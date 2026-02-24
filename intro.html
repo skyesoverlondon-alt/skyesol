@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyes Over London - Cinematic Intro</title>
+    <style>
+        :root { --bg-color: #010205; }
+        body, html { margin:0;padding:0;width:100%;height:100%;background:var(--bg-color);overflow:hidden;font-family:"Didot","Bodoni MT","Times New Roman",serif;color:#e0e6ed; }
+        #intro-container { position:relative;width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;perspective:1000px;animation:cameraPush 12s ease-out forwards; }
+        @keyframes cameraPush { 0%{transform:scale(1)} 100%{transform:scale(1.12)} }
+        #rain-canvas { position:absolute;inset:0;width:100%;height:100%;z-index:10;pointer-events:none; }
+        #lightning { position:absolute;inset:0;background:#fff;opacity:0;z-index:15;pointer-events:none;mix-blend-mode:overlay; }
+        .fog { position:absolute;width:200%;height:100%;top:0;left:-50%;z-index:20;opacity:.25;background:radial-gradient(circle at 20% 50%,rgba(15,25,40,.5) 0%,transparent 40%),radial-gradient(circle at 80% 60%,rgba(10,20,35,.4) 0%,transparent 50%);filter:blur(50px);animation:drift 25s cubic-bezier(.37,0,.63,1) infinite alternate;pointer-events:none; }
+        .fog-2 { top:20%;opacity:.2;background:radial-gradient(circle at 50% 50%,rgba(30,45,60,.3) 0%,transparent 60%);animation:drift 30s cubic-bezier(.37,0,.63,1) infinite alternate-reverse;z-index:25; }
+        @keyframes drift { 0%{transform:translateX(-5%) scale(1)} 100%{transform:translateX(5%) scale(1.1)} }
+        .vignette { position:absolute;inset:0;background:radial-gradient(circle at center,transparent 35%,#000 130%);z-index:40;pointer-events:none; }
+        .film-grain { position:absolute;inset:0;pointer-events:none;z-index:50;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+        .text-layer { position:absolute;text-align:center;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center; }
+        .sub-title { font-family:"Montserrat","Helvetica Neue",sans-serif;font-size:.85rem;letter-spacing:.5em;text-transform:uppercase;color:#ffcc00;text-shadow:0 0 12px rgba(255,170,0,.9);opacity:0;transform:translateY(15px);margin-bottom:25px; }
+        #company-logo { width:36vw;max-width:540px;min-width:260px;height:auto;margin-top:4vh;opacity:0;transform:scale(.9); }
+        .tagline { font-family:"Montserrat","Helvetica Neue",sans-serif;font-size:1.1rem;letter-spacing:.6em;text-transform:uppercase;color:#fae6ff;text-shadow:0 0 10px #d500f9,0 0 25px #aa00ff,0 0 50px #7b00ff;opacity:0;margin-top:5vh;transform:translateY(10px); }
+        .main-title { position:relative;font-size:5.5vw;font-weight:400;letter-spacing:.12em;text-transform:uppercase;margin:0;opacity:0;color:#fffdf5;text-shadow:0 0 10px #ffaa00,0 0 25px #ff8800,0 0 60px #ff4400;transform:scale(.95) translateZ(-50px); }
+        .main-title::after { content:'';position:absolute;left:0;bottom:-15px;width:100%;height:4px;background:#fae6ff;box-shadow:0 0 10px #d500f9,0 0 25px #aa00ff,0 0 50px #7b00ff;border-radius:2px; }
+        .cloud { position:absolute;left:100vw;width:400px;height:150px;background:radial-gradient(ellipse at center,rgba(200,210,225,.25) 0%,transparent 70%);z-index:12;pointer-events:none;--scale:1; }
+        .cloud::before { content:'';position:absolute;top:-40px;left:50px;width:250px;height:200px;background:radial-gradient(ellipse at center,rgba(180,195,215,.2) 0%,transparent 70%); }
+        .cloud::after { content:'';position:absolute;top:-60px;right:40px;width:300px;height:250px;background:radial-gradient(ellipse at center,rgba(220,230,245,.15) 0%,transparent 70%); }
+        #cloud-1{top:12vh;--scale:1.1;animation:driftCloud 50s linear infinite}#cloud-2{top:25vh;--scale:.7;opacity:.8;animation:driftCloud 70s linear 8s infinite}#cloud-3{top:5vh;--scale:.85;opacity:.9;animation:driftCloud 60s linear 3s infinite}#cloud-4{top:65vh;--scale:1.25;opacity:.5;animation:driftCloud 85s linear 5s infinite}
+        @keyframes driftCloud { 0%{transform:translateX(10vw) scale(var(--scale))} 100%{transform:translateX(calc(-110vw - 600px)) scale(var(--scale))} }
+        #skip-btn { position:absolute;bottom:30px;right:30px;z-index:100;background:transparent;border:1px solid rgba(255,170,0,.4);color:#ffcc00;font-family:"Montserrat","Helvetica Neue",sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 20px;cursor:pointer;transition:all .3s ease;opacity:0;animation:fadeInSkip 1s .5s forwards; }
+        #skip-btn:hover{border-color:#ffaa00;background:rgba(255,170,0,.1)}
+        @keyframes fadeInSkip{to{opacity:.7}}
+        .anim-sub-in{animation:fadeInUp 2s cubic-bezier(.25,.46,.45,.94) forwards}
+        .anim-title-reveal{animation:titleFadeIn 3s cubic-bezier(.19,1,.22,1) forwards}
+        .anim-logo-reveal{animation:logoFadeIn 3s cubic-bezier(.19,1,.22,1) forwards}
+        .anim-tagline-reveal{animation:taglineFadeIn 3s cubic-bezier(.215,.61,.355,1) forwards}
+        @keyframes fadeInUp{0%{opacity:0;transform:translateY(15px)}30%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+        @keyframes titleFadeIn{0%{opacity:0;filter:blur(20px);transform:scale(.9) translateZ(-50px)}100%{opacity:1;filter:blur(0);transform:scale(1.04) translateZ(0);letter-spacing:.18em}}
+        @keyframes logoFadeIn{0%{opacity:0;filter:blur(15px) drop-shadow(0 0 0 rgba(255,170,0,0));transform:scale(.85) translateY(10px)}100%{opacity:1;filter:blur(0) drop-shadow(0 0 20px rgba(255,170,0,.8));transform:scale(1) translateY(0)}}
+        @keyframes taglineFadeIn{0%{opacity:0;transform:translateY(15px);filter:blur(8px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+    </style>
+</head>
+<body>
+    <div id="intro-container">
+        <canvas id="rain-canvas"></canvas>
+        <div id="lightning"></div>
+        <div class="fog"></div><div class="fog fog-2"></div>
+        <div class="vignette"></div><div class="film-grain"></div>
+        <div class="text-layer">
+            <div class="sub-title" id="presents-text">An Intelligence Ecosystem</div>
+            <h1 class="main-title" id="company-name">Skyes Over London</h1>
+            <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" id="company-logo" alt="Skyes Over London Logo" />
+            <div class="tagline" id="tagline-text">Eminence In Motion</div>
+        </div>
+        <div class="cloud" id="cloud-1"></div><div class="cloud" id="cloud-2"></div>
+        <div class="cloud" id="cloud-3"></div><div class="cloud" id="cloud-4"></div>
+        <button id="skip-btn">Skip</button>
+    </div>
+    <script>
+        const canvas = document.getElementById('rain-canvas'), ctx = canvas.getContext('2d');
+        let width, height, drops = [];
+        function initCanvas() {
+            width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; drops = [];
+            for (let i = 0, n = Math.floor(width*.4); i < n; i++) {
+                const z = Math.random();
+                drops.push({x:Math.random()*width,y:Math.random()*height,z,length:(Math.random()*20+10)*(z*1.5+.5),speed:(Math.random()*15+10)*(z*2+.5),opacity:(Math.random()*.3+.05)*(z*1.5+.2),thickness:(Math.random()*2+.5)*(z*1.5+.2)});
+            }
+        }
+        function drawRain() {
+            ctx.clearRect(0,0,width,height);
+            const g=ctx.createLinearGradient(0,0,0,height); g.addColorStop(0,'#010206'); g.addColorStop(1,'#060a12');
+            ctx.fillStyle=g; ctx.fillRect(0,0,width,height); ctx.lineCap='round';
+            for (const d of drops) {
+                ctx.beginPath(); ctx.moveTo(d.x,d.y); ctx.lineTo(d.x+d.length*(.1+d.z*.05),d.y+d.length);
+                ctx.strokeStyle=`rgba(180,200,230,${d.opacity})`; ctx.lineWidth=d.thickness; ctx.stroke();
+                d.y+=d.speed; d.x+=d.speed*(.1+d.z*.05);
+                if(d.y>height){d.y=-d.length;d.x=Math.random()*width;}
+            }
+            requestAnimationFrame(drawRain);
+        }
+        window.addEventListener('resize',initCanvas); initCanvas(); drawRain();
+
+        const lightning=document.getElementById('lightning'), intro=document.getElementById('intro-container');
+        let done=false;
+        function flash(i,dur){lightning.style.opacity=i;setTimeout(()=>lightning.style.opacity=0,dur);}
+        function endIntro(){
+            if(done)return;done=true;
+            intro.style.transition='opacity 1.5s ease';intro.style.opacity='0';
+            setTimeout(()=>window.location.href='index.html',1500);
+        }
+        document.getElementById('skip-btn').addEventListener('click',endIntro);
+        window.onload=()=>{
+            setTimeout(()=>flash(.2,40),200);
+            setTimeout(()=>flash(.15,80),350);
+            setTimeout(()=>document.getElementById('presents-text').classList.add('anim-sub-in'),400);
+            setTimeout(()=>{
+                flash(.9,30);
+                setTimeout(()=>{
+                    flash(1,100);
+                    document.getElementById('company-logo').classList.add('anim-logo-reveal');
+                    document.getElementById('company-name').classList.add('anim-title-reveal');
+                    setTimeout(()=>flash(.5,60),150);
+                    setTimeout(()=>document.getElementById('tagline-text').classList.add('anim-tagline-reveal'),600);
+                },120);
+            },1500);
+            setTimeout(()=>flash(.12,60),3500);
+            setTimeout(endIntro,6000);
+        };
+    </script>
+</body>
+</html>

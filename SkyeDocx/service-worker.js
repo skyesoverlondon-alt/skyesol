@@ -4,17 +4,16 @@
    - Precache critical external deps (CDNs) with no-cors so they are available offline after first load
    - Cache-first for static assets; network-first for navigations with offline fallback
 */
-const VERSION = "skye-docx-pwa-v2";
+const VERSION = "skye-docx-pwa-v3";
 const SHELL_CACHE = "shell-" + VERSION;
 const RUNTIME_CACHE = "runtime-" + VERSION;
 
 const PRECACHE_URLS = [
   "./",
   "./index.html",
+  "./homepage.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./assets/brand/sol_tiger.png",
-  "./assets/brand/untitled-design-35.png",
   "./assets/icons/apple-touch-icon.png",
   "./assets/icons/favicon-16.png",
   "./assets/icons/favicon-32.png",
