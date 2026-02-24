@@ -18,6 +18,27 @@
     user: null,
   };
 
+  const staticPosts = [
+    {
+      slug: 'static-field-ops',
+      title: 'Field Ops: Structural Integrity Brief',
+      excerpt: 'A static playbook covering the physical and digital steps we take before a gateway deployment.',
+      published_at: '2025-10-16T08:00:00.000Z',
+      tags: ['Field Ops', 'Infrastructure'],
+      cover_image: 'https://cdn1.sharemyimage.com/2026/02/16/blog-fieldops.png',
+      staticUrl: 'blog-static-field-ops.html',
+    },
+    {
+      slug: 'static-command-gov',
+      title: 'Command Governance Primer',
+      excerpt: 'An annotated summary of our governance scaffolding and why we lock every deployment behind deliberate rituals.',
+      published_at: '2025-09-02T12:00:00.000Z',
+      tags: ['Governance', 'Ops'],
+      cover_image: 'https://cdn1.sharemyimage.com/2026/02/16/blog-governance.png',
+      staticUrl: 'blog-static-command-gov.html',
+    }
+  ];
+
   function esc(s){
     return String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   }
@@ -179,7 +200,7 @@
     const tagSelect = $('#blogTag');
     const notice = $('#blogNotice');
 
-    let posts = [];
+      let posts = [];
     let mode = 'api';
     try {
       const data = await jsonFetch(`${state.apiBase}/blog-list`);
@@ -203,6 +224,8 @@
       }
     }
 
+    const merged = staticPosts.filter(sp => !posts.some(p => p.slug === sp.slug));
+    posts = [...merged, ...posts];
     const allTags = new Set();
     posts.forEach(p => (p.tags || []).forEach(t => allTags.add(t)));
     if (tagSelect) {
@@ -235,7 +258,7 @@
     function blogCard(p){
       const img = p.cover_image ? `<div class="blog-cover"><img src="${esc(p.cover_image)}" alt="${esc(p.title)}" loading="lazy"></div>` : '';
       const tags = (p.tags||[]).slice(0,4).map(t => `<span class="chip">${esc(t)}</span>`).join('');
-      const href = mode === 'readonly' && p.slug === 'welcome' ? 'post.html?s=welcome&local=1' : `post.html?s=${encodeURIComponent(p.slug)}`;
+      const href = p.staticUrl ? p.staticUrl : (mode === 'readonly' && p.slug === 'welcome' ? 'post.html?s=welcome&local=1' : `post.html?s=${encodeURIComponent(p.slug)}`);
       return `
         <article class="blog-card reveal">
           ${img}
