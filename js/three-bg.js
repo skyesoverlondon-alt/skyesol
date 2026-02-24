@@ -8,9 +8,9 @@
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x050508, 1);
+  renderer.setClearColor(0x10101e, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.2;
+  renderer.toneMappingExposure = 2.2;
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -20,11 +20,11 @@
   let scrollY = 0;
 
   // Lights
-  scene.add(new THREE.AmbientLight(0x1a1410, 0.4));
-  const kL = new THREE.PointLight(0xc9a84c, 2.5, 50); kL.position.set(3, 3, 4); scene.add(kL);
-  const rL = new THREE.PointLight(0xe8d48b, 1.8, 40); rL.position.set(-4, 1, 2); scene.add(rL);
-  const bL = new THREE.PointLight(0x3a2a0a, 1.2, 30); bL.position.set(0, -4, 2); scene.add(bL);
-  const aL = new THREE.PointLight(0x2a4080, 0.6, 35); aL.position.set(-2, 3, -3); scene.add(aL);
+  scene.add(new THREE.AmbientLight(0x8878cc, 1.8));
+  const kL = new THREE.PointLight(0xc9a84c, 5.0, 50); kL.position.set(3, 3, 4); scene.add(kL);
+  const rL = new THREE.PointLight(0xe8d48b, 3.5, 40); rL.position.set(-4, 1, 2); scene.add(rL);
+  const bL = new THREE.PointLight(0x7755cc, 2.5, 30); bL.position.set(0, -4, 2); scene.add(bL);
+  const aL = new THREE.PointLight(0x6688ff, 1.8, 35); aL.position.set(-2, 3, -3); scene.add(aL);
 
   // Noise GLSL
   const noiseGLSL = `
@@ -110,9 +110,9 @@
     return new THREE.Mesh(g, m);
   }
 
-  const blob = makeBlob(1.6, 64, [.45,.34,.08], [.95,.82,.38], [.22,.15,.03]); scene.add(blob);
-  const b2 = makeBlob(.6, 48, [.3,.22,.05], [.8,.65,.25], [.15,.1,.02]); scene.add(b2);
-  const b3 = makeBlob(.35, 32, [.55,.42,.12], [1,.9,.5], [.25,.18,.04]); scene.add(b3);
+  const blob = makeBlob(1.6, 64, [.65,.50,.18], [1.0,.90,.50], [.40,.28,.10]); scene.add(blob);
+  const b2 = makeBlob(.6, 48, [.50,.38,.12], [.95,.78,.40], [.30,.20,.08]); scene.add(b2);
+  const b3 = makeBlob(.35, 32, [.70,.55,.20], [1.0,.95,.65], [.40,.30,.12]); scene.add(b3);
 
   // Gold dust
   const dC = 400, dG = new THREE.BufferGeometry();
@@ -174,8 +174,8 @@
     kL.position.y = 3 + Math.cos(t*.2);
     rL.position.x = -4 + Math.sin(t*.25+2);
     rL.position.y = 1 + Math.cos(t*.3+1)*1.5;
-    kL.intensity = 2.5 + Math.sin(t*.4)*.5;
-    rL.intensity = 1.8 + Math.sin(t*.3+1)*.4;
+    kL.intensity = 5.0 + Math.sin(t*.4)*1.0;
+    rL.intensity = 3.5 + Math.sin(t*.3+1)*0.8;
     dM.uniforms.uTime.value = t;
 
     renderer.render(scene, camera);

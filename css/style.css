@@ -1,3 +1,19 @@
+/* Glowing purple tile for network page */
+.glow-tile-purple {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(138,99,255,0.18) 0%, rgba(58,111,216,0.12) 100%);
+  border-radius: 12px;
+  box-shadow: 0 0 18px 6px rgba(138,99,255,0.22), 0 0 32px 12px rgba(138,99,255,0.12);
+  padding: 14px 28px;
+  margin: 18px 0;
+  color: #e8e6ff;
+  font-size: 1.08rem;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(138,99,255,0.18);
+  animation: floatGlowBlue 4.5s ease-in-out infinite;
+}
 /* ══════════════════════════════════════════════
    SOLEnterprises — Skyes Over London LC
    Shared Stylesheet
@@ -9,8 +25,8 @@
   --gold: #c9a84c;
   --gold-light: #e8d48b;
   --gold-dim: rgba(201,168,76,0.15);
-  --dark: #0a0a0f;
-  --darker: #050508;
+  --dark: #14142a;
+  --darker: #0d0d1a;
   --surface: #0c0c14;
   --surface-2: #111119;
   --surface-3: #181822;
@@ -25,7 +41,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--darker);
+  background: #0d0d1a;
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;

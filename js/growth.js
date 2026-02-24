@@ -20,13 +20,22 @@
 
   const staticPosts = [
     {
-      slug: 'sol-ops-field-brief',
-      title: 'Sol Ops Field Brief: Gateways & Command Bridges',
-      excerpt: 'A static dispatch from Skyes Over London LC about the procedural safeguards that let our operators move fast and stay grounded.',
-      published_at: '2026-02-24T09:00:00.000Z',
-      tags: ['Operations', 'Command', 'Field Notes'],
+      slug: 'static-field-ops',
+      title: 'Field Ops: Structural Integrity Brief',
+      excerpt: 'A static playbook covering the physical and digital steps we take before a gateway deployment.',
+      published_at: '2025-10-16T08:00:00.000Z',
+      tags: ['Field Ops', 'Infrastructure'],
       cover_image: 'https://cdn1.sharemyimage.com/2026/02/16/blog-fieldops.png',
-      staticUrl: 'Blogs/sol-ops-field-brief.html',
+      staticUrl: 'blog-static-field-ops.html',
+    },
+    {
+      slug: 'static-command-gov',
+      title: 'Command Governance Primer',
+      excerpt: 'An annotated summary of our governance scaffolding and why we lock every deployment behind deliberate rituals.',
+      published_at: '2025-09-02T12:00:00.000Z',
+      tags: ['Governance', 'Ops'],
+      cover_image: 'https://cdn1.sharemyimage.com/2026/02/16/blog-governance.png',
+      staticUrl: 'blog-static-command-gov.html',
     }
   ];
 
