@@ -534,3 +534,55 @@ footer a { color: var(--gold); text-decoration: none; }
   .hero-company-logo img { height: 160px; }
   .tech-logo-item img { height: 180px; }
 }
+
+/* ── Mega Nav Overlay ──────────────────────────────── */
+.mega-nav {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(5,5,8,0.97);
+  backdrop-filter: blur(20px);
+  display: flex; flex-direction: column; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.mega-nav.open { opacity: 1; pointer-events: all; }
+.mega-nav-close {
+  position: absolute; top: 28px; right: 40px;
+  background: none; border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold); font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; letter-spacing: 3px; padding: 9px 20px;
+  cursor: pointer; border-radius: 4px; transition: background .2s;
+}
+.mega-nav-close:hover { background: rgba(201,168,76,0.12); }
+.mega-nav-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 48px; max-width: 960px; margin: 0 auto; padding: 0 48px;
+}
+.mega-nav-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px; letter-spacing: 3px; color: var(--gold);
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(201,168,76,0.18);
+  padding-bottom: 8px;
+}
+.mega-nav-col a {
+  display: block; color: var(--text-dim); text-decoration: none;
+  font-size: 15px; padding: 6px 0; border-bottom: none;
+  transition: color .2s, padding-left .18s;
+}
+.mega-nav-col a:hover { color: #fff; padding-left: 8px; }
+.menu-btn {
+  background: none;
+  border: 1px solid rgba(201,168,76,0.35);
+  color: var(--gold); font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; letter-spacing: 3px; padding: 7px 18px;
+  cursor: pointer; border-radius: 4px; transition: background .2s;
+  white-space: nowrap;
+}
+.menu-btn:hover { background: rgba(201,168,76,0.12); }
+@media (max-width: 750px) {
+  .mega-nav-grid { grid-template-columns: 1fr 1fr; gap: 30px; padding: 0 28px; }
+}
+@media (max-width: 440px) {
+  .mega-nav-grid { grid-template-columns: 1fr; gap: 20px; }
+  .mega-nav-close { top: 16px; right: 20px; }
+}
