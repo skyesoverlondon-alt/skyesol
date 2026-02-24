@@ -1,9 +1,43 @@
 import { getStore } from "@netlify/blobs";
 
 const STORE_NAME = process.env.BLOBS_STORE || "sol_growth";
+const _textDecoder = typeof TextDecoder !== "undefined" ? new TextDecoder() : null;
+
+function decodeValue(raw) {
+  if (raw == null) return null;
+  if (typeof raw === "string") return raw;
+  if (raw instanceof Uint8Array) {
+    return _textDecoder ? _textDecoder.decode(raw) : Buffer.from(raw).toString();
+  }
+  if (typeof raw === "object" && typeof raw.toString === "function") {
+    return raw.toString();
+  }
+  return String(raw);
+}
+
+function wrapStore(base) {
+  if (!base) return base;
+  return {
+    ...base,
+    async getJSON(key) {
+      const raw = await base.get(key);
+      const text = decodeValue(raw);
+      if (text == null) return null;
+      try {
+        return JSON.parse(text);
+      } catch {
+        return null;
+      }
+    },
+    async setJSON(key, value) {
+      const payload = JSON.stringify(value ?? null);
+      await base.set(key, payload);
+    },
+  };
+}
 
 export function store() {
-  return getStore(STORE_NAME);
+  return wrapStore(getStore(STORE_NAME));
 }
 
 export function json(statusCode, body, extraHeaders = {}) {

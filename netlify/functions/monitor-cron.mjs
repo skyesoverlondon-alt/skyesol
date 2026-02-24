@@ -1,10 +1,7 @@
 // Scheduled portal monitoring.
 // Runs automatically on Netlify based on the cron expression below.
 
-import { getStore } from "@netlify/blobs";
-
-const STORE_NAME = process.env.BLOBS_STORE || "sol_growth";
-const store = () => getStore(STORE_NAME);
+import { store } from "./_common.mjs";
 
 async function checkOne(portal, timeoutMs = 6500) {
   const started = Date.now();
