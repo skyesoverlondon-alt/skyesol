@@ -1,0 +1,12 @@
+{
+  "name": "skyesol-growth-platform",
+  "private": true,
+  "type": "module",
+  "description": "Skyes Over London LC — full growth platform (static + Netlify Functions + Netlify Blobs)",
+  "scripts": {
+    "build": "true"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^7.0.0"
+  }
+}

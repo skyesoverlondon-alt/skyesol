@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status · SOLEnterprises Network</title>
+  <meta name="description" content="Live portal status and ecosystem health checks for the SOLEnterprises network.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <canvas id="three-bg"></canvas>
+
+  <!-- NAV -->
+  <nav class="main-nav" id="mainNav">
+    <a href="index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">Founder</a>
+      <a href="platforms.html">Platforms</a>
+      <a href="network.html">Network</a>
+      <a href="credibility.html">Credibility</a>
+      <a href="blog.html">Blog</a>
+      <a href="status.html" class="active">Status</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="section-label">Network Health · Portal Checks</div>
+    <h1>Status <span>Board</span></h1>
+    <p>Quick-read health checks for public portals. For controlled monitoring, open the Dashboard and Admin console.</p>
+  </header>
+
+  <section class="status-wrap">
+    <div class="notice" id="statusNotice"></div>
+    <div class="auth-bar">
+      <div id="statusAt" class="dim"></div>
+      <a class="btn-outline btn-sm" href="dashboard.html">Dashboard</a>
+      <a class="btn-outline btn-sm" href="admin.html">Admin</a>
+    </div>
+    <div style="margin-top:18px" id="statusMount"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+    <p><strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br>
+      <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 986-210-7040 · <a href="https://www.solenterprises.org/">solenterprises.org</a>
+    </p>
+    <div class="footer-links">
+      <a href="blog.html">Blog</a>
+      <a href="status.html">Status</a>
+      <a href="vault.html">Vault</a>
+      <a href="admin.html">Admin</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
+  </footer>
+
+  <script src="js/three-bg.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/growth.js"></script>
+</body>
+</html>
