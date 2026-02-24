@@ -1,0 +1,8 @@
+/*
+  Netlify SPA redirect: send all requests to index.html
+*/
+/* For client-side routing, uncomment the next line: */
+# /*    /index.html   200
+
+# For static HTML pages, no rewrite needed unless you want custom routing.
+# You can add custom redirects below.
