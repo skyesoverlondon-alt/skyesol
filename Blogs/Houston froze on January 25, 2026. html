@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Houston Winter Storm (Jan 25, 2026): Extreme Cold Shut the City Down — and What It Exposed About Homelessness | SKYEBRIDGE</title>
+  <meta name="description" content="Houston’s January 25, 2026 winter storm brought extreme cold warnings, ice risk, and widespread closures. Here’s how cold it got, how the city shut down, and why Houston must act upstream on homelessness—plus the SKYEBRIDGE prevention mission." />
+  <meta name="author" content="Skyes Over London LC" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="theme-color" content="#0b0b12" />
+
+  <!-- Canonical (adjust to your final URL path) -->
+  <link rel="canonical" href="https://solenterprises.org/blog/houston-winter-storm-jan-2026-homelessness-skyebridge" />
+
+  <!-- Logo / Social image -->
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/01/08/Untitled-design-35.png" />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/01/08/Untitled-design-35.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Houston Winter Storm (Jan 25, 2026): Extreme Cold Shut the City Down — and What It Exposed About Homelessness" />
+  <meta property="og:description" content="How cold it got, what shut down across Houston, and why extreme cold becomes a life-or-death event for unsheltered residents—plus the SKYEBRIDGE upstream solution." />
+  <meta property="og:url" content="https://solenterprises.org/blog/houston-winter-storm-jan-2026-homelessness-skyebridge" />
+  <meta property="og:site_name" content="SOLEnterprises / Skyes Over London LC" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Houston Winter Storm (Jan 25, 2026): Extreme Cold Shut the City Down" />
+  <meta name="twitter:description" content="Closures, ice risk, and lethal exposure—why Houston must act upstream on homelessness (SKYEBRIDGE)." />
+
+  <meta http-equiv="x-dns-prefetch-control" content="on" />
+
+  <!-- Structured Data: WebSite + Organization + Article -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"WebSite",
+        "name":"SOLEnterprises / Skyes Over London LC",
+        "url":"https://solenterprises.org/",
+        "inLanguage":"en"
+      },
+      {
+        "@type":"Organization",
+        "name":"Skyes Over London LC",
+        "url":"https://solenterprises.org/",
+        "logo":"https://cdn1.sharemyimage.com/2026/01/08/Untitled-design-35.png",
+        "sameAs":[
+          "https://solenterprises.org/"
+        ]
+      },
+      {
+        "@type":"BlogPosting",
+        "headline":"Houston Winter Storm (Jan 25, 2026): Extreme Cold Shut the City Down — and What It Exposed About Homelessness",
+        "description":"Houston’s January 25, 2026 winter storm brought extreme cold warnings, ice risk, and widespread closures. Here’s how cold it got, how the city shut down, and why Houston must act upstream on homelessness—plus the SKYEBRIDGE prevention mission.",
+        "datePublished":"2026-01-26",
+        "dateModified":"2026-01-26",
+        "inLanguage":"en",
+        "author":{
+          "@type":"Organization",
+          "name":"Skyes Over London LC"
+        },
+        "publisher":{
+          "@type":"Organization",
+          "name":"Skyes Over London LC",
+          "logo":{
+            "@type":"ImageObject",
+            "url":"https://cdn1.sharemyimage.com/2026/01/08/Untitled-design-35.png"
+          }
+        },
+        "mainEntityOfPage":{
+          "@type":"WebPage",
+          "@id":"https://solenterprises.org/blog/houston-winter-storm-jan-2026-homelessness-skyebridge"
+        },
+        "keywords":[
+          "Houston winter storm January 2026",
+          "Houston extreme cold warning Jan 25 2026",
+          "Houston closures Jan 26 2026",
+          "Houston warming centers 12",
+          "Houston homelessness unsheltered",
+          "SKYEBRIDGE program",
+          "homelessness prevention Houston"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#0b0b12;
+      --panel:#101020;
+      --panel2:#0f0f1a;
+      --text:#e9e9ff;
+      --muted:#b9b9d6;
+      --line:rgba(255,255,255,.12);
+      --glow:rgba(157, 86, 255, .45);
+      --gold: #f6c45c;
+      --violet:#9d56ff;
+      --cyan:#6fe7ff;
+      --ok:#49e6a5;
+      --warn:#ffb648;
+      --bad:#ff6b6b;
+      --radius:18px;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background: radial-gradient(1200px 800px at 15% 10%, rgba(157,86,255,.16), transparent 55%),
+                  radial-gradient(1000px 700px at 85% 15%, rgba(111,231,255,.12), transparent 50%),
+                  radial-gradient(900px 650px at 55% 95%, rgba(246,196,92,.10), transparent 55%),
+                  linear-gradient(180deg, #07070d 0%, var(--bg) 50%, #07070d 100%);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:var(--cyan); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 70px}
+
+    /* ========= WINDCHILL OPENING ANIMATION ========= */
+    .intro{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(1200px 900px at 30% 20%, rgba(111,231,255,.14), transparent 55%),
+        radial-gradient(900px 700px at 70% 25%, rgba(157,86,255,.12), transparent 58%),
+        radial-gradient(800px 600px at 50% 90%, rgba(246,196,92,.08), transparent 62%),
+        linear-gradient(180deg, rgba(7,7,13,.98), rgba(10,10,18,.92));
+      overflow:hidden;
+      animation: introFade 3.25s ease forwards;
+    }
+    @keyframes introFade{
+      0%{opacity:1}
+      82%{opacity:1}
+      100%{opacity:0; visibility:hidden}
+    }
+    .intro::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        repeating-linear-gradient(115deg,
+          rgba(255,255,255,.0) 0px,
+          rgba(255,255,255,.0) 18px,
+          rgba(255,255,255,.06) 19px,
+          rgba(255,255,255,.0) 38px),
+        radial-gradient(closest-side at 30% 40%, rgba(111,231,255,.18), transparent 60%),
+        radial-gradient(closest-side at 70% 55%, rgba(255,255,255,.08), transparent 62%);
+      filter: blur(1.2px) saturate(1.1);
+      opacity:.55;
+      transform: rotate(6deg);
+      animation: windDrift 2.6s ease-in-out infinite alternate;
+      pointer-events:none;
+      mix-blend-mode: screen;
+    }
+    @keyframes windDrift{
+      0%{transform: translate3d(-2.5%, -1.5%, 0) rotate(6deg)}
+      100%{transform: translate3d(3.5%, 2.2%, 0) rotate(6deg)}
+    }
+    .intro::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:
+        radial-gradient(700px 250px at 20% 30%, rgba(255,255,255,.14), transparent 70%),
+        radial-gradient(900px 320px at 80% 55%, rgba(111,231,255,.10), transparent 72%),
+        repeating-linear-gradient(0deg,
+          rgba(255,255,255,.0) 0px,
+          rgba(255,255,255,.0) 22px,
+          rgba(255,255,255,.04) 23px,
+          rgba(255,255,255,.0) 44px);
+      filter: blur(10px);
+      opacity:.70;
+      animation: chillPulse 1.05s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes chillPulse{
+      0%,100%{opacity:.62; transform: translateY(0)}
+      50%{opacity:.82; transform: translateY(-6px)}
+    }
+    .introCard{
+      position:relative;
+      width:min(760px, calc(100% - 44px));
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(16,16,32,.78), rgba(12,12,22,.56));
+      box-shadow: 0 30px 90px rgba(0,0,0,.65);
+      overflow:hidden;
+      padding:18px 18px 16px;
+      backdrop-filter: blur(10px);
+      transform: translateY(12px);
+      animation: cardRise 1.15s ease-out forwards, microShiver .9s ease-in-out 0.6s 2;
+    }
+    @keyframes cardRise{
+      from{opacity:0; transform: translateY(18px) scale(.99)}
+      to{opacity:1; transform: translateY(0) scale(1)}
+    }
+    @keyframes microShiver{
+      0%,100%{transform: translateY(0)}
+      20%{transform: translateY(0) translateX(-1px)}
+      40%{transform: translateY(0) translateX(1px)}
+      60%{transform: translateY(0) translateX(-1px)}
+      80%{transform: translateY(0) translateX(1px)}
+    }
+    .introTop{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .introLogo{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10,10,18,.30);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      box-shadow: 0 0 0 6px rgba(111,231,255,.08);
+    }
+    .introLogo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter: saturate(1.05) contrast(1.02);
+      transform: scale(1.04);
+    }
+    .introText{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .introKicker{
+      font-family:var(--mono);
+      letter-spacing:.35px;
+      font-size:12px;
+      color:rgba(185,185,214,.92);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .introTitle{
+      font-size:16px;
+      font-weight:950;
+      letter-spacing:-.25px;
+      margin:0;
+      line-height:1.2;
+    }
+    .introBar{
+      margin-top:12px;
+      height:10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+      position:relative;
+    }
+    .introBar::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: linear-gradient(90deg,
+        rgba(111,231,255,.0),
+        rgba(111,231,255,.60),
+        rgba(157,86,255,.55),
+        rgba(246,196,92,.35),
+        rgba(111,231,255,.0));
+      transform: translateX(-65%);
+      animation: barSweep 1.7s ease-in-out forwards;
+      filter: blur(.2px);
+    }
+    @keyframes barSweep{
+      0%{transform: translateX(-75%)}
+      70%{transform: translateX(15%)}
+      100%{transform: translateX(115%)}
+    }
+    .introHint{
+      margin-top:10px;
+      font-size:12px;
+      color:rgba(185,185,214,.92);
+      font-family:var(--mono);
+    }
+    .introHint strong{color:var(--cyan)}
+    .introFrostEdge{
+      position:absolute;
+      inset:-2px;
+      border-radius:24px;
+      pointer-events:none;
+      background:
+        radial-gradient(200px 80px at 15% 8%, rgba(255,255,255,.20), transparent 60%),
+        radial-gradient(220px 90px at 85% 10%, rgba(111,231,255,.18), transparent 62%),
+        radial-gradient(260px 110px at 50% 102%, rgba(255,255,255,.10), transparent 64%);
+      opacity:.60;
+      filter: blur(6px);
+      mix-blend-mode: screen;
+      animation: frostBreath 1.1s ease-in-out .2s 2;
+    }
+    @keyframes frostBreath{
+      0%,100%{opacity:.46}
+      50%{opacity:.78}
+    }
+
+    /* ========= MAIN PAGE ========= */
+    header.hero{
+      position:relative;
+      padding:34px 22px 22px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(16,16,32,.80), rgba(12,12,22,.55));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    header.hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(650px 260px at 15% 15%, rgba(157,86,255,.22), transparent 55%),
+        radial-gradient(520px 240px at 85% 20%, rgba(111,231,255,.18), transparent 55%),
+        radial-gradient(540px 280px at 55% 120%, rgba(246,196,92,.14), transparent 60%);
+      pointer-events:none;
+      filter:saturate(1.15);
+    }
+    .topbar{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      z-index:1;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800;
+      letter-spacing:.3px;
+      min-width:0;
+    }
+    .brand .logoWrap{
+      width:40px; height:40px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(10,10,18,.30);
+      overflow:hidden;
+      box-shadow: 0 0 0 6px rgba(157,86,255,.10);
+      flex:0 0 auto;
+    }
+    .brand .logoWrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.04);
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .brand .name{
+      display:flex;
+      align-items:baseline;
+      gap:8px;
+      flex-wrap:wrap;
+      min-width:0;
+    }
+    .pillrow{display:flex; gap:8px; flex-wrap:wrap}
+    .pill{
+      position:relative;
+      z-index:1;
+      font-family:var(--mono);
+      font-size:12px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(10,10,18,.45);
+      color:var(--muted);
+      backdrop-filter: blur(8px);
+      white-space:nowrap;
+    }
+    .pill strong{color:var(--text); font-weight:800}
+    h1{
+      position:relative;
+      margin:18px 0 10px;
+      font-size:clamp(28px, 4.3vw, 44px);
+      line-height:1.12;
+      letter-spacing:-.6px;
+      z-index:1;
+    }
+    .dek{
+      position:relative;
+      margin:0;
+      color:var(--muted);
+      max-width:78ch;
+      z-index:1;
+      font-size:16px;
+    }
+    .meta{
+      position:relative;
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      z-index:1;
+    }
+    .meta .tag{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(16,16,32,.55);
+      color:var(--muted);
+    }
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 940px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(16,16,32,.72), rgba(12,12,22,.55));
+      box-shadow: 0 12px 42px rgba(0,0,0,.45);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .card .hd h2{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.25px;
+      text-transform:uppercase;
+      color:rgba(233,233,255,.92);
+    }
+    .card .bd{padding:16px}
+    .toc a{display:block; padding:8px 10px; border-radius:12px; border:1px solid rgba(255,255,255,.08); margin:8px 0; color:var(--muted)}
+    .toc a:hover{border-color:rgba(111,231,255,.35); color:var(--text); text-decoration:none}
+    .kpi{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .kpi .box{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:16px;
+      padding:12px;
+      background: rgba(10,10,18,.30);
+    }
+    .kpi .box .label{
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .kpi .box .value{
+      margin-top:6px;
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:-.2px;
+      color:var(--text);
+    }
+    .kpi .box .note{
+      margin-top:6px;
+      font-size:12px;
+      color:rgba(185,185,214,.92);
+    }
+    .kpi .box .value .hi{color:var(--cyan)}
+    .kpi .box .value .gold{color:var(--gold)}
+    article{padding:18px 0 0;}
+    article .prose{padding: 6px 0 0;}
+    article h2{margin:26px 0 10px; font-size:20px; letter-spacing:-.2px;}
+    article h3{margin:20px 0 8px; font-size:16px; letter-spacing:-.1px; color:rgba(233,233,255,.95);}
+    article p{margin:10px 0; color:rgba(233,233,255,.92)}
+    .callout{
+      margin:18px 0;
+      border:1px solid rgba(157,86,255,.28);
+      border-radius:var(--radius);
+      background: radial-gradient(500px 200px at 15% 15%, rgba(157,86,255,.18), transparent 60%),
+                  radial-gradient(380px 180px at 85% 15%, rgba(111,231,255,.12), transparent 55%),
+                  rgba(10,10,18,.38);
+      padding:14px 14px;
+      box-shadow: 0 10px 34px rgba(0,0,0,.35);
+    }
+    .callout .title{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .callout .title .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--violet);
+      box-shadow: 0 0 0 6px rgba(157,86,255,.18);
+    }
+    .bullets{margin:10px 0 0; padding-left:18px; color:rgba(233,233,255,.92);}
+    .bullets li{margin:6px 0}
+    .quote{
+      margin:16px 0;
+      padding:14px 14px;
+      border-left:4px solid rgba(246,196,92,.65);
+      border-radius:12px;
+      background: rgba(10,10,18,.32);
+      border-top:1px solid rgba(255,255,255,.08);
+      border-right:1px solid rgba(255,255,255,.08);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .quote p{margin:0; color:rgba(233,233,255,.92)}
+    .cta{
+      margin:18px 0 6px;
+      border:1px solid rgba(246,196,92,.30);
+      border-radius:var(--radius);
+      padding:16px;
+      background: radial-gradient(520px 220px at 20% 10%, rgba(246,196,92,.14), transparent 60%),
+                  rgba(10,10,18,.35);
+    }
+    .cta .row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(111,231,255,.30);
+      background: linear-gradient(180deg, rgba(111,231,255,.18), rgba(157,86,255,.10));
+      color:var(--text);
+      font-weight:900;
+      letter-spacing:.2px;
+      text-decoration:none;
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+      white-space:nowrap;
+      transition: transform .12s ease;
+    }
+    .btn:hover{border-color:rgba(111,231,255,.55); text-decoration:none; transform: translateY(-1px)}
+    .btn:active{transform: translateY(0)}
+    .btn.secondary{
+      border-color: rgba(255,255,255,.14);
+      background: rgba(16,16,32,.55);
+      color:rgba(233,233,255,.92);
+    }
+    .small{font-size:12px; color:rgba(185,185,214,.92);}
+    .refs{margin-top:28px; border-top:1px solid var(--line); padding-top:18px;}
+    .refs h2{margin:0 0 10px; font-size:16px}
+    .refs ul{margin:0; padding-left:18px}
+    .refs li{margin:8px 0; color:rgba(233,233,255,.90)}
+    footer{
+      margin-top:26px;
+      color:rgba(185,185,214,.88);
+      font-size:12px;
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:16px;
+    }
+    .hr{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(157,86,255,.35), rgba(111,231,255,.25), transparent);
+      margin:18px 0;
+    }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+
+    /* Reduce motion support */
+    @media (prefers-reduced-motion: reduce){
+      .intro, .intro::before, .intro::after, .introCard, .introBar::before, header.hero::before { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- WINDCHILL OPENING OVERLAY -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="introCard" role="presentation">
+      <div class="introFrostEdge" aria-hidden="true"></div>
+      <div class="introTop">
+        <div class="introLogo" aria-hidden="true">
+          <img src="https://cdn1.sharemyimage.com/2026/01/08/Untitled-design-35.png" alt="" />
+        </div>
+        <div class="introText">
+          <div class="introKicker">WINDCHILL PROTOCOL • HOUSTON • JAN 25, 2026</div>
+          <p class="introTitle">Loading report: closures, cold exposure, and the upstream fix.</p>
+        </div>
+      </div>
+      <div class="introBar" aria-hidden="true"></div>
+      <div class="introHint">Signal: <strong>Extreme Cold</strong> → Outcome: <strong>Survival Gap</strong></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="hero" role="banner">
+      <div class="topbar">
+        <div class="brand" aria-label="Site brand">
+          <div class="logoWrap" aria-hidden="true">
+            <img src="https://cdn1.sharemyimage.com/2026/01/08/Untitled-design-35.png" alt="Skyes Over London LC logo" />
+          </div>
+          <div class="name">
+            <div>Skyes Over London LC</div>
+            <div style="opacity:.65">/</div>
+            <div style="color:var(--gold)">SKYEBRIDGE</div>
+          </div>
+        </div>
+        <div class="pillrow" aria-label="Quick facts">
+          <div class="pill"><strong>Houston</strong> • Winter Storm</div>
+          <div class="pill"><strong>Date</strong> • Jan 25, 2026</div>
+          <div class="pill"><strong>Topic</strong> • Extreme Cold + Homelessness</div>
+        </div>
+      </div>
+
+      <h1>Houston froze on January 25, 2026. That’s not just weather — it’s a survival test.</h1>
+      <p class="dek">
+        The winter storm that hit Houston on January 25, 2026 brought extreme cold warnings, ice risk, and widespread closures.
+        This post documents how cold it got, how the city shut down, and why deadly cold snaps demand an upstream response to homelessness —
+        not just emergency shelters, but real pathways to stability. ⚠️🧊
+      </p>
+
+      <div class="meta" aria-label="Article metadata">
+        <div class="tag">Published: <time datetime="2026-01-26">January 26, 2026</time></div>
+        <div class="tag">Reading time: <span id="rt">~6 min</span></div>
+        <div class="tag">Keywords: <span style="color:var(--cyan)">Houston winter storm January 2026</span>, <span style="color:var(--gold)">extreme cold warning</span>, homelessness</div>
+      </div>
+    </header>
+
+    <section class="grid" aria-label="Content layout">
+      <main class="card" role="main">
+        <div class="hd">
+          <h2>Blog Post</h2>
+          <span class="pill">Share: <a href="#" id="shareLink" style="color:var(--cyan)">Copy link</a></span>
+        </div>
+        <div class="bd">
+          <article class="prose" id="article">
+            <div class="callout">
+              <div class="title"><span class="dot" aria-hidden="true"></span>Quick snapshot (what happened)</div>
+              <ul class="bullets">
+                <li><strong>Extreme cold warning</strong> covered Southeast Texas through <strong>Tuesday midday</strong>, with teens/20s temps and harsh wind chills reported region-wide.</li>
+                <li><strong>Ice risk</strong> (especially on bridges/overpasses) forced officials and agencies to urge people off roads.</li>
+                <li><strong>Closures and delayed openings</strong> rolled out across Houston-area services and destinations, reflecting real “city slowdown” conditions.</li>
+                <li><strong>12 city warming centers</strong> were activated — critical, but not a complete solution for unsheltered survival barriers.</li>
+              </ul>
+            </div>
+
+            <h2 id="how-cold">1) How cold was it in Houston during the January 25, 2026 storm?</h2>
+            <p>
+              Houston’s cold wasn’t “cute.” It was the kind of cold that turns routine life into a high-friction hazard.
+              Local reporting noted an <strong>Extreme Cold Warning</strong> in effect across Southeast Texas into <strong>Tuesday, January 27, 2026</strong>,
+              with morning temperatures in the <strong>teens and 20s</strong> and wind that made it feel even colder.
+              Winds of roughly <strong>10–20 mph</strong> (with higher gusts) were reported in forecasts, driving wind chills down into single digits/low teens in the Houston area,
+              and even lower in outlying regions.
+            </p>
+
+            <div class="quote" role="note" aria-label="Why wind chill matters">
+              <p>
+                🧠 Wind chill is the “feels-like” effect of wind stripping heat from skin. In practical terms: it accelerates hypothermia risk for anyone outside without adequate shelter.
+              </p>
+            </div>
+
+            <p>
+              That’s the key: it’s not just the thermometer — it’s <em>exposure time</em>. If you’re housed, you can “wait it out.”
+              If you’re unsheltered, you are running a survival calculation against the clock.
+            </p>
+
+            <h2 id="shutdown">2) How did the storm shut Houston down?</h2>
+            <p>
+              “Shutdown” in Houston usually looks like a cascading series of safety decisions: avoid travel, close public-facing services, cancel events, delay openings, and reduce risk.
+              On <strong>Sunday, January 25</strong>, multiple outlets tracked the expanding list of closures and changes heading into <strong>Monday, January 26, 2026</strong>.
+              The reasons were simple: <strong>ice risk</strong>, <strong>unsafe roads</strong> (especially bridges/overpasses), and <strong>extreme cold exposure</strong>.
+            </p>
+
+            <h3 id="closures">Examples of closures & delays (Jan 26, 2026)</h3>
+            <p>
+              City and county offices, destinations, and services posted closures and delayed openings for Monday. Public notices and local reporting listed impacted operations
+              (including county offices and major attractions) as conditions remained hazardous.
+            </p>
+
+            <div class="callout" style="border-color:rgba(111,231,255,.26)">
+              <div class="title"><span class="dot" style="background:var(--cyan); box-shadow:0 0 0 6px rgba(111,231,255,.18)" aria-hidden="true"></span>Operational reality check</div>
+              <ul class="bullets">
+                <li>When Houston “shuts down,” it’s not symbolic — it’s a safety throttle on movement, staffing, and travel.</li>
+                <li>Ice + bridges + low temps = wreck risk, emergency response delays, and secondary hazards.</li>
+                <li>Everyone slows down. But not everyone has a place to slow down <em>inside</em>.</li>
+              </ul>
+            </div>
+
+            <h2 id="warming-centers">3) The city opened resources. Why were people still at risk?</h2>
+            <p>
+              The City of Houston announced <strong>12 warming centers</strong> ahead of the cold snap and confirmed they remained open during the storm window.
+              That matters. It saves lives.
+            </p>
+
+            <p>
+              But a deadly truth survives every freeze: <strong>availability is not the same as reachability</strong>.
+              People sleeping outside may not receive alerts in time, may not have transportation, may avoid shelters due to safety concerns,
+              may lack documentation, may fear separation from partners or pets, or may simply be too far from the nearest site when roads and temps turn hostile.
+              So even when the city activates resources, the system can still leave people exposed.
+            </p>
+
+            <h2 id="why-homelessness">4) Why January 25, 2026 becomes a homelessness issue (fast)</h2>
+            <p>
+              Extreme cold is a multiplier. It turns existing vulnerability into immediate danger.
+              Greater Houston’s homelessness numbers show why “weather events” can become “fatal events” when too many people live unsheltered.
+              The Coalition for the Homeless of Houston/Harris County reported that the <strong>2025 Point-in-Time Count</strong> identified
+              <strong>3,325 people experiencing homelessness</strong>, including <strong>1,282 unsheltered</strong>.
+            </p>
+
+            <p>
+              Another signal: research reporting has highlighted reduced shelter bed availability in the region, while unsheltered homelessness rose —
+              a reminder that capacity + flow to housing matters, especially during severe weather windows.
+            </p>
+
+            <div class="hr" aria-hidden="true"></div>
+
+            <h2 id="what-must-be-done">5) What must be done: upstream prevention, not only emergency response</h2>
+            <p>
+              Warming centers and shelters are emergency tools. Houston should keep improving them — and scaling outreach.
+              But extreme cold snaps will happen again.
+              If the unsheltered count stays high, we’re agreeing (by default) to repeat the same risk cycle every winter.
+            </p>
+
+            <p>
+              That’s why the focus must expand to <strong>upstream prevention</strong>: reduce the pipeline into homelessness by building durable stability earlier —
+              income skills, operator habits, support structure, and real-world capability.
+            </p>
+
+            <div class="cta" id="skyebridge">
+              <div class="row">
+                <div>
+                  <div style="font-weight:1000; font-size:18px; letter-spacing:-.25px;">
+                    SKYEBRIDGE: nip homelessness closer to the source 🧠⚙️
+                  </div>
+                  <div class="small" style="margin-top:6px; max-width:72ch;">
+                    SKYEBRIDGE is a mission built to equip at-risk individuals with the tools to become successful business operators.
+                    The goal is simple: fewer people forced into survival mode when the city freezes.
+                  </div>
+                </div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                  <a class="btn" href="#contact" aria-label="Jump to contact section">Build with SKYEBRIDGE →</a>
+                  <a class="btn secondary" href="#references" aria-label="Jump to sources and references">View sources</a>
+                </div>
+              </div>
+
+              <div style="margin-top:14px;">
+                <div class="small" style="font-family:var(--mono); color:rgba(185,185,214,.92); margin-bottom:8px;">
+                  What “upstream” looks like in practice:
+                </div>
+                <ul class="bullets">
+                  <li><strong>Operator training</strong>: decision-making, systems thinking, time discipline, business fundamentals.</li>
+                  <li><strong>Capability stacking</strong>: practical skills that lead to stable income and repeatable performance.</li>
+                  <li><strong>Structure</strong>: routines, accountability, and operational habits that survive setbacks.</li>
+                  <li><strong>Stability outcomes</strong>: less “edge living,” fewer crisis cycles, stronger personal infrastructure.</li>
+                </ul>
+              </div>
+            </div>
+
+            <h2 id="bottom-line">Bottom line</h2>
+            <p>
+              January 25, 2026 wasn’t just “a cold day in Houston.” It was a citywide reminder that
+              when the weather turns lethal, homelessness becomes a life-or-death issue on a timer.
+            </p>
+
+            <div class="quote" aria-label="Closing statement">
+              <p>
+                🧊 A city can open doors for a weekend. A city can also build fewer people who need to sleep outside at all. SKYEBRIDGE is about the second sentence.
+              </p>
+            </div>
+
+            <h2 id="contact">Contact / Next step</h2>
+            <p>
+              If your goal is to help Houston reduce the pipeline into homelessness — through operator training, structured capability building, and real-world stability —
+              SKYEBRIDGE is built for that mission.
+            </p>
+            <p class="small">
+              Note: This blog post is informational and advocacy-focused. For urgent local assistance during extreme weather, follow official City of Houston guidance and trusted local service providers.
+            </p>
+
+            <div class="refs" id="references">
+              <h2 id="references-title">Sources & References (for verification)</h2>
+              <ul>
+                <li>
+                  Click2Houston (KPRC 2) — Closures & delayed openings for Monday, Jan 26, 2026:
+                  <a href="https://www.click2houston.com/news/local/2026/01/25/list-houston-closures-delayed-openings-for-monday-due-to-winter-weather/" rel="noopener" target="_blank">https://www.click2houston.com/news/local/2026/01/25/list-houston-closures-delayed-openings-for-monday-due-to-winter-weather/</a>
+                </li>
+                <li>
+                  Click2Houston (KPRC 2) — City opening 12 warming centers ahead of the weekend freeze (Jan 23–24, 2026):
+                  <a href="https://www.click2houston.com/news/local/2026/01/23/warming-centers-to-open-ahead-of-winter-weather-coming-to-houston-this-weekend/" rel="noopener" target="_blank">https://www.click2houston.com/news/local/2026/01/23/warming-centers-to-open-ahead-of-winter-weather-coming-to-houston-this-weekend/</a>
+                </li>
+                <li>
+                  Click2Houston (KPRC 2) — Extreme cold warning coverage & forecast details (Jan 25, 2026):
+                  <a href="https://www.click2houston.com/weather/2026/01/25/snow-and-sleet-reports-confirmed-sunday-extreme-cold-to-follow/" rel="noopener" target="_blank">https://www.click2houston.com/weather/2026/01/25/snow-and-sleet-reports-confirmed-sunday-extreme-cold-to-follow/</a>
+                </li>
+                <li>
+                  FOX 26 Houston — Live updates referencing wind chill ranges and hazard conditions (Jan 25, 2026):
+                  <a href="https://www.fox26houston.com/news/houston-winter-storm-warning-sunday-live-forecast-icy-roads-power-outages" rel="noopener" target="_blank">https://www.fox26houston.com/news/houston-winter-storm-warning-sunday-live-forecast-icy-roads-power-outages</a>
+                </li>
+                <li>
+                  Coalition for the Homeless of Houston/Harris County — 2025 Point-in-Time Count results (3,325 total; 1,282 unsheltered):
+                  <a href="https://www.cfthhouston.org/2025-pit-results" rel="noopener" target="_blank">https://www.cfthhouston.org/2025-pit-results</a>
+                </li>
+                <li>
+                  Kinder Institute (Rice University) — Shelter bed availability context & unsheltered trends (Oct 2025):
+                  <a href="https://kinder.rice.edu/urbanedge/houston-reports-fewest-available-beds-20-plus-years-unsheltered-homelessness-rises" rel="noopener" target="_blank">https://kinder.rice.edu/urbanedge/houston-reports-fewest-available-beds-20-plus-years-unsheltered-homelessness-rises</a>
+                </li>
+              </ul>
+            </div>
+
+          </article>
+        </div>
+      </main>
+
+      <aside class="card" aria-label="Sidebar">
+        <div class="hd">
+          <h2>On This Page</h2>
+          <span class="pill"><strong>SEO</strong> ready</span>
+        </div>
+        <div class="bd">
+          <div class="kpi" aria-label="Key metrics">
+            <div class="box">
+              <div class="label">Weather</div>
+              <div class="value"><span class="hi">Extreme Cold</span></div>
+              <div class="note">Cold + wind chill accelerates risk</div>
+            </div>
+            <div class="box">
+              <div class="label">City response</div>
+              <div class="value"><span class="gold">12</span> warming centers</div>
+              <div class="note">Critical, but reach barriers remain</div>
+            </div>
+            <div class="box">
+              <div class="label">Homelessness</div>
+              <div class="value"><span class="hi">3,325</span> total</div>
+              <div class="note">2025 PIT Count (Greater Houston)</div>
+            </div>
+            <div class="box">
+              <div class="label">Unsheltered</div>
+              <div class="value"><span class="gold">1,282</span> outside</div>
+              <div class="note">Most exposed during freezes</div>
+            </div>
+          </div>
+
+          <div class="hr" aria-hidden="true"></div>
+
+          <nav class="toc" aria-label="Table of contents">
+            <a href="#how-cold">How cold was it?</a>
+            <a href="#shutdown">How Houston shut down</a>
+            <a href="#warming-centers">Warming centers</a>
+            <a href="#why-homelessness">Why homelessness becomes deadly</a>
+            <a href="#what-must-be-done">What must be done</a>
+            <a href="#skyebridge">SKYEBRIDGE mission</a>
+            <a href="#references">Sources</a>
+          </nav>
+
+          <div class="hr" aria-hidden="true"></div>
+
+          <div class="callout" style="border-color:rgba(246,196,92,.26)">
+            <div class="title"><span class="dot" style="background:var(--gold); box-shadow:0 0 0 6px rgba(246,196,92,.18)" aria-hidden="true"></span>SEO notes baked in</div>
+            <ul class="bullets">
+              <li>Keyword-rich H1/H2 structure</li>
+              <li>Clean internal anchors + TOC</li>
+              <li>Canonical + Open Graph + JSON-LD</li>
+              <li>Fast, no framework dependencies</li>
+            </ul>
+          </div>
+
+        </div>
+      </aside>
+    </section>
+
+    <footer>
+      <div>
+        © <span id="yr"></span> Skyes Over London LC. Built as a single-file blog page with SEO metadata and structured data.
+      </div>
+      <div class="small" style="margin-top:6px;">
+        Tip: Put this file at a stable URL (don’t change slugs often), and link to it from your main site navigation + relevant pages for stronger indexing.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      // Footer year
+      document.getElementById('yr').textContent = new Date().getFullYear();
+
+      // Reading time (simple estimate)
+      const text = document.getElementById('article').innerText || "";
+      const words = text.trim().split(/\s+/).filter(Boolean).length;
+      const mins = Math.max(3, Math.round(words / 220));
+      document.getElementById('rt').textContent = "~" + mins + " min";
+
+      // Copy link
+      const share = document.getElementById('shareLink');
+      share.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const url = location.href;
+        try{
+          await navigator.clipboard.writeText(url);
+          share.textContent = "Copied ✓";
+          setTimeout(()=> share.textContent = "Copy link", 1400);
+        }catch(err){
+          const ta = document.createElement('textarea');
+          ta.value = url;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          share.textContent = "Copied ✓";
+          setTimeout(()=> share.textContent = "Copy link", 1400);
+        }
+      });
+
+      // Remove intro from the accessibility tree after animation completes
+      const intro = document.getElementById('intro');
+      if(intro){
+        const kill = () => {
+          intro.style.display = 'none';
+          document.body.style.overflow = '';
+        };
+        // prevent scroll during intro
+        document.body.style.overflow = 'hidden';
+
+        // hard timeout in case animation events don't fire
+        setTimeout(kill, 3400);
+
+        intro.addEventListener('animationend', (ev) => {
+          if(ev && ev.animationName === 'introFade') kill();
+        }, { once:true });
+      }
+    })();
+  </script>
+</body>
+</html>

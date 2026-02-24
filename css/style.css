@@ -25,8 +25,8 @@
   --gold: #c9a84c;
   --gold-light: #e8d48b;
   --gold-dim: rgba(201,168,76,0.15);
-  --dark: #14142a;
-  --darker: #0d0d1a;
+  --dark: #0e0e1a;
+  --darker: #07070f;
   --surface: #0c0c14;
   --surface-2: #111119;
   --surface-3: #181822;
@@ -41,7 +41,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  background: #0d0d1a;
+  background: #07070f;
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;

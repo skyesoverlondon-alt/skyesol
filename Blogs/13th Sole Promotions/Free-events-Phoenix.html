@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Things to Do in Phoenix (Feb 2026) — Free Web &amp; Business Events</title>
+  <meta name="description" content="A cinematic, interactive city-desk guide to free, in-person Phoenix events in February 2026 for web development and business development—with RSVP links." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Things to Do in Phoenix (Feb 2026) — Free Web &amp; Business Events" />
+  <meta property="og:description" content="A cinematic, interactive guide to free Phoenix events for web and business builders, with RSVP links and quick actions." />
+  <meta property="og:type" content="article" />
+
+  <style>
+    /*
+      kAIxu Spectacle Layer (serious, not childish)
+      - editorial typography preserved
+      - cinematic chrome added: starfield, grid, ink panels, motion
+      - interactive controls: filter, quick actions, reading progress
+      - performance-safe: no external libs
+    */
+
+    :root{
+      --bg0:#05040a;
+      --bg1:#0b0718;
+      --panel:rgba(255,255,255,.04);
+      --panel2:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.12);
+      --stroke2:rgba(255,255,255,.18);
+      --text:#f5f3ff;
+      --muted:rgba(245,243,255,.72);
+      --muted2:rgba(245,243,255,.56);
+      --ink:#0d0b16;
+      --gold:#f5c542;
+      --gold2:#ffd56a;
+      --amethyst:#a855f7;
+      --amethyst2:#7c3aed;
+      --ok:#22c55e;
+      --shadow: 0 30px 90px rgba(0,0,0,.55);
+      --shadow2: 0 16px 55px rgba(0,0,0,.40);
+      --radius: 18px;
+      --radius2: 14px;
+      --max: 1040px;
+      --measure: 74ch;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family: var(--serif);
+      line-height:1.75;
+      background:
+        radial-gradient(1000px 620px at 14% 12%, rgba(168,85,247,.18), transparent 60%),
+        radial-gradient(900px 520px at 90% 22%, rgba(245,197,66,.14), transparent 58%),
+        radial-gradient(1000px 720px at 55% 92%, rgba(124,58,237,.12), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    a{color:inherit; text-decoration:none}
+
+    /* Fixed FX layers */
+    .fx{position:fixed; inset:0; pointer-events:none; z-index:0;}
+
+    /* Starfield (subtle) */
+    .fx::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.45) 45%, transparent 46%),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.22) 45%, transparent 46%),
+        radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,.28) 45%, transparent 46%),
+        radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,.18) 45%, transparent 46%),
+        radial-gradient(1px 1px at 55% 55%, rgba(255,255,255,.14) 45%, transparent 46%),
+        radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,.20) 45%, transparent 46%),
+        radial-gradient(1px 1px at 18% 55%, rgba(255,255,255,.12) 45%, transparent 46%),
+        radial-gradient(1px 1px at 62% 12%, rgba(255,255,255,.12) 45%, transparent 46%);
+      opacity:.50;
+      filter: blur(.2px);
+    }
+
+    /* Grid */
+    .fx::after{
+      content:"";
+      position:absolute; inset:-20%;
+      background-image:
+        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity:.07;
+      transform: rotate(-8deg);
+      filter: blur(.25px);
+    }
+
+    /* Film grain */
+    .grain{
+      position:fixed; inset:0; pointer-events:none; z-index:1;
+      opacity:.09;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    /* Cursor halo */
+    .halo{
+      position:fixed;
+      width:560px; height:560px;
+      border-radius:999px;
+      transform: translate(-50%,-50%);
+      background: radial-gradient(circle, rgba(245,197,66,.10), rgba(168,85,247,.08), transparent 62%);
+      filter: blur(14px);
+      opacity:.65;
+      pointer-events:none;
+      z-index:2;
+    }
+
+    /* Progress bar */
+    .progress{
+      position:fixed;
+      top:0; left:0;
+      height:3px;
+      width:0;
+      background: linear-gradient(90deg, rgba(245,197,66,.95), rgba(168,85,247,.95));
+      z-index:9999;
+      box-shadow: 0 10px 28px rgba(245,197,66,.14);
+    }
+
+    /* Layout */
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: 42px 18px 92px;
+      position:relative;
+      z-index:3;
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky;
+      top:10px;
+      z-index:50;
+      margin: 0 0 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow2);
+    }
+
+    .brand{display:flex; align-items:center; gap:10px; min-width: 220px;}
+
+    .sigil{
+      width:34px; height:34px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(circle at 30% 25%, rgba(245,197,66,.25), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(168,85,247,.22), transparent 58%),
+        rgba(255,255,255,.03);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+    }
+    .sigil::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 220deg, rgba(245,197,66,.25), rgba(168,85,247,.25), rgba(255,255,255,.06), rgba(245,197,66,.20));
+      opacity:.75;
+      filter: blur(6px);
+      transform: rotate(18deg);
+    }
+
+    .brandText{display:flex; flex-direction:column; gap:2px}
+    .brandText b{
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing:1.25px;
+      text-transform:uppercase;
+      color: rgba(245,243,255,.86);
+    }
+    .brandText span{font-family: var(--sans); font-size: 12px; color: var(--muted);}
+
+    .controls{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:center}
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: rgba(245,243,255,.86);
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing:.3px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .chip:hover{transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18)}
+    .chip[aria-pressed="true"]{
+      border-color: rgba(245,197,66,.35);
+      box-shadow: 0 18px 55px rgba(245,197,66,.10);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: rgba(245,243,255,.90);
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing:.3px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(0,0,0,.24); border-color: rgba(255,255,255,.18)}
+
+    /* Hero / masthead */
+    header{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      padding: 26px 22px;
+      position:relative;
+    }
+
+    header::before{
+      content:"";
+      position:absolute; inset:-40%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(168,85,247,.20), transparent 50%),
+        radial-gradient(circle at 82% 30%, rgba(245,197,66,.16), transparent 52%),
+        radial-gradient(circle at 55% 84%, rgba(124,58,237,.12), transparent 58%);
+      filter: blur(10px);
+      opacity:.95;
+      transform: rotate(-10deg);
+      pointer-events:none;
+    }
+
+    .kicker{
+      position:relative;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      margin-bottom:12px;
+      font-family: var(--sans);
+      text-transform:uppercase;
+      letter-spacing:1.35px;
+      font-size:12px;
+      color: var(--muted);
+    }
+    .kicker .dot{opacity:.55}
+
+    h1{
+      position:relative;
+      font-size: clamp(34px, 3.6vw, 52px);
+      line-height: 1.05;
+      margin: 0 0 14px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      max-width: var(--measure);
+    }
+
+    .subhead{
+      position:relative;
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0 0 16px;
+      max-width: var(--measure);
+    }
+
+    .byline{
+      position:relative;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:baseline;
+      font-size:12px;
+      color: var(--muted);
+      font-family: var(--sans);
+      letter-spacing:.2px;
+    }
+    .byline b{color: rgba(245,243,255,.92)}
+
+    /* Body */
+    main{margin-top:18px}
+
+    .lede{
+      max-width: var(--measure);
+      font-size: 18px;
+      color: rgba(245,243,255,.90);
+      margin: 0 0 18px;
+    }
+    .lede strong{font-weight:700}
+
+    /* Callout */
+    .callout{
+      max-width: var(--measure);
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      padding: 14px 14px;
+      font-family: var(--sans);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      box-shadow: var(--shadow2);
+    }
+    .callout b{color: rgba(245,243,255,.92)}
+    .callout ul{margin:10px 0 0; padding-left:18px}
+    .callout li{margin:6px 0}
+
+    blockquote{
+      margin: 22px 0;
+      padding: 0 0 0 16px;
+      border-left: 3px solid rgba(245,197,66,.40);
+      max-width: var(--measure);
+      color: rgba(245,243,255,.92);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    blockquote .cite{
+      display:block;
+      margin-top:10px;
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+    }
+
+    .sectionLabel{
+      margin-top: 26px;
+      font-family: var(--sans);
+      text-transform:uppercase;
+      letter-spacing:1.2px;
+      font-size:12px;
+      color: var(--muted);
+    }
+
+    /* Event cards */
+    .events{margin-top: 10px; display:grid; gap: 14px;}
+
+    .event{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(0,0,0,.12));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: transform .6s ease, opacity .6s ease;
+    }
+    .event.is-in{transform: translateY(0); opacity: 1;}
+
+    .eventTop{
+      padding: 18px 18px 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:flex-start;
+      justify-content:space-between;
+    }
+
+    .eventTitle{
+      margin:0;
+      font-size: 22px;
+      line-height: 1.2;
+      font-weight: 700;
+      max-width: 52ch;
+    }
+
+    .eventDate{
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.15px;
+      white-space: nowrap;
+      margin-top: 3px;
+    }
+
+    .badges{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      font-family: var(--sans);
+      font-size: 12px;
+      color: rgba(245,243,255,.86);
+      letter-spacing:.2px;
+    }
+
+    .badge .pip{
+      width:8px; height:8px; border-radius:999px;
+      background: linear-gradient(135deg, rgba(245,197,66,.95), rgba(168,85,247,.95));
+      box-shadow: 0 0 16px rgba(245,197,66,.16);
+    }
+
+    .badge.free{
+      border-color: rgba(34,197,94,.30);
+      background: linear-gradient(135deg, rgba(34,197,94,.12), rgba(0,0,0,.22));
+    }
+
+    .eventBody{padding: 0 18px 16px;}
+
+    .kv{
+      display:grid;
+      gap: 6px;
+      margin: 12px 0 14px;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(245,243,255,.90);
+      max-width: var(--measure);
+    }
+    .kv span{color: var(--muted)}
+
+    .why{
+      max-width: var(--measure);
+      margin: 0 0 12px;
+      font-size: 16px;
+      color: rgba(245,243,255,.88);
+    }
+    .why em{font-style: italic}
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 18px;
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+    }
+
+    .rsvp{
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(245,243,255,.90);
+    }
+    .rsvp b{font-weight:800}
+
+    .miniBtns{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+
+    .mini{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color: rgba(245,243,255,.90);
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing:.2px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .mini:hover{transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18)}
+    .mini.primary{
+      border-color: rgba(245,197,66,.30);
+      background: linear-gradient(135deg, rgba(245,197,66,.14), rgba(168,85,247,.10));
+      box-shadow: 0 18px 55px rgba(245,197,66,.10);
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 1000;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .modal[aria-hidden="false"]{display:flex;}
+    .sheet{
+      width:min(860px, 100%);
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.30));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .sheetTop{
+      padding: 14px 16px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      font-family: var(--sans);
+    }
+    .sheetTop b{letter-spacing:.4px}
+    .sheetBody{padding: 14px 16px; font-family: var(--sans); color: rgba(245,243,255,.86); font-size: 13px; line-height:1.65}
+    .sheetBody code{font-family: var(--mono); font-size: 12px; color: rgba(245,243,255,.90)}
+
+    .close{
+      display:inline-flex; align-items:center; justify-content:center;
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      color: rgba(245,243,255,.92);
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .close:hover{transform: translateY(-1px); background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.18)}
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .event{transition:none}
+      .chip,.btn,.mini,.close{transition:none}
+      .halo{display:none}
+    }
+
+    @media (max-width: 640px){
+      .brand{min-width:auto}
+      .eventTitle{font-size: 20px}
+    }
+
+    @media print{
+      .fx,.grain,.halo,.progress,.topbar,.modal{display:none !important}
+      body{background:#fff; color:#111}
+      a{text-decoration:underline}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Things to Do in Phoenix (Feb 2026) — Free Web & Business Events",
+    "description":"A cinematic, interactive guide to three free, in-person Phoenix events in February 2026 for web development and business development—with RSVP links.",
+    "author":{"@type":"Organization","name":"Phoenix City Desk"},
+    "datePublished":"2024-02-24",
+    "about":["Phoenix","Web Development","Business Development","Events"]
+  }
+  </script>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="fx" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="halo" aria-hidden="true"></div>
+
+  <div class="wrap">
+
+    <!-- Sticky controls -->
+    <div class="topbar" role="region" aria-label="Page controls">
+      <div class="brand">
+        <div class="sigil" aria-hidden="true"></div>
+        <div class="brandText">
+          <b>Phoenix City Desk</b>
+          <span>Feb 2026 · Free · In-person</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="chip" type="button" aria-pressed="true" data-filter="all">All</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="product">Product</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="web">Web Dev</button>
+        <button class="chip" type="button" aria-pressed="false" data-filter="business">Business</button>
+        <button class="btn" type="button" id="btnCalendar">Export calendar</button>
+        <button class="btn" type="button" id="btnCopy">Copy page link</button>
+      </div>
+    </div>
+
+    <article class="page" aria-label="Article">
+
+      <header>
+        <div class="kicker">
+          <span>Phoenix, Arizona</span><span class="dot">•</span>
+          <span>February 2026</span><span class="dot">•</span>
+          <span>Free · In-person</span><span class="dot">•</span>
+          <span>Web &amp; Business</span>
+        </div>
+
+        <h1>Three free events in Phoenix where builders still talk like builders</h1>
+        <p class="subhead">A short, high-signal list for web professionals and business builders—rooms that favor specificity over spectacle, with RSVP links included.</p>
+
+        <div class="byline">
+          <span><b>City Desk</b></span>
+          <span>·</span>
+          <span>Updated Jan 24, 2026</span>
+          <span>·</span>
+          <span>Reading time: ~4 minutes</span>
+        </div>
+      </header>
+
+      <main>
+        <p class="lede">
+          Phoenix’s most useful professional gatherings rarely announce themselves as “must-attend.” They’re usually smaller, closer to the ground, and built around a simple exchange: <strong>show up with a real question</strong>, leave with something you can actually use.
+        </p>
+
+        <p class="lede">
+          This February, three free, in-person events offer distinct versions of that trade: a downtown product room where community compounds, a developer round table with no slide deck buffer, and a Saturday entrepreneurship session best approached as diligence, not inspiration.
+        </p>
+
+        <div class="callout" role="note" aria-label="How to use this list">
+          <b>How to use this list</b>
+          <ul>
+            <li><b>Choose by intent:</b> product network, web peer room, or entrepreneurship recon.</li>
+            <li><b>RSVP early:</b> “free” often means limited capacity.</li>
+            <li><b>Bring one sharp question:</b> specificity gets better conversations than a generic pitch.</li>
+          </ul>
+        </div>
+
+        <blockquote>
+          The point of showing up isn’t to collect business cards. It’s to find the one conversation that shortens your next month.
+          <span class="cite">— An editor’s rule of thumb</span>
+        </blockquote>
+
+        <div class="sectionLabel">The short list</div>
+
+        <section class="events" id="events" aria-label="Events">
+
+          <!-- EVENT 1 -->
+          <article class="event" data-type="product" data-title="Phoenix Product Group Meetup: Building Community" data-start="2026-02-02T17:30:00-07:00" data-end="2026-02-02T19:30:00-07:00" data-location="Center for Entrepreneurial Innovation, 275 N Gateway Dr, Phoenix, AZ" data-url="https://lu.ma/tdzquqcc">
+            <div class="eventTop">
+              <div>
+                <h2 class="eventTitle">Phoenix Product Group Meetup: <em>Building Community</em></h2>
+                <div class="eventDate">Mon · Feb 2, 2026</div>
+              </div>
+              <div class="badges">
+                <span class="badge free"><span class="pip" aria-hidden="true"></span>FREE</span>
+                <span class="badge"><span class="pip" aria-hidden="true"></span>Product</span>
+                <span class="badge"><span class="pip" aria-hidden="true"></span>Downtown</span>
+              </div>
+            </div>
+
+            <div class="eventBody">
+              <div class="kv">
+                <div><b>Time</b> <span>·</span> 5:30 PM – 7:30 PM</div>
+                <div><b>Location</b> <span>·</span> Center for Entrepreneurial Innovation, 275 N Gateway Dr, Phoenix</div>
+                <div><b>Cost</b> <span>·</span> Free (RSVP required)</div>
+                <div><b>Contact</b> <span>·</span> Organizer listed on Luma (Marion Cholieu)</div>
+              </div>
+
+              <p class="why">
+                This is the kind of gathering that makes a city’s tech scene feel smaller—in the best way. Product work is relational by nature; it improves when the same people see each other often enough to trade context, not just introductions. Expect a blend of networking and discussion that favors execution realities: what’s shipping, what’s stuck, and what the Phoenix product community still needs.
+              </p>
+
+              <p class="why">
+                The room typically pulls in product managers, founders, developers, designers, and business strategists—people who sit close enough to the work to argue about priorities without drifting into theory.
+              </p>
+            </div>
+
+            <div class="actions">
+              <div class="rsvp"><b>RSVP:</b> <a href="https://lu.ma/tdzquqcc" target="_blank" rel="noopener">lu.ma/tdzquqcc</a></div>
+              <div class="miniBtns">
+                <a class="mini primary" href="https://lu.ma/tdzquqcc" target="_blank" rel="noopener">Open RSVP</a>
+                <button class="mini" type="button" data-action="calendar">Add to calendar</button>
+                <button class="mini" type="button" data-action="copy">Copy details</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- EVENT 2 -->
+          <article class="event" data-type="web" data-title="Web Design & Development Round Table" data-start="2026-02-02T18:30:00-07:00" data-end="2026-02-02T20:00:00-07:00" data-location="Desert Ridge Marketplace, 21001 N Tatum Blvd, Phoenix, AZ 85050" data-url="https://www.meetup.com/webdesignersdevelopers/events/312873462/">
+            <div class="eventTop">
+              <div>
+                <h2 class="eventTitle">Web Design &amp; Development Round Table</h2>
+                <div class="eventDate">Mon · Feb 2, 2026</div>
+              </div>
+              <div class="badges">
+                <span class="badge free"><span class="pip" aria-hidden="true"></span>FREE</span>
+                <span class="badge"><span class="pip" aria-hidden="true"></span>Web Dev</span>
+                <span class="badge"><span class="pip" aria-hidden="true"></span>North Phoenix</span>
+              </div>
+            </div>
+
+            <div class="eventBody">
+              <div class="kv">
+                <div><b>Time</b> <span>·</span> 6:30 PM – 8:00 PM</div>
+                <div><b>Location</b> <span>·</span> Desert Ridge Marketplace, 21001 N Tatum Blvd, Phoenix</div>
+                <div><b>Cost</b> <span>·</span> Free (Meetup RSVP recommended)</div>
+                <div><b>Contact</b> <span>·</span> Meetup organizer listed as Michael A. S.</div>
+              </div>
+
+              <p class="why">
+                There are meetups where you learn what someone wants you to believe. And then there are meetups where you learn what someone actually did. This round table leans hard toward the latter: no slide deck, no polished “case study,” just a peer room where tradeoffs can be named plainly—tooling choices, deployments, performance, and client constraints.
+              </p>
+
+              <p class="why">
+                It’s especially useful for freelancers and builders shipping real work who want to compare methods without the noise that usually surrounds “best practices.”
+              </p>
+            </div>
+
+            <div class="actions">
+              <div class="rsvp"><b>RSVP:</b> <a href="https://www.meetup.com/webdesignersdevelopers/events/312873462/" target="_blank" rel="noopener">Meetup event page</a></div>
+              <div class="miniBtns">
+                <a class="mini primary" href="https://www.meetup.com/webdesignersdevelopers/events/312873462/" target="_blank" rel="noopener">Open RSVP</a>
+                <button class="mini" type="button" data-action="calendar">Add to calendar</button>
+                <button class="mini" type="button" data-action="copy">Copy details</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- EVENT 3 -->
+          <article class="event" data-type="business" data-title="Build Your Own Business: Financial Opportunity Workshop" data-start="2026-02-07T10:00:00-07:00" data-end="2026-02-07T11:00:00-07:00" data-location="1010 E McDowell Rd, Phoenix, AZ" data-url="https://www.eventbrite.com/e/new-financial-opportunity-in-2026-build-your-own-business-fullpart-time-tickets-1126501667889">
+            <div class="eventTop">
+              <div>
+                <h2 class="eventTitle">Build Your Own Business: Financial Opportunity Workshop</h2>
+                <div class="eventDate">Sat · Feb 7, 2026</div>
+              </div>
+              <div class="badges">
+                <span class="badge free"><span class="pip" aria-hidden="true"></span>FREE</span>
+                <span class="badge"><span class="pip" aria-hidden="true"></span>Business</span>
+                <span class="badge"><span class="pip" aria-hidden="true"></span>Central Phoenix</span>
+              </div>
+            </div>
+
+            <div class="eventBody">
+              <div class="kv">
+                <div><b>Time</b> <span>·</span> 10:00 AM – 11:00 AM</div>
+                <div><b>Location</b> <span>·</span> 1010 E McDowell Rd, Phoenix</div>
+                <div><b>Cost</b> <span>·</span> Free (Eventbrite registration required)</div>
+                <div><b>Contact</b> <span>·</span> Host listed on Eventbrite (Kimberly Murman)</div>
+              </div>
+
+              <p class="why">
+                Approach this one like diligence. The value is not hype; it’s clarity. If you’re evaluating entrepreneurship, alternative income models, or a structured pathway into business ownership, an hour in the room can help you ask the questions that matter: time commitments, economics, expectations, and whether the model fits the life you’re building.
+              </p>
+
+              <p class="why">
+                The best outcome is not necessarily enthusiasm—it’s a confident decision, either direction, based on better information.
+              </p>
+            </div>
+
+            <div class="actions">
+              <div class="rsvp"><b>Register:</b> <a href="https://www.eventbrite.com/e/new-financial-opportunity-in-2026-build-your-own-business-fullpart-time-tickets-1126501667889" target="_blank" rel="noopener">Eventbrite listing</a></div>
+              <div class="miniBtns">
+                <a class="mini primary" href="https://www.eventbrite.com/e/new-financial-opportunity-in-2026-build-your-own-business-fullpart-time-tickets-1126501667889" target="_blank" rel="noopener">Open RSVP</a>
+                <button class="mini" type="button" data-action="calendar">Add to calendar</button>
+                <button class="mini" type="button" data-action="copy">Copy details</button>
+              </div>
+            </div>
+          </article>
+
+        </section>
+
+        <footer>
+          Event details can change. Confirm time and location on the official RSVP page before attending.
+        </footer>
+
+      </main>
+    </article>
+  </div>
+
+  <!-- Modal: Calendar export -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Calendar export">
+    <div class="sheet" role="document">
+      <div class="sheetTop">
+        <b>Calendar export</b>
+        <button class="close" type="button" id="close" aria-label="Close">✕</button>
+      </div>
+      <div class="sheetBody" id="sheetBody">
+        Export options are generated from the event data embedded in this page.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== Helpers =====
+    const $ = (q, el=document) => el.querySelector(q);
+    const $$ = (q, el=document) => Array.from(el.querySelectorAll(q));
+
+    // RFC 5545 line breaks are CRLF
+    const ICS_NL = "\r\n";
+
+    function escapeICS(value){
+      // Escape text per RFC 5545: backslash, comma, semicolon, newline
+      return String(value ?? "")
+        .replace(/\\/g, "\\\\")
+        .replace(/\r?\n/g, "\\n")
+        .replace(/,/g, "\\,")
+        .replace(/;/g, "\\;");
+    }
+
+    function toICSDate(iso){
+      // expects ISO with offset already in data-start/end
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) throw new Error("Invalid date for ICS: " + iso);
+      const pad = (n)=> String(n).padStart(2,'0');
+      // UTC format YYYYMMDDTHHMMSSZ
+      return (
+        d.getUTCFullYear() +
+        pad(d.getUTCMonth()+1) +
+        pad(d.getUTCDate()) +
+        'T' +
+        pad(d.getUTCHours()) +
+        pad(d.getUTCMinutes()) +
+        pad(d.getUTCSeconds()) +
+        'Z'
+      );
+    }
+
+    function buildICS(eventEls){
+      const events = Array.from(eventEls || []);
+      const now = new Date();
+      const stamp = toICSDate(now.toISOString());
+
+      // Build with explicit NLs (avoids accidental raw newlines inside JS string literals)
+      const lines = [];
+      lines.push("BEGIN:VCALENDAR");
+      lines.push("VERSION:2.0");
+      lines.push("PRODID:-//Phoenix City Desk//Feb 2026 Events//EN");
+      lines.push("CALSCALE:GREGORIAN");
+      lines.push("METHOD:PUBLISH");
+
+      for(const ev of events){
+        const title = ev.dataset.title || 'Event';
+        const uid = title
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g,'-')
+          .replace(/(^-|-$)/g,'') + "@phoenix-city-desk";
+
+        lines.push("BEGIN:VEVENT");
+        lines.push(`UID:${escapeICS(uid)}`);
+        lines.push(`DTSTAMP:${stamp}`);
+        lines.push(`DTSTART:${toICSDate(ev.dataset.start)}`);
+        lines.push(`DTEND:${toICSDate(ev.dataset.end)}`);
+        lines.push(`SUMMARY:${escapeICS(title)}`);
+        lines.push(`LOCATION:${escapeICS(ev.dataset.location || '')}`);
+        lines.push(`URL:${escapeICS(ev.dataset.url || '')}`);
+        lines.push("END:VEVENT");
+      }
+
+      lines.push("END:VCALENDAR");
+      return lines.join(ICS_NL) + ICS_NL;
+    }
+
+    function download(filename, text){
+      const blob = new Blob([text], {type:'text/calendar;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url), 500);
+    }
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        toast("Copied");
+      }catch(e){
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        toast("Copied");
+      }
+    }
+
+    // ===== Self-tests (run automatically; results in console) =====
+    function runTests(){
+      const results = [];
+      const t = (name, fn)=>{
+        try{ fn(); results.push({name, ok:true}); }
+        catch(err){ results.push({name, ok:false, err}); }
+      };
+      const expect = (cond, msg)=>{ if(!cond) throw new Error(msg || 'Expectation failed'); };
+
+      // Existing behavior: escapeICS must escape RFC 5545 chars
+      t('escapeICS escapes backslash', ()=>{
+        expect(escapeICS('a\\b') === 'a\\\\b', 'backslash not escaped');
+      });
+      t('escapeICS escapes newline', ()=>{
+        expect(escapeICS('a\n b') === 'a\\n b', 'newline not escaped');
+        expect(escapeICS('a\r\nb') === 'a\\nb', 'CRLF not normalized');
+      });
+      t('escapeICS escapes comma and semicolon', ()=>{
+        expect(escapeICS('a,b;c') === 'a\\,b\\;c', 'comma/semicolon not escaped');
+      });
+
+      // New tests: buildICS format + required tokens
+      t('buildICS produces VCALENDAR wrapper', ()=>{
+        const ev = document.querySelector('.event');
+        const ics = buildICS([ev]);
+        expect(ics.includes('BEGIN:VCALENDAR'), 'missing BEGIN:VCALENDAR');
+        expect(ics.includes('END:VCALENDAR'), 'missing END:VCALENDAR');
+        expect(ics.includes('BEGIN:VEVENT'), 'missing BEGIN:VEVENT');
+        expect(ics.includes('SUMMARY:'), 'missing SUMMARY');
+        expect(/\r\n/.test(ics), 'expected CRLF line breaks');
+      });
+
+      // Report
+      const failed = results.filter(r=>!r.ok);
+      if(failed.length){
+        console.groupCollapsed('%cSelf-tests: FAIL', 'color:#ff6b6b;font-weight:700');
+        failed.forEach(r=>console.error(r.name, r.err));
+        console.groupEnd();
+      }else{
+        console.log('%cSelf-tests: PASS', 'color:#7CFFB2;font-weight:700');
+      }
+      return results;
+    }
+
+    // ===== Cinematic cursor halo =====
+    (function(){
+      const halo = document.querySelector('.halo');
+      if(!halo) return;
+      let x = innerWidth*0.5, y = innerHeight*0.35, tx=x, ty=y;
+      const move = (e)=>{ tx = e.clientX; ty = e.clientY; };
+      window.addEventListener('mousemove', move, {passive:true});
+      const loop = ()=>{
+        x += (tx-x)*0.075;
+        y += (ty-y)*0.075;
+        halo.style.left = x+'px';
+        halo.style.top = y+'px';
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+    })();
+
+    // ===== Reading progress =====
+    (function(){
+      const bar = document.querySelector('.progress');
+      const onScroll = ()=>{
+        const h = document.documentElement;
+        const sc = h.scrollTop;
+        const max = (h.scrollHeight - h.clientHeight) || 1;
+        const pct = Math.min(1, Math.max(0, sc / max));
+        bar.style.width = (pct*100).toFixed(2) + '%';
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
+
+    // ===== Reveal on scroll =====
+    (function(){
+      const items = document.querySelectorAll('.event');
+      const io = new IntersectionObserver((entries)=>{
+        for(const e of entries){
+          if(e.isIntersecting){
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          }
+        }
+      }, {threshold: .12});
+      items.forEach(i=>io.observe(i));
+    })();
+
+    // ===== Filtering =====
+    (function(){
+      const chips = $$('button.chip');
+      const events = $$('.event');
+
+      function setPressed(target){
+        chips.forEach(c=>c.setAttribute('aria-pressed', String(c===target)));
+      }
+
+      function apply(filter){
+        for(const ev of events){
+          const t = ev.dataset.type;
+          const show = (filter==='all') || (t===filter);
+          ev.style.display = show ? '' : 'none';
+        }
+      }
+
+      chips.forEach(ch=>{
+        ch.addEventListener('click', ()=>{
+          const f = ch.dataset.filter;
+          setPressed(ch);
+          apply(f);
+          toast(f==='all' ? 'Showing all events' : `Filtered: ${f}`);
+        });
+      });
+    })();
+
+    // ===== Quick actions: per-event calendar + copy =====
+    (function(){
+      document.addEventListener('click', (e)=>{
+        const btn = e.target.closest('button[data-action]');
+        if(!btn) return;
+        const card = e.target.closest('.event');
+        if(!card) return;
+        const action = btn.dataset.action;
+        const title = card.dataset.title;
+        const start = card.dataset.start;
+        const end = card.dataset.end;
+        const loc = card.dataset.location;
+        const url = card.dataset.url;
+
+        if(action==='calendar'){
+          const ics = buildICS([card]);
+          const safe = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+          download(`${safe}.ics`, ics);
+          toast('Calendar file downloaded');
+        }
+
+        if(action==='copy'){
+          const text = `${title}\nTime: ${new Date(start).toLocaleString()} – ${new Date(end).toLocaleTimeString()}\nLocation: ${loc}\nRSVP: ${url}`;
+          copyText(text);
+        }
+      });
+    })();
+
+    // ===== Global buttons =====
+    (function(){
+      const modal = $('#modal');
+      const body = $('#sheetBody');
+      const close = $('#close');
+      const btnCalendar = $('#btnCalendar');
+      const btnCopy = $('#btnCopy');
+      const events = $$('.event');
+
+      function openModal(html){
+        body.innerHTML = html;
+        modal.setAttribute('aria-hidden','false');
+      }
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true');
+      }
+
+      close.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+      window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+      btnCalendar.addEventListener('click', ()=>{
+        const ics = buildICS(events);
+        const safeIcs = ics.replace(/</g,'&lt;');
+        const html = `
+          <div style="display:grid; gap:12px;">
+            <div><b>Download a single calendar file</b> containing all listed events.</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="mini primary" type="button" id="dlAll">Download .ics</button>
+              <button class="mini" type="button" id="copyICS">Copy .ics text</button>
+              <button class="mini" type="button" id="runTests">Run self-tests</button>
+            </div>
+            <div style="opacity:.85">
+              Google Calendar import: Google Calendar → Settings → Import &amp; export → Import.
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,.10); padding-top:10px; opacity:.92">
+              <div style="font-family: var(--mono); font-size:12px; white-space:pre-wrap;">${safeIcs}</div>
+            </div>
+          </div>
+        `;
+        openModal(html);
+        setTimeout(()=>{
+          const dlAll = $('#dlAll');
+          const copyICS = $('#copyICS');
+          const runBtn = $('#runTests');
+          dlAll && dlAll.addEventListener('click', ()=> download('phoenix-feb-2026-events.ics', ics));
+          copyICS && copyICS.addEventListener('click', ()=> copyText(ics));
+          runBtn && runBtn.addEventListener('click', ()=>{
+            const res = runTests();
+            const fails = res.filter(r=>!r.ok);
+            toast(fails.length ? `Tests failed: ${fails.length}` : 'Tests passed');
+          });
+        }, 0);
+      });
+
+      btnCopy.addEventListener('click', ()=>{
+        copyText(window.location.href);
+      });
+    })();
+
+    // ===== Toast =====
+    let toastTimer = null;
+    function toast(msg){
+      let el = document.getElementById('toast');
+      if(!el){
+        el = document.createElement('div');
+        el.id = 'toast';
+        el.style.position = 'fixed';
+        el.style.left = '18px';
+        el.style.bottom = '18px';
+        el.style.zIndex = '9999';
+        el.style.padding = '10px 12px';
+        el.style.borderRadius = '14px';
+        el.style.border = '1px solid rgba(255,255,255,.14)';
+        el.style.background = 'rgba(0,0,0,.30)';
+        el.style.backdropFilter = 'blur(10px)';
+        el.style.webkitBackdropFilter = 'blur(10px)';
+        el.style.boxShadow = '0 18px 55px rgba(0,0,0,.40)';
+        el.style.color = 'rgba(245,243,255,.92)';
+        el.style.fontFamily = getComputedStyle(document.documentElement).getPropertyValue('--sans');
+        el.style.fontSize = '12px';
+        el.style.letterSpacing = '.2px';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        el.style.transition = 'opacity .2s ease, transform .2s ease';
+        document.body.appendChild(el);
+      }
+      el.textContent = msg;
+      requestAnimationFrame(()=>{ el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>{ el.style.opacity = '0'; el.style.transform = 'translateY(8px)'; }, 1700);
+    }
+
+    // Run tests once on load (silent unless failing)
+    try { runTests(); } catch(_) {}
+  </script>
+</body>
+</html>

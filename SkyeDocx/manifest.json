@@ -1,0 +1,22 @@
+{
+  "name": "Skye OfferForge — Offer + Quote + Contract (Offline)",
+  "short_name": "OfferForge",
+  "description": "Offline tool for creating and managing Offers, Quotes, and Contracts.",
+  "theme_color": "#30cd04",
+  "background_color": "#0a0413",
+  "display": "standalone",
+  "start_url": "./index.html",
+  "iconUrl": "https://cdn1.sharemyimage.com/2026/02/09/SOL_Tiger_Logo_transparent_cropped.png",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

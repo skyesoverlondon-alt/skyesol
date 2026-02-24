@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blog Hub</title>
+  <meta name="description" content="Manual-path blog hub page. Fill slots with file paths to publish posts." />
+
+  <!--
+    ==========================================================
+    MANUAL PATH BLOG HUB — SINGLE FILE
+    ==========================================================
+    ✅ How you use this:
+    1) Scroll to:  "POST SLOTS (EDIT HERE)"
+    2) For each new post you create, replace ONE slot’s href:
+         href="/blog/posts/my-new-post.html"
+       (If you host posts elsewhere, use full URL.)
+    3) Optional (but recommended): set
+         data-title, data-excerpt, data-tags, data-date, data-cover
+
+    Slots with href="#" are automatically hidden.
+    No index file. No fetch. No build step.
+    ==========================================================
+  -->
+
+  <style>
+    :root{
+      --bg0:#05010f; --bg1:#0b0220; --bg2:#12002a;
+      --ink:rgba(255,255,255,.92); --muted:rgba(255,255,255,.72);
+      --line:rgba(255,255,255,.14); --soft:rgba(255,255,255,.10);
+      --accent:#7b2cff; --accent2:#c24bff; --gold:#ffd36a; --gold2:#ffb700;
+      --radius:22px; --radius2:28px; --shadow:0 18px 60px rgba(0,0,0,.55);
+      --blur: blur(14px);
+      --maxw: 1220px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(123,44,255,.25), transparent 60%),
+        radial-gradient(900px 500px at 85% 20%, rgba(255,211,106,.18), transparent 62%),
+        radial-gradient(900px 800px at 50% 90%, rgba(194,75,255,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 40%, var(--bg2));
+      overflow-x:hidden;
+    }
+    #stars{ position:fixed; inset:0; z-index:-2; opacity:.85; }
+    .grain{
+      pointer-events:none; position:fixed; inset:-20%; z-index:-1;
+      background-image:
+        radial-gradient(circle at 10% 12%, rgba(123,44,255,.14), transparent 45%),
+        radial-gradient(circle at 78% 18%, rgba(255,211,106,.10), transparent 46%),
+        radial-gradient(circle at 45% 76%, rgba(194,75,255,.12), transparent 48%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay; opacity:.38;
+      transform: rotate(-2deg);
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift{ from{ transform: translate3d(-2%,-1%,0) rotate(-2deg)} to{transform:translate3d(2%,1%,0) rotate(2deg)} }
+
+    .wrap{ width:min(var(--maxw), calc(100% - 32px)); margin:0 auto; padding: 28px 0 54px; }
+
+    header.hero{
+      border-radius: var(--radius2);
+      background: linear-gradient(135deg, rgba(123,44,255,.20), rgba(255,211,106,.10) 45%, rgba(194,75,255,.16));
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.16);
+      overflow:hidden;
+    }
+    .hero .inner{
+      padding: 28px 22px;
+      backdrop-filter: var(--blur);
+      background: linear-gradient(180deg, rgba(8,4,18,.55), rgba(8,4,18,.30));
+    }
+    .heroTop{ display:flex; gap:14px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+    .brand{ display:flex; align-items:center; gap:12px; min-width: 260px; }
+    .sigil{
+      width:44px; height:44px; border-radius:14px; position:relative; overflow:hidden;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,211,106,.40), transparent 45%),
+        radial-gradient(circle at 70% 70%, rgba(123,44,255,.45), transparent 52%),
+        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.20);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .sigil::before{
+      content:""; position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, rgba(255,211,106,.0), rgba(255,211,106,.55), rgba(123,44,255,.55), rgba(255,211,106,.0));
+      animation: spin 8s linear infinite;
+      opacity:.85; filter: blur(1px);
+    }
+    .sigil::after{
+      content:""; position:absolute; inset:10px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.18);
+      background: radial-gradient(circle at 50% 50%, rgba(0,0,0,.15), rgba(0,0,0,.55));
+    }
+    @keyframes spin{ to{ transform: rotate(360deg) } }
+
+    .titles h1{ margin:0; font-size: clamp(1.35rem, 2.2vw, 2.05rem); line-height:1.06; text-shadow: 0 10px 26px rgba(0,0,0,.45); }
+    .titles p{ margin:6px 0 0; color:var(--muted); max-width: 68ch; line-height:1.45; }
+
+    .heroStats{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px; border-radius: 999px;
+      background: rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.16);
+      backdrop-filter: var(--blur);
+      color: var(--muted);
+      font-size:.92rem;
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:99px;
+      background: radial-gradient(circle at 30% 30%, var(--gold), var(--accent));
+      box-shadow: 0 0 18px rgba(255,211,106,.35);
+    }
+    .kbd{
+      font-family: var(--mono);
+      font-size:.85rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.82);
+    }
+
+    .controls{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.4fr .8fr;
+      gap: 12px;
+    }
+    @media (max-width: 900px){ .controls{ grid-template-columns: 1fr; } }
+
+    .controlCard{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.14));
+      backdrop-filter: var(--blur);
+      padding: 12px;
+      box-shadow: 0 14px 46px rgba(0,0,0,.32);
+    }
+    .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+    .searchWrap{ position:relative; flex: 1 1 320px; min-width: 220px; }
+    .searchWrap input{
+      width:100%;
+      padding: 14px 46px 14px 14px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(5,2,16,.55);
+      color: var(--ink);
+      outline:none;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+    }
+    .searchWrap input::placeholder{ color: rgba(255,255,255,.55); }
+    .magnify{
+      position:absolute; right:12px; top:50%;
+      transform: translateY(-50%);
+      opacity:.85; width:20px; height:20px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+
+    .select{
+      flex: 0 0 auto;
+      min-width: 200px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(5,2,16,.55);
+      color: var(--ink);
+      outline:none;
+      appearance:none;
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: linear-gradient(135deg, rgba(123,44,255,.22), rgba(255,211,106,.14));
+      color: rgba(255,255,255,.92);
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    .btn:active{ transform: translateY(0px) scale(.99); }
+    .btn.secondary{ background: rgba(255,255,255,.06); }
+
+    .chips{
+      margin-top: 12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      max-height: 88px;
+      overflow:auto;
+      padding-right: 2px;
+    }
+    .chip{
+      display:inline-flex; gap:8px; align-items:center;
+      padding: 8px 10px; border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.84);
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      font-size:.92rem;
+    }
+    .chip:hover{ transform: translateY(-1px); }
+    .chip.active{
+      background: linear-gradient(135deg, rgba(123,44,255,.34), rgba(255,211,106,.22));
+      border-color: rgba(255,211,106,.45);
+      box-shadow: 0 10px 30px rgba(0,0,0,.22);
+    }
+    .chip small{ opacity:.7; font-family: var(--mono); font-size:.82rem; }
+
+    main{ margin-top: 18px; display:grid; grid-template-columns: 1fr 320px; gap: 14px; align-items:start; }
+    @media (max-width: 980px){ main{ grid-template-columns: 1fr; } }
+
+    .panel{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panelHead{
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+    .panelHead h2{ margin:0; font-size: 1.05rem; letter-spacing:.25px; }
+    .panelHead .meta{ color: var(--muted); font-size: .92rem; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+    .grid{
+      padding: 14px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 12px;
+    }
+    @media (max-width: 700px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      position:relative;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(600px 220px at 15% 0%, rgba(123,44,255,.16), transparent 55%),
+        radial-gradient(500px 220px at 85% 0%, rgba(255,211,106,.12), transparent 52%),
+        rgba(0,0,0,.26);
+      overflow:hidden;
+      box-shadow: 0 14px 40px rgba(0,0,0,.28);
+      transition: transform .14s ease, border-color .14s ease, filter .14s ease;
+      min-height: 210px;
+      display:flex; flex-direction:column;
+    }
+    .card:hover{ transform: translateY(-3px); border-color: rgba(255,211,106,.28); filter: brightness(1.02); }
+
+    .cover{
+      height: 120px;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(255,211,106,.22), transparent 52%),
+        radial-gradient(circle at 80% 20%, rgba(123,44,255,.28), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.00));
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      position:relative; overflow:hidden;
+    }
+    .cover img{ width:100%; height:100%; object-fit:cover; opacity:.9; filter: saturate(1.08) contrast(1.05); }
+    .cover::after{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.56)); }
+
+    .cardBody{ padding: 12px; display:flex; flex-direction:column; gap:10px; flex:1; }
+    .title{ font-size: 1.03rem; margin:0; line-height:1.2; letter-spacing:.15px; }
+    .excerpt{
+      margin:0; color: var(--muted); line-height:1.45; font-size:.95rem;
+      display:-webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      overflow:hidden; min-height: 4.1em;
+    }
+    .cardMeta{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:auto; color: rgba(255,255,255,.74); font-size: .88rem; }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+    .badge .spark{
+      width:8px; height:8px; border-radius:99px;
+      background: radial-gradient(circle at 30% 30%, var(--gold), var(--accent2));
+      box-shadow: 0 0 16px rgba(255,211,106,.25);
+    }
+    .actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .aBtn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding: 10px 12px; border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.90);
+      text-decoration:none;
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease;
+      font-size:.92rem;
+    }
+    .aBtn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    .aBtn.primary{
+      background: linear-gradient(135deg, rgba(123,44,255,.30), rgba(255,211,106,.18));
+      border-color: rgba(255,211,106,.22);
+    }
+
+    aside{ position:sticky; top: 14px; display:flex; flex-direction:column; gap: 12px; }
+    @media (max-width: 980px){ aside{ position:static; } }
+    .sideBox{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .sideBox h3{ margin: 0 0 8px; font-size:1rem; }
+    .sideBox p{ margin:0; color:var(--muted); line-height:1.45; }
+
+    .kv{
+      display:grid; grid-template-columns: 1fr auto; gap: 10px;
+      margin-top: 10px; align-items:center; padding-top: 10px;
+      border-top:1px solid rgba(255,255,255,.10);
+    }
+    .kv .label{ color: var(--muted); font-size:.92rem; }
+    .kv .value{ font-family: var(--mono); font-size:.92rem; opacity:.92; }
+
+    .small{
+      margin-top:10px; font-family: var(--mono); font-size:.85rem;
+      color: rgba(255,255,255,.70); word-break: break-word;
+      padding: 10px 12px; border-radius: 16px;
+      border:1px dashed rgba(255,255,255,.18);
+      background: rgba(255,255,255,.05);
+    }
+
+    footer{ margin-top: 16px; color: rgba(255,255,255,.55); font-size:.92rem; text-align:center; padding: 18px 0 6px; }
+    .state{ padding: 16px 14px; color: var(--muted); line-height:1.45; }
+    .error{ color: rgba(255,170,170,.95); }
+
+    @media print{
+      body{ background:#fff; color:#111; }
+      #stars, .grain, aside, .controls { display:none !important; }
+      header.hero, .panel{ box-shadow:none; background:#fff; color:#111; border:1px solid #ddd; }
+      .excerpt{ color:#333; }
+      a{ color:#111; text-decoration:underline; }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="inner">
+        <div class="heroTop">
+          <div class="brand">
+            <div class="sigil" aria-hidden="true"></div>
+            <div class="titles">
+              <h1 id="siteTitle">Blog Hub</h1>
+              <p id="siteSubtitle">Fill the slots with file paths. The hub builds the grid automatically.</p>
+            </div>
+          </div>
+
+          <div class="heroStats">
+            <span class="pill"><span class="dot"></span><span id="statusText">Ready</span></span>
+            <span class="pill">Search <span class="kbd">/</span></span>
+            <span class="pill">Sort <span class="kbd">S</span></span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="controlCard">
+            <div class="row">
+              <div class="searchWrap">
+                <input id="q" type="search" placeholder="Search titles, excerpts, tags…" autocomplete="off" />
+                <svg class="magnify" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="rgba(255,255,255,.78)" stroke-width="2"/>
+                  <path d="M16.5 16.5 21 21" stroke="rgba(255,255,255,.78)" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+
+              <select id="sort" class="select" aria-label="Sort posts">
+                <option value="newest">Sort: Newest</option>
+                <option value="oldest">Sort: Oldest</option>
+                <option value="title_az">Sort: Title (A→Z)</option>
+                <option value="title_za">Sort: Title (Z→A)</option>
+              </select>
+
+              <button id="clear" class="btn secondary" type="button">Clear</button>
+              <button id="print" class="btn" type="button">Print / PDF</button>
+            </div>
+
+            <div class="chips" id="chips" aria-label="Tag filters"></div>
+          </div>
+
+          <div class="controlCard">
+            <div class="row" style="justify-content:space-between; width:100%">
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="font-weight:700; letter-spacing:.2px;">Manual Slot System</div>
+                <div style="color:var(--muted); font-size:.92rem;">Paste paths into slots → publish.</div>
+              </div>
+              <button id="copyShare" class="btn secondary" type="button">Copy Share Link</button>
+            </div>
+
+            <div class="kv">
+              <div class="label">Posts Loaded</div>
+              <div class="value" id="countLoaded">—</div>
+            </div>
+            <div class="kv">
+              <div class="label">Visible Now</div>
+              <div class="value" id="countVisible">—</div>
+            </div>
+
+            <div class="small" id="sharePreview">—</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel" aria-label="Posts">
+        <div class="panelHead">
+          <h2>All Posts</h2>
+          <div class="meta">
+            <span id="activeFilters">No filters</span>
+            <span>•</span>
+            <span id="lastLoaded">Manual Slots</span>
+          </div>
+        </div>
+        <div class="grid" id="grid"></div>
+        <div class="state" id="state"></div>
+      </section>
+
+      <aside>
+        <div class="sideBox">
+          <h3>What you edit</h3>
+          <p>
+            Open this file and go to <strong>POST SLOTS (EDIT HERE)</strong>.
+            Replace <span style="font-family:var(--mono)">href="#"</span> with your post’s file path.
+          </p>
+          <div class="kv">
+            <div class="label">Empty slots</div>
+            <div class="value">Hidden</div>
+          </div>
+          <div class="kv">
+            <div class="label">Paths format</div>
+            <div class="value">/folder/file.html</div>
+          </div>
+        </div>
+
+        <div class="sideBox">
+          <h3>Fast workflow</h3>
+          <p>
+            When you publish a new post page, copy its path and paste it into the next empty slot.
+            Optional: paste a cover image path too.
+          </p>
+          <div class="small">
+            Example:<br>
+            href="/blog/posts/phoenix-llc-checklist.html"
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div>Manual file paths → auto hub rendering. Single-file deploy.</div>
+    </footer>
+  </div>
+
+  <!-- ==========================================================
+       POST SLOTS (EDIT HERE)
+       - Replace href="#" with your real file path.
+       - Optional: edit title/excerpt/tags/date/cover.
+       ========================================================== -->
+  <div id="postSlots" hidden>
+    <!-- SLOT 01 -->
+    <a class="postSlot"
+       href="#"
+       data-title="TEMPLATE POST 01"
+       data-excerpt="Replace this slot's href with your real post path."
+       data-tags="Phoenix,SEO"
+       data-date="2026-01-10"
+       data-cover="">
+    </a>
+
+    <!-- SLOT 02 -->
+    <a class="postSlot"
+       href="#"
+       data-title="TEMPLATE POST 02"
+       data-excerpt="You can leave everything except href if you want."
+       data-tags="Business Formation,Arizona"
+       data-date=""
+       data-cover="">
+    </a>
+
+    <!-- SLOT 03 -->
+    <a class="postSlot"
+       href="#"
+       data-title="TEMPLATE POST 03"
+       data-excerpt="Paste /blog/posts/your-file.html here."
+       data-tags="Web Design,Conversion"
+       data-date=""
+       data-cover="">
+    </a>
+
+    <!-- SLOT 04 -->
+    <a class="postSlot" href="#" data-title="TEMPLATE POST 04" data-excerpt="" data-tags="" data-date="" data-cover=""></a>
+    <!-- SLOT 05 -->
+    <a class="postSlot" href="#" data-title="TEMPLATE POST 05" data-excerpt="" data-tags="" data-date="" data-cover=""></a>
+    <!-- SLOT 06 -->
+    <a class="postSlot" href="#" data-title="TEMPLATE POST 06" data-excerpt="" data-tags="" data-date="" data-cover=""></a>
+    <!-- SLOT 07 -->
+    <a class="postSlot" href="#" data-title="TEMPLATE POST 07" data-excerpt="" data-tags="" data-date="" data-cover=""></a>
+    <!-- SLOT 08 -->
+    <a class="postSlot" href="#" data-title="TEMPLATE POST 08" data-excerpt="" data-tags="" data-date="" data-cover=""></a>
+    <!-- SLOT 09 -->
+    <a class="postSlot" href="#" data-title="TEMPLATE POST 09" data-excerpt="" data-tags="" data-date="" data-cover=""></a>
+    <!-- SLOT 10 -->
+    <a class="postSlot" href="#" data-title="TEMPLATE POST 10" data-excerpt="" data-tags="" data-date="" data-cover=""></a>
+
+    <!-- Add more slots by copying one of the lines above. -->
+  </div>
+
+  <script>
+    /**********************
+     * Helpers
+     **********************/
+    const $ = (s) => document.querySelector(s);
+    const grid = $("#grid");
+    const state = $("#state");
+    const chipsEl = $("#chips");
+
+    const escapeHtml = (s) => String(s ?? "")
+      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+
+    const fmtDate = (iso) => {
+      if (!iso) return "";
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return "";
+      return new Intl.DateTimeFormat(undefined, { year:"numeric", month:"short", day:"2-digit" }).format(d);
+    };
+
+    const debounce = (fn, ms=140) => {
+      let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+    };
+
+    const copyToClipboard = async (text) => {
+      try { await navigator.clipboard.writeText(text); toast("Copied."); }
+      catch {
+        const ta = document.createElement("textarea");
+        ta.value = text; document.body.appendChild(ta);
+        ta.select(); document.execCommand("copy");
+        document.body.removeChild(ta);
+        toast("Copied.");
+      }
+    };
+
+    let toastTimer = null;
+    const toast = (msg) => {
+      clearTimeout(toastTimer);
+      let el = document.getElementById("toast");
+      if (!el){
+        el = document.createElement("div");
+        el.id = "toast";
+        el.style.position = "fixed";
+        el.style.left = "50%";
+        el.style.bottom = "18px";
+        el.style.transform = "translateX(-50%)";
+        el.style.padding = "12px 14px";
+        el.style.borderRadius = "999px";
+        el.style.border = "1px solid rgba(255,255,255,.18)";
+        el.style.background = "rgba(0,0,0,.55)";
+        el.style.backdropFilter = "blur(14px)";
+        el.style.color = "rgba(255,255,255,.92)";
+        el.style.boxShadow = "0 18px 60px rgba(0,0,0,.45)";
+        el.style.zIndex = "999999";
+        el.style.fontSize = ".95rem";
+        el.style.opacity = "0";
+        el.style.transition = "opacity .18s ease, transform .18s ease";
+        document.body.appendChild(el);
+      }
+      el.textContent = msg;
+      el.style.opacity = "1";
+      el.style.transform = "translateX(-50%) translateY(-2px)";
+      toastTimer = setTimeout(() => {
+        el.style.opacity = "0";
+        el.style.transform = "translateX(-50%) translateY(0px)";
+      }, 1100);
+    };
+
+    /**********************
+     * Read manual slots
+     **********************/
+    function readSlots(){
+      const nodes = Array.from(document.querySelectorAll("#postSlots .postSlot"));
+      const posts = nodes
+        .map(a => ({
+          path: (a.getAttribute("href") || "").trim(),
+          title: (a.dataset.title || "").trim(),
+          excerpt: (a.dataset.excerpt || "").trim(),
+          tags: (a.dataset.tags || "").split(",").map(t => t.trim()).filter(Boolean),
+          date: (a.dataset.date || "").trim(),
+          cover: (a.dataset.cover || "").trim()
+        }))
+        .filter(p => p.path && p.path !== "#"); // hide empty slots automatically
+
+      // Fill safe defaults
+      for (const p of posts){
+        if (!p.title) {
+          const name = p.path.split("/").pop() || "Untitled";
+          p.title = name.replace(/\.[^.]+$/,"").replace(/[-_]/g," ");
+        }
+        if (!p.excerpt) p.excerpt = "Open to read.";
+      }
+      return posts;
+    }
+
+    /**********************
+     * Render
+     **********************/
+    let POSTS = [];
+    let TAG_COUNTS = new Map();
+    let ACTIVE_TAGS = new Set();
+    let QUERY = "";
+
+    function rebuildTags(){
+      TAG_COUNTS = new Map();
+      for (const p of POSTS){
+        for (const t of p.tags){
+          TAG_COUNTS.set(t, (TAG_COUNTS.get(t) || 0) + 1);
+        }
+      }
+    }
+
+    function renderChips(){
+      chipsEl.innerHTML = "";
+      const entries = Array.from(TAG_COUNTS.entries()).sort((a,b) => (b[1]-a[1]) || a[0].localeCompare(b[0]));
+      if (!entries.length){
+        chipsEl.innerHTML = `<div style="color:rgba(255,255,255,.72);padding:6px 4px;">No tags in your slots yet.</div>`;
+        return;
+      }
+
+      const all = document.createElement("button");
+      all.type = "button";
+      all.className = "chip" + (ACTIVE_TAGS.size === 0 ? " active" : "");
+      all.innerHTML = `All <small>${POSTS.length}</small>`;
+      all.onclick = () => { ACTIVE_TAGS.clear(); applyAndRender(); };
+      chipsEl.appendChild(all);
+
+      for (const [tag,count] of entries){
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "chip" + (ACTIVE_TAGS.has(tag) ? " active" : "");
+        b.innerHTML = `${escapeHtml(tag)} <small>${count}</small>`;
+        b.onclick = () => {
+          if (ACTIVE_TAGS.has(tag)) ACTIVE_TAGS.delete(tag);
+          else ACTIVE_TAGS.add(tag);
+          applyAndRender();
+        };
+        chipsEl.appendChild(b);
+      }
+    }
+
+    function applyFilters(){
+      let list = POSTS.slice();
+
+      if (ACTIVE_TAGS.size){
+        const wanted = Array.from(ACTIVE_TAGS);
+        list = list.filter(p => wanted.every(t => p.tags.includes(t)));
+      }
+
+      if (QUERY){
+        const q = QUERY.toLowerCase();
+        list = list.filter(p => {
+          const hay = `${p.title} ${p.excerpt} ${p.tags.join(" ")}`.toLowerCase();
+          return hay.includes(q);
+        });
+      }
+
+      const sort = $("#sort").value;
+      const dt = (x) => new Date(x.date || 0).getTime();
+      if (sort === "newest") list.sort((a,b) => dt(b) - dt(a));
+      if (sort === "oldest") list.sort((a,b) => dt(a) - dt(b));
+      if (sort === "title_az") list.sort((a,b) => a.title.localeCompare(b.title));
+      if (sort === "title_za") list.sort((a,b) => b.title.localeCompare(a.title));
+
+      return list;
+    }
+
+    function setCounts(loaded, visible){
+      $("#countLoaded").textContent = String(loaded);
+      $("#countVisible").textContent = String(visible);
+    }
+
+    function setActiveFiltersText(){
+      const parts = [];
+      if (QUERY) parts.push(`Query: “${QUERY}”`);
+      if (ACTIVE_TAGS.size) parts.push(`Tags: ${Array.from(ACTIVE_TAGS).join(", ")}`);
+      $("#activeFilters").textContent = parts.length ? parts.join(" · ") : "No filters";
+      const share = buildShareLink();
+      $("#sharePreview").textContent = share;
+    }
+
+    function buildShareLink(){
+      const u = new URL(window.location.href);
+      if (QUERY) u.searchParams.set("q", QUERY); else u.searchParams.delete("q");
+      if (ACTIVE_TAGS.size) u.searchParams.set("tags", Array.from(ACTIVE_TAGS).join(",")); else u.searchParams.delete("tags");
+      return u.toString();
+    }
+
+    function cardHtml(p){
+      const dateLabel = fmtDate(p.date) || "—";
+      const tags = p.tags.slice(0,3);
+      const extra = p.tags.length - tags.length;
+
+      const cover = p.cover ? `<img src="${escapeHtml(p.cover)}" alt="" loading="lazy" />` : "";
+      return `
+        <article class="card">
+          <div class="cover">${cover}</div>
+          <div class="cardBody">
+            <h3 class="title">${escapeHtml(p.title)}</h3>
+            <p class="excerpt">${escapeHtml(p.excerpt)}</p>
+
+            <div class="cardMeta">
+              <span class="badge"><span class="spark"></span>${escapeHtml(dateLabel)}</span>
+              ${tags.map(t => `<span class="badge" data-tag="${escapeHtml(t)}" title="Filter by tag">#${escapeHtml(t)}</span>`).join("")}
+              ${extra > 0 ? `<span class="badge">+${extra}</span>` : ""}
+            </div>
+
+            <div class="actions">
+              <a class="aBtn primary" href="${escapeHtml(p.path)}">Read</a>
+              <button class="aBtn" type="button" data-copy="${escapeHtml(p.path)}">Copy Link</button>
+              <button class="aBtn" type="button" data-copytitle="${escapeHtml(p.title)}">Copy Title</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderGrid(list){
+      if (!POSTS.length){
+        grid.innerHTML = "";
+        state.innerHTML = `<div class="error"><strong>No posts loaded.</strong> Go to POST SLOTS and replace href="#" with real file paths.</div>`;
+        setCounts(0,0);
+        return;
+      }
+      if (!list.length){
+        grid.innerHTML = "";
+        state.textContent = "No matches. Clear filters or change search.";
+        setCounts(POSTS.length, 0);
+        return;
+      }
+
+      state.textContent = "";
+      grid.innerHTML = list.map(cardHtml).join("");
+      setCounts(POSTS.length, list.length);
+
+      // actions
+      grid.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => copyToClipboard(b.getAttribute("data-copy")));
+      grid.querySelectorAll("[data-copytitle]").forEach(b => b.onclick = () => copyToClipboard(b.getAttribute("data-copytitle") || ""));
+
+      // clicking tag badges filters
+      grid.querySelectorAll(".badge[data-tag]").forEach(b => {
+        b.style.cursor = "pointer";
+        b.onclick = () => {
+          const t = b.getAttribute("data-tag");
+          if (!t) return;
+          ACTIVE_TAGS.add(t);
+          applyAndRender();
+        };
+      });
+    }
+
+    function applyAndRender(){
+      setActiveFiltersText();
+      renderChips();
+      renderGrid(applyFilters());
+      // keep URL in sync
+      const u = new URL(window.location.href);
+      if (QUERY) u.searchParams.set("q", QUERY); else u.searchParams.delete("q");
+      if (ACTIVE_TAGS.size) u.searchParams.set("tags", Array.from(ACTIVE_TAGS).join(",")); else u.searchParams.delete("tags");
+      history.replaceState({}, "", u.toString());
+    }
+
+    function applyUrlState(){
+      const u = new URL(window.location.href);
+      const q = (u.searchParams.get("q") || "").trim();
+      const tags = (u.searchParams.get("tags") || "").trim();
+      if (q){ QUERY = q; $("#q").value = q; }
+      if (tags){ ACTIVE_TAGS = new Set(tags.split(",").map(t => t.trim()).filter(Boolean)); }
+      $("#sharePreview").textContent = buildShareLink();
+    }
+
+    /**********************
+     * Starfield (cinematic)
+     **********************/
+    function initStars(){
+      const c = document.getElementById("stars");
+      const ctx = c.getContext("2d", { alpha:true });
+      let w=0,h=0,dpr=1, stars=[];
+      const resize = () => {
+        dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+        w = c.width = Math.floor(window.innerWidth * dpr);
+        h = c.height = Math.floor(window.innerHeight * dpr);
+        c.style.width = window.innerWidth + "px";
+        c.style.height = window.innerHeight + "px";
+        stars = Array.from({length:140}).map(() => ({
+          x: Math.random()*w, y: Math.random()*h,
+          r: (Math.random()*1.4 + .4)*dpr,
+          v: (Math.random()*0.35 + .05)*dpr,
+          a: Math.random()*0.65 + .15,
+          hue: Math.random() < .18 ? 48 : (Math.random() < .5 ? 275 : 305)
+        }));
+      };
+      let t=0;
+      const tick = () => {
+        t += 0.008;
+        ctx.clearRect(0,0,w,h);
+
+        const g = ctx.createRadialGradient(w*0.5,h*0.35, 10*dpr, w*0.5,h*0.5, Math.max(w,h)*0.65);
+        g.addColorStop(0, "rgba(0,0,0,0.0)");
+        g.addColorStop(1, "rgba(0,0,0,0.40)");
+        ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+
+        for (const s of stars){
+          s.y += s.v;
+          if (s.y > h + 10){ s.y = -10; s.x = Math.random()*w; }
+          const tw = 0.5 + 0.5*Math.sin(t + s.x*0.0008);
+          const alpha = s.a * (0.55 + 0.45*tw);
+          ctx.beginPath();
+          ctx.fillStyle = `hsla(${s.hue},95%,70%,${alpha})`;
+          ctx.arc(s.x, s.y, s.r*(0.75 + tw*0.6), 0, Math.PI*2);
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      };
+      window.addEventListener("resize", resize, {passive:true});
+      resize(); tick();
+    }
+
+    /**********************
+     * Boot
+     **********************/
+    function boot(){
+      initStars();
+
+      POSTS = readSlots();
+      rebuildTags();
+      applyUrlState();
+      applyAndRender();
+
+      $("#q").addEventListener("input", debounce((e) => { QUERY = e.target.value.trim(); applyAndRender(); }, 120));
+      $("#sort").addEventListener("change", applyAndRender);
+
+      $("#clear").addEventListener("click", () => {
+        QUERY = "";
+        ACTIVE_TAGS.clear();
+        $("#q").value = "";
+        $("#sort").value = "newest";
+        applyAndRender();
+      });
+
+      $("#print").addEventListener("click", () => window.print());
+      $("#copyShare").addEventListener("click", () => copyToClipboard(buildShareLink()));
+
+      // Keyboard shortcut: "/" focuses search
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "/" && document.activeElement !== $("#q")){
+          e.preventDefault();
+          $("#q").focus();
+        }
+      });
+
+      $("#statusText").textContent = "Ready";
+    }
+
+    boot();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1454 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#1a0b2e" />
+  <title>Arizona’s “Busy but Not In Control” Trap — Skyes Over London LC</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Arizona operators scaling real volume often hit a hidden bottleneck: digital demand and fulfillment don’t connect. Explore a connected operating system for Logistics, Digital Growth, and Apex Intelligence—built to reduce chaos, tighten handoffs, and restore control." />
+  <meta name="keywords" content="Arizona logistics, Phoenix operations, dispatch systems, digital growth Arizona, business systems Phoenix, automation for operators, connected operating system, Skyes Over London LC, Apex Intelligence, lead qualification, operational playbooks" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Arizona’s “Busy but Not In Control” Trap: When Leads Go Up, Fire Drills Go Up Too" />
+  <meta property="og:description" content="When digital and operations don’t talk, Arizona growth turns into chaos. A connected operating system across Logistics, Digital Growth, and Apex Intelligence restores control—without hype." />
+  <meta property="og:site_name" content="Skyes Over London LC" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Arizona’s “Busy but Not In Control” Trap" />
+  <meta name="twitter:description" content="A connected operating system for Logistics, Digital Growth, and Apex Intelligence—built for Arizona operators under real load." />
+
+  <!-- Structured Data (Organization + Service) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"ProfessionalService",
+    "name":"Skyes Over London LC",
+    "description":"A connected operating system for Logistics, Digital Growth, and Apex Intelligence—built for Arizona operators.",
+    "areaServed":[
+      {"@type":"City","name":"Phoenix"},
+      {"@type":"City","name":"Tempe"},
+      {"@type":"City","name":"Mesa"},
+      {"@type":"City","name":"Scottsdale"},
+      {"@type":"City","name":"Glendale"},
+      {"@type":"City","name":"Chandler"},
+      {"@type":"City","name":"Peoria"}
+    ],
+    "serviceType":[
+      "Operations Systems",
+      "Logistics Enablement",
+      "Digital Growth Systems",
+      "Automation & Decision Support"
+    ],
+    "brand":{"@type":"Brand","name":"Skyes Over London LC"},
+    "url":"/"
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg0:#070214;
+      --bg1:#0b0320;
+      --bg2:#13063a;
+      --ink:#f4f0ff;
+      --muted:rgba(244,240,255,.72);
+      --muted2:rgba(244,240,255,.55);
+      --glass:rgba(20,8,50,.56);
+      --glass2:rgba(22,8,55,.34);
+      --line:rgba(255,255,255,.10);
+      --gold:#f6d36b;
+      --gold2:#caa24a;
+      --purple:#b06bff;
+      --violet:#6f2cff;
+      --cyan:#66f2ff;
+      --danger:#ff5e7a;
+      --ok:#60ffb5;
+      --shadow: 0 22px 70px rgba(0,0,0,.45);
+      --shadow2: 0 12px 40px rgba(0,0,0,.30);
+      --radius: 22px;
+      --radius2: 16px;
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background: radial-gradient(1200px 700px at 15% 15%, rgba(176,107,255,.20), transparent 60%),
+                  radial-gradient(900px 600px at 80% 20%, rgba(102,242,255,.10), transparent 55%),
+                  radial-gradient(1100px 800px at 50% 85%, rgba(246,211,107,.09), transparent 60%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1) 35%, var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* Ambient canvases */
+    #stars, #grain{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:0;
+      pointer-events:none;
+    }
+    #grain{mix-blend-mode:overlay; opacity:.18; filter:contrast(120%)}
+
+    /* Cursor aura */
+    .cursor-aura, .cursor-dot{
+      position:fixed;
+      left:0; top:0;
+      z-index:9999;
+      pointer-events:none;
+      transform:translate(-50%,-50%);
+    }
+    .cursor-aura{
+      width:46px; height:46px;
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(176,107,255,.18), rgba(102,242,255,.08), transparent 70%);
+      border:1px solid rgba(246,211,107,.15);
+      box-shadow: 0 0 28px rgba(176,107,255,.22);
+      opacity:.9;
+      transition: width .18s ease, height .18s ease, opacity .18s ease, border-color .18s ease;
+    }
+    .cursor-dot{
+      width:6px; height:6px;
+      border-radius:50%;
+      background:rgba(246,211,107,.95);
+      box-shadow: 0 0 14px rgba(246,211,107,.55);
+      opacity:.95;
+    }
+    .cursor-press .cursor-aura{width:62px;height:62px;opacity:.95;border-color:rgba(102,242,255,.22)}
+    @media (pointer:coarse){
+      .cursor-aura,.cursor-dot{display:none}
+    }
+
+    /* Top HUD */
+    .hud{
+      position:fixed;
+      top:14px; left:50%;
+      transform:translateX(-50%);
+      width:min(var(--max), calc(100% - 28px));
+      z-index:50;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(18,6,46,.74), rgba(18,6,46,.42));
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow2);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 220px;
+    }
+    .sigil{
+      width:36px;height:36px;border-radius:12px;
+      background:
+        radial-gradient(circle at 35% 35%, rgba(246,211,107,.25), transparent 55%),
+        radial-gradient(circle at 70% 60%, rgba(176,107,255,.22), transparent 58%),
+        linear-gradient(135deg, rgba(102,242,255,.10), rgba(246,211,107,.06));
+      border:1px solid rgba(246,211,107,.22);
+      box-shadow: 0 0 22px rgba(176,107,255,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .sigil:before{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 120deg, rgba(246,211,107,.0), rgba(246,211,107,.22), rgba(176,107,255,.20), rgba(102,242,255,.18), rgba(246,211,107,.0));
+      animation: spin 8s linear infinite;
+      opacity:.85;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .brand strong{
+      font-weight:800;
+      letter-spacing:.2px;
+      line-height:1.05;
+      font-size:13px;
+    }
+    .brand span{
+      display:block;
+      font-size:11px;
+      color:var(--muted2);
+      letter-spacing:.28px;
+      margin-top:2px;
+    }
+    .hud nav{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      flex:1;
+    }
+    .chip{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--ink);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      user-select:none;
+    }
+    .chip:hover{transform:translateY(-1px);border-color:rgba(246,211,107,.25);background:rgba(176,107,255,.06)}
+    .chip kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:10px;
+      padding:2px 6px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.22);
+      color:rgba(244,240,255,.85);
+    }
+
+    .hud-right{
+      display:flex; gap:10px; align-items:center; justify-content:flex-end; min-width:220px;
+    }
+    .progress{
+      width:150px; height:10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.20);
+      overflow:hidden;
+      position:relative;
+    }
+    .progress > i{
+      position:absolute; left:0; top:0; bottom:0;
+      width:0%;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(246,211,107,.92), rgba(176,107,255,.78), rgba(102,242,255,.58));
+      box-shadow: 0 0 18px rgba(246,211,107,.25);
+      transition: width .12s linear;
+    }
+    .cta{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(246,211,107,.26);
+      background:linear-gradient(180deg, rgba(246,211,107,.14), rgba(176,107,255,.06));
+      color:var(--ink);
+      text-decoration:none;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.2px;
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      white-space:nowrap;
+    }
+    .cta:hover{
+      transform:translateY(-1px);
+      border-color:rgba(102,242,255,.25);
+      box-shadow: 0 12px 40px rgba(0,0,0,.22);
+    }
+
+    /* Layout */
+    .wrap{
+      position:relative;
+      z-index:1;
+      width:min(var(--max), calc(100% - 28px));
+      margin:0 auto;
+      padding:96px 0 80px;
+    }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      border-radius: calc(var(--radius) + 8px);
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 500px at 15% 20%, rgba(176,107,255,.18), transparent 60%),
+        radial-gradient(800px 460px at 75% 30%, rgba(102,242,255,.10), transparent 55%),
+        linear-gradient(180deg, rgba(18,6,46,.78), rgba(18,6,46,.40));
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      padding:26px 22px;
+    }
+    .hero:after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: linear-gradient(120deg, rgba(246,211,107,.08), rgba(176,107,255,.08), rgba(102,242,255,.06));
+      opacity:.7;
+      mask: radial-gradient(circle at 25% 15%, black 0 35%, transparent 60%);
+      pointer-events:none;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color:rgba(244,240,255,.82);
+      font-size:12px;
+      letter-spacing:.3px;
+    }
+    .pulse{
+      width:10px;height:10px;border-radius:50%;
+      background:rgba(246,211,107,.92);
+      box-shadow: 0 0 0 0 rgba(246,211,107,.42);
+      animation: pulse 1.6s ease-out infinite;
+    }
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(246,211,107,.45)}
+      70%{box-shadow:0 0 0 14px rgba(246,211,107,0)}
+      100%{box-shadow:0 0 0 0 rgba(246,211,107,0)}
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.06;
+      letter-spacing:-.4px;
+      font-weight:900;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size: 15px;
+      line-height:1.6;
+      max-width: 78ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
+      align-items:center;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      user-select:none;
+      padding:11px 14px;
+      border-radius: 14px;
+      font-weight:800;
+      letter-spacing:.25px;
+      color:var(--ink);
+      background: linear-gradient(180deg, rgba(246,211,107,.18), rgba(176,107,255,.08));
+      border:1px solid rgba(246,211,107,.26);
+      box-shadow: 0 18px 52px rgba(0,0,0,.22);
+      transition: transform .15s ease, border-color .15s ease, filter .15s ease;
+      text-decoration:none;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+    }
+    .btn:hover{transform:translateY(-1px);border-color:rgba(102,242,255,.25);filter:brightness(1.05)}
+    .btn.secondary{
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:none;
+      font-weight:700;
+      color:rgba(244,240,255,.88);
+    }
+
+    /* Content grid */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.55fr .95fr;
+      gap:16px;
+      margin-top:16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: 1fr; }
+      .hud nav{display:none}
+      .progress{display:none}
+      .brand{min-width:unset}
+      .hud-right{min-width:unset}
+    }
+
+    /* Card */
+    .card{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(18,6,46,.62), rgba(18,6,46,.30));
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+    .card .inner{padding:18px 18px 14px}
+    .card h2{
+      margin:0 0 8px;
+      font-size: 17px;
+      letter-spacing:.1px;
+      font-weight:900;
+    }
+    .card p, .card li{
+      color:var(--muted);
+      line-height:1.7;
+      font-size: 14px;
+    }
+    .card ul{margin:10px 0 0; padding-left: 20px}
+    .card li{margin:6px 0}
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+      margin: 12px 0;
+    }
+
+    /* Article content styling */
+    .article h2{
+      margin:0 0 8px;
+      font-size: 20px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .article h3{
+      margin:18px 0 8px;
+      font-size: 15px;
+      font-weight:900;
+      letter-spacing:.2px;
+      color:rgba(244,240,255,.92);
+    }
+    .article p{
+      margin:10px 0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size: 15px;
+    }
+    .article ul{
+      margin: 10px 0 14px;
+      padding-left: 20px;
+    }
+    .article li{
+      margin:8px 0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size: 15px;
+    }
+    .callout{
+      border:1px solid rgba(246,211,107,.18);
+      background:
+        radial-gradient(600px 300px at 10% 10%, rgba(246,211,107,.10), transparent 60%),
+        linear-gradient(180deg, rgba(246,211,107,.06), rgba(176,107,255,.04));
+      border-radius: var(--radius2);
+      padding:14px 14px 12px;
+      margin:14px 0;
+      position:relative;
+      overflow:hidden;
+    }
+    .callout strong{color:rgba(244,240,255,.92)}
+    .callout small{display:block;margin-top:6px;color:var(--muted2);line-height:1.55}
+
+    /* Interactive: Signal Chain */
+    .signal{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .node{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      border-radius: 18px;
+      padding:12px 12px 10px;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+    .node:hover{transform: translateY(-1px); border-color: rgba(246,211,107,.22); background: rgba(176,107,255,.06)}
+    .node .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .node .label{
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size: 13px;
+    }
+    .node .pill{
+      font-size:11px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: rgba(244,240,255,.86);
+      white-space:nowrap;
+    }
+    .node .detail{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .25s ease;
+    }
+    .node.open .detail{max-height:220px}
+    .node .detail p{margin:8px 0 0; font-size:13px; color:var(--muted); line-height:1.65}
+    .node:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: linear-gradient(120deg, rgba(246,211,107,.12), rgba(176,107,255,.10), rgba(102,242,255,.08));
+      opacity:.0;
+      transition: opacity .2s ease;
+      pointer-events:none;
+      mask: radial-gradient(circle at 20% 20%, black 0 42%, transparent 65%);
+    }
+    .node.open:before{opacity:.9}
+
+    /* Interactive: Leak Finder */
+    .leak{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:10px 10px 8px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      cursor:pointer;
+      transition: border-color .15s ease, transform .15s ease, background .15s ease;
+    }
+    .check:hover{transform:translateY(-1px); border-color: rgba(102,242,255,.20); background: rgba(102,242,255,.05)}
+    .check input{margin-top:3px}
+    .check b{display:block; font-size:13px; letter-spacing:.15px}
+    .check span{display:block; color:var(--muted2); font-size:12px; line-height:1.5; margin-top:3px}
+    .scorebox{
+      margin-top:10px;
+      padding:12px 12px 10px;
+      border-radius: 18px;
+      border:1px solid rgba(246,211,107,.18);
+      background: linear-gradient(180deg, rgba(246,211,107,.08), rgba(176,107,255,.05));
+    }
+    .meter{
+      height:12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      overflow:hidden;
+      margin-top:8px;
+    }
+    .meter i{
+      display:block;
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(102,242,255,.60), rgba(176,107,255,.76), rgba(246,211,107,.92));
+      transition: width .2s ease;
+    }
+    .scoreline{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .scoreline strong{font-size:13px}
+    .scoreline em{font-style:normal; color:var(--muted2); font-size:12px}
+
+    /* Form */
+    form{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    @media(max-width:700px){.row{grid-template-columns:1fr}}
+    label{font-size:12px; color:var(--muted2); letter-spacing:.2px}
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      color: var(--ink);
+      outline:none;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    textarea{min-height:110px; resize:vertical}
+    input:focus, textarea:focus, select:focus{border-color: rgba(246,211,107,.24); background: rgba(176,107,255,.06)}
+    .form-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:2px;
+    }
+    .hint{
+      color:var(--muted2);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    /* Command Palette */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.60);
+      z-index:120;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .overlay.show{display:flex}
+    .palette{
+      width:min(720px, 100%);
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(900px 400px at 10% 0%, rgba(176,107,255,.18), transparent 60%),
+        linear-gradient(180deg, rgba(18,6,46,.84), rgba(18,6,46,.44));
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .pal-top{
+      padding:14px 14px 10px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .pal-top input{
+      flex:1;
+      border-radius: 14px;
+      padding:12px 12px;
+      font-size:13px;
+    }
+    .pal-list{
+      max-height: 320px;
+      overflow:auto;
+      padding: 10px;
+    }
+    .pal-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 10px;
+      border-radius: 14px;
+      border:1px solid transparent;
+      cursor:pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    }
+    .pal-item:hover{
+      transform: translateY(-1px);
+      border-color: rgba(246,211,107,.18);
+      background: rgba(255,255,255,.05);
+    }
+    .pal-item b{font-size:13px}
+    .pal-item span{font-size:12px;color:var(--muted2)}
+    .pal-item kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:10px;
+      padding:2px 6px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.22);
+      color:rgba(244,240,255,.85);
+      white-space:nowrap;
+    }
+
+    /* Reveal */
+    .reveal{opacity:0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease}
+    .reveal.show{opacity:1; transform: translateY(0)}
+
+    /* Footer */
+    footer{
+      margin-top:16px;
+      padding:14px 16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      color:var(--muted2);
+      font-size:12px;
+      line-height:1.65;
+    }
+    .footrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .mini{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .mini a{
+      color:rgba(244,240,255,.86);
+      text-decoration:none;
+      border-bottom:1px solid rgba(246,211,107,.20);
+    }
+    .mini a:hover{border-bottom-color: rgba(102,242,255,.24)}
+  </style>
+</head>
+
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <canvas id="grain" aria-hidden="true"></canvas>
+
+  <div class="cursor-aura" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <header class="hud" role="banner">
+    <div class="brand">
+      <div class="sigil" aria-hidden="true"></div>
+      <div>
+        <strong>Skyes Over London LC</strong>
+        <span>Connected OS · Logistics · Digital Growth · Apex Intelligence</span>
+      </div>
+    </div>
+
+    <nav aria-label="Page navigation">
+      <a class="chip" href="#article">Read <span style="opacity:.7">·</span> Article</a>
+      <a class="chip" href="#signal">Signal Chain</a>
+      <a class="chip" href="#leaks">Leak Finder</a>
+      <a class="chip" href="#consult">System Map</a>
+      <a class="chip" href="javascript:void(0)" id="openPalette">Press <kbd>K</kbd></a>
+    </nav>
+
+    <div class="hud-right">
+      <div class="progress" aria-label="Reading progress">
+        <i id="prog"></i>
+      </div>
+      <a class="cta" href="#consult">Request a Consultation</a>
+    </div>
+  </header>
+
+  <main class="wrap" id="top">
+    <section class="hero reveal" id="hero" aria-label="Hero">
+      <div class="eyebrow">
+        <span class="pulse" aria-hidden="true"></span>
+        Arizona operators · real volume · real handoffs · real pressure
+      </div>
+
+      <h1>Arizona’s “Busy but Not In Control” Trap: When Leads Go Up, Fire Drills Go Up Too</h1>
+
+      <p class="sub">
+        If you’re running real fulfillment pressure in Arizona—routes, dispatch, field crews, vendor coordination, make-readies, service calls—there’s a moment you’ve probably felt:
+        <br /><br />
+        <strong>Business is coming in… but the system is splitting.</strong>
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn" href="#article" title="Jump to the article">
+          <span aria-hidden="true">✦</span> Read the full post
+        </a>
+        <button class="btn secondary" id="copyLink" type="button" title="Copy page link">
+          <span aria-hidden="true">⧉</span> Copy link
+        </button>
+        <button class="btn secondary" id="openPalette2" type="button" title="Open command palette">
+          <span aria-hidden="true">⌘</span> Command palette <span style="opacity:.75">(K)</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="grid">
+      <!-- LEFT: Article (retains all content) -->
+      <article class="card article reveal" id="article">
+        <div class="inner">
+          <h2>Arizona’s “Busy but Not In Control” Trap: When Leads Go Up, Fire Drills Go Up Too</h2>
+
+          <p>If you’re an Arizona operator running real volume—routes, dispatch, field crews, vendor coordination, make-readies, service calls—there’s a moment you’ve probably felt:</p>
+
+          <p><strong>Business is coming in… but the system is splitting.</strong></p>
+
+          <p>The digital side is pulling demand.<br />
+            Operations is feeling the pressure immediately.<br />
+            And leadership ends up acting like the glue—patching gaps between tools, people, and handoffs.</p>
+
+          <p>This isn’t a motivation problem. It’s an architecture problem.</p>
+
+          <div class="divider"></div>
+
+          <h3>The conflict Arizona growth creates (and why it’s so expensive)</h3>
+
+          <p>Most scaling teams don’t lose because they can’t deliver.</p>
+
+          <p>They lose margin and reputation in the <em>handoffs</em>:</p>
+
+          <ul>
+            <li>the intake form misses key details → dispatch fixes it manually (again)</li>
+            <li>the follow-up is inconsistent → good leads cool off</li>
+            <li>marketing is “working” → but it’s sending the wrong kind of work</li>
+            <li>service quality depends on who’s on shift → unpredictability creeps in</li>
+          </ul>
+
+          <p>And because you’re already operating, those leaks aren’t theoretical—they’re expensive in time, stress, and customer experience.</p>
+
+          <div class="divider"></div>
+
+          <h3>Who this hits hardest in Arizona</h3>
+
+          <p>Not “any business that wants growth.”</p>
+
+          <p>This hits operator-led teams across Phoenix, Tempe, Mesa, Scottsdale, Glendale, Chandler, Peoria—and the corridors where you’re expanding next.</p>
+
+          <p>Especially when your business has a <strong>logistics reality</strong> (even if you don’t call it that):</p>
+
+          <ul>
+            <li>courier / last-mile / fleet dispatch</li>
+            <li>HVAC, plumbing, electrical, restoration</li>
+            <li>construction support + subcontractor networks</li>
+            <li>property turns, trash-outs, vendor coordination</li>
+            <li>B2B service models where you both sell <em>and</em> fulfill</li>
+          </ul>
+
+          <p>Because when digital generates demand, operations feels it immediately.</p>
+
+          <div class="divider"></div>
+
+          <h3>The “growth split” is the real enemy</h3>
+
+          <p>We hear the same lines from serious Arizona operators:</p>
+
+          <ul>
+            <li>“We’re getting leads, but they’re messy.”</li>
+            <li>“We’re busy, but it feels chaotic.”</li>
+            <li>“Our team keeps fixing things at intake.”</li>
+            <li>“We have tools, but nothing talks to each other.”</li>
+            <li>“When volume spikes, it becomes fire drills.”</li>
+            <li>“I’m tired of being the glue.”</li>
+          </ul>
+
+          <p>That last one matters.</p>
+
+          <p>Because once the owner becomes the integration layer, growth stops feeling like growth.</p>
+
+          <p>It starts feeling like constant exception-handling.</p>
+
+          <div class="divider"></div>
+
+          <h3>The fix isn’t “more tools.” It’s a connected operating system.</h3>
+
+          <p>Skyes Over London LC builds a connected operating system across:</p>
+
+          <p><strong>Logistics + Digital Growth + Apex Intelligence</strong></p>
+
+          <p>Not as three separate “services.”<br />
+            As one clean signal chain: <strong>demand → qualification → fulfillment → reporting → improvement.</strong></p>
+
+          <div class="callout">
+            <strong>Fewer heroics. More repeatability.</strong>
+            <small>
+              Because the best businesses in Arizona aren’t trying to be loud.
+              They’re trying to be consistent—clean handoffs, predictable delivery, authority earned through process.
+            </small>
+          </div>
+
+          <div class="divider"></div>
+
+          <h3>What “connected” looks like in real life</h3>
+
+          <h3>1) Digital that doesn’t create operational chaos</h3>
+
+          <p>If your digital front door is bringing in the wrong work, you don’t need louder marketing—you need <strong>better qualification</strong>.</p>
+
+          <p>That means:</p>
+
+          <ul>
+            <li>intake that asks the <em>right</em> questions</li>
+            <li>follow-up that’s consistent (without babysitting it)</li>
+            <li>lead flow that matches your real capacity and service windows</li>
+          </ul>
+
+          <p>So your team stops doing manual triage on every job.</p>
+
+          <h3>2) Logistics that doesn’t depend on who’s working that day</h3>
+
+          <p>Operator-led businesses don’t want theory—they want reliability.</p>
+
+          <p>Connected logistics means:</p>
+
+          <ul>
+            <li>coverage and capacity clarity</li>
+            <li>fewer exceptions</li>
+            <li>clear escalation paths</li>
+            <li>fulfillment that stays consistent even as the team grows</li>
+          </ul>
+
+          <p>Because “quality depends on who’s on shift” is a silent reputation killer.</p>
+
+          <h3>3) Apex Intelligence that removes friction (instead of adding complexity)</h3>
+
+          <p>Most teams don’t want another dashboard. They want fewer moving parts and one version of the truth.</p>
+
+          <p>Apex Intelligence is where automation and decision support show up <strong>only where it reduces load</strong>:</p>
+
+          <ul>
+            <li>routing the right work to the right process</li>
+            <li>surfacing issues before they become escalations</li>
+            <li>giving leadership visibility into what’s real vs noise</li>
+          </ul>
+
+          <p>No hype. Just signal → action.</p>
+
+          <div class="divider"></div>
+
+          <h3>The first move: a System Map that finds the leaks</h3>
+
+          <p>Most Arizona operators don’t need a “rebrand.”<br />
+            They need the machine tightened.</p>
+
+          <p>The fastest way to get control is a structured System Map:</p>
+
+          <ul>
+            <li>where time and margin are leaking</li>
+            <li>why it keeps happening</li>
+            <li>what to connect first (in the right order)</li>
+          </ul>
+
+          <p>Because when you connect the right pieces first, scale stops feeling like chaos—and starts feeling controlled.</p>
+
+          <div class="divider"></div>
+
+          <h3>If you’re in Arizona and this sounds familiar…</h3>
+
+          <p>If you’re operating with real fulfillment pressure and real demand—but you can feel the split between digital and operations—this is exactly the lane we build in.</p>
+
+          <p>If you want a consultation, reach out to <strong>Skyes Over London LC</strong> and ask for a <strong>System Map</strong>. We’ll help you see what’s leaking, what’s misaligned, and what a connected operating system would look like for your operation—without adding complexity you don’t need.</p>
+        </div>
+      </article>
+
+      <!-- RIGHT: Interactive Panels -->
+      <aside class="stack">
+        <section class="card reveal" id="signal" aria-label="Signal chain interactive">
+          <div class="inner">
+            <h2>Signal Chain (tap to expand)</h2>
+            <p>One clean chain: demand → qualification → fulfillment → reporting → improvement.</p>
+
+            <div class="signal" role="list">
+              <div class="node" role="listitem" tabindex="0" data-node>
+                <div class="top">
+                  <div class="label">Demand</div>
+                  <div class="pill">Visibility + trust</div>
+                </div>
+                <div class="detail">
+                  <p>Demand is useful only when it aligns with what you can consistently deliver. If demand arrives “messy,” the chaos starts before dispatch even sees the job.</p>
+                </div>
+              </div>
+
+              <div class="node" role="listitem" tabindex="0" data-node>
+                <div class="top">
+                  <div class="label">Qualification</div>
+                  <div class="pill">Right work only</div>
+                </div>
+                <div class="detail">
+                  <p>Better intake beats louder marketing. The right questions and clean follow-up prevent manual triage and protect your capacity.</p>
+                </div>
+              </div>
+
+              <div class="node" role="listitem" tabindex="0" data-node>
+                <div class="top">
+                  <div class="label">Fulfillment</div>
+                  <div class="pill">Repeatable delivery</div>
+                </div>
+                <div class="detail">
+                  <p>When service quality depends on who’s on shift, scale becomes a gamble. Repeatable fulfillment removes heroics from the equation.</p>
+                </div>
+              </div>
+
+              <div class="node" role="listitem" tabindex="0" data-node>
+                <div class="top">
+                  <div class="label">Reporting</div>
+                  <div class="pill">One truth</div>
+                </div>
+                <div class="detail">
+                  <p>Operators don’t need more dashboards. They need a clean version of reality: what’s profitable, what’s noisy, and what’s about to break.</p>
+                </div>
+              </div>
+
+              <div class="node" role="listitem" tabindex="0" data-node>
+                <div class="top">
+                  <div class="label">Improvement</div>
+                  <div class="pill">Automation + playbooks</div>
+                </div>
+                <div class="detail">
+                  <p>Apex Intelligence belongs where it removes friction: routing, alerts, and decision support—signal to action, without complexity creep.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card reveal" id="leaks" aria-label="Leak finder interactive">
+          <div class="inner">
+            <h2>Leak Finder (30 seconds)</h2>
+            <p>Check what sounds familiar. Watch the “pressure signal” rise.</p>
+
+            <div class="leak" id="leakList">
+              <label class="check">
+                <input type="checkbox" class="leakCheck" />
+                <div>
+                  <b>Leads arrive “messy”</b>
+                  <span>Missing details, unclear scope, back-and-forth before a job is even schedulable.</span>
+                </div>
+              </label>
+              <label class="check">
+                <input type="checkbox" class="leakCheck" />
+                <div>
+                  <b>Manual triage is constant</b>
+                  <span>Dispatch or ops keeps correcting intake errors and exceptions all day.</span>
+                </div>
+              </label>
+              <label class="check">
+                <input type="checkbox" class="leakCheck" />
+                <div>
+                  <b>Tools don’t talk</b>
+                  <span>Data is scattered across texts, sheets, inboxes, apps—no single chain of truth.</span>
+                </div>
+              </label>
+              <label class="check">
+                <input type="checkbox" class="leakCheck" />
+                <div>
+                  <b>Quality depends on who’s on shift</b>
+                  <span>Results vary by person, not by process—creating risk at scale.</span>
+                </div>
+              </label>
+              <label class="check">
+                <input type="checkbox" class="leakCheck" />
+                <div>
+                  <b>Owner becomes the glue</b>
+                  <span>Growth feels like exception-handling—leadership is stitching handoffs together daily.</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="scorebox" aria-live="polite">
+              <div class="scoreline">
+                <strong>Pressure Signal: <span id="pressurePct">0%</span></strong>
+                <em id="pressureMsg">Stable chain</em>
+              </div>
+              <div class="meter" aria-hidden="true"><i id="pressureBar"></i></div>
+            </div>
+
+            <div class="divider"></div>
+            <p class="hint">
+              If this climbs fast, it usually means the bottleneck isn’t “effort.” It’s missing connections between demand, qualification, fulfillment, reporting, and improvement.
+            </p>
+          </div>
+        </section>
+
+        <section class="card reveal" id="consult" aria-label="Request a System Map">
+          <div class="inner">
+            <h2>Request a System Map</h2>
+            <p>A structured map to find where time and margin leak—and what to connect first.</p>
+
+            <!-- Netlify form (stores submissions in Netlify dashboard) -->
+            <form name="system-map" method="POST" data-netlify="true" action="/thanks.html">
+              <input type="hidden" name="form-name" value="system-map" />
+
+              <div class="row">
+                <div>
+                  <label for="name">Name</label>
+                  <input id="name" name="name" placeholder="Your name" autocomplete="name" required />
+                </div>
+                <div>
+                  <label for="company">Company</label>
+                  <input id="company" name="company" placeholder="Company name" autocomplete="organization" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
+                </div>
+                <div>
+                  <label for="phone">Phone</label>
+                  <input id="phone" name="phone" placeholder="(###) ###-####" autocomplete="tel" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label for="area">Primary service area</label>
+                  <select id="area" name="area">
+                    <option value="Phoenix">Phoenix</option>
+                    <option value="Tempe">Tempe</option>
+                    <option value="Mesa">Mesa</option>
+                    <option value="Scottsdale">Scottsdale</option>
+                    <option value="Glendale">Glendale</option>
+                    <option value="Chandler">Chandler</option>
+                    <option value="Peoria">Peoria</option>
+                    <option value="Other">Other / Multi-city</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="volume">Weekly volume (rough)</label>
+                  <select id="volume" name="volume">
+                    <option value="0-10">0–10</option>
+                    <option value="10-50">10–50</option>
+                    <option value="50-150">50–150</option>
+                    <option value="150+">150+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="note">What’s the main bottleneck right now?</label>
+                <textarea id="note" name="note" placeholder="Ex: messy intake, dispatch exceptions, inconsistent follow-up, tools don’t connect, quality varies, leadership feels like glue..."></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn" type="submit"><span aria-hidden="true">✦</span> Send request</button>
+                <a class="btn secondary" href="#article">Re-read the conflict</a>
+                <div class="hint">Submissions are captured by Netlify (no extra setup needed besides deploying this page).</div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </aside>
+    </section>
+
+    <footer class="reveal" aria-label="Footer">
+      <div class="footrow">
+        <div>
+          <strong>Skyes Over London LC</strong> — A connected operating system for Logistics, Digital Growth, and Apex Intelligence.
+        </div>
+        <div class="mini">
+          <a href="#top">Back to top</a>
+          <span style="opacity:.6">·</span>
+          <a href="#consult">Request a System Map</a>
+          <span style="opacity:.6">·</span>
+          <a href="javascript:void(0)" id="openPalette3">Command palette</a>
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        Built for Arizona operators under real load. No hype. Signal → action.
+      </div>
+    </footer>
+  </main>
+
+  <!-- Command Palette -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="palette">
+      <div class="pal-top">
+        <input id="palSearch" placeholder="Type to navigate… (Esc to close)" autocomplete="off" />
+        <a class="chip" href="javascript:void(0)" id="closePalette">Close <kbd>Esc</kbd></a>
+      </div>
+      <div class="pal-list" id="palList" role="listbox" aria-label="Navigation commands">
+        <div class="pal-item" data-go="#article" role="option">
+          <div>
+            <b>Read the article</b>
+            <span>Full post · conflict · solution</span>
+          </div>
+          <kbd>Enter</kbd>
+        </div>
+        <div class="pal-item" data-go="#signal" role="option">
+          <div>
+            <b>Signal Chain</b>
+            <span>Tap-to-expand chain: demand → improvement</span>
+          </div>
+          <kbd>Enter</kbd>
+        </div>
+        <div class="pal-item" data-go="#leaks" role="option">
+          <div>
+            <b>Leak Finder</b>
+            <span>Quick self-check · pressure signal meter</span>
+          </div>
+          <kbd>Enter</kbd>
+        </div>
+        <div class="pal-item" data-go="#consult" role="option">
+          <div>
+            <b>Request a System Map</b>
+            <span>Netlify-ready form</span>
+          </div>
+          <kbd>Enter</kbd>
+        </div>
+        <div class="pal-item" data-go="#top" role="option">
+          <div>
+            <b>Back to top</b>
+            <span>Hero</span>
+          </div>
+          <kbd>Enter</kbd>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== Canvas: Stars =====
+    (function(){
+      const c = document.getElementById('stars');
+      const ctx = c.getContext('2d', { alpha:true });
+      let w=0,h=0, dpr=1;
+      let stars=[];
+      const STAR_COUNT = 150;
+
+      function resize(){
+        dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+        w = c.width = Math.floor(window.innerWidth * dpr);
+        h = c.height = Math.floor(window.innerHeight * dpr);
+        c.style.width = window.innerWidth + 'px';
+        c.style.height = window.innerHeight + 'px';
+        stars = new Array(STAR_COUNT).fill(0).map(()=>({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          r: (Math.random()*1.2 + 0.2)*dpr,
+          s: (Math.random()*0.35 + 0.08)*dpr,
+          a: Math.random()*0.6 + 0.2,
+          tw: Math.random()*Math.PI*2
+        }));
+      }
+
+      function draw(t){
+        ctx.clearRect(0,0,w,h);
+        // subtle nebula wash
+        const g = ctx.createRadialGradient(w*0.2,h*0.15,0, w*0.2,h*0.15, Math.max(w,h)*0.65);
+        g.addColorStop(0, 'rgba(176,107,255,0.14)');
+        g.addColorStop(0.6, 'rgba(102,242,255,0.06)');
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,w,h);
+
+        for (const s of stars){
+          s.tw += 0.012;
+          const alpha = s.a + Math.sin(s.tw)*0.10;
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(244,240,255,${Math.max(0, Math.min(1, alpha))})`;
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+          ctx.fill();
+
+          s.y += s.s;
+          if (s.y > h + 10){
+            s.y = -10;
+            s.x = Math.random()*w;
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize, {passive:true});
+      resize();
+      requestAnimationFrame(draw);
+    })();
+
+    // ===== Canvas: Grain =====
+    (function(){
+      const c = document.getElementById('grain');
+      const ctx = c.getContext('2d', { alpha:true });
+      let w=0,h=0,dpr=1;
+      function resize(){
+        dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+        w = c.width = Math.floor(window.innerWidth * dpr);
+        h = c.height = Math.floor(window.innerHeight * dpr);
+        c.style.width = window.innerWidth + 'px';
+        c.style.height = window.innerHeight + 'px';
+        draw();
+      }
+      function draw(){
+        const img = ctx.createImageData(w,h);
+        const data = img.data;
+        for(let i=0;i<data.length;i+=4){
+          const v = (Math.random()*255)|0;
+          data[i]=v; data[i+1]=v; data[i+2]=v; data[i+3]=22;
+        }
+        ctx.putImageData(img,0,0);
+      }
+      window.addEventListener('resize', resize, {passive:true});
+      resize();
+      // redraw occasionally for subtle movement
+      setInterval(draw, 1200);
+    })();
+
+    // ===== Cursor Aura =====
+    (function(){
+      const aura = document.querySelector('.cursor-aura');
+      const dot  = document.querySelector('.cursor-dot');
+      let x = window.innerWidth/2, y = window.innerHeight/2;
+      let ax=x, ay=y;
+
+      function move(e){
+        x = e.clientX; y = e.clientY;
+      }
+      function tick(){
+        ax += (x-ax)*0.18;
+        ay += (y-ay)*0.18;
+        aura.style.transform = `translate(${ax}px,${ay}px) translate(-50%,-50%)`;
+        dot.style.transform  = `translate(${x}px,${y}px) translate(-50%,-50%)`;
+        requestAnimationFrame(tick);
+      }
+      window.addEventListener('mousemove', move, {passive:true});
+      window.addEventListener('mousedown', ()=>document.body.classList.add('cursor-press'), {passive:true});
+      window.addEventListener('mouseup', ()=>document.body.classList.remove('cursor-press'), {passive:true});
+      requestAnimationFrame(tick);
+    })();
+
+    // ===== Reading Progress =====
+    (function(){
+      const bar = document.getElementById('prog');
+      function update(){
+        const doc = document.documentElement;
+        const sc = doc.scrollTop || document.body.scrollTop;
+        const max = (doc.scrollHeight - doc.clientHeight) || 1;
+        const pct = Math.max(0, Math.min(1, sc / max));
+        bar.style.width = (pct*100).toFixed(1) + '%';
+      }
+      window.addEventListener('scroll', update, {passive:true});
+      update();
+    })();
+
+    // ===== Smooth scroll =====
+    (function(){
+      document.addEventListener('click', (e)=>{
+        const a = e.target.closest('a[href^="#"]');
+        if(!a) return;
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null, '', id);
+      });
+    })();
+
+    // ===== Reveal on scroll =====
+    (function(){
+      const els = [...document.querySelectorAll('.reveal')];
+      const io = new IntersectionObserver((entries)=>{
+        for(const en of entries){
+          if(en.isIntersecting) en.target.classList.add('show');
+        }
+      }, {threshold: 0.08});
+      els.forEach(el=>io.observe(el));
+    })();
+
+    // ===== Signal Chain toggles =====
+    (function(){
+      const nodes = [...document.querySelectorAll('[data-node]')];
+      function toggle(n){
+        const isOpen = n.classList.contains('open');
+        nodes.forEach(x=>x.classList.remove('open'));
+        if(!isOpen) n.classList.add('open');
+      }
+      nodes.forEach(n=>{
+        n.addEventListener('click', ()=>toggle(n));
+        n.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(n); }
+        });
+      });
+      // open first by default
+      if(nodes[0]) nodes[0].classList.add('open');
+    })();
+
+    // ===== Leak Finder score =====
+    (function(){
+      const checks = [...document.querySelectorAll('.leakCheck')];
+      const pctEl = document.getElementById('pressurePct');
+      const barEl = document.getElementById('pressureBar');
+      const msgEl = document.getElementById('pressureMsg');
+
+      function update(){
+        const on = checks.filter(c=>c.checked).length;
+        const total = checks.length || 1;
+        const pct = Math.round((on/total)*100);
+        pctEl.textContent = pct + '%';
+        barEl.style.width = pct + '%';
+
+        let msg = 'Stable chain';
+        if(pct >= 20) msg = 'Minor friction';
+        if(pct >= 40) msg = 'Handoffs leaking';
+        if(pct >= 60) msg = 'Fire-drill territory';
+        if(pct >= 80) msg = 'Owner-as-glue risk';
+        msgEl.textContent = msg;
+      }
+      checks.forEach(c=>c.addEventListener('change', update));
+      update();
+    })();
+
+    // ===== Copy link =====
+    (function(){
+      const btn = document.getElementById('copyLink');
+      btn.addEventListener('click', async ()=>{
+        try{
+          await navigator.clipboard.writeText(location.href);
+          btn.textContent = "✓ Link copied";
+          setTimeout(()=>btn.innerHTML = '<span aria-hidden="true">⧉</span> Copy link', 1200);
+        }catch(e){
+          btn.textContent = "Copy failed";
+          setTimeout(()=>btn.innerHTML = '<span aria-hidden="true">⧉</span> Copy link', 1200);
+        }
+      });
+    })();
+
+    // ===== Command Palette =====
+    (function(){
+      const overlay = document.getElementById('overlay');
+      const openBtns = [document.getElementById('openPalette'), document.getElementById('openPalette2'), document.getElementById('openPalette3')].filter(Boolean);
+      const closeBtn = document.getElementById('closePalette');
+      const search = document.getElementById('palSearch');
+      const list = document.getElementById('palList');
+      let items = [];
+
+      function show(){
+        overlay.classList.add('show');
+        search.value = '';
+        filter('');
+        setTimeout(()=>search.focus(), 20);
+      }
+      function hide(){
+        overlay.classList.remove('show');
+      }
+      function go(sel){
+        const el = document.querySelector(sel);
+        if(el){
+          hide();
+          el.scrollIntoView({behavior:'smooth', block:'start'});
+          history.replaceState(null,'',sel);
+        }
+      }
+      function filter(q){
+        q = (q||'').toLowerCase().trim();
+        items = [...list.querySelectorAll('.pal-item')];
+        items.forEach(it=>{
+          const txt = (it.innerText||'').toLowerCase();
+          it.style.display = txt.includes(q) ? 'flex' : 'none';
+        });
+      }
+
+      openBtns.forEach(b=>b.addEventListener('click', show));
+      closeBtn.addEventListener('click', hide);
+      overlay.addEventListener('click', (e)=>{
+        if(e.target === overlay) hide();
+      });
+
+      list.addEventListener('click', (e)=>{
+        const it = e.target.closest('.pal-item');
+        if(!it) return;
+        go(it.dataset.go);
+      });
+
+      search.addEventListener('input', (e)=>filter(e.target.value));
+      window.addEventListener('keydown', (e)=>{
+        const isMac = navigator.platform.toUpperCase().includes('MAC');
+        const mod = isMac ? e.metaKey : e.ctrlKey;
+
+        if(mod && e.key.toLowerCase() === 'k'){
+          e.preventDefault();
+          if(overlay.classList.contains('show')) hide(); else show();
+        }
+        if(e.key === 'Escape' && overlay.classList.contains('show')){
+          e.preventDefault();
+          hide();
+        }
+        if(e.key === 'Enter' && overlay.classList.contains('show')){
+          const first = [...list.querySelectorAll('.pal-item')].find(it => it.style.display !== 'none');
+          if(first) go(first.dataset.go);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

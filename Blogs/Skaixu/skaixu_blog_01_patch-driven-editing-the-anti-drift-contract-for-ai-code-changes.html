@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Patch-Driven Editing: The Anti-Drift Contract for AI Code Changes | SkAIxu IDE Blog</title>
+  <meta name="title" content="Patch-Driven Editing: The Anti-Drift Contract for AI Code Changes | SkAIxu IDE Blog">
+  <meta name="description" content="Why AI coding breaks in production—and how patch contracts (SEARCH/REPLACE) turn AI suggestions into controlled change requests. Launch the live SkAIxu IDE at https://skaixuidepro.netlify.app.">
+  <meta name="keywords" content="SkAIxu IDE, SkAIxuIDEPro, AI development discipline, patch editing, search replace, ai code changes, change control, developer workflow">
+  <meta name="author" content="Skyes Over London LC">
+  <meta name="publisher" content="Solenterprises International Nexus & Holdings LLC">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta name="category" content="Developer Tools, AI Engineering, Product Systems">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://skaixuidepro.netlify.app/patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html">
+  <meta property="og:title" content="Patch-Driven Editing: The Anti-Drift Contract for AI Code Changes">
+  <meta property="og:description" content="Why AI coding breaks in production—and how patch contracts (SEARCH/REPLACE) turn AI suggestions into controlled change requests.">
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SkAIxu IDE Blog">
+  <meta property="og:site_name" content="Skyes Over London LC">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:publisher" content="Solenterprises International Nexus & Holdings LLC">
+  <meta property="article:author" content="Skyes Over London Editorial">
+  <meta property="article:published_time" content="2025-09-22T00:00:00+00:00">
+  <meta property="article:modified_time" content="2025-09-22T00:00:00+00:00">
+  <meta property="article:section" content="Developer Tools">
+  <meta property="article:tag" content="SkAIxu IDE">
+  <meta property="article:tag" content="AI Engineering">
+  <meta property="article:tag" content="Governance">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://skaixuidepro.netlify.app/patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html">
+  <meta name="twitter:title" content="Patch-Driven Editing: The Anti-Drift Contract for AI Code Changes">
+  <meta name="twitter:description" content="Why AI coding breaks in production—and how patch contracts (SEARCH/REPLACE) turn AI suggestions into controlled change requests.">
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <meta name="twitter:image:alt" content="SkAIxu IDE Blog">
+  <meta name="twitter:site" content="@SkyesOverLondon">
+  <meta name="twitter:creator" content="@SkyesOverLondon">
+
+  <link rel="canonical" href="https://skaixuidepro.netlify.app/patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html">
+  <link rel="alternate" hreflang="en-US" href="https://skaixuidepro.netlify.app/patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html">
+  <link rel="alternate" hreflang="x-default" href="https://skaixuidepro.netlify.app/patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html">
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Patch-Driven Editing: The Anti-Drift Contract for AI Code Changes",
+    "description":"Why AI coding breaks in production—and how patch contracts (SEARCH/REPLACE) turn AI suggestions into controlled change requests.",
+    "image": {
+      "@type":"ImageObject",
+      "url":"https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png",
+      "width":1200,
+      "height":630
+    },
+    "author": {
+      "@type":"Organization",
+      "name":"Skyes Over London LC",
+      "url":"https://solenterprises.org/pages/leadership-hub"
+    },
+    "publisher": {
+      "@type":"Organization",
+      "name":"Solenterprises International Nexus & Holdings LLC",
+      "logo": {
+        "@type":"ImageObject",
+        "url":"https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png"
+      }
+    },
+    "datePublished":"2025-09-22",
+    "dateModified":"2025-09-22",
+    "mainEntityOfPage": {
+      "@type":"WebPage",
+      "@id":"https://skaixuidepro.netlify.app/patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html"
+    },
+    "keywords":"SkAIxu IDE, SkAIxuIDEPro, AI development discipline, patch editing, search replace, ai code changes, change control, developer workflow",
+    "articleSection":"Developer Tools",
+    "inLanguage":"en-US"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"SkAIxu IDE","item":"https://skaixuidepro.netlify.app"},
+      {"@type":"ListItem","position":2,"name":"Blog","item":"https://skaixuidepro.netlify.app/blog"},
+      {"@type":"ListItem","position":3,"name":"Patch-Driven Editing: The Anti-Drift Contract for AI Code Changes","item":"https://skaixuidepro.netlify.app/patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html"}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+  
+:root {
+  --color-ink:#0a0a0a;
+  --color-paper:#faf9f7;
+  --color-cream:#f5f3ef;
+  --color-gold:#c9a962;
+  --color-rust:#b54a32;
+  --color-navy:#1a2744;
+  --color-slate:#4a5568;
+  --color-mist:#e8e6e1;
+  --color-shadow:rgba(10,10,10,0.08);
+
+  --font-display:'Playfair Display', Georgia, serif;
+  --font-body:'Instrument Sans', -apple-system, sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+
+  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+  --ease-out-quart:cubic-bezier(0.25,1,0.5,1);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--color-paper);color:var(--color-ink);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit}
+
+.cinematic-opener{position:fixed;inset:0;background:var(--color-ink);z-index:10000;display:flex;align-items:center;justify-content:center;flex-direction:column;animation:openerFadeOut 1s var(--ease-out-expo) 4.5s forwards;pointer-events:none}
+.cinematic-opener::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%, rgba(201,169,98,0.15) 0%, transparent 50%),radial-gradient(ellipse at 80% 50%, rgba(181,74,50,0.10) 0%, transparent 50%);animation:gradientPulse 4s ease-in-out infinite}
+@keyframes gradientPulse{0%,100%{opacity:.5}50%{opacity:1}}
+.opener-content{position:relative;z-index:2;text-align:center;padding:2rem;max-width:980px}
+.opener-line{overflow:hidden}
+.opener-text{font-family:var(--font-display);color:var(--color-paper);font-size:clamp(1rem,3vw,1.5rem);letter-spacing:.3em;text-transform:uppercase;opacity:0;transform:translateY(100%);animation:slideUp 1s var(--ease-out-expo) .5s forwards}
+.opener-title{font-family:var(--font-display);color:var(--color-gold);font-size:clamp(2.3rem,7vw,4.8rem);font-weight:600;line-height:1.05;margin:1.5rem 0;opacity:0;transform:translateY(100%);animation:slideUp 1.2s var(--ease-out-expo) 1s forwards}
+.opener-divider{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--color-gold),transparent);margin:2rem auto;animation:expandLine 1.5s var(--ease-out-expo) 1.5s forwards}
+.opener-subtitle{font-family:var(--font-body);color:var(--color-mist);font-size:clamp(.95rem,2vw,1.1rem);letter-spacing:.05em;opacity:0;animation:fadeIn 1.5s var(--ease-out-expo) 2s forwards}
+.opener-logo{margin-top:2.25rem;opacity:0;animation:fadeIn 1s var(--ease-out-expo) 2.5s forwards;display:flex;flex-direction:column;align-items:center;gap:.85rem}
+.opener-logo img{width:74px;height:74px;object-fit:contain;filter:drop-shadow(0 14px 35px rgba(201,169,98,.25))}
+.opener-company{font-family:var(--font-mono);color:var(--color-slate);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;opacity:0;animation:fadeIn 1s var(--ease-out-expo) 3s forwards}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes expandLine{to{width:220px}}
+@keyframes openerFadeOut{to{opacity:0;visibility:hidden}}
+
+.progress-bar{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);width:220px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;z-index:10001;animation:fadeOut .5s var(--ease-out-expo) 4s forwards;pointer-events:none}
+.progress-fill{height:100%;background:var(--color-gold);width:0;animation:progressFill 4s var(--ease-out-quart) forwards}
+@keyframes progressFill{0%{width:0}100%{width:100%}}
+@keyframes fadeOut{to{opacity:0}}
+
+.nav{position:fixed;top:0;left:0;width:100%;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:transparent;transition:all .4s var(--ease-out-expo)}
+.nav.scrolled{background:rgba(250,249,247,.95);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--color-mist);padding:1rem 3rem}
+.nav-brand{display:flex;flex-direction:column;gap:.15rem}
+.nav-brand-name{font-family:var(--font-display);font-size:1.1rem;font-weight:600;letter-spacing:.02em}
+.nav-brand-sub{font-family:var(--font-mono);font-size:.6rem;color:var(--color-slate);letter-spacing:.1em;text-transform:uppercase}
+.nav-links{display:flex;gap:2.2rem;list-style:none}
+.nav-links a{font-size:.85rem;font-weight:500;color:var(--color-slate);padding:.25rem 0;transition:color .3s ease}
+.nav-links a:hover{color:var(--color-rust)}
+.nav-links a.active{color:var(--color-ink);border-bottom:1px solid var(--color-rust)}
+.nav-cta{background:var(--color-ink);color:var(--color-paper);padding:.75rem 1.4rem;font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;transition:all .3s ease}
+.nav-cta:hover{background:var(--color-rust);transform:translateY(-2px)}
+
+.hero{min-height:92vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--color-ink)}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,10,10,.35) 0%, rgba(10,10,10,.78) 100%), linear-gradient(90deg, rgba(10,10,10,.86) 0%, transparent 60%)}
+.hero-grain{position:absolute;inset:0;opacity:.03;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")}
+.hero-content{position:relative;z-index:10;max-width:980px;padding:0 5rem;padding-top:7.5rem}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:1rem;font-family:var(--font-mono);font-size:.7rem;color:var(--color-gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.75rem;opacity:0;animation:heroFadeUp 1s var(--ease-out-expo) 4.8s forwards}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--color-gold)}
+.hero-title{font-family:var(--font-display);font-size:clamp(2.8rem,7vw,5rem);font-weight:500;color:var(--color-paper);line-height:1.05;margin-bottom:1.8rem;opacity:0;animation:heroFadeUp 1.2s var(--ease-out-expo) 5s forwards}
+.hero-title em{font-style:italic;color:var(--color-gold)}
+.hero-description{font-size:1.1rem;color:var(--color-mist);line-height:1.85;max-width:720px;margin-bottom:2.6rem;opacity:0;animation:heroFadeUp 1.2s var(--ease-out-expo) 5.2s forwards}
+.hero-actions{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:heroFadeUp 1.2s var(--ease-out-expo) 5.4s forwards}
+.hero-btn{display:inline-flex;align-items:center;gap:.75rem;padding:1.15rem 2.2rem;font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:all .4s var(--ease-out-expo);border-radius:0;border:1px solid transparent}
+.hero-btn-primary{background:var(--color-gold);color:var(--color-ink)}
+.hero-btn-primary:hover{background:var(--color-paper);transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,.28)}
+.hero-btn-secondary{background:transparent;color:var(--color-paper);border-color:rgba(255,255,255,.3)}
+.hero-btn-secondary:hover{border-color:var(--color-gold);color:var(--color-gold)}
+.hero-btn svg{width:16px;height:16px;transition:transform .3s ease}
+.hero-btn:hover svg{transform:translateX(4px)}
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+.stats-bar{background:var(--color-navy);padding:3.5rem 5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;position:relative;overflow:hidden}
+.stats-bar::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%, rgba(201,169,98,.1) 0%, transparent 50%),radial-gradient(ellipse at 100% 50%, rgba(181,74,50,.08) 0%, transparent 50%)}
+.stat-item{position:relative;z-index:2;text-align:center;opacity:0;transform:translateY(20px);transition:all .8s var(--ease-out-expo)}
+.stat-item.visible{opacity:1;transform:translateY(0)}
+.stat-number{font-family:var(--font-display);font-size:3.1rem;font-weight:600;color:var(--color-gold);line-height:1;margin-bottom:.5rem}
+.stat-label{font-size:.85rem;color:var(--color-mist);letter-spacing:.05em}
+
+.article{max-width:1400px;margin:0 auto;padding:6rem 5rem}
+.article-header{display:grid;grid-template-columns:1fr 1fr;gap:6rem;margin-bottom:5rem;padding-bottom:5rem;border-bottom:1px solid var(--color-mist)}
+.article-meta{display:flex;flex-direction:column;gap:1.75rem}
+.article-category{font-family:var(--font-mono);font-size:.7rem;color:var(--color-rust);letter-spacing:.15em;text-transform:uppercase}
+.article-date{font-size:.9rem;color:var(--color-slate)}
+.article-author{display:flex;align-items:center;gap:1rem}
+.author-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--color-gold),var(--color-rust));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);color:var(--color-paper);font-weight:700}
+.author-info{display:flex;flex-direction:column;gap:.15rem}
+.author-name{font-weight:700;font-size:.95rem}
+.author-role{font-family:var(--font-mono);font-size:.7rem;color:var(--color-slate);letter-spacing:.05em}
+.article-intro p{font-family:var(--font-display);font-size:1.65rem;line-height:1.55}
+.article-body{display:grid;grid-template-columns:280px 1fr;gap:6rem}
+.article-sidebar{position:sticky;top:120px;height:fit-content}
+.sidebar-nav{display:flex;flex-direction:column;gap:.75rem}
+.sidebar-nav-title{font-family:var(--font-mono);font-size:.65rem;color:var(--color-slate);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--color-mist)}
+.sidebar-nav a{font-size:.9rem;color:var(--color-slate);padding:.5rem 0;padding-left:1rem;border-left:2px solid transparent;transition:all .3s ease}
+.sidebar-nav a:hover,.sidebar-nav a.active{color:var(--color-ink);border-left-color:var(--color-rust)}
+.article-content section{margin-bottom:2.75rem}
+.article-content h2{font-family:var(--font-display);font-size:2.35rem;font-weight:500;margin-bottom:1.25rem;line-height:1.2}
+.article-content p{font-size:1.08rem;line-height:1.9;margin-bottom:1.25rem}
+.article-content p.lead{font-size:1.25rem;color:var(--color-slate);line-height:1.75}
+
+.fade-up{opacity:0;transform:translateY(18px);transition:all .8s var(--ease-out-expo)}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+.feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin:2.5rem 0}
+.feature-card{background:var(--color-cream);padding:2.25rem;position:relative;overflow:hidden;transition:all .4s var(--ease-out-expo)}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--color-gold);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease-out-expo)}
+.feature-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px var(--color-shadow)}
+.feature-card:hover::before{transform:scaleY(1)}
+.feature-card h4{font-family:var(--font-display);font-size:1.25rem;font-weight:700;margin-bottom:.7rem}
+.feature-card p{font-size:.95rem;color:var(--color-slate);line-height:1.7;margin:0}
+
+.pull-quote{margin:3.5rem 0;padding:3rem 4rem;background:var(--color-ink);position:relative}
+.pull-quote::before{content:'"';position:absolute;top:-20px;left:2rem;font-family:var(--font-display);font-size:8rem;color:var(--color-gold);opacity:.3;line-height:1}
+.pull-quote blockquote{font-family:var(--font-display);font-size:1.65rem;font-style:italic;color:var(--color-paper);line-height:1.55;position:relative;z-index:2}
+.pull-quote cite{display:block;font-size:.9rem;color:var(--color-gold);margin-top:1.25rem}
+
+.animated-list{list-style:none;margin:2rem 0}
+.animated-list li{display:flex;align-items:flex-start;gap:1rem;padding:1.15rem 0;border-bottom:1px solid var(--color-mist);opacity:0;transform:translateX(-20px);transition:all .6s var(--ease-out-expo)}
+.animated-list li.visible{opacity:1;transform:translateX(0)}
+.list-icon{width:32px;height:32px;background:var(--color-gold);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.list-icon svg{width:16px;height:16px;color:var(--color-ink)}
+.list-content h5{font-weight:700;font-size:1rem;margin-bottom:.25rem}
+.list-content p{font-size:.95rem;color:var(--color-slate);margin:0;line-height:1.7}
+
+.cta-section{background:var(--color-ink);margin:5rem -5rem;padding:5.5rem 5rem;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:radial-gradient(ellipse at 100% 50%, rgba(201,169,98,.15) 0%, transparent 60%)}
+.cta-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:center}
+.cta-text h3{font-family:var(--font-display);font-size:2.35rem;font-weight:500;color:var(--color-paper);margin-bottom:1rem}
+.cta-text p{font-size:1.08rem;color:var(--color-mist);line-height:1.85;margin:0;max-width:760px}
+.cta-button{display:inline-flex;align-items:center;gap:1rem;padding:1.4rem 2.8rem;background:var(--color-gold);color:var(--color-ink);font-size:.9rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:all .4s var(--ease-out-expo)}
+.cta-button:hover{background:var(--color-paper);transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.cta-button svg{width:18px;height:18px;transition:transform .3s ease}
+.cta-button:hover svg{transform:translateX(4px)}
+
+.testimonials{background:var(--color-cream);margin:5rem -5rem;padding:5rem 5rem}
+.testimonials-header{text-align:center;margin-bottom:3.5rem}
+.testimonials-header h3{font-family:var(--font-display);font-size:2.35rem;font-weight:500}
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.testimonial-card{background:var(--color-paper);padding:2.25rem;transition:all .4s var(--ease-out-expo)}
+.testimonial-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px var(--color-shadow)}
+.testimonial-stars{display:flex;gap:.25rem;margin-bottom:1.25rem}
+.testimonial-stars svg{width:16px;height:16px;color:var(--color-gold);fill:var(--color-gold)}
+.testimonial-text{font-size:1rem;line-height:1.75;margin-bottom:1.25rem}
+.testimonial-author{display:flex;align-items:center;gap:1rem;padding-top:1.25rem;border-top:1px solid var(--color-mist)}
+.testimonial-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--color-navy),var(--color-rust))}
+.testimonial-name{font-weight:700;font-size:.9rem}
+.testimonial-role{font-size:.8rem;color:var(--color-slate)}
+
+.footer{background:var(--color-ink);padding:5rem 5rem 2.5rem;color:var(--color-paper)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:3.5rem;padding-bottom:3.5rem;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-brand h4{font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin-bottom:.5rem}
+.footer-brand .subsidiary{font-family:var(--font-mono);font-size:.65rem;color:var(--color-slate);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.25rem}
+.footer-brand p{font-size:.95rem;color:var(--color-mist);line-height:1.7;max-width:380px}
+.footer-links h5{font-weight:700;font-size:.9rem;margin-bottom:1.25rem}
+.footer-links ul{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.footer-links a{font-size:.9rem;color:var(--color-mist);transition:color .3s ease}
+.footer-links a:hover{color:var(--color-gold)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer-copyright{font-family:var(--font-mono);font-size:.7rem;color:var(--color-slate);letter-spacing:.05em}
+.footer-legal{display:flex;gap:2rem;flex-wrap:wrap}
+.footer-legal a{font-size:.8rem;color:var(--color-slate);transition:color .3s ease}
+.footer-legal a:hover{color:var(--color-gold)}
+
+@media (max-width: 1024px){
+  .nav{padding:1rem 2rem}
+  .nav-links{display:none}
+  .hero-content{padding:0 3rem;padding-top:6.5rem}
+  .stats-bar{grid-template-columns:repeat(2,1fr);padding:3rem}
+  .article{padding:5rem 3rem}
+  .article-header{grid-template-columns:1fr;gap:3rem}
+  .article-body{grid-template-columns:1fr;gap:3rem}
+  .article-sidebar{position:relative;top:0}
+  .sidebar-nav{background:var(--color-cream);padding:1.5rem;border:1px solid var(--color-mist)}
+  .feature-grid{grid-template-columns:1fr}
+  .testimonial-grid{grid-template-columns:1fr}
+  .cta-section{margin:4rem -3rem;padding:4rem 3rem}
+  .cta-content{grid-template-columns:1fr;text-align:center}
+  .testimonials{margin:4rem -3rem;padding:4rem 3rem}
+  .footer{padding:4rem 3rem 2rem}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:3rem}
+}
+@media (max-width: 768px){
+  .hero-content{padding:0 1.5rem;padding-top:6.0rem}
+  .stats-bar{grid-template-columns:1fr;padding:2rem 1.5rem}
+  .stat-number{font-size:2.5rem}
+  .article{padding:3rem 1.5rem}
+  .pull-quote{padding:2rem}
+  .pull-quote blockquote{font-size:1.25rem}
+  .cta-section{margin:3rem -1.5rem;padding:3rem 1.5rem}
+  .cta-text h3{font-size:1.75rem}
+  .testimonials{margin:3rem -1.5rem;padding:3rem 1.5rem}
+  .footer{padding:3rem 1.5rem 2rem}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:1.5rem;text-align:center}
+}
+
+  
+.codeblock{
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 1.5rem 1.5rem;
+  border-left: 4px solid var(--color-gold);
+  margin: 1.75rem 0;
+  overflow:auto;
+}
+.codeblock pre{
+  margin:0;
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  line-height: 1.6;
+  white-space: pre;
+}
+.kbd{
+  display:inline-block;
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  padding: .1rem .45rem;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.07);
+}
+.checklist{
+  background: var(--color-cream);
+  border: 1px solid var(--color-mist);
+  padding: 1.75rem;
+  margin: 2rem 0;
+}
+.checklist h3{
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+.check-item{
+  display:flex;
+  gap: .75rem;
+  align-items:flex-start;
+  padding: .85rem 0;
+  border-bottom: 1px solid var(--color-mist);
+}
+.check-item:last-child{border-bottom:none}
+.check-item input{margin-top:.3rem; width:18px; height:18px}
+.check-item label{font-size: 1rem; line-height:1.65}
+.check-note{font-size:.9rem;color:var(--color-slate);margin-top:.85rem}
+
+.faq{
+  background: var(--color-paper);
+  border: 1px solid var(--color-mist);
+  margin: 2rem 0;
+}
+.faq-item{
+  border-bottom: 1px solid var(--color-mist);
+}
+.faq-item:last-child{border-bottom:none}
+.faq-q{
+  width:100%;
+  text-align:left;
+  background: transparent;
+  border:none;
+  padding: 1.25rem 1.25rem;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 1rem;
+}
+.faq-q span{
+  font-weight: 700;
+  font-size: 1rem;
+}
+.faq-q .chev{
+  width: 22px; height: 22px;
+  border: 1px solid var(--color-mist);
+  display:flex;align-items:center;justify-content:center;
+}
+.faq-a{
+  max-height: 0;
+  overflow:hidden;
+  transition:max-height .35s var(--ease-out-expo);
+}
+.faq-a .inner{
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  color: var(--color-slate);
+  font-size: .98rem;
+  line-height: 1.75;
+}
+.faq-item.open .faq-a{max-height: 520px}
+.related{
+  background: var(--color-cream);
+  border: 1px solid var(--color-mist);
+  padding: 1.75rem;
+  margin: 2rem 0;
+}
+.related h3{font-family:var(--font-display);font-size:1.6rem;font-weight:600;margin-bottom:.85rem}
+.related ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.related a{color:var(--color-rust);border-bottom:1px solid rgba(181,74,50,.35)}
+.related a:hover{border-bottom-color: var(--color-rust)}
+
+  </style>
+</head>
+
+<body>
+  <!-- Cinematic Opening Sequence -->
+  <div class="cinematic-opener">
+    <div class="opener-content">
+      <div class="opener-line"><p class="opener-text">A Skyes Over London LC Publication</p></div>
+      <div class="opener-line"><h1 class="opener-title">Patch-Driven Editing: The Anti-Drift Contract for AI Code Changes</h1></div>
+      <div class="opener-divider"></div>
+      <p class="opener-subtitle">SkAIxu IDE Blog • Operator-grade development discipline</p>
+
+      <div class="opener-logo">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SkAIxu Logo">
+        <div class="opener-company">Solenterprises International Nexus & Holdings LLC</div>
+      </div>
+    </div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill"></div></div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-brand">
+      <div class="nav-brand-name">SkAIxu IDE Blog</div>
+      <div class="nav-brand-sub">Proof • Discipline • Controlled Change</div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#deep-dive">Deep Dive</a></li>
+      <li><a href="#checklist">Checklist</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+
+    <a class="nav-cta" href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener">Launch IDE</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-grain"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Developer Tools • AI Engineering • Governance</div>
+      <h1 class="hero-title">Patch-Driven Editing <em>The Anti-Drift Contract for AI Code Changes</em></h1>
+      <p class="hero-description">Why AI coding breaks in production—and how patch contracts (SEARCH/REPLACE) turn AI suggestions into controlled change requests. Built to point you directly to the live IDE: <a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener" style="color:var(--color-gold);border-bottom:1px solid rgba(201,169,98,.6)">https://skaixuidepro.netlify.app</a>.</p>
+      <div class="hero-actions">
+        <a class="hero-btn hero-btn-primary" href="#problem">Read Article
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="hero-btn hero-btn-secondary" href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener">Open SkAIxu IDE
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats Bar -->
+  <section class="stats-bar" aria-label="Key stats">
+    <div class="stat-item">
+      <div class="stat-number" data-count="5">0</div>
+      <div class="stat-label">Core Primitives</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-count="1">0</div>
+      <div class="stat-label">Recipe Ideas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">Closed</div>
+      <div class="stat-label">Production Endpoints</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-count="3">0</div>
+      <div class="stat-label">Loop Steps</div>
+    </div>
+  </section>
+
+  <!-- Main Article -->
+  <article class="article">
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-category">SkAIxu IDE • Developer Tools</span>
+        <span class="article-date">September 22, 2025</span>
+        <div class="article-author">
+          <div class="author-avatar">SL</div>
+          <div class="author-info">
+            <span class="author-name">Skyes Over London Editorial</span>
+            <span class="author-role">Operator Systems Division</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-intro">
+        <p>Why AI coding breaks in production—and how patch contracts (SEARCH/REPLACE) turn AI suggestions into controlled change requests. The fastest way to validate the ideas below: open <a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener" style="color:var(--color-rust);border-bottom:1px solid var(--color-rust);">SkAIxu IDE</a> and run the loop while you read.</p>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <aside class="article-sidebar">
+        <nav class="sidebar-nav">
+          <span class="sidebar-nav-title">In This Article</span>
+          <a href="#problem">The Problem</a><a href="#principle">Core Principle</a><a href="#deep-dive">Deep Dive</a><a href="#playbook">Playbook</a><a href="#checklist">Checklist</a><a href="#why-skaixu">SkAIxu IDE</a><a href="#faq">FAQ</a><a href="#cta">Launch</a>
+        </nav>
+      </aside>
+
+      <div class="article-content">
+        
+<section id="problem" class="fade-up">
+  <h2>The Problem This Solves</h2>
+  <p class="lead">AI-assisted development fails in a predictable way: the system can’t tell the difference between a small request and a large rewrite. The result is drift—formatting drift, logic drift, layout drift, and eventually trust drift.</p>
+  <ul class="animated-list">
+    <li><div class="list-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12l2-2 4 4L19 4l2 2-12 12L3 12z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="list-content"><h5>Unbounded output becomes unbounded change.</h5><p>A harmless tweak turns into collateral damage because nothing forces the edit to stay scoped.</p></div></li><li><div class="list-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12l2-2 4 4L19 4l2 2-12 12L3 12z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="list-content"><h5>Ambiguity edits the wrong instance.</h5><p>Repeated components invite the model to guess which one you meant.</p></div></li><li><div class="list-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12l2-2 4 4L19 4l2 2-12 12L3 12z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="list-content"><h5>Iteration multiplies uncertainty.</h5><p>Each round adds tiny inconsistencies until the project becomes fragile.</p></div></li><li><div class="list-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12l2-2 4 4L19 4l2 2-12 12L3 12z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="list-content"><h5>Security becomes accidental.</h5><p>Without governance, endpoints and secrets get exposed by mistake.</p></div></li>
+  </ul>
+</section>
+<section id="principle" class="fade-up">
+  <h2>The Core Principle</h2>
+  <p class="lead">SkAIxu IDE treats the model as a patch generator, not an author. The IDE becomes the enforcement layer: it constrains output, validates intent, and keeps your edits survivable under repetition.</p>
+  <div class="feature-grid">
+    <div class="feature-card"><h4>Structured edits beat clever rewrites.</h4><p>A patch contract is boring on purpose. Boring is reliable.</p></div><div class="feature-card"><h4>Evidence beats guesswork.</h4><p>Preview-to-edit targeting turns intent into context the system can verify.</p></div><div class="feature-card"><h4>Local continuity beats fragile sessions.</h4><p>Offline-first persistence keeps your workspace stable when the world isn’t.</p></div>
+  </div>
+  <div class="pull-quote fade-up">
+    <blockquote>“Discipline is the feature. Everything else is decoration.”</blockquote>
+    <cite>— Skyes Over London Editorial</cite>
+  </div>
+</section>
+<section id="deep-dive" class="fade-up">
+  <h2>Deep Dive: Patch Contracts That Make AI Edits Safe</h2>
+  <p class="lead">A patch contract turns an AI answer into something you can verify mechanically. It forces the model to name exactly what it is replacing, not just what it wants to create.</p>
+  <div class="feature-grid"><div class="feature-card"><h4>Exact-match guardrail</h4><p>If SEARCH isn’t found, nothing applies. That prevents silent drift.</p></div><div class="feature-card"><h4>Reviewable diffs</h4><p>You can see what changed without reading a novel.</p></div><div class="feature-card"><h4>Composable recipes</h4><p>Once a patch works, it becomes a reusable play in your library.</p></div></div>
+  <div class="codeblock"><pre>// Patch contract example (Develop Mode)
+// Require the model to respond ONLY with blocks like this:
+
+SEARCH:
+<button class="cta primary">Launch</button>
+
+REPLACE:
+<button class="cta primary" aria-label="Launch SkAIxu IDE">Launch</button></pre></div>
+  <p>Try this pattern immediately in the live IDE: <a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener" style="color:var(--color-rust);border-bottom:1px solid var(--color-rust);">https://skaixuidepro.netlify.app</a>.</p>
+</section>
+
+<section id="checklist" class="fade-up">
+  <div class="checklist">
+    <h3>Operator Checklist (saved locally)</h3>
+    <div class="check-item"><input type="checkbox" data-check="patch-driven-editing-the-anti-drift-contract-for-ai-code-changes-1"><label>Did you target the correct element or file region?</label></div><div class="check-item"><input type="checkbox" data-check="patch-driven-editing-the-anti-drift-contract-for-ai-code-changes-2"><label>Did you require SEARCH/REPLACE blocks only?</label></div><div class="check-item"><input type="checkbox" data-check="patch-driven-editing-the-anti-drift-contract-for-ai-code-changes-3"><label>Did you keep SEARCH unique and minimal?</label></div><div class="check-item"><input type="checkbox" data-check="patch-driven-editing-the-anti-drift-contract-for-ai-code-changes-4"><label>Did you verify the preview after apply?</label></div><div class="check-item"><input type="checkbox" data-check="patch-driven-editing-the-anti-drift-contract-for-ai-code-changes-5"><label>Did you save the patch as a reusable recipe?</label></div>
+    <div class="check-note">These checkboxes persist in your browser (local storage) so you can use this page as a repeatable runbook.</div>
+  </div>
+</section>
+
+<section id="faq" class="fade-up">
+  <h2>FAQ</h2>
+  <div class="faq">
+    <div class="faq-item">
+              <button class="faq-q" type="button"><span>What if SEARCH appears multiple times?</span><span class="chev">+</span></button>
+              <div class="faq-a"><div class="inner">Use preview targeting to capture the right instance (DOM context), or tighten SEARCH to a unique block (include surrounding lines).</div></div>
+            </div><div class="faq-item">
+              <button class="faq-q" type="button"><span>What if the model returns extra explanation text?</span><span class="chev">+</span></button>
+              <div class="faq-a"><div class="inner">Reject it. The contract is the feature: only SEARCH/REPLACE applies.</div></div>
+            </div><div class="faq-item">
+              <button class="faq-q" type="button"><span>Can I patch CSS and JS too?</span><span class="chev">+</span></button>
+              <div class="faq-a"><div class="inner">Yes. Patch contracts work for any text file. Keep SEARCH scoped to the smallest safe region.</div></div>
+            </div>
+  </div>
+</section>
+
+<section id="playbook" class="fade-up">
+  <h2>A Practical Playbook You Can Repeat</h2>
+  <p class="lead">Replace 'prompt and pray' with a repeatable loop: target → patch → apply → verify → repeat. The goal is to make improvement measurable and regression obvious.</p>
+  <div class="feature-grid">
+    <div class="feature-card"><h4>01. Target</h4><p>Click the element or choose the file/region you actually mean.</p></div><div class="feature-card"><h4>02. Instruct</h4><p>Describe the change in one sentence. Avoid multi-goal prompts.</p></div><div class="feature-card"><h4>03. Patch</h4><p>Require SEARCH/REPLACE edits so the change stays scoped.</p></div><div class="feature-card"><h4>04. Apply</h4><p>Apply locally, then immediately re-render/preview.</p></div><div class="feature-card"><h4>05. Verify</h4><p>Confirm the visible outcome matches intent. If not, refine the target, not the prompt.</p></div>
+  </div>
+  <p>When this loop becomes muscle memory, AI assistance stops feeling like chaos and starts feeling like controlled speed.</p>
+</section>
+<section id="why-skaixu" class="fade-up">
+  <h2>Why This Points Back to SkAIxu IDE</h2>
+  <p class="lead">Because SkAIxu is built around discipline: patch enforcement, preview targeting, offline-first continuity, and a governance-first posture. Production endpoints are closed by default and access is gated.</p>
+  <p>
+    Launch the live IDE here:
+    <a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener" style="color:var(--color-rust);border-bottom:1px solid var(--color-rust);">https://skaixuidepro.netlify.app</a>.
+    Use it as your daily discipline layer.
+  </p>
+  <ul class="animated-list">
+    <li><div class="list-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="list-content"><h5>Patch-driven change</h5><p>Edits can be validated before they’re applied.</p></div></li><li><div class="list-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="list-content"><h5>Preview-to-patch targeting</h5><p>Stop ambiguity at the source.</p></div></li><li><div class="list-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="list-content"><h5>Offline-first persistence</h5><p>Keep working through real-world interruptions.</p></div></li><li><div class="list-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div class="list-content"><h5>Production posture</h5><p>Closed-by-default endpoints reduce attack surface.</p></div></li>
+  </ul>
+  <p>
+    The fastest evaluation test:
+    open <a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener" style="color:var(--color-rust);border-bottom:1px solid var(--color-rust);">SkAIxu IDE</a>,
+    run the loop once on a real file, and measure whether you feel <strong>more certain</strong> after the edit.
+  </p>
+</section>
+<section id="related" class="fade-up">
+  <div class="related">
+    <h3>Related reads</h3>
+    <ul>
+      <li><a href="preview-to-patch-targeting-click-to-edit-that-stops-ambiguity.html">Preview-to-Patch Targeting: Click-to-Edit That Stops Ambiguity</a></li><li><a href="undo-redo-as-a-safety-rail-reliability-for-rapid-iteration.html">Undo/Redo as a Safety Rail: Reliability for Rapid Iteration</a></li><li><a href="auditability-without-enterprise-overhead.html">Auditability Without Enterprise Overhead</a></li>
+    </ul>
+    <p class="check-note">All roads lead back to the same test: open <a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener" style="color:var(--color-rust);border-bottom:1px solid var(--color-rust);">SkAIxu IDE</a> and run the loop on a real file.</p>
+  </div>
+</section>
+
+
+        <section id="cta" class="fade-up">
+          <div class="cta-section">
+            <div class="cta-content">
+              <div class="cta-text">
+                <h3>Launch SkAIxu IDE</h3>
+                <p>Use this article as a runbook. Open the live IDE and run the loop on a real file. Controlled edits beat clever rewrites every time.</p>
+              </div>
+              <a class="cta-button" href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener">
+                Open https://skaixuidepro.netlify.app
+                <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="testimonials-header">
+      <h3>What builders notice first</h3>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg></div>
+        <div class="testimonial-text">Patch-driven edits make AI assistance feel safe. You can move fast without the fear of hidden rewrites.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar"></div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">Builder</div>
+            <div class="testimonial-role">Front-end + Operator</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg></div>
+        <div class="testimonial-text">Preview targeting reduces ambiguity instantly. The tool stops guessing and starts executing.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar"></div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">Engineer</div>
+            <div class="testimonial-role">UI Systems</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg></div>
+        <div class="testimonial-text">Offline-first persistence makes the IDE feel like a real system, not a fragile demo session.</div>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar"></div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">Operator</div>
+            <div class="testimonial-role">Delivery + Ops</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Skyes Over London LC</h4>
+        <div class="subsidiary">Solenterprises International Nexus & Holdings LLC</div>
+        <p>Operator-grade systems built for performance under pressure. This blog exists to turn ideas into action inside the live platform.</p>
+      </div>
+
+      <div class="footer-links">
+        <h5>SkAIxu IDE</h5>
+        <ul>
+          <li><a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener">Launch IDE</a></li>
+          <li><a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener">SkAIxuIDEPro</a></li>
+          <li><a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener">Start a build</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="https://solenterprises.org/pages/leadership-hub" target="_blank" rel="noopener">Leadership Hub</a></li>
+          <li><a href="https://solenterprises.org/pages/contact-hub" target="_blank" rel="noopener">Contact Hub</a></li>
+          <li><a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener">Platform</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>Share</h5>
+        <ul>
+          <li><a href="https://twitter.com/intent/tweet?text=Patch-Driven%20Editing%3A%20The%20Anti-Drift%20Contract%20for%20AI%20Code%20Changes%20%E2%80%94%20https%3A//skaixuidepro.netlify.app" target="_blank" rel="noopener">Post on X</a></li>
+          <li><a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//skaixuidepro.netlify.app/patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html" target="_blank" rel="noopener">Share on LinkedIn</a></li>
+          <li><a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener">Copy IDE link</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">© 2026 Skyes Over London LC • All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="https://skaixuidepro.netlify.app" target="_blank" rel="noopener">SkAIxu IDE</a>
+        <a href="https://solenterprises.org/pages/contact-hub" target="_blank" rel="noopener">Contact</a>
+        <a href="#" onclick="window.print(); return false;">Print</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  
+// NAVIGATION SCROLL EFFECT
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 100) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+}, { passive: true });
+
+// INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
+const observerOptions = { root: null, rootMargin: '0px', threshold: 0.12 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, observerOptions);
+
+// Observe all fade-up elements
+document.querySelectorAll('.fade-up, .stat-item, .animated-list li').forEach(el => observer.observe(el));
+
+// ANIMATED COUNTER FOR STATISTICS
+const animateCounter = (element, target) => {
+  const duration = 1800;
+  const increment = target / (duration / 16);
+  let current = 0;
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      element.textContent = target.toLocaleString() + (target >= 50 ? '+' : '');
+      clearInterval(timer);
+    } else {
+      element.textContent = Math.floor(current).toLocaleString();
+    }
+  }, 16);
+};
+
+// Observe stat numbers
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const count = entry.target.dataset.count;
+      if (count) animateCounter(entry.target, parseInt(count));
+      statObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-number[data-count]').forEach(el => statObserver.observe(el));
+
+// SMOOTH SCROLL FOR ANCHOR LINKS
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ACTIVE SIDEBAR LINK HIGHLIGHTING
+const sections = document.querySelectorAll('section[id]');
+const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (window.scrollY >= sectionTop - 220) current = section.getAttribute('id');
+  });
+
+  sidebarLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+}, { passive: true });
+
+// HERO CANVAS NETWORK
+let animationId = null;
+function initHeroNetwork() {
+  const canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(2, window.devicePixelRatio || 1);
+  let w = 0, h = 0;
+
+  function resize() {
+    w = canvas.clientWidth;
+    h = canvas.clientHeight;
+    canvas.width = Math.floor(w * DPR);
+    canvas.height = Math.floor(h * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  resize();
+
+  const count = 85;
+  const linkDist = 150;
+  const speed = 0.22;
+
+  let particles = [];
+  function initParticles() {
+    particles = Array.from({ length: count }).map(() => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * speed,
+      vy: (Math.random() - 0.5) * speed,
+      r: 1 + Math.random() * 2
+    }));
+  }
+  initParticles();
+
+  function frame() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = 'rgba(10,10,10,0.02)';
+    ctx.fillRect(0, 0, w, h);
+
+    for (let i = 0; i < particles.length; i++) {
+      const a = particles[i];
+      for (let j = i + 1; j < particles.length; j++) {
+        const b = particles[j];
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < linkDist) {
+          const alpha = (1 - d / linkDist) * 0.12;
+          ctx.strokeStyle = `rgba(201,169,98,${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -20) p.x = w + 20;
+      if (p.x > w + 20) p.x = -20;
+      if (p.y < -20) p.y = h + 20;
+      if (p.y > h + 20) p.y = -20;
+
+      ctx.fillStyle = 'rgba(201,169,98,0.75)';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    animationId = requestAnimationFrame(frame);
+  }
+
+  frame();
+
+  window.addEventListener('resize', () => {
+    resize();
+    initParticles();
+  }, { passive: true });
+}
+initHeroNetwork();
+
+window.addEventListener('beforeunload', () => {
+  if (animationId) cancelAnimationFrame(animationId);
+});
+
+  
+// FAQ toggles
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(x => x.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
+
+// Checklist persistence
+function initChecklist(storageKey){
+  const checks = document.querySelectorAll('[data-check]');
+  if (!checks.length) return;
+
+  try {
+    const raw = localStorage.getItem(storageKey);
+    const state = raw ? JSON.parse(raw) : {};
+    checks.forEach(ch => {
+      const id = ch.getAttribute('data-check');
+      ch.checked = !!state[id];
+    });
+  } catch (_) {}
+
+  checks.forEach(ch => {
+    ch.addEventListener('change', () => {
+      try {
+        const raw = localStorage.getItem(storageKey);
+        const state = raw ? JSON.parse(raw) : {};
+        state[ch.getAttribute('data-check')] = ch.checked;
+        localStorage.setItem(storageKey, JSON.stringify(state));
+      } catch (_) {}
+    });
+  });
+}
+
+  initChecklist("skaixu-checklist:patch-driven-editing-the-anti-drift-contract-for-ai-code-changes");
+  </script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Navigation Map — SOLEnterprises</title>
+<meta name="description" content="Full navigational map of the SOLEnterprises / Skyes Over London LC site — all pages, blog archives, and content sections.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+  .map-section { margin-bottom: 52px; }
+  .map-section-title {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 18px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(212,170,85,0.18);
+  }
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .map-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,170,85,0.12);
+    border-radius: 8px;
+    padding: 14px 18px;
+    transition: border-color .25s, background .25s;
+    text-decoration: none;
+    display: block;
+  }
+  .map-card:hover {
+    border-color: rgba(212,170,85,0.45);
+    background: rgba(212,170,85,0.06);
+    text-decoration: none;
+  }
+  .map-card .map-label {
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(212,170,85,0.55); margin-bottom: 5px;
+  }
+  .map-card .map-title {
+    font-size: 13px; color: var(--text); font-weight: 400; line-height: 1.4;
+  }
+  .map-card .map-date {
+    font-size: 10px; color: rgba(138,136,128,0.5); margin-top: 6px;
+  }
+  .map-core-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .map-core-card {
+    background: rgba(212,170,85,0.07);
+    border: 1px solid rgba(212,170,85,0.22);
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-decoration: none;
+    display: block;
+    transition: border-color .25s, background .25s;
+  }
+  .map-core-card:hover {
+    border-color: rgba(212,170,85,0.6);
+    background: rgba(212,170,85,0.13);
+  }
+  .map-core-card .map-title { font-size: 13px; color: var(--gold); font-weight: 500; }
+  .map-core-card .map-sub  { font-size: 10px; color: rgba(138,136,128,0.55); margin-top: 4px; }
+
+  .blog-group { margin-bottom: 36px; }
+  .blog-group-label {
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: rgba(138,99,255,0.7); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .blog-group-label::after { content:""; flex:1; height:1px; background:rgba(138,99,255,0.15); }
+
+  .stat-bar {
+    display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 48px;
+  }
+  .stat-item { text-align: left; }
+  .stat-num  { font-size: 36px; color: var(--gold); font-weight: 300; letter-spacing: -1px; }
+  .stat-lbl  { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(138,136,128,0.5); }
+</style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+
+<nav class="main-nav" id="mainNav">
+  <a href="index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="about.html">Founder</a>
+    <a href="platforms.html">Platforms</a>
+    <a href="network.html">Network</a>
+    <a href="credibility.html">Credibility</a>
+    <a href="blog.html">Blog</a>
+    <a href="status.html">Status</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="section-label">SOLEnterprises · Full Site Index</div>
+  <h1>Site <span>Navigation Map</span></h1>
+  <div class="glow-tile-purple"><p style="color:#000000">Every page, blog series, and piece of content in the SOLEnterprises ecosystem — mapped, linked, and indexed.</p></div>
+</div>
+
+<div class="divider"></div>
+
+<section class="content-section">
+
+  <!-- STATS -->
+  <div class="stat-bar reveal">
+    <div class="stat-item"><div class="stat-num">94</div><div class="stat-lbl">Total Indexed URLs</div></div>
+    <div class="stat-item"><div class="stat-num">84</div><div class="stat-lbl">Blog Posts</div></div>
+    <div class="stat-item"><div class="stat-num">10</div><div class="stat-lbl">Core Pages</div></div>
+    <div class="stat-item"><div class="stat-num">8</div><div class="stat-lbl">Blog Series</div></div>
+  </div>
+
+  <!-- CORE PAGES -->
+  <div class="map-section reveal">
+    <div class="map-section-title">Core Site Pages</div>
+    <div class="map-core-grid">
+      <a class="map-core-card" href="index.html"><div class="map-title">Home</div><div class="map-sub">SOLEnterprises Hub · /</div></a>
+      <a class="map-core-card" href="about.html"><div class="map-title">Founder Dossier</div><div class="map-sub">About · /about.html</div></a>
+      <a class="map-core-card" href="platforms.html"><div class="map-title">Kaixu Platforms</div><div class="map-sub">AI Division · /platforms.html</div></a>
+      <a class="map-core-card" href="network.html"><div class="map-title">SOLE Network</div><div class="map-sub">Portal Directory · /network.html</div></a>
+      <a class="map-core-card" href="credibility.html"><div class="map-title">Credibility Archive</div><div class="map-sub">Verified Work · /credibility.html</div></a>
+      <a class="map-core-card" href="blog.html"><div class="map-title">Blog Archive</div><div class="map-sub">All Posts · /blog.html</div></a>
+      <a class="map-core-card" href="status.html"><div class="map-title">Status Board</div><div class="map-sub">Network Health · /status.html</div></a>
+      <a class="map-core-card" href="contact.html"><div class="map-title">Contact</div><div class="map-sub">Work Together · /contact.html</div></a>
+      <a class="map-core-card" href="privacy.html"><div class="map-title">Privacy Policy</div><div class="map-sub">/privacy.html</div></a>
+      <a class="map-core-card" href="terms.html"><div class="map-title">Terms of Service</div><div class="map-sub">/terms.html</div></a>
+    </div>
+  </div>
+
+  <!-- BLOG SERIES -->
+  <div class="map-section reveal">
+    <div class="map-section-title">Blog Archive · 84 Posts Across 8 Series</div>
+
+    <!-- Editorials -->
+    <div class="blog-group">
+      <div class="blog-group-label">Editorials</div>
+      <div class="map-grid">
+        <a class="map-card" href="Blogs/Editorials/One-Website-Can't-Carry-Your-Authority-Alone.html"><div class="map-label">Editorial</div><div class="map-title">One Website Can't Carry Your Authority Alone</div><div class="map-date">January 8, 2025</div></a>
+        <a class="map-card" href="Blogs/Editorials/billions_stolen_fom_American_workers.html"><div class="map-label">Editorial</div><div class="map-title">Billions Stolen From American Workers</div><div class="map-date">January 26, 2025</div></a>
+        <a class="map-card" href="Blogs/Editorials/WebPile Pro—Monaco Editor.html"><div class="map-label">Editorial</div><div class="map-title">WebPile Pro — Monaco Editor</div><div class="map-date">2025</div></a>
+      </div>
+    </div>
+
+    <!-- Colorado AI -->
+    <div class="blog-group">
+      <div class="blog-group-label">Colorado AI Landscape</div>
+      <div class="map-grid">
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/adobe-firefly.html"><div class="map-label">Colorado AI</div><div class="map-title">Adobe Firefly</div><div class="map-date">March 21, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/anthropic.html"><div class="map-label">Colorado AI</div><div class="map-title">Anthropic</div><div class="map-date">March 30, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/apple-core-ml.html"><div class="map-label">Colorado AI</div><div class="map-title">Apple Core ML</div><div class="map-date">April 8, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/databricks-mosaic-ai.html"><div class="map-label">Colorado AI</div><div class="map-title">Databricks Mosaic AI</div><div class="map-date">April 17, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/github-copilot.html"><div class="map-label">Colorado AI</div><div class="map-title">GitHub Copilot</div><div class="map-date">April 26, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/google-vertex-ai.html"><div class="map-label">Colorado AI</div><div class="map-title">Google Vertex AI</div><div class="map-date">May 5, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/meta-ai.html"><div class="map-label">Colorado AI</div><div class="map-title">Meta AI</div><div class="map-date">May 14, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/nvidia-cuda.html"><div class="map-label">Colorado AI</div><div class="map-title">NVIDIA CUDA</div><div class="map-date">May 23, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/openai.html"><div class="map-label">Colorado AI</div><div class="map-title">OpenAI</div><div class="map-date">May 31, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/perplexity.html"><div class="map-label">Colorado AI</div><div class="map-title">Perplexity</div><div class="map-date">June 9, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/salesforce-einstein-agentforce.html"><div class="map-label">Colorado AI</div><div class="map-title">Salesforce Einstein Agentforce</div><div class="map-date">June 18, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/scale-ai.html"><div class="map-label">Colorado AI</div><div class="map-title">Scale AI</div><div class="map-date">June 27, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Colorado AI/vercel.html"><div class="map-label">Colorado AI</div><div class="map-title">Vercel</div><div class="map-date">July 6, 2024</div></a>
+      </div>
+    </div>
+
+    <!-- Devs & AI -->
+    <div class="blog-group">
+      <div class="blog-group-label">Devs &amp; AI — Engineering Patterns</div>
+      <div class="map-grid">
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/ai-gateway-one-contract.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">AI Gateway — One Contract</div><div class="map-date">July 15, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/magic-links-done-right.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Magic Links Done Right</div><div class="map-date">July 24, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/minimal-rbac-that-works.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Minimal RBAC That Works</div><div class="map-date">August 1, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/neon-schema-versioning.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Neon Schema Versioning</div><div class="map-date">August 10, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/netlify-functions-practical-patterns.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Netlify Functions — Practical Patterns</div><div class="map-date">August 19, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/observability-for-ai-apps.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Observability for AI Apps</div><div class="map-date">August 28, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/offline-first-ai-patterns.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Offline-First AI Patterns</div><div class="map-date">September 6, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/prompt-hygiene-production.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Prompt Hygiene in Production</div><div class="map-date">September 15, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/rag-retrieval-that-doesnt-lie.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">RAG Retrieval That Doesn't Lie</div><div class="map-date">September 24, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/script-to-system-productizing-dev-work.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Script to System — Productizing Dev Work</div><div class="map-date">October 3, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/shipping-like-a-scientist.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Shipping Like a Scientist</div><div class="map-date">October 11, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/token-economics-indisputable-billing.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Token Economics — Indisputable Billing</div><div class="map-date">October 20, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/why-blocked-ux.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Why Blocked UX</div><div class="map-date">October 29, 2024</div></a>
+      </div>
+    </div>
+
+    <!-- NorthStar Financial -->
+    <div class="blog-group">
+      <div class="blog-group-label">NorthStar — Phoenix Financial Operations</div>
+      <div class="map-grid">
+        <a class="map-card" href="Blogs/Editorials/NorthStar/arizona-tpt-record-posture-phoenix-operators.html"><div class="map-label">NorthStar</div><div class="map-title">Arizona TPT Record Posture for Phoenix Operators</div><div class="map-date">November 7, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/NorthStar/bank-ready-financials-phoenix-loans-lines.html"><div class="map-label">NorthStar</div><div class="map-title">Bank-Ready Financials · Phoenix Loans &amp; Lines</div><div class="map-date">November 16, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-1099-contractor-tracking-year-end-ready.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix 1099 Contractor Tracking — Year-End Ready</div><div class="map-date">November 25, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-cash-flow-forecasting-13-week-clarity.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix Cash Flow Forecasting — 13-Week Clarity</div><div class="map-date">December 4, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-payroll-cadence-quarter-close-discipline.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix Payroll Cadence &amp; Quarter-Close Discipline</div><div class="map-date">December 12, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-quickbooks-cleanup-ledger-rescue.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix QuickBooks Cleanup — Ledger Rescue</div><div class="map-date">December 21, 2024</div></a>
+        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-year-end-close-30-day-playbook.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix Year-End Close — 30-Day Playbook</div><div class="map-date">December 30, 2024</div></a>
+      </div>
+    </div>
+
+    <!-- Houston Texas -->
+    <div class="blog-group">
+      <div class="blog-group-label">Houston Texas — Tech &amp; AI Ecosystem</div>
+      <div class="map-grid">
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-bmc-software.html"><div class="map-label">Houston</div><div class="map-title">BMC Software — Houston AI</div><div class="map-date">February 4, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-cemvita.html"><div class="map-label">Houston</div><div class="map-title">Cemvita — Houston AI</div><div class="map-date">February 13, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-chaione.html"><div class="map-label">Houston</div><div class="map-title">ChaiOne — Houston AI</div><div class="map-date">February 21, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-data-gumbo.html"><div class="map-label">Houston</div><div class="map-title">Data Gumbo — Houston AI</div><div class="map-date">March 2, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-halliburton-digital.html"><div class="map-label">Houston</div><div class="map-title">Halliburton Digital — Houston AI</div><div class="map-date">March 11, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-kbr.html"><div class="map-label">Houston</div><div class="map-title">KBR — Houston AI</div><div class="map-date">March 20, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-pros.html"><div class="map-label">Houston</div><div class="map-title">Houston AI Pros</div><div class="map-date">March 29, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-slb-innovation-factori.html"><div class="map-label">Houston</div><div class="map-title">SLB Innovation Factori — Houston AI</div><div class="map-date">April 7, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-dev-hpe-headquarters.html"><div class="map-label">Houston</div><div class="map-title">HPE Headquarters — Houston Dev</div><div class="map-date">April 16, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-dev-softeq.html"><div class="map-label">Houston</div><div class="map-title">Softeq — Houston Dev</div><div class="map-date">April 25, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-enterprise-chevron-hq.html"><div class="map-label">Houston</div><div class="map-title">Chevron HQ — Houston Enterprise</div><div class="map-date">May 3, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-space-axiom-space.html"><div class="map-label">Houston</div><div class="map-title">Axiom Space — Houston Space</div><div class="map-date">May 12, 2025</div></a>
+        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-space-intuitive-machines.html"><div class="map-label">Houston</div><div class="map-title">Intuitive Machines — Houston Space</div><div class="map-date">May 21, 2025</div></a>
+      </div>
+    </div>
+
+    <!-- Phoenix Arizona -->
+    <div class="blog-group">
+      <div class="blog-group-label">Phoenix Arizona — Business &amp; Compliance Playbooks</div>
+      <div class="map-grid">
+        <a class="map-card" href="Blogs/Phoenix Arizona/01_phoenix_start_business_playbook.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Phoenix Start Business Playbook</div><div class="map-date">June 17, 2025</div></a>
+        <a class="map-card" href="Blogs/Phoenix Arizona/02_how_to_start_llc_arizona_phoenix.html"><div class="map-label">Phoenix AZ</div><div class="map-title">How to Start an LLC in Arizona / Phoenix</div><div class="map-date">June 26, 2025</div></a>
+        <a class="map-card" href="Blogs/Phoenix Arizona/03_arizona_llc_cost_breakdown.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Arizona LLC Cost Breakdown</div><div class="map-date">July 4, 2025</div></a>
+        <a class="map-card" href="Blogs/Phoenix Arizona/04_phoenix_business_license_requirements.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Phoenix Business License Requirements</div><div class="map-date">July 13, 2025</div></a>
+        <a class="map-card" href="Blogs/Phoenix Arizona/05_arizona_tpt_license_who_needs_it.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Arizona TPT License — Who Needs It</div><div class="map-date">July 22, 2025</div></a>
+        <a class="map-card" href="Blogs/Phoenix Arizona/06_how_to_get_an_ein_arizona.html"><div class="map-label">Phoenix AZ</div><div class="map-title">How to Get an EIN in Arizona</div><div class="map-date">July 31, 2025</div></a>
+        <a class="map-card" href="Blogs/Phoenix Arizona/07_arizona_statutory_agent_registered_agent.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Arizona Statutory vs Registered Agent</div><div class="map-date">August 9, 2025</div></a>
+        <a class="map-card" href="Blogs/Phoenix Arizona/08_phoenix_home_based_business_zoning_rules.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Phoenix Home-Based Business Zoning Rules</div><div class="map-date">August 18, 2025</div></a>
+        <a class="map-card" href="Blogs/Phoenix Arizona/09_phoenix_sales_tax_vs_arizona_tpt.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Phoenix Sales Tax vs Arizona TPT</div><div class="map-date">August 27, 2025</div></a>
+        <a class="map-card" href="Blogs/Phoenix Arizona/10_arizona_contracts_deposits_invoicing_system.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Arizona Contracts, Deposits &amp; Invoicing System</div><div class="map-date">September 5, 2025</div></a>
+      </div>
+    </div>
+
+    <!-- Skaixu -->
+    <div class="blog-group">
+      <div class="blog-group-label">SkAIxu IDE — Engineering Blog Series</div>
+      <div class="map-grid">
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_01_patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html"><div class="map-label">SkAIxu</div><div class="map-title">Patch-Driven Editing — The Anti-Drift Contract</div><div class="map-date">September 22, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_02_preview-to-patch-targeting-click-to-edit-that-stops-ambiguity.html"><div class="map-label">SkAIxu</div><div class="map-title">Preview-to-Patch Targeting — Click-to-Edit</div><div class="map-date">October 1, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_03_offline-first-ide-local-persistence-that-survives-real-life.html"><div class="map-label">SkAIxu</div><div class="map-title">Offline-First IDE — Local Persistence</div><div class="map-date">October 10, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_04_pwa-install-portable-workspace-your-ide-in-one-tap.html"><div class="map-label">SkAIxu</div><div class="map-title">PWA Install — Portable Workspace in One Tap</div><div class="map-date">October 19, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_05_governance-first-ai-routing-model-access-designed-like-security.html"><div class="map-label">SkAIxu</div><div class="map-title">Governance-First AI Routing</div><div class="map-date">October 28, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_06_undo-redo-as-a-safety-rail-reliability-for-rapid-iteration.html"><div class="map-label">SkAIxu</div><div class="map-title">Undo/Redo as a Safety Rail</div><div class="map-date">November 6, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_07_from-prompt-chaos-to-engineering-discipline-a-practical-loop.html"><div class="map-label">SkAIxu</div><div class="map-title">From Prompt Chaos to Engineering Discipline</div><div class="map-date">November 14, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_08_element-level-refactors-without-breaking-layout.html"><div class="map-label">SkAIxu</div><div class="map-title">Element-Level Refactors Without Breaking Layout</div><div class="map-date">November 23, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_09_agency-workflow-faster-client-builds-without-losing-control.html"><div class="map-label">SkAIxu</div><div class="map-title">Agency Workflow — Faster Client Builds</div><div class="map-date">December 2, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_10_auditability-without-enterprise-overhead.html"><div class="map-label">SkAIxu</div><div class="map-title">Auditability Without Enterprise Overhead</div><div class="map-date">December 11, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_11_why-production-endpoints-must-be-closed-by-default.html"><div class="map-label">SkAIxu</div><div class="map-title">Why Production Endpoints Must Be Closed by Default</div><div class="map-date">December 20, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_12_pattern-libraries-patch-recipes-scale-changes-without-drift.html"><div class="map-label">SkAIxu</div><div class="map-title">Pattern Libraries — Patch Recipes at Scale</div><div class="map-date">December 29, 2025</div></a>
+        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_13_the-operator-s-ide-designing-for-pressure-not-demos.html"><div class="map-label">SkAIxu</div><div class="map-title">The Operator's IDE — Designed for Pressure</div><div class="map-date">January 7, 2026</div></a>
+      </div>
+    </div>
+
+    <!-- 13th Sole + Standalone -->
+    <div class="blog-group">
+      <div class="blog-group-label">13th Sole Promotions &amp; Standalone Posts</div>
+      <div class="map-grid">
+        <a class="map-card" href="Blogs/13th Sole Promotions/Free-events-Phoenix.html"><div class="map-label">13th Sole</div><div class="map-title">Free Events Phoenix</div><div class="map-date">February 24, 2024</div></a>
+        <a class="map-card" href="Blogs/13th Sole Promotions/Establishing-Business-Development-Firm-Phoenix-AZ.html"><div class="map-label">13th Sole</div><div class="map-title">Establishing a Business Development Firm in Phoenix, AZ</div><div class="map-date">2024</div></a>
+        <a class="map-card" href="Blogs/13th Sole Promotions/Mysfit's-Modern-Juke-Joint-Experience.html"><div class="map-label">13th Sole</div><div class="map-title">Mysfit's Modern Juke Joint Experience</div><div class="map-date">2024</div></a>
+        <a class="map-card" href="Blogs/CommonPhoenixLLCProblems.html"><div class="map-label">Standalone</div><div class="map-title">Common Phoenix LLC Problems</div><div class="map-date">March 13, 2024</div></a>
+        <a class="map-card" href="Blogs/PayHawk Is Revolutionizing Pay Plan Design for Small Businesses.html"><div class="map-label">Standalone</div><div class="map-title">PayHawk Is Revolutionizing Pay Plan Design</div><div class="map-date">June 8, 2025</div></a>
+        <a class="map-card" href="Blogs/What-Even-Is-SEO.html"><div class="map-label">Standalone</div><div class="map-title">What Even Is SEO?</div><div class="map-date">2025</div></a>
+        <a class="map-card" href="Blogs/WhenLeadsGoUp,FireDrillsGoUpToo.html"><div class="map-label">Standalone</div><div class="map-title">When Leads Go Up, Fire Drills Go Up Too</div><div class="map-date">2025</div></a>
+        <a class="map-card" href="Blogs/sol-ops-field-brief.html"><div class="map-label">SOL Ops</div><div class="map-title">SOL Ops Field Brief</div><div class="map-date">2025</div></a>
+        <a class="map-card" href="Blogs/Mysfit'sModernJukeJointExperience.html"><div class="map-label">Standalone</div><div class="map-title">Mysfit's Modern Juke Joint Experience</div><div class="map-date">2025</div></a>
+        <a class="map-card" href="Blogs/Web Development in Phoenix, AZ.html"><div class="map-label">Phoenix Web</div><div class="map-title">Web Development in Phoenix, AZ</div><div class="map-date">January 16, 2026</div></a>
+        <a class="map-card" href="Blogs/web-development-phoenix-az-apex-operator-playbook.html"><div class="map-label">Phoenix Web</div><div class="map-title">Web Development Phoenix AZ — Apex Operator Playbook</div><div class="map-date">February 20, 2026</div></a>
+        <a class="map-card" href="Blogs/PhoenixValleyBlogHome.html"><div class="map-label">Hub</div><div class="map-title">Phoenix Valley Blog Home</div><div class="map-date">2025</div></a>
+      </div>
+    </div>
+
+  </div><!-- /map-section blog -->
+
+  <!-- SITEMAP LINK -->
+  <div class="map-section reveal" style="margin-top:48px">
+    <div class="map-section-title">Machine-Readable Sitemap</div>
+    <p class="section-desc" style="margin-bottom:18px">Full XML sitemap for search engines — 94 URLs including all blog posts with publish dates and priority signals.</p>
+    <a href="/sitemap.xml" class="btn-outline" target="_blank" rel="noopener">View sitemap.xml →</a>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+  <p><strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 986-210-7040</p>
+  <div class="footer-links"><a href="blog.html">Blog</a><a href="status.html">Status</a><a href="vault.html">Vault</a><a href="admin.html">Admin</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+  <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
+</footer>
+
+<script src="js/three-bg.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

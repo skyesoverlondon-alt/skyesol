@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0614" />
+
+  <title>Skyes Over London LC — Launch | Phoenix Enterprise Architecture • LONDON Framework™</title>
+  <meta name="description" content="Skyes Over London LC is now live: enterprise architecture, authority systems, and platform ecosystems built for Phoenix operators and national expansion. Start with the Enterprise Diagnostic, then deploy the LONDON Framework™ in phases." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Skyes Over London LC — Launch" />
+  <meta property="og:description" content="Enterprise architecture • authority systems • platform ecosystems. Phoenix-first, built for national replication. Start with the Enterprise Diagnostic." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://skyesoverlondon-business-development.netlify.app/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Skyes Over London LC — Launch" />
+  <meta name="twitter:description" content="Phoenix enterprise architecture + LONDON Framework™ + platforms + verification. Start with the Enterprise Diagnostic." />
+
+  <!-- Preconnect (no external libs required, but keep fast DNS if you later add assets) -->
+  <link rel="preconnect" href="https://skyesoverlondon-business-development.netlify.app" crossorigin />
+
+  <style>
+    :root{
+      --bg0:#07040e;
+      --bg1:#0b0614;
+      --ink:#f5f3ff;
+      --muted:rgba(245,243,255,.72);
+      --muted2:rgba(245,243,255,.55);
+      --glass:rgba(255,255,255,.06);
+      --glass2:rgba(255,255,255,.10);
+      --stroke:rgba(255,255,255,.14);
+      --stroke2:rgba(255,255,255,.22);
+      --purple:#8b5cf6;
+      --purple2:#a78bfa;
+      --gold:#fbbf24;
+      --gold2:#f59e0b;
+      --good:#34d399;
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --shadow2: 0 10px 35px rgba(0,0,0,.45);
+      --r:18px;
+      --r2:26px;
+      --max:1180px;
+      --pad: clamp(18px, 3vw, 34px);
+
+      /* cursor glow */
+      --mx: 50%;
+      --my: 20%;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background:
+        radial-gradient(900px 550px at var(--mx) var(--my), rgba(139,92,246,.24), transparent 55%),
+        radial-gradient(820px 520px at 18% 12%, rgba(251,191,36,.12), transparent 55%),
+        radial-gradient(900px 680px at 86% 24%, rgba(167,139,250,.16), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 55%, #05030a);
+      overflow-x:hidden;
+    }
+
+    /* starfield canvas behind everything */
+    #stars{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:-2;
+      opacity:.65;
+      filter: saturate(1.05) contrast(1.03);
+    }
+
+    /* subtle grid + vignette */
+    .backdrop{
+      position:fixed;
+      inset:-1px;
+      z-index:-1;
+      pointer-events:none;
+      background:
+        radial-gradient(900px 700px at 50% 30%, rgba(255,255,255,.06), transparent 65%),
+        linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: auto, 52px 52px, 52px 52px;
+      mask-image: radial-gradient(900px 650px at 50% 28%, #000 35%, transparent 72%);
+      opacity:.25;
+    }
+    .vignette{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background: radial-gradient(1200px 700px at 50% 25%, transparent 35%, rgba(0,0,0,.55) 90%);
+      opacity:.65;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad)}
+    .row{display:flex; gap:18px; flex-wrap:wrap}
+    .tight{letter-spacing:-.02em}
+    .muted{color:var(--muted)}
+    .muted2{color:var(--muted2)}
+    .chip{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:999px;
+      border:1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow2);
+      font-weight:650;
+      font-size: 13px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:99px;
+      background: conic-gradient(from 200deg, var(--gold), var(--purple), var(--gold));
+      box-shadow: 0 0 18px rgba(139,92,246,.5);
+    }
+
+    /* header */
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(11,6,20,.78), rgba(11,6,20,.42));
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .hbar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:900;
+      letter-spacing:-.03em;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      background:
+        radial-gradient(12px 12px at 30% 35%, rgba(251,191,36,.95), rgba(251,191,36,.10) 70%),
+        radial-gradient(18px 18px at 70% 65%, rgba(139,92,246,.95), rgba(139,92,246,.10) 72%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 14px 45px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 240deg, rgba(251,191,36,.0), rgba(251,191,36,.28), rgba(139,92,246,.34), rgba(251,191,36,.0));
+      animation: spin 6.8s linear infinite;
+      opacity:.8;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    nav{
+      display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid transparent;
+      color:var(--muted);
+      font-weight:650;
+      font-size:13px;
+      transition: all .2s ease;
+    }
+    nav a:hover{
+      color:var(--ink);
+      border-color: rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color:var(--ink);
+      font-weight:750;
+      font-size:14px;
+      cursor:pointer;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      user-select:none;
+      box-shadow: var(--shadow2);
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22)}
+    .btn.primary{
+      border-color: rgba(251,191,36,.30);
+      background: linear-gradient(135deg, rgba(251,191,36,.22), rgba(139,92,246,.16));
+      box-shadow: 0 20px 70px rgba(139,92,246,.14), 0 18px 55px rgba(251,191,36,.10);
+    }
+    .btn.primary:hover{border-color: rgba(251,191,36,.42)}
+    .btn.small{padding:9px 12px; font-size:13px; box-shadow:none}
+    .btn.ghost{
+      background: transparent;
+      border-color: rgba(255,255,255,.14);
+      box-shadow:none;
+    }
+    .icon{
+      width:18px; height:18px; display:inline-block;
+    }
+
+    /* hero */
+    .hero{
+      padding: 44px 0 18px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .heroGrid{grid-template-columns:1fr}
+      nav{display:none}
+    }
+
+    .card{
+      border-radius: var(--r2);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(400px 200px at 20% 10%, rgba(251,191,36,.12), transparent 60%),
+                  radial-gradient(460px 260px at 85% 20%, rgba(139,92,246,.14), transparent 65%),
+                  radial-gradient(520px 280px at 40% 85%, rgba(167,139,250,.10), transparent 70%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .card > *{position:relative}
+
+    .heroMain{
+      padding: 30px;
+      min-height: 420px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap: 18px;
+    }
+    .kicker{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .kicker .tag{
+      display:inline-flex; gap:8px; align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.10);
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color: rgba(245,243,255,.88);
+    }
+    .kicker .tag .pulse{
+      width:9px;height:9px;border-radius:99px;
+      background: var(--good);
+      box-shadow: 0 0 0 rgba(52,211,153,.0);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%{box-shadow: 0 0 0 0 rgba(52,211,153,.0)}
+      45%{box-shadow: 0 0 0 10px rgba(52,211,153,.10)}
+      100%{box-shadow: 0 0 0 0 rgba(52,211,153,.0)}
+    }
+
+    h1{
+      margin: 0;
+      font-size: clamp(32px, 4.2vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -.04em;
+    }
+    .sub{
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+    .ctaRow{
+      display:flex; gap:12px; flex-wrap:wrap;
+      align-items:center;
+      margin-top: 6px;
+    }
+
+    .heroAside{
+      padding: 22px;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+      min-height: 420px;
+    }
+
+    .statGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .stat{
+      padding: 14px 14px 12px;
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+    }
+    .stat .num{
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing:-.03em;
+      margin-bottom: 2px;
+      background: linear-gradient(135deg, rgba(251,191,36,.95), rgba(139,92,246,.95));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+    }
+    .stat .lbl{
+      font-size: 12px;
+      color: var(--muted2);
+      font-weight: 700;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+    }
+
+    .mini{
+      padding: 16px;
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+    }
+    .mini h3{
+      margin:0 0 8px 0;
+      font-size: 14px;
+      letter-spacing:-.02em;
+    }
+    .mini p{
+      margin:0;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .divider{
+      margin: 26px 0 0;
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.14), transparent);
+    }
+
+    /* sections */
+    section{padding: 34px 0}
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px; flex-wrap:wrap;
+      margin-bottom: 14px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size: clamp(22px, 3vw, 34px);
+      letter-spacing:-.03em;
+    }
+    .sectionHead .desc{
+      color: var(--muted);
+      max-width: 70ch;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 980px){
+      .grid3{grid-template-columns:1fr}
+      .statGrid{grid-template-columns:1fr}
+    }
+
+    .tile{
+      padding: 18px;
+      border-radius: var(--r2);
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .tile:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(420px 240px at 15% 10%, rgba(251,191,36,.12), transparent 60%),
+        radial-gradient(520px 280px at 92% 18%, rgba(139,92,246,.12), transparent 65%);
+      opacity:.65;
+      pointer-events:none;
+    }
+    .tile > *{position:relative}
+    .tile h3{
+      margin:0 0 8px 0;
+      letter-spacing:-.02em;
+      font-size: 16px;
+    }
+    .tile p{
+      margin:0 0 12px 0;
+      color:var(--muted);
+      line-height:1.5;
+      font-size: 13.5px;
+    }
+    .tile .links{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+
+    .list{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 13.5px;
+    }
+    .list li{margin: 6px 0}
+    .pillRow{display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px}
+    .pill{
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.10);
+      font-size: 12px;
+      color: rgba(245,243,255,.82);
+      font-weight: 750;
+    }
+    .pill strong{color:var(--ink)}
+    .pill em{font-style:normal; color:rgba(245,243,255,.65)}
+
+    /* diagram-ish ladder */
+    .ladder{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .step{
+      display:flex; align-items:flex-start; gap: 12px;
+      padding: 16px;
+      border-radius: var(--r2);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      position:relative;
+      overflow:hidden;
+    }
+    .step:before{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(251,191,36,.10), rgba(139,92,246,.10), transparent 65%);
+      opacity:.45;
+      pointer-events:none;
+    }
+    .badge{
+      flex:0 0 auto;
+      width: 38px; height: 38px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(251,191,36,.20), rgba(139,92,246,.18));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 14px 35px rgba(0,0,0,.35);
+      font-weight: 950;
+      letter-spacing:-.03em;
+    }
+    .step h4{margin:0 0 6px 0; font-size: 15px; letter-spacing:-.02em}
+    .step p{margin:0; color:var(--muted); font-size: 13.5px; line-height:1.5}
+
+    /* big CTA block */
+    .ctaBlock{
+      padding: 22px;
+      border-radius: var(--r2);
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(700px 380px at 15% 20%, rgba(251,191,36,.14), transparent 60%),
+        radial-gradient(760px 420px at 85% 30%, rgba(139,92,246,.18), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 18px; flex-wrap:wrap;
+    }
+    .ctaBlock h3{
+      margin:0 0 6px 0;
+      font-size: 18px;
+      letter-spacing:-.02em;
+    }
+    .ctaBlock p{margin:0; color:var(--muted); line-height:1.5; font-size: 13.5px; max-width: 70ch}
+
+    /* form */
+    form{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    form .full{grid-column: 1 / -1}
+    label{display:block; font-size: 12px; color: var(--muted2); font-weight: 750; letter-spacing:.08em; text-transform: uppercase; margin-bottom:6px}
+    input, select, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.20);
+      color: var(--ink);
+      outline:none;
+      transition: border-color .18s ease, background .18s ease;
+      font-size: 14px;
+    }
+    textarea{min-height:120px; resize: vertical}
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(251,191,36,.45);
+      background: rgba(0,0,0,.26);
+    }
+    .formActions{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-start;
+      margin-top: 6px;
+    }
+    .note{
+      font-size: 12.5px;
+      color: var(--muted2);
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+
+    /* footer */
+    footer{
+      padding: 34px 0 44px;
+      color: var(--muted2);
+      border-top: 1px solid rgba(255,255,255,.10);
+      margin-top: 22px;
+    }
+    .footerGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .footerGrid{grid-template-columns:1fr}
+      form{grid-template-columns:1fr}
+    }
+
+    .copyRow{display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px}
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(12px);
+      color: rgba(245,243,255,.92);
+      padding: 10px 14px;
+      border-radius: 999px;
+      box-shadow: var(--shadow2);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .25s ease, transform .25s ease;
+      font-size: 13px;
+      z-index: 99;
+    }
+    .toast.on{
+      opacity:1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* reveal */
+    .reveal{opacity:0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease}
+    .reveal.on{opacity:1; transform:none}
+
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important; scroll-behavior:auto !important}
+      .reveal{opacity:1; transform:none}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Skyes Over London LC",
+    "description": "Enterprise architecture, authority systems, and platform ecosystems built for Phoenix operators and national expansion. Start with the Enterprise Diagnostic and deploy the LONDON Framework™ in phases.",
+    "areaServed": ["Phoenix, AZ", "Arizona", "United States"],
+    "email": "SkyesOverLondonLC@solenterprises.org",
+    "telephone": "+1-986-210-7040",
+    "url": "https://skyesoverlondon-business-development.netlify.app/",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Phoenix",
+      "addressRegion": "AZ",
+      "addressCountry": "US"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="backdrop" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="hbar">
+        <a class="brand" href="#top" aria-label="Skyes Over London LC Launch">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Skyes Over London LC</span>
+        </a>
+
+        <nav aria-label="Launch navigation">
+          <a href="#what">What’s Live</a>
+          <a href="#london">LONDON OS</a>
+          <a href="#ladder">Service → Platform → Licensing</a>
+          <a href="#diagnostic">Enterprise Diagnostic</a>
+          <a href="#contact">Request a Build</a>
+          <a class="btn small primary" href="#contact">Start Here</a>
+        </nav>
+
+        <a class="btn small primary" href="#contact" aria-label="Start with the Diagnostic">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7z" stroke="currentColor" stroke-width="1.7" />
+          </svg>
+          Launch Intake
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div class="heroGrid">
+        <div class="card heroMain reveal">
+          <div>
+            <div class="kicker">
+              <span class="tag"><span class="pulse"></span> Now Live</span>
+              <span class="chip"><span class="dot"></span> Phoenix Enterprise Architecture • Authority Systems • Platform Ecosystems</span>
+            </div>
+
+            <h1 class="tight" style="margin-top:14px;">
+              Build the next best business development firm in Phoenix.
+            </h1>
+
+            <p class="sub" style="margin-top:12px;">
+              Skyes Over London LC is engineered to dominate by building what most firms skip: an operating system.
+              Not motivation. Not random deliverables. Real structure—governance, enforcement, intelligence, and platformization—so growth becomes repeatable.
+            </p>
+
+            <div class="ctaRow">
+              <a class="btn primary" href="#diagnostic">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 20V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+                Start with the Enterprise Diagnostic
+              </a>
+
+              <a class="btn" href="https://skyesoverlondon-business-development.netlify.app/services/" target="_blank" rel="noopener">
+                Explore the Services Ladder
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 17L17 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  <path d="M10 7h7v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+              </a>
+
+              <a class="btn ghost" href="https://skyesoverlondon-business-development.netlify.app/" target="_blank" rel="noopener">
+                View the Live Site
+              </a>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="pillRow" aria-label="Key claims">
+              <span class="pill"><strong>Architecture</strong> <em>> Activity</em></span>
+              <span class="pill"><strong>Standards</strong> <em>+ Enforcement</em></span>
+              <span class="pill"><strong>Platforms</strong> <em>= Memory + Scale</em></span>
+              <span class="pill"><strong>Replication</strong> <em>without dilution</em></span>
+            </div>
+          </div>
+
+          <div class="row" style="align-items:center; justify-content:space-between;">
+            <div class="muted2" style="font-size:13px; font-weight:700;">
+              Phoenix-first. Built for Arizona expansion and national replication.
+            </div>
+            <a class="btn small" href="#contact">Book a build conversation</a>
+          </div>
+        </div>
+
+        <aside class="card heroAside reveal">
+          <div class="statGrid" aria-label="Launch stats">
+            <div class="stat">
+              <div class="num" data-count="6">6</div>
+              <div class="lbl">Pillars</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="3">3</div>
+              <div class="lbl">Ladders</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-count="1">1</div>
+              <div class="lbl">Outcome</div>
+            </div>
+          </div>
+
+          <div class="mini">
+            <h3>Flagship System: <span style="color:var(--gold)">LONDON</span></h3>
+            <p>
+              LONDON is our enterprise operating system: Legal Architecture, Operational Systems, Network Power,
+              Data & Intelligence, Organization Design, and National Distribution & Scale.
+            </p>
+          </div>
+
+          <div class="mini">
+            <h3>Launch Focus</h3>
+            <p>
+              Stabilize first. Then standardize. Then prove. Then platformize. Then replicate.
+              The system stays operational while it upgrades.
+            </p>
+          </div>
+
+          <div class="mini">
+            <h3>Fastest Start</h3>
+            <p>
+              Request the Enterprise Diagnostic. You leave with a phased roadmap, enforcement points, intelligence requirements, and replication readiness.
+            </p>
+          </div>
+
+          <div class="row" style="gap:10px">
+            <a class="btn small primary" href="#contact">Request a diagnostic slot</a>
+            <a class="btn small" href="https://skyesoverlondon-business-development.netlify.app/contact/" target="_blank" rel="noopener">Contact page</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <section id="what">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div>
+            <h2 class="tight">What’s live right now</h2>
+            <div class="desc">
+              The launch package is your full Phoenix-first enterprise OS: positioning, ladders, verification logic, and platform architecture—built for repeatable execution.
+            </div>
+          </div>
+          <a class="btn small" href="https://skyesoverlondon-business-development.netlify.app/" target="_blank" rel="noopener">
+            Open the site
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 17L17 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="M10 7h7v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="grid3">
+          <div class="tile reveal">
+            <h3>Phoenix Enterprise Architecture</h3>
+            <p>Why Phoenix demands an operating system: governance, enforcement, and platformization—so performance stays consistent as you scale.</p>
+            <ul class="list">
+              <li>Phoenix → Arizona expansion sequence</li>
+              <li>Authority as proof (not vibes)</li>
+              <li>Platformization as enforcement</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/phoenix-enterprise-architecture/" target="_blank" rel="noopener">Open</a>
+              <a class="btn small ghost" href="#diagnostic">Start with Diagnostic</a>
+            </div>
+          </div>
+
+          <div class="tile reveal">
+            <h3>The LONDON Framework™</h3>
+            <p>The six-pillar operating system that turns growth into infrastructure: enforceable, measurable, repeatable.</p>
+            <ul class="list">
+              <li>Installed means enforced</li>
+              <li>Documentation + training + measurement</li>
+              <li>Quality gates + escalation paths</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/london-framework/" target="_blank" rel="noopener">Open</a>
+              <a class="btn small ghost" href="#london">See pillars here</a>
+            </div>
+          </div>
+
+          <div class="tile reveal">
+            <h3>Services Ladder → Platform → Licensing</h3>
+            <p>Engagements are modular but sequenced. The fastest results come from installing the right layer first.</p>
+            <ul class="list">
+              <li>Enterprise Diagnostic → phased roadmap</li>
+              <li>LONDON deployment → pillars installed</li>
+              <li>Platform build → enforcement made durable</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/services/" target="_blank" rel="noopener">Open</a>
+              <a class="btn small ghost" href="#ladder">View ladder</a>
+            </div>
+          </div>
+
+          <div class="tile reveal">
+            <h3>Authority & Trust</h3>
+            <p>Become the default choice by building legitimacy as a system: proof, standards, verification, and consistent execution.</p>
+            <ul class="list">
+              <li>Authority stack layers</li>
+              <li>Trust modules: intake → checkpoints → escalation</li>
+              <li>Credential pathways (defensible proof)</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/authority-trust/" target="_blank" rel="noopener">Open</a>
+              <a class="btn small ghost" href="#trust">See stack here</a>
+            </div>
+          </div>
+
+          <div class="tile reveal">
+            <h3>Platforms</h3>
+            <p>Portals, libraries, dashboards, and verification layers that make execution repeatable—then replicate nationally.</p>
+            <ul class="list">
+              <li>Operating library → searchable SOPs</li>
+              <li>Execution console → QA + audit trail</li>
+              <li>Intelligence layer → KPI rules + dashboards</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/platforms/" target="_blank" rel="noopener">Open</a>
+              <a class="btn small ghost" href="#platforms">Platform ladder</a>
+            </div>
+          </div>
+
+          <div class="tile reveal">
+            <h3>Replication: Partnerships & Licensing</h3>
+            <p>Scale delivery capacity without dilution using standards, verification, enforcement, and replication playbooks.</p>
+            <ul class="list">
+              <li>Partner standards + onboarding criteria</li>
+              <li>Registry + audit trail + enforcement paths</li>
+              <li>Licensing as a governed environment</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/partnerships-licensing/" target="_blank" rel="noopener">Open</a>
+              <a class="btn small ghost" href="#replicate">Replication model</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ctaBlock reveal" style="margin-top: 16px;">
+          <div>
+            <h3>Want the fastest clarity?</h3>
+            <p>Start with the Enterprise Diagnostic. It maps breakpoints and produces a phased roadmap: stabilize → build → enforce → scale.</p>
+          </div>
+          <div class="row">
+            <a class="btn primary" href="#contact">Request the Diagnostic</a>
+            <a class="btn" href="https://skyesoverlondon-business-development.netlify.app/enterprise-diagnostic/" target="_blank" rel="noopener">Read diagnostic details</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="london">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div>
+            <h2 class="tight">LONDON Framework™ — the enterprise operating system</h2>
+            <div class="desc">
+              LONDON is not a slogan. It’s the structural sequence installed so execution becomes repeatable, enforceable, and scalable.
+            </div>
+          </div>
+          <a class="btn small" href="https://skyesoverlondon-business-development.netlify.app/london-framework/" target="_blank" rel="noopener">Open the full framework</a>
+        </div>
+
+        <div class="grid3">
+          <div class="tile reveal">
+            <h3>L — Legal Architecture</h3>
+            <p>Liability isolation, governance pathways, decision rights.</p>
+            <div class="pillRow">
+              <span class="pill"><strong>Authority flow</strong> <em>clarified</em></span>
+              <span class="pill"><strong>Risk</strong> <em>isolated</em></span>
+            </div>
+          </div>
+          <div class="tile reveal">
+            <h3>O — Operational Systems</h3>
+            <p>SOP libraries, workflows, quality gates, automation.</p>
+            <div class="pillRow">
+              <span class="pill"><strong>Standards</strong> <em>documented</em></span>
+              <span class="pill"><strong>Quality</strong> <em>enforced</em></span>
+            </div>
+          </div>
+          <div class="tile reveal">
+            <h3>N — Network Power</h3>
+            <p>Partnerships, certifications, talent pipelines.</p>
+            <div class="pillRow">
+              <span class="pill"><strong>Partners</strong> <em>verified</em></span>
+              <span class="pill"><strong>Capacity</strong> <em>governed</em></span>
+            </div>
+          </div>
+          <div class="tile reveal">
+            <h3>D — Data & Intelligence</h3>
+            <p>KPIs, dashboards, decision matrices, AI copilots.</p>
+            <div class="pillRow">
+              <span class="pill"><strong>KPIs</strong> <em>drive behavior</em></span>
+              <span class="pill"><strong>Dashboards</strong> <em>trigger action</em></span>
+            </div>
+          </div>
+          <div class="tile reveal">
+            <h3>O — Organization Design</h3>
+            <p>Roles, accountability, leadership layers, cadence.</p>
+            <div class="pillRow">
+              <span class="pill"><strong>Roles</strong> <em>defined</em></span>
+              <span class="pill"><strong>Cadence</strong> <em>installed</em></span>
+            </div>
+          </div>
+          <div class="tile reveal">
+            <h3>N — National Distribution & Scale</h3>
+            <p>Offer architecture, platformization, licensing, replication.</p>
+            <div class="pillRow">
+              <span class="pill"><strong>Replication</strong> <em>without dilution</em></span>
+              <span class="pill"><strong>Scale</strong> <em>codified</em></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal" style="margin-top:16px;">
+          <div style="padding:22px;">
+            <div class="sectionHead" style="margin-bottom:10px;">
+              <div>
+                <h2 class="tight" style="font-size: 22px;">Deployment sequence (installed in phases)</h2>
+                <div class="desc">Stabilize first so growth doesn’t amplify chaos. Then standardize, prove, platformize, and replicate.</div>
+              </div>
+              <a class="btn small ghost" href="#diagnostic">Start with the Diagnostic</a>
+            </div>
+
+            <div class="ladder" aria-label="LONDON deployment sequence">
+              <div class="step">
+                <div class="badge">1</div>
+                <div>
+                  <h4>Legal Architecture</h4>
+                  <p>Isolate risk and clarify authority flow so decisions are enforceable.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="badge">2</div>
+                <div>
+                  <h4>Operational Systems</h4>
+                  <p>Make execution repeatable through SOP libraries, training paths, and quality gates.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="badge">3</div>
+                <div>
+                  <h4>Network Power</h4>
+                  <p>Standardize partner delivery using credentials, verification, and onboarding protocols.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="badge">4</div>
+                <div>
+                  <h4>Data & Intelligence</h4>
+                  <p>KPIs that trigger actions, dashboards that reveal variance, and matrices that reduce opinion wars.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="badge">5</div>
+                <div>
+                  <h4>Organization Design</h4>
+                  <p>Install roles, accountability, and cadence so leadership scales beyond the founder.</p>
+                </div>
+              </div>
+              <div class="step">
+                <div class="badge">6</div>
+                <div>
+                  <h4>National Distribution & Scale</h4>
+                  <p>Codify the offer ladder, platformize delivery, and build licensing/replication standards.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="ladder">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div>
+            <h2 class="tight">Service Ladder → Platform Ladder → Licensing</h2>
+            <div class="desc">
+              Skyes Over London LC is built as an ecosystem, not a single service. Each rung increases enforcement and reduces reliance on founder bandwidth.
+            </div>
+          </div>
+          <a class="btn small" href="https://skyesoverlondon-business-development.netlify.app/services/" target="_blank" rel="noopener">Open services</a>
+        </div>
+
+        <div class="grid3">
+          <div class="tile reveal">
+            <h3>Service Ladder</h3>
+            <ul class="list">
+              <li>Enterprise Diagnostic → expose constraints and breakpoints</li>
+              <li>LONDON Deployment → install pillars in sequence</li>
+              <li>Authority & Trust Stack → verification + legitimacy</li>
+              <li>Platform Build → portals + dashboards + SOP libraries</li>
+              <li>Partnerships & Licensing → replicate without dilution</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="#contact">Request a proposal</a>
+              <a class="btn small ghost" href="#diagnostic">Start here</a>
+            </div>
+          </div>
+
+          <div class="tile reveal" id="platforms">
+            <h3>Platform Ladder</h3>
+            <ul class="list">
+              <li>Operating Library → SOP + training + templates</li>
+              <li>Execution Console → workflows, approvals, quality gates</li>
+              <li>Intelligence Layer → KPIs, dashboards, decision matrices</li>
+              <li>Verification Layer → credentials, registry, audit trail</li>
+              <li>Replication Layer → licensing playbooks + enforcement rules</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/platforms/" target="_blank" rel="noopener">Platforms page</a>
+              <a class="btn small ghost" href="#contact">Request a build</a>
+            </div>
+          </div>
+
+          <div class="tile reveal" id="replicate">
+            <h3>Licensing (Governed Environment)</h3>
+            <p>Licensing is not a PDF. It’s operating rules + enforcement mechanisms + platform structures that make replication predictable.</p>
+            <ul class="list">
+              <li>Offer architecture + scope boundaries</li>
+              <li>Delivery playbooks + training verification</li>
+              <li>Reporting cadence + dashboards to reveal variance</li>
+              <li>Quality gates + escalation + audit trail</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/partnerships-licensing/" target="_blank" rel="noopener">Partnerships & Licensing</a>
+              <a class="btn small ghost" href="https://skyesoverlondon-business-development.netlify.app/certifications/" target="_blank" rel="noopener">Certifications</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="diagnostic">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div>
+            <h2 class="tight">Enterprise Diagnostic — the only honest starting point</h2>
+            <div class="desc">
+              Replace guessing with structure. Map breakpoints. Then deploy LONDON in phases so the business stabilizes while it upgrades.
+            </div>
+          </div>
+          <a class="btn small" href="https://skyesoverlondon-business-development.netlify.app/enterprise-diagnostic/" target="_blank" rel="noopener">Read diagnostic page</a>
+        </div>
+
+        <div class="grid3">
+          <div class="tile reveal">
+            <h3>What it maps</h3>
+            <ul class="list">
+              <li><strong>Authority flow</strong> — approvals, escalation paths, decision rights, stall points</li>
+              <li><strong>Operational truth</strong> — workflow variance, quality gates, training gaps</li>
+              <li><strong>Intelligence blueprint</strong> — KPIs, dashboards, decision matrices</li>
+            </ul>
+          </div>
+          <div class="tile reveal">
+            <h3>What you get</h3>
+            <ul class="list">
+              <li>Phased roadmap with standards + enforcement points</li>
+              <li>Sequence: stabilize → standardize → instrument → platformize → replicate</li>
+              <li>Replication readiness for multi-city expansion</li>
+            </ul>
+          </div>
+          <div class="tile reveal">
+            <h3>When it’s a must</h3>
+            <ul class="list">
+              <li>You feel busy but not scaling</li>
+              <li>Quality changes depending on who delivers</li>
+              <li>Approvals and decisions stall execution</li>
+              <li>You want to platformize and license the model</li>
+            </ul>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="#contact">Request a diagnostic slot</a>
+              <a class="btn small ghost" href="https://skyesoverlondon-business-development.netlify.app/contact/" target="_blank" rel="noopener">Contact</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="ctaBlock reveal" style="margin-top: 16px;">
+          <div>
+            <h3>Launch intake is open</h3>
+            <p>Tell us your priority and we’ll route you fast. Diagnostic requests are prioritized.</p>
+          </div>
+          <div class="row">
+            <a class="btn primary" href="#contact">Open the intake form</a>
+            <a class="btn" href="https://skyesoverlondon-business-development.netlify.app/insights/" target="_blank" rel="noopener">Read insights</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trust">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div>
+            <h2 class="tight">Authority & Trust — become the default choice</h2>
+            <div class="desc">
+              Authority is proof plus consistency. We build verification, credentials, standards, expectation control, and enforcement so trust velocity increases.
+            </div>
+          </div>
+          <a class="btn small" href="https://skyesoverlondon-business-development.netlify.app/authority-trust/" target="_blank" rel="noopener">Open Authority & Trust</a>
+        </div>
+
+        <div class="grid3">
+          <div class="tile reveal">
+            <h3>Authority Stack</h3>
+            <ul class="list">
+              <li>Framework (named method: LONDON)</li>
+              <li>Standards (explicit rules for quality + scope)</li>
+              <li>Verification (registry, credential checks, audit trail)</li>
+              <li>Evidence (measurable checkpoints)</li>
+              <li>Cadence (reporting that proves consistency)</li>
+            </ul>
+          </div>
+
+          <div class="tile reveal">
+            <h3>Trust Modules</h3>
+            <ul class="list">
+              <li>Intake framework (what qualifies + what doesn’t)</li>
+              <li>Expectation control (scope + change pathways)</li>
+              <li>Delivery checkpoints (milestones + quality gates)</li>
+              <li>Transparency (simple reporting to reduce doubt)</li>
+              <li>Escalation (decision rights when reality changes)</li>
+            </ul>
+          </div>
+
+          <div class="tile reveal">
+            <h3>Certifications (Defensible Proof)</h3>
+            <p>Credentials are not decoration. They’re a proof system that strengthens Network Power and protects quality while expanding capacity.</p>
+            <div class="links" style="margin-top:12px">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/certifications/" target="_blank" rel="noopener">Certifications page</a>
+              <a class="btn small ghost" href="#contact">Discuss credentials</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="insights">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div>
+            <h2 class="tight">Featured insights (live)</h2>
+            <div class="desc">
+              Frameworks, sequences, and enforcement logic for building enterprise capability in Phoenix and scaling nationally.
+            </div>
+          </div>
+          <a class="btn small" href="https://skyesoverlondon-business-development.netlify.app/insights/" target="_blank" rel="noopener">Open Insights</a>
+        </div>
+
+        <div class="grid3">
+          <div class="tile reveal">
+            <h3>Phoenix Domination: Why Structure Beats Hustle</h3>
+            <p>Phoenix-first sequence for building an enterprise OS that creates deals and delivery simultaneously.</p>
+            <div class="links">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/phoenix-enterprise-architecture/" target="_blank" rel="noopener">Read</a>
+            </div>
+          </div>
+
+          <div class="tile reveal">
+            <h3>LONDON: Installing an Operating System in Six Pillars</h3>
+            <p>How Legal, Operations, Network Power, Intelligence, Org Design, and Distribution form a scalable institution.</p>
+            <div class="links">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/london-framework/" target="_blank" rel="noopener">Read</a>
+            </div>
+          </div>
+
+          <div class="tile reveal">
+            <h3>Licensing Without Dilution: The Replication Model</h3>
+            <p>The standards, measurement, and verification rules required for licensing to work.</p>
+            <div class="links">
+              <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/partnerships-licensing/" target="_blank" rel="noopener">Read</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <div>
+            <h2 class="tight">Launch intake — start the conversation</h2>
+            <div class="desc">
+              Choose your priority and send a message. If you want the fastest clarity, request the Enterprise Diagnostic.
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn small" type="button" id="copyEmail">Copy Email</button>
+            <button class="btn small" type="button" id="copyPhone">Copy Phone</button>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div style="padding:22px;">
+            <div class="row" style="justify-content:space-between; align-items:flex-start;">
+              <div>
+                <div class="chip"><span class="dot"></span> Phoenix, Arizona • Built for national replication</div>
+                <div style="margin-top:10px; font-weight:900; letter-spacing:-.03em; font-size: 18px;">SkyesOverLondonLC@solenterprises.org</div>
+                <div style="margin-top:4px; font-weight:800; color: rgba(245,243,255,.86)">(986) 210-7040</div>
+                <div class="note">Response windows vary by project load. Diagnostic requests are prioritized.</div>
+              </div>
+
+              <div class="row" style="gap:10px;">
+                <a class="btn small primary" href="https://skyesoverlondon-business-development.netlify.app/contact/" target="_blank" rel="noopener">Contact page</a>
+                <a class="btn small" href="https://skyesoverlondon-business-development.netlify.app/" target="_blank" rel="noopener">Open site</a>
+              </div>
+            </div>
+
+            <!-- Netlify Forms -->
+            <form name="launch-intake" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
+              <input type="hidden" name="form-name" value="launch-intake" />
+              <p style="display:none">
+                <label>Don’t fill this out: <input name="bot-field" /></label>
+              </p>
+
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" autocomplete="name" required />
+              </div>
+
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+
+              <div class="full">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority" required>
+                  <option value="" selected disabled>Select one</option>
+                  <option>Enterprise Diagnostic</option>
+                  <option>LONDON Deployment</option>
+                  <option>Authority & Trust Build</option>
+                  <option>Platform Ecosystem Build</option>
+                  <option>Partnerships & Licensing</option>
+                  <option>Certifications / Verification</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="full">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="What’s your current offer, team structure, and where does execution stall or quality drift?" required></textarea>
+              </div>
+
+              <div class="full">
+                <div class="formActions">
+                  <button class="btn primary" type="submit">Send</button>
+                  <a class="btn" href="#diagnostic">See Diagnostic Scope</a>
+                  <a class="btn ghost" href="https://skyesoverlondon-business-development.netlify.app/services/" target="_blank" rel="noopener">Services Ladder</a>
+                </div>
+                <div class="note">
+                  Submitting uses Netlify Forms if you deploy on Netlify.
+                  If you want a custom CRM routing workflow, we can platformize intake into a portal with approvals + audit trail.
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="footerGrid">
+          <div>
+            <div style="font-weight:950; letter-spacing:-.03em; font-size: 18px; color: rgba(245,243,255,.92);">Skyes Over London LC</div>
+            <div class="muted" style="margin-top:6px; line-height:1.55;">
+              Enterprise architecture and platform ecosystems built for Phoenix operators and national expansion.
+              LONDON is our operating system: Legal Architecture, Operational Systems, Network Power, Data & Intelligence,
+              Organization Design, and National Distribution & Scale.
+            </div>
+            <div class="copyRow">
+              <a class="btn small" href="mailto:SkyesOverLondonLC@solenterprises.org">Email</a>
+              <a class="btn small" href="tel:+19862107040">Call</a>
+              <a class="btn small ghost" href="https://skyesoverlondon-business-development.netlify.app/insights/" target="_blank" rel="noopener">Insights</a>
+              <a class="btn small ghost" href="https://skyesoverlondon-business-development.netlify.app/contact/" target="_blank" rel="noopener">Contact</a>
+            </div>
+            <div class="note" style="margin-top:10px;">© <span id="year"></span> Skyes Over London LC. Built for clarity, enforcement, and scalable execution.</div>
+          </div>
+
+          <div>
+            <div class="mini">
+              <h3>Quick links</h3>
+              <ul class="list">
+                <li><a href="https://skyesoverlondon-business-development.netlify.app/enterprise-diagnostic/" target="_blank" rel="noopener">Enterprise Diagnostic</a></li>
+                <li><a href="https://skyesoverlondon-business-development.netlify.app/london-framework/" target="_blank" rel="noopener">LONDON Framework™</a></li>
+                <li><a href="https://skyesoverlondon-business-development.netlify.app/services/" target="_blank" rel="noopener">Services Ladder</a></li>
+                <li><a href="https://skyesoverlondon-business-development.netlify.app/platforms/" target="_blank" rel="noopener">Platforms</a></li>
+                <li><a href="https://skyesoverlondon-business-development.netlify.app/partnerships-licensing/" target="_blank" rel="noopener">Partnerships & Licensing</a></li>
+                <li><a href="https://skyesoverlondon-business-development.netlify.app/certifications/" target="_blank" rel="noopener">Certifications</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Cursor glow tracking
+    window.addEventListener('pointermove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.documentElement.style.setProperty('--mx', x.toFixed(2) + '%');
+      document.documentElement.style.setProperty('--my', y.toFixed(2) + '%');
+    }, {passive:true});
+
+    // Toast
+    const toast = document.getElementById('toast');
+    let toastT;
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add('on');
+      clearTimeout(toastT);
+      toastT = setTimeout(()=>toast.classList.remove('on'), 1800);
+    }
+
+    // Copy helpers
+    const email = "SkyesOverLondonLC@solenterprises.org";
+    const phone = "(986) 210-7040";
+    document.getElementById('copyEmail').addEventListener('click', async () => {
+      try{ await navigator.clipboard.writeText(email); showToast("Email copied."); }
+      catch{ showToast("Copy failed (browser blocked)."); }
+    });
+    document.getElementById('copyPhone').addEventListener('click', async () => {
+      try{ await navigator.clipboard.writeText(phone); showToast("Phone copied."); }
+      catch{ showToast("Copy failed (browser blocked)."); }
+    });
+
+    // Reveal on scroll
+    const obs = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); }
+      }
+    }, {threshold: 0.12});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    // Animated counts
+    function animateCount(el){
+      const target = parseInt(el.getAttribute('data-count') || el.textContent, 10);
+      const dur = 650;
+      const start = performance.now();
+      const from = 0;
+      function tick(t){
+        const p = Math.min(1, (t - start) / dur);
+        const val = Math.floor(from + (target - from) * (p*p*(3-2*p)));
+        el.textContent = val;
+        if(p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    document.querySelectorAll('[data-count]').forEach(el => animateCount(el));
+
+    // Starfield canvas (lightweight)
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let W=0, H=0, DPR=1;
+    let stars = [];
+    function resize(){
+      DPR = Math.min(2, window.devicePixelRatio || 1);
+      W = Math.floor(window.innerWidth * DPR);
+      H = Math.floor(window.innerHeight * DPR);
+      canvas.width = W; canvas.height = H;
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      const count = Math.floor((window.innerWidth * window.innerHeight) / 14000);
+      stars = Array.from({length: Math.max(70, count)}, () => ({
+        x: Math.random()*W,
+        y: Math.random()*H,
+        r: (Math.random()*1.4 + 0.2) * DPR,
+        a: Math.random()*0.7 + 0.15,
+        s: (Math.random()*0.25 + 0.05) * DPR
+      }));
+    }
+    window.addEventListener('resize', resize, {passive:true});
+    resize();
+
+    let last = performance.now();
+    function draw(t){
+      const dt = Math.min(32, t - last); last = t;
+      ctx.clearRect(0,0,W,H);
+
+      // subtle nebula haze
+      ctx.globalAlpha = 0.08;
+      const g = ctx.createRadialGradient(W*0.5, H*0.25, 0, W*0.5, H*0.25, Math.max(W,H)*0.6);
+      g.addColorStop(0, 'rgba(139,92,246,0.65)');
+      g.addColorStop(0.55, 'rgba(251,191,36,0.22)');
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,W,H);
+
+      // stars
+      ctx.globalAlpha = 1;
+      for(const s of stars){
+        s.y += s.s * (dt/16);
+        if(s.y > H + 10){ s.y = -10; s.x = Math.random()*W; }
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(245,243,255,${s.a})`;
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  </script>
+</body>
+</html>

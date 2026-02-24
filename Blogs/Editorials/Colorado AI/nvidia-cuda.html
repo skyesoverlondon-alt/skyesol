@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CUDA: The Gravity Well of GPU-Accelerated Development | CA AI & Dev Field Notes</title>
+  <meta name="description" content="CUDA is a toolkit, an ecosystem, and—practically speaking—a default target for high-performance ML workloads and GPU-heavy applications.">
+  <meta name="keywords" content="CUDA Toolkit, NVIDIA, GPU acceleration, CUDA libraries, ML training, inference">
+  <meta name="author" content="Skyes Over London LC">
+  <link rel="canonical" href="./nvidia-cuda.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="CUDA: The Gravity Well of GPU-Accelerated Development">
+  <meta property="og:description" content="CUDA is a toolkit, an ecosystem, and—practically speaking—a default target for high-performance ML workloads and GPU-heavy applications.">
+  <meta property="og:site_name" content="CA AI & Dev Field Notes">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/theme.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "CUDA: The Gravity Well of GPU-Accelerated Development",
+    "description": "CUDA is a toolkit, an ecosystem, and\u2014practically speaking\u2014a default target for high-performance ML workloads and GPU-heavy applications.",
+    "author": {"@type":"Organization","name":"Skyes Over London LC"},
+    "publisher": {"@type":"Organization","name":"Solenterprises International Nexus & Holdings LLC"},
+    "datePublished": "2024-05-23",
+    "inLanguage": "en-US"
+  }
+  </script>
+</head>
+<body>
+
+  <div class="cinematic-opener" aria-hidden="true">
+    <div class="opener-content">
+      <div class="opener-line"><div class="opener-text">CALIFORNIA</div></div>
+      <h1 class="opener-title">AI & Dev Field Notes</h1>
+      <div class="opener-divider"></div>
+      <div class="opener-subtitle">Practical writeups for builders who ship.</div>
+      <div class="opener-company">Skyes Over London LC · Solenterprises International</div>
+    </div>
+  </div>
+  <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
+
+  <nav id="nav" class="nav">
+    <a class="nav-brand" href="../index.html">
+      <span class="nav-brand-name">CA AI & Dev Field Notes</span>
+      <span class="nav-brand-sub">NVIDIA (CUDA) · Santa Clara, California</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#why-devs-care">Why Devs Care</a></li>
+      <li><a href="#how-to-use">How to Use</a></li>
+      <li><a href="#official-links">Links</a></li>
+    </ul>
+    <a class="nav-cta" href="https://developer.nvidia.com/cuda/toolkit" target="_blank" rel="noopener noreferrer">Official Site</a>
+  </nav>
+
+  <header class="hero" role="banner">
+    <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">GPU Compute / AI Acceleration</div>
+      <h1 class="hero-title">NVIDIA (CUDA): <em>The Gravity Well of GPU-Accelerated Development</em></h1>
+      <p class="hero-description">CUDA is a toolkit, an ecosystem, and—practically speaking—a default target for high-performance ML workloads and GPU-heavy applications.</p>
+      <div class="hero-actions">
+        <a class="hero-btn hero-btn-primary" href="#overview">Read the field note <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></a>
+        <a class="hero-btn hero-btn-secondary" href="https://docs.nvidia.com/cuda" target="_blank" rel="noopener noreferrer">Open docs <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </header>
+
+  <section class="stats-bar" aria-label="Quick stats">
+    <div class="stat-item fade-up">
+      <div class="stat-number" data-count="3">0</div>
+      <div class="stat-label">Core Surfaces</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-number" data-count="4">0</div>
+      <div class="stat-label">Common Integrations</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-number" data-count="1">0</div>
+      <div class="stat-label">Primary HQ Region</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-number" data-count="24">0</div>
+      <div class="stat-label">Always-On Expectation</div>
+    </div>
+  </section>
+
+  <article class="article" role="article">
+    <div class="article-header">
+      <div class="article-meta">
+        <div>
+          <div class="article-category">GPU Compute / AI Acceleration</div>
+          <div class="article-date">February 10, 2026 · 8 min read</div>
+        </div>
+        <div class="article-author">
+          <div class="author-avatar">S</div>
+          <div class="author-info">
+            <div class="author-name">Skyes Over London LC</div>
+            <div class="author-role">Editorial · CA AI & Dev World</div>
+          </div>
+        </div>
+      </div>
+      <div class="article-intro">
+        NVIDIA (CUDA) is one of the companies that shapes how modern teams <em>actually ship</em> AI-enabled products—especially when speed, reliability, and governance collide.
+      </div>
+    </div>
+
+    <div class="article-body">
+      <aside class="article-sidebar">
+        <div class='sidebar-nav'><div class='sidebar-nav-title'>On this page</div><a href='#overview'>Overview</a><a href='#why-devs-care'>Why Developers Care</a><a href='#how-to-use'>How Teams Actually Use It</a><a href='#tradeoffs'>Tradeoffs &amp; Gotchas</a><a href='#official-links'>Official Links</a></div>
+      </aside>
+
+      <div class="article-content">
+        <section id="overview">
+          <h2>Overview</h2>
+          
+<p class="lead"><strong>NVIDIA (CUDA)</strong> is a California-based anchor in the modern AI/dev ecosystem. This field note is written for builders who care less about hype and more about surfaces: what you can integrate, what you can govern, and what tends to break under real usage.</p>
+<p>Think of this as a developer-centric map. Not a press release, not a fan club. We’ll define the core product surfaces, show the integration patterns that repeat across teams, and call out the boring-but-decisive constraints: auth, rate limits, observability, governance, and reliability.</p>
+
+        </section>
+
+        <section id="why-devs-care">
+          <h2>Why Developers Care</h2>
+          
+<p>If your product touches AI in 2026, you’re likely juggling at least three realities: (1) customers want magic, (2) your engineers want sane interfaces, and (3) your lawyers want receipts. NVIDIA (CUDA) matters because it sits somewhere on that triangle with a set of tools developers can actually ship.</p>
+<div class="feature-grid">
+  <div class="feature-card">
+    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3l9 5-9 5-9-5 9-5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 13l9 5 9-5"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 18l9 5 9-5"/></svg></div>
+    <h4>Clear surfaces</h4>
+    <p>APIs, SDKs, consoles, and docs that map to how teams build: environments, keys, orgs, projects, and usage controls.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 19l9 2 9-2M3 19V8l9-3 9 3v11M7 10v9m10-9v9"/></svg></div>
+    <h4>Production posture</h4>
+    <p>Patterns that assume you’ll deploy, monitor, iterate, and bill—without turning your backend into an archeological dig site.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V7l7-4z"/></svg></div>
+    <h4>Governance hooks</h4>
+    <p>Places to attach policy: logging, routing, access control, and “why blocked” feedback that users can understand.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+    <h4>Velocity</h4>
+    <p>Developer experience that keeps iteration tight—because you’ll change prompts, models, and workflows more than you think.</p>
+  </div>
+</div>
+
+        </section>
+
+        <section id="how-to-use">
+          <h2>How Teams Actually Use It</h2>
+          
+<p>Most teams converge on a familiar architecture, even when they pretend they won’t:</p>
+<ul class="animated-list">
+  <li>
+    <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+    <div class="list-content">
+      <h5>One “AI gateway” boundary</h5>
+      <p>Centralize provider calls behind a single service so you can route models, enforce policy, and produce audit trails.</p>
+    </div>
+  </li>
+  <li>
+    <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+    <div class="list-content">
+      <h5>Versioned prompts & configs</h5>
+      <p>Prompts are code. Version them. Ship them. Roll them back. Measure changes like you measure releases.</p>
+    </div>
+  </li>
+  <li>
+    <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+    <div class="list-content">
+      <h5>Observability from day one</h5>
+      <p>Log requests (safely), responses (carefully), token/cost metadata, and latency. Debugging without traces is pain cosplay.</p>
+    </div>
+  </li>
+  <li>
+    <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+    <div class="list-content">
+      <h5>Evaluation loops</h5>
+      <p>Define what “good” means for your app, then automate regression tests before your users do it for you.</p>
+    </div>
+  </li>
+</ul>
+
+<div class="pull-quote">
+  <blockquote>“You don’t ‘add AI’ once. You build a living system that needs routing, controls, and feedback loops.”</blockquote>
+  <cite>Field note — CA AI & Dev World</cite>
+</div>
+
+<p>From there, you choose your tradeoffs: on-device vs cloud, closed models vs open models, latency vs cost, and governance vs speed. The point is to make those decisions explicit—then bake them into the system.</p>
+
+        </section>
+
+        <section id="tradeoffs">
+          <h2>Tradeoffs & Gotchas</h2>
+          
+<p>No platform is pure upside. The classic failure modes tend to look like this:</p>
+<ul class="animated-list">
+  <li>
+    <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+    <div class="list-content">
+      <h5>Accidental vendor lock-in</h5>
+      <p>Direct calls from frontend code, scattered API keys, and provider-specific logic that metastasizes across the app.</p>
+    </div>
+  </li>
+  <li>
+    <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+    <div class="list-content">
+      <h5>“We forgot billing was real”</h5>
+      <p>Costs arrive as a surprise when you don’t log usage metadata, don’t cap tokens, and don’t enforce budgets.</p>
+    </div>
+  </li>
+  <li>
+    <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+    <div class="list-content">
+      <h5>Trust breaks silently</h5>
+      <p>Users don’t just want “blocked.” They want “why blocked,” and what to do next—everywhere the system refuses a request.</p>
+    </div>
+  </li>
+</ul>
+<p>The fix is rarely glamorous. It’s governance and ergonomics: one boundary layer, explicit policies, better UI feedback, and continuous evals.</p>
+
+        </section>
+
+        <section id="official-links">
+          <h2>Official Links</h2>
+          <p>These are the official entry points used in this post.</p><div class='inline-links'><a class="pill-link" href="https://developer.nvidia.com/cuda/toolkit" target="_blank" rel="noopener noreferrer">Official website <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></a><a class="pill-link" href="https://docs.nvidia.com/cuda" target="_blank" rel="noopener noreferrer">Developer docs / reference <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></a><a class="pill-link" href="https://www.nvidia.com/en-us/ai/" target="_blank" rel="noopener noreferrer">NVIDIA AI overview <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></a></div>
+        </section>
+
+        <section class="cta-section" aria-label="Call to action">
+          <div class="cta-content">
+            <div class="cta-text">
+              <h3>Get the CUDA Toolkit</h3>
+              <p>Go straight to the source: product pages, docs, and official references.</p>
+            </div>
+            <a class="cta-button" href="https://developer.nvidia.com/cuda/toolkit" target="_blank" rel="noopener noreferrer">Open now <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg></a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>CA AI & Dev Field Notes</h4>
+        <p>Longform, developer-centric writeups on companies building in California’s AI and software ecosystem. Focus: practical surfaces, integrations, and tradeoffs.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Posts</h5>
+        <ul>
+          <li><a href="../index.html">Index</a></li>
+          <li><a href="https://developer.nvidia.com/cuda/toolkit" target="_blank" rel="noopener noreferrer">NVIDIA (CUDA) official</a></li>
+          <li><a href="https://docs.nvidia.com/cuda" target="_blank" rel="noopener noreferrer">Docs / reference</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Publisher</h5>
+        <ul>
+          <li><a href="https://solenterprises.org/pages/leadership-hub" target="_blank" rel="noopener noreferrer">Leadership</a></li>
+          <li><a href="https://solenterprises.org/pages/contact-hub" target="_blank" rel="noopener noreferrer">Contact</a></li>
+          <li><a href="https://solenterprises.org/" target="_blank" rel="noopener noreferrer">SOLEnterprises.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Skyes Over London LC</div>
+      <div>Built for builders. No fluff.</div>
+    </div>
+  </footer>
+
+  <script src="../assets/theme.js"></script>
+</body>
+</html>

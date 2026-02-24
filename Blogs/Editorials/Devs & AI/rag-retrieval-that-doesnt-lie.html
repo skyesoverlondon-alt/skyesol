@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>RAG Is Not a Vibe: Retrieval That Doesn’t Lie | Skyes Over London LC</title>
+  <meta name="description" content="Retrieval-Augmented Generation (RAG) works when it’s measurable, auditable, and brutally honest about uncertainty.">
+  <meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+  <meta property="og:title" content="RAG Is Not a Vibe: Retrieval That Doesn’t Lie">
+  <meta property="og:description" content="Retrieval-Augmented Generation (RAG) works when it’s measurable, auditable, and brutally honest about uncertainty.">
+  <meta property="og:site_name" content="Skyes Over London LC">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RAG Is Not a Vibe: Retrieval That Doesn’t Lie">
+  <meta name="twitter:description" content="Retrieval-Augmented Generation (RAG) works when it’s measurable, auditable, and brutally honest about uncertainty.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="cinematic-opener" aria-hidden="true">
+  <div class="opener-content">
+    <div class="opener-line"><div class="opener-text">SOL / ENGINEERING DISPATCH</div></div>
+    <div class="opener-divider"></div>
+    <div class="opener-line"><div class="opener-title">AI &amp; Dev Dispatch</div></div>
+    <div class="opener-subtitle">Production notes, patterns, and playbooks — written for builders.</div>
+    <div class="opener-company">Skyes Over London LC</div>
+  </div>
+</div>
+<div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
+
+
+<nav id="nav" class="nav">
+  <div class="nav-brand">
+    <div class="nav-brand-name">Skyes Over London LC</div>
+    <div class="nav-brand-sub">AI &amp; Dev Dispatch</div>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="https://solenterprisesnexusconnect.netlify.app/" target="_blank" rel="noopener">NexusConnect</a></li>
+    <li><a href="https://familycommand.netlify/" target="_blank" rel="noopener">FamilyCommand</a></li>
+    <li><a href="https://kaixugateway13.netlify.app/" target="_blank" rel="noopener">kAIxuGateway13</a></li>
+  </ul>
+
+  <a class="nav-cta" href="https://solenterprises.org/pages/contact-hub" target="_blank" rel="noopener">Contact Hub</a>
+</nav>
+
+
+<header class="hero">
+  <div class="hero-video-container">
+    <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-grain" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">FIELD NOTES • SHIP READY</div>
+    <h1 class="hero-title">RAG Is Not a Vibe: Retrieval That Doesn’t Lie</h1>
+    <p class="hero-description">Retrieval-Augmented Generation (RAG) works when it’s measurable, auditable, and brutally honest about uncertainty.</p>
+    <div class="hero-actions">
+      <a href="#intro" class="hero-btn hero-btn-primary">Read the Brief <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></a>
+      <a href="https://solenterprises.org/pages/contact-hub" class="hero-btn hero-btn-secondary" target="_blank" rel="noopener">Contact Hub <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<article class="article">
+  <header class="article-header">
+    <div class="article-meta">
+      <div class="article-category">Search &amp; Retrieval</div>
+      <div class="article-date">September 24, 2024</div>
+
+      <div class="article-author">
+        <div class="author-avatar">SL</div>
+        <div class="author-info">
+          <div class="author-name">Skyes Over London LC</div>
+          <div class="author-role">Engineering Editorial</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-intro">Retrieval-Augmented Generation (RAG) works when it’s measurable, auditable, and brutally honest about uncertainty.</div>
+  </header>
+
+  <div class="article-body">
+    <aside class="article-sidebar">
+      <div class="sidebar-nav">
+        <div class="sidebar-nav-title">On This Page</div>
+        <a href="#intro">Executive Summary</a>
+<a href="#core">The Core Idea</a>
+<a href="#pitfalls">Failure Modes You’ll Actually See</a>
+<a href="#implementation">Implementation Notes</a>
+<a href="#checklist">Ship‑Ready Checklist</a>
+<a href="#links">Further Reading</a>
+        <a href="../index.html">Back to Index</a>
+      </div>
+    </aside>
+
+    <div class="article-content">
+      <section id="intro" class="fade-up">
+        <h2>Executive Summary</h2>
+        <p class="lead">Retrieval-Augmented Generation (RAG) works when it’s measurable, auditable, and brutally honest about uncertainty.</p>
+        <p>RAG fails when retrieval is treated as a magic spell instead of an information system. The model can only be as honest as your evidence pipeline.</p>
+<p>Build retrieval like you build search: measurable quality, explicit citations, and graceful uncertainty when evidence is thin.</p>
+        <div class="pull-quote">
+          <blockquote>“Production is where good ideas meet boring reality. The winners instrument the boring part.”</blockquote>
+          <cite>AI &amp; Dev Dispatch</cite>
+        </div>
+      </section>
+
+      <section id="core" class="fade-up">
+        <h2>The Core Idea</h2>
+        <p>Most “AI failures” are system failures: missing contracts, missing logs, missing ownership lines. Fix the system, and the model suddenly looks smarter.</p>
+        <div class="feature-grid">
+          <div class="feature-card">
+          <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></div>
+          <h4>Contract</h4>
+          <p>Define the stable input/output boundary first.</p>
+        </div><div class="feature-card">
+          <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></div>
+          <h4>Logs</h4>
+          <p>Capture raw facts, not just summaries.</p>
+        </div><div class="feature-card">
+          <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></div>
+          <h4>Policy</h4>
+          <p>Centralize allow/deny decisions and expose reason codes.</p>
+        </div><div class="feature-card">
+          <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></div>
+          <h4>UX</h4>
+          <p>Make failure legible and recoverable.</p>
+        </div>
+        </div>
+
+        <div class="code-block">
+          <pre><code>// Retrieval contract: keep provenance.
+{
+  &quot;doc_id&quot;: &quot;handbook-2026-02&quot;,
+  &quot;chunk_id&quot;: &quot;handbook-2026-02#sec-3.2&quot;,
+  &quot;source_url&quot;: &quot;https://example.com/handbook#sec-3.2&quot;,
+  &quot;score&quot;: 0.82
+}</code></pre>
+        </div>
+        <p>That snippet is not a complete app. It’s a reminder: your system should prefer verifiable facts over narrative.</p>
+      </section>
+
+      <section id="pitfalls" class="fade-up">
+        <h2>Failure Modes You’ll Actually See</h2>
+        <ul class="animated-list">
+          <li>
+          <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></div>
+          <div class="list-content">
+            <h5>Weak chunking</h5>
+            <p>Chunks that are too big dilute relevance; too small lose meaning.</p>
+          </div>
+        </li><li>
+          <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></div>
+          <div class="list-content">
+            <h5>No citations</h5>
+            <p>Users can’t verify. You can’t debug.</p>
+          </div>
+        </li><li>
+          <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></div>
+          <div class="list-content">
+            <h5>Stale indexes</h5>
+            <p>If data changes but embeddings don’t, retrieval lies silently.</p>
+          </div>
+        </li><li>
+          <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></div>
+          <div class="list-content">
+            <h5>Overconfident answers</h5>
+            <p>RAG must degrade gracefully: ‘I don’t have evidence for that’ is a feature.</p>
+          </div>
+        </li>
+        </ul>
+      </section>
+
+      <section id="implementation" class="fade-up">
+        <h2>Implementation Notes</h2>
+        <p>Measure retrieval: top‑k hit rate, citation coverage, and ‘answerable vs unanswerable’ classification.</p>
+<p>Keep chunk provenance: document_id, section, timestamp, and a stable URL.</p>
+<p>Force the model to cite: output should include evidence IDs or quoted spans with limits.</p>
+        <p>For architecture and rollout planning, use the <a class="inline-link" href="https://solenterprises.org/pages/contact-hub" target="_blank" rel="noopener">Contact Hub</a>.</p>
+      </section>
+
+      <section id="checklist" class="fade-up">
+        <h2>Ship‑Ready Checklist</h2>
+        <p>Use this as a pre‑deploy gate. If you can’t check these boxes, don’t pretend you’re “done.”</p>
+        <div class="code-block">
+          <pre><code>- A single source of truth for versions (prompt/policy/schema) and a way to display them in-app.
+- Request correlation ID visible in UI, logged server-side, and searchable.
+- Explicit failure UX: what happened, why, and a safe next step.
+- An audit trail you can replay: inputs, decisions, outputs, and cost facts.
+- A small test harness (even 20 cases) that runs before deployment.</code></pre>
+        </div>
+      </section>
+
+      <section id="links" class="fade-up">
+        <h2>Further Reading</h2>
+        <p>External references (full links):</p>
+        <ul>
+          <li><a class="inline-link" href="https://www.postgresql.org/docs/current/textsearch.html" target="_blank" rel="noopener">PostgreSQL full-text search</a></li>
+<li><a class="inline-link" href="https://neon.tech/docs/" target="_blank" rel="noopener">Neon Postgres docs</a></li>
+<li><a class="inline-link" href="https://docs.netlify.com/functions/overview/" target="_blank" rel="noopener">Netlify Functions docs</a></li>
+        </ul>
+
+        <h3>Related Reads in This Series</h3>
+        <ul><li><a class="inline-link" href="offline-first-ai-patterns.html">Edge AI on a Budget: Offline‑First Patterns That Scale</a></li><li><a class="inline-link" href="script-to-system-productizing-dev-work.html">From Script to System: Productizing Dev Work Without Killing Velocity</a></li><li><a class="inline-link" href="magic-links-done-right.html">Magic Links Done Right: Passwordless Auth Without Pain</a></li></ul>
+      </section>
+
+      
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="cta-text">
+      <h3>Want this turned into a working product?</h3>
+      <p>Use the Contact Hub to scope features, security, billing, and the deployment plan.</p>
+    </div>
+    <a class="cta-button" href="https://solenterprises.org/pages/contact-hub" target="_blank" rel="noopener">
+      Open Contact Hub <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+    </a>
+  </div>
+</section>
+
+    </div>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h4>Skyes Over London LC</h4>
+      <p class="subsidiary">A Subsidiary of Solenterprises International Nexus &amp; Holdings LLC</p>
+      <p>AI systems, product engineering, and operational tooling. This publication focuses on practical patterns that survive real traffic, real users, and real constraints.</p>
+    </div>
+
+    <div class="footer-links">
+      <h5>Platforms</h5>
+      <ul>
+        <li><a href="https://kaixugateway13.netlify.app/" target="_blank" rel="noopener">kAIxuGateway13</a></li>
+        <li><a href="https://solenterprisesnexusconnect.netlify.app/" target="_blank" rel="noopener">NexusConnect</a></li>
+        <li><a href="https://familycommand.netlify/" target="_blank" rel="noopener">FamilyCommand</a></li>
+        <li><a href="https://solenterprises.org/" target="_blank" rel="noopener">SOLEnterprises.org</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="https://solenterprises.org/pages/leadership-hub" target="_blank" rel="noopener">Leadership Hub</a></li>
+        <li><a href="https://solenterprises.org/pages/contact-hub" target="_blank" rel="noopener">Contact Hub</a></li>
+        <li><a href="../index.html">AI &amp; Dev Dispatch</a></li>
+        <li><a href="../privacy.html">Privacy</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h5>Legal</h5>
+      <ul>
+        <li><a href="../terms.html">Terms</a></li>
+        <li><a href="../disclaimer.html">Disclaimer</a></li>
+        <li><a href="https://solenterprises.org/pages/contact-hub" target="_blank" rel="noopener">Support</a></li>
+        <li><a href="../index.html#about">About This Series</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copyright">© 2026 Skyes Over London LC. All rights reserved. A subsidiary of Solenterprises International Nexus &amp; Holdings LLC.</p>
+    <div class="footer-legal">
+      <a href="../privacy.html">Privacy</a>
+      <a href="../terms.html">Terms</a>
+      <a href="../disclaimer.html">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../scripts.js" defer></script>
+</body>
+</html>

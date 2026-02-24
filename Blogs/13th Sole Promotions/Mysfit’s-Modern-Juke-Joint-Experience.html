@@ -1,0 +1,1776 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#07070b" />
+  <title>Skyes Over London | Chicago Doesn’t Need More Gatekeepers — It Needs Rooms Like This</title>
+  <meta name="description" content="From Skyes Over London's perspective: spotlighting Mysfit’s Modern Juke Joint Experience — a #NoGateKeepingChicago live showcase + networking night built on community, authenticity, and creative safety." />
+
+  <!-- Only using the images you provided -->
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/01/23/IMG_0999.jpeg" />
+  <meta property="og:title" content="Chicago Doesn’t Need More Gatekeepers — It Needs Rooms Like This" />
+  <meta property="og:description" content="Skyes Over London spotlights Mysfit’s Modern Juke Joint Experience — a #NoGateKeepingChicago live showcase + networking night." />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root{
+      --bg:#06060a;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(0,0,0,.26);
+      --ink: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --soft: rgba(255,255,255,.12);
+      --line: rgba(255,255,255,.16);
+      --gold:#f0c86a;
+      --gold2:#ffd78a;
+      --purple:#7b4dff;
+      --purple2:#b28cff;
+      --shadow: 0 26px 90px rgba(0,0,0,.60);
+      --r1: 18px;
+      --r2: 26px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1000px 600px at 20% 0%, rgba(123,77,255,.18), transparent 60%),
+        radial-gradient(900px 600px at 90% 15%, rgba(240,200,106,.14), transparent 60%),
+        radial-gradient(900px 650px at 50% 120%, rgba(123,77,255,.12), transparent 60%),
+        linear-gradient(180deg, #05050a 0%, #07070b 35%, #06060a 100%);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
+
+    /* Top progress bar */
+    .progress{
+      position:fixed; top:0; left:0; height:3px; width:0%;
+      background: linear-gradient(90deg, rgba(240,200,106,.95), rgba(123,77,255,.95));
+      z-index: 100;
+      box-shadow: 0 0 18px rgba(240,200,106,.28);
+    }
+
+    /* Ambient grain + glow */
+    .grain{
+      pointer-events:none;
+      position:fixed; inset:-35%;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity:.16;
+      transform: rotate(10deg);
+      z-index:0;
+    }
+    .cursorGlow{
+      pointer-events:none;
+      position:fixed;
+      width: 540px; height: 540px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(240,200,106,.18), rgba(123,77,255,.12), transparent 60%);
+      filter: blur(10px);
+      transform: translate(-50%,-50%);
+      opacity: .8;
+      z-index: 0;
+    }
+
+    /* Sticky topbar */
+    .topbar{
+      position:sticky; top:0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(0,0,0,.68), rgba(0,0,0,.22));
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .topbar .row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 14px;
+      padding: 12px 0;
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 240px;
+    }
+    .sigil{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,215,138,.78), rgba(240,200,106,.12) 45%),
+        radial-gradient(circle at 85% 80%, rgba(123,77,255,.26), transparent 62%),
+        rgba(0,0,0,.18);
+      box-shadow: 0 12px 35px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+    }
+    .sigil:after{
+      content:"";
+      position:absolute; inset:-70% -30%;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.22), transparent 60%);
+      transform: rotate(16deg);
+      animation: sheen 5.8s linear infinite;
+    }
+    @keyframes sheen{
+      0%{ transform: translateX(-38%) rotate(16deg); }
+      100%{ transform: translateX(38%) rotate(16deg); }
+    }
+    .brandTitle{
+      margin:0;
+      font-size: 12px;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.90);
+      line-height:1.2;
+    }
+    .brandSub{
+      margin:3px 0 0;
+      font-size: 12px;
+      color: rgba(255,255,255,.64);
+    }
+    .brandSub .gold{ color: var(--gold2); font-weight:800; }
+
+    .nav{
+      display:flex; gap: 10px; flex-wrap:wrap; justify-content:center;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 9px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      font-size: 12px;
+      color: rgba(255,255,255,.72);
+      transition: transform .18s ease, border-color .18s ease, color .18s ease;
+      white-space: nowrap;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      border-color: rgba(240,200,106,.34);
+      color: rgba(255,255,255,.88);
+    }
+
+    .cta{
+      display:flex; gap:10px; align-items:center; justify-content:flex-end;
+      min-width: 240px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.20);
+      color: rgba(255,255,255,.88);
+      font-weight: 750;
+      font-size: 13px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.20);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.24);
+      background: rgba(255,255,255,.06);
+    }
+    .btn.primary{
+      border-color: rgba(240,200,106,.55);
+      background: linear-gradient(135deg, rgba(240,200,106,.18), rgba(123,77,255,.14));
+    }
+    .dot{
+      width:8px; height:8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, var(--gold2), var(--gold));
+      box-shadow: 0 0 14px rgba(240,200,106,.55);
+    }
+
+    @media (max-width: 980px){
+      .nav{ display:none; }
+      .brand{ min-width: auto; }
+      .cta{ min-width:auto; }
+    }
+    @media (max-width: 560px){
+      .cta .btn{ padding: 11px 12px; font-size: 12px; }
+    }
+
+    /* Hero */
+    header.hero{
+      position:relative;
+      padding: 38px 0 18px;
+      z-index: 1;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.22fr .78fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    @media (max-width: 920px){
+      .heroGrid{ grid-template-columns: 1fr; }
+    }
+    .panel{
+      border-radius: var(--r2);
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(0,0,0,.20));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .panel:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(900px 420px at 20% 0%, rgba(240,200,106,.16), transparent 55%),
+        radial-gradient(900px 420px at 92% 12%, rgba(123,77,255,.18), transparent 60%);
+      pointer-events:none;
+      z-index: 0;
+    }
+    .panel .inner{
+      position:relative;
+      z-index:1;
+      padding: 24px;
+    }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(240,200,106,.32);
+      background: rgba(0,0,0,.22);
+      color: rgba(255,255,255,.84);
+      font-size: 12px;
+      letter-spacing:.6px;
+      text-transform: uppercase;
+    }
+    .kicker strong{ color: var(--gold2); font-weight: 900; }
+
+    .headline{
+      margin: 14px 0 10px;
+      font-size: clamp(30px, 3.9vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -.8px;
+      position:relative;
+    }
+    .headline .shine{
+      background: linear-gradient(90deg, rgba(255,255,255,.86), rgba(255,215,138,.88), rgba(178,140,255,.88), rgba(255,255,255,.86));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% 100%;
+      animation: textShine 6.8s ease-in-out infinite;
+    }
+    @keyframes textShine{
+      0%{ background-position: 0% 50%; }
+      50%{ background-position: 100% 50%; }
+      100%{ background-position: 0% 50%; }
+    }
+
+    .subhead{
+      margin:0 0 16px;
+      font-size: clamp(14px, 1.5vw, 18px);
+      line-height: 1.55;
+      color: rgba(255,255,255,.78);
+      max-width: 65ch;
+    }
+
+    .metaRow{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    @media (max-width: 520px){
+      .metaRow{ grid-template-columns: 1fr; }
+    }
+    .metaCard{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      padding: 14px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      min-height: 76px;
+    }
+    .glyph{
+      width: 36px; height: 36px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(240,200,106,.18), rgba(123,77,255,.12));
+      display:flex; align-items:center; justify-content:center;
+      flex: 0 0 auto;
+    }
+    .metaCard h3{
+      margin:0;
+      font-size: 12px;
+      letter-spacing:.6px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.64);
+    }
+    .metaCard p{
+      margin:5px 0 0;
+      font-size: 14px;
+      color: rgba(255,255,255,.90);
+      line-height: 1.35;
+    }
+    .metaCard p small{ display:block; margin-top:4px; color: rgba(255,255,255,.62); font-size: 12px; }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    /* Right hero photo */
+    .photo{
+      border-radius: var(--r2);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.24);
+      box-shadow: var(--shadow);
+      position:relative;
+      min-height: 360px;
+    }
+    .photo img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.04);
+      filter: contrast(1.02) saturate(1.05);
+    }
+    .photo:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 420px at 10% 0%, rgba(240,200,106,.16), transparent 55%),
+        radial-gradient(900px 420px at 100% 15%, rgba(123,77,255,.18), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.76));
+      pointer-events:none;
+    }
+    .photoCaption{
+      position:absolute; left:16px; right:16px; bottom:14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(12px);
+      padding: 12px 12px;
+    }
+    .photoCaption .t{
+      font-weight: 900;
+      letter-spacing:.3px;
+      margin:0;
+    }
+    .photoCaption .s{
+      margin:6px 0 0;
+      color: rgba(255,255,255,.72);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    /* Sections */
+    main{ position:relative; z-index:1; }
+    section{
+      padding: 22px 0;
+    }
+    .sectionHead{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: -.2px;
+    }
+    .sectionHead p{
+      margin:0;
+      color: rgba(255,255,255,.66);
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 66ch;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .grid2{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border-radius: var(--r2);
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.20));
+      box-shadow: 0 18px 58px rgba(0,0,0,.30);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(650px 300px at 15% 0%, rgba(240,200,106,.14), transparent 55%),
+        radial-gradient(650px 300px at 92% 10%, rgba(123,77,255,.16), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+      z-index:0;
+    }
+    .card .pad{
+      position:relative;
+      z-index:1;
+      padding: 18px;
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-size: 16px;
+      letter-spacing: -.1px;
+    }
+    .card p{
+      margin:0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,.76);
+    }
+    .card ul{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: rgba(255,255,255,.74);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* Pull quote */
+    .quote{
+      border-radius: var(--r2);
+      border:1px solid rgba(240,200,106,.26);
+      background: rgba(0,0,0,.22);
+      padding: 16px 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .quote:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: linear-gradient(120deg, rgba(240,200,106,.12), rgba(123,77,255,.10), transparent 65%);
+      opacity:.95;
+      pointer-events:none;
+    }
+    .quote .inner{
+      position:relative;
+      z-index:1;
+    }
+    .quote .big{
+      margin:0 0 8px;
+      font-size: 18px;
+      line-height:1.45;
+      letter-spacing: -.2px;
+      color: rgba(255,255,255,.92);
+    }
+    .quote .by{
+      margin:0;
+      font-size: 13px;
+      color: rgba(255,255,255,.68);
+    }
+    .gold{ color: var(--gold2); font-weight: 900; }
+
+    /* Interactive: Filter lanes */
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 10px 0 0;
+    }
+    .filterBtn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      color: rgba(255,255,255,.78);
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight: 780;
+      font-size: 12px;
+      letter-spacing: .4px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .filterBtn:hover{ transform: translateY(-1px); border-color: rgba(240,200,106,.32); }
+    .filterBtn.active{
+      border-color: rgba(240,200,106,.52);
+      background: linear-gradient(135deg, rgba(240,200,106,.18), rgba(123,77,255,.12));
+      color: rgba(255,255,255,.92);
+    }
+    .laneGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (max-width: 980px){
+      .laneGrid{ grid-template-columns: 1fr; }
+    }
+    .lane{
+      border-radius: var(--r2);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      padding: 14px;
+      position:relative;
+      overflow:hidden;
+      transition: transform .18s ease, border-color .18s ease;
+      cursor: pointer;
+    }
+    .lane:hover{ transform: translateY(-2px); border-color: rgba(240,200,106,.34); }
+    .lane .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      font-size: 12px;
+      color: rgba(255,255,255,.74);
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+    .lane h4{ margin: 10px 0 6px; font-size: 15px; letter-spacing: -.1px; }
+    .lane p{ margin:0; font-size: 13px; color: rgba(255,255,255,.72); line-height: 1.55; }
+
+    /* Timeline accordion */
+    .timeline{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    details.step{
+      border-radius: var(--r2);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      overflow:hidden;
+    }
+    details.step summary{
+      list-style:none;
+      cursor:pointer;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      user-select:none;
+    }
+    details.step summary::-webkit-details-marker{ display:none; }
+    .sumLeft{
+      display:flex; align-items:center; gap: 12px;
+    }
+    .badgeNum{
+      width: 34px; height: 34px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(240,200,106,.18), rgba(123,77,255,.12));
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 950;
+      color: rgba(255,255,255,.90);
+    }
+    .sumTitle{
+      font-weight: 900;
+      letter-spacing: -.1px;
+    }
+    .chev{
+      width: 28px; height: 28px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      display:flex; align-items:center; justify-content:center;
+      color: rgba(255,255,255,.78);
+      transition: transform .2s ease;
+      flex:0 0 auto;
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+    .stepBody{
+      padding: 0 16px 14px;
+      color: rgba(255,255,255,.74);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 12px;
+    }
+    @media (max-width: 920px){
+      .gallery{ grid-template-columns: 1fr; }
+    }
+    .gMain{
+      border-radius: var(--r2);
+      border: 1px solid rgba(255,255,255,.14);
+      overflow:hidden;
+      background: rgba(0,0,0,.22);
+      position:relative;
+      min-height: 330px;
+      cursor: zoom-in;
+    }
+    .gMain img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.03);
+      filter: contrast(1.02) saturate(1.05);
+    }
+    .gMain:after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 420px at 10% 0%, rgba(240,200,106,.16), transparent 55%),
+        radial-gradient(900px 420px at 100% 20%, rgba(123,77,255,.18), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.75));
+      pointer-events:none;
+    }
+    .gLabel{
+      position:absolute; left:14px; right:14px; bottom:12px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(12px);
+      padding: 12px;
+      display:flex; align-items:flex-start; justify-content:space-between; gap: 10px;
+    }
+    .gLabel .t{ font-weight: 950; letter-spacing:.2px; }
+    .gLabel .s{ margin-top:5px; font-size: 12px; color: rgba(255,255,255,.72); line-height: 1.35; max-width: 64ch; }
+
+    .thumbs{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .thumb{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      overflow:hidden;
+      background: rgba(0,0,0,.20);
+      cursor:pointer;
+      position:relative;
+      min-height: 150px;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .thumb:hover{ transform: translateY(-2px); border-color: rgba(240,200,106,.34); }
+    .thumb img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.03);
+      filter: saturate(1.03) contrast(1.03);
+    }
+    .thumb:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+    .thumb .miniTag{
+      position:absolute; left:10px; bottom:10px;
+      padding: 7px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.30);
+      backdrop-filter: blur(10px);
+      font-size: 11px;
+      color: rgba(255,255,255,.80);
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      z-index:2;
+    }
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(10px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 200;
+      padding: 18px;
+    }
+    .lightbox.open{ display:flex; }
+    .lbPanel{
+      width: min(980px, 100%);
+      border-radius: var(--r2);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.30);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .lbTop{
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 10px;
+      padding: 12px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+    }
+    .lbTop .lbTitle{
+      font-weight: 950;
+      letter-spacing:.2px;
+      font-size: 13px;
+      color: rgba(255,255,255,.86);
+      display:flex; align-items:center; gap:10px;
+    }
+    .lbImgWrap{
+      position:relative;
+      background: rgba(0,0,0,.22);
+    }
+    .lbImg{
+      width:100%;
+      height: auto;
+      display:block;
+    }
+    .lbControls{
+      display:flex; gap: 8px; align-items:center;
+    }
+    .iconBtn{
+      width: 36px; height: 36px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.84);
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .iconBtn:hover{ transform: translateY(-1px); border-color: rgba(240,200,106,.34); }
+    .lbCaption{
+      padding: 12px 14px;
+      color: rgba(255,255,255,.72);
+      font-size: 13px;
+      line-height: 1.5;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+
+    /* Contact / ticket card */
+    .infoGrid{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 14px;
+      align-items: start;
+    }
+    @media (max-width: 900px){
+      .infoGrid{ grid-template-columns: 1fr; }
+    }
+    .pillGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 520px){
+      .pillGrid{ grid-template-columns: 1fr; }
+    }
+    .pill{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      padding: 14px;
+    }
+    .pill .k{
+      font-size: 12px;
+      letter-spacing:.6px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.62);
+    }
+    .pill .v{
+      margin-top: 6px;
+      font-size: 14px;
+      color: rgba(255,255,255,.90);
+      line-height: 1.35;
+    }
+    .pill .v a{
+      text-decoration: underline;
+      text-decoration-color: rgba(240,200,106,.45);
+      text-underline-offset: 3px;
+    }
+
+    /* Footer */
+    .end{
+      padding: 26px 0 96px;
+      color: rgba(255,255,255,.64);
+      font-size: 12px;
+      position:relative;
+      z-index:1;
+    }
+    .hr{
+      height:1px;
+      background: rgba(255,255,255,.12);
+      margin-bottom: 14px;
+    }
+    .tags{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 10px;
+    }
+    .tag{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.72);
+      font-size: 12px;
+    }
+
+    /* Floating CTA */
+    .float{
+      position:fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 120;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-end;
+    }
+    .bubble{
+      width: min(330px, calc(100vw - 32px));
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.28);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 70px rgba(0,0,0,.48);
+      padding: 12px 12px;
+    }
+    .bubbleTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap: 10px;
+    }
+    .bubble .lbl{
+      font-size: 12px;
+      letter-spacing:.6px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.62);
+    }
+    .bubble .count{
+      margin-top: 6px;
+      font-size: 14px;
+      color: rgba(255,255,255,.88);
+      line-height: 1.35;
+    }
+    .bubble .count strong{ color: var(--gold2); }
+    .xBtn{
+      width: 30px; height: 30px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.82);
+      cursor:pointer;
+    }
+    .xBtn:hover{ border-color: rgba(240,200,106,.34); }
+
+    /* Reveal animation */
+    .reveal{
+      opacity:0;
+      transform: translateY(10px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.on{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .headline .shine{ animation:none; }
+      .sigil:after{ animation:none; }
+      .reveal{ transition:none; }
+      .btn,.chip,.thumb,.lane,.filterBtn,.iconBtn{ transition:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="grain"></div>
+  <div class="cursorGlow" id="cursorGlow" aria-hidden="true"></div>
+
+  <div class="topbar">
+    <div class="wrap">
+      <div class="row">
+        <div class="brand">
+          <div class="sigil" aria-hidden="true"></div>
+          <div>
+            <p class="brandTitle">Skyes Over London · Editorial Signal</p>
+            <p class="brandSub">Spotlighting Chicago culture with <span class="gold">community-first</span> energy.</p>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Sections">
+          <a class="chip" href="#why">Why we’re posting</a>
+          <a class="chip" href="#what">What it is</a>
+          <a class="chip" href="#lanes">Who should pull up</a>
+          <a class="chip" href="#details">Details</a>
+          <a class="chip" href="#gallery">Gallery</a>
+          <a class="chip" href="#contact">Contact</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="#details">
+            <span class="dot" aria-hidden="true"></span>
+            Quick Details
+          </a>
+          <a class="btn primary" href="https://www.ticketleap.events/tickets/nogatekeepingchicago/mysfit-s-modern-juke-joint-experience" target="_blank" rel="noopener">
+            🎟️ Tickets
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="heroGrid">
+        <div class="panel reveal">
+          <div class="inner">
+            <div class="kicker">
+              <span class="dot" aria-hidden="true"></span>
+              <span><strong>#NoGateKeepingChicago</strong> • Live Showcase + Networking • Creative Safety</span>
+            </div>
+
+            <h1 class="headline">
+              <span class="shine">Chicago doesn’t need more gatekeepers — it needs rooms like this.</span>
+            </h1>
+
+            <p class="subhead">
+              From the Skyes Over London desk: we’re spotlighting <strong>Mysfit’s Modern Juke Joint Experience</strong> — a modern juke joint built on
+              community, authenticity, and the kind of energy that makes collaboration feel natural again.
+            </p>
+
+            <div class="metaRow">
+              <div class="metaCard">
+                <div class="glyph" aria-hidden="true">🗓️</div>
+                <div>
+                  <h3>Date</h3>
+                  <p>Sunday, January 25, 2026 <small>Chicago (CST)</small></p>
+                </div>
+              </div>
+
+              <div class="metaCard">
+                <div class="glyph" aria-hidden="true">🕕</div>
+                <div>
+                  <h3>Time</h3>
+                  <p>6:00 PM <small>Show + networking energy</small></p>
+                </div>
+              </div>
+
+              <div class="metaCard">
+                <div class="glyph" aria-hidden="true">📍</div>
+                <div>
+                  <h3>Location</h3>
+                  <p>3045 West 63rd Street <small>Chicago, IL 60629</small></p>
+                </div>
+              </div>
+
+              <div class="metaCard">
+                <div class="glyph" aria-hidden="true">✨</div>
+                <div>
+                  <h3>Welcoming</h3>
+                  <p>Singers • Rappers • Burlesque • Musicians • Creatives</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <a class="btn primary" href="https://www.ticketleap.events/tickets/nogatekeepingchicago/mysfit-s-modern-juke-joint-experience" target="_blank" rel="noopener">
+                🔥 Reserve Your Spot
+              </a>
+              <button class="btn" id="addCalBtn" type="button">📅 Add to Calendar</button>
+              <button class="btn" id="copyTicketBtn" type="button">🔗 Copy Ticket Link</button>
+              <button class="btn" id="shareBtn" type="button">📣 Share</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="photo reveal" aria-label="Featured image">
+          <img id="heroImg" src="https://cdn1.sharemyimage.com/2026/01/23/IMG_0999.jpeg" alt="Mysfit’s Modern Juke Joint Experience featured photo" />
+          <div class="photoCaption">
+            <p class="t">A modern juke joint — where the city can breathe again.</p>
+            <p class="s">No clout hierarchy. No pay-to-play pressure. Just Chicago artistry, real connection, and a room built with integrity.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="why">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <h2>Why Skyes Over London is posting this</h2>
+          <p>We’re a systems-and-culture house. When a room protects artists, the whole city gets stronger.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="card reveal">
+            <div class="pad">
+              <h3>Because culture needs infrastructure — not obstacles.</h3>
+              <p>
+                Skyes Over London is built on a simple idea: <span class="gold">culture moves when community is protected</span>.
+                Chicago has never lacked talent — it’s lacked consistent, intentional spaces where artists can build without getting exploited,
+                priced out, or forced into politics just to be seen.
+              </p>
+              <p style="margin-top:10px;">
+                That’s why we amplify rooms with integrity. Rooms where the vibe is respected, boundaries are clear, and the work can speak.
+              </p>
+            </div>
+          </div>
+
+          <div class="quote reveal" role="note" aria-label="Editorial stance">
+            <div class="inner">
+              <p class="big">“If the room makes artists feel safe, seen, and supported — that room is city-building.”</p>
+              <p class="by">Skyes Over London editorial principle — spotlight what strengthens the underground <span class="gold">before</span> it hits the mainstream.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="what">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <h2>What it is</h2>
+          <p>A live showcase + networking experience inspired by traditional juke joints — built for authenticity, collaboration, and creative safety.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="card reveal">
+            <div class="pad">
+              <h3>Mysfit’s Modern Juke Joint Experience</h3>
+              <p>
+                This is a live showcase and networking experience rooted in community, authenticity, and creative safety.
+                Inspired by the spirit of traditional juke joints, it creates intentional space for Chicago artists to perform, connect,
+                and build without gatekeeping, pay-to-play practices, or exploitative promoter energy.
+              </p>
+              <ul>
+                <li>Perform • connect • build</li>
+                <li>Respect-first energy</li>
+                <li>Community over competition</li>
+                <li>Integrity over industry politics</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="pad">
+              <h3>Why it matters</h3>
+              <p>
+                Chicago artists are often discouraged by systems that prioritize clout, budgets, and politics over real artistry.
+                This event is an alternative: a grassroots platform focused on integrity, collaboration, and mental wellness.
+              </p>
+              <p style="margin-top:10px;">
+                Founded by Chicago artist and creative producer <strong>Mahogany “The Mysfit” Mills</strong>, the experience is deeply rooted in mental
+                health advocacy — treating music as a healing and connective force.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lanes">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <h2>Who should pull up</h2>
+          <p>Tap a lane to see why this room makes sense for you — and what to do when you arrive.</p>
+        </div>
+
+        <div class="filters reveal" role="tablist" aria-label="Audience filters">
+          <button class="filterBtn active" data-filter="all" role="tab" aria-selected="true"><span class="dot" aria-hidden="true"></span>All</button>
+          <button class="filterBtn" data-filter="artists" role="tab" aria-selected="false">🎤 Artists</button>
+          <button class="filterBtn" data-filter="supporters" role="tab" aria-selected="false">🤝 Supporters</button>
+          <button class="filterBtn" data-filter="media" role="tab" aria-selected="false">📸 Media + Creatives</button>
+        </div>
+
+        <div class="laneGrid" id="laneGrid">
+          <div class="lane reveal" data-type="artists" tabindex="0" aria-label="Artist lane">
+            <span class="tag">🎤 Artist Lane</span>
+            <h4>For artists tired of performing for approval</h4>
+            <p>
+              If you’ve ever felt “not plugged in enough” — this is the antidote. Come to be heard, meet collaborators, and build before the spotlight hits.
+            </p>
+          </div>
+
+          <div class="lane reveal" data-type="supporters" tabindex="0" aria-label="Supporter lane">
+            <span class="tag">🤝 Supporter Lane</span>
+            <h4>For people who actually love Chicago culture</h4>
+            <p>
+              Pull up and be part of what keeps the city alive. Your presence is support — and the room feels different when the crowd is real.
+            </p>
+          </div>
+
+          <div class="lane reveal" data-type="media" tabindex="0" aria-label="Media and creative lane">
+            <span class="tag">📸 Media + Creative Lane</span>
+            <h4>For photographers, videographers, and builders</h4>
+            <p>
+              If you capture culture, this is where it’s happening. Bring respect, build relationships, and connect with artists in a safe, honest space.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;" class="quote reveal">
+          <div class="inner">
+            <p class="big">Skyes Over London note: rooms like this are how “underground” becomes “unbreakable.”</p>
+            <p class="by"><span class="gold">#NoGateKeepingChicago</span> isn’t a slogan — it’s a standard.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="expect">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <h2>What to expect</h2>
+          <p>Tap to expand each moment — this is a night designed to feel intentional from the first hello to the last connection.</p>
+        </div>
+
+        <div class="timeline">
+          <details class="step reveal">
+            <summary>
+              <div class="sumLeft">
+                <div class="badgeNum">1</div>
+                <div class="sumTitle">Arrive & lock in the vibe</div>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="stepBody">
+              Walk in with respect-first energy. This room is built for creative safety — the goal is community, not competition.
+            </div>
+          </details>
+
+          <details class="step reveal">
+            <summary>
+              <div class="sumLeft">
+                <div class="badgeNum">2</div>
+                <div class="sumTitle">Live showcase moments</div>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="stepBody">
+              A stage built for real artistry — singers, rappers, burlesque performers, musicians, and creatives sharing work in a supportive environment.
+            </div>
+          </details>
+
+          <details class="step reveal">
+            <summary>
+              <div class="sumLeft">
+                <div class="badgeNum">3</div>
+                <div class="sumTitle">Networking that isn’t weird</div>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="stepBody">
+              Meet artists, collaborators, and supporters without the “industry politics” pressure. Think: genuine conversations, real follow-ups, real momentum.
+            </div>
+          </details>
+
+          <details class="step reveal">
+            <summary>
+              <div class="sumLeft">
+                <div class="badgeNum">4</div>
+                <div class="sumTitle">Leave with connections (not just photos)</div>
+              </div>
+              <div class="chev" aria-hidden="true">⌄</div>
+            </summary>
+            <div class="stepBody">
+              If you came for community, you’ll leave with it. This is how the underground becomes a village — before anyone “blows up.”
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="details">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <h2>Event details</h2>
+          <p>Everything you need — ticket link, address, map, calendar file, and contact.</p>
+        </div>
+
+        <div class="infoGrid">
+          <div class="card reveal">
+            <div class="pad">
+              <h3>When + where</h3>
+              <div class="pillGrid">
+                <div class="pill">
+                  <div class="k">Date</div>
+                  <div class="v">Sunday, January 25, 2026</div>
+                </div>
+                <div class="pill">
+                  <div class="k">Time</div>
+                  <div class="v">6:00 PM (CST)</div>
+                </div>
+                <div class="pill">
+                  <div class="k">Location</div>
+                  <div class="v">
+                    3045 West 63rd Street<br/>Chicago, IL 60629
+                  </div>
+                </div>
+                <div class="pill">
+                  <div class="k">Maps</div>
+                  <div class="v">
+                    <a href="https://www.google.com/maps/search/?api=1&query=3045%20West%2063rd%20Street%20Chicago%20IL%2060629" target="_blank" rel="noopener">
+                      Open in Google Maps →
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="actions" style="margin-top:14px;">
+                <a class="btn primary" href="https://www.ticketleap.events/tickets/nogatekeepingchicago/mysfit-s-modern-juke-joint-experience" target="_blank" rel="noopener">
+                  🎟️ Tickets
+                </a>
+                <button class="btn" id="copyAddressBtn" type="button">📌 Copy Address</button>
+                <button class="btn" id="scrollToContactBtn" type="button">✉️ Contact Organizer</button>
+              </div>
+
+              <p style="margin:12px 0 0;color:rgba(255,255,255,.72);font-size:13px;line-height:1.5;">
+                Skyes Over London recommendation: bring one person you trust. Community is contagious — and the room feels different when support is visible.
+              </p>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="pad">
+              <h3>Official promo</h3>
+              <p style="margin-bottom:12px;">
+                Only official visuals. Tap to zoom in.
+              </p>
+
+              <div class="gMain" id="promoZoom" style="min-height:280px;">
+                <img src="https://cdn1.sharemyimage.com/2026/01/23/Black-and-Gold-Psychologist-Business-Card.png" alt="NoGateKeepingChicago promo graphic" />
+                <div class="gLabel">
+                  <div>
+                    <div class="t">#NoGateKeepingChicago</div>
+                    <div class="s">A room built for integrity, collaboration, and creative safety.</div>
+                  </div>
+                  <div style="text-align:right;color:rgba(255,255,255,.72);font-size:12px;">
+                    <div style="font-weight:950;color:var(--gold2);">Jan 25, 2026</div>
+                    <div>Chicago, IL</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="actions" style="margin-top:12px;">
+                <button class="btn" id="copyPressBtn" type="button">🧷 Copy Key Info</button>
+                <button class="btn" id="openTicketsBtn" type="button">🔥 Open Ticket Page</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <h2>Gallery</h2>
+          <p>Tap any image to open the lightbox. Use ← → keys to move through the set.</p>
+        </div>
+
+        <div class="gallery reveal">
+          <div class="gMain" id="gMain" aria-label="Gallery main image">
+            <img id="gMainImg" src="https://cdn1.sharemyimage.com/2026/01/23/0ABF174B-20A0-49B1-848F-98EB032051FE.jpeg" alt="Gallery image" />
+            <div class="gLabel">
+              <div>
+                <div class="t">Mysfit’s Modern Juke Joint Experience</div>
+                <div class="s">Live showcase + networking — community first, no gatekeeping energy.</div>
+              </div>
+              <div style="text-align:right;color:rgba(255,255,255,.72);font-size:12px;">
+                <div style="font-weight:950;color:var(--gold2);">Chicago</div>
+                <div>Jan 25</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="thumbs" aria-label="Gallery thumbnails">
+            <div class="thumb" data-src="https://cdn1.sharemyimage.com/2026/01/23/0ABF174B-20A0-49B1-848F-98EB032051FE.jpeg" data-title="The room, the energy" data-caption="A modern juke joint vibe — built for real artistry and real connection.">
+              <img src="https://cdn1.sharemyimage.com/2026/01/23/0ABF174B-20A0-49B1-848F-98EB032051FE.jpeg" alt="Thumbnail 1" />
+              <div class="miniTag">Energy</div>
+            </div>
+
+            <div class="thumb" data-src="https://cdn1.sharemyimage.com/2026/01/23/69FA893D-80DC-41A2-B420-280A80CEA4ED.jpeg" data-title="Culture without politics" data-caption="No clout hierarchy. No gatekeeping. Just Chicago artistry.">
+              <img src="https://cdn1.sharemyimage.com/2026/01/23/69FA893D-80DC-41A2-B420-280A80CEA4ED.jpeg" alt="Thumbnail 2" />
+              <div class="miniTag">Community</div>
+            </div>
+
+            <div class="thumb" data-src="https://cdn1.sharemyimage.com/2026/01/23/53913BC0-0F08-4A6A-9463-84EE7A58C53D.jpeg" data-title="Build before the blow up" data-caption="An underground village forming in real time — connection first.">
+              <img src="https://cdn1.sharemyimage.com/2026/01/23/53913BC0-0F08-4A6A-9463-84EE7A58C53D.jpeg" alt="Thumbnail 3" />
+              <div class="miniTag">Village</div>
+            </div>
+
+            <div class="thumb" data-src="https://cdn1.sharemyimage.com/2026/01/23/17946136-6897-4DEE-949A-1A0C184776B0.jpeg" data-title="Creative safety is the standard" data-caption="Respect-first energy — where art and wellness can coexist.">
+              <img src="https://cdn1.sharemyimage.com/2026/01/23/17946136-6897-4DEE-949A-1A0C184776B0.jpeg" alt="Thumbnail 4" />
+              <div class="miniTag">Safety</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="sectionHead reveal">
+          <h2>Contact</h2>
+          <p>Questions, collaboration, or media inquiries — reach the organizer directly.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="card reveal">
+            <div class="pad">
+              <h3>Organizer</h3>
+              <p style="margin-bottom:12px;">
+                <strong>Mahogany “The Mysfit” Mills</strong><br/>
+                <span style="color:rgba(255,255,255,.70);">Chicago artist + creative producer</span>
+              </p>
+
+              <div class="actions" style="margin-top:0;">
+                <a class="btn primary" href="mailto:bumahogany@gmail.com">✉️ Email</a>
+                <a class="btn" href="https://www.instagram.com/mahoganythemysfit" target="_blank" rel="noopener">📷 Instagram</a>
+                <a class="btn" href="https://www.facebook.com/search/top?q=Mahogany%20TheMysfit" target="_blank" rel="noopener">📘 Facebook</a>
+              </div>
+
+              <p style="margin-top:12px;color:rgba(255,255,255,.72);font-size:13px;line-height:1.5;">
+                Best regards,<br/>
+                Mahogany “The Mysfit” Mills<br/>
+                <span class="gold">#NoGateKeepingChicago</span> <span style="opacity:.7;">•</span> <span class="gold">#MakeMusicChicagoAgain</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="card reveal">
+            <div class="pad">
+              <h3>Skyes Over London call to action</h3>
+              <p>
+                Chicago is too talented for artists to feel alone. Pull up, support the room, meet your people,
+                and help build a culture that doesn’t require permission to exist.
+              </p>
+
+              <div class="actions" style="margin-top:14px;">
+                <a class="btn primary" href="https://www.ticketleap.events/tickets/nogatekeepingchicago/mysfit-s-modern-juke-joint-experience" target="_blank" rel="noopener">
+                  🔥 Reserve Your Spot
+                </a>
+                <button class="btn" id="copyHashtagsBtn" type="button">🏷️ Copy Hashtags</button>
+              </div>
+
+              <div class="tags" style="margin-top:12px;">
+                <span class="tag">#NoGateKeepingChicago</span>
+                <span class="tag">#MakeMusicChicagoAgain</span>
+                <span class="tag">#ChicagoArtists</span>
+                <span class="tag">#ModernJukeJoint</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="end">
+      <div class="wrap">
+        <div class="hr"></div>
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:flex-start;">
+          <div style="max-width:74ch;">
+            <div style="font-weight:950;color:rgba(255,255,255,.86);">Skyes Over London · Editorial Signal</div>
+            <div style="margin-top:6px;line-height:1.55;">
+              We amplify rooms that protect the underground and respect the craft — because a city’s culture is only as strong as the spaces that hold it.
+            </div>
+          </div>
+          <div style="text-align:right;opacity:.78;">
+            <div>Jan 25, 2026 · 6:00 PM</div>
+            <div>3045 West 63rd Street · Chicago, IL</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Floating countdown + tickets -->
+  <div class="float" aria-live="polite">
+    <div class="bubble" id="countBubble">
+      <div class="bubbleTop">
+        <div>
+          <div class="lbl">Countdown</div>
+          <div class="count" id="countText">Loading…</div>
+        </div>
+        <button class="xBtn" id="hideBubbleBtn" aria-label="Hide countdown">✕</button>
+      </div>
+    </div>
+
+    <a class="btn primary" href="https://www.ticketleap.events/tickets/nogatekeepingchicago/mysfit-s-modern-juke-joint-experience" target="_blank" rel="noopener">
+      🎟️ Get Tickets
+    </a>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lbPanel" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <div class="lbTop">
+        <div class="lbTitle">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="lbTitle">Gallery</span>
+        </div>
+        <div class="lbControls">
+          <button class="iconBtn" id="prevBtn" aria-label="Previous image">←</button>
+          <button class="iconBtn" id="nextBtn" aria-label="Next image">→</button>
+          <button class="iconBtn" id="closeBtn" aria-label="Close viewer">✕</button>
+        </div>
+      </div>
+      <div class="lbImgWrap">
+        <img class="lbImg" id="lbImg" alt="Expanded gallery image" />
+      </div>
+      <div class="lbCaption" id="lbCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    // ====== CONSTANTS ======
+    const TICKET_URL = "https://www.ticketleap.events/tickets/nogatekeepingchicago/mysfit-s-modern-juke-joint-experience";
+    const ADDRESS = "3045 West 63rd Street, Chicago, IL 60629";
+    const HASHTAGS = "#NoGateKeepingChicago #MakeMusicChicagoAgain #ChicagoArtists #ModernJukeJoint";
+
+    // ====== SMOOTH ANCHOR SCROLL ======
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        const y = el.getBoundingClientRect().top + window.scrollY - 78;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      });
+    });
+
+    // ====== REVEAL ON SCROLL ======
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if(en.isIntersecting){
+          en.target.classList.add('on');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ====== TOP PROGRESS BAR ======
+    const progress = document.getElementById('progress');
+    function updateProgress(){
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docH = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docH > 0 ? (scrollTop / docH) * 100 : 0;
+      progress.style.width = pct + "%";
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    // ====== CURSOR GLOW ======
+    const glow = document.getElementById('cursorGlow');
+    let gx = window.innerWidth * 0.5, gy = window.innerHeight * 0.3;
+    let tx = gx, ty = gy;
+    window.addEventListener('mousemove', (e) => {
+      tx = e.clientX; ty = e.clientY;
+    }, { passive: true });
+
+    function animateGlow(){
+      gx += (tx - gx) * 0.12;
+      gy += (ty - gy) * 0.12;
+      glow.style.left = gx + "px";
+      glow.style.top = gy + "px";
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+
+    // ====== HERO IMAGE ROTATOR (only your images) ======
+    const heroImgs = [
+      "https://cdn1.sharemyimage.com/2026/01/23/IMG_0999.jpeg",
+      "https://cdn1.sharemyimage.com/2026/01/23/69FA893D-80DC-41A2-B420-280A80CEA4ED.jpeg",
+      "https://cdn1.sharemyimage.com/2026/01/23/53913BC0-0F08-4A6A-9463-84EE7A58C53D.jpeg"
+    ];
+    const heroImgEl = document.getElementById('heroImg');
+    let heroIdx = 0;
+    setInterval(() => {
+      heroIdx = (heroIdx + 1) % heroImgs.length;
+      heroImgEl.style.opacity = 0.001;
+      setTimeout(() => {
+        heroImgEl.src = heroImgs[heroIdx];
+        heroImgEl.style.opacity = 1;
+      }, 240);
+    }, 5600);
+
+    // ====== FILTER LANES ======
+    const filterBtns = Array.from(document.querySelectorAll('.filterBtn'));
+    const lanes = Array.from(document.querySelectorAll('.lane'));
+
+    function setActiveFilter(type){
+      filterBtns.forEach(b => {
+        const active = b.dataset.filter === type;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      lanes.forEach(l => {
+        const show = (type === 'all') || (l.dataset.type === type);
+        l.style.display = show ? '' : 'none';
+      });
+    }
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => setActiveFilter(btn.dataset.filter));
+    });
+
+    // Lane click micro-interaction (scroll to details)
+    lanes.forEach(l => {
+      const go = () => {
+        const y = document.querySelector('#details').getBoundingClientRect().top + window.scrollY - 78;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      };
+      l.addEventListener('click', go);
+      l.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') go(); });
+    });
+
+    // ====== COPY / SHARE / QUICK ACTIONS ======
+    async function copyText(text, okLabel, btn){
+      try{
+        await navigator.clipboard.writeText(text);
+        const old = btn.textContent;
+        btn.textContent = okLabel;
+        setTimeout(() => btn.textContent = old, 1400);
+      }catch(err){
+        alert("Copy failed. Here it is:\n\n" + text);
+      }
+    }
+
+    document.getElementById('copyTicketBtn').addEventListener('click', (e) => copyText(TICKET_URL, "✅ Ticket Link Copied", e.currentTarget));
+    document.getElementById('copyAddressBtn').addEventListener('click', (e) => copyText(ADDRESS, "✅ Address Copied", e.currentTarget));
+    document.getElementById('copyHashtagsBtn').addEventListener('click', (e) => copyText(HASHTAGS, "✅ Hashtags Copied", e.currentTarget));
+
+    document.getElementById('copyPressBtn').addEventListener('click', (e) => {
+      const press = `Mysfit’s Modern Juke Joint Experience
+A #NoGateKeepingChicago Initiative
+
+Date: Sunday, January 25, 2026
+Time: 6:00 PM (CST)
+Location: 3045 West 63rd Street, Chicago, IL 60629
+
+Tickets: ${TICKET_URL}
+
+Organizer: Mahogany “The Mysfit” Mills
+Email: bumahogany@gmail.com
+Instagram: @mahoganythemysfit
+Facebook: Mahogany TheMysfit
+
+#NoGateKeepingChicago #MakeMusicChicagoAgain`;
+      copyText(press, "✅ Key Info Copied", e.currentTarget);
+    });
+
+    document.getElementById('openTicketsBtn').addEventListener('click', () => window.open(TICKET_URL, "_blank", "noopener"));
+
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      const data = {
+        title: "Mysfit’s Modern Juke Joint Experience",
+        text: "A #NoGateKeepingChicago live showcase + networking night rooted in community, authenticity, and creative safety.",
+        url: TICKET_URL
+      };
+      try{
+        if(navigator.share){
+          await navigator.share(data);
+        }else{
+          await navigator.clipboard.writeText(TICKET_URL);
+          const btn = document.getElementById('shareBtn');
+          const old = btn.textContent;
+          btn.textContent = "✅ Link Copied";
+          setTimeout(() => btn.textContent = old, 1400);
+        }
+      }catch(e){
+        // user canceled share or not available
+      }
+    });
+
+    document.getElementById('scrollToContactBtn').addEventListener('click', () => {
+      const y = document.querySelector('#contact').getBoundingClientRect().top + window.scrollY - 78;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+
+    // ====== ADD TO CALENDAR (ICS) ======
+    function toICSDate(d){
+      const pad = n => String(n).padStart(2,'0');
+      return d.getUTCFullYear() + pad(d.getUTCMonth()+1) + pad(d.getUTCDate()) + "T" +
+             pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + "Z";
+    }
+    document.getElementById('addCalBtn').addEventListener('click', (e) => {
+      // Event at 6:00 PM CST on Jan 25, 2026 -> UTC is Jan 26, 00:00Z
+      const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SkyesOverLondon//ModernJukeJoint//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:${Date.now()}@skyesoverlondon
+DTSTAMP:${toICSDate(new Date())}
+DTSTART:20260126T000000Z
+DTEND:20260126T033000Z
+SUMMARY:Mysfit’s Modern Juke Joint Experience (#NoGateKeepingChicago)
+DESCRIPTION:Live showcase + networking rooted in community, authenticity, and creative safety. Tickets: ${TICKET_URL}
+LOCATION:${ADDRESS}
+URL:${TICKET_URL}
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([ics], { type:"text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "Mysfits-Modern-Juke-Joint-Experience.ics";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+
+      const btn = e.currentTarget;
+      const old = btn.textContent;
+      btn.textContent = "✅ Calendar Downloaded";
+      setTimeout(() => btn.textContent = old, 1600);
+    });
+
+    // ====== COUNTDOWN ======
+    const countText = document.getElementById('countText');
+    const eventStart = new Date("2026-01-25T18:00:00-06:00"); // CST
+    const eventEnd   = new Date("2026-01-25T21:30:00-06:00"); // optional end
+
+    function updateCountdown(){
+      const now = new Date();
+      if(now < eventStart){
+        const ms = eventStart - now;
+        const d = Math.floor(ms / (1000*60*60*24));
+        const h = Math.floor((ms / (1000*60*60)) % 24);
+        const m = Math.floor((ms / (1000*60)) % 60);
+        countText.innerHTML = `Starts in <strong>${d}d</strong> <strong>${h}h</strong> <strong>${m}m</strong> — pull up on time.`;
+      }else if(now >= eventStart && now <= eventEnd){
+        const ms = eventEnd - now;
+        const h = Math.floor(ms / (1000*60*60));
+        const m = Math.floor((ms / (1000*60)) % 60);
+        countText.innerHTML = `Happening now — <strong>${h}h</strong> <strong>${m}m</strong> left.`;
+      }else{
+        countText.innerHTML = `This one has ended — stay tapped in for the next <strong>#NoGateKeepingChicago</strong> experience.`;
+      }
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 30000);
+
+    // Hide countdown bubble
+    document.getElementById('hideBubbleBtn').addEventListener('click', () => {
+      document.getElementById('countBubble').style.display = 'none';
+    });
+
+    // ====== GALLERY MAIN + LIGHTBOX ======
+    const thumbs = Array.from(document.querySelectorAll('.thumb'));
+    const gMain = document.getElementById('gMain');
+    const gMainImg = document.getElementById('gMainImg');
+
+    function setMain(src){
+      gMainImg.style.opacity = 0.001;
+      setTimeout(() => {
+        gMainImg.src = src;
+        gMainImg.style.opacity = 1;
+      }, 160);
+    }
+    thumbs.forEach(t => {
+      t.addEventListener('click', () => setMain(t.dataset.src));
+    });
+
+    // Lightbox state
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbCaption = document.getElementById('lbCaption');
+    const galleryItems = thumbs.map(t => ({
+      src: t.dataset.src,
+      title: t.dataset.title || "Gallery",
+      caption: t.dataset.caption || ""
+    }));
+    let lbIndex = 0;
+
+    function openLightbox(index){
+      lbIndex = index;
+      const item = galleryItems[lbIndex];
+      lbImg.src = item.src;
+      lbTitle.textContent = item.title;
+      lbCaption.textContent = item.caption;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function next(){
+      lbIndex = (lbIndex + 1) % galleryItems.length;
+      const item = galleryItems[lbIndex];
+      lbImg.src = item.src;
+      lbTitle.textContent = item.title;
+      lbCaption.textContent = item.caption;
+    }
+    function prev(){
+      lbIndex = (lbIndex - 1 + galleryItems.length) % galleryItems.length;
+      const item = galleryItems[lbIndex];
+      lbImg.src = item.src;
+      lbTitle.textContent = item.title;
+      lbCaption.textContent = item.caption;
+    }
+
+    // Click main image opens lightbox using current main selection
+    gMain.addEventListener('click', () => {
+      const currentSrc = gMainImg.src;
+      const i = galleryItems.findIndex(it => it.src === currentSrc);
+      openLightbox(i >= 0 ? i : 0);
+    });
+
+    // Promo zoom opens lightbox with promo
+    document.getElementById('promoZoom').addEventListener('click', () => {
+      // Show promo as a single-item lightbox
+      lbIndex = 0;
+      lbImg.src = "https://cdn1.sharemyimage.com/2026/01/23/Black-and-Gold-Psychologist-Business-Card.png";
+      lbTitle.textContent = "#NoGateKeepingChicago Promo";
+      lbCaption.textContent = "Official promo visual — built for integrity, collaboration, and creative safety.";
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Open lightbox when clicking a thumbnail (with correct index)
+    thumbs.forEach((t, idx) => {
+      t.addEventListener('dblclick', () => openLightbox(idx));
+      // optional: long-press behavior not implemented for simplicity
+    });
+
+    document.getElementById('closeBtn').addEventListener('click', closeLightbox);
+    document.getElementById('nextBtn').addEventListener('click', next);
+    document.getElementById('prevBtn').addEventListener('click', prev);
+
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) closeLightbox();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+    });
+  </script>
+</body>
+</html>
