@@ -16,7 +16,15 @@ function decodeValue(raw) {
 }
 
 function wrapStore(base) {
-  if (!base) return base;
+  const fallback = {
+    async getJSON() {
+      return null;
+    },
+    async setJSON() {
+      return;
+    },
+  };
+  if (!base) return fallback;
   return {
     ...base,
     async getJSON(key) {
