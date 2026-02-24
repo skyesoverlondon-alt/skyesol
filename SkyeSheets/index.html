@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#05040a" />
+  <title>SkyeSheets | Data Canvas</title>
+  <meta name="description" content="SkyeSheets replaces spreadsheet suites with a Kaixu-powered data canvas: datasets, pivot outputs, and formula streams all go through kAIxuGateway13." />
+  <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .sheet-card { background: var(--surface); border-radius: 12px; padding: 26px; border: 1px solid rgba(201,168,76,0.12); box-shadow: 0 20px 60px rgba(0,0,0,0.45); }
+    .sheet-card h3 { font-family: 'Playfair Display', serif; margin-bottom: 12px; }
+    .sheet-card textarea { width: 100%; min-height: 160px; background: rgba(255,255,255,0.02); border: 1px solid rgba(201,168,76,0.2); border-radius: 6px; padding: 14px; font-family: 'Fira Code', monospace; color: #fff; }
+    .sheet-card table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
+    .sheet-card th, .sheet-card td { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 8px; text-align: left; }
+    .sheet-card .actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .sheet-card .status-pill { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); font-size: 12px; letter-spacing: 1px; }
+    .sheet-card .status-pill.alert { border-color: #ff7070; color: #ff9a9a; }
+    .sheet-output { min-height: 140px; background: rgba(255,255,255,0.02); border-radius: 6px; border: 1px solid rgba(201,168,76,0.12); padding: 16px; font-family: 'Fira Code', monospace; font-size: 13px; overflow-y: auto; }
+    .budget-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .budget-card { background: rgba(255,255,255,0.02); border-radius: 6px; border: 1px solid rgba(201,168,76,0.12); padding: 16px; }
+    .tutorial-grid { margin-top: 36px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  </style>
+</head>
+<body>
+  <canvas id="three-bg"></canvas>
+  <nav class="main-nav">
+    <a href="../index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="../SkyeFlow/index.html">SkyeFlow</a>
+      <a href="../SkyeArchive/index.html">SkyeArchive</a>
+      <a href="../SkyeCollab/index.html">SkyeCollab</a>
+      <a href="../SkyeLedger/index.html">SkyeLedger</a>
+      <a class="active" href="index.html">SkyeSheets</a>
+      <a href="../SkyeOps/index.html">SkyeOps</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="section-label">Skye Suite · Sheets</div>
+    <h1>SkyeSheets <span>Data & Formula Canvas</span></h1>
+    <p class="section-desc">Modern spreadsheet workflows, but powered by kAIxuGateway13, kaixuStreamChat, and broadcast diagnostics. Dataset insights, formula streaming, and budget guardrails replace every Google Sheet.</p>
+    <div class="key-panel">
+      <input id="kaixu-key" type="password" placeholder="Kaixu Virtual Key" autocomplete="new-password" />
+      <button id="save-key">Store key</button>
+      <span style="font-size:12px;color:rgba(255,255,255,0.65);">KAIXU_VIRTUAL_KEY only.</span>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="section-title">Dataset & insights</div>
+    <div class="grid-two">
+      <div class="sheet-card">
+        <h3>Dataset loader</h3>
+        <textarea id="dataset-input">Region,Revenue,Margin
+East,345000,0.18
+West,412000,0.21
+South,287000,0.17</textarea>
+        <div class="actions">
+          <button class="btn btn-gold" id="load-dataset">Load dataset</button>
+        </div>
+        <div class="sheet-output" id="dataset-table">Parsed dataset will appear here.</div>
+        <div class="status-pill" id="dataset-status">Ready</div>
+      </div>
+      <div class="sheet-card">
+        <h3>Insight & formula console</h3>
+        <textarea id="analysis-prompt">Describe five risks if West region margins drop 500 basis points. Then suggest two formulas to hedge.</textarea>
+        <div class="actions">
+          <button class="btn btn-outline" id="insight-button">Generate insight</button>
+          <button class="btn btn-gold" id="formula-stream">Stream formula</button>
+        </div>
+        <div class="sheet-output" id="insight-output">Insight output streams here.</div>
+        <div class="sheet-output" id="formula-output" style="margin-top:12px;">Formula deltas appear here.</div>
+        <div class="status-pill" id="insight-status">Awaiting request</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Budget & diagnostics</div>
+    <div class="budget-grid">
+      <div class="budget-card"><p>Cap</p><strong id="cap-display">—</strong></div>
+      <div class="budget-card"><p>Spent</p><strong id="spent-display">—</strong></div>
+      <div class="budget-card"><p>Remaining</p><strong id="remaining-display">—</strong></div>
+      <div class="budget-card"><p>Provider</p><strong id="provider-display">gemini</strong><p>Model</p><strong id="model-display">gemini-2.0-flash</strong></div>
+      <div class="budget-card"><p>Diagnostics</p><strong id="diagnostics">No sessions yet.</strong><p>Last delta</p><strong id="last-delta">—</strong></div>
+    </div>
+    <div class="sheet-output" id="diagnostic-log" style="margin-top:20px;min-height:120px;">BroadcastChannel logs appear here.</div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Tutorial</div>
+    <div class="tutorial-grid">
+      <div class="sheet-card">
+        <h3>Step 1 · Load your dataset</h3>
+        <p>Paste CSV or tabular data, click load, and confirm the rendered table before making any AI requests.</p>
+      </div>
+      <div class="sheet-card">
+        <h3>Step 2 · Ask the canvas</h3>
+        <p>Use the insight prompt to summarize risks or build formulas; the `/api/gateway-chat` result populates the insight console and updates budgets.</p>
+      </div>
+      <div class="sheet-card">
+        <h3>Step 3 · Stream formulas</h3>
+        <p>Stream formulas through `/api/gateway-stream`, watch `delta` chunks arrive, and keep the usage ledger visible to stop when 402 or caps appear.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+    <p>SkyeSheets · kAIxuGateway13 · kaixuStreamChat helper · BroadcastChannel diagnostics.</p>
+  </footer>
+
+  <div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+    <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+    <div class="mega-nav-grid">
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Navigate</div>
+        <a href="../index.html">Home</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="../SkyeFlow/index.html">SkyeFlow</a>
+        <a href="../SkyeArchive/index.html">SkyeArchive</a>
+        <a href="../SkyeCollab/index.html">SkyeCollab</a>
+        <a href="../SkyeLedger/index.html">SkyeLedger</a>
+        <a href="index.html">SkyeSheets</a>
+        <a href="../SkyeOps/index.html">SkyeOps</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Platform</div>
+        <a href="../dashboard.html">Dashboard</a>
+        <a href="../admin.html">Admin CMS</a>
+        <a href="../vault.html">Client Vault</a>
+        <a href="../status.html">Status</a>
+        <a href="../blog.html">Blog Hub</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx App</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Company</div>
+        <a href="../sitemap-visual.html">Site Map</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/three-bg.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/growth.js"></script>
+  <script>
+    const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
+    const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
+    const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
+    const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
+    const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.6 };
+
+    const diagChannel = new BroadcastChannel('kaixu_events');
+    const keyInput = document.getElementById('kaixu-key');
+    const saveKeyButton = document.getElementById('save-key');
+    const datasetInput = document.getElementById('dataset-input');
+    const datasetTable = document.getElementById('dataset-table');
+    const datasetStatus = document.getElementById('dataset-status');
+    const loadButton = document.getElementById('load-dataset');
+    const analysisPrompt = document.getElementById('analysis-prompt');
+    const insightButton = document.getElementById('insight-button');
+    const formulaButton = document.getElementById('formula-stream');
+    const insightOutput = document.getElementById('insight-output');
+    const formulaOutput = document.getElementById('formula-output');
+    const insightStatus = document.getElementById('insight-status');
+    const capDisplay = document.getElementById('cap-display');
+    const spentDisplay = document.getElementById('spent-display');
+    const remainingDisplay = document.getElementById('remaining-display');
+    const providerDisplay = document.getElementById('provider-display');
+    const modelDisplay = document.getElementById('model-display');
+    const diagnosticsEl = document.getElementById('diagnostics');
+    const lastDeltaEl = document.getElementById('last-delta');
+    const diagnosticLog = document.getElementById('diagnostic-log');
+
+    let kaixuKey = localStorage.getItem('kaixu_virtual_key') || '';
+    keyInput.value = kaixuKey;
+    const ensureKey = () => kaixuKey && kaixuKey.trim().length > 0;
+
+    saveKeyButton.addEventListener('click', () => {
+      const value = keyInput.value.trim();
+      if (!value) {
+        updateInsight('Store the Kaixu key first.', true);
+        return;
+      }
+      kaixuKey = value;
+      localStorage.setItem('kaixu_virtual_key', kaixuKey);
+      updateInsight('Key stored.', false);
+      logDiagnostic('key-saved', { stored: true });
+    });
+
+    loadButton.addEventListener('click', () => {
+      parseDataset();
+    });
+
+    insightButton.addEventListener('click', () => {
+      if (!ensureKey()) return updateInsight('Provide Kaixu key to proceed.', true);
+      insightStatus.textContent = 'Consulting';
+      runInsight();
+    });
+
+    formulaButton.addEventListener('click', () => {
+      if (!ensureKey()) return updateInsight('Provide Kaixu key to proceed.', true);
+      insightStatus.textContent = 'Streaming';
+      streamFormula();
+    });
+
+    function parseDataset() {
+      datasetStatus.textContent = 'Parsing';
+      const lines = datasetInput.value.trim().split('\n').filter(Boolean);
+      if (!lines.length) {
+        datasetTable.textContent = 'No rows provided.';
+        datasetStatus.textContent = 'Empty dataset';
+        return;
+      }
+      const headers = lines[0].split(',').map(h => h.trim());
+      const rows = lines.slice(1).map(line => line.split(',').map(cell => cell.trim()));
+      const table = document.createElement('table');
+      const thead = document.createElement('thead');
+      thead.innerHTML = `<tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>`;
+      table.appendChild(thead);
+      const tbody = document.createElement('tbody');
+      rows.forEach(cells => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = cells.map(cell => `<td>${cell}</td>`).join('');
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      datasetTable.innerHTML = '';
+      datasetTable.appendChild(table);
+      datasetStatus.textContent = 'Loaded';
+    }
+
+    async function runInsight() {
+      insightOutput.textContent = 'Contacting gateway...';
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are a CFO-grade analyst translating datasets into insights.' },
+          { role: 'user', content: analysisPrompt.value }
+        ]
+      };
+      try {
+        const response = await postToGateway([KAIXU_CHAT_ENDPOINT, KAIXU_FALLBACK_CHAT], payload);
+        await handleNonStreamResponse(response, 'sheets-insight', insightOutput);
+      } catch (error) {
+        updateInsight(`Insight failed: ${error.message}`, true);
+        logDiagnostic('sheets-insight-error', { error: error.message });
+      }
+    }
+
+    async function streamFormula() {
+      formulaOutput.textContent = '';
+      await kaixuStreamChat(kaixuKey, {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'Stream formula deltas for the dataset, referencing column names and budgets.' },
+          { role: 'user', content: analysisPrompt.value }
+        ]
+      }, {
+        onMeta(meta) {
+          providerDisplay.textContent = meta.provider || DEFAULT_PAYLOAD.provider;
+          modelDisplay.textContent = meta.model || DEFAULT_PAYLOAD.model;
+          updateBudget(meta.month);
+          logDiagnostic('sheets-meta', meta);
+        },
+        onDelta(delta) {
+          formulaOutput.textContent += `${delta.label || 'delta'}: ${delta.text || ''}\n\n`;
+          lastDeltaEl.textContent = delta.label || 'delta chunk';
+          logDiagnostic('sheets-delta', delta);
+        },
+        onDone(done) {
+          updateInsight('Formula stream complete.', false);
+          updateBudget(done.month);
+          logDiagnostic('sheets-done', done);
+        },
+        onError(err) {
+          updateInsight(err.message, true, err.code === 402);
+          logDiagnostic('sheets-stream-error', err);
+        }
+      });
+    }
+
+    async function postToGateway(endpoints, payload) {
+      let lastError;
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${kaixuKey}`
+            },
+            body: JSON.stringify(payload)
+          });
+          return response;
+        } catch (err) {
+          lastError = err;
+        }
+      }
+      throw lastError || new Error('Gateway unreachable');
+    }
+
+    async function handleNonStreamResponse(response, label, outputEl) {
+      if (!response) {
+        updateInsight('No gateway response.', true);
+        return;
+      }
+      if (response.status === 402) {
+        updateInsight('Monthly cap reached.', true, true);
+        return;
+      }
+      if (response.status === 401) {
+        updateInsight('Invalid Kaixu Key.', true);
+        return;
+      }
+      if (response.status === 429) {
+        updateInsight('Rate limited.', true);
+        return;
+      }
+      if (response.status === 500) {
+        updateInsight('Gateway error.', true);
+        return;
+      }
+      if (![200, 201].includes(response.status)) {
+        updateInsight(`Gateway ${response.status} error.`, true);
+        logDiagnostic(label, { status: response.status });
+        return;
+      }
+      const data = await response.json();
+      outputEl.textContent = data.output_text || data.result || 'No output returned.';
+      updateBudget(data.month);
+      updateInsight('Insight delivered.', false);
+      logDiagnostic(label, data);
+    }
+
+    function updateBudget(monthData) {
+      if (!monthData) return;
+      const cap = monthData.cap_cents / 100;
+      const spent = monthData.spent_cents / 100;
+      const remaining = Math.max(cap - spent, 0);
+      capDisplay.textContent = Intl.NumberFormat().format(cap);
+      spentDisplay.textContent = Intl.NumberFormat().format(spent);
+      remainingDisplay.textContent = Intl.NumberFormat().format(remaining);
+    }
+
+    function updateInsight(message, isError = false, blocked = false) {
+      insightStatus.textContent = blocked ? 'Blocked' : (isError ? 'Error' : 'Ready');
+      insightStatus.classList.toggle('alert', isError || blocked);
+      diagnosticsEl.textContent = `${message} @ ${new Date().toISOString()}`;
+    }
+
+    function kaixuStreamChat(key, payload, { onMeta, onDelta, onDone, onError }) {
+      const endpoints = [KAIXU_STREAM_ENDPOINT, KAIXU_FALLBACK_STREAM];
+      return new Promise(async (resolve) => {
+        let lastError;
+        for (const endpoint of endpoints) {
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${key}`
+              },
+              body: JSON.stringify(payload)
+            });
+            if (response.status === 402) {
+              onError && onError({ code: 402, message: 'Monthly cap reached' });
+              return resolve();
+            }
+            if (response.status === 401) {
+              onError && onError({ code: 401, message: 'Invalid Kaixu Key' });
+              return resolve();
+            }
+            if (!response.ok) {
+              const errorBody = await response.text().catch(() => '');
+              onError && onError({ code: response.status, message: errorBody || `Gateway ${response.status}` });
+              return resolve();
+            }
+            if (!response.body) throw new Error('No stream body returned.');
+            await readSSEStream(response.body.getReader(), { onMeta, onDelta, onDone, onError });
+            return resolve();
+          } catch (err) {
+            lastError = err;
+          }
+        }
+        onError && onError({ code: 'network', message: `All stream endpoints failed: ${lastError?.message || 'unknown'}` });
+        resolve();
+      });
+    }
+
+    async function readSSEStream(reader, { onMeta, onDelta, onDone, onError }) {
+      const decoder = new TextDecoder();
+      let buffer = '';
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const events = buffer.split('\n\n');
+        buffer = events.pop();
+        for (const chunk of events) {
+          const lines = chunk.split(/\r?\n/).filter(Boolean);
+          if (!lines.length) continue;
+          let eventName = 'message';
+          let dataLine = '';
+          for (const line of lines) {
+            if (line.startsWith('event:')) eventName = line.replace('event:', '').trim();
+            if (line.startsWith('data:')) dataLine += line.replace('data:', '').trim();
+          }
+          if (!dataLine) continue;
+          try {
+            const parsed = JSON.parse(dataLine);
+            if (eventName === 'meta') onMeta && onMeta(parsed);
+            if (eventName === 'delta') onDelta && onDelta(parsed);
+            if (eventName === 'done') onDone && onDone(parsed);
+            if (eventName === 'error') onError && onError(parsed);
+          } catch (err) {
+            console.warn('Invalid SSE payload', err);
+          }
+        }
+      }
+    }
+
+    function logDiagnostic(source, payload) {
+      diagnosticsEl.textContent = `${source} @ ${new Date().toISOString()}`;
+      diagChannel.postMessage({ source, payload, timestamp: Date.now() });
+      diagnosticLog.textContent = `${source}: ${JSON.stringify(payload)}\n${diagnosticLog.textContent}`;
+    }
+
+    window.addEventListener('beforeunload', () => {
+      if (navigator.sendBeacon) {
+        const blob = new Blob([JSON.stringify({ event: 'unload', ts: Date.now() })], { type: 'application/json' });
+        navigator.sendBeacon('/api/logs', blob);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#05040a">
+  <title>SkyeOps | Mission Control</title>
+  <meta name="description" content="SkyeOps listens for keywords in SkyeDocx templates, fires kAIxuGateway13 streams, and pauses when caps are hit while logging usage to Neon via BroadcastChannel heartbeats.">
+  <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 26px;
+    }
+    .ops-card {
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 10px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
+    .ops-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .ops-card textarea {
+      width: 100%;
+      min-height: 140px;
+      border-radius: 6px;
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(255,255,255,0.02);
+      color: #f8f5ff;
+      padding: 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+    }
+    .ops-card .actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 12px; }
+    .status-pill { padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); letter-spacing: 1px; font-size: 12px; text-transform: uppercase; display: flex; justify-content: space-between; }
+    .status-pill.alert { border-color: #ff7070; color: #ff9a9a; }
+    .status-pill.active { border-color: var(--gold); color: var(--gold); }
+    .output-box { margin-top: 14px; min-height: 160px; border-radius: 6px; border: 1px solid rgba(201,168,76,0.18); padding: 14px; background: rgba(255,255,255,0.02); font-family: 'Fira Code', monospace; font-size: 13px; line-height: 1.7; overflow-y: auto; }
+    .timeline-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .timeline-list li { padding: 12px 14px; border-radius: 6px; border: 1px solid rgba(201,168,76,0.08); background: rgba(255,255,255,0.02); }
+    .ops-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .key-panel { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .key-panel input { flex: 1; min-width: 260px; }
+  </style>
+</head>
+<body>
+  <canvas id="three-bg"></canvas>
+  <nav class="main-nav" id="mainNav">
+    <a href="../index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">Founder</a>
+      <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="../SkyeFlow/index.html">SkyeFlow</a>
+      <a href="../SkyeArchive/index.html">SkyeArchive</a>
+      <a href="../SkyeCollab/index.html">SkyeCollab</a>
+      <a class="active" href="index.html">SkyeOps</a>
+      <a href="../platforms.html">Platforms</a>
+      <a href="../network.html">Network</a>
+      <a href="../credibility.html">Credibility</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../status.html">Status</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn">☰ MENU</button>
+  </nav>
+
+  <div class="page-header">
+    <div class="section-label">Skye Suite · Ops Control</div>
+    <h1>SkyeOps <span>Mission Control</span></h1>
+    <p class="section-desc">Listen for keywords embedded in SkyeDocx templates, fire kAIxuGateway13 streams with the shared helper, and pause or resume the timeline when caps are hit. Every response logs usage through the kaixu_events BroadcastChannel and the Neon-backed logs endpoint.</p>
+    <div class="key-panel">
+      <input id="kaixu-key" type="password" placeholder="Kaixu Virtual Key" autocomplete="new-password">
+      <button id="save-key">Store key</button>
+      <span style="font-size:12px;color:rgba(255,255,255,0.65);">KAIXU_VIRTUAL_KEY is the only persisted secret.</span>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="section-title">Keyword-driven playbooks</div>
+    <p class="section-desc">Define the keyword triggers, start the stream, pause when the plan is capped, and resume only after budgets clear.</p>
+    <div class="ops-grid">
+      <div class="ops-card">
+        <h3>Trigger keywords</h3>
+        <textarea id="keyword-input">Listen for commands like: deploy.ops|escalate-legal|compliance-pulse</textarea>
+        <div class="ops-controls">
+          <button class="btn btn-gold" id="start-ops">Start ops run</button>
+          <button class="btn btn-outline" id="pause-ops">Pause stream</button>
+          <button class="btn btn-outline" id="resume-ops">Resume stream</button>
+        </div>
+        <div class="status-grid">
+          <span class="status-pill active" id="ops-pill">Idle</span>
+          <span class="status-pill" id="alert-pill">No alerts</span>
+          <span class="status-pill" id="controller-pill">Stopped</span>
+        </div>
+        <div class="output-box" id="ops-output">Stream logs appear here.</div>
+      </div>
+      <div class="ops-card">
+        <h3>Ops timeline</h3>
+        <p>Every `meta`, `delta`, and `done` event charts status so you can pause/resume when budgets change.</p>
+        <ul class="timeline-list" id="ops-timeline"></ul>
+        <div class="ops-controls" style="margin-top:20px;">
+          <button class="btn btn-outline" id="reset-timeline">Clear timeline</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Budget & diagnostics</div>
+    <p class="section-desc">Every gateway response ships usage metadata via `kaixu_events`, and the Neon logs endpoint keeps a heartbeat for auditing.</p>
+    <div class="budget-matrix">
+      <div class="budget-card"><p>Cap</p><strong id="budget-cap">—</strong></div>
+      <div class="budget-card"><p>Spent</p><strong id="budget-spent">—</strong></div>
+      <div class="budget-card"><p>Remaining</p><strong id="budget-remaining">—</strong></div>
+      <div class="budget-card"><p>Provider</p><strong id="provider-display">gemini</strong><p>Model</p><strong id="model-display">gemini-2.0-flash</strong></div>
+      <div class="budget-card"><p>Diagnostics</p><strong id="diagnostics">idle</strong><p>Last label</p><strong id="last-label">—</strong></div>
+    </div>
+    <div class="output-box" id="diagnostic-log" style="margin-top:20px; min-height:120px;">BroadcastChannel &amp; Neon logs live here.</div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Tutorial</div>
+    <p class="section-desc">Follow Ops mission-control steps to keep streams under budget.</p>
+    <div class="workflow-grid">
+      <div class="ops-card">
+        <h3>Step 1 · Store the key</h3>
+        <p>Use the hero key panel so keyword-triggered streams authenticate through kAIxuGateway13 only.</p>
+      </div>
+      <div class="ops-card">
+        <h3>Step 2 · Start the stream</h3>
+        <p>Insert keywords and click "Start ops run". The stream connects to `/api/gateway-stream` with `meta/delta/done` diagnostics captured.</p>
+      </div>
+      <div class="ops-card">
+        <h3>Step 3 · Control caps</h3>
+        <p>Pause/resume using the buttons when you see 402 or budget warnings in the timeline; the ledger state is rendered in the budget grid.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+    <p>SkyeOps · kAIxuGateway13 · kaixuStreamChat helper · BroadcastChannel diagnostics &amp; Neon logs.</p>
+  </footer>
+
+  <div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+    <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+    <div class="mega-nav-grid">
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Navigate</div>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">Founder</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="../SkyeFlow/index.html">SkyeFlow</a>
+        <a href="../SkyeArchive/index.html">SkyeArchive</a>
+        <a href="../SkyeCollab/index.html">SkyeCollab</a>
+        <a href="index.html">SkyeOps</a>
+        <a href="../platforms.html">Platforms</a>
+        <a href="../network.html">Network</a>
+        <a href="../credibility.html">Credibility</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../status.html">Status</a>
+        <a href="../contact.html">Contact</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Platform</div>
+        <a href="../dashboard.html">Dashboard</a>
+        <a href="../admin.html">Admin CMS</a>
+        <a href="../vault.html">Client Vault</a>
+        <a href="../status.html">Status</a>
+        <a href="../blog.html">Blog Hub</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx App</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Company</div>
+        <a href="../sitemap-visual.html">Site Map</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/three-bg.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/growth.js"></script>
+  <script>
+    const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
+    const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
+    const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
+    const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
+    const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.45 };
+
+    const diagChannel = new BroadcastChannel('kaixu_events');
+    const keyInput = document.getElementById('kaixu-key');
+    const saveKeyButton = document.getElementById('save-key');
+    const keywordInput = document.getElementById('keyword-input');
+    const startButton = document.getElementById('start-ops');
+    const pauseButton = document.getElementById('pause-ops');
+    const resumeButton = document.getElementById('resume-ops');
+    const resetTimeline = document.getElementById('reset-timeline');
+    const opsOutput = document.getElementById('ops-output');
+    const opsTimeline = document.getElementById('ops-timeline');
+    const opsPill = document.getElementById('ops-pill');
+    const alertPill = document.getElementById('alert-pill');
+    const controllerPill = document.getElementById('controller-pill');
+    const budgetCap = document.getElementById('budget-cap');
+    const budgetSpent = document.getElementById('budget-spent');
+    const budgetRemaining = document.getElementById('budget-remaining');
+    const providerDisplay = document.getElementById('provider-display');
+    const modelDisplay = document.getElementById('model-display');
+    const diagnosticsEl = document.getElementById('diagnostics');
+    const lastLabelEl = document.getElementById('last-label');
+    const diagnosticLog = document.getElementById('diagnostic-log');
+
+    let kaixuKey = localStorage.getItem('kaixu_virtual_key') || '';
+    let opsController = null;
+    let isPaused = false;
+    keyInput.value = kaixuKey;
+    const ensureKey = () => kaixuKey && kaixuKey.trim().length > 0;
+
+    saveKeyButton.addEventListener('click', () => {
+      const value = keyInput.value.trim();
+      if (!value) {
+        updateAlert('Kaixu key required.', true);
+        return;
+      }
+      kaixuKey = value;
+      localStorage.setItem('kaixu_virtual_key', kaixuKey);
+      updateAlert('Kaixu key saved.', false);
+      logDiagnostic('key-saved', { stored: true });
+    });
+
+    startButton.addEventListener('click', () => {
+      if (!ensureKey()) {
+        updateAlert('Kaixu key required.', true);
+        return;
+      }
+      isPaused = false;
+      runOpsStream('start');
+    });
+
+    pauseButton.addEventListener('click', () => {
+      if (!opsController) { updateAlert('No stream active.', true); return; }
+      isPaused = true;
+      updateControllers('Paused');
+      opsController.abort();
+      updateAlert('Ops stream paused.', false);
+      opsPill.textContent = 'Paused';
+    });
+
+    resumeButton.addEventListener('click', () => {
+      if (!ensureKey()) { updateAlert('Kaixu key required.', true); return; }
+      isPaused = false;
+      runOpsStream('resume');
+    });
+
+    resetTimeline.addEventListener('click', () => { opsTimeline.innerHTML = ''; });
+
+    async function runOpsStream(label) {
+      if (opsController) {
+        opsController.abort();
+      }
+      opsController = new AbortController();
+      controllerPill.textContent = 'Streaming';
+      opsPill.textContent = label === 'resume' ? 'Resuming' : 'Streaming';
+      opsOutput.textContent = `${label === 'resume' ? 'Resuming stream...' : 'Initiating ops stream...'}\n`;
+      appendTimeline(`Ops ${label}`, 'Triggered', keywordInput.value);
+      updateAlert('Ops stream active...', false);
+
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are SkyeOps mission control parsing keywords and dispatching alerts.' },
+          { role: 'user', content: keywordInput.value }
+        ]
+      };
+
+      await kaixuStreamChat(kaixuKey, payload, {
+        controller: opsController,
+        onMeta(meta) {
+          providerDisplay.textContent = meta.provider || DEFAULT_PAYLOAD.provider;
+          modelDisplay.textContent = meta.model || DEFAULT_PAYLOAD.model;
+          updateBudget(meta.month);
+          appendTimeline('Meta', 'Budget checkpoint', JSON.stringify(meta));
+          logDiagnostic('ops-meta', meta);
+        },
+        onDelta(delta) {
+          opsOutput.textContent += `${delta.label || 'delta'}: ${delta.text || '[no text]'}\n`;
+          appendTimeline('Delta', delta.label || 'delta', delta.text);
+          lastLabelEl.textContent = delta.label || 'delta chunk';
+          controllerPill.textContent = 'Streaming';
+          logDiagnostic('ops-delta', delta);
+        },
+        onDone(done) {
+          opsPill.textContent = 'Complete';
+          controllerPill.textContent = 'Stopped';
+          updateAlert('Ops stream completed.', false);
+          appendTimeline('Done', 'Ops complete', done.result || 'Stream finished.');
+          updateBudget(done.month);
+          logDiagnostic('ops-done', done);
+        },
+        onError(err) {
+          if (err.code === 'abort' && isPaused) {
+            appendTimeline('Paused', 'Manual pause', 'Ops stream halted.');
+            return;
+          }
+          opsPill.textContent = 'Error';
+          alertPill.textContent = err.message || 'Error';
+          alertPill.classList.add('alert');
+          updateAlert(`Stream error: ${err.message}`, true, err.code === 402);
+          logDiagnostic('ops-stream-error', err);
+        },
+        onAbort() {
+          updateAlert('Stream aborted.', false);
+          controllerPill.textContent = 'Stopped';
+        }
+      });
+    }
+
+    async function kaixuStreamChat(key, payload, { controller, onMeta, onDelta, onDone, onError, onAbort }) {
+      const signal = controller ? controller.signal : new AbortController().signal;
+      if (controller) {
+        controller.signal.addEventListener('abort', () => onAbort && onAbort(), { once: true });
+      }
+      const endpoints = [KAIXU_STREAM_ENDPOINT, KAIXU_FALLBACK_STREAM];
+      for (const endpoint of endpoints) {
+        if (signal.aborted) return;
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${key}`
+            },
+            body: JSON.stringify(payload),
+            signal
+          });
+          if (response.status === 402) {
+            onError && onError({ code: 402, message: 'Monthly cap reached' });
+            return;
+          }
+          if (response.status === 401) {
+            onError && onError({ code: 401, message: 'Invalid Kaixu Key' });
+            return;
+          }
+          if (!response.ok) {
+            const errorBody = await response.text().catch(() => '');
+            onError && onError({ code: response.status, message: errorBody || `Gateway error ${response.status}` });
+            return;
+          }
+          if (!response.body) {
+            throw new Error('No stream body returned.');
+          }
+          await readSSEStream(response.body.getReader(), controller || new AbortController(), { onMeta, onDelta, onDone, onError });
+          return;
+        } catch (err) {
+          if (err.name === 'AbortError') {
+            onError && onError({ code: 'abort', message: 'Stream aborted' });
+            return;
+          }
+          if (endpoint === endpoints[endpoints.length - 1]) {
+            onError && onError({ code: 'network', message: err.message || 'Stream failed' });
+          }
+        }
+      }
+    }
+
+    async function readSSEStream(reader, controller, { onMeta, onDelta, onDone, onError }) {
+      const decoder = new TextDecoder();
+      let buffer = '';
+      try {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const events = buffer.split('\n\n');
+          buffer = events.pop();
+          for (const chunk of events) {
+            const lines = chunk.split(/\r?\n/).filter(Boolean);
+            if (!lines.length) continue;
+            let eventName = 'message';
+            let dataLine = '';
+            for (const line of lines) {
+              if (line.startsWith('event:')) eventName = line.replace('event:', '').trim();
+              if (line.startsWith('data:')) dataLine += line.replace('data:', '').trim();
+            }
+            if (!dataLine) continue;
+            try {
+              const parsed = JSON.parse(dataLine);
+              if (eventName === 'meta') onMeta && onMeta(parsed);
+              if (eventName === 'delta') onDelta && onDelta(parsed);
+              if (eventName === 'done') onDone && onDone(parsed);
+              if (eventName === 'error') onError && onError(parsed);
+            } catch (err) {
+              console.warn('Invalid SSE payload', err);
+            }
+          }
+        }
+      }
+    }
+
+    function updateBudget(monthData) {
+      if (!monthData) return;
+      const cap = monthData.cap_cents / 100;
+      const spent = monthData.spent_cents / 100;
+      const remaining = Math.max(cap - spent, 0);
+      budgetCap.textContent = Intl.NumberFormat().format(cap);
+      budgetSpent.textContent = Intl.NumberFormat().format(spent);
+      budgetRemaining.textContent = Intl.NumberFormat().format(remaining);
+    }
+
+    function appendTimeline(label, title, detail) {
+      const entry = document.createElement('li');
+      entry.innerHTML = `<strong>${label}</strong><br><span style="color:rgba(255,255,255,0.75);font-size:12px;">${title}</span><br><small style="color:rgba(201,168,76,0.65);">${detail || ''}</small>`;
+      opsTimeline.prepend(entry);
+    }
+
+    function updateAlert(message, isError = false, blocked = false) {
+      alertPill.textContent = message;
+      alertPill.classList.toggle('alert', isError);
+      if (blocked) {
+        alertPill.textContent = 'Blocked';
+        alertPill.classList.add('alert');
+      }
+    }
+
+    function updateControllers(status) {
+      controllerPill.textContent = status;
+    }
+
+    function logDiagnostic(source, payload) {
+      diagnosticsEl.textContent = `${source} @ ${new Date().toISOString()}`;
+      diagChannel.postMessage({ source, payload, timestamp: Date.now() });
+      diagnosticLog.textContent = `${source}: ${JSON.stringify(payload)}\n${diagnosticLog.textContent}`;
+      sendHeartbeat(payload);
+    }
+
+    function sendHeartbeat(payload) {
+      if (!navigator.sendBeacon) return;
+      const data = new Blob([JSON.stringify({ event: 'ops-heartbeat', payload, ts: Date.now() })], { type: 'application/json' });
+      navigator.sendBeacon('/api/logs', data);
+    }
+
+    window.addEventListener('beforeunload', () => {
+      if (navigator.sendBeacon) {
+        const blob = new Blob([JSON.stringify({ event: 'unload', ts: Date.now() })], { type: 'application/json' });
+        navigator.sendBeacon('/api/logs', blob);
+      }
+    });
+  </script>
+</body>
+</html>

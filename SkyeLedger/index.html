@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#05040a">
+  <title>SkyeLedger | Executive Intelligence Cockpit</title>
+  <meta name="description" content="SkyeLedger surfaces Fortune 500 executive narratives and regulatory insights through kAIxuGateway13-only streams with budget-aware controls and BroadcastChannel diagnostics.">
+  <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .intel-grid {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .intel-card {
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 10px;
+      padding: 26px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+    }
+    .intel-card h3 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+    .intel-card textarea {
+      width: 100%;
+      min-height: 160px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 6px;
+      padding: 16px;
+      color: #fff;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+    }
+    .actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .timeline-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .timeline-item {
+      padding: 12px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(201,168,76,0.08);
+      background: rgba(255,255,255,0.02);
+      font-size: 13px;
+    }
+    .timeline-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--gold);
+    }
+    .status-pill-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .status-pill {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      letter-spacing: 1px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .status-pill.alert { border-color: #ff7070; color: #ff9a9a; }
+    .budget-matrix { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+    .budget-card { background: rgba(255,255,255,0.02); border-radius: 6px; border: 1px solid rgba(201,168,76,0.12); padding: 16px; }
+    .budget-card p { margin: 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+    .budget-card strong { display: block; font-size: 24px; color: var(--gold); margin-top: 6px; }
+    .output-box { background: rgba(255,255,255,0.02); border-radius: 6px; border: 1px solid rgba(201,168,76,0.12); padding: 16px; font-family: 'Fira Code', monospace; font-size: 13px; min-height: 140px; overflow-y: auto; }
+    .key-panel { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .key-panel input { flex: 1; min-width: 260px; }
+  </style>
+</head>
+<body>
+  <canvas id="three-bg"></canvas>
+  <nav class="main-nav" id="mainNav">
+    <a href="../index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">Founder</a>
+      <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="../SkyeFlow/index.html">SkyeFlow</a>
+      <a href="../SkyeArchive/index.html">SkyeArchive</a>
+      <a href="../SkyeCollab/index.html">SkyeCollab</a>
+      <a class="active" href="index.html">SkyeLedger</a>
+      <a href="../SkyeOps/index.html">SkyeOps</a>
+      <a href="../platforms.html">Platforms</a>
+      <a href="../network.html">Network</a>
+      <a href="../credibility.html">Credibility</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../status.html">Status</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn">☰ MENU</button>
+  </nav>
+
+  <div class="page-header">
+    <div class="section-label">Skye Suite · Executive Intelligence</div>
+    <h1>SkyeLedger <span>Intelligence Cockpit</span></h1>
+    <p class="section-desc">Stream long-form regulatory summaries, risk narratives, and board memoranda through kAIxuGateway13 only. Every chunk updates the usage ledger, surfaces HTTP 401/402/429/500 states, and logs `meta`/`delta`/`done` events to the kaixu_events BroadcastChannel.</p>
+    <div class="key-panel">
+      <input id="kaixu-key" type="password" placeholder="Kaixu Virtual Key" autocomplete="new-password">
+      <button id="save-key">Store key</button>
+      <span style="color:rgba(255,255,255,0.7);font-size:12px;">Only KAIXU_VIRTUAL_KEY is persisted.</span>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="section-title">Board-ready narratives</div>
+    <p class="section-desc">Summaries call `/api/gateway-chat`, while streaming commentary and dev-mode edits use `/api/gateway-stream`. All SSE parsing happens via `ReadableStream` and the shared `kaixuStreamChat` helper.</p>
+    <div class="intel-grid">
+      <div class="intel-card">
+        <h3>Source briefing</h3>
+        <textarea id="source-text">Draft the narrative: reinforce strategy, highlight risk, and update the board on cascading opportunity.</textarea>
+        <div class="actions">
+          <button class="btn btn-outline" id="summary-button">Generate summary</button>
+          <button class="btn btn-gold" id="insight-stream">Stream insight</button>
+        </div>
+        <div class="status-pill-group">
+          <span class="status-pill" id="summary-status">Idle</span>
+          <span class="status-pill" id="stream-status">Waiting</span>
+        </div>
+        <div class="output-box" id="summary-output">Executive summary appears here.</div>
+      </div>
+      <div class="intel-card">
+        <h3>Live stream choreography</h3>
+        <p class="section-desc">Deltas translate into timeline entries, risk alerts, and budget telemetry; 401/402/429/500 map to paused states.</p>
+        <div class="output-box" id="stream-output">Streaming commentary will append here.</div>
+        <div class="timeline-list" id="timeline-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Usage ledger & diagnostics</div>
+    <div class="budget-matrix">
+      <div class="budget-card"><p>Cap</p><strong id="cap-display">—</strong></div>
+      <div class="budget-card"><p>Spent</p><strong id="spent-display">—</strong></div>
+      <div class="budget-card"><p>Remaining</p><strong id="remaining-display">—</strong></div>
+      <div class="budget-card"><p>Provider</p><strong id="provider-display">gemini</strong><p>Model</p><strong id="model-display">gemini-2.0-flash</strong></div>
+      <div class="budget-card"><p>Diagnostics</p><strong id="diagnostics">Awaiting stream</strong><p>Last delta label</p><strong id="last-label">—</strong></div>
+    </div>
+    <div class="output-box" id="diagnostic-log" style="margin-top:20px;min-height:120px;">BroadcastChannel diagnostics log here.</div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Tutorial</div>
+    <p class="section-desc">Onboard SkyeLedger with these steps.</p>
+    <div class="workflow-grid">
+      <div class="intel-card">
+        <h3>Step 1 · Save the key</h3>
+        <p>Store your `KAIXU_VIRTUAL_KEY` via the hero panel so every summary and stream authenticates through kAIxuGateway13.</p>
+      </div>
+      <div class="intel-card">
+        <h3>Step 2 · Generate summary</h3>
+        <p>Click "Generate summary" to call `/api/gateway-chat`. The response fills the summary panel and updates the ledger meta data.</p>
+      </div>
+      <div class="intel-card">
+        <h3>Step 3 · Stream commentary</h3>
+        <p>Press "Stream insight" to start `/api/gateway-stream`, watch `meta/delta/done` events fill the timeline, and monitor the budget cards/diagnostics.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+    <p>SkyeLedger · kAIxuGateway13 · kaixuStreamChat helper · BroadcastChannel diagnostics.</p>
+  </footer>
+
+  <div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+    <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+    <div class="mega-nav-grid">
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Navigate</div>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">Founder</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="../SkyeFlow/index.html">SkyeFlow</a>
+        <a href="../SkyeArchive/index.html">SkyeArchive</a>
+        <a href="../SkyeCollab/index.html">SkyeCollab</a>
+        <a href="index.html">SkyeLedger</a>
+        <a href="../SkyeOps/index.html">SkyeOps</a>
+        <a href="../platforms.html">Platforms</a>
+        <a href="../network.html">Network</a>
+        <a href="../credibility.html">Credibility</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../status.html">Status</a>
+        <a href="../contact.html">Contact</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Platform</div>
+        <a href="../dashboard.html">Dashboard</a>
+        <a href="../admin.html">Admin CMS</a>
+        <a href="../vault.html">Client Vault</a>
+        <a href="../status.html">Status</a>
+        <a href="../blog.html">Blog Hub</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx App</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Company</div>
+        <a href="../sitemap-visual.html">Site Map</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/three-bg.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/growth.js"></script>
+  <script>
+    const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
+    const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
+    const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
+    const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
+    const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.7 };
+
+    const diagChannel = new BroadcastChannel('kaixu_events');
+    const summaryOutput = document.getElementById('summary-output');
+    const streamOutput = document.getElementById('stream-output');
+    const timelineList = document.getElementById('timeline-list');
+    const summaryStatus = document.getElementById('summary-status');
+    const streamStatus = document.getElementById('stream-status');
+    const capDisplay = document.getElementById('cap-display');
+    const spentDisplay = document.getElementById('spent-display');
+    const remainingDisplay = document.getElementById('remaining-display');
+    const providerDisplay = document.getElementById('provider-display');
+    const modelDisplay = document.getElementById('model-display');
+    const diagnosticsEl = document.getElementById('diagnostics');
+    const lastLabelEl = document.getElementById('last-label');
+    const diagnosticLog = document.getElementById('diagnostic-log');
+    const summaryButton = document.getElementById('summary-button');
+    const streamButton = document.getElementById('insight-stream');
+    const keyInput = document.getElementById('kaixu-key');
+    const saveKeyButton = document.getElementById('save-key');
+    const sourceText = document.getElementById('source-text');
+
+    let kaixuKey = localStorage.getItem('kaixu_virtual_key') || '';
+    keyInput.value = kaixuKey;
+    const ensureKey = () => kaixuKey && kaixuKey.trim().length > 0;
+
+    saveKeyButton.addEventListener('click', () => {
+      const value = keyInput.value.trim();
+      if (!value) {
+        updateStatus('Kaixu key required.', true);
+        return;
+      }
+      kaixuKey = value;
+      localStorage.setItem('kaixu_virtual_key', kaixuKey);
+      updateStatus('Kaixu key stored.', false);
+      logDiagnostic('key-saved', { stored: true });
+    });
+
+    summaryButton.addEventListener('click', () => {
+      if (!ensureKey()) {
+        updateStatus('Store the Kaixu key first.', true);
+        return;
+      }
+      runSummary();
+    });
+
+    streamButton.addEventListener('click', () => {
+      if (!ensureKey()) {
+        updateStatus('Store the Kaixu key first.', true);
+        return;
+      }
+      streamNarrative();
+    });
+
+    async function runSummary() {
+      summaryStatus.textContent = 'Consulting';
+      summaryOutput.textContent = '';
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are an executive analyst who writes Fortune 500-ready summaries referencing governance and compliance.' },
+          { role: 'user', content: sourceText.value }
+        ]
+      };
+      try {
+        const response = await postToGateway([KAIXU_CHAT_ENDPOINT, KAIXU_FALLBACK_CHAT], payload);
+        await handleNonStreamResponse(response, 'ledger-summary');
+      } catch (err) {
+        summaryStatus.textContent = 'Error';
+        updateStatus(err.message, true);
+        logDiagnostic('ledger-summary-error', { error: err.message });
+      }
+    }
+
+    async function streamNarrative() {
+      streamStatus.textContent = 'Streaming';
+      streamOutput.textContent = '';
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are a risk analyst who emits meta/delta/done events for each compliance signal.' },
+          { role: 'user', content: sourceText.value }
+        ]
+      };
+      await kaixuStreamChat(kaixuKey, payload, {
+        onMeta(meta) {
+          providerDisplay.textContent = meta.provider || DEFAULT_PAYLOAD.provider;
+          modelDisplay.textContent = meta.model || DEFAULT_PAYLOAD.model;
+          updateBudget(meta.month);
+          appendTimeline('Meta', 'Budget checkpoint', JSON.stringify(meta));
+          logDiagnostic('ledger-meta', meta);
+        },
+        onDelta(delta) {
+          streamOutput.textContent += `${delta.label || 'delta'}: ${delta.text || '[no text]'}\n\n`;
+          appendTimeline('Delta', delta.label || 'delta', delta.text);
+          lastLabelEl.textContent = delta.label || 'delta chunk';
+          streamStatus.textContent = delta.label ? `Delta ${delta.label}` : 'Streaming';
+          logDiagnostic('ledger-delta', delta);
+        },
+        onDone(done) {
+          streamStatus.textContent = 'Complete';
+          appendTimeline('Done', 'Stream finished', done.result || 'Narrative complete');
+          updateBudget(done.month);
+          updateStatus('Stream complete.', false);
+          logDiagnostic('ledger-done', done);
+        },
+        onError(err) {
+          streamStatus.textContent = 'Error';
+          updateStatus(err.message, true, err.code === 402);
+          appendTimeline('Error', 'Stream errored', err.message);
+          logDiagnostic('ledger-stream-error', err);
+        }
+      });
+    }
+
+    async function postToGateway(endpoints, payload) {
+      let lastError;
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${kaixuKey}`
+            },
+            body: JSON.stringify(payload)
+          });
+          return response;
+        } catch (err) {
+          lastError = err;
+        }
+      }
+      throw lastError || new Error('Gateway unreachable.');
+    }
+
+    async function handleNonStreamResponse(response, label) {
+      if (!response) {
+        updateStatus('No gateway response.', true);
+        return;
+      }
+      if (response.status === 402) {
+        updateStatus('Monthly cap reached.', true, true);
+        return;
+      }
+      if (response.status === 401) {
+        updateStatus('Invalid Kaixu Key.', true);
+        return;
+      }
+      if (response.status === 429) {
+        updateStatus('Too many requests.', true);
+        return;
+      }
+      if (response.status === 500) {
+        updateStatus('Gateway error.', true);
+        return;
+      }
+      if (![200, 201].includes(response.status)) {
+        const body = await response.text().catch(() => '');
+        updateStatus(`Gateway ${response.status}: ${body || 'error'}`, true);
+        logDiagnostic(label, { status: response.status });
+        return;
+      }
+      const data = await response.json();
+      summaryOutput.textContent = data.output_text || data.result || 'No text returned.';
+      summaryStatus.textContent = 'Delivered';
+      updateBudget(data.month);
+      updateStatus('Summary delivered.', false);
+      logDiagnostic(label, data);
+    }
+
+    function updateBudget(monthData) {
+      if (!monthData) return;
+      const cap = monthData.cap_cents / 100;
+      const spent = monthData.spent_cents / 100;
+      const remaining = Math.max(cap - spent, 0);
+      capDisplay.textContent = Intl.NumberFormat().format(cap);
+      spentDisplay.textContent = Intl.NumberFormat().format(spent);
+      remainingDisplay.textContent = Intl.NumberFormat().format(remaining);
+    }
+
+    function updateStatus(message, isError = false, blocked = false) {
+      if (blocked) {
+        summaryStatus.textContent = 'Blocked';
+        streamStatus.textContent = 'Blocked';
+      }
+      if (isError) {
+        summaryStatus.classList.add('alert');
+        streamStatus.classList.add('alert');
+      } else {
+        summaryStatus.classList.remove('alert');
+        streamStatus.classList.remove('alert');
+      }
+      diagnosticsEl.textContent = `${message} @ ${new Date().toISOString()}`;
+    }
+
+    function appendTimeline(type, title, detail) {
+      const entry = document.createElement('li');
+      entry.className = 'timeline-item';
+      entry.innerHTML = `<strong>${type}</strong><span>${title}</span><p style="color:rgba(232,232,232,0.8);font-size:12px;margin-top:6px;">${detail || ''}</p>`;
+      timelineList.prepend(entry);
+    }
+
+    function kaixuStreamChat(key, payload, { onMeta, onDelta, onDone, onError }) {
+      const endpoints = [KAIXU_STREAM_ENDPOINT, KAIXU_FALLBACK_STREAM];
+      return new Promise(async (resolve) => {
+        let lastError;
+        for (const endpoint of endpoints) {
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${key}`
+              },
+              body: JSON.stringify(payload)
+            });
+            if (response.status === 402) {
+              onError && onError({ code: 402, message: 'Monthly cap reached.' });
+              return resolve();
+            }
+            if (response.status === 401) {
+              onError && onError({ code: 401, message: 'Invalid Kaixu Key' });
+              return resolve();
+            }
+            if (!response.ok) {
+              const errorBody = await response.text().catch(() => '');
+              onError && onError({ code: response.status, message: errorBody || `Gateway ${response.status}` });
+              return resolve();
+            }
+            if (!response.body) throw new Error('No stream body returned.');
+            await readSSEStream(response.body.getReader(), { onMeta, onDelta, onDone, onError });
+            return resolve();
+          } catch (err) {
+            lastError = err;
+          }
+        }
+        onError && onError({ code: 'network', message: `All endpoints failed: ${lastError?.message || 'unknown'}` });
+        resolve();
+      });
+    }
+
+    async function readSSEStream(reader, { onMeta, onDelta, onDone, onError }) {
+      const decoder = new TextDecoder();
+      let buffer = '';
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const events = buffer.split('\n\n');
+        buffer = events.pop();
+        for (const chunk of events) {
+          const lines = chunk.split(/\r?\n/).filter(Boolean);
+          if (!lines.length) continue;
+          let eventName = 'message';
+          let dataLine = '';
+          for (const line of lines) {
+            if (line.startsWith('event:')) eventName = line.replace('event:', '').trim();
+            if (line.startsWith('data:')) dataLine += line.replace('data:', '').trim();
+          }
+          if (!dataLine) continue;
+          try {
+            const parsed = JSON.parse(dataLine);
+            if (eventName === 'meta') onMeta && onMeta(parsed);
+            if (eventName === 'delta') onDelta && onDelta(parsed);
+            if (eventName === 'done') onDone && onDone(parsed);
+            if (eventName === 'error') onError && onError(parsed);
+          } catch (err) {
+            console.warn('Invalid SSE payload', err);
+          }
+        }
+      }
+    }
+
+    function logDiagnostic(source, payload) {
+      diagnosticsEl.textContent = `${source} @ ${new Date().toISOString()}`;
+      diagChannel.postMessage({ source, payload, timestamp: Date.now() });
+      diagnosticLog.textContent = `${source}: ${JSON.stringify(payload)}\n${diagnosticLog.textContent}`;
+    }
+
+    window.addEventListener('beforeunload', () => {
+      if (navigator.sendBeacon) {
+        const blob = new Blob([JSON.stringify({ event: 'unload', ts: Date.now() })], { type: 'application/json' });
+        navigator.sendBeacon('/api/logs', blob);
+      }
+    });
+  </script>
+</body>
+</html>

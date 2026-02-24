@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#05040a">
+  <title>SkyeCollab | Lockstep Studio</title>
+  <meta name="description" content="SkyeCollab is the lockstep collaboration studio that routes QA + Develop prompts through kAIxuGateway13 with the shared kaixuStreamChat helper.">
+  <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .chat-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    .chat-panel {
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+      min-height: 520px;
+    }
+    .chat-thread {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-right: 6px;
+    }
+    .chat-bubble {
+      padding: 18px;
+      border-radius: 10px;
+      line-height: 1.6;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      border: 1px solid rgba(201,168,76,0.12);
+      background: rgba(255,255,255,0.02);
+    }
+    .chat-bubble.assistant { border-color: rgba(132, 99, 255, 0.3); background: rgba(132, 99, 255, 0.06); }
+    .chat-bubble.system { border-color: rgba(0, 240, 255, 0.3); }
+    .command-panel {
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .command-panel textarea {
+      min-height: 160px;
+    }
+    .command-panel .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .status-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .status-pill.error { border-color: #ff7070; color: #ff9a9a; }
+    .status-pill.active { border-color: var(--gold); color: var(--gold); }
+    .timeline-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .timeline-list li { padding: 12px 14px; border-radius: 6px; border: 1px solid rgba(201,168,76,0.08); background: rgba(255,255,255,0.02); }
+    @media (max-width: 960px) {
+      .chat-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="three-bg"></canvas>
+  <nav class="main-nav" id="mainNav">
+    <a href="../index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">Founder</a>
+      <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="../SkyeFlow/index.html">SkyeFlow</a>
+      <a href="../SkyeArchive/index.html">SkyeArchive</a>
+      <a class="active" href="index.html">SkyeCollab</a>
+      <a href="../platforms.html">Platforms</a>
+      <a href="../network.html">Network</a>
+      <a href="../credibility.html">Credibility</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../status.html">Status</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn">☰ MENU</button>
+  </nav>
+
+  <div class="page-header">
+    <div class="section-label">Skye Suite · Collaboration</div>
+    <h1>SkyeCollab <span>Lockstep Studio</span></h1>
+    <p class="section-desc">Live QA and developing prompts that all route through kAIxuGateway13. Every chat thread llamas through the `kaixuStreamChat` helper, budgets publish to the shared ledger, and the BroadcastChannel keeps diagnostics in sync.</p>
+    <div class="key-panel">
+      <input id="kaixu-key" type="password" placeholder="Kaixu Virtual Key" autocomplete="new-password">
+      <button id="save-key">Store key</button>
+      <span style="font-size:12px;color:rgba(255,255,255,0.65);">Only KAIXU_VIRTUAL_KEY is stored.</span>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="section-title">One thread, two modes</div>
+    <p class="section-desc">Ask QA questions for context or flip into Develop mode where streaming deltas inject updates directly into the shared editor preview.</p>
+    <div class="chat-layout">
+      <div class="chat-panel">
+        <div class="status-grid">
+          <span class="status-pill active" id="live-pill">Idle</span>
+          <span class="status-pill" id="mode-pill">QA</span>
+          <span class="status-pill" id="apply-pill">Paused</span>
+        </div>
+        <div class="chat-thread" id="chat-thread">
+          <div class="chat-bubble system">System: Responses will stream via kaixuStreamChat and diagnostics publish to kaixu_events.</div>
+        </div>
+        <div class="timeline" style="margin-top:18px;">
+          <div class="section-desc" style="margin-bottom:10px;">Activity timeline</div>
+          <ul class="timeline-list" id="collab-timeline"></ul>
+        </div>
+      </div>
+      <div class="command-panel">
+        <textarea id="collab-input">Paste a file snippet, QA prompt, or describe the develop change.</textarea>
+        <div class="actions">
+          <button class="btn btn-outline" id="qa-button">Ask QA</button>
+          <button class="btn btn-gold" id="apply-button">Develop & Apply</button>
+        </div>
+        <div class="status-grid" style="margin-bottom:0;">
+          <span class="status-pill" id="status-message">Awaiting prompt.</span>
+          <span class="status-pill" id="apply-status">Applying...</span>
+        </div>
+        <div class="output-box" id="apply-log">Applying updates will append here.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Budget & diagnostics</div>
+    <p class="section-desc">Caps, spend, and remaining credits are refreshed after every gateway response so the collaboration studio never overshoots. Diagnostics ride the `kaixu_events` BroadcastChannel.</p>
+    <div class="budget-matrix">
+      <div class="budget-card"><p>Cap</p><strong id="budget-cap">—</strong></div>
+      <div class="budget-card"><p>Spent</p><strong id="budget-spent">—</strong></div>
+      <div class="budget-card"><p>Remaining</p><strong id="budget-remaining">—</strong></div>
+      <div class="budget-card"><p>Provider</p><strong id="provider-display">gemini</strong><p>Model</p><strong id="model-display">gemini-2.0-flash</strong></div>
+      <div class="budget-card"><p>Diagnostics</p><strong id="diagnostics">No events yet.</strong><p>Last label</p><strong id="last-label">—</strong></div>
+    </div>
+    <div class="output-box" id="diagnostic-log" style="margin-top:20px; min-height:100px;">BroadcastChannel logs appear here.</div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Tutorial</div>
+    <p class="section-desc">Get the studio running with these steps.</p>
+    <div class="workflow-grid">
+      <div class="workflow-card">
+        <h3>Step 1 · Store the key</h3>
+        <p>Save the `KAIXU_VIRTUAL_KEY` using the hero panel so all QA and Develop requests authenticate through kAIxuGateway13.</p>
+      </div>
+      <div class="workflow-card">
+        <h3>Step 2 · QA prompt</h3>
+        <p>Type your QC question into the chat box and click "Ask QA". The `/api/gateway-chat` response streams into the chat thread with usage metadata.</p>
+      </div>
+      <div class="workflow-card">
+        <h3>Step 3 · Develop stream</h3>
+        <p>Hit "Develop & Apply" to open the stream, watch `meta/delta/done` events update the timeline, and let the applying indicator show progress.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+    <p>SkyeCollab · kAIxuGateway13 · kaixuStreamChat helper · BroadcastChannel diagnostics.</p>
+  </footer>
+
+  <div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+    <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+    <div class="mega-nav-grid">
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Navigate</div>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">Founder</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="../SkyeFlow/index.html">SkyeFlow</a>
+        <a href="../SkyeArchive/index.html">SkyeArchive</a>
+        <a href="index.html">SkyeCollab</a>
+        <a href="../platforms.html">Platforms</a>
+        <a href="../network.html">Network</a>
+        <a href="../credibility.html">Credibility</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../status.html">Status</a>
+        <a href="../contact.html">Contact</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Platform</div>
+        <a href="../dashboard.html">Dashboard</a>
+        <a href="../admin.html">Admin CMS</a>
+        <a href="../vault.html">Client Vault</a>
+        <a href="../status.html">Status</a>
+        <a href="../blog.html">Blog Hub</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx App</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Company</div>
+        <a href="../sitemap-visual.html">Site Map</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/three-bg.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/growth.js"></script>
+  <script>
+    const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
+    const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
+    const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
+    const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
+    const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.6 };
+
+    const diagChannel = new BroadcastChannel('kaixu_events');
+    const keyInput = document.getElementById('kaixu-key');
+    const saveKeyButton = document.getElementById('save-key');
+    const collabInput = document.getElementById('collab-input');
+    const qaButton = document.getElementById('qa-button');
+    const applyButton = document.getElementById('apply-button');
+    const chatThread = document.getElementById('chat-thread');
+    const livePill = document.getElementById('live-pill');
+    const modePill = document.getElementById('mode-pill');
+    const applyPill = document.getElementById('apply-pill');
+    const statusMessage = document.getElementById('status-message');
+    const applyStatus = document.getElementById('apply-status');
+    const applyLog = document.getElementById('apply-log');
+    const budgetCap = document.getElementById('budget-cap');
+    const budgetSpent = document.getElementById('budget-spent');
+    const budgetRemaining = document.getElementById('budget-remaining');
+    const providerDisplay = document.getElementById('provider-display');
+    const modelDisplay = document.getElementById('model-display');
+    const diagnosticsEl = document.getElementById('diagnostics');
+    const lastLabelEl = document.getElementById('last-label');
+    const diagnosticLog = document.getElementById('diagnostic-log');
+    const timeline = document.getElementById('collab-timeline');
+
+    let kaixuKey = localStorage.getItem('kaixu_virtual_key') || '';
+    keyInput.value = kaixuKey;
+    const ensureKey = () => kaixuKey && kaixuKey.trim().length > 0;
+
+    saveKeyButton.addEventListener('click', () => {
+      const value = keyInput.value.trim();
+      if (!value) {
+        updateStatus('Store the Kaixu key first.', true);
+        return;
+      }
+      kaixuKey = value;
+      localStorage.setItem('kaixu_virtual_key', kaixuKey);
+      updateStatus('Kaixu key saved locally.', false);
+      logDiagnostic('key-saved', { stored: true });
+    });
+
+    qaButton.addEventListener('click', () => {
+      if (!ensureKey()) {
+        updateStatus('Kaixu key required.', true);
+        return;
+      }
+      runQA();
+    });
+
+    applyButton.addEventListener('click', () => {
+      if (!ensureKey()) {
+        updateStatus('Kaixu key required.', true);
+        return;
+      }
+      launchDevelop();
+    });
+
+    async function runQA() {
+      modePill.textContent = 'QA';
+      livePill.textContent = 'Consulting';
+      updateStatus('Running QA prompt...', false);
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are a QA partner for artist-operators reviewing SkyeDocx drafts.' },
+          { role: 'user', content: collabInput.value }
+        ]
+      };
+      appendMessage('user', collabInput.value);
+      try {
+        const response = await postToGateway([KAIXU_CHAT_ENDPOINT, KAIXU_FALLBACK_CHAT], payload);
+        await handleNonStreamResponse(response, 'collab-qa', true);
+      } catch (err) {
+        updateStatus(`QA failed: ${err.message}`, true);
+        logDiagnostic('collab-qa-error', { error: err.message });
+      }
+    }
+
+    async function launchDevelop() {
+      modePill.textContent = 'Develop';
+      livePill.textContent = 'Streaming';
+      applyPill.textContent = 'Applying...';
+      applyStatus.textContent = 'Applying updates...';
+      updateStatus('Streaming develop deltas...', false);
+      appendMessage('user', `Develop: ${collabInput.value}`);
+      applyLog.textContent = '';
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are a collaboration engine that streams actionable deltas for the shared editor.' },
+          { role: 'user', content: collabInput.value }
+        ]
+      };
+      await kaixuStreamChat(kaixuKey, payload, {
+        onMeta(meta) {
+          providerDisplay.textContent = meta.provider || DEFAULT_PAYLOAD.provider;
+          modelDisplay.textContent = meta.model || DEFAULT_PAYLOAD.model;
+          updateBudget(meta.month);
+          logDiagnostic('collab-meta', meta);
+        },
+        onDelta(delta) {
+          appendMessage('assistant', delta.text || '[no text]');
+          applyLog.textContent += `${delta.label || 'delta'}: ${delta.text || '[no text]'}\n\n`;
+          appendTimeline('Delta', delta.label || 'delta', delta.text);
+          lastLabelEl.textContent = delta.label || 'delta chunk';
+          applyStatus.textContent = `Applying: ${delta.label || 'delta'}`;
+          logDiagnostic('collab-delta', delta);
+        },
+        onDone(done) {
+          applyPill.textContent = 'Idle';
+          livePill.textContent = 'Complete';
+          updateStatus('Develop stream complete.', false);
+          applyStatus.textContent = 'Applied updates';
+          appendTimeline('Done', 'Develop complete', done.result || 'All deltas applied.');
+          updateBudget(done.month);
+          logDiagnostic('collab-done', done);
+        },
+        onError(err) {
+          applyPill.textContent = 'Errored';
+          livePill.textContent = 'Error';
+          updateStatus(`Stream error: ${err.message}`, true, err.code === 402);
+          applyStatus.textContent = 'Stream failed';
+          logDiagnostic('collab-stream-error', err);
+        }
+      });
+    }
+
+    function appendMessage(role, text) {
+      const bubble = document.createElement('div');
+      bubble.className = `chat-bubble ${role === 'assistant' ? 'assistant' : 'system'}`;
+      bubble.textContent = `${role === 'assistant' ? 'COLLAB AI' : 'You'} · ${text}`;
+      chatThread.appendChild(bubble);
+      chatThread.scrollTop = chatThread.scrollHeight;
+    }
+
+    function appendTimeline(label, title, detail) {
+      const entry = document.createElement('li');
+      entry.innerHTML = `<strong>${label}</strong><br><span style="color:rgba(232,232,232,0.85);font-size:12px;">${title}</span><br><small style="color:rgba(201,168,76,0.65);">${detail || ''}</small>`;
+      timeline.prepend(entry);
+    }
+
+    async function postToGateway(endpoints, payload) {
+      let lastError;
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${kaixuKey}`
+            },
+            body: JSON.stringify(payload)
+          });
+          return response;
+        } catch (err) {
+          lastError = err;
+        }
+      }
+      throw lastError || new Error('Gateway unreachable');
+    }
+
+    async function handleNonStreamResponse(response, label, prependAssistant = false) {
+      if (!response) {
+        updateStatus('No gateway response.', true);
+        return;
+      }
+      if (response.status === 402) {
+        updateStatus('Monthly cap reached.', true, true);
+        return;
+      }
+      if (response.status === 401) {
+        updateStatus('Kaixu key invalid.', true);
+        return;
+      }
+      if (response.status === 429) {
+        updateStatus('Too many requests.', true);
+        return;
+      }
+      if (response.status === 500) {
+        updateStatus('Gateway error.', true);
+        return;
+      }
+      if (![200, 201].includes(response.status)) {
+        const body = await response.text().catch(() => '');
+        updateStatus(`Gateway ${response.status}: ${body || 'unknown'}`, true);
+        logDiagnostic(label, { status: response.status });
+        return;
+      }
+      const data = await response.json();
+      appendMessage('assistant', data.output_text || data.result || 'No response text.');
+      updateBudget(data.month);
+      updateStatus('QA answer ready.', false);
+      logDiagnostic(label, data);
+    }
+
+    function updateBudget(monthData) {
+      if (!monthData) return;
+      const cap = monthData.cap_cents / 100;
+      const spent = monthData.spent_cents / 100;
+      const remaining = Math.max(cap - spent, 0);
+      budgetCap.textContent = Intl.NumberFormat().format(cap);
+      budgetSpent.textContent = Intl.NumberFormat().format(spent);
+      budgetRemaining.textContent = Intl.NumberFormat().format(remaining);
+    }
+
+    function updateStatus(message, isError = false, blocked = false) {
+      statusMessage.textContent = message;
+      statusMessage.classList.toggle('error', isError);
+      livePill.textContent = blocked ? 'Blocked' : (isError ? 'Error' : 'Ready');
+      if (isError) livePill.classList.add('error'); else livePill.classList.remove('error');
+    }
+
+    function kaixuStreamChat(key, payload, { onMeta, onDelta, onDone, onError }) {
+      const endpoints = [KAIXU_STREAM_ENDPOINT, KAIXU_FALLBACK_STREAM];
+      return new Promise(async (resolve) => {
+        let lastError;
+        for (const endpoint of endpoints) {
+          const controller = new AbortController();
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${key}`
+              },
+              body: JSON.stringify(payload),
+              signal: controller.signal
+            });
+            if (response.status === 402) {
+              onError && onError({ code: 402, message: 'Monthly cap reached' });
+              return resolve();
+            }
+            if (response.status === 401) {
+              onError && onError({ code: 401, message: 'Invalid Kaixu Key' });
+              return resolve();
+            }
+            if (!response.ok) {
+              const errorBody = await response.text().catch(() => '');
+              const message = errorBody || `Gateway error ${response.status}`;
+              onError && onError({ code: response.status, message });
+              return resolve();
+            }
+            if (!response.body) throw new Error('No stream body returned.');
+            await readSSEStream(response.body.getReader(), controller, { onMeta, onDelta, onDone, onError });
+            return resolve();
+          } catch (err) {
+            lastError = err;
+          }
+        }
+        onError && onError({ code: 'network', message: `All stream endpoints failed: ${lastError?.message || 'unknown'}` });
+        resolve();
+      });
+    }
+
+    async function readSSEStream(reader, controller, { onMeta, onDelta, onDone, onError }) {
+      const decoder = new TextDecoder();
+      let buffer = '';
+      try {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const events = buffer.split('\n\n');
+          buffer = events.pop();
+          for (const chunk of events) {
+            const lines = chunk.split(/\r?\n/).filter(Boolean);
+            if (!lines.length) continue;
+            let eventName = 'message';
+            let dataLine = '';
+            for (const line of lines) {
+              if (line.startsWith('event:')) eventName = line.replace('event:', '').trim();
+              if (line.startsWith('data:')) dataLine += line.replace('data:', '').trim();
+            }
+            if (!dataLine) continue;
+            try {
+              const parsed = JSON.parse(dataLine);
+              if (eventName === 'meta') onMeta && onMeta(parsed);
+              if (eventName === 'delta') onDelta && onDelta(parsed);
+              if (eventName === 'done') onDone && onDone(parsed);
+              if (eventName === 'error') onError && onError(parsed);
+            } catch (err) {
+              console.warn('Invalid SSE payload', err);
+            }
+          }
+        }
+      } finally {
+        controller.abort();
+      }
+    }
+
+    function logDiagnostic(source, payload) {
+      diagnosticsEl.textContent = `${source} @ ${new Date().toISOString()}`;
+      diagChannel.postMessage({ source, payload, timestamp: Date.now() });
+      diagnosticLog.textContent = `${source}: ${JSON.stringify(payload)}\n${diagnosticLog.textContent}`;
+    }
+
+    window.addEventListener('beforeunload', () => {
+      if (navigator.sendBeacon) {
+        const blob = new Blob([JSON.stringify({ event: 'unload', ts: Date.now() })], { type: 'application/json' });
+        navigator.sendBeacon('/api/logs', blob);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#05040a">
+  <title>SkyeFlow | Automation Hub</title>
+  <meta name="description" content="SkyeFlow turns SkyeDocx drafts into governed workflows via kAIxuGateway13. Consult for plans, develop for live automation streams, and watch every delta flow through our shared usage ledger.">
+  <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .workflow-card {
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    }
+    .workflow-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .workflow-card textarea {
+      width: 100%;
+      min-height: 120px;
+      border-radius: 6px;
+      border: 1px solid rgba(201,168,76,0.2);
+      background: rgba(255,255,255,0.02);
+      color: #f8f5ff;
+      padding: 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      resize: vertical;
+      margin-bottom: 14px;
+    }
+    .workflow-card .actions {
+      margin-bottom: 12px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .workflow-card .output-box {
+      min-height: 140px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 6px;
+      padding: 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      background-clip: padding-box;
+    }
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .status-pill {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      display: inline-flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    .key-panel {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .key-panel input {
+      flex: 1;
+      min-width: 260px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 6px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: 'Fira Code', monospace;
+      letter-spacing: 0.5px;
+    }
+    .key-panel button {
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 6px;
+      padding: 10px 18px;
+      background: rgba(201,168,76,0.15);
+      color: #fff;
+      font-family: 'Fira Code', monospace;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+    .budget-matrix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .budget-card {
+      background: rgba(255,255,255,0.02);
+      border-radius: 6px;
+      border: 1px solid rgba(201,168,76,0.12);
+      padding: 18px;
+    }
+    .budget-card p {
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 10px;
+      color: rgba(232,232,232,0.7);
+    }
+    .budget-card strong {
+      display: block;
+      font-size: 24px;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .timeline-list {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .timeline-item {
+      background: rgba(255,255,255,0.03);
+      border-radius: 4px;
+      border: 1px solid rgba(201,168,76,0.08);
+      padding: 10px 14px;
+      font-size: 12px;
+      color: rgba(232,232,232,0.8);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="three-bg"></canvas>
+  <nav class="main-nav" id="mainNav">
+    <a href="../index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">Founder</a>
+      <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+      <a class="active" href="index.html">SkyeFlow</a>
+      <a href="../SkyeArchive/index.html">SkyeArchive</a>
+      <a href="../SkyeCollab/index.html">SkyeCollab</a>
+      <a href="../platforms.html">Platforms</a>
+      <a href="../network.html">Network</a>
+      <a href="../credibility.html">Credibility</a>
+      <a href="../blog.html">Blog</a>
+      <a href="../status.html">Status</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <button class="menu-btn" id="menuBtn">☰ MENU</button>
+  </nav>
+
+  <div class="page-header">
+    <div class="section-label">Skye Suite · Kaixu Automation</div>
+    <h1>SkyeFlow <span>Automations</span></h1>
+    <p class="section-desc">Consult for governed plans and develop streams for real automation. Every prompt routes through kAIxuGateway13 with the shared kaixuStreamChat helper so budgets track, diagnostics publish to the kaixu_events BroadcastChannel, and HTTP 401/402/429/500 states surface in the UI.</p>
+    <div class="key-panel">
+      <input id="kaixu-key" type="password" placeholder="Kaixu Virtual Key" autocomplete="new-password">
+      <button id="save-key">Store key</button>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="section-title">Consult + Develop</div>
+    <div class="section-desc">Capture the SkyeDocx snippet, describe the governance workflow, and either consult for narrative planning or stream actionable deltas with visible statuses.</div>
+    <div class="workflow-grid">
+      <div class="workflow-card">
+        <h3>Consult chat</h3>
+        <textarea id="doc-snippet">Trigger on any SkyeDocx paragraph marking approvals, escalations, or compliance reviews.</textarea>
+        <textarea id="workflow-intent" rows="4">Intent: Build a gated approval workflow that notifies ops, auto-auths secondary reviewer, and archives sign-offs.</textarea>
+        <div class="actions">
+          <button class="btn-outline" id="build-plan">Consult: Craft plan</button>
+          <button class="btn-gold" id="launch-automation">Develop: Stream deltas</button>
+        </div>
+        <div class="output-box" id="consult-output">Consult plan output will appear here.</div>
+      </div>
+      <div class="workflow-card">
+        <h3>Develop stream</h3>
+        <div class="status-grid">
+          <span class="status-pill" id="status-pill">Idle</span>
+          <span class="status-pill" id="consult-pill">--</span>
+          <span class="status-pill" id="streaming-pill">--</span>
+          <span class="status-pill" id="stream-pill">--</span>
+        </div>
+        <p class="section-desc" id="status-message">Awaiting instructions.</p>
+        <p class="section-desc" id="stream-message">Streaming deltas will append below.</p>
+        <div class="output-box" id="stream-output">Live automation deltas appear here.</div>
+        <ul class="timeline-list" id="timeline-steps"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Usage ledger</div>
+    <div class="budget-matrix">
+      <div class="budget-card">
+        <p>Cap</p>
+        <strong id="cap-display">—</strong>
+      </div>
+      <div class="budget-card">
+        <p>Spent</p>
+        <strong id="spent-display">—</strong>
+      </div>
+      <div class="budget-card">
+        <p>Remaining</p>
+        <strong id="remaining-display">—</strong>
+      </div>
+      <div class="budget-card">
+        <p>Provider</p>
+        <strong id="provider-display">gemini</strong>
+        <p>Model</p>
+        <strong id="model-display">gemini-2.0-flash</strong>
+      </div>
+      <div class="budget-card">
+        <p>Diagnostics</p>
+        <strong id="diagnostics">No diagnostics yet.</strong>
+        <p>Last delta label</p>
+        <strong id="last-delta">—</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Tutorial</div>
+    <p class="section-desc">Follow these steps to driveway automation through SkyeFlow while keeping budgets honest.</p>
+    <div class="workflow-grid">
+      <div class="workflow-card">
+        <h3>Step 1 · Store the key</h3>
+        <p>Enter your `KAIXU_VIRTUAL_KEY` in the panel at the top and hit Store key. The key only lives in `localStorage` and gates every gateway call.</p>
+      </div>
+      <div class="workflow-card">
+        <h3>Step 2 · Consult</h3>
+        <p>Paste the SkyeDocx snippet, describe the governance intent, then click "Consult: Craft plan" to stream a conversational plan and see the delta timeline populate.</p>
+      </div>
+      <div class="workflow-card">
+        <h3>Step 3 · Develop stream</h3>
+        <p>Switch to Develop mode, press "Develop: Stream deltas", and watch `meta`/`delta`/`done` events update the status pills, ledger, and diagnostics panel.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+    <p>SkyeFlow · kAIxuGateway13 · kaixuStreamChat helper · BroadcastChannel diagnostics.</p>
+  </footer>
+
+  <div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+    <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+    <div class="mega-nav-grid">
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Navigate</div>
+        <a href="../index.html">Home</a>
+        <a href="../about.html">Founder</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="index.html">SkyeFlow</a>
+        <a href="../SkyeArchive/index.html">SkyeArchive</a>
+        <a href="../SkyeCollab/index.html">SkyeCollab</a>
+        <a href="../platforms.html">Platforms</a>
+        <a href="../network.html">Network</a>
+        <a href="../credibility.html">Credibility</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../status.html">Status</a>
+        <a href="../contact.html">Contact</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Platform</div>
+        <a href="../dashboard.html">Dashboard</a>
+        <a href="../admin.html">Admin CMS</a>
+        <a href="../vault.html">Client Vault</a>
+        <a href="../status.html">Status</a>
+        <a href="../blog.html">Blog Hub</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx App</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Company</div>
+        <a href="../sitemap-visual.html">Site Map</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/three-bg.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/growth.js"></script>
+  <script>
+    const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
+    const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
+    const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
+    const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
+    const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.7 };
+
+    const diagChannel = new BroadcastChannel('kaixu_events');
+    const docSnippet = document.getElementById('doc-snippet');
+    const workflowIntent = document.getElementById('workflow-intent');
+    const consultOutput = document.getElementById('consult-output');
+    const streamOutput = document.getElementById('stream-output');
+    const timelineSteps = document.getElementById('timeline-steps');
+    const statusMessage = document.getElementById('status-message');
+    const streamMessage = document.getElementById('stream-message');
+    const statusPill = document.getElementById('status-pill');
+    const consultPill = document.getElementById('consult-pill');
+    const streamingPill = document.getElementById('streaming-pill');
+    const streamPill = document.getElementById('stream-pill');
+    const capDisplay = document.getElementById('cap-display');
+    const spentDisplay = document.getElementById('spent-display');
+    const remainingDisplay = document.getElementById('remaining-display');
+    const providerDisplay = document.getElementById('provider-display');
+    const modelDisplay = document.getElementById('model-display');
+    const diagnosticsEl = document.getElementById('diagnostics');
+    const lastDeltaEl = document.getElementById('last-delta');
+    const buildPlanButton = document.getElementById('build-plan');
+    const launchAutomationButton = document.getElementById('launch-automation');
+    const keyInput = document.getElementById('kaixu-key');
+    const saveKeyButton = document.getElementById('save-key');
+
+    let kaixuKey = localStorage.getItem('kaixu_virtual_key') || '';
+    keyInput.value = kaixuKey;
+
+    const ensureKey = () => kaixuKey && kaixuKey.trim().length > 0;
+
+    saveKeyButton.addEventListener('click', () => {
+      const value = keyInput.value.trim();
+      if (!value) {
+        updateStatus('Provide the Kaixu key first.', true);
+        return;
+      }
+      kaixuKey = value;
+      localStorage.setItem('kaixu_virtual_key', kaixuKey);
+      updateStatus('Kaixu key stored locally.', false);
+    });
+
+    buildPlanButton.addEventListener('click', () => {
+      if (!ensureKey()) {
+        updateStatus('Kaixu key required.', true);
+        return;
+      }
+      runConsult();
+    });
+
+    launchAutomationButton.addEventListener('click', () => {
+      if (!ensureKey()) {
+        updateStatus('Kaixu key required.', true);
+        return;
+      }
+      streamAutomation();
+    });
+
+    async function runConsult() {
+      consultOutput.textContent = 'Contacting gateway...';
+      consultPill.textContent = 'Consulting';
+      updateStatus('Consulting workflow intent...', false);
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are a workflow architect who writes governance-ready automation plans for SkyeDocx operators.' },
+          { role: 'user', content: `${docSnippet.value}\n\nIntent: ${workflowIntent.value}` }
+        ]
+      };
+      try {
+        const response = await postToGateway([KAIXU_CHAT_ENDPOINT, KAIXU_FALLBACK_CHAT], payload);
+        await handleNonStreamResponse(response, 'consult-plan', consultOutput);
+      } catch (err) {
+        updateStatus(`Consult error: ${err.message}`, true);
+        logDiagnostic('consult-error', { error: err.message });
+      }
+    }
+
+    async function streamAutomation() {
+      streamOutput.textContent = '';
+      timelineSteps.innerHTML = '';
+      streamPill.textContent = 'Develop';
+      streamingPill.textContent = 'Streaming...';
+      updateStatus('Streaming automation deltas...', false);
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are an automation agent. Stream delta events tagged with labels and avoid summarizing until completion.' },
+          { role: 'user', content: `${docSnippet.value}\n\nIntent: ${workflowIntent.value}` }
+        ]
+      };
+      await kaixuStreamChat(kaixuKey, payload, {
+        onMeta(meta) {
+          providerDisplay.textContent = meta.provider || DEFAULT_PAYLOAD.provider;
+          modelDisplay.textContent = meta.model || DEFAULT_PAYLOAD.model;
+          updateBudget(meta.month);
+          logDiagnostic('develop-meta', meta);
+        },
+        onDelta(delta) {
+          const label = delta.label || 'Delta';
+          const entry = document.createElement('li');
+          entry.classList.add('timeline-item');
+          entry.textContent = `${label}: ${delta.text || '[no text]'}`;
+          timelineSteps.appendChild(entry);
+          streamOutput.textContent += delta.text ? `${delta.text}\n\n` : '';
+          streamMessage.textContent = delta.label ? `Delta: ${delta.label}` : 'Receiving automation delta';
+          lastDeltaEl.textContent = delta.label || 'delta chunk';
+          logDiagnostic('develop-delta', delta);
+        },
+        onDone(done) {
+          streamPill.textContent = 'Done';
+          streamingPill.textContent = 'Stream complete';
+          streamMessage.textContent = 'Automation stream completed.';
+          updateBudget(done.month);
+          updateStatus('Develop stream finished.', false);
+          logDiagnostic('develop-done', done);
+        },
+        onError(err) {
+          streamPill.textContent = 'Error';
+          streamingPill.textContent = 'Errored';
+          streamMessage.textContent = err.message || 'Stream error';
+          updateStatus(`Stream error: ${err.message}`, true, err.code === 402);
+          logDiagnostic('develop-error', err);
+        }
+      });
+    }
+
+    async function postToGateway(endpoints, payload) {
+      let lastError;
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${kaixuKey}`
+            },
+            body: JSON.stringify(payload)
+          });
+          return response;
+        } catch (err) {
+          lastError = err;
+        }
+      }
+      throw lastError || new Error('Gateway unreachable');
+    }
+
+    async function handleNonStreamResponse(response, label, outputEl) {
+      if (!response) {
+        updateStatus('No gateway response.', true);
+        return;
+      }
+      if (response.status === 402) {
+        updateStatus('Monthly cap reached.', true, true);
+        return;
+      }
+      if (response.status === 401) {
+        updateStatus('Kaixu key invalid.', true);
+        return;
+      }
+      if (response.status === 429) {
+        updateStatus('Too many requests.', true);
+        return;
+      }
+      if (response.status === 500) {
+        updateStatus('Gateway error.', true);
+        return;
+      }
+      if (![200, 201].includes(response.status)) {
+        const body = await response.text().catch(() => '');
+        updateStatus(`Gateway ${response.status}: ${body || 'unknown'}`, true);
+        logDiagnostic(label, { status: response.status });
+        return;
+      }
+      const data = await response.json();
+      outputEl.textContent = data.output_text || data.result || 'No output returned.';
+      consultPill.textContent = 'Consulted';
+      updateBudget(data.month);
+      updateStatus('Consult deliverable ready.', false);
+      logDiagnostic(label, data);
+    }
+
+    function updateBudget(monthData) {
+      if (!monthData) return;
+      const cap = monthData.cap_cents / 100;
+      const spent = monthData.spent_cents / 100;
+      const remaining = Math.max(cap - spent, 0);
+      capDisplay.textContent = Intl.NumberFormat().format(cap);
+      spentDisplay.textContent = Intl.NumberFormat().format(spent);
+      remainingDisplay.textContent = Intl.NumberFormat().format(remaining);
+    }
+
+    function updateStatus(message, isError = false, blocked = false) {
+      statusMessage.textContent = message;
+      statusPill.textContent = blocked ? 'Blocked' : (isError ? 'Error' : 'Ready');
+      statusPill.style.color = isError ? '#ff9999' : '#cfa72c';
+    }
+
+    function kaixuStreamChat(key, payload, { onMeta, onDelta, onDone, onError }) {
+      const endpoints = [KAIXU_STREAM_ENDPOINT, KAIXU_FALLBACK_STREAM];
+      return new Promise(async (resolve) => {
+        let lastError;
+        for (const endpoint of endpoints) {
+          const controller = new AbortController();
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${key}`
+              },
+              body: JSON.stringify(payload),
+              signal: controller.signal
+            });
+            if (response.status === 402) {
+              onError && onError({ code: 402, message: 'Monthly cap reached' });
+              return resolve();
+            }
+            if (response.status === 401) {
+              onError && onError({ code: 401, message: 'Invalid Kaixu Key' });
+              return resolve();
+            }
+            if (!response.ok) {
+              const errorBody = await response.text().catch(() => '');
+              const message = errorBody || `Gateway error ${response.status}`;
+              onError && onError({ code: response.status, message });
+              return resolve();
+            }
+            if (!response.body) {
+              throw new Error('No stream body returned.');
+            }
+            await readSSEStream(response.body.getReader(), controller, { onMeta, onDelta, onDone, onError });
+            return resolve();
+          } catch (err) {
+            lastError = err;
+          }
+        }
+        onError && onError({ code: 'network', message: `All stream endpoints failed: ${lastError?.message || 'unknown'}` });
+        resolve();
+      });
+    }
+
+    async function readSSEStream(reader, controller, { onMeta, onDelta, onDone, onError }) {
+      const decoder = new TextDecoder();
+      let buffer = '';
+      try {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const events = buffer.split('\n\n');
+          buffer = events.pop();
+          for (const chunk of events) {
+            const lines = chunk.split(/\r?\n/).filter(Boolean);
+            if (!lines.length) continue;
+            let eventName = 'message';
+            let dataLine = '';
+            for (const line of lines) {
+              if (line.startsWith('event:')) eventName = line.replace('event:', '').trim();
+              if (line.startsWith('data:')) dataLine += line.replace('data:', '').trim();
+            }
+            if (!dataLine) continue;
+            try {
+              const parsed = JSON.parse(dataLine);
+              if (eventName === 'meta') onMeta && onMeta(parsed);
+              if (eventName === 'delta') onDelta && onDelta(parsed);
+              if (eventName === 'done') onDone && onDone(parsed);
+              if (eventName === 'error') onError && onError(parsed);
+            } catch (err) {
+              console.warn('Invalid SSE payload', err);
+            }
+          }
+        }
+      } finally {
+        controller.abort();
+      }
+    }
+
+    function logDiagnostic(source, payload) {
+      diagnosticsEl.textContent = `${source} @ ${new Date().toISOString()}`;
+      diagChannel.postMessage({ source, payload, timestamp: Date.now() });
+    }
+
+    window.addEventListener('beforeunload', () => {
+      if (navigator.sendBeacon) {
+        const blob = new Blob([JSON.stringify({ event: 'unload', ts: Date.now() })], { type: 'application/json' });
+        navigator.sendBeacon('/api/logs', blob);
+      }
+    });
+  </script>
+</body>
+</html>

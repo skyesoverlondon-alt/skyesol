@@ -24,6 +24,80 @@ if ('serviceWorker' in navigator) {
     links.classList.remove('open');
     toggle.textContent = '☰';
   }));
+  const suiteApps = [
+    { name: 'SkyeDocx', href: '/SkyeDocx/homepage.html', match: /SkyeDocx/i },
+    { name: 'SkyeFlow', href: '/SkyeFlow/index.html', match: /SkyeFlow/i },
+    { name: 'SkyeArchive', href: '/SkyeArchive/index.html', match: /SkyeArchive/i },
+    { name: 'SkyeCollab', href: '/SkyeCollab/index.html', match: /SkyeCollab/i },
+    { name: 'SkyeSheets', href: '/SkyeSheets/index.html', match: /SkyeSheets/i },
+    { name: 'SkyeLedger', href: '/SkyeLedger/index.html', match: /SkyeLedger/i },
+    { name: 'SkyeOps', href: '/SkyeOps/index.html', match: /SkyeOps/i }
+  ];
+  function attachSuiteDropdown() {
+    if (!links || links.querySelector('.nav-dropdown')) return;
+    const anchors = [];
+    let insertBeforeNode = null;
+    Array.from(links.children).forEach(child => {
+      if (child.tagName !== 'A') return;
+      const label = child.textContent.trim();
+      const matched = suiteApps.find(app => app.name === label);
+      if (matched) {
+        anchors.push(child);
+        child.dataset.suiteApp = matched.name;
+        insertBeforeNode = insertBeforeNode || child;
+      }
+    });
+    const dropdown = document.createElement('div');
+    dropdown.className = 'nav-dropdown';
+    const dropdownToggle = document.createElement('button');
+    dropdownToggle.type = 'button';
+    dropdownToggle.className = 'dropdown-toggle';
+    dropdownToggle.textContent = 'SkyeSuite';
+    const dropdownMenu = document.createElement('div');
+    dropdownMenu.className = 'dropdown-menu';
+    dropdown.appendChild(dropdownToggle);
+    dropdown.appendChild(dropdownMenu);
+    const aboutLink = links.querySelector('a[href$="about.html"]');
+    const target = insertBeforeNode || (aboutLink ? aboutLink.nextSibling : null);
+    links.insertBefore(dropdown, target);
+    anchors.forEach(link => dropdownMenu.appendChild(link));
+    suiteApps.forEach(app => {
+      const present = Array.from(dropdownMenu.children).some(child => child.textContent.trim() === app.name);
+        if (!present) {
+        const anchor = document.createElement('a');
+        anchor.textContent = app.name;
+        anchor.href = app.href;
+        anchor.setAttribute('data-suite-app', app.name);
+        dropdownMenu.appendChild(anchor);
+      }
+    });
+    const markActive = () => {
+      const path = location.pathname;
+      let active = false;
+      dropdownMenu.querySelectorAll('a').forEach(link => {
+        const label = link.textContent.trim();
+        const appDef = suiteApps.find(app => app.name === label);
+        if (appDef && appDef.match.test(path)) {
+          link.classList.add('active');
+          active = true;
+        } else {
+          link.classList.remove('active');
+        }
+      });
+      dropdownToggle.classList.toggle('active', active);
+    };
+    markActive();
+    dropdownToggle.addEventListener('click', event => {
+      event.stopPropagation();
+      dropdown.classList.toggle('expanded');
+    });
+    document.addEventListener('click', () => dropdown.classList.remove('expanded'));
+    dropdownMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => dropdown.classList.remove('expanded'));
+    });
+    toggle.addEventListener('click', () => dropdown.classList.remove('expanded'));
+  }
+  attachSuiteDropdown();
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.pageYOffset > 60);
   }, { passive: true });

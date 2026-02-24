@@ -989,12 +989,18 @@
     <div id="ctx-menu" class="context-menu"></div>
 
     <script>
-        lucide.createIcons();
-
         const DB_NAME = 'SkyesDocsDB';
         const STORE_DOCS = 'documents';
         const STORE_ASSETS = 'assets';
         const STORE_FOLDERS = 'folders';
+
+        const refreshLucideIcons = () => {
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+                window.lucide.createIcons();
+            }
+        };
+
+        refreshLucideIcons();
 
         // 1. Database Layer
         const DB = {
@@ -1109,7 +1115,7 @@
             toggleNetworkMenu(e) {
                 e.stopPropagation();
                 document.getElementById('network-menu').classList.toggle('show');
-                lucide.createIcons();
+                refreshLucideIcons();
             },
 
             initQuill() {
@@ -1126,7 +1132,7 @@
                 toolbar.addHandler('link', async function(value) {
                     if (value) {
                         const href = await App.customPrompt('<i data-lucide="link"></i> Enter the link URL:', 'https://');
-                        lucide.createIcons();
+                        refreshLucideIcons();
                         if (href && href !== 'https://') {
                             this.quill.format('link', href);
                         }
@@ -1235,7 +1241,7 @@
             // --- Folder Management ---
             async createFolder() {
                 const name = await this.customPrompt('<i data-lucide="folder-plus"></i> Enter folder name:');
-                lucide.createIcons();
+                refreshLucideIcons();
                 if(!name || !name.trim()) return;
                 const id = 'folder_' + Math.random().toString(36).substr(2, 9);
                 
@@ -1263,7 +1269,7 @@
                 try {
                     if (title === null) {
                         title = await this.customPrompt('<i data-lucide="file-text"></i> Enter document title:', 'Untitled Document');
-                        lucide.createIcons();
+                        refreshLucideIcons();
                         if (!title || !title.trim()) return;
                     }
 
@@ -1321,7 +1327,7 @@
                     const rootDocs = docsToRender.filter(d => !d.folderId);
                     rootDocs.forEach(doc => container.appendChild(this.createDocNode(doc)));
                 }
-                lucide.createIcons();
+                refreshLucideIcons();
             },
 
             createDocNode(doc) {
@@ -1498,7 +1504,7 @@
                 } else {
                     icon.setAttribute('data-lucide', 'maximize');
                 }
-                lucide.createIcons();
+                refreshLucideIcons();
             },
 
             // --- Binary Asset Management ---
@@ -1587,7 +1593,7 @@
                 menu.style.display = 'flex'; 
                 menu.style.left = e.pageX + 'px'; 
                 menu.style.top = e.pageY + 'px';
-                lucide.createIcons();
+                refreshLucideIcons();
             },
 
             async createDocInsideFolder() {
@@ -1640,7 +1646,7 @@
                 const titleKey = this.ctxTargetType === 'folder' ? 'name' : 'title';
                 
                 const newTitle = await this.customPrompt(`<i data-lucide="edit-3"></i> Rename ${this.ctxTargetType}:`, item[titleKey]);
-                lucide.createIcons();
+                refreshLucideIcons();
                 if (newTitle && newTitle.trim()) {
                     item[titleKey] = newTitle.trim(); 
                     if(this.ctxTargetType === 'doc') item.updatedAt = Date.now();
@@ -1662,7 +1668,7 @@
                     
                     if (childDocs.length > 0) {
                         const confirmed = await this.customConfirm(`<i data-lucide="alert-triangle"></i> Delete Folder`, `Folder "${folder.name}" contains ${childDocs.length} documents. Delete folder AND all documents inside?`, true, "Delete All");
-                        lucide.createIcons();
+                        refreshLucideIcons();
                         if(!confirmed) return;
                         
                         for(let doc of childDocs) {
@@ -1675,7 +1681,7 @@
                         }
                     } else {
                         const confirmed = await this.customConfirm(`<i data-lucide="trash-2"></i> Delete Folder`, `Delete folder "${folder.name}"?`, true, "Delete");
-                        lucide.createIcons();
+                        refreshLucideIcons();
                         if(!confirmed) return;
                     }
                     
@@ -1686,7 +1692,7 @@
                 } else {
                     const doc = await DB.get(STORE_DOCS, this.ctxTargetId);
                     const confirmed = await this.customConfirm(`<i data-lucide="trash-2"></i> Delete Document`, `Delete document "${doc.title}"?`, true, "Delete");
-                    lucide.createIcons();
+                    refreshLucideIcons();
                     if (confirmed) {
                         await DB.delete(STORE_DOCS, this.ctxTargetId);
                         if (this.activeDocId === this.ctxTargetId) { 
@@ -1746,7 +1752,7 @@
                 if (!file) return;
 
                 const confirmed = await this.customConfirm(`<i data-lucide="upload-cloud"></i> Merge Backup`, "This will merge the backup with your current data. Existing documents with the same IDs will be overwritten. Proceed?", false, "Proceed");
-                lucide.createIcons();
+                refreshLucideIcons();
                 if (!confirmed) {
                     event.target.value = ''; 
                     return;
