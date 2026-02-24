@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#05040a" />
+  <title>SkyeDrive | Fortune 500 Vault</title>
+  <meta name="description" content="SkyeDrive replaces Google Drive with a Fortune 500-ready vault, streaming indexing, budgets, and compliance trails through kAIxuGateway13." />
+  <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .drive-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .drive-card { background: var(--surface); border-radius: 12px; padding: 26px; border: 1px solid rgba(201,168,76,0.12); box-shadow: 0 20px 60px rgba(0,0,0,0.45); }
+    .drive-card h3 { font-family: 'Playfair Display', serif; margin-bottom: 12px; }
+    .drive-card input, .drive-card textarea, .drive-card select { width: 100%; border-radius: 6px; padding: 14px; border: 1px solid rgba(201,168,76,0.2); background: rgba(255,255,255,0.02); color: #fff; margin-top: 8px; }
+    .drive-card .actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .drive-card .status-pill { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); font-size: 12px; letter-spacing: 1px; }
+    .drive-card .status-pill.alert { border-color: #ff7070; color: #ff9a9a; }
+    .ledger-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; margin-top: 20px; }
+    .ledger-card { padding: 20px; border-radius: 8px; border: 1px solid rgba(201,168,76,0.12); background: rgba(255,255,255,0.02); }
+    .ledger-card strong { display: block; margin-bottom: 6px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+    .ledger-card span { font-size: 18px; font-family: 'Bebas Neue', sans-serif; }
+    .vault-log { margin-top: 20px; min-height: 160px; border-radius: 6px; border: 1px solid rgba(201,168,76,0.12); padding: 16px; background: rgba(255,255,255,0.02); font-family: 'Fira Code', monospace; font-size: 13px; overflow-y: auto; }
+    .upload-stack { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .compliance-pill { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(232,76,48,0.4); background: rgba(232,76,48,0.08); font-size: 11px; letter-spacing: 2px; }
+  </style>
+</head>
+<body>
+  <canvas id="three-bg"></canvas>
+  <nav class="main-nav">
+    <a href="../index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="../SkyeFlow/index.html">SkyeFlow</a>
+      <a href="../SkyeArchive/index.html">SkyeArchive</a>
+      <a href="../SkyeCollab/index.html">SkyeCollab</a>
+      <a href="../SkyeLedger/index.html">SkyeLedger</a>
+      <a href="../SkyeSheets/index.html">SkyeSheets</a>
+      <a class="active" href="index.html">SkyeDrive</a>
+      <a href="../SkyeOps/index.html">SkyeOps</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="section-label">Skye Suite · Drive</div>
+    <h1>SkyeDrive <span>Fortune 500 Vault & Workspace</span></h1>
+    <p class="section-desc">Secure uploads, streamed indexing, and budgeted compliance trails for every SkyeDocx asset. Every storage action runs through kAIxuGateway13 and the kaixuStreamChat helper so finance/legal always see the ledger.</p>
+    <div class="key-panel">
+      <input id="kaixu-key" type="password" placeholder="Kaixu Virtual Key" autocomplete="new-password" />
+      <button id="save-key">Store key</button>
+      <span style="font-size:12px;color:rgba(255,255,255,0.65);">KAIXU_VIRTUAL_KEY only.</span>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="section-title">Uploads & indexing</div>
+    <div class="drive-grid">
+      <div class="drive-card">
+        <h3>Upload brief or folder</h3>
+        <textarea id="upload-note" placeholder="Describe the artifacts, compliance tags, and retention policy."></textarea>
+        <div class="upload-stack">
+          <select id="retention-select">
+            <option value="5">5-year retention</option>
+            <option value="10">10-year retention</option>
+            <option value="archival">Archival (legal)</option>
+          </select>
+          <input id="folder-target" placeholder="Folder alias (e.g., Executive Briefs)" />
+          <div class="actions">
+            <button class="btn btn-gold" id="upload-button">Stream upload</button>
+            <button class="btn btn-outline" id="lock-button">Lock folder</button>
+          </div>
+        </div>
+        <div class="status-pill" id="upload-status">Awaiting artifact</div>
+        <div class="compliance-pill" id="policy-pill">Policy: None yet</div>
+      </div>
+      <div class="drive-card">
+        <h3>Audit & geo-guards</h3>
+        <p>Geo-fenced collaboration rooms require each SSE chunk to confirm Netlify proxy routing before the workspace unlocks. Alerts surface instantly when HTTP 402/429/500 responses block workflows.</p>
+        <div class="guard-grid">
+          <div class="guard-card">
+            <strong>Geo locks</strong>
+            <p id="geo-flag">All regions active.</p>
+          </div>
+          <div class="guard-card">
+            <strong>Recent response</strong>
+            <p id="last-response">None</p>
+          </div>
+        </div>
+        <div class="vault-log" id="gov-log">BroadcastChannel captures appear here.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Budget & ledger</div>
+    <div class="ledger-row">
+      <div class="ledger-card"><strong>Cap</strong><span id="cap-display">—</span></div>
+      <div class="ledger-card"><strong>Spent</strong><span id="spent-display">—</span></div>
+      <div class="ledger-card"><strong>Remaining</strong><span id="remaining-display">—</span></div>
+      <div class="ledger-card"><strong>Provider</strong><span id="provider-display">gemini</span><strong>Model</strong><span id="model-display">gemini-2.0-flash</span></div>
+    </div>
+    <div class="slide-card" style="margin-top:32px;">
+      <h3>Audit trail</h3>
+      <div class="vault-log" id="audit-log">Audit events stream here.</div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Tutorial</div>
+    <div class="tutorial-grid">
+      <div class="sheet-card">
+        <h3>Step 1 · Describe & tag</h3>
+        <p>Document the asset, retention policy, and compliance tags before pushing the `Stream upload` command. The brief feeds the sequence and budget ledger.</p>
+      </div>
+      <div class="sheet-card">
+        <h3>Step 2 · Watch the stream</h3>
+        <p>Chunks arrive via `/api/gateway-stream`, logging `meta/delta/done` events in `kaixu_events` so every index operation is auditable.</p>
+      </div>
+      <div class="sheet-card">
+        <h3>Step 3 · Pause on caps</h3>
+        <p>The UI blocks new writes on HTTP 401/402/429/500. Guard logs and geo-rooms remain frozen until approvals/keys are refreshed.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+    <p>SkyeDrive · kAIxuGateway13 · kaixuStreamChat helper · BroadcastChannel diagnostics.</p>
+  </footer>
+
+  <div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+    <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+    <div class="mega-nav-grid">
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Navigate</div>
+        <a href="../index.html">Home</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="../SkyeFlow/index.html">SkyeFlow</a>
+        <a href="../SkyeArchive/index.html">SkyeArchive</a>
+        <a href="../SkyeCollab/index.html">SkyeCollab</a>
+        <a href="../SkyeLedger/index.html">SkyeLedger</a>
+        <a href="../SkyeSheets/index.html">SkyeSheets</a>
+        <a href="../SkyeSlides/index.html">SkyeSlides</a>
+        <a class="active" href="index.html">SkyeDrive</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Platform</div>
+        <a href="../dashboard.html">Dashboard</a>
+        <a href="../admin.html">Admin CMS</a>
+        <a href="../vault.html">Client Vault</a>
+        <a href="../status.html">Status</a>
+        <a href="../blog.html">Blog Hub</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx App</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Company</div>
+        <a href="../sitemap-visual.html">Site Map</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/three-bg.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/growth.js"></script>
+  <script>
+    const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
+    const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
+    const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
+    const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
+    const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.45 };
+
+    const diagChannel = new BroadcastChannel('kaixu_events');
+    const keyInput = document.getElementById('kaixu-key');
+    const saveKeyButton = document.getElementById('save-key');
+    const uploadButton = document.getElementById('upload-button');
+    const lockButton = document.getElementById('lock-button');
+    const uploadStatus = document.getElementById('upload-status');
+    const policyPill = document.getElementById('policy-pill');
+    const geoFlag = document.getElementById('geo-flag');
+    const lastResponse = document.getElementById('last-response');
+    const vaultLog = document.getElementById('gov-log');
+    const auditLog = document.getElementById('audit-log');
+    const capDisplay = document.getElementById('cap-display');
+    const spentDisplay = document.getElementById('spent-display');
+    const remainingDisplay = document.getElementById('remaining-display');
+    const providerDisplay = document.getElementById('provider-display');
+    const modelDisplay = document.getElementById('model-display');
+    const diagnosticsEl = document.getElementById('diagnostics');
+    const lastDeltaEl = document.getElementById('last-delta');
+
+    let kaixuKey = localStorage.getItem('kaixu_virtual_key') || '';
+    keyInput.value = kaixuKey;
+    const ensureKey = () => kaixuKey && kaixuKey.trim().length > 0;
+
+    function logEntry(type, payload) {
+      const record = `${new Date().toISOString()} · ${type} · ${JSON.stringify(payload)}`;
+      vaultLog.textContent = `${record}\n${vaultLog.textContent}`;
+      auditLog.textContent = `${record}\n${auditLog.textContent}`;
+      diagChannel.postMessage({ type, payload });
+      lastResponse.textContent = `${type} @ ${new Date().toISOString()}`;
+    }
+
+    saveKeyButton.addEventListener('click', () => {
+      const value = keyInput.value.trim();
+      if (!value) { uploadStatus.textContent = 'Key required.'; uploadStatus.classList.add('alert'); return; }
+      kaixuKey = value;
+      localStorage.setItem('kaixu_virtual_key', kaixuKey);
+      uploadStatus.textContent = 'Key stored.';
+      uploadStatus.classList.remove('alert');
+      logEntry('key-saved', { stored: true });
+    });
+
+    uploadButton.addEventListener('click', () => {
+      if (!ensureKey()) { uploadStatus.textContent = 'Provide Kaixu key before uploading.'; uploadStatus.classList.add('alert'); return; }
+      streamUpload();
+    });
+
+    lockButton.addEventListener('click', () => {
+      policyPill.textContent = 'Policy: Locked until approval.';
+      logEntry('folder-locked', { locked: true });
+    });
+
+    async function streamUpload() {
+      uploadStatus.textContent = 'Streaming upload';
+      uploadStatus.classList.remove('alert');
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are an indexing assistant ensuring every upload is compliance-verified with budgets and retention metadata.' },
+          { role: 'user', content: `${document.getElementById('upload-note').value} Retention: ${document.getElementById('retention-select').value}. Folder: ${document.getElementById('folder-target').value || 'untitled'}.` }
+        ]
+      };
+      await kaixuStreamChat(kaixuKey, payload, {
+        onMeta(meta) {
+          providerDisplay.textContent = meta.provider || DEFAULT_PAYLOAD.provider;
+          modelDisplay.textContent = meta.model || DEFAULT_PAYLOAD.model;
+          updateBudget(meta.month);
+          logEntry('drive-meta', meta);
+        },
+        onDelta(delta) {
+          const chunk = delta.text?.trim() || 'Index chunk received.';
+          uploadStatus.textContent = `Indexed chunk: ${delta.label || 'delta'}`;
+          lastDeltaEl.textContent = delta.label || 'delta chunk';
+          logEntry('drive-delta', delta);
+        },
+        onDone(done) {
+          uploadStatus.textContent = 'Upload complete';
+          policyPill.textContent = 'Policy: Artifact ready';
+          updateBudget(done.month);
+          logEntry('drive-done', done);
+        },
+        onError(err) {
+          uploadStatus.textContent = err.message;
+          uploadStatus.classList.add('alert');
+          logEntry('drive-stream-error', err);
+        }
+      });
+    }
+
+    async function kaixuStreamChat(key, payload, { onMeta, onDelta, onDone, onError }) {
+      const endpoints = [KAIXU_STREAM_ENDPOINT, KAIXU_FALLBACK_STREAM];
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${key}`
+            },
+            body: JSON.stringify(payload)
+          });
+          if (response.status === 401 || response.status === 402 || response.status === 429 || response.status === 500) {
+            const message = response.status === 401 ? 'Invalid Kaixu Key' : response.status === 402 ? 'Cap reached' : response.status === 429 ? 'Rate limited' : 'Gateway error';
+            onError && onError({ code: response.status, message });
+            return;
+          }
+          if (!response.ok) { const body = await response.text().catch(() => ''); onError && onError({ code: response.status, message: body || `Gateway ${response.status}` }); return; }
+          if (!response.body) throw new Error('No stream body returned.');
+          await readSSEStream(response.body.getReader(), { onMeta, onDelta, onDone, onError });
+          return;
+        } catch (err) {
+          if (endpoint === endpoints[endpoints.length - 1]) { onError && onError({ code: 'network', message: err.message }); }
+        }
+      }
+    }
+
+    async function readSSEStream(reader, { onMeta, onDelta, onDone, onError }) {
+      const decoder = new TextDecoder();
+      let buffer = '';
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const events = buffer.split('\n\n');
+        buffer = events.pop();
+        for (const chunk of events) {
+          if (!chunk.trim()) continue;
+          const payload = chunk.replace(/^data: */gm, '');
+          try {
+            const parsed = JSON.parse(payload);
+            if (parsed.meta) onMeta && onMeta(parsed.meta);
+            if (parsed.delta) onDelta && onDelta(parsed.delta);
+            if (parsed.done) onDone && onDone(parsed.done);
+          } catch (err) {
+            onError && onError({ message: payload });
+          }
+        }
+      }
+    }
+
+    function updateBudget(monthData) {
+      if (!monthData) return;
+      const cap = monthData.cap_cents / 100;
+      const spent = monthData.spent_cents / 100;
+      const remaining = Math.max(cap - spent, 0);
+      capDisplay.textContent = Intl.NumberFormat().format(cap);
+      spentDisplay.textContent = Intl.NumberFormat().format(spent);
+      remainingDisplay.textContent = Intl.NumberFormat().format(remaining);
+      diagnosticsEl.textContent = `Budget updated @ ${new Date().toISOString()}`;
+    }
+  </script>
+</body>
+</html>
