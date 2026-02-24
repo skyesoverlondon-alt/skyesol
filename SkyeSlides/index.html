@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#05040a" />
+  <title>SkyeSlides | Fortune 500 Storytelling</title>
+  <meta name="description" content="SkyeSlides replaces Google Slides with Kaixu-powered deck orchestration: gated sequencing, streamed layouts, and compliance diagnostics through kAIxuGateway13." />
+  <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .slide-card { background: var(--surface); border-radius: 12px; padding: 26px; border: 1px solid rgba(201,168,76,0.12); box-shadow: 0 20px 60px rgba(0,0,0,0.45); }
+    .slide-card h3 { font-family: 'Playfair Display', serif; margin-bottom: 12px; }
+    .slide-card textarea, .slide-card select { width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(201,168,76,0.2); border-radius: 6px; padding: 14px; color: #fff; }
+    .slide-card textarea { min-height: 160px; font-family: 'Fira Code', monospace; }
+    .slide-card .actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .slide-card .status-pill { margin-top: 12px; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); font-size: 12px; letter-spacing: 1px; }
+    .status-pill.alert { border-color: #ff7070; color: #ff9a9a; }
+    .slide-preview { margin-top: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .slide-entry { padding: 16px; border-radius: 8px; border: 1px solid rgba(201,168,76,0.15); background: rgba(255,255,255,0.02); }
+    .slide-entry h4 { margin-bottom: 6px; font-size: 15px; }
+    .slide-entry p { font-size: 14px; line-height: 1.6; color: var(--text-dim); }
+    .slide-card .consult-output { margin-top: 14px; min-height: 120px; border-radius: 6px; border: 1px solid rgba(201,168,76,0.12); padding: 14px; background: rgba(255,255,255,0.02); font-family: 'Fira Code', monospace; }
+    .guard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+    .guard-card { padding: 20px; border-radius: 8px; border: 1px solid rgba(201,168,76,0.12); background: rgba(255,255,255,0.02); }
+    .guard-card strong { display: block; margin-bottom: 6px; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+    .guard-log { margin-top: 20px; min-height: 140px; border-radius: 6px; border: 1px solid rgba(201,168,76,0.12); padding: 16px; background: rgba(255,255,255,0.02); font-family: 'Fira Code', monospace; font-size: 13px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <canvas id="three-bg"></canvas>
+  <nav class="main-nav">
+    <a href="../index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="../SkyeFlow/index.html">SkyeFlow</a>
+      <a href="../SkyeArchive/index.html">SkyeArchive</a>
+      <a href="../SkyeCollab/index.html">SkyeCollab</a>
+      <a href="../SkyeLedger/index.html">SkyeLedger</a>
+      <a class="active" href="index.html">SkyeSlides</a>
+      <a href="../SkyeSheets/index.html">SkyeSheets</a>
+      <a href="../SkyeOps/index.html">SkyeOps</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="section-label">Skye Suite · Slides</div>
+    <h1>SkyeSlides <span>Compliance-Ready Storytelling</span></h1>
+    <p class="section-desc">Fortune 500 decks, sequenced through kAIxuGateway13. Narratives, speaker notes, and layouts emerge as streamed chunks, budgets glow in real-time, and every slide change is auditable through the BroadcastChannel.</p>
+    <div class="key-panel">
+      <input id="kaixu-key" type="password" placeholder="Kaixu Virtual Key" autocomplete="new-password" />
+      <button id="save-key">Store key</button>
+      <span style="font-size:12px;color:rgba(255,255,255,0.65);">KAIXU_VIRTUAL_KEY only.</span>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="section-title">Deck orchestration</div>
+    <div class="grid-two">
+      <div class="slide-card">
+        <h3>Sequence your deck</h3>
+        <textarea id="sequence-brief">Executive summary, 12-slide investor-ready deck, include momentum, risk mitigation, call to action.</textarea>
+        <select id="persona-select">
+          <option value="cxo" selected>CXO executive</option>
+          <option value="board">Board & compliance</option>
+          <option value="sales">Revenue leadership</option>
+        </select>
+        <div class="actions">
+          <button class="btn btn-gold" id="sequence-button">Stream sequence</button>
+          <button class="btn btn-outline" id="consult-button">Consult insight</button>
+        </div>
+        <div class="status-pill" id="sequence-status">Idle</div>
+        <div class="slide-preview" id="slide-preview">Sequenced slides stream here.</div>
+      </div>
+      <div class="slide-card">
+        <h3>Approval & narration</h3>
+        <p>Legal reviews, brand guards, and speaker notes must pass through the `Consult` channel before deploying. Each consultation response summarizes compliance flags and usage buckets.</p>
+        <div class="consult-output" id="consult-output">Consult output appears after invoking `/api/gateway-chat`.</div>
+        <div class="guard-grid">
+          <div class="guard-card">
+            <strong>Guard status</strong>
+            <p id="guard-status">Ready to stream.</p>
+          </div>
+          <div class="guard-card">
+            <strong>Recent signals</strong>
+            <p id="signal-count">0 alerts logged.</p>
+          </div>
+        </div>
+        <div class="guard-log" id="guard-log">BroadcastChannel traces appear here.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Budget & diagnostics</div>
+    <div class="budget-grid">
+      <div class="budget-card"><p>Cap</p><strong id="cap-display">—</strong></div>
+      <div class="budget-card"><p>Spent</p><strong id="spent-display">—</strong></div>
+      <div class="budget-card"><p>Remaining</p><strong id="remaining-display">—</strong></div>
+      <div class="budget-card"><p>Provider</p><strong id="provider-display">gemini</strong><p>Model</p><strong id="model-display">gemini-2.0-flash</strong></div>
+      <div class="budget-card"><p>Diagnostics</p><strong id="diagnostics">No streams yet.</strong><p>Last delta</p><strong id="last-delta">—</strong></div>
+    </div>
+    <div class="slide-card" style="margin-top:32px;">
+      <h3>Audit log</h3>
+      <div class="guard-log" id="audit-log">Gateway & BroadcastChannel records appear here.</div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="section-title">Tutorial</div>
+    <div class="tutorial-grid">
+      <div class="sheet-card">
+        <h3>Step 1 · Define your sequence</h3>
+        <p>Describe the narrative, audience, and any mandatory legal attachments. The `/api/gateway-stream` request will draft slide headings, speaker notes, and animation cues.</p>
+      </div>
+      <div class="sheet-card">
+        <h3>Step 2 · Consult the guardians</h3>
+        <p>Run `/api/gateway-chat` through the Consult button to surface compliance warnings and budget context before you deploy.</p>
+      </div>
+      <div class="sheet-card">
+        <h3>Step 3 · Capture every chunk</h3>
+        <p>Streamed deltas update the preview, budgets, and `kaixu_events` diagnostics in real-time so teams can pause on 402/429/500 events.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+    <p>SkyeSlides · kAIxuGateway13 · kaixuStreamChat helper · BroadcastChannel diagnostics.</p>
+  </footer>
+
+  <div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+    <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+    <div class="mega-nav-grid">
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Navigate</div>
+        <a href="../index.html">Home</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="../SkyeFlow/index.html">SkyeFlow</a>
+        <a href="../SkyeArchive/index.html">SkyeArchive</a>
+        <a href="../SkyeCollab/index.html">SkyeCollab</a>
+        <a href="../SkyeLedger/index.html">SkyeLedger</a>
+        <a class="active" href="index.html">SkyeSlides</a>
+        <a href="../SkyeSheets/index.html">SkyeSheets</a>
+        <a href="../SkyeOps/index.html">SkyeOps</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Platform</div>
+        <a href="../dashboard.html">Dashboard</a>
+        <a href="../admin.html">Admin CMS</a>
+        <a href="../vault.html">Client Vault</a>
+        <a href="../status.html">Status</a>
+        <a href="../blog.html">Blog Hub</a>
+        <a href="../SkyeDocx/homepage.html">SkyeDocx App</a>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Company</div>
+        <a href="../sitemap-visual.html">Site Map</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/three-bg.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/growth.js"></script>
+  <script>
+    const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
+    const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
+    const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
+    const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
+    const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.4 };
+
+    const diagChannel = new BroadcastChannel('kaixu_events');
+    const keyInput = document.getElementById('kaixu-key');
+    const saveKeyButton = document.getElementById('save-key');
+    const sequenceBrief = document.getElementById('sequence-brief');
+    const personaSelect = document.getElementById('persona-select');
+    const sequenceButton = document.getElementById('sequence-button');
+    const consultButton = document.getElementById('consult-button');
+    const sequenceStatus = document.getElementById('sequence-status');
+    const slidePreview = document.getElementById('slide-preview');
+    const consultOutput = document.getElementById('consult-output');
+    const guardStatus = document.getElementById('guard-status');
+    const signalCount = document.getElementById('signal-count');
+    const guardLog = document.getElementById('guard-log');
+    const auditLog = document.getElementById('audit-log');
+    const capDisplay = document.getElementById('cap-display');
+    const spentDisplay = document.getElementById('spent-display');
+    const remainingDisplay = document.getElementById('remaining-display');
+    const providerDisplay = document.getElementById('provider-display');
+    const modelDisplay = document.getElementById('model-display');
+    const diagnosticsEl = document.getElementById('diagnostics');
+    const lastDeltaEl = document.getElementById('last-delta');
+
+    let kaixuKey = localStorage.getItem('kaixu_virtual_key') || '';
+    keyInput.value = kaixuKey;
+    const ensureKey = () => kaixuKey && kaixuKey.trim().length > 0;
+
+    function logDiagnostic(type, payload) {
+      const entry = `${new Date().toISOString()} · ${type} · ${JSON.stringify(payload)}`;
+      guardLog.textContent = `${entry}\n${guardLog.textContent}`;
+      auditLog.textContent = `${entry}\n${auditLog.textContent}`;
+      diagChannel.postMessage({ type, payload });
+      const currentSignals = guardLog.textContent.split('\n').filter(Boolean).length;
+      signalCount.textContent = `${currentSignals} alerts logged.`;
+    }
+
+    saveKeyButton.addEventListener('click', () => {
+      const value = keyInput.value.trim();
+      if (!value) {
+        sequenceStatus.textContent = 'Key required.';
+        sequenceStatus.classList.add('alert');
+        return;
+      }
+      kaixuKey = value;
+      localStorage.setItem('kaixu_virtual_key', kaixuKey);
+      sequenceStatus.textContent = 'Key stored.';
+      sequenceStatus.classList.remove('alert');
+      logDiagnostic('key-saved', { stored: true });
+    });
+
+    sequenceButton.addEventListener('click', () => {
+      if (!ensureKey()) {
+        sequenceStatus.textContent = 'Provide Kaixu key.';
+        sequenceStatus.classList.add('alert');
+        return;
+      }
+      runSequence();
+    });
+
+    consultButton.addEventListener('click', () => {
+      if (!ensureKey()) {
+        sequenceStatus.textContent = 'Provide Kaixu key.';
+        sequenceStatus.classList.add('alert');
+        return;
+      }
+      runConsult();
+    });
+
+    function renderSlide(deltaText) {
+      const entry = document.createElement('div');
+      entry.className = 'slide-entry';
+      entry.innerHTML = `<h4>Slide ${slidePreview.children.length + 1}</h4><p>${deltaText}</p>`;
+      slidePreview.appendChild(entry);
+    }
+
+    async function runSequence() {
+      slidePreview.innerHTML = '';
+      sequenceStatus.textContent = 'Sequencing';
+      sequenceStatus.classList.remove('alert');
+      sequenceButton.disabled = true;
+      await kaixuStreamChat(kaixuKey, {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are a compliance-first storytelling assistant turning briefs into deck sequences, speaker notes, and animation cues.' },
+          { role: 'user', content: `${sequenceBrief.value} Persona: ${personaSelect.value}.` }
+        ]
+      }, {
+        onMeta(meta) {
+          providerDisplay.textContent = meta.provider || DEFAULT_PAYLOAD.provider;
+          modelDisplay.textContent = meta.model || DEFAULT_PAYLOAD.model;
+          updateBudget(meta.month);
+          logDiagnostic('slides-meta', meta);
+        },
+        onDelta(delta) {
+          const text = delta.text?.trim() || 'Slide chunk received.';
+          renderSlide(text);
+          lastDeltaEl.textContent = delta.label || 'slide chunk';
+          logDiagnostic('slides-delta', delta);
+        },
+        onDone(done) {
+          sequenceStatus.textContent = 'Sequence complete';
+          sequenceButton.disabled = false;
+          updateBudget(done.month);
+          logDiagnostic('slides-done', done);
+        },
+        onError(err) {
+          sequenceStatus.textContent = err.message;
+          sequenceStatus.classList.add('alert');
+          sequenceButton.disabled = false;
+          logDiagnostic('slides-stream-error', err);
+        }
+      });
+    }
+
+    async function runConsult() {
+      consultOutput.textContent = 'Consulting gateway...';
+      const payload = {
+        ...DEFAULT_PAYLOAD,
+        messages: [
+          { role: 'system', content: 'You are a governance reviewer flagging compliance and budget risk for decks.' },
+          { role: 'user', content: `Review this deck brief: ${sequenceBrief.value}` }
+        ]
+      };
+      try {
+        const response = await postToGateway([KAIXU_CHAT_ENDPOINT, KAIXU_FALLBACK_CHAT], payload);
+        await handleNonStreamResponse(response, 'slides-consult', consultOutput);
+      } catch (error) {
+        consultOutput.textContent = `Consult failed: ${error.message}`;
+        logDiagnostic('slides-consult-error', { error: error.message });
+      }
+    }
+
+    async function postToGateway(endpoints, payload) {
+      let lastError;
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${kaixuKey}`
+            },
+            body: JSON.stringify(payload)
+          });
+          return response;
+        } catch (err) {
+          lastError = err;
+        }
+      }
+      throw lastError || new Error('Gateway unreachable');
+    }
+
+    async function handleNonStreamResponse(response, label, outputEl) {
+      if (!response) {
+        outputEl.textContent = 'No gateway response.';
+        return;
+      }
+      if (response.status === 402) { outputEl.textContent = 'Monthly cap reached.'; sequenceStatus.textContent = 'Blocked'; sequenceStatus.classList.add('alert'); return; }
+      if (response.status === 401) { outputEl.textContent = 'Invalid Kaixu Key.'; return; }
+      if (response.status === 429) { outputEl.textContent = 'Rate limited.'; return; }
+      if (response.status === 500) { outputEl.textContent = 'Gateway error.'; return; }
+      if (![200, 201].includes(response.status)) {
+        outputEl.textContent = `Gateway ${response.status} error.`;
+        logDiagnostic(label, { status: response.status });
+        return;
+      }
+      const data = await response.json().catch(() => ({}));
+      outputEl.textContent = data.output_text || data.result || 'No consult output.';
+      updateBudget(data.month);
+      logDiagnostic(label, data);
+    }
+
+    function updateBudget(monthData) {
+      if (!monthData) return;
+      const cap = monthData.cap_cents / 100;
+      const spent = monthData.spent_cents / 100;
+      const remaining = Math.max(cap - spent, 0);
+      capDisplay.textContent = Intl.NumberFormat().format(cap);
+      spentDisplay.textContent = Intl.NumberFormat().format(spent);
+      remainingDisplay.textContent = Intl.NumberFormat().format(remaining);
+      diagnosticsEl.textContent = `Budget updated @ ${new Date().toISOString()}`;
+    }
+
+    function kaixuStreamChat(key, payload, { onMeta, onDelta, onDone, onError }) {
+      const endpoints = [KAIXU_STREAM_ENDPOINT, KAIXU_FALLBACK_STREAM];
+      return new Promise(async (resolve) => {
+        let lastError;
+        for (const endpoint of endpoints) {
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${key}`
+              },
+              body: JSON.stringify(payload)
+            });
+            if (response.status === 402) {
+              onError && onError({ code: 402, message: 'Monthly cap reached' });
+              return resolve();
+            }
+            if (response.status === 401) {
+              onError && onError({ code: 401, message: 'Invalid Kaixu Key' });
+              return resolve();
+            }
+            if (!response.ok) {
+              const errorBody = await response.text().catch(() => '');
+              onError && onError({ code: response.status, message: errorBody || `Gateway ${response.status}` });
+              return resolve();
+            }
+            if (!response.body) throw new Error('No stream body returned.');
+            await readSSEStream(response.body.getReader(), { onMeta, onDelta, onDone, onError });
+            return resolve();
+          } catch (err) {
+            lastError = err;
+          }
+        }
+        onError && onError({ code: 'network', message: `All stream endpoints failed: ${lastError?.message || 'unknown'}` });
+        resolve();
+      });
+    }
+
+    async function readSSEStream(reader, { onMeta, onDelta, onDone, onError }) {
+      const decoder = new TextDecoder();
+      let buffer = '';
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const events = buffer.split('\n\n');
+        buffer = events.pop();
+        for (const chunk of events) {
+          if (!chunk.trim()) continue;
+          const payload = chunk.replace(/^data: */gm, '');
+          try {
+            const parsed = JSON.parse(payload);
+            if (parsed.meta) onMeta && onMeta(parsed.meta);
+            if (parsed.delta) onDelta && onDelta(parsed.delta);
+            if (parsed.done) onDone && onDone(parsed.done);
+          } catch (err) {
+            onError && onError({ message: payload });
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
