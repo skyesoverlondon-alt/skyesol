@@ -315,6 +315,11 @@
         return okQ && okT;
       }).sort((a,b) => new Date(b.published_at||0) - new Date(a.published_at||0));
       mount.innerHTML = filtered.map(p => blogCard(p)).join('') || '<div class="empty-state">No posts match your filters.</div>';
+      // Re-observe dynamically injected .reveal cards so they animate in
+      const revealObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.08 });
+      mount.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
     }
 
     if (search) search.addEventListener('input', applyFilters);
