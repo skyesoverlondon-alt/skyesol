@@ -70,15 +70,15 @@
 })();
 
 // ── Mega Nav ───────────────────────────────────────
-(function(){
-  const menuBtn     = document.getElementById('menuBtn');
-  const megaNav     = document.getElementById('megaNav');
-  const megaClose   = document.getElementById('megaNavClose');
+document.addEventListener('DOMContentLoaded', function(){
+  const menuBtn   = document.getElementById('menuBtn');
+  const megaNav   = document.getElementById('megaNav');
+  const megaClose = document.getElementById('megaNavClose');
   if (!menuBtn || !megaNav) return;
-  function open()  { megaNav.classList.add('open');    document.body.style.overflow = 'hidden'; }
-  function close() { megaNav.classList.remove('open'); document.body.style.overflow = ''; }
-  menuBtn.addEventListener('click', open);
-  megaClose?.addEventListener('click', close);
-  megaNav.addEventListener('click', e => { if (e.target === megaNav) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-})();
+  function openNav()  { megaNav.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  function closeNav() { megaNav.style.display = 'none';  document.body.style.overflow = ''; }
+  menuBtn.addEventListener('click', openNav);
+  if (megaClose) megaClose.addEventListener('click', closeNav);
+  megaNav.addEventListener('click', function(e){ if (e.target === megaNav) closeNav(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeNav(); });
+});

@@ -536,15 +536,16 @@ footer a { color: var(--gold); text-decoration: none; }
 }
 
 /* ── Mega Nav Overlay ──────────────────────────────── */
+@keyframes megaFadeIn { from { opacity: 0; } to { opacity: 1; } }
 .mega-nav {
-  position: fixed; inset: 0; z-index: 10000;
+  position: fixed; inset: 0; z-index: 99999;
   background: rgba(5,5,8,0.97);
   backdrop-filter: blur(20px);
-  display: flex; flex-direction: column; justify-content: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity .3s ease;
+  display: none; flex-direction: column; justify-content: center;
+  align-items: center;
+  animation: megaFadeIn .2s ease;
 }
-.mega-nav.open { opacity: 1; pointer-events: all; }
+.mega-nav.open { display: flex; }
 .mega-nav-close {
   position: absolute; top: 28px; right: 40px;
   background: none; border: 1px solid rgba(201,168,76,0.35);
