@@ -44,8 +44,18 @@ function wrapStore(base) {
   };
 }
 
+let cachedStore;
 export function store() {
-  return wrapStore(getStore(STORE_NAME));
+  if (cachedStore) return cachedStore;
+  try {
+    const base = getStore(STORE_NAME);
+    cachedStore = wrapStore(base);
+    return cachedStore;
+  } catch (err) {
+    console.error("[-] Netlify Blobs unavailable", err?.message || err);
+    cachedStore = wrapStore(null);
+    return cachedStore;
+  }
 }
 
 export function json(statusCode, body, extraHeaders = {}) {
