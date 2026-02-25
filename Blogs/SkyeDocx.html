@@ -316,9 +316,35 @@ a { color:inherit; text-decoration:none }
   .footer-bottom{flex-direction:column;gap:1.5rem;text-align:center}
 }
   </style>
+
+<style>
+.site-top-nav{position:sticky;top:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 24px;background:rgba(5,5,10,0.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.08);} 
+.site-top-nav .nav-logo{display:flex;align-items:center;gap:10px;font-weight:600;color:#f7f3e8;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;font-size:13px;} 
+.site-top-nav .nav-logo img{height:36px;width:auto;} 
+.site-top-nav .nav-links{display:flex;flex-wrap:wrap;gap:12px;font-size:14px;} 
+.site-top-nav .nav-links a{color:#eae6dc;text-decoration:none;padding:6px 10px;border-radius:6px;transition:background 0.2s ease,color 0.2s ease;} 
+.site-top-nav .nav-links a:hover{background:rgba(255,255,255,0.08);color:#d7b35b;} 
+@media(max-width:720px){.site-top-nav{flex-direction:column;align-items:flex-start;}.site-top-nav .nav-links{gap:10px;}}
+</style>
+
 </head>
 
 <body>
+
+<nav class="site-top-nav">
+  <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+  <div class="nav-links">
+    <a href="/index.html">Home</a>
+    <a href="/about.html">Founder</a>
+    <a href="/platforms.html">Platforms</a>
+    <a href="/network.html">Network</a>
+    <a href="/credibility.html">Credibility</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+</nav>
+
   <!-- Cinematic Opening -->
   <div class="cinematic-opener">
     <div class="opener-content">
@@ -554,9 +580,9 @@ a { color:inherit; text-decoration:none }
           <div class="related">
             <h3>More from the SOL ecosystem</h3>
             <ul>
-              <li><a href="../Skaixu/skaixu_blog_05_governance-first-ai-routing-model-access-designed-like-security.html">Governance-First AI Routing — Model Access Designed Like Security</a></li>
-              <li><a href="../Skaixu/skaixu_blog_10_auditability-without-enterprise-overhead.html">Auditability Without Enterprise Overhead</a></li>
-              <li><a href="../Editorials/One-Website-Can't-Carry-Your-Authority-Alone.html">One Website Can't Carry Your Authority Alone</a></li>
+              <li><a href="Skaixu/skaixu_blog_05_governance-first-ai-routing-model-access-designed-like-security.html">Governance-First AI Routing — Model Access Designed Like Security</a></li>
+              <li><a href="Skaixu/skaixu_blog_10_auditability-without-enterprise-overhead.html">Auditability Without Enterprise Overhead</a></li>
+              <li><a href="Editorials/One-Website-Can't-Carry-Your-Authority-Alone.html">One Website Can't Carry Your Authority Alone</a></li>
             </ul>
             <p class="check-note">SkyeDocx is part of the SOLEnterprises platform family. See the full network at <a href="https://skyesol.netlify.app/network.html" style="color:var(--color-rust);border-bottom:1px solid var(--color-rust);">skyesol.netlify.app/network.html</a>.</p>
           </div>
@@ -805,5 +831,6 @@ a { color:inherit; text-decoration:none }
     });
   });
   </script>
+  <script src="/js/partials.js"></script>
 </body>
 </html>

@@ -53,6 +53,15 @@ function resolveInternalLink(sourceFile, href) {
     return null;
   }
 
+  if (trimmed.includes('${')) {
+    return null;
+  }
+
+  if (trimmed.startsWith('/')) {
+    const normalized = trimmed.replace(/^\//, '');
+    return path.join(root, decodeURIComponent(normalized));
+  }
+
   if (/^https?:\/\//i.test(trimmed)) {
     try {
       const url = new URL(trimmed);
@@ -91,8 +100,7 @@ async function fixRelAttributes(htmlFiles, fixMode) {
   return totalChanges;
 }
 
-async function checkBlogLinks(blogFiles) {
-  const blogSet = new Set(blogFiles.map((file) => normalizePath(file.fullPath)));
+async function checkBlogLinks(blogFiles, validPaths) {
   const errors = [];
   for (const file of blogFiles) {
     const content = await fs.readFile(file.fullPath, 'utf-8');
@@ -102,8 +110,22 @@ async function checkBlogLinks(blogFiles) {
       const href = stripHashAndQuery(match[2]);
       if (!href) continue;
       const target = resolveInternalLink(file.fullPath, href);
-      if (target && blogSet.has(normalizePath(target)) === false) {
-        errors.push({ source: file.relative, target: normalizePath(target) });
+      if (!target) continue;
+
+      let normalizedTarget = normalizePath(target);
+      try {
+        const stats = await fs.stat(target);
+        if (stats.isDirectory()) {
+          const indexPath = path.join(target, 'index.html');
+          normalizedTarget = normalizePath(indexPath);
+        }
+      } catch (error) {
+        const indexPath = path.join(target, 'index.html');
+        normalizedTarget = normalizePath(indexPath);
+      }
+
+      if (validPaths.has(normalizedTarget) === false) {
+        errors.push({ source: file.relative, target: normalizedTarget });
       }
     }
   }
@@ -114,6 +136,7 @@ async function run() {
   const htmlFiles = [];
   await collectHtml(root, htmlFiles);
   const blogFiles = htmlFiles.filter((file) => file.relative.startsWith('Blogs/'));
+  const validPaths = new Set(htmlFiles.map((file) => normalizePath(file.fullPath)));
   const fixMode = process.argv.includes('--fix');
 
   if (blogFiles.length !== 84) {
@@ -126,7 +149,7 @@ async function run() {
     await fixRelAttributes(htmlFiles, false);
   }
 
-  const linkErrors = await checkBlogLinks(blogFiles);
+  const linkErrors = await checkBlogLinks(blogFiles, validPaths);
   if (linkErrors.length) {
     console.error('Link checker found missing targets:');
     for (const error of linkErrors) {

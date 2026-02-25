@@ -936,3 +936,12 @@ EXISTING LINEUP (for reference — do NOT duplicate these):
   ALL BALANCE TERMS:     6–36 months
   ENGAGEMENT MINIMUM:    $28,000
   ─────────────────────────────────────────────────────────────
+
+
+
+
+
+kaixu UPDATE LOG:
+SCAN - Services coverage (Feb 2026)
+- Pages found: CineFrame -> Services/WebBuilds.html; SignalFlow -> Services/intake-routing.html; DataPilot -> Services/ai-data-apps.html; TrustLayer -> Services/trust-surfaces.html; AccessAtlas -> Services/portals-hubs.html; CheckoutForge -> Services/ecommerce-payments.html; InsightForge -> Services/analytics-dashboards.html; RetainEngine -> Services/lifecycle-retention.html; ShieldStack -> Services/security-audit.html; BrandForge -> Services/brand-identity.html; ContentEngine -> Services/seo-content.html; PulseWire -> Services/notification-comms.html; MigrateOps -> Services/platform-migration.html; VaultOps -> Services/docs-knowledge.html; LaunchPad -> Services/mvp-launchpad.html.
+- Missing: ConnectBridge (API & Integration Layer) has no Services page yet; total coverage is 15/16 products.
