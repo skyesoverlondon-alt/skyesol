@@ -1,0 +1,35 @@
+name: Site Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Metadata template check
+        run: npm run meta:check
+
+      - name: Generate sitemap
+        run: npm run gen-sitemap
+
+      - name: Link guard
+        run: npm run link-check
+
+      - name: Ensure working tree clean
+        run: git diff --quiet --exit-code || (echo "Generated files changed. Run npm run gen-sitemap && npm run meta:apply before pushing." && exit 1)

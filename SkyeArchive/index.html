@@ -8,6 +8,7 @@
   <meta name="description" content="SkyeArchive re-classifies SkyeDocx drafts via kAIxuGateway13 streaming events, surfaces budgets, and keeps diagnostics on the shared BroadcastChannel.">
   <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/sol-intro.css">
   <style>
     .workflow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
     .workflow-card { background: var(--surface); border: 1px solid rgba(201,168,76,0.08); border-radius: 8px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.45); }
@@ -31,9 +32,14 @@
   </style>
 </head>
 <body>
+  <div id="loader" aria-live="polite" aria-busy="true">
+    <div class="spinner" aria-hidden="true"></div>
+    <div id="loading-text">INITIALIZING SKYE ARCHIVE...</div>
+    <div id="loading-sub">CALIBRATING COMPLIANCE CHANNELS</div>
+  </div>
   <canvas id="three-bg"></canvas>
   <nav class="main-nav" id="mainNav">
-    <a href="../index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <a href="https://skaixuidepro.netlify.app/" target="_blank" rel="noreferrer noopener" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
     <button class="nav-toggle" id="navToggle">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="../index.html">Home</a>
@@ -59,6 +65,7 @@
     <div class="key-panel">
       <input id="kaixu-key" type="password" placeholder="Kaixu Virtual Key" autocomplete="new-password">
       <button id="save-key">Store key</button>
+      <a class="request-key" href="https://skyesoverlondon.netlify.app/pages/services/real-intelligence/getkaixu-api" target="_blank" rel="noreferrer noopener">Request a kAIxU Key</a>
       <span style="font-size:12px;color:rgba(255,255,255,0.65);">Only the Kaixu Virtual Key is persisted locally.</span>
     </div>
   </div>
@@ -125,7 +132,7 @@
       <div class="budget-card"><p>Cap</p><strong id="budget-cap">—</strong></div>
       <div class="budget-card"><p>Spent</p><strong id="budget-spent">—</strong></div>
       <div class="budget-card"><p>Remaining</p><strong id="budget-remaining">—</strong></div>
-      <div class="budget-card"><p>Provider</p><strong id="provider-display">gemini</strong><p>Model</p><strong id="model-display">gemini-2.0-flash</strong></div>
+      <div class="budget-card"><p>Provider</p><strong id="provider-display">Skyes Over London</strong><p>Model</p><strong id="model-display">skAIxU Flow6.7</strong></div>
       <div class="budget-card"><p>Diagnostics</p><strong id="diagnostics">Awaiting stream</strong><p>Last label</p><strong id="last-label">—</strong></div>
     </div>
     <div style="margin-top:20px;">
@@ -187,12 +194,15 @@
   <script src="../js/three-bg.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/growth.js"></script>
+  <script src="../js/sol-intro.js"></script>
   <script>
     const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
     const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
     const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
     const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
     const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.35 };
+    const PROVIDER_BRANDING = { gemini: 'Skyes Over London' };
+    const MODEL_BRANDING = { 'gemini-2.0-flash': 'skAIxU Flow6.7' };
 
     const diagChannel = new BroadcastChannel('kaixu_events');
     const keyInput = document.getElementById('kaixu-key');
@@ -214,6 +224,11 @@
     const budgetRemaining = document.getElementById('budget-remaining');
     const providerDisplay = document.getElementById('provider-display');
     const modelDisplay = document.getElementById('model-display');
+    function renderProviderModel(provider, model) {
+      providerDisplay.textContent = PROVIDER_BRANDING[provider] || provider;
+      modelDisplay.textContent = MODEL_BRANDING[model] || model;
+    }
+    renderProviderModel(DEFAULT_PAYLOAD.provider, DEFAULT_PAYLOAD.model);
     const diagnosticsEl = document.getElementById('diagnostics');
     const lastLabelEl = document.getElementById('last-label');
     const retentionList = document.getElementById('retention-list');
@@ -290,8 +305,7 @@
 
       await kaixuStreamChat(kaixuKey, payload, {
         onMeta(meta) {
-          providerDisplay.textContent = meta.provider || DEFAULT_PAYLOAD.provider;
-          modelDisplay.textContent = meta.model || DEFAULT_PAYLOAD.model;
+          renderProviderModel(meta.provider || DEFAULT_PAYLOAD.provider, meta.model || DEFAULT_PAYLOAD.model);
           updateBudget(meta.month);
           metaLog.textContent += `${JSON.stringify(meta)}\n\n`;
           logDiagnostic('archive-meta', meta);
@@ -501,6 +515,16 @@
         const blob = new Blob([JSON.stringify({ event: 'unload', ts: Date.now() })], { type: 'application/json' });
         navigator.sendBeacon('/api/logs', blob);
       }
+    });
+  </script>
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (!loader) return;
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 1000);
+      }, 650);
     });
   </script>
 </body>

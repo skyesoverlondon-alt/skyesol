@@ -8,6 +8,7 @@
   <meta name="description" content="SkyeSheets replaces spreadsheet suites with a Kaixu-powered data canvas: datasets, pivot outputs, and formula streams all go through kAIxuGateway13." />
   <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/sol-intro.css" />
   <style>
     .grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
     .sheet-card { background: var(--surface); border-radius: 12px; padding: 26px; border: 1px solid rgba(201,168,76,0.12); box-shadow: 0 20px 60px rgba(0,0,0,0.45); }
@@ -25,9 +26,14 @@
   </style>
 </head>
 <body>
+  <div id="loader" aria-live="polite" aria-busy="true">
+    <div class="spinner" aria-hidden="true"></div>
+    <div id="loading-text">INITIALIZING SKYE SHEETS...</div>
+    <div id="loading-sub">CALIBRATING DATA CANVAS</div>
+  </div>
   <canvas id="three-bg"></canvas>
   <nav class="main-nav">
-    <a href="../index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <a href="https://skaixuidepro.netlify.app/" target="_blank" rel="noreferrer noopener" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
     <div class="nav-links">
       <a href="../index.html">Home</a>
       <a href="../SkyeDocx/homepage.html">SkyeDocx</a>
@@ -47,6 +53,7 @@
     <div class="key-panel">
       <input id="kaixu-key" type="password" placeholder="Kaixu Virtual Key" autocomplete="new-password" />
       <button id="save-key">Store key</button>
+      <a class="request-key" href="https://skyesoverlondon.netlify.app/pages/services/real-intelligence/getkaixu-api" target="_blank" rel="noreferrer noopener">Request a kAIxU Key</a>
       <span style="font-size:12px;color:rgba(255,255,255,0.65);">KAIXU_VIRTUAL_KEY only.</span>
     </div>
   </div>
@@ -86,7 +93,7 @@ South,287000,0.17</textarea>
       <div class="budget-card"><p>Cap</p><strong id="cap-display">—</strong></div>
       <div class="budget-card"><p>Spent</p><strong id="spent-display">—</strong></div>
       <div class="budget-card"><p>Remaining</p><strong id="remaining-display">—</strong></div>
-      <div class="budget-card"><p>Provider</p><strong id="provider-display">gemini</strong><p>Model</p><strong id="model-display">gemini-2.0-flash</strong></div>
+      <div class="budget-card"><p>Provider</p><strong id="provider-display">Skyes Over London</strong><p>Model</p><strong id="model-display">skAIxU Flow6.7</strong></div>
       <div class="budget-card"><p>Diagnostics</p><strong id="diagnostics">No sessions yet.</strong><p>Last delta</p><strong id="last-delta">—</strong></div>
     </div>
     <div class="sheet-output" id="diagnostic-log" style="margin-top:20px;min-height:120px;">BroadcastChannel logs appear here.</div>
@@ -150,12 +157,15 @@ South,287000,0.17</textarea>
   <script src="../js/three-bg.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/growth.js"></script>
+  <script src="../js/sol-intro.js"></script>
   <script>
     const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
     const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
     const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
     const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
     const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.6 };
+    const PROVIDER_BRANDING = { gemini: 'Skyes Over London' };
+    const MODEL_BRANDING = { 'gemini-2.0-flash': 'skAIxU Flow6.7' };
 
     const diagChannel = new BroadcastChannel('kaixu_events');
     const keyInput = document.getElementById('kaixu-key');
@@ -175,6 +185,11 @@ South,287000,0.17</textarea>
     const remainingDisplay = document.getElementById('remaining-display');
     const providerDisplay = document.getElementById('provider-display');
     const modelDisplay = document.getElementById('model-display');
+    function renderProviderModel(provider, model) {
+      providerDisplay.textContent = PROVIDER_BRANDING[provider] || provider;
+      modelDisplay.textContent = MODEL_BRANDING[model] || model;
+    }
+    renderProviderModel(DEFAULT_PAYLOAD.provider, DEFAULT_PAYLOAD.model);
     const diagnosticsEl = document.getElementById('diagnostics');
     const lastDeltaEl = document.getElementById('last-delta');
     const diagnosticLog = document.getElementById('diagnostic-log');
@@ -265,8 +280,7 @@ South,287000,0.17</textarea>
         ]
       }, {
         onMeta(meta) {
-          providerDisplay.textContent = meta.provider || DEFAULT_PAYLOAD.provider;
-          modelDisplay.textContent = meta.model || DEFAULT_PAYLOAD.model;
+          renderProviderModel(meta.provider || DEFAULT_PAYLOAD.provider, meta.model || DEFAULT_PAYLOAD.model);
           updateBudget(meta.month);
           logDiagnostic('sheets-meta', meta);
         },
@@ -438,6 +452,16 @@ South,287000,0.17</textarea>
         const blob = new Blob([JSON.stringify({ event: 'unload', ts: Date.now() })], { type: 'application/json' });
         navigator.sendBeacon('/api/logs', blob);
       }
+    });
+  </script>
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if (!loader) return;
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 1000);
+      }, 650);
     });
   </script>
 </body>

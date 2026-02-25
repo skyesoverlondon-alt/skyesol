@@ -1,0 +1,24 @@
+#sol-intro{position:fixed;inset:0;z-index:98000;overflow:hidden;font-family:"Didot","Bodoni MT","Times New Roman",serif;}
+#sol-intro canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+#sol-intro .si-lightning{position:absolute;inset:0;background:#fff;opacity:0;z-index:5;pointer-events:none;mix-blend-mode:overlay;}
+#sol-intro .si-fog{position:absolute;width:200%;height:100%;top:0;left:-50%;z-index:8;opacity:.25;background:radial-gradient(circle at 20% 50%,rgba(15,25,40,.5) 0%,transparent 40%),radial-gradient(circle at 80% 60%,rgba(10,20,35,.4) 0%,transparent 50%);filter:blur(50px);animation:si-drift 25s cubic-bezier(.37,0,.63,1) infinite alternate;pointer-events:none;}
+#sol-intro .si-fog2{top:20%;opacity:.2;background:radial-gradient(circle at 50% 50%,rgba(30,45,60,.3) 0%,transparent 60%);animation:si-drift 30s cubic-bezier(.37,0,.63,1) infinite alternate-reverse;z-index:9;}
+#sol-intro .si-vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 35%,#000 130%);z-index:20;pointer-events:none;}
+#sol-intro .si-grain{position:absolute;inset:0;z-index:21;opacity:.06;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+#sol-intro .si-text{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+#sol-intro .si-sub{font-family:"Montserrat","Helvetica Neue",sans-serif;font-size:.85rem;letter-spacing:.5em;text-transform:uppercase;color:#ffcc00;text-shadow:0 0 12px rgba(255,170,0,.9);opacity:0;transform:translateY(15px);margin-bottom:24px;}
+#sol-intro .si-title{position:relative;font-size:5.5vw;font-weight:400;letter-spacing:.12em;text-transform:uppercase;margin:0;opacity:0;color:#fffdf5;text-shadow:0 0 10px #ffaa00,0 0 25px #ff8800,0 0 60px #ff4400;transform:scale(.95);}
+#sol-intro .si-title::after{content:'';position:absolute;left:0;bottom:-14px;width:100%;height:4px;background:#fae6ff;box-shadow:0 0 10px #d500f9,0 0 25px #aa00ff,0 0 50px #7b00ff;border-radius:2px;}
+#sol-intro .si-logo{width:36vw;max-width:520px;min-width:240px;height:auto;margin-top:4vh;opacity:0;transform:scale(.9);}
+#sol-intro .si-tagline{font-family:"Montserrat","Helvetica Neue",sans-serif;font-size:1.1rem;letter-spacing:.6em;text-transform:uppercase;color:#fae6ff;text-shadow:0 0 10px #d500f9,0 0 25px #aa00ff,0 0 50px #7b00ff;opacity:0;margin-top:4vh;transform:translateY(10px);}
+#sol-intro .si-skip{position:absolute;bottom:28px;right:28px;z-index:40;background:transparent;border:1px solid rgba(255,170,0,.4);color:#ffcc00;font-family:"Montserrat","Helvetica Neue",sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;padding:9px 18px;cursor:pointer;transition:all .3s;opacity:0;animation:si-skip-in 1s .5s forwards;}
+#sol-intro .si-skip:hover{border-color:#ffaa00;background:rgba(255,170,0,.1);}
+.si-anim-sub{animation:si-fadeup 2s cubic-bezier(.25,.46,.45,.94) forwards;}
+.si-anim-title{animation:si-title-in 3s cubic-bezier(.19,1,.22,1) forwards;}
+.si-anim-logo{animation:si-logo-in 3s cubic-bezier(.19,1,.22,1) forwards;}
+.si-anim-tag{animation:si-tag-in 3s cubic-bezier(.215,.61,.355,1) forwards;}
+@keyframes si-drift{0%{transform:translateX(-5%) scale(1)}100%{transform:translateX(5%) scale(1.1)}}
+@keyframes si-fadeup{0%{opacity:0;transform:translateY(15px)}30%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+@keyframes si-title-in{0%{opacity:0;filter:blur(20px);transform:scale(.9)}100%{opacity:1;filter:blur(0);transform:scale(1.04);letter-spacing:.18em}}
+@keyframes si-logo-in{0%{opacity:0;filter:blur(15px) drop-shadow(0 0 0 rgba(255,170,0,0));transform:scale(.85) translateY(10px)}100%{opacity:1;filter:blur(0) drop-shadow(0 0 20px rgba(255,170,0,.8));transform:scale(1) translateY(0)}}
+@keyframes si-tag-in{0%{opacity:0;transform:translateY(15px);filter:blur(8px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
