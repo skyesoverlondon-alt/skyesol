@@ -239,7 +239,9 @@ function attachNav(){
 // expose for partial-injected navs and run once on load
 window.SOL = window.SOL || {};
 window.SOL.attachNav = attachNav;
+window.SOL.attachMegaNav = attachMegaNav;
 attachNav();
+attachMegaNav();
 
 // ── SCROLL REVEAL ──
 (function(){
@@ -289,11 +291,14 @@ attachNav();
 })();
 
 // ── Mega Nav ───────────────────────────────────────
-document.addEventListener('DOMContentLoaded', function(){
+function attachMegaNav(){
   const menuBtn   = document.getElementById('menuBtn');
   const megaNav   = document.getElementById('megaNav');
   const megaClose = document.getElementById('megaNavClose');
   if (!menuBtn || !megaNav) return;
+  if (menuBtn.dataset.megaBound === 'true') return; // avoid double-binding
+  menuBtn.dataset.megaBound = 'true';
+
   const servicePages = [
     { name: 'Web Builds', href: '/Services/WebBuilds.html' },
     { name: 'AI & Data Apps', href: '/Services/ai-data-apps.html' },
@@ -343,4 +348,6 @@ document.addEventListener('DOMContentLoaded', function(){
   if (megaClose) megaClose.addEventListener('click', closeNav);
   megaNav.addEventListener('click', function(e){ if (e.target === megaNav) closeNav(); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeNav(); });
-});
+}
+
+document.addEventListener('DOMContentLoaded', attachMegaNav);

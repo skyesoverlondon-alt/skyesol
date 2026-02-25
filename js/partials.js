@@ -18,9 +18,14 @@ async function injectPartial(selector, url, position){
       document.body.appendChild(node);
     }
 
-    // Re-bind nav JS if we just swapped the header
-    if (node.matches('nav.main-nav') && window.SOL && typeof window.SOL.attachNav === 'function') {
-      window.SOL.attachNav();
+    // Re-bind nav + mega nav when header is swapped in
+    if (node.matches('nav.main-nav') && window.SOL) {
+      if (typeof window.SOL.attachNav === 'function') {
+        window.SOL.attachNav();
+      }
+      if (typeof window.SOL.attachMegaNav === 'function') {
+        window.SOL.attachMegaNav();
+      }
     }
   } catch (err) {
     console.warn('Partial inject failed for', url, err);
