@@ -58,6 +58,13 @@
 /request-key                  /kAIxu/RequestKaixuAPIKey.html                                                        200
 /request-key/                 /kAIxu/RequestKaixuAPIKey.html                                                        200
 
+# Account / login portal
+/account                      /account/index.html                                                                    200
+/login                        /account/index.html                                                                    200
+/login/                       /account/index.html                                                                    200
+/signin                       /account/index.html                                                                    200
+/signin/                      /account/index.html                                                                    200
+
 # Gate Proofx
 /gate-proofx.html             /Platforms-Apps-Infrastructure/GateProofx/index.html                                   200
 /Gate%20Proofx/index.html     /Platforms-Apps-Infrastructure/GateProofx/index.html                                   200

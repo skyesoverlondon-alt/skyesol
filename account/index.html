@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account · SOLEnterprises</title>
+  <meta name="description" content="Sign in or create your SOLEnterprises account to access the Gateway, your API key dashboard, and platform tools.">
+  <link rel="canonical" href="https://skyesol.netlify.app/account/">
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+
+  <!-- Netlify Identity Widget — handles signup, login, email confirmation links -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <style>
+    .account-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 60px;
+    }
+    .account-card {
+      width: 100%;
+      max-width: 460px;
+    }
+    .tab-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 0;
+      border-bottom: 1px solid rgba(201,168,76,0.12);
+    }
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 12px 16px;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all .3s;
+      margin-bottom: -1px;
+    }
+    .tab-btn.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: var(--text-dim);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(201,168,76,0.1);
+    }
+    .identity-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 13px 20px;
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .3s;
+      font-family: inherit;
+    }
+    .identity-btn:hover {
+      background: rgba(201,168,76,0.12);
+      border-color: var(--gold);
+    }
+    .notice {
+      background: rgba(201,168,76,0.04);
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+    .notice strong { color: var(--gold); }
+    .notice a { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3); }
+    .err-msg {
+      font-size: 11px;
+      color: #e87070;
+      margin-top: 8px;
+      display: none;
+    }
+    .ok-msg {
+      font-size: 11px;
+      color: #70e8a0;
+      margin-top: 8px;
+      display: none;
+    }
+    #keyLoginForm .field { margin-bottom: 14px; }
+    #keyLoginForm input {
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.12);
+      color: var(--text);
+      border-radius: 4px;
+      padding: 10px 12px;
+      width: 100%;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      box-sizing: border-box;
+      transition: border-color .3s;
+    }
+    #keyLoginForm input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .actions-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+    .actions-row .btn-gold, .actions-row .btn-outline {
+      flex: 1;
+      justify-content: center;
+    }
+    .user-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: rgba(201,168,76,0.04);
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+    }
+    .user-bar .user-email { font-size: 12px; color: var(--gold); }
+    .user-bar .user-role { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim); }
+    .quick-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .quick-link {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.06);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: border-color .3s, transform .3s;
+    }
+    .quick-link:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-2px); }
+    .quick-link .ql-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+    .quick-link .ql-title { font-size: 13px; color: var(--text); }
+    @media (max-width: 480px) {
+      .quick-links { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="main-nav" id="mainNav">
+    <a href="/index.html" class="nav-logo" aria-label="SOLEnterprises">
+      <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span>
+    </a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="/index.html">Home</a>
+      <a href="/kAIxu/index.html">kAIxu</a>
+      <a href="/gateway/dashboard.html">My Dashboard</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/account/" class="active" style="color:var(--gold);">Account</a>
+    </div>
+    <button class="menu-btn" id="menuBtn">☰ MENU</button>
+  </nav>
+
+  <div class="account-wrap">
+    <div class="account-card">
+
+      <!-- logged-in identity bar -->
+      <div class="user-bar" id="userBar">
+        <div>
+          <div class="user-email" id="userEmail"></div>
+          <div class="user-role" id="userRole"></div>
+        </div>
+        <button class="btn-outline" id="logoutBtn" style="padding:8px 18px;font-size:10px;">Sign Out</button>
+      </div>
+
+      <div class="section-label" style="margin-bottom:8px;">SOLEnterprises</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,38px);margin-bottom:6px;">
+        Your <span style="background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Account</span>
+      </h1>
+      <p style="color:var(--text-dim);font-size:14px;margin-bottom:28px;font-family:'Cormorant Garamond',serif;font-style:italic;">
+        Sign in to access your Gateway dashboard, API key, and platform tools.
+      </p>
+
+      <!-- Tabs -->
+      <div class="tab-row">
+        <button class="tab-btn active" data-tab="identity">Identity Login</button>
+        <button class="tab-btn" data-tab="apikey">API Key Login</button>
+      </div>
+
+      <!-- TAB: Netlify Identity -->
+      <div class="panel" style="border-top-left-radius:0;border-top-right-radius:0;border-top:none;" id="tabIdentity">
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px;line-height:1.7;">
+          Sign in or create an account with your email. If you just signed up,
+          check your inbox (and spam) for a verification email.
+        </p>
+        <button class="identity-btn" id="identityOpenBtn">
+          ✉ &nbsp;Sign In / Sign Up with Email
+        </button>
+        <div class="divider">or</div>
+        <div class="quick-links" id="quickLinksArea" style="display:none;">
+          <a href="/gateway/dashboard.html" class="quick-link">
+            <span class="ql-label">Gateway</span>
+            <span class="ql-title">Usage Dashboard</span>
+          </a>
+          <a href="/kAIxu/index.html" class="quick-link">
+            <span class="ql-label">kAIxu</span>
+            <span class="ql-title">AI Gateway</span>
+          </a>
+          <a href="/admin.html" class="quick-link" id="adminLink" style="display:none;">
+            <span class="ql-label">Admin</span>
+            <span class="ql-title">Admin Console</span>
+          </a>
+          <a href="/kAIxu/RequestKaixuAPIKey.html" class="quick-link">
+            <span class="ql-label">Keys</span>
+            <span class="ql-title">Request API Key</span>
+          </a>
+        </div>
+        <div class="notice" id="verifyNotice">
+          <strong>Didn't get the verification email?</strong><br>
+          Check your spam folder. Still nothing? Click the button above and use
+          <em>"Forgot Password"</em> or re-enter your email to resend.
+          If the issue persists, <a href="/contact.html">contact us</a>.
+        </div>
+      </div>
+
+      <!-- TAB: API Key -->
+      <div class="panel" style="border-top-left-radius:0;border-top-right-radius:0;border-top:none;display:none;" id="tabApikey">
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px;line-height:1.7;">
+          Have a kAIxu API key? Paste it below to open your usage dashboard.
+          Don't have one? <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">Request a key.</a>
+        </p>
+        <form id="keyLoginForm">
+          <div class="field">
+            <label for="apiKeyInput">Your API Key</label>
+            <input type="password" id="apiKeyInput" placeholder="kx-••••••••••••••••" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="err-msg" id="keyErr"></div>
+          <div class="ok-msg" id="keyOk">Key accepted — opening dashboard…</div>
+          <div class="actions-row">
+            <button type="submit" class="btn-gold">Open Dashboard</button>
+            <a href="/kAIxu/RequestKaixuAPIKey.html" class="btn-outline">Get a Key</a>
+          </div>
+        </form>
+        <div class="notice" style="margin-top:18px;">
+          <strong>What is this?</strong><br>
+          Your kAIxu API key gives you access to the Gateway dashboard where you
+          can monitor usage, caps, logs, devices, and exports.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/assets/app.js" defer></script>
+  <script>
+    // ── Tab switching ────────────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tabIdentity').style.display = target === 'identity' ? 'block' : 'none';
+        document.getElementById('tabApikey').style.display  = target === 'apikey'   ? 'block' : 'none';
+      });
+    });
+
+    // ── Netlify Identity widget ──────────────────────────────────────────────
+    const identityBtn   = document.getElementById('identityOpenBtn');
+    const userBar       = document.getElementById('userBar');
+    const userEmailEl   = document.getElementById('userEmail');
+    const userRoleEl    = document.getElementById('userRole');
+    const quickLinks    = document.getElementById('quickLinksArea');
+    const adminLink     = document.getElementById('adminLink');
+    const verifyNotice  = document.getElementById('verifyNotice');
+    const logoutBtn     = document.getElementById('logoutBtn');
+
+    function applyUser(user) {
+      if (!user) {
+        userBar.style.display = 'none';
+        quickLinks.style.display = 'none';
+        verifyNotice.style.display = 'block';
+        return;
+      }
+      userEmailEl.textContent = user.email || '';
+      const roles = user.app_metadata?.roles || [];
+      userRoleEl.textContent = roles.includes('admin') ? 'Admin' : 'Member';
+      if (roles.includes('admin')) adminLink.style.display = 'flex';
+      userBar.style.display = 'flex';
+      quickLinks.style.display = 'grid';
+      verifyNotice.style.display = 'none';
+      identityBtn.style.display = 'none';
+    }
+
+    if (window.netlifyIdentity) {
+      netlifyIdentity.on('init', user => applyUser(user));
+      netlifyIdentity.on('login', user => {
+        applyUser(user);
+        netlifyIdentity.close();
+      });
+      netlifyIdentity.on('logout', () => applyUser(null));
+    }
+
+    identityBtn.addEventListener('click', () => {
+      if (window.netlifyIdentity) netlifyIdentity.open();
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      if (window.netlifyIdentity) netlifyIdentity.logout();
+    });
+
+    // ── API key login ────────────────────────────────────────────────────────
+    const keyForm  = document.getElementById('keyLoginForm');
+    const keyInput = document.getElementById('apiKeyInput');
+    const keyErr   = document.getElementById('keyErr');
+    const keyOk    = document.getElementById('keyOk');
+
+    keyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      keyErr.style.display = 'none';
+      keyOk.style.display  = 'none';
+
+      const key = keyInput.value.trim();
+      if (!key) { showKeyErr('Please enter your API key.'); return; }
+
+      try {
+        const res = await fetch('/.netlify/functions/session-token', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          showKeyErr(body.error || 'Invalid or revoked key. Check your key and try again.');
+          return;
+        }
+        const data = await res.json();
+        // Store session in sessionStorage and redirect to dashboard
+        sessionStorage.setItem('kaixu_session', data.token);
+        sessionStorage.setItem('kaixu_key_last4', data.key_last4 || '');
+        keyOk.style.display = 'block';
+        setTimeout(() => { window.location.href = '/gateway/dashboard.html'; }, 800);
+      } catch (err) {
+        showKeyErr('Network error. Please try again.');
+      }
+    });
+
+    function showKeyErr(msg) {
+      keyErr.textContent = msg;
+      keyErr.style.display = 'block';
+    }
+
+    // ── Handle email confirmation / recovery tokens in URL hash ──────────────
+    // The Netlify Identity widget auto-handles #confirmation_token, #recovery_token, etc.
+    // Just ensure the widget is initialized on this page (done via the script tag above).
+  </script>
+</body>
+</html>
