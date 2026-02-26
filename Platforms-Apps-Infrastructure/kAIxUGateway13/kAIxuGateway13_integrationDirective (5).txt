@@ -1,0 +1,254 @@
+CORE BUILD DIRECTIVE — kAIxuGateway13-ONLY AI ROUTING (MANDATORY)
+
+You are modifying or building a web application. This is a hard requirement: the application must route 100% of all AI/LLM requests through kAIxuGateway13. Any direct provider usage is forbidden. Any build that violates any item below is considered FAILED and must be corrected before delivery.
+
+ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
+
+Do not call OpenAI, Anthropic, or Gemini endpoints directly.
+
+Do not use any OpenAI/Anthropic/Gemini SDKs (client or server).
+
+Remove/disable any direct HTTP calls to:
+
+https://api.openai.com/
+...
+
+https://api.anthropic.com/
+...
+
+https://generativelanguage.googleapis.com/
+...
+
+Ensure there are no remaining call sites, helpers, or legacy paths that touch provider APIs.
+
+REQUIRED GATEWAY (USE EXACTLY)
+KAIXU_GATEWAY_BASE = https://skyesol.netlify.app
+
+Non-stream endpoint:
+POST https://skyesol.netlify.app/.netlify/functions/gateway-chat
+
+Streaming SSE endpoint:
+POST https://skyesol.netlify.app/.netlify/functions/gateway-stream
+
+Authorization header (BOTH endpoints):
+Authorization: Bearer <KAIXU_VIRTUAL_KEY>
+
+Streaming requirement:
+
+Streaming must use fetch + ReadableStream parsing of SSE frames.
+
+Do NOT use EventSource (it cannot POST).
+
+REQUIRED REQUEST PAYLOAD SHAPE (MUST MATCH)
+Every AI request sent to the gateway must use this JSON shape:
+
+{
+"provider": "openai" | "anthropic" | "gemini",
+"model": "string",
+"messages": [{"role":"system"|"user"|"assistant","content":"text"}],
+"max_tokens": 123,
+"temperature": 0.7
+}
+
+REQUIRED RESPONSE HANDLING (USAGE + BUDGET)
+Non-stream JSON response:
+{
+"output_text": "string",
+"usage": {"input_tokens": 0, "output_tokens": 0, "cost_cents": 0},
+"month": {"month":"YYYY-MM","cap_cents":0,"spent_cents":0}
+}
+
+Streaming SSE events (must be supported):
+
+meta: { provider, model, month:{month, cap_cents, spent_cents} }
+
+delta: { text }
+
+done: { usage:{...}, month:{...} }
+
+error: { error }
+
+UI requirement:
+
+If the app displays usage, also display remaining budget: cap_cents - spent_cents.
+
+If HTTP 402 is returned, show “Monthly cap reached” and block further calls until upgrade/top-up.
+
+REQUIRED IMPLEMENTATION PATTERN (ONE GATEWAY CLIENT)
+
+Implement a single shared gateway client module (e.g., src/lib/kaixuGateway.js) OR embed the standard `kaixuStreamChat` function.
+
+Standard `kaixuStreamChat` implementation (must use fetch + ReadableStream):
+
+async function kaixuStreamChat(kaixuKey, payload, { onMeta, onDelta, onDone, onError }) {
+    // 1. Environment Detection (Local vs Prod)
+    // 2. Gateway Fallback Logic (Try local proxy, then direct)
+    // 3. SSE Parsing (read() loop, decode, buffer splitting)
+    // 4. Event Dispatch (meta, delta, done, error)
+    // Reference implementation: Neural-Space-Pro/index.html
+}
+
+Replace every AI call site with these functions.
+
+Preserve existing UX: chat history, system prompts, model selection, streaming behavior (if present). Do not break UI flows.
+
+UI/UX REQUIREMENTS (DEV VS CHAT MODES)
+
+1. Chat Mode ("Consult"):
+   - Output tokens stream into the chat bubble.
+   - Standard conversational interface.
+
+2. Dev Mode ("Develop"):
+   - Output tokens must NOT stream into the chat bubble.
+   - Output must apply directly to the code editor or preview pane.
+   - Use a status indicator (e.g., "Thinking...", "Applying...") instead of chat text.
+   - If the AI generates code, it replaces or updates the active editor content.
+
+REQUIRED KEY MANAGEMENT (KAIXU KEY ONLY)
+
+The only AI credential the app may accept/store is KAIXU_VIRTUAL_KEY (a “Kaixu Key”).
+
+Remove any UI fields, storage, or logic that asks for/provider keys.
+
+Provider keys must not exist anywhere in the app because providers are never called directly.
+
+REQUIRED ERROR MAPPING (USER-VISIBLE)
+
+401 → prompt for Kaixu Key / invalid key message
+
+402 → “Monthly cap reached” + block calls
+
+429 → rate limit message + retry guidance
+
+500 → gateway/provider error message
+
+DELIVERY REQUIREMENTS (NON-NEGOTIABLE)
+
+Output FULL updated files (no partial snippets, no TODOs).
+
+All AI calls must be routed through kAIxuGateway13 endpoints exactly as specified.
+
+Any direct provider call or SDK usage anywhere in the repo is an automatic failure.
+
+────────────────────────────────────────────────────────────
+BUILD & DEPLOYMENT SPECS (CONSISTENT ACROSS ALL ENVIRONMENTS)
+────────────────────────────────────────────────────────────
+
+PLATFORM
+  Host            : Netlify (static site + serverless functions)
+  Repository      : skyesoverlondon-alt/skAIxuide (branch: main)
+  Publish dir     : . (workspace root — all sub-apps served as-is)
+  Build command   : npm install (installs function deps only; no compile step)
+
+NETLIFY CONFIGURATION — netlify.toml
+  [build]
+    functions = "netlify/functions"
+    publish   = "."
+
+  [functions]
+    node_bundler = "esbuild"
+
+  [[redirects]]
+    from   = "/api/*"
+    to     = "https://kaixugateway13.netlify.app/:splat"
+    status = 200
+    force  = true
+
+  The /api/* redirect proxies every client-side /api/ call to the kAIxuGateway13
+  origin so that client code never references the gateway URL directly in production.
+
+PACKAGE MANIFEST — package.json
+  {
+    "name": "skaixuide",
+    "private": true,
+    "version": "1.0.0",
+    "type": "module",
+    "dependencies": {
+      "@neondatabase/serverless": "^0.10.0"
+    }
+  }
+
+  "type": "module" is required — all Netlify functions use ESM import syntax.
+  Only add runtime dependencies here; dev/build tools are not needed (esbuild is
+  provided by Netlify).
+
+NETLIFY FUNCTIONS — netlify/functions/
+  All serverless functions live in netlify/functions/ and are auto-deployed by Netlify.
+
+  logs-setup.js
+    Purpose  : One-time Neon DB table creation (kaixu_logs)
+    Trigger  : POST /.netlify/functions/logs-setup
+    Env var  : NEON_DATABASE_URL (required)
+    Schema   : kaixu_logs (id BIGSERIAL PK, ts TIMESTAMPTZ, source VARCHAR(64),
+               type VARCHAR(16), message TEXT, session_id VARCHAR(64),
+               user_agent TEXT, hostname VARCHAR(255))
+    Indexes  : ts DESC, source, type
+
+  logs.js
+    Purpose  : Log ingestion (POST) and retrieval (GET)
+    Trigger  : /.netlify/functions/logs
+    Env var  : NEON_DATABASE_URL (required)
+    POST     : Accepts single log or batch (max 100). Fields: source, type,
+               message, session_id, user_agent, hostname
+    GET      : Filters: ?source=, ?type=, ?since= (ISO), ?search= (ILIKE),
+               ?limit= (max 1000, default 200)
+
+REQUIRED ENVIRONMENT VARIABLES (Netlify Dashboard → Site → Environment Variables)
+  NEON_DATABASE_URL   : Neon PostgreSQL connection string (pooled, ?sslmode=require)
+                        Never hardcode. Required for logs.js and logs-setup.js.
+  KAIXU_VIRTUAL_KEY   : (optional on Netlify — client apps send their own key via
+                        Authorization header; only required in server.py for local dev)
+
+LOCAL DEVELOPMENT — server.py
+  Runtime     : Python 3 (no pip packages beyond stdlib + python-dotenv)
+  Port        : 8000
+  Start cmd   : cd skAIxuide && python server.py
+  .env file   : Workspace root .env — must contain KAIXU_VIRTUAL_KEY
+  Key inject  : server.py auto-reads .env and injects the Bearer token into proxied
+                requests when the client omits an Authorization header.
+  Endpoints   : GET /api/kaixu-key → returns the key JSON (local dev only)
+                All other /api/* → proxied to kaixugateway13.netlify.app via
+                http.client.HTTPSConnection + read1() for true SSE streaming.
+
+.gitignore (MUST NOT BE COMMITTED)
+  .env
+  __pycache__/
+  *.pyc
+  node_modules/
+  package-lock.json
+  .DS_Store
+  Thumbs.db
+  *.bak
+
+OBSERVABILITY — Cross-App Diagnostics
+  BroadcastChannel : 'kaixu_events' — all apps post real-time log messages to this
+                     channel for the diagnostics dashboard.
+  Heartbeat        : Every app emits a heartbeat log every 20 seconds via broadcastLog.
+  Stream lifecycle  : kaixuStreamChat logs "Stream COMPLETE in Xs | chunks=N | in=X out=Y"
+                     on the SSE done event.
+  Neon persistence : In production, broadcastLog also queues logs into a batch buffer
+                     that flushes every 5 seconds to /.netlify/functions/logs (POST).
+                     navigator.sendBeacon fires on beforeunload for guaranteed delivery.
+                     Local/dev mode does NOT write to Neon (_neonIsLocal flag).
+  Diagnostics page : skAIxuide/diagnostics.html — Neon DB panel for setup, history
+                     retrieval (with source filter), and full-text search.
+
+APP INVENTORY (served from publish root)
+  /skAIxuide/           — Main IDE (index.html, login.html, admin_panel.html, diagnostics.html, tutorial.html)
+  /Neural-Space-Pro/    — Neural Space Pro chat (index.html, Neural-2.html)
+  /Nexus-Pro/           — Nexus Pro chat (NexusPro.html)
+  /kaixumagic/          — kAIxu Magic (index.html)
+  /NexusConnectHomepage/ — Nexus Connect landing page (index.html)
+  /SkyeDocx/            — Document manager (index.html)
+  /SkyeVault/           — Vault app (index.html)
+  /WebPilePro/          — Web Pile Pro (index.html)
+  /ALLAI.html           — Combined AI page (root level)
+
+MODEL DEFAULTS (CURRENT)
+  Provider    : gemini
+  Model       : gemini-2.0-flash
+  max_tokens  : 8192
+  temperature : 0.7
+
+  Do NOT use deprecated model names (e.g., gemini-1.5-pro-latest).
+  Do NOT set max_tokens above 8192 for gemini-2.0-flash.

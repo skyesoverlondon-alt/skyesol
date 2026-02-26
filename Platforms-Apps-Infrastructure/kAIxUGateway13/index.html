@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kaixu Gateway Admin</title>
+  <link rel="canonical" href="https://skyesol.netlify.app/" />
+  <meta name="description" content="Kaixu Gateway Admin and kAIxU Gateway 13 controls with billing, keys, monitoring, and exports." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kaixu Gateway Admin" />
+  <meta property="og:description" content="Administer Kaixu Gateway: keys, billing, monitoring, exports, and kAIxU Gateway 13 intro." />
+  <meta property="og:url" content="https://skyesol.netlify.app/" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kaixu Gateway Admin" />
+  <meta name="twitter:description" content="Administer Kaixu Gateway: keys, billing, monitoring, exports, and kAIxU Gateway 13 intro." />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Kaixu Gateway Admin",
+    "operatingSystem": "Web",
+    "applicationCategory": "BusinessApplication",
+    "description": "Admin console for Kaixu Gateway with keys, billing, monitoring, and exports.",
+    "url": "https://skyesol.netlify.app/",
+    "image": "https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png",
+    "creator": {"@type": "Organization", "name": "SkyeSol"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question","name": "How do I administer Kaixu Gateway?","acceptedAnswer": {"@type": "Answer","text": "Use the Kaixu Gateway Admin to manage customers, keys, billing, monitoring, and exports."}},
+      {"@type": "Question","name": "Is there an offline-friendly mode?","acceptedAnswer": {"@type": "Answer","text": "The gateway UI is lightweight and can cache assets; the Skye DocX suite supports offline editing."}},
+      {"@type": "Question","name": "Where do I get support?","acceptedAnswer": {"@type": "Answer","text": "Use the SOL network links in the top bar or contact the SkyeSol team via the provided channels."}}
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --intro-bg-deep: #0b0914;
+      --intro-accent-purple: #8A4FFF;
+      --intro-accent-gold: #FFD700;
+      --intro-glow-purple: rgba(138, 79, 255, 0.4);
+      --intro-glow-gold: rgba(255, 215, 0, 0.5);
+      --intro-text-main: #fcfcfc;
+    }
+
+    /* kAIxU Gateway 13 intro overlay */
+    #kAIxU-intro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #05040a;
+      z-index: 9999;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: all;
+      animation: introBlast 0.8s cubic-bezier(0.8, 0, 0.2, 1) 4.5s forwards;
+      font-family: 'Inter', sans-serif;
+    }
+
+    #kAIxU-intro .intro-grid {
+      position: absolute;
+      bottom: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: linear-gradient(rgba(138, 79, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(138, 79, 255, 0.3) 1px, transparent 1px);
+      background-size: 50px 50px;
+      transform: perspective(600px) rotateX(75deg) translateY(0);
+      opacity: 0;
+      animation: gridBoot 2s cubic-bezier(0.2, 0.8, 0.2, 1) 0s forwards;
+    }
+
+    #kAIxU-intro .intro-scanner {
+      position: absolute;
+      top: -10%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--intro-accent-gold);
+      box-shadow: 0 0 30px 5px var(--intro-glow-gold);
+      opacity: 0;
+      animation: laserScan 1.8s ease-in-out 0s forwards;
+    }
+
+    #kAIxU-intro .intro-terminal {
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      font-family: 'Fira Code', monospace;
+      color: var(--intro-accent-purple);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: terminalBoot 1.8s steps(20, end) 0s forwards;
+      text-shadow: 0 0 5px var(--intro-glow-purple);
+    }
+
+    #kAIxU-intro .intro-centerpiece {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+
+    #kAIxU-intro .intro-logo {
+      max-width: 220px;
+      opacity: 0;
+      transform: scale(0.5) translateY(50px);
+      filter: blur(20px);
+      animation: logoMaterialize 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 1.8s forwards, logoPulse 2s ease-in-out 3.3s infinite alternate;
+    }
+
+    #kAIxU-intro .intro-brand-text {
+      margin-top: 30px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--intro-text-main);
+      letter-spacing: -5px;
+      opacity: 0;
+      filter: blur(10px);
+      animation: textExpand 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 2.2s forwards;
+    }
+
+    #kAIxU-intro .intro-brand-sub {
+      margin-top: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--intro-accent-gold);
+      letter-spacing: 12px;
+      opacity: 0;
+      animation: subFade 1s ease-out 2.6s forwards;
+      text-shadow: 0 0 10px var(--intro-glow-gold);
+    }
+
+    #kAIxU-intro .intro-whiteout {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--intro-accent-gold);
+      mix-blend-mode: overlay;
+      opacity: 0;
+      z-index: 5;
+      animation: whiteoutFlash 0.8s ease-out 4.2s forwards;
+    }
+
+    @keyframes gridBoot {
+      0% { transform: perspective(600px) rotateX(75deg) translateY(-200px); opacity: 0; filter: hue-rotate(90deg); }
+      30% { opacity: 1; }
+      80% { opacity: 1; filter: hue-rotate(0deg); }
+      100% { transform: perspective(600px) rotateX(75deg) translateY(200px); opacity: 0; }
+    }
+
+    @keyframes laserScan {
+      0% { top: -10%; opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+    }
+
+    @keyframes terminalBoot {
+      0% { opacity: 1; clip-path: inset(0 0 100% 0); }
+      90% { opacity: 1; clip-path: inset(0 0 0% 0); }
+      100% { opacity: 0; clip-path: inset(0 0 0% 0); }
+    }
+
+    @keyframes logoMaterialize {
+      0% { opacity: 0; transform: scale(0.5) translateY(50px); filter: blur(20px) drop-shadow(0 0 0 transparent); }
+      100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0px) drop-shadow(0 0 30px var(--intro-glow-purple)); }
+    }
+
+    @keyframes logoPulse {
+      0% { filter: drop-shadow(0 0 30px var(--intro-glow-purple)); transform: scale(1); }
+      100% { filter: drop-shadow(0 0 50px var(--intro-glow-gold)); transform: scale(1.05); }
+    }
+
+    @keyframes textExpand {
+      0% { opacity: 0; letter-spacing: -10px; filter: blur(10px); transform: scale(0.9); }
+      100% { opacity: 1; letter-spacing: 6px; filter: blur(0px); transform: scale(1); }
+    }
+
+    @keyframes subFade {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes whiteoutFlash {
+      0% { opacity: 0; }
+      50% { opacity: 0.8; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes introBlast {
+      0% { opacity: 1; transform: scale(1); filter: blur(0); }
+      100% { opacity: 0; transform: scale(3) translateZ(200px); filter: blur(20px); visibility: hidden; }
+    }
+  </style>
+</head>
+<body>
+  <div id="kAIxU-intro">
+    <div class="intro-grid"></div>
+    <div class="intro-scanner"></div>
+    <div class="intro-terminal" id="kAIxU-intro-terminal">
+      &gt; SECURE CONNECTION ESTABLISHED<br />
+      &gt; ROUTING TO kAIxU GATEWAY 13... [OK]<br />
+      &gt; INITIALIZING NEURAL ENGINE... [OK]<br />
+      &gt; LOADING kAIxU FRAMEWORK v13.0<br />
+      &gt; DECRYPTING OFFLINE LEDGER... [OK]<br />
+      &gt; MOUNTING FILE SYSTEM...
+    </div>
+    <div class="intro-whiteout"></div>
+    <div class="intro-centerpiece">
+      <img src="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" alt="kAIxU Gateway 13" class="intro-logo" />
+      <div class="intro-brand-text">kAIxU GATEWAY 13</div>
+      <div class="intro-brand-sub">PRIME ACCESS NODE</div>
+    </div>
+  </div>
+
+  <div class="bg"></div>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">K</div>
+        <div>
+          <div class="title">Kaixu Gateway</div>
+          <div class="subtitle">Admin dashboard · virtual keys · sub-keys · spend caps · SSE · Stripe</div>
+        </div>
+      </div>
+      <div class="top-actions">
+                <button id="gatewayBaseBtn" class="btn ghost" type="button" title="Switch which gateway this dashboard calls">Gateway Base</button>
+<a class="btn ghost" href="/dashboard.html" title="User dashboard">User Dashboard</a>
+        <a class="btn ghost" href="/Gate Proofx/index.html" title="Gate Proofx (admin exports)">Gate Proofx</a>
+  <a class="btn ghost" href="/App Suites/SkyeDocx/homepage.html" title="Skye DocX landing">Skye DocX</a>
+        <a class="btn ghost" href="/.netlify/functions/health" target="_blank" rel="noreferrer">Health</a>
+        <button id="logoutBtn" class="btn danger" style="display:none;">Logout</button>
+      </div>
+    </header>
+
+    <section id="toast" class="toast" style="display:none;"></section>
+
+    <section id="loginView" class="card">
+      <h2>Admin login</h2>
+      <p class="muted">Password comes from <code>ADMIN_PASSWORD</code>.</p>
+      <div class="row">
+        <input id="adminPassword" type="password" placeholder="Admin password" autocomplete="current-password" />
+        <button id="loginBtn" class="btn primary">Login</button>
+      </div>
+      <p class="muted small">v5 adds universal caps, per-device seats, allowlists, exports, invoice snapshots, Stripe top-ups, and stronger rate limiting.</p>
+    </section>
+
+    <section id="appView" style="display:none;">
+      <nav class="tabs">
+        <button class="tab active" data-tab="customers">Customers</button>
+        <button class="tab" data-tab="create">Create Customer + Master Key</button>
+        <button class="tab" data-tab="keys">Keys (Sub-keys / Rotate / Revoke)</button>
+        <button class="tab" data-tab="usage">Usage</button>
+        <button class="tab" data-tab="billing">Billing &amp; Controls</button>
+        <button class="tab" data-tab="devices">Devices</button>
+        <button class="tab" data-tab="exports">Exports &amp; Invoices</button>
+        <button class="tab" data-tab="push">KaixuPush</button>
+        <button class="tab" data-tab="github">GitHub Push</button>
+        <button class="tab" data-tab="docs">Integration</button>
+        <button class="tab" data-tab="monitor">Monitor</button>
+      </nav>
+
+      <section class="grid">
+        <div class="card tabpanel" id="tab-customers">
+          <div class="cardhead">
+            <h2>Customers</h2>
+            <button id="refreshCustomers" class="btn ghost">Refresh</button>
+          </div>
+          <div class="tablewrap">
+            <table class="table" id="customersTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Email</th>
+                  <th>Plan</th>
+                  <th>Monthly cap</th>
+                  <th>Active</th>
+                  <th>Active keys</th>
+                  <th>Netlify token</th>
+                  <th>Created</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="muted small">Click a customer row to prefill Customer ID for Keys/Usage.</p>
+<div class="row" style="gap:10px; flex-wrap:wrap; margin-top:10px;">
+            <button id="setNetlifyToken" class="btn">Set Netlify token (selected)</button>
+            <button id="clearNetlifyToken" class="btn ghost">Clear Netlify token</button>
+          </div>
+          <p class="muted small">Netlify token is stored encrypted in Netlify DB. KaixuPush will prefer the customer token; it falls back to NETLIFY_AUTH_TOKEN if unset.</p>
+        </div>
+
+        <div class="card tabpanel" id="tab-create" style="display:none;">
+          <h2>Create customer + issue master key</h2>
+          <div class="form">
+            <label>Email</label>
+            <input id="cEmail" placeholder="user@company.com" />
+
+            <div class="cols">
+              <div>
+                <label>Plan name</label>
+                <input id="cPlan" placeholder="starter" value="starter" />
+              </div>
+              <div>
+                <label>Monthly cap (cents)</label>
+                <input id="cCap" placeholder="2000 = $20" value="2000" />
+              </div>
+            </div>
+
+            <button id="createBtn" class="btn primary">Create + Issue Master Key</button>
+
+            <div id="keyBox" class="keybox" style="display:none;">
+              <div class="keyhead">
+                <div>
+                  <div class="kTitle">Key (copy now)</div>
+                  <div class="muted small">Shown once. Store securely.</div>
+                </div>
+                <button id="copyKey" class="btn ghost">Copy</button>
+              </div>
+              <code id="keyValue" class="keyvalue"></code>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tabpanel" id="tab-keys" style="display:none;">
+          <h2>Keys (Sub-keys / Rotate / Revoke)</h2>
+
+          <div class="cols">
+            <div>
+              <label>Customer ID</label>
+              <input id="kCustomerId" placeholder="123" />
+            </div>
+            <div style="display:flex;align-items:flex-end;gap:10px;">
+              <button id="loadKeys" class="btn primary" style="width:100%;">Load keys</button>
+              <button id="refreshKeys" class="btn ghost">Refresh</button>
+            </div>
+          </div>
+
+          <div class="tablewrap" style="margin-top:12px;">
+            <table class="table" id="keysTable" style="min-width:900px;">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Last4</th>
+                  <th>Label</th>
+                  <th>Cap override</th>
+                  <th>RPM override</th>
+                  <th>Max devices</th>
+                  <th>Require install</th>
+                  <th>Allowed providers</th>
+                  <th>Allowed models</th>
+                  <th>Revoked</th>
+                  <th>Created</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10); margin:14px 0;" />
+
+          <h3>Create sub-key</h3>
+          <div class="cols">
+            <div>
+              <label>Label</label>
+              <input id="kLabel" placeholder="user-tyrone-01" />
+            </div>
+            <div>
+              <label>Monthly cap override (cents, blank = inherit)</label>
+              <input id="kCapOverride" placeholder="2000" />
+            </div>
+          </div>
+          <div class="cols">
+            <div>
+              <label>RPM override (blank = default)</label>
+              <input id="kRpm" placeholder="120" />
+            </div>
+            <div>
+              <label>RPD override (optional)</label>
+              <input id="kRpd" placeholder="5000" />
+            </div>
+          </div>
+
+          <div class="cols">
+            <div>
+              <label>Max devices override (blank = inherit)</label>
+              <input id="kMaxDevices" placeholder="3" />
+            </div>
+            <div style="display:flex; align-items:flex-end;">
+              <label style="display:flex; align-items:center; gap:8px; margin:0;">
+                <input type="checkbox" id="kRequireInstall" /> Require install_id
+              </label>
+            </div>
+          </div>
+          <div class="cols">
+            <div>
+              <label>Allowed providers override (comma, optional)</label>
+              <input id="kAllowedProviders" placeholder="openai,anthropic" />
+            </div>
+            <div>
+              <label>Allowed models override JSON (optional)</label>
+              <textarea id="kAllowedModels" placeholder="{&quot;openai&quot;:[&quot;gpt-4o-mini&quot;],&quot;anthropic&quot;:[&quot;*&quot;]}" style="min-height:60px;"></textarea>
+            </div>
+          </div>
+
+          <button id="createSubKey" class="btn primary">Create Sub-key</button>
+
+          <div id="subKeyBox" class="keybox" style="display:none;">
+            <div class="keyhead">
+              <div>
+                <div class="kTitle">Sub-key (copy now)</div>
+                <div class="muted small">Shown once. Store securely.</div>
+              </div>
+              <button id="copySubKey" class="btn ghost">Copy</button>
+            </div>
+            <code id="subKeyValue" class="keyvalue"></code>
+          </div>
+
+          <p class="muted small">Rotate = create a new key with same settings and revoke the old key. Revoke = immediate cutoff.</p>
+        </div>
+
+        <div class="card tabpanel" id="tab-usage" style="display:none;">
+          <h2>Usage</h2>
+          <div class="cols">
+            <div>
+              <label>Customer ID</label>
+              <input id="uCustomerId" placeholder="123" />
+            </div>
+            <div>
+              <label>Month (YYYY-MM)</label>
+              <input id="uMonth" placeholder="2026-02" />
+            </div>
+          </div>
+          <button id="loadUsage" class="btn primary">Load usage</button>
+
+          <div id="usageSummary" class="summary" style="display:none;">
+            <div class="stat">
+              <div class="label">Cap</div>
+              <div class="value" id="sCap">$0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Extra</div>
+              <div class="value" id="sExtra">$0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Spent</div>
+              <div class="value" id="sSpent">$0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Tokens</div>
+              <div class="value" id="sTok">0</div>
+            </div>
+          </div>
+
+          <div class="tablewrap" style="margin-top:12px;">
+            <table class="table" id="eventsTable">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Provider</th>
+                  <th>Model</th>
+                  <th>Input</th>
+                  <th>Output</th>
+                  <th>Cost (cents)</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <p class="muted small">SSE endpoint: <code>POST /.netlify/functions/gateway-stream</code></p>
+        </div>
+
+        
+
+        <div class="card tabpanel" id="tab-billing" style="display:none;">
+          <div class="cardhead">
+            <h2>Billing &amp; Controls</h2>
+            <button id="loadCustomerConfig" class="btn ghost">Load</button>
+          </div>
+
+          <div class="row" style="flex-wrap:wrap;">
+            <label class="muted small">Customer ID</label>
+            <input id="billCustomerId" placeholder="Customer ID" style="max-width:160px;" />
+            <label class="muted small">Month</label>
+            <input id="billMonth" placeholder="YYYY-MM" style="max-width:140px;" />
+          </div>
+
+          <div class="grid2" style="margin-top:10px;">
+            <div class="card">
+              <h3 style="margin-top:0;">Customer policy</h3>
+              <div class="row" style="flex-wrap:wrap;">
+                <input id="custPlan" placeholder="plan_name" style="max-width:180px;" />
+                <input id="custCap" placeholder="monthly_cap_cents" style="max-width:220px;" />
+                <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="custActive" /> Active</label>
+              </div>
+              <div class="row" style="flex-wrap:wrap;">
+                <input id="custMaxDevices" placeholder="max_devices_per_key (optional)" style="max-width:260px;" />
+                <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="custRequireInstall" /> Require install_id</label>
+              </div>
+              <div class="row" style="flex-direction:column; align-items:stretch;">
+                <input id="custAllowedProviders" placeholder="allowed_providers (comma) e.g. openai,anthropic" />
+                <textarea id="custAllowedModels" placeholder="allowed_models JSON (optional) e.g. {\"openai\":[\"gpt-4o-mini\"],\"anthropic\":[\"*\"]}" style="min-height:110px;"></textarea>
+              </div>
+              <div class="row" style="flex-wrap:wrap;">
+                <button id="saveCustomerConfig" class="btn primary">Save</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 style="margin-top:0;">Top-ups</h3>
+              <p class="muted small">Manual top-ups credit <code>extra_cents</code>. Stripe checkout requires Stripe env vars + webhook.</p>
+              <div class="row" style="flex-wrap:wrap;">
+                <input id="topupCents" placeholder="amount_cents" style="max-width:180px;" />
+                <button id="manualTopupBtn" class="btn ghost">Manual top-up</button>
+              </div>
+              <div class="row" style="flex-wrap:wrap;">
+                <input id="stripeTopupCents" placeholder="amount_cents" style="max-width:180px;" />
+                <button id="stripeTopupBtn" class="btn primary">Create Stripe checkout</button>
+                <a id="stripeTopupLink" class="btn ghost" target="_blank" rel="noreferrer" style="display:none;">Open checkout</a>
+              </div>
+              <hr style="border:0; border-top:1px solid rgba(255,255,255,0.12); margin:14px 0;" />
+              <h3 style="margin:0 0 8px 0;">Invoice snapshot</h3>
+              <div class="row" style="flex-wrap:wrap;">
+                <button id="loadInvoiceBtn" class="btn ghost">Load invoice JSON</button>
+                <button id="createInvoiceBtn" class="btn primary">Create/Update snapshot</button>
+              </div>
+              <pre class="block" id="adminInvoiceJson" style="max-height:320px; overflow:auto;">—</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tabpanel" id="tab-devices" style="display:none;">
+          <div class="cardhead">
+            <h2>Devices</h2>
+            <button id="loadDevicesBtn" class="btn ghost">Load</button>
+          </div>
+          <div class="row" style="flex-wrap:wrap;">
+            <input id="devCustomerId" placeholder="Customer ID" style="max-width:160px;" />
+            <input id="devKeyId" placeholder="Key ID (optional)" style="max-width:180px;" />
+          </div>
+          <div class="tablewrap" style="margin-top:10px;">
+            <table class="table" id="adminDevicesTable" style="min-width:1000px;">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Install ID</th>
+                  <th>First seen</th>
+                  <th>Last seen</th>
+                  <th>Revoked</th>
+                  <th>User-Agent</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card tabpanel" id="tab-exports" style="display:none;">
+          <div class="cardhead">
+            <h2>Exports &amp; Invoices</h2>
+          </div>
+          <p class="muted small">Downloads use your admin password header, so they fetch and save locally.</p>
+          <div class="row" style="flex-wrap:wrap;">
+            <input id="expCustomerId" placeholder="Customer ID" style="max-width:160px;" />
+            <input id="expMonth" placeholder="YYYY-MM" style="max-width:140px;" />
+            <input id="expKeyId" placeholder="Key ID (optional)" style="max-width:180px;" />
+          </div>
+          <div class="row" style="flex-wrap:wrap;">
+            <button id="admDlEvents" class="btn primary">Download Events CSV</button>
+            <button id="admDlSummary" class="btn ghost">Download Summary CSV</button>
+            <button id="admDlInvoice" class="btn ghost">Download Invoice CSV</button>
+          </div>
+        </div>
+
+<div class="card tabpanel" id="tab-push" style="display:none;">
+  <div class="cardhead">
+    <h2>KaixuPush (Deploy Proxy)</h2>
+    <div class="muted small">Projects · Deploy history · Chunk jobs · Push invoices</div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <label>Customer ID</label>
+      <input id="pushCustomerId" placeholder="123" />
+    </div>
+    <div>
+      <label>Month (YYYY-MM)</label>
+      <input id="pushMonth" placeholder="2026-02" />
+    </div>
+  </div>
+
+  <div class="row" style="gap:10px; flex-wrap:wrap; margin-top:10px;">
+    <button id="pushLoadProjects" class="btn primary" type="button">Load Projects</button>
+    <button id="pushLoadDeploys" class="btn" type="button">Load Deploys</button>
+    <button id="pushLoadJobs" class="btn" type="button">Load Jobs</button>
+    <button id="pushLoadInvoices" class="btn ghost" type="button">Load Invoices</button>
+    <button id="pushGenInvoice" class="btn ghost" type="button">Generate Invoice (Month)</button>
+  </div>
+
+  <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10); margin:14px 0;" />
+
+  <h3>Project registry</h3>
+  <div class="cols">
+    <div>
+      <label>Project ID</label>
+      <input id="pushProjectId" placeholder="solenterprises-main" />
+    </div>
+    <div>
+      <label>Project name</label>
+      <input id="pushProjectName" placeholder="SOLEnterprises Main Site" />
+    </div>
+  </div>
+  <div class="cols">
+    <div>
+      <label>Netlify Site ID</label>
+      <input id="pushNetlifySiteId" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+    </div>
+    <div style="display:flex; align-items:flex-end; gap:10px;">
+      <button id="pushSaveProject" class="btn primary" type="button" style="width:100%;">Upsert Project</button>
+      <button id="pushClearProjectForm" class="btn ghost" type="button">Clear</button>
+    </div>
+  </div>
+
+  <div class="tablewrap" style="margin-top:12px;">
+    <table class="table" id="pushProjectsTable" style="min-width:900px;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Project ID</th>
+          <th>Name</th>
+          <th>Netlify Site ID</th>
+          <th>Updated</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="muted small">Tip: click a row to load into the form.</p>
+
+  <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10); margin:14px 0;" />
+
+  <h3>Deploy history</h3>
+  <div class="tablewrap">
+    <table class="table" id="pushDeploysTable" style="min-width:1000px;">
+      <thead>
+        <tr>
+          <th>Push ID</th>
+          <th>Project</th>
+          <th>Branch</th>
+          <th>State</th>
+          <th>Required</th>
+          <th>Uploaded</th>
+          <th>URL</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10); margin:14px 0;" />
+
+  <h3>Chunk jobs</h3>
+  <div class="tablewrap">
+    <table class="table" id="pushJobsTable" style="min-width:1100px;">
+      <thead>
+        <tr>
+          <th>Push ID</th>
+          <th>Project</th>
+          <th>Path</th>
+          <th>SHA1</th>
+          <th>Parts</th>
+          <th>Received</th>
+          <th>Staged bytes</th>
+          <th>Status</th>
+          <th>Updated</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10); margin:14px 0;" />
+
+  <h3>Push invoices</h3>
+  <div class="tablewrap">
+    <table class="table" id="pushInvoicesTable" style="min-width:900px;">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Total</th>
+          <th>Pricing</th>
+          <th>Deploys</th>
+          <th>Bytes</th>
+          <th>Updated</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+        
+        <div class="card tabpanel" id="tab-github" style="display:none;">
+          <div class="cardhead">
+            <h2>GitHub Push Gateway</h2>
+            <div class="muted small">Token status · Repos · ZIP push jobs</div>
+          </div>
+
+          <div class="cols">
+            <div>
+              <label>Customer ID</label>
+              <input id="ghCustomerId" placeholder="123" />
+            </div>
+            <div>
+              <label>Limit</label>
+              <input id="ghLimit" placeholder="50" />
+            </div>
+          </div>
+
+          <div class="row" style="gap:10px; flex-wrap:wrap; margin-top:10px;">
+            <button id="ghTokenStatus" class="btn" type="button">Token Status</button>
+            <button id="ghTokenClear" class="btn danger" type="button">Clear Token</button>
+          </div>
+
+          <div class="cols" style="margin-top:10px;">
+            <div>
+              <label>Set PAT (fine-grained or classic)</label>
+              <input id="ghPat" placeholder="ghp_..." />
+              <div class="muted small">Stored encrypted in DB. Use OAuth flow for enterprise if preferred.</div>
+            </div>
+            <div style="display:flex; align-items:flex-end;">
+              <button id="ghTokenSet" class="btn primary" type="button" style="width:100%;">Save PAT</button>
+            </div>
+          </div>
+
+          <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10); margin:14px 0;" />
+
+          <div class="row" style="gap:10px; flex-wrap:wrap;">
+            <button id="ghLoadRepos" class="btn primary" type="button">Load Repos</button>
+            <button id="ghLoadJobs" class="btn" type="button">Load Jobs</button>
+          </div>
+
+          <h3 style="margin-top:12px;">Repositories</h3>
+          <div class="tablewrap">
+            <table class="table" id="ghReposTable">
+              <thead><tr>
+                <th>Repo</th><th>Private</th><th>Default</th><th>Updated</th><th>Link</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <h3 style="margin-top:12px;">Recent ZIP push jobs</h3>
+          <div class="tablewrap">
+            <table class="table" id="ghJobsTable">
+              <thead><tr>
+                <th>Job</th><th>Repo</th><th>Branch</th><th>Status</th><th>Bytes</th><th>Attempts</th><th>Updated</th><th>Result</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <div class="muted small" style="margin-top:12px;">
+            OAuth flow endpoints exist: <code>/.netlify/functions/github-oauth-start</code> and <code>/.netlify/functions/github-oauth-callback</code>.
+            Git DB push pipeline endpoints: <code>/gh-push-init</code>, <code>/gh-push-upload-chunk</code>, <code>/gh-push-upload-complete</code>, <code>/gh-push-status</code>.
+          </div>
+        </div>
+
+<div class="card tabpanel" id="tab-docs" style="display:none;">
+          <h2>Integration</h2>
+
+          <h3>Non-stream</h3>
+          <code class="block">POST /.netlify/functions/gateway-chat</code>
+
+          <h3>Streaming (SSE)</h3>
+          <code class="block">POST /.netlify/functions/gateway-stream</code>
+          <p class="muted small">Client opens EventSource-like stream via <code>fetch</code> and reads SSE frames (event/meta/delta/done).</p>
+
+          <h3>Normalized request</h3>
+<pre class="block">{
+  "provider": "openai" | "anthropic" | "gemini",
+  "model": "...",
+  "messages": [{"role":"user","content":"Hello"}],
+  "max_tokens": 256,
+  "temperature": 0.7
+}</pre>
+
+          <h3>SSE events</h3>
+<pre class="block">event: meta
+data: {"provider":"openai","model":"gpt-4o-mini","month":{"month":"2026-02","cap_cents":2000,"spent_cents":0,"key_cap_cents":500,"key_spent_cents":12}}
+
+event: delta
+data: {"text":"Hel"}
+
+event: delta
+data: {"text":"lo!"}
+
+event: done
+data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"month":"2026-02","cap_cents":2000,"spent_cents":1,"key_cap_cents":500,"key_spent_cents":13}}</pre>
+
+          <p class="muted small">This build is Netlify DB-native (Neon) and uses an in-house DB-backed rate limiter (no Redis required).</p>
+        </div>
+      
+        <div class="card tabpanel" id="tab-monitor" style="display:none;">
+          <div class="cardhead">
+            <h2>Monitor</h2>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span id="monStatus" class="pill">idle</span>
+              <button id="monLiveBtn" class="btn">Start Live</button>
+              <button id="monRefreshBtn" class="btn ghost">Refresh</button>
+              <button id="monClearBtn" class="btn ghost">Clear</button>
+              <button id="monPruneBtn" class="btn danger">Prune</button>
+            </div>
+          </div>
+
+          <div class="form" style="margin-top:10px;">
+            <div class="cols">
+              <div>
+                <label>Level</label>
+                <select id="monLevel">
+                  <option value="">(any)</option>
+                  <option value="error">error</option>
+                  <option value="warn">warn</option>
+                  <option value="info">info</option>
+                </select>
+              </div>
+              <div>
+                <label>Kind</label>
+                <select id="monKind">
+                  <option value="">(any)</option>
+                  <option value="client_error">client_error</option>
+                  <option value="error">error</option>
+                  <option value="slow">slow</option>
+                  <option value="rate_limited">rate_limited</option>
+                  <option value="blocked">blocked</option>
+                  <option value="audit">audit</option>
+                </select>
+              </div>
+              <div>
+                <label>Function</label>
+                <input id="monFn" placeholder="gateway-stream" />
+              </div>
+              <div>
+                <label>App</label>
+                <input id="monApp" placeholder="SkyIDE" />
+              </div>
+            </div>
+
+            <div class="cols">
+              <div style="flex:2;">
+                <label>Request ID</label>
+                <input id="monRequestId" placeholder="x-kaixu-request-id / x-request-id" />
+              </div>
+              <div style="display:flex; align-items:flex-end; gap:10px;">
+                <button id="monSearchBtn" class="btn primary" type="button">Search</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tablewrap" style="margin-top:10px;">
+            <table class="table" id="monitorTable">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Level</th>
+                  <th>Function</th>
+                  <th>App</th>
+                  <th>Status</th>
+                  <th>Provider/Model</th>
+                  <th>ms</th>
+                  <th>Request</th>
+                  <th>Summary</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <p class="muted small" style="margin-top:10px;">
+            Tip: tag your apps with headers <span style="font-family:var(--mono);">x-kaixu-app</span> and <span style="font-family:var(--mono);">x-kaixu-build</span>. For client-side errors (before the request hits the gateway), POST to <span style="font-family:var(--mono);">/.netlify/functions/client-error-report</span>.
+          </p>
+        </div>
+
+      </section>
+    </section>
+
+    <footer class="foot">
+      <span class="muted small">Kaixu Gateway v5.1 · kAIxu Canon enforced · deploy-kaixuCanon-20260221102017</span>
+    </footer>
+  </main>
+
+  <script src="/assets/app.js"></script>
+
+  <!-- Gateway Base modal (lets you point this UI at a dedicated gateway) -->
+  <div id="baseModal" class="modalOverlay" style="display:none;">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px;">
+        <div>
+          <h3>Gateway Base</h3>
+          <p class="muted">Leave blank to use this site. Set a full URL to point at your dedicated gateway (VPS).</p>
+          <p class="muted">Current effective base: <code id="apiBaseCurrent"></code></p>
+        </div>
+        <button id="apiBaseClose" class="btn ghost" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <div class="row">
+        <input id="apiBaseInput" placeholder="https://gateway.yourdomain.com" />
+      </div>
+
+      <div class="row" style="margin-top:8px;">
+        <a id="apiBaseHealthLink" class="btn ghost" href="/.netlify/functions/health" target="_blank" rel="noreferrer">Open Health for this base</a>
+      </div>
+
+      <div class="actions">
+        <button id="apiBaseUseThisSite" class="btn" type="button">Use This Site</button>
+        <button id="apiBaseSave" class="btn primary" type="button">Save</button>
+      </div>
+    </div>
+
+  <!-- Monitor detail modal -->
+  <div id="monitorModal" class="modalOverlay" style="display:none;">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px;">
+        <div>
+          <h3>Monitor event</h3>
+          <p class="muted">Full, structured payload for debugging (copy/paste into an issue or back into your IDE).</p>
+        </div>
+        <button id="monCloseBtn" class="btn danger" type="button">Close</button>
+      </div>
+      <div class="row" style="justify-content:flex-end; gap:10px;">
+        <button id="monCopyBtn" class="btn ghost" type="button">Copy JSON</button>
+      </div>
+      <pre id="monDetail" class="code"></pre>
+    </div>
+  </div>
+
+  </div>
+
+</body>
+<script>
+  // kAIxU Gateway 13 intro: animate terminal ticker and remove overlay after boot.
+  (() => {
+    const terminal = document.getElementById('kAIxU-intro-terminal');
+    let terminalInterval;
+    if (terminal) {
+      terminalInterval = setInterval(() => {
+        terminal.innerHTML += '<br>> SYS_' + Math.random().toString(16).substr(2, 8).toUpperCase() + ' ALLOCATED';
+      }, 150);
+    }
+
+    setTimeout(() => {
+      if (terminalInterval) clearInterval(terminalInterval);
+      const intro = document.getElementById('kAIxU-intro');
+      if (intro) intro.remove();
+    }, 5300);
+  })();
+</script>
+</html>
+</html>
