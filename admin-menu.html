@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <link rel="canonical" href="https://skyesol.netlify.app/admin-menu.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Menu · Site Paths</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="/js/admin-menu-triggers.js" defer></script>
+</head>
+<body>
+  <nav class="main-nav" id="mainNav">
+    <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="/index.html">Home</a>
+      <a href="/admin.html">Admin Console</a>
+      <a href="/sitemap-visual.html">Sitemap</a>
+    </div>
+    <button class="menu-btn" id="menuBtn">☰ MENU</button>
+  </nav>
+
+  <header class="page-header">
+    <div class="section-label">Admin · Full Path Inventory</div>
+    <h1>Admin <span>Menu</span></h1>
+    <p>Enter your Executive Officer Key to reveal every published path, grouped by category and searchable.</p>
+  </header>
+
+  <main class="content-section" style="max-width:1100px">
+    <div class="panel" id="gatePanel">
+      <h3>Executive Officer Key required</h3>
+      <p class="dim" id="gateMsg">This menu is gated by the site's Executive Officer Key (<span class="mono">DEMONKEY</span>) environment variable.</p>
+      <div class="form-row" style="margin-top:10px">
+        <div class="field" style="grid-column:1/-1">
+          <label>Executive Officer Key</label>
+          <input id="demonkeyIn" type="password" placeholder="Enter Executive Officer Key" autocomplete="off">
+        </div>
+      </div>
+      <div class="actions" style="margin-top:12px">
+        <button class="btn-gold" id="unlockBtn">Unlock</button>
+        <button class="btn-outline" id="clearBtn" type="button">Clear</button>
+      </div>
+    </div>
+
+    <div class="panel" id="menuPanel" style="display:none">
+      <div class="form-row">
+        <div class="field" style="grid-column:1/-1">
+          <label>Search</label>
+          <input id="searchIn" type="text" placeholder="Search by title, url, or file path" autocomplete="off">
+        </div>
+      </div>
+      <div class="dim" id="metaLine" style="margin-top:10px"></div>
+      <div id="menuOut" style="margin-top:14px"></div>
+    </div>
+  </main>
+
+  <script>
+    const DEMONKEY_STORAGE_KEY = "skyesol:demonkey";
+    const gatePanel = document.getElementById('gatePanel');
+    const gateMsg = document.getElementById('gateMsg');
+    const menuPanel = document.getElementById('menuPanel');
+    const menuOut = document.getElementById('menuOut');
+    const metaLine = document.getElementById('metaLine');
+    const demonkeyIn = document.getElementById('demonkeyIn');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const searchIn = document.getElementById('searchIn');
+
+    let siteMenu = null;
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function norm(s) {
+      return String(s || "").toLowerCase();
+    }
+
+    function matches(item, q) {
+      if (!q) return true;
+      const hay = [item.title, item.urlPath, item.prettyPath, item.file, item.category].map(norm).join(' | ');
+      return hay.includes(q);
+    }
+
+    function render() {
+      if (!siteMenu) return;
+      const q = norm(searchIn.value).trim();
+
+      let visibleCount = 0;
+      const chunks = [];
+      for (const cat of siteMenu.categories || []) {
+        const items = (cat.items || []).filter((it) => matches(it, q));
+        if (!items.length) continue;
+        visibleCount += items.length;
+        const rows = items.map((it) => {
+          const file = escapeHtml(it.file);
+          const ext = escapeHtml(it.ext || "");
+          let title = it.title ? escapeHtml(it.title) : file;
+          let link = null;
+          if (it.urlPath) {
+            link = `<a href="${escapeHtml(it.urlPath)}" target="_blank" rel="noopener">${title}</a>`;
+          } else if (ext === ".md" || ext === ".txt" || ext === ".js" || ext === ".mjs" || ext === ".json" || ext === ".css") {
+            link = `<a href="/${file}" target="_blank" rel="noopener">${title}</a>`;
+          } else {
+            link = `<span>${title}</span>`;
+          }
+          const pretty = it.prettyPath ? ` · <span class="dim">${escapeHtml(it.prettyPath)}</span>` : '';
+          return `
+            <div class="list-item" style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06)">
+              <div>${link}${pretty}</div>
+              <div class="dim" style="margin-top:4px"><span class="mono">${file}</span> · ${ext}</div>
+            </div>
+          `;
+        }).join('');
+
+        chunks.push(`
+          <div style="margin-top:18px">
+            <div class="section-label" style="margin-bottom:8px">${escapeHtml(cat.name)} · ${items.length}</div>
+            <div class="list">${rows}</div>
+          </div>
+        `);
+      }
+
+      const total = siteMenu.totalItems || 0;
+      metaLine.textContent = `${visibleCount} / ${total} pages · generated ${siteMenu.generatedAt}`;
+      menuOut.innerHTML = chunks.length ? chunks.join('') : '<div class="dim">No matches.</div>';
+    }
+
+    async function fetchMenu(demonkey) {
+      console.log('[ADMIN MENU] fetchMenu called with demonkey:', demonkey);
+      const res = await fetch('/.netlify/functions/admin-site-menu', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ demonkey })
+      });
+      console.log('[ADMIN MENU] fetch response:', res.status, res.statusText);
+      if (!res.ok) {
+        const msg = await res.text().catch(() => '');
+        console.log('[ADMIN MENU] fetch error:', msg);
+        throw new Error(msg || `Unlock failed (${res.status})`);
+      }
+      const data = await res.json();
+      console.log('[ADMIN MENU] fetchMenu data:', data);
+      return data;
+    }
+
+    async function unlock(demonkey) {
+      console.log('[ADMIN MENU] unlock called');
+      gateMsg.textContent = 'Checking…';
+      unlockBtn.disabled = true;
+      try {
+        siteMenu = await fetchMenu(demonkey);
+        console.log('[ADMIN MENU] unlock success, siteMenu:', siteMenu);
+        sessionStorage.setItem(DEMONKEY_STORAGE_KEY, demonkey);
+        gatePanel.style.display = 'none';
+        menuPanel.style.display = 'block';
+        render();
+        searchIn.focus();
+      } catch (e) {
+        console.log('[ADMIN MENU] unlock error:', e);
+        gateMsg.textContent = (e && e.message) ? e.message : 'Unlock failed.';
+      } finally {
+        unlockBtn.disabled = false;
+      }
+    }
+
+    unlockBtn.addEventListener('click', () => unlock(demonkeyIn.value));
+    demonkeyIn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') unlock(demonkeyIn.value);
+    });
+    clearBtn.addEventListener('click', () => {
+      demonkeyIn.value = '';
+      sessionStorage.removeItem(DEMONKEY_STORAGE_KEY);
+      gateMsg.textContent = 'Cleared.';
+    });
+    searchIn.addEventListener('input', render);
+
+    const existing = sessionStorage.getItem(DEMONKEY_STORAGE_KEY);
+    if (existing) {
+      unlock(existing);
+    }
+  </script>
+</body>
+</html>

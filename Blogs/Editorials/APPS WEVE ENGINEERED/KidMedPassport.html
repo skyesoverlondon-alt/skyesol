@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- JS feature flag (if JS is blocked, page still renders fully) -->
+  <script>
+    document.documentElement.classList.add('js');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>KidMed Passport — Free Pediatric Emergency Readiness Kit (Printable + PDF Export)</title>
+  <meta name="description" content="Get the free Pediatric Emergency Readiness Kit + learn how KidMed Passport helps you organize your child’s medical details and export a clean PDF for school, travel, and emergencies." />
+  <meta name="keywords" content="kid medical passport, child medical record, pediatric emergency sheet, vaccine record PDF, school immunization records, caregiver handoff, emergency mode, printable medical info, pediatric allergies, medication list" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="theme-color" content="#070812" />
+
+  <link rel="canonical" href="https://kidmedpassport.netlify.app/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://kidmedpassport.netlify.app/" />
+  <meta property="og:title" content="KidMed Passport — Free Pediatric Emergency Readiness Kit" />
+  <meta property="og:description" content="Printable emergency sheet + caregiver scripts + vaccine quick-check + a clean path to export a PDF via KidMed Passport." />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KidMed Passport — Free Pediatric Emergency Readiness Kit" />
+  <meta name="twitter:description" content="Printable emergency sheet + caregiver scripts + vaccine quick-check + PDF export workflow." />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "KidMed Passport — Free Pediatric Emergency Readiness Kit",
+    "description": "Printable emergency sheet + caregiver handoff scripts + vaccine quick-check + a clean path to export a PDF via KidMed Passport.",
+    "image": ["https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png"],
+    "author": { "@type": "Organization", "name": "Skyes Over London LC — Editorial Division" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Solenterprises International Nexus & Holdings LLC",
+      "logo": { "@type": "ImageObject", "url": "https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" }
+    },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://kidmedpassport.netlify.app/" },
+    "inLanguage": "en-US"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "KidMed Passport",
+    "url": "https://kidmedpassport.netlify.app/",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web Browser",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Emergency Mode quick access",
+      "Child profiles",
+      "Tabs: Overview, Medical, Vaccines, Notes",
+      "Export selected records to a single PDF",
+      "Local reset option for privacy"
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg0:#05050b;
+      --bg1:#070812;
+      --bg2:#0b0d1b;
+
+      --ink:#eef0ff;
+      --muted:rgba(238,240,255,.72);
+
+      --gold:#ffd36a;
+      --gold2:#ffefb0;
+      --purple:#a243ff;
+      --cyan:#27f2ff;
+
+      --stroke:rgba(255,255,255,.12);
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --shadow2: 0 10px 40px rgba(0,0,0,.40);
+
+      --font-display:'Playfair Display', Georgia, serif;
+      --font-body:'Instrument Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      --r:18px;
+      --max:1180px;
+
+      --ease-expo:cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family:var(--font-body);
+      background:
+        radial-gradient(1200px 720px at 18% 12%, rgba(162,67,255,.26), transparent 58%),
+        radial-gradient(1100px 760px at 82% 22%, rgba(39,242,255,.18), transparent 58%),
+        radial-gradient(900px 680px at 62% 88%, rgba(255,211,106,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg0) 45%, var(--bg2));
+      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    a{color:inherit;text-decoration:none}
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+      outline:2px solid rgba(39,242,255,.70);
+      outline-offset:3px;
+      border-radius: 12px;
+    }
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+
+    /* FX */
+    .grain{
+      position:fixed;inset:0;z-index:1;pointer-events:none;
+      opacity:.12;mix-blend-mode: overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+      background-size:220px 220px;
+    }
+    .scanlines{
+      position:fixed;inset:0;z-index:1;pointer-events:none;
+      opacity:.07;
+      background: repeating-linear-gradient(to bottom, rgba(255,255,255,.05), rgba(255,255,255,.05) 1px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 7px);
+    }
+
+    /* Watermark */
+    .watermark{
+      position:fixed;
+      inset:auto auto -120px -120px;
+      width:min(720px, 78vw);
+      opacity:.10;
+      filter: drop-shadow(0 0 28px rgba(255,211,106,.10));
+      z-index:0;
+      pointer-events:none;
+      transform: rotate(-10deg);
+    }
+
+    /* Opener: ONLY shown when JS is enabled; JS removes it regardless of reduced-motion */
+    .cinematic-opener{display:none}
+    .js .cinematic-opener{
+      display:flex;
+      position:fixed;inset:0;z-index:10000;
+      background: var(--bg0);
+      align-items:center;justify-content:center;
+      text-align:center;
+    }
+    .cinematic-opener::before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(255,211,106,.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 50%, rgba(162,67,255,.20) 0%, transparent 55%);
+      opacity:.85;
+    }
+    .opener-content{position:relative;z-index:2;padding:2rem;max-width: 980px}
+    .opener-text{
+      font-family:var(--font-mono);
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      font-size: clamp(0.85rem, 2.4vw, 1.1rem);
+      color: rgba(255,255,255,.75);
+      margin:0 0 12px;
+    }
+    .opener-title{
+      font-family:var(--font-display);
+      color: var(--gold);
+      font-size: clamp(2.4rem, 7.8vw, 5.2rem);
+      font-weight: 900;
+      line-height:1.02;
+      margin: 0 0 12px;
+      text-shadow: 0 0 30px rgba(162,67,255,.16);
+    }
+    .opener-subtitle{
+      margin:0 auto;
+      color: rgba(255,255,255,.74);
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      line-height:1.75;
+      max-width: 72ch;
+    }
+    .progress-bar{
+      margin: 22px auto 0;
+      width:240px;height:2px;
+      background: rgba(255,255,255,.10);
+      border-radius:2px;overflow:hidden;
+    }
+    .progress-fill{
+      height:100%;width:0%;
+      background: linear-gradient(90deg, rgba(39,242,255,.35), rgba(39,242,255,.95), rgba(255,211,106,.95), rgba(162,67,255,.75));
+      box-shadow: 0 0 18px rgba(39,242,255,.35);
+      animation: progressFill 2.8s var(--ease-expo) forwards;
+    }
+    @keyframes progressFill{to{width:100%}}
+
+    /* Nav */
+    .nav{
+      position:fixed;left:0;top:0;width:100%;
+      z-index:1000;
+      background: linear-gradient(180deg, rgba(5,6,12,.78), rgba(5,6,12,.30));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.10);
+      transition: all .35s var(--ease-expo);
+    }
+    .nav.scrolled{
+      background: rgba(5,6,12,.78);
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .nav-inner{
+      height:74px;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;
+    }
+
+    /* Logo: unboxed, floating, glowing, slight pulse */
+    .brand{display:flex;align-items:center;gap:12px}
+    .sol-logo{
+      width:58px;height:auto;
+      filter: drop-shadow(0 0 16px rgba(255,211,106,.18)) drop-shadow(0 0 18px rgba(162,67,255,.14));
+      animation: logoPulse 2.6s ease-in-out infinite;
+      transform: translateZ(0);
+    }
+    @keyframes logoPulse{
+      0%,100%{transform: scale(1); opacity:.92}
+      50%{transform: scale(1.04); opacity:1}
+    }
+    .brand-name{display:flex;flex-direction:column;line-height:1.02}
+    .brand-name .top{
+      font-family:var(--font-display);
+      font-weight:900;
+      letter-spacing:.02em;
+      color: var(--gold2);
+      font-size: 1.05rem;
+    }
+    .brand-name .sub{
+      font-family:var(--font-mono);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:.62rem;
+      color: rgba(255,255,255,.68);
+      margin-top: 4px;
+    }
+
+    .nav-links{
+      display:flex;align-items:center;gap:14px;
+      font-family:var(--font-mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:.72rem;
+      color: rgba(255,255,255,.70);
+      white-space:nowrap;
+    }
+    .nav-links a{
+      padding:10px 10px;border-radius:14px;
+      border:1px solid transparent;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .nav-links a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.04);
+      border-color: rgba(255,255,255,.10);
+    }
+
+    .nav-cta{
+      display:inline-flex;align-items:center;gap:10px;
+      padding: 12px 14px;border-radius: 14px;
+      border:1px solid rgba(255,211,106,.28);
+      background: rgba(255,211,106,.10);
+      color: rgba(255,255,255,.92);
+      box-shadow: 0 18px 42px rgba(0,0,0,.35);
+      cursor:pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      font-family:var(--font-mono);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: .72rem;
+      white-space:nowrap;
+    }
+    .nav-cta:hover{
+      transform: translateY(-1px);
+      border-color: rgba(39,242,255,.30);
+      background: rgba(39,242,255,.08);
+    }
+
+    .menuBtn{
+      display:none;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--ink);
+      border-radius: 14px;
+      padding:10px 12px;
+      font-family:var(--font-mono);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+
+    .progress{
+      position:fixed; left:0; top:74px; height:2px; width:100%;
+      z-index:1001;
+      background: rgba(255,255,255,.06);
+    }
+    .progress > i{
+      display:block;height:100%;width:0%;
+      background: linear-gradient(90deg, rgba(39,242,255,.1), rgba(39,242,255,.95), rgba(255,211,106,.95), rgba(162,67,255,.75));
+      box-shadow: 0 0 18px rgba(39,242,255,.35);
+    }
+
+    main{position:relative;z-index:2;padding-top: 112px}
+
+    /* Reveal: visible by default; only animates when JS is present */
+    .reveal{opacity:1;transform:none}
+    .js .reveal{opacity:0;transform: translateY(10px); transition: opacity .65s ease, transform .65s ease}
+    .js .reveal.on{opacity:1;transform: translateY(0)}
+
+    /* Hero */
+    .hero{padding: 26px 0 14px}
+    .hero-shell{
+      position:relative;
+      border-radius: calc(var(--r) + 10px);
+      background:
+        radial-gradient(1200px 720px at 18% 18%, rgba(255,211,106,.10), transparent 55%),
+        radial-gradient(900px 680px at 78% 28%, rgba(162,67,255,.18), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-shell::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: conic-gradient(from 210deg, rgba(39,242,255,.0), rgba(39,242,255,.50), rgba(255,211,106,.36), rgba(162,67,255,.44), rgba(39,242,255,.0));
+      filter: blur(18px);
+      opacity:.32;
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;
+      padding: 34px 22px;
+      display:grid;
+      grid-template-columns: 1.18fr .82fr;
+      gap: 18px;
+      align-items:stretch;
+    }
+    .kicker{
+      font-family:var(--font-mono);
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:12px;
+      color: rgba(255,255,255,.70);
+    }
+    .headline{
+      margin:10px 0 10px;
+      font-family:var(--font-display);
+      font-weight:900;
+      letter-spacing:.01em;
+      line-height:1.02;
+      font-size: clamp(34px, 4.2vw, 60px);
+      text-shadow:
+        0 0 26px rgba(162,67,255,.16),
+        0 0 18px rgba(39,242,255,.10);
+    }
+    .subhead{
+      max-width: 72ch;
+      color: rgba(238,240,255,.78);
+      font-size: clamp(15px, 1.35vw, 18px);
+      line-height:1.75;
+      margin: 0 0 14px;
+    }
+    .byline{
+      display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;
+      font-family:var(--font-mono);
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      font-size:12px;
+      color: rgba(255,255,255,.70);
+      margin-top: 10px;
+    }
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;border-radius:999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .pill b{color: var(--gold2); font-weight:800}
+
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top: 12px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding: 12px 14px;border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: var(--ink);
+      box-shadow: 0 18px 42px rgba(0,0,0,.35);
+      cursor:pointer;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      font-family:var(--font-mono);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 12px;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(39,242,255,.24); background: rgba(39,242,255,.06)}
+    .btn.gold{border-color: rgba(255,211,106,.26); background: rgba(255,211,106,.10)}
+    .btn.gold:hover{border-color: rgba(255,211,106,.45); background: rgba(255,211,106,.14)}
+
+    .hero-visual{
+      position:relative;
+      min-height: 360px;
+      border-radius: calc(var(--r) + 6px);
+      background:
+        radial-gradient(260px 260px at 50% 40%, rgba(39,242,255,.16), transparent 60%),
+        radial-gradient(260px 260px at 40% 65%, rgba(255,211,106,.12), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.20), rgba(0,0,0,.45));
+      border: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+      box-shadow: var(--shadow2);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .ring{
+      position:absolute;
+      width: min(420px, 84vw);
+      aspect-ratio: 1 / 1;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow:
+        0 0 0 1px rgba(39,242,255,.10) inset,
+        0 0 40px rgba(39,242,255,.14),
+        0 0 60px rgba(162,67,255,.12),
+        0 0 50px rgba(255,211,106,.08);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.06), transparent 58%),
+        conic-gradient(from 210deg, rgba(39,242,255,.0), rgba(39,242,255,.65), rgba(255,211,106,.40), rgba(162,67,255,.48), rgba(39,242,255,.0));
+      opacity:.66;
+      animation: breathe 6.2s ease-in-out infinite;
+      transform: translate(-10%, 6%);
+      pointer-events:none;
+    }
+    @keyframes breathe{
+      0%,100%{transform: translate(-10%, 6%) scale(1.00); opacity:.56}
+      50%{transform: translate(-10%, 3%) scale(1.04); opacity:.78}
+    }
+
+    .mini-ui{position:relative;padding: 16px;z-index:2;display:grid;gap: 12px}
+    .mini-title{
+      font-family:var(--font-mono);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,.74);
+      display:flex;align-items:center;justify-content:space-between;gap: 10px;
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(39,242,255,.20);
+      background: rgba(39,242,255,.07);
+      color: rgba(238,240,255,.90);
+      font-size: 11px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.35);
+      white-space:nowrap;
+    }
+    .mini-card{
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+    }
+    .mini-card .row{
+      display:flex;align-items:center;justify-content:space-between;
+      padding: 12px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .mini-card .row:last-child{border-bottom:none}
+    .mini-chip{
+      font-family:var(--font-mono);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 11px;
+      color: rgba(255,255,255,.70);
+    }
+    .mini-pill{
+      font-family:var(--font-mono);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 11px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,211,106,.22);
+      background: rgba(255,211,106,.08);
+      color: rgba(255,255,255,.92);
+      white-space:nowrap;
+    }
+
+    /* Stats */
+    .stats{
+      margin-top: 18px;
+      border-radius: calc(var(--r) + 10px);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .stats-inner{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 1px;
+      background: rgba(255,255,255,.10);
+    }
+    .stat{background: rgba(255,255,255,.04);padding: 18px 14px;text-align:center}
+    .stat .num{
+      font-family:var(--font-display);
+      font-weight:900;
+      font-size: 30px;
+      color: var(--gold2);
+      text-shadow: 0 0 18px rgba(255,211,106,.12);
+    }
+    .stat .lab{
+      margin-top: 6px;
+      font-family:var(--font-mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size: 11px;
+      color: rgba(255,255,255,.72);
+      line-height:1.4;
+    }
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap: 18px;
+      align-items:start;
+      margin-top: 18px;
+    }
+
+    .card{
+      border-radius: calc(var(--r) + 8px);
+      background:
+        radial-gradient(900px 520px at 24% 20%, rgba(162,67,255,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .card-inner{padding: 18px}
+
+    .toc{position:sticky; top: 92px}
+    .toc h3{
+      margin:0 0 10px;
+      font-family:var(--font-mono);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+      color: rgba(255,255,255,.74);
+    }
+    .toc a{
+      display:block;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+      margin: 8px 0;
+      color: rgba(238,240,255,.84);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      font-size: 13px;
+      line-height:1.35;
+    }
+    .toc a:hover{
+      transform: translateY(-1px);
+      border-color: rgba(39,242,255,.22);
+      background: rgba(39,242,255,.06);
+    }
+    .toc a.active{
+      border-color: rgba(255,211,106,.30);
+      background: rgba(255,211,106,.08);
+    }
+
+    article h2{
+      margin: 22px 0 10px;
+      font-family:var(--font-display);
+      font-weight:900;
+      letter-spacing:.01em;
+      line-height:1.1;
+      font-size: clamp(20px, 2.1vw, 30px);
+    }
+    article p{
+      margin: 0 0 14px;
+      color: rgba(238,240,255,.82);
+      line-height: 1.9;
+      font-size: 16px;
+    }
+    article p.lead{font-size: 17px;color: rgba(238,240,255,.74)}
+    article ul{margin: 0 0 16px 18px;color: rgba(238,240,255,.82);line-height: 1.85}
+    article li{margin: 6px 0}
+
+    .rule{
+      height:1px;
+      background: linear-gradient(90deg, rgba(39,242,255,0), rgba(39,242,255,.45), rgba(255,211,106,.35), rgba(162,67,255,.35), rgba(39,242,255,0));
+      opacity:.70;
+      margin: 18px 0;
+    }
+
+    .callout{
+      border-radius: calc(var(--r) + 8px);
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(520px 320px at 12% 10%, rgba(39,242,255,.12), transparent 60%),
+        radial-gradient(520px 320px at 88% 30%, rgba(255,211,106,.10), transparent 60%),
+        rgba(0,0,0,.12);
+      padding: 16px 16px;
+      box-shadow: 0 18px 48px rgba(0,0,0,.35);
+      margin: 16px 0;
+      overflow:hidden;
+    }
+    .callout .tag{
+      font-family:var(--font-mono);
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      font-size:12px;
+      color: rgba(255,255,255,.72);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom: 8px;
+    }
+    .callout .tag i{
+      width:10px;height:10px;border-radius:99px;
+      background: rgba(39,242,255,.85);
+      box-shadow: 0 0 18px rgba(39,242,255,.45);
+    }
+    .callout b{color: var(--gold2)}
+
+    blockquote{
+      margin: 16px 0;
+      padding: 16px 18px;
+      border-left: 3px solid rgba(255,211,106,.85);
+      background: rgba(0,0,0,.12);
+      border-radius: 14px;
+      color: rgba(238,240,255,.88);
+      box-shadow: 0 18px 48px rgba(0,0,0,.25);
+    }
+    blockquote p{margin:0;font-size:16px;line-height:1.85}
+    blockquote cite{
+      display:block;margin-top: 10px;
+      font-family:var(--font-mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,.66);
+      font-style: normal;
+    }
+
+    /* Feature grid */
+    .feature-grid{display:grid;grid-template-columns: repeat(2, minmax(0,1fr));gap: 12px;margin: 14px 0 8px}
+    .feature{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      padding: 14px 14px;
+      box-shadow: 0 14px 38px rgba(0,0,0,.38);
+      position:relative;
+      overflow:hidden;
+    }
+    .feature::before{
+      content:"";position:absolute;inset:-1px;
+      background:
+        radial-gradient(240px 160px at 20% 20%, rgba(39,242,255,.16), transparent 60%),
+        radial-gradient(240px 160px at 70% 70%, rgba(255,211,106,.12), transparent 62%);
+      opacity:.85;pointer-events:none;
+    }
+    .feature h4{position:relative;margin:0 0 8px;font-family:var(--font-display);font-weight:900;font-size: 16px;color: rgba(255,255,255,.92)}
+    .feature p{position:relative;margin:0;color: rgba(238,240,255,.74);font-size: 14px;line-height:1.75}
+
+    /* Lead form */
+    .formBox{
+      border-radius: calc(var(--r) + 12px);
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(620px 420px at 18% 24%, rgba(162,67,255,.18), transparent 60%),
+        radial-gradient(620px 420px at 78% 24%, rgba(39,242,255,.12), transparent 62%),
+        rgba(0,0,0,.14);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      margin-top: 14px;
+    }
+    .formInner{padding: 16px;display:grid;grid-template-columns: 1.05fr .95fr;gap: 14px;align-items:start}
+    .formInner h3{margin:0 0 8px;font-family:var(--font-display);font-weight:900}
+    .formInner p{margin:0;color: rgba(238,240,255,.80);line-height:1.75;font-size: 14px}
+
+    form{display:grid;gap: 10px}
+    .row2{display:grid;grid-template-columns: 1fr 1fr;gap: 10px}
+    label{
+      font-family:var(--font-mono);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 11px;
+      color: rgba(255,255,255,.72);
+      display:block;margin-bottom: 6px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      color: rgba(238,240,255,.92);
+      font-family: var(--font-body);
+      font-size: 14px;
+      transition: border-color .18s ease, background .18s ease;
+    }
+    input::placeholder, textarea::placeholder{color: rgba(238,240,255,.55)}
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(39,242,255,.30);
+      background: rgba(39,242,255,.06);
+    }
+    textarea{min-height: 92px; resize: vertical}
+
+    .consent{display:flex;align-items:flex-start;gap:10px;color: rgba(238,240,255,.78);font-size: 13px;line-height:1.55}
+    .consent input{width:18px;height:18px;margin-top: 2px;accent-color: var(--cyan)}
+    .fine{color: rgba(238,240,255,.62);font-size: 12px;line-height:1.55;margin-top: 6px}
+
+    .success{
+      display:none;
+      border-radius: 16px;
+      border:1px solid rgba(39,242,255,.22);
+      background: rgba(39,242,255,.08);
+      padding: 12px;
+      color: rgba(238,240,255,.92);
+      font-size: 14px;
+      line-height:1.6;
+    }
+    .success b{color: var(--gold2)}
+    .formBox.submitted .success{display:block}
+    .formBox.submitted form{display:none}
+
+    /* Printable sheet */
+    .printSheet{
+      border-radius: calc(var(--r) + 10px);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      margin-top: 14px;
+    }
+    .printHead{
+      padding: 14px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;align-items:center;justify-content:space-between;gap: 10px;flex-wrap:wrap;
+    }
+    .printHead .title{font-family:var(--font-display);font-weight:900;color: rgba(255,255,255,.92);font-size: 18px}
+    .printBody{padding: 14px;display:grid;gap: 10px}
+    .printGrid{display:grid;grid-template-columns: 1fr 1fr;gap: 10px}
+    .printNote{font-family:var(--font-mono);letter-spacing:.10em;text-transform:uppercase;font-size: 11px;color: rgba(255,255,255,.66)}
+
+    /* Sticky lead bar */
+    .stickyBar{
+      position:fixed;left: 12px;right: 12px;bottom: 12px;
+      z-index: 1200;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 30px 90px rgba(0,0,0,.55);
+      padding: 10px 12px;
+      display:flex;align-items:center;justify-content:space-between;gap: 10px;
+      transform: translateY(110%);
+      transition: transform .28s var(--ease-expo);
+    }
+    .stickyBar.on{transform: translateY(0)}
+    .stickyBar .text{display:flex;flex-direction:column;gap:3px;min-width: 0}
+    .stickyBar .text .t1{
+      font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;
+      font-size: 11px;color: rgba(255,255,255,.72);
+      white-space:nowrap;overflow:hidden;text-overflow: ellipsis;
+    }
+    .stickyBar .text .t2{
+      font-size: 13px;color: rgba(238,240,255,.84);
+      white-space:nowrap;overflow:hidden;text-overflow: ellipsis;
+    }
+
+    /* Modal */
+    .modalOverlay{
+      position:fixed;inset:0;z-index:1300;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 14px;
+    }
+    .modalOverlay.on{display:flex}
+    .modal{
+      width: min(860px, 96vw);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(620px 420px at 18% 24%, rgba(162,67,255,.18), transparent 60%),
+        radial-gradient(620px 420px at 78% 24%, rgba(39,242,255,.12), transparent 62%),
+        rgba(0,0,0,.70);
+      box-shadow: 0 40px 120px rgba(0,0,0,.70);
+      overflow:hidden;
+    }
+    .modalHead{
+      padding: 14px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;align-items:center;justify-content:space-between;gap: 10px;
+    }
+    .modalHead .mTitle{font-family:var(--font-display);font-weight:900;color: rgba(255,255,255,.92);font-size: 18px}
+    .modalClose{
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: rgba(238,240,255,.92);
+      padding: 10px 12px;
+      font-family:var(--font-mono);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 12px;
+      cursor:pointer;
+    }
+    .modalBody{padding: 14px}
+
+    /* Footer */
+    footer{padding: 26px 0 34px;color: rgba(255,255,255,.62);text-align:center;font-size: 13px}
+    footer .line{max-width: var(--max);margin: 14px auto 10px;height: 1px;background: rgba(255,255,255,.10)}
+    footer .fmono{font-family: var(--font-mono);letter-spacing:.12em;text-transform:uppercase;font-size: 12px;color: rgba(255,255,255,.70)}
+
+    /* Print */
+    @media print{
+      body{background:#fff;color:#000}
+      .nav,.progress,.cinematic-opener,.stickyBar,.grain,.scanlines,.watermark,.modalOverlay{display:none!important}
+      main{padding-top:0}
+      .card,.hero-shell,.stats,.printSheet{box-shadow:none!important;border:1px solid #ddd!important;background:#fff!important}
+      input,select,textarea{border:1px solid #aaa!important;background:#fff!important;color:#000!important}
+      a{color:#000!important}
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .nav-links{display:none}
+      .menuBtn{display:inline-flex}
+      .hero-inner{grid-template-columns: 1fr}
+      .grid{grid-template-columns: 1fr}
+      .toc{position:relative;top:auto}
+      .stats-inner{grid-template-columns: repeat(2, minmax(0,1fr))}
+      .feature-grid{grid-template-columns: 1fr}
+      .formInner{grid-template-columns: 1fr}
+      .printGrid{grid-template-columns: 1fr}
+      .sol-logo{width:52px}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .ring,.sol-logo,.progress-fill{animation:none!important}
+      .js .reveal{transition:none!important}
+    }
+
+    .hide{display:none!important}
+    .muted{color: rgba(238,240,255,.66)}
+  </style>
+</head>
+
+<body>
+  <img class="watermark" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="" aria-hidden="true" />
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Cinematic opener (safe: JS shows + JS removes) -->
+  <div class="cinematic-opener" id="opener" aria-hidden="true">
+    <div class="opener-content">
+      <p class="opener-text">A Skyes Over London LC Publication</p>
+      <h1 class="opener-title">KidMed<br/>Passport</h1>
+      <p class="opener-subtitle">
+        A parent-grade system for fast medical recall: organize records, then export a clean PDF when it matters.
+        Grab the <b style="color:var(--gold2)">free Pediatric Emergency Readiness Kit</b> below.
+      </p>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="KidMed Passport Lead Magnet">
+          <img class="sol-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC logo" />
+          <div class="brand-name">
+            <div class="top">KidMed Passport</div>
+            <div class="sub">Editorial • Lead Magnet</div>
+          </div>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#problem">Problem</a>
+          <a href="#solution">Solution</a>
+          <a href="#kit">Free Kit</a>
+          <a href="#how">How It Works</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <button class="menuBtn" id="menuBtn" type="button" aria-expanded="false">☰ Menu</button>
+        <a class="nav-cta" href="#get-kit" id="navGetKit">Get Free Kit</a>
+      </div>
+    </div>
+  </header>
+  <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-shell reveal">
+          <div class="hero-inner">
+            <div>
+              <div class="kicker">Pediatric emergency readiness • PDF export • caregiver handoffs</div>
+              <h1 class="headline">Your child’s medical info<br/>shouldn’t live in your memory.</h1>
+              <p class="subhead">
+                In the moment—urgent care, school enrollment, travel, a new babysitter—you don’t want to “remember.”
+                You want a clean, printable record. KidMed Passport is built around that reality: child profiles, tabs for
+                <b>Overview / Medical / Vaccines / Notes</b>, plus a one-click <b>Export PDF</b> flow and an <b>Emergency Mode</b> mindset.
+              </p>
+
+              <div class="byline">
+                <span class="pill"><span>Platform</span> <b>KidMed Passport</b></span>
+                <span class="pill"><span>Kit</span> <b>Free Download</b></span>
+                <span class="pill"><span>Use</span> <b>School • Travel • ER</b></span>
+              </div>
+
+              <div class="hero-actions">
+                <a class="btn gold" href="https://kidmedpassport.netlify.app/" target="_blank" rel="noopener">Launch KidMed Passport</a>
+                <a class="btn" href="#get-kit">Get the Free Kit</a>
+                <button class="btn" type="button" id="openModalBtn">Quick Download Popup</button>
+              </div>
+
+              <div class="callout" style="margin-top:14px">
+                <div class="tag"><i></i> Important</div>
+                <p style="margin:0">
+                  This page is organizational support, not medical advice. In a medical emergency, call your local emergency number.
+                </p>
+              </div>
+            </div>
+
+            <div class="hero-visual" aria-label="KidMed Passport preview">
+              <div class="ring" aria-hidden="true"></div>
+              <div class="mini-ui">
+                <div class="mini-title">
+                  <span>Workflow Snapshot</span>
+                  <span class="badge">Emergency Mode • PDF Export</span>
+                </div>
+
+                <div class="mini-card" role="img" aria-label="A simplified preview of KidMed Passport sections">
+                  <div class="row">
+                    <span class="mini-chip">Active Child</span>
+                    <span class="mini-pill">Add Kid</span>
+                  </div>
+                  <div class="row">
+                    <span class="mini-chip">Tabs</span>
+                    <span class="mini-pill">Overview</span>
+                    <span class="mini-pill">Medical</span>
+                    <span class="mini-pill">Vaccines</span>
+                    <span class="mini-pill">Notes</span>
+                  </div>
+                  <div class="row">
+                    <span class="mini-chip">Outputs</span>
+                    <span class="mini-pill">Export PDF</span>
+                    <span class="mini-pill">Print</span>
+                  </div>
+                  <div class="row">
+                    <span class="mini-chip">Privacy</span>
+                    <span class="mini-pill">Reset Local Data</span>
+                  </div>
+                </div>
+
+                <div class="mini-title" style="margin-top:6px">
+                  <span>Lead Magnet</span>
+                  <span class="badge">Printable 1-Pager Included</span>
+                </div>
+
+                <a class="btn gold" href="#get-kit">Get Kit + Print Sheet</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats reveal" aria-label="Conceptual metrics (non-performance claims)">
+          <div class="stats-inner">
+            <div class="stat">
+              <div class="num">4</div>
+              <div class="lab">Record Tabs<br/>Overview • Medical • Vaccines • Notes</div>
+            </div>
+            <div class="stat">
+              <div class="num">1</div>
+              <div class="lab">Export Move<br/>Compile to a single PDF</div>
+            </div>
+            <div class="stat">
+              <div class="num">0</div>
+              <div class="lab">Cloud Accounts<br/>No account required to start</div>
+            </div>
+            <div class="stat">
+              <div class="num">FAST</div>
+              <div class="lab">Emergency Mindset<br/>Get to facts quickly</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Main content grid -->
+    <section>
+      <div class="wrap">
+        <div class="grid">
+          <div class="card reveal">
+            <div class="card-inner">
+              <div class="kicker">Editorial</div>
+              <h2 style="margin-top:10px">A weird truth: emergencies punish “good intentions.”</h2>
+              <p class="lead">
+                You can be the most attentive parent on Earth and still freeze when the question is fast:
+                <b>allergies?</b> <b>meds?</b> <b>last shot?</b> <b>dosage?</b> <b>prior reactions?</b> <b>provider contact?</b>
+                The problem isn’t love. It’s retrieval.
+              </p>
+
+              <div class="rule"></div>
+
+              <article id="post">
+                <section id="problem">
+                  <h2>1) The problem: medical facts get scattered</h2>
+                  <p>
+                    Most families run pediatric information like a distributed system with no source of truth:
+                    one note on a phone, one email thread, a photo of a vaccine card, a portal login you forgot, a school form you filled last year,
+                    and a “we’ll remember that” conversation that never got written down.
+                  </p>
+                  <blockquote>
+                    <p>When time gets tight, the system you actually have is the system you fall back to.</p>
+                    <cite>Parent reality</cite>
+                  </blockquote>
+                  <p>
+                    KidMed Passport exists for one operational reason: convert “I think” into “Here it is.”
+                    And do it in a format that schools, caregivers, and urgent care can use: <b>a clean PDF</b>.
+                  </p>
+                </section>
+
+                <div class="callout">
+                  <div class="tag"><i></i> The lead magnet logic</div>
+                  <p style="margin:0">
+                    This page pulls traffic <b>and</b> converts: you get a high-signal kit (printable + scripts),
+                    then route straight into the tool: <b>KidMed Passport</b>.
+                  </p>
+                </div>
+
+                <section id="solution">
+                  <h2>2) The solution: a simple record system that exports clean</h2>
+                  <p>
+                    KidMed Passport is structured like your brain wants it structured under stress:
+                    <b>Overview</b> for identity + contacts, <b>Medical</b> for conditions + allergies + medications,
+                    <b>Vaccines</b> for immunization timeline, and <b>Notes</b> for caregiver-ready language.
+                  </p>
+                  <p>
+                    When you need it, you don’t “share a folder.” You hit <b>Export PDF</b>, select the child records, and print.
+                    That’s the point: output designed for real-world constraints.
+                  </p>
+
+                  <div class="feature-grid" aria-label="Key features">
+                    <div class="feature">
+                      <h4>Emergency Mode mindset</h4>
+                      <p>Fast access to essentials when stress makes your memory unreliable.</p>
+                    </div>
+                    <div class="feature">
+                      <h4>Child profiles</h4>
+                      <p>Separate records per child so details don’t cross-wire under pressure.</p>
+                    </div>
+                    <div class="feature">
+                      <h4>Vaccine visibility</h4>
+                      <p>A place to track immunizations so school forms stop being a scavenger hunt.</p>
+                    </div>
+                    <div class="feature">
+                      <h4>Export a clean PDF</h4>
+                      <p>Printable output for school, travel, urgent care, babysitters, and handoffs.</p>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="kit">
+                  <h2>3) The free Pediatric Emergency Readiness Kit</h2>
+                  <p class="lead">
+                    Built for one moment: someone asks for critical info and you answer without guessing.
+                  </p>
+
+                  <div class="callout">
+                    <div class="tag"><i></i> What you get</div>
+                    <ul style="margin:0 0 0 18px">
+                      <li><b>Printable 1-Page Emergency Sheet</b> (fill + print on this page)</li>
+                      <li><b>Caregiver Handoff Script</b> (what to say + what to include)</li>
+                      <li><b>Medication + Allergy Capture Prompts</b> (so you don’t miss key fields)</li>
+                      <li><b>School / Daycare Immunization Quick-Check</b></li>
+                      <li><b>Travel + Overnight Checklist</b></li>
+                    </ul>
+                  </div>
+
+                  <p>
+                    The kit is intentionally “boring” in the right way: checklists, scripts, and a printable sheet.
+                    Boring is what you want in an emergency. Reliable beats clever.
+                  </p>
+                </section>
+
+                <section id="get-kit">
+                  <h2>4) Get the kit (email capture)</h2>
+
+                  <div class="formBox" id="leadBox">
+                    <div class="formInner">
+                      <div>
+                        <div class="kicker">Free Download</div>
+                        <h3>Get the kit + the printable sheet</h3>
+                        <p>
+                          Drop your email and we’ll send the kit link + practical updates when KidMed Passport ships new export layouts.
+                        </p>
+                        <p class="fine">
+                          Tip: If you’re a clinic, school, or caregiver agency, choose “Clinic/Org” so it routes correctly.
+                        </p>
+                      </div>
+
+                      <!-- Netlify Form -->
+                      <div>
+                        <div class="success" id="successMsg" role="status" aria-live="polite">
+                          ✅ You’re in. <b>Next:</b> print your emergency sheet and open KidMed Passport to build child profiles.
+                          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">
+                            <a class="btn gold" href="https://kidmedpassport.netlify.app/" target="_blank" rel="noopener">Open KidMed Passport</a>
+                            <button class="btn" type="button" id="printSheetBtn2">Print Emergency Sheet</button>
+                            <button class="btn" type="button" id="copyShareBtn">Copy Share Link</button>
+                          </div>
+                        </div>
+
+                        <form name="kidmed-lead-magnet" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="leadForm">
+                          <input type="hidden" name="form-name" value="kidmed-lead-magnet" />
+                          <p class="hide">
+                            <label>Don’t fill this out: <input name="bot-field" /></label>
+                          </p>
+
+                          <div class="row2">
+                            <div>
+                              <label for="firstName">First Name</label>
+                              <input id="firstName" name="firstName" type="text" placeholder="Jordan" autocomplete="given-name" required />
+                            </div>
+                            <div>
+                              <label for="zip">ZIP (optional)</label>
+                              <input id="zip" name="zip" type="text" placeholder="85003" autocomplete="postal-code" inputmode="numeric" />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" placeholder="you@domain.com" autocomplete="email" required />
+                          </div>
+
+                          <div class="row2">
+                            <div>
+                              <label for="role">I’m a…</label>
+                              <select id="role" name="role" required>
+                                <option value="" selected disabled>Select one</option>
+                                <option>Parent/Guardian</option>
+                                <option>Caregiver / Babysitter</option>
+                                <option>School / Daycare Staff</option>
+                                <option>Clinic / Org</option>
+                                <option>Other</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label for="ageGroup">Child age group (optional)</label>
+                              <select id="ageGroup" name="ageGroup">
+                                <option value="" selected>Prefer not to say</option>
+                                <option>0–2</option>
+                                <option>3–5</option>
+                                <option>6–10</option>
+                                <option>11–13</option>
+                                <option>14–17</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label for="note">What do you want to organize first? (optional)</label>
+                            <textarea id="note" name="note" placeholder="Allergies + meds, vaccines for school, travel packet, caregiver handoff…"></textarea>
+                          </div>
+
+                          <div class="consent">
+                            <input id="consent" name="consent" type="checkbox" value="yes" required />
+                            <div>
+                              <b style="color:var(--gold2)">Consent.</b> Send me the kit link + practical updates about KidMed Passport.
+                              <div class="fine">Unsubscribe anytime. We don’t sell your info.</div>
+                            </div>
+                          </div>
+
+                          <input type="hidden" name="page" id="fieldPage" value="" />
+                          <input type="hidden" name="referrer" id="fieldReferrer" value="" />
+                          <input type="hidden" name="utm" id="fieldUtm" value="" />
+
+                          <button class="btn gold" type="submit" id="submitBtn">Send Me The Kit</button>
+                          <div class="fine">After you submit: print your emergency sheet and open KidMed Passport.</div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="printSheet" id="print-sheet">
+                    <div class="printHead">
+                      <div class="title">Printable 1-Page Emergency Sheet</div>
+                      <div style="display:flex;flex-wrap:wrap;gap:10px">
+                        <button class="btn" type="button" id="printSheetBtn">Print Sheet</button>
+                        <button class="btn" type="button" id="clearSheetBtn">Clear</button>
+                      </div>
+                    </div>
+                    <div class="printBody">
+                      <div class="printNote">Fill what you can. Print. Put one in the glove box, school binder, and travel bag.</div>
+
+                      <div class="printGrid">
+                        <div>
+                          <label for="ps_child">Child Name</label>
+                          <input id="ps_child" type="text" placeholder="Child full name" />
+                        </div>
+                        <div>
+                          <label for="ps_dob">Date of Birth</label>
+                          <input id="ps_dob" type="text" placeholder="MM/DD/YYYY" />
+                        </div>
+                      </div>
+
+                      <div class="printGrid">
+                        <div>
+                          <label for="ps_guardian">Parent/Guardian</label>
+                          <input id="ps_guardian" type="text" placeholder="Name + relationship" />
+                        </div>
+                        <div>
+                          <label for="ps_phone">Primary Phone</label>
+                          <input id="ps_phone" type="text" placeholder="(###) ###-####" />
+                        </div>
+                      </div>
+
+                      <div class="printGrid">
+                        <div>
+                          <label for="ps_allergies">Allergies</label>
+                          <input id="ps_allergies" type="text" placeholder="Food / medication / environmental" />
+                        </div>
+                        <div>
+                          <label for="ps_conditions">Conditions</label>
+                          <input id="ps_conditions" type="text" placeholder="Asthma, diabetes, seizure history…" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label for="ps_meds">Medications (name + dose + schedule)</label>
+                        <textarea id="ps_meds" placeholder="Example: Albuterol inhaler — 2 puffs as needed…"></textarea>
+                      </div>
+
+                      <div class="printGrid">
+                        <div>
+                          <label for="ps_pcp">Primary Care Provider</label>
+                          <input id="ps_pcp" type="text" placeholder="Clinic / provider name" />
+                        </div>
+                        <div>
+                          <label for="ps_pcp_phone">Provider Phone</label>
+                          <input id="ps_pcp_phone" type="text" placeholder="Phone number" />
+                        </div>
+                      </div>
+
+                      <div class="printGrid">
+                        <div>
+                          <label for="ps_insurance">Insurance</label>
+                          <input id="ps_insurance" type="text" placeholder="Carrier + member ID" />
+                        </div>
+                        <div>
+                          <label for="ps_emergency_contact">Emergency Contact</label>
+                          <input id="ps_emergency_contact" type="text" placeholder="Name + phone" />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label for="ps_notes">Special Notes (triggers, sensory needs, prior reactions, preferred hospital)</label>
+                        <textarea id="ps_notes" placeholder="Short, practical notes for caregivers and clinicians."></textarea>
+                      </div>
+
+                      <div class="callout" style="margin:0">
+                        <div class="tag"><i></i> Next step</div>
+                        <p style="margin:0">
+                          After printing: build your full record inside <b>KidMed Passport</b> and use <b>Export PDF</b> for school/travel packets.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="how">
+                  <h2>5) How to use KidMed Passport (30-second onboarding)</h2>
+                  <p class="lead">
+                    Start small: create one child profile, fill essentials, export one PDF.
+                  </p>
+                  <div class="callout">
+                    <div class="tag"><i></i> 5-step flow</div>
+                    <ul style="margin:0 0 0 18px">
+                      <li>Open KidMed Passport and click <b>Add Kid</b>.</li>
+                      <li>Fill <b>Overview</b> (identity + guardian contacts).</li>
+                      <li>Fill <b>Medical</b> (allergies, conditions, meds).</li>
+                      <li>Fill <b>Vaccines</b> (for school forms + travel).</li>
+                      <li>Use <b>Export PDF</b> to print a clean packet.</li>
+                    </ul>
+                  </div>
+                </section>
+
+                <section id="privacy">
+                  <h2>6) Privacy posture (simple and practical)</h2>
+                  <p>
+                    KidMed Passport is built with a local-first vibe: start without an account, keep control, and reset local data when needed.
+                  </p>
+                  <div class="feature-grid">
+                    <div class="feature">
+                      <h4>Start immediately</h4>
+                      <p>No signup gate to begin organizing.</p>
+                    </div>
+                    <div class="feature">
+                      <h4>Reset capability</h4>
+                      <p>Clear local data when it’s time to wipe a device.</p>
+                    </div>
+                    <div class="feature">
+                      <h4>Print is durable</h4>
+                      <p>Paper and PDFs work without Wi-Fi.</p>
+                    </div>
+                    <div class="feature">
+                      <h4>Less guessing</h4>
+                      <p>Clear records reduce chaotic conversations.</p>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="faq">
+                  <h2>7) FAQ</h2>
+                  <p><b>Does this replace a patient portal?</b><br/>
+                    No. This is for fast recall + printable handoffs.
+                  </p>
+                  <p><b>What should I put in Emergency Mode?</b><br/>
+                    Allergies, conditions, medications with doses, guardian contacts, provider contact.
+                  </p>
+                  <p><b>When should I export a PDF?</b><br/>
+                    Anytime you’re crossing a boundary: school, travel, new caregiver, specialist intake.
+                  </p>
+                </section>
+
+                <div class="rule"></div>
+
+                <section id="closing">
+                  <h2>8) Closing: make your “parent brain” a system</h2>
+                  <p>
+                    Parenting already runs at high cognitive load. A small system buys you calm:
+                    one place to store facts, and an output that travels across real-world constraints.
+                  </p>
+                  <div class="callout">
+                    <div class="tag"><i></i> Do this today</div>
+                    <ul style="margin:0 0 0 18px">
+                      <li>Print the 1-page sheet.</li>
+                      <li>Build one child record in KidMed Passport.</li>
+                      <li>Export one PDF and store it somewhere you can find it.</li>
+                    </ul>
+                  </div>
+                </section>
+              </article>
+            </div>
+          </div>
+
+          <aside class="toc card reveal" id="tocCard">
+            <div class="card-inner">
+              <h3>On This Page</h3>
+              <div id="toc"></div>
+
+              <div class="rule"></div>
+
+              <h3>Quick Launch</h3>
+              <a href="https://kidmedpassport.netlify.app/" target="_blank" rel="noopener">Launch KidMed Passport</a>
+              <a href="#get-kit">Get Free Kit</a>
+              <a href="#print-sheet">Printable Emergency Sheet</a>
+
+              <div class="rule"></div>
+
+              <h3>Share</h3>
+              <a href="#" id="shareTwitter">Share on X</a>
+              <a href="#" id="shareEmail">Share via Email</a>
+              <a href="#" id="shareCopy">Copy Link</a>
+
+              <div class="rule"></div>
+
+              <div class="callout" style="margin:0">
+                <div class="tag"><i></i> Operator note</div>
+                <p style="margin:0">A good parent system is one you can run on a bad day.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="line"></div>
+        <div class="fmono">SKYES OVER LONDON LC · SOLEnterprises ecosystem</div>
+        <div style="margin-top:10px">
+          SkyesOverLondonLC@solenterprises.org · 986-210-7040
+        </div>
+        <div style="margin-top:10px; color: rgba(255,255,255,.52)">
+          KidMed Passport is an organizational tool. Not medical advice. In emergencies, contact local emergency services.
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Sticky lead bar -->
+  <div class="stickyBar" id="stickyBar" role="region" aria-label="Sticky lead capture">
+    <div class="text">
+      <div class="t1">Free Pediatric Emergency Readiness Kit</div>
+      <div class="t2">Printable 1-pager + caregiver scripts + vaccine quick-check</div>
+    </div>
+    <a class="btn gold" href="#get-kit">Get Kit</a>
+  </div>
+
+  <!-- Modal -->
+  <div class="modalOverlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Get the free kit">
+      <div class="modalHead">
+        <div class="mTitle">Get the Free Kit (fast)</div>
+        <button class="modalClose" id="modalClose" type="button">Close</button>
+      </div>
+      <div class="modalBody">
+        <div class="callout" style="margin-top:0">
+          <div class="tag"><i></i> Instant value</div>
+          <p style="margin:0">
+            Submit once. Then print your emergency sheet and open KidMed Passport to build child profiles + export PDF packets.
+          </p>
+        </div>
+
+        <div class="formBox" id="modalLeadBox" style="margin-top:12px">
+          <div class="formInner">
+            <div>
+              <div class="kicker">Popup Capture</div>
+              <h3>Send me the kit link</h3>
+              <p>Same kit. Same promise: useful updates only.</p>
+              <p class="fine">Select Clinic/Org if you’re onboarding families at scale.</p>
+            </div>
+
+            <div>
+              <div class="success" id="modalSuccess" role="status" aria-live="polite">
+                ✅ Done. <b>Next:</b>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">
+                  <a class="btn gold" href="https://kidmedpassport.netlify.app/" target="_blank" rel="noopener">Open KidMed Passport</a>
+                  <a class="btn" href="#print-sheet" id="modalGoPrint">Print Emergency Sheet</a>
+                  <button class="btn" type="button" id="modalCopyShareBtn">Copy Share Link</button>
+                </div>
+              </div>
+
+              <form name="kidmed-lead-magnet-modal" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="modalLeadForm">
+                <input type="hidden" name="form-name" value="kidmed-lead-magnet-modal" />
+                <p class="hide">
+                  <label>Don’t fill this out: <input name="bot-field" /></label>
+                </p>
+
+                <div class="row2">
+                  <div>
+                    <label for="m_firstName">First Name</label>
+                    <input id="m_firstName" name="firstName" type="text" placeholder="Jordan" autocomplete="given-name" required />
+                  </div>
+                  <div>
+                    <label for="m_role">I’m a…</label>
+                    <select id="m_role" name="role" required>
+                      <option value="" selected disabled>Select one</option>
+                      <option>Parent/Guardian</option>
+                      <option>Caregiver / Babysitter</option>
+                      <option>School / Daycare Staff</option>
+                      <option>Clinic / Org</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="m_email">Email</label>
+                  <input id="m_email" name="email" type="email" placeholder="you@domain.com" autocomplete="email" required />
+                </div>
+
+                <div class="consent">
+                  <input id="m_consent" name="consent" type="checkbox" value="yes" required />
+                  <div>
+                    <b style="color:var(--gold2)">Consent.</b> Send me the kit link + practical updates.
+                    <div class="fine">Unsubscribe anytime. No selling info.</div>
+                  </div>
+                </div>
+
+                <input type="hidden" name="page" id="m_fieldPage" value="" />
+                <input type="hidden" name="referrer" id="m_fieldReferrer" value="" />
+                <input type="hidden" name="utm" id="m_fieldUtm" value="" />
+
+                <button class="btn gold" type="submit" id="m_submitBtn">Send Kit Link</button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const $ = (q, el=document) => el.querySelector(q);
+      const $$ = (q, el=document) => Array.from(el.querySelectorAll(q));
+
+      // Remove opener reliably (fixes "blank page" issues)
+      const opener = $("#opener");
+      if (opener){
+        // show for a short moment; then hard-remove
+        setTimeout(() => {
+          opener.style.opacity = "0";
+          opener.style.transition = "opacity .35s ease";
+          setTimeout(() => opener.remove(), 420);
+        }, 2900);
+      }
+
+      // Nav scroll effect
+      const nav = $("#nav");
+      const onNavScroll = () => {
+        if (window.scrollY > 30) nav.classList.add("scrolled");
+        else nav.classList.remove("scrolled");
+      };
+      window.addEventListener("scroll", onNavScroll, {passive:true});
+      onNavScroll();
+
+      // Progress bar
+      const bar = $("#bar");
+      const onProgress = () => {
+        const h = document.documentElement;
+        const scrollTop = h.scrollTop || document.body.scrollTop;
+        const height = (h.scrollHeight - h.clientHeight) || 1;
+        const pct = Math.min(100, Math.max(0, (scrollTop / height) * 100));
+        if (bar) bar.style.width = pct.toFixed(2) + "%";
+      };
+      window.addEventListener("scroll", onProgress, {passive:true});
+      onProgress();
+
+      // Reveal on scroll
+      const reveals = $$(".reveal");
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if (e.isIntersecting){
+            e.target.classList.add("on");
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.10 });
+      reveals.forEach(el => io.observe(el));
+
+      // Build TOC
+      const post = $("#post");
+      const toc = $("#toc");
+      const tocLinks = [];
+      if (toc && post){
+        const heads = $$("section[id] > h2", post);
+        heads.forEach((h) => {
+          const sec = h.parentElement;
+          const id = sec.getAttribute("id");
+          if (!id) return;
+          const a = document.createElement("a");
+          a.href = "#" + id;
+          a.textContent = h.textContent.trim();
+          toc.appendChild(a);
+          tocLinks.push(a);
+        });
+      }
+      const sections = $$("#post section[id]");
+      const activeMap = new Map(tocLinks.map(a => [a.getAttribute("href").slice(1), a]));
+      const aObserver = new IntersectionObserver((entries)=>{
+        const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+        if (!visible) return;
+        const id = visible.target.id;
+        tocLinks.forEach(a => a.classList.remove("active"));
+        const link = activeMap.get(id);
+        if (link) link.classList.add("active");
+      }, { threshold: [0.25, 0.6] });
+      sections.forEach(s => aObserver.observe(s));
+
+      // Sticky bar
+      const stickyBar = $("#stickyBar");
+      const stickyToggle = () => {
+        if (!stickyBar) return;
+        if (window.scrollY > 700) stickyBar.classList.add("on");
+        else stickyBar.classList.remove("on");
+      };
+      window.addEventListener("scroll", stickyToggle, {passive:true});
+      stickyToggle();
+
+      // Share
+      const pageUrl = window.location.href.split("#")[0];
+      const shareText = encodeURIComponent("KidMed Passport — Free Pediatric Emergency Readiness Kit (printable + PDF export)");
+      const shareUrl = encodeURIComponent(pageUrl);
+      const shareTwitter = $("#shareTwitter");
+      const shareEmail = $("#shareEmail");
+      const shareCopy = $("#shareCopy");
+      if (shareTwitter) shareTwitter.href = "https://twitter.com/intent/tweet?text=" + shareText + "&url=" + shareUrl;
+      if (shareEmail) shareEmail.href = "mailto:?subject=" + shareText + "&body=" + shareText + "%0A%0A" + shareUrl;
+
+      // Toast
+      let toastTimer = null;
+      const toast = (msg) => {
+        let el = $("#toast");
+        if (!el){
+          el = document.createElement("div");
+          el.id = "toast";
+          el.style.position = "fixed";
+          el.style.left = "50%";
+          el.style.bottom = "84px";
+          el.style.transform = "translateX(-50%)";
+          el.style.zIndex = "2000";
+          el.style.padding = "10px 12px";
+          el.style.borderRadius = "14px";
+          el.style.border = "1px solid rgba(255,255,255,.14)";
+          el.style.background = "rgba(0,0,0,.60)";
+          el.style.backdropFilter = "blur(14px)";
+          el.style.webkitBackdropFilter = "blur(14px)";
+          el.style.boxShadow = "0 30px 90px rgba(0,0,0,.55)";
+          el.style.color = "rgba(238,240,255,.92)";
+          el.style.fontFamily = "var(--font-mono)";
+          el.style.letterSpacing = ".10em";
+          el.style.textTransform = "uppercase";
+          el.style.fontSize = "12px";
+          el.style.opacity = "0";
+          el.style.transition = "opacity .18s ease, transform .18s ease";
+          document.body.appendChild(el);
+        }
+        el.textContent = msg;
+        el.style.opacity = "1";
+        el.style.transform = "translateX(-50%) translateY(0)";
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(()=>{
+          el.style.opacity = "0";
+          el.style.transform = "translateX(-50%) translateY(6px)";
+        }, 1600);
+      };
+
+      const copyLink = async () => {
+        try{
+          await navigator.clipboard.writeText(pageUrl);
+          toast("Copied link ✅");
+        }catch(e){
+          prompt("Copy link:", pageUrl);
+        }
+      };
+      if (shareCopy) shareCopy.addEventListener("click", (e)=>{ e.preventDefault(); copyLink(); });
+      const copyShareBtn = $("#copyShareBtn");
+      const modalCopyShareBtn = $("#modalCopyShareBtn");
+      if (copyShareBtn) copyShareBtn.addEventListener("click", copyLink);
+      if (modalCopyShareBtn) modalCopyShareBtn.addEventListener("click", copyLink);
+
+      // Print + clear sheet
+      const printSheet = () => window.print();
+      const printSheetBtn = $("#printSheetBtn");
+      const printSheetBtn2 = $("#printSheetBtn2");
+      if (printSheetBtn) printSheetBtn.addEventListener("click", printSheet);
+      if (printSheetBtn2) printSheetBtn2.addEventListener("click", printSheet);
+
+      const clearSheetBtn = $("#clearSheetBtn");
+      if (clearSheetBtn){
+        clearSheetBtn.addEventListener("click", () => {
+          ["ps_child","ps_dob","ps_guardian","ps_phone","ps_allergies","ps_conditions","ps_meds","ps_pcp","ps_pcp_phone","ps_insurance","ps_emergency_contact","ps_notes"]
+            .map(id => $("#"+id))
+            .filter(Boolean)
+            .forEach(el => el.value = "");
+          toast("Cleared ✅");
+        });
+      }
+
+      // Attribution fields
+      const setAttribution = () => {
+        const params = new URLSearchParams(window.location.search);
+        const utm = ["utm_source","utm_medium","utm_campaign","utm_term","utm_content"]
+          .map(k => params.get(k) ? (k + "=" + params.get(k)) : null)
+          .filter(Boolean)
+          .join("&");
+
+        const page = window.location.href;
+        const ref = document.referrer || "";
+
+        const fp = $("#fieldPage"); const fr = $("#fieldReferrer"); const fu = $("#fieldUtm");
+        const mp = $("#m_fieldPage"); const mr = $("#m_fieldReferrer"); const mu = $("#m_fieldUtm");
+
+        if (fp) fp.value = page;
+        if (fr) fr.value = ref;
+        if (fu) fu.value = utm;
+
+        if (mp) mp.value = page;
+        if (mr) mr.value = ref;
+        if (mu) mu.value = utm;
+      };
+      setAttribution();
+
+      // Netlify AJAX submit
+      const encode = (data) => Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+
+      const leadBox = $("#leadBox");
+      const leadForm = $("#leadForm");
+      const submitBtn = $("#submitBtn");
+
+      const modalLeadBox = $("#modalLeadBox");
+      const modalLeadForm = $("#modalLeadForm");
+      const mSubmitBtn = $("#m_submitBtn");
+
+      const onSubmit = (form, box, btn) => {
+        if (!form || !box) return;
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const data = new FormData(form);
+          const obj = {};
+          data.forEach((v,k) => obj[k] = v);
+
+          if (btn){
+            btn.disabled = true;
+            btn.textContent = "Sending...";
+          }
+
+          try{
+            await fetch("/", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: encode(obj)
+            });
+            box.classList.add("submitted");
+            localStorage.setItem("kidmed_lead_submitted", "yes");
+            localStorage.setItem("kidmed_lead_submitted_at", String(Date.now()));
+            toast("Kit sent ✅");
+          }catch(err){
+            toast("Error — try again");
+          }finally{
+            if (btn){
+              btn.disabled = false;
+              btn.textContent = (btn.id === "m_submitBtn") ? "Send Kit Link" : "Send Me The Kit";
+            }
+          }
+        });
+      };
+
+      onSubmit(leadForm, leadBox, submitBtn);
+      onSubmit(modalLeadForm, modalLeadBox, mSubmitBtn);
+
+      // Modal
+      const overlay = $("#modalOverlay");
+      const modalClose = $("#modalClose");
+      const openModalBtn = $("#openModalBtn");
+      const closeModal = () => {
+        if (!overlay) return;
+        overlay.classList.remove("on");
+        overlay.setAttribute("aria-hidden","true");
+      };
+      const openModal = () => {
+        if (!overlay) return;
+        overlay.classList.add("on");
+        overlay.setAttribute("aria-hidden","false");
+      };
+      if (modalClose) modalClose.addEventListener("click", closeModal);
+      if (overlay) overlay.addEventListener("click", (e)=>{ if (e.target === overlay) closeModal(); });
+      if (openModalBtn) openModalBtn.addEventListener("click", openModal);
+
+      // Exit intent once/day (unless submitted)
+      const shouldExitModal = () => {
+        if (localStorage.getItem("kidmed_lead_submitted") === "yes") return false;
+        const last = parseInt(localStorage.getItem("kidmed_exit_modal_at") || "0", 10);
+        const day = 24 * 60 * 60 * 1000;
+        return (Date.now() - last) > day;
+      };
+      let exitArmed = true;
+      document.addEventListener("mouseout", (e) => {
+        if (!exitArmed) return;
+        if (e.clientY > 10) return;
+        if (!shouldExitModal()) return;
+        exitArmed = false;
+        localStorage.setItem("kidmed_exit_modal_at", String(Date.now()));
+        openModal();
+      });
+
+      // Menu
+      const menuBtn = $("#menuBtn");
+      let panel = null;
+      const closeMenu = () => {
+        if (!menuBtn) return;
+        menuBtn.setAttribute("aria-expanded","false");
+        if (panel){ panel.remove(); panel = null; }
+      };
+      const openMenu = () => {
+        if (!menuBtn) return;
+        menuBtn.setAttribute("aria-expanded","true");
+        panel = document.createElement("div");
+        panel.style.position = "fixed";
+        panel.style.inset = "86px 14px auto 14px";
+        panel.style.zIndex = "1200";
+        panel.style.borderRadius = "18px";
+        panel.style.border = "1px solid rgba(255,255,255,.14)";
+        panel.style.background = "rgba(0,0,0,.55)";
+        panel.style.backdropFilter = "blur(16px)";
+        panel.style.webkitBackdropFilter = "blur(16px)";
+        panel.style.boxShadow = "0 30px 90px rgba(0,0,0,.55)";
+        panel.style.padding = "12px";
+        panel.innerHTML = `
+          <a style="display:block;padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);margin:8px 0;background:rgba(255,255,255,.04);font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:rgba(255,255,255,.78)" href="#problem">Problem</a>
+          <a style="display:block;padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);margin:8px 0;background:rgba(255,255,255,.04);font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:rgba(255,255,255,.78)" href="#solution">Solution</a>
+          <a style="display:block;padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);margin:8px 0;background:rgba(255,255,255,.04);font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:rgba(255,255,255,.78)" href="#get-kit">Get Kit</a>
+          <a style="display:block;padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);margin:8px 0;background:rgba(255,255,255,.04);font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:rgba(255,255,255,.78)" href="#print-sheet">Printable Sheet</a>
+          <a style="display:block;padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);margin:8px 0;background:rgba(255,255,255,.04);font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;font-size:12px;color:rgba(255,255,255,.78)" href="https://kidmedpassport.netlify.app/" target="_blank" rel="noopener">Open App</a>
+          <button id="closeMenu" type="button" style="width:100%;margin-top:6px;padding:12px;border-radius:14px;border:1px solid rgba(39,242,255,.22);background:rgba(39,242,255,.06);color:rgba(238,240,255,.92);font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;font-size:12px;cursor:pointer">Close</button>
+        `;
+        document.body.appendChild(panel);
+        panel.querySelectorAll("a").forEach(a => a.addEventListener("click", closeMenu));
+        $("#closeMenu", panel).addEventListener("click", closeMenu);
+      };
+      if (menuBtn){
+        menuBtn.addEventListener("click", () => {
+          const expanded = menuBtn.getAttribute("aria-expanded") === "true";
+          if (expanded) closeMenu();
+          else openMenu();
+        });
+      }
+
+      // Smooth scroll + close menu
+      $$('a[href^="#"]').forEach(a=>{
+        a.addEventListener("click",(e)=>{
+          const href = a.getAttribute("href");
+          if (!href || href.length < 2) return;
+          const target = $(href);
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({behavior:"smooth", block:"start"});
+          closeMenu();
+        });
+      });
+
+      // Nav Get Kit smooth
+      const navGetKit = $("#navGetKit");
+      if (navGetKit){
+        navGetKit.addEventListener("click", (e)=>{
+          e.preventDefault();
+          const el = $("#get-kit");
+          if (el) el.scrollIntoView({behavior:"smooth", block:"start"});
+        });
+      }
+
+      // Close modal on ESC
+      window.addEventListener("keydown", (e)=>{ if (e.key === "Escape") { closeMenu(); closeModal(); } });
+    })();
+  </script>
+</body>
+</html>

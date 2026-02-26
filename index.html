@@ -186,6 +186,7 @@
   <a href="sitemap-visual.html">Site Map</a></div>
   <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">Third-party references included for historical context. No endorsement implied. © Skyes Over London LC / SOLEnterprises.</p>
 </footer>
+<a href="/admin-menu.html" class="floating-glow-neon" id="adminMenuFloatLink" style="display:block;">ADMIN MENU</a>
 
 <script src="js/three-bg.js"></script>
 <script src="js/main.js"></script>
@@ -280,6 +281,7 @@
     <div class="mega-nav-col">
       <div class="mega-nav-label">Navigate</div>
       <a href="index.html">Home</a>
+
       <a href="about.html">Founder</a>
       <a href="SkyeDocx/homepage.html">SkyeDocx</a>
       <a href="platforms.html">Platforms</a>
@@ -323,4 +325,42 @@
 </div>
   <script src="/js/partials.js"></script>
 </body>
+<script>
+// Secret triggers for admin menu
+let keysDown = {};
+let codeBuffer = "";
+let logoClicks = 0;
+const adminMenuUrl = "/admin-menu.html";
+function showAdminMenu() {
+  window.location.href = adminMenuUrl;
+}
+document.addEventListener("keydown", (e) => {
+  keysDown[e.key] = true;
+  if (keysDown["6"] && keysDown["7"]) {
+    codeBuffer += e.key;
+    if (codeBuffer.endsWith("444666")) {
+      showAdminMenu();
+      codeBuffer = "";
+    }
+  }
+});
+document.addEventListener("keyup", (e) => {
+  keysDown[e.key] = false;
+  if (!keysDown["6"] || !keysDown["7"]) codeBuffer = "";
+});
+const logoBtn = document.querySelector(".nav-logo");
+if (logoBtn) {
+  logoBtn.addEventListener("click", () => {
+    if (keysDown["6"] && keysDown["7"]) {
+      logoClicks++;
+      if (logoClicks >= 3) {
+        showAdminMenu();
+        logoClicks = 0;
+      }
+    } else {
+      logoClicks = 0;
+    }
+  });
+}
+</script>
 </html>

@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="canonical" href="https://skyesol.netlify.app/Services/pwa-conversion.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Conversion — SkyePWA Forge™ (Website-as-App)</title>
+  <meta name="description" content="SkyePWA Forge™: Website-as-App conversion engineered by Skyes Over London—installability, offline resilience, safe updates, device QA, and lifecycle AppCare. rate card included." />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SkyePWA Forge™ — Website-as-App Conversion">
+  <meta name="twitter:description" content="Installable, branded app experience (no app store required) with offline fallback, safe updates, device QA, and AppCare monthly support." />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SkyePWA Forge™ — Website-as-App Conversion">
+  <meta property="og:description" content="SkyePWA Forge™: PWA conversion with installability, resilience, update control, QA, and lifecycle support." />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <meta property="og:url" content="https://skyesol.netlify.app/Services/pwa-conversion.html">
+<meta name="theme-color" content="#05050a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SkyeSol">
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
+:root { --gold:#c9a84c;--gold-light:#e8d48b;--gold-dim:rgba(201,168,76,0.15);--dark:#0e0e1a;--darker:#07070f;--surface:#0c0c14;--surface-2:#111119;--surface-3:#181822;--text:#e8e6e1;--text-dim:#8a8880;--accent-fire:#e84c30;--accent-blue:#3a6fd8;--glow-gold:0 0 30px rgba(201,168,76,0.3),0 0 60px rgba(201,168,76,0.1);--glow-gold-strong:0 0 40px rgba(201,168,76,0.5),0 0 80px rgba(201,168,76,0.2);}*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}body{background:#07070f;color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}body.sol-intro-active #loader{opacity:0;pointer-events:none;}#loader{position:fixed;inset:0;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;font-family:'Fira Code','DM Sans',monospace;letter-spacing:1px;color:var(--gold);text-align:center;transition:opacity 1s ease;} .spinner{width:56px;height:56px;border:2px solid transparent;border-top-color:var(--gold);border-right-color:var(--accent-blue);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:18px;box-shadow:0 0 20px rgba(201,168,76,0.35);}#loading-text{text-transform:uppercase;font-size:13px;margin-bottom:8px;}#loading-sub{text-transform:uppercase;font-size:11px;color:rgba(232,232,232,0.55);letter-spacing:1.5px;}@keyframes spin{to{transform:rotate(360deg);}}
+#three-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9998;}@keyframes floatGlow{0%,100%{transform:translateY(0);filter:drop-shadow(0 0 18px rgba(201,168,76,0.5)) drop-shadow(0 0 40px rgba(201,168,76,0.15));}50%{transform:translateY(-10px);filter:drop-shadow(0 0 28px rgba(201,168,76,0.7)) drop-shadow(0 0 60px rgba(201,168,76,0.25));}}@keyframes floatGlowBlue{0%,100%{transform:translateY(0);filter:drop-shadow(0 0 18px rgba(58,111,216,0.5)) drop-shadow(0 0 40px rgba(58,111,216,0.15));}50%{transform:translateY(-10px);filter:drop-shadow(0 0 28px rgba(58,111,216,0.7)) drop-shadow(0 0 60px rgba(58,111,216,0.25));}}@keyframes floatGlowFire{0%,100%{transform:translateY(0);filter:drop-shadow(0 0 18px rgba(232,76,48,0.5)) drop-shadow(0 0 40px rgba(232,76,48,0.15));}50%{transform:translateY(-8px);filter:drop-shadow(0 0 28px rgba(232,76,48,0.7)) drop-shadow(0 0 60px rgba(232,76,48,0.25));}}@keyframes subtlePulse{0%,100%{opacity:1;}50%{opacity:.7;}}@keyframes fadeInUp{from{opacity:0;transform:translateY(50px);}to{opacity:1;transform:translateY(0);}}@keyframes fadeInRight{from{opacity:0;transform:translateX(60px);}to{opacity:1;transform:translateX(0);}}@keyframes borderGlow{0%,100%{border-color:rgba(201,168,76,0.15);}50%{border-color:rgba(201,168,76,0.45);}}@keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}@keyframes lineExpand{from{width:0;}to{width:100%;}}@keyframes glowPulseRing{0%,100%{box-shadow:0 0 20px rgba(201,168,76,0.1),inset 0 0 20px rgba(201,168,76,0.05);}50%{box-shadow:0 0 40px rgba(201,168,76,0.25),inset 0 0 40px rgba(201,168,76,0.1);}}.floating-glow{animation:floatGlow 4s ease-in-out infinite;}.floating-glow-blue{animation:floatGlowBlue 4.5s ease-in-out infinite;}.floating-glow-fire{animation:floatGlowFire 3.8s ease-in-out infinite;}.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);} .reveal.visible{opacity:1;transform:translateY(0);} .reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);} .reveal-left.visible{opacity:1;transform:translateX(0);} .reveal-right{opacity:0;transform:translateX(50px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);} .reveal-right.visible{opacity:1;transform:translateX(0);} .stagger-children .reveal:nth-child(1){transition-delay:0s;} .stagger-children .reveal:nth-child(2){transition-delay:.08s;} .stagger-children .reveal:nth-child(3){transition-delay:.14s;} .stagger-children .reveal:nth-child(4){transition-delay:.2s;} .stagger-children .reveal:nth-child(5){transition-delay:.26s;} .stagger-children .reveal:nth-child(6){transition-delay:.32s;} .stagger-children .reveal:nth-child(7){transition-delay:.38s;} .stagger-children .reveal:nth-child(8){transition-delay:.44s;} .stagger-children .reveal:nth-child(9){transition-delay:.5s;}
+.main-nav{position:fixed;top:0;left:0;right:0;z-index:9000;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,8,0.75);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,0.06);transition:background .4s;} .main-nav.scrolled{background:rgba(5,5,8,0.92);} .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;} .nav-logo img{height:34px;width:auto;} .nav-logo span{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:4px;color:var(--gold);} .nav-links{display:flex;gap:24px;align-items:center;} .nav-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .3s;padding:6px 0;position:relative;} .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s;} .nav-links a:hover{color:var(--gold);} .nav-links a:hover::after{width:100%;} .nav-links a.active{color:var(--gold);} .nav-links a.active::after{width:100%;} .nav-links>a[data-suite-app]{display:none;} .nav-toggle{display:none;background:none;border:none;color:var(--gold);font-size:22px;cursor:pointer;} .menu-btn{background:none;border:1px solid rgba(201,168,76,0.35);color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;padding:7px 18px;cursor:pointer;border-radius:4px;transition:background .2s;white-space:nowrap;} .menu-btn:hover{background:rgba(201,168,76,0.12);} .hero-wrapper{position:relative;min-height:100vh;overflow:hidden;padding-top:70px;} .hero-grid{position:relative;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;min-height:100vh;max-width:1400px;margin:0 auto;padding:80px 60px;z-index:2;} .hero-wrapper::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 10%,var(--gold) 50%,transparent 90%);animation:subtlePulse 3s ease-in-out infinite;z-index:10;} .hero-img-col{position:relative;display:flex;align-items:center;justify-content:center;} .hero-img-col .founder-hero-img{width:100%;max-width:440px;height:auto;border-radius:8px;animation:floatGlow 4s ease-in-out infinite;position:relative;z-index:3;} .hero-img-col::before{content:'';position:absolute;width:110%;height:110%;top:-5%;left:-5%;background:radial-gradient(circle at center,rgba(201,168,76,0.1) 0%,transparent 60%);border-radius:50%;filter:blur(50px);animation:subtlePulse 6s ease-in-out infinite;z-index:1;} .hero-img-col::after{content:'';position:absolute;width:80%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(201,168,76,0.06);top:50%;left:50%;transform:translate(-50%,-50%);animation:glowPulseRing 5s ease-in-out infinite;z-index:0;} .hero-txt-col{display:flex;flex-direction:column;justify-content:center;padding-right:50px;z-index:3;} .hero-company-logo{margin-bottom:32px;animation:floatGlow 4s ease-in-out infinite;text-align:center;} .hero-company-logo img{height:240px;width:auto;} .hero-tagline{font-family:'Bebas Neue',sans-serif;font-size:clamp(11px,1.4vw,14px);letter-spacing:7px;color:var(--gold);text-transform:uppercase;margin-bottom:18px;animation:fadeInRight 1s ease-out .3s both;display:inline-block;} .hero-tagline::after{content:'';display:block;height:1px;margin-top:10px;background:linear-gradient(90deg,var(--gold),transparent);animation:lineExpand 1.5s ease-out .8s both;} .hero-grid h1{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,72px);font-weight:700;line-height:1.05;color:var(--text);margin-bottom:20px;animation:fadeInRight 1s ease-out .6s both;} .hero-grid h1 span{display:block;background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:fadeInRight 1s ease-out .6s both,shimmer 4s ease-in-out infinite;} .hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.8vw,20px);font-style:italic;color:var(--text-dim);max-width:500px;margin-bottom:36px;animation:fadeInRight 1s ease-out .9s both;} .hero-cta-row{display:flex;gap:14px;flex-wrap:wrap;animation:fadeInRight 1s ease-out 1.1s both;} .hero-scroll-hint{position:absolute;bottom:35px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);animation:fadeInUp 1s ease-out 1.4s both;z-index:5;} .scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent);animation:subtlePulse 2s ease-in-out infinite;} .content-section{padding:100px 24px;max-width:1100px;margin:0 auto;position:relative;z-index:1;} .section-label{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;} .section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4.2vw,48px);font-weight:700;line-height:1.15;margin-bottom:18px;} .section-desc{font-size:15px;color:var(--text-dim);max-width:700px;margin-bottom:45px;line-height:1.85;} .divider{width:100%;max-width:1100px;margin:0 auto;height:1px;position:relative;z-index:1;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.25),transparent);} .card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;} .card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;} .card-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;} .platform-card{padding:34px 26px;background:var(--surface);border:1px solid rgba(201,168,76,0.04);border-radius:6px;position:relative;overflow:hidden;transition:all .4s;} .platform-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transform:scaleX(0);transform-origin:left;transition:transform .5s;} .platform-card:hover::before{transform:scaleX(1);} .platform-card:hover{border-color:rgba(201,168,76,0.15);transform:translateY(-6px);} .platform-card .card-icon{font-size:28px;margin-bottom:14px;} .platform-card h3{font-weight:700;font-size:17px;margin-bottom:4px;} .platform-card .card-type{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;} .platform-card p{font-size:13px;color:var(--text-dim);line-height:1.75;} .platform-card .card-link{display:inline-block;margin-top:16px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:all .3s;border-bottom:1px solid rgba(201,168,76,0.2);} .platform-card .card-link:hover{border-color:var(--gold);padding-left:6px;} .metric-card{text-align:center;padding:36px 18px;background:var(--surface);border:1px solid rgba(201,168,76,0.04);border-radius:4px;position:relative;overflow:hidden;transition:border-color .4s,transform .4s;} .metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s;} .metric-card:hover::before{opacity:1;} .metric-card:hover{border-color:rgba(201,168,76,0.2);transform:translateY(-6px);} .metric-number{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--gold);line-height:1;margin-bottom:8px;} .metric-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-dim);} .btn-gold{display:inline-flex;align-items:center;gap:10px;padding:13px 32px;background:linear-gradient(135deg,var(--gold),#b8943f);color:var(--dark);font-weight:600;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;border-radius:3px;transition:all .4s;position:relative;overflow:hidden;} .btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left .6s;} .btn-gold:hover::before{left:100%;} .btn-gold:hover{transform:translateY(-3px);box-shadow:var(--glow-gold-strong);} .btn-outline{display:inline-flex;align-items:center;gap:10px;padding:13px 32px;background:transparent;border:1px solid rgba(201,168,76,0.25);color:var(--gold);font-weight:500;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;border-radius:3px;transition:all .4s;} .btn-outline:hover{border-color:var(--gold);background:rgba(201,168,76,0.05);transform:translateY(-3px);} .glow-tile-purple{display:inline-block;background:linear-gradient(135deg,rgba(138,99,255,0.18) 0%,rgba(58,111,216,0.12) 100%);border-radius:12px;box-shadow:0 0 18px 6px rgba(138,99,255,0.22),0 0 32px 12px rgba(138,99,255,0.12);padding:14px 28px;margin:18px 0;color:#e8e6ff;font-size:1.08rem;font-weight:500;text-align:center;letter-spacing:.01em;border:1px solid rgba(138,99,255,0.18);animation:floatGlowBlue 4.5s ease-in-out infinite;}
+footer{text-align:center;padding:60px 24px 30px;border-top:1px solid rgba(201,168,76,0.05);position:relative;z-index:1;} footer .footer-logo{animation:floatGlow 4s ease-in-out infinite;margin-bottom:18px;} footer .footer-logo img{height:44px;width:auto;} footer p{font-size:12px;color:var(--text-dim);line-height:1.8;} footer a{color:var(--gold);text-decoration:none;} .footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:16px;} .footer-links a{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .3s;} .footer-links a:hover{color:var(--gold);} @media (max-width:900px){.nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(5,5,8,0.95);padding:20px 40px;gap:14px;border-bottom:1px solid rgba(201,168,76,0.08);} .nav-links.open{display:flex;} .nav-toggle{display:block;} .hero-grid{grid-template-columns:1fr;text-align:center;padding:100px 24px 80px;gap:40px;} .hero-img-col{order:1;} .hero-txt-col{order:2;padding-right:0;align-items:center;} .hero-subtitle{margin-left:auto;margin-right:auto;} .hero-cta-row{justify-content:center;} .card-grid-2,.card-grid-3,.card-grid-4{grid-template-columns:1fr;gap:14px;} }
+#sol-intro{position:fixed;inset:0;z-index:98000;overflow:hidden;font-family:"Didot","Bodoni MT","Times New Roman",serif;}#sol-intro canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;}#sol-intro .si-lightning{position:absolute;inset:0;background:#fff;opacity:0;z-index:5;pointer-events:none;mix-blend-mode:overlay;}#sol-intro .si-fog{position:absolute;width:200%;height:100%;top:0;left:-50%;z-index:8;opacity:.25;background:radial-gradient(circle at 20% 50%,rgba(15,25,40,.5) 0%,transparent 40%),radial-gradient(circle at 80% 60%,rgba(10,20,35,.4) 0%,transparent 50%);filter:blur(50px);animation:si-drift 25s cubic-bezier(.37,0,.63,1) infinite alternate;pointer-events:none;}#sol-intro .si-fog2{top:20%;opacity:.2;background:radial-gradient(circle at 50% 50%,rgba(30,45,60,.3) 0%,transparent 60%);animation:si-drift 30s cubic-bezier(.37,0,.63,1) infinite alternate-reverse;z-index:9;}#sol-intro .si-vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 35%,#000 130%);z-index:20;pointer-events:none;}#sol-intro .si-grain{position:absolute;inset:0;z-index:21;opacity:.06;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}#sol-intro .si-text{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}#sol-intro .si-sub{font-family:"Montserrat","Helvetica Neue",sans-serif;font-size:.85rem;letter-spacing:.5em;text-transform:uppercase;color:#ffcc00;text-shadow:0 0 12px rgba(255,170,0,.9);opacity:0;transform:translateY(15px);margin-bottom:24px;}#sol-intro .si-title{position:relative;font-size:5.5vw;font-weight:400;letter-spacing:.12em;text-transform:uppercase;margin:0;opacity:0;color:#fffdf5;text-shadow:0 0 10px #ffaa00,0 0 25px #ff8800,0 0 60px #ff4400;transform:scale(.95);}#sol-intro .si-title::after{content:'';position:absolute;left:0;bottom:-14px;width:100%;height:4px;background:#fae6ff;box-shadow:0 0 10px #d500f9,0 0 25px #aa00ff,0 0 50px #7b00ff;border-radius:2px;}#sol-intro .si-logo{width:36vw;max-width:520px;min-width:240px;height:auto;margin-top:4vh;opacity:0;transform:scale(.9);}#sol-intro .si-tagline{font-family:"Montserrat","Helvetica Neue",sans-serif;font-size:1.1rem;letter-spacing:.6em;text-transform:uppercase;color:#fae6ff;text-shadow:0 0 10px #d500f9,0 0 25px #aa00ff,0 0 50px #7b00ff;opacity:0;margin-top:4vh;transform:translateY(10px);}#sol-intro .si-skip{position:absolute;bottom:28px;right:28px;z-index:40;background:transparent;border:1px solid rgba(255,170,0,.4);color:#ffcc00;font-family:"Montserrat","Helvetica Neue",sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;padding:9px 18px;cursor:pointer;transition:all .3s;opacity:0;animation:si-skip-in 1s .5s forwards;}#sol-intro .si-skip:hover{border-color:#ffaa00;background:rgba(255,170,0,.1);}@keyframes si-skip-in{to{opacity:.7}}.si-anim-sub{animation:si-fadeup 2s cubic-bezier(.25,.46,.45,.94) forwards}.si-anim-title{animation:si-title-in 3s cubic-bezier(.19,1,.22,1) forwards}.si-anim-logo{animation:si-logo-in 3s cubic-bezier(.19,1,.22,1) forwards}.si-anim-tag{animation:si-tag-in 3s cubic-bezier(.215,.61,.355,1) forwards}@keyframes si-drift{0%{transform:translateX(-5%) scale(1)}100%{transform:translateX(5%) scale(1.1)}}@keyframes si-fadeup{0%{opacity:0;transform:translateY(15px)}30%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}@keyframes si-title-in{0%{opacity:0;filter:blur(20px);transform:scale(.9)}100%{opacity:1;filter:blur(0);transform:scale(1.04);letter-spacing:.18em}}@keyframes si-logo-in{0%{opacity:0;filter:blur(15px) drop-shadow(0 0 0 rgba(255,170,0,0));transform:scale(.85) translateY(10px)}100%{opacity:1;filter:blur(0) drop-shadow(0 0 20px rgba(255,170,0,.8));transform:scale(1) translateY(0)}}@keyframes si-tag-in{0%{opacity:0;transform:translateY(15px);filter:blur(8px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+  
+
+.reveal,.reveal-left,.reveal-right{opacity:1 !important;transform:none !important;transition:none !important;}
+
+
+
+.sol-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  background:rgba(12,12,20,0.85);
+  border:1px solid rgba(201,168,76,0.12);
+  border-radius:8px;
+  overflow:hidden;
+}
+.sol-table th, .sol-table td{
+  padding:14px 14px;
+  border-bottom:1px solid rgba(201,168,76,0.08);
+  vertical-align:top;
+  font-size:13px;
+  color:rgba(232,230,225,0.78);
+  line-height:1.6;
+}
+.sol-table th{
+  background:rgba(201,168,76,0.10);
+  color:var(--gold);
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-size:11px;
+}
+.sol-table tr:last-child td{border-bottom:none;}
+.money{color:var(--gold-light);font-weight:700;white-space:nowrap; text-shadow:0 0 18px rgba(201,168,76,0.14);}
+.sol-note{margin-top:10px;font-size:12px;color:rgba(138,136,128,0.85);line-height:1.7;}
+.sol-form label{
+  display:block;
+  margin-top:10px;
+  font-size:10px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:rgba(138,136,128,0.95);
+}
+.sol-form select{
+  width:100%;
+  margin-top:6px;
+  padding:10px 12px;
+  background:rgba(7,7,15,0.6);
+  border:1px solid rgba(201,168,76,0.14);
+  border-radius:6px;
+  color:rgba(232,230,225,0.90);
+  outline:none;
+}
+.sol-form select:focus{border-color:rgba(201,168,76,0.30); box-shadow:0 0 22px rgba(201,168,76,0.12);}
+.sol-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.calcOut{
+  padding:12px 12px;
+  border:1px solid rgba(201,168,76,0.12);
+  background:rgba(17,17,25,0.55);
+  border-radius:6px;
+  color:rgba(232,230,225,0.86);
+}
+@media (max-width: 920px){
+  .sol-two{grid-template-columns:1fr;}
+}
+
+</style>
+<style>
+
+@media (max-width: 900px) {
+  .nav-dropdown { width: 100%; }
+  .nav-dropdown .dropdown-menu {
+    position: static;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 0 0 0 16px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transform: none;
+    transition: max-height .3s ease, opacity .2s ease;
+  }
+  .nav-dropdown.expanded .dropdown-menu {
+    max-height: 600px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown:focus-within .dropdown-menu {
+    opacity: 0;
+    pointer-events: none;
+    max-height: 0;
+  }
+  .nav-dropdown.expanded:hover .dropdown-menu,
+  .nav-dropdown.expanded:focus-within .dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    max-height: 600px;
+  }
+  .nav-dropdown .dropdown-menu a { padding-left: 0; }
+  .dropdown-toggle { width: 100%; text-align: left; }
+}
+</style>
+
+<style>
+
+.platform-card ul { padding-right: 10px; }
+@media (max-width:900px){
+  #megaNav .mega-nav-grid{grid-template-columns:1fr !important;}
+}
+</style>
+
+</head>
+<body>
+<div id="top"></div>
+<canvas id="three-bg"></canvas>
+
+<nav class="main-nav" id="mainNav">
+  <a href="#top" class="nav-logo">
+    <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL">
+    <span>SOLEnterprises</span>
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="#overview">Overview</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#addons">Add-ons</a>
+    <a href="#appcare">AppCare</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#process">Process</a>
+    <a href="#spec">Under the Hood</a>
+    <a href="#acceptance">QA</a>
+    <a href="#scope">Scope</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+</div>
+  <a class="menu-btn" href="#pricing">VIEW PRICING</a>
+</nav>
+
+<div class="hero-wrapper">
+  <div class="hero-grid">
+    <div class="hero-txt-col">
+      <div class="hero-company-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SkyeSol"></div>
+      <div class="hero-tagline">WEBSITE-AS-APP DELIVERY</div>
+      <h1>SkyePWA Forge™<br><span>Website-as-App Conversion</span></h1>
+      <p class="hero-subtitle">A product-engineered conversion that turns your website into an installable, branded app experience across iPhone, Android, and desktop—no app store required. Built with offline resilience, safe updates, and device QA as non‑negotiables.</p>
+      <div class="hero-cta-row">
+        <a href="#contact" class="btn-gold">Request PWA Audit</a>
+        <a href="#pricing" class="btn-outline">See Tier Options</a>
+        <a href="#contact" class="btn-outline">Talk to SOL</a>
+      </div>
+    </div>
+    <div class="hero-img-col">
+      <div class="platform-card" style="max-width:520px;">
+        <div class="card-icon">💎</div>
+        <h3>Rate Card Snapshot</h3>
+        <div class="card-type">All figures reflect </div>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.7">
+          <li><strong>Tier 0 — Audit:</strong> $460 – $1,965 (credited to build if signed within 14 days)</li>
+          <li><strong>Tier 1 — Conversion:</strong> $1,965 – $8,515</li>
+          <li><strong>Tier 2 — Productization:</strong> $6,550 – $19,650</li>
+          <li><strong>Tier 3 — Enterprise Ops:</strong> $15,720 – $45,850 + monthly</li>
+        </ul>
+        <a href="#pricing" class="card-link">Jump to Full Pricing →</a>
+      </div>
+      <div class="glow-tile-purple" style="margin-top:16px;">
+        Tier 0 Audit → Blueprint → Fixed-Price Recommendation → Tier 1–3 Build Credit
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">Scroll<div class="scroll-line"></div></div>Scroll<div class="scroll-line"></div></div>
+</div>
+
+
+<div class="divider"></div>
+
+<section class="content-section" id="overview">
+  <div class="section-label reveal">Product Overview</div>
+  <div class="section-title reveal">SkyePWA Forge™: Website-as-App Conversion (Engineered)</div>
+  <div class="section-desc reveal">
+    SkyePWA Forge™ turns your existing website into an installable, branded app experience across iOS, Android, and desktop—without requiring an app store release. This is delivered as a repeatable engineering system: installability, resilience under weak signal, controlled updates, and real device QA are built in by default.
+    <br><br>
+    SOL builds PWAs as an <strong style="color:var(--text)">engineered product surface</strong>—not a design add-on. Each tier below ships a predictable set of outcomes and is validated against an agreed device matrix with safe update behavior.
+  </div>
+
+  <div class="card-grid-3 stagger-children">
+    <div class="platform-card reveal">
+      <div class="card-icon">📲</div>
+      <h3>Installability (No App Store)</h3>
+      <div class="card-type">HOME SCREEN • FULL‑SCREEN LAUNCH</div>
+      <p>Customers install your brand to their home screen and open it like an app. The launch experience is full-screen with branded identity and clean navigation (no browser chrome).</p>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">🧱</div>
+      <h3>Resilience Under Real Conditions</h3>
+      <div class="card-type">OFFLINE FALLBACK • WEAK‑SIGNAL UX</div>
+      <p>Engineered offline fallback and degraded-mode UX so core pages remain usable and conversions don’t collapse when the network is weak or absent.</p>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">🧠</div>
+      <h3>Update Control (Safe)</h3>
+      <div class="card-type">CACHE VERSIONING • PREDICTABLE REFRESH</div>
+      <p>Controlled updates with cache versioning and an intentional “new version available” prompt. No “stuck on old build” failure mode.</p>
+    </div>
+  </div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:18px;">
+    <div class="platform-card reveal">
+      <div class="card-icon">🎛️</div>
+      <h3>Brand Packaging Discipline</h3>
+      <div class="card-type">ICONS • THEME • APP IDENTITY</div>
+      <p>Complete icon set (including maskable icons), theme color system, and app identity configuration aligned to SVS. The app looks intentional—because it is.</p>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">🧪</div>
+      <h3>QA on Real Devices</h3>
+      <div class="card-type">DEVICE MATRIX • INSTALL TESTS</div>
+      <p>Install, launch, offline, and update behaviors validated on the agreed device matrix (iOS, Android, desktop). Acceptance criteria are explicit and non-negotiable.</p>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">🧰</div>
+      <h3>Install Funnel Kit</h3>
+      <div class="card-type">QR • STAFF SCRIPT • LANDING COPY</div>
+      <p>Handoff kit for staff and customers: install instructions, QR collateral, and install-optimized landing content so adoption is real—not theoretical.</p>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:60px;"></div>
+
+  <section class="content-section" style="padding-top:70px;">
+    <div class="section-label reveal">Core Outcomes</div>
+    <div class="section-title reveal">Delivered in Every Build</div>
+    <div class="section-desc reveal">
+      These outcomes ship in every tier. Upgrades add depth (performance, observability, store packaging), but the baseline product surface is always installable, branded, resilient, and update-safe.
+    </div>
+
+    <div class="card-grid-2 stagger-children">
+      <div class="platform-card reveal">
+        <div class="card-icon">✅</div>
+        <h3>Install + Launch Behavior</h3>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.7">
+          <li>Home-screen install flow (iOS/Android) with clean install guidance</li>
+          <li>Full-screen launch with proper app identity and scoped navigation</li>
+          <li>Branded icons (including maskable) + theme configuration</li>
+        </ul>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">🛡️</div>
+        <h3>Resilience + Update Safety</h3>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.7">
+          <li>Offline fallback page + degraded-mode UX behavior</li>
+          <li>Service worker cache versioning and predictable refresh prompt</li>
+          <li>QA validated: install, offline, update, and critical conversions</li>
+        </ul>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">📦</div>
+        <h3>Handoff Kit</h3>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.7">
+          <li>Staff install script + customer install instructions</li>
+          <li>QR collateral guidance for storefronts, flyers, and email</li>
+          <li>Launch checklist + stabilization window (recommended)</li>
+        </ul>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">🧭</div>
+        <h3>Compatibility Reality (Handled)</h3>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.7">
+          <li>Platform capabilities vary by OS/browser for advanced background behaviors</li>
+          <li>SOL tiers advanced features (e.g., push) as add-ons</li>
+          <li>Acceptance is based on the agreed device matrix, not vague assumptions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</section>
+
+<div class="divider"></div>
+
+<section class="content-section" id="pricing">
+  <div class="section-label reveal">Pricing</div>
+  <div class="section-title reveal">SkyePWA Forge™ Rate Card</div>
+  <div class="section-desc reveal">
+    Investment ranges are USD and depend on site condition, complexity, and required integrations. Taxes and third‑party vendor fees are excluded.
+    <br><br>
+    <strong style="color:var(--text)">Audit credit:</strong> 100% of Tier 0 is credited to Tier 1–3 if the build agreement is signed within 14 days of audit delivery.
+    <br>
+    <strong style="color:var(--text)">Payment options:</strong> 30% deposit to start, remainder over 6/12 months available for qualifying engagements.
+  </div>
+
+  <div class="card-grid-2 stagger-children">
+    <div class="platform-card reveal">
+      <div class="card-icon">🔍</div>
+      <h3>Tier 0 — PWA Readiness Audit</h3>
+      <div class="card-type">$460 – $1,965</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.65">
+        <li>Installability audit + baseline performance/security scan</li>
+        <li>Conversion blueprint + fixed-price recommendation</li>
+        <li>Risk flags and compatibility constraints documented</li>
+        <li><strong>100% credited</strong> to Tier 1–3 if signed within 14 days</li>
+      </ul>
+      <p class="card-type">Deposit example (30%): $138 – $590</p>
+      <a href="#contact" class="card-link">Request Audit →</a>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">📲</div>
+      <h3>Tier 1 — PWA Conversion</h3>
+      <div class="card-type">$1,965 – $8,515</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.65">
+        <li>Manifest + icons + service worker</li>
+        <li>Offline fallback + safe updates</li>
+        <li>Install UX kit + device QA + handoff</li>
+      </ul>
+      <p class="card-type">Deposit example (30%): $590 – $2,555</p>
+      <a href="#contact" class="card-link">Start Tier 1 →</a>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">⚙️</div>
+      <h3>Tier 2 — PWA+ Productization</h3>
+      <div class="card-type">$6,550 – $19,650</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.65">
+        <li>Tier 1 plus performance upgrades</li>
+        <li>Offline-first tuning for key journeys</li>
+        <li>Lead/form reliability (retry/failover)</li>
+        <li>Basic monitoring + diagnostics</li>
+      </ul>
+      <p class="card-type">Deposit example (30%): $1,965 – $5,895</p>
+      <a href="#contact" class="card-link">Upgrade to Tier 2 →</a>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">🏛️</div>
+      <h3>Tier 3 — PWA Enterprise Ops</h3>
+      <div class="card-type">$15,720 – $45,850 + monthly</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.65">
+        <li>Tier 2 plus observability pipeline</li>
+        <li>Security hardening review</li>
+        <li>Release governance + rollback plan</li>
+        <li>Monthly health reporting</li>
+      </ul>
+      <p class="card-type">Deposit example (30%): $4,716 – $13,755</p>
+      <a href="#contact" class="card-link">Discuss Enterprise Ops →</a>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:60px;"></div>
+
+  <section class="content-section" style="padding-top:70px;" id="addons">
+    <div class="section-label reveal">Add-ons</div>
+    <div class="section-title reveal">Optional Upgrades Priced by Scope</div>
+    <div class="section-desc reveal">
+      Add-ons extend capability (push programs, store packaging, multilingual install funnels, offline catalog snapshots). SOL recommends selecting add-ons after Tier 0 so scope matches reality.
+    </div>
+
+    <div class="card-grid-2 stagger-children">
+      <div class="platform-card reveal">
+        <div class="card-icon">🔔</div>
+        <h3>Push Notifications Program</h3>
+        <div class="card-type">$3,275 – $9,825</div>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.65">
+          <li>Permission UX + setup + testing</li>
+          <li>Campaign templates + delivery guidance</li>
+          <li>Capability validation by OS/browser</li>
+        </ul>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">🏪</div>
+        <h3>App Store Packaging (Wrapper + Store Ops)</h3>
+        <div class="card-type">$9,825 – $26,200</div>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.65">
+          <li>iOS/Android packaging + store listing assets</li>
+          <li>Compliance basics + release workflow</li>
+          <li>Update guidance (store process)</li>
+        </ul>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">🌎</div>
+        <h3>Multi-language Install Kit (EN/ES)</h3>
+        <div class="card-type">$985 – $3,275</div>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.65">
+          <li>Bilingual install prompts + QR collateral</li>
+          <li>Install landing copy + branded assets</li>
+          <li>Staff install script (EN/ES)</li>
+        </ul>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">📚</div>
+        <h3>Offline Catalog Snapshot Sync</h3>
+        <div class="card-type">$6,550 – $23,580</div>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.65">
+          <li>Offline snapshot for menus/services/catalog content</li>
+          <li>Sync rules + degraded-mode UX</li>
+          <li>Scope based on content volume + update cadence</li>
+        </ul>
+      </div>
+    </div>
+  
+  <div class="sol-table-wrap reveal" style="margin-top:26px;">
+    <table class="sol-table" aria-label="SkyePWA Forge Rate Card">
+      <thead>
+        <tr>
+          <th style="width:22%;">Tier</th>
+          <th>What’s Included</th>
+          <th style="width:18%;">Investment Range</th>
+          <th style="width:16%;">Typical Window</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tier 0 — Audit</strong></td>
+          <td>Installability review, baseline performance/security scan, risk flags, conversion blueprint, fixed-price recommendation. <strong>100% credited</strong> to Tier 1–3 if approved within 14 days.</td>
+          <td><span class="money">$460 – $1,965</span></td>
+          <td>3–7 business days</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 1 — Conversion</strong></td>
+          <td>Manifest + app identity, icon suite (including maskable), service worker with safe caching strategy, offline fallback, update control prompt, install UX kit, real-device QA + handoff.</td>
+          <td><span class="money">$1,965 – $8,515</span></td>
+          <td>7–14 business days</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 2 — Productization</strong></td>
+          <td>Tier 1 plus performance upgrades, offline-first tuning for key journeys, lead/form reliability (retry/failover patterns), basic monitoring + diagnostics, SEO safety validation.</td>
+          <td><span class="money">$6,550 – $19,650</span></td>
+          <td>2–4 weeks</td>
+        </tr>
+        <tr>
+          <td><strong>Tier 3 — Enterprise Ops</strong></td>
+          <td>Tier 2 plus observability pipeline, security hardening review, release governance and rollback plan, monthly health reporting, lifecycle management.</td>
+          <td><span class="money">$15,720 – $45,850</span></td>
+          <td>4–8 weeks</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="sol-note">All ranges shown are USD and depend on site condition, complexity, and required integrations. Taxes and third‑party vendor fees are excluded.</p>
+  </div>
+
+</section>
+
+  <div class="divider" style="margin-top:60px;"></div>
+
+  <section class="content-section" style="padding-top:70px;" id="appcare">
+    <div class="section-label reveal">Lifecycle</div>
+    <div class="section-title reveal">AppCare (Monthly)</div>
+    <div class="section-desc reveal">
+      Monthly lifecycle support and monitoring (recommended for production). AppCare keeps the install experience clean, updates safe, and performance disciplined over time.
+    </div>
+
+    <div class="card-grid-3 stagger-children">
+      <div class="platform-card reveal">
+        <div class="card-icon">🧩</div>
+        <h3>AppCare Lite</h3>
+        <div class="card-type">$260 / month</div>
+        <p>Updates + minor fixes, quarterly install UX refresh, standard support.</p>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">📈</div>
+        <h3>AppCare Pro</h3>
+        <div class="card-type">$655 / month</div>
+        <p>Lite plus monitoring thresholds, monthly health report, priority queue.</p>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">👑</div>
+        <h3>AppCare Elite</h3>
+        <div class="card-type">$1,640 / month</div>
+        <p>Pro plus performance-budget enforcement, quarterly optimization sprint, executive reporting.</p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<div class="divider"></div>
+
+
+<div class="divider"></div>
+
+<section class="content-section" style="padding-top:70px;" id="calculator">
+  <div class="section-label reveal">Calculator</div>
+  <div class="section-title reveal">Estimate Deposit + Installments</div>
+  <div class="section-desc reveal">
+    Select a tier and range to estimate a <strong style="color:var(--text)">30% deposit</strong> with the remaining balance split across 6 or 12 months.
+  </div>
+
+  <div class="card-grid-2 stagger-children">
+    <div class="platform-card reveal">
+      <div class="card-icon">🧮</div>
+      <h3>Pricing Estimator</h3>
+      <div class="card-type">Instant math</div>
+
+      <div class="sol-form" style="margin-top:14px;">
+        <label for="calcTier">Tier</label>
+        <select id="calcTier">
+          <option value="t0">Tier 0 — PWA Readiness Audit ($460–$1,965)</option>
+          <option value="t1" selected>Tier 1 — PWA Conversion ($1,965–$8,515)</option>
+          <option value="t2">Tier 2 — PWA+ Productization ($6,550–$19,650)</option>
+          <option value="t3">Tier 3 — PWA Enterprise Ops ($15,720–$45,850)</option>
+        </select>
+
+        <div class="sol-two" style="margin-top:12px;">
+          <div>
+            <label for="calcRange">Range</label>
+            <select id="calcRange">
+              <option value="low" selected>Low end</option>
+              <option value="high">High end</option>
+            </select>
+          </div>
+          <div>
+            <label for="calcTerm">Term</label>
+            <select id="calcTerm">
+              <option value="6">6 months</option>
+              <option value="12" selected>12 months</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="calcOut" class="calcOut" style="margin-top:14px;"></div>
+        <p class="sol-note" style="margin-top:10px;">
+          Final investment is confirmed after Tier 0 (or equivalent intake review). Ongoing operations support is available via AppCare.
+        </p>
+      </div>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">🎯</div>
+      <h3>Which Tier Fits?</h3>
+      <div class="card-type">Decision guidance</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.75">
+        <li><strong>Tier 0</strong> when the site has unknowns (CMS complexity, auth, heavy scripts, performance issues).</li>
+        <li><strong>Tier 1</strong> when you need installability + branding + offline fallback + safe updates with clean QA.</li>
+        <li><strong>Tier 2</strong> when conversions matter (booking/quote/contact) and weak-signal reliability impacts revenue.</li>
+        <li><strong>Tier 3</strong> when you need monitoring, governance, and executive visibility for scalable operations.</li>
+      </ul>
+      <p style="margin-top:14px;font-size:12px;color:rgba(232,230,225,0.75)">
+        Common upgrades: Push Program • App Store Packaging • Offline Catalog Snapshot • Bilingual Install Kit (EN/ES)
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" id="process">
+  <div class="section-label reveal">Delivery</div>
+  <div class="section-title reveal">How SOL Ships SkyePWA Forge™</div>
+  <div class="section-desc reveal">
+    This is a productized engineering delivery with explicit gates. The goal is predictable outcomes: installable app behavior, resilience, safe updates, and validated conversions.
+  </div>
+
+  <div class="card-grid-4 stagger-children">
+    <div class="platform-card reveal">
+      <div class="card-icon">1️⃣</div>
+      <h3>Intake + Audit</h3>
+      <p>Confirm hosting/HTTPS, map critical journeys (call, map, booking, quote, contact), capture brand assets, and run baseline scans. Output: conversion blueprint + fixed-price recommendation.</p>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">2️⃣</div>
+      <h3>Build Sprint</h3>
+      <p>Manifest + icon suite (maskable included), service worker + cache strategy, offline fallback, update banner behavior, install funnel kit. Tier 2/3 adds monitoring and governance.</p>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">3️⃣</div>
+      <h3>Device QA</h3>
+      <p>Install/launch/offline/update validation on the agreed device matrix. Critical conversions tested end-to-end. Output: acceptance report + go-live checklist.</p>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">4️⃣</div>
+      <h3>Launch + Stabilize</h3>
+      <p>Launch the install experience with QR collateral and staff scripts. Stabilize over the first week, then transition into AppCare (recommended) for lifecycle reliability.</p>
+    </div>
+  </div>
+
+  <div class="divider" style="margin-top:60px;"></div>
+
+  <section class="content-section" style="padding-top:70px;" id="spec">
+    <div class="section-label reveal">Engineering Spec</div>
+    <div class="section-title reveal">What’s Under the Hood</div>
+    <div class="section-desc reveal">
+      SOL implements PWAs with disciplined caching, explicit update rules, and compatibility‑aware UX. The “app feel” is the result of engineering decisions—especially around offline and updates.
+    </div>
+
+    <div class="card-grid-2 stagger-children">
+      <div class="platform-card reveal">
+        <div class="card-icon">🧾</div>
+        <h3>Manifest + Identity</h3>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.7">
+          <li>Name / short name / scope / start URL / display mode</li>
+          <li>Theme + background colors (SVS aligned)</li>
+          <li>Icon suite including <strong>maskable</strong> icons for Android</li>
+          <li>Apple touch icons + iOS home-screen behavior tuning</li>
+        </ul>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">🧊</div>
+        <h3>Service Worker + Caching Strategy</h3>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.7">
+          <li>Static asset caching for fast repeat loads</li>
+          <li>HTML caching rules designed to prevent “stale site” failures</li>
+          <li>Offline fallback route and user messaging</li>
+          <li>Cache versioning + safe cleanup on update</li>
+        </ul>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">🔄</div>
+        <h3>Update Safety Protocol</h3>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.7">
+          <li>Predictable “new version available” prompt</li>
+          <li>One‑tap refresh with controlled activation</li>
+          <li>Eliminates “stuck on old build” cache drift</li>
+          <li>Tier 3 adds governance + rollback planning</li>
+        </ul>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="card-icon">📡</div>
+        <h3>Monitoring + Diagnostics (Tier 2/3)</h3>
+        <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.7">
+          <li>Basic client diagnostics panel</li>
+          <li>Error capture and performance thresholds</li>
+          <li>Monthly health reporting (Tier 3 + AppCare Pro/Elite)</li>
+          <li>Performance budget enforcement (AppCare Elite)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</section>
+
+<div class="divider"></div>
+
+<section class="content-section" id="acceptance">
+  <div class="section-label reveal">Quality Gate</div>
+  <div class="section-title reveal">Acceptance Criteria (Non‑Negotiable)</div>
+  <div class="section-desc reveal">
+    This is how SOL prevents “it works on my laptop” projects. Acceptance criteria are explicit, testable, and validated before handoff.
+  </div>
+
+  <div class="platform-card reveal" style="max-width:900px;margin:0 auto;">
+    <ul style="margin:8px 0 0 18px;font-size:14px;color:var(--text-dim);line-height:1.75">
+      <li>Installs successfully on the agreed device matrix (iOS, Android, desktop).</li>
+      <li>Launches full‑screen from home screen with correct branding.</li>
+      <li>Offline fallback renders cleanly; key journeys degrade gracefully under weak/no signal.</li>
+      <li>Update behavior is safe: versioned cache, predictable refresh prompt, no “stuck on old build” failure mode.</li>
+      <li>Critical conversions (call, map, booking, quote, contact) validate end‑to‑end.</li>
+    </ul>
+  </div>
+
+  <div class="divider" style="margin-top:60px;"></div>
+
+  </section>
+
+<div class="divider"></div>
+
+
+<div class="divider"></div>
+
+<section class="content-section" style="padding-top:70px;" id="scope">
+  <div class="section-label reveal">Scope</div>
+  <div class="section-title reveal">Scope, Responsibilities, Platform Support</div>
+  <div class="section-desc reveal">
+    SkyePWA Forge™ is delivered as an engineered website-as-app experience. Exact scope is confirmed in the build agreement and validated against the agreed device matrix.
+  </div>
+
+  <div class="card-grid-2 stagger-children">
+    <div class="platform-card reveal">
+      <div class="card-icon">📦</div>
+      <h3>Included (Standard)</h3>
+      <div class="card-type">What you receive</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.75">
+        <li>Manifest + app identity configuration</li>
+        <li>Icon suite (including maskable icons)</li>
+        <li>Service worker with safe caching strategy</li>
+        <li>Offline fallback + resilience behavior</li>
+        <li>Update control prompt + cache versioning</li>
+        <li>Install UX kit + real-device QA + handoff</li>
+      </ul>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">🚫</div>
+      <h3>Out of Scope (unless added)</h3>
+      <div class="card-type">Optional add-ons</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.75">
+        <li>App Store listing/approvals</li>
+        <li>Custom backend engineering beyond scoped reliability work</li>
+        <li>Major site redesign or full content rewrite</li>
+        <li>Third-party vendor outages or paid API limitations</li>
+      </ul>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">🧷</div>
+      <h3>Client Responsibilities</h3>
+      <div class="card-type">To ship fast</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.75">
+        <li>Provide brand assets (logo/colors) or approve SOL-generated icon set</li>
+        <li>Provide required access to hosting/repo/CMS environments</li>
+        <li>Identify priority journeys (call/booking/quote/contact/buy)</li>
+        <li>Confirm target device mix for QA acceptance</li>
+      </ul>
+    </div>
+
+    <div class="platform-card reveal">
+      <div class="card-icon">📱</div>
+      <h3>Platform Support</h3>
+      <div class="card-type">Reality, tested</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.75">
+        <li>Installability and capabilities vary by OS/browser</li>
+        <li>SOL validates against the agreed device matrix</li>
+        <li>Advanced features (push, store packaging) carry separate acceptance criteria</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="content-section" id="faq" style="padding-bottom:70px;">
+  <div class="section-label reveal">FAQ</div>
+  <div class="section-title reveal">Operational Questions (Answered)</div>
+  <div class="section-desc reveal">This is the stuff clients ask right before they sign. SOL answers it with product clarity, not hand-waving.</div>
+
+  <div class="card-grid-2 stagger-children">
+    <div class="platform-card reveal">
+      <h3>Does this work on iPhone?</h3>
+      <p>Yes. Users can install to the home screen and launch full‑screen. Advanced background behaviors vary by iOS version and browser, which is why SOL tiers advanced features (like push programs) as add‑ons and validates on the agreed device matrix.</p>
+    </div>
+
+    <div class="platform-card reveal">
+      <h3>Is this the same as a native app?</h3>
+      <p>It’s a different delivery model. A PWA ships faster, updates instantly, and avoids app store overhead. If you need app store listing, SOL offers App Store Packaging (wrapper + store ops) as an add‑on.</p>
+    </div>
+
+    <div class="platform-card reveal">
+      <h3>Will caching break my site?</h3>
+      <p>Not when engineered correctly. SOL uses explicit caching rules with versioned updates, plus a predictable refresh prompt. Tier 3 adds governance and rollback planning for higher‑risk environments.</p>
+    </div>
+
+    <div class="platform-card reveal">
+      <h3>What do you need from us?</h3>
+      <p>Brand assets (logo/colors), access to hosting or repo/CMS, and a quick list of critical user journeys (call, booking, quote, contact). SOL handles the rest through the audit + sprint process.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:34px;" class="reveal">
+    <a href="#contact" class="btn-gold">Request PWA Audit</a>
+    <a href="#pricing" class="btn-outline">View Pricing</a>
+    <a href="#process" class="btn-outline">Delivery Process</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="content-section" style="text-align:center">
+  <div class="section-label reveal">Get Started</div>
+  <div class="section-title reveal">Ship the App Version of Your Website</div>
+  <div class="section-desc reveal" style="margin:0 auto 30px">
+    Projects can begin within 7 days of deposit depending on queue. Start with Tier 0 to lock scope, eliminate uncertainty, and convert into Tier 1–3 with full audit credit.
+  </div>
+  <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap" class="reveal">
+    <a href="#contact" class="btn-gold">Book Tier 0 Audit</a>
+    <a href="#appcare" class="btn-outline">AppCare Options</a>
+    <a href="#acceptance" class="btn-outline">Acceptance Criteria</a>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+<section class="content-section" id="contact" style="padding-bottom:90px;">
+  <div class="section-label">Contact</div>
+  <div class="section-title">Request Tier 0 Audit (Fastest Start)</div>
+  <div class="section-desc">
+    The fastest path is to start with Tier 0. You receive a PWA readiness report, a conversion blueprint, and a fixed-price recommendation. If you approve the build agreement within <strong style="color:var(--text)">14 days</strong>, the Tier 0 audit is <strong style="color:var(--text)">100% credited</strong> to Tier 1–3.
+  </div>
+
+  <div class="card-grid-2">
+    <div class="platform-card">
+      <div class="card-icon">📩</div>
+      <h3>Direct Contact</h3>
+      <div class="card-type">Business Intake</div>
+      <ul style="margin:10px 0 0 18px;font-size:13px;color:var(--text-dim);line-height:1.75">
+        <li><strong>Email:</strong> <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a></li>
+        <li><strong>B2B:</strong> <a href="mailto:B2B@solenterprises.org">B2B@solenterprises.org</a></li>
+        <li><strong>Phone:</strong> 480-469-5416</li>
+        <li><strong>Website:</strong> <a href="https://www.solenterprises.org/" target="_blank" rel="noopener">solenterprises.org</a></li>
+      </ul>
+      <p style="margin-top:14px;font-size:12px;color:rgba(232,230,225,0.75)">
+        Payment structure: <strong style="color:var(--text)">30% deposit</strong> to start. 6/12‑month installments available for qualifying engagements.
+      </p>
+    </div>
+
+    <div class="platform-card">
+      <div class="card-icon">🧾</div>
+      <h3>Quick Intake Form</h3>
+      <div class="card-type">Request Form</div>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.75;margin-top:10px;">
+        Share your details and we’ll respond with next steps and scheduling options.
+      </p>
+
+      <form name="pwa-audit-intake" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-top:14px;">
+        <input type="hidden" name="form-name" value="pwa-audit-intake">
+        <p style="display:none;">
+          <label>Don’t fill this out: <input name="bot-field"></label>
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;">Company</label>
+            <input name="company" required placeholder="Company / Brand" style="width:100%;padding:12px;border:1px solid rgba(201,168,76,0.15);border-radius:6px;background:rgba(17,17,25,0.55);color:var(--text);">
+          </div>
+          <div>
+            <label style="display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;">Website URL</label>
+            <input name="url" required placeholder="https://..." style="width:100%;padding:12px;border:1px solid rgba(201,168,76,0.15);border-radius:6px;background:rgba(17,17,25,0.55);color:var(--text);">
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+          <div>
+            <label style="display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;">Contact Name</label>
+            <input name="name" required placeholder="Full Name" style="width:100%;padding:12px;border:1px solid rgba(201,168,76,0.15);border-radius:6px;background:rgba(17,17,25,0.55);color:var(--text);">
+          </div>
+          <div>
+            <label style="display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;">Email</label>
+            <input type="email" name="email" required placeholder="name@company.com" style="width:100%;padding:12px;border:1px solid rgba(201,168,76,0.15);border-radius:6px;background:rgba(17,17,25,0.55);color:var(--text);">
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label style="display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;">Primary Goal</label>
+          <input name="goal" placeholder="Calls, bookings, quotes, checkout, portal usage…" style="width:100%;padding:12px;border:1px solid rgba(201,168,76,0.15);border-radius:6px;background:rgba(17,17,25,0.55);color:var(--text);">
+        </div>
+
+        <div style="margin-top:12px;">
+          <label style="display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:6px;">Notes / Integrations</label>
+          <textarea name="notes" rows="4" placeholder="CMS, booking tools, CRM, forms, auth/login, pages that must work offline, etc."
+            style="width:100%;padding:12px;border:1px solid rgba(201,168,76,0.15);border-radius:6px;background:rgba(17,17,25,0.55);color:var(--text);resize:vertical;"></textarea>
+        </div>
+
+        <button class="btn-gold" type="submit" style="margin-top:14px;">Submit Intake</button>
+      </form>
+
+      <p style="margin-top:12px;font-size:11px;color:rgba(232,230,225,0.65)">
+        Tip: If you preview locally, the form won’t submit anywhere. Once deployed to Netlify, submissions will appear in your Netlify dashboard.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+  <p>
+    <strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br>
+    <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 480-469-5416 ·
+    <a href="https://www.solenterprises.org/" target="_blank" rel="noopener">solenterprises.org</a>
+  </p>
+  <p style="margin-top:10px;font-size:11px;color:rgba(232,230,225,0.7)">
+    SkyePWA Forge™ — Website-as-App Conversion. Installability • Resilience • Update Control • QA • Lifecycle AppCare.
+  </p>
+  <p style="margin-top:18px;font-size:10px;color:rgba(138,136,128,0.35)">
+    © Skyes Over London LC / SOLEnterprises International Nexus &amp; Holdings.   </p>
+</footer>
+
+<script>
+(() => {
+  const canvas = document.getElementById('three-bg');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+  const colors = ['#c9a84c', '#3a6fd8', '#e84c30'];
+  const blobs = Array.from({ length: 12 }, () => ({
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: 120 + Math.random() * 220,
+    dx: -0.4 + Math.random() * 0.8,
+    dy: -0.4 + Math.random() * 0.8,
+    hue: colors[Math.floor(Math.random() * colors.length)],
+    alpha: 0.08 + Math.random() * 0.12
+  }));
+  const gradientStops = [
+    { offset: 0, color: 'rgba(5,5,8,0.35)' },
+    { offset: 1, color: 'rgba(5,5,8,0.9)' }
+  ];
+  const render = () => {
+    ctx.clearRect(0, 0, w, h);
+    for (const b of blobs) {
+      b.x += b.dx;
+      b.y += b.dy;
+      if (b.x < -b.r) b.x = w + b.r;
+      if (b.x > w + b.r) b.x = -b.r;
+      if (b.y < -b.r) b.y = h + b.r;
+      if (b.y > h + b.r) b.y = -b.r;
+      const g = ctx.createRadialGradient(b.x, b.y, b.r * 0.1, b.x, b.y, b.r);
+      g.addColorStop(0, `${b.hue}${Math.floor(b.alpha * 255).toString(16).padStart(2, '0')}`);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    const g2 = ctx.createLinearGradient(0, 0, 0, h);
+    gradientStops.forEach(s => g2.addColorStop(s.offset, s.color));
+    ctx.fillStyle = g2;
+    ctx.fillRect(0, 0, w, h);
+    requestAnimationFrame(render);
+  };
+  window.addEventListener('resize', () => {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  });
+  render();
+})();
+
+</script>
+
+<script>
+
+
+(function(){
+  function attachNav(){
+    const nav=document.getElementById('mainNav');
+    const toggle=document.getElementById('navToggle');
+    const links=document.getElementById('navLinks');
+    if(toggle && links){
+      toggle.addEventListener('click', ()=> links.classList.toggle('open'));
+
+      links.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=> links.classList.remove('open'));
+      });
+    }
+    function onScroll(){
+      if(!nav) return;
+      if(window.scrollY > 18) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+  }
+  document.addEventListener('DOMContentLoaded', attachNav);
+})();
+
+
+(() => {
+  const tiers = {
+    t0: { name:'Tier 0 — Audit', low:460, high:1965 },
+    t1: { name:'Tier 1 — Conversion', low:1965, high:8515 },
+    t2: { name:'Tier 2 — Productization', low:6550, high:19650 },
+    t3: { name:'Tier 3 — Enterprise Ops', low:15720, high:45850 }
+  };
+  const tierEl = document.getElementById('calcTier');
+  const rangeEl = document.getElementById('calcRange');
+  const termEl = document.getElementById('calcTerm');
+  const outEl = document.getElementById('calcOut');
+  if (!tierEl || !rangeEl || !termEl || !outEl) return;
+
+  const fmt = (n) => n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+
+  function render(){
+    const t = tiers[tierEl.value];
+    const price = (rangeEl.value === 'high') ? t.high : t.low;
+    const deposit = price * 0.30;
+    const remaining = price - deposit;
+    const term = parseInt(termEl.value, 10);
+    const monthly = remaining / term;
+
+    outEl.innerHTML = `
+      <div><strong>${t.name}</strong> • <strong>${rangeEl.value.toUpperCase()}</strong></div>
+      <div style="margin-top:8px; line-height:1.7;">
+        Total: <strong>${fmt(price)}</strong><br/>
+        30% deposit: <strong>${fmt(deposit)}</strong><br/>
+        Remaining: <strong>${fmt(remaining)}</strong><br/>
+        ${term}-month installment: <strong>${fmt(monthly)}</strong> / month
+      </div>
+    `;
+  }
+  tierEl.addEventListener('change', render);
+  rangeEl.addEventListener('change', render);
+  termEl.addEventListener('change', render);
+  render();
+})();
+
+</script>
+
+<script src="/js/partials.js"></script>
+</body>
+</html>

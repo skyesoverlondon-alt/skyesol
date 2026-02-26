@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#2b0a5a" />
+  <meta name="description" content="Local SEO Snapshot: business + city → checklist + targets + 30-day plan + PDF export." />
+
+  <title>Local SEO Snapshot — Skyes Over London LC</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.svg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="./styles.css" />
+
+  <!-- jsPDF (CDN only) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+
+<body>
+  <!-- Floating logo (no container), subtle glow + pulse -->
+  <img
+    class="floating-logo"
+    src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png"
+    alt="Skyes Over London LC Logo"
+    border="0"
+    decoding="async"
+    loading="eager"
+  />
+
+  <!-- Big obvious watermark -->
+  <div class="page-watermark" aria-hidden="true"></div>
+
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="grid"></div>
+    <div class="sparkline"></div>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-title">Local SEO Snapshot</div>
+        <div class="brand-sub">Business + City → Checklist + Targets + 30-Day Plan + PDF</div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn btn-ghost" id="btnLoadLast" type="button" title="Load last report from this device">
+          Load last report
+        </button>
+        <button class="btn btn-ghost" id="btnInstall" type="button" title="Install as an app" disabled>
+          Install PWA
+        </button>
+        <button class="btn btn-ghost" id="btnDiagnostics" type="button" title="Diagnostics & error reporting">
+          Diagnostics
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero glass">
+      <div class="hero-left">
+        <div class="kicker">Royal Purple + Neon Gold Snapshot Engine</div>
+        <h1>Get a real score (0–100), targets, and a week-by-week action plan.</h1>
+        <p class="lede">
+          This tool computes a practical local SEO snapshot using your inputs: listing completeness, category precision,
+          review strength vs competitors, posting cadence, conversion readiness, and trust signals. Then it generates a
+          30-day plan + top fixes and exports everything to a branded PDF. 🟣✨🟡
+        </p>
+
+        <div class="pill-row">
+          <div class="pill">Score Engine</div>
+          <div class="pill">Competitor Targets</div>
+          <div class="pill">Top 10 Fixes</div>
+          <div class="pill">30-Day Plan</div>
+          <div class="pill">PDF Export</div>
+          <div class="pill">Netlify Lead Form</div>
+          <div class="pill">PWA + Offline</div>
+          <div class="pill">Error Reporting</div>
+        </div>
+
+        <div class="mini-note">
+          Snapshot output is guidance, not a guarantee. Winning local search is a long game with a very short attention span. 😈
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="score-card glass">
+          <div class="score-head">
+            <div class="score-title">Overall Score</div>
+            <div class="score-sub" id="scoreSubtitle">Generate a snapshot to see your score.</div>
+          </div>
+
+          <div class="gauge">
+            <svg viewBox="0 0 120 120" class="gauge-svg" aria-label="Overall score gauge">
+              <defs>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="2.2" result="coloredBlur"></feGaussianBlur>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"></feMergeNode>
+                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle cx="60" cy="60" r="46" class="gauge-track" />
+              <circle cx="60" cy="60" r="46" class="gauge-fill" id="gaugeFill" />
+              <text x="60" y="66" text-anchor="middle" class="gauge-text" id="gaugeText">—</text>
+            </svg>
+          </div>
+
+          <div class="score-breakdown" id="scoreBreakdown">
+            <div class="dim">
+              <div class="dim-name">NAP completeness</div>
+              <div class="dim-bar"><div class="dim-bar-fill" data-dim="nap" style="width:0%"></div></div>
+              <div class="dim-val" data-dimval="nap">—</div>
+            </div>
+            <div class="dim">
+              <div class="dim-name">Category match</div>
+              <div class="dim-bar"><div class="dim-bar-fill" data-dim="category" style="width:0%"></div></div>
+              <div class="dim-val" data-dimval="category">—</div>
+            </div>
+            <div class="dim">
+              <div class="dim-name">Review strength</div>
+              <div class="dim-bar"><div class="dim-bar-fill" data-dim="reviews" style="width:0%"></div></div>
+              <div class="dim-val" data-dimval="reviews">—</div>
+            </div>
+            <div class="dim">
+              <div class="dim-name">Content cadence</div>
+              <div class="dim-bar"><div class="dim-bar-fill" data-dim="cadence" style="width:0%"></div></div>
+              <div class="dim-val" data-dimval="cadence">—</div>
+            </div>
+            <div class="dim">
+              <div class="dim-name">Conversion readiness</div>
+              <div class="dim-bar"><div class="dim-bar-fill" data-dim="conversion" style="width:0%"></div></div>
+              <div class="dim-val" data-dimval="conversion">—</div>
+            </div>
+            <div class="dim">
+              <div class="dim-name">Trust</div>
+              <div class="dim-bar"><div class="dim-bar-fill" data-dim="trust" style="width:0%"></div></div>
+              <div class="dim-val" data-dimval="trust">—</div>
+            </div>
+          </div>
+
+          <div class="score-actions">
+            <button class="btn btn-gold" id="btnExportPdf" type="button" disabled>Export PDF</button>
+            <button class="btn btn-ghost" id="btnCopySummary" type="button" disabled>Copy summary</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <section class="glass panel">
+        <div class="panel-title">Tool Inputs</div>
+        <div class="panel-sub">Enter your business + city details. Generate a report. Save locally. Export PDF.</div>
+
+        <form id="toolForm" class="tool-form" autocomplete="on">
+          <div class="field-row">
+            <div class="field">
+              <label for="businessName">Business name</label>
+              <input id="businessName" name="businessName" type="text" placeholder="e.g., North Star Office & Accounting" required />
+            </div>
+
+            <div class="field">
+              <label for="category">Category</label>
+              <select id="category" name="category" required>
+                <option value="" disabled selected>Select a category</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="cityState">City / State</label>
+              <input id="cityState" name="cityState" type="text" placeholder="e.g., Phoenix, AZ" required />
+            </div>
+
+            <div class="field">
+              <label for="radiusMiles">Service radius (miles)</label>
+              <input id="radiusMiles" name="radiusMiles" type="number" min="0" max="500" step="1" value="20" required />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="websiteUrl">Website URL (optional)</label>
+              <input id="websiteUrl" name="websiteUrl" type="url" placeholder="https://example.com" />
+              <div class="hint">Used for conversion readiness scoring (presence + HTTPS).</div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="reviewCount">Current review count</label>
+              <input id="reviewCount" name="reviewCount" type="number" min="0" max="200000" step="1" value="0" required />
+            </div>
+
+            <div class="field">
+              <label for="avgRating">Average rating</label>
+              <input id="avgRating" name="avgRating" type="number" min="0" max="5" step="0.1" value="0" required />
+            </div>
+          </div>
+
+          <div class="panel-mini">
+            <div class="panel-mini-title">Top competitor review counts (up to 3)</div>
+            <div class="field-row">
+              <div class="field">
+                <label for="comp1">Competitor #1</label>
+                <input id="comp1" name="comp1" type="number" min="0" max="200000" step="1" placeholder="e.g., 120" />
+              </div>
+              <div class="field">
+                <label for="comp2">Competitor #2</label>
+                <input id="comp2" name="comp2" type="number" min="0" max="200000" step="1" placeholder="e.g., 85" />
+              </div>
+              <div class="field">
+                <label for="comp3">Competitor #3</label>
+                <input id="comp3" name="comp3" type="number" min="0" max="200000" step="1" placeholder="e.g., 160" />
+              </div>
+            </div>
+            <div class="hint">If provided, targets + weekly/monthly pace are computed for the next 90 days.</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="postingFreq">Posting frequency (Google updates per month)</label>
+              <input id="postingFreq" name="postingFreq" type="number" min="0" max="120" step="1" value="0" required />
+              <div class="hint">0–2 is low, 3–8 is solid, 9+ is aggressive.</div>
+            </div>
+
+            <div class="field">
+              <label for="photosPerMonth">Photos per month</label>
+              <input id="photosPerMonth" name="photosPerMonth" type="number" min="0" max="500" step="1" value="0" required />
+              <div class="hint">Local winners keep listings visually alive. 🖼️</div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-gold" id="btnGenerate" type="submit">Generate Snapshot</button>
+            <button class="btn btn-ghost" id="btnSaveLocal" type="button">Save to this device</button>
+            <button class="btn btn-ghost" id="btnClear" type="button">Clear</button>
+          </div>
+
+          <div class="callout" id="toolStatus" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section class="glass panel">
+        <div class="panel-title">Results</div>
+        <div class="panel-sub">Top fixes + targets + 30-day plan generated from your numbers.</div>
+
+        <div class="result-stack">
+          <div class="result-card glass" id="resultSummaryCard">
+            <div class="result-title">Snapshot Summary</div>
+            <div class="result-body" id="resultSummary">
+              Generate a snapshot to populate this section.
+            </div>
+          </div>
+
+          <div class="result-card glass" id="targetCard" hidden>
+            <div class="result-title">Review Targets (90 days)</div>
+            <div class="result-body" id="targetBody"></div>
+          </div>
+
+          <div class="result-card glass">
+            <div class="result-title">Top 10 Fixes</div>
+            <div class="result-body" id="topFixes">
+              —
+            </div>
+          </div>
+
+          <div class="result-card glass">
+            <div class="result-title">30-Day Action Plan</div>
+            <div class="result-body" id="plan30">
+              —
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="glass panel">
+      <div class="panel-title">Lead Form (Netlify Forms)</div>
+      <div class="panel-sub">
+        Capture leads alongside the generated report. The hidden <span class="mono">report_summary</span> is auto-filled when you generate a snapshot.
+      </div>
+
+      <form
+        name="local-seo-snapshot-lead"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        id="leadForm"
+        class="lead-form"
+      >
+        <input type="hidden" name="form-name" value="local-seo-snapshot-lead" />
+        <p class="hidden">
+          <label>Don’t fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="leadName">Your name</label>
+            <input id="leadName" name="lead_name" type="text" placeholder="Full name" required />
+          </div>
+          <div class="field">
+            <label for="leadEmail">Email</label>
+            <input id="leadEmail" name="lead_email" type="email" placeholder="you@domain.com" required />
+          </div>
+          <div class="field">
+            <label for="leadPhone">Phone (optional)</label>
+            <input id="leadPhone" name="lead_phone" type="tel" placeholder="(000) 000-0000" />
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="leadNotes">Notes (optional)</label>
+            <textarea id="leadNotes" name="lead_notes" rows="3" placeholder="What are you trying to improve locally?"></textarea>
+          </div>
+        </div>
+
+        <!-- Hidden report summary for Netlify Forms capture -->
+        <input type="hidden" id="reportSummaryField" name="report_summary" value="" />
+
+        <div class="form-actions">
+          <button class="btn btn-gold" id="btnSubmitLead" type="submit">Submit Lead</button>
+          <button class="btn btn-ghost" id="btnPrefillLead" type="button">Prefill from tool inputs</button>
+        </div>
+
+        <div class="callout" id="leadStatus" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <div class="footer-title">Skyes Over London LC</div>
+          <div class="footer-sub">Local SEO Snapshot • PWA • Netlify Drop-ready • Error Reporting</div>
+        </div>
+        <div class="footer-right">
+          <button class="btn btn-ghost" id="btnRunSelfTest" type="button">Run self-test</button>
+          <button class="btn btn-ghost" id="btnSendTestError" type="button">Send test error</button>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Diagnostics Drawer -->
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-overlay" id="drawerOverlay" tabindex="-1"></div>
+    <div class="drawer-panel glass" role="dialog" aria-modal="true" aria-label="Diagnostics drawer">
+      <div class="drawer-head">
+        <div class="drawer-title">Diagnostics</div>
+        <button class="btn btn-ghost btn-sm" id="btnCloseDrawer" type="button">Close</button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="diag-grid">
+          <div class="diag-card glass">
+            <div class="diag-k">App</div>
+            <div class="diag-v" id="diagApp">—</div>
+          </div>
+          <div class="diag-card glass">
+            <div class="diag-k">Build</div>
+            <div class="diag-v" id="diagBuild">—</div>
+          </div>
+          <div class="diag-card glass">
+            <div class="diag-k">Online</div>
+            <div class="diag-v" id="diagOnline">—</div>
+          </div>
+          <div class="diag-card glass">
+            <div class="diag-k">Service Worker</div>
+            <div class="diag-v" id="diagSw">—</div>
+          </div>
+        </div>
+
+        <div class="diag-section">
+          <div class="diag-section-title">Local Storage</div>
+          <div class="diag-row">
+            <div class="diag-row-label">Last report present</div>
+            <div class="diag-row-value" id="diagLastReport">—</div>
+          </div>
+          <div class="diag-row">
+            <div class="diag-row-label">Approx. storage used</div>
+            <div class="diag-row-value" id="diagStorageUsed">—</div>
+          </div>
+        </div>
+
+        <div class="diag-section">
+          <div class="diag-section-title">Last Captured Error</div>
+          <pre class="diag-pre" id="diagLastError">—</pre>
+          <div class="diag-actions">
+            <button class="btn btn-ghost btn-sm" id="btnReportLastError" type="button">Report last error</button>
+            <button class="btn btn-ghost btn-sm" id="btnClearLastError" type="button">Clear</button>
+          </div>
+        </div>
+
+        <div class="diag-section">
+          <div class="diag-section-title">Error Reporting Endpoint</div>
+          <div class="diag-row">
+            <div class="diag-row-label">POST</div>
+            <div class="diag-row-value mono">/.netlify/functions/client-error-report</div>
+          </div>
+          <div class="diag-row">
+            <div class="diag-row-label">Headers</div>
+            <div class="diag-row-value mono">x-kaixu-app, x-kaixu-build</div>
+          </div>
+          <div class="diag-actions">
+            <button class="btn btn-gold btn-sm" id="btnSendDiagPing" type="button">Send diagnostics ping</button>
+          </div>
+          <div class="callout" id="diagStatus" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</body>
+</html>

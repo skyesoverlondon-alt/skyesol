@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gate Proofx · Gateway Data Explorer</title>
+  <link rel="canonical" href="https://skyesol.netlify.app/Gate%20Proofx/index.html" />
+  <meta name="description" content="Gate Proofx gateway export reader with filters, charts, and re-export." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Gate Proofx · Gateway Data Explorer" />
+  <meta property="og:description" content="Load gateway exports, filter, chart, and re-export with Gate Proofx." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Gate%20Proofx/index.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gate Proofx · Gateway Data Explorer" />
+  <meta name="twitter:description" content="Load gateway exports, filter, chart, and re-export with Gate Proofx." />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Gate Proofx",
+    "operatingSystem": "Web",
+    "applicationCategory": "BusinessApplication",
+    "description": "Gateway export reader with filters, charts, and re-export.",
+    "url": "https://skyesol.netlify.app/Gate%20Proofx/index.html",
+    "image": "https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png",
+    "creator": {"@type": "Organization", "name": "SkyeSol"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question","name": "How do I load exports?","acceptedAnswer": {"@type": "Answer","text": "Upload CSV/NDJSON or load archived NDJSON batches with your admin token."}},
+      {"@type": "Question","name": "Can I filter and chart?","acceptedAnswer": {"@type": "Answer","text": "Yes. Use filters to narrow text, level, provider, model, date, status; charts and table update instantly."}},
+      {"@type": "Question","name": "How do I export filtered results?","acceptedAnswer": {"@type": "Answer","text": "Click Export filtered CSV or use Save view as PDF."}}
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">GP</div>
+        <div>
+          <div class="title">Gate Proofx</div>
+          <div class="subtitle">Gateway export reader · charts · filters · re-export</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <label class="btn ghost" for="fileInput">Upload CSV / NDJSON</label>
+        <input id="fileInput" type="file" accept=".csv,.ndjson,.json,.txt" hidden />
+        <button id="fetchArchiveBtn" class="btn ghost" type="button">Load from archive key</button>
+        <button id="exportCsvBtn" class="btn" type="button">Export filtered CSV</button>
+        <button id="exportPdfBtn" class="btn ghost" type="button">Save view as PDF</button>
+        <button id="helpBtn" class="btn ghost" type="button">Tutorial</button>
+      </div>
+    </header>
+
+    <section id="alerts" class="toast" style="display:none;"></section>
+
+    <section class="card">
+      <div class="cardhead">
+        <div>
+          <h2>Data source</h2>
+          <p class="muted">Upload gateway CSV/NDJSON exports or pull an archived NDJSON batch from blobs.</p>
+        </div>
+        <div class="row wrap" style="max-width:720px; width:100%;">
+          <input id="adminToken" class="input" placeholder="Admin bearer token (used for archive access)" />
+          <button id="saveTokenBtn" class="btn ghost" type="button">Save token</button>
+        </div>
+        <div class="row wrap">
+          <input id="archiveKey" class="input" placeholder="gateway_events/2026-02-25/batch-1-2000.ndjson" />
+          <button id="listArchiveBtn" class="btn ghost" type="button">List archive batches</button>
+        </div>
+      </div>
+      <div id="archiveList" class="archive-list"></div>
+    </section>
+
+    <section class="card filters">
+      <div class="cardhead">
+        <h2>Filters</h2>
+        <p class="muted">Narrow the view; charts and table respond instantly.</p>
+      </div>
+      <div class="filter-grid">
+        <div>
+          <label>Text contains</label>
+          <input id="fSearch" class="input" placeholder="provider:model, request_id, app_id..." />
+        </div>
+        <div>
+          <label>Level</label>
+          <select id="fLevel" class="input">
+            <option value="">Any</option>
+            <option>info</option>
+            <option>warn</option>
+            <option>error</option>
+          </select>
+        </div>
+        <div>
+          <label>Provider</label>
+          <input id="fProvider" class="input" placeholder="openai, anthropic..." />
+        </div>
+        <div>
+          <label>Model</label>
+          <input id="fModel" class="input" placeholder="gpt-4o, claude..." />
+        </div>
+        <div>
+          <label>From</label>
+          <input id="fFrom" class="input" type="datetime-local" />
+        </div>
+        <div>
+          <label>To</label>
+          <input id="fTo" class="input" type="datetime-local" />
+        </div>
+        <div>
+          <label>Status code</label>
+          <input id="fStatus" class="input" placeholder="200, 500" />
+        </div>
+        <div>
+          <label>Max rows</label>
+          <input id="fLimit" class="input" type="number" min="10" max="5000" value="500" />
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="cardhead">
+          <h2>Overview</h2>
+          <p class="muted">Quick stats for current filtered set.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="label">Rows</div><div class="value" id="statRows">—</div></div>
+          <div class="stat"><div class="label">Errors</div><div class="value" id="statErrors">—</div></div>
+          <div class="stat"><div class="label">Warns</div><div class="value" id="statWarns">—</div></div>
+          <div class="stat"><div class="label">Providers</div><div class="value" id="statProviders">—</div></div>
+          <div class="stat"><div class="label">Models</div><div class="value" id="statModels">—</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cardhead">
+          <h2>Charts</h2>
+          <p class="muted">Trends update with filters.</p>
+        </div>
+        <div class="charts">
+          <canvas id="chartTimeline" height="130"></canvas>
+          <canvas id="chartProviders" height="130"></canvas>
+          <canvas id="chartLevels" height="130"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="cardhead">
+        <h2>Data table</h2>
+        <p class="muted">Latest rows first. Click column headers to sort.</p>
+      </div>
+      <div class="tablewrap">
+        <table id="dataTable" class="table">
+          <thead>
+            <tr>
+              <th data-key="created_at">Time</th>
+              <th data-key="level">Level</th>
+              <th data-key="provider">Provider</th>
+              <th data-key="model">Model</th>
+              <th data-key="http_status">Status</th>
+              <th data-key="function_name">Function</th>
+              <th data-key="request_id">Request ID</th>
+              <th data-key="app_id">App</th>
+              <th data-key="duration_ms">Duration</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="tutorialModal" class="modal" style="display:none;">
+    <div class="modal-body">
+      <div class="modal-head">
+        <h3>Gate Proofx walkthrough</h3>
+        <button id="closeTutorial" class="btn ghost" type="button">Close</button>
+      </div>
+      <ol class="tutorial-list">
+        <li>Paste your admin bearer token (Data source) and click Save token.</li>
+        <li>To load archives: click “List archive batches”, then Load a batch, or paste a key and click “Load from archive key”.</li>
+        <li>To load exports: click Upload and select a gateway CSV/NDJSON export.</li>
+        <li>Use Filters (text, level, provider, model, date range, status, max rows) to narrow results; charts and table update instantly.</li>
+        <li>Sort columns by clicking headers; errors and warns are counted in stats.</li>
+        <li>Export the current filtered view via “Export filtered CSV” or print/Save view as PDF.</li>
+        <li>Charts: Requests over time, top providers, and levels doughnut reflect your current filters.</li>
+      </ol>
+      <p class="muted">Tip: Keep tokens off the front-end by using the archive endpoint server-side in production; this UI uses your pasted token for convenience.</p>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

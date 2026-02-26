@@ -1,0 +1,4 @@
+/* Compatibility shim: a few pages reference /assets/style.css.
+   Keep this file so those links never 404. */
+
+@import url("/css/style.css");

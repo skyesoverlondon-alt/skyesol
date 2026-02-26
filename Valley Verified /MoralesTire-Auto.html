@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://moralestireandauto-valleyverified.netlify.app/" />
+  <title>Morales Tire & Auto Care — Valley Verified | 3D Sponsor Spectacle</title>
+  <meta name="description" content="Morales Tire & Auto Care (Phoenix, AZ) — tires, wheels, repairs, and financing options. A Valley Verified sponsor spectacle: cinematic 3D, service surface, hours, location, and instant call/quote actions." />
+  <meta name="theme-color" content="#05050a" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Morales Tire & Auto Care — Valley Verified | 3D Sponsor Spectacle" />
+  <meta property="og:description" content="Cinematic 3D sponsor surface for Morales Tire & Auto Care. Services, hours, directions, and call-to-action — built in the Skye Visual Standard style." />
+  <meta property="og:url" content="https://moralestireandauto-valleyverified.netlify.app/" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Morales Tire & Auto Care — Valley Verified | 3D Sponsor Spectacle" />
+  <meta name="twitter:description" content="Cinematic 3D sponsor surface: services, hours, directions, and instant call/quote actions." />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <style>
+/* ════════════════════════════════════════════════════════════════════
+   Skye Visual Standard — Single-File Sponsor Spectacle (HTML Only)
+   Theme: Royal Purple + Neon Gold · Operator-grade layout discipline
+   ════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
+
+:root{
+  --gold:#c9a84c;
+  --gold-light:#e8d48b;
+  --gold-dim:rgba(201,168,76,.15);
+  --purple:#8a63ff;
+  --blue:#3a6fd8;
+  --fire:#e84c30;
+
+  --dark:#0e0e1a;
+  --darker:#07070f;
+  --surface:#0c0c14;
+  --surface-2:#111119;
+  --surface-3:#181822;
+
+  --text:#e8e6e1;
+  --text-dim:#8a8880;
+
+  --glow-gold: 0 0 30px rgba(201,168,76,.30), 0 0 60px rgba(201,168,76,.10);
+  --glow-gold-strong: 0 0 40px rgba(201,168,76,.50), 0 0 80px rgba(201,168,76,.20);
+  --glow-purple: 0 0 28px rgba(138,99,255,.35), 0 0 64px rgba(138,99,255,.14);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--darker);
+  color:var(--text);
+  font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+a{color:inherit}
+strong{font-weight:700}
+
+#three-bg, #three-hero{
+  position:fixed; inset:0;
+  width:100%; height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* grain */
+body::after{
+  content:'';
+  position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.032'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9998;
+}
+
+/* loader */
+#loader{
+  position:fixed; inset:0;
+  background:radial-gradient(1200px 900px at 50% 35%, rgba(138,99,255,.12), rgba(7,7,15,1) 60%);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  z-index:99999;
+  font-family:'Fira Code',monospace;
+  letter-spacing:1px;
+  color:var(--gold);
+  text-align:center;
+  transition:opacity 1s ease;
+}
+body.ready #loader{opacity:0;pointer-events:none}
+.spinner{
+  width:62px;height:62px;border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:var(--gold);
+  border-right-color:var(--blue);
+  animation:spin 1s linear infinite;
+  margin-bottom:18px;
+  box-shadow:0 0 22px rgba(201,168,76,.30);
+}
+#loading-text{font-size:12px;text-transform:uppercase;margin-bottom:8px}
+#loading-sub{font-size:11px;text-transform:uppercase;color:rgba(232,232,232,.55);letter-spacing:1.5px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* intro cinematic */
+#intro{
+  position:fixed; inset:0;
+  z-index:98000;
+  background:radial-gradient(1400px 900px at 50% 40%, rgba(201,168,76,.08), rgba(7,7,15,1) 62%);
+  overflow:hidden;
+  opacity:1;
+  transition:opacity 1s ease;
+}
+body.ready #intro{opacity:0;pointer-events:none}
+#intro .fog{
+  position:absolute; inset:-40% -60%;
+  background:
+    radial-gradient(circle at 22% 48%, rgba(138,99,255,.22) 0%, transparent 42%),
+    radial-gradient(circle at 78% 58%, rgba(201,168,76,.18) 0%, transparent 46%),
+    radial-gradient(circle at 50% 35%, rgba(58,111,216,.12) 0%, transparent 52%);
+  filter:blur(60px);
+  opacity:.28;
+  animation:fogDrift 18s cubic-bezier(.37,0,.63,1) infinite alternate;
+}
+#intro .fog.two{opacity:.18;animation-duration:26s;animation-direction:alternate-reverse}
+@keyframes fogDrift{0%{transform:translateX(-3%) scale(1)}100%{transform:translateX(3%) scale(1.1)}}
+#intro .vignette{position:absolute;inset:0;background:radial-gradient(circle at center, transparent 35%, #000 140%);opacity:.9}
+#intro .grid{
+  position:absolute; left:-20%; right:-20%; bottom:-35%;
+  height:60%;
+  background:
+    linear-gradient(to right, rgba(201,168,76,.14) 1px, transparent 1px),
+    linear-gradient(to top, rgba(201,168,76,.10) 1px, transparent 1px);
+  background-size: 46px 46px;
+  transform:perspective(800px) rotateX(68deg);
+  filter:drop-shadow(0 0 20px rgba(201,168,76,.15));
+  opacity:.28;
+}
+#intro .txt{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  padding:24px;
+}
+#intro .kicker{
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:8px;
+  color:var(--gold);
+  text-transform:uppercase;
+  font-size:12px;
+  opacity:0;
+  transform:translateY(10px);
+  animation:introUp 1.8s .2s forwards;
+}
+#intro .title{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:clamp(34px,5vw,62px);
+  line-height:1.05;
+  margin:14px 0 10px;
+  opacity:0;
+  transform:translateY(10px) scale(.98);
+  animation:introUp 1.8s .45s forwards;
+}
+#intro .title span{
+  background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-size:200% auto;
+  animation:shimmer 4s ease-in-out infinite;
+}
+#intro .sub{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  color:rgba(232,232,232,.72);
+  max-width:780px;
+  opacity:0;
+  transform:translateY(10px);
+  animation:introUp 1.8s .7s forwards;
+}
+#intro .badgeRow{
+  display:flex; gap:12px; flex-wrap:wrap;
+  justify-content:center;
+  margin-top:18px;
+  opacity:0;
+  transform:translateY(10px);
+  animation:introUp 1.8s .95s forwards;
+}
+.badge{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:9px 14px;
+  border-radius:999px;
+  border:1px solid rgba(201,168,76,.22);
+  background:rgba(17,17,25,.65);
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(232,232,232,.84);
+}
+.badge .dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 16px rgba(201,168,76,.55);
+}
+.badge.purple{border-color:rgba(138,99,255,.28)}
+.badge.purple .dot{background:var(--purple);box-shadow:0 0 16px rgba(138,99,255,.55)}
+#intro .skip{
+  position:absolute; right:22px; bottom:22px;
+  background:transparent;
+  border:1px solid rgba(201,168,76,.35);
+  color:var(--gold);
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:4px;
+  padding:10px 16px;
+  border-radius:6px;
+  cursor:pointer;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+#intro .skip:hover{background:rgba(201,168,76,.10);border-color:rgba(201,168,76,.6);transform:translateY(-2px)}
+@keyframes introUp{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+
+/* nav */
+.main-nav{
+  position:fixed; top:0; left:0; right:0;
+  z-index:9000;
+  padding:14px 40px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(5,5,8,.72);
+  backdrop-filter: blur(16px);
+  border-bottom:1px solid rgba(201,168,76,.06);
+  transition: background .4s;
+}
+.main-nav.scrolled{background:rgba(5,5,8,.92)}
+.nav-left{display:flex;align-items:center;gap:14px}
+.nav-logo{
+  display:flex; align-items:center; gap:12px;
+  text-decoration:none;
+}
+.nav-logo img{
+  height:34px; width:auto;
+  filter:drop-shadow(0 0 18px rgba(201,168,76,.28));
+  animation:logoPulse 3.6s ease-in-out infinite;
+}
+@keyframes logoPulse{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-3px) scale(1.02)}}
+.nav-logo span{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px;
+  letter-spacing:4px;
+  color:var(--gold);
+  text-transform:uppercase;
+}
+.sponsor-chip{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(138,99,255,.22);
+  background:rgba(17,17,25,.55);
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(232,232,232,.8);
+}
+.sponsor-chip b{color:var(--gold);font-weight:700}
+.sponsor-chip .vv{
+  width:18px;height:18px;border-radius:6px;
+  background:linear-gradient(135deg, rgba(138,99,255,.9), rgba(201,168,76,.9));
+  display:grid; place-items:center;
+  box-shadow: var(--glow-purple);
+}
+.sponsor-chip .vv span{
+  font-family:'Fira Code',monospace;
+  font-size:10px;
+  color:#07070f;
+  font-weight:700;
+}
+
+.nav-links{display:flex; gap:22px; align-items:center}
+.nav-links a, .nav-links button{
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  text-decoration:none;
+  transition: color .25s, transform .25s;
+  padding:6px 0;
+  position:relative;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute; left:0; bottom:0;
+  width:0; height:1px;
+  background:var(--gold);
+  transition:width .25s;
+}
+.nav-links a:hover{color:var(--gold);transform:translateY(-1px)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--gold)}
+.nav-links a.active::after{width:100%}
+.nav-toggle{
+  display:none;
+  background:none;
+  border:1px solid rgba(201,168,76,.28);
+  color:var(--gold);
+  font-size:18px;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.menu-btn{
+  border:1px solid rgba(201,168,76,.35);
+  border-radius:6px;
+  padding:7px 14px;
+  color:var(--gold);
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:4px;
+}
+.menu-btn:hover{background:rgba(201,168,76,.10)}
+
+@media(max-width:980px){
+  .nav-toggle{display:block}
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:100%; left:0; right:0;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+    padding:18px 40px;
+    background:rgba(5,5,8,.95);
+    border-bottom:1px solid rgba(201,168,76,.08);
+  }
+  .nav-links.open{display:flex}
+}
+
+/* section skeleton */
+.hero-wrapper{position:relative; min-height:100vh; overflow:hidden; padding-top:72px}
+.hero-grid{
+  position:relative;
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items:center;
+  min-height:100vh;
+  max-width:1400px;
+  margin:0 auto;
+  padding:88px 60px 80px;
+  z-index:2;
+}
+.hero-wrapper::before{
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg, transparent 10%, var(--gold) 50%, transparent 90%);
+  animation:subtlePulse 3s ease-in-out infinite;
+  z-index:10;
+}
+@keyframes subtlePulse{0%,100%{opacity:1}50%{opacity:.65}}
+
+.hero-txt-col{padding-right:50px; z-index:3}
+.hero-tag{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px;
+  letter-spacing:7px;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:18px;
+  display:inline-block;
+}
+.hero-tag::after{
+  content:'';
+  display:block;
+  height:1px;
+  margin-top:10px;
+  background:linear-gradient(90deg, var(--gold), transparent);
+}
+.hero-grid h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,5vw,70px);
+  font-weight:700;
+  line-height:1.04;
+  margin-bottom:18px;
+}
+.hero-grid h1 span{
+  display:block;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-size:200% auto;
+  animation:shimmer 4s ease-in-out infinite;
+}
+.hero-subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  color:rgba(232,232,232,.72);
+  max-width:620px;
+  margin-bottom:22px;
+  font-size:clamp(15px,1.8vw,20px);
+}
+.hero-actions{
+  display:flex; gap:14px; flex-wrap:wrap;
+  margin-top:14px;
+}
+.btn-gold, .btn-outline, .btn-fire{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:13px 30px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  transition: transform .35s, box-shadow .35s, background .35s, border-color .35s;
+  position:relative;
+  overflow:hidden;
+}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold),#b8943f);
+  color:#07070f;
+}
+.btn-gold:hover{transform:translateY(-3px); box-shadow:var(--glow-gold-strong)}
+.btn-outline{
+  background:transparent;
+  border:1px solid rgba(201,168,76,.25);
+  color:var(--gold);
+}
+.btn-outline:hover{transform:translateY(-3px);border-color:rgba(201,168,76,.6);background:rgba(201,168,76,.06)}
+.btn-fire{
+  background:linear-gradient(135deg, rgba(232,76,48,.95), rgba(201,168,76,.75));
+  color:#07070f;
+}
+.btn-fire:hover{transform:translateY(-3px); box-shadow:0 0 40px rgba(232,76,48,.22), 0 0 70px rgba(201,168,76,.14)}
+.hero-right{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:520px;
+}
+.hero-right .glass{
+  width:min(520px, 92vw);
+  border-radius:18px;
+  padding:22px 18px 18px;
+  background:rgba(12,12,20,.72);
+  border:1px solid rgba(201,168,76,.12);
+  box-shadow: 0 24px 60px rgba(0,0,0,.55), var(--glow-purple);
+  backdrop-filter: blur(18px);
+  position:relative;
+  overflow:hidden;
+}
+.hero-right .glass::before{
+  content:'';
+  position:absolute; inset:-2px;
+  background:radial-gradient(600px 240px at 20% 20%, rgba(201,168,76,.18), transparent 55%),
+             radial-gradient(600px 240px at 80% 70%, rgba(138,99,255,.18), transparent 55%);
+  opacity:.55;
+  filter:blur(10px);
+}
+.hero-right .glass .cap{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  border-radius:12px;
+  background:rgba(17,17,25,.55);
+  border:1px solid rgba(201,168,76,.10);
+}
+.hero-right .cap .label{
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:4px;
+  font-size:11px;
+  color:rgba(232,232,232,.85);
+  text-transform:uppercase;
+}
+.hero-right .cap .pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  border:1px solid rgba(58,111,216,.28);
+  color:rgba(125,165,255,.95);
+  background:rgba(58,111,216,.08);
+}
+.hero-right .glass .body{
+  position:relative;
+  padding:16px 10px 6px;
+}
+.kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:12px;
+  margin-top:12px;
+}
+.kpi{
+  border-radius:14px;
+  padding:14px 14px;
+  background:rgba(17,17,25,.60);
+  border:1px solid rgba(201,168,76,.10);
+  transition:transform .25s, border-color .25s;
+}
+.kpi:hover{transform:translateY(-2px); border-color:rgba(201,168,76,.25)}
+.kpi .k{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(232,232,232,.6)}
+.kpi .v{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--gold);line-height:1;margin-top:6px}
+.kpi .s{font-size:12px;color:rgba(232,232,232,.7);margin-top:6px;line-height:1.5}
+
+.hero-scroll{
+  position:absolute;
+  bottom:32px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  font-size:10px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gold);
+  z-index:5;
+}
+.hero-scroll .line{
+  width:1px;height:36px;
+  background:linear-gradient(to bottom, var(--gold), transparent);
+  animation:subtlePulse 2s ease-in-out infinite;
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;text-align:center;gap:26px;padding:98px 22px 70px}
+  .hero-txt-col{padding-right:0}
+  .hero-actions{justify-content:center}
+  .hero-right{min-height:440px}
+}
+
+/* sections */
+.divider{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  height:1px;
+  position:relative;
+  z-index:1;
+  background:linear-gradient(90deg, transparent, rgba(201,168,76,.25), transparent);
+}
+.content-section{
+  padding:100px 24px;
+  max-width:1100px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+}
+.section-label{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:12px;
+  letter-spacing:5px;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,4.2vw,48px);
+  font-weight:700;
+  line-height:1.15;
+  margin-bottom:18px;
+}
+.section-desc{
+  font-size:15px;
+  color:var(--text-dim);
+  max-width:760px;
+  margin-bottom:45px;
+  line-height:1.85;
+}
+
+/* cards */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:980px){.grid-4,.grid-3,.grid-2{grid-template-columns:1fr}}
+
+.card{
+  background:rgba(12,12,20,.78);
+  border:1px solid rgba(201,168,76,.06);
+  border-radius:14px;
+  padding:22px 18px;
+  position:relative;
+  overflow:hidden;
+  transition:transform .35s, border-color .35s, box-shadow .35s;
+  backdrop-filter: blur(12px);
+}
+.card::before{
+  content:'';
+  position:absolute; left:0; right:0; top:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .45s;
+}
+.card:hover::before{transform:scaleX(1)}
+.card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.20);box-shadow:0 26px 70px rgba(0,0,0,.55)}
+.card .icon{font-size:26px;margin-bottom:10px}
+.card h3{font-weight:700;font-size:16px;margin-bottom:6px}
+.card .type{
+  font-size:10px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.card p{font-size:13px;color:rgba(232,232,232,.68);line-height:1.75}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.card .tags span{
+  font-size:9px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:5px 10px;
+  border-radius:999px;
+  border:1px solid rgba(201,168,76,.14);
+  background:rgba(201,168,76,.04);
+  color:rgba(232,232,232,.72);
+}
+
+/* trust ribbon */
+.ribbon{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:18px; flex-wrap:wrap;
+  padding:18px 18px;
+  border-radius:16px;
+  border:1px solid rgba(201,168,76,.14);
+  background:linear-gradient(135deg, rgba(201,168,76,.08), rgba(138,99,255,.07));
+  box-shadow: 0 18px 60px rgba(0,0,0,.50);
+}
+.ribbon .left{display:flex;flex-direction:column;gap:4px}
+.ribbon .left .t{
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  font-weight:700;
+}
+.ribbon .left .d{color:rgba(232,232,232,.70);font-size:13px;max-width:680px}
+.ribbon .right{display:flex;gap:10px;flex-wrap:wrap}
+
+/* quote console */
+.console{
+  border-radius:16px;
+  border:1px solid rgba(201,168,76,.14);
+  background:rgba(10,10,15,.72);
+  box-shadow: 0 24px 70px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+.console .bar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  background:rgba(17,17,25,.75);
+  border-bottom:1px solid rgba(201,168,76,.10);
+}
+.console .bar .title{
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:4px;
+  font-size:12px;
+  text-transform:uppercase;
+  color:rgba(232,232,232,.86);
+}
+.console .bar .mode{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 10px;border-radius:999px;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  border:1px solid rgba(138,99,255,.24);
+  color:rgba(232,232,232,.78);
+  background:rgba(138,99,255,.08);
+}
+.console .body{padding:16px 14px 18px}
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(max-width:900px){.form{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{
+  font-size:10px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.field input, .field select, .field textarea{
+  background:rgba(17,17,25,.72);
+  color:var(--text);
+  border:1px solid rgba(201,168,76,.14);
+  border-radius:10px;
+  padding:12px 12px;
+  outline:none;
+  font-size:13px;
+}
+.field textarea{min-height:120px;resize:vertical}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.note{
+  margin-top:12px;
+  font-size:12px;
+  color:rgba(232,232,232,.55);
+  line-height:1.7;
+}
+
+/* contact */
+.contact-section{
+  text-align:center;
+  padding:120px 24px;
+  background:radial-gradient(ellipse at 50% 50%, rgba(201,168,76,.05) 0%, transparent 55%);
+  position:relative;
+  z-index:1;
+}
+.contact-buttons{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+/* footer */
+footer{
+  text-align:center;
+  padding:60px 24px 30px;
+  border-top:1px solid rgba(201,168,76,.05);
+  position:relative;
+  z-index:1;
+}
+.footer-logo{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+  filter:drop-shadow(0 0 20px rgba(201,168,76,.25));
+}
+.footer-logo img{height:44px;width:auto;animation:logoPulse 3.6s ease-in-out infinite}
+footer p{font-size:12px;color:rgba(232,232,232,.62);line-height:1.85}
+.footer-links{
+  display:flex;justify-content:center;gap:22px;flex-wrap:wrap;
+  margin-top:16px;
+}
+.footer-links a{
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  text-decoration:none;
+  transition:color .25s;
+}
+.footer-links a:hover{color:var(--gold)}
+
+/* reveal */
+.reveal{opacity:0; transform:translateY(26px); transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1; transform:translateY(0)}
+.stagger .reveal:nth-child(1){transition-delay:0s}
+.stagger .reveal:nth-child(2){transition-delay:.08s}
+.stagger .reveal:nth-child(3){transition-delay:.14s}
+.stagger .reveal:nth-child(4){transition-delay:.2s}
+.stagger .reveal:nth-child(5){transition-delay:.26s}
+.stagger .reveal:nth-child(6){transition-delay:.32s}
+
+/* toast */
+#toast{
+  position:fixed;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(5,5,8,.92);
+  border:1px solid rgba(201,168,76,.16);
+  padding:12px 14px;
+  border-radius:999px;
+  color:var(--text);
+  font-size:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s, transform .25s;
+  z-index:9999;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
+#toast.err{border-color:rgba(232,76,48,.28)}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important}
+  html{scroll-behavior:auto}
+}
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader" aria-hidden="true">
+  <div class="spinner"></div>
+  <div id="loading-text">CALIBRATING SPONSOR SPECTACLE</div>
+  <div id="loading-sub">3D SCENE · TRUST SURFACE · ACTION LAYER</div>
+</div>
+
+<!-- CINEMATIC INTRO -->
+<div id="intro" aria-hidden="true">
+  <div class="fog"></div>
+  <div class="fog two"></div>
+  <div class="grid"></div>
+  <div class="vignette"></div>
+  <div class="txt">
+    <div class="kicker">VALLEY VERIFIED · PHOENIX, AZ</div>
+    <h1 class="title">Morales <span>Tire &amp; Auto Care</span></h1>
+    <div class="sub">A single-file 3D sponsor surface: services, hours, directions, and instant call/quote actions — wrapped in a cinematic Skye Visual Standard presentation.</div>
+    <div class="badgeRow">
+      <div class="badge"><span class="dot"></span> Tires · Wheels · Repairs</div>
+      <div class="badge purple"><span class="dot"></span> Financing Options</div>
+      <div class="badge"><span class="dot"></span> Fast Intake + Directions</div>
+    </div>
+  </div>
+  <button class="skip" id="skipIntro" type="button">SKIP</button>
+</div>
+
+<!-- 3D BACKGROUND -->
+<canvas id="three-bg"></canvas>
+
+<!-- NAV -->
+<nav class="main-nav" id="mainNav">
+  <div class="nav-left">
+    <a class="nav-logo" href="#home" aria-label="Home">
+      <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOLEnterprises logo" />
+      <span>SKYES OVER LONDON LC</span>
+    </a>
+    <div class="sponsor-chip" title="Valley Verified Sponsor Surface">
+      <div class="vv"><span>VV</span></div>
+      <div>SPONSOR · <b>VALLEY VERIFIED</b></div>
+    </div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Open navigation">☰</button>
+
+  <div class="nav-links" id="navLinks" aria-label="Site">
+    <a href="#home" class="active">Home</a>
+    <a href="#services">Services</a>
+    <a href="#financing">Financing</a>
+    <a href="#trust">Trust</a>
+    <a href="#quote">Quote</a>
+    <a href="#contact">Contact</a>
+    <a href="https://moralestireandauto-valleyverified.netlify.app/" target="_blank" rel="noopener" class="menu-btn" style="text-decoration:none">Visit Live Site</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero-wrapper" id="home">
+  <div class="hero-grid">
+    <div class="hero-txt-col">
+      <div class="hero-tag">CINEMATIC • FAST • LOCAL</div>
+      <h1>Morales Tire &amp; Auto Care<br><span>Valley Verified Sponsor</span></h1>
+      <div class="hero-subtitle">
+        Tires, wheels, and auto service with quick intake and direct actions. Tap-to-call, tap-to-directions, and a quote console—built as a single-page 3D ad surface.
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn-fire" href="tel:+16025025517">Call (602) 502-5517</a>
+        <a class="btn-gold" href="#quote">Get a Quote</a>
+        <a class="btn-outline" href="#services">See Services</a>
+        <a class="btn-outline" href="https://www.google.com/maps?q=3701+N+43rd+Ave+Phoenix+AZ+85031" target="_blank" rel="noopener">Directions</a>
+      </div>
+
+      <div style="margin-top:18px;color:rgba(232,232,232,.62);font-size:12px;max-width:720px">
+        <span style="color:var(--gold);font-family:'Fira Code',monospace;letter-spacing:1px">LOCATION</span>
+        <span> 3701 N 43rd Ave, Phoenix, AZ 85031</span>
+        <span style="opacity:.5"> · </span>
+        <span style="color:var(--gold);font-family:'Fira Code',monospace;letter-spacing:1px">HOURS</span>
+        <span> Mon–Sat 8AM–8PM · Sun 8AM–4PM</span>
+      </div>
+    </div>
+
+    <div class="hero-right" aria-hidden="true">
+      <div class="glass">
+        <div class="cap">
+          <div class="label">Live Service Console</div>
+          <div class="pill">3D SCENE SYNCS TO SCROLL</div>
+        </div>
+        <div class="body">
+          <div style="color:rgba(232,232,232,.72);font-size:13px;line-height:1.75">
+            This surface is designed for ads, kiosks, and link-in-bio use—one URL, no page switching. Scroll triggers scene modes: service tools, financing glow, trust grid, and contact beacon.
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi">
+              <div class="k">PRIMARY LINE</div>
+              <div class="v" data-copy="+16025025517">(602)</div>
+              <div class="s">Tap-to-call opens your phone dialer instantly.</div>
+            </div>
+            <div class="kpi">
+              <div class="k">SECONDARY</div>
+              <div class="v" data-copy="+16023144423">(602)</div>
+              <div class="s">Alternate line listed publicly for quick reach.</div>
+            </div>
+            <div class="kpi">
+              <div class="k">DIRECT ADDRESS</div>
+              <div class="v">85031</div>
+              <div class="s">Open directions with one click.</div>
+            </div>
+            <div class="kpi">
+              <div class="k">QUOTE MODE</div>
+              <div class="v">LIVE</div>
+              <div class="s">Build a tire size / service request in seconds.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="hero-scroll">Scroll<div class="line"></div></div>
+</header>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section class="content-section" id="services">
+  <div class="section-label reveal">Services</div>
+  <div class="section-title reveal">Tires, wheels, repairs — built for speed</div>
+  <div class="section-desc reveal">
+    This sponsor surface mirrors a full shop landing page, but optimized for conversion: clear service blocks, instant actions, and a quote console.
+  </div>
+
+  <div class="grid-3 stagger">
+    <div class="card reveal">
+      <div class="icon">🛞</div>
+      <h3>Tires (New &amp; Used)</h3>
+      <div class="type">Sizing · Mount/Balance · Flats</div>
+      <p>Request by tire size, vehicle, or budget. Same-day solutions for many tire needs.</p>
+      <div class="tags"><span>mount</span><span>balance</span><span>repairs</span><span>rotations</span></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="icon">🛞✨</div>
+      <h3>Wheels &amp; Custom Setups</h3>
+      <div class="type">Rims · Fitment · Style</div>
+      <p>Wheel swaps and setup guidance. Ask about fitment, offsets, and compatible sizes.</p>
+      <div class="tags"><span>rims</span><span>fitment</span><span>setups</span></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="icon">🧰</div>
+      <h3>General Auto Repair</h3>
+      <div class="type">Diagnostics · Maintenance</div>
+      <p>Repairs and maintenance support across common vehicle needs—built for quick intake.</p>
+      <div class="tags"><span>maintenance</span><span>diagnostics</span><span>repairs</span></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="icon">🛑</div>
+      <h3>Brakes</h3>
+      <div class="type">Pads · Rotors · Safety</div>
+      <p>Brake checks and service requests. Bring noise, vibration, or stopping issues—get routed fast.</p>
+      <div class="tags"><span>pads</span><span>rotors</span><span>inspection</span></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="icon">📐</div>
+      <h3>Alignment</h3>
+      <div class="type">Tracking · Steering feel</div>
+      <p>If the car pulls, drifts, or eats tires—alignment check is your first move.</p>
+      <div class="tags"><span>alignment</span><span>steering</span><span>tire wear</span></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="icon">🧊</div>
+      <h3>A/C &amp; Cooling</h3>
+      <div class="type">Heat · Overheating · Comfort</div>
+      <p>Phoenix reality: A/C performance matters. Log symptoms and we’ll route the request.</p>
+      <div class="tags"><span>ac</span><span>cooling</span><span>comfort</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINANCING -->
+<section class="content-section" id="financing">
+  <div class="section-label reveal">Financing</div>
+  <div class="section-title reveal">Ask about financing options</div>
+  <div class="section-desc reveal">
+    Public listings indicate financing availability for new tires and wheels. Use the quote console below to request details and eligibility.
+  </div>
+
+  <div class="ribbon reveal">
+    <div class="left">
+      <div class="t">Financing signal: Tires &amp; Wheels</div>
+      <div class="d">Start with tire size, wheel size, or vehicle. Add your budget and timeframe. We generate a clean request you can copy or send.</div>
+    </div>
+    <div class="right">
+      <a class="btn-gold" href="#quote">Open Quote Console</a>
+      <a class="btn-outline" href="tel:+16025025517">Call to Confirm</a>
+      <a class="btn-outline" href="https://moralestireandauto-valleyverified.netlify.app/" target="_blank" rel="noopener">View Listing</a>
+    </div>
+  </div>
+
+  <div style="margin-top:20px" class="grid-2 stagger">
+    <div class="card reveal">
+      <div class="icon">💳</div>
+      <h3>New Tires</h3>
+      <div class="type">Budget · Approvals · Terms</div>
+      <p>Request a quote with your tire size and budget. Ask about available financing pathways on new tires.</p>
+      <div class="tags"><span>new tires</span><span>budget</span><span>terms</span></div>
+    </div>
+    <div class="card reveal">
+      <div class="icon">🛞🏁</div>
+      <h3>Wheels &amp; Packages</h3>
+      <div class="type">Tire + wheel bundles</div>
+      <p>Ask about bundled packages. Include vehicle year/make/model for faster fitment confirmation.</p>
+      <div class="tags"><span>wheels</span><span>packages</span><span>fitment</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRUST -->
+<section class="content-section" id="trust">
+  <div class="section-label reveal">Trust Surface</div>
+  <div class="section-title reveal">Valley Verified discipline</div>
+  <div class="section-desc reveal">
+    A sponsor surface should be clear, fast, and honest. This section gives customers the “next right click”: verify details, confirm hours, and open directions.
+  </div>
+
+  <div class="grid-3 stagger">
+    <div class="card reveal">
+      <div class="icon">✅</div>
+      <h3>Verify on the Live Listing</h3>
+      <div class="type">Primary source</div>
+      <p>Open the live Valley Verified site for the latest updates and any shop announcements.</p>
+      <div class="tags"><span>listing</span><span>updates</span><span>verify</span></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="icon">🧭</div>
+      <h3>Directions First</h3>
+      <div class="type">Phoenix, AZ 85031</div>
+      <p>Tap the Directions button and your maps app opens directly to the shop address.</p>
+      <div class="tags"><span>maps</span><span>routing</span><span>one tap</span></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="icon">🗣️</div>
+      <h3>English / Español</h3>
+      <div class="type">Fast intake</div>
+      <p>Use the quote console in either language. The output is readable and structured.</p>
+      <div class="tags"><span>bilingual</span><span>intake</span><span>fast</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:18px" class="ribbon reveal">
+    <div class="left">
+      <div class="t">Quick facts (public listings)</div>
+      <div class="d">
+        Address: 3701 N 43rd Ave, Phoenix, AZ 85031 · Primary: (602) 502-5517 · Secondary: (602) 314-4423 · Hours: Mon–Sat 8AM–8PM, Sun 8AM–4PM
+      </div>
+    </div>
+    <div class="right">
+      <a class="btn-fire" href="tel:+16025025517">Call Now</a>
+      <a class="btn-outline" href="https://www.google.com/maps?q=3701+N+43rd+Ave+Phoenix+AZ+85031" target="_blank" rel="noopener">Open Maps</a>
+      <a class="btn-outline" href="#contact">Contact Panel</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- QUOTE CONSOLE -->
+<section class="content-section" id="quote">
+  <div class="section-label reveal">Quote Console</div>
+  <div class="section-title reveal">Build a clean request in seconds</div>
+  <div class="section-desc reveal">
+    This is an ad-grade intake tool: pick what you need, and it generates a structured message you can copy, text, or email.
+  </div>
+
+  <div class="console reveal" role="region" aria-label="Quote Console">
+    <div class="bar">
+      <div class="title">MORALES · INTAKE CONSOLE</div>
+      <div class="mode" id="sceneModePill">SCENE MODE: HOME</div>
+    </div>
+    <div class="body">
+      <div class="form">
+        <div class="field">
+          <label for="rqType">Request type</label>
+          <select id="rqType">
+            <option value="Tire Quote">Tire Quote</option>
+            <option value="Wheel Package">Wheel Package</option>
+            <option value="Brake Service">Brake Service</option>
+            <option value="Alignment Check">Alignment Check</option>
+            <option value="General Repair">General Repair</option>
+            <option value="A/C Service">A/C Service</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="lang">Language</label>
+          <select id="lang">
+            <option value="EN">English</option>
+            <option value="ES">Español</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="vehicle">Vehicle (year/make/model)</label>
+          <input id="vehicle" placeholder="Example: 2016 Toyota Camry" />
+        </div>
+        <div class="field">
+          <label for="tireSize">Tire size (if applicable)</label>
+          <input id="tireSize" placeholder="Example: 225/45R17" />
+        </div>
+
+        <div class="field">
+          <label for="budget">Budget range (optional)</label>
+          <input id="budget" placeholder="Example: $300–$600" />
+        </div>
+        <div class="field">
+          <label for="timeline">When do you need it?</label>
+          <select id="timeline">
+            <option>Today</option>
+            <option>Within 2–3 days</option>
+            <option>This week</option>
+            <option>Next week</option>
+          </select>
+        </div>
+
+        <div class="field" style="grid-column:1 / -1">
+          <label for="details">Details / symptoms</label>
+          <textarea id="details" placeholder="Example: front right tire leaking slowly, need patch or replacement. Or: brakes squeal when stopping."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" placeholder="Your name" />
+        </div>
+        <div class="field">
+          <label for="contactInfo">Callback text/call</label>
+          <input id="contactInfo" placeholder="Phone or email" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-gold" id="btnGenerate" type="button">Generate Request</button>
+        <button class="btn-outline" id="btnCopy" type="button">Copy</button>
+        <a class="btn-fire" id="btnText" href="sms:+16025025517">Text Shop</a>
+        <a class="btn-outline" id="btnEmail" href="mailto:">Email</a>
+        <button class="btn-outline" id="btnPrint" type="button">Print / Save PDF</button>
+      </div>
+
+      <div class="note" id="rqNote">Tip: Tap “Generate Request” first—then Copy / Text / Email use the generated message.</div>
+
+      <div style="margin-top:14px">
+        <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Generated message</div>
+        <textarea id="out" style="width:100%;min-height:160px;border-radius:14px"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label reveal">Contact</div>
+  <div class="section-title reveal">Instant actions</div>
+  <div class="section-desc reveal">
+    Single-tap actions matter. Use Call, Directions, or open the live Valley Verified site for updates.
+  </div>
+
+  <div class="contact-buttons reveal">
+    <a class="btn-fire" href="tel:+16025025517">Call (602) 502-5517</a>
+    <a class="btn-outline" href="tel:+16023144423">Call (602) 314-4423</a>
+    <a class="btn-gold" href="https://www.google.com/maps?q=3701+N+43rd+Ave+Phoenix+AZ+85031" target="_blank" rel="noopener">Directions</a>
+    <a class="btn-outline" href="https://moralestireandauto-valleyverified.netlify.app/" target="_blank" rel="noopener">Open Live Site</a>
+  </div>
+
+  <div style="max-width:980px;margin:38px auto 0" class="reveal">
+    <div class="ribbon">
+      <div class="left">
+        <div class="t">Morales Tire &amp; Auto Care</div>
+        <div class="d">
+          3701 N 43rd Ave, Phoenix, AZ 85031 · Mon–Sat 8AM–8PM · Sun 8AM–4PM
+        </div>
+      </div>
+      <div class="right">
+        <a class="btn-outline" href="#quote">Quote Console</a>
+        <a class="btn-outline" href="#services">Services</a>
+        <a class="btn-outline" href="#trust">Trust</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOLEnterprises logo" /></div>
+  <p>
+    <strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · Sponsor Surface for a Valley Verified listing<br />
+    <a href="https://solenterprises.org" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">solenterprises.org</a>
+    <span style="opacity:.5"> · </span>
+    <a href="https://moralestireandauto-valleyverified.netlify.app/" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none">moralestireandauto-valleyverified.netlify.app</a>
+  </p>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#financing">Financing</a>
+    <a href="#trust">Trust</a>
+    <a href="#quote">Quote</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p style="margin-top:18px;font-size:10px;color:rgba(232,232,232,.35)">
+    Public contact details reflect third-party listings and may change—verify on the live Valley Verified site before relying on them.
+  </p>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ──────────────────────────────────────────────────────────────────
+   UX: loader/intro, nav, reveals, toast, quote console
+   ────────────────────────────────────────────────────────────────── */
+(function(){
+  const toast = document.getElementById('toast');
+  const showToast = (msg, isErr=false) => {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.toggle('err', !!isErr);
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(()=>toast.classList.remove('show'), 2200);
+  };
+
+  // intro skip
+  const skip = document.getElementById('skipIntro');
+  if (skip) skip.addEventListener('click', () => finish());
+
+  // finish (also called by 3D init)
+  function finish(){
+    document.body.classList.add('ready');
+  }
+
+  // fail-safe: auto-finish after 4s
+  setTimeout(finish, 4200);
+
+  // nav
+  const nav = document.getElementById('mainNav');
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (toggle && links){
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+      toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
+    });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.textContent = '☰';
+    }));
+  }
+  window.addEventListener('scroll', () => {
+    if (nav) nav.classList.toggle('scrolled', window.pageYOffset > 60);
+    // active section indicator
+    const ids = ['home','services','financing','trust','quote','contact'];
+    let current = 'home';
+    for (const id of ids){
+      const el = document.getElementById(id);
+      if (!el) continue;
+      const r = el.getBoundingClientRect();
+      if (r.top <= 110 && r.bottom >= 160) { current = id; break; }
+    }
+    if (links){
+      links.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }
+    window.__SCENE_MODE = current.toUpperCase();
+    const pill = document.getElementById('sceneModePill');
+    if (pill) pill.textContent = 'SCENE MODE: ' + window.__SCENE_MODE;
+  }, { passive:true });
+
+  // reveal
+  const els = document.querySelectorAll('.reveal');
+  if (els.length){
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12, rootMargin:'0px 0px -40px 0px' });
+    els.forEach(el=>obs.observe(el));
+  }
+
+  // copy helper on KPI click
+  document.querySelectorAll('[data-copy]').forEach(el=>{
+    el.style.cursor = 'pointer';
+    el.title = 'Click to copy';
+    el.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(el.getAttribute('data-copy'));
+        showToast('Copied: ' + el.getAttribute('data-copy'));
+      }catch{
+        showToast('Copy blocked by browser', true);
+      }
+    });
+  });
+
+  // quote console
+  const rqType = document.getElementById('rqType');
+  const lang = document.getElementById('lang');
+  const vehicle = document.getElementById('vehicle');
+  const tireSize = document.getElementById('tireSize');
+  const budget = document.getElementById('budget');
+  const timeline = document.getElementById('timeline');
+  const details = document.getElementById('details');
+  const name = document.getElementById('name');
+  const contactInfo = document.getElementById('contactInfo');
+  const out = document.getElementById('out');
+
+  const btnGenerate = document.getElementById('btnGenerate');
+  const btnCopy = document.getElementById('btnCopy');
+  const btnText = document.getElementById('btnText');
+  const btnEmail = document.getElementById('btnEmail');
+  const btnPrint = document.getElementById('btnPrint');
+
+  function gen(){
+    const L = (lang?.value || 'EN');
+    const t = (rqType?.value || 'Tire Quote');
+    const v = (vehicle?.value || '').trim();
+    const s = (tireSize?.value || '').trim();
+    const b = (budget?.value || '').trim();
+    const when = (timeline?.value || '').trim();
+    const d = (details?.value || '').trim();
+    const n = (name?.value || '').trim();
+    const c = (contactInfo?.value || '').trim();
+
+    const partsEN = [
+      'MORALES TIRE & AUTO CARE — REQUEST',
+      'Type: ' + t,
+      v ? ('Vehicle: ' + v) : null,
+      s ? ('Tire Size: ' + s) : null,
+      b ? ('Budget: ' + b) : null,
+      when ? ('Timeline: ' + when) : null,
+      d ? ('Details: ' + d) : null,
+      (n || c) ? ('Contact: ' + [n, c].filter(Boolean).join(' · ')) : null,
+      '',
+      'Address reference: 3701 N 43rd Ave, Phoenix, AZ 85031',
+      'Primary line: (602) 502-5517',
+      'Secondary line: (602) 314-4423'
+    ].filter(Boolean);
+
+    const partsES = [
+      'MORALES TIRE & AUTO CARE — SOLICITUD',
+      'Tipo: ' + ({
+        'Tire Quote':'Cotización de llantas',
+        'Wheel Package':'Paquete de rines/llantas',
+        'Brake Service':'Servicio de frenos',
+        'Alignment Check':'Revisión de alineación',
+        'General Repair':'Reparación general',
+        'A/C Service':'Servicio de A/C'
+      }[t] || t),
+      v ? ('Vehículo: ' + v) : null,
+      s ? ('Medida de llanta: ' + s) : null,
+      b ? ('Presupuesto: ' + b) : null,
+      when ? ('Tiempo: ' + when) : null,
+      d ? ('Detalles: ' + d) : null,
+      (n || c) ? ('Contacto: ' + [n, c].filter(Boolean).join(' · ')) : null,
+      '',
+      'Dirección: 3701 N 43rd Ave, Phoenix, AZ 85031',
+      'Tel: (602) 502-5517',
+      'Alt: (602) 314-4423'
+    ].filter(Boolean);
+
+    const msg = (L === 'ES' ? partsES : partsEN).join('\n');
+    if (out) out.value = msg;
+
+    // update sms/mail
+    const smsNumber = '+16025025517';
+    const subject = encodeURIComponent('Morales Tire & Auto Care — ' + t);
+    const body = encodeURIComponent(msg);
+
+    if (btnText) btnText.href = 'sms:' + smsNumber + '?&body=' + body;
+    if (btnEmail) btnEmail.href = 'mailto:?subject=' + subject + '&body=' + body;
+
+    showToast('Request generated');
+  }
+
+  if (btnGenerate) btnGenerate.addEventListener('click', gen);
+
+  if (btnCopy) btnCopy.addEventListener('click', async ()=>{
+    try{
+      if (!out || !out.value.trim()) gen();
+      await navigator.clipboard.writeText(out.value);
+      showToast('Copied request');
+    }catch{
+      showToast('Copy blocked by browser', true);
+    }
+  });
+
+  if (btnPrint) btnPrint.addEventListener('click', ()=>{
+    if (!out || !out.value.trim()) gen();
+    showToast('Opening print dialog…');
+    setTimeout(()=>window.print(), 200);
+  });
+
+  // expose toast for 3D module
+  window.__SHOW_TOAST = showToast;
+  window.__FINISH_INTRO = finish;
+})();
+</script>
+
+<script>
+/* ──────────────────────────────────────────────────────────────────
+   Three.js: Single-scene sponsor spectacle
+   - Starfield particles + aurora bands + tire "totem" + beacon
+   - Scroll-driven "scene modes" (HOME/SERVICES/FINANCING/TRUST/QUOTE/CONTACT)
+   - No external assets besides Three.js CDN
+   ────────────────────────────────────────────────────────────────── */
+(function(){
+  const canvas = document.getElementById('three-bg');
+  if (!canvas || !window.THREE) {
+    if (window.__SHOW_TOAST) window.__SHOW_TOAST('3D unavailable — running in static mode', true);
+    if (window.__FINISH_INTRO) window.__FINISH_INTRO();
+    return;
+  }
+
+  // Try/catch: WebGL init safety
+  let renderer;
+  try{
+    renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false, powerPreference:'high-performance' });
+  }catch(e){
+    if (window.__SHOW_TOAST) window.__SHOW_TOAST('WebGL blocked — running in static mode', true);
+    if (window.__FINISH_INTRO) window.__FINISH_INTRO();
+    return;
+  }
+
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x07070f, 1);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.18;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x07070f, 0.018);
+
+  const camera = new THREE.PerspectiveCamera(58, window.innerWidth/window.innerHeight, 0.1, 240);
+  camera.position.set(0, 0.3, 13);
+
+  // lights
+  const key = new THREE.DirectionalLight(0xfff0c8, 1.05);
+  key.position.set(6, 8, 10);
+  scene.add(key);
+
+  const fill = new THREE.PointLight(0x8a63ff, 1.2, 70, 2);
+  fill.position.set(-8, 2, 6);
+  scene.add(fill);
+
+  const gold = new THREE.PointLight(0xc9a84c, 1.15, 80, 2);
+  gold.position.set(8, -2, 8);
+  scene.add(gold);
+
+  const rimLight = new THREE.PointLight(0x3a6fd8, 0.95, 60, 2);
+  rimLight.position.set(0, 6, -2);
+  scene.add(rimLight);
+
+  // subtle background plane gradient
+  const bgGeo = new THREE.PlaneGeometry(64, 40, 1, 1);
+  const bgMat = new THREE.ShaderMaterial({
+    uniforms: { uTime:{value:0}, uMode:{value:0} },
+    vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+    fragmentShader: `
+      varying vec2 vUv;
+      uniform float uTime; uniform float uMode;
+      float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
+      void main(){
+        vec2 uv = vUv;
+        float vign = smoothstep(1.1, 0.2, distance(uv, vec2(0.5)));
+        float wave = sin((uv.y*4.0 + uTime*0.12) + sin(uv.x*3.0 + uTime*0.08)) * 0.5 + 0.5;
+        vec3 base = vec3(0.03, 0.03, 0.06);
+        vec3 gold = vec3(0.78, 0.64, 0.20);
+        vec3 purp = vec3(0.45, 0.32, 0.95);
+        vec3 blue = vec3(0.22, 0.42, 0.85);
+        vec3 mix1 = mix(purp, gold, wave);
+        vec3 mix2 = mix(blue, purp, wave*0.7);
+        vec3 col = base + mix(mix1, mix2, clamp(uMode,0.0,1.0)) * 0.18;
+        col *= vign;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `,
+    depthWrite:false, depthTest:false
+  });
+  const bg = new THREE.Mesh(bgGeo, bgMat);
+  bg.position.set(0, 0, -30);
+  scene.add(bg);
+
+  // STAR PARTICLES
+  const COUNT = 3200;
+  const pPos = new Float32Array(COUNT*3);
+  const pCol = new Float32Array(COUNT*3);
+  const pSz  = new Float32Array(COUNT);
+  const pSpd = new Float32Array(COUNT);
+  const pOff = new Float32Array(COUNT);
+
+  const goldPal = [[0.85,0.68,0.22],[0.95,0.85,0.42],[1.0,0.93,0.58]];
+  const purplePal = [[0.55,0.40,1.0],[0.62,0.48,0.94],[0.74,0.60,1.0]];
+  const bluePal = [[0.22,0.42,0.85],[0.45,0.62,1.0],[0.65,0.76,1.0]];
+
+  for (let i=0;i<COUNT;i++){
+    pPos[i*3]   = (Math.random()-0.5)*38;
+    pPos[i*3+1] = (Math.random()-0.5)*24;
+    pPos[i*3+2] = (Math.random()-0.5)*18 - 4;
+    pSz[i]  = Math.random()*2.8 + 0.35;
+    pSpd[i] = Math.random()*0.36 + 0.06;
+    pOff[i] = Math.random()*Math.PI*2;
+
+    const r = Math.random();
+    const pal = r < 0.52 ? goldPal : (r < 0.82 ? purplePal : bluePal);
+    const c = pal[(Math.random()*pal.length)|0];
+    pCol[i*3]=c[0]; pCol[i*3+1]=c[1]; pCol[i*3+2]=c[2];
+  }
+
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos,3));
+  pGeo.setAttribute('color', new THREE.BufferAttribute(pCol,3));
+  pGeo.setAttribute('size', new THREE.BufferAttribute(pSz,1));
+  pGeo.setAttribute('aSpeed', new THREE.BufferAttribute(pSpd,1));
+  pGeo.setAttribute('aOffset', new THREE.BufferAttribute(pOff,1));
+
+  const pMat = new THREE.ShaderMaterial({
+    uniforms:{ uTime:{value:0}, uPixelRatio:{value:renderer.getPixelRatio()}, uMode:{value:0} },
+    vertexShader: `
+      attribute float size; attribute float aSpeed; attribute float aOffset; attribute vec3 color;
+      uniform float uTime; uniform float uPixelRatio; uniform float uMode;
+      varying vec3 vColor; varying float vAlpha;
+      void main(){
+        vColor = color;
+        vec3 pos = position;
+
+        float drift = (0.65 + uMode*0.55);
+        pos.y += sin(uTime * (aSpeed*drift) + aOffset + pos.x*0.28) * 0.9;
+        pos.x += cos(uTime * (aSpeed*0.65*drift) + aOffset*1.4 + pos.y*0.18) * 0.45;
+        pos.z += sin(uTime * (aSpeed*0.45*drift) + aOffset*0.9) * 0.26;
+
+        vec4 mv = modelViewMatrix * vec4(pos, 1.0);
+        float dist = -mv.z;
+        vAlpha = smoothstep(22.0, 4.0, dist) * (0.30 + sin(uTime * aSpeed + aOffset) * 0.18 + 0.44);
+        gl_PointSize = size * uPixelRatio * (55.0 / dist);
+        gl_Position = projectionMatrix * mv;
+      }
+    `,
+    fragmentShader: `
+      varying vec3 vColor; varying float vAlpha;
+      void main(){
+        float d = length(gl_PointCoord - 0.5);
+        if(d>0.5) discard;
+        float s = smoothstep(0.5, 0.0, d);
+        gl_FragColor = vec4(vColor, s * vAlpha);
+      }
+    `,
+    transparent:true, depthWrite:false,
+    blending:THREE.AdditiveBlending, vertexColors:true
+  });
+  const stars = new THREE.Points(pGeo, pMat);
+  scene.add(stars);
+
+  // AURORA BANDS
+  function makeAurora(w,h,segs, colA, colB, z, y, spd, phase, tiltX){
+    const geo = new THREE.PlaneGeometry(w,h,segs, Math.max(1, (segs/4)|0));
+    const mat = new THREE.ShaderMaterial({
+      uniforms:{
+        uTime:{value:0},
+        uColorA:{value:new THREE.Color(...colA)},
+        uColorB:{value:new THREE.Color(...colB)},
+        uSpeed:{value:spd},
+        uPhase:{value:phase},
+        uMode:{value:0}
+      },
+      vertexShader: `
+        uniform float uTime; uniform float uSpeed; uniform float uPhase; uniform float uMode;
+        varying vec2 vUv; varying float vWave;
+        void main(){
+          vUv = uv;
+          vec3 pos = position;
+          float s = uSpeed * (0.75 + uMode*0.6);
+          float w1 = sin(pos.x*0.38 + uTime*s + uPhase) * 1.35;
+          float w2 = sin(pos.x*0.75 + uTime*s*1.4 + uPhase*1.8) * 0.55;
+          float w3 = cos(pos.x*0.18 + uTime*s*0.55 + uPhase*0.6) * 0.8;
+          pos.y += (w1+w2+w3) * uv.y;
+          vWave = (w1+w2)*0.5;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.0);
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uColorA; uniform vec3 uColorB; uniform float uTime; uniform float uPhase; uniform float uMode;
+        varying vec2 vUv; varying float vWave;
+        void main(){
+          float ef = smoothstep(0.0,0.22,vUv.y)*smoothstep(1.0,0.78,vUv.y);
+          float sf = smoothstep(0.0,0.12,vUv.x)*smoothstep(1.0,0.88,vUv.x);
+          float t = clamp(vUv.x + vWave*0.18 + sin(uTime*0.28+uPhase)*0.1, 0.0, 1.0);
+          vec3 col = mix(uColorA, uColorB, t);
+          float shim = sin(vUv.x*18.0 + uTime*(1.8+uMode) + uPhase) * 0.07 + 0.93;
+          col *= shim;
+          gl_FragColor = vec4(col, ef*sf*(0.20 + uMode*0.06));
+        }
+      `,
+      transparent:true, depthWrite:false,
+      blending:THREE.AdditiveBlending, side:THREE.DoubleSide
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(0,y,z);
+    mesh.rotation.x = tiltX;
+    return mesh;
+  }
+
+  const a1 = makeAurora(46,7, 150, [0.55,0.40,1.0], [0.85,0.68,0.22], -2,  1.9, 0.38, 0.0, -0.08);
+  const a2 = makeAurora(40,5, 120, [0.85,0.68,0.22], [0.22,0.42,0.85], -4, -0.7, 0.30, 2.1,  0.05);
+  const a3 = makeAurora(52,6, 170, [0.74,0.60,1.0], [1.0,0.93,0.58], -6,  3.3, 0.22, 4.3, -0.12);
+  scene.add(a1,a2,a3);
+
+  // TIRE TOTEM (procedural tread)
+  const totem = new THREE.Group();
+  scene.add(totem);
+
+  const tireGeo = new THREE.TorusGeometry(2.65, 0.9, 44, 190);
+  const posAttr = tireGeo.attributes.position;
+  const nAttr = tireGeo.attributes.normal;
+  const v = new THREE.Vector3();
+  const n = new THREE.Vector3();
+
+  for (let i=0;i<posAttr.count;i++){
+    v.fromBufferAttribute(posAttr,i);
+    n.fromBufferAttribute(nAttr,i);
+
+    // tread displacement along outer radius
+    const ang = Math.atan2(v.z, v.x);
+    const t = (ang + Math.PI) / (Math.PI*2);
+    const groove = Math.sin(t* Math.PI*2 * 20.0) * 0.10;
+    const blocks = (Math.sin(t* Math.PI*2 * 10.0) > 0.0 ? 0.06 : -0.02);
+    const ridge = groove + blocks;
+
+    // emphasize outside
+    const outside = Math.max(0, (Math.abs(v.y) - 0.15)) * 0.75;
+    v.addScaledVector(n, ridge * outside);
+    posAttr.setXYZ(i, v.x, v.y, v.z);
+  }
+  tireGeo.computeVertexNormals();
+
+  const tireMat = new THREE.MeshStandardMaterial({
+    color:0x121218,
+    metalness:0.25,
+    roughness:0.78,
+    emissive:0x000000,
+    envMapIntensity:1.0
+  });
+  const tire = new THREE.Mesh(tireGeo, tireMat);
+  tire.castShadow = false; tire.receiveShadow = false;
+  totem.add(tire);
+
+  const rimGeo = new THREE.TorusGeometry(2.02, 0.22, 24, 120);
+  const rimMat = new THREE.MeshStandardMaterial({
+    color:0x1a1a22,
+    metalness:0.92,
+    roughness:0.25,
+    emissive:0x20160a,
+    emissiveIntensity:0.25
+  });
+  const rim = new THREE.Mesh(rimGeo, rimMat);
+  totem.add(rim);
+
+  // spokes
+  const spokeGroup = new THREE.Group();
+  const spokeMat = new THREE.MeshStandardMaterial({
+    color:0x2a2a3a,
+    metalness:0.9,
+    roughness:0.30,
+    emissive:0x2b1c08,
+    emissiveIntensity:0.2
+  });
+  for (let i=0;i<6;i++){
+    const sGeo = new THREE.BoxGeometry(0.35, 0.12, 1.55);
+    const s = new THREE.Mesh(sGeo, spokeMat);
+    s.position.set(0,0,0);
+    s.rotation.y = (Math.PI*2/6)*i;
+    s.position.x = Math.cos(s.rotation.y) * 0.15;
+    s.position.z = Math.sin(s.rotation.y) * 0.15;
+    spokeGroup.add(s);
+  }
+  totem.add(spokeGroup);
+
+  // center cap
+  const capGeo = new THREE.SphereGeometry(0.35, 32, 32);
+  const capMat = new THREE.MeshStandardMaterial({
+    color:0x0c0c14,
+    metalness:0.6,
+    roughness:0.25,
+    emissive:0xc9a84c,
+    emissiveIntensity:0.14
+  });
+  const cap = new THREE.Mesh(capGeo, capMat);
+  totem.add(cap);
+
+  // glow ring (additive)
+  const glowGeo = new THREE.RingGeometry(2.95, 3.25, 96);
+  const glowMat = new THREE.ShaderMaterial({
+    uniforms:{ uTime:{value:0}, uMode:{value:0} },
+    vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
+    fragmentShader:`
+      varying vec2 vUv; uniform float uTime; uniform float uMode;
+      void main(){
+        float d = abs(vUv.y - 0.5);
+        float a = smoothstep(0.5, 0.0, d);
+        float pulse = 0.65 + 0.35*sin(uTime*1.2);
+        vec3 gold = vec3(0.78,0.64,0.20);
+        vec3 purp = vec3(0.45,0.32,0.95);
+        vec3 col = mix(purp, gold, 0.35 + uMode*0.5);
+        gl_FragColor = vec4(col, a*0.22*pulse);
+      }
+    `,
+    transparent:true, depthWrite:false,
+    blending:THREE.AdditiveBlending,
+    side:THREE.DoubleSide
+  });
+  const glow = new THREE.Mesh(glowGeo, glowMat);
+  glow.rotation.x = Math.PI/2;
+  glow.position.z = 0.03;
+  totem.add(glow);
+
+  // beacon (contact mode)
+  const beacon = new THREE.Group();
+  beacon.position.set(0, -3.3, -3.2);
+  scene.add(beacon);
+
+  const beaconGeo = new THREE.ConeGeometry(0.22, 0.8, 18);
+  const beaconMat = new THREE.MeshStandardMaterial({
+    color:0xe84c30,
+    metalness:0.2,
+    roughness:0.45,
+    emissive:0xe84c30,
+    emissiveIntensity:0.35
+  });
+  const cone = new THREE.Mesh(beaconGeo, beaconMat);
+  cone.position.y = 0.4;
+  beacon.add(cone);
+
+  const beaconRingGeo = new THREE.RingGeometry(0.6, 0.95, 64);
+  const beaconRingMat = new THREE.ShaderMaterial({
+    uniforms:{uTime:{value:0}, uMode:{value:0}},
+    vertexShader:`void main(){gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+    fragmentShader:`
+      uniform float uTime; uniform float uMode;
+      void main(){
+        float a = 0.18 + 0.10*sin(uTime*2.0);
+        vec3 col = mix(vec3(0.91,0.30,0.18), vec3(0.78,0.64,0.20), uMode);
+        gl_FragColor = vec4(col, a);
+      }
+    `,
+    transparent:true, depthWrite:false, blending:THREE.AdditiveBlending, side:THREE.DoubleSide
+  });
+  const ring = new THREE.Mesh(beaconRingGeo, beaconRingMat);
+  ring.rotation.x = -Math.PI/2;
+  beacon.add(ring);
+
+  // mouse + scroll
+  const mouse = {x:0,y:0,tx:0,ty:0};
+  let scrollY = 0;
+
+  window.addEventListener('mousemove', (e)=>{
+    mouse.tx = (e.clientX/window.innerWidth - 0.5) * 2;
+    mouse.ty = -(e.clientY/window.innerHeight - 0.5) * 2;
+  }, {passive:true});
+
+  window.addEventListener('scroll', ()=>{
+    scrollY = window.scrollY || window.pageYOffset || 0;
+  }, {passive:true});
+
+  window.addEventListener('resize', ()=>{
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    pMat.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+  });
+
+  // scene modes mapping
+  const modeIndex = (mode)=>{
+    switch(mode){
+      case 'SERVICES': return 0.35;
+      case 'FINANCING': return 0.55;
+      case 'TRUST': return 0.72;
+      case 'QUOTE': return 0.82;
+      case 'CONTACT': return 1.0;
+      default: return 0.0; // HOME
+    }
+  };
+
+  // animate
+  const clock = new THREE.Clock();
+  let introFinished = false;
+
+  function animate(){
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    // smooth mouse
+    mouse.x += (mouse.tx - mouse.x) * 0.03;
+    mouse.y += (mouse.ty - mouse.y) * 0.03;
+
+    // mode
+    const mode = (window.__SCENE_MODE || 'HOME');
+    const m = modeIndex(mode);
+
+    // camera drift + scroll tilt
+    camera.position.x = mouse.x * 0.9;
+    camera.position.y = mouse.y * 0.55 - scrollY * 0.0018;
+    camera.lookAt(0, -scrollY * 0.0009, 0);
+
+    // update uniforms
+    bgMat.uniforms.uTime.value = t;
+    bgMat.uniforms.uMode.value = m;
+    pMat.uniforms.uTime.value = t;
+    pMat.uniforms.uMode.value = m;
+    a1.material.uniforms.uTime.value = t; a1.material.uniforms.uMode.value = m;
+    a2.material.uniforms.uTime.value = t; a2.material.uniforms.uMode.value = m;
+    a3.material.uniforms.uTime.value = t; a3.material.uniforms.uMode.value = m;
+    glowMat.uniforms.uTime.value = t; glowMat.uniforms.uMode.value = m;
+    beaconRingMat.uniforms.uTime.value = t; beaconRingMat.uniforms.uMode.value = m;
+
+    // aurora parallax
+    a1.position.x = -mouse.x * 0.55;
+    a2.position.x =  mouse.x * 0.35;
+    a3.position.x = -mouse.x * 0.75;
+
+    // totem motion: respond to mode
+    const baseZ = -2.6 - m*1.2;
+    totem.position.set(0.0 + mouse.x*0.15, 0.6 + mouse.y*0.18, baseZ);
+    totem.rotation.y = t*0.45 + mouse.x*0.15;
+    totem.rotation.x = Math.sin(t*0.25)*0.06 + mouse.y*0.07;
+    spokeGroup.rotation.y = -t*0.9;
+
+    // lights tint per mode
+    fill.intensity = 1.05 + m*0.55;
+    gold.intensity = 1.05 + (0.35 + m)*0.55;
+    rimLight.intensity = 0.85 + m*0.45;
+
+    // beacon visibility: strongest in CONTACT
+    const bTarget = (mode === 'CONTACT') ? 1.0 : (mode === 'QUOTE' ? 0.45 : 0.22);
+    beacon.scale.setScalar(0.75 + bTarget*0.55);
+    beacon.position.y = -3.25 + Math.sin(t*1.4)*0.05;
+    ring.rotation.z = t*0.45;
+
+    renderer.render(scene, camera);
+
+    // end intro once first frame renders
+    if (!introFinished){
+      introFinished = true;
+      if (window.__FINISH_INTRO) window.__FINISH_INTRO();
+    }
+  }
+  animate();
+})();
+</script>
+
+</body>
+</html>

@@ -4,6 +4,74 @@
 /gateway         /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
 /gateway/        /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
 
+# Editorials canonical URLs (rewrite — no URL change)
+/editorials                 /Blogs/Editorials/index.html  200
+/editorials/                /Blogs/Editorials/index.html  200
+/editorials/index.html      /Blogs/Editorials/index.html  200
+
+/editorials/scottsdale-clubs/*   /Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/:splat  200
+/editorials/tempe-clubs/*        /Blogs/Editorials/ArizonaClubScene/TempeArizona/:splat       200
+/editorials/mesa-clubs/*         /Blogs/Editorials/ArizonaClubScene/MesaArizona/:splat        200
+/editorials/glendale-clubs/*     /Blogs/Editorials/ArizonaClubScene/GlendaleArizona/:splat    200
+/editorials/phoenix-clubs/*      /Blogs/Editorials/ArizonaClubScene/PhoenixArizona/:splat     200
+
+/editorials/phoenix/*            /Blogs/Editorials/Techwear/Phoenix-Arizona/:splat                                 200
+/editorials/phoenix-batch2/*     /Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/:splat          200
+/editorials/africa/*             /Blogs/Editorials/Techwear/Africas%20Got%20Sole!/:splat                             200
+
+# Editorial singletons + app editorials (rewrite)
+/editorials/little-linguist-jumpstart-kit/     /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/LittleLinguist.html        200
+/editorials/little-linguist-jumpstart-kit/*    /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/LittleLinguist.html        200
+
+# Catch-all for Techwear single-page editorials (rewrite)
+/editorials/*                 /Blogs/Editorials/Techwear/:splat  200
+
+# DualLaneFunnel public pages (served at root)
+/jobseekers.html              /Platforms-Apps-Infrastructure/DualLaneFunnel/public/jobseekers.html                  200
+/employers.html               /Platforms-Apps-Infrastructure/DualLaneFunnel/public/employers.html                   200
+/diagnostics.html             /Platforms-Apps-Infrastructure/DualLaneFunnel/public/diagnostics.html                 200
+
+# Assets shims (some apps reference /assets/*)
+/assets/intake.js             /Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/intake.js                 200
+/assets/funnel_diagram.png    /Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/funnel_diagram.png        200
+/assets/icon-192.png          /Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/icon-192.png                    200
+/assets/logo.png              /Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/logo.png                        200
+/assets/svs.css               /Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/svs.css                         200
+/assets/zip.js                /Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/zip.js                          200
+/assets/user.js               /Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js                           200
+
+/assets/dual_lane_funnel_system_brief.pdf            /Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/dual_lane_funnel_system_brief.pdf            200
+/assets/dual_lane_funnel_valuation_certificate.pdf  /Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/dual_lane_funnel_valuation_certificate.pdf  200
+
+/funnel-system-editorial.html  /Platforms-Apps-Infrastructure/DualLaneFunnel/public/funnel-system-editorial.html     200
+
+# Services folder is capitalized in repo; keep lowercase links working
+/services/*                   /Services/:splat                                                                     200
+
+# Legacy /get-started.html
+/get-started.html             /get-started/                                                                         301
+
+# BusinessLaunchGo points at a root manifest
+/manifest.webmanifest         /Platforms-Apps-Infrastructure/BusinessLaunchGo/manifest.webmanifest                   200
+
+# Gate Proofx legacy aliases
+/gate-proofx.html             /Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html                         200
+/Gate%20Proofx/index.html     /Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html                         200
+
+# BrandID Offline PWA icon paths
+/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/favicon.svg      /Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/logo.svg  200
+/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/icons/icon.svg   /Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/logo.svg  200
+
+# SkyeDocx brand assets path compatibility
+/SkyeDocx/assets/brand/*      /SkyeDocx/assets/icons/brand/:splat   200
+
+# Service canonical alias
+/Services/pwa-conversion.html  /Services/SkyePWAForge/SkyePWAForge.html  200
+
+# Valley Verified folder has a trailing space in-repo; keep clean URL working
+/Valley%20Verified/*          /Valley%20Verified%20/:splat           200
+/Valley%20Verified/northstar.html  /Valley%20Verified%20/NorthStar.html  200
+
 /case-studies                /Case%20Studies/index.html  301
 /case-studies/               /Case%20Studies/index.html  301
 /case-studies/index.html     /Case%20Studies/index.html  301

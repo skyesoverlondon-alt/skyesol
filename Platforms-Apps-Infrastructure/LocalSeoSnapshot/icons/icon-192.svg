@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <defs>
+    <radialGradient id="g1" cx="30%" cy="25%" r="70%">
+      <stop offset="0%" stop-color="#ffd36b" stop-opacity="0.92"/>
+      <stop offset="45%" stop-color="#7c3aed" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#120022" stop-opacity="1"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="192" height="192" rx="42" fill="url(#g1)"/>
+  <g filter="url(#glow)">
+    <circle cx="96" cy="92" r="52" fill="none" stroke="#ffd36b" stroke-width="6" opacity="0.9"/>
+    <path d="M56 122 C78 78, 114 78, 136 122" fill="none" stroke="#f5efff" stroke-width="6" opacity="0.88" stroke-linecap="round"/>
+    <path d="M68 78 L96 56 L124 78" fill="none" stroke="#f5efff" stroke-width="6" opacity="0.88" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="96" y="160" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="#ffd36b" font-weight="800" letter-spacing="2">SOL</text>
+  </g>
+</svg>

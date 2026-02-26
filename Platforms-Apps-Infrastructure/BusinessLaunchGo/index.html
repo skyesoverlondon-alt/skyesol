@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#2b0a3d" />
+  <meta name="description" content="Business Launch Kit (AZ) Pack — generator → ZIP + PDF. Netlify Drop-ready." />
+
+  <title>Business Launch Kit (AZ) Pack</title>
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/assets/icon-192.png" />
+  <link rel="apple-touch-icon" href="/assets/icon-192.png" />
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="/assets/svs.css" />
+
+  <!-- CDNs: JSZip + jsPDF -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script defer src="/assets/zip.js"></script>
+  <script defer src="/assets/app.js"></script>
+</head>
+
+<body>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <div class="bg-watermark" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="/assets/logo.png" alt="Skyes Over London" />
+      <div class="brand-meta">
+        <div class="brand-title">Business Launch Kit (AZ) Pack</div>
+        <div class="brand-sub">Generator → ZIP Pack + Branded PDF • PWA • Diagnostics • Error Reporting</div>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button id="btnInstall" class="btn btn-ghost" type="button" title="Install PWA" disabled>Install</button>
+      <button id="btnDiagnostics" class="btn btn-ghost" type="button">Diagnostics</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card hero">
+      <div class="hero-left">
+        <div class="kicker">Arizona launch workflow — fast, clean, and trackable</div>
+        <h1>Generate a client-ready launch pack in seconds.</h1>
+        <p class="muted">
+          Fill in basics, follow the checklist, then export a ZIP pack (docs + templates) and a branded PDF summary.
+          Everything persists locally so you can iterate without losing progress.
+        </p>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="businessName">Business name</label>
+            <input id="businessName" type="text" placeholder="e.g., North Star Office & Accounting" autocomplete="organization" />
+          </div>
+
+          <div class="field">
+            <label for="city">City (AZ)</label>
+            <input id="city" type="text" placeholder="e.g., Phoenix" autocomplete="address-level2" />
+          </div>
+
+          <div class="field">
+            <label for="industry">Industry</label>
+            <input id="industry" type="text" placeholder="e.g., Accounting, Logistics, Marketing" />
+          </div>
+
+          <div class="field">
+            <label for="ownersCount">Owners count</label>
+            <input id="ownersCount" type="number" min="1" max="50" step="1" value="1" />
+          </div>
+
+          <div class="field field-row">
+            <div class="toggle">
+              <input id="hireEmployees" type="checkbox" />
+              <label for="hireEmployees">Plan to hire employees (yes/no)</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>&nbsp;</label>
+            <button id="btnSave" class="btn btn-primary" type="button">Save Inputs</button>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button id="btnGenerateZip" class="btn btn-gold" type="button">Generate ZIP Pack</button>
+          <button id="btnExportPdf" class="btn btn-primary" type="button">Export Branded PDF Summary</button>
+        </div>
+
+        <div class="tiny muted">
+          Build: <span id="buildId"></span> • Local-first • Netlify Drop-ready
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="panel">
+          <div class="panel-title">Report Summary</div>
+          <div id="reportSummary" class="report"></div>
+          <div class="panel-actions">
+            <button id="btnReset" class="btn btn-ghost" type="button">Reset Local Data</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Lead Form</div>
+          <form id="leadForm" name="lead" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="lead" />
+            <p class="hidden">
+              <label>Don’t fill this out: <input name="bot-field" /></label>
+            </p>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="leadName">Name</label>
+                <input id="leadName" name="name" type="text" autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="leadEmail">Email</label>
+                <input id="leadEmail" name="email" type="email" autocomplete="email" />
+              </div>
+              <div class="field">
+                <label for="leadPhone">Phone</label>
+                <input id="leadPhone" name="phone" type="tel" autocomplete="tel" />
+              </div>
+              <div class="field">
+                <label for="leadCompany">Company</label>
+                <input id="leadCompany" name="company" type="text" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="leadMessage">Message</label>
+              <textarea id="leadMessage" name="message" rows="3" placeholder="What are you building? What’s the deadline?"></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Submit Lead</button>
+            <div class="tiny muted">Netlify Forms compatible (no extra functions required).</div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <div>
+          <h2>Launch Checklist (AZ)</h2>
+          <div class="muted">Toggle items as you complete them. Progress is saved locally.</div>
+        </div>
+        <div class="section-actions">
+          <button id="btnMarkCore" class="btn btn-ghost" type="button">Mark Core Done</button>
+          <button id="btnExportJson" class="btn btn-ghost" type="button">Export Progress JSON</button>
+        </div>
+      </div>
+
+      <div id="checklist" class="checklist"></div>
+
+      <div class="disclaimer">
+        This kit is operational guidance and templates, not legal or tax advice. For legal/tax decisions, use a licensed professional.
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© 2026 Skyes Over London LC • SVS UI</div>
+    <div class="tiny muted">Offline-first PWA • Error reporting via Netlify Functions</div>
+  </footer>
+
+  <dialog id="diagModal" class="modal">
+    <div class="modal-inner">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title">Diagnostics</div>
+          <div class="muted tiny">Troubleshooting, self-test, and error queue.</div>
+        </div>
+        <button id="btnCloseDiag" class="btn btn-ghost" type="button">Close</button>
+      </div>
+
+      <div class="modal-grid">
+        <div class="panel">
+          <div class="panel-title">Status</div>
+          <pre id="diagStatus" class="pre"></pre>
+          <div class="panel-actions">
+            <button id="btnSelfTest" class="btn btn-primary" type="button">Run Self-Test</button>
+            <button id="btnNeonPing" class="btn btn-ghost" type="button">Neon Ping</button>
+            <button id="btnSendTestError" class="btn btn-ghost" type="button">Send Test Error</button>
+          </div>
+
+          <div class="tiny muted" style="margin-top:10px;">
+            <b>Neon Data API Config (client fallback)</b><br/>
+            <span>Use this only if Functions aren't deploying (Drop mode). Stored locally in your browser.</span>
+          </div>
+          <div class="grid-2" style="margin-top:10px;">
+            <div class="field">
+              <label for="neonDataApiUrl">NEON_DATA_API_URL</label>
+              <input id="neonDataApiUrl" type="text" placeholder="https://your-data-api-endpoint" />
+            </div>
+            <div class="field">
+              <label for="neonJwt">NEON_DATA_API_JWT</label>
+              <input id="neonJwt" type="password" placeholder="JWT (must include sub if RLS enabled)" />
+            </div>
+            <div class="field" style="grid-column:1/-1;">
+              <button id="btnSaveNeonCfg" class="btn btn-primary" type="button">Save Neon Config</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Recent Client Errors (local)</div>
+          <pre id="diagErrors" class="pre"></pre>
+          <div class="panel-actions">
+            <button id="btnFlushQueue" class="btn btn-primary" type="button">Flush Error Queue</button>
+            <button id="btnClearErrors" class="btn btn-ghost" type="button">Clear Local Errors</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tiny muted">
+        Endpoint: <code>/.netlify/functions/client-error-report</code> • Headers: <code>x-kaixu-app</code>, <code>x-kaixu-build</code>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Netlify Forms pre-render hook (keeps static detection reliable) -->
+  <form name="lead" data-netlify="true" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <input type="text" name="company" />
+    <textarea name="message"></textarea>
+  </form>
+</body>
+</html>

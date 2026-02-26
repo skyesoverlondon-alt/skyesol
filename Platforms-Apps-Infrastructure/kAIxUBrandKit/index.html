@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skyes Over London | Brand Kit + kAIxU</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            sol: {
+              obsidian: "#070A12",
+              graphite: "#101827",
+              purple: "#6D28D9",
+              gold: "#FBBF24",
+              cyan: "#22D3EE",
+              steel: "#9CA3AF"
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+
+    .grid-pattern {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    }
+    .light-grid-pattern {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+    }
+
+    .float-glow {
+      filter:
+        drop-shadow(0 0 14px rgba(251,191,36,0.45))
+        drop-shadow(0 0 28px rgba(109,40,217,0.35));
+      animation: pulseGlow 2.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: scale(1);
+        filter:
+          drop-shadow(0 0 14px rgba(251,191,36,0.45))
+          drop-shadow(0 0 28px rgba(109,40,217,0.35));
+      }
+      50% {
+        transform: scale(1.03);
+        filter:
+          drop-shadow(0 0 22px rgba(251,191,36,0.65))
+          drop-shadow(0 0 40px rgba(109,40,217,0.55));
+      }
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .chip {
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      transition: 160ms ease;
+    }
+    .chip:hover {
+      background: rgba(255,255,255,0.10);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+
+<body class="bg-sol-obsidian text-white min-h-screen flex flex-col transition-colors duration-300">
+
+  <header class="border-b border-white/10 bg-sol-graphite/50 backdrop-blur-md sticky top-0 z-10">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <img id="headerLogo" class="w-9 h-9 float-glow" alt="SOL Logo" />
+        <div class="min-w-0">
+          <div class="font-black italic text-xl tracking-wider truncate">
+            SKYEs OVER LONDON
+            <span class="text-white/40 font-medium text-sm ml-2 not-italic hidden sm:inline-block">BRAND KIT</span>
+          </div>
+          <div class="text-xs text-sol-steel truncate">Two-card exporter + kAIxU Studio</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="btnToggleTheme"
+          class="text-sm font-semibold bg-white/5 hover:bg-white/10 px-4 py-2 rounded-md transition flex items-center gap-2 border border-white/10">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+          Toggle Background
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-6xl mx-auto px-6 py-10 w-full">
+
+    <div class="mb-8 max-w-3xl">
+      <h2 class="text-3xl font-extrabold tracking-tight mb-3">Brand Identity Kit (2 Assets) + kAIxU</h2>
+      <p class="text-sol-steel leading-relaxed">
+        Generate a Primary Lockup + Icon Mark, then use kAIxU Studio to produce taglines, names, banner copy, and palettes you can apply instantly.
+      </p>
+    </div>
+
+    <div class="bg-white/5 border border-white/10 rounded-xl p-5 mb-10">
+      <div class="grid lg:grid-cols-12 gap-4 items-end">
+        <div class="lg:col-span-5">
+          <label class="text-sm font-semibold text-white/80">Logo URL</label>
+          <div class="mt-2 flex gap-2">
+            <input id="logoUrl" type="url"
+              class="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-sol-cyan"
+              placeholder="https://.../logo.png or .svg" />
+            <button id="btnLoadLogo"
+              class="shrink-0 text-sm font-black bg-sol-purple hover:bg-white text-white hover:text-black px-4 py-2 rounded-lg transition">
+              Load
+            </button>
+          </div>
+          <div class="text-[11px] text-white/50 mt-1">Best exports: upload logo if URL fetch is blocked.</div>
+        </div>
+
+        <div class="lg:col-span-3">
+          <label class="text-sm font-semibold text-white/80">Upload logo (PNG/JPG/SVG)</label>
+          <input id="logoFile" type="file" accept=".png,.jpg,.jpeg,.svg,image/png,image/jpeg,image/svg+xml"
+            class="mt-2 w-full text-sm file:bg-white/10 file:border file:border-white/10 file:text-white file:px-3 file:py-2 file:rounded-lg file:mr-3 file:hover:bg-white/15 file:transition" />
+        </div>
+
+        <div class="lg:col-span-2">
+          <label class="text-sm font-semibold text-white/80">Brand name</label>
+          <input id="brandName" type="text"
+            class="mt-2 w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-sol-cyan"
+            value="Skyes Over London" />
+        </div>
+
+        <div class="lg:col-span-2">
+          <label class="text-sm font-semibold text-white/80">Tagline</label>
+          <input id="brandTagline" type="text"
+            class="mt-2 w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-sol-cyan"
+            value="SOLEnterprises International Nexus & Holdings" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-4 mt-4 items-end">
+        <div class="md:col-span-4">
+          <label class="text-sm font-semibold text-white/80">Accent (line + ring)</label>
+          <input id="accentColor" type="color"
+            class="mt-2 w-full h-11 bg-black/30 border border-white/10 rounded-lg"
+            value="#FBBF24" />
+        </div>
+
+        <div class="md:col-span-4">
+          <label class="text-sm font-semibold text-white/80">kAIxU intensity</label>
+          <select id="aiIntensity"
+            class="mt-2 w-full bg-black/30 border border-white/10 rounded-lg px-3 py-3 text-sm outline-none focus:border-sol-cyan">
+            <option value="rapid">Rapid</option>
+            <option value="balanced" selected>Balanced</option>
+            <option value="deep">Deep</option>
+          </select>
+        </div>
+
+        <div class="md:col-span-4 flex gap-2">
+          <button id="btnRefresh"
+            class="w-full text-sm font-black bg-sol-cyan text-black hover:bg-white px-4 py-3 rounded-lg transition">
+            Refresh
+          </button>
+          <button id="btnReset"
+            class="text-sm font-semibold bg-white/5 hover:bg-white/10 px-4 py-3 rounded-lg transition border border-white/10">
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div id="status" class="text-xs px-3 py-2 rounded-lg bg-black/20 border border-white/10 text-white/70 mono whitespace-pre-wrap">
+          Diagnostics: initializing…
+        </div>
+        <div class="text-xs text-white/50 mono">
+          x-kaixu-app: sol-brand-kit • x-kaixu-build: v1
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-10">
+      <div class="bg-black/40 border border-white/10 rounded-xl overflow-hidden flex flex-col">
+        <div class="p-8 flex-grow flex items-center justify-center relative grid-pattern min-h-[300px]" id="preview-1">
+          <svg id="logo-primary" viewBox="0 0 520 140" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="solDrop" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#FBBF24" flood-opacity="0.35"/>
+                <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#6D28D9" flood-opacity="0.35"/>
+              </filter>
+
+              <radialGradient id="solGlow" cx="35%" cy="45%" r="60%">
+                <stop offset="0%" stop-color="rgba(109,40,217,0.45)"/>
+                <stop offset="60%" stop-color="rgba(251,191,36,0.22)"/>
+                <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+              </radialGradient>
+            </defs>
+
+            <g transform="translate(0, 10)">
+              <rect x="6" y="4" width="104" height="104" rx="22" fill="url(#solGlow)" opacity="0.9"/>
+              <image id="img-primary" href="" x="10" y="8" width="96" height="96" preserveAspectRatio="xMidYMid meet" filter="url(#solDrop)"/>
+            </g>
+
+            <g transform="translate(120, 0)">
+              <text id="text-primary-1"
+                    x="0" y="85"
+                    font-family="system-ui, -apple-system, sans-serif"
+                    font-weight="900"
+                    font-size="64"
+                    font-style="italic"
+                    fill="#FFFFFF"
+                    letter-spacing="-1">Skyes Over London</text>
+
+              <text id="text-primary-2"
+                    x="5" y="112"
+                    font-family="system-ui, -apple-system, sans-serif"
+                    font-weight="800"
+                    font-size="12"
+                    letter-spacing="3.2"
+                    fill="#9CA3AF">SOLEnterprises International Nexus &amp; Holdings</text>
+
+              <rect id="accent-line" x="5" y="122" width="360" height="5" rx="2.5" fill="#FBBF24" opacity="0.95"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="bg-black/50 p-4 border-t border-white/10 flex justify-between items-center gap-3">
+          <div>
+            <div class="font-bold text-lg">Primary Lockup</div>
+            <div class="text-xs text-white/40">Dark/light preview + SVG export</div>
+          </div>
+
+          <button id="btnDownloadPrimary"
+            class="bg-sol-gold text-black font-black py-2 px-5 rounded hover:bg-white transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            Download SVG
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-black/40 border border-white/10 rounded-xl overflow-hidden flex flex-col">
+        <div class="p-8 flex-grow flex items-center justify-center relative grid-pattern min-h-[300px]" id="preview-2">
+          <svg id="logo-mark" viewBox="0 0 100 100" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="solDropSmall" x="-40%" y="-40%" width="180%" height="180%">
+                <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#FBBF24" flood-opacity="0.35"/>
+                <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#6D28D9" flood-opacity="0.35"/>
+              </filter>
+            </defs>
+
+            <rect x="6" y="6" width="88" height="88" rx="26" fill="rgba(109,40,217,0.18)"/>
+            <rect id="mark-ring" x="8" y="8" width="84" height="84" rx="24" fill="none" stroke="#FBBF24" stroke-width="2.4" opacity="0.75"/>
+            <image id="img-mark" href="" x="12" y="12" width="76" height="76"
+                   preserveAspectRatio="xMidYMid meet" filter="url(#solDropSmall)"/>
+          </svg>
+        </div>
+
+        <div class="bg-black/50 p-4 border-t border-white/10 flex justify-between items-center gap-3">
+          <div>
+            <div class="font-bold text-lg">The Mark (Icon)</div>
+            <div class="text-xs text-white/40">Avatars + app icons + SVG export</div>
+          </div>
+
+          <button id="btnDownloadMark"
+            class="bg-sol-gold text-black font-black py-2 px-5 rounded hover:bg-white transition flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            Download SVG
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="bg-white/5 border border-white/10 rounded-2xl p-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+        <div>
+          <div class="text-xl font-black italic tracking-tight">kAIxU Studio</div>
+          <div class="text-sm text-white/55">Generate names, taglines, banner copy, and palettes — then click to apply.</div>
+        </div>
+
+        <div class="flex gap-2 flex-wrap">
+          <button class="aiQuick chip px-3 py-2 rounded-lg text-sm font-black" data-mode="taglines">Taglines</button>
+          <button class="aiQuick chip px-3 py-2 rounded-lg text-sm font-black" data-mode="names">Name Variants</button>
+          <button class="aiQuick chip px-3 py-2 rounded-lg text-sm font-black" data-mode="banner">Banner Copy</button>
+          <button class="aiQuick chip px-3 py-2 rounded-lg text-sm font-black" data-mode="palette">Palette</button>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-4">
+        <div class="lg:col-span-7">
+          <label class="text-sm font-semibold text-white/80">Request</label>
+          <textarea id="aiPrompt" rows="6"
+            class="mt-2 w-full bg-black/30 border border-white/10 rounded-xl px-3 py-3 text-sm outline-none focus:border-sol-cyan"
+            placeholder="Example: Create 12 taglines that feel Fortune-500, futuristic, and Phoenix-powerful. Keep it clean, punchy, confident."></textarea>
+
+          <div class="flex flex-col sm:flex-row gap-2 mt-3">
+            <button id="btnAsk"
+              class="w-full sm:w-auto text-sm font-black bg-sol-purple hover:bg-white text-white hover:text-black px-5 py-3 rounded-xl transition">
+              Run kAIxU
+            </button>
+
+            <button id="btnClearOutput"
+              class="w-full sm:w-auto text-sm font-semibold bg-white/5 hover:bg-white/10 px-5 py-3 rounded-xl transition border border-white/10">
+              Clear Output
+            </button>
+
+            <div class="sm:ml-auto text-xs text-white/55 mono flex items-center">
+              <span id="aiState">idle</span>
+            </div>
+          </div>
+
+          <div class="mt-3 text-xs text-white/50">
+            Click any suggestion chip to apply it directly into your brand fields.
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="text-sm font-semibold text-white/80">Output</div>
+          <div id="aiOutput"
+            class="mt-2 bg-black/20 border border-white/10 rounded-xl p-4 min-h-[220px] overflow-auto">
+            <div class="text-white/50 text-sm">No output yet.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+(() => {
+  const DEFAULT_LOGO_URL = "https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png";
+  const APP_HEADERS = { "x-kaixu-app": "sol-brand-kit", "x-kaixu-build": "v1" };
+  const el = (id) => document.getElementById(id);
+
+  function getInstallId() {
+    try {
+      const k = "kaixu_install_id";
+      const existing = localStorage.getItem(k);
+      if (existing && existing.length >= 8) return existing;
+      const id = "kbk_" + crypto.randomUUID();
+      localStorage.setItem(k, id);
+      return id;
+    } catch {
+      return "kbk_ephemeral";
+    }
+  }
+
+  let isDark = true;
+  let logoDataUrl = "";
+  let logoFallbackUrl = DEFAULT_LOGO_URL;
+
+  const headerLogo = el("headerLogo");
+  const status = el("status");
+  const logoUrl = el("logoUrl");
+  const logoFile = el("logoFile");
+  const brandName = el("brandName");
+  const brandTagline = el("brandTagline");
+  const accentColor = el("accentColor");
+  const aiIntensity = el("aiIntensity");
+
+  const btnLoadLogo = el("btnLoadLogo");
+  const btnToggleTheme = el("btnToggleTheme");
+  const btnRefresh = el("btnRefresh");
+  const btnReset = el("btnReset");
+
+  const preview1 = el("preview-1");
+  const preview2 = el("preview-2");
+
+  const imgPrimary = el("img-primary");
+  const imgMark = el("img-mark");
+  const textPrimary1 = el("text-primary-1");
+  const textPrimary2 = el("text-primary-2");
+  const markRing = el("mark-ring");
+  const accentLine = el("accent-line");
+
+  const btnDownloadPrimary = el("btnDownloadPrimary");
+  const btnDownloadMark = el("btnDownloadMark");
+
+  const aiPrompt = el("aiPrompt");
+  const btnAsk = el("btnAsk");
+  const btnClearOutput = el("btnClearOutput");
+  const aiOutput = el("aiOutput");
+  const aiState = el("aiState");
+
+  function setDiag(t) { status.textContent = "Diagnostics: " + t; }
+  function safeBaseName() {
+    const n = (brandName.value || "Skyes_Over_London").trim().replace(/[^a-z0-9\-_]+/gi, "_");
+    return n || "Skyes_Over_London";
+  }
+  function getLogoHref() { return logoDataUrl || logoFallbackUrl; }
+
+  async function blobToDataUrl(blob) {
+    return await new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result);
+      r.onerror = reject;
+      r.readAsDataURL(blob);
+    });
+  }
+
+  async function loadLogoFromUrl(url) {
+    const u = (url || "").trim() || DEFAULT_LOGO_URL;
+    logoFallbackUrl = u;
+    setDiag("fetching logo URL…");
+
+    try {
+      const resp = await fetch(u, { mode: "cors", cache: "no-store" });
+      if (!resp.ok) throw new Error("Fetch failed (" + resp.status + ")");
+      const blob = await resp.blob();
+      const dataUrl = await blobToDataUrl(blob);
+      logoDataUrl = dataUrl;
+      headerLogo.src = logoDataUrl;
+      setDiag("logo loaded as data URL (export-safe).");
+    } catch (err) {
+      logoDataUrl = "";
+      headerLogo.src = u;
+      setDiag("URL fetch blocked/failed (common: CORS). Preview still works. Upload logo for perfect embedding.\nError: " + String(err?.message || err));
+    }
+    updateSvgs();
+  }
+
+  async function loadLogoFromFile(file) {
+    setDiag("reading uploaded logo…");
+    try {
+      const dataUrl = await new Promise((resolve, reject) => {
+        const r = new FileReader();
+        r.onload = () => resolve(r.result);
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      });
+      logoDataUrl = dataUrl;
+      headerLogo.src = logoDataUrl;
+      setDiag("logo loaded from file (export-safe).");
+      updateSvgs();
+    } catch (err) {
+      setDiag("upload read failed. Error: " + String(err?.message || err));
+    }
+  }
+
+  function updateSvgs() {
+    const href = getLogoHref();
+    const name = (brandName.value || "Skyes Over London").trim();
+    const tag = (brandTagline.value || "").trim();
+    const accent = accentColor.value || "#FBBF24";
+
+    imgPrimary.setAttribute("href", href);
+    imgMark.setAttribute("href", href);
+
+    textPrimary1.textContent = name;
+    textPrimary2.textContent = tag || " ";
+
+    accentLine.setAttribute("fill", accent);
+    markRing.setAttribute("stroke", accent);
+
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("bg-sol-obsidian", "text-white");
+      document.body.classList.remove("bg-gray-100", "text-gray-900");
+
+      preview1.classList.add("grid-pattern");
+      preview1.classList.remove("light-grid-pattern");
+      preview2.classList.add("grid-pattern");
+      preview2.classList.remove("light-grid-pattern");
+
+      textPrimary1.setAttribute("fill", "#FFFFFF");
+      textPrimary2.setAttribute("fill", "#9CA3AF");
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("bg-sol-obsidian", "text-white");
+      document.body.classList.add("bg-gray-100", "text-gray-900");
+
+      preview1.classList.remove("grid-pattern");
+      preview1.classList.add("light-grid-pattern");
+      preview2.classList.remove("grid-pattern");
+      preview2.classList.add("light-grid-pattern");
+
+      textPrimary1.setAttribute("fill", "#111827");
+      textPrimary2.setAttribute("fill", "rgba(17,24,39,0.62)");
+    }
+  }
+
+  function downloadSVG(svgId, filename) {
+    const svgElement = document.getElementById(svgId);
+    const clone = svgElement.cloneNode(true);
+    const href = getLogoHref();
+    clone.querySelectorAll("image").forEach(img => img.setAttribute("href", href));
+    clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    const serializer = new XMLSerializer();
+    let source = serializer.serializeToString(clone);
+    source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+    const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  function clearOutput() {
+    aiOutput.innerHTML = '<div class="text-white/50 text-sm">No output yet.</div>';
+  }
+  function setAiState(s) { aiState.textContent = s; }
+  function escapeHtml(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+  }
+  function normalizeHex(h) {
+    const s = String(h || "").trim();
+    const m = s.match(/^#([0-9a-fA-F]{6})$/);
+    return m ? ("#" + m[1]) : null;
+  }
+
+  function renderSection(title, items, onPick) {
+    if (!items || !items.length) return null;
+    const wrap = document.createElement("div");
+    wrap.className = "mb-4";
+    const h = document.createElement("div");
+    h.className = "text-sm font-black mb-2";
+    h.textContent = title;
+    wrap.appendChild(h);
+
+    const grid = document.createElement("div");
+    grid.className = "flex flex-wrap gap-2";
+    items.forEach((it) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip text-sm px-3 py-2 rounded-lg";
+      b.textContent = String(it);
+      b.addEventListener("click", () => onPick(String(it)));
+      grid.appendChild(b);
+    });
+    wrap.appendChild(grid);
+    return wrap;
+  }
+
+  function renderPalette(palette) {
+    if (!Array.isArray(palette) || palette.length === 0) return null;
+    const wrap = document.createElement("div");
+    wrap.className = "mb-4";
+    const h = document.createElement("div");
+    h.className = "text-sm font-black mb-2";
+    h.textContent = "Palette (click to apply accent)";
+    wrap.appendChild(h);
+
+    const grid = document.createElement("div");
+    grid.className = "flex flex-wrap gap-2";
+
+    palette.forEach((p) => {
+      const hex = (p && p.hex) ? String(p.hex) : "";
+      const label = (p && p.label) ? String(p.label) : hex;
+      if (!hex) return;
+
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip text-sm px-3 py-2 rounded-lg flex items-center gap-2";
+
+      const sw = document.createElement("span");
+      sw.style.width = "14px"; sw.style.height = "14px";
+      sw.style.borderRadius = "999px";
+      sw.style.background = hex;
+      sw.style.border = "1px solid rgba(255,255,255,0.18)";
+      b.appendChild(sw);
+
+      const t = document.createElement("span");
+      t.textContent = `${label} (${hex})`;
+      b.appendChild(t);
+
+      b.addEventListener("click", () => {
+        accentColor.value = normalizeHex(hex) || accentColor.value;
+        updateSvgs();
+        setDiag("applied accent from palette.");
+      });
+
+      grid.appendChild(b);
+    });
+
+    wrap.appendChild(grid);
+    return wrap;
+  }
+
+  function buildQuickPrompt(mode) {
+    const name = (brandName.value || "").trim();
+    const tag = (brandTagline.value || "").trim();
+    const accent = (accentColor.value || "").trim();
+
+    const baseContext =
+      `BRAND CONTEXT:\n` +
+      `Name: ${name}\n` +
+      `Current Tagline: ${tag}\n` +
+      `Accent: ${accent}\n` +
+      `Voice: Fortune-500, futuristic, confident, clean.\n\n`;
+
+    if (mode === "taglines") return baseContext +
+      `Generate 14 tagline options.\nRules: 3–8 words each, punchy, premium, no emojis.\nReturn JSON with "taglines" filled.\n`;
+
+    if (mode === "names") return baseContext +
+      `Generate 12 name variants that preserve the SkyesOverLondon aura.\nRules: keep it brandable, not generic, no mention of outside providers.\nReturn JSON with "names" filled.\n`;
+
+    if (mode === "banner") return baseContext +
+      `Generate 12 social banner lines (headline style) for 1200x630.\nRules: 4–10 words each, executive tone.\nReturn JSON with "bannerCopy" filled.\n`;
+
+    if (mode === "palette") return baseContext +
+      `Generate a premium palette: 6 colors.\nReturn JSON with "palette" filled as [{"label":"", "hex":"#RRGGBB"}].\nInclude: 1 royal purple, 1 neon gold, 1 cyan highlight, 1 ink background, 1 slate text, 1 optional accent.\n`;
+
+    return baseContext + `Return helpful JSON for brand improvements.`;
+  }
+
+  async function reportClientError(kind, message, extra = {}) {
+    try {
+      await fetch("/.netlify/functions/client-error-report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...APP_HEADERS },
+        body: JSON.stringify({
+          kind, message, extra,
+          href: location.href, ua: navigator.userAgent,
+          ts: new Date().toISOString()
+        })
+      });
+    } catch {}
+  }
+
+  async function askKaixu(promptText, modeHint) {
+    setAiState("running…");
+    btnAsk.disabled = true;
+    btnAsk.classList.add("opacity-60");
+
+    try {
+      const payload = {
+        prompt: promptText,
+        mode: modeHint || "general",
+        intensity: aiIntensity.value || "balanced",
+        maxTokens: 900,
+        temperature: 0.7
+      };
+
+      const resp = await fetch("/.netlify/functions/kaixu-generate", {
+        method: "POST",
+        headers: { ...APP_HEADERS, "x-kaixu-install-id": getInstallId(), "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const txt = await resp.text();
+      let data = null;
+      try { data = JSON.parse(txt); } catch {}
+
+      if (!resp.ok) {
+        const msg = (data && (data.error || data.details)) ? JSON.stringify(data, null, 2) : txt;
+        aiOutput.innerHTML = `<pre class="mono text-xs text-rose-200 whitespace-pre-wrap">${escapeHtml(msg)}</pre>`;
+        setAiState("error");
+        setDiag("kAIxU request failed (see output).");
+        return;
+      }
+
+      aiOutput.innerHTML = "";
+      const root = document.createElement("div");
+
+      if (data && data.ok) {
+        const names = Array.isArray(data.names) ? data.names : [];
+        const taglines = Array.isArray(data.taglines) ? data.taglines : [];
+        const bannerCopy = Array.isArray(data.bannerCopy) ? data.bannerCopy : [];
+        const palette = Array.isArray(data.palette) ? data.palette : [];
+        const notes = (typeof data.notes === "string") ? data.notes : "";
+
+        const sec1 = renderSection("Names", names, (v) => { brandName.value = v; updateSvgs(); setDiag("applied name from kAIxU."); });
+        const sec2 = renderSection("Taglines", taglines, (v) => { brandTagline.value = v; updateSvgs(); setDiag("applied tagline from kAIxU."); });
+        const sec3 = renderSection("Banner Copy", bannerCopy, (v) => { brandTagline.value = v; updateSvgs(); setDiag("applied banner line into tagline (edit as needed)."); });
+        const sec4 = renderPalette(palette);
+
+        if (sec1) root.appendChild(sec1);
+        if (sec2) root.appendChild(sec2);
+        if (sec3) root.appendChild(sec3);
+        if (sec4) root.appendChild(sec4);
+
+        if (notes) {
+          const n = document.createElement("div");
+          n.className = "mt-3 bg-white/5 border border-white/10 rounded-xl p-3";
+          n.innerHTML = `<div class="text-sm font-black mb-1">Notes</div><div class="text-sm text-white/70 whitespace-pre-wrap">${escapeHtml(notes)}</div>`;
+          root.appendChild(n);
+        }
+
+        if (!root.childNodes.length) {
+          root.innerHTML = `<div class="text-white/60 text-sm">kAIxU returned no lists. Raw response below:</div>
+                            <pre class="mono text-xs text-white/70 whitespace-pre-wrap mt-2">${escapeHtml(txt)}</pre>`;
+        }
+      } else {
+        root.innerHTML = `<pre class="mono text-xs text-white/70 whitespace-pre-wrap">${escapeHtml(txt)}</pre>`;
+      }
+
+      aiOutput.appendChild(root);
+      setAiState("done");
+      setDiag("kAIxU delivered output.");
+    } catch (err) {
+      aiOutput.innerHTML = `<pre class="mono text-xs text-rose-200 whitespace-pre-wrap">${escapeHtml(String(err?.message || err))}</pre>`;
+      setAiState("error");
+      setDiag("kAIxU call threw a client error (reported).");
+      reportClientError("kaixu_fetch_exception", String(err?.message || err));
+    } finally {
+      btnAsk.disabled = false;
+      btnAsk.classList.remove("opacity-60");
+    }
+  }
+
+  window.addEventListener("error", (e) => {
+    reportClientError("window_error", e?.message || "unknown", { source: e?.filename, line: e?.lineno, col: e?.colno });
+  });
+  window.addEventListener("unhandledrejection", (e) => {
+    reportClientError("unhandledrejection", String(e?.reason || "unknown"));
+  });
+
+  btnLoadLogo.addEventListener("click", () => loadLogoFromUrl(logoUrl.value));
+  btnToggleTheme.addEventListener("click", () => { isDark = !isDark; updateSvgs(); });
+  btnRefresh.addEventListener("click", () => { updateSvgs(); setDiag("refreshed previews + export state."); });
+  btnReset.addEventListener("click", async () => {
+    isDark = true;
+    logoDataUrl = "";
+    logoFallbackUrl = DEFAULT_LOGO_URL;
+    logoUrl.value = DEFAULT_LOGO_URL;
+    brandName.value = "Skyes Over London";
+    brandTagline.value = "SOLEnterprises International Nexus & Holdings";
+    accentColor.value = "#FBBF24";
+    aiIntensity.value = "balanced";
+    aiPrompt.value = "";
+    headerLogo.src = DEFAULT_LOGO_URL;
+    setDiag("reset complete. loading default logo…");
+    await loadLogoFromUrl(DEFAULT_LOGO_URL);
+  });
+
+  logoFile.addEventListener("change", (e) => {
+    const f = e.target.files && e.target.files[0];
+    if (f) loadLogoFromFile(f);
+  });
+
+  [brandName, brandTagline, accentColor].forEach(inp => inp.addEventListener("input", updateSvgs));
+
+  btnDownloadPrimary.addEventListener("click", () => {
+    downloadSVG("logo-primary", `${safeBaseName()}_Logo_Primary_Transparent.svg`);
+  });
+  btnDownloadMark.addEventListener("click", () => {
+    downloadSVG("logo-mark", `${safeBaseName()}_Icon_Transparent.svg`);
+  });
+
+  document.querySelectorAll(".aiQuick").forEach((b) => {
+    b.addEventListener("click", async () => {
+      const mode = b.getAttribute("data-mode");
+      const qp = buildQuickPrompt(mode);
+      aiPrompt.value = qp;
+      await askKaixu(qp, mode);
+    });
+  });
+
+  btnAsk.addEventListener("click", async () => {
+    const p = (aiPrompt.value || "").trim() || buildQuickPrompt("taglines");
+    await askKaixu(p, "general");
+  });
+
+  btnClearOutput.addEventListener("click", () => {
+    clearOutput();
+    setAiState("idle");
+  });
+
+  logoUrl.value = DEFAULT_LOGO_URL;
+  headerLogo.src = DEFAULT_LOGO_URL;
+  clearOutput();
+  setAiState("idle");
+  loadLogoFromUrl(DEFAULT_LOGO_URL).then(updateSvgs);
+})();
+</script>
+</body>
+</html>

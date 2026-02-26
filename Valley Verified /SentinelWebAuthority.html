@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentinel Web Authority™ — Distributed SEO. Real Authority. Sustainable Growth.</title>
+  <meta name="description" content="Sentinel Web Authority™ by Skyes Over London LC: A distributed brand authority system — up to 5 branded websites, editorial-grade content, contextual referral linking, and monthly visibility reporting.">
+  <meta property="og:title" content="Sentinel Web Authority™ — Distributed SEO. Real Authority. Sustainable Growth.">
+  <meta property="og:description" content="We don't chase rankings. We build ecosystems Google trusts. Up to 5 branded sites, 23+ long-form blogs/month, editorial & media layer.">
+  <meta property="og:url" content="https://sentinelwebauthority.netlify.app/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap');
+
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dim: rgba(201,168,76,0.15);
+      --dark: #0e0e1a;
+      --darker: #07070f;
+      --surface: #0c0c14;
+      --surface-2: #111119;
+      --surface-3: #181822;
+      --text: #e8e6e1;
+      --text-dim: #8a8880;
+      --accent-fire: #e84c30;
+      --accent-blue: #3a6fd8;
+      --sentinel-cyan: #00e5ff;
+      --sentinel-teal: #00bfa5;
+      --glow-gold: 0 0 30px rgba(201,168,76,0.3), 0 0 60px rgba(201,168,76,0.1);
+      --glow-gold-strong: 0 0 40px rgba(201,168,76,0.5), 0 0 80px rgba(201,168,76,0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #07070f;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── THREE BG ── */
+    #three-bg {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    /* ══ LOADER ══ */
+    #loader {
+      position: fixed; inset: 0;
+      background: var(--darker);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 99999;
+      font-family: 'Fira Code', monospace;
+      letter-spacing: 1px;
+      color: var(--gold);
+      text-align: center;
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+    #loader.hidden { opacity: 0; pointer-events: none; transform: scale(1.05); }
+    .spinner {
+      width: 56px; height: 56px;
+      border: 2px solid transparent;
+      border-top-color: var(--gold);
+      border-right-color: var(--sentinel-cyan);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 18px;
+      box-shadow: 0 0 20px rgba(201,168,76,0.35), 0 0 30px rgba(0,229,255,0.15);
+    }
+    #loading-text { text-transform: uppercase; font-size: 13px; margin-bottom: 8px; }
+    #loading-sub { text-transform: uppercase; font-size: 11px; color: rgba(232,232,232,0.55); letter-spacing: 1.5px; }
+
+    /* ══ ANIMATIONS ══ */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes floatGlow {
+      0%,100% { transform: translateY(0); filter: drop-shadow(0 0 18px rgba(201,168,76,0.5)) drop-shadow(0 0 40px rgba(201,168,76,0.15)); }
+      50% { transform: translateY(-10px); filter: drop-shadow(0 0 28px rgba(201,168,76,0.7)) drop-shadow(0 0 60px rgba(201,168,76,0.25)); }
+    }
+    @keyframes floatGlowCyan {
+      0%,100% { transform: translateY(0); filter: drop-shadow(0 0 18px rgba(0,229,255,0.5)) drop-shadow(0 0 40px rgba(0,229,255,0.15)); }
+      50% { transform: translateY(-10px); filter: drop-shadow(0 0 28px rgba(0,229,255,0.7)) drop-shadow(0 0 60px rgba(0,229,255,0.25)); }
+    }
+    @keyframes floatGlowFire {
+      0%,100% { transform: translateY(0); filter: drop-shadow(0 0 18px rgba(232,76,48,0.5)) drop-shadow(0 0 40px rgba(232,76,48,0.15)); }
+      50% { transform: translateY(-8px); filter: drop-shadow(0 0 28px rgba(232,76,48,0.7)) drop-shadow(0 0 60px rgba(232,76,48,0.25)); }
+    }
+    @keyframes subtlePulse { 0%,100% { opacity: 1; } 50% { opacity: .7; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(60px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes borderGlow { 0%,100% { border-color: rgba(201,168,76,0.15); } 50% { border-color: rgba(201,168,76,0.45); } }
+    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+    @keyframes lineExpand { from { width: 0; } to { width: 100%; } }
+    @keyframes glowPulseRing {
+      0%,100% { box-shadow: 0 0 20px rgba(201,168,76,0.1), inset 0 0 20px rgba(201,168,76,0.05); }
+      50% { box-shadow: 0 0 40px rgba(201,168,76,0.25), inset 0 0 40px rgba(201,168,76,0.1); }
+    }
+    @keyframes cyanPulse {
+      0%,100% { box-shadow: 0 0 20px rgba(0,229,255,0.08), inset 0 0 20px rgba(0,229,255,0.04); }
+      50% { box-shadow: 0 0 45px rgba(0,229,255,0.2), inset 0 0 40px rgba(0,229,255,0.08); }
+    }
+    @keyframes nodeGlow {
+      0%,100% { box-shadow: 0 0 8px rgba(0,229,255,0.3); }
+      50% { box-shadow: 0 0 22px rgba(0,229,255,0.7), 0 0 44px rgba(0,229,255,0.2); }
+    }
+    @keyframes dataStream {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 0%; }
+    }
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink { 50% { border-color: transparent; } }
+    @keyframes scanLine {
+      0% { top: -5%; }
+      100% { top: 105%; }
+    }
+    @keyframes hexRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .floating-glow { animation: floatGlow 4s ease-in-out infinite; }
+    .floating-glow-cyan { animation: floatGlowCyan 4.5s ease-in-out infinite; }
+
+    /* ══ SCROLL REVEAL ══ */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(50px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .stagger-children .reveal:nth-child(1) { transition-delay: 0s; }
+    .stagger-children .reveal:nth-child(2) { transition-delay: .08s; }
+    .stagger-children .reveal:nth-child(3) { transition-delay: .14s; }
+    .stagger-children .reveal:nth-child(4) { transition-delay: .2s; }
+    .stagger-children .reveal:nth-child(5) { transition-delay: .26s; }
+    .stagger-children .reveal:nth-child(6) { transition-delay: .32s; }
+    .stagger-children .reveal:nth-child(7) { transition-delay: .38s; }
+    .stagger-children .reveal:nth-child(8) { transition-delay: .44s; }
+
+    /* ══ NAV ══ */
+    .main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+      padding: 14px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(5,5,8,0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(201,168,76,0.06);
+      transition: background .4s;
+    }
+    .main-nav.scrolled { background: rgba(5,5,8,0.92); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo img { height: 34px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text .brand { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 4px; color: var(--gold); }
+    .nav-logo-text .sub { font-size: 8px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--text-dim); text-decoration: none;
+      transition: color .3s; padding: 6px 0; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1px; background: var(--gold); transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 22px; cursor: pointer; }
+
+    /* ══ BUTTONS ══ */
+    .btn-gold {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 13px 30px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--darker); font-weight: 700; font-size: 12px;
+      letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+      border-radius: 4px; border: none; cursor: pointer;
+      transition: all .4s; box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+    }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(201,168,76,0.5); }
+    .btn-outline {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 13px 30px;
+      background: transparent;
+      color: var(--text); font-weight: 500; font-size: 12px;
+      letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+      border-radius: 4px; border: 1px solid rgba(201,168,76,0.25); cursor: pointer;
+      transition: all .4s;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); transform: translateY(-2px); }
+    .btn-cyan {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 13px 30px;
+      background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(0,191,165,0.15));
+      color: var(--sentinel-cyan); font-weight: 600; font-size: 12px;
+      letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+      border-radius: 4px; border: 1px solid rgba(0,229,255,0.25); cursor: pointer;
+      transition: all .4s;
+    }
+    .btn-cyan:hover { background: rgba(0,229,255,0.2); border-color: var(--sentinel-cyan); transform: translateY(-2px); box-shadow: 0 4px 25px rgba(0,229,255,0.2); }
+
+    /* ══ HERO ══ */
+    .hero-wrapper { position: relative; min-height: 100vh; overflow: hidden; padding-top: 70px; }
+    .hero-grid {
+      position: relative;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; min-height: 100vh;
+      max-width: 1400px; margin: 0 auto; padding: 80px 60px; z-index: 2;
+    }
+    .hero-wrapper::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: linear-gradient(90deg, transparent 10%, var(--gold) 30%, var(--sentinel-cyan) 70%, transparent 90%);
+      animation: subtlePulse 3s ease-in-out infinite; z-index: 10;
+    }
+    .hero-txt-col { display: flex; flex-direction: column; justify-content: center; padding-right: 50px; z-index: 3; }
+    .hero-company-logo { margin-bottom: 32px; animation: floatGlow 4s ease-in-out infinite; }
+    .hero-company-logo img { height: 70px; width: auto; }
+    .hero-tagline {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(11px,1.4vw,14px);
+      letter-spacing: 7px; color: var(--gold); text-transform: uppercase;
+      margin-bottom: 18px; animation: fadeInRight 1s ease-out .3s both; display: inline-block;
+    }
+    .hero-tagline::after {
+      content: ''; display: block; height: 1px; margin-top: 10px;
+      background: linear-gradient(90deg, var(--gold), var(--sentinel-cyan), transparent);
+      animation: lineExpand 1.5s ease-out .8s both;
+    }
+    .hero-grid h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px,5vw,72px);
+      font-weight: 700; line-height: 1.05;
+      color: var(--text); margin-bottom: 20px;
+      animation: fadeInRight 1s ease-out .6s both;
+    }
+    .hero-grid h1 span {
+      display: block;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--sentinel-cyan), var(--gold));
+      background-size: 300% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: fadeInRight 1s ease-out .6s both, shimmer 6s ease-in-out infinite;
+    }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(15px,1.8vw,20px);
+      font-style: italic; color: var(--text-dim);
+      max-width: 520px; margin-bottom: 36px;
+      animation: fadeInRight 1s ease-out .9s both;
+    }
+    .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeInRight 1s ease-out 1.1s both; }
+    .hero-scroll-hint {
+      position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); animation: fadeInUp 1s ease-out 1.4s both; z-index: 5;
+    }
+    .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, var(--gold), transparent); animation: subtlePulse 2s ease-in-out infinite; }
+
+    /* ── HERO RIGHT — 3D NETWORK VISUAL ── */
+    .hero-visual-col {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      z-index: 3;
+    }
+    #hero-network-canvas {
+      width: 100%; max-width: 560px; height: 500px;
+      border-radius: 12px;
+      background: transparent;
+    }
+
+    /* ══ SECTIONS ══ */
+    .content-section { padding: 100px 24px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .section-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px; line-height: 1;
+      color: rgba(201,168,76,0.06);
+      position: absolute; top: 60px; right: 24px;
+      z-index: 0; pointer-events: none;
+    }
+    .section-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px; letter-spacing: 5px;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px,4.2vw,48px);
+      font-weight: 700; line-height: 1.15; margin-bottom: 18px;
+    }
+    .section-title span {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .section-desc { font-size: 15px; color: var(--text-dim); max-width: 700px; margin-bottom: 45px; line-height: 1.85; }
+    .divider {
+      width: 100%; max-width: 1100px; margin: 0 auto; height: 1px;
+      position: relative; z-index: 1;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), rgba(0,229,255,0.15), transparent);
+    }
+
+    /* ══ STAT CARDS ══ */
+    .card-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .card-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+    .metric-card {
+      text-align: center; padding: 36px 18px;
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.04);
+      border-radius: 4px; position: relative; overflow: hidden;
+      transition: border-color .4s, transform .4s;
+    }
+    .metric-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--sentinel-cyan), transparent);
+      opacity: 0; transition: opacity .4s;
+    }
+    .metric-card:hover::before { opacity: 1; }
+    .metric-card:hover { border-color: rgba(201,168,76,0.2); transform: translateY(-6px); }
+    .metric-number { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+    .metric-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-dim); }
+
+    /* ══ PLATFORM CARDS ══ */
+    .platform-card {
+      padding: 34px 26px; background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.04);
+      border-radius: 6px; position: relative; overflow: hidden;
+      transition: all .4s;
+    }
+    .platform-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--sentinel-cyan));
+      transform: scaleX(0); transform-origin: left; transition: transform .5s;
+    }
+    .platform-card:hover::before { transform: scaleX(1); }
+    .platform-card:hover { border-color: rgba(201,168,76,0.15); transform: translateY(-6px); }
+    .platform-card .card-icon { font-size: 28px; margin-bottom: 14px; }
+    .platform-card h3 { font-weight: 700; font-size: 17px; margin-bottom: 4px; }
+    .platform-card .card-type { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .platform-card p { font-size: 13px; color: var(--text-dim); line-height: 1.75; }
+    .platform-card .card-link {
+      display: inline-block; margin-top: 16px;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--sentinel-cyan); text-decoration: none;
+      transition: all .3s; border-bottom: 1px solid rgba(0,229,255,0.2);
+    }
+    .platform-card .card-link:hover { border-color: var(--sentinel-cyan); padding-left: 6px; }
+
+    /* ══ SENTINEL NODES — NETWORK DIAGRAM ══ */
+    .network-diagram {
+      position: relative; width: 100%; max-width: 900px;
+      margin: 0 auto 60px; padding: 80px 40px;
+    }
+    .network-hub {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 140px; height: 140px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.2), rgba(201,168,76,0.02));
+      border: 2px solid rgba(201,168,76,0.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; text-align: center; z-index: 5;
+      animation: glowPulseRing 4s ease-in-out infinite;
+    }
+    .network-hub .hub-icon { font-size: 28px; margin-bottom: 4px; }
+    .network-hub .hub-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px; letter-spacing: 3px; color: var(--gold);
+    }
+    .sat-node {
+      position: absolute; width: 100px; height: 100px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.12), rgba(0,229,255,0.02));
+      border: 1px solid rgba(0,229,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; text-align: center; z-index: 4;
+      animation: cyanPulse 5s ease-in-out infinite;
+    }
+    .sat-node .sat-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 8px; letter-spacing: 1px; color: var(--sentinel-cyan);
+      text-transform: uppercase;
+    }
+    .sat-node .sat-icon { font-size: 20px; margin-bottom: 2px; }
+    .sat-node:nth-child(2) { top: 5%; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
+    .sat-node:nth-child(3) { top: 28%; right: 5%; animation-delay: 1s; }
+    .sat-node:nth-child(4) { bottom: 28%; right: 5%; animation-delay: 2s; }
+    .sat-node:nth-child(5) { bottom: 5%; left: 50%; transform: translateX(-50%); animation-delay: 1.5s; }
+    .sat-node:nth-child(6) { top: 28%; left: 5%; animation-delay: 0.5s; }
+    .sat-node:nth-child(7) { bottom: 28%; left: 5%; animation-delay: 2.5s; }
+
+    /* ══ PRICING CARDS ══ */
+    .pricing-card {
+      padding: 40px 30px; background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.06);
+      border-radius: 8px; position: relative; overflow: hidden;
+      transition: all .5s; display: flex; flex-direction: column;
+    }
+    .pricing-card.featured {
+      border-color: rgba(201,168,76,0.25);
+      background: linear-gradient(135deg, var(--surface), rgba(201,168,76,0.04));
+    }
+    .pricing-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--sentinel-cyan));
+      opacity: 0; transition: opacity .5s;
+    }
+    .pricing-card:hover::before { opacity: 1; }
+    .pricing-card:hover { transform: translateY(-8px); border-color: rgba(201,168,76,0.2); }
+    .pricing-card .tier-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px; letter-spacing: 4px; color: var(--sentinel-cyan);
+      margin-bottom: 6px;
+    }
+    .pricing-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px; font-weight: 700; margin-bottom: 4px;
+    }
+    .pricing-card .price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px; color: var(--gold); margin-bottom: 4px;
+    }
+    .pricing-card .price-sub { font-size: 11px; color: var(--text-dim); margin-bottom: 20px; }
+    .pricing-card ul { list-style: none; flex: 1; margin-bottom: 24px; }
+    .pricing-card li {
+      font-size: 13px; color: var(--text-dim); padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      padding-left: 18px; position: relative;
+    }
+    .pricing-card li::before {
+      content: '◆'; position: absolute; left: 0; color: var(--gold); font-size: 8px; top: 9px;
+    }
+    .pricing-card .best-for {
+      font-size: 11px; color: var(--text-dim); font-style: italic;
+      margin-top: auto; padding-top: 16px;
+      border-top: 1px solid rgba(201,168,76,0.08);
+    }
+
+    /* ══ AGREEMENT ACCORDION ══ */
+    .accordion-item {
+      border: 1px solid rgba(201,168,76,0.06);
+      border-radius: 4px; margin-bottom: 10px;
+      background: var(--surface);
+      overflow: hidden; transition: border-color .3s;
+    }
+    .accordion-item:hover { border-color: rgba(201,168,76,0.15); }
+    .accordion-header {
+      padding: 18px 24px; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      font-weight: 600; font-size: 14px;
+      transition: background .3s;
+    }
+    .accordion-header:hover { background: rgba(201,168,76,0.03); }
+    .accordion-arrow { color: var(--gold); font-size: 14px; transition: transform .3s; }
+    .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+    .accordion-body {
+      max-height: 0; overflow: hidden; transition: max-height .5s ease;
+      padding: 0 24px;
+    }
+    .accordion-item.open .accordion-body { max-height: 200px; padding: 0 24px 18px; }
+    .accordion-body p { font-size: 13px; color: var(--text-dim); line-height: 1.8; }
+
+    /* ══ TIMELINE ══ */
+    .timeline { position: relative; padding-left: 44px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, var(--gold), var(--sentinel-cyan), rgba(0,229,255,0.05));
+    }
+    .timeline-item { position: relative; margin-bottom: 40px; padding-left: 28px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -48px; top: 8px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--gold); box-shadow: 0 0 16px rgba(201,168,76,0.5);
+    }
+    .timeline-item::after {
+      content: ''; position: absolute; left: -52px; top: 4px;
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.2);
+      animation: glowPulseRing 4s ease-in-out infinite;
+    }
+    .timeline-item h4 { font-weight: 600; font-size: 15px; margin-bottom: 5px; }
+    .timeline-item .tl-number {
+      font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+      color: var(--gold); opacity: 0.5; margin-bottom: 2px;
+    }
+    .timeline-item p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+
+    /* ══ NO CARDS (WHY SENTINEL) ══ */
+    .no-card {
+      padding: 28px; background: var(--surface);
+      border-left: 3px solid var(--accent-fire); border-radius: 0 4px 4px 0;
+      position: relative; overflow: hidden; transition: all .4s;
+    }
+    .no-card::after {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 0; height: 100%; background: rgba(232,76,48,0.03);
+      transition: width .5s;
+    }
+    .no-card:hover::after { width: 100%; }
+    .no-card:hover { transform: translateX(8px); }
+    .no-card .no-icon { font-size: 18px; color: var(--accent-fire); margin-bottom: 8px; position: relative; z-index: 1; }
+    .no-card h4 { font-weight: 600; font-size: 14px; margin-bottom: 8px; position: relative; z-index: 1; }
+    .no-card p { font-size: 13px; color: var(--text-dim); line-height: 1.7; position: relative; z-index: 1; }
+
+    /* ══ HUD TERMINAL ══ */
+    .hud-bar {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px; letter-spacing: 1px;
+      color: rgba(0,229,255,0.5); text-transform: uppercase;
+      padding: 10px 24px;
+      display: flex; justify-content: center; gap: 30px;
+      position: relative; z-index: 1;
+    }
+    .hud-bar span { animation: subtlePulse 3s ease-in-out infinite; }
+    .hud-bar span:nth-child(2) { animation-delay: 1s; }
+    .hud-bar span:nth-child(3) { animation-delay: 2s; }
+
+    /* ══ GLOW TILES ══ */
+    .glow-tile-gold {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.04) 100%);
+      border-radius: 12px;
+      box-shadow: 0 0 18px 6px rgba(201,168,76,0.15), 0 0 32px 12px rgba(201,168,76,0.06);
+      padding: 14px 28px; margin: 18px 0;
+      color: #e8e6e1; font-size: 1.08rem; font-weight: 500;
+      text-align: center; letter-spacing: 0.01em;
+      border: 1px solid rgba(201,168,76,0.12);
+    }
+    .glow-tile-cyan {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(0,229,255,0.1) 0%, rgba(0,191,165,0.06) 100%);
+      border-radius: 12px;
+      box-shadow: 0 0 18px 6px rgba(0,229,255,0.12), 0 0 32px 12px rgba(0,229,255,0.05);
+      padding: 14px 28px; margin: 18px 0;
+      color: #e0fcff; font-size: 1.08rem; font-weight: 500;
+      text-align: center; letter-spacing: 0.01em;
+      border: 1px solid rgba(0,229,255,0.12);
+    }
+
+    /* ══ FEATURE PILLS ══ */
+    .feature-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+    .feature-pill {
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 7px 16px;
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 20px; color: var(--sentinel-cyan);
+      background: rgba(0,229,255,0.04);
+      transition: all .3s;
+    }
+    .feature-pill:hover { background: rgba(0,229,255,0.1); border-color: var(--sentinel-cyan); transform: translateY(-2px); }
+
+    /* ══ CTA BANNER ══ */
+    .cta-banner {
+      text-align: center; padding: 80px 40px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.04), rgba(0,229,255,0.04));
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 12px; position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--sentinel-cyan), transparent);
+    }
+    .cta-banner::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--sentinel-cyan), var(--gold), transparent);
+    }
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3.5vw, 42px); font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .cta-banner p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-style: italic;
+      color: var(--text-dim); margin-bottom: 36px; max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+
+    /* ══ FOOTER ══ */
+    footer {
+      text-align: center; padding: 60px 24px 40px;
+      border-top: 1px solid rgba(201,168,76,0.06);
+      position: relative; z-index: 1;
+    }
+    .footer-logo img { height: 44px; margin-bottom: 16px; }
+    footer p { font-size: 12px; color: var(--text-dim); line-height: 1.9; }
+    footer a { color: var(--gold); text-decoration: none; transition: color .3s; }
+    footer a:hover { color: var(--gold-light); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 20px; }
+    .footer-links a { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color .3s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ══ IDEAL CLIENTS ══ */
+    .client-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 30px; }
+    .client-tag {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      padding: 8px 20px;
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 3px; color: var(--gold);
+      background: rgba(201,168,76,0.03);
+      transition: all .3s;
+    }
+    .client-tag:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); transform: translateY(-2px); }
+
+    /* ══ SCAN LINE EFFECT ══ */
+    .scan-container { position: relative; overflow: hidden; }
+    .scan-container::after {
+      content: ''; position: absolute; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(to bottom, transparent, rgba(0,229,255,0.08), transparent);
+      animation: scanLine 8s linear infinite;
+      pointer-events: none; z-index: 2;
+    }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; padding: 60px 30px; }
+      .hero-txt-col { padding-right: 0; align-items: center; }
+      .hero-visual-col { margin-top: 30px; }
+      #hero-network-canvas { height: 350px; }
+      .card-grid-4 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .card-grid-3 { grid-template-columns: 1fr; }
+      .card-grid-4 { grid-template-columns: 1fr; }
+      .card-grid-2 { grid-template-columns: 1fr; }
+      .main-nav { padding: 14px 20px; }
+      .content-section { padding: 60px 16px; }
+      .section-number { font-size: 50px; }
+    }
+    @media (max-width: 480px) {
+      .hero-grid h1 { font-size: 32px; }
+      #hero-network-canvas { height: 280px; }
+    }
+
+    /* ══ MOBILE NAV ══ */
+    .mobile-nav {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(5,5,8,0.97);
+      backdrop-filter: blur(20px);
+      display: none; flex-direction: column;
+      justify-content: center; align-items: center;
+      gap: 16px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 18px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--text-dim); text-decoration: none;
+      padding: 10px 0; transition: color .3s;
+    }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-nav-close {
+      position: absolute; top: 28px; right: 28px;
+      background: none; border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold); font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px; letter-spacing: 3px; padding: 9px 20px;
+      cursor: pointer; border-radius: 4px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="spinner"></div>
+  <div id="loading-text">Sentinel Web Authority™</div>
+  <div id="loading-sub">Initializing distributed authority network...</div>
+</div>
+
+<!-- NAV -->
+<nav class="main-nav" id="mainNav">
+  <a href="https://sentinelwebauthority.netlify.app/" class="nav-logo" target="_blank" rel="noopener">
+    <img src="https://cdn1.sharemyimage.com/2025/12/30/SkyesOverLondonLC_logo_transparent_clean_tight.png" alt="Skyes Over London LC">
+    <div class="nav-logo-text">
+      <span class="brand">Sentinel Authority™</span>
+      <span class="sub">by Skyes Over London LC</span>
+    </div>
+  </a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="nav-links">
+    <a href="#solution">Solution</a>
+    <a href="#problem">Problem</a>
+    <a href="#how">How It Works</a>
+    <a href="#why">Why Sentinel</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#agreement">Agreement</a>
+    <a href="https://sentinelwebauthority.netlify.app/" target="_blank" rel="noopener" style="color:var(--sentinel-cyan)">Visit Site →</a>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="mobileNavClose">✕ CLOSE</button>
+  <a href="#solution" onclick="closeMobileNav()">Solution</a>
+  <a href="#problem" onclick="closeMobileNav()">Problem</a>
+  <a href="#how" onclick="closeMobileNav()">How It Works</a>
+  <a href="#why" onclick="closeMobileNav()">Why Sentinel</a>
+  <a href="#pricing" onclick="closeMobileNav()">Pricing</a>
+  <a href="#agreement" onclick="closeMobileNav()">Agreement</a>
+  <a href="https://sentinelwebauthority.netlify.app/" target="_blank" rel="noopener" style="color:var(--sentinel-cyan)">Visit Full Site →</a>
+</div>
+
+<!-- HUD BAR TOP -->
+<div class="hud-bar" style="margin-top:60px">
+  <span>SENTINEL_v1.0</span>
+  <span>AUTHORITY_LOCK</span>
+  <span>DISTRIBUTED SEO · REAL AUTHORITY · SUSTAINABLE GROWTH</span>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="hero-wrapper">
+  <div class="hero-grid">
+    <div class="hero-txt-col">
+      <div class="hero-company-logo">
+        <img src="https://cdn1.sharemyimage.com/2025/12/30/SkyesOverLondonLC_logo_transparent_clean_tight.png" alt="Skyes Over London LC">
+      </div>
+      <div class="hero-tagline">Distributed SEO · Real Authority · Sustainable Growth</div>
+      <h1>Sentinel Web<br><span>Authority™</span></h1>
+      <p class="hero-subtitle">We don't chase rankings. We build ecosystems Google trusts. Multiple aligned properties publishing authority content — funneling relevance back to your most important pages.</p>
+      <div class="feature-pills" style="animation: fadeInRight 1s ease-out 1s both;">
+        <span class="feature-pill">Up to 5 branded websites</span>
+        <span class="feature-pill">Editorial-grade content</span>
+        <span class="feature-pill">Contextual referral linking</span>
+        <span class="feature-pill">Monthly visibility reporting</span>
+      </div>
+      <div class="hero-cta-row">
+        <a href="https://sentinelwebauthority.netlify.app/#assessment" class="btn-gold" target="_blank" rel="noopener">Request Authority Assessment</a>
+        <a href="https://sentinelwebauthority.netlify.app/my-site/pages/freedemo" class="btn-cyan" target="_blank" rel="noopener">View Demo Network</a>
+      </div>
+    </div>
+    <div class="hero-visual-col">
+      <canvas id="hero-network-canvas"></canvas>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">Scroll<div class="scroll-line"></div></div>
+</div>
+
+<div class="hud-bar">
+  <span>AUTHORITY NETWORK: ONLINE</span>
+  <span>EDITORIAL-GRADE · NO BLACK-HAT TACTICS</span>
+</div>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     01 — THE SENTINEL SOLUTION
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="content-section scan-container" id="solution">
+  <div class="section-number">01</div>
+  <div class="section-label reveal">The Sentinel Solution</div>
+  <div class="section-title reveal">A Five-Entity Brand <span>Amplification Funnel</span></div>
+  <div class="section-desc reveal">Multiple aligned properties publishing authority content and funneling relevance back to your most important pages. No spam networks, no risky automation, no black-hat tactics.</div>
+
+  <div class="card-grid-4 stagger-children" style="margin-bottom:50px">
+    <div class="metric-card reveal"><div class="metric-number" data-count="5">0</div><div class="metric-label">Max Branded Sites</div></div>
+    <div class="metric-card reveal"><div class="metric-number" data-count="23" data-suffix="+">0</div><div class="metric-label">Long-Form Blogs / Mo</div></div>
+    <div class="metric-card reveal"><div class="metric-number" data-text="E/PR">—</div><div class="metric-label">Editorial + Media Layer</div></div>
+    <div class="metric-card reveal"><div class="metric-number" data-text="∞">—</div><div class="metric-label">Authority Compounding</div></div>
+  </div>
+
+  <div class="card-grid-3 stagger-children">
+    <div class="platform-card reveal">
+      <div class="card-icon">🌐</div>
+      <h3>Multiple Aligned Brand Sites</h3>
+      <div class="card-type">Authority infrastructure</div>
+      <p>Independently valuable properties that compound trust signals across the web. Authority flows contextually.</p>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">✍️</div>
+      <h3>Human-Written Authority Content</h3>
+      <div class="card-type">Editorial-grade publishing</div>
+      <p>Long-form publishing mapped to your services and buyer intent. Real humans, real standards. Reinforces priority pages.</p>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">📰</div>
+      <h3>Editorial &amp; Media Layer</h3>
+      <div class="card-type">PR + Visual trust</div>
+      <p>PR-style content and visuals that elevate trust, engagement, and recall — sustainably. Sustainable authority building.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     02 — PROBLEM → SOLUTION
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="content-section" id="problem">
+  <div class="section-number">02</div>
+  <div class="section-label reveal">Problem → Solution</div>
+  <div class="section-title reveal">One Website Can't Carry Your <span>Authority Alone</span></div>
+
+  <div class="card-grid-2 stagger-children" style="margin-top:40px">
+    <div class="platform-card reveal" style="border-left: 3px solid var(--accent-fire);">
+      <div class="card-icon">⚠️</div>
+      <h3>The Problem</h3>
+      <div class="card-type" style="color:var(--accent-fire)">Single-domain limitation</div>
+      <p>Most brands rely on a single domain — which limits visibility, slows growth in competitive markets, and weakens brand reinforcement. Inconsistent visibility across services and locations. Slow movement in competitive keywords. Weak reinforcement of trust signals and brand narrative.</p>
+    </div>
+    <div class="platform-card reveal" style="border-left: 3px solid var(--sentinel-cyan);">
+      <div class="card-icon">⬡</div>
+      <h3>Infrastructure That Makes Authority Inevitable</h3>
+      <div class="card-type" style="color:var(--sentinel-cyan)">Distributed authority system</div>
+      <p>Up to 5 branded websites built and managed. Feature-length authority publishing at monthly cadence. Strategic referrals to your exact priority pages. Editorial/PR layer to increase trust and recall. Photo &amp; video drops when campaigns require it. Monthly reporting on production and visibility signals.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px" class="reveal">
+    <a href="https://sentinelwebauthority.netlify.app/#pricing" class="btn-gold" target="_blank" rel="noopener">See Pricing Tiers</a>
+    <a href="https://sentinelwebauthority.netlify.app/my-site/pages/freedemo" class="btn-outline" target="_blank" rel="noopener" style="margin-left:12px">See Demo Build Plan</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     03 — HOW IT WORKS
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="content-section" id="how">
+  <div class="section-number">03</div>
+  <div class="section-label reveal">How It Works</div>
+  <div class="section-title reveal">A Distributed Authority System — <span>Engineered, Not Improvised</span></div>
+  <div class="section-desc reveal">Skyes Over London LC deploys multiple aligned properties that publish real authority content and funnel relevance back to your priority pages through contextual referrals.</div>
+
+  <!-- Timeline -->
+  <div class="timeline reveal" style="margin-bottom:60px">
+    <div class="timeline-item">
+      <div class="tl-number">3</div>
+      <h4>3-Month Authority Launch</h4>
+      <p>Infrastructure + foundation content to establish footprint.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-number">6</div>
+      <h4>6-Month Expansion Cycle</h4>
+      <p>Scale properties + deepen topical coverage and page targeting.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-number">9</div>
+      <h4>9-Month Market Capture</h4>
+      <p>Compounding authority + aggressive priority-page reinforcement.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="tl-number">12</div>
+      <h4>12-Month Dominance Program</h4>
+      <p>Mature ecosystem + reporting + editorial &amp; media drops.</p>
+    </div>
+  </div>
+
+  <!-- Pillars -->
+  <div class="card-grid-4 stagger-children" style="margin-bottom:40px">
+    <div class="platform-card reveal">
+      <div class="card-icon" style="color:var(--gold)">1</div>
+      <h3>Multi-Entity Brand Architecture</h3>
+      <p>We design and manage up to five aligned brand sites — each independently valuable, collectively powerful.</p>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon" style="color:var(--gold)">2</div>
+      <h3>Authority Content Engine</h3>
+      <p>Long-form, human-written publishing mapped to your services, locations, and buyer questions.</p>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon" style="color:var(--gold)">3</div>
+      <h3>Strategic Authority Flow</h3>
+      <p>Contextual referrals reinforce the exact pages you prioritize — not random linking.</p>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon" style="color:var(--gold)">4</div>
+      <h3>Editorial &amp; Media Layer</h3>
+      <p>PR-style content + visuals that elevate trust and keep your brand "sticky."</p>
+    </div>
+  </div>
+
+  <!-- Ideal Clients -->
+  <div class="reveal" style="text-align:center;margin-top:30px">
+    <div class="section-label">Ideal Clients</div>
+    <div class="client-tags">
+      <span class="client-tag">Service businesses</span>
+      <span class="client-tag">Logistics &amp; transportation firms</span>
+      <span class="client-tag">Agencies &amp; consultants</span>
+      <span class="client-tag">Founders in competitive niches</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     04 — WHY SENTINEL
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="content-section" id="why">
+  <div class="section-number">04</div>
+  <div class="section-label reveal">Why Sentinel</div>
+  <div class="section-title reveal">No Shortcuts. No Spam. <span>No Risky Automation.</span></div>
+  <div class="section-desc reveal">Sentinel is compliance-conscious and editorial-grade. We build durable authority infrastructure that compounds over time.</div>
+
+  <div class="card-grid-4 stagger-children">
+    <div class="no-card reveal">
+      <div class="no-icon">✕</div>
+      <h4>No Shortcuts</h4>
+      <p>Authority is built — not hacked. Every property and piece of content is engineered for durability.</p>
+    </div>
+    <div class="no-card reveal">
+      <div class="no-icon">✕</div>
+      <h4>No Spam Networks</h4>
+      <p>No toxic link profiles, no synthetic footprints. Every property is independently valuable.</p>
+    </div>
+    <div class="no-card reveal">
+      <div class="no-icon">✕</div>
+      <h4>No Risky Automation</h4>
+      <p>Editorial workflows, real publishing standards. Humans drive every piece of output.</p>
+    </div>
+    <div class="no-card reveal">
+      <div class="no-icon">✕</div>
+      <h4>No Black-Hat Tactics</h4>
+      <p>Built for long-term trust and stability — aligned with every platform's guidelines.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px" class="reveal">
+    <a href="https://sentinelwebauthority.netlify.app/#assessment" class="btn-gold" target="_blank" rel="noopener">Start Your Campaign</a>
+    <a href="#agreement" class="btn-outline" style="margin-left:12px">Review Service Terms</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     05 — PRICING
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="content-section" id="pricing">
+  <div class="section-number">05</div>
+  <div class="section-label reveal">Pricing Tiers</div>
+  <div class="section-title reveal">Choose Your Authority <span>Build-Out Level</span></div>
+  <div class="section-desc reveal">Minimum terms apply per tier. All work is human-driven, editorial-grade, and mapped to your priority pages.</div>
+
+  <div class="card-grid-3 stagger-children">
+    <!-- STARTER -->
+    <div class="pricing-card reveal">
+      <div class="tier-badge">Starter</div>
+      <h3>Authority Launch</h3>
+      <div class="price">$4,500<span style="font-size:16px;color:var(--text-dim)">/ month</span></div>
+      <div class="price-sub">3-month minimum</div>
+      <ul>
+        <li>2 supporting brand websites</li>
+        <li>8 authority blog posts / month</li>
+        <li>Priority page reinforcement</li>
+        <li>Monthly reporting</li>
+      </ul>
+      <div class="best-for">Best for: Local &amp; early-stage brands</div>
+      <a href="https://sentinelwebauthority.netlify.app/#assessment" class="btn-cyan" style="margin-top:16px;width:100%;text-align:center" target="_blank" rel="noopener">Start Starter</a>
+    </div>
+    <!-- AUTHORITY -->
+    <div class="pricing-card featured reveal">
+      <div class="tier-badge">Authority</div>
+      <h3>Expansion System</h3>
+      <div class="price">$7,500<span style="font-size:16px;color:var(--text-dim)">/ month</span></div>
+      <div class="price-sub">6-month minimum</div>
+      <ul>
+        <li>4 supporting brand websites</li>
+        <li>16 authority blog posts / month</li>
+        <li>Editorial-grade content</li>
+        <li>Strategic page targeting</li>
+        <li>Quarterly PR releases</li>
+      </ul>
+      <div class="best-for">Best for: Regional &amp; scaling businesses</div>
+      <a href="https://sentinelwebauthority.netlify.app/#assessment" class="btn-gold" style="margin-top:16px;width:100%;text-align:center" target="_blank" rel="noopener">Start Authority</a>
+    </div>
+    <!-- DOMINANCE -->
+    <div class="pricing-card reveal">
+      <div class="tier-badge">Dominance</div>
+      <h3>Market Control</h3>
+      <div class="price">$12,000<span style="font-size:16px;color:var(--text-dim)">/ month</span></div>
+      <div class="price-sub">9–12 months</div>
+      <ul>
+        <li>Full 5-site authority network</li>
+        <li>23+ long-form blogs / month</li>
+        <li>Press releases &amp; media drops</li>
+        <li>Photo &amp; video integration</li>
+        <li>Advanced authority reporting</li>
+      </ul>
+      <div class="best-for">Best for: Competitive markets &amp; enterprise clients</div>
+      <a href="https://sentinelwebauthority.netlify.app/#assessment" class="btn-cyan" style="margin-top:16px;width:100%;text-align:center" target="_blank" rel="noopener">Start Dominance</a>
+    </div>
+  </div>
+
+  <div class="glow-tile-gold reveal" style="max-width:700px;margin:50px auto 0;display:block">
+    If your brand deserves to be seen as an authority — Sentinel Web Authority™ builds the infrastructure to make that inevitable.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     06 — SERVICE AGREEMENT
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="content-section" id="agreement">
+  <div class="section-number">06</div>
+  <div class="section-label reveal">Contract-Safe Service Agreement</div>
+  <div class="section-title reveal">Clear Scope. <span>Compliance-Conscious Delivery.</span></div>
+  <div class="section-desc reveal">Sentinel Web Authority™ provides brand infrastructure development, content creation, and authority reinforcement services. Search visibility and rankings are influenced by third-party platforms; no specific outcomes are guaranteed.</div>
+
+  <div class="reveal">
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">Service Scope <span class="accordion-arrow">▾</span></div>
+      <div class="accordion-body"><p>Brand infrastructure development, content creation, and authority reinforcement — executed with editorial standards and mapped to client priorities.</p></div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">No Guarantees Clause <span class="accordion-arrow">▾</span></div>
+      <div class="accordion-body"><p>Client acknowledges search visibility and rankings are influenced by third-party platforms; no specific outcomes are guaranteed.</p></div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">Compliance Statement <span class="accordion-arrow">▾</span></div>
+      <div class="accordion-body"><p>Services are performed using compliance-conscious, human-driven workflows aligned with industry best practices.</p></div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">Payment Terms <span class="accordion-arrow">▾</span></div>
+      <div class="accordion-body"><p>Monthly retainer. No refunds on work performed. Minimum engagement terms apply per tier.</p></div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAccordion(this)">Intellectual Property <span class="accordion-arrow">▾</span></div>
+      <div class="accordion-body"><p>All client-specific content becomes client property upon payment, excluding internal frameworks and proprietary operating methods.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     07 — FINAL CTA
+     ════════════════════════════════════════════════════════════════════ -->
+<section class="content-section">
+  <div class="section-number">07</div>
+  <div class="cta-banner reveal">
+    <div class="section-label">Build Your Authority Network</div>
+    <h2>Ready to own your market's<br><span style="background:linear-gradient(135deg,var(--gold),var(--sentinel-cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">search visibility?</span></h2>
+    <p>Tell Skyes Over London LC what you do and which pages matter most. We'll map a distributed authority plan designed to reinforce your primary site strategically.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+      <a href="https://sentinelwebauthority.netlify.app/#assessment" class="btn-gold" target="_blank" rel="noopener">Request Authority Assessment</a>
+      <a href="https://sentinelwebauthority.netlify.app/my-site/pages/freedemo" class="btn-cyan" target="_blank" rel="noopener">View Demo Authority Network</a>
+      <a href="https://sentinelwebauthority.netlify.app/" class="btn-outline" target="_blank" rel="noopener">Visit sentinelwebauthority.netlify.app</a>
+    </div>
+  </div>
+</section>
+
+<!-- HUD BAR BOTTOM -->
+<div class="hud-bar">
+  <span>SENTINEL_v1.0 :: AUTHORITY_LOCK</span>
+  <span>POWERED BY SKYES OVER LONDON LC</span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://cdn1.sharemyimage.com/2025/12/30/SkyesOverLondonLC_logo_transparent_clean_tight.png" alt="Skyes Over London LC">
+  </div>
+  <p><strong style="color:var(--text)">Sentinel Web Authority™</strong><br>by Skyes Over London LC — Distributed Brand Authority &amp; SEO Amplification</p>
+  <div class="footer-links">
+    <a href="https://sentinelwebauthority.netlify.app/#how" target="_blank" rel="noopener">How It Works</a>
+    <a href="https://sentinelwebauthority.netlify.app/#pricing" target="_blank" rel="noopener">Pricing</a>
+    <a href="https://sentinelwebauthority.netlify.app/my-site/pages/freedemo" target="_blank" rel="noopener">Demo Network</a>
+    <a href="https://sentinelwebauthority.netlify.app/#agreement" target="_blank" rel="noopener">Agreement</a>
+    <a href="https://sentinelwebauthority.netlify.app/#assessment" target="_blank" rel="noopener">Assessment</a>
+  </div>
+  <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC. All rights reserved. This page is a promotional Three.js spectacle for Sentinel Web Authority™.</p>
+</footer>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     THREE.JS — MAIN AURORA PARTICLE BACKGROUND
+     ════════════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  const canvas = document.getElementById('three-bg');
+  if (!canvas) return;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x07070f, 1);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
+  camera.position.set(0, 0, 12);
+
+  const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+  let scrollY = 0;
+
+  // ── PARTICLES ──────────────────────────────────────────────────────
+  const COUNT = 3200;
+  const pPos    = new Float32Array(COUNT * 3);
+  const pColor  = new Float32Array(COUNT * 3);
+  const pSize   = new Float32Array(COUNT);
+  const pSpeed  = new Float32Array(COUNT);
+  const pOffset = new Float32Array(COUNT);
+
+  const goldPal   = [[0.85,0.68,0.22],[0.95,0.85,0.42],[1.0,0.93,0.58]];
+  const cyanPal   = [[0.0,0.9,1.0],[0.0,0.75,0.65],[0.2,0.95,0.95]];
+  const purplePal = [[0.55,0.40,1.0],[0.62,0.48,0.94],[0.74,0.60,1.0]];
+
+  for (let i = 0; i < COUNT; i++) {
+    pPos[i*3]   = (Math.random() - 0.5) * 38;
+    pPos[i*3+1] = (Math.random() - 0.5) * 24;
+    pPos[i*3+2] = (Math.random() - 0.5) * 16 - 4;
+    pSize[i]   = Math.random() * 2.8 + 0.4;
+    pSpeed[i]  = Math.random() * 0.35 + 0.08;
+    pOffset[i] = Math.random() * Math.PI * 2;
+    const r = Math.random();
+    const pal = r < 0.42 ? goldPal : r < 0.72 ? cyanPal : purplePal;
+    const c = pal[Math.floor(Math.random() * pal.length)];
+    pColor[i*3] = c[0]; pColor[i*3+1] = c[1]; pColor[i*3+2] = c[2];
+  }
+
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  pGeo.setAttribute('color', new THREE.BufferAttribute(pColor, 3));
+  pGeo.setAttribute('size', new THREE.BufferAttribute(pSize, 1));
+  pGeo.setAttribute('aSpeed', new THREE.BufferAttribute(pSpeed, 1));
+  pGeo.setAttribute('aOffset', new THREE.BufferAttribute(pOffset, 1));
+
+  const pMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPixelRatio: { value: renderer.getPixelRatio() } },
+    vertexShader: `
+      attribute float size; attribute float aSpeed; attribute float aOffset;
+      uniform float uTime; uniform float uPixelRatio;
+      varying vec3 vColor; varying float vAlpha;
+      void main() {
+        vColor = color;
+        vec3 pos = position;
+        pos.y += sin(uTime * aSpeed + aOffset + pos.x * 0.28) * 0.9;
+        pos.x += cos(uTime * aSpeed * 0.65 + aOffset * 1.4 + pos.y * 0.18) * 0.45;
+        pos.z += sin(uTime * aSpeed * 0.5  + aOffset * 0.9) * 0.3;
+        vec4 mv = modelViewMatrix * vec4(pos, 1.0);
+        float dist = -mv.z;
+        vAlpha = smoothstep(24.0, 4.0, dist) * (0.35 + sin(uTime * aSpeed + aOffset) * 0.18 + 0.4);
+        gl_PointSize = size * uPixelRatio * (55.0 / dist);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      varying vec3 vColor; varying float vAlpha;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        float s = smoothstep(0.5, 0.0, d);
+        gl_FragColor = vec4(vColor, s * vAlpha);
+      }`,
+    transparent: true, depthWrite: false,
+    blending: THREE.AdditiveBlending, vertexColors: true
+  });
+  scene.add(new THREE.Points(pGeo, pMat));
+
+  // ── AURORA BANDS ───────────────────────────────────────────────────
+  function makeAurora(w, h, segs, colA, colB, z, y, spd, phase, tiltX) {
+    const geo = new THREE.PlaneGeometry(w, h, segs, Math.max(1, Math.floor(segs / 4)));
+    const mat = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 }, uColorA: { value: new THREE.Color(...colA) },
+        uColorB: { value: new THREE.Color(...colB) }, uSpeed: { value: spd }, uPhase: { value: phase }
+      },
+      vertexShader: `
+        uniform float uTime, uSpeed, uPhase;
+        varying vec2 vUv; varying float vWave;
+        void main() {
+          vUv = uv; vec3 pos = position;
+          float w1 = sin(pos.x*0.38+uTime*uSpeed+uPhase)*1.4;
+          float w2 = sin(pos.x*0.75+uTime*uSpeed*1.4+uPhase*1.8)*0.55;
+          float w3 = cos(pos.x*0.18+uTime*uSpeed*0.55+uPhase*0.6)*0.85;
+          pos.y += (w1+w2+w3)*uv.y; vWave = (w1+w2)*0.5;
+          gl_Position = projectionMatrix*modelViewMatrix*vec4(pos,1.0);
+        }`,
+      fragmentShader: `
+        uniform vec3 uColorA, uColorB; uniform float uTime, uPhase;
+        varying vec2 vUv; varying float vWave;
+        void main() {
+          float ef=smoothstep(0.0,0.22,vUv.y)*smoothstep(1.0,0.78,vUv.y);
+          float sf=smoothstep(0.0,0.12,vUv.x)*smoothstep(1.0,0.88,vUv.x);
+          float t=clamp(vUv.x+vWave*0.18+sin(uTime*0.28+uPhase)*0.1,0.0,1.0);
+          vec3 col=mix(uColorA,uColorB,t);
+          float shim=sin(vUv.x*18.0+uTime*1.8+uPhase)*0.07+0.93;
+          col*=shim;
+          gl_FragColor=vec4(col,ef*sf*0.18);
+        }`,
+      transparent: true, depthWrite: false,
+      blending: THREE.AdditiveBlending, side: THREE.DoubleSide
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(0, y, z); mesh.rotation.x = tiltX;
+    return mesh;
+  }
+
+  // Gold + Cyan aurora scheme
+  const a1 = makeAurora(42, 7, 130, [0.0,0.9,1.0], [0.85,0.68,0.22], -2, 1.8, 0.38, 0.0, -0.08);
+  const a2 = makeAurora(38, 5, 110, [0.85,0.68,0.22], [0.0,0.75,0.65], -4, -0.6, 0.28, 2.1, 0.05);
+  const a3 = makeAurora(46, 6, 150, [0.55,0.40,1.0], [0.0,0.9,1.0], -6, 3.2, 0.22, 4.3, -0.12);
+  const a4 = makeAurora(40, 4, 100, [0.85,0.68,0.22], [0.55,0.40,1.0], -3, -2.8, 0.32, 1.5, 0.06);
+  const a5 = makeAurora(35, 5, 90, [0.0,0.9,1.0], [0.74,0.60,1.0], -5, 0.5, 0.25, 3.0, 0.03);
+  scene.add(a1, a2, a3, a4, a5);
+
+  const auroras = [a1, a2, a3, a4, a5];
+
+  // ── EVENTS ─────────────────────────────────────────────────────────
+  window.addEventListener('mousemove', e => {
+    mouse.tx =  (e.clientX / window.innerWidth  - 0.5) * 2;
+    mouse.ty = -(e.clientY / window.innerHeight - 0.5) * 2;
+  });
+  window.addEventListener('scroll', () => { scrollY = window.pageYOffset; }, { passive: true });
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // ── ANIMATE ────────────────────────────────────────────────────────
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    mouse.x += (mouse.tx - mouse.x) * 0.03;
+    mouse.y += (mouse.ty - mouse.y) * 0.03;
+
+    camera.position.x = mouse.x * 0.9;
+    camera.position.y = mouse.y * 0.55 - scrollY * 0.002;
+    camera.lookAt(0, -scrollY * 0.001, 0);
+
+    pMat.uniforms.uTime.value = t;
+    auroras.forEach(a => { a.material.uniforms.uTime.value = t; });
+
+    a1.position.x = -mouse.x * 0.5;
+    a2.position.x =  mouse.x * 0.3;
+    a3.position.x = -mouse.x * 0.7;
+    a4.position.x =  mouse.x * 0.4;
+    a5.position.x = -mouse.x * 0.2;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     THREE.JS — HERO NETWORK VISUALIZATION (5-node authority diagram)
+     ════════════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  const canvas = document.getElementById('hero-network-canvas');
+  if (!canvas) return;
+
+  const w = canvas.clientWidth || 560;
+  const h = canvas.clientHeight || 500;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(w, h);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 100);
+  camera.position.set(0, 0, 14);
+
+  // ── HUB NODE (center — primary site) ──
+  const hubGeo = new THREE.IcosahedronGeometry(1.3, 2);
+  const hubMat = new THREE.MeshBasicMaterial({ color: 0xc9a84c, wireframe: true, transparent: true, opacity: 0.7 });
+  const hub = new THREE.Mesh(hubGeo, hubMat);
+  scene.add(hub);
+
+  // Glow around hub
+  const hubGlowGeo = new THREE.SphereGeometry(1.8, 32, 32);
+  const hubGlowMat = new THREE.MeshBasicMaterial({ color: 0xc9a84c, transparent: true, opacity: 0.06 });
+  const hubGlow = new THREE.Mesh(hubGlowGeo, hubGlowMat);
+  scene.add(hubGlow);
+
+  // ── SATELLITE NODES (5 brand sites) ──
+  const satCount = 5;
+  const satRadius = 5.2;
+  const sats = [];
+  const satColors = [0x00e5ff, 0x00bfa5, 0x00e5ff, 0x00bfa5, 0x00e5ff];
+
+  for (let i = 0; i < satCount; i++) {
+    const angle = (i / satCount) * Math.PI * 2 - Math.PI / 2;
+    const x = Math.cos(angle) * satRadius;
+    const y = Math.sin(angle) * satRadius;
+
+    // Satellite sphere
+    const satGeo = new THREE.IcosahedronGeometry(0.55, 1);
+    const satMat = new THREE.MeshBasicMaterial({ color: satColors[i], wireframe: true, transparent: true, opacity: 0.65 });
+    const sat = new THREE.Mesh(satGeo, satMat);
+    sat.position.set(x, y, 0);
+    sat.userData = { baseX: x, baseY: y, angle, idx: i };
+    scene.add(sat);
+
+    // Glow around satellite
+    const sGlowGeo = new THREE.SphereGeometry(0.85, 16, 16);
+    const sGlowMat = new THREE.MeshBasicMaterial({ color: satColors[i], transparent: true, opacity: 0.04 });
+    const sGlow = new THREE.Mesh(sGlowGeo, sGlowMat);
+    sGlow.position.set(x, y, 0);
+    scene.add(sGlow);
+
+    // Connection line to hub
+    const lineGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(x, y, 0)
+    ]);
+    const lineMat = new THREE.LineBasicMaterial({ color: satColors[i], transparent: true, opacity: 0.15 });
+    scene.add(new THREE.Line(lineGeo, lineMat));
+
+    sats.push({ mesh: sat, glow: sGlow, line: lineGeo });
+  }
+
+  // ── ORBITING PARTICLES (authority flow) ──
+  const flowCount = 120;
+  const flowPos = new Float32Array(flowCount * 3);
+  const flowColor = new Float32Array(flowCount * 3);
+  const flowSize = new Float32Array(flowCount);
+  const flowData = [];
+
+  for (let i = 0; i < flowCount; i++) {
+    const satIdx = i % satCount;
+    const t = Math.random();
+    const angle = (satIdx / satCount) * Math.PI * 2 - Math.PI / 2;
+    const sx = Math.cos(angle) * satRadius;
+    const sy = Math.sin(angle) * satRadius;
+
+    flowPos[i*3] = sx * (1 - t);
+    flowPos[i*3+1] = sy * (1 - t);
+    flowPos[i*3+2] = (Math.random() - 0.5) * 0.5;
+    flowSize[i] = Math.random() * 2 + 0.5;
+
+    const isGold = Math.random() > 0.5;
+    flowColor[i*3] = isGold ? 0.85 : 0.0;
+    flowColor[i*3+1] = isGold ? 0.68 : 0.9;
+    flowColor[i*3+2] = isGold ? 0.22 : 1.0;
+
+    flowData.push({ satIdx, t, speed: 0.15 + Math.random() * 0.25, sx, sy });
+  }
+
+  const flowGeo = new THREE.BufferGeometry();
+  flowGeo.setAttribute('position', new THREE.BufferAttribute(flowPos, 3));
+  flowGeo.setAttribute('color', new THREE.BufferAttribute(flowColor, 3));
+  const flowMat = new THREE.PointsMaterial({
+    size: 0.08, vertexColors: true, transparent: true, opacity: 0.6,
+    blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  const flowPoints = new THREE.Points(flowGeo, flowMat);
+  scene.add(flowPoints);
+
+  // ── ORBIT RING ──
+  const ringGeo = new THREE.RingGeometry(satRadius - 0.1, satRadius + 0.1, 64);
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0xc9a84c, transparent: true, opacity: 0.04, side: THREE.DoubleSide });
+  scene.add(new THREE.Mesh(ringGeo, ringMat));
+
+  // Second ring
+  const ring2Geo = new THREE.RingGeometry(satRadius * 0.65 - 0.05, satRadius * 0.65 + 0.05, 48);
+  const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, transparent: true, opacity: 0.03, side: THREE.DoubleSide });
+  const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+  ring2.rotation.x = 0.5;
+  scene.add(ring2);
+
+  // ── ANIMATE ──
+  const clock = new THREE.Clock();
+  const nmouse = { x: 0, y: 0, tx: 0, ty: 0 };
+
+  canvas.parentElement.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    nmouse.tx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    nmouse.ty = -((e.clientY - rect.top) / rect.height - 0.5) * 2;
+  });
+
+  function resize() {
+    const nw = canvas.clientWidth;
+    const nh = canvas.clientHeight;
+    if (nw && nh) {
+      camera.aspect = nw / nh;
+      camera.updateProjectionMatrix();
+      renderer.setSize(nw, nh);
+    }
+  }
+  window.addEventListener('resize', resize);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+
+    nmouse.x += (nmouse.tx - nmouse.x) * 0.05;
+    nmouse.y += (nmouse.ty - nmouse.y) * 0.05;
+
+    // Rotate hub
+    hub.rotation.x = t * 0.3 + nmouse.y * 0.3;
+    hub.rotation.y = t * 0.2 + nmouse.x * 0.3;
+    hubGlow.rotation.y = -t * 0.1;
+
+    // Hub pulse
+    const pulse = 1 + Math.sin(t * 2) * 0.05;
+    hub.scale.set(pulse, pulse, pulse);
+    hubGlowMat.opacity = 0.04 + Math.sin(t * 1.5) * 0.02;
+
+    // Animate satellites
+    sats.forEach((s, i) => {
+      const wobble = Math.sin(t * 0.8 + i * 1.3) * 0.3;
+      s.mesh.position.z = wobble;
+      s.glow.position.z = wobble;
+      s.mesh.rotation.x = t * 0.5 + i;
+      s.mesh.rotation.y = t * 0.3 + i * 0.7;
+
+      // Update connection line
+      const pos = s.line.attributes.position;
+      pos.array[3] = s.mesh.position.x;
+      pos.array[4] = s.mesh.position.y;
+      pos.array[5] = s.mesh.position.z;
+      pos.needsUpdate = true;
+    });
+
+    // Animate flow particles
+    const fPos = flowGeo.attributes.position;
+    for (let i = 0; i < flowCount; i++) {
+      const fd = flowData[i];
+      fd.t += fd.speed * 0.008;
+      if (fd.t > 1) fd.t = 0;
+
+      // Move from satellite toward hub
+      const progress = fd.t;
+      fPos.array[i*3]   = fd.sx * (1 - progress) + (Math.sin(t + i) * 0.1);
+      fPos.array[i*3+1] = fd.sy * (1 - progress) + (Math.cos(t + i * 0.7) * 0.1);
+      fPos.array[i*3+2] = Math.sin(progress * Math.PI) * 0.5;
+    }
+    fPos.needsUpdate = true;
+
+    // Camera subtle drift
+    camera.position.x = nmouse.x * 1.2;
+    camera.position.y = nmouse.y * 0.8;
+    camera.lookAt(0, 0, 0);
+
+    ring2.rotation.z = t * 0.1;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     MAIN JS — Nav, Scroll Reveals, Counters, Accordion, Loader
+     ════════════════════════════════════════════════════════════════════ -->
+<script>
+// ── LOADER ─────────────────────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 1800);
+});
+
+// ── NAV SCROLL ─────────────────────────────────────
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// ── MOBILE NAV ─────────────────────────────────────
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+document.getElementById('mobileNavClose').addEventListener('click', closeMobileNav);
+function closeMobileNav() {
+  document.getElementById('mobileNav').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── SCROLL REVEALS ─────────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+
+// ── COUNTERS ───────────────────────────────────────
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    if (el.dataset.counted) return;
+    el.dataset.counted = '1';
+
+    const textVal = el.dataset.text;
+    if (textVal) { el.textContent = textVal; return; }
+
+    const target = parseInt(el.dataset.count) || 0;
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.metric-number').forEach(el => counterObserver.observe(el));
+
+// ── ACCORDION ──────────────────────────────────────
+function toggleAccordion(header) {
+  const item = header.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ── SMOOTH SCROLL ──────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>

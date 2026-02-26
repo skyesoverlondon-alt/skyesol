@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employers • Skyes Over London</title>
+  <meta name="description" content="Employers intake lane for Skyes Over London. Lead qualification, needs assessment, and frictionless request flow." />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <script defer src="/assets/intake.js"></script>
+</head>
+<body>
+  <img class="watermark" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London watermark" />
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img class="sol-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London logo" />
+        <div>
+          <h1>Skyes Over London</h1>
+          <div class="tag">Employers Lane • Conversion‑First Intake</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/jobseekers.html">Job Seekers</a>
+        <a class="active" href="/employers.html">Employers</a>
+        <a href="/diagnostics.html">Diagnostics</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="card pad">
+          <div class="kicker"><span class="dot"></span><span>Employers Lane</span></div>
+          <div class="h1">Request talent. Get qualified lanes. Execute fast.</div>
+          <p class="sub">We qualify quickly, then move into a structured needs assessment and delivery cadence. First step is intentionally short.</p>
+
+          <div class="grid2" style="margin-top:12px;">
+            <div class="step"><h3>1–2: Lead Gen → Qualification</h3><p>Right buyer, right urgency, right lane.</p></div>
+            <div class="step"><h3>3: Needs Assessment</h3><p>Role definition, culture fit, constraints, timeline.</p></div>
+          </div>
+
+          <div class="grid2" style="margin-top:12px;">
+            <div class="step"><h3>4–5: Proposal → Onboarding</h3><p>Clear math, clear scope, fast launch.</p></div>
+            <div class="step"><h3>6–7: Delivery → Retention</h3><p>Weekly reporting cadence + follow‑on services.</p></div>
+          </div>
+        </div>
+
+        <div class="card pad">
+          <div class="kicker"><span class="dot"></span><span>Operator Snapshot</span></div>
+          <div class="metrics" style="margin-top:10px;">
+            <div class="metric"><div class="k">First response target</div><div class="v">Same day</div></div>
+            <div class="metric"><div class="k">Required fields</div><div class="v">Company + Email</div></div>
+            <div class="metric"><div class="k">Intake style</div><div class="v">Single‑page</div></div>
+            <div class="metric"><div class="k">Capture</div><div class="v">Forms + (DB optional)</div></div>
+          </div>
+          <p class="sub" style="margin-top:14px;">Netlify Forms stores every submission; functions can also write to Neon + Blobs when enabled.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="formwrap">
+          <h3>Start Intake</h3>
+          <p>Short form. Clear signal. We follow up to lock requirements.</p>
+
+          <form
+            name="employers-intake"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            data-intake="true"
+            data-lane="employers"
+            data-success="/thank-you.html"
+          >
+            <input type="hidden" name="form-name" value="employers-intake" />
+            <p class="hp"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+            <div class="field">
+              <label for="em_company">Company *</label>
+              <input id="em_company" name="company" autocomplete="organization" required />
+            </div>
+
+            <div class="field">
+              <label for="em_contact">Contact person *</label>
+              <input id="em_contact" name="contact" autocomplete="name" required />
+            </div>
+
+            <div class="field">
+              <label for="em_email">Email *</label>
+              <input id="em_email" name="email" type="email" autocomplete="email" required />
+            </div>
+
+            <div class="field">
+              <label for="em_phone">Phone</label>
+              <input id="em_phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+
+            <div class="field">
+              <label for="em_roles">Roles needed</label>
+              <input id="em_roles" name="roles_needed" placeholder="e.g., 2 dispatchers, 5 engineers" />
+            </div>
+
+            <div class="field">
+              <label for="em_urgency">Urgency</label>
+              <select id="em_urgency" name="urgency">
+                <option value="">Select…</option>
+                <option>Immediate</option>
+                <option>Within 30 days</option>
+                <option>60–90 days</option>
+                <option>Just planning</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="em_budget">Budget range</label>
+              <select id="em_budget" name="budget_range">
+                <option value="">Select…</option>
+                <option>Under $5k</option>
+                <option>$5k–$10k</option>
+                <option>$10k–$25k</option>
+                <option>$25k+</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="em_location">Location / remote</label>
+              <input id="em_location" name="location" placeholder="City, State or Remote" />
+            </div>
+
+            <div class="field full">
+              <label for="em_notes">Notes</label>
+              <textarea id="em_notes" name="notes" placeholder="Key requirements, constraints, must-haves, schedule."></textarea>
+              <div class="note" style="margin-top:6px;">We’ll confirm details on the discovery call and convert into a clean scope.</div>
+            </div>
+
+            <div class="full inline-actions">
+              <button class="btn primary" type="submit">Submit</button>
+              <span class="note">No account required. We respond fast.</span>
+            </div>
+          </form>
+
+          <div class="toast" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div>© 2026 Skyes Over London LC</div>
+      <div style="margin-top:6px;"><a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a></div>
+    </div>
+  </footer>
+</body>
+</html>

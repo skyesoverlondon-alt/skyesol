@@ -1,0 +1,11 @@
+{
+  "name": "skyes-over-london-funnel-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Skyes Over London conversion-first dual-lane agency funnel (Netlify Forms + Blobs + Neon)",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@netlify/blobs": "^10.7.0",
+    "pg": "^8.13.1"
+  }
+}

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Job Seekers • Skyes Over London</title>
+  <meta name="description" content="Job seekers intake lane for Skyes Over London. Low-friction application and clear steps." />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <script defer src="/assets/intake.js"></script>
+</head>
+<body>
+  <img class="watermark" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London watermark" />
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img class="sol-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London logo" />
+        <div>
+          <h1>Skyes Over London</h1>
+          <div class="tag">Job Seekers Lane • Frictionless Intake</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a class="active" href="/jobseekers.html">Job Seekers</a>
+        <a href="/employers.html">Employers</a>
+        <a href="/diagnostics.html">Diagnostics</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="card pad">
+          <div class="kicker"><span class="dot"></span><span>Job Seekers Lane</span></div>
+          <div class="h1">Apply fast. Get routed clean. Stay informed.</div>
+          <p class="sub">We keep the first step low‑touch: essential info only, mobile‑first, single‑page. Deeper screening happens after we confirm fit.</p>
+
+          <div class="grid2" style="margin-top:12px;">
+            <div class="step"><h3>1–3: Awareness → Attraction → Interest</h3><p>Clear role context, culture signal, and what to expect.</p></div>
+            <div class="step"><h3>4: Conversion</h3><p>Single‑page intake. No redundant data entry. No nonsense.</p></div>
+          </div>
+
+          <div class="grid2" style="margin-top:12px;">
+            <div class="step"><h3>5: Evaluation</h3><p>Structured screen + fast scheduling. Transparent next steps.</p></div>
+            <div class="step"><h3>6–7: Placement → Network</h3><p>Offer clarity + ongoing talent network for future lanes.</p></div>
+          </div>
+        </div>
+
+        <div class="card pad">
+          <div class="kicker"><span class="dot"></span><span>Intake Target</span></div>
+          <div class="metrics" style="margin-top:10px;">
+            <div class="metric"><div class="k">Time to submit</div><div class="v">~45–60s</div></div>
+            <div class="metric"><div class="k">Required fields</div><div class="v">Name + Email</div></div>
+            <div class="metric"><div class="k">Optional depth</div><div class="v">Links + Notes</div></div>
+            <div class="metric"><div class="k">Submission capture</div><div class="v">Netlify Forms</div></div>
+          </div>
+          <p class="sub" style="margin-top:14px;">On submit: Netlify Forms stores your entry. If functions are enabled, we also write to Neon + Blobs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="formwrap">
+          <h3>Start Intake</h3>
+          <p>Give us the minimum. We’ll do the routing.</p>
+
+          <!-- Netlify Forms + Honeypot -->
+          <form
+            name="jobseekers-intake"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            data-intake="true"
+            data-lane="jobseekers"
+            data-success="/thank-you.html"
+          >
+            <input type="hidden" name="form-name" value="jobseekers-intake" />
+            <p class="hp">
+              <label>Don’t fill this out: <input name="bot-field" /></label>
+            </p>
+
+            <div class="field">
+              <label for="js_name">Full name *</label>
+              <input id="js_name" name="name" autocomplete="name" required />
+            </div>
+
+            <div class="field">
+              <label for="js_email">Email *</label>
+              <input id="js_email" name="email" type="email" autocomplete="email" required />
+            </div>
+
+            <div class="field">
+              <label for="js_phone">Phone</label>
+              <input id="js_phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+
+            <div class="field">
+              <label for="js_role">Target role / lane</label>
+              <input id="js_role" name="target_role" placeholder="e.g., Dispatcher, Developer, AE, Driver" />
+            </div>
+
+            <div class="field">
+              <label for="js_location">Location</label>
+              <input id="js_location" name="location" placeholder="City, State" />
+            </div>
+
+            <div class="field">
+              <label for="js_avail">Availability</label>
+              <select id="js_avail" name="availability">
+                <option value="">Select…</option>
+                <option>Immediately</option>
+                <option>2 weeks</option>
+                <option>30 days</option>
+                <option>60+ days</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="js_portfolio">Portfolio / LinkedIn URL</label>
+              <input id="js_portfolio" name="portfolio_url" placeholder="https://…" />
+            </div>
+
+            <div class="field">
+              <label for="js_resume">Resume URL</label>
+              <input id="js_resume" name="resume_url" placeholder="https://…" />
+            </div>
+
+            <div class="field full">
+              <label for="js_notes">Notes</label>
+              <textarea id="js_notes" name="notes" placeholder="Skills, experience, what you want next."></textarea>
+              <div class="note" style="margin-top:6px;">Tip: If you don’t have links yet, just tell us your core skills. We’ll follow up.</div>
+            </div>
+
+            <div class="full inline-actions">
+              <button class="btn gold" type="submit">Submit</button>
+              <span class="note">No account required. No multi‑step wizard.</span>
+            </div>
+          </form>
+
+          <div class="toast" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div>© 2026 Skyes Over London LC</div>
+      <div style="margin-top:6px;"><a href="/privacy.html">Privacy</a> • <a href="/terms.html">Terms</a></div>
+    </div>
+  </footer>
+</body>
+</html>

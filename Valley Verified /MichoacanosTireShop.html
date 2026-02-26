@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michoacanos Tire's Shop — Wheels, Tires, Fitment • Glendale, AZ</title>
+  <meta name="description" content="Best prices in town. Premium rims, high-performance tires, and complete wheel packages in Glendale, AZ. Precision mount & balance, stance/clearance fitment, and financing verification via Valley Verified." />
+  <meta name="theme-color" content="#05050a" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Michoacanos Tire's Shop — Wheels, Tires, Fitment • Glendale, AZ" />
+  <meta property="og:description" content="Premium rims, high-performance tires, and unbeatable wheel packages in Glendale. Clean builds. Precision fitment." />
+  <meta property="og:url" content="https://newmichoacanostireshop-valleyverified.netlify.app/" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Michoacanos Tire's Shop — Glendale, AZ" />
+  <meta name="twitter:description" content="Wheels & tires packages • Custom fitment • Financing verification • Glendale showroom" />
+
+  <!-- Fonts (Template-aligned) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --gold:#c9a84c;
+      --gold-light:#e8d48b;
+      --gold-dim:rgba(201,168,76,0.15);
+      --dark:#0e0e1a;
+      --darker:#07070f;
+      --surface:#0c0c14;
+      --surface-2:#111119;
+      --surface-3:#181822;
+      --text:#e8e6e1;
+      --text-dim:#8a8880;
+      --accent-fire:#e84c30;
+      --accent-blue:#3a6fd8;
+      --accent-purple:#8a63ff;
+      --glow-gold:0 0 30px rgba(201,168,76,0.3),0 0 60px rgba(201,168,76,0.1);
+      --glow-gold-strong:0 0 40px rgba(201,168,76,0.5),0 0 80px rgba(201,168,76,0.2);
+      --glow-purple:0 0 28px rgba(138,99,255,0.32),0 0 70px rgba(138,99,255,0.10);
+      --glow-blue:0 0 28px rgba(58,111,216,0.28),0 0 70px rgba(58,111,216,0.08);
+      --radius:14px;
+      --navH:72px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--darker);
+      color:var(--text);
+      font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-weight:300;
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+
+    /* Noise */
+    body::after{
+      content:"";
+      position:fixed;inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events:none;
+      z-index:9998;
+    }
+
+    /* Loader */
+    #loader{
+      position:fixed;inset:0;z-index:99999;
+      background:var(--dark);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      color:var(--gold);
+      font-family:"Fira Code","DM Sans",monospace;
+      letter-spacing:1px;
+      text-align:center;
+      transition:opacity 900ms ease;
+    }
+    body.ready #loader{opacity:0;pointer-events:none}
+    .spinner{
+      width:56px;height:56px;border:2px solid transparent;
+      border-top-color:var(--gold);
+      border-right-color:var(--accent-blue);
+      border-radius:50%;
+      animation:spin 1s linear infinite;
+      margin-bottom:18px;
+      box-shadow:0 0 20px rgba(201,168,76,0.35);
+    }
+    #loading-text{font-size:12px;text-transform:uppercase;margin-bottom:10px}
+    #loading-sub{font-size:10px;color:rgba(232,232,232,0.55);letter-spacing:1.6px;text-transform:uppercase}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Three background canvas */
+    #three-bg{
+      position:fixed;inset:0;
+      width:100%;height:100%;
+      z-index:0;
+      display:block;
+      background:#07070f;
+    }
+
+    /* Watermark */
+    .sol-watermark{
+      position:fixed;
+      right:18px;bottom:16px;
+      z-index:20;
+      opacity:0.14;
+      pointer-events:none;
+      filter:drop-shadow(0 0 18px rgba(201,168,76,0.32)) drop-shadow(0 0 38px rgba(138,99,255,0.12));
+      animation:wmPulse 4.2s ease-in-out infinite;
+    }
+    .sol-watermark img{height:90px;width:auto}
+    @keyframes wmPulse{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.02)}}
+
+    /* Nav */
+    .main-nav{
+      position:fixed;top:0;left:0;right:0;
+      z-index:9000;
+      height:var(--navH);
+      padding:14px 34px;
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(5,5,8,0.74);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(201,168,76,0.06);
+      transition:background .35s ease;
+    }
+    .main-nav.scrolled{background:rgba(5,5,8,0.93)}
+    .nav-logo{
+      display:flex;align-items:center;gap:12px;
+      text-decoration:none;
+    }
+    .nav-logo img{
+      height:34px;width:auto;
+      filter:drop-shadow(0 0 18px rgba(201,168,76,0.26));
+      animation:floatGlow 4.2s ease-in-out infinite;
+    }
+    .nav-logo span{
+      font-family:"Bebas Neue",sans-serif;
+      font-size:14px;
+      letter-spacing:4px;
+      color:var(--gold);
+      white-space:nowrap;
+    }
+    .nav-links{display:flex;gap:22px;align-items:center}
+    .nav-links a{
+      font-size:11px;letter-spacing:2px;text-transform:uppercase;
+      color:var(--text-dim);
+      text-decoration:none;
+      padding:6px 0;
+      position:relative;
+      transition:color .25s ease;
+    }
+    .nav-links a::after{
+      content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+      background:var(--gold);transition:width .25s ease;
+    }
+    .nav-links a:hover{color:var(--gold)}
+    .nav-links a:hover::after{width:100%}
+    .nav-links a.active{color:var(--gold)}
+    .nav-links a.active::after{width:100%}
+
+    .nav-toggle{display:none;background:none;border:none;color:var(--gold);font-size:22px;cursor:pointer}
+    .menu-btn{
+      background:none;border:1px solid rgba(201,168,76,0.35);
+      color:var(--gold);font-family:"Bebas Neue",sans-serif;
+      font-size:13px;letter-spacing:3px;padding:7px 18px;
+      cursor:pointer;border-radius:8px;transition:background .2s ease;
+      white-space:nowrap;
+    }
+    .menu-btn:hover{background:rgba(201,168,76,0.12)}
+
+    /* Mega nav overlay */
+    @keyframes megaFadeIn{from{opacity:0}to{opacity:1}}
+    .mega-nav{
+      position:fixed;inset:0;z-index:99998;
+      background:rgba(5,5,8,0.97);
+      backdrop-filter:blur(20px);
+      display:none;flex-direction:column;justify-content:center;align-items:center;
+      animation:megaFadeIn .2s ease;
+    }
+    .mega-nav.open{display:flex}
+    .mega-nav-close{
+      position:absolute;top:26px;right:30px;
+      background:none;border:1px solid rgba(201,168,76,0.35);
+      color:var(--gold);font-family:"Bebas Neue",sans-serif;
+      font-size:13px;letter-spacing:3px;padding:9px 20px;
+      cursor:pointer;border-radius:10px;transition:background .2s ease;
+    }
+    .mega-nav-close:hover{background:rgba(201,168,76,0.12)}
+    .mega-nav-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:44px;
+      max-width:920px;
+      margin:0 auto;
+      padding:0 28px;
+    }
+    .mega-nav-label{
+      font-family:"Bebas Neue",sans-serif;
+      font-size:11px;letter-spacing:3px;color:var(--gold);
+      margin-bottom:16px;
+      border-bottom:1px solid rgba(201,168,76,0.18);
+      padding-bottom:8px;
+    }
+    .mega-nav-col a{
+      display:block;color:var(--text-dim);
+      text-decoration:none;
+      font-size:15px;padding:7px 0;
+      transition:color .2s ease, padding-left .18s ease;
+    }
+    .mega-nav-col a:hover{color:#fff;padding-left:10px}
+    .mega-nav-col .small{
+      font-size:12px;color:rgba(138,136,128,0.85);margin-top:10px;line-height:1.8;
+    }
+
+    /* Hero */
+    .hero-wrapper{
+      position:relative;
+      min-height:100vh;
+      padding-top:var(--navH);
+      overflow:hidden;
+      z-index:2;
+    }
+    .hero-grid{
+      max-width:1320px;
+      margin:0 auto;
+      padding:76px 46px 60px;
+      display:grid;
+      grid-template-columns:1.08fr 0.92fr;
+      gap:44px;
+      align-items:center;
+      min-height:calc(100vh - var(--navH));
+      position:relative;
+      z-index:3;
+    }
+    .hero-wrapper::before{
+      content:"";
+      position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent 10%, var(--gold) 50%, transparent 90%);
+      opacity:0.9;
+      animation:subtlePulse 3s ease-in-out infinite;
+      z-index:2;
+    }
+    .hero-tag{
+      font-family:"Bebas Neue",sans-serif;
+      letter-spacing:7px;
+      text-transform:uppercase;
+      color:var(--gold);
+      font-size:clamp(11px,1.4vw,14px);
+      display:inline-block;
+      margin-bottom:18px;
+      opacity:0;
+      transform:translateX(28px);
+      animation:fadeInRight 900ms cubic-bezier(.22,1,.36,1) 380ms forwards;
+    }
+    .hero-tag::after{
+      content:"";
+      display:block;height:1px;margin-top:10px;
+      background:linear-gradient(90deg,var(--gold),transparent);
+      width:0;
+      animation:lineExpand 1.35s ease-out 700ms forwards;
+    }
+    .hero-title{
+      font-family:"Playfair Display",serif;
+      font-weight:700;
+      font-size:clamp(38px,5.2vw,78px);
+      line-height:1.03;
+      margin-bottom:16px;
+      opacity:0;
+      transform:translateX(28px);
+      animation:fadeInRight 1s cubic-bezier(.22,1,.36,1) 520ms forwards;
+    }
+    .hero-title span{
+      display:block;
+      background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));
+      background-size:200% auto;
+      -webkit-background-clip:text;background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:shimmer 4s ease-in-out infinite;
+    }
+    .hero-sub{
+      font-family:"Cormorant Garamond",serif;
+      font-style:italic;
+      font-size:clamp(16px,1.75vw,20px);
+      color:var(--text-dim);
+      max-width:640px;
+      margin-bottom:26px;
+      opacity:0;
+      transform:translateX(28px);
+      animation:fadeInRight 1s cubic-bezier(.22,1,.36,1) 760ms forwards;
+    }
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;opacity:0;transform:translateX(28px);animation:fadeInRight 1s cubic-bezier(.22,1,.36,1) 980ms forwards}
+    .btn-gold{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:13px 30px;border-radius:12px;
+      background:linear-gradient(135deg,var(--gold),#b8943f);
+      color:var(--dark);
+      font-weight:700;
+      font-size:11px;
+      letter-spacing:2.4px;text-transform:uppercase;
+      text-decoration:none;
+      position:relative;
+      overflow:hidden;
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .btn-gold::before{
+      content:"";position:absolute;top:0;left:-110%;
+      width:100%;height:100%;
+      background:linear-gradient(90deg,transparent, rgba(255,255,255,0.22), transparent);
+      transition:left .6s ease;
+    }
+    .btn-gold:hover::before{left:110%}
+    .btn-gold:hover{transform:translateY(-3px);box-shadow:var(--glow-gold-strong)}
+    .btn-outline{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:13px 30px;border-radius:12px;
+      background:transparent;border:1px solid rgba(201,168,76,0.28);
+      color:var(--gold);
+      font-weight:600;
+      font-size:11px;
+      letter-spacing:2.4px;text-transform:uppercase;
+      text-decoration:none;
+      transition:transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+    .btn-outline:hover{transform:translateY(-3px);background:rgba(201,168,76,0.06);border-color:var(--gold)}
+    .btn-mini{
+      padding:10px 14px;
+      font-size:10px;
+      border-radius:999px;
+      letter-spacing:2px;
+    }
+
+    .hero-right{
+      position:relative;
+      padding:24px;
+      border-radius:var(--radius);
+      background:linear-gradient(135deg, rgba(17,17,25,0.68), rgba(12,12,20,0.68));
+      border:1px solid rgba(201,168,76,0.10);
+      box-shadow:0 20px 44px rgba(0,0,0,0.55);
+      overflow:hidden;
+    }
+    .hero-right::before{
+      content:"";
+      position:absolute;inset:-60px;
+      background:radial-gradient(circle at 20% 20%, rgba(138,99,255,0.22), transparent 55%),
+                 radial-gradient(circle at 80% 70%, rgba(201,168,76,0.16), transparent 50%);
+      filter:blur(30px);
+      opacity:0.9;
+      pointer-events:none;
+    }
+    .hero-card{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .hero-card .badge-row{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    }
+    .pill{
+      font-size:10px;
+      letter-spacing:2px;text-transform:uppercase;
+      padding:7px 10px;border-radius:999px;
+      border:1px solid rgba(201,168,76,0.18);
+      color:var(--gold);
+      background:rgba(201,168,76,0.03);
+      font-family:"Fira Code",monospace;
+    }
+    .pill.blue{border-color:rgba(58,111,216,0.30);color:rgba(158,190,255,0.95);background:rgba(58,111,216,0.08)}
+    .pill.purple{border-color:rgba(138,99,255,0.30);color:rgba(208,192,255,0.95);background:rgba(138,99,255,0.08)}
+    .hero-card h3{
+      font-family:"Playfair Display",serif;
+      font-size:22px;
+      line-height:1.2;
+    }
+    .hero-card p{
+      font-size:13px;
+      color:rgba(138,136,128,0.95);
+      line-height:1.85;
+    }
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:6px;
+    }
+    .mini{
+      background:rgba(10,10,15,0.55);
+      border:1px solid rgba(201,168,76,0.10);
+      border-radius:12px;
+      padding:12px 12px;
+      position:relative;
+      overflow:hidden;
+      transition:transform .2s ease, border-color .2s ease;
+    }
+    .mini:hover{transform:translateY(-2px);border-color:rgba(201,168,76,0.24)}
+    .mini .k{
+      font-size:9px;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;
+    }
+    .mini .v{font-size:13px;color:var(--text);font-weight:600}
+    .mini a{color:var(--text);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.18)}
+    .mini a:hover{border-color:var(--gold)}
+
+    .hero-scroll{
+      position:absolute;left:50%;bottom:32px;transform:translateX(-50%);
+      z-index:4;
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);
+      opacity:0;
+      animation:fadeInUp 900ms ease 1.25s forwards;
+    }
+    .scroll-line{width:1px;height:36px;background:linear-gradient(to bottom,var(--gold),transparent);animation:subtlePulse 2s ease-in-out infinite}
+
+    /* Sections */
+    .divider{
+      width:100%;
+      height:1px;
+      background:linear-gradient(90deg,transparent, rgba(201,168,76,0.25), transparent);
+      position:relative;
+      z-index:2;
+    }
+    .content{
+      position:relative;
+      z-index:2;
+    }
+    .content-section{
+      padding:92px 24px;
+      max-width:1160px;
+      margin:0 auto;
+    }
+    .section-label{
+      font-family:"Bebas Neue",sans-serif;
+      font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);
+      margin-bottom:10px;
+    }
+    .section-title{
+      font-family:"Playfair Display",serif;
+      font-weight:700;
+      font-size:clamp(28px,4vw,50px);
+      line-height:1.15;
+      margin-bottom:16px;
+    }
+    .section-desc{
+      font-size:15px;
+      color:rgba(138,136,128,0.92);
+      max-width:780px;
+      margin-bottom:42px;
+      line-height:1.9;
+    }
+
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+
+    .card{
+      background:rgba(12,12,20,0.78);
+      border:1px solid rgba(201,168,76,0.08);
+      border-radius:18px;
+      padding:22px 20px;
+      position:relative;
+      overflow:hidden;
+      transition:transform .35s cubic-bezier(.22,1,.36,1), border-color .35s cubic-bezier(.22,1,.36,1);
+    }
+    .card::before{
+      content:"";
+      position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--gold),var(--gold-light));
+      transform:scaleX(0);transform-origin:left;
+      transition:transform .55s ease;
+      opacity:0.9;
+    }
+    .card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,0.22)}
+    .card:hover::before{transform:scaleX(1)}
+    .card .icon{font-size:26px;margin-bottom:10px}
+    .card h3{font-size:16px;font-weight:800;margin-bottom:6px}
+    .card .type{
+      font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);
+      margin-bottom:10px;font-family:"Fira Code",monospace;
+    }
+    .card p{font-size:13px;color:rgba(138,136,128,0.95);line-height:1.8}
+
+    /* Metrics */
+    .metric{
+      text-align:center;
+      padding:26px 12px;
+      border-radius:18px;
+      background:rgba(12,12,20,0.78);
+      border:1px solid rgba(201,168,76,0.08);
+      transition:transform .35s cubic-bezier(.22,1,.36,1), border-color .35s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .metric:hover{transform:translateY(-6px);border-color:rgba(201,168,76,0.22)}
+    .metric::before{
+      content:"";
+      position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      opacity:0;
+      transition:opacity .35s ease;
+    }
+    .metric:hover::before{opacity:1}
+    .metric .num{
+      font-family:"Bebas Neue",sans-serif;
+      font-size:46px;
+      color:var(--gold);
+      line-height:1;
+      margin-bottom:10px;
+    }
+    .metric .lab{
+      font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:rgba(138,136,128,0.95);
+    }
+
+    /* Configurator */
+    .config-wrap{
+      display:grid;
+      grid-template-columns:0.98fr 1.02fr;
+      gap:16px;
+      align-items:start;
+    }
+    .panel{
+      background:rgba(12,12,20,0.80);
+      border:1px solid rgba(201,168,76,0.10);
+      border-radius:18px;
+      padding:18px 16px;
+      overflow:hidden;
+      position:relative;
+    }
+    .panel::before{
+      content:"";
+      position:absolute;inset:-60px;
+      background:radial-gradient(circle at 20% 20%, rgba(58,111,216,0.18), transparent 55%),
+                 radial-gradient(circle at 80% 70%, rgba(138,99,255,0.18), transparent 55%);
+      filter:blur(32px);
+      opacity:0.7;
+      pointer-events:none;
+    }
+    .panel > *{position:relative;z-index:1}
+    .panel h4{
+      font-family:"Playfair Display",serif;
+      font-size:18px;margin-bottom:10px;
+    }
+    .fields{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:10px;
+    }
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field label{
+      font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);
+      font-family:"Fira Code",monospace;
+    }
+    .field select,.field input[type="range"],.field input[type="text"]{
+      width:100%;
+      background:rgba(17,17,25,0.72);
+      color:var(--text);
+      border:1px solid rgba(201,168,76,0.14);
+      border-radius:12px;
+      padding:11px 12px;
+      outline:none;
+      font-size:13px;
+    }
+    .field input[type="range"]{padding:12px 10px}
+    .readout{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:10px;margin-top:12px;
+    }
+    .readout .mini{padding:12px 12px}
+    .gauge{
+      margin-top:12px;
+      border-radius:999px;
+      border:1px solid rgba(201,168,76,0.12);
+      background:rgba(17,17,25,0.62);
+      height:12px;
+      overflow:hidden;
+      position:relative;
+    }
+    .gauge > span{
+      display:block;height:100%;
+      width:50%;
+      background:linear-gradient(90deg, rgba(232,76,48,0.75), rgba(201,168,76,0.9), rgba(58,111,216,0.75));
+      filter:drop-shadow(0 0 12px rgba(201,168,76,0.25));
+    }
+    .hint{
+      font-size:12px;color:rgba(138,136,128,0.95);
+      margin-top:12px;line-height:1.8;
+    }
+    .hint a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.22)}
+    .hint a:hover{border-bottom-color:var(--gold)}
+
+    /* Map card */
+    .map-card{
+      background:rgba(12,12,20,0.80);
+      border:1px solid rgba(201,168,76,0.10);
+      border-radius:18px;
+      overflow:hidden;
+      position:relative;
+    }
+    .map-top{
+      padding:18px 16px;
+      display:flex;justify-content:space-between;gap:12px;align-items:flex-start;
+    }
+    .map-top h4{font-family:"Playfair Display",serif;font-size:18px;margin-bottom:6px}
+    .map-top p{font-size:13px;color:rgba(138,136,128,0.95);line-height:1.8}
+    .map-svg{
+      width:100%;
+      height:240px;
+      display:block;
+      background:radial-gradient(circle at 35% 35%, rgba(58,111,216,0.12), transparent 55%),
+                 radial-gradient(circle at 70% 70%, rgba(201,168,76,0.12), transparent 55%),
+                 linear-gradient(180deg, rgba(10,10,15,0.20), rgba(0,0,0,0.55));
+      border-top:1px solid rgba(201,168,76,0.08);
+    }
+
+    /* Footer */
+    footer{
+      position:relative;
+      z-index:2;
+      padding:60px 24px 34px;
+      border-top:1px solid rgba(201,168,76,0.06);
+      text-align:center;
+    }
+    footer .fine{
+      font-size:10px;
+      color:rgba(138,136,128,0.45);
+      margin-top:18px;
+      line-height:1.7;
+    }
+    .footer-links{
+      display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:14px;
+    }
+    .footer-links a{
+      font-size:10px;letter-spacing:2px;text-transform:uppercase;
+      color:rgba(138,136,128,0.9);
+      text-decoration:none;
+      transition:color .25s ease;
+    }
+    .footer-links a:hover{color:var(--gold)}
+
+    /* Reveals */
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .stagger .reveal:nth-child(1){transition-delay:0s}
+    .stagger .reveal:nth-child(2){transition-delay:.08s}
+    .stagger .reveal:nth-child(3){transition-delay:.14s}
+    .stagger .reveal:nth-child(4){transition-delay:.20s}
+    .stagger .reveal:nth-child(5){transition-delay:.26s}
+    .stagger .reveal:nth-child(6){transition-delay:.32s}
+    .stagger .reveal:nth-child(7){transition-delay:.38s}
+    .stagger .reveal:nth-child(8){transition-delay:.44s}
+
+    /* Animations */
+    @keyframes floatGlow{0%,100%{transform:translateY(0);filter:drop-shadow(0 0 18px rgba(201,168,76,0.5)) drop-shadow(0 0 40px rgba(201,168,76,0.15))}50%{transform:translateY(-10px);filter:drop-shadow(0 0 28px rgba(201,168,76,0.7)) drop-shadow(0 0 60px rgba(201,168,76,0.25))}}
+    @keyframes subtlePulse{0%,100%{opacity:1}50%{opacity:.72}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(48px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes lineExpand{from{width:0}to{width:100%}}
+    @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+
+    /* Toast */
+    #toast{
+      position:fixed;
+      bottom:18px;left:50%;
+      transform:translateX(-50%);
+      z-index:9999;
+      background:rgba(5,5,8,0.92);
+      border:1px solid rgba(201,168,76,0.16);
+      padding:12px 14px;
+      border-radius:999px;
+      color:var(--text);
+      font-size:12px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .25s ease, transform .25s ease;
+    }
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
+    #toast.err{border-color:rgba(232,76,48,0.28)}
+
+    /* Responsive */
+    @media(max-width:980px){
+      .hero-grid{grid-template-columns:1fr;padding:88px 22px 50px;gap:22px;text-align:center}
+      .hero-sub{margin-left:auto;margin-right:auto}
+      .cta-row{justify-content:center}
+      .hero-right{max-width:780px;margin:0 auto}
+      .grid-4{grid-template-columns:1fr 1fr}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .config-wrap{grid-template-columns:1fr}
+      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(5,5,8,0.95);padding:18px 34px;gap:14px;border-bottom:1px solid rgba(201,168,76,0.08)}
+      .nav-links.open{display:flex}
+      .nav-toggle{display:block}
+    }
+    @media(max-width:520px){
+      .main-nav{padding:12px 16px}
+      .hero-grid{padding:78px 16px 46px}
+      .grid-4{grid-template-columns:1fr}
+      .fields{grid-template-columns:1fr}
+      .mini-grid{grid-template-columns:1fr}
+      .sol-watermark img{height:70px}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      *{animation:none !important;transition:none !important}
+      body::after{opacity:0.02}
+      .sol-watermark{opacity:0.10}
+    }
+
+    /* ── CINEMATIC INTRO OVERLAY ───────────────────────────────────────── */
+    #sol-intro{position:fixed;inset:0;z-index:98000;overflow:hidden;font-family:"Playfair Display","Times New Roman",serif;display:none}
+    #sol-intro.show{display:block}
+    #sol-intro canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+    #sol-intro .si-lightning{position:absolute;inset:0;background:#fff;opacity:0;z-index:5;pointer-events:none;mix-blend-mode:overlay}
+    #sol-intro .si-fog{position:absolute;width:200%;height:100%;top:0;left:-50%;z-index:8;opacity:.25;background:radial-gradient(circle at 20% 50%,rgba(15,25,40,.55) 0%,transparent 40%),radial-gradient(circle at 80% 60%,rgba(10,20,35,.45) 0%,transparent 50%);filter:blur(50px);animation:si-drift 22s cubic-bezier(.37,0,.63,1) infinite alternate;pointer-events:none}
+    #sol-intro .si-fog2{top:20%;opacity:.18;background:radial-gradient(circle at 50% 50%,rgba(30,45,60,.35) 0%,transparent 60%);animation:si-drift 28s cubic-bezier(.37,0,.63,1) infinite alternate-reverse;z-index:9}
+    #sol-intro .si-vignette{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 35%,#000 130%);z-index:20;pointer-events:none}
+    #sol-intro .si-grain{position:absolute;inset:0;z-index:21;opacity:.06;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    #sol-intro .si-text{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 18px}
+    #sol-intro .si-sub{font-family:"Fira Code","DM Sans",monospace;font-size:.78rem;letter-spacing:.5em;text-transform:uppercase;color:#ffcc00;text-shadow:0 0 12px rgba(255,170,0,.9);opacity:0;transform:translateY(15px);margin-bottom:20px}
+    #sol-intro .si-title{position:relative;font-size:5.2vw;max-width:1100px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;margin:0;opacity:0;color:#fffdf5;text-shadow:0 0 10px #ffaa00,0 0 25px #ff8800,0 0 60px #ff4400;transform:scale(.95);line-height:1.05}
+    #sol-intro .si-title small{display:block;font-size:.38em;letter-spacing:.35em;color:rgba(232,230,225,0.86);text-shadow:none;margin-top:12px}
+    #sol-intro .si-title::after{content:'';position:absolute;left:0;bottom:-16px;width:100%;height:4px;background:#fae6ff;box-shadow:0 0 10px #d500f9,0 0 25px #aa00ff,0 0 50px #7b00ff;border-radius:2px;opacity:0.95}
+    #sol-intro .si-logo{width:34vw;max-width:520px;min-width:220px;height:auto;margin-top:4vh;opacity:0;transform:scale(.9);filter:drop-shadow(0 0 22px rgba(255,170,0,.75))}
+    #sol-intro .si-tagline{font-family:"Bebas Neue",sans-serif;font-size:1.05rem;letter-spacing:.6em;text-transform:uppercase;color:#fae6ff;text-shadow:0 0 10px #d500f9,0 0 25px #aa00ff,0 0 50px #7b00ff;opacity:0;margin-top:3.5vh;transform:translateY(10px)}
+    #sol-intro .si-skip{position:absolute;bottom:22px;right:22px;z-index:40;background:transparent;border:1px solid rgba(255,170,0,.4);color:#ffcc00;font-family:"Fira Code","DM Sans",monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;padding:9px 16px;cursor:pointer;border-radius:10px;transition:all .3s;opacity:0}
+    #sol-intro .si-skip:hover{border-color:#ffaa00;background:rgba(255,170,0,.1)}
+    .si-anim-sub{animation:si-fadeup 2s cubic-bezier(.25,.46,.45,.94) forwards}
+    .si-anim-title{animation:si-title-in 2.8s cubic-bezier(.19,1,.22,1) forwards}
+    .si-anim-logo{animation:si-logo-in 2.4s cubic-bezier(.19,1,.22,1) forwards}
+    .si-anim-tag{animation:si-tag-in 2.6s cubic-bezier(.215,.61,.355,1) forwards}
+    .si-skip-in{animation:si-skip-in 1s .55s forwards}
+    @keyframes si-drift{0%{transform:translateX(-5%) scale(1)}100%{transform:translateX(5%) scale(1.1)}}
+    @keyframes si-fadeup{0%{opacity:0;transform:translateY(15px)}30%{opacity:1;transform:translateY(0)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+    @keyframes si-title-in{0%{opacity:0;filter:blur(18px);transform:scale(.9)}100%{opacity:1;filter:blur(0);transform:scale(1.02);letter-spacing:.16em}}
+    @keyframes si-logo-in{0%{opacity:0;filter:blur(15px) drop-shadow(0 0 0 rgba(255,170,0,0));transform:scale(.85) translateY(10px)}100%{opacity:1;filter:blur(0) drop-shadow(0 0 20px rgba(255,170,0,.85));transform:scale(1) translateY(0)}}
+    @keyframes si-tag-in{0%{opacity:0;transform:translateY(15px);filter:blur(8px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+    @keyframes si-skip-in{to{opacity:1}}
+    @media(max-width:800px){#sol-intro .si-title{font-size:8.4vw}}
+  </style>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+
+  <!-- LocalBusiness JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AutoPartsStore",
+    "name":"Michoacanos Tire's Shop",
+    "telephone":"+1-623-242-8512",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"5530 W Bethany Home Rd",
+      "addressLocality":"Glendale",
+      "addressRegion":"AZ",
+      "postalCode":"85301",
+      "addressCountry":"US"
+    },
+    "openingHoursSpecification":[
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"17:00"}
+    ],
+    "url":"https://newmichoacanostireshop-valleyverified.netlify.app/"
+  }
+  </script>
+</head>
+
+<body>
+
+  <!-- CINEMATIC INTRO -->
+  <section id="sol-intro" aria-label="Cinematic intro">
+    <canvas id="introCanvas"></canvas>
+    <div class="si-lightning" id="introLightning"></div>
+    <div class="si-fog"></div>
+    <div class="si-fog si-fog2"></div>
+    <div class="si-vignette"></div>
+    <div class="si-grain"></div>
+    <div class="si-text">
+      <div class="si-sub" id="introSub">VALLEY VERIFIED • PRESENTS</div>
+      <h2 class="si-title" id="introTitle">MICHOACANOS TIRE'S SHOP<small>GLENDALE • WHEELS • TIRES • FITMENT</small></h2>
+      <img class="si-logo" id="introLogo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOLEnterprises">
+      <div class="si-tagline" id="introTag">INITIALIZING SHOWROOM</div>
+    </div>
+    <button class="si-skip" id="introSkip" type="button">SKIP</button>
+  </section>
+
+  <!-- LOADER -->
+  <div id="loader" aria-label="Loading">
+    <div class="spinner" aria-hidden="true"></div>
+    <div id="loading-text">INITIALIZING SHOWROOM...</div>
+    <div id="loading-sub">3D SPECTACLE • VALLEY VERIFIED • GLENDALE AZ</div>
+  </div>
+
+  <!-- 3D BACKGROUND -->
+  <canvas id="three-bg"></canvas>
+
+  <!-- WATERMARK (Sponsor mark) -->
+  <div class="sol-watermark" aria-hidden="true">
+    <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOLEnterprises">
+  </div>
+
+  <!-- NAV -->
+  <nav class="main-nav" id="mainNav">
+    <a href="#home" class="nav-logo" aria-label="Home">
+      <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL">
+      <span>VALLEY VERIFIED</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#packages">Packages</a>
+      <a href="#fitment">Custom Fitment</a>
+      <a href="#financing">Financing</a>
+      <a href="#location">Location</a>
+    </div>
+
+    <button class="menu-btn" id="menuBtn" type="button">☰ MENU</button>
+  </nav>
+
+  <!-- MEGA NAV -->
+  <div class="mega-nav" id="megaNav" role="dialog" aria-label="Site navigation">
+    <button class="mega-nav-close" id="megaNavClose" type="button">✕ CLOSE</button>
+    <div class="mega-nav-grid">
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Navigate</div>
+        <a href="#home">Home</a>
+        <a href="#packages">Wheels & Tires Packages</a>
+        <a href="#fitment">Custom Fitment & Upgrades</a>
+        <a href="#financing">Payment & Financing</a>
+        <a href="#location">Glendale Showroom</a>
+        <div class="small">This is a single-file sponsor spectacle for the live site.</div>
+      </div>
+      <div class="mega-nav-col">
+        <div class="mega-nav-label">Live Links</div>
+        <a href="https://newmichoacanostireshop-valleyverified.netlify.app/" target="_blank" rel="noopener">Open the Live Website</a>
+        <a href="tel:+16232428512">Call (623) 242-8512</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=5530+W+Bethany+Home+Rd%2C+Glendale%2C+AZ+85301" target="_blank" rel="noopener">Get Directions</a>
+        <a href="https://valleyverified.netlify.app/" target="_blank" rel="noopener">Valley Verified Verification Hub</a>
+        <div class="small">Financing partners, active hours, and certain services may change—verification hub confirms current listings.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero-wrapper" id="home">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">BEST PRICES IN TOWN • CLEAN BUILDS • PRECISION FITMENT</div>
+        <h1 class="hero-title">Michoacanos<br><span>Tire's Shop</span></h1>
+        <p class="hero-sub">Premium rims, high-performance tires, and unbeatable wheel packages in Glendale. We deliver clean builds and precision fitment for your vehicle.</p>
+
+        <div class="cta-row">
+          <a class="btn-gold" href="tel:+16232428512" id="btnCall">📞 Call (623) 242-8512</a>
+          <a class="btn-outline" href="https://www.google.com/maps/search/?api=1&query=5530+W+Bethany+Home+Rd%2C+Glendale%2C+AZ+85301" target="_blank" rel="noopener">🧭 Get Directions</a>
+          <a class="btn-outline" href="https://newmichoacanostireshop-valleyverified.netlify.app/" target="_blank" rel="noopener">🌐 Live Site</a>
+        </div>
+      </div>
+
+      <aside class="hero-right" aria-label="Showroom quick facts">
+        <div class="hero-card">
+          <div class="badge-row">
+            <span class="pill">GLENDALE, AZ</span>
+            <span class="pill blue">VALLEY VERIFIED</span>
+            <span class="pill purple">3D SHOWROOM</span>
+          </div>
+
+          <h3>Build your stance. Then verify what’s active. 🛞</h3>
+          <p>This page is a cinematic sponsor version of the live listing. Financing partners, hours, and some services can change—use the verification hub for current details.</p>
+
+          <div class="mini-grid">
+            <div class="mini">
+              <div class="k">Address</div>
+              <div class="v">5530 W Bethany Home Rd</div>
+            </div>
+            <div class="mini">
+              <div class="k">City</div>
+              <div class="v">Glendale, AZ 85301</div>
+            </div>
+            <div class="mini">
+              <div class="k">Hours</div>
+              <div class="v">Mon–Sat · 8:00 AM–5:00 PM</div>
+            </div>
+            <div class="mini">
+              <div class="k">Verification</div>
+              <div class="v"><a href="https://valleyverified.netlify.app/" target="_blank" rel="noopener">valleyverified.netlify.app</a></div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+            <a class="btn-outline btn-mini" href="#fitment">⚙️ Fitment Lab</a>
+            <a class="btn-outline btn-mini" href="#packages">📦 Packages</a>
+            <a class="btn-outline btn-mini" href="#financing">💳 Financing</a>
+            <a class="btn-outline btn-mini" href="#location">📍 Location</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="hero-scroll">Scroll<div class="scroll-line"></div></div>
+  </header>
+
+  <div class="divider"></div>
+
+  <main class="content">
+
+    <!-- METRICS -->
+    <section class="content-section" aria-label="Signal metrics">
+      <div class="section-label reveal">Signal Metrics</div>
+      <div class="section-title reveal">Operator-grade wheel packages</div>
+      <div class="section-desc reveal">One clean surface that shows what the live site says: packages, fitment, financing verification, and the Glendale showroom.</div>
+
+      <div class="grid-4 stagger">
+        <div class="metric reveal">
+          <div class="num" data-count="4">0</div>
+          <div class="lab">Core Package Types</div>
+        </div>
+        <div class="metric reveal">
+          <div class="num" data-count="6" data-suffix="D">0</div>
+          <div class="lab">Days Open / Week</div>
+        </div>
+        <div class="metric reveal">
+          <div class="num" data-count="8" data-suffix="AM">0</div>
+          <div class="lab">Opens (Mon–Sat)</div>
+        </div>
+        <div class="metric reveal">
+          <div class="num" data-count="5" data-suffix="PM">0</div>
+          <div class="lab">Closes (Mon–Sat)</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PACKAGES -->
+    <section class="content-section" id="packages" aria-label="Wheels and tires packages">
+      <div class="section-label reveal">Wheels & Tires Packages</div>
+      <div class="section-title reveal">Best prices in town — build it right</div>
+      <div class="section-desc reveal">Upgrade your ride's stance and safety. We specialize in matching the perfect rims with the right rubber.</div>
+
+      <div class="grid-3 stagger">
+        <article class="card reveal">
+          <div class="icon">🛞</div>
+          <h3>Custom Rims & Wheels</h3>
+          <div class="type">Chrome · matte · alloy · forged</div>
+          <p>Huge selection of aftermarket rims. We’ll help you pick the look and the specs, then verify clearance so the build sits right—flush or aggressive.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">🧱</div>
+          <h3>New & Used Tires</h3>
+          <div class="type">Performance · all-terrain · daily</div>
+          <p>Performance, all-terrain, and daily-driver tires at the best prices in town. Get the right compound and tread for your actual driving.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">⚖️</div>
+          <h3>Mount & Balance</h3>
+          <div class="type">Precision mounting</div>
+          <p>Vibration-free riding with precision mounting for oversized and custom wheels. Proper balance is what turns “looks good” into “drives clean.”</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">📦</div>
+          <h3>Complete Packages</h3>
+          <div class="type">Bundle · discount · install</div>
+          <p>Bundle your rims and tires together for deep discounts and instant aesthetic upgrades. One decision, one install, one clean result.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">🧮</div>
+          <h3>Spec Matching</h3>
+          <div class="type">Bolt pattern · offset · hub</div>
+          <p>We match bolt pattern, offset, hub bore, and tire size so your setup fits the vehicle and the vision. No mystery fitment.</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">🧼</div>
+          <h3>Clean Build Standard</h3>
+          <div class="type">Torque · alignment awareness</div>
+          <p>Proper torque sequence, seating checks, and sanity steps that keep the build stable. Clean results are a process, not luck.</p>
+        </article>
+      </div>
+
+      <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap" class="reveal">
+        <a class="btn-gold" href="#fitment">Enter the Fitment Lab</a>
+        <a class="btn-outline" href="https://newmichoacanostireshop-valleyverified.netlify.app/" target="_blank" rel="noopener">See the original listing</a>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FITMENT -->
+    <section class="content-section" id="fitment" aria-label="Custom fitment and upgrades">
+      <div class="section-label reveal">Custom Fitment & Upgrades</div>
+      <div class="section-title reveal">Every vehicle is different. Fit it flawlessly.</div>
+      <div class="section-desc reveal">We ensure your new setup clears your brakes, suspension, and fenders—clean stance without rubbing.</div>
+
+      <div class="grid-2 stagger" style="margin-bottom:16px">
+        <article class="card reveal">
+          <div class="icon">📐</div>
+          <h3>Stance & Clearance</h3>
+          <div class="type">Offset calculation</div>
+          <p>Expert offset calculation so your wheels sit perfectly flush or aggressive without rubbing. Clearance isn’t a guess—it’s math + verification.</p>
+        </article>
+        <article class="card reveal">
+          <div class="icon">🛻</div>
+          <h3>Lift & Leveling Availability</h3>
+          <div class="type">Verify current service</div>
+          <p>Interested in lifting your truck for larger wheels? Because services can change, confirm what’s active using the Valley Verified verification hub.</p>
+        </article>
+      </div>
+
+      <div class="card reveal" style="margin-bottom:18px">
+        <div class="icon">🛡️</div>
+        <h3>External Shop Verification</h3>
+        <div class="type">Protects customers</div>
+        <p>We protect our customers from outdated web listings. Ensure you are looking at our active services.</p>
+        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn-outline" href="https://valleyverified.netlify.app/" target="_blank" rel="noopener">Verify Suspension & Lift Service Availability →</a>
+          <a class="btn-outline" href="https://valleyverified.netlify.app/" target="_blank" rel="noopener">Verify active hours →</a>
+        </div>
+      </div>
+
+      <div class="config-wrap reveal">
+        <div class="panel" aria-label="Fitment Lab controls">
+          <h4>Fitment Lab (visual simulator)</h4>
+          <p style="font-size:13px;color:rgba(138,136,128,0.95);line-height:1.85">
+            This simulator is a visual aid for stance and finish—final specs should be verified in-shop. Use it to communicate what you want fast.
+          </p>
+
+          <div class="fields">
+            <div class="field">
+              <label for="finish">Rim Finish</label>
+              <select id="finish">
+                <option value="chrome">Chrome / Polished</option>
+                <option value="matte">Matte Black</option>
+                <option value="forged">Forged / Brushed</option>
+                <option value="gold">Gold Accent</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="tire">Tire Type</label>
+              <select id="tire">
+                <option value="daily">Daily Driver</option>
+                <option value="performance">Performance</option>
+                <option value="allterrain">All-Terrain</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="size">Wheel Size (in)</label>
+              <input id="size" type="range" min="15" max="24" value="20" />
+            </div>
+
+            <div class="field">
+              <label for="stance">Stance (flush → aggressive)</label>
+              <input id="stance" type="range" min="-10" max="10" value="2" />
+            </div>
+
+            <div class="field">
+              <label for="profile">Tire Profile (thin → thick)</label>
+              <input id="profile" type="range" min="25" max="65" value="40" />
+            </div>
+
+            <div class="field">
+              <label for="notes">Build Notes (copy)</label>
+              <input id="notes" type="text" value="20&quot; wheels • chrome • daily • slight aggressive stance" />
+            </div>
+          </div>
+
+          <div class="readout">
+            <div class="mini">
+              <div class="k">Visual Fit</div>
+              <div class="v" id="fitLabel">Clearance-safe</div>
+            </div>
+            <div class="mini">
+              <div class="k">Stance</div>
+              <div class="v" id="stanceLabel">Slight aggressive</div>
+            </div>
+          </div>
+
+          <div class="gauge" aria-label="Clearance gauge">
+            <span id="clearGauge"></span>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+            <button class="btn-gold btn-mini" id="copyBtn" type="button">📋 Copy Notes</button>
+            <a class="btn-outline btn-mini" href="tel:+16232428512">📞 Call With Notes</a>
+            <a class="btn-outline btn-mini" href="https://newmichoacanostireshop-valleyverified.netlify.app/" target="_blank" rel="noopener">🌐 Verify listing</a>
+          </div>
+
+          <div class="hint">
+            Tip: Use <a href="https://valleyverified.netlify.app/" target="_blank" rel="noopener">Valley Verified</a> to confirm active services and financing partners before you commit.
+          </div>
+        </div>
+
+        <div class="panel" aria-label="Fitment Lab view">
+          <h4>3D Wheel View</h4>
+          <p style="font-size:13px;color:rgba(138,136,128,0.95);line-height:1.85;margin-bottom:10px">
+            The 3D wheel in the background responds to these settings. Drag on desktop to orbit. Scroll rotates the showroom.
+          </p>
+          <div class="readout">
+            <div class="mini">
+              <div class="k">Wheel Size</div>
+              <div class="v" id="sizeLabel">20"</div>
+            </div>
+            <div class="mini">
+              <div class="k">Profile</div>
+              <div class="v" id="profileLabel">40</div>
+            </div>
+          </div>
+          <div class="hint">If WebGL is blocked, the page falls back to a static layout. The live site remains accessible via the top menu.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FINANCING -->
+    <section class="content-section" id="financing" aria-label="Payment and financing">
+      <div class="section-label reveal">Payment & Financing</div>
+      <div class="section-title reveal">Don’t let budget stop your build.</div>
+      <div class="section-desc reveal">Don't let budget stand in the way of your dream build. We aim to make premium wheel packages accessible.</div>
+
+      <div class="grid-2 stagger">
+        <article class="card reveal">
+          <div class="icon">💳</div>
+          <h3>Do you offer “No Credit Needed” financing?</h3>
+          <div class="type">Verify current partners</div>
+          <p>Many customers use structured payment plans to roll out on new rims today. Because lending programs update frequently, we ask customers to verify our current financing partners.</p>
+          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn-gold" href="https://valleyverified.netlify.app/" target="_blank" rel="noopener">Check Financing Options</a>
+            <a class="btn-outline" href="tel:+16232428512">Call for details</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">🧾</div>
+          <h3>What you bring in</h3>
+          <div class="type">Fast quote workflow</div>
+          <p>To speed things up, have your vehicle year/make/model, current wheel size (if known), and the stance you want. The Fitment Lab notes can be copied and read over the phone.</p>
+          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn-outline btn-mini" type="button" onclick="document.getElementById('copyBtn').click()">Copy Fitment Notes</button>
+            <a class="btn-outline btn-mini" href="#fitment">Back to Fitment Lab</a>
+            <a class="btn-outline btn-mini" href="https://newmichoacanostireshop-valleyverified.netlify.app/" target="_blank" rel="noopener">See original wording</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- LOCATION -->
+    <section class="content-section" id="location" aria-label="Glendale showroom">
+      <div class="section-label reveal">Glendale Showroom</div>
+      <div class="section-title reveal">Come see the inventory in person.</div>
+      <div class="section-desc reveal">Best prices in town located directly on West Bethany Home Road.</div>
+
+      <div class="grid-2 stagger" style="margin-bottom:16px">
+        <article class="card reveal">
+          <div class="icon">⏱️</div>
+          <h3>Operating Hours</h3>
+          <div class="type">Mon–Sat · 8:00 AM – 5:00 PM</div>
+          <p>Sunday: Closed. Hours subject to change—verify active hours through Valley Verified.</p>
+          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn-outline btn-mini" href="https://valleyverified.netlify.app/" target="_blank" rel="noopener">Verify active hours</a>
+            <a class="btn-outline btn-mini" href="tel:+16232428512">Call to confirm</a>
+          </div>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">📍</div>
+          <h3>Location</h3>
+          <div class="type">5530 W Bethany Home Rd</div>
+          <p>Glendale, AZ 85301. Tap directions for turn-by-turn navigation.</p>
+          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn-gold" href="https://www.google.com/maps/search/?api=1&query=5530+W+Bethany+Home+Rd%2C+Glendale%2C+AZ+85301" target="_blank" rel="noopener">Navigate to Shop</a>
+            <a class="btn-outline" href="https://newmichoacanostireshop-valleyverified.netlify.app/" target="_blank" rel="noopener">Open listing</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="map-card reveal" aria-label="Map preview">
+        <div class="map-top">
+          <div>
+            <h4>Quick Route Preview</h4>
+            <p><strong style="color:var(--text)">5530 W Bethany Home Rd</strong><br>Glendale, AZ 85301</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+            <a class="btn-outline btn-mini" href="https://www.google.com/maps/search/?api=1&query=5530+W+Bethany+Home+Rd%2C+Glendale%2C+AZ+85301" target="_blank" rel="noopener">Open in Google Maps</a>
+            <a class="btn-outline btn-mini" href="tel:+16232428512">Call shop</a>
+          </div>
+        </div>
+        <svg class="map-svg" viewBox="0 0 900 300" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="r" x1="0" x2="1">
+              <stop offset="0" stop-color="rgba(58,111,216,0.0)"/>
+              <stop offset="0.5" stop-color="rgba(201,168,76,0.65)"/>
+              <stop offset="1" stop-color="rgba(138,99,255,0.0)"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <path d="M0 240 C 220 160, 380 260, 540 200 S 780 110, 900 160" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"/>
+          <path d="M0 70 C 210 140, 400 60, 620 110 S 790 220, 900 210" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+          <path d="M120 310 C 250 210, 420 210, 540 290" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/>
+          <path d="M80 235 C 230 165, 390 250, 550 195 S 760 120, 840 150" fill="none" stroke="url(#r)" stroke-width="5" filter="url(#glow)"/>
+          <circle cx="550" cy="195" r="9" fill="rgba(201,168,76,0.9)" filter="url(#glow)"/>
+          <circle cx="550" cy="195" r="18" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="2"/>
+          <text x="566" y="200" fill="rgba(232,230,225,0.82)" font-size="12" font-family="Fira Code, monospace">SHOP</text>
+        </svg>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- CTA -->
+    <section class="content-section" aria-label="Final call to action" style="text-align:center">
+      <div class="section-label reveal">Final</div>
+      <div class="section-title reveal">Ready to upgrade your wheels?</div>
+      <div class="section-desc reveal" style="margin-left:auto;margin-right:auto">Call the shop, verify what’s active, and roll out with a clean build.</div>
+
+      <div class="reveal" style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+        <a class="btn-gold" href="tel:+16232428512">📞 Call (623) 242-8512</a>
+        <a class="btn-outline" href="https://www.google.com/maps/search/?api=1&query=5530+W+Bethany+Home+Rd%2C+Glendale%2C+AZ+85301" target="_blank" rel="noopener">🧭 Get Directions</a>
+        <a class="btn-outline" href="https://valleyverified.netlify.app/" target="_blank" rel="noopener">✅ Verify on Valley Verified</a>
+        <a class="btn-outline" href="https://newmichoacanostireshop-valleyverified.netlify.app/" target="_blank" rel="noopener">🌐 View live site</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="display:flex;justify-content:center;gap:12px;align-items:center;flex-wrap:wrap">
+      <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOLEnterprises" style="height:44px;width:auto;filter:drop-shadow(0 0 18px rgba(201,168,76,0.28))">
+      <div style="text-align:left">
+        <div style="font-family:'Bebas Neue',sans-serif;letter-spacing:4px;color:var(--gold);font-size:12px">SPONSORED SPECTACLE</div>
+        <div style="font-size:12px;color:rgba(138,136,128,0.95);line-height:1.7">
+          Michoacanos Tire's Shop · 5530 W Bethany Home Rd · Glendale, AZ 85301 · <a href="tel:+16232428512" style="color:var(--gold);text-decoration:none"> (623) 242-8512</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#packages">Packages</a>
+      <a href="#fitment">Fitment</a>
+      <a href="#financing">Financing</a>
+      <a href="#location">Location</a>
+      <a href="https://newmichoacanostireshop-valleyverified.netlify.app/" target="_blank" rel="noopener">Live Site</a>
+      <a href="https://valleyverified.netlify.app/" target="_blank" rel="noopener">Valley Verified</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=5530+W+Bethany+Home+Rd%2C+Glendale%2C+AZ+85301" target="_blank" rel="noopener">Directions</a>
+    </div>
+
+    <div class="fine">This single-file page is a sponsor spectacle for the live listing. Always verify active services, financing partners, and hours at the Valley Verified hub.</div>
+  </footer>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* Cinematic intro (2D canvas) */
+    (function(){
+      const intro = document.getElementById('sol-intro');
+      const cv = document.getElementById('introCanvas');
+      const lightning = document.getElementById('introLightning');
+      const sub = document.getElementById('introSub');
+      const title = document.getElementById('introTitle');
+      const logo = document.getElementById('introLogo');
+      const tag = document.getElementById('introTag');
+      const skip = document.getElementById('introSkip');
+
+      if (!intro || !cv) return;
+
+      // Show intro unless user prefers reduced motion
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce) return;
+
+      intro.classList.add('show');
+      document.body.style.overflow = 'hidden';
+
+      // Animate text
+      requestAnimationFrame(()=>{
+        sub && sub.classList.add('si-anim-sub');
+        title && title.classList.add('si-anim-title');
+        logo && logo.classList.add('si-anim-logo');
+        tag && tag.classList.add('si-anim-tag');
+        skip && (skip.classList.add('si-skip-in'));
+      });
+
+      const ctx = cv.getContext('2d');
+      let w=0,h=0, raf=0, t0=performance.now();
+      let stars = [];
+      function resize(){
+        w = cv.width = Math.floor(window.innerWidth * Math.min(devicePixelRatio||1,2));
+        h = cv.height = Math.floor(window.innerHeight * Math.min(devicePixelRatio||1,2));
+        stars = new Array(520).fill(0).map(()=>({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          z: Math.random()*1,
+          r: Math.random()*1.6+0.2,
+          s: Math.random()*0.55+0.05,
+          c: Math.random()<0.55 ? [201,168,76] : (Math.random()<0.75 ? [138,99,255] : [58,111,216])
+        }));
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function flash(){
+        if (!lightning) return;
+        lightning.style.transition = 'none';
+        lightning.style.opacity = '0.0';
+        requestAnimationFrame(()=>{
+          lightning.style.transition = 'opacity 220ms ease';
+          lightning.style.opacity = '0.38';
+          setTimeout(()=>lightning.style.opacity='0.0', 180);
+        });
+      }
+
+      let flashes = 0;
+      const flashTimer = setInterval(()=>{
+        flashes++;
+        if (Math.random()<0.6) flash();
+        if (flashes>6) clearInterval(flashTimer);
+      }, 520);
+
+      function draw(now){
+        const dt = (now - t0) * 0.001;
+        t0 = now;
+
+        ctx.clearRect(0,0,w,h);
+
+        // Background wash
+        const g = ctx.createRadialGradient(w*0.35,h*0.35,0,w*0.5,h*0.55,Math.max(w,h));
+        g.addColorStop(0, 'rgba(138,99,255,0.18)');
+        g.addColorStop(0.35, 'rgba(58,111,216,0.10)');
+        g.addColorStop(0.7, 'rgba(201,168,76,0.08)');
+        g.addColorStop(1, 'rgba(0,0,0,0.92)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,w,h);
+
+        // Stars
+        for (const s of stars){
+          s.y += s.s * (14 + s.z*40) * dt * 6.0;
+          if (s.y > h+10){ s.y = -10; s.x = Math.random()*w; }
+          const alpha = 0.35 + Math.sin(now*0.002 + s.x*0.001)*0.25;
+          ctx.fillStyle = `rgba(${s.c[0]},${s.c[1]},${s.c[2]},${alpha})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r*(1+s.z), 0, Math.PI*2);
+          ctx.fill();
+        }
+
+        // Pulse rings
+        const cx = w*0.5, cy = h*0.52;
+        for (let i=0;i<5;i++){
+          const R = (now*0.08 + i*90) % 520;
+          ctx.strokeStyle = `rgba(201,168,76,${0.12 - i*0.018})`;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(cx, cy, R, 0, Math.PI*2);
+          ctx.stroke();
+        }
+
+        raf = requestAnimationFrame(draw);
+      }
+      raf = requestAnimationFrame(draw);
+
+      let ended = false;
+      function end(){
+        if (ended) return;
+        ended = true;
+        cancelAnimationFrame(raf);
+        clearInterval(flashTimer);
+        intro.style.transition = 'opacity 650ms ease';
+        intro.style.opacity = '0';
+        setTimeout(()=>{
+          intro.classList.remove('show');
+          intro.style.display = 'none';
+          document.body.style.overflow = '';
+        }, 700);
+      }
+
+      // auto end
+      setTimeout(end, 4300);
+      skip && skip.addEventListener('click', end);
+      intro.addEventListener('click', (e)=>{ if (e.target === intro) end(); });
+    })();
+  </script>
+
+  <script>
+    // Boot: fast loader exit + guard rails
+    (function(){
+      const done = () => document.body.classList.add('ready');
+      if (document.readyState === 'complete') return done();
+      window.addEventListener('load', () => setTimeout(done, 250));
+      setTimeout(done, 2500); // never let it hang
+    })();
+  </script>
+
+  <script>
+  /* =====================================================================
+     Three.js — SVS-inspired Aurora + Particle Field + Wheel Showroom
+     One renderer on the background canvas. Wheel sits "behind" content and
+     responds to scroll + Fitment Lab controls.
+     ===================================================================== */
+  (function(){
+    const canvas = document.getElementById('three-bg');
+    if (!canvas || !window.THREE) return;
+
+    let renderer, scene, camera, clock;
+    let wheelGroup, rimMat, tireMat, ringMat, glowRing;
+    let mouse = {x:0,y:0,tx:0,ty:0};
+    let scrollY = 0;
+    let running = true;
+
+    function safeToast(msg, isErr=false){
+      const t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.toggle('err', !!isErr);
+      t.classList.add('show');
+      clearTimeout(t._to);
+      t._to = setTimeout(()=>t.classList.remove('show'), 1800);
+    }
+
+    try{
+      renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:false, powerPreference:'high-performance'});
+    } catch (e) {
+      console.warn('WebGL init failed', e);
+      safeToast('3D disabled (WebGL blocked).', true);
+      return;
+    }
+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x07070f, 1);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.18;
+
+    scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x07070f, 0.045);
+
+    camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 240);
+    camera.position.set(0, 0, 14);
+
+    clock = new THREE.Clock();
+
+    // Lights
+    const key = new THREE.DirectionalLight(0xfff3d0, 1.05);
+    key.position.set(6, 8, 10);
+    scene.add(key);
+
+    const fill = new THREE.PointLight(0x8a63ff, 1.4, 55);
+    fill.position.set(-6, 2.5, 8);
+    scene.add(fill);
+
+    const gold = new THREE.PointLight(0xc9a84c, 1.2, 60);
+    gold.position.set(6, -3, 8);
+    scene.add(gold);
+
+    const blue = new THREE.PointLight(0x3a6fd8, 0.9, 60);
+    blue.position.set(0, 4.5, 14);
+    scene.add(blue);
+
+    // Subtle "floor"
+    const floorGeo = new THREE.PlaneGeometry(80, 80, 1, 1);
+    const floorMat = new THREE.MeshStandardMaterial({
+      color: 0x090913,
+      metalness: 0.0,
+      roughness: 1.0,
+      transparent: true,
+      opacity: 0.55
+    });
+    const floor = new THREE.Mesh(floorGeo, floorMat);
+    floor.rotation.x = -Math.PI/2;
+    floor.position.y = -5.2;
+    floor.position.z = -6;
+    scene.add(floor);
+
+    // Grid lines (procedural)
+    const grid = new THREE.GridHelper(80, 40, 0xc9a84c, 0x2d2b3a);
+    grid.position.y = -5.18;
+    grid.position.z = -6;
+    grid.material.transparent = true;
+    grid.material.opacity = 0.22;
+    scene.add(grid);
+
+    // Particles (shader)
+    const COUNT = 2400;
+    const pPos = new Float32Array(COUNT * 3);
+    const pColor = new Float32Array(COUNT * 3);
+    const pSize = new Float32Array(COUNT);
+    const pSpeed = new Float32Array(COUNT);
+    const pOff = new Float32Array(COUNT);
+
+    const goldPal = [[0.85,0.68,0.22],[0.95,0.85,0.42],[1.0,0.93,0.58]];
+    const purpPal = [[0.55,0.40,1.0],[0.62,0.48,0.94],[0.74,0.60,1.0]];
+    const bluePal = [[0.26,0.46,0.95],[0.35,0.55,1.0]];
+
+    for (let i=0;i<COUNT;i++){
+      pPos[i*3]   = (Math.random()-0.5)*36;
+      pPos[i*3+1] = (Math.random()-0.5)*22;
+      pPos[i*3+2] = (Math.random()-0.5)*18 - 10;
+
+      pSize[i] = Math.random()*2.6 + 0.45;
+      pSpeed[i] = Math.random()*0.35 + 0.06;
+      pOff[i] = Math.random()*Math.PI*2;
+
+      const roll = Math.random();
+      const pal = roll < 0.55 ? goldPal : (roll < 0.83 ? purpPal : bluePal);
+      const c = pal[(Math.random()*pal.length)|0];
+      pColor[i*3]=c[0]; pColor[i*3+1]=c[1]; pColor[i*3+2]=c[2];
+    }
+
+    const pGeo = new THREE.BufferGeometry();
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    pGeo.setAttribute('color', new THREE.BufferAttribute(pColor, 3));
+    pGeo.setAttribute('size', new THREE.BufferAttribute(pSize, 1));
+    pGeo.setAttribute('aSpeed', new THREE.BufferAttribute(pSpeed, 1));
+    pGeo.setAttribute('aOffset', new THREE.BufferAttribute(pOff, 1));
+
+    const pMat = new THREE.ShaderMaterial({
+      uniforms:{uTime:{value:0},uPixelRatio:{value:renderer.getPixelRatio()}},
+      vertexShader:`
+        attribute float size;
+        attribute float aSpeed;
+        attribute float aOffset;
+        attribute vec3 color;
+        uniform float uTime;
+        uniform float uPixelRatio;
+        varying vec3 vColor;
+        varying float vAlpha;
+        void main(){
+          vColor = color;
+          vec3 pos = position;
+          pos.y += sin(uTime*aSpeed + aOffset + pos.x*0.25) * 0.9;
+          pos.x += cos(uTime*aSpeed*0.65 + aOffset*1.3 + pos.y*0.18) * 0.42;
+          pos.z += sin(uTime*aSpeed*0.5 + aOffset*0.9) * 0.28;
+
+          vec4 mv = modelViewMatrix * vec4(pos,1.0);
+          float dist = -mv.z;
+          vAlpha = smoothstep(26.0, 4.0, dist) * (0.35 + sin(uTime*aSpeed + aOffset)*0.18 + 0.4);
+          gl_PointSize = size * uPixelRatio * (52.0 / dist);
+          gl_Position = projectionMatrix * mv;
+        }
+      `,
+      fragmentShader:`
+        varying vec3 vColor;
+        varying float vAlpha;
+        void main(){
+          float d = length(gl_PointCoord - 0.5);
+          if (d > 0.5) discard;
+          float s = smoothstep(0.5, 0.0, d);
+          gl_FragColor = vec4(vColor, s * vAlpha);
+        }
+      `,
+      transparent:true,
+      depthWrite:false,
+      blending:THREE.AdditiveBlending,
+      vertexColors:true
+    });
+    scene.add(new THREE.Points(pGeo, pMat));
+
+    // Aurora bands
+    function makeAurora(w,h,segs,colA,colB,z,y,spd,phase,tiltX){
+      const geo = new THREE.PlaneGeometry(w,h,segs,Math.max(1,Math.floor(segs/4)));
+      const mat = new THREE.ShaderMaterial({
+        uniforms:{
+          uTime:{value:0},
+          uColorA:{value:new THREE.Color(colA[0],colA[1],colA[2])},
+          uColorB:{value:new THREE.Color(colB[0],colB[1],colB[2])},
+          uSpeed:{value:spd},
+          uPhase:{value:phase}
+        },
+        vertexShader:`
+          uniform float uTime; uniform float uSpeed; uniform float uPhase;
+          varying vec2 vUv; varying float vWave;
+          void main(){
+            vUv = uv;
+            vec3 pos = position;
+            float w1 = sin(pos.x*0.38 + uTime*uSpeed + uPhase) * 1.4;
+            float w2 = sin(pos.x*0.75 + uTime*uSpeed*1.4 + uPhase*1.8) * 0.55;
+            float w3 = cos(pos.x*0.18 + uTime*uSpeed*0.55 + uPhase*0.6) * 0.85;
+            pos.y += (w1+w2+w3) * uv.y;
+            vWave = (w1+w2)*0.5;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos,1.0);
+          }
+        `,
+        fragmentShader:`
+          uniform vec3 uColorA; uniform vec3 uColorB;
+          uniform float uTime; uniform float uPhase;
+          varying vec2 vUv; varying float vWave;
+          void main(){
+            float ef = smoothstep(0.0,0.22,vUv.y) * smoothstep(1.0,0.78,vUv.y);
+            float sf = smoothstep(0.0,0.12,vUv.x) * smoothstep(1.0,0.88,vUv.x);
+            float t = clamp(vUv.x + vWave*0.18 + sin(uTime*0.28 + uPhase)*0.1, 0.0, 1.0);
+            vec3 col = mix(uColorA, uColorB, t);
+            float shim = sin(vUv.x*18.0 + uTime*1.8 + uPhase) * 0.07 + 0.93;
+            col *= shim;
+            gl_FragColor = vec4(col, ef * sf * 0.20);
+          }
+        `,
+        transparent:true,
+        depthWrite:false,
+        blending:THREE.AdditiveBlending,
+        side:THREE.DoubleSide
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(0,y,z);
+      mesh.rotation.x = tiltX;
+      return mesh;
+    }
+
+    const a1 = makeAurora(46,7,150,[0.55,0.40,1.0],[0.85,0.68,0.22], -8,  2.2, 0.36, 0.0, -0.08);
+    const a2 = makeAurora(40,5,120,[0.85,0.68,0.22],[0.26,0.46,0.95], -10, -1.0, 0.26, 2.1,  0.06);
+    const a3 = makeAurora(52,6,170,[0.74,0.60,1.0],[1.0,0.93,0.58], -12,  3.3, 0.22, 4.3, -0.11);
+    scene.add(a1,a2,a3);
+
+    // Wheel showroom
+    wheelGroup = new THREE.Group();
+    wheelGroup.position.set(4.2, 0.0, -1.2);
+    scene.add(wheelGroup);
+
+    // Tire
+    tireMat = new THREE.MeshStandardMaterial({
+      color:0x14141c,
+      metalness:0.05,
+      roughness:0.92
+    });
+    const tire = new THREE.Mesh(new THREE.TorusGeometry(2.65, 0.62, 32, 160), tireMat);
+    tire.rotation.x = Math.PI/2;
+    wheelGroup.add(tire);
+
+    // Rim
+    rimMat = new THREE.MeshStandardMaterial({
+      color:0xdedede,
+      metalness:1.0,
+      roughness:0.12
+    });
+    const rim = new THREE.Mesh(new THREE.CylinderGeometry(2.05, 2.05, 1.15, 96, 1, true), rimMat);
+    rim.rotation.z = Math.PI/2;
+    wheelGroup.add(rim);
+
+    // Rim lip
+    const lipMat = new THREE.MeshStandardMaterial({color:0xffffff, metalness:1.0, roughness:0.06});
+    const lip = new THREE.Mesh(new THREE.TorusGeometry(2.08, 0.09, 18, 96), lipMat);
+    lip.rotation.x = Math.PI/2;
+    wheelGroup.add(lip);
+
+    // Spokes
+    const spokeMat = new THREE.MeshStandardMaterial({
+      color:0xf2f2f2,
+      metalness:0.95,
+      roughness:0.18
+    });
+    const spokeGeo = new THREE.BoxGeometry(0.22, 1.85, 0.25);
+    const spokeCount = 10;
+    for (let i=0;i<spokeCount;i++){
+      const s = new THREE.Mesh(spokeGeo, spokeMat);
+      const a = (i/spokeCount)*Math.PI*2;
+      const r = 0.95;
+      s.position.set(Math.cos(a)*r, Math.sin(a)*r, 0.0);
+      s.rotation.z = a;
+      wheelGroup.add(s);
+
+      const s2 = new THREE.Mesh(new THREE.BoxGeometry(0.15, 1.35, 0.22), spokeMat);
+      s2.position.set(Math.cos(a)*0.55, Math.sin(a)*0.55, 0.0);
+      s2.rotation.z = a + Math.PI/spokeCount;
+      wheelGroup.add(s2);
+    }
+
+    // Hub + lugs
+    const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.55,0.55,0.55,48), spokeMat);
+    hub.rotation.z = Math.PI/2;
+    wheelGroup.add(hub);
+    const lugMat = new THREE.MeshStandardMaterial({color:0xc9a84c, metalness:1.0, roughness:0.22});
+    for (let i=0;i<5;i++){
+      const a=(i/5)*Math.PI*2;
+      const lug = new THREE.Mesh(new THREE.CylinderGeometry(0.08,0.08,0.22,18), lugMat);
+      lug.position.set(Math.cos(a)*0.30, Math.sin(a)*0.30, 0.25);
+      lug.rotation.x = Math.PI/2;
+      wheelGroup.add(lug);
+    }
+
+    // Glow rings (fake bloom)
+    ringMat = new THREE.MeshBasicMaterial({color:0x8a63ff, transparent:true, opacity:0.24});
+    glowRing = new THREE.Mesh(new THREE.TorusGeometry(3.05, 0.035, 10, 180), ringMat);
+    glowRing.rotation.x = Math.PI/2;
+    wheelGroup.add(glowRing);
+
+    const glowRing2 = new THREE.Mesh(new THREE.TorusGeometry(3.16, 0.02, 10, 180),
+      new THREE.MeshBasicMaterial({color:0xc9a84c, transparent:true, opacity:0.18})
+    );
+    glowRing2.rotation.x = Math.PI/2;
+    wheelGroup.add(glowRing2);
+
+    // Small floating sparks near wheel
+    const sparkGeo = new THREE.BufferGeometry();
+    const sparkCount = 260;
+    const sp = new Float32Array(sparkCount*3);
+    const sc = new Float32Array(sparkCount*3);
+    for (let i=0;i<sparkCount;i++){
+      sp[i*3] = (Math.random()-0.5)*6 + 4.2;
+      sp[i*3+1] = (Math.random()-0.5)*6;
+      sp[i*3+2] = (Math.random()-0.5)*2 - 1.2;
+      const c = (Math.random()<0.5) ? [0.85,0.68,0.22] : [0.55,0.40,1.0];
+      sc[i*3]=c[0]; sc[i*3+1]=c[1]; sc[i*3+2]=c[2];
+    }
+    sparkGeo.setAttribute('position', new THREE.BufferAttribute(sp,3));
+    sparkGeo.setAttribute('color', new THREE.BufferAttribute(sc,3));
+    const sparkMat = new THREE.PointsMaterial({size:0.06, vertexColors:true, transparent:true, opacity:0.65, blending:THREE.AdditiveBlending, depthWrite:false});
+    const sparks = new THREE.Points(sparkGeo, sparkMat);
+    scene.add(sparks);
+
+    // Interaction
+    window.addEventListener('mousemove', (e)=>{
+      mouse.tx =  (e.clientX / window.innerWidth - 0.5) * 2;
+      mouse.ty = -(e.clientY / window.innerHeight - 0.5) * 2;
+    }, {passive:true});
+
+    window.addEventListener('scroll', ()=>{
+      scrollY = window.pageYOffset || 0;
+    }, {passive:true});
+
+    window.addEventListener('resize', ()=>{
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      pMat.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+    });
+
+    // Orbit-ish drag for wheel
+    let dragging=false, lastX=0, lastY=0, rotVelX=0, rotVelY=0;
+    window.addEventListener('pointerdown', (e)=>{
+      dragging=true;
+      lastX=e.clientX; lastY=e.clientY;
+    });
+    window.addEventListener('pointerup', ()=>{dragging=false;});
+    window.addEventListener('pointermove', (e)=>{
+      if (!dragging) return;
+      const dx = e.clientX-lastX, dy = e.clientY-lastY;
+      lastX=e.clientX; lastY=e.clientY;
+      rotVelY += dx*0.0009;
+      rotVelX += dy*0.0007;
+    });
+
+    // Fitment lab hooks
+    const elFinish = document.getElementById('finish');
+    const elTire = document.getElementById('tire');
+    const elSize = document.getElementById('size');
+    const elStance = document.getElementById('stance');
+    const elProfile = document.getElementById('profile');
+    const elNotes = document.getElementById('notes');
+    const elFitLabel = document.getElementById('fitLabel');
+    const elStanceLabel = document.getElementById('stanceLabel');
+    const elClear = document.getElementById('clearGauge');
+    const elSizeLabel = document.getElementById('sizeLabel');
+    const elProfileLabel = document.getElementById('profileLabel');
+
+    function clamp(n,a,b){return Math.max(a,Math.min(b,n));}
+    function lerp(a,b,t){return a+(b-a)*t;}
+    function stanceText(v){
+      if (v<=-6) return 'Tucked / conservative';
+      if (v<=-2) return 'Flush (safe)';
+      if (v<=3) return 'Slight aggressive';
+      if (v<=7) return 'Aggressive';
+      return 'Very aggressive';
+    }
+
+    function applyConfig(){
+      const finish = (elFinish && elFinish.value) || 'chrome';
+      const tireSel = (elTire && elTire.value) || 'daily';
+      const sizeIn = parseInt((elSize && elSize.value) || '20', 10);
+      const stance = parseInt((elStance && elStance.value) || '2', 10);
+      const profile = parseInt((elProfile && elProfile.value) || '40', 10);
+
+      if (elSizeLabel) elSizeLabel.textContent = sizeIn + '"';
+      if (elProfileLabel) elProfileLabel.textContent = String(profile);
+      if (elStanceLabel) elStanceLabel.textContent = stanceText(stance);
+
+      // Scale wheel
+      const scale = lerp(0.86, 1.16, (sizeIn-15)/9);
+      wheelGroup.scale.set(scale, scale, scale);
+
+      // Tire thickness
+      const tireThick = lerp(0.48, 0.78, (profile-25)/40);
+      tire.geometry.dispose();
+      tire.geometry = new THREE.TorusGeometry(2.65, tireThick, 32, 160);
+
+      // Tire material tuning
+      if (tireSel === 'performance'){ tireMat.roughness = 0.75; tireMat.color.setHex(0x12121a); }
+      else if (tireSel === 'allterrain'){ tireMat.roughness = 0.98; tireMat.color.setHex(0x0f0f16); }
+      else { tireMat.roughness = 0.90; tireMat.color.setHex(0x14141c); }
+
+      // Rim finish
+      if (finish === 'chrome'){
+        rimMat.color.setHex(0xe8e8e8);
+        rimMat.metalness = 1.0; rimMat.roughness = 0.10;
+        spokeMat.color.setHex(0xf2f2f2); spokeMat.roughness = 0.16;
+        ringMat.color.setHex(0x8a63ff); ringMat.opacity = 0.22;
+      } else if (finish === 'matte'){
+        rimMat.color.setHex(0x1a1a22);
+        rimMat.metalness = 0.55; rimMat.roughness = 0.72;
+        spokeMat.color.setHex(0x14141c); spokeMat.roughness = 0.80;
+        ringMat.color.setHex(0xc9a84c); ringMat.opacity = 0.18;
+      } else if (finish === 'forged'){
+        rimMat.color.setHex(0xbfc6cf);
+        rimMat.metalness = 0.95; rimMat.roughness = 0.22;
+        spokeMat.color.setHex(0xd7dde5); spokeMat.roughness = 0.26;
+        ringMat.color.setHex(0x3a6fd8); ringMat.opacity = 0.20;
+      } else { // gold
+        rimMat.color.setHex(0xc9a84c);
+        rimMat.metalness = 0.9; rimMat.roughness = 0.24;
+        spokeMat.color.setHex(0xe8d48b); spokeMat.roughness = 0.30;
+        ringMat.color.setHex(0x8a63ff); ringMat.opacity = 0.20;
+      }
+
+      // Stance offset (visual only)
+      wheelGroup.position.x = 4.2 + stance * 0.12;
+
+      // Clearance gauge heuristic (visual)
+      const clearance = clamp(100 - Math.max(0, stance-2)*9 - Math.max(0, sizeIn-21)*10 - Math.max(0, profile-50)*1.2, 10, 100);
+      if (elClear) elClear.style.width = clearance + '%';
+      if (elFitLabel){
+        if (clearance > 70) elFitLabel.textContent = 'Clearance-safe';
+        else if (clearance > 45) elFitLabel.textContent = 'Tight fit — verify';
+        else elFitLabel.textContent = 'High risk — verify';
+      }
+
+      // Notes
+      const stancePhrase = (stance>=4) ? 'aggressive' : (stance<=-3 ? 'flush' : 'slight aggressive');
+      const finLabel = (finish==='chrome')?'chrome':(finish==='matte'?'matte black':(finish==='forged'?'forged/brushed':'gold accent'));
+      const tireLabel = (tireSel==='daily')?'daily':(tireSel==='performance'?'performance':'all-terrain');
+      if (elNotes){
+        elNotes.value = `${sizeIn}" wheels • ${finLabel} • ${tireLabel} • ${stancePhrase} stance • profile ${profile}`;
+      }
+    }
+
+    [elFinish,elTire,elSize,elStance,elProfile].forEach(el=>{
+      if (!el) return;
+      el.addEventListener('input', applyConfig);
+      el.addEventListener('change', applyConfig);
+    });
+
+    // Copy notes
+    const copyBtn = document.getElementById('copyBtn');
+    if (copyBtn){
+      copyBtn.addEventListener('click', async ()=>{
+        try{
+          const notes = (elNotes && elNotes.value) ? elNotes.value : 'Fitment notes';
+          await navigator.clipboard.writeText(notes);
+          safeToast('Fitment notes copied.');
+        }catch(e){
+          safeToast('Copy blocked by browser settings.', true);
+        }
+      });
+    }
+
+    applyConfig();
+
+    // Animate
+    function animate(){
+      if (!running) return;
+      requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+
+      mouse.x += (mouse.tx - mouse.x) * 0.03;
+      mouse.y += (mouse.ty - mouse.y) * 0.03;
+
+      camera.position.x = mouse.x * 0.9;
+      camera.position.y = mouse.y * 0.55 - scrollY * 0.002;
+      camera.lookAt(0, -scrollY * 0.001, 0);
+
+      pMat.uniforms.uTime.value = t;
+      a1.material.uniforms.uTime.value = t;
+      a2.material.uniforms.uTime.value = t;
+      a3.material.uniforms.uTime.value = t;
+
+      // Aurora parallax
+      a1.position.x = -mouse.x * 0.55;
+      a2.position.x =  mouse.x * 0.35;
+      a3.position.x = -mouse.x * 0.75;
+
+      // Wheel motion: spin + scroll influence
+      wheelGroup.rotation.z += 0.012 + rotVelY;
+      wheelGroup.rotation.x += rotVelX * 0.5;
+      rotVelY *= 0.92;
+      rotVelX *= 0.90;
+      wheelGroup.position.y = Math.sin(t*0.55)*0.25 + (-scrollY * 0.0009);
+
+      // Glow pulse
+      glowRing.scale.setScalar(1.0 + Math.sin(t*1.7)*0.03);
+      ringMat.opacity = 0.18 + (Math.sin(t*2.0)*0.04);
+
+      // Spark drift
+      sparks.rotation.y = t * 0.08;
+      sparks.rotation.x = t * 0.04;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // If tab hidden, pause
+    document.addEventListener('visibilitychange', ()=>{
+      running = !document.hidden;
+      if (running) clock.getDelta(); // resync
+      if (running) animate();
+    });
+  })();
+  </script>
+
+  <script>
+  /* =====================================================================
+     UI JS — nav, mega nav, scroll reveal, counters, smooth anchor offset
+     ===================================================================== */
+  (function(){
+    const nav = document.getElementById('mainNav');
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    const menuBtn = document.getElementById('menuBtn');
+    const megaNav = document.getElementById('megaNav');
+    const megaClose = document.getElementById('megaNavClose');
+
+    function setActive(hash){
+      if (!links) return;
+      const a = links.querySelectorAll('a');
+      a.forEach(x=>x.classList.toggle('active', x.getAttribute('href')===hash));
+    }
+
+    function closeMobile(){
+      if (!links || !toggle) return;
+      links.classList.remove('open');
+      toggle.textContent = '☰';
+    }
+
+    if (toggle && links){
+      toggle.addEventListener('click', ()=>{
+        links.classList.toggle('open');
+        toggle.textContent = links.classList.contains('open') ? '✕' : '☰';
+      });
+      links.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click', ()=>closeMobile());
+      });
+    }
+
+    window.addEventListener('scroll', ()=>{
+      if (nav) nav.classList.toggle('scrolled', window.pageYOffset > 60);
+    }, {passive:true});
+
+    // Mega nav
+    function openMega(){
+      if (!megaNav) return;
+      megaNav.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMega(){
+      if (!megaNav) return;
+      megaNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    if (menuBtn) menuBtn.addEventListener('click', openMega);
+    if (megaClose) megaClose.addEventListener('click', closeMega);
+    if (megaNav) megaNav.addEventListener('click', (e)=>{ if (e.target === megaNav) closeMega(); });
+    document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeMega(); });
+
+    // Smooth scroll with nav offset
+    function scrollToHash(hash){
+      const el = document.querySelector(hash);
+      if (!el) return;
+      const navH = 72;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - navH + 2;
+      window.scrollTo({top:y, behavior: (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth')});
+      setActive(hash);
+      history.replaceState(null, '', hash);
+    }
+
+    document.addEventListener('click', (e)=>{
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      if (!href.startsWith('#')) return;
+      const target = href;
+      if (!document.querySelector(target)) return;
+      e.preventDefault();
+      closeMobile();
+      closeMega();
+      scrollToHash(target);
+    });
+
+    // Scroll reveal
+    const els = document.querySelectorAll('.reveal');
+    if (els.length){
+      const obs = new IntersectionObserver(entries=>{
+        entries.forEach(en=>{
+          if (en.isIntersecting) en.target.classList.add('visible');
+        });
+      }, {threshold:0.12, rootMargin:'0px 0px -30px 0px'});
+      els.forEach(el=>obs.observe(el));
+    }
+
+    // Counters
+    const counters = document.querySelectorAll('[data-count]');
+    const seen = new Set();
+    function animateCounter(el){
+      const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1600;
+      const start = performance.now();
+      function step(now){
+        const p = Math.min((now-start)/duration, 1);
+        const eased = 1 - Math.pow(1-p, 3);
+        const cur = Math.floor(eased * target);
+        el.textContent = cur.toLocaleString() + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    counters.forEach(el=>{
+      new IntersectionObserver(entries=>{
+        entries.forEach(en=>{
+          if (en.isIntersecting && !seen.has(en.target)){
+            seen.add(en.target);
+            animateCounter(en.target);
+          }
+        });
+      }, {threshold:0.55}).observe(el);
+    });
+
+    // Default active
+    setActive('#home');
+  })();
+  </script>
+</body>
+</html>

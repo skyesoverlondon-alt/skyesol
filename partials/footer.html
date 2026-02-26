@@ -17,3 +17,178 @@
   </div>
   <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">Third-party references included for historical context. No endorsement implied. © Skyes Over London LC / SOLEnterprises.</p>
 </footer>
+<a href="/admin-menu.html" class="floating-glow-neon" id="adminMenuFloatLink" style="position:fixed;bottom:28px;left:24px;z-index:99999;padding:8px 14px;border-radius:10px;background:linear-gradient(135deg,rgba(138,99,255,0.22),rgba(58,111,216,0.18));box-shadow:0 0 18px 6px #8a63ff,0 0 36px 12px #3a6fd8; color:#e8e6ff;font-size:0.95rem;font-family:'Fira Code',monospace;letter-spacing:0.6px;text-transform:uppercase;text-decoration:none;border:1.5px solid #8a63ff;animation: floatGlowBlue 4.5s infinite;transition:background .3s,border-color .3s,transform .12s;display:block;">ADMIN MENU</a>
+<script>
+// Permissive secret triggers + debug panel
+(function(){
+  if (window.__adminMenuShortcutBound) return;
+  window.__adminMenuShortcutBound = true;
+
+  const adminMenuUrl = "/admin-menu.html";
+  const held = new Set();        // tracks currently seen keys/codes
+  const recent = {};            // timestamps for recent presses
+  let codeBuffer = "";
+  let logoClicks = 0;
+
+  const HOLD_GRACE_MS = 700;    // allow 6 and 7 to be pressed within this window
+  const BUFFER_TIMEOUT_MS = 3000; // buffer clears after inactivity
+  let lastBufferAt = 0;
+  // Triple-combo (hold 6+7 together three times) detector
+  const COMBO_COOLDOWN_MS = 600;
+  const COMBO_RESET_MS = 2000;
+  let comboCount = 0;
+  let lastComboAt = 0;
+
+  function showAdminMenu(){ window.location.href = adminMenuUrl; }
+
+  function isDigitKey(k){ return typeof k === 'string' && /^[0-9]$/.test(k); }
+
+  function seenWithin(keyNames, ms){
+    const now = Date.now();
+    return keyNames.some(k => (recent[k] && (now - recent[k]) <= ms));
+  }
+
+  function has6And7Loose(){
+    // either currently held or pressed within grace window
+    const now = Date.now();
+    const has6 = held.has('6') || held.has('Digit6') || held.has('Numpad6') || seenWithin(['6','Digit6','Numpad6'], HOLD_GRACE_MS);
+    const has7 = held.has('7') || held.has('Digit7') || held.has('Numpad7') || seenWithin(['7','Digit7','Numpad7'], HOLD_GRACE_MS);
+    return has6 && has7;
+  }
+
+  // Debug panel
+  const dbg = document.createElement('div');
+  dbg.id = 'adminShortcutDebug';
+  dbg.style.position = 'fixed';
+  dbg.style.left = '24px';
+  dbg.style.bottom = '72px';
+  dbg.style.zIndex = '100000';
+  dbg.style.padding = '6px 8px';
+  dbg.style.background = 'rgba(10,10,14,0.85)';
+  dbg.style.color = '#e8e6ff';
+  dbg.style.fontFamily = 'Fira Code, monospace';
+  dbg.style.fontSize = '12px';
+  dbg.style.border = '1px solid rgba(138,99,255,0.18)';
+  dbg.style.borderRadius = '8px';
+  dbg.style.pointerEvents = 'none';
+  dbg.innerText = 'Admin shortcut: ready';
+  document.body.appendChild(dbg);
+
+  function updateDebug(){
+    const now = Date.now();
+    const heldArr = Array.from(held).slice(0,6).join(',');
+    const age = lastBufferAt ? Math.round((now-lastBufferAt)/1000) + 's' : '-';
+    dbg.innerText = `held: [${heldArr}]\nbuf: ${codeBuffer} (age ${age})\ncombo: ${comboCount}`;
+  }
+
+  function appendToBuffer(d){
+    const now = Date.now();
+    codeBuffer += d;
+    lastBufferAt = now;
+    updateDebug();
+    if (codeBuffer.endsWith('444666')){
+      console.log('[ADMIN DEBUG] sequence matched, opening menu');
+      showAdminMenu();
+      codeBuffer = '';
+      updateDebug();
+    }
+  }
+
+  function registerComboPress(){
+    const now = Date.now();
+    if (now - lastComboAt < COMBO_COOLDOWN_MS) return; // debounce
+    lastComboAt = now;
+    comboCount++;
+    updateDebug();
+    if (comboCount >= 3){
+      console.log('[ADMIN DEBUG] triple combo detected, opening menu');
+      showAdminMenu();
+      comboCount = 0;
+      codeBuffer = '';
+      lastBufferAt = 0;
+      updateDebug();
+    }
+    // reset combo after idle
+    setTimeout(() => {
+      if (Date.now() - lastComboAt >= COMBO_RESET_MS) {
+        comboCount = 0;
+        updateDebug();
+      }
+    }, COMBO_RESET_MS + 50);
+  }
+
+  // Capture-phase so inputs don't block us
+  window.addEventListener('keydown', (e) => {
+    try {
+      held.add(e.key);
+      held.add(e.code);
+      recent[e.key] = Date.now();
+      recent[e.code] = Date.now();
+
+      // when 6 and 7 are seen within grace, accept digits
+      if (has6And7Loose() && isDigitKey(e.key)) {
+        appendToBuffer(e.key);
+      }
+      // detect simultaneous 6+7 presses as combo clicks (either key triggers)
+      if (has6And7Loose() && (e.key === '6' || e.key === '7' || (typeof e.code === 'string' && (e.code.includes('6') || e.code.includes('7'))))) {
+        registerComboPress();
+      }
+      updateDebug();
+    } catch (err) {
+      console.warn('[ADMIN DEBUG] keydown handler error', err);
+    }
+  }, true);
+
+  window.addEventListener('keyup', (e) => {
+    try {
+      held.delete(e.key);
+      held.delete(e.code);
+      recent[e.key] = Date.now();
+      recent[e.code] = Date.now();
+      // if neither 6 nor 7 are held nor recent, clear buffer after small delay
+      if (!has6And7Loose()) {
+        // allow brief releases; buffer will clear on timeout as well
+        setTimeout(() => {
+          if (!has6And7Loose() && (Date.now() - lastBufferAt) > BUFFER_TIMEOUT_MS) {
+            codeBuffer = '';
+            updateDebug();
+          }
+        }, HOLD_GRACE_MS + 50);
+      }
+      updateDebug();
+    } catch (err) {
+      console.warn('[ADMIN DEBUG] keyup handler error', err);
+    }
+  }, true);
+
+  // Buffer inactivity timer
+  setInterval(() => {
+    if (lastBufferAt && (Date.now() - lastBufferAt) > BUFFER_TIMEOUT_MS) {
+      if (codeBuffer) {
+        codeBuffer = '';
+        updateDebug();
+      }
+      lastBufferAt = 0;
+    }
+  }, 800);
+
+  // Keep logo triple-click behavior
+  const logoBtn = document.querySelector('.nav-logo');
+  if (logoBtn) {
+    logoBtn.addEventListener('click', () => {
+      if (has6And7Loose()) {
+        logoClicks++;
+        if (logoClicks >= 3) {
+          showAdminMenu();
+          logoClicks = 0;
+        }
+      } else {
+        logoClicks = 0;
+      }
+    });
+  }
+
+  // initial debug update
+  updateDebug();
+})();
+</script>

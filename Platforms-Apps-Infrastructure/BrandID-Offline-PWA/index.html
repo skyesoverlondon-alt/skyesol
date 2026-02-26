@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Skyes Over London | Brand Identity Kit</title>
+  <meta name="description" content="Generate a primary lockup + icon mark in seconds. Live previews, one-click SVG exports, and true offline-first PWA caching." />
+  <meta name="theme-color" content="#070A12" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Skyes Over London | Brand Identity Kit" />
+  <meta property="og:description" content="Primary lockup + icon mark. Live preview. One-click SVG export. True offline-first PWA." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="icons/icon.svg" />
+
+  <style>
+    :root{
+      color-scheme: dark;
+      --obsidian:#070A12;
+      --graphite:#101827;
+      --purple:#6D28D9;
+      --gold:#FBBF24;
+      --cyan:#22D3EE;
+      --steel:#9CA3AF;
+      --white: #ffffff;
+
+      --glass-bg: rgba(16, 24, 39, 0.55);
+      --glass-border: rgba(255,255,255,0.10);
+      --border: rgba(255,255,255,0.10);
+      --muted: rgba(255,255,255,0.65);
+      --muted2: rgba(255,255,255,0.50);
+      --muted3: rgba(255,255,255,0.40);
+
+      --radius: 18px;
+      --radius-sm: 12px;
+
+      --shadow-gold: drop-shadow(0 0 14px rgba(251,191,36,0.45)) drop-shadow(0 0 28px rgba(109,40,217,0.35));
+      --shadow-gold-strong: drop-shadow(0 0 22px rgba(251,191,36,0.65)) drop-shadow(0 0 40px rgba(109,40,217,0.55));
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; margin:0; }
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--obsidian);
+      color: var(--white);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body{ scroll-behavior:auto; }
+      .float-glow{ animation:none !important; }
+      .card-tilt{ transition:none !important; }
+    }
+
+    /* Ambient layers */
+    #starfield{ position:fixed; inset:0; z-index:-4; pointer-events:none; }
+    .bg-glow{
+      position:fixed; inset:-30%;
+      z-index:-3; pointer-events:none;
+      background:
+        radial-gradient(closest-side at 30% 35%, rgba(109,40,217,0.35), rgba(0,0,0,0) 70%),
+        radial-gradient(closest-side at 70% 55%, rgba(251,191,36,0.20), rgba(0,0,0,0) 68%),
+        radial-gradient(closest-side at 52% 82%, rgba(34,211,238,0.14), rgba(0,0,0,0) 62%);
+      filter: blur(10px);
+      opacity: 0.95;
+    }
+    .noise{
+      position:fixed; inset:0;
+      z-index:-2; pointer-events:none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity: 0.18;
+    }
+    .watermark{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      pointer-events:none;
+      display:grid;
+      place-items:center;
+      opacity: 0.13;
+      transform: translateY(10px);
+    }
+    .watermark img{
+      width: min(72vw, 760px);
+      height:auto;
+      filter:
+        drop-shadow(0 0 26px rgba(251,191,36,0.18))
+        drop-shadow(0 0 46px rgba(109,40,217,0.22));
+    }
+
+    /* Layout helpers */
+    .container{
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+    .main{ flex:1 1 auto; }
+    .section{ padding: 56px 0; }
+    .section.tight{ padding: 40px 0; }
+    .grid{
+      display:grid;
+      gap: 20px;
+    }
+    .grid-2{ grid-template-columns: 1fr; }
+    .grid-3{ grid-template-columns: 1fr; }
+    .grid-hero{ grid-template-columns: 1fr; align-items:center; gap: 40px; }
+    .grid-cards{ grid-template-columns: 1fr; }
+    @media (min-width: 900px){
+      .grid-2{ grid-template-columns: 1fr 1fr; }
+      .grid-3{ grid-template-columns: repeat(3, 1fr); }
+      .grid-hero{ grid-template-columns: 7fr 5fr; }
+      .grid-cards{ grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Typography */
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.60);
+      margin-bottom: 14px;
+      font-weight: 650;
+    }
+    .kicker .kdot{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: var(--cyan);
+    }
+    h1{
+      margin:0;
+      font-weight: 900;
+      line-height: 1.05;
+      font-size: clamp(34px, 4.5vw, 54px);
+    }
+    h2{
+      margin: 0;
+      font-weight: 900;
+      font-size: 26px;
+      line-height: 1.2;
+    }
+    p{
+      margin:0;
+      color: rgba(255,255,255,0.70);
+      line-height: 1.6;
+    }
+    .muted{ color: rgba(255,255,255,0.65); }
+    .muted2{ color: rgba(255,255,255,0.55); }
+    .small{ font-size: 12px; }
+
+    /* Glass and cards */
+    .glass{
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+    }
+    .panel{
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .card{
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .card-tilt{
+      transform: translateZ(0);
+      transition: transform .25s ease, border-color .25s ease;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .card-tilt:hover{
+      transform: translateY(-2px);
+      border-color: rgba(34,211,238,0.35);
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      text-decoration:none;
+      cursor:pointer;
+      user-select:none;
+      font-weight: 800;
+      font-size: 14px;
+      transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease, opacity .15s ease;
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+    }
+    .btn:hover{ background: rgba(255,255,255,0.10); }
+    .btn:active{ transform: translateY(1px); }
+
+    .btn-gold{
+      background: var(--gold);
+      color: #000;
+      border-color: rgba(0,0,0,0.08);
+      font-weight: 900;
+    }
+    .btn-gold:hover{ background: #fff; }
+    .btn-purple{
+      background: var(--purple);
+      border-color: rgba(0,0,0,0.12);
+      font-weight: 900;
+    }
+    .btn-purple:hover{ background:#fff; color:#000; }
+    .btn-cyan{
+      background: var(--cyan);
+      color:#000;
+      border-color: rgba(0,0,0,0.10);
+      font-weight: 900;
+    }
+    .btn-cyan:hover{ background:#fff; }
+    .btn-ghost{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+      font-weight: 700;
+    }
+
+    /* Header */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .header-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+      text-decoration:none;
+      color: inherit;
+    }
+    .brand-title{
+      font-weight: 900;
+      font-style: italic;
+      font-size: 20px;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 52vw;
+    }
+    .brand-sub{
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 52vw;
+    }
+    nav{
+      display:none;
+      gap: 18px;
+      align-items:center;
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+    }
+    nav a{
+      color: inherit;
+      text-decoration:none;
+    }
+    nav a:hover{ color:#fff; }
+    @media (min-width: 900px){
+      nav{ display:flex; }
+    }
+
+    /* Logo glow pulse */
+    .float-glow{
+      width: 40px;
+      height: 40px;
+      filter: var(--shadow-gold);
+      animation: pulseGlow 2.8s ease-in-out infinite;
+      transform-origin:center;
+    }
+    @keyframes pulseGlow{
+      0%, 100% { transform: scale(1); filter: var(--shadow-gold); }
+      50% { transform: scale(1.035); filter: var(--shadow-gold-strong); }
+    }
+
+    /* Hero */
+    .hero{ padding: 58px 0 36px; }
+    .hero-cta{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    @media (min-width: 700px){
+      .hero-cta{ flex-direction:row; align-items:center; }
+    }
+
+    .stats{ margin-top: 22px; }
+    .stat-row{ display:grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 700px){
+      .stat-row{ grid-template-columns: repeat(3, 1fr); }
+    }
+    .stat{
+      border-radius: var(--radius-sm);
+      padding: 14px;
+    }
+    .stat .label{
+      font-size: 11px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .stat .big{
+      font-size: 18px;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+    .stat .sub{
+      font-size: 13px;
+      color: rgba(255,255,255,0.60);
+      margin-top: 2px;
+    }
+
+    /* Preview panes */
+    .grid-pattern{
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    }
+    .light-grid-pattern{
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+    }
+
+    /* Kit controls */
+    .controls{
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .controls-grid{
+      display:grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px){
+      .controls-grid{
+        grid-template-columns: 5fr 3fr 2fr 2fr;
+        align-items:end;
+      }
+    }
+    label{
+      display:block;
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.80);
+    }
+    input[type="text"], input[type="url"], input[type="email"], textarea{
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.30);
+      border: 1px solid rgba(255,255,255,0.10);
+      outline:none;
+      color:#fff;
+      font-size: 14px;
+    }
+    input[type="text"]:focus, input[type="url"]:focus, input[type="email"]:focus, textarea:focus{
+      border-color: rgba(34,211,238,0.60);
+    }
+    input[type="file"]{
+      width:100%;
+      margin-top: 8px;
+      color: rgba(255,255,255,0.75);
+      font-size: 14px;
+    }
+    input[type="file"]::file-selector-button{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.08);
+      color:#fff;
+      cursor:pointer;
+      margin-right: 12px;
+      transition: background .15s ease;
+    }
+    input[type="file"]::file-selector-button:hover{ background: rgba(255,255,255,0.14); }
+
+    .status{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.70);
+      white-space: pre-line;
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .row-between{
+      margin-top: 12px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    @media (min-width: 700px){
+      .row-between{
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-between;
+      }
+    }
+    .btn-row{ display:flex; gap: 10px; flex-wrap:wrap; }
+
+    /* Output cards */
+    .output-card{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.35);
+      display:flex;
+      flex-direction:column;
+      min-height: 520px;
+    }
+    .preview{
+      flex: 1 1 auto;
+      min-height: 320px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 26px;
+      position:relative;
+    }
+    .output-foot{
+      border-top: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.40);
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .output-foot h3{
+      margin:0;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .output-foot p{
+      margin-top: 2px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.40);
+    }
+
+    /* Pills */
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap: .5rem;
+      padding: .4rem .7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.25);
+      font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      user-select: none;
+      white-space: nowrap;
+    }
+    .dot{
+      width: 9px; height: 9px;
+      border-radius: 999px;
+      background: rgba(34,211,238,0.95);
+      box-shadow: 0 0 14px rgba(34,211,238,0.45);
+    }
+    .dot.offline{
+      background: rgba(251,191,36,0.95);
+      box-shadow: 0 0 14px rgba(251,191,36,0.45);
+    }
+
+    /* Footer */
+    footer{
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding: 18px 0;
+      color: rgba(255,255,255,0.50);
+      font-size: 14px;
+    }
+    .footer-row{
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+    }
+    @media (min-width: 700px){
+      .footer-row{
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+      }
+    }
+
+    /* Simple link reset for CTA blocks */
+    a{ color: inherit; }
+  </style>
+</head>
+
+<body>
+  <canvas id="starfield"></canvas>
+  <div class="bg-glow"></div>
+  <div class="noise"></div>
+  <div class="watermark" aria-hidden="true">
+    <img id="wmLogo" src="assets/logo.svg" alt="" />
+  </div>
+
+  <header>
+    <div class="glass">
+      <div class="container header-row">
+        <a href="#top" class="brand">
+          <img id="headerLogo" class="float-glow" src="assets/logo.svg" alt="SOL Logo" />
+          <div style="min-width:0;">
+            <div class="brand-title">SKYES OVER LONDON</div>
+            <div class="brand-sub">Brand Identity Kit • True Offline PWA</div>
+          </div>
+        </a>
+
+        <nav aria-label="Primary">
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="#kit">The Kit</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span id="netPill" class="pill" title="This app is offline-first: all assets are local and cached.">
+            <span id="netDot" class="dot"></span>
+            <span id="netText">Online</span>
+          </span>
+
+          <button id="btnInstall" class="btn btn-cyan" style="display:none;" title="Install this PWA">Install</button>
+          <a href="#kit" class="btn btn-gold">Open Kit</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="main">
+    <section class="hero">
+      <div class="container grid grid-hero">
+        <div>
+          <div class="kicker"><span class="kdot"></span> Drop-ready • Offline-first • SVG export</div>
+
+          <h1>
+            Generate a <span style="color:var(--gold);">Primary Lockup</span> + <span style="color:var(--cyan);">Icon Mark</span><br/>
+            in seconds. 🚀
+          </h1>
+
+          <p style="margin-top:14px; max-width: 720px;">
+            This landing page includes the full asset generator inside it. No external CSS libraries, no CDN dependencies.
+            Everything is local + cached by the Service Worker, so it can open offline on first use (as long as the files exist).
+          </p>
+
+          <div class="hero-cta">
+            <a href="#kit" class="btn btn-purple">Launch the Generator</a>
+            <a href="#features" class="btn btn-ghost">See what it does</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat-row">
+              <div class="glass stat card-tilt">
+                <div class="label">Outputs</div>
+                <div class="big">2 assets</div>
+                <div class="sub">Lockup + Mark</div>
+              </div>
+              <div class="glass stat card-tilt">
+                <div class="label">Exports</div>
+                <div class="big">1-click SVG</div>
+                <div class="sub">Transparent</div>
+              </div>
+              <div class="glass stat card-tilt">
+                <div class="label">Offline</div>
+                <div class="big">True offline</div>
+                <div class="sub">No CDN required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="glass panel" style="border-radius: var(--radius);">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <img class="float-glow" src="assets/logo.svg" alt="SOL Logo" style="width:48px; height:48px;" />
+              <div>
+                <div style="font-weight:900; font-size:18px;">Skyes Over London</div>
+                <div class="muted2" style="font-size:14px;">SOLEnterprises International Nexus &amp; Holdings</div>
+              </div>
+            </div>
+
+            <div style="margin-top:18px;">
+              <div class="muted2" style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase;">What you get</div>
+              <ul style="margin:10px 0 0; padding-left: 18px; color: rgba(255,255,255,0.72); line-height:1.7;">
+                <li>Primary logo lockup with tagline + accent bar</li>
+                <li>Icon mark for avatars / favicons / socials</li>
+                <li>Preview background toggle (dark vs light grid)</li>
+                <li>Downloadable transparent SVG exports</li>
+                <li>Offline-first: all styling is inside this file</li>
+              </ul>
+            </div>
+
+            <div style="margin-top:18px; display:flex; gap:10px;">
+              <a href="#kit" class="btn btn-gold" style="flex:1;">Start Now</a>
+              <a href="#faq" class="btn btn-ghost" style="flex:1;">FAQ</a>
+            </div>
+
+            <div class="small" style="margin-top:10px; color: rgba(255,255,255,0.45);">
+              Default logo is local (<span style="font-family: ui-monospace, monospace;">assets/logo.svg</span>). Replace that file with your real logo anytime.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section tight">
+      <div class="container">
+        <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+          <div>
+            <h2>Features</h2>
+            <p style="margin-top:10px; max-width: 780px;">Built for quick brand consistency: generate clean lockups and marks without babysitting design files.</p>
+          </div>
+          <div>
+            <a href="#kit" class="btn btn-cyan" style="display:inline-flex;">Jump to Kit</a>
+          </div>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="glass card card-tilt">
+            <div class="muted2" style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase;">Preview</div>
+            <div style="font-weight:900; font-size:18px; margin-top:8px;">Live lockup + mark</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">Update name + tagline instantly and see the lockup and icon update together.</div>
+          </div>
+
+          <div class="glass card card-tilt">
+            <div class="muted2" style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase;">Export</div>
+            <div style="font-weight:900; font-size:18px; margin-top:8px;">Download SVGs</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">One click per asset. Transparent outputs ready for web headers, socials, and print workflows.</div>
+          </div>
+
+          <div class="glass card card-tilt">
+            <div class="muted2" style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase;">Offline</div>
+            <div style="font-weight:900; font-size:18px; margin-top:8px;">No CDN dependency</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">All CSS is in this file. Service Worker caches the shell so it launches offline.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section tight">
+      <div class="container">
+        <h2>How it works</h2>
+
+        <div class="grid grid-3" style="margin-top:16px;">
+          <div class="glass card card-tilt">
+            <div style="color:var(--gold); font-weight:900; font-size:34px;">01</div>
+            <div style="font-weight:900; font-size:18px; margin-top:6px;">Load or upload a logo</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">Use the default local logo or upload PNG/JPG/SVG for perfect embedding.</div>
+          </div>
+
+          <div class="glass card card-tilt">
+            <div style="color:var(--cyan); font-weight:900; font-size:34px;">02</div>
+            <div style="font-weight:900; font-size:18px; margin-top:6px;">Set brand name & tagline</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">Type your brand name and tagline; both assets update immediately.</div>
+          </div>
+
+          <div class="glass card card-tilt">
+            <div style="color:var(--purple); font-weight:900; font-size:34px;">03</div>
+            <div style="font-weight:900; font-size:18px; margin-top:6px;">Export SVG assets</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">Download lockup and mark. Uploading embeds the image data for offline-safe exports.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kit" class="section">
+      <div class="container">
+        <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:16px;">
+          <div>
+            <h2>The Kit (Generator)</h2>
+            <p style="margin-top:10px; max-width: 860px;">Load your logo, adjust name/tagline, toggle preview background, then export both SVGs.</p>
+          </div>
+
+          <div class="btn-row">
+            <button id="btnTogglePreviewBg" class="btn btn-ghost" type="button" aria-label="Toggle preview background">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3v18m9-9H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Toggle Preview Background
+            </button>
+            <button id="btnScrollTop" class="btn btn-gold" type="button">Top</button>
+          </div>
+        </div>
+
+        <div class="glass controls">
+          <div class="controls-grid">
+            <div>
+              <label for="logoUrl">Logo URL (optional)</label>
+              <div style="display:flex; gap:10px; margin-top:8px;">
+                <input id="logoUrl" type="url" placeholder="https://.../logo.png or .svg" style="margin-top:0;" />
+                <button id="btnLoadLogo" class="btn btn-purple" type="button" style="padding:10px 14px; border-radius:12px;">Load</button>
+              </div>
+              <div class="small" style="margin-top:6px; color: rgba(255,255,255,0.50);">Offline-first setup prefers uploads/local files over remote URLs.</div>
+            </div>
+
+            <div>
+              <label for="logoFile">Upload logo (PNG/JPG/SVG)</label>
+              <input id="logoFile" type="file" accept=".png,.jpg,.jpeg,.svg,image/png,image/jpeg,image/svg+xml" />
+            </div>
+
+            <div>
+              <label for="brandName">Brand name</label>
+              <input id="brandName" type="text" value="Skyes Over London" />
+            </div>
+
+            <div>
+              <label for="brandTagline">Tagline</label>
+              <input id="brandTagline" type="text" value="SOLEnterprises International Nexus & Holdings" />
+            </div>
+          </div>
+
+          <div class="row-between">
+            <div id="status" class="status">Diagnostics: initializing…</div>
+            <div class="btn-row">
+              <button id="btnRefresh" class="btn btn-cyan" type="button">Refresh</button>
+              <button id="btnReset" class="btn btn-ghost" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cards" style="margin-top:18px;">
+          <div class="output-card">
+            <div class="preview grid-pattern" id="preview-1">
+              <svg id="logo-primary" viewBox="0 0 520 140" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <filter id="solDrop" x="-40%" y="-40%" width="180%" height="180%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#FBBF24" flood-opacity="0.35"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#6D28D9" flood-opacity="0.35"/>
+                  </filter>
+                  <radialGradient id="solGlow" cx="35%" cy="45%" r="60%">
+                    <stop offset="0%" stop-color="rgba(109,40,217,0.45)"/>
+                    <stop offset="60%" stop-color="rgba(251,191,36,0.22)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+                  </radialGradient>
+                </defs>
+
+                <g transform="translate(0, 10)">
+                  <rect x="6" y="4" width="104" height="104" rx="22" fill="url(#solGlow)" opacity="0.9"/>
+                  <image id="img-primary" href="assets/logo.svg" x="10" y="8" width="96" height="96" preserveAspectRatio="xMidYMid meet" filter="url(#solDrop)"/>
+                </g>
+
+                <g transform="translate(120, 0)">
+                  <text id="text-primary-1"
+                        x="0" y="85"
+                        font-family="system-ui, -apple-system, sans-serif"
+                        font-weight="900"
+                        font-size="64"
+                        font-style="italic"
+                        fill="#FFFFFF"
+                        letter-spacing="-1">Skyes Over London</text>
+
+                  <text id="text-primary-2"
+                        x="5" y="112"
+                        font-family="system-ui, -apple-system, sans-serif"
+                        font-weight="800"
+                        font-size="12"
+                        letter-spacing="3.2"
+                        fill="#9CA3AF">SOLEnterprises International Nexus &amp; Holdings</text>
+
+                  <rect id="accent-line" x="5" y="122" width="360" height="5" rx="2.5" fill="#FBBF24" opacity="0.95"/>
+                </g>
+              </svg>
+            </div>
+
+            <div class="output-foot">
+              <div>
+                <h3>Primary Lockup</h3>
+                <p>Great for headers, hero sections, and dark UI.</p>
+              </div>
+              <button id="btnDownloadPrimary" class="btn btn-gold" type="button" style="border-radius:12px; padding:10px 14px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Download SVG
+              </button>
+            </div>
+          </div>
+
+          <div class="output-card">
+            <div class="preview grid-pattern" id="preview-2">
+              <svg id="logo-mark" viewBox="0 0 100 100" width="180" height="180" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <filter id="solDropSmall" x="-40%" y="-40%" width="180%" height="180%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="2.5" flood-color="#FBBF24" flood-opacity="0.35"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#6D28D9" flood-opacity="0.35"/>
+                  </filter>
+                </defs>
+
+                <rect x="6" y="6" width="88" height="88" rx="26" fill="rgba(109,40,217,0.18)"/>
+                <rect id="mark-ring" x="8" y="8" width="84" height="84" rx="24" fill="none" stroke="#FBBF24" stroke-width="2.4" opacity="0.75"/>
+                <image id="img-mark" href="assets/logo.svg" x="12" y="12" width="76" height="76"
+                       preserveAspectRatio="xMidYMid meet" filter="url(#solDropSmall)"/>
+              </svg>
+            </div>
+
+            <div class="output-foot">
+              <div>
+                <h3>The Mark (Icon)</h3>
+                <p>Avatars, favicons, app icons, social media.</p>
+              </div>
+              <button id="btnDownloadMark" class="btn btn-gold" type="button" style="border-radius:12px; padding:10px 14px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Download SVG
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section tight">
+      <div class="container">
+        <h2>FAQ</h2>
+        <div class="grid grid-2" style="margin-top:16px;">
+          <div class="glass card">
+            <div style="font-weight:900;">Does it truly work offline on first-ever open?</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">
+              Yes. There are no CDN dependencies. All CSS and scripts are local. The Service Worker caches the shell too.
+              (Remote logo URLs are optional; the default local logo works offline.)
+            </div>
+          </div>
+          <div class="glass card">
+            <div style="font-weight:900;">Why upload the logo?</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">
+              Uploading turns the image into a data URL, so your exported SVG embeds it—meaning the exported files are self-contained and offline-proof.
+            </div>
+          </div>
+          <div class="glass card">
+            <div style="font-weight:900;">Does the contact form work offline?</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">
+              No. Form submits need a network connection. Everything else in the generator works offline.
+            </div>
+          </div>
+          <div class="glass card">
+            <div style="font-weight:900;">How do I use my real company logo offline?</div>
+            <div class="muted" style="font-size:14px; margin-top:10px;">
+              Replace <span style="font-family: ui-monospace, monospace;">assets/logo.svg</span> with your logo (same filename), or upload it in the generator.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section tight">
+      <div class="container">
+        <div class="glass panel">
+          <div class="grid grid-2" style="align-items:center;">
+            <div>
+              <h2>Contact</h2>
+              <p style="margin-top:10px; max-width: 640px;">This form needs network. Offline mode still lets you generate + export assets.</p>
+            </div>
+
+            <form id="contactForm" name="sol-contact" method="POST" data-netlify="true" style="display:grid; gap:10px;">
+              <input type="hidden" name="form-name" value="sol-contact" />
+              <div class="grid grid-2" style="gap:10px;">
+                <input name="name" required placeholder="Name" />
+                <input name="email" type="email" required placeholder="Email" />
+              </div>
+              <input name="subject" placeholder="Subject" />
+              <textarea name="message" required placeholder="Message" rows="4"></textarea>
+              <button id="contactSubmit" type="submit" class="btn btn-gold" style="width:100%;">Send</button>
+              <div id="offlineHint" class="small" style="display:none; color: rgba(255,255,255,0.55);">
+                Offline: form sending disabled. Go online to submit.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>© <span id="year"></span> Skyes Over London • SOLEnterprises International Nexus &amp; Holdings</div>
+      <div style="font-family: ui-monospace, monospace; color: rgba(255,255,255,0.40);">Asset Generator • Offline PWA</div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      // ===== Starfield (lightweight, offline) =====
+      const canvas = document.getElementById("starfield");
+      const ctx = canvas.getContext("2d", { alpha: true });
+
+      let stars = [];
+      const STAR_COUNT = 140;
+
+      function resize() {
+        const dpr = (window.devicePixelRatio || 1);
+        canvas.width = Math.floor(window.innerWidth * dpr);
+        canvas.height = Math.floor(window.innerHeight * dpr);
+        canvas.style.width = window.innerWidth + "px";
+        canvas.style.height = window.innerHeight + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        stars = Array.from({ length: STAR_COUNT }, () => ({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          r: Math.random() * 1.6 + 0.2,
+          v: Math.random() * 0.22 + 0.04,
+          a: Math.random() * 0.55 + 0.15,
+        }));
+      }
+
+      function tick() {
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        ctx.save();
+        for (const s of stars) {
+          s.y += s.v;
+          if (s.y > window.innerHeight + 10) {
+            s.y = -10;
+            s.x = Math.random() * window.innerWidth;
+          }
+          ctx.globalAlpha = s.a;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = "#ffffff";
+          ctx.fill();
+        }
+        ctx.restore();
+        requestAnimationFrame(tick);
+      }
+
+      window.addEventListener("resize", resize);
+      resize();
+      tick();
+
+      // ===== Footer year =====
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // ===== Network pill + offline form lock =====
+      const netDot = document.getElementById("netDot");
+      const netText = document.getElementById("netText");
+      const contactSubmit = document.getElementById("contactSubmit");
+      const offlineHint = document.getElementById("offlineHint");
+
+      function updateOnlineUI() {
+        const online = navigator.onLine;
+        netText.textContent = online ? "Online" : "Offline";
+        netDot.classList.toggle("offline", !online);
+
+        // disable form sending offline
+        if (contactSubmit) {
+          contactSubmit.disabled = !online;
+          contactSubmit.style.opacity = online ? "1" : "0.55";
+          contactSubmit.style.cursor = online ? "pointer" : "not-allowed";
+        }
+        if (offlineHint) offlineHint.style.display = online ? "none" : "block";
+      }
+      window.addEventListener("online", updateOnlineUI);
+      window.addEventListener("offline", updateOnlineUI);
+      updateOnlineUI();
+
+      // ===== PWA Install prompt =====
+      const btnInstall = document.getElementById("btnInstall");
+      let deferredPrompt = null;
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        btnInstall.style.display = "inline-flex";
+      });
+
+      btnInstall.addEventListener("click", async () => {
+        if (!deferredPrompt) return;
+        btnInstall.style.display = "none";
+        deferredPrompt.prompt();
+        try { await deferredPrompt.userChoice; } catch (_) {}
+        deferredPrompt = null;
+      });
+
+      // ===== Service Worker registration =====
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", async () => {
+          try {
+            const reg = await navigator.serviceWorker.register("./sw.js", { scope: "./" });
+            if (reg.waiting) reg.waiting.postMessage({ type: "SKIP_WAITING" });
+          } catch (err) {
+            console.warn("Service worker registration failed:", err);
+          }
+        });
+      }
+
+      // ===== App (Kit) Logic =====
+      const DEFAULT_LOGO_URL = "assets/logo.svg";
+
+      const el = (id) => document.getElementById(id);
+
+      // State
+      let previewIsDark = true;    // preview panes only
+      let logoDataUrl = "";        // best for exports
+      let logoFallbackUrl = DEFAULT_LOGO_URL;
+
+      // DOM
+      const headerLogo = el("headerLogo");
+      const wmLogo = el("wmLogo");
+      const status = el("status");
+      const logoUrl = el("logoUrl");
+      const logoFile = el("logoFile");
+      const brandName = el("brandName");
+      const brandTagline = el("brandTagline");
+
+      const btnLoadLogo = el("btnLoadLogo");
+      const btnTogglePreviewBg = el("btnTogglePreviewBg");
+      const btnRefresh = el("btnRefresh");
+      const btnReset = el("btnReset");
+      const btnScrollTop = el("btnScrollTop");
+
+      const preview1 = el("preview-1");
+      const preview2 = el("preview-2");
+
+      // SVG nodes
+      const imgPrimary = el("img-primary");
+      const imgMark = el("img-mark");
+      const textPrimary1 = el("text-primary-1");
+      const textPrimary2 = el("text-primary-2");
+      const markRing = el("mark-ring");
+
+      // Download buttons
+      const btnDownloadPrimary = el("btnDownloadPrimary");
+      const btnDownloadMark = el("btnDownloadMark");
+
+      btnScrollTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+      function getLogoHref() {
+        return logoDataUrl || logoFallbackUrl;
+      }
+
+      async function blobToDataUrl(blob) {
+        return await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+      }
+
+      async function loadLogoFromUrl(url) {
+        const u = (url || "").trim();
+        if (!u) {
+          logoFallbackUrl = DEFAULT_LOGO_URL;
+          status.textContent = "Diagnostics: using local default logo (offline-safe).";
+          updateSvgs();
+          return;
+        }
+
+        logoFallbackUrl = u;
+        status.textContent = "Diagnostics: fetching logo URL…";
+
+        try {
+          const resp = await fetch(u, { mode: "cors", cache: "no-store" });
+          if (!resp.ok) throw new Error("Fetch failed (" + resp.status + ")");
+          const blob = await resp.blob();
+          const dataUrl = await blobToDataUrl(blob);
+
+          logoDataUrl = dataUrl;
+          headerLogo.src = logoDataUrl;
+          wmLogo.src = logoDataUrl;
+          status.textContent = "Diagnostics: logo loaded as data URL. SVG exports will embed it (offline-proof).";
+        } catch (err) {
+          logoDataUrl = "";
+          headerLogo.src = u;
+          wmLogo.src = u;
+          status.textContent =
+            "Diagnostics: URL fetch blocked/failed.\n" +
+            "Fix: upload the logo file (best), or replace assets/logo.svg.\n" +
+            "Error: " + String(err?.message || err);
+        }
+
+        updateSvgs();
+      }
+
+      async function loadLogoFromFile(file) {
+        status.textContent = "Diagnostics: reading uploaded logo…";
+        try {
+          const dataUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          });
+
+          logoDataUrl = dataUrl;
+          headerLogo.src = logoDataUrl;
+          wmLogo.src = logoDataUrl;
+          status.textContent = "Diagnostics: logo loaded from file. SVG exports will embed it (offline-proof).";
+          updateSvgs();
+        } catch (err) {
+          status.textContent = "Diagnostics: upload read failed. Error: " + String(err?.message || err);
+        }
+      }
+
+      function setPreviewTheme(isDark) {
+        if (isDark) {
+          preview1.classList.add("grid-pattern");
+          preview1.classList.remove("light-grid-pattern");
+          preview2.classList.add("grid-pattern");
+          preview2.classList.remove("light-grid-pattern");
+
+          textPrimary1.setAttribute("fill", "#FFFFFF");
+          textPrimary2.setAttribute("fill", "#9CA3AF");
+          markRing.setAttribute("stroke", "#FBBF24");
+        } else {
+          preview1.classList.remove("grid-pattern");
+          preview1.classList.add("light-grid-pattern");
+          preview2.classList.remove("grid-pattern");
+          preview2.classList.add("light-grid-pattern");
+
+          textPrimary1.setAttribute("fill", "#111827");
+          textPrimary2.setAttribute("fill", "rgba(17,24,39,0.62)");
+          markRing.setAttribute("stroke", "rgba(17,24,39,0.55)");
+        }
+      }
+
+      function updateSvgs() {
+        const href = getLogoHref();
+        imgPrimary.setAttribute("href", href);
+        imgMark.setAttribute("href", href);
+
+        const name = (brandName.value || "Skyes Over London").trim();
+        const tag = (brandTagline.value || "SOLEnterprises International Nexus & Holdings").trim();
+
+        textPrimary1.textContent = name;
+        textPrimary2.textContent = tag;
+
+        setPreviewTheme(previewIsDark);
+      }
+
+      function downloadSVG(svgId, filename) {
+        const svgElement = document.getElementById(svgId);
+        const clone = svgElement.cloneNode(true);
+
+        const href = getLogoHref();
+        const imgs = clone.querySelectorAll("image");
+        imgs.forEach(img => img.setAttribute("href", href));
+
+        clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+        const serializer = new XMLSerializer();
+        let source = serializer.serializeToString(clone);
+        source = '<?xml version="1.0" standalone="no"?>\\r\\n' + source;
+
+        const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+
+      function safeFileBase() {
+        const n = (brandName.value || "Skyes_Over_London").trim().replace(/[^a-z0-9\\-_]+/gi, "_");
+        return n || "Skyes_Over_London";
+      }
+
+      function refresh() {
+        updateSvgs();
+        status.textContent = "Diagnostics: refreshed previews + export state.";
+      }
+
+      async function resetAll() {
+        previewIsDark = true;
+        logoDataUrl = "";
+        logoFallbackUrl = DEFAULT_LOGO_URL;
+
+        logoUrl.value = "";
+        brandName.value = "Skyes Over London";
+        brandTagline.value = "SOLEnterprises International Nexus & Holdings";
+
+        headerLogo.src = DEFAULT_LOGO_URL;
+        wmLogo.src = DEFAULT_LOGO_URL;
+
+        status.textContent = "Diagnostics: reset complete. Using local default logo.";
+        updateSvgs();
+      }
+
+      function togglePreviewBg() {
+        previewIsDark = !previewIsDark;
+        updateSvgs();
+        status.textContent = "Diagnostics: toggled preview background (" + (previewIsDark ? "dark" : "light") + ").";
+      }
+
+      // Events
+      btnLoadLogo.addEventListener("click", () => loadLogoFromUrl(logoUrl.value));
+      btnTogglePreviewBg.addEventListener("click", togglePreviewBg);
+      btnRefresh.addEventListener("click", refresh);
+      btnReset.addEventListener("click", resetAll);
+
+      logoFile.addEventListener("change", (e) => {
+        const f = e.target.files && e.target.files[0];
+        if (f) loadLogoFromFile(f);
+      });
+
+      [brandName, brandTagline].forEach(inp => inp.addEventListener("input", updateSvgs));
+
+      btnDownloadPrimary.addEventListener("click", () => {
+        const base = safeFileBase();
+        downloadSVG("logo-primary", `${base}_Logo_Primary_Transparent.svg`);
+      });
+
+      btnDownloadMark.addEventListener("click", () => {
+        const base = safeFileBase();
+        downloadSVG("logo-mark", `${base}_Icon_Transparent.svg`);
+      });
+
+      // Init
+      logoUrl.value = "";
+      headerLogo.src = DEFAULT_LOGO_URL;
+      wmLogo.src = DEFAULT_LOGO_URL;
+      status.textContent = "Diagnostics: ready. Offline-first shell is active. Default logo is local.";
+      updateSvgs();
+    })();
+  </script>
+</body>
+</html>

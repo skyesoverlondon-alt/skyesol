@@ -1,0 +1,50 @@
+Skyesol command runbook (copy/paste friendly)
+
+1) One-time setup (inside repo)
+- cd /workspaces/skyesol
+- npm install
+
+2) Keep Case Studies index + sitemap in sync
+- npm run content:sync
+
+What this does now:
+- Runs case-studies index sync first
+- Then regenerates sitemap
+
+You can also run each step directly:
+- npm run case-studies:sync
+- npm run gen-sitemap
+
+3) Build command (now includes sync+sitemap flow)
+- npm run build
+
+4) Local server options
+A) Quick static preview (no Netlify Functions)
+- cd /workspaces/skyesol
+- python3 -m http.server 8080
+- Open: http://localhost:8080
+
+B) Full local platform preview (with Netlify Functions)
+- cd /workspaces/skyesol
+- npx netlify dev
+- Open: http://localhost:8888
+
+5) Netlify deploy flow
+- cd /workspaces/skyesol
+- npm install
+- npx netlify login
+- npx netlify init
+- npm run content:sync
+- npx netlify deploy --prod
+
+6) Useful maintenance commands
+- npm run link-check
+- npm run link-check:fix
+- npm run meta:check
+- npm run meta:apply
+
+7) Typical daily sequence
+- cd /workspaces/skyesol
+- npm run content:sync
+- npm run link-check
+- npx netlify dev

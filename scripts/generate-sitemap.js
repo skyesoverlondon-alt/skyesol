@@ -55,6 +55,15 @@ function extractMetaDate(content, property) {
   return match ? match[1] : null;
 }
 
+function escapeXmlText(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
 async function generate() {
   const pageFiles = [];
   await collectHtml(root, pageFiles);
@@ -100,15 +109,15 @@ async function generate() {
   const xml = [`<?xml version="1.0" encoding="UTF-8"?>`, `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">`];
   for (const entry of urlEntries) {
     xml.push('  <url>');
-    xml.push(`    <loc>${entry.loc}</loc>`);
+    xml.push(`    <loc>${escapeXmlText(entry.loc)}</loc>`);
     if (entry.lastmod) {
-      xml.push(`    <lastmod>${entry.lastmod}</lastmod>`);
+      xml.push(`    <lastmod>${escapeXmlText(entry.lastmod)}</lastmod>`);
     }
     if (entry.changefreq) {
-      xml.push(`    <changefreq>${entry.changefreq}</changefreq>`);
+      xml.push(`    <changefreq>${escapeXmlText(entry.changefreq)}</changefreq>`);
     }
     if (entry.priority) {
-      xml.push(`    <priority>${entry.priority}</priority>`);
+      xml.push(`    <priority>${escapeXmlText(entry.priority)}</priority>`);
     }
     xml.push('  </url>');
   }

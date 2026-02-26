@@ -4,10 +4,11 @@
   "type": "module",
   "description": "Skyes Over London LC — full growth platform (static + Netlify Functions + Netlify Blobs)",
   "scripts": {
-    "build": "true",
+    "build": "node scripts/generate-site-menu.mjs",
     "gen-sitemap": "node scripts/generate-sitemap.js",
     "link-check": "node scripts/link-guardian.js",
     "link-check:fix": "node scripts/link-guardian.js --fix",
+    "audit:internal-links": "node scripts/audit-internal-links.mjs",
     "meta:apply": "node scripts/meta-templater.js",
     "meta:check": "node scripts/meta-templater.js --check"
   },

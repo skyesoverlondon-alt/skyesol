@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NorthStar Office &amp; Accounting LLC | Neon-Blue Ops + Gold-Standard Clarity</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Rajdhani:wght@300;500;700&family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#00060b;
+  --panel:rgba(6,18,30,.55);
+  --panel2:rgba(6,18,30,.35);
+  --text:#e9f3ff;
+  --muted:rgba(233,243,255,.62);
+
+  --gold:#FFD700;
+  --gold2:#ffb700;
+
+  --blue:#00C2FF;
+  --blue2:#007BFF;
+
+  --serif:'Cormorant Garamond',serif;
+  --sans:'Rajdhani',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background: radial-gradient(1200px 800px at 50% -10%, rgba(0,194,255,.10), transparent 65%),
+              radial-gradient(900px 700px at 20% 30%, rgba(255,215,0,.10), transparent 60%),
+              linear-gradient(180deg, #00060b 0%, #00060b 55%, #000208 100%);
+  color:var(--text);
+  font-family:var(--sans);
+  overflow-x:hidden;
+}
+
+#app{opacity:1;}
+
+/* Floating media (no containers, no frames) */
+.float-free{
+  display:inline-block;
+  transform-origin:center;
+  animation: floatPulse 6.2s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 18px rgba(0,194,255,.35)) drop-shadow(0 0 22px rgba(255,215,0,.20));
+}
+@keyframes floatPulse{
+  0%{transform:translateY(0) scale(1);}
+  100%{transform:translateY(-6px) scale(1.04);}
+}
+
+/* NAV */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center;
+  padding:1.05rem 4rem;
+  background: linear-gradient(to bottom, rgba(0,6,11,.92), rgba(0,6,11,.55), transparent);
+  transition: background .35s, border-color .35s;
+}
+nav.scrolled{
+  background: rgba(0,6,11,.92);
+  backdrop-filter: blur(18px);
+  border-bottom:1px solid rgba(0,194,255,.16);
+}
+.nav-logo{height:38px; cursor:pointer;}
+.nav-links{display:flex; gap:2.2rem; margin-left:3rem;}
+.nav-links a{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(233,243,255,.58);
+  text-decoration:none;
+  transition:color .2s, text-shadow .2s;
+}
+.nav-links a:hover{color:var(--blue); text-shadow:0 0 16px rgba(0,194,255,.35);}
+.nav-cta{
+  margin-left:auto;
+  padding:.68rem 1.85rem;
+  border-radius:6px;
+  border:1px solid rgba(0,194,255,.22);
+  background: linear-gradient(135deg, rgba(0,194,255,.18), rgba(255,215,0,.10));
+  color:var(--text);
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow: 0 0 26px rgba(0,194,255,.16), 0 0 18px rgba(255,215,0,.12);
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.nav-cta:hover{
+  transform: translateY(-1px);
+  border-color: rgba(255,215,0,.35);
+  box-shadow: 0 0 44px rgba(0,194,255,.25), 0 0 28px rgba(255,215,0,.18);
+}
+
+/* HERO */
+#hero{
+  position:relative;
+  min-height:92vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-top:6rem;
+  overflow:hidden;
+}
+#hero-canvas{position:absolute; inset:0; z-index:0;}
+.hero-vignette{
+  position:absolute; inset:0; z-index:1;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,6,11,.82) 100%);
+}
+.hero-content{
+  position:relative; z-index:2;
+  text-align:center;
+  max-width:980px;
+  padding: 0 2rem;
+}
+.hero-eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:rgba(0,194,255,.85);
+  margin-bottom:1.3rem;
+}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(3rem,7vw,6rem);
+  font-weight:300;
+  line-height:1.05;
+  letter-spacing:.045em;
+  margin-bottom:1.35rem;
+}
+.hero-h1 em{
+  font-style:italic;
+  color:var(--gold);
+  text-shadow:0 0 26px rgba(255,215,0,.34), 0 0 26px rgba(0,194,255,.18);
+}
+.hero-sub{
+  font-size:1.12rem;
+  color:var(--muted);
+  letter-spacing:.08em;
+  line-height:1.75;
+  max-width:720px;
+  margin:0 auto 2.25rem;
+}
+.hero-logo{width:min(440px, 74vw); margin: 0 auto 1.7rem;}
+.hero-actions{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;}
+.btn-primary{
+  padding:1.0rem 2.7rem;
+  border-radius:8px;
+  border:1px solid rgba(255,215,0,.28);
+  background: linear-gradient(135deg, rgba(255,215,0,.85), rgba(0,194,255,.22));
+  color:#001018;
+  font-family:var(--mono);
+  font-size:.80rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  font-weight:800;
+  box-shadow: 0 0 36px rgba(255,215,0,.22), 0 0 40px rgba(0,194,255,.16);
+  transition: transform .22s, box-shadow .22s, border-color .22s;
+}
+.btn-primary:hover{
+  transform: translateY(-3px);
+  border-color: rgba(0,194,255,.32);
+  box-shadow: 0 0 58px rgba(255,215,0,.30), 0 0 60px rgba(0,194,255,.22);
+}
+.btn-ghost{
+  padding:1.0rem 2.7rem;
+  border-radius:8px;
+  border:1px solid rgba(0,194,255,.22);
+  background: transparent;
+  color:var(--text);
+  font-family:var(--mono);
+  font-size:.80rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition: transform .22s, box-shadow .22s, border-color .22s, color .22s;
+}
+.btn-ghost:hover{
+  transform: translateY(-3px);
+  border-color: rgba(255,215,0,.30);
+  color: var(--blue);
+  box-shadow: 0 0 42px rgba(0,194,255,.18);
+}
+.scroll-hint{
+  position:absolute;
+  bottom:2.1rem;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:2;
+  font-family:var(--mono);
+  font-size:.62rem;
+  letter-spacing:.2em;
+  color:rgba(233,243,255,.52);
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* SECTIONS */
+section{padding:8rem 8%; position:relative; overflow:hidden;}
+.section-label{
+  font-family:var(--mono);
+  font-size:.65rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:rgba(0,194,255,.80);
+  margin-bottom:1rem;
+  display:block;
+}
+.section-h2{
+  font-family:var(--serif);
+  font-size:clamp(2rem,4vw,3.5rem);
+  font-weight:300;
+  line-height:1.1;
+  letter-spacing:.05em;
+  margin-bottom:1.35rem;
+}
+.section-h2 em{font-style:italic; color:var(--gold); text-shadow:0 0 18px rgba(255,215,0,.25);}
+.section-body{font-size:1.05rem; color:var(--muted); line-height:1.85; max-width:760px;}
+
+/* PILLARS */
+#pillars{
+  background:
+    radial-gradient(900px 700px at 75% 15%, rgba(0,194,255,.10), transparent 60%),
+    radial-gradient(800px 650px at 20% 70%, rgba(255,215,0,.10), transparent 65%);
+}
+.pillar-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; margin-top:4.2rem;}
+.pillar{
+  padding:2.75rem 2.25rem;
+  border-radius:14px;
+  background: linear-gradient(135deg, rgba(6,18,30,.55), rgba(6,18,30,.28));
+  border:1px solid rgba(0,194,255,.16);
+  box-shadow: 0 0 40px rgba(0,194,255,.08);
+  position:relative;
+  overflow:hidden;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.pillar::before{
+  content:'';
+  position:absolute; inset:-40%;
+  background: radial-gradient(circle at 30% 30%, rgba(0,194,255,.16), transparent 55%),
+              radial-gradient(circle at 70% 70%, rgba(255,215,0,.14), transparent 58%);
+  opacity:.35;
+  transform: rotate(18deg);
+}
+.pillar:hover{transform: translateY(-6px); border-color: rgba(255,215,0,.22); box-shadow: 0 0 60px rgba(0,194,255,.14), 0 0 40px rgba(255,215,0,.10);}
+.pillar-num{font-family:var(--mono); font-size:.65rem; letter-spacing:.2em; color:rgba(0,194,255,.55); margin-bottom:1.15rem; display:block; position:relative;}
+.pillar-icon{font-size:2.4rem; margin-bottom:1.2rem; display:block; position:relative;}
+.pillar-title{font-family:var(--serif); font-size:1.65rem; font-weight:300; letter-spacing:.05em; margin-bottom:.85rem; position:relative;}
+.pillar-desc{font-size:.95rem; color:rgba(233,243,255,.62); line-height:1.75; position:relative;}
+.pillar-line{position:absolute; bottom:0; left:0; height:2px; width:0; background: linear-gradient(90deg, var(--blue), var(--gold)); transition: width .35s ease;}
+.pillar:hover .pillar-line{width:100%;}
+
+/* LEADERSHIP */
+#leadership{
+  background:
+    radial-gradient(900px 700px at 18% 20%, rgba(255,215,0,.10), transparent 60%),
+    radial-gradient(900px 700px at 80% 65%, rgba(0,194,255,.10), transparent 62%);
+}
+.team-grid{margin-top:3rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;}
+.team-member{display:flex; gap:1.8rem; align-items:flex-start;}
+.team-photo{width: 190px; height: auto; border-radius: 18px; background: transparent;}
+.team-name{font-family:var(--serif); font-size:2.0rem; font-weight:300; letter-spacing:.04em;}
+.team-title{font-family:var(--mono); font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(0,194,255,.80); margin-top:.55rem;}
+.team-bio{margin-top:.9rem; color:var(--muted); line-height:1.8; font-size:1.0rem; max-width:520px;}
+.trust-row{margin-top:2.2rem; display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem;}
+.trust{padding:1.35rem 1.35rem; border-radius:12px; border:1px solid rgba(0,194,255,.14); background: rgba(6,18,30,.25);}
+.trust b{display:block; font-family:var(--mono); font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,215,0,.92); margin-bottom:.6rem;}
+.trust p{color:rgba(233,243,255,.62); line-height:1.7; font-size:.92rem;}
+
+/* SERVICES */
+#services{
+  background:
+    radial-gradient(1000px 750px at 50% 10%, rgba(0,194,255,.10), transparent 60%),
+    radial-gradient(900px 700px at 30% 70%, rgba(255,215,0,.10), transparent 65%);
+}
+.badge{display:inline-block; padding:.25rem .7rem; border:1px solid rgba(0,194,255,.22); border-radius:999px; font-family:var(--mono); font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(233,243,255,.62); margin-bottom:1rem;}
+.price{font-family:var(--serif); font-size:2.25rem; font-weight:300; color:var(--gold); text-shadow: 0 0 22px rgba(255,215,0,.25); line-height:1.05; margin:.15rem 0 1rem;}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; margin-top:3.6rem;}
+.card{padding:2.35rem 2.1rem; border-radius:14px; border:1px solid rgba(0,194,255,.15); background: linear-gradient(135deg, rgba(6,18,30,.55), rgba(6,18,30,.22)); box-shadow: 0 0 46px rgba(0,194,255,.08); transition: transform .25s, border-color .25s, box-shadow .25s;}
+.card:hover{transform: translateY(-6px); border-color: rgba(255,215,0,.22); box-shadow: 0 0 62px rgba(0,194,255,.14), 0 0 46px rgba(255,215,0,.10);}
+.card-title{font-family:var(--serif); font-size:1.55rem; font-weight:300; letter-spacing:.05em; margin-bottom:.5rem;}
+.card-desc{font-size:.95rem; color:rgba(233,243,255,.62); line-height:1.7;}
+.card-list{margin-top:1.1rem; display:flex; flex-direction:column; gap:.55rem;}
+.card-list span{font-size:.86rem; color:rgba(233,243,255,.60); line-height:1.35;}
+.note{margin-top:3.0rem; border:1px solid rgba(0,194,255,.14); border-radius:14px; padding:1.75rem; background: rgba(6,18,30,.25);}
+.bundle-grid{display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start;}
+
+/* ABOUT split */
+.split{display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center;}
+.split-visual{position:relative; height:460px;}
+.split-frame{position:absolute; inset:0; border:1px solid rgba(0,194,255,.16); border-radius:14px; overflow:hidden; background: linear-gradient(135deg, rgba(6,18,30,.55), rgba(6,18,30,.22)); box-shadow:0 0 54px rgba(0,194,255,.10);}
+.data-art{position:absolute; inset:0;}
+
+.stat-row{display:flex; gap:3rem; margin-top:2.2rem; flex-wrap:wrap;}
+.stat{display:flex; flex-direction:column; gap:.3rem;}
+.stat-n{font-family:var(--serif); font-size:2.85rem; font-weight:300; color:var(--gold); text-shadow:0 0 20px rgba(255,215,0,.24); line-height:1;}
+.stat-l{font-family:var(--mono); font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(233,243,255,.55);}
+
+/* Testimonials */
+#testimonials{background: rgba(0,6,11,.0);}
+.testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; margin-top:3.6rem;}
+.testi-card{padding:2.35rem; border-radius:14px; border:1px solid rgba(0,194,255,.14); background: rgba(6,18,30,.22); box-shadow: 0 0 44px rgba(0,194,255,.08); position:relative; transition: transform .25s, border-color .25s, box-shadow .25s;}
+.testi-card:hover{transform: translateY(-6px); border-color: rgba(255,215,0,.22); box-shadow: 0 0 64px rgba(0,194,255,.14), 0 0 46px rgba(255,215,0,.10);}
+.testi-quote{font-family:var(--serif); font-size:1.18rem; font-style:italic; line-height:1.7; color:var(--text); margin-bottom:1.25rem;}
+.testi-author{font-family:var(--mono); font-size:.65rem; letter-spacing:.15em; color:rgba(255,215,0,.90); text-transform:uppercase;}
+.testi-role{font-family:var(--mono); font-size:.6rem; color:rgba(233,243,255,.55); margin-top:.3rem; letter-spacing:.1em;}
+.testi-mark{position:absolute; top:1.2rem; right:1.4rem; font-size:3rem; color:rgba(0,194,255,.10); font-family:var(--serif); line-height:1;}
+
+/* CTA */
+#cta-section{text-align:center; padding:9.5rem 8%; background: radial-gradient(1000px 700px at 50% 15%, rgba(255,215,0,.10), transparent 60%), radial-gradient(1000px 700px at 50% 65%, rgba(0,194,255,.12), transparent 62%);}
+.cta-h{font-family:var(--serif); font-size:clamp(2.5rem,5vw,4.6rem); font-weight:300; line-height:1.08; letter-spacing:.05em; margin-bottom:1.35rem;}
+.cta-h em{font-style:italic; color:var(--gold);}
+.cta-sub{font-size:1.02rem; color:var(--muted); letter-spacing:.06em; max-width:650px; margin:0 auto 2.6rem; line-height:1.75;}
+
+/* Footer */
+footer{padding:3.1rem 8%; border-top:1px solid rgba(0,194,255,.12); display:flex; align-items:center; gap:1.8rem;}
+.footer-logo{height:28px; opacity:.75;}
+.footer-text{font-family:var(--mono); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(233,243,255,.55);}
+.footer-links{margin-left:auto; display:flex; gap:2rem;}
+.footer-links a{font-family:var(--mono); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(233,243,255,.55); text-decoration:none; transition:color .2s, text-shadow .2s;}
+.footer-links a:hover{color:var(--blue); text-shadow:0 0 14px rgba(0,194,255,.30);}
+
+/* Scroll reveal */
+.reveal{opacity:0; transform:translateY(40px); transition: opacity .9s cubic-bezier(.23,1,.32,1), transform .9s cubic-bezier(.23,1,.32,1);}
+.reveal.in{opacity:1; transform:translateY(0);}
+.reveal-delay-1{transition-delay:.10s;}
+.reveal-delay-2{transition-delay:.20s;}
+.reveal-delay-3{transition-delay:.30s;}
+
+/* Responsive */
+@media (max-width: 1050px){
+  nav{padding:1rem 1.25rem;}
+  .nav-links{display:none;}
+  section{padding:6.5rem 6%;}
+  .pillar-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr;}
+  .trust-row{grid-template-columns:1fr;}
+  .grid3{grid-template-columns:1fr;}
+  .split{grid-template-columns:1fr; gap:3rem;}
+  .split-visual{height:360px;}
+  .testi-grid{grid-template-columns:1fr;}
+  .bundle-grid{grid-template-columns:1fr;}
+  .team-member{flex-direction:column;}
+  .team-photo{width:min(320px, 80vw);}
+}
+
+/* Bottom 3-column hub */
+#bottom-hub{
+  padding:6.5rem 8% 5.5rem;
+  background:
+    radial-gradient(900px 700px at 15% 20%, rgba(0,194,255,.10), transparent 60%),
+    radial-gradient(900px 700px at 80% 75%, rgba(255,215,0,.10), transparent 62%),
+    linear-gradient(180deg, rgba(0,6,11,.0) 0%, rgba(2,10,18,.45) 55%, rgba(0,6,11,.0) 100%);
+}
+.hub-grid{
+  margin-top:2.4rem;
+  display:grid;
+  grid-template-columns:1fr 1.15fr 1fr;
+  gap:1.8rem;
+  align-items:stretch;
+}
+.hub-col{
+  padding:2.25rem 2.1rem;
+  border-radius:14px;
+  border:1px solid rgba(0,194,255,.14);
+  background: linear-gradient(135deg, rgba(6,18,30,.45), rgba(6,18,30,.18));
+  box-shadow: 0 0 44px rgba(0,194,255,.08);
+  position:relative;
+  overflow:hidden;
+}
+.hub-col::before{
+  content:'';
+  position:absolute; inset:-35%;
+  background:
+    radial-gradient(circle at 28% 26%, rgba(0,194,255,.14), transparent 55%),
+    radial-gradient(circle at 74% 78%, rgba(255,215,0,.12), transparent 58%);
+  opacity:.35;
+  transform: rotate(16deg);
+}
+.hub-inner{position:relative;}
+.hub-title{
+  font-family:var(--serif);
+  font-size:1.8rem;
+  font-weight:300;
+  letter-spacing:.05em;
+  margin-bottom:.7rem;
+}
+.hub-kicker{
+  font-family:var(--mono);
+  font-size:.62rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(0,194,255,.78);
+  margin-bottom:1.15rem;
+}
+.hub-text{color:rgba(233,243,255,.62); line-height:1.8; font-size:.98rem;}
+.hub-photo{
+  width:min(220px, 70vw);
+  height:auto;
+  border-radius:18px;
+  margin: .6rem 0 1.1rem;
+  background:transparent;
+}
+.hub-list{margin-top:1.15rem; display:flex; flex-direction:column; gap:.55rem;}
+.hub-item{
+  font-family:var(--mono);
+  font-size:.66rem;
+  letter-spacing:.12em;
+  color:rgba(233,243,255,.60);
+  text-transform:uppercase;
+}
+.hub-item a{color:rgba(255,215,0,.90); text-decoration:none;}
+.hub-item a:hover{color:var(--blue); text-shadow:0 0 14px rgba(0,194,255,.25);}
+.hub-actions{margin-top:1.4rem; display:flex; gap:.8rem; flex-wrap:wrap;}
+.btn-mini{
+  padding:.82rem 1.2rem;
+  border-radius:8px;
+  border:1px solid rgba(0,194,255,.20);
+  background: rgba(0,6,11,.12);
+  color:var(--text);
+  font-family:var(--mono);
+  font-size:.68rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition: transform .22s, box-shadow .22s, border-color .22s, color .22s;
+}
+.btn-mini:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,215,0,.26);
+  color: var(--blue);
+  box-shadow: 0 0 34px rgba(0,194,255,.16);
+}
+@media (max-width: 1050px){
+  #bottom-hub{padding:5.5rem 6% 5rem;}
+  .hub-grid{grid-template-columns:1fr; }
+}
+
+/* === NS INTRO OVERLAY === */
+#ns-intro{position:fixed;inset:0;z-index:9999;background:#02040a;transition:opacity 1.5s ease-in-out;}
+#ns-intro.ns-done{opacity:0;pointer-events:none;}
+@keyframes nsEmerge{0%{opacity:0;filter:blur(30px) brightness(0);transform:scale(.8) translateY(50px)}50%{opacity:.8;filter:blur(5px) brightness(2)}100%{opacity:1;filter:blur(0);transform:scale(1) translateY(0)}}
+@keyframes nsFloat{0%{transform:translateY(10px) scale(.98);filter:drop-shadow(0px 0px 0px rgba(0,200,255,0))}50%{transform:translateY(-15px) scale(1.02);filter:drop-shadow(0px 20px 45px rgba(100,220,255,.4)) drop-shadow(0px 0px 15px rgba(255,255,255,.2))}100%{transform:translateY(10px) scale(.98)}}
+@keyframes nsTitleReveal{0%{opacity:0;filter:blur(12px);transform:translateY(20px);letter-spacing:.1em}100%{opacity:1;filter:blur(0);transform:translateY(0);letter-spacing:.3em}}
+@keyframes nsSubReveal{0%{opacity:0;filter:blur(5px);transform:translateY(10px)}100%{opacity:1;filter:blur(0);transform:translateY(0)}}
+.ns-logo-emerge{animation:nsEmerge 3s cubic-bezier(0.16,1,0.3,1) forwards,nsFloat 7s ease-in-out 3s infinite;}
+#ns-skip{position:absolute;bottom:2rem;right:2rem;font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,194,255,.55);background:none;border:1px solid rgba(0,194,255,.22);border-radius:6px;padding:.55rem 1.1rem;cursor:pointer;transition:color .2s,border-color .2s;}
+#ns-skip:hover{color:rgba(0,194,255,.95);border-color:rgba(0,194,255,.55);}
+
+</style>
+</head>
+<body>
+<div id="app">
+
+  
+  <div id="ns-intro">
+    <canvas id="ns-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+    <div style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;height:100vh;pointer-events:none;">
+      <img id="ns-logo"
+        src="https://cdn1.sharemyimage.com/2026/02/24/Screenshot2026-02-231.04.00PM-Display3.png"
+        alt="NorthStar"
+        style="width:min(450px,70vw);height:auto;object-fit:contain;opacity:0;"
+      />
+      <div style="margin-top:3.5rem;display:flex;flex-direction:column;align-items:center;">
+        <h1 id="ns-title"
+          style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,8vw,5.5rem);font-weight:300;text-transform:uppercase;letter-spacing:.3em;margin-left:.3em;opacity:0;">
+          NorthStar
+        </h1>
+        <div id="ns-sep"
+          style="width:1px;height:1px;background:#00C2FF;margin:1.5rem 0;opacity:0;border-radius:999px;transition:all 1.5s cubic-bezier(0.16,1,0.3,1);">
+        </div>
+        <h2 id="ns-sub"
+          style="color:rgba(200,230,255,.6);font-family:'IBM Plex Mono',monospace;font-size:clamp(.75rem,1.6vw,1rem);font-weight:500;text-transform:uppercase;letter-spacing:.5em;margin-left:.5em;opacity:0;">
+          Office &amp; Accounting
+        </h2>
+      </div>
+    </div>
+    <button id="ns-skip" onclick="dismissNSIntro()">Skip ›</button>
+  </div>
+
+  <nav id="main-nav">
+    <img src="https://cdn1.sharemyimage.com/2026/02/24/Screenshot2026-02-231.04.00PM-Display3.png" class="nav-logo float-free" alt="NorthStar" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'});" />
+    <div class="nav-links">
+      <a href="../index.html">Nexus Home</a>
+      <a href="../network.html">Directory</a>
+      <a href="../blog/index.html">Blog</a>
+      <a href="#pillars">Platform</a>
+      <a href="#services">Services</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#cta-section">Contact</a>
+    </div>
+    <button class="nav-cta" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'});">Start Intake</button>
+  </nav>
+
+  <section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-vignette"></div>
+    <div class="hero-content">
+      <img src="https://cdn1.sharemyimage.com/2026/02/24/Screenshot2026-02-231.04.00PM-Display3.png" class="hero-logo float-free" alt="NorthStar logo" />
+      <div class="hero-eyebrow">NorthStar Office &amp; Accounting LLC · Back Office Command</div>
+      <h1 class="hero-h1">Neon-speed execution.<br><em>Gold-standard</em> clarity.</h1>
+      <p class="hero-sub">
+        NorthStar is the back-office command center inside the Skyes Over London ecosystem.
+        We engineer clean filings, defensible documents, and monthly financial cadence — then bridge front office to back office with Executive Ledger Pro and the AE Console.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'});">View Services &amp; Pricing</button>
+        <button class="btn-ghost" onclick="document.getElementById('cta-section').scrollIntoView({behavior:'smooth'});">Request Intake</button>
+      </div>
+    </div>
+    <div class="scroll-hint">▼ Scroll</div>
+  </section>
+
+  <section id="pillars">
+    <div class="reveal">
+      <span class="section-label">Core Systems</span>
+      <h2 class="section-h2">Three systems that keep<br><em>operators</em> in control</h2>
+      <p class="section-body">
+        NorthStar isn’t “paperwork help.” It’s operational infrastructure: compliance discipline, document governance, and financial visibility — packaged so you can scale without losing control.
+      </p>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar reveal reveal-delay-1">
+        <span class="pillar-num">01</span>
+        <span class="pillar-icon">◈</span>
+        <div class="pillar-title">LLC Filer Pro</div>
+        <p class="pillar-desc">Formation + compliance workflows that prevent founder mistakes: guided intake, filing support, renewal calendars, and governance so changes never surprise you.</p>
+        <div class="pillar-line"></div>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <span class="pillar-num">02</span>
+        <span class="pillar-icon">⬡</span>
+        <div class="pillar-title">DocVault System</div>
+        <p class="pillar-desc">A professional document system: templates, versioning, approvals, and export bundles. Banking-ready, dispute-ready, audit-ready — without chaos.</p>
+        <div class="pillar-line"></div>
+      </div>
+      <div class="pillar reveal reveal-delay-3">
+        <span class="pillar-num">03</span>
+        <span class="pillar-icon">◉</span>
+        <div class="pillar-title">Executive Ops Bridge</div>
+        <p class="pillar-desc">Executive Ledger Pro + AE Console connect sold → delivered → paid. Front office and back office stop arguing and start aligning.</p>
+        <div class="pillar-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <div class="reveal">
+      <span class="section-label">Leadership</span>
+      <h2 class="section-h2">Built by operators, not spectators.</h2>
+      <p class="section-body">
+        NorthStar is run inside a wider execution ecosystem. That means the paperwork, books, and systems aren’t theoretical — they’re built to survive real clients, real deadlines, and real cashflow.
+      </p>
+    </div>
+
+    <div class="team-grid">
+      <div class="team-member reveal reveal-delay-1">
+        <img src="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png" class="team-photo float-free" alt="Gray Skyes — Co-Founder &amp; President" />
+        <div>
+          <div class="team-name">Gray Skyes</div>
+          <div class="team-title">Co‑Founder · President (Skyes Over London LC)</div>
+          <p class="team-bio">
+            Executive operator focused on building scalable business systems: compliance discipline, document governance, and financial visibility.
+            NorthStar is engineered to help founders operate bank‑ready and audit‑ready — without slowing down.
+          </p>
+        </div>
+      </div>
+
+      <div class="team-member reveal reveal-delay-2">
+        <img src="https://cdn1.sharemyimage.com/2026/02/18/IMG_6795_49.png" class="team-photo float-free" alt="Dakayla Clark — Co-Founder &amp; VP" />
+        <div>
+          <div class="team-name">Dakayla Clark</div>
+          <div class="team-title">Co‑Founder · Vice President</div>
+          <p class="team-bio">
+            Operations and governance lead — focused on turning “messy reality” into clean workflows: intake discipline, document control, and repeatable back‑office cadence that scales.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-row reveal">
+      <div class="trust">
+        <b>Third‑Party Review Governance</b>
+        <p>Our template library is reviewed through a professional network governance process. For higher‑stakes situations, optional paid professional review is coordinated before final use.</p>
+      </div>
+      <div class="trust">
+        <b>Evidence‑Ready Exports</b>
+        <p>We structure exports as single “evidence packs” (docs + summaries + hashes) so banking, disputes, audits, and handoffs don’t turn into scavenger hunts.</p>
+      </div>
+      <div class="trust">
+        <b>Front ↔ Back Office Integration</b>
+        <p>We bridge what was sold (AE Console) to what was delivered and paid (Executive Ledger Pro) so the business stops feeling split‑brained.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="reveal">
+      <span class="section-label">Services &amp; Pricing</span>
+      <h2 class="section-h2">Clear deliverables.<br><em>Real</em> prices.</h2>
+      <p class="section-body">
+        Government fees and optional third‑party professional fees are always separate and pre‑approved.
+        These packages are structured to be deliverable with NorthStar systems (LLC Filer Pro, DocVault, Executive Ledger Pro, AE Console).
+      </p>
+    </div>
+
+    <div class="grid3">
+      <div class="card reveal reveal-delay-1">
+        <div class="badge">Formation</div>
+        <div class="card-title">LLC Launch (Starter)</div>
+        <div class="price">$349</div>
+        <p class="card-desc">Guided filing support with LLC Filer Pro so you launch clean and fast (state fees separate).</p>
+        <div class="card-list">
+          <span>• Launch intake + entity structure checklist</span>
+          <span>• Filing preparation + submission support</span>
+          <span>• EIN guidance packet (step-by-step)</span>
+          <span>• Compliance calendar + renewal reminders</span>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-2">
+        <div class="badge">Compliance</div>
+        <div class="card-title">Compliance Keeper</div>
+        <div class="price">$29 <span style="font-size:1rem;color:rgba(233,243,255,.58);">/mo</span></div>
+        <p class="card-desc">Ongoing deadline discipline so renewals and changes don’t turn into emergencies.</p>
+        <div class="card-list">
+          <span>• Renewal + annual filing calendar</span>
+          <span>• Change tracker (address, members, managers)</span>
+          <span>• 1 compliance check-in per year</span>
+          <span>• Add‑on filing support as needed</span>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-3">
+        <div class="badge">Documents</div>
+        <div class="card-title">DocVault Setup</div>
+        <div class="price">$249</div>
+        <p class="card-desc">A professional document system so your contracts, policies, and proofs stop living in chaos.</p>
+        <div class="card-list">
+          <span>• Custom folder architecture + naming rules</span>
+          <span>• Access map (who can view/edit/export)</span>
+          <span>• Import/cleanup up to 50 existing docs</span>
+          <span>• Versioning + change log baseline</span>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-1">
+        <div class="badge">Templates</div>
+        <div class="card-title">Core Business Document Pack</div>
+        <div class="price">$499</div>
+        <p class="card-desc">Field-customized, signature-ready templates for what operators need immediately.</p>
+        <div class="card-list">
+          <span>• Contractor agreement (basic) + NDA</span>
+          <span>• Client service agreement (basic)</span>
+          <span>• SOW + change order templates</span>
+          <span>• Invoice + payment terms sheet</span>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-2">
+        <div class="badge">Accounting</div>
+        <div class="card-title">Monthly Close (Starter)</div>
+        <div class="price">$349 <span style="font-size:1rem;color:rgba(233,243,255,.58);">/mo</span></div>
+        <p class="card-desc">A predictable close packet every month so you always know where you stand.</p>
+        <div class="card-list">
+          <span>• Categorization + cleanup cadence</span>
+          <span>• Reconciliation workflow</span>
+          <span>• P&amp;L snapshot + cashflow summary</span>
+          <span>• AR list + action plan</span>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-3">
+        <div class="badge">Integration</div>
+        <div class="card-title">Growth Ops Bundle</div>
+        <div class="price">$1,899 <span style="font-size:1rem;color:rgba(233,243,255,.58);">setup</span></div>
+        <p class="card-desc">Document system + monthly close + sales-to-ledger integration for scaling operators.</p>
+        <div class="card-list">
+          <span>• Ops Document Pack + DocVault setup</span>
+          <span>• Ledger Foundation + Monthly Close (Growth)</span>
+          <span>• Compliance Keeper included</span>
+          <span>• AE Console setup (pipeline → invoice → ledger)</span>
+        </div>
+        <div style="margin-top:1.0rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(233,243,255,.58);">
+          $899/mo ongoing (Growth Close)
+        </div>
+      </div>
+    </div>
+
+    <div class="note reveal">
+      <span class="section-label">Bundles</span>
+      <div class="bundle-grid">
+        <div>
+          <div class="card-title" style="margin-bottom:.35rem;">Launch Bundle</div>
+          <div class="price" style="font-size:2rem;">$999 <span style="font-size:1rem;color:rgba(233,243,255,.58);">+ fees</span></div>
+          <p class="card-desc">LLC Launch + DocVault Setup + Core Document Pack + Ledger Foundation setup.</p>
+        </div>
+        <div>
+          <div class="card-title" style="margin-bottom:.35rem;">Operator Suite</div>
+          <div class="price" style="font-size:2rem;">$2,999 <span style="font-size:1rem;color:rgba(233,243,255,.58);">setup</span></div>
+          <p class="card-desc">Executive Document Pack + Monthly Close (Operator) + Compliance Keeper + AE Console setup + export packs.</p>
+          <div style="margin-top:1.0rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(233,243,255,.58);">
+            $1,750/mo ongoing (Operator Close)
+          </div>
+        </div>
+      </div>
+
+      <p class="section-body" style="max-width:100%;margin-top:1.25rem;">
+        NorthStar is not a law firm and does not provide legal advice. For higher‑stakes documents and disputes, we coordinate optional third‑party licensed professional review through our vetted support network — so you can escalate with organized files, clean timelines, and defensible exports.
+      </p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="split reveal">
+      <div>
+        <span class="section-label">Operating Model</span>
+        <h2 class="section-h2">Clarity that survives<br>real-world speed.</h2>
+        <p class="section-body">
+          NorthStar runs your back office on a predictable cadence: deadlines tracked, documents governed, and monthly close packets delivered.
+          When legal stakes appear, escalation is structured — clean exports, clean timelines, and optional professional review.
+        </p>
+        <div class="stat-row">
+          <div class="stat"><span class="stat-n">48–72h</span><span class="stat-l">Typical Launch Window</span></div>
+          <div class="stat"><span class="stat-n">25+</span><span class="stat-l">Core Templates</span></div>
+          <div class="stat"><span class="stat-n">1</span><span class="stat-l">Evidence Pack</span></div>
+        </div>
+      </div>
+      <div class="split-visual">
+        <div class="split-frame">
+          <canvas class="data-art" id="data-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <div class="reveal">
+      <span class="section-label">Client Outcomes</span>
+      <h2 class="section-h2">Designed for founders who demand<br><em>control</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-mark">"</div>
+        <p class="testi-quote">We walked in with scattered docs and messy invoicing. We left with DocVault structure, clean templates, and a monthly close packet we can actually act on.</p>
+        <div class="testi-author">Outcome 01</div>
+        <div class="testi-role">Document System + Monthly Close</div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-mark">"</div>
+        <p class="testi-quote">We needed an LLC launch that didn’t miss anything. LLC Filer Pro gave us a clear checklist, filing support, and a compliance calendar that prevents surprise deadlines.</p>
+        <div class="testi-author">Outcome 02</div>
+        <div class="testi-role">LLC Launch + Compliance Keeper</div>
+      </div>
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-mark">"</div>
+        <p class="testi-quote">Our pipeline and accounting were disconnected. AE Console + Executive Ledger Pro connected sold → delivered → paid, so we can scale without losing control.</p>
+        <div class="testi-author">Outcome 03</div>
+        <div class="testi-role">AE Console + Ledger Integration</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-section">
+    <span class="section-label reveal">Start NorthStar</span>
+    <h2 class="cta-h reveal"><em>Legit</em> isn’t a look.<br>It’s a system.</h2>
+    <p class="cta-sub reveal">Launch correctly. Stay compliant. Keep clean books. When legal stakes show up, escalate fast with organized evidence and optional third‑party review.</p>
+    <div class="reveal">
+      <button class="btn-primary" style="font-size:.82rem;padding:1.12rem 3.1rem;" onclick="alert('Intake form hook: connect this button to your form / CRM next.');">Request NorthStar Intake</button>
+    </div>
+  </section>
+
+  <section id="bottom-hub">
+    <div class="reveal">
+      <span class="section-label">Direct Connect</span>
+      <h2 class="section-h2">Three lanes. One system.<br><em>Fast</em> escalation.</h2>
+      <p class="section-body">
+        Keep it simple: leadership on both sides, and a central contact hub in the middle — so intake, compliance, documents, and finance never get stuck in limbo.
+      </p>
+    </div>
+
+    <div class="hub-grid">
+      <div class="hub-col reveal reveal-delay-1">
+        <div class="hub-inner">
+          <div class="hub-kicker">Left Column</div>
+          <div class="hub-title">Dakayla Clark</div>
+          <img src="https://cdn1.sharemyimage.com/2026/02/18/IMG_6795_49.png" class="hub-photo float-free" alt="Dakayla Clark — Co-Founder &amp; VP" />
+          <p class="hub-text">
+            Co‑Founder &amp; VP. Operations + governance. Intake discipline, document control, and the cadence that keeps the back office tight when the business speeds up.
+          </p>
+          <div class="hub-list">
+            <div class="hub-item">Role: Governance &amp; Ops</div>
+            <div class="hub-item">Focus: Document Control</div>
+            <div class="hub-item">Focus: Compliance Cadence</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hub-col reveal reveal-delay-2">
+        <div class="hub-inner">
+          <div class="hub-kicker">Middle Column</div>
+          <div class="hub-title">NorthStar Contact Hub</div>
+          <p class="hub-text">
+            Use this lane for onboarding, document requests, monthly close coordination, and escalation packs (evidence bundles + timelines) when stakes increase.
+          </p>
+
+          <div class="hub-list">
+            <div class="hub-item">Email: <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a></div>
+            <div class="hub-item">Phone: <a href="tel:+14804695416">(480) 469‑5416</a></div>
+            <div class="hub-item">Web: <a href="https://SOLEnterprises.org" target="_blank" rel="noopener">SOLEnterprises.org</a></div>
+          </div>
+
+          <div class="hub-actions">
+            <button class="btn-mini" onclick="window.location.href='mailto:SkyesOverLondonLC@solenterprises.org?subject=NorthStar%20Intake%20Request';">Email Intake</button>
+            <button class="btn-mini" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'});">View Pricing</button>
+            <button class="btn-mini" onclick="alert('Hook this button to your intake form / CRM next.');">Open Intake Form</button>
+          </div>
+
+          <p class="hub-text" style="margin-top:1.2rem;">
+            Note: NorthStar is not a law firm. For higher‑stakes legal matters, we coordinate optional third‑party professional review through our vetted support network.
+          </p>
+        </div>
+      </div>
+
+      <div class="hub-col reveal reveal-delay-3">
+        <div class="hub-inner">
+          <div class="hub-kicker">Right Column</div>
+          <div class="hub-title">Gray Skyes</div>
+          <img src="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png" class="hub-photo float-free" alt="Gray Skyes — Co-Founder &amp; President" />
+          <p class="hub-text">
+            Co‑Founder &amp; President (Skyes Over London). Strategy + systems execution. The goal is simple: make the operation bank‑ready, audit‑ready, and scalable — without slowing down.
+          </p>
+          <div class="hub-list">
+            <div class="hub-item">Role: Executive Ops</div>
+            <div class="hub-item">Focus: Systems &amp; Scale</div>
+            <div class="hub-item">Focus: Front ↔ Back Integration</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <img src="https://cdn1.sharemyimage.com/2026/02/24/Screenshot2026-02-231.04.00PM-Display3.png" class="footer-logo float-free" alt="NorthStar">
+    <span class="footer-text">© 2026 NorthStar Office &amp; Accounting LLC · Operated within the Skyes Over London ecosystem</span>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#cta-section">Contact</a>
+    </div>
+  
+  <p style="margin-top:14px;font-size:12px;letter-spacing:.08em;">
+    <a href="../get-started.html">Get Started</a> ·
+    <a href="../index.html">Nexus Hub</a> ·
+    <a href="../privacy.html">Privacy</a> ·
+    <a href="../terms.html">Terms</a>
+  </p>
+</footer>
+
+</div>
+
+<script>
+/* NAV SCROLL */
+window.addEventListener('scroll',()=>{
+  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY>50);
+});
+
+/* SCROLL REVEAL */
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* HERO CANVAS (Neon Blue + Gold particles) */
+function initHero(){
+  const hc=document.getElementById('hero-canvas');
+  if(!hc) return;
+  const hx=hc.getContext('2d');
+  let particles=[];
+  function resize(){
+    hc.width=window.innerWidth;
+    hc.height=window.innerHeight;
+    particles=[];
+    const count=Math.min(260, Math.floor((hc.width*hc.height)/9000));
+    for(let i=0;i<count;i++) {
+      particles.push({
+        x:Math.random()*hc.width,
+        y:Math.random()*hc.height,
+        r:Math.random()*1.8+0.3,
+        o:Math.random()*0.85+0.15,
+        v:(Math.random()*0.006+0.002) * (Math.random()<0.5?-1:1),
+        c:(Math.random()<0.55?'blue':'gold'),
+        dx:(Math.random()-.5)*0.25,
+        dy:(Math.random()-.5)*0.25
+      });
+    }
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  function draw(){
+    hx.clearRect(0,0,hc.width,hc.height);
+
+    const g=hx.createRadialGradient(hc.width/2,hc.height/2,0,hc.width/2,hc.height/2,Math.max(hc.width,hc.height)*0.65);
+    g.addColorStop(0,'rgba(0,194,255,.14)');
+    g.addColorStop(0.4,'rgba(255,215,0,.06)');
+    g.addColorStop(1,'rgba(0,6,11,0)');
+    hx.fillStyle=g;
+    hx.fillRect(0,0,hc.width,hc.height);
+
+    for(const p of particles){
+      p.o += p.v;
+      if(p.o>1 || p.o<0.12) p.v*=-1;
+      p.x += p.dx; p.y += p.dy;
+      if(p.x<0) p.x = hc.width;
+      if(p.x>hc.width) p.x = 0;
+      if(p.y<0) p.y = hc.height;
+      if(p.y>hc.height) p.y = 0;
+
+      hx.beginPath();
+      hx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      const col = p.c==='blue' ? `rgba(0,194,255,${p.o*0.55})` : `rgba(255,215,0,${p.o*0.45})`;
+      hx.fillStyle=col;
+      hx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  const dc=document.getElementById('data-canvas');
+  if(!dc) return;
+  function resizeDC(){ dc.width=dc.offsetWidth; dc.height=dc.offsetHeight; }
+  resizeDC();
+  window.addEventListener('resize', resizeDC);
+  const dx=dc.getContext('2d');
+  const nodes=[];
+  for(let i=0;i<32;i++) nodes.push({
+    x:Math.random()*dc.width,
+    y:Math.random()*dc.height,
+    vx:(Math.random()-.5)*0.9,
+    vy:(Math.random()-.5)*0.9,
+    r:Math.random()*3+1,
+    t:Math.random()<0.6?'blue':'gold'
+  });
+  function drawData(){
+    dx.clearRect(0,0,dc.width,dc.height);
+
+    for(let i=0;i<nodes.length;i++) {
+      for(let j=i+1;j<nodes.length;j++) {
+        const d=Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);
+        if(d<140){
+          dx.beginPath();
+          dx.moveTo(nodes[i].x,nodes[i].y);
+          dx.lineTo(nodes[j].x,nodes[j].y);
+          dx.strokeStyle=`rgba(0,194,255,${(1-d/140)*0.28})`;
+          dx.lineWidth=0.6;
+          dx.stroke();
+        }
+      }
+    }
+
+    for(const n of nodes){
+      dx.beginPath();
+      dx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      const col = n.t==='blue' ? 'rgba(0,194,255,.85)' : 'rgba(255,215,0,.78)';
+      dx.fillStyle=col;
+      dx.shadowColor=col;
+      dx.shadowBlur=12;
+      dx.fill();
+      dx.shadowBlur=0;
+
+      n.x+=n.vx; n.y+=n.vy;
+      if(n.x<0||n.x>dc.width) n.vx*=-1;
+      if(n.y<0||n.y>dc.height) n.vy*=-1;
+    }
+    requestAnimationFrame(drawData);
+  }
+  drawData();
+}
+
+document.addEventListener('DOMContentLoaded', initHero);
+
+/* === NORTHSTAR INTRO ENGINE === */
+function dismissNSIntro() {
+  var o = document.getElementById('ns-intro');
+  if (!o) return;
+  o.classList.add('ns-done');
+  setTimeout(function() { if (o.parentNode) o.parentNode.removeChild(o); }, 1600);
+}
+
+(function() {
+  var canvas = document.getElementById('ns-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H;
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var chars = '0123456789$%+-=.,/';
+  var NUM = 380;
+  var cols = Math.max(1, Math.floor(window.innerWidth / 60));
+  var rowsN = Math.max(1, Math.floor(window.innerHeight / 40));
+  var colSp = window.innerWidth / cols;
+  var rowSp = window.innerHeight / rowsN;
+  var isOrdered = false;
+  var pts = [];
+
+  function DataPoint(i) {
+    this.x = Math.random() * W; this.y = Math.random() * H;
+    this.vx = (Math.random() - .5) * 1.5; this.vy = (Math.random() - .5) * 1.5;
+    this.char = chars[Math.floor(Math.random() * chars.length)];
+    this.op = Math.random() * .4 + .1;
+    this.tx = (i % cols) * colSp + colSp / 2;
+    this.ty = Math.floor(i / cols) % rowsN * rowSp + rowSp / 2;
+  }
+  DataPoint.prototype.update = function() {
+    if (!isOrdered) {
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < 0) this.x = W; if (this.x > W) this.x = 0;
+      if (this.y < 0) this.y = H; if (this.y > H) this.y = 0;
+      if (Math.random() > .98) this.char = chars[Math.floor(Math.random() * chars.length)];
+    } else {
+      this.x += (this.tx - this.x) * .04;
+      this.y += (this.ty - this.y) * .04;
+    }
+  };
+  DataPoint.prototype.draw = function() {
+    ctx.font = isOrdered ? '12px monospace' : '14px monospace';
+    ctx.fillStyle = 'rgba(100,200,255,' + this.op + ')';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(this.char, this.x, this.y);
+  };
+
+  for (var i = 0; i < NUM; i++) pts.push(new DataPoint(i));
+
+  (function render() {
+    if (!document.getElementById('ns-intro')) return;
+    ctx.fillStyle = isOrdered ? 'rgba(2,4,10,.4)' : 'rgba(2,4,10,.2)';
+    ctx.fillRect(0, 0, W, H);
+    var g = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, isOrdered ? 400 : 200);
+    g.addColorStop(0, 'rgba(0,150,255,' + (isOrdered ? '.08' : '.03') + ')');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    pts.forEach(function(p) { p.update(); p.draw(); });
+    requestAnimationFrame(render);
+  })();
+
+  /* Sequence timing */
+  setTimeout(function() {
+    var logo = document.getElementById('ns-logo');
+    if (logo) logo.classList.add('ns-logo-emerge');
+  }, 1000);
+
+  setTimeout(function() { isOrdered = true; }, 4000);
+
+  setTimeout(function() {
+    var cv = document.getElementById('ns-canvas');
+    if (cv) { cv.style.transition = 'opacity 4s ease'; cv.style.opacity = '0.15'; }
+    var title = document.getElementById('ns-title');
+    if (title) title.style.animation = 'nsTitleReveal 2s cubic-bezier(0.16,1,0.3,1) forwards';
+    var sep = document.getElementById('ns-sep');
+    if (sep) { sep.style.opacity = '1'; sep.style.width = '300px'; sep.style.boxShadow = '0 0 15px rgba(0,200,255,.5)'; }
+    var sub = document.getElementById('ns-sub');
+    if (sub) sub.style.animation = 'nsSubReveal 2s cubic-bezier(0.16,1,0.3,1) .5s forwards';
+  }, 5500);
+
+  /* Auto-dismiss after full sequence */
+  setTimeout(dismissNSIntro, 8500);
+})();
+</script>
+</body>
+</html>

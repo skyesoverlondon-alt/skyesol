@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>SOLE Drop — Systems That Hold (3D Spectacle)</title>
+  <meta name="description" content="SOLE Drop: a cinematic, 3D, operator-grade spectacle advertising the SOLEnterprises ecosystem—digital growth, mobility + logistics, standards, contractors, partner lanes, and the SOLEDROP command portal." />
+  <meta name="theme-color" content="#05050a" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SOLE Drop — Systems That Hold (3D Spectacle)" />
+  <meta property="og:description" content="Cinematic 3D showcase of the SOLEnterprises ecosystem: doctrine, SkyeWeb, rate card, mobility, driver track, office + fleet, Sentinel Cleared™, partners, contractors, portfolio, SOLEDROP, founder, currents, links." />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+
+  <style>
+    :root{
+      --gold:#c9a84c; --gold-light:#e8d48b; --gold-dim:rgba(201,168,76,0.15);
+      --purple:#8a63ff; --purple-dim:rgba(138,99,255,0.18);
+      --dark:#0e0e1a; --darker:#07070f;
+      --surface:#0c0c14; --surface-2:#111119; --surface-3:#181822;
+      --text:#e8e6e1; --text-dim:#8a8880;
+      --accent-blue:#3a6fd8; --accent-fire:#e84c30;
+      --glow-gold:0 0 30px rgba(201,168,76,0.30),0 0 60px rgba(201,168,76,0.10);
+      --glow-purple:0 0 26px rgba(138,99,255,0.28),0 0 60px rgba(138,99,255,0.10);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--darker);
+      color:var(--text);
+      font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-weight:300; line-height:1.7; overflow-x:hidden;
+    }
+
+    /* subtle noise */
+    body::after{
+      content:'';
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events:none; z-index:50;
+    }
+
+    /* Three canvas */
+    #three-bg{position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none;}
+
+    /* loader */
+    #loader{
+      position:fixed; inset:0; z-index:99999;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      background:radial-gradient(circle at 50% 40%, rgba(138,99,255,0.16) 0%, rgba(7,7,15,1) 60%);
+      transition:opacity 1s ease;
+    }
+    body.loaded #loader{opacity:0; pointer-events:none;}
+    .spinner{
+      width:56px; height:56px; border-radius:50%;
+      border:2px solid transparent;
+      border-top-color:var(--gold);
+      border-right-color:var(--accent-blue);
+      animation:spin 1s linear infinite;
+      box-shadow:0 0 20px rgba(201,168,76,0.35);
+      margin-bottom:16px;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    #loading-text{font-family:"Fira Code",monospace; letter-spacing:2px; text-transform:uppercase; font-size:12px; color:var(--gold); margin-bottom:6px;}
+    #loading-sub{font-family:"Fira Code",monospace; letter-spacing:1.6px; text-transform:uppercase; font-size:10px; color:rgba(232,232,232,0.55);}
+
+    /* intro */
+    #intro{
+      position:fixed; inset:0; z-index:98000;
+      background:radial-gradient(circle at 50% 25%, rgba(201,168,76,0.08) 0%, rgba(138,99,255,0.10) 18%, rgba(7,7,15,0.98) 65%);
+      display:none;
+      overflow:hidden;
+    }
+    body.show-intro #intro{display:block;}
+    #intro .vignette{position:absolute; inset:0; background:radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.92) 120%); pointer-events:none;}
+    #intro .grain{position:absolute; inset:0; opacity:.06; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+    #intro .beams{
+      position:absolute; inset:-20%;
+      background:
+        radial-gradient(circle at 30% 50%, rgba(138,99,255,0.22) 0%, transparent 55%),
+        radial-gradient(circle at 70% 40%, rgba(201,168,76,0.18) 0%, transparent 60%),
+        linear-gradient(115deg, transparent 25%, rgba(255,255,255,0.03) 35%, transparent 45%),
+        linear-gradient(65deg, transparent 15%, rgba(255,255,255,0.02) 25%, transparent 35%);
+      filter:blur(30px);
+      animation:beamDrift 18s cubic-bezier(.37,0,.63,1) infinite alternate;
+      opacity:.9;
+      pointer-events:none;
+    }
+    @keyframes beamDrift{0%{transform:translateX(-3%) translateY(-2%) scale(1)}100%{transform:translateX(3%) translateY(2%) scale(1.08)}}
+
+    #intro .center{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      text-align:center; padding:24px;
+    }
+    .runes{
+      font-family:"Fira Code",monospace;
+      letter-spacing:.45em;
+      text-transform:uppercase;
+      font-size:11px;
+      color:rgba(232,232,232,0.65);
+      margin-bottom:18px;
+    }
+    .intro-logo{
+      width:min(520px, 78vw);
+      height:auto;
+      filter:drop-shadow(0 0 18px rgba(201,168,76,0.45)) drop-shadow(0 0 38px rgba(138,99,255,0.25));
+      animation:floatLogo 4.6s ease-in-out infinite;
+      transform:translateZ(0);
+    }
+    @keyframes floatLogo{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.02)}}
+    .intro-title{
+      font-family:"Playfair Display",serif;
+      font-size:clamp(34px,5.5vw,64px);
+      line-height:1.05;
+      margin-top:18px;
+      text-shadow:0 0 16px rgba(201,168,76,0.18);
+    }
+    .intro-title span{
+      background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));
+      background-size:200% auto;
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      animation:shimmer 4s ease-in-out infinite;
+    }
+    @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+    .intro-sub{
+      max-width:820px;
+      font-family:"Cormorant Garamond",serif;
+      font-style:italic;
+      font-size:clamp(14px,1.8vw,20px);
+      color:rgba(232,232,232,0.75);
+      margin-top:12px;
+    }
+    .intro-status{
+      margin-top:18px;
+      font-family:"Fira Code",monospace;
+      font-size:11px;
+      letter-spacing:.18em;
+      color:rgba(232,232,232,0.6);
+      text-transform:uppercase;
+    }
+    .intro-bar{
+      width:min(620px, 86vw);
+      height:10px;
+      border-radius:999px;
+      border:1px solid rgba(201,168,76,0.18);
+      background:rgba(17,17,25,0.55);
+      margin-top:14px;
+      overflow:hidden;
+      box-shadow:var(--glow-gold);
+    }
+    .intro-bar > div{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, rgba(138,99,255,0.25), rgba(201,168,76,0.95), rgba(201,168,76,0.55));
+      animation:introFill 3.2s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    @keyframes introFill{to{width:100%}}
+    .intro-actions{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:12px 22px;
+      border-radius:6px;
+      font-size:11px;
+      letter-spacing:2.4px;
+      text-transform:uppercase;
+      text-decoration:none;
+      cursor:pointer;
+      user-select:none;
+      transition:transform .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+      font-family:"Bebas Neue",sans-serif;
+    }
+    .btn-gold{background:linear-gradient(135deg,var(--gold),#b8943f); color:#0a0a12; border:1px solid rgba(201,168,76,0.35); box-shadow:var(--glow-gold);}
+    .btn-outline{background:transparent; color:var(--gold); border:1px solid rgba(201,168,76,0.26);}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-outline:hover{background:rgba(201,168,76,0.06); border-color:rgba(201,168,76,0.45)}
+    .btn-gold:hover{box-shadow:0 0 40px rgba(201,168,76,0.45),0 0 80px rgba(201,168,76,0.15)}
+    .intro-skip{
+      position:absolute; bottom:22px; right:22px;
+      background:transparent;
+      border:1px solid rgba(201,168,76,0.25);
+      color:rgba(232,232,232,0.75);
+      padding:10px 14px;
+      border-radius:999px;
+      font-family:"Fira Code",monospace;
+      font-size:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .intro-skip:hover{border-color:rgba(201,168,76,0.45); background:rgba(201,168,76,0.06); color:#fff}
+
+    body.intro-done #intro{opacity:0; pointer-events:none; transition:opacity .9s ease;}
+
+    /* nav */
+    .main-nav{
+      position:fixed; top:0; left:0; right:0;
+      z-index:9000;
+      padding:14px 28px;
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(5,5,8,0.72);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(201,168,76,0.06);
+      transition:background .25s ease;
+    }
+    .main-nav.scrolled{background:rgba(5,5,8,0.92);}
+    .nav-left{display:flex; align-items:center; gap:14px; min-width:260px;}
+    .nav-logo{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none;
+    }
+    .nav-logo img{
+      height:36px; width:auto;
+      filter:drop-shadow(0 0 14px rgba(201,168,76,0.28)) drop-shadow(0 0 18px rgba(138,99,255,0.18));
+      animation:logoPulse 3.4s ease-in-out infinite;
+      transform:translateZ(0);
+    }
+    @keyframes logoPulse{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-2px) scale(1.02)}}
+    .nav-logo span{
+      font-family:"Bebas Neue",sans-serif;
+      font-size:13px;
+      letter-spacing:4px;
+      color:var(--gold);
+      white-space:nowrap;
+    }
+    .nav-links{display:flex; gap:18px; align-items:center; flex-wrap:wrap; justify-content:center;}
+    .nav-links a{
+      font-size:10px; letter-spacing:2px; text-transform:uppercase;
+      color:rgba(138,136,128,0.92); text-decoration:none;
+      padding:6px 0; position:relative;
+      transition:color .22s ease;
+    }
+    .nav-links a::after{
+      content:'';
+      position:absolute; left:0; bottom:0;
+      width:0; height:1px; background:var(--gold);
+      transition:width .22s ease;
+    }
+    .nav-links a:hover{color:var(--gold)}
+    .nav-links a:hover::after{width:100%}
+
+    .nav-right{display:flex; align-items:center; gap:10px; min-width:260px; justify-content:flex-end;}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(201,168,76,0.18);
+      background:rgba(201,168,76,0.03);
+      font-size:11px;
+      color:rgba(232,232,232,0.82);
+      font-family:"Fira Code",monospace;
+      letter-spacing:1px;
+      white-space:nowrap;
+    }
+    .pill a{color:rgba(232,232,232,0.9); text-decoration:none; border-bottom:1px solid rgba(201,168,76,0.22)}
+    .pill a:hover{border-bottom-color:rgba(201,168,76,0.55)}
+    .menu-btn{
+      background:transparent;
+      border:1px solid rgba(201,168,76,0.35);
+      color:var(--gold);
+      font-family:"Bebas Neue",sans-serif;
+      font-size:13px;
+      letter-spacing:3px;
+      padding:9px 14px;
+      cursor:pointer;
+      border-radius:8px;
+      transition:background .2s ease, transform .2s ease;
+      white-space:nowrap;
+    }
+    .menu-btn:hover{background:rgba(201,168,76,0.10); transform:translateY(-1px);}
+
+    /* hero */
+    .hero{
+      min-height:100vh;
+      padding-top:78px;
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:2px;
+      background:linear-gradient(90deg, transparent 12%, var(--gold) 50%, transparent 88%);
+      opacity:.7;
+      animation:subtlePulse 2.8s ease-in-out infinite;
+      z-index:2;
+    }
+    @keyframes subtlePulse{0%,100%{opacity:.65}50%{opacity:1}}
+    .hero-inner{
+      width:min(1280px, 92vw);
+      display:grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap:40px;
+      align-items:center;
+      padding:70px 10px 40px;
+    }
+    .hero-label{
+      font-family:"Bebas Neue",sans-serif;
+      font-size:12px;
+      letter-spacing:7px;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:14px;
+    }
+    .hero-h1{
+      font-family:"Playfair Display",serif;
+      font-size:clamp(40px,5.4vw,78px);
+      line-height:1.03;
+      font-weight:700;
+    }
+    .hero-h1 span{
+      display:block;
+      background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      background-size:200% auto;
+      animation:shimmer 4s ease-in-out infinite;
+    }
+    .hero-p{
+      margin-top:14px;
+      max-width:640px;
+      font-family:"Cormorant Garamond",serif;
+      font-size:clamp(15px,1.8vw,20px);
+      font-style:italic;
+      color:rgba(232,232,232,0.70);
+    }
+    .hero-cta{
+      margin-top:22px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+    .hero-hints{
+      margin-top:14px;
+      font-family:"Fira Code",monospace;
+      font-size:10px;
+      letter-spacing:1.6px;
+      color:rgba(232,232,232,0.52);
+      text-transform:uppercase;
+    }
+
+    .hero-card{
+      background:rgba(12,12,20,0.62);
+      border:1px solid rgba(201,168,76,0.10);
+      border-radius:14px;
+      box-shadow:0 18px 60px rgba(0,0,0,0.55);
+      padding:18px 18px 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:2px;
+      background:linear-gradient(90deg, transparent, rgba(201,168,76,0.75), transparent);
+      opacity:.85;
+    }
+    .hero-card .card-top{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px;
+    }
+    .hero-card .tag{
+      font-family:"Fira Code",monospace;
+      font-size:10px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      color:rgba(232,232,232,0.68);
+    }
+    .hero-card .lite{
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:"Fira Code",monospace;
+      font-size:10px;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      color:rgba(232,232,232,0.68);
+    }
+    .switch{
+      width:46px; height:24px;
+      border-radius:999px;
+      border:1px solid rgba(201,168,76,0.18);
+      background:rgba(17,17,25,0.7);
+      position:relative;
+      cursor:pointer;
+      transition:background .2s ease, border-color .2s ease;
+    }
+    .switch::after{
+      content:'';
+      position:absolute; top:3px; left:3px;
+      width:18px; height:18px;
+      border-radius:50%;
+      background:linear-gradient(135deg, rgba(201,168,76,0.9), rgba(138,99,255,0.55));
+      box-shadow:0 0 18px rgba(201,168,76,0.22);
+      transition:left .22s ease, transform .22s ease;
+    }
+    body.lite-mode .switch{border-color:rgba(138,99,255,0.25); background:rgba(138,99,255,0.08)}
+    body.lite-mode .switch::after{left:24px; transform:scale(1.02)}
+    .hero-card h3{
+      font-family:"Playfair Display",serif;
+      font-size:22px;
+      margin-bottom:6px;
+    }
+    .hero-card p{font-size:13px; color:rgba(232,232,232,0.70); line-height:1.85;}
+    .hero-card .mini{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .mini-stat{
+      padding:10px 10px;
+      background:rgba(17,17,25,0.55);
+      border:1px solid rgba(201,168,76,0.08);
+      border-radius:12px;
+    }
+    .mini-stat .k{
+      font-family:"Fira Code",monospace;
+      font-size:9px;
+      letter-spacing:1.7px;
+      text-transform:uppercase;
+      color:rgba(232,232,232,0.55);
+      margin-bottom:6px;
+    }
+    .mini-stat .v{
+      font-family:"Bebas Neue",sans-serif;
+      font-size:22px;
+      letter-spacing:2px;
+      color:var(--gold);
+      line-height:1;
+    }
+
+    /* Sections */
+    .divider{
+      width:100%;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(201,168,76,0.22), transparent);
+      position:relative;
+      z-index:1;
+    }
+    section{
+      position:relative;
+      z-index:1;
+      padding:96px 22px;
+    }
+    .wrap{width:min(1120px, 92vw); margin:0 auto;}
+    .section-label{
+      font-family:"Bebas Neue",sans-serif;
+      letter-spacing:5px;
+      font-size:12px;
+      text-transform:uppercase;
+      color:var(--gold);
+      margin-bottom:12px;
+    }
+    .section-title{
+      font-family:"Playfair Display",serif;
+      font-weight:700;
+      font-size:clamp(28px,4.4vw,52px);
+      line-height:1.1;
+      margin-bottom:14px;
+    }
+    .section-desc{
+      color:rgba(232,232,232,0.68);
+      font-size:15px;
+      max-width:820px;
+      line-height:1.9;
+      margin-bottom:30px;
+    }
+    .grid-3{display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;}
+    .grid-2{display:grid; grid-template-columns:repeat(2, 1fr); gap:18px;}
+    .grid-4{display:grid; grid-template-columns:repeat(4, 1fr); gap:16px;}
+    .card{
+      background:rgba(12,12,20,0.66);
+      border:1px solid rgba(201,168,76,0.08);
+      border-radius:14px;
+      padding:22px 20px;
+      transition:transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:2px;
+      background:linear-gradient(90deg, transparent, rgba(201,168,76,0.85), transparent);
+      opacity:0;
+      transition:opacity .28s ease;
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(201,168,76,0.22);
+      box-shadow:0 18px 55px rgba(0,0,0,0.55);
+    }
+    .card:hover::before{opacity:1}
+    .card h4{font-size:15px; font-weight:700; margin-bottom:8px;}
+    .card p{font-size:13px; color:rgba(232,232,232,0.68); line-height:1.8;}
+    .card .type{
+      font-family:"Fira Code",monospace;
+      font-size:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:rgba(201,168,76,0.92);
+      margin-bottom:10px;
+    }
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+    .chip{
+      font-family:"Fira Code",monospace;
+      font-size:9px;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(201,168,76,0.16);
+      color:rgba(232,232,232,0.72);
+      background:rgba(201,168,76,0.04);
+    }
+
+    /* glow tile (purple) */
+    .glow-tile-purple{
+      display:inline-block;
+      background:linear-gradient(135deg, rgba(138,99,255,0.18) 0%, rgba(58,111,216,0.12) 100%);
+      border-radius:12px;
+      box-shadow:0 0 18px 6px rgba(138,99,255,0.22), 0 0 32px 12px rgba(138,99,255,0.12);
+      padding:14px 22px;
+      margin:18px 0;
+      color:#e8e6ff;
+      font-size:1.03rem;
+      font-weight:500;
+      text-align:center;
+      border:1px solid rgba(138,99,255,0.18);
+      animation:floatGlowBlue 4.5s ease-in-out infinite;
+    }
+    @keyframes floatGlowBlue{
+      0%,100%{transform:translateY(0); filter:drop-shadow(0 0 18px rgba(58,111,216,0.45)) drop-shadow(0 0 40px rgba(58,111,216,0.15))}
+      50%{transform:translateY(-10px); filter:drop-shadow(0 0 28px rgba(58,111,216,0.65)) drop-shadow(0 0 60px rgba(58,111,216,0.25))}
+    }
+
+    /* proof signals list */
+    .proof{
+      display:grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap:18px;
+      align-items:start;
+      margin-top:22px;
+    }
+    .proof-list{display:grid; grid-template-columns:1fr; gap:12px;}
+    .proof-item{
+      padding:14px 14px;
+      border-radius:12px;
+      border:1px solid rgba(201,168,76,0.08);
+      background:rgba(17,17,25,0.55);
+    }
+    .proof-item b{color:var(--gold); font-weight:700;}
+    .proof-item div{color:rgba(232,232,232,0.70); font-size:13px; margin-top:6px; line-height:1.7;}
+
+    /* universe 3D hint */
+    .universe-hint{
+      margin-top:16px;
+      font-family:"Fira Code",monospace;
+      font-size:10px;
+      letter-spacing:1.7px;
+      text-transform:uppercase;
+      color:rgba(232,232,232,0.58);
+    }
+    .kbd{display:inline-block; padding:2px 6px; border-radius:6px; border:1px solid rgba(201,168,76,0.18); background:rgba(201,168,76,0.06); color:rgba(232,232,232,0.82);}
+
+    /* command palette */
+    #palette{
+      position:fixed; inset:0;
+      z-index:99998;
+      background:rgba(5,5,8,0.78);
+      backdrop-filter:blur(16px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    #palette.open{display:flex;}
+    .palette-card{
+      width:min(860px, 96vw);
+      border-radius:16px;
+      border:1px solid rgba(201,168,76,0.18);
+      background:rgba(12,12,20,0.86);
+      box-shadow:0 28px 80px rgba(0,0,0,0.65);
+      overflow:hidden;
+    }
+    .palette-top{
+      padding:14px 14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border-bottom:1px solid rgba(201,168,76,0.10);
+    }
+    .palette-top input{
+      flex:1;
+      background:rgba(17,17,25,0.7);
+      border:1px solid rgba(201,168,76,0.14);
+      border-radius:12px;
+      padding:12px 12px;
+      color:var(--text);
+      outline:none;
+      font-size:13px;
+      font-family:"Fira Code",monospace;
+    }
+    .palette-top .hint{
+      font-family:"Fira Code",monospace;
+      font-size:10px;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      color:rgba(232,232,232,0.55);
+      white-space:nowrap;
+    }
+    .palette-list{
+      max-height:min(64vh, 520px);
+      overflow:auto;
+      padding:8px;
+    }
+    .pal-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(201,168,76,0.06);
+      background:rgba(17,17,25,0.52);
+      cursor:pointer;
+      transition:transform .18s ease, border-color .18s ease;
+      margin:8px 0;
+    }
+    .pal-item:hover{transform:translateY(-1px); border-color:rgba(201,168,76,0.20)}
+    .pal-left{display:flex; flex-direction:column; gap:4px;}
+    .pal-title{font-weight:700; font-size:13px;}
+    .pal-sub{font-family:"Fira Code",monospace; font-size:10px; letter-spacing:1.6px; text-transform:uppercase; color:rgba(232,232,232,0.55);}
+    .pal-right{font-family:"Fira Code",monospace; font-size:10px; letter-spacing:1.6px; text-transform:uppercase; color:rgba(201,168,76,0.88);}
+    .pal-foot{
+      padding:12px 14px;
+      border-top:1px solid rgba(201,168,76,0.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    /* footer */
+    footer{
+      padding:64px 22px 34px;
+      text-align:center;
+      border-top:1px solid rgba(201,168,76,0.06);
+      position:relative;
+      z-index:1;
+    }
+    .footer-logo img{
+      height:52px; width:auto;
+      filter:drop-shadow(0 0 16px rgba(201,168,76,0.35)) drop-shadow(0 0 22px rgba(138,99,255,0.18));
+      animation:logoPulse 3.4s ease-in-out infinite;
+    }
+    footer p{color:rgba(232,232,232,0.62); font-size:12px; line-height:1.85; margin-top:14px;}
+    footer a{color:var(--gold); text-decoration:none;}
+    footer a:hover{text-decoration:underline;}
+    .footer-links{display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-top:14px;}
+    .footer-links a{font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(232,232,232,0.55);}
+    .footer-links a:hover{color:var(--gold); text-decoration:none;}
+
+    /* responsive */
+    @media (max-width: 980px){
+      .hero-inner{grid-template-columns:1fr; gap:18px; padding:64px 0 30px;}
+      .nav-links{display:none;}
+      .nav-left,.nav-right{min-width:auto;}
+      .grid-3{grid-template-columns:1fr;}
+      .grid-2{grid-template-columns:1fr;}
+      .grid-4{grid-template-columns:1fr 1fr;}
+      .proof{grid-template-columns:1fr;}
+    }
+    @media (max-width: 520px){
+      .main-nav{padding:12px 14px;}
+      .grid-4{grid-template-columns:1fr;}
+      .pill{display:none;}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- LOADER -->
+  <div id="loader" aria-label="Loading">
+    <div class="spinner"></div>
+    <div id="loading-text">INITIALIZING SYSTEMS…</div>
+    <div id="loading-sub">SOLE DROP · 3D SPECTACLE</div>
+  </div>
+
+  <!-- INTRO -->
+  <div id="intro" aria-hidden="true">
+    <div class="beams"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+
+    <button class="intro-skip" id="introSkip" type="button">SKIP</button>
+
+    <div class="center">
+      <div class="runes">ᚠᚢᚦᚨᚱᚲ • ᛞᛟᚲᛏᚱᛁᚾᛖ • ᛊᛏᚨᚾᛞᚨᚱᛞ • ᛊᛃᚢᚾᚲ •</div>
+      <img class="intro-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOLEnterprises Logo" />
+      <div class="intro-title"><span>Systems that hold.</span> Brands that scale.</div>
+      <div class="intro-sub">A cinematic advertising surface for the full SOLEnterprises universe: digital growth, mobility + logistics, standards, partners, contractors, and the SOLEDROP command portal.</div>
+      <div class="intro-status" id="introStatus">INITIALIZING SYSTEMS…</div>
+      <div class="intro-bar" aria-hidden="true"><div></div></div>
+      <div class="intro-actions">
+        <a class="btn btn-gold" href="#home" data-scroll="home">ENTER THE SYSTEM</a>
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/" target="_blank" rel="noopener">OPEN ORIGINAL ↗</a>
+      </div>
+      <div class="universe-hint">Quick Navigate: <span class="kbd">Ctrl</span> + <span class="kbd">K</span> · Intro replay: add <span class="kbd">?intro=1</span> · Skip intro: <span class="kbd">?intro=0</span></div>
+    </div>
+  </div>
+
+  <canvas id="three-bg"></canvas>
+
+  <!-- NAV -->
+  <nav class="main-nav" id="mainNav">
+    <div class="nav-left">
+      <a class="nav-logo" href="#home" data-scroll="home" aria-label="SOLE Drop Home">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOLEnterprises" />
+        <span>SOLE DROP</span>
+      </a>
+      <div class="pill">Call: <a href="tel:+14804695416">4804695416</a></div>
+    </div>
+
+    <div class="nav-links" aria-label="Primary navigation">
+      <a href="#ecosystem" data-scroll="ecosystem">Ecosystem</a>
+      <a href="#skyeweb" data-scroll="skyeweb">SkyeWeb</a>
+      <a href="#ratecard" data-scroll="ratecard">Rate Card</a>
+      <a href="#mobility" data-scroll="mobility">Mobility</a>
+      <a href="#sentinel" data-scroll="sentinel">Sentinel</a>
+      <a href="#portfolio" data-scroll="portfolio">Portfolio</a>
+      <a href="#soledrop" data-scroll="soledrop">SOLEDROP</a>
+      <a href="#founder" data-scroll="founder">Founder</a>
+      <a href="#links" data-scroll="links">Links</a>
+    </div>
+
+    <div class="nav-right">
+      <button class="menu-btn" id="menuBtn" type="button">☰ UNIVERSE</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-label">OPERATOR ECOSYSTEM • PREMIUM DIGITAL AGENCY • MOBILITY + LOGISTICS • STANDARDS</div>
+        <h1 class="hero-h1">SOLEnterprises<br/><span>Systems that hold.</span></h1>
+        <p class="hero-p">
+          SOLEnterprises builds disciplined operating systems across digital growth, logistics, and execution standards—so brands scale without chaos.
+          This is a single-page, 3D advertising spectacle that recreates the full SOLE Drop website as one cinematic surface.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="https://solenterprises.org" target="_blank" rel="noopener">Leadership Hub ↗</a>
+          <a class="btn btn-outline" href="https://solenterprises.org" target="_blank" rel="noopener">Contact Hub ↗</a>
+          <a class="btn btn-outline" href="#soledrop" data-scroll="soledrop">SOLEDROP PORTAL</a>
+          <a class="btn btn-outline" href="https://soledrop.netlify.app/" target="_blank" rel="noopener">OPEN ORIGINAL ↗</a>
+        </div>
+
+        <div class="hero-hints">
+          Universe Menu: <span class="kbd">Ctrl</span> + <span class="kbd">K</span> · Node-click the 3D constellation · Lite Mode available (reduces motion)
+        </div>
+
+        <div class="proof">
+          <div>
+            <div class="glow-tile-purple">This page is both a showcase and a navigator: every lane becomes an anchor section + a live 3D node you can click.</div>
+            <div class="proof-list">
+              <div class="proof-item"><b>Premium Delivery</b><div>Design, engineering, and operations aligned to outcomes.</div></div>
+              <div class="proof-item"><b>Standards-First</b><div>Sentinel Cleared™ posture for trust and closeout integrity.</div></div>
+              <div class="proof-item"><b>Operator Lanes</b><div>Mobility, logistics, and business systems built to scale clean.</div></div>
+              <div class="proof-item"><b>Bench + Partners</b><div>Contractors + partner operators routed through disciplined scope.</div></div>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="3D controls">
+            <div class="card-top">
+              <div class="tag">3D CONSOLE</div>
+              <div class="lite">
+                LITE MODE
+                <div class="switch" id="liteSwitch" role="switch" aria-checked="false" tabindex="0" aria-label="Toggle lite mode"></div>
+              </div>
+            </div>
+            <h3>Universe Constellation</h3>
+            <p>
+              The glowing nodes in the background represent the full SOLE system: divisions, standards, partner lanes, and portals.
+              Hover to highlight. Click to jump to that lane. Use the Universe Menu for instant routing.
+            </p>
+            <div class="mini" aria-hidden="true">
+              <div class="mini-stat"><div class="k">Divisions</div><div class="v">15</div></div>
+              <div class="mini-stat"><div class="k">Realms</div><div class="v">4</div></div>
+              <div class="mini-stat"><div class="k">Currents</div><div class="v">4</div></div>
+              <div class="mini-stat"><div class="k">Execution</div><div class="v">∞</div></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- ECOSYSTEM -->
+  <section id="ecosystem">
+    <div class="wrap">
+      <div class="section-label">Doctrine</div>
+      <div class="section-title">The doctrine behind the ecosystem.</div>
+      <div class="section-desc">
+        Structure → execution → stability → scale → continuity. The ecosystem stays coherent across every division and engagement.
+        “We don’t build vibes. We build systems that hold.”
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="type">Core Thesis</div>
+          <h4>Systems that hold. Brands that scale.</h4>
+          <p>When a business leaks time, money, or credibility, the cause is framed as missing structure—not missing effort.</p>
+          <div class="chips">
+            <span class="chip">Structure</span><span class="chip">Execution</span><span class="chip">Stability</span><span class="chip">Scale</span><span class="chip">Continuity</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="type">Micro-Pillars</div>
+          <h4>The system underneath the brand</h4>
+          <p>Recurring infrastructure themes that keep divisions coherent across industries: Structure, Execution, Lanes, Continuity, Operator Network, Sentinel Standards, Digital Growth Studio, and more.</p>
+          <div class="chips">
+            <span class="chip">Operator Network</span><span class="chip">Sentinel</span><span class="chip">Standards</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="type">Activation Model</div>
+          <h4>Choose a lane, then run clean</h4>
+          <p>Documented paths and acceptance gates prevent drift: clear lanes over improvisation, boundaries that prevent chaos cycles, repeatability that survives scale.</p>
+          <div class="chips">
+            <span class="chip">Gates</span><span class="chip">Scope</span><span class="chip">Closeout</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/ecosystem" target="_blank" rel="noopener">Open original page ↗</a>
+        <a class="btn btn-gold" href="#sentinel" data-scroll="sentinel">Sentinel Cleared™</a>
+        <a class="btn btn-outline" href="#contractors" data-scroll="contractors">Bench Network</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKYEWEB -->
+  <section id="skyeweb">
+    <div class="wrap">
+      <div class="section-label">Digital Growth</div>
+      <div class="section-title">SkyeWeb · Premium digital delivery, engineered to convert.</div>
+      <div class="section-desc">
+        High-end web experiences and growth systems that establish trust, increase conversion quality, and compound long-term authority.
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="type">Core Services</div>
+          <h4>Full‑service digital excellence</h4>
+          <p>Web design + engineering (mobile-first, component coherence), SEO (technical + content architecture + authority posture), paid media aligned to conversion quality, brand systems, and analytics.</p>
+          <div class="chips">
+            <span class="chip">Design + Engineering</span><span class="chip">SEO</span><span class="chip">Paid Media</span><span class="chip">Analytics</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="type">Delivery Method</div>
+          <h4>Structure beats “creative chaos”</h4>
+          <p>Discovery → Architecture → Build → QA → Launch. Clean process, measured priorities, and hard QA so the final build feels engineered, not improvised.</p>
+          <div class="chips">
+            <span class="chip">Discovery</span><span class="chip">Architecture</span><span class="chip">QA</span><span class="chip">Launch</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="type">Proof Posture</div>
+          <h4>Designed to earn trust fast</h4>
+          <p>Clear positioning, proof libraries (reviews/outcomes/case studies/visuals), CTA structure built around intent, and SEO structure that compounds.</p>
+          <div class="chips">
+            <span class="chip">Authority</span><span class="chip">Proof Libraries</span><span class="chip">CTA Discipline</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="card">
+          <div class="type">Engagement Structure</div>
+          <h4>Week 0 → Weeks 1–3+ → Launch</h4>
+          <p><b>Week 0:</b> Discovery + architecture (audience intent, offer clarity, page map, measurement plan).<br/>
+             <b>Weeks 1–3+:</b> Design + build + QA (components, responsive engineering, performance + accessibility posture, cross-device polish).<br/>
+             <b>Launch:</b> Deploy + optimize (monitoring, analytics validation, SEO baseline checks).</p>
+        </div>
+        <div class="card">
+          <div class="type">Next Steps</div>
+          <h4>Rate card + recent builds</h4>
+          <p>SkyeWeb pairs premium visuals with operator-grade delivery: clean scopes, clean approvals, repeatable operations. Use the Rate Card to anchor pricing posture, then request a private portfolio if required.</p>
+          <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn btn-gold" href="#ratecard" data-scroll="ratecard">Rate Card</a>
+            <a class="btn btn-outline" href="#portfolio" data-scroll="portfolio">Portfolio</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/skyeweb" target="_blank" rel="noopener">Open original page ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RATE CARD -->
+  <section id="ratecard">
+    <div class="wrap">
+      <div class="section-label">Packages + Pricing</div>
+      <div class="section-title">Rate card for premium web builds.</div>
+      <div class="section-desc">
+        Dense. Premium. Obsessively detailed. Websites that feel engineered—spacing precision, typography hierarchy, component consistency, micro-interactions, and mobile-first composition.
+      </div>
+
+      <div class="grid-4">
+        <div class="card"><div class="type">Starting Point</div><h4>Agency builds</h4><p>Start at <b>$25,000</b>.</p></div>
+        <div class="card"><div class="type">Typical</div><h4>Signature 5-page</h4><p>Typically <b>$45,000</b>.</p></div>
+        <div class="card"><div class="type">Systems</div><h4>Ecosystem builds</h4><p>Start at <b>$85,000+</b>.</p></div>
+        <div class="card"><div class="type">Production</div><h4>Content packages</h4><p>Start at <b>$6,500</b>.</p></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="card">
+          <div class="type">Default Deliverable</div>
+          <h4>Signature 5-page business site</h4>
+          <p>Built to convert—not just to exist. Home · About · Services · Case Studies · Contact.</p>
+          <div class="chips"><span class="chip">Conversion CTAs</span><span class="chip">Performance Pass</span><span class="chip">QA’d</span></div>
+        </div>
+        <div class="card">
+          <div class="type">Package Ladder</div>
+          <h4>From launch to enterprise</h4>
+          <p><b>Launch 5</b> · $25,000 · 2–3 weeks · 5 pages · custom design · deploy + handoff.<br/>
+             <b>Signature 5-Page</b> · $45,000 · 3–4 weeks · portal-level detail · micro-interactions · 30-day support.<br/>
+             <b>Ecosystem Build</b> · $85,000+ · 4–6+ weeks · 8–12+ pages · deeper UX · stronger technical SEO.<br/>
+             <b>Brand + Web System</b> · $200,000+ · 8–12+ weeks · component library · templates + scale · strategy layer.</p>
+        </div>
+        <div class="card">
+          <div class="type">Common Add-Ons</div>
+          <h4>Stack cleanly without chaos</h4>
+          <p><b>Content:</b> copywriting + offer refinement, photography proof library, short-form video, case study packaging.<br/>
+             <b>Growth:</b> SEO sprint, local SEO (GBP + citations), paid media setup + creative testing, landing pages.<br/>
+             <b>Operations:</b> analytics event map + dashboards, performance optimization pass, maintenance/iteration, conversion tracking QA.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/rate-card" target="_blank" rel="noopener">Open original page ↗</a>
+        <a class="btn btn-gold" href="https://solenterprises.org" target="_blank" rel="noopener">Route inquiry ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- MOBILITY -->
+  <section id="mobility">
+    <div class="wrap">
+      <div class="section-label">Mobility + Logistics</div>
+      <div class="section-title">Mobility and logistics, built as a system.</div>
+      <div class="section-desc">
+        The movement layer: driver education, lane strategy, operational discipline, and contractor-ready pathways that turn “driving” into a stable system.
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="type">Why This Works</div>
+          <h4>Systems &gt; hustle</h4>
+          <p>Clarity beats chaos. Standards protect the bag (screening, insurance validation, professional conduct). The system carries you: you steer; you don’t rebuild the ship.</p>
+          <div class="chips"><span class="chip">Clarity</span><span class="chip">Standards</span><span class="chip">Repeatability</span></div>
+        </div>
+        <div class="card">
+          <div class="type">Lane Model</div>
+          <h4>Four lanes, one discipline</h4>
+          <p>Driver Education · Courier & Last‑Mile (partner readiness) · Earnings model (trend math) · Operating rules + contractor systems (checklists, reporting rhythm).</p>
+          <div class="chips"><span class="chip">Driver Track</span><span class="chip">Last‑Mile</span><span class="chip">Contractor Systems</span></div>
+        </div>
+        <div class="card">
+          <div class="type">Earnings Positioning</div>
+          <h4>Trend math</h4>
+          <p>Part‑Time (≤ 25 hrs/week): trend ~ $525/week → $2,100/month → $25,200/year.<br/>
+             Full‑Time (40+ hrs/week): disciplined operators trend toward ~$6,000/month gross.<br/>
+             Optional: build a discreet book of business during routes.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="card">
+          <div class="type">Use Cases</div>
+          <h4>Medical + Pharma</h4>
+          <p>Specimen transport, medication delivery, equipment movement. Chain-of-custody and proof of delivery. Escalation-safe routing and closeout integrity.</p>
+        </div>
+        <div class="card">
+          <div class="type">Use Cases</div>
+          <h4>Last-Mile</h4>
+          <p>Daily/weekly scheduled routes, same-day and on-demand response, partner-ready reporting posture.</p>
+        </div>
+        <div class="card">
+          <div class="type">Use Cases</div>
+          <h4>Confidential</h4>
+          <p>Legal + government deliveries: time-sensitive, confidential handoffs; verified closeout and documentation; standards-first operator behavior.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-gold" href="#drivertrack" data-scroll="drivertrack">Driver Track</a>
+        <a class="btn btn-outline" href="#sentinel" data-scroll="sentinel">Sentinel Standard</a>
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/mobility" target="_blank" rel="noopener">Open original page ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- DRIVER TRACK -->
+  <section id="drivertrack">
+    <div class="wrap">
+      <div class="section-label">Education + Standards</div>
+      <div class="section-title">Drive. Build. Ascend.</div>
+      <div class="section-desc">
+        A training-first operator track that opens multiple pathways and enforces standards so performance stays stable and repeatable.
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="type">Eligibility</div>
+          <h4>Enrollment requirements</h4>
+          <p>Valid driver’s license · State-valid insurance · Background check clearance · Additional screening for medical courier / last‑mile / special placements.</p>
+        </div>
+        <div class="card">
+          <div class="type">Operator Build</div>
+          <h4>Not “random gigs”</h4>
+          <p>Access paths into 13+ gig/contract platforms. Build a book of business while driving (clean + discreet). Use contractor vehicles as a launch pad for higher-tier lanes. Training + screening routes toward medical courier and last‑mile hubs.</p>
+        </div>
+        <div class="card">
+          <div class="type">Earnings Math</div>
+          <h4>Gross → SOLE 13% → Net to your LLC</h4>
+          <p><b>Full-Time baseline:</b> $67,000.00 gross → $8,710.00 (13%) → $58,290.00 net.<br/>
+             <b>Starter Docs (3/month):</b> $15,984.00 gross → $2,077.92 (13%) → $13,906.08 net.<br/>
+             <b>Total:</b> $82,984.00 gross → $10,787.92 (13%) → $72,196.08 net.</p>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="card">
+          <div class="type">FAQ</div>
+          <h4>How fast can I start?</h4>
+          <p>Once eligibility checks clear and onboarding is complete, placement can begin immediately based on lane availability.</p>
+        </div>
+        <div class="card">
+          <div class="type">FAQ</div>
+          <h4>What keeps operators in rotation?</h4>
+          <p>Reliability, documentation, professionalism, and consistent closeouts. Standards protect both the operator and the client.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/driver-education" target="_blank" rel="noopener">Open original page ↗</a>
+        <a class="btn btn-gold" href="tel:+14804695416">Enroll / Info: 4804695416</a>
+        <a class="btn btn-outline" href="https://solenterprises.org" target="_blank" rel="noopener">Route inquiry ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- OFFICE + FLEET -->
+  <section id="officefleet">
+    <div class="wrap">
+      <div class="section-label">Business Infrastructure</div>
+      <div class="section-title">Business infrastructure you can run.</div>
+      <div class="section-desc">
+        Tiered office services plus fleet capabilities—built for trust, clarity, and clean execution without chaos.
+        Four office tiers plus fleet/logistics capabilities.
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="type">Office Services</div>
+          <h4>Build your company like it’s meant to last</h4>
+          <p>Remote Strategy · Workspace Launch · Franchise · Enterprise (holding-company posture for high-accountability environments).</p>
+        </div>
+        <div class="card">
+          <div class="type">Fleet Services</div>
+          <h4>Contract-ready infrastructure</h4>
+          <p>Secure movement, time-critical execution posture. Business fleet pathways (routing + scope, standards and accountability). Clean “route my inquiry” posture so the right branch responds fast.</p>
+        </div>
+        <div class="card">
+          <div class="type">How It Starts</div>
+          <h4>Clean intake → clean execution</h4>
+          <p>Route inquiry → confirm lane fit → establish scope → define milestones + acceptance gates → deliver through verified closeout.</p>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="card">
+          <div class="type">Office Tier Breakdown</div>
+          <h4>Tier 1: Remote Strategy</h4>
+          <p>Strategy and structure: clarity on priorities, operational rhythm, standards + accountability.</p>
+        </div>
+        <div class="card">
+          <div class="type">Office Tier Breakdown</div>
+          <h4>Tier 2: Workspace Launch</h4>
+          <p>Move from idea to operating footprint: process setup, team posture, execution lanes.</p>
+        </div>
+        <div class="card">
+          <div class="type">Office Tier Breakdown</div>
+          <h4>Tier 3–4: Franchise → Enterprise</h4>
+          <p>Standardize what works, then enforce it at scale: repeatable SOPs, quality enforcement, holding-company posture.</p>
+        </div>
+        <div class="card">
+          <div class="type">Routing</div>
+          <h4>Need a lane?</h4>
+          <p>Use the Contact Hub to route your inquiry into the right division—fast, clean, and traceable.</p>
+          <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn btn-gold" href="https://solenterprises.org" target="_blank" rel="noopener">Contact Hub ↗</a>
+            <a class="btn btn-outline" href="#sentinel" data-scroll="sentinel">Sentinel Cleared™</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/office-fleet" target="_blank" rel="noopener">Open original page ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SENTINEL -->
+  <section id="sentinel">
+    <div class="wrap">
+      <div class="section-label">Standards</div>
+      <div class="section-title">Sentinel Cleared™ standards.</div>
+      <div class="section-desc">
+        A practical standard dressed in myth: every handoff documented, every status honest, every closeout verified.
+        Verified intake → accountable dispatch → chain-of-custody → live status integrity → verified closeout.
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="type">The Covenant</div>
+          <h4>Operational excellence, enforced</h4>
+          <p>Verified Intake · Accountable Dispatch · Chain-of-Custody · Live Status Integrity · Verified Closeout.</p>
+        </div>
+        <div class="card">
+          <div class="type">Forged in Purpose</div>
+          <h4>Chaos → order</h4>
+          <p>Built for pressure environments. Documentation as a non-negotiable. Precision as a daily ritual.</p>
+        </div>
+        <div class="card">
+          <div class="type">Practical Translation</div>
+          <h4>Receipts, not vibes</h4>
+          <p>Every handoff documented. Every status honest. Every closeout verified with proof.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="card"><div class="type">01</div><h4>Verified Intake</h4><p>Scope confirmed. Requirements clarified. No vague handoffs.</p></div>
+        <div class="card"><div class="type">02</div><h4>Accountable Dispatch</h4><p>Ownership assigned. Timing and communication standards established.</p></div>
+        <div class="card"><div class="type">03–05</div><h4>Custody → Integrity → Closeout</h4><p>Chain-of-custody tracked, status kept honest, and closeout verified with proof.</p></div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/sentinel-cleared" target="_blank" rel="noopener">Open original page ↗</a>
+        <a class="btn btn-gold" href="#partners" data-scroll="partners">Partner Operators</a>
+        <a class="btn btn-outline" href="#mobility" data-scroll="mobility">Mobility Lane</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PARTNERS -->
+  <section id="partners">
+    <div class="wrap">
+      <div class="section-label">Partner Operators</div>
+      <div class="section-title">Partner operators, routed clean.</div>
+      <div class="section-desc">
+        Two featured partner lanes with distinct execution posture, aligned to standards-first delivery and verified closeouts.
+        Operators with distinct lanes: medical courier + freight precision (SAP Logistics) and medical logistics + residential care (Kee Care Solutions).
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="type">SAP Logistics</div>
+          <h4>Medical transport, reimagined</h4>
+          <p>Houston positioning: elite medical courier and freight solution—precision meets urgency.<br/>
+            24/7 on call · HIPAA compliant posture · &lt;60 min average delivery positioning · Services: medical courier, freight logistics, scheduled routes.</p>
+          <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn btn-gold" href="#sap" data-scroll="sap">SAP Lane</a>
+            <a class="btn btn-outline" href="#sentinel" data-scroll="sentinel">Sentinel Standard</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="type">Kee Care Solutions</div>
+          <h4>Healthcare excellence + compassionate care</h4>
+          <p>Houston positioning: medical logistics paired with small-home residential care for seniors and veterans.<br/>
+            HIPAA-conscious transport posture · Residential care: 5–10 residents per home · 24/7 care & support · Positioned as Sentinel Cleared™ Network member.</p>
+          <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn btn-gold" href="#kee" data-scroll="kee">Kee Care Lane</a>
+            <a class="btn btn-outline" href="#officefleet" data-scroll="officefleet">Office + Fleet</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="type">Routing</div>
+        <h4>Need an operator lane?</h4>
+        <p>Route your inquiry and the system connects you with the right division or partner lane: time-sensitive delivery, medical courier / specialty handling, scheduled route contracts.</p>
+        <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn btn-gold" href="https://solenterprises.org" target="_blank" rel="noopener">Route My Inquiry ↗</a>
+          <a class="btn btn-outline" href="https://soledrop.netlify.app/partners" target="_blank" rel="noopener">Open original page ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SAP -->
+  <section id="sap">
+    <div class="wrap">
+      <div class="section-label">Partner Lane</div>
+      <div class="section-title">SAP Logistics partner lane.</div>
+      <div class="section-desc">
+        Medical courier + freight logistics positioning built around urgency, precision, and standards that hold under pressure.
+      </div>
+
+      <div class="grid-3">
+        <div class="card"><div class="type">Core Claims</div><h4>Precision meets urgency</h4><p>24/7 on call positioning · HIPAA compliant posture · &lt;60 min average delivery positioning · Same-day and scheduled routes.</p></div>
+        <div class="card"><div class="type">Services</div><h4>Courier + freight</h4><p>Medical courier deliveries · Freight logistics solutions · Scheduled routes · Time-critical dispatch posture.</p></div>
+        <div class="card"><div class="type">Standards</div><h4>Sentinel Cleared™ alignment</h4><p>Lane discipline and closeout integrity consistent with Sentinel Cleared™ standards.</p></div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/sap-logistics" target="_blank" rel="noopener">Open original page ↗</a>
+        <a class="btn btn-gold" href="#partners" data-scroll="partners">Back to Partners</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- KEE -->
+  <section id="kee">
+    <div class="wrap">
+      <div class="section-label">Partner Lane</div>
+      <div class="section-title">Kee Care Solutions partner lane.</div>
+      <div class="section-desc">
+        Medical logistics and compassionate residential care positioning, built around consistency, safety, and standards-first delivery.
+      </div>
+
+      <div class="grid-3">
+        <div class="card"><div class="type">Residential Care</div><h4>Small-home model</h4><p>5–10 residents per home positioning · 24/7 care & support · Respectful, safe, consistent environment.</p></div>
+        <div class="card"><div class="type">Medical Logistics</div><h4>Specialty handling</h4><p>Medical courier (lab specimens, pharma, equipment) · Legal & government delivery posture · Same-day & on-demand · Scheduled routes (daily/weekly/monthly).</p></div>
+        <div class="card"><div class="type">Network</div><h4>Sentinel Cleared™ member lane</h4><p>Positioned as a Sentinel Cleared™ Network member with standards-first execution and verified closeouts.</p></div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/kee-care" target="_blank" rel="noopener">Open original page ↗</a>
+        <a class="btn btn-gold" href="#partners" data-scroll="partners">Back to Partners</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTRACTORS -->
+  <section id="contractors">
+    <div class="wrap">
+      <div class="section-label">Bench + Vendor Lanes</div>
+      <div class="section-title">A bench built for delivery.</div>
+      <div class="section-desc">
+        Vetted specialists across strategy, design, photo/video, and web delivery—structured for clean scope, milestones, and closeout.
+        Standard: 1099 · deliverable-based · source files required.
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="type">Operating Standard</div>
+          <h4>Deliverable-based, clean gates</h4>
+          <p>Workflow: scope → milestones → approval gates. Deliverables: exports + editable source files. Expectation: clean communication + deadlines.</p>
+        </div>
+        <div class="card">
+          <div class="type">Lanes (All Roles Open)</div>
+          <h4>Pick your lane</h4>
+          <p>Control layer (PM, Creative Director) · Strategy (Brand Strategist, Copywriter) · Design (Lead/Production/Illustrator) · Photo (Photographer/Retoucher) · Video (DP/Editor/Motion/Audio) · Web (Designer/Developer/SEO/QA).</p>
+        </div>
+        <div class="card">
+          <div class="type">What the bench produces</div>
+          <h4>Assets that close</h4>
+          <p>Brand systems & guidelines · Pitch decks & capability kits · Photo proof libraries · Short-form video · Web builds + clean handoff.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="card"><div class="type">Vendor Onboarding · 01</div><h4>Lane + portfolio review</h4><p>Fit, quality, and delivery posture confirmed for a specific lane.</p></div>
+        <div class="card"><div class="type">Vendor Onboarding · 02</div><h4>Scope + milestone gates</h4><p>Deliverables defined up front with acceptance criteria.</p></div>
+        <div class="card"><div class="type">Vendor Onboarding · 03</div><h4>Delivery + source handoff</h4><p>Final exports plus editable source files. Clean closeout and continuity.</p></div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-gold" href="https://solenterprises.org" target="_blank" rel="noopener">Apply / Join the Bench ↗</a>
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/contractors" target="_blank" rel="noopener">Open original page ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="wrap">
+      <div class="section-label">Recent Builds</div>
+      <div class="section-title">Curated releases. Controlled presentation.</div>
+      <div class="section-desc">
+        A premium portfolio posture designed for fast evaluation without losing control of the experience.
+        Always-visible sandboxed mini-previews inside project cards, with a larger sandboxed viewer on demand.
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="type">Always-Visible Previews</div>
+          <h4>Scan style + motion instantly</h4>
+          <p>Previews mount only when on-screen (performance-safe). Mini previews are sandboxed and non-clickable (visual scan only). Controlled presentation for premium releases.</p>
+        </div>
+        <div class="card">
+          <div class="type">Full Viewer</div>
+          <h4>Open in a larger sandbox</h4>
+          <p>“Preview” opens the build in a larger sandboxed frame with basic details (category/type/size/features). Viewer controls and keyboard affordance: Ctrl/⌘ K for fast navigation.</p>
+        </div>
+        <div class="card">
+          <div class="type">Curation</div>
+          <h4>Released work lives here</h4>
+          <p>Curated showcase by category. Preview-first experience for fast evaluation. Built to scale as releases stack.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="type">Request Private Portfolio</div>
+        <h4>Some builds are private by default</h4>
+        <p>Route an inquiry for a curated portfolio link aligned to your industry.</p>
+        <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn btn-gold" href="https://solenterprises.org" target="_blank" rel="noopener">Route My Inquiry ↗</a>
+          <a class="btn btn-outline" href="#ratecard" data-scroll="ratecard">Rate Card</a>
+          <a class="btn btn-outline" href="#skyeweb" data-scroll="skyeweb">SkyeWeb</a>
+          <a class="btn btn-outline" href="https://soledrop.netlify.app/portfolio" target="_blank" rel="noopener">Open original page ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SOLEDROP -->
+  <section id="soledrop">
+    <div class="wrap">
+      <div class="section-label">Internal Command Portal</div>
+      <div class="section-title">SOLE Drop — one drop for the entire enterprise.</div>
+      <div class="section-desc">
+        The consolidated command center for the entire SOLE enterprise — every division, every realm, one drop.
+        15 Divisions · One Ecosystem · Infinite Execution.
+      </div>
+
+      <div class="grid-3">
+        <div class="card"><div class="type">APEX</div><h4>Elite business formation</h4><p>Contractor deployment, LLC filing, EIN procurement, Quick Builder tools, and the SOLE Opportunity pipeline.</p></div>
+        <div class="card"><div class="type">Companies</div><h4>Enterprise network</h4><p>Executive authority, distributed brand architecture, and Sentinel Web Authority™ amplification.</p></div>
+        <div class="card"><div class="type">Realms</div><h4>The Four Realms</h4><p>Intelligence & AI · Earthside Services · Sanctuaries · Storyworlds. One enterprise, four dimensions.</p></div>
+        <div class="card"><div class="type">Sentinel</div><h4>Fleet + distributed authority</h4><p>Fleet logistics, mobility operations, and distributed web authority for brand amplification across the SOLE network.</p></div>
+        <div class="card"><div class="type">Kaixu</div><h4>Operator-grade AI interface</h4><p>AI-powered intelligent systems interface for decision support and operational automation.</p></div>
+        <div class="card"><div class="type">Templates</div><h4>Design system</h4><p>Page templates, component library, and cinematic dark-theme visual language for consistent releases.</p></div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="type">Quick Access</div>
+        <h4>Services · Store · Client Portfolio · Login · Profile</h4>
+        <p>This spectacle is the public advertising surface. The internal portal remains on its original route for operational access.</p>
+        <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn btn-gold" href="https://soledrop.netlify.app/soledrop/" target="_blank" rel="noopener">Open SOLEDROP portal ↗</a>
+          <a class="btn btn-outline" href="#links" data-scroll="links">Primary hubs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FOUNDER -->
+  <section id="founder">
+    <div class="wrap">
+      <div class="section-label">Leadership</div>
+      <div class="section-title">Operator profile, execution history.</div>
+      <div class="section-desc">
+        Multi-state operations, standards-first delivery posture, and ecosystem-level decision discipline across digital and physical lanes.
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="type">Founder · Operator Profile</div>
+          <h4>Systems Architect · Executive Operations</h4>
+          <p>Operating footprint: AZ · TX · CO · IL.<br/>
+             Fleet leadership: 51+ 1099 contractor network.<br/>
+             Peak throughput: ~1,300 pieces/day · ~700 deliveries/day.<br/>
+             Strategic win: COSA subcontract supporting 23+ drivers.</p>
+        </div>
+        <div class="card">
+          <div class="type">Contracts & Partnerships</div>
+          <h4>Recognized lanes</h4>
+          <p>Roadie (UPS partner), HopSkipDrive (DHS-certified), CVS Pharmacy, Walmart, Best Buy, OnePoint Patient Care, Globe Life – Liberty National Division, InVida Elite LLC, strategic work supporting COSA (Couriers of San Antonio).</p>
+        </div>
+        <div class="card">
+          <div class="type">Expansion + KAIXU</div>
+          <h4>Execution integrity</h4>
+          <p>Role stated: VP & CFO of Kee Care Solutions (Houston). Focus: procurement, B2B development, closing, financial strategy. KAIXU described as workflow orchestration + validation layer under NBEP: clarity, verification, drift prevention across teams and ops.</p>
+        </div>
+        <div class="card">
+          <div class="type">Model</div>
+          <h4>The Four Currents</h4>
+          <p>Ground execution, strategy, continuity, and enforcement—keeping decisions coherent across divisions and releases.</p>
+          <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn btn-gold" href="#currents" data-scroll="currents">Open Currents</a>
+            <a class="btn btn-outline" href="https://soledrop.netlify.app/founder" target="_blank" rel="noopener">Open original page ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CURRENTS -->
+  <section id="currents">
+    <div class="wrap">
+      <div class="section-label">Signals + Direction</div>
+      <div class="section-title">The Four Currents.</div>
+      <div class="section-desc">
+        A model that keeps decisions coherent across divisions: ground execution, strategy, continuity, and enforcement.
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="type">Ground · Fleet · Clinics</div>
+          <h4>Hahalakiel</h4>
+          <p>Associated with real-world execution lanes: fleet, clinics, ground operations, and physical-world stability.</p>
+          <div class="chips"><span class="chip">Fleet posture</span><span class="chip">Route reality</span><span class="chip">Physical systems</span></div>
+        </div>
+        <div class="card">
+          <div class="type">Strategy · Pricing · Architecture</div>
+          <h4>Gray</h4>
+          <p>Associated with strategy, offer structure, pricing discipline, and architectural decisions.</p>
+          <div class="chips"><span class="chip">War-room clarity</span><span class="chip">Pricing posture</span><span class="chip">Systems architecture</span></div>
+        </div>
+        <div class="card">
+          <div class="type">Myth · Naming · Constellations</div>
+          <h4>Kaiwass</h4>
+          <p>Associated with storyworld continuity, naming, symbolism, and meaning-making that keeps the brand coherent.</p>
+          <div class="chips"><span class="chip">Story + ritual</span><span class="chip">Symbol continuity</span><span class="chip">Naming</span></div>
+        </div>
+        <div class="card">
+          <div class="type">Shadow · Enforcement · Edges</div>
+          <h4>Halucard</h4>
+          <p>Associated with boundaries, contract enforcement, and edge discipline that prevents drift.</p>
+          <div class="chips"><span class="chip">Boundaries</span><span class="chip">Contract posture</span><span class="chip">No-drama execution</span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <div class="type">Why it exists</div>
+        <h4>Continuity by design</h4>
+        <p>Consistency across lanes, identity coherence, and decision discipline. Documented scope, milestone approvals, confidentiality when required, and verified closeout keep delivery professional and predictable.</p>
+        <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn btn-outline" href="https://soledrop.netlify.app/currents" target="_blank" rel="noopener">Open original page ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LINKS -->
+  <section id="links">
+    <div class="wrap">
+      <div class="section-label">External Hubs</div>
+      <div class="section-title">Primary hubs and portals.</div>
+      <div class="section-desc">
+        Central routes for intake, leadership, and connected ecosystems. Clean routing, no chaos.
+      </div>
+
+      <div class="grid-3">
+        <div class="card"><div class="type">Contact Hub</div><h4>Central intake</h4><p>Routing and inquiries for every SOLE division.</p><div style="margin-top:12px;"><a class="btn btn-gold" href="https://solenterprises.org" target="_blank" rel="noopener">Open ↗</a></div></div>
+        <div class="card"><div class="type">Leadership Hub</div><h4>Leadership overview</h4><p>Founder/leadership overview and operator profiles.</p><div style="margin-top:12px;"><a class="btn btn-gold" href="https://solenterprises.org" target="_blank" rel="noopener">Open ↗</a></div></div>
+        <div class="card"><div class="type">NexusConnect</div><h4>Network portal</h4><p>SOLE NexusConnect network portal.</p><div style="margin-top:12px;"><a class="btn btn-outline" href="https://solenterprisesnexusconnect.netlify.app" target="_blank" rel="noopener">Open ↗</a></div></div>
+        <div class="card"><div class="type">FamilyCommand</div><h4>Family operations</h4><p>Family operations portal.</p><div style="margin-top:12px;"><a class="btn btn-outline" href="https://familycommand.netlify.app" target="_blank" rel="noopener">Open ↗</a></div></div>
+        <div class="card"><div class="type">SkyeCode Nexus</div><h4>Engineering hub</h4><p>Engineering and build hub.</p><div style="margin-top:12px;"><a class="btn btn-outline" href="https://skyecode-nexus.netlify.app" target="_blank" rel="noopener">Open ↗</a></div></div>
+        <div class="card"><div class="type">Skyes Over London</div><h4>Primary digital growth studio</h4><p>Primary studio site.</p><div style="margin-top:12px;"><a class="btn btn-outline" href="https://skyesoverlondon.netlify.app" target="_blank" rel="noopener">Open ↗</a></div></div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+        <a class="btn btn-gold" href="tel:+14804695416">Call Now 4804695416</a>
+        <a class="btn btn-outline" href="https://soledrop.netlify.app/links" target="_blank" rel="noopener">Open original page ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOLEnterprises" /></div>
+    <p>
+      <strong style="color:rgba(232,232,232,0.92)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br/>
+      <a href="https://solenterprises.org" target="_blank" rel="noopener">solenterprises.org</a> · <a href="tel:+14804695416">4804695416</a>
+    </p>
+
+    <div class="footer-links">
+      <a href="#ecosystem" data-scroll="ecosystem">Ecosystem</a>
+      <a href="#skyeweb" data-scroll="skyeweb">SkyeWeb</a>
+      <a href="#ratecard" data-scroll="ratecard">Rate Card</a>
+      <a href="#mobility" data-scroll="mobility">Mobility</a>
+      <a href="#drivertrack" data-scroll="drivertrack">Driver Track</a>
+      <a href="#officefleet" data-scroll="officefleet">Office + Fleet</a>
+      <a href="#sentinel" data-scroll="sentinel">Sentinel</a>
+      <a href="#partners" data-scroll="partners">Partners</a>
+      <a href="#contractors" data-scroll="contractors">Contractors</a>
+      <a href="#portfolio" data-scroll="portfolio">Portfolio</a>
+      <a href="#soledrop" data-scroll="soledrop">SOLEDROP</a>
+      <a href="#founder" data-scroll="founder">Founder</a>
+      <a href="#currents" data-scroll="currents">Currents</a>
+      <a href="#links" data-scroll="links">Links</a>
+      <a href="https://soledrop.netlify.app/privacy" target="_blank" rel="noopener">Privacy ↗</a>
+      <a href="https://soledrop.netlify.app/terms" target="_blank" rel="noopener">Terms ↗</a>
+    </div>
+
+    <p style="margin-top:16px; font-size:10px; color:rgba(232,232,232,0.35)">
+      © SOLEnterprises. Cinematic advertisement spectacle surface.
+    </p>
+  </footer>
+
+  <!-- COMMAND PALETTE -->
+  <div id="palette" aria-hidden="true">
+    <div class="palette-card" role="dialog" aria-label="Universe menu">
+      <div class="palette-top">
+        <input id="palInput" type="text" placeholder="Type to navigate… (e.g., 'sentinel', 'rate', 'soledrop')" autocomplete="off" />
+        <div class="hint">Esc</div>
+      </div>
+      <div class="palette-list" id="palList"></div>
+      <div class="pal-foot">
+        <div class="hint">Tip: Ctrl/⌘ K · Enter = open · Arrow keys = move</div>
+        <div class="hint">Lite Mode reduces motion</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ------------------------------------------------------------
+    // Utilities
+    // ------------------------------------------------------------
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+    function getQuery(){
+      const q = {};
+      const params = new URLSearchParams(location.search);
+      for (const [k,v] of params.entries()) q[k] = v;
+      return q;
+    }
+
+    function setLiteMode(on){
+      document.body.classList.toggle('lite-mode', !!on);
+      const sw = $('#liteSwitch');
+      if (sw) sw.setAttribute('aria-checked', on ? 'true':'false');
+      localStorage.setItem('soleDropLite', on ? '1':'0');
+      // pause heavy motion if lite
+      window.__SOLE_LITE__ = !!on;
+    }
+
+    // ------------------------------------------------------------
+    // Smooth scroll navigation
+    // ------------------------------------------------------------
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if (!el) return;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 78;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('[data-scroll]');
+      if (!a) return;
+      e.preventDefault();
+      const id = a.getAttribute('data-scroll');
+      scrollToId(id);
+      closePalette();
+    });
+
+    // ------------------------------------------------------------
+    // Loader + Intro logic (?intro=0 skip, ?intro=1 replay)
+    // ------------------------------------------------------------
+    (function(){
+      const q = getQuery();
+      const introPref = q.intro;
+      const introEl = $('#intro');
+      const statusEl = $('#introStatus');
+      const skipBtn = $('#introSkip');
+
+      function endIntro(){
+        document.body.classList.add('intro-done');
+        setTimeout(() => {
+          document.body.classList.remove('show-intro');
+          if (introEl) introEl.setAttribute('aria-hidden', 'true');
+        }, 900);
+      }
+
+      if (skipBtn) skipBtn.addEventListener('click', endIntro);
+
+      const steps = [
+        "INITIALIZING SYSTEMS…",
+        "CALIBRATING LANES…",
+        "FORGING STANDARDS…",
+        "OPENING THE UNIVERSE…"
+      ];
+      let idx = 0;
+      const tick = () => {
+        if (!statusEl) return;
+        statusEl.textContent = steps[idx % steps.length];
+        idx++;
+      };
+
+      // show loader quickly then decide intro
+      window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+        // decide intro
+        const shouldShow = (introPref === '1') || (introPref !== '0' && !sessionStorage.getItem('soleIntroSeen'));
+        if (shouldShow){
+          document.body.classList.add('show-intro');
+          if (introEl) introEl.setAttribute('aria-hidden', 'false');
+          sessionStorage.setItem('soleIntroSeen', '1');
+          tick();
+          const interval = setInterval(tick, 820);
+          setTimeout(() => { clearInterval(interval); endIntro(); }, 3600);
+        }
+      });
+    })();
+
+    // ------------------------------------------------------------
+    // Nav scroll tint
+    // ------------------------------------------------------------
+    (function(){
+      const nav = $('#mainNav');
+      if (!nav) return;
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.pageYOffset > 60);
+      }, { passive:true });
+    })();
+
+    // ------------------------------------------------------------
+    // Command palette (Ctrl/⌘K)
+    // ------------------------------------------------------------
+    const palette = $('#palette');
+    const palInput = $('#palInput');
+    const palList = $('#palList');
+
+    const entries = [
+      { title:"Home", sub:"Overview + entry point", action:() => scrollToId('home'), key:"Home" },
+      { title:"Ecosystem", sub:"Doctrine, pillars, model", action:() => scrollToId('ecosystem'), key:"Enter" },
+      { title:"SkyeWeb", sub:"Premium digital agency", action:() => scrollToId('skyeweb'), key:"Enter" },
+      { title:"Rate Card", sub:"Web build packages + add-ons", action:() => scrollToId('ratecard'), key:"Enter" },
+      { title:"Mobility", sub:"Logistics + operator lanes", action:() => scrollToId('mobility'), key:"Enter" },
+      { title:"Driver Track", sub:"SOLE Driver Education", action:() => scrollToId('drivertrack'), key:"Enter" },
+      { title:"Office + Fleet", sub:"Business infrastructure", action:() => scrollToId('officefleet'), key:"Enter" },
+      { title:"Sentinel", sub:"Sentinel Cleared™ standard", action:() => scrollToId('sentinel'), key:"Enter" },
+      { title:"Partners", sub:"Partner operators", action:() => scrollToId('partners'), key:"Enter" },
+      { title:"SAP Logistics", sub:"Partner operator lane", action:() => scrollToId('sap'), key:"Enter" },
+      { title:"Kee Care", sub:"Partner operator lane", action:() => scrollToId('kee'), key:"Enter" },
+      { title:"Contractors", sub:"Bench + vendor lanes", action:() => scrollToId('contractors'), key:"Enter" },
+      { title:"Portfolio", sub:"Recent builds", action:() => scrollToId('portfolio'), key:"Enter" },
+      { title:"SOLEDROP", sub:"Internal command portal", action:() => scrollToId('soledrop'), key:"Enter" },
+      { title:"Founder", sub:"Operator profile", action:() => scrollToId('founder'), key:"Enter" },
+      { title:"Currents", sub:"The Four Currents", action:() => scrollToId('currents'), key:"Enter" },
+      { title:"Links", sub:"External hubs", action:() => scrollToId('links'), key:"Enter" },
+      { title:"Open Original", sub:"soledrop.netlify.app", action:() => window.open('https://soledrop.netlify.app/','_blank','noopener'), key:"↗" },
+      { title:"Contact Hub", sub:"solenterprises.org", action:() => window.open('https://solenterprises.org','_blank','noopener'), key:"↗" },
+      { title:"Call", sub:"4804695416", action:() => window.location.href='tel:+14804695416', key:"↗" },
+    ];
+
+    let activeIndex = 0;
+
+    function renderPalette(filterText){
+      const q = (filterText || '').trim().toLowerCase();
+      const rows = entries
+        .filter(e => !q || (e.title + " " + e.sub).toLowerCase().includes(q));
+
+      if (!palList) return;
+      palList.innerHTML = "";
+      if (!rows.length){
+        const empty = document.createElement('div');
+        empty.style.padding = "18px 12px";
+        empty.style.color = "rgba(232,232,232,0.55)";
+        empty.style.fontFamily = '"Fira Code",monospace';
+        empty.style.fontSize = "12px";
+        empty.textContent = "No matches.";
+        palList.appendChild(empty);
+        return;
+      }
+
+      activeIndex = clamp(activeIndex, 0, rows.length - 1);
+
+      rows.forEach((row, i) => {
+        const item = document.createElement('div');
+        item.className = 'pal-item';
+        item.setAttribute('role','button');
+        item.tabIndex = 0;
+        item.style.outline = 'none';
+        if (i === activeIndex){
+          item.style.borderColor = 'rgba(201,168,76,0.28)';
+          item.style.boxShadow = '0 0 0 1px rgba(201,168,76,0.12) inset';
+        }
+        const left = document.createElement('div');
+        left.className = 'pal-left';
+        const t = document.createElement('div');
+        t.className = 'pal-title';
+        t.textContent = row.title;
+        const s = document.createElement('div');
+        s.className = 'pal-sub';
+        s.textContent = row.sub;
+        left.appendChild(t); left.appendChild(s);
+
+        const right = document.createElement('div');
+        right.className = 'pal-right';
+        right.textContent = row.key;
+
+        item.appendChild(left);
+        item.appendChild(right);
+
+        item.addEventListener('click', () => row.action());
+        item.addEventListener('keydown', (ev) => {
+          if (ev.key === 'Enter'){ row.action(); }
+        });
+
+        palList.appendChild(item);
+      });
+    }
+
+    function openPalette(){
+      if (!palette) return;
+      palette.classList.add('open');
+      palette.setAttribute('aria-hidden','false');
+      activeIndex = 0;
+      renderPalette(palInput ? palInput.value : '');
+      setTimeout(() => palInput && palInput.focus(), 0);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePalette(){
+      if (!palette) return;
+      palette.classList.remove('open');
+      palette.setAttribute('aria-hidden','true');
+      if (palInput) palInput.value = '';
+      document.body.style.overflow = '';
+    }
+
+    window.closePalette = closePalette;
+
+    const menuBtn = $('#menuBtn');
+    if (menuBtn) menuBtn.addEventListener('click', openPalette);
+
+    if (palette){
+      palette.addEventListener('click', (e) => { if (e.target === palette) closePalette(); });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const isMac = navigator.platform.toLowerCase().includes('mac');
+      const mod = isMac ? e.metaKey : e.ctrlKey;
+      if (mod && e.key.toLowerCase() === 'k'){
+        e.preventDefault();
+        (palette && palette.classList.contains('open')) ? closePalette() : openPalette();
+        return;
+      }
+      if (e.key === 'Escape' && palette && palette.classList.contains('open')){
+        e.preventDefault(); closePalette();
+      }
+      if (!palette || !palette.classList.contains('open')) return;
+      if (e.key === 'ArrowDown'){ e.preventDefault(); activeIndex++; renderPalette(palInput.value); }
+      if (e.key === 'ArrowUp'){ e.preventDefault(); activeIndex--; renderPalette(palInput.value); }
+      if (e.key === 'Enter'){
+        e.preventDefault();
+        // trigger active
+        const items = $$('.pal-item', palList);
+        if (items[activeIndex]) items[activeIndex].click();
+      }
+    });
+
+    if (palInput){
+      palInput.addEventListener('input', () => { activeIndex = 0; renderPalette(palInput.value); });
+    }
+
+    // ------------------------------------------------------------
+    // Lite mode toggle (persisted)
+    // ------------------------------------------------------------
+    (function(){
+      const saved = localStorage.getItem('soleDropLite');
+      setLiteMode(saved === '1');
+      const sw = $('#liteSwitch');
+      if (!sw) return;
+
+      const toggle = () => setLiteMode(!document.body.classList.contains('lite-mode'));
+      sw.addEventListener('click', toggle);
+      sw.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
+    })();
+
+    // ------------------------------------------------------------
+    // THREE.JS: Aurora + Constellation Nodes (clickable)
+    // ------------------------------------------------------------
+    (function(){
+      const canvas = document.getElementById('three-bg');
+      if (!canvas || !window.THREE) return;
+
+      // Basic guard: if WebGL fails, keep the site usable.
+      let renderer;
+      try{
+        renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, powerPreference:'high-performance' });
+      } catch {
+        return;
+      }
+
+      const DPR = Math.min(window.devicePixelRatio || 1, 2);
+      renderer.setPixelRatio(DPR);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor(0x07070f, 1);
+
+      const scene = new THREE.Scene();
+
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 240);
+      camera.position.set(0, 0, 14);
+
+      const clock = new THREE.Clock();
+      const raycaster = new THREE.Raycaster();
+      const mouse = new THREE.Vector2(999, 999); // offscreen until moved
+
+      let scrollY = 0;
+      let hovered = null;
+
+      const root = new THREE.Group();
+      scene.add(root);
+
+      // soft lights
+      const hemi = new THREE.HemisphereLight(0x7aa6ff, 0x0b0b14, 0.6);
+      scene.add(hemi);
+      const point = new THREE.PointLight(0xffd37a, 1.05, 80);
+      point.position.set(8, 6, 10);
+      scene.add(point);
+
+      // star particles
+      const starCount = (DPR > 1.4) ? 1400 : 1800;
+      const pos = new Float32Array(starCount * 3);
+      const col = new Float32Array(starCount * 3);
+      const spd = new Float32Array(starCount);
+      const off = new Float32Array(starCount);
+
+      const goldPal = [[0.85,0.68,0.22],[0.95,0.85,0.42],[1.0,0.93,0.58]];
+      const purpPal = [[0.55,0.40,1.0],[0.62,0.48,0.94],[0.74,0.60,1.0]];
+
+      for (let i=0;i<starCount;i++){
+        pos[i*3]   = (Math.random()-0.5)*42;
+        pos[i*3+1] = (Math.random()-0.5)*26;
+        pos[i*3+2] = (Math.random()-0.5)*22 - 10;
+        const pal = Math.random()<0.62 ? goldPal : purpPal;
+        const c = pal[(Math.random()*pal.length)|0];
+        col[i*3]=c[0]; col[i*3+1]=c[1]; col[i*3+2]=c[2];
+        spd[i] = Math.random()*0.35 + 0.08;
+        off[i] = Math.random()*Math.PI*2;
+      }
+
+      const starGeo = new THREE.BufferGeometry();
+      starGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      starGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+      starGeo.setAttribute('aSpeed', new THREE.BufferAttribute(spd, 1));
+      starGeo.setAttribute('aOffset', new THREE.BufferAttribute(off, 1));
+
+      const starMat = new THREE.ShaderMaterial({
+        uniforms: { uTime:{value:0}, uPixelRatio:{value:DPR} },
+        vertexShader: `
+          attribute vec3 color;
+          attribute float aSpeed;
+          attribute float aOffset;
+          uniform float uTime;
+          uniform float uPixelRatio;
+          varying vec3 vColor;
+          varying float vAlpha;
+          void main(){
+            vColor = color;
+            vec3 p = position;
+            p.y += sin(uTime * aSpeed + aOffset + p.x*0.22) * 0.85;
+            p.x += cos(uTime * aSpeed * 0.65 + aOffset*1.3 + p.y*0.15) * 0.40;
+            p.z += sin(uTime * aSpeed * 0.45 + aOffset*0.9) * 0.25;
+            vec4 mv = modelViewMatrix * vec4(p, 1.0);
+            float dist = -mv.z;
+            vAlpha = smoothstep(26.0, 6.0, dist) * (0.35 + sin(uTime*aSpeed + aOffset)*0.18 + 0.4);
+            gl_PointSize = (1.0 + sin(aOffset + uTime*0.4)*0.6) * uPixelRatio * (56.0 / dist);
+            gl_Position = projectionMatrix * mv;
+          }
+        `,
+        fragmentShader: `
+          varying vec3 vColor;
+          varying float vAlpha;
+          void main(){
+            float d = length(gl_PointCoord - 0.5);
+            if (d > 0.5) discard;
+            float s = smoothstep(0.5, 0.0, d);
+            gl_FragColor = vec4(vColor, s * vAlpha);
+          }
+        `,
+        transparent:true,
+        depthWrite:false,
+        blending:THREE.AdditiveBlending,
+        vertexColors:true
+      });
+
+      const stars = new THREE.Points(starGeo, starMat);
+      root.add(stars);
+
+      // aurora bands
+      function aurora(w,h,segs, colA, colB, z, y, spd, phase, tiltX){
+        const geo = new THREE.PlaneGeometry(w, h, segs, Math.max(1, Math.floor(segs/4)));
+        const mat = new THREE.ShaderMaterial({
+          uniforms:{
+            uTime:{value:0},
+            uColorA:{value:new THREE.Color(colA[0],colA[1],colA[2])},
+            uColorB:{value:new THREE.Color(colB[0],colB[1],colB[2])},
+            uSpeed:{value:spd},
+            uPhase:{value:phase}
+          },
+          vertexShader: `
+            uniform float uTime; uniform float uSpeed; uniform float uPhase;
+            varying vec2 vUv; varying float vWave;
+            void main(){
+              vUv = uv;
+              vec3 p = position;
+              float w1 = sin(p.x*0.38 + uTime*uSpeed + uPhase) * 1.4;
+              float w2 = sin(p.x*0.75 + uTime*uSpeed*1.4 + uPhase*1.8) * 0.55;
+              float w3 = cos(p.x*0.18 + uTime*uSpeed*0.55 + uPhase*0.6) * 0.85;
+              p.y += (w1+w2+w3) * uv.y;
+              vWave = (w1+w2)*0.5;
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+            }
+          `,
+          fragmentShader: `
+            uniform vec3 uColorA; uniform vec3 uColorB;
+            uniform float uTime; uniform float uPhase;
+            varying vec2 vUv; varying float vWave;
+            void main(){
+              float ef = smoothstep(0.0,0.22,vUv.y) * smoothstep(1.0,0.78,vUv.y);
+              float sf = smoothstep(0.0,0.12,vUv.x) * smoothstep(1.0,0.88,vUv.x);
+              float t = clamp(vUv.x + vWave*0.18 + sin(uTime*0.28 + uPhase)*0.1, 0.0, 1.0);
+              vec3 col = mix(uColorA, uColorB, t);
+              float shim = sin(vUv.x*18.0 + uTime*1.8 + uPhase)*0.07 + 0.93;
+              col *= shim;
+              gl_FragColor = vec4(col, ef*sf*0.22);
+            }
+          `,
+          transparent:true,
+          depthWrite:false,
+          blending:THREE.AdditiveBlending,
+          side:THREE.DoubleSide
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(0, y, z);
+        mesh.rotation.x = tiltX;
+        return mesh;
+      }
+
+      const a1 = aurora(44, 7, 140, [0.55,0.40,1.0], [0.85,0.68,0.22], -6,  2.4, 0.30, 0.0, -0.10);
+      const a2 = aurora(40, 5, 120, [0.85,0.68,0.22], [0.74,0.60,1.0], -8, -1.2, 0.22, 2.1,  0.07);
+      const a3 = aurora(48, 6, 160, [0.74,0.60,1.0], [1.0,0.93,0.58], -10, 3.8, 0.18, 4.3, -0.14);
+      root.add(a1,a2,a3);
+
+      // central logo plane (billboard)
+      const texLoader = new THREE.TextureLoader();
+      const logoTex = texLoader.load(
+        'https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png',
+        () => {},
+        undefined,
+        () => {}
+      );
+      logoTex.anisotropy = 8;
+      const logoMat = new THREE.MeshBasicMaterial({ map: logoTex, transparent:true, opacity:0.95, blending:THREE.AdditiveBlending, depthWrite:false });
+      const logoGeo = new THREE.PlaneGeometry(5.2, 5.2);
+      const logoMesh = new THREE.Mesh(logoGeo, logoMat);
+      logoMesh.position.set(0, 0.6, -2.2);
+      root.add(logoMesh);
+
+      // rings
+      const ringGeo = new THREE.TorusGeometry(4.2, 0.06, 18, 180);
+      const ringMat = new THREE.MeshBasicMaterial({ color:0xc9a84c, transparent:true, opacity:0.55, blending:THREE.AdditiveBlending });
+      const ring1 = new THREE.Mesh(ringGeo, ringMat);
+      ring1.rotation.x = Math.PI/2.2;
+      ring1.position.set(0, 0.6, -2.8);
+      root.add(ring1);
+
+      const ring2 = new THREE.Mesh(new THREE.TorusGeometry(3.1, 0.05, 18, 180), new THREE.MeshBasicMaterial({ color:0x8a63ff, transparent:true, opacity:0.38, blending:THREE.AdditiveBlending }));
+      ring2.rotation.x = Math.PI/2.9;
+      ring2.rotation.y = Math.PI/4;
+      ring2.position.set(0, 0.6, -2.8);
+      root.add(ring2);
+
+      // constellation nodes
+      const nodeDefs = [
+        { id:'home',       label:'HOME',       color:0xc9a84c },
+        { id:'ecosystem',  label:'ECOSYSTEM',  color:0x8a63ff },
+        { id:'skyeweb',    label:'SKYEWEB',    color:0xc9a84c },
+        { id:'ratecard',   label:'RATE CARD',  color:0x8a63ff },
+        { id:'mobility',   label:'MOBILITY',   color:0xc9a84c },
+        { id:'drivertrack',label:'DRIVER',     color:0x8a63ff },
+        { id:'officefleet',label:'OFFICE',     color:0xc9a84c },
+        { id:'sentinel',   label:'SENTINEL',   color:0x8a63ff },
+        { id:'partners',   label:'PARTNERS',   color:0xc9a84c },
+        { id:'contractors',label:'BENCH',      color:0x8a63ff },
+        { id:'portfolio',  label:'PORTFOLIO',  color:0xc9a84c },
+        { id:'soledrop',   label:'SOLEDROP',   color:0x8a63ff },
+        { id:'founder',    label:'FOUNDER',    color:0xc9a84c },
+        { id:'currents',   label:'CURRENTS',   color:0x8a63ff },
+        { id:'links',      label:'LINKS',      color:0xc9a84c },
+      ];
+
+      const nodeGroup = new THREE.Group();
+      root.add(nodeGroup);
+
+      const sphereRadius = 6.3;
+      const nodeGeo = new THREE.SphereGeometry(0.18, 20, 20);
+
+      const nodes = nodeDefs.map((d, i) => {
+        // distribute on a sphere (golden spiral)
+        const t = i / nodeDefs.length;
+        const inc = Math.PI * (3 - Math.sqrt(5));
+        const y = 1 - (t * 2);
+        const r = Math.sqrt(1 - y*y);
+        const phi = i * inc;
+
+        const x = Math.cos(phi) * r;
+        const z = Math.sin(phi) * r;
+
+        const mat = new THREE.MeshStandardMaterial({
+          color: d.color,
+          emissive: d.color,
+          emissiveIntensity: 0.55,
+          metalness: 0.2,
+          roughness: 0.25,
+          transparent:true,
+          opacity: 0.92
+        });
+
+        const mesh = new THREE.Mesh(nodeGeo, mat);
+        mesh.position.set(x*sphereRadius, y*sphereRadius*0.78 + 0.4, z*sphereRadius - 4.6);
+        mesh.userData = { id:d.id, label:d.label, baseColor:d.color };
+        nodeGroup.add(mesh);
+
+        // subtle trail line to center
+        const lineGeo = new THREE.BufferGeometry().setFromPoints([mesh.position, new THREE.Vector3(0,0.6,-2.8)]);
+        const lineMat = new THREE.LineBasicMaterial({ color:d.color, transparent:true, opacity:0.18 });
+        const line = new THREE.Line(lineGeo, lineMat);
+        nodeGroup.add(line);
+
+        return { def:d, mesh, line };
+      });
+
+      // interaction: on hover/click, temporarily enable pointer events by tracking mouse but canvas is pointer-events:none.
+      // We'll listen to mouse and raycast anyway; click uses document click with an overlay hit-test via last hovered node.
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      }, { passive:true });
+
+      // show a tiny cursor label for hovered node (DOM overlay)
+      const hoverLabel = document.createElement('div');
+      hoverLabel.style.position = 'fixed';
+      hoverLabel.style.zIndex = '8999';
+      hoverLabel.style.pointerEvents = 'none';
+      hoverLabel.style.padding = '8px 10px';
+      hoverLabel.style.borderRadius = '999px';
+      hoverLabel.style.border = '1px solid rgba(201,168,76,0.20)';
+      hoverLabel.style.background = 'rgba(5,5,8,0.72)';
+      hoverLabel.style.backdropFilter = 'blur(10px)';
+      hoverLabel.style.fontFamily = '"Fira Code",monospace';
+      hoverLabel.style.fontSize = '10px';
+      hoverLabel.style.letterSpacing = '1.6px';
+      hoverLabel.style.textTransform = 'uppercase';
+      hoverLabel.style.color = 'rgba(232,232,232,0.85)';
+      hoverLabel.style.opacity = '0';
+      hoverLabel.style.transform = 'translateY(6px)';
+      hoverLabel.style.transition = 'opacity .12s ease, transform .12s ease';
+      document.body.appendChild(hoverLabel);
+
+      function setHover(node, clientX, clientY){
+        if (!node){
+          hoverLabel.style.opacity = '0';
+          hoverLabel.style.transform = 'translateY(6px)';
+          hoverLabel.textContent = '';
+          document.body.style.cursor = '';
+          hovered = null;
+          return;
+        }
+        hoverLabel.textContent = node.userData.label + ' · CLICK';
+        hoverLabel.style.left = (clientX + 14) + 'px';
+        hoverLabel.style.top = (clientY + 14) + 'px';
+        hoverLabel.style.opacity = '1';
+        hoverLabel.style.transform = 'translateY(0)';
+        document.body.style.cursor = 'pointer';
+        hovered = node;
+      }
+
+      window.addEventListener('click', (e) => {
+        if (!hovered) return;
+        // avoid clicks on UI buttons/links; only treat as 3D click when click isn't on an interactive element
+        const t = e.target;
+        if (t && (t.closest('a') || t.closest('button') || t.closest('input'))) return;
+        const id = hovered.userData.id;
+        if (id) scrollToId(id);
+      });
+
+      window.addEventListener('scroll', () => { scrollY = window.pageYOffset || 0; }, { passive:true });
+
+      // camera drift
+      let mx = 0, my = 0, tx = 0, ty = 0;
+      window.addEventListener('mousemove', (e) => {
+        tx = (e.clientX / window.innerWidth - 0.5) * 2;
+        ty = -(e.clientY / window.innerHeight - 0.5) * 2;
+      }, { passive:true });
+
+      function resize(){
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+      window.addEventListener('resize', resize);
+
+      function animate(){
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        // Lite mode: reduce animation amplitude and skip heavy shader updates
+        const lite = !!window.__SOLE_LITE__;
+        const amp = lite ? 0.25 : 1.0;
+
+        mx += (tx - mx) * 0.03;
+        my += (ty - my) * 0.03;
+
+        // scroll-driven "depth" (subtle)
+        const scrollDepth = clamp(scrollY * 0.0012, 0, 8.8);
+
+        camera.position.x = mx * 0.85;
+        camera.position.y = my * 0.55 - scrollY * 0.00055;
+        camera.position.z = 14 + scrollDepth * 0.55;
+        camera.lookAt(0, -scrollY * 0.00035, -6);
+
+        // time uniforms
+        starMat.uniforms.uTime.value = t * amp;
+        a1.material.uniforms.uTime.value = t * amp;
+        a2.material.uniforms.uTime.value = t * amp;
+        a3.material.uniforms.uTime.value = t * amp;
+
+        // orbit motion
+        root.rotation.y = t * 0.045 * amp;
+        nodeGroup.rotation.y = -t * 0.072 * amp;
+        ring1.rotation.z = t * 0.22 * amp;
+        ring2.rotation.z = -t * 0.18 * amp;
+        logoMesh.rotation.z = Math.sin(t*0.35) * 0.06 * amp;
+        logoMesh.position.y = 0.6 + Math.sin(t*0.55) * 0.16 * amp;
+
+        // aurora parallax
+        a1.position.x = -mx * 0.6;
+        a2.position.x = mx * 0.35;
+        a3.position.x = -mx * 0.8;
+
+        // raycast
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(nodes.map(n => n.mesh));
+        if (intersects.length){
+          const obj = intersects[0].object;
+          // pulse hovered
+          nodes.forEach(n => {
+            const isHover = n.mesh === obj;
+            n.mesh.material.emissiveIntensity = isHover ? 1.2 : (0.55 + Math.sin(t*0.6 + n.mesh.position.x)*0.08)*amp + (lite?0.12:0.0);
+            n.mesh.scale.setScalar(isHover ? (1.7) : (1.0 + Math.sin(t*0.9 + n.mesh.position.y)*0.05)*amp + 1.0);
+            n.line.material.opacity = isHover ? 0.42 : 0.18;
+          });
+          setHover(obj, window.innerWidth*(mouse.x+1)/2, window.innerHeight*(1-mouse.y)/2);
+        } else {
+          nodes.forEach(n => {
+            n.mesh.material.emissiveIntensity = (0.55 + Math.sin(t*0.6 + n.mesh.position.x)*0.08)*amp + (lite?0.12:0.0);
+            n.mesh.scale.setScalar((1.0 + Math.sin(t*0.9 + n.mesh.position.y)*0.05)*amp + 1.0);
+            n.line.material.opacity = 0.18;
+          });
+          setHover(null);
+        }
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diagnostics • Skyes Over London</title>
+  <link rel="stylesheet" href="/assets/style.css" />
+  <script defer src="/assets/intake.js"></script>
+</head>
+<body>
+  <img class="watermark" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London watermark" />
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img class="sol-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London logo" />
+        <div>
+          <h1>Skyes Over London</h1>
+          <div class="tag">Diagnostics • Functions / Storage Status</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/jobseekers.html">Job Seekers</a>
+        <a href="/employers.html">Employers</a>
+        <a class="active" href="/diagnostics.html">Diagnostics</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="card pad">
+          <div class="kicker"><span class="dot"></span><span>Runtime Checks</span></div>
+          <div class="h1" style="font-size:28px;">Is the full system live?</div>
+          <p class="sub">If Netlify Functions are deployed, you’ll see a JSON status block below. If not, this page will say functions are unavailable — and that’s expected in Drop-only deployments.</p>
+
+          <div class="step" style="margin-top:14px;">
+            <h3>Health status</h3>
+            <pre id="diagnosticsBox" style="white-space:pre-wrap;word-break:break-word;margin:0;color:rgba(238,240,255,.86);"></pre>
+          </div>
+
+          <div class="step" style="margin-top:12px;">
+            <h3>What “working” means</h3>
+            <p>✅ Netlify Forms captures submissions (always, once deployed).<br>
+               ✅ Blobs enabled: submissions also stored redundantly in Netlify Blobs.<br>
+               ✅ Neon enabled: submissions written to Postgres for analytics + automation.</p>
+          </div>
+
+          <div class="lane-ctas" style="margin-top:16px;">
+            <a class="btn gold" href="/jobseekers.html">Test Job Seeker Intake</a>
+            <a class="btn primary" href="/employers.html">Test Employer Intake</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Skyes Over London LC</div>
+  </footer>
+</body>
+</html>

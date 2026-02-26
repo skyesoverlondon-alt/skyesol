@@ -27,6 +27,17 @@ async function injectPartial(selector, url, position){
         window.SOL.attachMegaNav();
       }
     }
+
+    // Ensure admin menu triggers script is loaded once footer/header are present
+    if (!window.__adminMenuTriggersLoaderAdded) {
+      window.__adminMenuTriggersLoaderAdded = true;
+      const s = document.createElement('script');
+      s.src = '/js/admin-menu-triggers.js';
+      s.async = false; // ensure execution order
+      s.onload = () => console.debug('admin-menu-triggers loaded');
+      s.onerror = (e) => console.warn('admin-menu-triggers failed to load', e);
+      document.head.appendChild(s);
+    }
   } catch (err) {
     console.warn('Partial inject failed for', url, err);
   }
@@ -35,4 +46,14 @@ async function injectPartial(selector, url, position){
 document.addEventListener('DOMContentLoaded', () => {
   injectPartial('nav.main-nav', '/partials/header.html', 'start');
   injectPartial('footer', '/partials/footer.html', 'end');
+  // Ensure admin menu floating link exists on pages that include partials.js
+  if (!document.getElementById('adminMenuFloatLink')) {
+    const a = document.createElement('a');
+    a.id = 'adminMenuFloatLink';
+    a.className = 'floating-glow-neon';
+    a.href = '/admin-menu.html';
+    a.textContent = 'ADMIN MENU';
+    a.style.display = 'block';
+    document.body.appendChild(a);
+  }
 });

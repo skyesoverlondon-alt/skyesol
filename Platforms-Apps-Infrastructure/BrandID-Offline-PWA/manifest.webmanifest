@@ -1,0 +1,25 @@
+{
+  "name": "Skyes Over London \u2014 Brand Identity Kit",
+  "short_name": "SOL Kit",
+  "description": "Generate a primary lockup + icon mark. Live previews, one-click SVG exports, true offline-first PWA.",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070A12",
+  "theme_color": "#070A12",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
