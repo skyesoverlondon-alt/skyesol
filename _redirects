@@ -54,6 +54,10 @@
 # BusinessLaunchGo points at a root manifest
 /manifest.webmanifest         /Platforms-Apps-Infrastructure/BusinessLaunchGo/manifest.webmanifest                   200
 
+# Self-service kAIxu key request
+/request-key                  /kAIxu/RequestKaixuAPIKey.html                                                        200
+/request-key/                 /kAIxu/RequestKaixuAPIKey.html                                                        200
+
 # Gate Proofx legacy aliases
 /gate-proofx.html             /Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html                         200
 /Gate%20Proofx/index.html     /Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html                         200
