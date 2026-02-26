@@ -191,9 +191,10 @@ export async function ensureSeed() {
     });
   }
 
-  // Portal seed
-  const portals = await s.getJSON("portals:list").catch(() => null);
-  if (!portals) {
+  // Portal seed – also re-seed when the array was emptied (e.g. all deleted)
+  const portalsDoc = await s.getJSON("portals:list").catch(() => null);
+  const existingPortals = Array.isArray(portalsDoc?.portals) ? portalsDoc.portals : [];
+  if (!portalsDoc || existingPortals.length === 0) {
     const seed = [
       {
         id: "sol-gateway",

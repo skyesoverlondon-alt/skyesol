@@ -40,7 +40,8 @@
   }
   </script>
   <link rel="stylesheet" href="assets/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@450;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
   <style>
     :root {
       --intro-bg-deep: #0b0914;
@@ -234,7 +235,34 @@
     </div>
   </div>
 
+  <canvas id="three-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
   <div class="bg"></div>
+
+  <!-- ══════ Site-wide nav (always visible) ══════ -->
+  <nav style="background:rgba(5,5,10,0.92); border-bottom:1px solid rgba(255,255,255,0.08); padding:6px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; font-size:12px; font-family:'Inter',sans-serif; position:sticky; top:0; z-index:900; backdrop-filter:blur(12px);">
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <a href="/" style="color:#ffd36a; text-decoration:none; font-weight:600;">← SOLEnterprises</a>
+      <span style="color:rgba(255,255,255,0.20);">|</span>
+      <a href="/platforms.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Platforms</a>
+      <a href="/Services/WebBuilds.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Services</a>
+      <a href="/about.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Founder</a>
+      <a href="/contact.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Contact</a>
+      <span style="color:rgba(255,255,255,0.20);">|</span>
+      <a href="/SkyeDocx/homepage.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">SkyeDocx</a>
+      <a href="/blog.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Blog</a>
+      <a href="/network.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Network</a>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <span style="color:rgba(255,255,255,0.30); font-weight:600;">GATEWAY:</span>
+      <a href="/gateway" style="color:#a243ff; text-decoration:none; font-weight:500;">Admin</a>
+      <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a; text-decoration:none;">Get API Key</a>
+      <a href="/dashboard.html" style="color:#27f2ff; text-decoration:none;">User Dashboard</a>
+      <a href="smoketest.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Smoke Tests</a>
+      <a href="gate-proofx.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Gate Proofx</a>
+      <a href="/.netlify/functions/health" target="_blank" rel="noreferrer" style="color:rgba(255,255,255,0.65); text-decoration:none;">Health</a>
+    </div>
+  </nav>
+
   <main class="shell">
     <header class="topbar">
       <div class="brand">
@@ -245,13 +273,7 @@
         </div>
       </div>
       <div class="top-actions">
-                <button id="gatewayBaseBtn" class="btn ghost" type="button" title="Switch which gateway this dashboard calls">Gateway Base</button>
-<a class="btn ghost" href="/request-key" title="Get a kAIxu API key">Get API Key</a>
-<a class="btn ghost" href="/dashboard.html" title="User dashboard">User Dashboard</a>
-          <a class="btn ghost" href="gate-proofx.html" title="Gate Proofx (admin exports)">Gate Proofx</a>
-        <a class="btn ghost" href="/SkyeDocx/homepage.html" title="Skye DocX landing">Skye DocX</a>
-        <a class="btn ghost" href="/.netlify/functions/health" target="_blank" rel="noreferrer">Health</a>
-          <a class="btn ghost" href="smoketest.html" title="Run live smoke tests against the gateway">Smoke Tests</a>
+        <button id="gatewayBaseBtn" class="btn ghost" type="button" title="Switch which gateway this dashboard calls">Gateway Base</button>
         <button id="logoutBtn" class="btn danger" style="display:none;">Logout</button>
       </div>
     </header>
@@ -267,7 +289,7 @@
       </div>
       <p class="muted small">v5 adds universal caps, per-device seats, allowlists, exports, invoice snapshots, Stripe top-ups, and stronger rate limiting.</p>
       <div style="margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.10);">
-        <p class="muted small">Looking for an API key? <a href="/request-key" style="color:#ffd36a;">Request a kAIxu API key →</a></p>
+        <p class="muted small">Looking for an API key? <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a;">Request a kAIxu API key →</a></p>
         <p class="muted small">Already have a key? <a href="/dashboard.html" style="color:#27f2ff;">Open User Dashboard →</a></p>
       </div>
     </section>
@@ -1076,7 +1098,7 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
           <tr><td>Admin auth</td><td>JWT from <code>ADMIN_PASSWORD</code> login (12h TTL)</td></tr>
           <tr><td>Chat endpoint</td><td><code>POST /.netlify/functions/gateway-chat</code></td></tr>
           <tr><td>Stream endpoint</td><td><code>POST /.netlify/functions/gateway-stream</code></td></tr>
-          <tr><td>Self-service keys</td><td><a href="/request-key" style="color:#ffd36a;">/request-key</a> (public, no admin needed)</td></tr>
+          <tr><td>Self-service keys</td><td><a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a;">/request-key</a> (public, no admin needed)</td></tr>
           <tr><td>User dashboard</td><td><a href="/dashboard.html" style="color:#27f2ff;">/dashboard.html</a></td></tr>
           <tr><td>Health check</td><td><code>GET /.netlify/functions/health</code></td></tr>
           <tr><td>Spend caps</td><td>Customer-level + per-key override (in cents)</td></tr>
@@ -1106,7 +1128,7 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
     <!-- SELF-SERVICE -->
     <div style="border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:20px; background:rgba(255,255,255,0.03);">
       <h3 style="color:#27f2ff; margin:0 0 12px;">🤖 Self-Service Key Generator</h3>
-      <p class="muted small">Clients can request their own starter key at <a href="/request-key" style="color:#ffd36a;">/request-key</a> without needing you to be involved.</p>
+      <p class="muted small">Clients can request their own starter key at <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a;">/request-key</a> without needing you to be involved.</p>
       <ul class="muted small" style="padding-left:18px; list-style:disc;">
         <li>They enter their email → get a <code>kx_live_…</code> key instantly</li>
         <li>Defaults: $20/month cap, 10 RPM, 3 max devices, starter plan</li>
@@ -1156,6 +1178,7 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
         <button id="apiBaseSave" class="btn primary" type="button">Save</button>
       </div>
     </div>
+  </div>
 
   <!-- Monitor detail modal -->
   <div id="monitorModal" class="modalOverlay" style="display:none;">
@@ -1172,8 +1195,6 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
       </div>
       <pre id="monDetail" class="code"></pre>
     </div>
-  </div>
-
   </div>
 
 </body>
@@ -1195,4 +1216,5 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
     }, 5300);
   })();
 </script>
+<script src="assets/three-bg-gate.js"></script>
 </html>

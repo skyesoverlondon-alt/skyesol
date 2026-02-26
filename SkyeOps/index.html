@@ -403,6 +403,14 @@
             onError && onError({ code: 401, message: 'Invalid Kaixu Key' });
             return;
           }
+          if (response.status === 429) {
+            onError && onError({ code: 429, message: 'Rate limited — retry shortly' });
+            return;
+          }
+          if (response.status >= 500) {
+            onError && onError({ code: response.status, message: 'Gateway / provider error (' + response.status + ')' });
+            return;
+          }
           if (!response.ok) {
             const errorBody = await response.text().catch(() => '');
             onError && onError({ code: response.status, message: errorBody || `Gateway error ${response.status}` });

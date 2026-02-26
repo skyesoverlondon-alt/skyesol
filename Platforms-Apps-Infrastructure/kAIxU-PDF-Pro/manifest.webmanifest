@@ -1,0 +1,16 @@
+{
+  "name": "Skyes Over London \u2014 kAIxU PDF Suite",
+  "short_name": "kAIxU PDF",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07020d",
+  "theme_color": "#1b0b2a",
+  "icons": [
+    {
+      "src": "https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

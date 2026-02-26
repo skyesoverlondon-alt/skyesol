@@ -188,8 +188,11 @@
         <div id="status" class="text-xs px-3 py-2 rounded-lg bg-black/20 border border-white/10 text-white/70 mono whitespace-pre-wrap">
           Diagnostics: initializing…
         </div>
-        <div class="text-xs text-white/50 mono">
-          x-kaixu-app: sol-brand-kit • x-kaixu-build: v1
+        <div class="flex items-center gap-3">
+          <span id="budgetBadge" class="text-xs px-3 py-2 rounded-lg bg-black/20 border border-white/10 text-amber-300/80 mono" title="Monthly budget (cap − spent)">Budget: —</span>
+          <span class="text-xs text-white/50 mono">
+            x-kaixu-app: sol-brand-kit • x-kaixu-build: v1
+          </span>
         </div>
       </div>
     </div>
@@ -350,6 +353,38 @@
   const DEFAULT_LOGO_URL = "https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png";
   const APP_HEADERS = { "x-kaixu-app": "sol-brand-kit", "x-kaixu-build": "v1" };
   const el = (id) => document.getElementById(id);
+
+  /* ── BroadcastChannel diagnostics (kAIxuGateway13 integration directive) ── */
+  let diagChannel = null;
+  try { diagChannel = new BroadcastChannel('kaixu_events'); } catch (_) {}
+
+  function broadcastLog(source, payload) {
+    try {
+      const msg = { source, payload, app: 'kAIxUBrandKit', timestamp: Date.now() };
+      if (diagChannel) diagChannel.postMessage(msg);
+    } catch (_) {}
+  }
+
+  /* ── Budget display ── */
+  function updateBudget(month) {
+    const badge = el("budgetBadge");
+    if (!badge || !month) return;
+    const cap = Number(month.cap_cents ?? 0);
+    const spent = Number(month.spent_cents ?? 0);
+    const remain = Math.max(0, cap - spent);
+    badge.textContent = `Budget: $${(remain / 100).toFixed(2)} left`;
+    badge.title = `Month ${month.month || ""} · Cap $${(cap / 100).toFixed(2)} · Spent $${(spent / 100).toFixed(2)}`;
+  }
+
+  /* ── Gateway error mapping (402/401/429/500+) ── */
+  function mapGatewayError(status, data) {
+    if (status === 402) return "Monthly cap reached (402). Upgrade your plan or wait for the next billing cycle.";
+    if (status === 401) return "Invalid or missing kAIxU key (401). Check your virtual key.";
+    if (status === 429) return "Rate limited (429). Please wait a moment and try again.";
+    if (status >= 500)  return "Gateway / provider error (" + status + "). Try again shortly.";
+    const msg = (data && (data.error || data.details)) ? JSON.stringify(data, null, 2) : "";
+    return msg || "Request failed (" + status + ").";
+  }
 
   function getInstallId() {
     try {
@@ -648,6 +683,8 @@
     btnAsk.disabled = true;
     btnAsk.classList.add("opacity-60");
 
+    broadcastLog('askKaixu:request', { mode: modeHint || 'general' });
+
     try {
       const payload = {
         prompt: promptText,
@@ -667,13 +704,19 @@
       let data = null;
       try { data = JSON.parse(txt); } catch {}
 
+      /* ── Update budget if gateway returned month data ── */
+      if (data && data.month) updateBudget(data.month);
+
       if (!resp.ok) {
-        const msg = (data && (data.error || data.details)) ? JSON.stringify(data, null, 2) : txt;
-        aiOutput.innerHTML = `<pre class="mono text-xs text-rose-200 whitespace-pre-wrap">${escapeHtml(msg)}</pre>`;
+        const userMsg = mapGatewayError(resp.status, data);
+        broadcastLog('askKaixu:error', { status: resp.status });
+        aiOutput.innerHTML = `<pre class="mono text-xs text-rose-200 whitespace-pre-wrap">${escapeHtml(userMsg)}</pre>`;
         setAiState("error");
-        setDiag("kAIxU request failed (see output).");
+        setDiag("kAIxU request failed (" + resp.status + ").");
         return;
       }
+
+      broadcastLog('askKaixu:response', { status: resp.status, ok: !!(data && data.ok) });
 
       aiOutput.innerHTML = "";
       const root = document.createElement("div");
@@ -714,6 +757,7 @@
       setAiState("done");
       setDiag("kAIxU delivered output.");
     } catch (err) {
+      broadcastLog('askKaixu:exception', { message: String(err?.message || err) });
       aiOutput.innerHTML = `<pre class="mono text-xs text-rose-200 whitespace-pre-wrap">${escapeHtml(String(err?.message || err))}</pre>`;
       setAiState("error");
       setDiag("kAIxU call threw a client error (reported).");

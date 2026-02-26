@@ -47,6 +47,31 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
+  <!-- ══════ Site-wide nav (always visible) ══════ -->
+  <nav style="background:rgba(5,5,10,0.92); border-bottom:1px solid rgba(255,255,255,0.08); padding:6px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; font-size:12px; font-family:'Space Grotesk',system-ui,sans-serif; position:sticky; top:0; z-index:900; backdrop-filter:blur(12px);">
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <a href="/" style="color:#5cf4d3; text-decoration:none; font-weight:600;">&larr; SOLEnterprises</a>
+      <span style="color:rgba(255,255,255,0.20);">|</span>
+      <a href="/platforms.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Platforms</a>
+      <a href="/Services/WebBuilds.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Services</a>
+      <a href="/about.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Founder</a>
+      <a href="/contact.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Contact</a>
+      <span style="color:rgba(255,255,255,0.20);">|</span>
+      <a href="/SkyeDocx/homepage.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">SkyeDocx</a>
+      <a href="/blog.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Blog</a>
+      <a href="/network.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Network</a>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <span style="color:rgba(255,255,255,0.30); font-weight:600;">GATEWAY:</span>
+      <a href="/gateway" style="color:#6ea8ff; text-decoration:none; font-weight:500;">Admin</a>
+      <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a; text-decoration:none;">Get API Key</a>
+      <a href="/dashboard.html" style="color:#5cf4d3; text-decoration:none;">User Dashboard</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Smoke Tests</a>
+      <span style="color:var(--accent); font-weight:600;">Gate Proofx</span>
+      <a href="/.netlify/functions/health" target="_blank" rel="noreferrer" style="color:rgba(255,255,255,0.65); text-decoration:none;">Health</a>
+    </div>
+  </nav>
+
   <div class="bg"></div>
   <main class="shell">
     <header class="topbar">
@@ -187,24 +212,77 @@
   </main>
 
   <div id="tutorialModal" class="modal" style="display:none;">
-    <div class="modal-body">
+    <div class="modal-body" style="max-height:85vh; overflow-y:auto;">
       <div class="modal-head">
-        <h3>Gate Proofx walkthrough</h3>
+        <h3>Gate Proofx — Full Walkthrough</h3>
         <button id="closeTutorial" class="btn ghost" type="button">Close</button>
       </div>
+
+      <p class="muted" style="margin:10px 0 14px;">Gate Proofx is the <strong style="color:var(--text);">Gateway Data Explorer</strong> for kAIxU Gateway 13. It lets you load, filter, chart, and re-export every event that flowed through the gateway so you can audit usage, debug errors, and prove billing to clients.</p>
+
+      <h4 style="margin:18px 0 6px; color:var(--accent);">1 — Load your data</h4>
       <ol class="tutorial-list">
-        <li>Paste your admin bearer token (Data source) and click Save token.</li>
-        <li>To load archives: click “List archive batches”, then Load a batch, or paste a key and click “Load from archive key”.</li>
-        <li>To load exports: click Upload and select a gateway CSV/NDJSON export.</li>
-        <li>Use Filters (text, level, provider, model, date range, status, max rows) to narrow results; charts and table update instantly.</li>
-        <li>Sort columns by clicking headers; errors and warns are counted in stats.</li>
-        <li>Export the current filtered view via “Export filtered CSV” or print/Save view as PDF.</li>
-        <li>Charts: Requests over time, top providers, and levels doughnut reflect your current filters.</li>
+        <li><strong>Upload a file</strong> — Click <em>Upload CSV / NDJSON</em> and pick an export file from the gateway admin’s <em>Exports &amp; Invoices</em> tab. Supports <code>.csv</code>, <code>.ndjson</code>, <code>.json</code>, and <code>.txt</code>.</li>
+        <li><strong>Load from archive</strong> — Paste your admin bearer token into the Data-source section and click <em>Save token</em>. Then click <em>List archive batches</em> to browse archived NDJSON batches on Netlify Blobs, or paste a specific archive key and click <em>Load from archive key</em>.</li>
+        <li>Your token is saved to localStorage for convenience. Keep it private.</li>
       </ol>
-      <p class="muted">Tip: Keep tokens off the front-end by using the archive endpoint server-side in production; this UI uses your pasted token for convenience.</p>
+
+      <h4 style="margin:18px 0 6px; color:var(--accent);">2 — Filter</h4>
+      <ol class="tutorial-list">
+        <li><strong>Text contains</strong> — Free-text search across every field (provider, model, request_id, app_id, etc.).</li>
+        <li><strong>Level</strong> — Filter by <code>info</code>, <code>warn</code>, or <code>error</code>.</li>
+        <li><strong>Provider / Model</strong> — Narrow to a specific AI provider (openai, anthropic, gemini…) or model (gpt-4o, claude-3.5…).</li>
+        <li><strong>Date range</strong> — Set <em>From</em> / <em>To</em> timestamps to focus on a window.</li>
+        <li><strong>Status code</strong> — Show only a specific HTTP status (200, 429, 500…).</li>
+        <li><strong>Max rows</strong> — Cap the result set (10–5 000). Default 500.</li>
+        <li>Charts and the data table update <strong>instantly</strong> as you change filters.</li>
+      </ol>
+
+      <h4 style="margin:18px 0 6px; color:var(--accent);">3 — Read the overview cards</h4>
+      <ol class="tutorial-list">
+        <li><strong>Rows</strong> — Total events in the current filtered set.</li>
+        <li><strong>Errors / Warns</strong> — Counts by log level for quick triage.</li>
+        <li><strong>Providers / Models</strong> — Distinct count of AI vendors and models hit.</li>
+      </ol>
+
+      <h4 style="margin:18px 0 6px; color:var(--accent);">4 — Charts</h4>
+      <ol class="tutorial-list">
+        <li><strong>Requests over time</strong> (line chart) — Shows daily request volume.</li>
+        <li><strong>Top providers</strong> (bar chart) — Which providers are handling the most traffic.</li>
+        <li><strong>Levels breakdown</strong> (doughnut) — Visual split of info / warn / error events.</li>
+      </ol>
+
+      <h4 style="margin:18px 0 6px; color:var(--accent);">5 — Data table</h4>
+      <ol class="tutorial-list">
+        <li>Columns: <strong>Time, Level, Provider, Model, Status, Function, Request ID, App, Duration</strong>.</li>
+        <li>Click any column header to <strong>sort</strong> (ascending / descending toggles).</li>
+        <li>Rows are colour-neutral — hover to highlight.</li>
+      </ol>
+
+      <h4 style="margin:18px 0 6px; color:var(--accent);">6 — Export</h4>
+      <ol class="tutorial-list">
+        <li><strong>Export filtered CSV</strong> — Downloads the current filtered view as a <code>.csv</code> file you can open in Excel / Sheets.</li>
+        <li><strong>Save view as PDF</strong> — Opens the browser print dialog so you can save the entire page (charts included) as a PDF for client proof or internal records.</li>
+      </ol>
+
+      <h4 style="margin:18px 0 6px; color:var(--accent-2);">Why “Gate Proofx”?</h4>
+      <p class="muted" style="margin:6px 0;">The name comes from <em>proof of gateway</em> — you should be able to prove, with data, exactly what ran through the gateway, for whom, at what cost. This is your audit trail, billing proof, and debugging workbench — all in one page.</p>
+
+      <h4 style="margin:18px 0 6px; color:var(--accent-2);">Typical workflow</h4>
+      <table style="width:100%; border-collapse:collapse; font-size:13px; margin:6px 0 12px;">
+        <tr><td style="padding:6px; border-bottom:1px solid var(--border); color:var(--accent); font-weight:600;">Step</td><td style="padding:6px; border-bottom:1px solid var(--border);">Action</td></tr>
+        <tr><td style="padding:6px; border-bottom:1px solid var(--border);">①</td><td style="padding:6px; border-bottom:1px solid var(--border);">Open Gate Proofx and paste your admin token.</td></tr>
+        <tr><td style="padding:6px; border-bottom:1px solid var(--border);">②</td><td style="padding:6px; border-bottom:1px solid var(--border);">Click <em>List archive batches</em> → pick today’s batch → Load.</td></tr>
+        <tr><td style="padding:6px; border-bottom:1px solid var(--border);">③</td><td style="padding:6px; border-bottom:1px solid var(--border);">Set <em>Level = error</em> to see failures. Check provider + status for patterns.</td></tr>
+        <tr><td style="padding:6px; border-bottom:1px solid var(--border);">④</td><td style="padding:6px; border-bottom:1px solid var(--border);">Clear the filter. Set <em>Provider = openai</em> to view OpenAI-specific usage.</td></tr>
+        <tr><td style="padding:6px;">⑤</td><td style="padding:6px;">Export as CSV for bookkeeping, or save PDF to share with a client.</td></tr>
+      </table>
+
+      <p class="muted" style="margin:8px 0 0;">Tip: Keep tokens off the front-end by using the archive endpoint server-side in production; this UI uses your pasted token for convenience.</p>
     </div>
   </div>
 
   <script src="./app.js"></script>
+  <script src="/js/admin-menu-triggers.js" defer></script>
 </body>
 </html>

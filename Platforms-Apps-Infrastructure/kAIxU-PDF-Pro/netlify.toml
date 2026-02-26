@@ -1,0 +1,13 @@
+[build]
+  publish = "."
+  command = "echo 'SVS build: static publish'"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://skyesol.netlify.app/.netlify/functions/:splat"
+  status = 200
+  force = true

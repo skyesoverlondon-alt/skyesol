@@ -58,9 +58,23 @@
 /request-key                  /kAIxu/RequestKaixuAPIKey.html                                                        200
 /request-key/                 /kAIxu/RequestKaixuAPIKey.html                                                        200
 
-# Gate Proofx legacy aliases
-/gate-proofx.html             /Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html                         200
-/Gate%20Proofx/index.html     /Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html                         200
+# Gate Proofx
+/gate-proofx.html             /Platforms-Apps-Infrastructure/GateProofx/index.html                                   200
+/Gate%20Proofx/index.html     /Platforms-Apps-Infrastructure/GateProofx/index.html                                   200
+
+# Phoenix Arizona blog SEO slugs (was: stub index.html files)
+/phoenix-start-business-llc-compliance-playbook/*   /Blogs/Phoenix%20Arizona/01_phoenix_start_business_playbook.html    301
+/phoenix-start-business-llc-compliance-playbook     /Blogs/Phoenix%20Arizona/01_phoenix_start_business_playbook.html    301
+/how-to-start-an-llc-in-arizona-phoenix/*           /Blogs/Phoenix%20Arizona/02_how_to_start_llc_arizona_phoenix.html   301
+/how-to-start-an-llc-in-arizona-phoenix             /Blogs/Phoenix%20Arizona/02_how_to_start_llc_arizona_phoenix.html   301
+/arizona-llc-cost-breakdown/*                       /Blogs/Phoenix%20Arizona/03_arizona_llc_cost_breakdown.html         301
+/arizona-llc-cost-breakdown                         /Blogs/Phoenix%20Arizona/03_arizona_llc_cost_breakdown.html         301
+/phoenix-business-license-requirements/*            /Blogs/Phoenix%20Arizona/04_phoenix_business_license_requirements.html  301
+/phoenix-business-license-requirements              /Blogs/Phoenix%20Arizona/04_phoenix_business_license_requirements.html  301
+/arizona-tpt-license-who-needs-it/*                 /Blogs/Phoenix%20Arizona/05_arizona_tpt_license_who_needs_it.html   301
+/arizona-tpt-license-who-needs-it                   /Blogs/Phoenix%20Arizona/05_arizona_tpt_license_who_needs_it.html   301
+/how-to-get-an-ein-arizona/*                        /Blogs/Phoenix%20Arizona/06_how_to_get_an_ein_arizona.html          301
+/how-to-get-an-ein-arizona                          /Blogs/Phoenix%20Arizona/06_how_to_get_an_ein_arizona.html          301
 
 # BrandID Offline PWA icon paths
 /Platforms-Apps-Infrastructure/BrandID-Offline-PWA/favicon.svg      /Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/logo.svg  200

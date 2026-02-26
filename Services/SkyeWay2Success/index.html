@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SkyeWay to Success — Business Development Coaching | SkyeHub OfficeSpace</title>
+<meta name="description" content="SkyeWay to Success is an 8-week adult-only business development coaching + build program. LLC filing, live website by Week 3, brand assets, and 12-week SkyeHub OfficeSpace perk."/>
+<meta name="theme-color" content="#7a2cff"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:263 70% 4%;--fg:270 40% 96%;--primary:266 80% 55%;--secondary:45 95% 60%;
+--muted-fg:270 20% 65%;--gold:45 95% 60%;--gold-light:45 95% 75%;
+--purple:266 80% 55%;--purple-light:266 80% 70%;--emerald:160 70% 50%;--coral:350 85% 65%;
+}
+html{scroll-behavior:smooth}
+body{background:hsl(var(--bg));color:hsl(var(--fg));font-family:'Outfit',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5,h6{font-family:'Space Grotesk','Outfit',sans-serif}
+::selection{background:hsl(var(--primary)/.4);color:hsl(var(--fg))}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:hsl(var(--bg))}
+::-webkit-scrollbar-thumb{background:hsl(263 40% 15%);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:hsl(var(--primary))}
+
+/* ── Intro ── */
+#intro{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:hsl(var(--bg));transition:opacity .8s}
+#intro.hide{opacity:0;pointer-events:none}
+#intro .orb{width:128px;height:128px;border-radius:50%;background:radial-gradient(circle at 30% 30%,hsl(45 95% 75%),hsl(45 95% 60%) 30%),radial-gradient(circle at 70% 70%,hsl(266 80% 55%),transparent 50%),linear-gradient(135deg,hsl(266 80% 45%),hsl(45 95% 60%));box-shadow:0 0 100px hsl(45 95% 60%/.6),0 0 200px hsl(266 80% 55%/.4);animation:spin 8s linear infinite;transform:scale(0);transition:transform .8s cubic-bezier(.4,0,.2,1),opacity .5s}
+#intro.phase1 .orb{transform:scale(1)}
+#intro.phase2 .orb{transform:scale(30);opacity:0}
+#intro .brand{position:absolute;opacity:0;text-align:center;transition:opacity .8s,transform .8s}
+#intro.phase3 .brand{opacity:1;transform:translateY(0)}
+#intro .brand h1{font-size:clamp(3rem,8vw,6rem);font-weight:700;background:linear-gradient(135deg,hsl(45 95% 60%),hsl(45 95% 75%),hsl(45 95% 60%));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.05em;text-shadow:0 0 80px hsl(45 95% 60%/.5)}
+#intro .brand p{font-size:1.2rem;color:hsl(var(--fg)/.7);letter-spacing:.3em;text-transform:uppercase;margin-top:.5rem}
+#intro .rays{position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 50%,transparent 0deg,hsl(45 95% 60%/.1) 20deg,transparent 40deg,hsl(266 80% 55%/.1) 60deg,transparent 80deg,hsl(45 95% 60%/.1) 100deg,transparent 120deg);opacity:0;transform:scale(.5);transition:opacity 1.5s,transform 3s ease-out}
+#intro.phase1 .rays{opacity:.6;transform:scale(2) rotate(180deg)}
+@keyframes spin{from{transform:scale(1) rotate(0)}to{transform:scale(1) rotate(-360deg)}}
+
+/* ── Starfield Canvas ── */
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.9}
+
+/* ── Floating Orbs ── */
+.floating-orbs{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.floating-orbs .orb{position:absolute;border-radius:50%;filter:blur(40px);animation:orbFloat 14s ease-in-out infinite}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(20px,-30px) scale(1.1)}75%{transform:translate(-20px,30px) scale(.95)}}
+
+/* ── Vignette ── */
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse 80% 50% at 50% 0%,transparent 0%,hsl(263 70% 4%) 100%),radial-gradient(ellipse 60% 40% at 50% 100%,hsl(263 70% 4%/.8) 0%,transparent 60%)}
+
+/* ── Navbar ── */
+nav.top-bar{position:fixed;top:0;left:0;right:0;z-index:50;transition:all .5s;padding:0 1.5rem}
+nav.top-bar.scrolled{backdrop-filter:blur(16px);background:hsl(var(--bg)/.8);border-bottom:1px solid hsl(0 0% 100%/.1)}
+nav .inner{max-width:80rem;margin:auto;display:flex;align-items:center;justify-content:space-between;height:5rem}
+nav .logo{display:flex;align-items:center;gap:.75rem;cursor:pointer}
+nav .sigil{width:2.5rem;height:2.5rem;border-radius:.75rem;overflow:hidden;position:relative;background:radial-gradient(circle at 30% 30%,hsl(45 95% 75%/.9),hsl(45 95% 60%/.4) 45%,hsl(266 80% 55%/.5) 75%),linear-gradient(135deg,hsl(266 80% 55%/.7),hsl(45 95% 60%/.4))}
+nav .logo-text h1{font-size:.85rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+nav .logo-text span{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:hsl(var(--muted-fg))}
+nav .links{display:flex;align-items:center;gap:.5rem}
+nav .links a{padding:.5rem 1rem;border-radius:9999px;font-size:.875rem;font-weight:500;color:hsl(var(--fg)/.8);text-decoration:none;transition:all .3s}
+nav .links a:hover{color:hsl(var(--fg));background:hsl(0 0% 100%/.05)}
+nav .links a.active{background:hsl(var(--primary)/.2);color:hsl(0 0% 100%);border:1px solid hsl(var(--primary)/.5)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:9999px;font-weight:600;cursor:pointer;border:none;transition:all .3s;font-family:inherit}
+.btn-sm{padding:.5rem 1rem;font-size:.875rem}
+.btn-md{padding:.75rem 1.5rem;font-size:1rem}
+.btn-lg{padding:1rem 2rem;font-size:1.125rem}
+.btn-secondary{background:linear-gradient(90deg,hsl(var(--secondary)/.2),hsl(var(--secondary)/.3),hsl(var(--secondary)/.2));color:hsl(var(--secondary));border:1px solid hsl(var(--secondary)/.4)}
+.btn-secondary:hover{box-shadow:0 0 40px hsl(45 95% 60%/.4)}
+.btn-ghost{background:hsl(0 0% 100%/.05);color:hsl(var(--fg));border:1px solid hsl(0 0% 100%/.1)}
+.btn-ghost:hover{background:hsl(0 0% 100%/.1);border-color:hsl(0 0% 100%/.2)}
+.btn-full{width:100%}
+.text-gold{background:linear-gradient(135deg,hsl(var(--gold)),hsl(var(--gold-light)),hsl(var(--gold)));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ── Mobile nav ── */
+.hamburger{display:none;background:none;border:none;color:hsl(var(--fg));cursor:pointer;padding:.5rem}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:40;background:hsl(0 0% 0%/.8);backdrop-filter:blur(16px)}
+.mobile-menu.open{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem}
+.mobile-menu a{font-size:1.25rem;color:hsl(var(--fg));text-decoration:none;padding:.75rem 1.5rem;border-radius:1rem}
+@media(max-width:1023px){nav .links{display:none}.hamburger{display:block}}
+
+/* ── Sections ── */
+section{position:relative;z-index:10;padding:6rem 1rem;overflow:hidden}
+.container{max-width:80rem;margin:auto;padding:0 1rem}
+.section-title{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;margin-bottom:1rem}
+.section-desc{font-size:1.125rem;color:hsl(var(--muted-fg));max-width:48rem;margin-bottom:3rem;line-height:1.7}
+
+/* ── Hero ── */
+#program{min-height:100vh;display:flex;align-items:center;padding-top:6rem;padding-bottom:4rem}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+@media(max-width:1023px){.hero-grid{grid-template-columns:1fr}}
+.kicker{display:inline-flex;align-items:center;gap:.75rem;padding:.5rem 1rem;border-radius:9999px;border:1px solid hsl(var(--secondary)/.4);background:hsl(var(--secondary)/.1);margin-bottom:1.5rem;font-size:.875rem;font-weight:500;color:hsl(var(--secondary));letter-spacing:.05em;text-transform:uppercase}
+.kicker .dot{width:8px;height:8px;border-radius:50%;background:hsl(var(--secondary));animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.1;margin-bottom:1.5rem}
+.hero h1 .muted{color:hsl(var(--muted-fg))}
+.hero p.desc{font-size:1.125rem;color:hsl(var(--muted-fg));line-height:1.7;margin-bottom:2rem;max-width:36rem}
+.hero p.desc strong{color:hsl(var(--fg))}
+.pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.pill{display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border-radius:9999px;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);font-size:.875rem;color:hsl(var(--fg)/.8);transition:all .3s;cursor:default}
+.pill:hover{border-color:hsl(var(--secondary)/.4);background:hsl(var(--secondary)/.1)}
+.pill svg{width:16px;height:16px;color:hsl(var(--secondary))}
+.ctas{display:flex;flex-wrap:wrap;gap:1rem}
+
+/* ── Deliverables Card ── */
+.deliverables-card{border-radius:1.5rem;overflow:hidden;padding:2px;background:linear-gradient(135deg,hsl(266 80% 55%/.5),hsl(45 95% 60%/.3),hsl(266 80% 55%/.5))}
+.deliverables-card-inner{border-radius:1.4rem;padding:1.5rem 2rem;background:linear-gradient(180deg,hsl(263 60% 8%),hsl(263 70% 4%))}
+.deliverables-card h3{font-size:1.5rem;font-weight:700;margin-bottom:.5rem}
+.deliverables-card .sub{font-size:.875rem;color:hsl(var(--muted-fg));margin-bottom:1.5rem}
+.del-row{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;border-radius:.75rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);margin-bottom:.5rem;transition:all .3s}
+.del-row:hover{background:hsl(var(--secondary)/.1);border-color:hsl(var(--secondary)/.3)}
+.del-row .val{color:hsl(var(--secondary));font-weight:600}
+.price-block{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid hsl(0 0% 100%/.1)}
+.price-block .amount{font-size:1.875rem;font-weight:700;color:hsl(var(--secondary))}
+.price-block .label{color:hsl(var(--muted-fg))}
+.price-block .note{font-size:.875rem;color:hsl(var(--muted-fg));margin-top:.5rem}
+
+/* ── Scroll Indicator ── */
+.scroll-ind{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%)}
+.scroll-ind .pill-scroll{width:24px;height:40px;border-radius:9999px;border:2px solid hsl(0 0% 100%/.3);display:flex;justify-content:center;padding-top:8px;animation:bob 1.5s infinite}
+.scroll-ind .pill-scroll .dot-s{width:6px;height:12px;border-radius:9999px;background:hsl(var(--secondary));animation:scrollDot 1.5s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@keyframes scrollDot{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(8px);opacity:.5}}
+
+/* ── Glass Card ── */
+.glow-card{position:relative;border-radius:1rem;overflow:hidden;background:linear-gradient(180deg,hsl(0 0% 100%/.08),hsl(0 0% 0%/.3));border:1px solid hsl(0 0% 100%/.1);backdrop-filter:blur(16px);box-shadow:0 20px 60px hsl(0 0% 0%/.4),0 0 0 1px hsl(0 0% 100%/.1);transition:all .3s}
+.glow-card:hover{border-color:hsl(0 0% 100%/.2)}
+
+/* ── Office Section ── */
+.gallery{position:relative;aspect-ratio:4/3;border-radius:1rem;overflow:hidden}
+.gallery img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s}
+.gallery img.active{opacity:1}
+.gallery .overlay{position:absolute;inset:0;background:linear-gradient(to top,hsl(0 0% 0%/.8),transparent)}
+.gallery .caption{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;z-index:2}
+.gallery .caption h4{font-size:1.25rem;font-weight:700;margin-bottom:.5rem}
+.gallery .caption p{font-size:.875rem;color:hsl(var(--fg)/.8)}
+.gallery .nav-dots{position:absolute;bottom:1.5rem;right:1.5rem;display:flex;gap:.5rem;z-index:3}
+.gallery .nav-dots button{width:10px;height:10px;border-radius:50%;border:none;cursor:pointer;transition:all .3s}
+.gallery .nav-dots button.active{background:hsl(var(--secondary));box-shadow:0 0 10px hsl(45 95% 60%/.5);transform:scale(1.25)}
+.gallery .nav-dots button:not(.active){background:hsl(0 0% 100%/.3)}
+.gallery .arrows{position:absolute;bottom:1.5rem;right:6rem;display:flex;gap:.5rem;z-index:3}
+.gallery .arrows button{padding:.5rem;border-radius:.5rem;background:hsl(0 0% 100%/.1);border:none;color:hsl(var(--fg));cursor:pointer;transition:all .3s;font-size:1rem}
+.gallery .arrows button:hover{background:hsl(0 0% 100%/.2)}
+
+/* ── Slider ── */
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:9999px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:hsl(var(--secondary));border:2px solid hsl(var(--bg));box-shadow:0 0 10px hsl(45 95% 60%/.5);cursor:pointer}
+
+/* ── Grid helpers ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:1023px){.grid-2{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.grid-3{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr}}
+
+/* ── Stats card ── */
+.stat-card{padding:1rem;border-radius:.75rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05)}
+.stat-card .label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:hsl(var(--muted-fg))}
+.stat-card .value{font-size:1.5rem;font-weight:700;color:hsl(var(--secondary));margin-top:.25rem}
+.stat-card .sub{font-size:.75rem;color:hsl(var(--muted-fg));margin-top:.25rem}
+
+/* ── Features grid ── */
+.feature-card{padding:1.25rem;border-radius:.75rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);transition:all .3s}
+.feature-card:hover{border-color:hsl(var(--secondary)/.3);background:hsl(var(--secondary)/.05);transform:translateY(-5px)}
+.feature-card svg{width:24px;height:24px;color:hsl(var(--secondary));margin-bottom:.75rem}
+.feature-card h5{font-weight:700;margin-bottom:.5rem}
+.feature-card p{font-size:.875rem;color:hsl(var(--muted-fg))}
+
+/* ── Pricing cards ── */
+.price-orb{position:relative;width:12rem;height:12rem;border-radius:1.5rem;flex-shrink:0;background:radial-gradient(circle at 30% 30%,hsl(45 95% 75%/.3),hsl(45 95% 60%/.15) 40%,hsl(266 80% 55%/.2) 70%),linear-gradient(180deg,hsl(0 0% 100%/.08),hsl(0 0% 0%/.3));box-shadow:0 20px 60px hsl(0 0% 0%/.4);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.price-orb svg{position:absolute;inset:0;width:100%;height:100%}
+.price-orb .center{position:relative;z-index:2}
+.price-orb .center .amt{font-size:1.5rem;font-weight:700;color:hsl(var(--secondary))}
+.progress-bar{height:.75rem;border-radius:9999px;background:hsl(0 0% 100%/.1);overflow:hidden;margin-top:1rem}
+.progress-bar .fill{height:100%;border-radius:9999px;background:linear-gradient(90deg,hsl(45 95% 60%),hsl(160 70% 50%));transition:width .5s}
+
+/* ── Tabs ── */
+.tab-group{display:flex;gap:.75rem;margin-bottom:1.5rem}
+.tab{padding:.5rem 1rem;border-radius:9999px;font-size:.875rem;font-weight:600;cursor:pointer;transition:all .3s;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);color:hsl(var(--fg)/.7);font-family:inherit}
+.tab.active{background:hsl(var(--secondary)/.2);color:hsl(var(--secondary));border-color:hsl(var(--secondary)/.4)}
+
+/* ── Week buttons ── */
+.week-btns{display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap}
+.week-btn{flex:1;min-width:2rem;padding:.5rem;border-radius:.5rem;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .3s;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);color:hsl(var(--fg)/.5);font-family:inherit;text-align:center}
+.week-btn.past{background:hsl(var(--emerald)/.2);color:hsl(var(--emerald));border-color:hsl(var(--emerald)/.3)}
+.week-btn.current{background:hsl(var(--secondary)/.2);color:hsl(var(--secondary));border-color:hsl(var(--secondary)/.4)}
+
+/* ── Toggle Checkbox ── */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:1rem;border-radius:.75rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);cursor:pointer;transition:all .3s}
+.toggle-row:hover{background:hsl(0 0% 100%/.1)}
+.toggle-row input{width:20px;height:20px;accent-color:hsl(var(--secondary))}
+
+/* ── Pipeline step ── */
+.pipeline-step{padding:1rem;border-radius:.75rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);margin-bottom:.75rem;transition:all .5s}
+.pipeline-step.ready{border-color:hsl(var(--emerald)/.3);background:hsl(var(--emerald)/.1)}
+.pipeline-step .step-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:hsl(var(--muted-fg));transition:color .5s}
+.pipeline-step.ready .step-title{color:hsl(var(--emerald))}
+.pipeline-step .step-desc{font-size:.875rem;color:hsl(var(--fg)/.8);margin-top:.25rem}
+
+/* ── Trigger Box ── */
+.trigger-box{padding:1rem;border-radius:.75rem;border:1px solid hsl(var(--secondary)/.3);background:hsl(var(--secondary)/.1);margin-bottom:1.5rem}
+.trigger-box p{font-size:.875rem}
+.trigger-box strong{color:hsl(var(--secondary))}
+
+/* ── Timeline ── */
+.timeline{position:relative}
+.timeline-line{position:absolute;left:1.5rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,hsl(var(--primary)),hsl(var(--secondary)),hsl(var(--primary)));opacity:.3}
+@media(min-width:768px){.timeline-line{left:50%}}
+.tl-item{position:relative;display:flex;align-items:flex-start;gap:1.5rem;margin-bottom:2rem;padding-left:3rem}
+@media(min-width:768px){.tl-item{padding-left:0;justify-content:center}.tl-item .tl-content{width:45%}.tl-item:nth-child(odd) .tl-content{text-align:right;margin-right:5%}.tl-item:nth-child(even) .tl-content{text-align:left;margin-left:5%}}
+.tl-node{position:absolute;left:1.5rem;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;border:2px solid hsl(var(--purple));background:hsl(var(--purple));box-shadow:0 0 15px hsl(266 80% 55%/.4);z-index:2}
+@media(min-width:768px){.tl-node{left:50%}}
+.tl-node.highlight{border-color:hsl(var(--secondary));background:hsl(var(--secondary));box-shadow:0 0 20px hsl(45 95% 60%/.5)}
+.tl-card{display:inline-block;padding:1.25rem;border-radius:1rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);transition:all .3s}
+.tl-card:hover{border-color:hsl(0 0% 100%/.2)}
+.tl-card.highlight{border-color:hsl(var(--secondary)/.4);background:hsl(var(--secondary)/.1)}
+.tl-card .week{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:hsl(var(--primary))}
+.tl-card.highlight .week{color:hsl(var(--secondary))}
+.tl-card h3{font-size:1.125rem;font-weight:700;margin-top:.25rem}
+.tl-card p{font-size:.875rem;color:hsl(var(--muted-fg));margin-top:.5rem}
+
+/* ── Deliverables Grid ── */
+.del-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media(max-width:1023px){.del-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.del-grid{grid-template-columns:1fr}}
+.del-item{padding:1.25rem;border-radius:1rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);transition:all .3s;display:flex;gap:.75rem}
+.del-item:hover{border-color:hsl(var(--secondary)/.3);background:hsl(var(--secondary)/.05);transform:translateY(-5px)}
+.del-item .check{padding:.375rem;border-radius:.5rem;background:hsl(var(--secondary)/.2);flex-shrink:0;width:fit-content;height:fit-content}
+.del-item .check svg{width:16px;height:16px;color:hsl(var(--secondary))}
+.del-item h4{font-weight:700;margin-bottom:.5rem}
+.del-item p{font-size:.875rem;color:hsl(var(--muted-fg))}
+
+/* ── FAQ ── */
+.faq-item{border-radius:1rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);margin-bottom:1rem;overflow:hidden;transition:all .3s}
+.faq-item.open{border-color:hsl(var(--secondary)/.4);background:hsl(var(--secondary)/.05)}
+.faq-q{width:100%;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;background:none;border:none;color:hsl(var(--fg));font-size:1.125rem;font-weight:600;cursor:pointer;text-align:left;font-family:inherit}
+.faq-q .chevron{transition:transform .3s;font-size:1.25rem;color:hsl(var(--muted-fg))}
+.faq-item.open .faq-q .chevron{transform:rotate(180deg);color:hsl(var(--secondary))}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s,padding .3s}
+.faq-item.open .faq-a{max-height:300px;padding:0 1.5rem 1.25rem}
+.faq-a p{color:hsl(var(--muted-fg));line-height:1.7}
+
+/* ── Application ── */
+.step-indicators{display:flex;justify-content:center;gap:.75rem;margin-bottom:2rem;flex-wrap:wrap}
+.step-ind{padding:.5rem 1rem;border-radius:9999px;font-size:.875rem;font-weight:500;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);color:hsl(var(--muted-fg));transition:all .3s}
+.step-ind.active{background:hsl(var(--secondary)/.2);color:hsl(var(--secondary));border-color:hsl(var(--secondary)/.4)}
+.step-ind.done{background:hsl(var(--emerald)/.2);color:hsl(var(--emerald));border-color:hsl(var(--emerald)/.3)}
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;font-size:.875rem;font-weight:500;margin-bottom:.5rem}
+.form-group select,.form-group input,.form-group textarea{width:100%;padding:.75rem;border-radius:.75rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);color:hsl(var(--fg));font-family:inherit;font-size:1rem;outline:none;transition:all .3s}
+.form-group select:focus,.form-group input:focus,.form-group textarea:focus{border-color:hsl(var(--secondary));box-shadow:0 0 0 2px hsl(var(--secondary)/.25)}
+.form-group select option{background:hsl(var(--bg));color:hsl(var(--fg))}
+.form-group textarea{min-height:120px;resize:none}
+.form-group .hint{font-size:.75rem;color:hsl(var(--muted-fg));margin-top:.5rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+.fit-box{padding:1rem;border-radius:.75rem;margin-top:1.5rem;display:flex;align-items:center;gap:.75rem}
+.fit-box.fit{background:hsl(var(--emerald)/.1);border:1px solid hsl(var(--emerald)/.3);color:hsl(var(--emerald))}
+.fit-box.maybe{background:hsl(var(--primary)/.2);border:1px solid hsl(var(--primary)/.3);color:hsl(var(--purple-light))}
+.fit-box.not_fit{background:hsl(var(--coral)/.1);border:1px solid hsl(var(--coral)/.3);color:hsl(var(--coral))}
+.form-actions{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;flex-wrap:wrap;gap:1rem}
+
+/* ── Note box ── */
+.note-box{padding:1.5rem;border-radius:1rem;border:1px solid hsl(var(--secondary)/.3);background:hsl(var(--secondary)/.1)}
+.note-box strong{color:hsl(var(--secondary))}
+.note-box p{font-size:.875rem;color:hsl(var(--fg)/.9)}
+
+/* ── Footer ── */
+footer{border-top:1px solid hsl(0 0% 100%/.1);padding:3rem 1rem}
+footer .inner{max-width:80rem;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+footer p{font-size:.75rem;color:hsl(var(--muted-fg))}
+footer p strong{color:hsl(var(--fg))}
+
+/* ── Badge ── */
+.badge{display:inline-block;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;border:1px solid hsl(var(--secondary)/.3);background:hsl(var(--secondary)/.2);color:hsl(var(--secondary))}
+
+/* ── Sticky Mobile CTA ── */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:40;padding:1rem;background:linear-gradient(180deg,transparent,hsl(263 70% 4%/.95) 50%);backdrop-filter:blur(12px);display:none}
+@media(max-width:1023px){.sticky-cta{display:flex;align-items:center;justify-content:space-between;gap:1rem}}
+.sticky-cta .price{font-size:.875rem}
+.sticky-cta .price strong{color:hsl(var(--secondary));font-weight:700}
+.sticky-cta .price span{color:hsl(var(--muted-fg))}
+
+/* ── Animate on scroll ── */
+.aos{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s cubic-bezier(.25,.46,.45,.94)}
+.aos.visible{opacity:1;transform:translateY(0)}
+
+/* ── Value Pricing Table ── */
+.val-row{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;border-radius:.75rem;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05);margin-bottom:.5rem}
+.val-row .lbl{color:hsl(var(--fg)/.8)}
+.val-row .val{color:hsl(var(--secondary));font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- ═══ INTRO ═══ -->
+<div id="intro">
+  <div class="rays"></div>
+  <div class="orb"></div>
+  <div class="brand" style="transform:translateY(30px)">
+    <h1>SKYEWAY</h1>
+    <p>To Success</p>
+  </div>
+</div>
+
+<!-- ═══ STARFIELD ═══ -->
+<canvas id="starfield"></canvas>
+
+<!-- ═══ FLOATING ORBS ═══ -->
+<div class="floating-orbs">
+  <div class="orb" style="width:400px;height:400px;left:10%;top:20%;background:radial-gradient(circle at 30% 30%,hsl(266 80% 55%/.15),hsl(266 80% 35%/.05),transparent 70%)"></div>
+  <div class="orb" style="width:300px;height:300px;left:80%;top:15%;background:radial-gradient(circle at 30% 30%,hsl(45 95% 60%/.1),hsl(45 95% 50%/.03),transparent 70%);animation-delay:2s;animation-duration:16s"></div>
+  <div class="orb" style="width:350px;height:350px;left:60%;top:70%;background:radial-gradient(circle at 30% 30%,hsl(266 80% 55%/.15),hsl(266 80% 35%/.05),transparent 70%);animation-delay:4s;animation-duration:18s"></div>
+  <div class="orb" style="width:250px;height:250px;left:20%;top:80%;background:radial-gradient(circle at 30% 30%,hsl(45 95% 60%/.1),hsl(45 95% 50%/.03),transparent 70%);animation-delay:1s"></div>
+</div>
+
+<!-- ═══ VIGNETTE ═══ -->
+<div class="vignette"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="top-bar" id="navbar">
+  <div class="inner">
+    <a href="#program" class="logo" onclick="scrollTo2('#program')">
+      <div class="sigil"></div>
+      <div class="logo-text"><h1>SkyeWay to Success</h1><span>Skyes Over London LC</span></div>
+    </a>
+    <div class="links">
+      <a href="#program" onclick="scrollTo2('#program');return false">Program</a>
+      <a href="#office" onclick="scrollTo2('#office');return false">OfficeSpace</a>
+      <a href="#included" onclick="scrollTo2('#included');return false">What's Included</a>
+      <a href="#pricing" onclick="scrollTo2('#pricing');return false">Pricing</a>
+      <a href="#timeline" onclick="scrollTo2('#timeline');return false">Timeline</a>
+      <a href="#faq" onclick="scrollTo2('#faq');return false">FAQ</a>
+      <button class="btn btn-secondary btn-sm" onclick="scrollTo2('#apply')">✦ Apply Now</button>
+    </div>
+    <button class="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#program" onclick="scrollTo2('#program');closeMobile()">Program</a>
+  <a href="#office" onclick="scrollTo2('#office');closeMobile()">OfficeSpace</a>
+  <a href="#included" onclick="scrollTo2('#included');closeMobile()">What's Included</a>
+  <a href="#pricing" onclick="scrollTo2('#pricing');closeMobile()">Pricing</a>
+  <a href="#timeline" onclick="scrollTo2('#timeline');closeMobile()">Timeline</a>
+  <a href="#faq" onclick="scrollTo2('#faq');closeMobile()">FAQ</a>
+  <button class="btn btn-secondary btn-md" onclick="scrollTo2('#apply');closeMobile()">✦ Apply Now</button>
+</div>
+
+<!-- ═══ MAIN CONTENT (hidden until intro completes) ═══ -->
+<main id="mainContent" style="opacity:0;transition:opacity .8s">
+
+<!-- ═══ HERO ═══ -->
+<section id="program">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero">
+        <div class="kicker"><div class="dot"></div>Adult-Only • Business Development Coaching + Build</div>
+        <h1>Not a course.<br><span class="text-gold">A launch plan</span> with real output—<br><span class="muted">and real office presence.</span></h1>
+        <p class="desc"><strong>SkyeWay to Success</strong> is a private 8-week program operated by <strong>Skyes Over London LC</strong> for adults ready to move from "idea" to <strong style="color:hsl(var(--secondary))">operating business</strong>—with real infrastructure, weekly executive coaching, and deliverables that go live.</p>
+        <div class="pills">
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>White-Glove LLC Filing</div>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Website Live by Week 3</div>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2z"/></svg>Brand + Positioning</div>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Photoshoot + Interview</div>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Certifications</div>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Executive Playbooks</div>
+          <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>SkyeHub OfficeSpace (12 Weeks)</div>
+        </div>
+        <div class="ctas">
+          <button class="btn btn-secondary btn-lg" onclick="scrollTo2('#apply')">Apply Now →</button>
+          <button class="btn btn-ghost btn-lg" onclick="scrollTo2('#office')">See OfficeSpace</button>
+          <button class="btn btn-ghost btn-lg" onclick="scrollTo2('#pricing')">View Pricing</button>
+        </div>
+      </div>
+
+      <!-- Deliverables Card -->
+      <div class="deliverables-card">
+        <div class="deliverables-card-inner">
+          <h3>Included Deliverables</h3>
+          <p class="sub">What you get inside the 8-week build + coaching</p>
+          <div class="del-row"><span>White-Glove LLC Formation</span><span class="val">Filed + tracked</span></div>
+          <div class="del-row"><span>Website Live by Week 3</span><span class="val">5 pages + intake</span></div>
+          <div class="del-row"><span>Brand + Positioning</span><span class="val">Offer clarity</span></div>
+          <div class="del-row"><span>Authority Media Package</span><span class="val">Photo + interview</span></div>
+          <div class="del-row"><span>Executive Playbooks</span><span class="val">SOP stack</span></div>
+          <div class="del-row"><span>SkyeHub OfficeSpace</span><span class="val">12 weeks included</span></div>
+          <div class="price-block">
+            <span class="amount">$9,500</span> <span class="label">program investment</span>
+            <p class="note">40% enrollment + weekly plan available</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-ind"><div class="pill-scroll"><div class="dot-s"></div></div></div>
+  </div>
+</section>
+
+<!-- ═══ OFFICE ═══ -->
+<section id="office">
+  <div class="container">
+    <div class="aos">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap">
+        <h2 class="section-title" style="margin:0"><span class="text-gold">SkyeHub</span> OfficeSpace</h2>
+        <span class="badge">Graduation Perk</span>
+      </div>
+      <p class="section-desc">Graduation unlocks <strong style="color:hsl(var(--fg))">SkyeHub access</strong>—scheduled office time inside a Skyes Over London LC business location in the Valley. This keeps momentum high after Week 8.</p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Gallery -->
+      <div class="aos">
+        <div class="glow-card" style="padding:0">
+          <div class="gallery" id="gallery">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Office 1" class="active" data-slide="0"/>
+            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80" alt="Office 2" data-slide="1"/>
+            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80" alt="Office 3" data-slide="2"/>
+            <div class="overlay"></div>
+            <div class="caption">
+              <h4 id="slideTitle">Client-ready meeting vibe</h4>
+              <p id="slideDesc">Use SkyeHub for presentations, onboarding sessions, and high-trust conversations.</p>
+            </div>
+            <div class="arrows">
+              <button onclick="prevSlide()">‹</button>
+              <button onclick="nextSlide()">›</button>
+            </div>
+            <div class="nav-dots">
+              <button class="active" onclick="goSlide(0)"></button>
+              <button onclick="goSlide(1)"></button>
+              <button onclick="goSlide(2)"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculator -->
+      <div class="aos">
+        <div class="glow-card" style="padding:1.5rem">
+          <h4 style="font-size:1rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Office perk value estimator</h4>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+            <span style="font-size:.875rem;color:hsl(var(--muted-fg))">Hours per week</span>
+            <span class="badge" id="usageBadge">Planned Use: Medium</span>
+          </div>
+          <input type="range" min="4" max="40" step="2" value="20" id="hoursSlider" oninput="updateCalc()"/>
+          <div class="grid-2" style="gap:1rem;margin-top:1.5rem">
+            <div class="stat-card"><span class="label">Hours / week</span><p class="value" id="hoursVal">20</p></div>
+            <div class="stat-card"><span class="label">Estimated perk value</span><p class="value" id="perkVal">$884</p></div>
+          </div>
+          <p style="font-size:.875rem;color:hsl(var(--muted-fg));margin-top:1.5rem">The full included window is <strong style="color:hsl(var(--fg))">12 weeks</strong>. This estimator scales the included value reference ($1,767 at the maximum schedule) based on your planned usage.</p>
+          <button class="btn btn-secondary btn-md btn-full" style="margin-top:1.5rem" onclick="scrollTo2('#apply')">Request an Office Tour</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="grid-4" style="margin-top:3rem">
+      <div class="feature-card aos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><h5>12 Weeks Included</h5><p>Up to 40 office hours/week in a shared office suite after graduation.</p></div>
+      <div class="feature-card aos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><h5>On-Site Support</h5><p>Each location includes an on-site assistant contracted by Skyes Over London.</p></div>
+      <div class="feature-card aos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg><h5>Refreshments</h5><p>Light office amenities: coffee + water (standard client-ready environment).</p></div>
+      <div class="feature-card aos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg><h5>Operate Like a Brand</h5><p>Professional space for calls, client meetings, deliverable work, and admin execution.</p></div>
+    </div>
+
+    <!-- Value Table -->
+    <div class="aos" style="margin-top:3rem">
+      <div class="glow-card" style="padding:1.5rem">
+        <h4 style="font-size:1rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:hsl(var(--secondary));margin-bottom:1rem">Value + Alumni Pricing</h4>
+        <div class="val-row"><span class="lbl">Shared-suite access (12 weeks included)</span><span class="val">$0 (value $1,767)</span></div>
+        <div class="val-row"><span class="lbl">Shared co-working suite after included window</span><span class="val">$444/mo (normally $589)</span></div>
+        <div class="val-row"><span class="lbl">Private executive offices start at</span><span class="val">$896/mo</span></div>
+        <div class="val-row"><span class="lbl">Private office alumni discount</span><span class="val">$222/mo off first 12 weeks</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DELIVERABLES ═══ -->
+<section id="included">
+  <div class="container">
+    <div class="aos">
+      <h2 class="section-title">Full <span class="text-gold">Deliverables</span></h2>
+      <p class="section-desc"><strong style="color:hsl(var(--fg))">This is deliverables-first.</strong> No upsell maze. No "add-on surprises."</p>
+    </div>
+    <div class="del-grid" id="delGrid"></div>
+    <div class="aos" style="margin-top:3rem">
+      <div class="note-box"><p><strong>Note:</strong> OfficeSpace is scheduled access (not a lease). No income guarantees—results depend on execution.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing">
+  <div class="container">
+    <div class="aos">
+      <h2 class="section-title">Pricing <span class="text-gold">(Interactive)</span></h2>
+      <p class="section-desc"><strong style="color:hsl(var(--fg))">$9,500</strong> — 8-week program investment. Choose your plan, visualize the breakdown, and preview what happens immediately after enrollment.</p>
+    </div>
+    <div class="grid-2">
+      <!-- Visual Side -->
+      <div class="aos">
+        <div class="glow-card" style="padding:1.5rem">
+          <div style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap">
+            <div class="price-orb">
+              <svg viewBox="0 0 192 192" style="transform:rotate(-90deg)">
+                <circle cx="96" cy="96" r="70" fill="none" stroke="hsl(0 0% 100%/.1)" stroke-width="8"/>
+                <circle id="progressRing" cx="96" cy="96" r="70" fill="none" stroke="hsl(var(--secondary))" stroke-width="8" stroke-linecap="round" stroke-dasharray="440" stroke-dashoffset="264"/>
+              </svg>
+              <div class="center">
+                <div class="amt" id="paidAmt">$5,512</div>
+                <div style="font-size:.7rem;color:hsl(var(--muted-fg));text-transform:uppercase;letter-spacing:.1em;margin-top:.25rem">Total Paid</div>
+                <div style="font-size:.7rem;color:hsl(var(--muted-fg));margin-top:.75rem;padding:.25rem .5rem;border-radius:9999px;border:1px solid hsl(0 0% 100%/.1);background:hsl(0 0% 100%/.05)" id="progressPct">58% Complete</div>
+              </div>
+            </div>
+            <div style="flex:1;min-width:200px">
+              <div class="stat-card" style="margin-bottom:1rem">
+                <div style="display:flex;justify-content:space-between;font-size:.875rem;margin-bottom:.5rem">
+                  <span style="color:hsl(var(--muted-fg))">Enrollment (40%)</span>
+                  <span style="color:hsl(var(--secondary));font-weight:600">$3,800</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;font-size:.875rem">
+                  <span style="color:hsl(var(--muted-fg))">Remaining</span>
+                  <span style="font-weight:600" id="remainAmt">$3,988</span>
+                </div>
+                <div class="progress-bar"><div class="fill" id="progressBar" style="width:58%"></div></div>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:.5rem">
+                <span class="badge">LLC Filing Included</span>
+                <span class="badge">12-Week Office Access</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Side -->
+      <div class="aos">
+        <div class="glow-card" style="padding:1.5rem">
+          <h4 style="font-size:1rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Payment Plan Simulator</h4>
+          <div class="tab-group">
+            <button class="tab active" id="tabInstall" onclick="setPlan('installments')">Weekly Plan</button>
+            <button class="tab" id="tabFull" onclick="setPlan('full')">Pay in Full</button>
+          </div>
+          <div class="grid-2" style="gap:1rem;margin-bottom:1.5rem">
+            <div class="stat-card"><span class="label">Due at Enrollment</span><p class="value" id="enrollAmt">$3,800</p><p class="sub" id="enrollNote">40% upfront</p></div>
+            <div class="stat-card"><span class="label">Weekly Payment</span><p class="value" id="weeklyAmt">$712.50</p><p class="sub" id="weeklyNote">8 payments total</p></div>
+          </div>
+          <div id="weekSliderBox">
+            <div class="stat-card" style="margin-bottom:1.5rem">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+                <span class="label">Simulate Progress</span>
+                <span class="badge" id="weekBadge">Week 0</span>
+              </div>
+              <div class="week-btns" id="weekBtns"></div>
+              <input type="range" min="0" max="8" value="0" id="weekSlider" oninput="updateWeek(this.value)"/>
+            </div>
+          </div>
+          <div class="trigger-box"><p><strong>Enrollment clears → production begins.</strong> Toggle the checkboxes below to preview what unlocks when payment + onboarding are complete.</p></div>
+          <div class="grid-2" style="gap:1rem;margin-bottom:1.5rem">
+            <label class="toggle-row"><span style="font-size:.875rem">Payment cleared</span><input type="checkbox" id="chkPay" onchange="updatePipeline()"/></label>
+            <label class="toggle-row"><span style="font-size:.875rem">Onboarding complete</span><input type="checkbox" id="chkOnboard" onchange="updatePipeline()"/></label>
+          </div>
+          <div id="pipelineSteps">
+            <div class="pipeline-step" id="pipe0"><span class="step-title">Formation Intake</span><p class="step-desc">We initiate your formation intake and filing preparation after enrollment clears + onboarding completes.</p></div>
+            <div class="pipeline-step" id="pipe1"><span class="step-title">Website Build Pipeline</span><p class="step-desc">Your website build begins after intake (target: live by Week 3). Intake + approvals control speed.</p></div>
+            <div class="pipeline-step" id="pipe2"><span class="step-title">Coaching Slot Assignment</span><p class="step-desc">Your 1:1 slot and execution cadence are scheduled once onboarding forms are submitted.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TIMELINE ═══ -->
+<section id="timeline">
+  <div class="container">
+    <div class="aos">
+      <h2 class="section-title">8-Week <span class="text-gold">Timeline</span></h2>
+      <p class="section-desc">Structured milestones from onboarding to graduation and beyond.</p>
+    </div>
+    <div class="timeline" id="timelineEl"></div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq">
+  <div class="container" style="max-width:56rem">
+    <div class="aos" style="text-align:center">
+      <h2 class="section-title">Frequently Asked <span class="text-gold">Questions</span></h2>
+      <p class="section-desc" style="margin-left:auto;margin-right:auto">Fast answers to common questions about the program.</p>
+    </div>
+    <div id="faqList"></div>
+    <div class="aos" style="margin-top:3rem">
+      <div class="note-box" style="text-align:center"><h3 style="font-size:1.125rem;font-weight:700;margin-bottom:.5rem">Need a human answer?</h3><p>Apply and request a fit call. If accepted, you'll get onboarding immediately and a clear production schedule.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPLICATION ═══ -->
+<section id="apply">
+  <div class="container" style="max-width:56rem">
+    <div class="aos" style="text-align:center">
+      <h2 class="section-title">Apply / Request a <span class="text-gold">Fit Call</span></h2>
+      <p class="section-desc" style="margin-left:auto;margin-right:auto">Qualification-first funnel. If you're a fit, you'll submit contact details and schedule preferences.</p>
+    </div>
+    <div class="step-indicators">
+      <div class="step-ind active" id="si1">Step 1 • Readiness</div>
+      <div class="step-ind" id="si2">Step 2 • Program Fit</div>
+      <div class="step-ind" id="si3">Step 3 • Contact</div>
+    </div>
+    <div class="glow-card" style="padding:2rem">
+      <form id="appForm" onsubmit="handleSubmit(event)">
+        <!-- Step 1 -->
+        <div id="formStep1">
+          <div class="form-grid">
+            <div class="form-group"><label>I confirm I am 18+</label><select id="f_adult" required><option value="">Select one</option><option>Yes</option><option>No</option></select><p class="hint">Program is adult-only.</p></div>
+            <div class="form-group"><label>Weekly time you can commit</label><select id="f_time" required><option value="">Select one</option><option>6–8 hours/week</option><option>9–12 hours/week</option><option>13+ hours/week</option><option>Less than 6 hours/week</option></select></div>
+            <div class="form-group"><label>Investment readiness ($9,500)</label><select id="f_budget" required><option value="">Select one</option><option>Ready (40% upfront + weekly)</option><option>Ready (pay in full)</option><option>Need to discuss</option><option>Not ready</option></select></div>
+            <div class="form-group"><label>Do you want OfficeSpace access?</label><select id="f_office" required><option value="">Select one</option><option>Yes — meetings + presence matter</option><option>Yes — I need a workspace</option><option>Maybe</option><option>No</option></select></div>
+          </div>
+          <div id="fitBox" style="display:none"></div>
+        </div>
+        <!-- Step 2 -->
+        <div id="formStep2" style="display:none">
+          <div class="form-grid">
+            <div class="form-group"><label>Business stage</label><select id="f_stage" required><option value="">Select one</option><option>Idea stage (no sales yet)</option><option>Early sales (some revenue)</option><option>Operating (needs systems + scale)</option></select></div>
+            <div class="form-group"><label>Preferred start window</label><select id="f_window"><option>Next Cohort</option><option>Within 30 Days</option><option>Within 60 Days</option><option>Not Sure Yet</option></select></div>
+          </div>
+          <div class="form-group"><label>What must be true by Week 8 for you to call this a win?</label><textarea id="f_outcome" placeholder="Be specific: offer clarity, first X clients, website live, systems set, pitch deck, etc." required></textarea></div>
+        </div>
+        <!-- Step 3 -->
+        <div id="formStep3" style="display:none">
+          <div class="form-grid">
+            <div class="form-group"><label>Full Name</label><input type="text" id="f_name" required/></div>
+            <div class="form-group"><label>Email</label><input type="email" id="f_email" required/></div>
+            <div class="form-group"><label>Phone</label><input type="tel" id="f_phone"/></div>
+            <div class="form-group"><label>City / State</label><input type="text" id="f_city" placeholder="Phoenix, AZ"/></div>
+          </div>
+          <div class="form-group"><label>Business idea / what you sell (or want to sell)</label><textarea id="f_idea" placeholder="Tell us your offer, target customer, and what you want built in 8 weeks." required></textarea></div>
+          <div class="form-group"><label>Any constraints we should know?</label><textarea id="f_constraints" placeholder="Schedule constraints, travel, deadlines, existing assets, etc." style="min-height:80px"></textarea></div>
+        </div>
+        <div class="form-actions">
+          <div style="display:flex;gap:1rem">
+            <button type="button" class="btn btn-ghost btn-md" id="btnBack" style="display:none" onclick="formBack()">Back</button>
+            <button type="button" class="btn btn-ghost btn-md" onclick="formReset()">Reset</button>
+          </div>
+          <button type="button" class="btn btn-secondary btn-md" id="btnNext" onclick="formNext()">Next</button>
+          <button type="submit" class="btn btn-secondary btn-md" id="btnSubmit" style="display:none">Submit Application</button>
+        </div>
+        <p style="font-size:.75rem;color:hsl(var(--muted-fg));margin-top:1.5rem;text-align:center">By submitting, you're requesting a fit call. This does not guarantee acceptance. No income guarantees; outcomes depend on execution.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="footerEl" style="opacity:0;transition:opacity .8s;position:relative;z-index:10">
+  <div class="inner">
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <div class="sigil" style="width:2.5rem;height:2.5rem;border-radius:.75rem;background:radial-gradient(circle at 30% 30%,hsl(45 95% 75%/.9),hsl(45 95% 60%/.4) 45%,hsl(266 80% 55%/.5) 75%),linear-gradient(135deg,hsl(266 80% 55%/.7),hsl(45 95% 60%/.4))"></div>
+      <div><h3 style="font-weight:700;font-size:.875rem;letter-spacing:.1em">SkyeWay to Success</h3><p>Skyes Over London LC</p></div>
+    </div>
+    <p style="max-width:36rem;text-align:center"><strong>SkyeWay to Success</strong> is a private coaching and execution program operated by Skyes Over London LC. State processing timelines are external. Contractor ecosystem pathway is performance-based and does not constitute employment or guaranteed compensation. OfficeSpace perk is scheduled access (not a lease).</p>
+    <p>© <script>document.write(new Date().getFullYear())</script> Skyes Over London LC</p>
+  </div>
+</footer>
+
+<!-- ═══ STICKY MOBILE CTA ═══ -->
+<div class="sticky-cta">
+  <div class="price"><strong>$9,500</strong> <span>• 8-week program</span></div>
+  <button class="btn btn-secondary btn-md" onclick="scrollTo2('#apply')">Apply Now</button>
+</div>
+
+<script>
+// ── Utilities ──
+function scrollTo2(sel){const el=document.querySelector(sel);if(el)el.scrollIntoView({behavior:'smooth'})}
+function toggleMobile(){document.getElementById('mobileMenu').classList.toggle('open')}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+
+// ── Intro Sequence ──
+(function(){
+  const intro=document.getElementById('intro');
+  setTimeout(()=>intro.classList.add('phase1'),500);
+  setTimeout(()=>intro.classList.add('phase2'),1500);
+  setTimeout(()=>intro.classList.add('phase3'),2500);
+  setTimeout(()=>{
+    intro.classList.add('hide');
+    document.getElementById('mainContent').style.opacity='1';
+    document.getElementById('footerEl').style.opacity='1';
+  },4000);
+  setTimeout(()=>intro.style.display='none',5000);
+})();
+
+// ── Starfield ──
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');
+  let stars=[],t=0,mx=.5,my=.5;
+  function resize(){
+    const d=devicePixelRatio||1;c.width=innerWidth*d;c.height=innerHeight*d;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';ctx.scale(d,d);
+    const n=Math.min(250,Math.floor(innerWidth*innerHeight/7000));
+    stars=Array.from({length:n},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,z:Math.random()+.3,r:Math.random()*1.5+.5,
+      color:Math.random()>.7?`hsl(${45+Math.random()*20},90%,${70+Math.random()*20}%)`:Math.random()>.5?`hsl(${260+Math.random()*20},80%,${60+Math.random()*20}%)`:`hsl(270,30%,${85+Math.random()*15}%)`}));
+  }
+  addEventListener('mousemove',e=>{mx=e.clientX/innerWidth;my=e.clientY/innerHeight},{passive:true});
+  addEventListener('resize',resize,{passive:true});
+  function draw(){
+    const w=innerWidth,h=innerHeight;t+=.005;ctx.clearRect(0,0,w,h);
+    for(let i=0;i<3;i++){const gx=(.15+i*.3+Math.sin(t+i)*.05+mx*.1)*w,gy=(.2+i*.25+Math.cos(t+i)*.05+my*.1)*h,gr=Math.max(w,h)*.5;
+      const g=ctx.createRadialGradient(gx,gy,0,gx,gy,gr);
+      if(i%2===0){g.addColorStop(0,'rgba(122,44,255,.15)');g.addColorStop(.5,'rgba(122,44,255,.06)')}else{g.addColorStop(0,'rgba(247,200,67,.1)');g.addColorStop(.5,'rgba(247,200,67,.03)')}
+      g.addColorStop(1,'transparent');ctx.globalAlpha=.8;ctx.fillStyle=g;ctx.fillRect(0,0,w,h)}
+    ctx.globalAlpha=1;
+    for(const s of stars){s.x-=.15*s.z;if(s.x<-20){s.x=w+20;s.y=Math.random()*h}
+      const tw=(Math.sin(t*3+s.y*.01)+1)*.5,a=.4+tw*.6;ctx.beginPath();ctx.fillStyle=s.color;ctx.globalAlpha=a;ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();
+      if(s.r>1){const gl=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*4);gl.addColorStop(0,s.color.replace(')',',.3)').replace('hsl','hsla'));gl.addColorStop(1,'transparent');ctx.globalAlpha=a*.5;ctx.fillStyle=gl;ctx.fillRect(s.x-s.r*4,s.y-s.r*4,s.r*8,s.r*8)}}
+    if(Math.random()<.002){const sx=Math.random()*w,sy=Math.random()*h*.5;const lg=ctx.createLinearGradient(sx,sy,sx-100,sy+50);lg.addColorStop(0,'rgba(255,255,255,.8)');lg.addColorStop(1,'transparent');ctx.globalAlpha=.8;ctx.strokeStyle=lg;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx-100,sy+50);ctx.stroke()}
+    requestAnimationFrame(draw)}
+  resize();draw();
+})();
+
+// ── Scroll effects ──
+addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',scrollY>50);
+  document.querySelectorAll('.aos').forEach(el=>{if(el.getBoundingClientRect().top<innerHeight-80)el.classList.add('visible')});
+},{passive:true});
+// Trigger initial check
+setTimeout(()=>dispatchEvent(new Event('scroll')),4200);
+
+// ── Gallery ──
+const slideData=[
+  {title:'Client-ready meeting vibe',desc:'Use SkyeHub for presentations, onboarding sessions, and high-trust conversations.'},
+  {title:'Workstations + execution flow',desc:'Scheduled office hours help you lock in deep work: admin, proposals, invoicing, systems, and outreach.'},
+  {title:'Brand presence, not "home office" energy',desc:'Professional environment for calls and meetings—so your business looks like it\'s already operating.'}
+];
+let currentSlide=0;
+function goSlide(n){currentSlide=n;const imgs=document.querySelectorAll('#gallery img');imgs.forEach((img,i)=>img.classList.toggle('active',i===n));
+  document.querySelectorAll('.nav-dots button').forEach((b,i)=>b.classList.toggle('active',i===n));
+  document.getElementById('slideTitle').textContent=slideData[n].title;document.getElementById('slideDesc').textContent=slideData[n].desc}
+function nextSlide(){goSlide((currentSlide+1)%3)}
+function prevSlide(){goSlide((currentSlide-1+3)%3)}
+
+// ── Office Calculator ──
+function updateCalc(){const h=+document.getElementById('hoursSlider').value;
+  const pv=Math.round(h/40*1767);const lvl=h>=28?'High':h<=10?'Low':'Medium';
+  document.getElementById('hoursVal').textContent=h;document.getElementById('perkVal').textContent='$'+pv.toLocaleString();
+  document.getElementById('usageBadge').textContent='Planned Use: '+lvl}
+
+// ── Pricing ──
+let plan='installments',week=0;
+const P={total:9500,enroll:3800,weekly:712.5,weeks:8};
+function setPlan(p){plan=p;
+  document.getElementById('tabInstall').classList.toggle('active',p==='installments');
+  document.getElementById('tabFull').classList.toggle('active',p==='full');
+  if(p==='full'){week=8;document.getElementById('weekSliderBox').style.display='none';
+    document.getElementById('enrollAmt').textContent='$9,500';document.getElementById('enrollNote').textContent='Paid in full';
+    document.getElementById('weeklyAmt').textContent='—';document.getElementById('weeklyNote').textContent='No weekly payments';
+  }else{document.getElementById('weekSliderBox').style.display='block';
+    document.getElementById('enrollAmt').textContent='$3,800';document.getElementById('enrollNote').textContent='40% upfront';
+    document.getElementById('weeklyAmt').textContent='$712.50';document.getElementById('weeklyNote').textContent='8 payments total';
+  }
+  updatePricing()}
+function updateWeek(w){week=+w;document.getElementById('weekBadge').textContent='Week '+week;
+  document.querySelectorAll('.week-btn').forEach((b,i)=>{b.className='week-btn';if(i<week)b.classList.add('past');else if(i===week)b.classList.add('current')});
+  updatePricing()}
+function updatePricing(){const paid=plan==='full'?P.total:P.enroll+P.weekly*week;const rem=P.total-paid;const pct=(paid/P.total)*100;
+  document.getElementById('paidAmt').textContent='$'+paid.toLocaleString();document.getElementById('remainAmt').textContent='$'+rem.toLocaleString();
+  document.getElementById('progressPct').textContent=pct.toFixed(0)+'% Complete';
+  document.getElementById('progressBar').style.width=pct+'%';
+  document.getElementById('progressRing').setAttribute('stroke-dashoffset',440-440*pct/100)}
+function updatePipeline(){const ready=document.getElementById('chkPay').checked&&document.getElementById('chkOnboard').checked;
+  ['pipe0','pipe1','pipe2'].forEach(id=>document.getElementById(id).classList.toggle('ready',ready))}
+// Build week buttons
+(function(){const c=document.getElementById('weekBtns');for(let i=0;i<=8;i++){const b=document.createElement('button');b.type='button';b.className='week-btn'+(i===0?' current':'');b.textContent=i;b.onclick=()=>{document.getElementById('weekSlider').value=i;updateWeek(i)};c.appendChild(b)}})();
+
+// ── Timeline ──
+(function(){const steps=[
+  {week:'Week 0',title:'Onboarding + Diagnostics',desc:'Business, brand, formation, site intakes. 1:1 slots assigned.'},
+  {week:'Week 1–2',title:'Offer Clarity + Foundations',desc:'Sales foundations + formation documents drafted, verified, and prepared.'},
+  {week:'Week 3',title:'Website Launches Live',desc:'5 pages + intake working. Credibility layer goes public.',highlight:true},
+  {week:'Week 4–6',title:'Execution + Delegation',desc:'Pipeline execution. Certifications progress. Sales readiness coached.'},
+  {week:'Week 7',title:'Media Production',desc:'Photos + interview + edits begin. Authority narrative coached.'},
+  {week:'Week 8',title:'Capstone + Graduation',desc:'Review complete. Feature published + promo page + SkyeHub opens.',highlight:true},
+  {week:'Post',title:'State Processing',desc:'Returns processed when received. Status updates continue.'},
+  {week:'Ongoing',title:'Ecosystem Pathway',desc:'Performance-based opportunities continue (role readiness).'}
+];
+const el=document.getElementById('timelineEl');
+el.innerHTML='<div class="timeline-line"></div>'+steps.map((s,i)=>`
+  <div class="tl-item aos">
+    <div class="tl-node${s.highlight?' highlight':''}"></div>
+    <div class="tl-content"><div class="tl-card${s.highlight?' highlight':''}">
+      <span class="week">${s.week}</span><h3>${s.title}</h3><p>${s.desc}</p>
+    </div></div>
+  </div>`).join('')})();
+
+// ── Deliverables ──
+(function(){const items=[
+  {title:'White-Glove LLC Formation',desc:'Filing submitted on your behalf, EIN assistance, Operating Agreement, Registered Agent setup, and compliance checklists.'},
+  {title:'Website by Week 3',desc:'5 pages — Home, About, Services, Partners, Contact Form (working intake).'},
+  {title:'Brand Package',desc:'Logo creation + positioning direction + marketing roadmap (pipeline + next steps).'},
+  {title:'Authority Media Package',desc:'Photoshoot, filmed interview, edited video/audio assets, feature placement, and graduation promo page.'},
+  {title:'SkyeHub OfficeSpace Perk',desc:'12 weeks of shared-suite office access after graduation (booking required), plus alumni pricing options.'},
+  {title:'Coaching Model',desc:'Self-paced modules + two live group sessions/week + weekly 1:1 executive coaching.'},
+  {title:'Certifications',desc:'ExpertRating + IAP completion required for graduation.'},
+  {title:'Ecosystem Pathway',desc:'Performance-based pathway into Skyes Over London LC contractor ecosystem (no guaranteed compensation).'},
+  {title:'Executive Playbooks',desc:'SOP stack + sales agency playbook + hiring/delegation workflows + SOW templates.'}
+];
+document.getElementById('delGrid').innerHTML=items.map(it=>`
+  <div class="del-item aos">
+    <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><h4>${it.title}</h4><p>${it.desc}</p></div>
+  </div>`).join('')})();
+
+// ── FAQ ──
+(function(){const faqs=[
+  {q:'Is SkyeHub a lease?',a:'No. The OfficeSpace perk is scheduled access to a shared suite. It\'s not a lease, tenancy, or guaranteed private office. House rules and availability apply.'},
+  {q:'Do you guarantee results?',a:'No. This is coaching + execution support with deliverables. Outcomes depend on participation and effort. No income guarantees.'},
+  {q:'What if I already have an LLC?',a:'We\'ll adapt the formation deliverable to your situation (review + compliance checklist + updates). State timelines are external.'},
+  {q:'Why the \'fit call\'?',a:'Because execution programs break when the wrong people enter. The fit call confirms readiness, schedule, expectations, and production timing.'},
+  {q:'Can I opt out of the office perk?',a:'Yes. If you prefer to opt out of the SkyeHub office perk, you may do so up through Week 3. After you have approved your website build, your office decision is finalized. Anyone who opts out within the window receives a $1,111 payment.'},
+  {q:'What\'s the payment structure?',a:'$9,500 total. 40% enrollment ($3,800) + 8 weekly payments of $712.50. Pay-in-full option is also available.'}
+];
+document.getElementById('faqList').innerHTML=faqs.map((f,i)=>`
+  <div class="faq-item aos" id="faq${i}">
+    <button class="faq-q" onclick="toggleFaq(${i})">${f.q}<span class="chevron">▾</span></button>
+    <div class="faq-a"><p>${f.a}</p></div>
+  </div>`).join('')})();
+function toggleFaq(i){const el=document.getElementById('faq'+i);el.classList.toggle('open')}
+
+// ── Application Form ──
+let appStep=1,fitResult='pending';
+function updateStepUI(){
+  ['formStep1','formStep2','formStep3'].forEach((id,i)=>document.getElementById(id).style.display=i+1===appStep?'block':'none');
+  document.getElementById('si1').className='step-ind'+(appStep===1?' active':appStep>1?' done':'');
+  document.getElementById('si2').className='step-ind'+(appStep===2?' active':appStep>2?' done':'');
+  document.getElementById('si3').className='step-ind'+(appStep===3?' active':'');
+  document.getElementById('btnBack').style.display=appStep>1?'inline-flex':'none';
+  document.getElementById('btnNext').style.display=appStep<3?'inline-flex':'none';
+  document.getElementById('btnSubmit').style.display=appStep===3?'inline-flex':'none';
+}
+function scoreFit(){let s=0,block=false;
+  const adult=document.getElementById('f_adult').value,time=document.getElementById('f_time').value,budget=document.getElementById('f_budget').value,office=document.getElementById('f_office').value;
+  if(adult==='Yes')s+=2;else if(adult==='No')block=true;
+  if(time.includes('13+'))s+=3;else if(time.includes('9–12'))s+=2;else if(time.includes('6–8'))s+=1;else if(time.includes('Less'))s-=2;
+  if(budget.includes('Ready'))s+=3;else if(budget.includes('Need'))s+=1;else if(budget.includes('Not'))s-=3;
+  if(office.startsWith('Yes'))s+=1;
+  if(block)return'not_fit';if(s>=6)return'fit';if(s>=3)return'maybe';return'not_fit'}
+function formNext(){
+  if(appStep===1){
+    if(!document.getElementById('f_adult').value||!document.getElementById('f_time').value||!document.getElementById('f_budget').value||!document.getElementById('f_office').value){alert('Please fill all fields');return}
+    fitResult=scoreFit();const fb=document.getElementById('fitBox');fb.style.display='block';
+    const msgs={fit:{cls:'fit',icon:'✓',label:'Strong Fit',msg:'Your answers indicate strong execution readiness. Continue to complete the application.'},maybe:{cls:'maybe',icon:'⚠',label:'Needs Review',msg:'Your answers suggest we should review your fit on a short call.'},not_fit:{cls:'not_fit',icon:'✕',label:'Not a Fit Yet',msg:'Based on your answers, we should not move forward right now.'}};
+    const m=msgs[fitResult];fb.innerHTML=`<div class="fit-box ${m.cls}"><span style="font-size:1.25rem">${m.icon}</span><div><strong>${m.label}</strong><p style="font-size:.875rem;margin-top:.25rem;opacity:.8">${m.msg}</p></div></div>`;
+    if(fitResult==='not_fit')return;appStep=2;
+  }else if(appStep===2){
+    if(!document.getElementById('f_stage').value||!document.getElementById('f_outcome').value){alert('Please fill all fields');return}
+    appStep=3;
+  }
+  updateStepUI()}
+function formBack(){if(appStep>1){appStep--;updateStepUI()}}
+function formReset(){appStep=1;fitResult='pending';document.getElementById('fitBox').style.display='none';
+  document.getElementById('appForm').reset();updateStepUI()}
+function handleSubmit(e){e.preventDefault();alert('Application submitted! We\'ll be in touch within 48 hours.')}
+</script>
+</body>
+</html>

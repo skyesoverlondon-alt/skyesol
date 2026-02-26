@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Skyes Over London — kAIxU PDF Suite</title>
+  <meta name="theme-color" content="#1b0b2a">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./assets/app.css" />
+
+  <!-- PDF + QR libraries (client-side export) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <canvas id="skyfx" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+  <div id="cineloader" class="cineloader" aria-hidden="true">
+    <div class="cinewrap">
+      <img class="cine-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="" />
+      <div class="cine-title">CALIBRATING SKYLINE</div>
+      <div class="cine-sub">Skyes Over London • kAIxU Suite initializing…</div>
+      <div class="cine-bar"><div class="cine-fill"></div></div>
+      <div class="cine-fine">Spectacle mode: ON</div>
+    </div>
+  </div>
+
+  <div class="suiteTop">
+    <div class="stickywrap">
+      <header class="suitebar">
+        <div class="brand">
+          <img class="logo-float" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London Logo" />
+          <div class="brand-text">
+            <div class="brand-title">Skyes Over London</div>
+            <div class="brand-subtitle">kAIxU PDF Suite</div>
+          </div>
+        </div>
+
+        <div class="suite-controls">
+          <div class="ws-mini">
+            <select id="wsSelect" class="select small" title="Workspace"></select>
+            <button id="wsNew" class="btn small" title="New workspace">New</button>
+          </div>
+
+          <input id="wsName" class="input small" placeholder="Workspace name…" title="Rename workspace" />
+          <button id="wsSave" class="btn ghost small" title="Save workspace name">Save</button>
+
+          <input id="kaixuKey" class="input small" type="password" placeholder="Kaixu Key (KAIXU_VIRTUAL_KEY)" title="Enter Kaixu Key" />
+          <button id="saveKaixuKey" class="btn neon small" title="Save Kaixu Key">Save Key</button>
+          <span id="budgetBadge" class="badge badge-live" title="Monthly budget (cap - spent)">Budget: —</span>
+
+          <input id="toolSearch" class="input small" placeholder="Search tools…" title="Search tools" />
+
+          <button id="openTutorial" class="btn neon small" title="Tutorial">Tutorial</button>
+          <button id="openDiagnostics" class="btn ghost small" title="Diagnostics">Diagnostics</button>
+          <a class="btn ghost small" href="./index.html" title="Home">Home</a>
+        </div>
+      </header>
+
+      <div class="tabsbar">
+        <nav id="toolTabs" class="tabs"></nav>
+      </div>
+    </div>
+
+    <main class="main full">
+      <header class="mainbar nonsticky">
+        <div class="titleblock">
+          <div id="toolTitle" class="maintitle">kAIxU Suite</div>
+          <div id="toolTagline" class="muted">Provider: Skyes Over London</div>
+        </div>
+
+        <div class="bar-actions">
+          <select id="qualityMode" class="select" title="Quality tier">
+            <option value="lite">Lite (fastest)</option>
+            <option value="fast" selected>Fast</option>
+            <option value="pro">Pro (highest quality)</option>
+          </select>
+          <button id="runBtn" class="btn">Run kAIxU</button>
+          <button id="pdfBtn" class="btn ghost">Export PDF</button>
+        </div>
+      </header>
+
+      <section class="panelgrid">
+        <section class="card panel">
+          <div class="panelhead">
+            <div class="paneltitle">Inputs</div>
+            <div class="panelmeta">
+              <span class="badge">Provider: Skyes Over London</span>
+              <span class="badge">Intelligence: kAIxU</span>
+            </div>
+          </div>
+
+          <div id="toolForm" class="form"></div>
+
+          <div class="attach card inset">
+            <div class="attach-head">
+              <div class="paneltitle">Attachments</div>
+              <div class="muted">Upload files to Blobs and optionally include them in the run.</div>
+            </div>
+            <div class="attach-row">
+              <input id="attachFile" type="file" class="input" />
+              <button id="attachUpload" class="btn neon">Upload</button>
+            </div>
+            <label class="checkline"><input id="attachInclude" type="checkbox" checked /> Include attachment keys in kAIxU inputs</label>
+            <div id="attachList" class="attach-list"></div>
+          </div>
+
+          <div class="support card inset">
+            <div class="attach-head">
+              <div class="paneltitle">Support / Requests</div>
+              <div class="muted">This goes to Netlify Forms (traceable and auditable).</div>
+            </div>
+            <form id="supportForm" name="kaixu-support" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="kaixu-support" />
+              <p style="display:none">
+                <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+              </p>
+              <div class="grid2">
+                <input class="input" name="name" placeholder="Name" required />
+                <input class="input" name="email" placeholder="Email" type="email" required />
+              </div>
+              <input class="input" name="subject" placeholder="Subject" required />
+              <textarea class="textarea" name="message" placeholder="Message" required></textarea>
+              <input class="input" name="app" value="skyesoverlondon-kaixu-suite" readonly />
+              <button class="btn ghost" type="submit">Send</button>
+              <div id="supportStatus" class="muted" style="margin-top:8px"></div>
+            </form>
+          </div>
+
+          <div class="form-actions">
+            <button id="saveDraft" class="btn ghost">Save Draft</button>
+            <button id="loadDraft" class="btn ghost">Load Draft</button>
+            <button id="clearDraft" class="btn ghost danger">Clear</button>
+          </div>
+        </section>
+
+        <section class="card panel">
+          <div class="panelhead">
+            <div class="paneltitle">Results</div>
+            <div class="panelmeta">
+              <span id="runStatus" class="muted">Idle</span>
+            </div>
+          </div>
+
+          <div id="resultSummary" class="result"></div>
+
+          <div class="subhead">History (workspace)</div>
+          <div id="history" class="history"></div>
+        </section>
+
+        <section class="card panel vault">
+          <div class="panelhead">
+            <div class="paneltitle">Vault</div>
+            <div class="panelmeta">
+              <span id="vaultStatus" class="badge badge-live">Cloud: Checking…</span>
+            </div>
+          </div>
+
+          <div class="vault-actions">
+            <button id="vaultRefresh" class="btn ghost small">Refresh</button>
+            <button id="vaultSave" class="btn neon small">Save Run</button>
+            <button id="vaultSavePdf" class="btn ghost small" title="Save PDF to Blobs">Save PDF</button>
+          </div>
+
+          <div class="vault-search">
+            <input id="vaultQuery" class="input" placeholder="Search vault…" />
+          </div>
+
+          <div id="vaultList" class="vault-list"></div>
+
+          <div class="vault-note muted">
+            Neon DB stores run metadata + JSON. Netlify Blobs stores PDFs and uploads.
+          </div>
+        </section>
+
+      </section>
+
+      <section class="card panel">
+        <div class="panelhead">
+          <div class="paneltitle">Diagnostics</div>
+          <div class="panelmeta">
+            <span class="badge">x-kaixu-app: <span id="diagApp"></span></span>
+            <span class="badge">x-kaixu-build: <span id="diagBuild"></span></span>
+          </div>
+        </div>
+
+        <div class="diaggrid">
+          <div class="diagcard">
+            <div class="label">Function health</div>
+            <button id="pingFn" class="btn ghost small">Ping</button>
+            <div id="pingOut" class="mono muted"></div>
+          </div>
+          <div class="diagcard">
+            <div class="label">Last error</div>
+            <button id="clearErr" class="btn ghost small danger">Clear</button>
+            <pre id="lastErr" class="pre"></pre>
+          </div>
+          <div class="diagcard">
+            <div class="label">Notes</div>
+            <div class="muted">
+              Keys remain server-side. kAIxU runs via the server function and returns structured JSON for rendering and PDF export.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer compact">
+        <span>Provider: <b>Skyes Over London</b></span>
+        <span class="sep">•</span>
+        <span>Intelligence: <b>kAIxU</b></span>
+        <span class="sep">•</span>
+        <span class="muted">Tabbed suite UI (shared across all tools)</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./assets/tools.js"></script>
+  <script src="./assets/kaixuGateway.js"></script>
+  <script src="./assets/app.js"></script>
+  <script src="./assets/skyfx.js"></script>
+  <script src="./assets/tutorial.js"></script>
+</body>
+</html>

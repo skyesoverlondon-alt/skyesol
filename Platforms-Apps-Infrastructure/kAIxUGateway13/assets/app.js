@@ -525,7 +525,9 @@ function mountPricedModelPicker(textareaSel, providersInputSel) {
       tr.style.cursor = "pointer";
       tr.addEventListener("click", () => {
         setSelectedCustomer(c.id);
-        showToast(`Selected customer #${c.id}`, true);
+        showToast(`Selected customer #${c.id} — loading keys…`, true);
+        switchTab("keys");
+        loadKeys().catch((e) => showToast(e.message, false));
       });
       tbody.appendChild(tr);
     }
@@ -1311,6 +1313,9 @@ async function generatePushInvoice() {
   $("#apiBaseClose")?.addEventListener("click", closeBaseModal);
   $("#apiBaseSave")?.addEventListener("click", saveBaseModal);
   $("#apiBaseUseThisSite")?.addEventListener("click", useThisSite);
+  $("#baseModal")?.addEventListener("click", (e) => {
+    if (e.target && e.target.id === "baseModal") closeBaseModal();
+  });
 
   $("#monCloseBtn")?.addEventListener("click", closeMonitorDetail);
   $("#monitorModal")?.addEventListener("click", (e) => {
