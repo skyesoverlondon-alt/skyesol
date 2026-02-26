@@ -20,7 +20,7 @@ export async function handler(event) {
     };
   }
 
-  const expected = process.env.DEMONKEY;
+  const expected = process.env.DEMONKEY || process.env.Demonkey;
   if (!expected) {
     return {
       statusCode: 500,
