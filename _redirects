@@ -1,2 +1,10 @@
  /network         /network.html   301
  /network/        /network.html   301
+
+/gateway         /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
+/gateway/        /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
+
+/case-studies                /Case%20Studies/index.html  301
+/case-studies/               /Case%20Studies/index.html  301
+/case-studies/index.html     /Case%20Studies/index.html  301
+/case-studies/*              /Case%20Studies/:splat      301
