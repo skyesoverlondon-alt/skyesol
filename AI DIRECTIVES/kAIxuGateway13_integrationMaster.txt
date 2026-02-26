@@ -22,15 +22,23 @@ https://generativelanguage.googleapis.com/
 Ensure there are no remaining call sites, helpers, or legacy paths that touch provider APIs.
 
 REQUIRED GATEWAY (USE EXACTLY)
-KAIXU_GATEWAY_BASE = https://kaixugateway13.netlify.app
+
+GATEWAY DASHBOARD URL (browser / admin):
+  https://skyesol.netlify.app/gateway
+  (canonical redirect → /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html)
+
+KAIXU_GATEWAY_BASE = https://skyesol.netlify.app
 
 Non-stream endpoint:
-POST https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat
+POST https://skyesol.netlify.app/.netlify/functions/gateway-chat
 
 Streaming SSE endpoint:
-POST https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream
+POST https://skyesol.netlify.app/.netlify/functions/gateway-stream
 
-Authorization header (BOTH endpoints):
+Health / smoke-test endpoint:
+GET  https://skyesol.netlify.app/.netlify/functions/health
+
+Authorization header (BOTH chat & stream endpoints):
 Authorization: Bearer <KAIXU_VIRTUAL_KEY>
 
 Streaming requirement:
@@ -72,13 +80,13 @@ UI requirement:
 
 If the app displays usage, also display remaining budget: cap_cents - spent_cents.
 
-If HTTP 402 is returned, show “Monthly cap reached” and block further calls until upgrade/top-up.
+If HTTP 402 is returned, show "Monthly cap reached" and block further calls until upgrade/top-up.
 
 REQUIRED IMPLEMENTATION PATTERN (ONE GATEWAY CLIENT)
 
-Implement a single shared gateway client module (e.g., src/lib/kaixuGateway.js) OR embed the standard `kaixuStreamChat` function.
+Implement a single shared gateway client module (e.g., src/lib/kaixuGateway.js) OR embed the standard kaixuStreamChat function.
 
-Standard `kaixuStreamChat` implementation (must use fetch + ReadableStream):
+Standard kaixuStreamChat implementation (must use fetch + ReadableStream):
 
 async function kaixuStreamChat(kaixuKey, payload, { onMeta, onDelta, onDone, onError }) {
     // 1. Environment Detection (Local vs Prod)
@@ -106,7 +114,7 @@ UI/UX REQUIREMENTS (DEV VS CHAT MODES)
 
 REQUIRED KEY MANAGEMENT (KAIXU KEY ONLY)
 
-The only AI credential the app may accept/store is KAIXU_VIRTUAL_KEY (a “Kaixu Key”).
+The only AI credential the app may accept/store is KAIXU_VIRTUAL_KEY (a "Kaixu Key").
 
 Remove any UI fields, storage, or logic that asks for/provider keys.
 
@@ -116,7 +124,7 @@ REQUIRED ERROR MAPPING (USER-VISIBLE)
 
 401 → prompt for Kaixu Key / invalid key message
 
-402 → “Monthly cap reached” + block calls
+402 → "Monthly cap reached" + block calls
 
 429 → rate limit message + retry guidance
 
@@ -136,79 +144,223 @@ BUILD & DEPLOYMENT SPECS (CONSISTENT ACROSS ALL ENVIRONMENTS)
 
 PLATFORM
   Host            : Netlify (static site + serverless functions)
-  Repository      : skyesoverlondon-alt/skAIxuide (branch: main)
+  Site URL        : https://skyesol.netlify.app
+  Gateway URL     : https://skyesol.netlify.app/gateway
+  Repository      : skyesoverlondon-alt/skyesol (branch: main)
   Publish dir     : . (workspace root — all sub-apps served as-is)
-  Build command   : npm install (installs function deps only; no compile step)
+  Build command   : node scripts/generate-site-menu.mjs
+  Site ID         : cbcc48c2-deee-41b7-bb12-ca7c348d23c1
 
 NETLIFY CONFIGURATION — netlify.toml
   [build]
-    functions = "netlify/functions"
-    publish   = "."
+    publish = "."
 
   [functions]
-    node_bundler = "esbuild"
+    directory = "netlify/functions"
 
-  [[redirects]]
-    from   = "/api/*"
-    to     = "https://kaixugateway13.netlify.app/:splat"
-    status = 200
-    force  = true
-
-  The /api/* redirect proxies every client-side /api/ call to the kAIxuGateway13
-  origin so that client code never references the gateway URL directly in production.
+  NOTE: This site does NOT use the /api/* proxy redirect pattern.
+  Client apps that consume the gateway should call the function URLs directly:
+    POST https://skyesol.netlify.app/.netlify/functions/gateway-chat
+    POST https://skyesol.netlify.app/.netlify/functions/gateway-stream
+  Or use a proxy redirect in THEIR netlify.toml:
+    [[redirects]]
+      from   = "/api/*"
+      to     = "https://skyesol.netlify.app/.netlify/functions/:splat"
+      status = 200
+      force  = true
 
 PACKAGE MANIFEST — package.json
   {
-    "name": "skaixuide",
+    "name": "skyesol-growth-platform",
     "private": true,
-    "version": "1.0.0",
     "type": "module",
     "dependencies": {
-      "@neondatabase/serverless": "^0.10.0"
+      "@netlify/blobs": "^7.0.0",
+      "@netlify/neon": "^0.1.2"
     }
   }
 
   "type": "module" is required — all Netlify functions use ESM import syntax.
+  "@netlify/neon" wraps @neondatabase/serverless and auto-reads NETLIFY_DATABASE_URL.
   Only add runtime dependencies here; dev/build tools are not needed (esbuild is
   provided by Netlify).
 
 NETLIFY FUNCTIONS — netlify/functions/
   All serverless functions live in netlify/functions/ and are auto-deployed by Netlify.
 
-  logs-setup.js
-    Purpose  : One-time Neon DB table creation (kaixu_logs)
-    Trigger  : POST /.netlify/functions/logs-setup
-    Env var  : NEON_DATABASE_URL (required)
-    Schema   : kaixu_logs (id BIGSERIAL PK, ts TIMESTAMPTZ, source VARCHAR(64),
-               type VARCHAR(16), message TEXT, session_id VARCHAR(64),
-               user_agent TEXT, hostname VARCHAR(255))
-    Indexes  : ts DESC, source, type
+  GATEWAY FUNCTIONS (AI routing core):
+    gateway-chat.js                : Non-streaming AI request → JSON response
+    gateway-stream.js              : Streaming SSE AI request → chunked text events
+    gateway-job-submit.js          : Submit async AI job
+    gateway-job-status.js          : Poll async job status
+    gateway-job-result.js          : Retrieve completed job result
+    gateway-job-run-background.js  : Background job execution
 
-  logs.js
-    Purpose  : Log ingestion (POST) and retrieval (GET)
-    Trigger  : /.netlify/functions/logs
-    Env var  : NEON_DATABASE_URL (required)
-    POST     : Accepts single log or batch (max 100). Fields: source, type,
-               message, session_id, user_agent, hostname
-    GET      : Filters: ?source=, ?type=, ?since= (ISO), ?search= (ILIKE),
-               ?limit= (max 1000, default 200)
+  HEALTH / MONITORING:
+    health.js                      : System health check (DB, env vars, provider key presence)
+    monitor-cron.mjs               : Scheduled monitoring (background)
+    monitor-archive-access.js      : Read archived monitoring data
+    monitor-archive-prune.js       : Prune old monitoring archives
+    portal-status.mjs              : Ping portals, return uptime/latency
+    portals-list.mjs               : List configured portals
+    portals-upsert.mjs             : Add/update portal (admin)
+    portals-delete.mjs             : Remove portal (admin)
+
+  ADMIN FUNCTIONS:
+    admin-site-menu.mjs            : Admin file browser (requires DEMONKEY auth)
+    admin-login.js                 : Admin authentication → JWT
+    admin-whoami.mjs               : Session identity check
+    admin-customers.js             : Customer management
+    admin-invoices.js              : Invoice management
+    admin-keys.js                  : API key management
+    admin-devices.js               : Device tracking
+    admin-usage.js                 : Usage reporting
+    admin-export.js                : Data export (CSV/JSON)
+    admin-topup.js                 : Account top-up
+    admin-monitor-events.js        : Monitor event log
+    admin-monitor-prune.js         : Prune monitor events
+    admin-monitor-stream.js        : Real-time monitor stream
+    admin-voice-numbers.js         : Voice number management
+    admin-voice-usage.js           : Voice call usage
+    admin-netlify-token.js         : Per-customer Netlify PAT
+    admin-push-deploys.js          : Deploy management
+    admin-push-invoices.js         : Deploy billing
+    admin-push-jobs.js             : Deploy job management
+    admin-push-projects.js         : Deploy project management
+    admin-github-repos.js          : GitHub repo listing
+    admin-github-token.js          : Per-customer GitHub token
+    admin-gh-jobs.js               : GitHub push job management
+
+  BLOG / CMS (Blobs-backed):
+    blog-list.mjs                  : List published blog posts
+    blog-get.mjs                   : Fetch single post by slug
+    blog-upsert.mjs                : Create/update post (admin)
+    blog-delete.mjs                : Delete post (admin)
+
+  VAULT (Blobs-backed, gated):
+    vault-list.mjs                 : List vault documents
+    vault-get.mjs                  : Fetch single vault doc
+    vault-upsert.mjs               : Create/update vault doc (admin)
+    vault-delete.mjs               : Delete vault doc (admin)
+
+  AUTH / IDENTITY:
+    identity-login.mjs             : Netlify Identity login hook
+    session-token.js               : User session token issuance
+    request-key.mjs                : Self-service kAIxu API key requests
+
+  USER-FACING:
+    user-summary.js                : User account summary
+    user-devices.js                : User device listing
+    user-events.js                 : User event log
+    user-export.js                 : User data export
+    user-invoices.js               : User invoice listing
+    user-topup-checkout.js         : User-initiated Stripe top-up
+    user-voice-calls.js            : User voice call history
+    user-voice-summary.js          : User voice usage summary
+
+  PUSH / DEPLOY (Netlify):
+    push-init.js                   : Start a deploy job
+    push-upload.js                 : Upload file
+    push-upload-chunk.js           : Upload file chunk
+    push-upload-complete.js        : Finalize chunk upload
+    push-uploadfile-background.js  : Background file upload
+    push-complete.js               : Finalize deploy
+    push-complete-background.js    : Background deploy finalization
+    push-status.js                 : Check deploy status
+    push-file-status.js            : Check file upload status
+    push-projects.js               : List deploy projects
+    push-billing.js                : Deploy billing
+    push-chunk-cleanup.js          : Clean expired chunks
+    push-job-retry.js              : Retry failed deploy job
+    push-whoami.js                 : Push session identity
+
+  GITHUB PUSH:
+    gh-push-init.js                : Start GitHub push job
+    gh-push-upload-chunk.js        : Upload chunk to GitHub
+    gh-push-upload-complete.js     : Finalize GitHub chunk
+    gh-push-background.js          : Background GitHub push
+    gh-push-status.js              : Check GitHub push status
+    gh-my-jobs.js                  : List user's GitHub jobs
+    gh-job-retry.js                : Retry failed GitHub job
+    gh-chunk-cleanup.js            : Clean expired GitHub chunks
+    github-create-repo.js          : Create GitHub repo
+    github-repos.js                : List GitHub repos
+    github-token.js                : GitHub token management
+    github-whoami.js               : GitHub session identity
+    github-oauth-start.js          : Begin GitHub OAuth flow
+    github-oauth-callback.js       : GitHub OAuth callback
+
+  PAYMENTS (Stripe):
+    stripe-create-checkout.js      : Create Stripe checkout session
+    stripe-webhook.js              : Stripe webhook handler
+
+  VOICE (Twilio):
+    voice-twilio-inbound.js        : Incoming call webhook
+    voice-twilio-turn.js           : Call turn (IVR) logic
+    voice-twilio-status.js         : Call status callback
+
+  MAINTENANCE:
+    asyncjobs-retention.js         : Prune old async jobs (scheduled)
+    client-error-report.js         : Client-side error logging endpoint
+
+  SHARED CONFIG:
+    _common.mjs                    : Blobs store wrapper, seed logic, JSON helpers
+
+  SHARED LIBRARIES (netlify/functions/_lib/) — 27 modules:
+    db.js              : Neon Postgres helper (imports @netlify/neon, 489 lines)
+    authz.js           : API key hash verification, JWT auth (179 lines)
+    crypto.js          : Hashing, JWT sign/verify, encrypt/decrypt (155 lines)
+    http.js            : CORS builder, JSON response utilities (110 lines)
+    wrap.js            : Function wrapper with error handling + CORS (105 lines)
+    kaixu.js           : Build ID, schema version, system hash constants (25 lines)
+    providers.js       : AI provider routing + streaming logic (386 lines)
+    pricing.js         : Pricing config loader (40 lines)
+    ratelimit.js       : Rate limiting via DB + optional Upstash Redis (103 lines)
+    invoices.js        : Invoice generation with monthly range calc (149 lines)
+    monitor.js         : Event emission, request IDs, audit logging (142 lines)
+    audit.js           : Best-effort audit log to Postgres (16 lines)
+    alerts.js          : Budget/cap percentage alerts (84 lines)
+    allowlist.js       : Allowlist normalization utilities (57 lines)
+    admin.js           : Admin JWT verification + env-flag helpers (29 lines)
+    devices.js         : Install/device binding + seat limit enforcement (99 lines)
+    csv.js             : CSV escape and serialization (18 lines)
+    github.js          : GitHub API client with retry/sleep (122 lines)
+    githubTokens.js    : Per-customer encrypted GitHub token storage (35 lines)
+    netlifyTokens.js   : Per-customer encrypted Netlify API token storage (35 lines)
+    twilio.js          : Twilio API integration (base64 auth, API calls) (94 lines)
+    voice.js           : Voice telephony billing + number lookup via DB (83 lines)
+    voice_pricing.js   : Voice pricing model — cents per minute (46 lines)
+    pushCaps.js        : Push deployment budget/cap tracking (130 lines)
+    pushNetlify.js     : Netlify Deploy API integration (139 lines)
+    pushPath.js        : Path encoding for Netlify push deploys (8 lines)
+    pushPathNormalize.js : Path normalization for deploy operations (65 lines)
 
 REQUIRED ENVIRONMENT VARIABLES (Netlify Dashboard → Site → Environment Variables)
-  NEON_DATABASE_URL   : Neon PostgreSQL connection string (pooled, ?sslmode=require)
-                        Never hardcode. Required for logs.js and logs-setup.js.
-  KAIXU_VIRTUAL_KEY   : (optional on Netlify — client apps send their own key via
-                        Authorization header; only required in server.py for local dev)
+  NETLIFY_DATABASE_URL : Auto-injected by the Netlify Neon extension.
+                         Neon PostgreSQL connection string (pooled, sslmode=require).
+                         Functions access it via @netlify/neon which reads it automatically.
+                         Never hardcode. Do NOT use NEON_DATABASE_URL (legacy name).
+  JWT_SECRET           : Secret for signing/verifying session JWTs.
+  ADMIN_PASSWORD       : Admin panel authentication password.
+  DEMONKEY             : Executive Officer Key for admin site menu access.
+  OPENAI_API_KEY       : OpenAI provider key (consumed by gateway functions only).
+  ANTHROPIC_API_KEY    : Anthropic provider key (consumed by gateway functions only).
+  GEMINI_API_KEY       : Gemini provider key (consumed by gateway functions only).
+  DB_ENCRYPTION_KEY    : AES encryption key for sensitive DB fields.
+  KEY_PEPPER           : Pepper for API key hashing.
 
-LOCAL DEVELOPMENT — server.py
-  Runtime     : Python 3 (no pip packages beyond stdlib + python-dotenv)
-  Port        : 8000
-  Start cmd   : cd skAIxuide && python server.py
-  .env file   : Workspace root .env — must contain KAIXU_VIRTUAL_KEY
-  Key inject  : server.py auto-reads .env and injects the Bearer token into proxied
-                requests when the client omits an Authorization header.
-  Endpoints   : GET /api/kaixu-key → returns the key JSON (local dev only)
-                All other /api/* → proxied to kaixugateway13.netlify.app via
-                http.client.HTTPSConnection + read1() for true SSE streaming.
+  IMPORTANT: Total env var payload must stay under 4,096 bytes (AWS Lambda limit).
+  Current budget: ~63 vars, ~2,861 bytes, ~1,235 bytes margin.
+
+  See env.template (194 lines) at workspace root for the complete reference
+  with all optional sections (governance, security, rate limiting, push, GitHub,
+  Stripe, Twilio, monitoring, voice).
+
+LOCAL DEVELOPMENT
+  Start cmd   : npx netlify dev (from workspace root)
+  Functions   : Served at http://localhost:8888/.netlify/functions/*
+  .env file   : Platforms-Apps-Infrastructure/kAIxUGateway13/.env (master reference)
+                Not committed to git. Contains all env vars for local dev.
 
 .gitignore (MUST NOT BE COMMITTED)
   .env
@@ -230,19 +382,26 @@ OBSERVABILITY — Cross-App Diagnostics
                      that flushes every 5 seconds to /.netlify/functions/logs (POST).
                      navigator.sendBeacon fires on beforeunload for guaranteed delivery.
                      Local/dev mode does NOT write to Neon (_neonIsLocal flag).
-  Diagnostics page : skAIxuide/diagnostics.html — Neon DB panel for setup, history
-                     retrieval (with source filter), and full-text search.
 
-APP INVENTORY (served from publish root)
-  /skAIxuide/           — Main IDE (index.html, login.html, admin_panel.html, diagnostics.html, tutorial.html)
-  /Neural-Space-Pro/    — Neural Space Pro chat (index.html, Neural-2.html)
-  /Nexus-Pro/           — Nexus Pro chat (NexusPro.html)
-  /kaixumagic/          — kAIxu Magic (index.html)
-  /NexusConnectHomepage/ — Nexus Connect landing page (index.html)
-  /SkyeDocx/            — Document manager (index.html)
-  /SkyeVault/           — Vault app (index.html)
-  /WebPilePro/          — Web Pile Pro (index.html)
-  /ALLAI.html           — Combined AI page (root level)
+GATEWAY DASHBOARD PAGES (served from Platforms-Apps-Infrastructure/kAIxUGateway13/):
+  index.html       — Gateway admin dashboard (login + 12-tab panel)
+  dashboard.html   — User-facing dashboard (caps, usage, logs, devices, exports)
+  intro.html       — Gateway introduction / onboarding
+  smoketest.html   — Quick connectivity + provider validation
+
+  Related pages served from other directories:
+  gateway/dashboard.html                              — Public-facing gateway dashboard (SEO-optimized)
+  Platforms-Apps-Infrastructure/GateProofx/index.html  — Gate Proofx data explorer
+  kAIxu/RequestKaixuAPIKey.html                        — Self-service API key request form
+
+  Live URLs:
+    Admin:           https://skyesol.netlify.app/gateway
+    Gate Proofx:     https://skyesol.netlify.app/gate-proofx.html
+    Request Key:     https://skyesol.netlify.app/request-key
+
+SCHEMA & BUILD CONSTANTS (netlify/functions/_lib/kaixu.js)
+  SCHEMA_VERSION : KAIXU_GATEWAY_SCHEMA_V5.1_KAIXU_CANON
+  BUILD_ID       : deploy-kaixuCanon-20260221102017
 
 MODEL DEFAULTS (CURRENT)
   Provider    : gemini
@@ -253,6 +412,15 @@ MODEL DEFAULTS (CURRENT)
   Do NOT use deprecated model names (e.g., gemini-1.5-pro-latest).
   Do NOT set max_tokens above 8192 for gemini-2.0-flash.
 
+SKYE SUITE APPS (all route through kAIxuGateway13):
+  SkyeOps/       — Mission Control (stream from SkyeDocx templates)
+  SkyeFlow/      — Automation Hub (drafts → governed workflows)
+  SkyeLedger/    — Executive Intelligence Cockpit
+  SkyeSlides/    — Deck Orchestration (replace Google Slides)
+  SkyeSheets/    — Data Canvas (replace spreadsheet suites)
+  SkyeCollab/    — Lockstep Collaboration Studio
+  SkyeDrive/     — Fortune 500 Vault (replace Google Drive)
+  SkyeArchive/   — Compliance Vault
 
-
-  Tip: tag your apps with headers x-kaixu-app and x-kaixu-build. For client-side errors (before the request hits the gateway), POST to /.netlify/functions/client-error-report.
+  All apps use the kaixuStreamChat pattern and BroadcastChannel('kaixu_events')
+  for cross-app diagnostics.
