@@ -6,6 +6,21 @@ const ROOT = process.cwd();
 const SKIP_DIR_NAMES_ANYWHERE = new Set(["node_modules", ".git", ".github", ".netlify"]);
 const SKIP_PATHS_RELATIVE = new Set(["netlify/functions"]);
 
+// Directories to exclude from the admin menu (dev notes, secrets, internal-only)
+const SKIP_DIR_NAMES_EXACT = new Set(["xxDEVONLY", "AI DIRECTIVES"]);
+
+// File basenames to exclude (templates, secrets, dev-only files)
+const SKIP_FILE_BASENAMES = new Set([
+  "template.html", "TEMPLATE.html",
+  "env.template", ".env",
+]);
+
+// Relative paths to exclude explicitly
+const SKIP_FILES_RELATIVE = new Set([
+  "Platforms-Apps-Infrastructure/kAIxUGateway13/.env",
+  "Platforms-Apps-Infrastructure/kAIxUGateway13/env.template",
+]);
+
 function slash(p) {
   return p.replace(/\\/g, "/");
 }
@@ -30,12 +45,16 @@ async function collectAllFiles(dir, out) {
 
     if (entry.isDirectory()) {
       if (SKIP_DIR_NAMES_ANYWHERE.has(entry.name)) continue;
+      if (SKIP_DIR_NAMES_EXACT.has(entry.name)) continue;
       if (SKIP_PATHS_RELATIVE.has(rel)) continue;
       await collectAllFiles(full, out);
       continue;
     }
 
     if (entry.isFile()) {
+      // Skip template files, env files, and other dev-only artifacts
+      if (SKIP_FILE_BASENAMES.has(entry.name)) continue;
+      if (SKIP_FILES_RELATIVE.has(rel)) continue;
       out.push({ fullPath: full, relative: rel, ext: path.extname(entry.name).toLowerCase() });
     }
   }

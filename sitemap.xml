@@ -43,12 +43,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://skyesol.netlify.app/AI%20DIRECTIVES/the%20standard%20for%20editorials.html</loc>
-    <lastmod>2026-02-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://skyesol.netlify.app/arizona-llc-cost-breakdown/index.html</loc>
     <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -1435,12 +1429,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://skyesol.netlify.app/Blogs/template.html</loc>
-    <lastmod>2026-02-23</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://skyesol.netlify.app/Blogs/web-development-phoenix-az-apex-operator-playbook.html</loc>
     <lastmod>2026-02-20</lastmod>
     <changefreq>yearly</changefreq>
@@ -2113,6 +2101,18 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://skyesol.netlify.app/kAIxu/index.html</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/kAIxu/RequestKaixuAPIKey.html</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://skyesol.netlify.app/leadership/dakayla-clark.html</loc>
     <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -2515,12 +2515,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://skyesol.netlify.app/Services/TEMPLATE.html</loc>
-    <lastmod>2026-02-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://skyesol.netlify.app/Services/trust-surfaces.html</loc>
     <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -2726,12 +2720,6 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Valuationx/Build-Valuation2.html</loc>
-    <lastmod>2026-02-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://skyesol.netlify.app/Valuationx/template.html</loc>
     <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

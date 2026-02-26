@@ -2,12 +2,12 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-02-26T15:36:08.040Z",
-  "totalItems": 732,
+  "generatedAt": "2026-02-26T19:36:30.981Z",
+  "totalItems": 728,
   "categories": [
     {
       "name": "root",
-      "count": 28,
+      "count": 29,
       "items": [
         {
           "urlPath": "/404.html",
@@ -172,14 +172,6 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
-          "file": "env.template",
-          "title": null,
-          "ext": ".template",
-          "category": "root"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
           "file": "manifest.json",
           "title": null,
           "ext": ".json",
@@ -191,6 +183,14 @@ export const SITE_MENU = {
           "file": "netlify.toml",
           "title": null,
           "ext": ".toml",
+          "category": "root"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "package-lock.json",
+          "title": null,
+          "ext": ".json",
           "category": "root"
         },
         {
@@ -231,6 +231,14 @@ export const SITE_MENU = {
           "file": "sw.js",
           "title": null,
           "ext": ".js",
+          "category": "root"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Untitled.ipynb",
+          "title": null,
+          "ext": ".ipynb",
           "category": "root"
         }
       ]
@@ -288,36 +296,6 @@ export const SITE_MENU = {
           "title": "Admin · Skyes Over London LC",
           "ext": ".html",
           "category": "admin"
-        }
-      ]
-    },
-    {
-      "name": "AI DIRECTIVES",
-      "count": 3,
-      "items": [
-        {
-          "urlPath": "/AI%20DIRECTIVES/the%20standard%20for%20editorials.html",
-          "prettyPath": null,
-          "file": "AI DIRECTIVES/the standard for editorials.html",
-          "title": "SKAIXU.SYSTEM: The Operator’s App Launcher (and the Free Launch Kit) | Skyes Over London LC",
-          "ext": ".html",
-          "category": "AI DIRECTIVES"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "AI DIRECTIVES/kAIxuGateway13_integrationDirective (4).txt",
-          "title": null,
-          "ext": ".txt",
-          "category": "AI DIRECTIVES"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "AI DIRECTIVES/kAIxuGateway13_integrationMaster.txt",
-          "title": null,
-          "ext": ".txt",
-          "category": "AI DIRECTIVES"
         }
       ]
     },
@@ -417,7 +395,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Blogs",
-      "count": 236,
+      "count": 235,
       "items": [
         {
           "urlPath": "/Blogs/13th%20Sole%20Promotions/Establishing-Business-Development-Firm-Phoenix-AZ.html",
@@ -2220,14 +2198,6 @@ export const SITE_MENU = {
           "category": "Blogs"
         },
         {
-          "urlPath": "/Blogs/template.html",
-          "prettyPath": null,
-          "file": "Blogs/template.html",
-          "title": "The Operator’s Advantage: Proof-First Businesses in the Next Economy | Nexus Hub Blog",
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
           "urlPath": "/Blogs/web-development-phoenix-az-apex-operator-playbook.html",
           "prettyPath": null,
           "file": "Blogs/web-development-phoenix-az-apex-operator-playbook.html",
@@ -3315,8 +3285,16 @@ export const SITE_MENU = {
     },
     {
       "name": "js",
-      "count": 6,
+      "count": 7,
       "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "js/admin-menu-triggers.js",
+          "title": null,
+          "ext": ".js",
+          "category": "js"
+        },
         {
           "urlPath": null,
           "prettyPath": null,
@@ -3364,6 +3342,28 @@ export const SITE_MENU = {
           "title": null,
           "ext": ".js",
           "category": "js"
+        }
+      ]
+    },
+    {
+      "name": "kAIxu",
+      "count": 2,
+      "items": [
+        {
+          "urlPath": "/kAIxu/index.html",
+          "prettyPath": "/kAIxu/",
+          "file": "kAIxu/index.html",
+          "title": null,
+          "ext": ".html",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": "/kAIxu/RequestKaixuAPIKey.html",
+          "prettyPath": null,
+          "file": "kAIxu/RequestKaixuAPIKey.html",
+          "title": null,
+          "ext": ".html",
+          "category": "kAIxu"
         }
       ]
     },
@@ -3491,7 +3491,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Platforms-Apps-Infrastructure",
-      "count": 202,
+      "count": 201,
       "items": [
         {
           "urlPath": "/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html",
@@ -4067,14 +4067,6 @@ export const SITE_MENU = {
           "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_NETLIFY_PUSH.md",
           "title": null,
           "ext": ".md",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/env.template",
-          "title": null,
-          "ext": ".template",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
@@ -5231,7 +5223,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Services",
-      "count": 39,
+      "count": 38,
       "items": [
         {
           "urlPath": "/Services/ai-data-apps.html",
@@ -5462,14 +5454,6 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Services/SkyePWAForge/SkyePWAForge.html",
           "title": "PWA Conversion — SkyePWA Forge™ (Website-as-App)",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
-          "urlPath": "/Services/TEMPLATE.html",
-          "prettyPath": null,
-          "file": "Services/TEMPLATE.html",
-          "title": "Intake & Routing — Queues and Handoffs",
           "ext": ".html",
           "category": "Services"
         },
@@ -6049,7 +6033,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Valuationx",
-      "count": 16,
+      "count": 15,
       "items": [
         {
           "urlPath": "/Valuationx/Build-Valuation1.html",
@@ -6064,14 +6048,6 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Valuationx/Build-Valuation2.html",
           "title": null,
-          "ext": ".html",
-          "category": "Valuationx"
-        },
-        {
-          "urlPath": "/Valuationx/template.html",
-          "prettyPath": null,
-          "file": "Valuationx/template.html",
-          "title": "SOLEnterprises.org • Proof-Asset Valuation Report (2026) — Editable Web",
           "ext": ".html",
           "category": "Valuationx"
         },
@@ -6192,20 +6168,6 @@ export const SITE_MENU = {
           "title": "Client Vault · Skyes Over London LC",
           "ext": ".html",
           "category": "vault"
-        }
-      ]
-    },
-    {
-      "name": "xxDEVONLY",
-      "count": 1,
-      "items": [
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "xxDEVONLY/Prime",
-          "title": null,
-          "ext": "",
-          "category": "xxDEVONLY"
         }
       ]
     }

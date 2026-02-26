@@ -1,20 +1,20 @@
-/* Floating neon admin menu link */
+/* Floating neon admin menu link — 50% reduced size */
 .floating-glow-neon {
   animation: floatGlowBlue 4.5s ease-in-out infinite;
   background: linear-gradient(135deg, rgba(138,99,255,0.22), rgba(58,111,216,0.18));
-  box-shadow: 0 0 18px 6px #8a63ff, 0 0 36px 12px #3a6fd8;
+  box-shadow: 0 0 9px 3px #8a63ff, 0 0 18px 6px #3a6fd8;
   color: #e8e6ff;
-  border: 1.5px solid #8a63ff;
-  border-radius: 10px;
-  font-size: 0.95rem;
+  border: 1px solid #8a63ff;
+  border-radius: 5px;
+  font-size: 0.475rem;
   font-family: 'Fira Code', monospace;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 8px 14px;
+  padding: 4px 7px;
   position: fixed;
-  bottom: 28px;
-  left: 24px;
+  bottom: 14px;
+  left: 12px;
   right: auto;
   z-index: 99999;
   display: block;
@@ -23,35 +23,7 @@
 .floating-glow-neon:hover {
   background: linear-gradient(135deg, rgba(138,99,255,0.32), rgba(58,111,216,0.28));
   border-color: #fff;
-  transform: translateY(-2px);
-}
-/* Floating neon admin menu link */
-.floating-glow-neon {
-  /* fallback/duplicate block kept in sync with the primary definition */
-  animation: floatGlowBlue 4.5s ease-in-out infinite;
-  background: linear-gradient(135deg, rgba(138,99,255,0.22), rgba(58,111,216,0.18));
-  box-shadow: 0 0 18px 6px #8a63ff, 0 0 36px 12px #3a6fd8;
-  color: #e8e6ff;
-  border: 1.5px solid #8a63ff;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-family: 'Fira Code', monospace;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 8px 14px;
-  position: fixed;
-  bottom: 28px;
-  left: 24px;
-  right: auto;
-  z-index: 99999;
-  display: block;
-  transition: background .3s, border-color .3s, transform .12s;
-}
-.floating-glow-neon:hover {
-  background: linear-gradient(135deg, rgba(138,99,255,0.32), rgba(58,111,216,0.28));
-  border-color: #fff;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 /* Glowing purple tile for network page */
 .glow-tile-purple {

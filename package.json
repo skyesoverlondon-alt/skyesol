@@ -13,6 +13,7 @@
     "meta:check": "node scripts/meta-templater.js --check"
   },
   "dependencies": {
-    "@netlify/blobs": "^7.0.0"
+    "@netlify/blobs": "^7.0.0",
+    "@netlify/neon": "^0.1.2"
   }
 }
