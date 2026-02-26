@@ -48,6 +48,12 @@
   var tokenType = detectToken();
 
   waitForWidget(function (identity) {
+    /* Explicitly set the API URL so the widget works on custom domains
+       and doesn't fail to auto-detect the Netlify Identity instance.  */
+    identity.init({
+      APIUrl: "https://skyesol.netlify.app/.netlify/identity"
+    });
+
     /* If a token was found in the URL hash, open the widget so the
        Identity service can consume it and complete the action.        */
     if (tokenType) {

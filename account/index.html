@@ -329,6 +329,9 @@
     }
 
     if (window.netlifyIdentity) {
+      netlifyIdentity.init({
+        APIUrl: 'https://skyesol.netlify.app/.netlify/identity'
+      });
       netlifyIdentity.on('init', user => applyUser(user));
       netlifyIdentity.on('login', user => {
         applyUser(user);
