@@ -246,6 +246,7 @@
       </div>
       <div class="top-actions">
                 <button id="gatewayBaseBtn" class="btn ghost" type="button" title="Switch which gateway this dashboard calls">Gateway Base</button>
+<a class="btn ghost" href="/request-key" title="Get a kAIxu API key">Get API Key</a>
 <a class="btn ghost" href="/dashboard.html" title="User dashboard">User Dashboard</a>
           <a class="btn ghost" href="gate-proofx.html" title="Gate Proofx (admin exports)">Gate Proofx</a>
         <a class="btn ghost" href="/SkyeDocx/homepage.html" title="Skye DocX landing">Skye DocX</a>
@@ -265,6 +266,10 @@
         <button id="loginBtn" class="btn primary">Login</button>
       </div>
       <p class="muted small">v5 adds universal caps, per-device seats, allowlists, exports, invoice snapshots, Stripe top-ups, and stronger rate limiting.</p>
+      <div style="margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.10);">
+        <p class="muted small">Looking for an API key? <a href="/request-key" style="color:#ffd36a;">Request a kAIxu API key →</a></p>
+        <p class="muted small">Already have a key? <a href="/dashboard.html" style="color:#27f2ff;">Open User Dashboard →</a></p>
+      </div>
     </section>
 
     <section id="appView" style="display:none;">
@@ -280,6 +285,7 @@
         <button class="tab" data-tab="github">GitHub Push</button>
         <button class="tab" data-tab="docs">Integration</button>
         <button class="tab" data-tab="monitor">Monitor</button>
+        <button class="tab" data-tab="tutorial">📖 Tutorial</button>
       </nav>
 
       <section class="grid">
@@ -907,6 +913,213 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
             Tip: tag your apps with headers <span style="font-family:var(--mono);">x-kaixu-app</span> and <span style="font-family:var(--mono);">x-kaixu-build</span>. For client-side errors (before the request hits the gateway), POST to <span style="font-family:var(--mono);">/.netlify/functions/client-error-report</span>.
           </p>
         </div>
+
+<!-- ═══════════════════════════════════════ TUTORIAL ═══════════════════════════════════════ -->
+<div class="card tabpanel" id="tab-tutorial" style="display:none;">
+  <h2>📖 Admin Tutorial — How to Use kAIxU Gateway</h2>
+  <p class="muted">This is your complete guide to running the gateway. Bookmark this tab.</p>
+
+  <div style="margin-top:20px; display:flex; flex-direction:column; gap:24px;">
+
+    <!-- OVERVIEW -->
+    <div style="border-left:3px solid #ffd36a; padding-left:16px;">
+      <h3 style="color:#ffd36a; margin:0 0 8px;">⚡ How It Works</h3>
+      <p class="muted small">kAIxU Gateway is a <strong>metered AI proxy</strong>. You own the real provider API keys (OpenAI, Anthropic, Gemini). Clients get <strong>kAIxu virtual keys</strong> (<code>kx_live_…</code>) that route through your gateway. You set spend caps, rate limits, and device seats. Clients pay you → you pay providers. The margin is yours.</p>
+      <p class="muted small" style="margin-top:6px;">All keys, usage, billing, and audit data live in Neon Postgres (via <code>@netlify/neon</code>). No Redis. No external services unless you add Stripe.</p>
+    </div>
+
+    <!-- TAB 1: CUSTOMERS -->
+    <div style="border-left:3px solid #a243ff; padding-left:16px;">
+      <h3 style="color:#a243ff; margin:0 0 8px;">1. Customers Tab</h3>
+      <p class="muted small"><strong>What it shows:</strong> All registered customers — email, plan, monthly cap, active status, key count, and whether they have a Netlify token set (for KaixuPush).</p>
+      <p class="muted small" style="margin-top:6px;"><strong>How to use:</strong></p>
+      <ul class="muted small" style="padding-left:18px; list-style:disc;">
+        <li>Click <strong>Refresh</strong> to reload the list</li>
+        <li><strong>Click any row</strong> to select that customer — their ID auto-fills into the Keys, Usage, Billing, Devices, and Exports tabs</li>
+        <li>Use <strong>Set Netlify token</strong> to store an encrypted deploy token for the selected customer (used by KaixuPush)</li>
+      </ul>
+    </div>
+
+    <!-- TAB 2: CREATE -->
+    <div style="border-left:3px solid #27f2ff; padding-left:16px;">
+      <h3 style="color:#27f2ff; margin:0 0 8px;">2. Create Customer + Master Key</h3>
+      <p class="muted small"><strong>What it does:</strong> Creates a new customer record AND immediately issues them a master API key.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>Steps:</strong></p>
+      <ol class="muted small" style="padding-left:18px;">
+        <li>Enter their <strong>email</strong></li>
+        <li>Set the <strong>plan name</strong> (e.g. "starter", "pro", "enterprise") — this is just a label</li>
+        <li>Set the <strong>monthly cap in cents</strong> (2000 = $20/month spend limit)</li>
+        <li>Click <strong>Create + Issue Master Key</strong></li>
+        <li>⚠️ The raw key (<code>kx_live_…</code>) appears <strong>once</strong>. Copy it immediately and send to the client. You cannot retrieve it later — only the hash is stored.</li>
+      </ol>
+    </div>
+
+    <!-- TAB 3: KEYS -->
+    <div style="border-left:3px solid #ffd36a; padding-left:16px;">
+      <h3 style="color:#ffd36a; margin:0 0 8px;">3. Keys (Sub-keys / Rotate / Revoke)</h3>
+      <p class="muted small"><strong>What it does:</strong> Manage all keys for a customer. Create sub-keys with custom limits, rotate compromised keys, or revoke access instantly.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>Key concepts:</strong></p>
+      <ul class="muted small" style="padding-left:18px; list-style:disc;">
+        <li><strong>Sub-keys</strong> inherit the customer's cap but can have their own overrides (lower cap, different RPM, restricted providers/models)</li>
+        <li><strong>Rotate</strong> = creates a new key with the same settings, revokes the old one. Use when a key is compromised</li>
+        <li><strong>Revoke</strong> = immediate cutoff. The key stops working instantly</li>
+        <li><strong>Cap override</strong>: If set, this key has its own separate spend cap (in cents) independent of the customer cap</li>
+        <li><strong>Allowed providers/models</strong>: Restrict which AI providers or specific models this key can access</li>
+        <li><strong>Max devices</strong>: How many unique install_ids can use this key simultaneously</li>
+      </ul>
+    </div>
+
+    <!-- TAB 4: USAGE -->
+    <div style="border-left:3px solid #a243ff; padding-left:16px;">
+      <h3 style="color:#a243ff; margin:0 0 8px;">4. Usage</h3>
+      <p class="muted small"><strong>What it shows:</strong> Detailed usage breakdown for a customer in a specific month — total cap, extra credits, amount spent, total tokens, and every individual API call.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>How to use:</strong></p>
+      <ol class="muted small" style="padding-left:18px;">
+        <li>Enter or select a <strong>Customer ID</strong></li>
+        <li>Set the <strong>month</strong> (YYYY-MM format, defaults to current)</li>
+        <li>Click <strong>Load usage</strong></li>
+      </ol>
+      <p class="muted small" style="margin-top:6px;">The summary cards show Cap / Extra / Spent / Tokens. The table below shows every individual gateway call with provider, model, input/output tokens, and cost in cents.</p>
+    </div>
+
+    <!-- TAB 5: BILLING -->
+    <div style="border-left:3px solid #27f2ff; padding-left:16px;">
+      <h3 style="color:#27f2ff; margin:0 0 8px;">5. Billing & Controls</h3>
+      <p class="muted small"><strong>Customer policy</strong> — change a customer's plan name, monthly cap, active status, device limits, provider/model allowlists. Click <strong>Save</strong> to apply.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>Top-ups:</strong></p>
+      <ul class="muted small" style="padding-left:18px; list-style:disc;">
+        <li><strong>Manual top-up</strong>: Adds extra_cents to the customer's balance for the current month (use when a client pays you directly)</li>
+        <li><strong>Stripe checkout</strong>: Creates a Stripe checkout session. Requires <code>STRIPE_SECRET_KEY</code> and <code>STRIPE_WEBHOOK_SECRET</code> env vars</li>
+      </ul>
+      <p class="muted small" style="margin-top:6px;"><strong>Invoice snapshots:</strong> Load or create a JSON invoice record for the month. Useful for record-keeping.</p>
+    </div>
+
+    <!-- TAB 6: DEVICES -->
+    <div style="border-left:3px solid #ffd36a; padding-left:16px;">
+      <h3 style="color:#ffd36a; margin:0 0 8px;">6. Devices</h3>
+      <p class="muted small"><strong>What it shows:</strong> Every unique device (install_id) that has used a customer's keys. Shows first-seen, last-seen, user-agent, and revocation status.</p>
+      <p class="muted small" style="margin-top:6px;">If a customer sets <code>require_install_id = true</code>, every request must include an <code>x-install-id</code> header. Devices are auto-registered up to <code>max_devices_per_key</code>. You can revoke individual devices here.</p>
+    </div>
+
+    <!-- TAB 7: EXPORTS -->
+    <div style="border-left:3px solid #a243ff; padding-left:16px;">
+      <h3 style="color:#a243ff; margin:0 0 8px;">7. Exports & Invoices</h3>
+      <p class="muted small">Download CSV exports of usage data:</p>
+      <ul class="muted small" style="padding-left:18px; list-style:disc;">
+        <li><strong>Events CSV</strong> — every individual API call with timestamps, tokens, cost</li>
+        <li><strong>Summary CSV</strong> — aggregated monthly summary</li>
+        <li><strong>Invoice CSV</strong> — formatted for billing/accounting</li>
+      </ul>
+      <p class="muted small" style="margin-top:6px;">Filter by customer, month, and optionally a specific key.</p>
+    </div>
+
+    <!-- TAB 8: KAIXUPUSH -->
+    <div style="border-left:3px solid #27f2ff; padding-left:16px;">
+      <h3 style="color:#27f2ff; margin:0 0 8px;">8. KaixuPush (Deploy Proxy)</h3>
+      <p class="muted small"><strong>What it is:</strong> A deployment pipeline that lets clients push sites to Netlify through your gateway. Each deploy is tracked, metered, and invoiced.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>Workflow:</strong></p>
+      <ol class="muted small" style="padding-left:18px;">
+        <li><strong>Register a project</strong> — give it an ID, name, and the Netlify Site ID it deploys to</li>
+        <li>Client pushes files via the chunked upload pipeline</li>
+        <li>Track deploys in <strong>Deploy history</strong> and chunk uploads in <strong>Chunk jobs</strong></li>
+        <li>Generate invoices per month with <strong>Generate Invoice</strong></li>
+      </ol>
+      <p class="muted small" style="margin-top:6px;">The client's Netlify token (set in Customers tab) is used for deploys. If not set, falls back to your <code>NETLIFY_AUTH_TOKEN</code>.</p>
+    </div>
+
+    <!-- TAB 9: GITHUB -->
+    <div style="border-left:3px solid #ffd36a; padding-left:16px;">
+      <h3 style="color:#ffd36a; margin:0 0 8px;">9. GitHub Push</h3>
+      <p class="muted small"><strong>What it is:</strong> Push code to GitHub repositories through the gateway. Clients store their GitHub PAT (encrypted), and the gateway handles ZIP-based pushes to any branch.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>Steps:</strong></p>
+      <ol class="muted small" style="padding-left:18px;">
+        <li><strong>Set PAT</strong> — save the client's GitHub personal access token (stored encrypted in DB)</li>
+        <li><strong>Load Repos</strong> — see all repos the token has access to</li>
+        <li><strong>Load Jobs</strong> — view recent ZIP push operations and their status</li>
+      </ol>
+      <p class="muted small" style="margin-top:6px;">OAuth flow also available at <code>/.netlify/functions/github-oauth-start</code>.</p>
+    </div>
+
+    <!-- TAB 10: INTEGRATION -->
+    <div style="border-left:3px solid #a243ff; padding-left:16px;">
+      <h3 style="color:#a243ff; margin:0 0 8px;">10. Integration</h3>
+      <p class="muted small">Quick-reference for API endpoints and request/response formats. Share this with clients so they know how to call the gateway.</p>
+      <ul class="muted small" style="padding-left:18px; list-style:disc;">
+        <li><strong>Non-stream:</strong> <code>POST /.netlify/functions/gateway-chat</code> — returns full response</li>
+        <li><strong>Stream (SSE):</strong> <code>POST /.netlify/functions/gateway-stream</code> — returns Server-Sent Events</li>
+      </ul>
+      <p class="muted small" style="margin-top:6px;">Both endpoints accept the same normalized request body with <code>provider</code>, <code>model</code>, <code>messages</code>, <code>max_tokens</code>, <code>temperature</code>. Auth via <code>Authorization: Bearer kx_live_…</code> header.</p>
+    </div>
+
+    <!-- TAB 11: MONITOR -->
+    <div style="border-left:3px solid #27f2ff; padding-left:16px;">
+      <h3 style="color:#27f2ff; margin:0 0 8px;">11. Monitor</h3>
+      <p class="muted small"><strong>What it does:</strong> Real-time and historical view of gateway events — errors, warnings, rate-limited requests, slow responses, and audit entries.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>How to use:</strong></p>
+      <ul class="muted small" style="padding-left:18px; list-style:disc;">
+        <li><strong>Start Live</strong> — polls for new events every few seconds</li>
+        <li><strong>Filter</strong> by level (error/warn/info), kind, function name, app name, or request ID</li>
+        <li><strong>Click a row</strong> to see the full JSON payload in a modal</li>
+        <li><strong>Prune</strong> — delete old events to keep the table clean</li>
+      </ul>
+      <p class="muted small" style="margin-top:6px;">Tip: have your clients tag requests with <code>x-kaixu-app: MyApp</code> so you can filter by app.</p>
+    </div>
+
+    <!-- QUICK REFERENCE -->
+    <div style="border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:20px; background:rgba(255,255,255,0.03);">
+      <h3 style="color:#ffd36a; margin:0 0 12px;">🔑 Quick Reference</h3>
+      <table class="table" style="font-size:12px;">
+        <thead><tr><th>Item</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Key format</td><td><code>kx_live_</code> + 48 base64url chars (56 total)</td></tr>
+          <tr><td>Auth header</td><td><code>Authorization: Bearer kx_live_…</code></td></tr>
+          <tr><td>Admin auth</td><td>JWT from <code>ADMIN_PASSWORD</code> login (12h TTL)</td></tr>
+          <tr><td>Chat endpoint</td><td><code>POST /.netlify/functions/gateway-chat</code></td></tr>
+          <tr><td>Stream endpoint</td><td><code>POST /.netlify/functions/gateway-stream</code></td></tr>
+          <tr><td>Self-service keys</td><td><a href="/request-key" style="color:#ffd36a;">/request-key</a> (public, no admin needed)</td></tr>
+          <tr><td>User dashboard</td><td><a href="/dashboard.html" style="color:#27f2ff;">/dashboard.html</a></td></tr>
+          <tr><td>Health check</td><td><code>GET /.netlify/functions/health</code></td></tr>
+          <tr><td>Spend caps</td><td>Customer-level + per-key override (in cents)</td></tr>
+          <tr><td>Rate limits</td><td>RPM (per key) + RPD (optional) — DB-backed, no Redis</td></tr>
+          <tr><td>Device seats</td><td><code>max_devices_per_key</code> with optional <code>require_install_id</code></td></tr>
+          <tr><td>Providers</td><td>OpenAI, Anthropic, Gemini (set keys in env vars)</td></tr>
+          <tr><td>Env vars needed</td><td><code>ADMIN_PASSWORD</code>, <code>JWT_SECRET</code>, <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TYPICAL WORKFLOW -->
+    <div style="border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:20px; background:rgba(255,255,255,0.03);">
+      <h3 style="color:#a243ff; margin:0 0 12px;">🚀 Typical Workflow (New Client)</h3>
+      <ol class="muted small" style="padding-left:18px; line-height:2;">
+        <li>Go to <strong>Create</strong> tab → enter email, set plan + cap → click Create</li>
+        <li>Copy the <code>kx_live_…</code> key and send it to the client securely</li>
+        <li>Client adds <code>Authorization: Bearer kx_live_…</code> to their API calls</li>
+        <li>Client hits <code>/.netlify/functions/gateway-chat</code> or <code>gateway-stream</code></li>
+        <li>Monitor usage in the <strong>Usage</strong> tab</li>
+        <li>Adjust caps/limits in <strong>Billing & Controls</strong> as needed</li>
+        <li>If a key is compromised → <strong>Keys</strong> tab → Rotate</li>
+        <li>End of month → <strong>Exports</strong> tab → download invoice CSV</li>
+      </ol>
+    </div>
+
+    <!-- SELF-SERVICE -->
+    <div style="border:1px solid rgba(255,255,255,0.12); border-radius:12px; padding:20px; background:rgba(255,255,255,0.03);">
+      <h3 style="color:#27f2ff; margin:0 0 12px;">🤖 Self-Service Key Generator</h3>
+      <p class="muted small">Clients can request their own starter key at <a href="/request-key" style="color:#ffd36a;">/request-key</a> without needing you to be involved.</p>
+      <ul class="muted small" style="padding-left:18px; list-style:disc;">
+        <li>They enter their email → get a <code>kx_live_…</code> key instantly</li>
+        <li>Defaults: $20/month cap, 10 RPM, 3 max devices, starter plan</li>
+        <li>Abuse guard: max 5 keys per email per hour</li>
+        <li>If they already had a key, the old one is revoked and a new one issued</li>
+        <li>You can customize defaults with <code>DEFAULT_SELFSERVE_*</code> env vars</li>
+      </ul>
+      <p class="muted small" style="margin-top:8px;">The client still shows up in your <strong>Customers</strong> tab. You can upgrade their plan, change caps, or issue sub-keys anytime.</p>
+    </div>
+
+  </div>
+</div>
+<!-- ═══════════════════════════════════════ /TUTORIAL ═══════════════════════════════════════ -->
 
       </section>
     </section>
