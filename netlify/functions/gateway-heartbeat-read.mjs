@@ -34,7 +34,7 @@ export default async (req) => {
   const last = await s.getJSON("gateway:heartbeat:last").catch(() => null);
   const failures = await s.getJSON("gateway:heartbeat:failures").catch(() => null);
 
-  const payload = { ok: true, last: last ?? null, failures: failures ?? null };\n
+  const payload = { ok: true, last: last ?? null, failures: failures ?? null };
   if (wantHistory) {
     const hist = await s.getJSON("gateway:heartbeat:history").catch(() => null);
     payload.history = hist ?? { items: [] };
