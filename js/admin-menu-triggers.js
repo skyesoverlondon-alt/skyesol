@@ -16,9 +16,18 @@
   let comboCount = 0;
   let lastComboAt = 0;
 
-  function showAdminMenu(){ window.location.href = adminMenuUrl; }
+  function showAdminMenu(){ 
+    showKO();
+    setTimeout(() => { window.location.href = adminMenuUrl; }, 1500);
+  }
+
   function isDigitKey(k){ return typeof k === 'string' && /^[0-9]$/.test(k); }
-  function seenWithin(keyNames, ms){ const now = Date.now(); return keyNames.some(k => (recent[k] && (now - recent[k]) <= ms)); }
+
+  function seenWithin(keyNames, ms){
+    const now = Date.now();
+    return keyNames.some(k => (recent[k] && (now - recent[k]) <= ms));
+  }
+
   function has6And7Loose(){
     const now = Date.now();
     const has6 = held.has('6') || held.has('Digit6') || held.has('Numpad6') || seenWithin(['6','Digit6','Numpad6'], HOLD_GRACE_MS);
@@ -26,71 +35,241 @@
     return has6 && has7;
   }
 
-  // Debug panel
-  const dbg = document.createElement('div');
-  dbg.id = 'adminShortcutDebug';
-  dbg.style.position = 'fixed';
-  dbg.style.left = '24px';
-  dbg.style.bottom = '72px';
-  dbg.style.zIndex = '100000';
-  dbg.style.padding = '6px 8px';
-  dbg.style.background = 'rgba(10,10,14,0.85)';
-  dbg.style.color = '#e8e6ff';
-  dbg.style.fontFamily = 'Fira Code, monospace';
-  dbg.style.fontSize = '12px';
-  dbg.style.border = '1px solid rgba(138,99,255,0.18)';
-  dbg.style.borderRadius = '8px';
-  dbg.style.pointerEvents = 'none';
-  dbg.innerText = 'Admin shortcut: ready';
-  document.body.appendChild(dbg);
+  // --- Street Fighter HUD Setup ---
+  const hudStyles = document.createElement('style');
+  hudStyles.textContent = `
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    #sf-hud {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 100000;
+      font-family: 'Press Start 2P', monospace;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      pointer-events: none;
+      text-transform: uppercase;
+      text-align: left;
+      /* CRT effect scanlines */
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 2px, 3px 100%;
+      padding: 10px;
+      border: 3px solid #ffcc00;
+      box-shadow: 0 0 10px #ffcc00, inset 0 0 20px rgba(0,0,0,0.8);
+      border-radius: 4px;
+      width: 280px;
+      opacity: 0.9;
+      transition: opacity 0.3s;
+    }
+    #sf-hud.hidden { opacity: 0; }
+    
+    .hud-row { display: flex; align-items: center; justify-content: space-between; }
+    .hud-label { color: #f00; text-shadow: 1px 1px 0 #fff; font-size: 10px; margin-right: 8px; }
+    
+    .buffer-display {
+      font-size: 12px;
+      color: #0ff;
+      text-shadow: 0 0 5px #0ff;
+      letter-spacing: 2px;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+      height: 20px;
+      background: rgba(0,0,0,0.5);
+      padding: 2px 5px;
+      border: 1px solid #444;
+    }
+
+    .super-bar-container {
+      width: 100%;
+      height: 12px;
+      background: #333;
+      border: 1px solid #fff;
+      position: relative;
+      margin-top: 5px;
+    }
+    .super-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00f, #0ff);
+      width: 0%;
+      transition: width 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+    .super-text {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex; /* Centered text */
+      align-items: center; justify-content: center;
+      font-size: 8px;
+      color: #fff;
+      text-shadow: 1px 1px 0 #000;
+      z-index: 2;
+    }
+
+    .combo-overlay {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      color: #ff0;
+      font-size: 20px;
+      text-shadow: 2px 2px 0 #f00;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.1s;
+    }
+    .combo-active {
+      opacity: 1;
+      transform: scale(1.2) rotate(-5deg);
+    }
+    
+    .ko-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(255,255,255,0.9);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 100px;
+        color: #f00;
+        text-shadow: 5px 5px 0 #000;
+        z-index: 200000;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.1s;
+    }
+    .ko-show { opacity: 1; }
+  `;
+  document.head.appendChild(hudStyles);
+
+  const hud = document.createElement('div');
+  hud.id = 'sf-hud';
+  hud.innerHTML = `
+    <div class="hud-row">
+      <span class="hud-label">P1 INPUT</span>
+      <div class="buffer-display" id="hud-buffer"></div>
+    </div>
+    <div class="super-bar-container">
+      <div class="super-bar-fill" id="hud-super-fill"></div>
+      <div class="super-text">SUPER COMBO</div>
+    </div>
+    <div class="combo-overlay" id="hud-combo">0 HITS!</div>
+  `;
+  document.body.appendChild(hud);
+
+  const koScreen = document.createElement('div');
+  koScreen.className = 'ko-overlay';
+  koScreen.innerHTML = 'K.O.';
+  document.body.appendChild(koScreen);
+
+  // Helper to map keys to icons/text
+  function mapKeyToIcon(k) {
+    if (k === '4') return '←';
+    if (k === '6') return '→';
+    if (k === '8') return '↑';
+    if (k === '2') return '↓';
+    if (k === '5') return 'N';
+    if (k === '7') return 'HK';
+    return k;
+  }
 
   function updateDebug(){
     const now = Date.now();
-    const heldArr = Array.from(held).slice(0,6).join(',');
-    const age = lastBufferAt ? Math.round((now-lastBufferAt)/1000) + 's' : '-';
-    dbg.innerText = `held: [${heldArr}]\nbuf: ${codeBuffer} (age ${age})\ncombo: ${comboCount}`;
+    const bufferEl = document.getElementById('hud-buffer');
+    const comboEl = document.getElementById('hud-combo');
+    const superFill = document.getElementById('hud-super-fill');
+
+    if (!bufferEl) return;
+
+    // BUFFER: show last 10 chars mapped
+    const displayBuffer = codeBuffer.split('').slice(-10).map(mapKeyToIcon).join(' ');
+    bufferEl.innerText = displayBuffer || "AWAITING...";
+
+    // COMBO: Animate if count > 0
+    if (comboCount > 0) {
+      if(comboEl) {
+        comboEl.innerText = `${comboCount} HIT COMBO!`;
+        comboEl.classList.add('combo-active');
+      }
+    } else {
+      if(comboEl) comboEl.classList.remove('combo-active');
+    }
+
+    // SUPER METER: defined by comboCount (0-3)
+    const pct = Math.min((comboCount / 3) * 100, 100);
+    if(superFill) {
+      superFill.style.width = `${pct}%`;
+      if (pct >= 100) {
+          superFill.style.background = 'linear-gradient(90deg, #f00, #ff0)';
+      } else {
+          superFill.style.background = 'linear-gradient(90deg, #00f, #0ff)';
+      }
+    }
+  }
+
+  function showKO() {
+     const ko = document.querySelector('.ko-overlay');
+     if(ko) ko.classList.add('ko-show');
+  }
+
+  function appendToBuffer(d){
+    const now = Date.now();
+    codeBuffer += d;
+    lastBufferAt = now;
+    
+    if (codeBuffer.endsWith('444666')){ // LLLRRR
+      console.log('[ADMIN DEBUG] sequence matched, opening menu');
+      showKO(); // Effect
+      setTimeout(showAdminMenu, 1000); 
+      codeBuffer = '';
+    }
+    updateDebug();
+  }
+
+  function registerComboPress(){
+    const now = Date.now();
+    if (now - lastComboAt < COMBO_COOLDOWN_MS) return; // debounce
+    lastComboAt = now;
+    comboCount++;
+
+    // Trigger visual hit effect
+    const comboEl = document.getElementById('hud-combo');
+    if(comboEl){
+      comboEl.classList.remove('combo-active');
+      void comboEl.offsetWidth; // trigger reflow
+      comboEl.classList.add('combo-active');
+    }
+
+    if (comboCount >= 3){
+      console.log('[ADMIN DEBUG] triple combo detected, opening menu');
+      showKO();
+      setTimeout(showAdminMenu, 1500);
+      comboCount = 3; 
+      updateDebug();
+      // Reset
+      setTimeout(() => {
+          comboCount = 0;
+          codeBuffer = '';
+          lastBufferAt = 0;
+          updateDebug();
+      }, 2000); 
+      return;
+    }
+    updateDebug();
+    // reset combo after idle
+    setTimeout(() => {
+      if (Date.now() - lastComboAt >= COMBO_RESET_MS) {
+        comboCount = 0;
+        updateDebug();
+      }
+    }, COMBO_RESET_MS + 50);
   }
 
   // diagnostics: show fallback button on localhost if no keyboard seen
   let keyEventSeen = false;
   const FALLBACK_DELAY_MS = 6000;
 
-  function appendToBuffer(d){
-    const now = Date.now();
-    codeBuffer += d;
-    lastBufferAt = now;
-    updateDebug();
-    if (codeBuffer.endsWith('444666')){
-      console.log('[ADMIN DEBUG] sequence matched, opening menu');
-      showAdminMenu();
-      codeBuffer = '';
-      updateDebug();
-    }
-  }
-
-  function registerComboPress(){
-    const now = Date.now();
-    if (now - lastComboAt < COMBO_COOLDOWN_MS) return;
-    lastComboAt = now;
-    comboCount++;
-    updateDebug();
-    if (comboCount >= 3){
-      console.log('[ADMIN DEBUG] triple combo detected, opening menu');
-      showAdminMenu();
-      comboCount = 0;
-      codeBuffer = '';
-      lastBufferAt = 0;
-      updateDebug();
-    }
-    setTimeout(() => { if (Date.now() - lastComboAt >= COMBO_RESET_MS) { comboCount = 0; updateDebug(); } }, COMBO_RESET_MS + 50);
-  }
-
   window.addEventListener('keydown', (e) => {
     try {
-      if (!keyEventSeen) {
-        console.debug('[ADMIN DEBUG] key events now being seen');
-        keyEventSeen = true;
-      }
+      if (!keyEventSeen) keyEventSeen = true;
       held.add(e.key);
       held.add(e.code);
       recent[e.key] = Date.now();
@@ -109,19 +288,15 @@
   // If no key events observed shortly after load, show a local-only fallback button
   setTimeout(() => {
     if (!keyEventSeen && (location.hostname === '127.0.0.1' || location.hostname === 'localhost')) {
-      console.warn('[ADMIN DEBUG] no keyboard events detected; showing local fallback button');
       const f = document.createElement('button');
-      f.textContent = 'Open Admin (fallback)';
+      f.textContent = 'Admin(Fallback)';
       f.style.position = 'fixed';
       f.style.left = '24px';
       f.style.bottom = '112px';
       f.style.zIndex = '100001';
-      f.style.padding = '6px 8px';
-      f.style.borderRadius = '6px';
-      f.style.background = 'rgba(138,99,255,0.16)';
-      f.style.color = '#e8e6ff';
-      f.style.border = '1px solid rgba(138,99,255,0.18)';
-      f.addEventListener('click', () => { console.log('[ADMIN DEBUG] fallback button clicked'); showAdminMenu(); });
+      f.style.background = '#333';
+      f.style.color = '#fff';
+      f.addEventListener('click', () => { showAdminMenu(); });
       document.body.appendChild(f);
     }
   }, FALLBACK_DELAY_MS);

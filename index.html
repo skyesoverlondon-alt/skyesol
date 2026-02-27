@@ -328,42 +328,5 @@
 </div>
   <script src="/js/partials.js"></script>
 </body>
-<script>
-// Secret triggers for admin menu
-let keysDown = {};
-let codeBuffer = "";
-let logoClicks = 0;
-const adminMenuUrl = "/admin-menu.html";
-function showAdminMenu() {
-  window.location.href = adminMenuUrl;
-}
-document.addEventListener("keydown", (e) => {
-  keysDown[e.key] = true;
-  if (keysDown["6"] && keysDown["7"]) {
-    codeBuffer += e.key;
-    if (codeBuffer.endsWith("444666")) {
-      showAdminMenu();
-      codeBuffer = "";
-    }
-  }
-});
-document.addEventListener("keyup", (e) => {
-  keysDown[e.key] = false;
-  if (!keysDown["6"] || !keysDown["7"]) codeBuffer = "";
-});
-const logoBtn = document.querySelector(".nav-logo");
-if (logoBtn) {
-  logoBtn.addEventListener("click", () => {
-    if (keysDown["6"] && keysDown["7"]) {
-      logoClicks++;
-      if (logoClicks >= 3) {
-        showAdminMenu();
-        logoClicks = 0;
-      }
-    } else {
-      logoClicks = 0;
-    }
-  });
-}
-</script>
+<!-- Admin triggers moved to js/admin-menu-triggers.js -->
 </html>
