@@ -13,7 +13,7 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 20px; /* Position 1: Bottom */
+  bottom: 80px; /* Position 1: Above Retro (20px + ~60px height) */
   left: 20px;
   z-index: 100001;
   display: block;
@@ -35,20 +35,11 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 60px; /* Position 2: Above Purple (20+40) */
+  bottom: 120px; /* Position 2: Above Purple (80+40) */
   left: 20px;
   z-index: 100002;
   display: block;
   transition: background .3s, border-color .3s, transform .12s;
-}
-.floating-glow-teal:hover {
-  background: linear-gradient(135deg, rgba(50,255,200,0.32), rgba(99,255,138,0.28));
-  border-color: #fff;
-  transform: translateY(-1px);
-}
-@keyframes floatGlowTeal {
-  0%, 100% { box-shadow: 0 0 9px 3px #32ffc8, 0 0 18px 6px #63ff8a; }
-  50% { box-shadow: 0 0 14px 5px #32ffc8, 0 0 22px 8px #63ff8a; }
 }
 
 /* Blue Admin Menu (Position 3: Above Contractor) */
@@ -66,7 +57,7 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 100px; /* Position 3: Above Contractor (60+40) */
+  bottom: 160px; /* Position 3: Above Contractor (120+40) */
   left: 20px;
   right: auto;
   z-index: 100003;
@@ -89,7 +80,7 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 140px; /* Position 4: Top (100+40) */
+  bottom: 200px; /* Position 4: Top (160+40) */
   left: 20px;
   z-index: 100004;
   display: block;
