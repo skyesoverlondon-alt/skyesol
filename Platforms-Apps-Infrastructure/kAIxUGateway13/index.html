@@ -305,6 +305,7 @@
         <button class="tab" data-tab="exports">Exports &amp; Invoices</button>
         <button class="tab" data-tab="push">KaixuPush</button>
         <button class="tab" data-tab="github">GitHub Push</button>
+        <button class="tab" data-tab="embeddings">Embeddings</button>
         <button class="tab" data-tab="docs">Integration</button>
         <button class="tab" data-tab="monitor">Monitor</button>
         <button class="tab" data-tab="tutorial">📖 Tutorial</button>
@@ -821,6 +822,290 @@
           </div>
         </div>
 
+<!-- ═══════════════════════════════════════ EMBEDDINGS ═══════════════════════════════════════ -->
+<div class="card tabpanel" id="tab-embeddings" style="display:none;">
+  <div class="cardhead">
+    <h2>Embeddings Lane</h2>
+    <div class="muted small">Generate · Store · Search — True Semantic RAG inside the Gateway</div>
+  </div>
+
+  <!-- ── Generate Embeddings ── -->
+  <div style="border-left:3px solid #a243ff; padding-left:16px; margin-top:16px;">
+    <h3 style="color:#a243ff; margin:0 0 10px;">Generate Embeddings</h3>
+    <div class="cols">
+      <div>
+        <label>Customer ID</label>
+        <input id="embCustomerId" placeholder="123" />
+      </div>
+      <div>
+        <label>Provider</label>
+        <select id="embProvider">
+          <option value="openai">OpenAI</option>
+          <option value="gemini">Gemini</option>
+          <option value="voyage">Voyage AI</option>
+        </select>
+      </div>
+      <div>
+        <label>Model</label>
+        <select id="embModel">
+          <option value="text-embedding-3-small">text-embedding-3-small (1536d)</option>
+          <option value="text-embedding-3-large">text-embedding-3-large (3072d)</option>
+          <option value="text-embedding-ada-002">text-embedding-ada-002 (1536d)</option>
+          <option value="embedding-001">Gemini embedding-001 (768d)</option>
+          <option value="text-embedding-004">Gemini text-embedding-004 (768d)</option>
+          <option value="voyage-3">voyage-3 (1024d)</option>
+          <option value="voyage-3-lite">voyage-3-lite (512d)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="cols" style="margin-top:10px;">
+      <div>
+        <label>Collection / Namespace</label>
+        <input id="embCollection" placeholder="my-docs" value="default" />
+        <div class="muted small">Logical grouping for your vectors. Think of it like a table.</div>
+      </div>
+      <div>
+        <label>Dimensions override (optional)</label>
+        <input id="embDimensions" placeholder="auto" />
+        <div class="muted small">Leave blank for model default. OpenAI v3 models support shortening.</div>
+      </div>
+    </div>
+
+    <label style="margin-top:10px;">Input text(s) — one per line for batch</label>
+    <textarea id="embInput" placeholder="The quick brown fox jumps over the lazy dog.&#10;Another document to embed.&#10;A third piece of content for semantic search." style="min-height:120px; width:100%; font-family:'Fira Code',monospace; font-size:12px;"></textarea>
+
+    <div class="cols" style="margin-top:8px;">
+      <div>
+        <label>Document IDs (optional, one per line — auto-generated if blank)</label>
+        <textarea id="embDocIds" placeholder="doc-001&#10;doc-002&#10;doc-003" style="min-height:80px; width:100%; font-family:'Fira Code',monospace; font-size:12px;"></textarea>
+      </div>
+      <div>
+        <label>Metadata JSON (optional, applied to all)</label>
+        <textarea id="embMeta" placeholder='{"source": "upload", "category": "docs"}' style="min-height:80px; width:100%; font-family:'Fira Code',monospace; font-size:12px;"></textarea>
+      </div>
+    </div>
+
+    <div class="row" style="gap:10px; flex-wrap:wrap; margin-top:10px;">
+      <button id="embGenerateBtn" class="btn primary" type="button">Generate & Store Embeddings</button>
+      <button id="embGenerateOnlyBtn" class="btn" type="button">Generate Only (don't store)</button>
+      <button id="embClearInputBtn" class="btn ghost" type="button">Clear</button>
+    </div>
+
+    <div id="embGenerateResult" style="display:none; margin-top:12px;">
+      <div class="summary">
+        <div class="stat">
+          <div class="label">Vectors</div>
+          <div class="value" id="embResCount">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Dimensions</div>
+          <div class="value" id="embResDims">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Tokens used</div>
+          <div class="value" id="embResTokens">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Cost</div>
+          <div class="value" id="embResCost">$0.00</div>
+        </div>
+      </div>
+      <pre class="block" id="embResJson" style="max-height:200px; overflow:auto; margin-top:8px;">—</pre>
+    </div>
+  </div>
+
+  <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10); margin:20px 0;" />
+
+  <!-- ── Semantic Search ── -->
+  <div style="border-left:3px solid #27f2ff; padding-left:16px;">
+    <h3 style="color:#27f2ff; margin:0 0 10px;">Semantic Search</h3>
+    <p class="muted small">Query your stored embeddings with natural language. The gateway embeds your query in real-time, performs cosine similarity against your collection, and returns the top-K matches.</p>
+
+    <div class="cols">
+      <div style="flex:2;">
+        <label>Query</label>
+        <input id="embQuery" placeholder="How do I reset my password?" />
+      </div>
+      <div>
+        <label>Collection</label>
+        <input id="embSearchCollection" placeholder="default" value="default" />
+      </div>
+      <div>
+        <label>Top K</label>
+        <input id="embTopK" placeholder="5" value="5" type="number" min="1" max="100" />
+      </div>
+    </div>
+
+    <div class="cols" style="margin-top:8px;">
+      <div>
+        <label>Similarity threshold (0–1, optional)</label>
+        <input id="embThreshold" placeholder="0.7" value="0.7" />
+      </div>
+      <div>
+        <label>Metadata filter JSON (optional)</label>
+        <input id="embFilterMeta" placeholder='{"category": "docs"}' />
+      </div>
+      <div style="display:flex; align-items:flex-end;">
+        <button id="embSearchBtn" class="btn primary" type="button" style="width:100%;">Search</button>
+      </div>
+    </div>
+
+    <div id="embSearchResult" style="display:none; margin-top:12px;">
+      <div class="summary">
+        <div class="stat">
+          <div class="label">Results</div>
+          <div class="value" id="embSearchCount">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Query ms</div>
+          <div class="value" id="embSearchMs">0</div>
+        </div>
+      </div>
+      <div class="tablewrap" style="margin-top:10px;">
+        <table class="table" id="embSearchTable">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Score</th>
+              <th>Doc ID</th>
+              <th>Text (preview)</th>
+              <th>Metadata</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10); margin:20px 0;" />
+
+  <!-- ── Collections Manager ── -->
+  <div style="border-left:3px solid #ffd36a; padding-left:16px;">
+    <h3 style="color:#ffd36a; margin:0 0 10px;">Collections</h3>
+    <p class="muted small">Manage your vector namespaces. Each collection is an isolated set of embeddings.</p>
+
+    <div class="row" style="gap:10px; flex-wrap:wrap; margin-top:8px;">
+      <button id="embListCollBtn" class="btn primary" type="button">List Collections</button>
+      <button id="embCollStatsBtn" class="btn" type="button">Collection Stats</button>
+      <input id="embCollStatsName" placeholder="collection name" style="max-width:200px;" />
+    </div>
+
+    <div class="tablewrap" style="margin-top:12px;">
+      <table class="table" id="embCollTable">
+        <thead>
+          <tr>
+            <th>Collection</th>
+            <th>Vectors</th>
+            <th>Dimensions</th>
+            <th>Model</th>
+            <th>Created</th>
+            <th>Last updated</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <hr style="border:0;border-top:1px solid rgba(255,255,255,0.08); margin:14px 0;" />
+
+    <h4>Manage documents</h4>
+    <div class="cols">
+      <div>
+        <label>Collection</label>
+        <input id="embDocCollection" placeholder="default" />
+      </div>
+      <div>
+        <label>Document ID (for lookup/delete)</label>
+        <input id="embDocId" placeholder="doc-001" />
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:10px;">
+        <button id="embDocLookupBtn" class="btn" type="button">Lookup</button>
+        <button id="embDocDeleteBtn" class="btn danger" type="button">Delete</button>
+      </div>
+    </div>
+    <pre class="block" id="embDocResult" style="max-height:200px; overflow:auto; margin-top:8px;">—</pre>
+
+    <hr style="border:0;border-top:1px solid rgba(255,255,255,0.08); margin:14px 0;" />
+
+    <h4>Bulk operations</h4>
+    <div class="row" style="gap:10px; flex-wrap:wrap;">
+      <input id="embBulkCollection" placeholder="collection" style="max-width:200px;" />
+      <button id="embBulkExportBtn" class="btn" type="button">Export Collection (JSON)</button>
+      <button id="embBulkPurgeBtn" class="btn danger" type="button">Purge Collection</button>
+    </div>
+  </div>
+
+  <hr style="border:0;border-top:1px solid rgba(255,255,255,0.10); margin:20px 0;" />
+
+  <!-- ── Embeddings Usage ── -->
+  <div style="border-left:3px solid #a243ff; padding-left:16px;">
+    <h3 style="color:#a243ff; margin:0 0 10px;">Embeddings Usage</h3>
+    <div class="cols">
+      <div>
+        <label>Customer ID</label>
+        <input id="embUsageCustId" placeholder="123" />
+      </div>
+      <div>
+        <label>Month</label>
+        <input id="embUsageMonth" placeholder="2026-02" />
+      </div>
+      <div style="display:flex; align-items:flex-end;">
+        <button id="embUsageBtn" class="btn primary" type="button" style="width:100%;">Load Usage</button>
+      </div>
+    </div>
+
+    <div id="embUsageResult" style="display:none; margin-top:12px;">
+      <div class="summary">
+        <div class="stat">
+          <div class="label">Embed calls</div>
+          <div class="value" id="embUsageCalls">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Vectors stored</div>
+          <div class="value" id="embUsageVectors">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Tokens</div>
+          <div class="value" id="embUsageTokens">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Search queries</div>
+          <div class="value" id="embUsageSearches">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Cost</div>
+          <div class="value" id="embUsageCost">$0.00</div>
+        </div>
+      </div>
+
+      <div class="tablewrap" style="margin-top:10px;">
+        <table class="table" id="embUsageTable">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Operation</th>
+              <th>Provider</th>
+              <th>Model</th>
+              <th>Vectors</th>
+              <th>Tokens</th>
+              <th>Cost (cents)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px; padding:16px; border:1px solid rgba(255,255,255,0.08); border-radius:8px; background:rgba(138,79,255,0.05);">
+    <p class="muted small" style="margin:0;"><strong>Architecture note:</strong> All embeddings are generated <em>inside</em> the gateway — your clients never call OpenAI/Gemini/Voyage directly for embeddings. The gateway handles model routing, token metering, vector storage (pgvector in Neon), and cosine similarity search. This is <strong>true semantic RAG</strong>: ingest → embed → store → search, all through one authenticated endpoint with the same <code>kx_live_…</code> key.</p>
+  </div>
+</div>
+<!-- ═══════════════════════════════════════ /EMBEDDINGS ═══════════════════════════════════════ -->
+
 <div class="card tabpanel" id="tab-docs" style="display:none;">
           <h2>Integration</h2>
 
@@ -831,7 +1116,7 @@
           <code class="block">POST /.netlify/functions/gateway-stream</code>
           <p class="muted small">Client opens EventSource-like stream via <code>fetch</code> and reads SSE frames (event/meta/delta/done).</p>
 
-          <h3>Normalized request</h3>
+          <h3>Normalized chat request</h3>
 <pre class="block">{
   "provider": "openai" | "anthropic" | "gemini",
   "model": "...",
@@ -839,6 +1124,37 @@
   "max_tokens": 256,
   "temperature": 0.7
 }</pre>
+
+          <h3>Embeddings — Generate &amp; Store</h3>
+          <code class="block">POST /.netlify/functions/gateway-embed</code>
+<pre class="block">{
+  "provider": "openai" | "gemini" | "voyage",
+  "model": "text-embedding-3-small",
+  "input": ["First document", "Second document"],
+  "collection": "my-docs",
+  "store": true,
+  "doc_ids": ["doc-001", "doc-002"],
+  "metadata": {"source": "api"},
+  "dimensions": 1536
+}</pre>
+          <p class="muted small">Set <code>store: false</code> to generate vectors without persisting. Omit <code>doc_ids</code> for auto-generated UUIDs. <code>dimensions</code> is optional (model default used).</p>
+
+          <h3>Embeddings — Semantic Search</h3>
+          <code class="block">POST /.netlify/functions/gateway-embed-search</code>
+<pre class="block">{
+  "query": "How do I reset my password?",
+  "collection": "my-docs",
+  "top_k": 5,
+  "threshold": 0.7,
+  "filter": {"category": "docs"}
+}</pre>
+          <p class="muted small">The gateway embeds your query using the same model as the collection, then performs pgvector cosine similarity search. Results include <code>doc_id</code>, <code>score</code>, <code>text</code>, and <code>metadata</code>.</p>
+
+          <h3>Embeddings — Collection Management</h3>
+          <code class="block">GET  /.netlify/functions/gateway-embed-collections</code>
+          <code class="block">GET  /.netlify/functions/gateway-embed-collections?name=my-docs</code>
+          <code class="block">DELETE /.netlify/functions/gateway-embed-collections?name=my-docs</code>
+          <p class="muted small">List all collections, get stats for one, or purge an entire collection.</p>
 
           <h3>SSE events</h3>
 <pre class="block">event: meta
@@ -1062,9 +1378,30 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
       <p class="muted small" style="margin-top:6px;">OAuth flow also available at <code>/.netlify/functions/github-oauth-start</code>.</p>
     </div>
 
-    <!-- TAB 10: INTEGRATION -->
+    <!-- TAB 10: EMBEDDINGS -->
     <div style="border-left:3px solid #a243ff; padding-left:16px;">
-      <h3 style="color:#a243ff; margin:0 0 8px;">10. Integration</h3>
+      <h3 style="color:#a243ff; margin:0 0 8px;">10. Embeddings Lane (Semantic RAG)</h3>
+      <p class="muted small"><strong>What it is:</strong> A complete embeddings pipeline built into the gateway. Generate vector embeddings from any supported provider, store them in pgvector (Neon), and run semantic similarity search — all authenticated through the same <code>kx_live_…</code> key.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>Why it matters:</strong> This is <strong>true semantic RAG</strong>. Your clients don't need their own OpenAI keys, a separate vector database, or a retrieval pipeline. Everything goes through one gateway with metered billing.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>Workflow:</strong></p>
+      <ol class="muted small" style="padding-left:18px;">
+        <li>Choose a <strong>provider + model</strong> (OpenAI text-embedding-3-small recommended for cost/performance)</li>
+        <li>Paste or send text(s) → they get embedded and optionally stored in a <strong>collection</strong></li>
+        <li>Use <strong>Semantic Search</strong> to query your stored vectors with natural language</li>
+        <li>Pipe search results into your chat completions for grounded, RAG-powered responses</li>
+      </ol>
+      <p class="muted small" style="margin-top:6px;"><strong>Supported providers:</strong></p>
+      <ul class="muted small" style="padding-left:18px; list-style:disc;">
+        <li><strong>OpenAI</strong> — text-embedding-3-small (1536d, cheapest), text-embedding-3-large (3072d, best quality), ada-002 (legacy)</li>
+        <li><strong>Gemini</strong> — embedding-001 (768d), text-embedding-004 (768d)</li>
+        <li><strong>Voyage AI</strong> — voyage-3 (1024d), voyage-3-lite (512d, fastest)</li>
+      </ul>
+      <p class="muted small" style="margin-top:6px;"><strong>Collections:</strong> Each collection is a logical namespace. You can have "support-docs", "product-catalog", "knowledge-base", etc. Each tracks its model and dimensions so queries always use the right model.</p>
+    </div>
+
+    <!-- TAB 11: INTEGRATION -->
+    <div style="border-left:3px solid #ffd36a; padding-left:16px;">
+      <h3 style="color:#ffd36a; margin:0 0 8px;">11. Integration</h3>
       <p class="muted small">Quick-reference for API endpoints and request/response formats. Share this with clients so they know how to call the gateway.</p>
       <ul class="muted small" style="padding-left:18px; list-style:disc;">
         <li><strong>Non-stream:</strong> <code>POST /.netlify/functions/gateway-chat</code> — returns full response</li>
@@ -1073,9 +1410,9 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
       <p class="muted small" style="margin-top:6px;">Both endpoints accept the same normalized request body with <code>provider</code>, <code>model</code>, <code>messages</code>, <code>max_tokens</code>, <code>temperature</code>. Auth via <code>Authorization: Bearer kx_live_…</code> header.</p>
     </div>
 
-    <!-- TAB 11: MONITOR -->
+    <!-- TAB 12: MONITOR -->
     <div style="border-left:3px solid #27f2ff; padding-left:16px;">
-      <h3 style="color:#27f2ff; margin:0 0 8px;">11. Monitor</h3>
+      <h3 style="color:#27f2ff; margin:0 0 8px;">12. Monitor</h3>
       <p class="muted small"><strong>What it does:</strong> Real-time and historical view of gateway events — errors, warnings, rate-limited requests, slow responses, and audit entries.</p>
       <p class="muted small" style="margin-top:6px;"><strong>How to use:</strong></p>
       <ul class="muted small" style="padding-left:18px; list-style:disc;">
@@ -1098,14 +1435,19 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
           <tr><td>Admin auth</td><td>JWT from <code>ADMIN_PASSWORD</code> login (12h TTL)</td></tr>
           <tr><td>Chat endpoint</td><td><code>POST /.netlify/functions/gateway-chat</code></td></tr>
           <tr><td>Stream endpoint</td><td><code>POST /.netlify/functions/gateway-stream</code></td></tr>
+          <tr><td>Embed endpoint</td><td><code>POST /.netlify/functions/gateway-embed</code></td></tr>
+          <tr><td>Embed search</td><td><code>POST /.netlify/functions/gateway-embed-search</code></td></tr>
+          <tr><td>Collections</td><td><code>GET/DELETE /.netlify/functions/gateway-embed-collections</code></td></tr>
+          <tr><td>Vector storage</td><td>pgvector (Neon Postgres) — cosine similarity</td></tr>
           <tr><td>Self-service keys</td><td><a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a;">/request-key</a> (public, no admin needed)</td></tr>
           <tr><td>User dashboard</td><td><a href="/gateway/dashboard.html" style="color:#27f2ff;">/gateway/dashboard.html</a></td></tr>
           <tr><td>Health check</td><td><code>GET /.netlify/functions/health</code></td></tr>
           <tr><td>Spend caps</td><td>Customer-level + per-key override (in cents)</td></tr>
           <tr><td>Rate limits</td><td>RPM (per key) + RPD (optional) — DB-backed, no Redis</td></tr>
           <tr><td>Device seats</td><td><code>max_devices_per_key</code> with optional <code>require_install_id</code></td></tr>
-          <tr><td>Providers</td><td>OpenAI, Anthropic, Gemini (set keys in env vars)</td></tr>
-          <tr><td>Env vars needed</td><td><code>ADMIN_PASSWORD</code>, <code>JWT_SECRET</code>, <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code></td></tr>
+          <tr><td>Chat providers</td><td>OpenAI, Anthropic, Gemini</td></tr>
+          <tr><td>Embed providers</td><td>OpenAI, Gemini, Voyage AI</td></tr>
+          <tr><td>Env vars needed</td><td><code>ADMIN_PASSWORD</code>, <code>JWT_SECRET</code>, <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code>, <code>VOYAGE_API_KEY</code> (optional)</td></tr>
         </tbody>
       </table>
     </div>
@@ -1147,7 +1489,7 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
     </section>
 
     <footer class="foot">
-      <span class="muted small">Kaixu Gateway v5.1 · kAIxu Canon enforced · deploy-kaixuCanon-20260221102017</span>
+      <span class="muted small">Kaixu Gateway v6.0 · Semantic RAG · kAIxu Canon enforced · deploy-kaixuCanon-20260227</span>
     </footer>
   </main>
 

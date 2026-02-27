@@ -237,6 +237,7 @@ async function ensureSchema() {
 
       // --- KaixuPush (Deploy Push) enterprise tables ---
       `alter table api_keys add column if not exists role text not null default 'deployer';`,
+      `alter table api_keys add column if not exists encrypted_key text;`,
       `create index if not exists api_keys_role_idx on api_keys(role);`,
       `create table if not exists customer_netlify_tokens (
         customer_id bigint primary key references customers(id) on delete cascade,

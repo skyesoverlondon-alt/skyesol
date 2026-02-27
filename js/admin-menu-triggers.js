@@ -62,6 +62,11 @@
       width: 280px;
       opacity: 0.9;
       transition: opacity 0.3s;
+      cursor: pointer;
+    }
+    #sf-hud:hover {
+      border-color: #fff;
+      box-shadow: 0 0 15px #ffcc00, inset 0 0 20px rgba(0,0,0,0.6);
     }
     #sf-hud.hidden { opacity: 0; }
     
@@ -142,6 +147,11 @@
 
   const hud = document.createElement('div');
   hud.id = 'sf-hud';
+  hud.title = "Click to Play Retro Fighter";
+  hud.onclick = (e) => {
+    // Prevent interfering with buffer updates if they were typing
+    if(!codeBuffer) window.location.href = '/Platforms-Apps-Infrastructure/RetroFighter.html';
+  };
   hud.innerHTML = `
     <div class="hud-row">
       <span class="hud-label">P1 INPUT</span>
@@ -285,21 +295,58 @@
     } catch (err) { console.warn('[ADMIN DEBUG] keydown handler error', err); }
   }, true);
 
-  // If no key events observed shortly after load, show a local-only fallback button
+  // Create persistent admin buttons above the HUD
   setTimeout(() => {
-    if (!keyEventSeen && (location.hostname === '127.0.0.1' || location.hostname === 'localhost')) {
-      const f = document.createElement('button');
-      f.textContent = 'Admin(Fallback)';
-      f.style.position = 'fixed';
-      f.style.left = '24px';
-      f.style.bottom = '112px';
-      f.style.zIndex = '100001';
-      f.style.background = '#333';
-      f.style.color = '#fff';
-      f.addEventListener('click', () => { showAdminMenu(); });
-      document.body.appendChild(f);
-    }
-  }, FALLBACK_DELAY_MS);
+    // Check if buttons already exist to avoid duplicates
+    if (document.getElementById('exec-admin-btn')) return;
+
+    // --- Middle button: Admin Menu (the path inventory menu) ---
+    const adminMenuBtn = document.createElement('button');
+    adminMenuBtn.id = 'admin-menu-btn';
+    adminMenuBtn.textContent = 'Admin Menu';
+    adminMenuBtn.style.position = 'fixed';
+    adminMenuBtn.style.left = '20px';
+    adminMenuBtn.style.bottom = '140px';
+    adminMenuBtn.style.zIndex = '100001';
+    adminMenuBtn.style.background = 'rgba(0,0,0,0.8)';
+    adminMenuBtn.style.color = '#0ff';
+    adminMenuBtn.style.border = '1px solid #0ff';
+    adminMenuBtn.style.padding = '5px 10px';
+    adminMenuBtn.style.fontFamily = "'Press Start 2P', monospace";
+    adminMenuBtn.style.fontSize = '10px';
+    adminMenuBtn.style.cursor = 'pointer';
+    adminMenuBtn.style.pointerEvents = 'auto';
+
+    adminMenuBtn.addEventListener('click', () => { window.location.href = adminMenuUrl; });
+    adminMenuBtn.addEventListener('mouseenter', () => { adminMenuBtn.style.background = '#0ff'; adminMenuBtn.style.color = '#000'; });
+    adminMenuBtn.addEventListener('mouseleave', () => { adminMenuBtn.style.background = 'rgba(0,0,0,0.8)'; adminMenuBtn.style.color = '#0ff'; });
+
+    document.body.appendChild(adminMenuBtn);
+
+    // --- Top button: Executive Admin (main admin dashboard) ---
+    const f = document.createElement('button');
+    f.id = 'exec-admin-btn';
+    f.textContent = 'Executive Admin';
+    f.style.position = 'fixed';
+    f.style.left = '20px';
+    f.style.bottom = '170px';
+    f.style.zIndex = '100001';
+    f.style.background = 'rgba(0,0,0,0.8)';
+    f.style.color = '#f00';
+    f.style.border = '1px solid #f00';
+    f.style.padding = '5px 10px';
+    f.style.fontFamily = "'Press Start 2P', monospace";
+    f.style.fontSize = '10px';
+    f.style.cursor = 'pointer';
+    f.style.pointerEvents = 'auto';
+
+    f.addEventListener('click', () => { window.location.href = '/admin.html'; });
+    f.addEventListener('mouseenter', () => { f.style.background = '#f00'; f.style.color = '#000'; });
+    f.addEventListener('mouseleave', () => { f.style.background = 'rgba(0,0,0,0.8)'; f.style.color = '#f00'; });
+
+    document.body.appendChild(f);
+  }, 1000);
+
 
   window.addEventListener('keyup', (e) => {
     try {

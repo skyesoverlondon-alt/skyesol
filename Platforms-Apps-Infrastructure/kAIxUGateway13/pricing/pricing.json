@@ -13,6 +13,10 @@
     "gemini-2.5-flash": {
       "input_per_1m_usd": 0.393,
       "output_per_1m_usd": 3.275
+    },
+    "gemini-embedding-001": {
+      "input_per_1m_usd": 0.10,
+      "output_per_1m_usd": 0.00
     }
   },
   "openai": {

@@ -67,7 +67,7 @@ export async function lookupKeyById(api_key_id) {
 /**
  * Resolve an Authorization Bearer token.
  * Supported:
- * - Kaixu sub-key (plain virtual key)
+ * - Kaixu sub-key (plain virtual key, must start with "kx_live_")
  * - Short-lived user session JWT (type: 'user_session')
  */
 export async function resolveAuth(token) {
@@ -83,6 +83,11 @@ export async function resolveAuth(token) {
     const row = await lookupKeyById(payload.api_key_id);
     return row;
   }
+
+  // Reject tokens that are clearly not kAIxu keys.
+  // Prevents provider API keys (OpenAI sk-*, Gemini AI…, Anthropic sk-ant-*) from
+  // being hashed and looked up needlessly.
+  if (!token.startsWith("kx_live_")) return null;
 
   return await lookupKey(token);
 }

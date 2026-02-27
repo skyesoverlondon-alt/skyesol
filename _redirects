@@ -1,11 +1,15 @@
  /network         /network.html   301
  /network/        /network.html   301
 
+/about           /about.html     301
+/about/          /about.html     301
+/admin           /admin.html     301
+/admin/          /admin.html     301
+/blog            /blog.html      301
+/blog/           /blog.html      301
+
 /gateway         /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
 /gateway/        /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
-
-# Old PAI dashboard stub → canonical gateway dashboard
-/Platforms-Apps-Infrastructure/kAIxUGateway13/dashboard.html  /gateway/dashboard.html  301
 
 # Editorials canonical URLs (rewrite — no URL change)
 /editorials                 /Blogs/Editorials/index.html  200

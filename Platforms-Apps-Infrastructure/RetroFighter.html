@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Fighter - Skyes Sol</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background: linear-gradient(to bottom, #000044, #8800cc);
+            border: 4px solid #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        /* Scanlines Overlay */
+        #scanlines {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* UI Layer */
+        #ui-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 90;
+            pointer-events: none;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .health-bar-container {
+            position: absolute;
+            top: 20px;
+            width: 300px;
+            height: 30px;
+            background: #550000;
+            border: 2px solid white;
+        }
+
+        #p1-health-container { left: 20px; }
+        #p2-health-container { right: 20px; }
+
+        .health-fill {
+            height: 100%;
+            background: #ffcc00;
+            width: 100%;
+            transition: width 0.1s linear;
+        }
+
+        #timer {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            color: #fff;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        #message-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            text-align: center;
+            color: #ffcc00;
+            text-shadow: 4px 4px 0 #ff0000;
+            display: none;
+            z-index: 95;
+        }
+        
+        #controls-hint {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Game World */
+        #game-canvas {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div id="game-container">
+        <canvas id="game-canvas" width="800" height="600"></canvas>
+        <div id="scanlines"></div>
+        
+        <div id="ui-layer">
+            <div id="p1-health-container" class="health-bar-container">
+                <div id="p1-health" class="health-fill"></div>
+            </div>
+            <div id="p2-health-container" class="health-bar-container">
+                <div id="p2-health" class="health-fill"></div>
+            </div>
+            <div id="timer">99</div>
+            <div id="message-overlay">ROUND 1<br>FIGHT!</div>
+            <div id="controls-hint">P1: WASD (Jump/Crouch) | F=Punch | G=Kick | S=Block | ↓↘→ + F = Hadouken!</div>
+        </div>
+    </div>
+
+<script>
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Game State
+    let gameOver = false;
+    let timer = 99;
+    let timerId;
+    
+    // Physics & World
+    const GRAVITY = 0.8;
+    const GROUND_Y = 500;
+    
+    // Particles System
+    const particles = [];
+    
+    function createParticles(x, y, color, count) {
+        for(let i=0; i<count; i++) {
+            particles.push({
+                x, y,
+                vx: (Math.random() - 0.5) * 10,
+                vy: (Math.random() - 0.5) * 10,
+                life: 1.0,
+                color
+            });
+        }
+    }
+
+    // Projectile System
+    const projectiles = [];
+
+    class Projectile {
+        constructor({x, y, velocity, owner}) {
+            this.x = x;
+            this.y = y;
+            this.velocity = velocity;
+            this.owner = owner;
+            this.radius = 15;
+            this.color = '#0ff';
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            // Tail
+            ctx.fillStyle = 'rgba(0, 255, 255, 0.3)';
+            ctx.fillRect(this.x - (this.velocity.x * 3), this.y - 10, 40, 20);
+        }
+        update() {
+            this.x += this.velocity.x;
+            this.draw();
+        }
+    }
+    
+    class Fighter {
+        constructor({position, velocity, color, offset, isEnemy = false}) {
+            this.position = position;
+            this.velocity = velocity;
+            this.width = 50;
+            this.height = 150;
+            this.color = color;
+            this.isAttacking = false;
+            this.attackType = ''; // 'punch', 'kick'
+            this.maxHealth = 400; // Increased from 100 for longer fights
+            this.health = this.maxHealth;
+            this.isEnemy = isEnemy;
+            this.onGround = false;
+            this.isBlocking = false;
+            this.isCrouching = false;
+            this.facingRight = !isEnemy;
+            
+            this.animationFrame = 0;
+            
+            // Attack boxes
+            this.attackBox = {
+                position: { x: this.position.x, y: this.position.y },
+                offset: offset,
+                width: 100,
+                height: 50
+            };
+        }
+
+        draw() {
+            // Shadow
+            ctx.fillStyle = 'rgba(0,0,0,0.5)';
+            ctx.beginPath();
+            ctx.ellipse(this.position.x + this.width/2, GROUND_Y, 40, 10, 0, 0, Math.PI*2);
+            ctx.fill();
+
+            ctx.save();
+            
+            // Character Drawing (Procedural "Sprite")
+            if (this.isEnemy) {
+                ctx.translate(this.position.x + this.width, this.position.y);
+                ctx.scale(-1, 1); // Flip enemy
+                ctx.translate(-this.width, 0); // Correct origin
+            } else {
+                ctx.translate(this.position.x, this.position.y);
+            }
+
+            // Body Color Logic
+            ctx.fillStyle = this.color;
+            if (this.isBlocking) ctx.fillStyle = '#555'; // Darker when blocking
+
+            // Head
+            ctx.fillRect(10, 0, 30, 30);
+            // Torso
+            ctx.fillRect(0, 30, 50, 70);
+            
+            // Arms (Animate based on attack)
+            if (this.isAttacking && this.attackType === 'punch') {
+                ctx.fillStyle = '#ffcc00'; // Punch color
+                ctx.fillRect(50, 40, 60, 20); // Extended Arm
+            } else {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(15, 40, 20, 50); // Idle Arm
+            }
+
+            // Legs
+            if (this.isAttacking && this.attackType === 'kick') {
+                ctx.fillStyle = '#ffcc00';
+                ctx.fillRect(40, 90, 80, 20); // Kick Leg
+            } else if (this.isCrouching) {
+                ctx.fillRect(0, 100, 50, 20); // Crouched
+            } else {
+                 // Idle Legs
+                ctx.fillRect(5, 100, 15, 50);
+                ctx.fillRect(30, 100, 15, 50);
+            }
+            
+            // Headband / Visor details
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(15, 10, 25, 5);
+
+            ctx.restore();
+
+            // Debug Attack Box
+            // if (this.isAttacking) {
+            //     ctx.fillStyle = 'rgba(255, 0, 0, 0.3)';
+            //     ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+            // }
+        }
+
+        update() {
+            this.draw();
+            
+            // Physics
+            this.position.x += this.velocity.x;
+            this.position.y += this.velocity.y;
+
+            if (this.position.y + this.height + this.velocity.y >= GROUND_Y) {
+                this.velocity.y = 0;
+                this.position.y = GROUND_Y - this.height;
+                this.onGround = true;
+            } else {
+                this.velocity.y += GRAVITY;
+                this.onGround = false;
+            }
+
+            // Boundaries
+            if (this.position.x < 0) this.position.x = 0;
+            if (this.position.x + this.width > canvas.width) this.position.x = canvas.width - this.width;
+
+            // Stats
+            if (this.health <= 0) this.health = 0;
+
+            // Attack Box Sync
+            if (this.isEnemy) {
+                 this.attackBox.position.x = this.position.x - 50; // Offset Left
+            } else {
+                 this.attackBox.position.x = this.position.x + this.width; // Offset Right
+            }
+            this.attackBox.position.y = this.position.y + 30;
+        }
+
+        attack(type) {
+            if (this.isAttacking || this.isBlocking) return;
+            
+            this.isAttacking = true;
+            this.attackType = type;
+            
+            // Hitbox adjustment
+            if (type === 'kick') {
+                this.attackBox.width = 120;
+                this.attackBox.height = 40;
+                this.attackBox.position.y = this.position.y + 80;
+            } else {
+                this.attackBox.width = 100;
+                this.attackBox.height = 50;
+                this.attackBox.position.y = this.position.y + 30;
+            }
+
+            setTimeout(() => {
+                this.isAttacking = false;
+            }, 250); // Attack duration
+        }
+
+        takeHit(damage) {
+            if (this.isBlocking) {
+                this.health -= damage * 0.1; // Chip damage
+                createParticles(this.position.x + this.width/2, this.position.y + 50, '#ccc', 3); // Spark
+            } else {
+                this.health -= damage;
+                // Knockback
+                const dir = this.isEnemy ? 1 : -1;
+                this.position.x += dir * 20;
+                this.velocity.y = -5; // Mini pop-up
+                createParticles(this.position.x + this.width/2, this.position.y + 50, '#ff0000', 8); // Blood/Impact
+            }
+        }
+        
+        fireball() {
+             if (this.isEnemy) return; // CPU doesn't throw yet
+             const p = new Projectile({
+                 x: this.position.x + this.width,
+                 y: this.position.y + 60,
+                 velocity: { x: 8, y: 0 },
+                 owner: this
+             });
+             projectiles.push(p);
+        }
+    }
+
+    const player = new Fighter({
+        position: {x: 100, y: 0},
+        velocity: {x: 0, y: 0},
+        color: '#00ccff',
+        offset: {x: 0, y: 0}
+    });
+
+    const enemy = new Fighter({
+        position: {x: 600, y: 0},
+        velocity: {x: 0, y: 0},
+        color: '#ff3333',
+        offset: {x: -50, y: 0},
+        isEnemy: true
+    });
+
+    const keys = {
+        a: { pressed: false },
+        d: { pressed: false },
+        w: { pressed: false },
+        s: { pressed: false }
+    };
+    
+    // Input Buffer for Specials
+    let inputBuffer = [];
+    const MAX_BUFFER = 10;
+    
+    function checkSpecialMoves() {
+        const recent = inputBuffer.slice(-4).join(''); 
+        // Simple Hadouken: Down, Right, Punch (simulated by S, D, F)
+        // In real inputs: S (Down), D (Forward)
+        // Let's look for S -> D pattern right before attack
+    }
+
+    let lastKey;
+
+    function rectangularCollision({ rectangle1, rectangle2 }) {
+        return (
+            rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x &&
+            rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width &&
+            rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y &&
+            rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
+        );
+    }
+    
+    function projectileCollision(proj, target) {
+         return (
+             proj.x >= target.position.x &&
+             proj.x <= target.position.x + target.width &&
+             proj.y >= target.position.y &&
+             proj.y <= target.position.y + target.height
+         );
+    }
+
+    function determineWinner({player, enemy}) {
+        clearTimeout(timerId);
+        gameOver = true;
+        document.getElementById('message-overlay').style.display = 'block';
+        
+        if (player.health === enemy.health) {
+            document.getElementById('message-overlay').innerHTML = 'TIE';
+        } else if (player.health > enemy.health) {
+             document.getElementById('message-overlay').innerHTML = 'PLAYER 1<br>WINS';
+        } else {
+             document.getElementById('message-overlay').innerHTML = 'ENEMY<br>WINS';
+        }
+    }
+
+    function decreaseTimer() {
+        if (timer > 0) {
+            timerId = setTimeout(decreaseTimer, 1000);
+            timer--;
+            document.getElementById('timer').innerText = timer;
+        } else {
+            determineWinner({player, enemy});
+        }
+    }
+
+    // Improved AI Logic
+    function cpuAI() {
+        if (gameOver) return;
+        
+        const dist = Math.abs(player.position.x - enemy.position.x);
+        
+        // Defensive
+        if (player.isAttacking && dist < 120 && Math.random() < 0.6) {
+            enemy.isBlocking = true;
+            enemy.velocity.x = -2; // Retreat
+        } else {
+            enemy.isBlocking = false;
+        }
+        
+        if (enemy.isBlocking) return; // Don't move if blocking
+
+        // Movement
+        if (dist > 80) {
+            enemy.velocity.x = -3; // Move Left towards player (simplified since player is usually left)
+        } else if (dist < 40) {
+            enemy.velocity.x = 2; // Back up
+        } else {
+            enemy.velocity.x = 0;
+        }
+
+        // Attacks
+        if (dist < 100 && Math.random() < 0.015) {
+            enemy.attack('punch');
+        } else if (dist < 130 && Math.random() < 0.01) {
+            enemy.attack('kick');
+        }
+
+        // Jump
+        if (Math.random() < 0.005 && enemy.onGround) {
+            enemy.velocity.y = -18;
+        }
+    }
+
+    function animate() {
+        if (gameOver) return;
+        
+        window.requestAnimationFrame(animate);
+        
+        // Clear & Draw World
+        ctx.fillStyle = '#111';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Floor
+        ctx.fillStyle = '#222';
+        ctx.fillRect(0, GROUND_Y, canvas.width, canvas.height - GROUND_Y);
+        // Grid on floor for depth
+        ctx.strokeStyle = '#444';
+        for(let i=0; i<canvas.width; i+=50) {
+            ctx.beginPath();
+            ctx.moveTo(i, GROUND_Y); ctx.lineTo(i - 200, canvas.height);
+            ctx.stroke();
+        }
+
+        // Update Projectiles
+        for (let i = projectiles.length - 1; i >= 0; i--) {
+            const p = projectiles[i];
+            p.update();
+            
+            // Collision with Enemy
+            if (p.owner === player && projectileCollision(p, enemy)) {
+                enemy.takeHit(15);
+                document.getElementById('p2-health').style.width = (enemy.health / enemy.maxHealth * 100) + '%';
+                createParticles(p.x, p.y, '#0ff', 10);
+                projectiles.splice(i, 1);
+            } else if (p.x > canvas.width) {
+                projectiles.splice(i, 1);
+            }
+        }
+
+        // Update Particles
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const part = particles[i];
+            part.x += part.vx;
+            part.y += part.vy;
+            part.life -= 0.05;
+            
+            ctx.globalAlpha = part.life;
+            ctx.fillStyle = part.color;
+            ctx.fillRect(part.x, part.y, 4, 4);
+            ctx.globalAlpha = 1.0;
+            
+            if (part.life <= 0) particles.splice(i, 1);
+        }
+
+        player.update();
+        enemy.update();
+        cpuAI();
+
+        // Player Movement Logic
+        player.velocity.x = 0;
+        
+        if (keys.a.pressed && lastKey === 'a') {
+            player.velocity.x = -5;
+            player.isBlocking = true; // Hold back to block logic
+        } else if (keys.d.pressed && lastKey === 'd') {
+            player.velocity.x = 5;
+            player.isBlocking = false;
+        } else {
+             if (keys.s.pressed) { // Explicit block/crouch
+                 player.isBlocking = true;
+                 player.isCrouching = true;
+             } else {
+                 player.isBlocking = false;
+                 player.isCrouching = false;
+             }
+        }
+
+        // Collision: Player Hit Enemy
+        if (
+            rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&
+            player.isAttacking && player.animationFrame === 0 // Hit once logic flag
+        ) {
+            player.isAttacking = false; 
+            enemy.takeHit(player.attackType === 'kick' ? 15 : 8);
+            document.getElementById('p2-health').style.width = (enemy.health / enemy.maxHealth * 100) + '%';
+        }
+
+        // Collision: Enemy Hit Player
+        if (
+            rectangularCollision({ rectangle1: enemy, rectangle2: player }) &&
+            enemy.isAttacking
+        ) {
+            enemy.isAttacking = false;
+            player.takeHit(enemy.attackType === 'kick' ? 12 : 8);
+            document.getElementById('p1-health').style.width = (player.health / player.maxHealth * 100) + '%';
+        }
+
+        // End Game Conditions
+        if (enemy.health <= 0 || player.health <= 0) {
+            determineWinner({player, enemy});
+        }
+    }
+
+    animate();
+    decreaseTimer();
+    
+    // Start Message
+    const msg = document.getElementById('message-overlay');
+    msg.style.display = 'block';
+    setTimeout(() => {
+        msg.style.display = 'none';
+    }, 2000);
+
+    // Input Handling
+    window.addEventListener('keydown', (event) => {
+        if (gameOver) return;
+        switch (event.key.toLowerCase()) {
+            case 'd':
+                keys.d.pressed = true;
+                lastKey = 'd';
+                inputBuffer.push('d');
+                break;
+            case 'a':
+                keys.a.pressed = true;
+                lastKey = 'a';
+                inputBuffer.push('a');
+                break;
+            case 'w':
+                keys.w.pressed = true;
+                if (player.onGround) player.velocity.y = -20;
+                break;
+            case 's':
+                keys.s.pressed = true;
+                inputBuffer.push('s');
+                break;
+            case 'f': // Punch / Fireball confirm
+                // Check Fireball Motion: S, D, F within short time
+                const last2 = inputBuffer.slice(-2).join('');
+                if (last2 === 'sd' || last2 === 'ds') { // Loose check for quarter circle
+                    player.fireball();
+                    inputBuffer = []; // clear buffer logic roughly
+                } else {
+                    player.attack('punch');
+                }
+                break;
+            case 'g': // Kick
+                player.attack('kick');
+                break;
+        }
+        
+        if (inputBuffer.length > 10) inputBuffer.shift();
+    });
+
+    window.addEventListener('keyup', (event) => {
+        switch (event.key.toLowerCase()) {
+            case 'd':
+                keys.d.pressed = false;
+                break;
+            case 'a':
+                keys.a.pressed = false;
+                break;
+            case 'w':
+                keys.w.pressed = false;
+                break;
+            case 's':
+                keys.s.pressed = false;
+                break;
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -184,6 +184,41 @@ export async function callGemini({ model, messages, max_tokens, temperature }) {
 }
 
 /**
+ * Gemini Embedding — calls /v1beta/models/{model}:embedContent
+ * Returns { embedding: number[], input_tokens: number }
+ */
+export async function callGeminiEmbed({ model, input, taskType, title, outputDimensionality }) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw configError("GEMINI_API_KEY not configured", "Set GEMINI_API_KEY in Netlify → Site configuration → Environment variables (your Google AI Studio / Gemini API key).");
+
+  const body = {
+    content: { parts: [{ text: String(input ?? "") }] }
+  };
+  if (taskType) body.taskType = String(taskType);
+  if (title) body.title = String(title);
+  if (Number.isFinite(outputDimensionality) && outputDimensionality > 0) body.outputDimensionality = outputDimensionality;
+
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:embedContent`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "x-goog-api-key": apiKey, "content-type": "application/json" },
+    body: JSON.stringify(body)
+  });
+
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw upstreamError("gemini", res, data);
+
+  const values = data?.embedding?.values;
+  if (!Array.isArray(values)) throw new Error("Gemini embed response missing embedding.values");
+
+  // Gemini embedContent doesn't return token counts per-request in v1beta,
+  // so we approximate: ~4 chars per token (conservative).
+  const approxTokens = Math.max(1, Math.ceil(String(input ?? "").length / 4));
+
+  return { embedding: values, dimensions: values.length, input_tokens: approxTokens };
+}
+
+/**
  * Stream adapters:
  * Each returns { upstream: Response, parseChunk(text)->{deltaText, done, usage?}[] }.
  * We normalize into SSE events for the client: "delta" and "done".

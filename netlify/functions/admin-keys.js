@@ -2,7 +2,7 @@ import { wrap } from "./_lib/wrap.js";
 import { buildCors, json, badRequest } from "./_lib/http.js";
 import { requireAdmin } from "./_lib/admin.js";
 import { q } from "./_lib/db.js";
-import { randomKey, keyHashHex } from "./_lib/crypto.js";
+import { randomKey, keyHashHex, encryptSecret, decryptSecret } from "./_lib/crypto.js";
 import { audit } from "./_lib/audit.js";
 
 function parseProviders(v) {
@@ -34,11 +34,31 @@ export default wrap(async (req) => {
   const customer_id = url.searchParams.get("customer_id") ? parseInt(url.searchParams.get("customer_id"), 10) : null;
 
   if (req.method === "GET") {
+    // --- Reveal a single key (admin only) ---
+    const reveal_key_id = url.searchParams.get("reveal_key_id") ? parseInt(url.searchParams.get("reveal_key_id"), 10) : null;
+    if (reveal_key_id) {
+      const row = await q(
+        `select id, key_last4, label, encrypted_key, revoked_at from api_keys where id=$1 limit 1`,
+        [reveal_key_id]
+      );
+      if (!row.rowCount) return json(404, { error: "Key not found" }, cors);
+      const k = row.rows[0];
+      if (!k.encrypted_key) return json(409, { error: "Key was created before vault storage was enabled. Rotate the key to generate a new one that can be retrieved." }, cors);
+      let plainKey;
+      try { plainKey = decryptSecret(k.encrypted_key); } catch { return json(500, { error: "Decryption failed — check DB_ENCRYPTION_KEY / JWT_SECRET env var" }, cors); }
+      if (!plainKey) return json(500, { error: "Decryption returned empty — encryption key mismatch" }, cors);
+
+      await audit("admin", "KEY_REVEAL", `key:${reveal_key_id}`);
+      return json(200, { id: k.id, key_last4: k.key_last4, label: k.label, key: plainKey }, cors);
+    }
+
+    // --- List all keys for a customer ---
     if (!customer_id) return badRequest("Missing customer_id", cors);
     const res = await q(
       `select id, key_last4, label, role, monthly_cap_cents, rpm_limit, rpd_limit,
               max_devices, require_install_id, allowed_providers, allowed_models,
-              created_at, revoked_at
+              created_at, revoked_at,
+              (encrypted_key is not null) as can_reveal
        from api_keys
        where customer_id=$1
        order by created_at desc
@@ -74,17 +94,19 @@ export default wrap(async (req) => {
     const key = randomKey("kx_live_");
     const key_hash = keyHashHex(key);
     const key_last4 = key.slice(-4);
+    const encrypted_key = encryptSecret(key);
 
     const ins = await q(
       `insert into api_keys(customer_id, key_hash, key_last4, label, role, monthly_cap_cents, rpm_limit, rpd_limit,
-                           max_devices, require_install_id, allowed_providers, allowed_models)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+                           max_devices, require_install_id, allowed_providers, allowed_models, encrypted_key)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
        returning id, created_at`,
       [cid, key_hash, key_last4, label, role, monthly_cap_cents, rpm_limit, rpd_limit,
        Number.isFinite(max_devices) ? max_devices : null,
        require_install_id,
        allowed_providers,
-       allowed_models]
+       allowed_models,
+       encrypted_key]
     );
 
     await audit("admin", "KEY_CREATE", `key:${ins.rows[0].id}`,
@@ -191,14 +213,15 @@ export default wrap(async (req) => {
     const key = randomKey("kx_live_");
     const key_hash = keyHashHex(key);
     const key_last4 = key.slice(-4);
+    const encrypted_key = encryptSecret(key);
 
     const ins = await q(
       `insert into api_keys(customer_id, key_hash, key_last4, label, role, monthly_cap_cents, rpm_limit, rpd_limit,
-                           max_devices, require_install_id, allowed_providers, allowed_models)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+                           max_devices, require_install_id, allowed_providers, allowed_models, encrypted_key)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
        returning id, created_at`,
       [o.customer_id, key_hash, key_last4, o.label, (o.role || 'deployer'), o.monthly_cap_cents, o.rpm_limit, o.rpd_limit,
-       o.max_devices, o.require_install_id, o.allowed_providers, o.allowed_models]
+       o.max_devices, o.require_install_id, o.allowed_providers, o.allowed_models, encrypted_key]
     );
 
     await q(`update api_keys set revoked_at=now() where id=$1 and revoked_at is null`, [rotate_key_id]);

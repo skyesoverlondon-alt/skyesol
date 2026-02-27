@@ -596,6 +596,7 @@ function mountPricedModelPicker(textareaSel, providersInputSel) {
 
     for (const k of (data.keys || [])) {
       const revoked = !!k.revoked_at;
+      const canReveal = !!k.can_reveal;
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${k.id}</td>
@@ -610,6 +611,7 @@ function mountPricedModelPicker(textareaSel, providersInputSel) {
         <td>${revoked ? "Yes" : "No"}</td>
         <td>${k.created_at ? new Date(k.created_at).toLocaleString() : ""}</td>
         <td class="row-actions">
+          ${canReveal ? `<button class="btn ghost" data-reveal="${k.id}" title="Copy full key to clipboard">📋 Copy</button>` : ''}
           <button class="btn ghost" data-rotate="${k.id}">Rotate</button>
           <button class="btn ${revoked ? 'ghost' : 'danger'}" data-revoke="${k.id}" data-revoked="${revoked ? '1':'0'}">${revoked ? 'Unrevoke' : 'Revoke'}</button>
         </td>
@@ -617,7 +619,31 @@ function mountPricedModelPicker(textareaSel, providersInputSel) {
       tbody.appendChild(tr);
     }
 
-    // Actions
+    // Actions — Reveal / Copy key
+    tbody.querySelectorAll("button[data-reveal]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const key_id = parseInt(btn.getAttribute("data-reveal"), 10);
+        try {
+          const data = await apiAdmin(`/.netlify/functions/admin-keys?reveal_key_id=${key_id}`);
+          const key = data?.key || "";
+          if (key) {
+            await copyText(key);
+            // Also show it in the key display box
+            const box = $("#subKeyBox");
+            const val = $("#subKeyValue");
+            if (box && val) {
+              val.textContent = key;
+              box.style.display = "block";
+            }
+            showToast("Key copied to clipboard.", true);
+          } else {
+            showToast("Could not retrieve key.", false);
+          }
+        } catch (e) { showToast(e.message || "Reveal failed", false); }
+      });
+    });
+
+    // Actions — Revoke / Unrevoke
     tbody.querySelectorAll("button[data-revoke]").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const key_id = parseInt(btn.getAttribute("data-revoke"), 10);
