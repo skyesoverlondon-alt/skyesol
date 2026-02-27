@@ -1,3 +1,4 @@
+import "./_lib/defaults.js";  // pre-populate process.env with non-secret defaults
 import { getStore } from "@netlify/blobs";
 
 const STORE_NAME = process.env.BLOBS_STORE || "sol_growth";

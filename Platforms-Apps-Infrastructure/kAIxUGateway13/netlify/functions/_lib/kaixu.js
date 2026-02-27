@@ -1,7 +1,7 @@
 import { sha256Hex } from "./crypto.js";
 
-export const SCHEMA_VERSION = "KAIXU_GATEWAY_SCHEMA_V5.1_KAIXU_CANON";
-export const BUILD_ID = "deploy-kaixuCanon-20260221102017";
+export const SCHEMA_VERSION = "KAIXU_GATEWAY_SCHEMA_V6.0_KAIXU_CANON";
+export const BUILD_ID = "deploy-kaixuCanon-20260227-embed-keyvault";
 
 // This is enforced server-side on every gateway request.
 // Any client-provided system prompts are appended *after* this canon.

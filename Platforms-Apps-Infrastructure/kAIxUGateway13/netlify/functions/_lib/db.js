@@ -1,3 +1,4 @@
+import "./defaults.js";  // pre-populate process.env with non-secret defaults
 import { neon } from "@netlify/neon";
 
 /**
