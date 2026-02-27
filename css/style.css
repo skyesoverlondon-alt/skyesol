@@ -13,7 +13,7 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 80px; /* Position 1: Above Retro (20px + ~60px height) */
+  bottom: 110px; /* Position 1: 20px retro + 40px gap = 110px */
   left: 20px;
   z-index: 100001;
   display: block;
@@ -35,7 +35,7 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 120px; /* Position 2: Above Purple (80+40) */
+  bottom: 160px; /* Position 2: 110px + 50px gap = 160px */
   left: 20px;
   z-index: 100002;
   display: block;
@@ -57,7 +57,7 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 160px; /* Position 3: Above Contractor (120+40) */
+  bottom: 210px; /* Position 3: 160px + 50px gap = 210px */
   left: 20px;
   right: auto;
   z-index: 100003;
@@ -80,7 +80,7 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 200px; /* Position 4: Top (160+40) */
+  bottom: 260px; /* Position 4: 210px + 50px gap = 260px */
   left: 20px;
   z-index: 100004;
   display: block;
