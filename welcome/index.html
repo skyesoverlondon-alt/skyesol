@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to SOLEnterprises</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+  <script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dim: rgba(201,168,76,0.12);
+      --bg: #07070f;
+      --surface: #0c0c14;
+      --surface-2: #111119;
+      --surface-3: #181822;
+      --text: #e8e6e1;
+      --text-dim: #8a8880;
+      --border: rgba(201,168,76,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── AUTH GATE ── */
+    #authGate {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 14px; z-index: 100;
+    }
+    .gate-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px; letter-spacing: 6px; color: var(--gold);
+    }
+    .spinner {
+      width: 28px; height: 28px;
+      border: 2px solid rgba(201,168,76,0.15);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── MAIN ── */
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      flex: 1;
+      opacity: 0;
+      transition: opacity .6s;
+    }
+    .page.visible { opacity: 1; }
+
+    /* ── HEADER ── */
+    .welcome-tag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px; letter-spacing: 6px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .welcome-tag::after {
+      content: '';
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(201,168,76,0.3), transparent);
+    }
+    .welcome-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 7vw, 64px);
+      line-height: 1.0;
+      margin-bottom: 12px;
+    }
+    .welcome-headline .name {
+      display: block;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .welcome-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 50px;
+    }
+
+    /* ── STEPS ── */
+    .steps-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--text-dim); text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 52px;
+      position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 19px; top: 24px; bottom: 24px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.1));
+    }
+    .step {
+      display: flex; gap: 20px;
+      padding: 0 0 36px;
+      cursor: default;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step-num {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px; letter-spacing: 1px;
+      color: var(--gold);
+      transition: all .3s;
+      position: relative; z-index: 1;
+    }
+    .step:hover .step-num {
+      background: var(--gold);
+      color: #07070f;
+      border-color: var(--gold);
+    }
+    .step-content { padding-top: 8px; }
+    .step-title {
+      font-size: 16px; font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .step-desc {
+      font-size: 13px; color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .step-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+      transition: border-color .2s;
+    }
+    .step-link:hover { border-color: var(--gold); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
+      margin: 48px 0;
+    }
+
+    /* ── WHAT'S HERE ── */
+    .whats-here-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--text-dim); text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .perks {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 52px;
+    }
+    .perk {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 16px;
+      display: flex; align-items: flex-start; gap: 12px;
+      transition: border-color .25s;
+    }
+    .perk:hover { border-color: rgba(201,168,76,0.22); }
+    .perk-icon {
+      font-size: 20px;
+      width: 28px; flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .perk-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .perk-sub { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+
+    /* ── CTA ── */
+    .cta-block {
+      background: linear-gradient(135deg, var(--surface), var(--surface-2));
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 12px;
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .cta-block h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px; margin-bottom: 10px;
+    }
+    .cta-block p {
+      font-size: 14px; color: var(--text-dim);
+      line-height: 1.7; margin-bottom: 28px;
+      max-width: 460px; margin-left: auto; margin-right: auto;
+    }
+    .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--gold), #b8943f);
+      color: #07070f; font-weight: 700;
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+      text-decoration: none; border-radius: 4px;
+      transition: all .3s;
+    }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(201,168,76,0.3); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold); font-weight: 500;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; border-radius: 4px;
+      transition: all .3s;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+    }
+    footer p { font-size: 12px; color: var(--text-dim); }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .page { padding: 50px 16px; }
+      .steps::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="authGate">
+  <div class="gate-logo">SOLEnterprises</div>
+  <div class="spinner"></div>
+  <p style="font-size:13px;color:#8a8880;">Loading your experience…</p>
+</div>
+
+<div class="page" id="page">
+
+  <!-- HEADER -->
+  <div class="welcome-tag">SOLEnterprises · Member Access</div>
+  <h1 class="welcome-headline">
+    You're in,<br>
+    <span class="name" id="memberName">Welcome.</span>
+  </h1>
+  <p class="welcome-sub">
+    Your account is live. Here's how to get the most out of the SOLEnterprises ecosystem.
+  </p>
+
+  <!-- STEPS -->
+  <div class="steps-label">Getting Started · 3 Steps</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <div class="step-title">Explore Your Member Hub</div>
+        <div class="step-desc">Your dashboard is where everything lives — tools, apps, services, and your account profile. Bookmark it, use it daily.</div>
+        <a href="/members/" class="step-link">Open Member Hub →</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <div class="step-title">Get Your kAIxu API Key</div>
+        <div class="step-desc">kAIxu is our governed AI gateway — it routes your prompts across models with caps, logging, and export built in. Request your key to get started.</div>
+        <a href="/kAIxu/RequestKaixuAPIKey.html" class="step-link">Request API Key →</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <div class="step-title">Tell Us What You Need Built</div>
+        <div class="step-desc">Whether it's a site, a tool, a brand system, or an AI integration — we build it. Reach out and start the conversation.</div>
+        <a href="/contact.html" class="step-link">Contact the Team →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PERKS -->
+  <div class="whats-here-label">What's Included</div>
+  <div class="perks">
+    <div class="perk">
+      <div class="perk-icon">◈</div>
+      <div>
+        <div class="perk-name">kAIxu Gateway</div>
+        <div class="perk-sub">Access to our governed AI platform with multi-model routing.</div>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">◻</div>
+      <div>
+        <div class="perk-name">SkyeSuite Apps</div>
+        <div class="perk-sub">Docs, Flow, Slides, Sheets, Ledger, Ops — all in one place.</div>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">❖</div>
+      <div>
+        <div class="perk-name">Resource Library</div>
+        <div class="perk-sub">Case studies, editorials, platform guides, and blog content.</div>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">◁</div>
+      <div>
+        <div class="perk-name">Direct Access</div>
+        <div class="perk-sub">Work directly with the SOLEnterprises team on your builds.</div>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">⬡</div>
+      <div>
+        <div class="perk-name">Gateway Dashboard</div>
+        <div class="perk-sub">Real-time usage, cap tracking, and API export tools.</div>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">◇</div>
+      <div>
+        <div class="perk-name">PDF &amp; Document Tools</div>
+        <div class="perk-sub">18 document types — proposals, invoices, contracts, and more.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>Your Hub Is Ready.</h2>
+    <p>Everything you need is inside your Member Hub. Tools, services, resources, and support — start exploring.</p>
+    <div class="cta-actions">
+      <a href="/members/" class="btn-gold" onclick="markSeen()">Enter Member Hub</a>
+      <a href="/contact.html" class="btn-outline">Talk to the Team</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><a href="/index.html">SOLEnterprises</a> · <a href="/members/">Member Hub</a> · <a href="/privacy.html">Privacy</a></p>
+</footer>
+
+<script>
+  function markSeen() {
+    localStorage.setItem('sol_welcome_seen', '1');
+  }
+
+  if (window.netlifyIdentity) {
+    netlifyIdentity.on('init', function(user) {
+      if (!user) {
+        window.location.href = '/account/?next=/welcome/';
+        return;
+      }
+      // Populate name
+      const email = user.email || '';
+      const fullName = user.user_metadata?.full_name || '';
+      const displayName = fullName ? fullName.split(' ')[0] : email.split('@')[0];
+      document.getElementById('memberName').textContent = displayName + '.';
+
+      // Mark welcome as seen
+      localStorage.setItem('sol_welcome_seen', '1');
+
+      // Show page
+      document.getElementById('authGate').style.display = 'none';
+      document.getElementById('page').classList.add('visible');
+    });
+
+    netlifyIdentity.on('logout', function() {
+      window.location.href = '/account/';
+    });
+  } else {
+    setTimeout(() => {
+      document.getElementById('authGate').innerHTML = '<div class="gate-logo">SOLEnterprises</div><p style="color:#e87070;font-size:13px;">Auth failed to load. <a href="/account/" style="color:var(--gold);">Return to login</a></p>';
+    }, 4000);
+  }
+</script>
+</body>
+</html>

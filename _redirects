@@ -65,6 +65,12 @@
 /signin                       /account/index.html                                                                    200
 /signin/                      /account/index.html                                                                    200
 
+# Member hub & onboarding
+/members                      /members/index.html                                                                    200
+/members/                     /members/index.html                                                                    200
+/welcome                      /welcome/index.html                                                                    200
+/welcome/                     /welcome/index.html                                                                    200
+
 # Gate Proofx
 /gate-proofx.html             /Platforms-Apps-Infrastructure/GateProofx/index.html                                   200
 /Gate%20Proofx/index.html     /Platforms-Apps-Infrastructure/GateProofx/index.html                                   200

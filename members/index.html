@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Hub · SOLEnterprises</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://skyesol.netlify.app/members/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+  <script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dim: rgba(201,168,76,0.15);
+      --bg: #07070f;
+      --surface: #0c0c14;
+      --surface-2: #111119;
+      --surface-3: #181822;
+      --text: #e8e6e1;
+      --text-dim: #8a8880;
+      --border: rgba(201,168,76,0.08);
+      --border-hover: rgba(201,168,76,0.25);
+      --sidebar-w: 240px;
+      --glow: 0 0 30px rgba(201,168,76,0.12);
+    }
+
+    html, body { height: 100%; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── AUTH GATE ── */
+    #authGate {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 200;
+      flex-direction: column;
+      gap: 14px;
+    }
+    #authGate .gate-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px; letter-spacing: 6px; color: var(--gold);
+    }
+    #authGate p { font-size: 13px; color: var(--text-dim); }
+    .spinner {
+      width: 28px; height: 28px;
+      border: 2px solid var(--border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── LAYOUT ── */
+    .shell {
+      display: flex;
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .shell.visible { opacity: 1; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      min-height: 100vh;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 10;
+      transition: transform .3s;
+    }
+    .sidebar-header {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .sidebar-logo img { width: 28px; height: 28px; object-fit: contain; }
+    .sidebar-logo span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px; letter-spacing: 4px; color: var(--gold);
+    }
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .nav-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 9px; letter-spacing: 3px;
+      color: var(--text-dim);
+      padding: 10px 10px 4px;
+      text-transform: uppercase;
+    }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 13px; font-weight: 500;
+      transition: all .2s;
+      cursor: pointer;
+      border: none; background: none; width: 100%; text-align: left;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: var(--gold-dim);
+      color: var(--gold);
+    }
+    .nav-item .icon { width: 16px; text-align: center; flex-shrink: 0; }
+    .sidebar-footer {
+      padding: 16px 10px;
+      border-top: 1px solid var(--border);
+    }
+    .user-chip {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: var(--surface-2);
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .user-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #7a5e1f);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #07070f;
+      flex-shrink: 0;
+    }
+    .user-info { min-width: 0; }
+    .user-email-small {
+      font-size: 11px; color: var(--text);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .user-role-badge {
+      font-size: 9px; letter-spacing: 1.5px;
+      color: var(--gold); text-transform: uppercase;
+    }
+    .signout-btn {
+      width: 100%;
+      padding: 9px 12px;
+      background: none;
+      border: 1px solid rgba(232,112,112,0.2);
+      border-radius: 6px;
+      color: #e87070;
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .signout-btn:hover { background: rgba(232,112,112,0.06); border-color: rgba(232,112,112,0.4); }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      min-height: 100vh;
+    }
+
+    /* ── MOBILE TOPBAR ── */
+    .topbar {
+      display: none;
+      position: sticky; top: 0; z-index: 9;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      height: 56px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topbar-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 16px; letter-spacing: 3px; color: var(--gold);
+      text-decoration: none;
+    }
+    .menu-toggle {
+      background: none; border: none; color: var(--gold);
+      font-size: 20px; cursor: pointer; padding: 8px;
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 36px 36px; display: none; }
+    .section.active { display: block; }
+
+    /* ── WELCOME HERO ── */
+    .welcome-hero {
+      background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-3) 100%);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 10px;
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .welcome-hero::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .welcome-hero .label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .welcome-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+    .welcome-hero h1 span {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .welcome-hero p {
+      font-size: 14px; color: var(--text-dim);
+      line-height: 1.7; max-width: 600px;
+      margin-bottom: 20px;
+    }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      transition: border-color .3s;
+    }
+    .stat-card:hover { border-color: var(--border-hover); }
+    .stat-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 9px; letter-spacing: 3px;
+      color: var(--text-dim); text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .stat-val {
+      font-size: 20px; font-weight: 700; color: var(--gold);
+    }
+    .stat-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+    /* ── SECTION HEADERS ── */
+    .sec-head {
+      display: flex; align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .sec-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+    }
+    .sec-head a {
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.3);
+    }
+
+    /* ── TOOL CARDS ── */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 18px;
+      text-decoration: none;
+      display: flex; flex-direction: column; gap: 8px;
+      transition: all .25s;
+      position: relative; overflow: hidden;
+    }
+    .tool-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0; transition: opacity .3s;
+    }
+    .tool-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: var(--glow); }
+    .tool-card:hover::before { opacity: 1; }
+    .tool-icon { font-size: 22px; }
+    .tool-name {
+      font-size: 13px; font-weight: 600; color: var(--text);
+    }
+    .tool-desc { font-size: 11px; color: var(--text-dim); line-height: 1.6; }
+    .tool-tag {
+      display: inline-block;
+      font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
+      background: var(--gold-dim); color: var(--gold);
+      padding: 3px 8px; border-radius: 20px;
+      align-self: flex-start;
+    }
+
+    /* ── SERVICE CARDS ── */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: border-color .25s;
+    }
+    .service-card:hover { border-color: var(--border-hover); }
+    .service-title { font-size: 14px; font-weight: 600; color: var(--text); }
+    .service-desc { font-size: 12px; color: var(--text-dim); line-height: 1.65; flex: 1; }
+    .service-cta {
+      display: inline-flex; align-items: center;
+      gap: 6px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.25);
+      transition: border-color .2s;
+      align-self: flex-start;
+    }
+    .service-cta:hover { border-color: var(--gold); }
+
+    /* ── RESOURCE CARDS ── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    .resource-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 18px;
+      text-decoration: none;
+      display: flex; align-items: flex-start; gap: 14px;
+      transition: all .25s;
+    }
+    .resource-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .resource-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: var(--gold-dim);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .resource-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .resource-sub { font-size: 11px; color: var(--text-dim); line-height: 1.6; }
+
+    /* ── SUPPORT CARD ── */
+    .support-banner {
+      background: linear-gradient(135deg, var(--surface-2), var(--surface-3));
+      border: 1px solid var(--border-hover);
+      border-radius: 10px;
+      padding: 30px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .support-banner h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px; margin-bottom: 6px;
+    }
+    .support-banner p { font-size: 13px; color: var(--text-dim); max-width: 400px; line-height: 1.6; }
+
+    /* ── ACCOUNT SECTION ── */
+    .account-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+    .account-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 20px;
+    }
+    .account-panel h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.04);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); }
+    .info-val { font-size: 12px; color: var(--text); font-family: 'Fira Code', monospace; }
+    .role-pill {
+      display: inline-block;
+      font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      background: var(--gold-dim); color: var(--gold);
+      padding: 3px 10px; border-radius: 20px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 26px;
+      background: linear-gradient(135deg, var(--gold), #b8943f);
+      color: #07070f; font-weight: 700;
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+      text-decoration: none; border-radius: 4px;
+      transition: all .3s; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,168,76,0.3); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 24px;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold); font-weight: 500;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; border-radius: 4px;
+      transition: all .3s; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: var(--gold-dim); }
+
+    /* ── OVERLAY for mobile sidebar ── */
+    .sidebar-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 9;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay.open { display: block; }
+      .topbar { display: flex; }
+      .main { margin-left: 0; }
+      .section { padding: 20px 16px; }
+      .account-grid { grid-template-columns: 1fr; }
+      .welcome-hero { padding: 22px 20px; }
+      .support-banner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- AUTH GATE shown until identity confirms user -->
+<div id="authGate">
+  <div class="gate-logo">SOLEnterprises</div>
+  <div class="spinner"></div>
+  <p>Verifying your session…</p>
+</div>
+
+<div class="shell" id="shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="/index.html" class="sidebar-logo">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL">
+        <span>SOLEnterprises</span>
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">Member Hub</div>
+      <button class="nav-item active" data-section="dashboard" onclick="showSection('dashboard', this)">
+        <span class="icon">⬟</span> Dashboard
+      </button>
+      <button class="nav-item" data-section="tools" onclick="showSection('tools', this)">
+        <span class="icon">⬡</span> Tools &amp; Apps
+      </button>
+      <button class="nav-item" data-section="services" onclick="showSection('services', this)">
+        <span class="icon">◈</span> Services
+      </button>
+      <button class="nav-item" data-section="resources" onclick="showSection('resources', this)">
+        <span class="icon">❖</span> Resources
+      </button>
+
+      <div class="nav-label" style="margin-top:8px;">Account</div>
+      <button class="nav-item" data-section="account" onclick="showSection('account', this)">
+        <span class="icon">◎</span> My Account
+      </button>
+      <button class="nav-item" onclick="contactSupport()">
+        <span class="icon">◇</span> Get Support
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <div class="user-avatar" id="sidebarAvatar">?</div>
+        <div class="user-info">
+          <div class="user-email-small" id="sidebarEmail">Loading…</div>
+          <div class="user-role-badge" id="sidebarRole">Member</div>
+        </div>
+      </div>
+      <button class="signout-btn" onclick="signOut()">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- MOBILE TOPBAR -->
+  <div class="topbar">
+    <a href="/index.html" class="topbar-logo">SOL</a>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+  </div>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- DASHBOARD SECTION -->
+    <section class="section active" id="sec-dashboard">
+      <div class="welcome-hero">
+        <div class="label">Member Hub · SOLEnterprises</div>
+        <h1>Welcome back, <span id="heroName">Member</span></h1>
+        <p>You're inside the SOLEnterprises ecosystem. Access your tools, explore services, and manage your account — all from one place.</p>
+        <div class="hero-actions">
+          <a href="/gateway/dashboard.html" class="btn-gold">Open Gateway Dashboard</a>
+          <a href="/contact.html" class="btn-outline">Talk to the Team</a>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Status</div>
+          <div class="stat-val" style="color:#70e8a0;">Active</div>
+          <div class="stat-sub">Account in good standing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Member Since</div>
+          <div class="stat-val" id="memberSince" style="font-size:13px;">—</div>
+          <div class="stat-sub">SOLEnterprises ecosystem</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Access Level</div>
+          <div class="stat-val" id="accessLevel" style="font-size:14px;">Member</div>
+          <div class="stat-sub">Full platform access</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Platform</div>
+          <div class="stat-val" style="font-size:13px;">kAIxu</div>
+          <div class="stat-sub"><a href="/kAIxu/index.html" style="color:var(--gold);text-decoration:none;">View AI gateway →</a></div>
+        </div>
+      </div>
+
+      <div class="sec-head">
+        <h2>Quick Access</h2>
+        <button class="btn-outline" style="padding:6px 16px;font-size:9px;" onclick="showSection('tools', document.querySelector('[data-section=tools]'))">All Tools</button>
+      </div>
+      <div class="tool-grid">
+        <a href="/gateway/dashboard.html" class="tool-card">
+          <div class="tool-icon">⬟</div>
+          <div class="tool-name">Gateway Dashboard</div>
+          <div class="tool-desc">Monitor usage, caps, logs, devices, and API exports.</div>
+          <span class="tool-tag">AI Gateway</span>
+        </a>
+        <a href="/kAIxu/index.html" class="tool-card">
+          <div class="tool-icon">◈</div>
+          <div class="tool-name">kAIxu Platform</div>
+          <div class="tool-desc">Your governed AI gateway with model routing and billing.</div>
+          <span class="tool-tag">Core</span>
+        </a>
+        <a href="/SkyeDocx/homepage.html" class="tool-card">
+          <div class="tool-icon">◻</div>
+          <div class="tool-name">SkyeDocx</div>
+          <div class="tool-desc">Create, edit, and export documents offline-first.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+        <a href="/SkyeFlow/index.html" class="tool-card">
+          <div class="tool-icon">◬</div>
+          <div class="tool-name">SkyeFlow</div>
+          <div class="tool-desc">Workflow automation and process management tools.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+        <a href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html" class="tool-card">
+          <div class="tool-icon">◧</div>
+          <div class="tool-name">kAIxU PDF Pro</div>
+          <div class="tool-desc">Generate proposals, invoices, contracts, and reports.</div>
+          <span class="tool-tag">Documents</span>
+        </a>
+        <a href="/kAIxu/RequestKaixuAPIKey.html" class="tool-card">
+          <div class="tool-icon">⬡</div>
+          <div class="tool-name">Get API Key</div>
+          <div class="tool-desc">Request your kAIxu API key to access the gateway directly.</div>
+          <span class="tool-tag">Access</span>
+        </a>
+      </div>
+
+      <div class="support-banner">
+        <div>
+          <h3>Need something built?</h3>
+          <p>Our team handles web builds, AI integrations, brand identity, and full platform development. Tell us what you need.</p>
+        </div>
+        <a href="/contact.html" class="btn-gold">Start a Project</a>
+      </div>
+    </section>
+
+    <!-- TOOLS SECTION -->
+    <section class="section" id="sec-tools">
+      <div class="sec-head" style="margin-bottom:24px;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:6px;">SOLEnterprises</div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:26px;">Tools &amp; Apps</h2>
+        </div>
+      </div>
+
+      <div class="nav-label" style="margin-bottom:10px;">AI &amp; Gateway</div>
+      <div class="tool-grid">
+        <a href="/gateway/dashboard.html" class="tool-card">
+          <div class="tool-icon">⬟</div>
+          <div class="tool-name">Gateway Dashboard</div>
+          <div class="tool-desc">Caps, usage, logs, devices, exports, and GitHub push.</div>
+          <span class="tool-tag">Core</span>
+        </a>
+        <a href="/kAIxu/index.html" class="tool-card">
+          <div class="tool-icon">◈</div>
+          <div class="tool-name">kAIxu Platform</div>
+          <div class="tool-desc">Governed AI routing across OpenAI, Anthropic, Gemini.</div>
+          <span class="tool-tag">AI</span>
+        </a>
+        <a href="/kAIxu/docs.html" class="tool-card">
+          <div class="tool-icon">❖</div>
+          <div class="tool-name">kAIxu Docs</div>
+          <div class="tool-desc">Integration guides, API reference, and config docs.</div>
+          <span class="tool-tag">Docs</span>
+        </a>
+        <a href="/kAIxu/pricing.html" class="tool-card">
+          <div class="tool-icon">◇</div>
+          <div class="tool-name">kAIxu Pricing</div>
+          <div class="tool-desc">Plans, caps, and billing details for your usage tier.</div>
+          <span class="tool-tag">Billing</span>
+        </a>
+      </div>
+
+      <div class="nav-label" style="margin-bottom:10px;">SkyeSuite</div>
+      <div class="tool-grid">
+        <a href="/SkyeDocx/homepage.html" class="tool-card">
+          <div class="tool-icon">◻</div>
+          <div class="tool-name">SkyeDocx</div>
+          <div class="tool-desc">Offline-first document creation and export.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+        <a href="/SkyeFlow/index.html" class="tool-card">
+          <div class="tool-icon">◬</div>
+          <div class="tool-name">SkyeFlow</div>
+          <div class="tool-desc">Workflow and process automation.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+        <a href="/SkyeSlides/index.html" class="tool-card">
+          <div class="tool-icon">◁</div>
+          <div class="tool-name">SkyeSlides</div>
+          <div class="tool-desc">Presentation builder for client-ready decks.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+        <a href="/SkyeSheets/index.html" class="tool-card">
+          <div class="tool-icon">⬤</div>
+          <div class="tool-name">SkyeSheets</div>
+          <div class="tool-desc">Spreadsheet and data management tools.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+        <a href="/SkyeLedger/index.html" class="tool-card">
+          <div class="tool-icon">◑</div>
+          <div class="tool-name">SkyeLedger</div>
+          <div class="tool-desc">Financial tracking and accounting tools.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+        <a href="/SkyeOps/index.html" class="tool-card">
+          <div class="tool-icon">⬙</div>
+          <div class="tool-name">SkyeOps</div>
+          <div class="tool-desc">Operations and project management hub.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+        <a href="/SkyeArchive/index.html" class="tool-card">
+          <div class="tool-icon">◫</div>
+          <div class="tool-name">SkyeArchive</div>
+          <div class="tool-desc">Secure file and document archiving.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+        <a href="/SkyeDrive/index.html" class="tool-card">
+          <div class="tool-icon">◰</div>
+          <div class="tool-name">SkyeDrive</div>
+          <div class="tool-desc">Cloud storage and file management.</div>
+          <span class="tool-tag">SkyeSuite</span>
+        </a>
+      </div>
+
+      <div class="nav-label" style="margin-bottom:10px;">Platform Tools</div>
+      <div class="tool-grid">
+        <a href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html" class="tool-card">
+          <div class="tool-icon">◧</div>
+          <div class="tool-name">kAIxU PDF Pro</div>
+          <div class="tool-desc">18 document types: proposals, invoices, contracts, and more.</div>
+          <span class="tool-tag">Documents</span>
+        </a>
+        <a href="/Platforms-Apps-Infrastructure/LocalSeoSnapshot/index.html" class="tool-card">
+          <div class="tool-icon">◎</div>
+          <div class="tool-name">Local SEO Snapshot</div>
+          <div class="tool-desc">Quick local SEO audit and presence check.</div>
+          <span class="tool-tag">SEO</span>
+        </a>
+        <a href="/Platforms-Apps-Infrastructure/BusinessLaunchGo/index.html" class="tool-card">
+          <div class="tool-icon">▷</div>
+          <div class="tool-name">BusinessLaunchGo</div>
+          <div class="tool-desc">Fast-track business launch checklist and toolkit.</div>
+          <span class="tool-tag">Launch</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section class="section" id="sec-services">
+      <div class="sec-head" style="margin-bottom:8px;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:6px;">What We Build</div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:26px;">Services</h2>
+        </div>
+      </div>
+      <p style="color:var(--text-dim);font-size:14px;margin-bottom:26px;line-height:1.7;max-width:600px;">
+        We build operational infrastructure for businesses at every stage. See something you need — start a conversation.
+      </p>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="tool-icon">◻</div>
+          <div class="service-title">Web Builds</div>
+          <div class="service-desc">Full-stack web builds — sites, portals, multi-page apps, and PWAs. Enterprise-grade or lean and fast.</div>
+          <a href="/Services/WebBuilds.html" class="service-cta">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="tool-icon">◈</div>
+          <div class="service-title">AI &amp; Data Apps</div>
+          <div class="service-desc">Governed AI integrations, data pipelines, dashboards, and custom model routing built for real workloads.</div>
+          <a href="/Services/ai-data-apps.html" class="service-cta">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="tool-icon">◬</div>
+          <div class="service-title">Portals &amp; Hubs</div>
+          <div class="service-desc">Client portals, internal ops hubs, membership platforms, and custom dashboards.</div>
+          <a href="/Services/portals-hubs.html" class="service-cta">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="tool-icon">◇</div>
+          <div class="service-title">Brand Identity</div>
+          <div class="service-desc">Brand systems, design kits, visual identity, and brand documentation for modern businesses.</div>
+          <a href="/Services/brand-identity.html" class="service-cta">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="tool-icon">⬡</div>
+          <div class="service-title">API Integrations</div>
+          <div class="service-desc">Third-party API connections, Stripe, Twilio, GitHub, and custom webhook infrastructure.</div>
+          <a href="/Services/api-integration.html" class="service-cta">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="tool-icon">❖</div>
+          <div class="service-title">SEO &amp; Content</div>
+          <div class="service-desc">Technical SEO, editorial content, schema markup, and regional authority building.</div>
+          <a href="/Services/seo-content.html" class="service-cta">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="tool-icon">◁</div>
+          <div class="service-title">MVP Builds</div>
+          <div class="service-desc">Fast-track startup MVPs with architecture, auth, payments, and core features ready to ship.</div>
+          <a href="/Services/mvp-launchpad.html" class="service-cta">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="tool-icon">◑</div>
+          <div class="service-title">Security Audit</div>
+          <div class="service-desc">API security reviews, auth hardening, and ops security assessments for your platforms.</div>
+          <a href="/Services/security-audit.html" class="service-cta">Learn more →</a>
+        </div>
+        <div class="service-card">
+          <div class="tool-icon">⬤</div>
+          <div class="service-title">Ecommerce &amp; Payments</div>
+          <div class="service-desc">Stripe-powered checkout flows, subscription billing, and full commerce infrastructure.</div>
+          <a href="/Services/ecommerce-payments.html" class="service-cta">Learn more →</a>
+        </div>
+      </div>
+      <div class="support-banner">
+        <div>
+          <h3>Ready to start a project?</h3>
+          <p>Tell us what you need. We'll scope it, price it, and build it. No BS, no bloat — just execution.</p>
+        </div>
+        <a href="/contact.html" class="btn-gold">Get in Touch</a>
+      </div>
+    </section>
+
+    <!-- RESOURCES SECTION -->
+    <section class="section" id="sec-resources">
+      <div style="margin-bottom:24px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:6px;">Knowledge</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:26px;">Resources</h2>
+      </div>
+      <div class="resource-grid">
+        <a href="/blog.html" class="resource-card">
+          <div class="resource-icon">✍</div>
+          <div>
+            <div class="resource-title">Blog</div>
+            <div class="resource-sub">Phoenix LLCs, AI dev patterns, nightlife, techwear, Houston tech — we cover it all.</div>
+          </div>
+        </a>
+        <a href="/Blogs/Editorials/Devs%20%26%20AI/ai-gateway-one-contract.html" class="resource-card">
+          <div class="resource-icon">⚙</div>
+          <div>
+            <div class="resource-title">Devs &amp; AI Editorials</div>
+            <div class="resource-sub">RAG, RBAC, magic links, prompt hygiene, token economics — practical guides for builders.</div>
+          </div>
+        </a>
+        <a href="/Case%20Studies/index.html" class="resource-card">
+          <div class="resource-icon">◧</div>
+          <div>
+            <div class="resource-title">Case Studies</div>
+            <div class="resource-sub">Real work, real outcomes. Documented across industries from healthcare to retail.</div>
+          </div>
+        </a>
+        <a href="/kAIxu/docs.html" class="resource-card">
+          <div class="resource-icon">❖</div>
+          <div>
+            <div class="resource-title">kAIxu Docs</div>
+            <div class="resource-sub">Full API reference, integration patterns, and gateway configuration guides.</div>
+          </div>
+        </a>
+        <a href="/resources/phoenix-business-resource-directory/index.html" class="resource-card">
+          <div class="resource-icon">◎</div>
+          <div>
+            <div class="resource-title">Phoenix Business Directory</div>
+            <div class="resource-sub">Curated resources for Phoenix-area businesses — compliance, licensing, and more.</div>
+          </div>
+        </a>
+        <a href="/credibility.html" class="resource-card">
+          <div class="resource-icon">◈</div>
+          <div>
+            <div class="resource-title">Credibility Hub</div>
+            <div class="resource-sub">Track record, client proof, and platform documentation for SOLEnterprises.</div>
+          </div>
+        </a>
+        <a href="/status.html" class="resource-card">
+          <div class="resource-icon">⬤</div>
+          <div>
+            <div class="resource-title">System Status</div>
+            <div class="resource-sub">Real-time health checks on Gateway, kAIxu, and all SOL platform services.</div>
+          </div>
+        </a>
+        <a href="/Blogs/Editorials/ArizonaClubScene/index.html" class="resource-card">
+          <div class="resource-icon">◬</div>
+          <div>
+            <div class="resource-title">Arizona Nightlife Guide</div>
+            <div class="resource-sub">Editorials covering Phoenix, Scottsdale, Tempe, Mesa, and Glendale venues.</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ACCOUNT SECTION -->
+    <section class="section" id="sec-account">
+      <div style="margin-bottom:24px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:6px;">Member</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:26px;">My Account</h2>
+      </div>
+      <div class="account-grid">
+        <div class="account-panel">
+          <h3>Profile</h3>
+          <div class="info-row">
+            <span class="info-key">Email</span>
+            <span class="info-val" id="profileEmail">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Role</span>
+            <span class="info-val"><span class="role-pill" id="profileRole">Member</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Member Since</span>
+            <span class="info-val" id="profileSince">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Confirmed</span>
+            <span class="info-val" id="profileConfirmed">—</span>
+          </div>
+        </div>
+        <div class="account-panel">
+          <h3>Access</h3>
+          <div class="info-row">
+            <span class="info-key">Platform</span>
+            <span class="info-val">SOLEnterprises</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Gateway</span>
+            <span class="info-val"><a href="/gateway/dashboard.html" style="color:var(--gold);text-decoration:none;">Open Dashboard</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">API Key</span>
+            <span class="info-val"><a href="/kAIxu/RequestKaixuAPIKey.html" style="color:var(--gold);text-decoration:none;">Request Key</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Status</span>
+            <span class="info-val" style="color:#70e8a0;">Active</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:8px;">
+        <button class="btn-outline" onclick="signOut()" style="border-color:rgba(232,112,112,0.3);color:#e87070;">Sign Out of Account</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  const IDENTITY_URL = 'https://skyesol.netlify.app/.netlify/identity';
+
+  // ── Show section
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    if (btn) btn.classList.add('active');
+    // Close mobile sidebar
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+  }
+
+  // ── Mobile sidebar
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('open');
+  });
+  document.getElementById('sidebarOverlay').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('open');
+  });
+
+  function contactSupport() {
+    window.location.href = '/contact.html';
+  }
+
+  function signOut() {
+    if (window.netlifyIdentity) netlifyIdentity.logout();
+    else window.location.href = '/account/';
+  }
+
+  function fmt(dateStr) {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr);
+    if (isNaN(d)) return '—';
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  function initDashboard(user) {
+    const roles = user.app_metadata?.roles || [];
+    const email = user.email || '';
+    const initial = email.charAt(0).toUpperCase() || '?';
+    const role = roles.includes('admin') ? 'Admin' : 'Member';
+    const since = fmt(user.created_at);
+    const confirmed = fmt(user.confirmed_at);
+    const firstName = (user.user_metadata?.full_name || email).split(/[\s@]/)[0];
+
+    // Sidebar
+    document.getElementById('sidebarAvatar').textContent = initial;
+    document.getElementById('sidebarEmail').textContent = email;
+    document.getElementById('sidebarRole').textContent = role;
+
+    // Hero
+    document.getElementById('heroName').textContent = firstName;
+
+    // Stats
+    document.getElementById('memberSince').textContent = since;
+    document.getElementById('accessLevel').textContent = role;
+
+    // Account panel
+    document.getElementById('profileEmail').textContent = email;
+    document.getElementById('profileRole').textContent = role;
+    document.getElementById('profileSince').textContent = since;
+    document.getElementById('profileConfirmed').textContent = confirmed;
+  }
+
+  // ── Auth check
+  if (window.netlifyIdentity) {
+    netlifyIdentity.on('init', function(user) {
+      if (!user) {
+        // Not logged in — redirect to account page
+        window.location.href = '/account/?next=/members/';
+        return;
+      }
+      const roles = user.app_metadata?.roles || [];
+      if (roles.includes('admin')) {
+        // Admin should be in the admin console
+        window.location.href = '/admin/';
+        return;
+      }
+      // Show dashboard
+      document.getElementById('authGate').style.display = 'none';
+      document.getElementById('shell').classList.add('visible');
+      initDashboard(user);
+    });
+
+    netlifyIdentity.on('logout', function() {
+      window.location.href = '/account/';
+    });
+  } else {
+    // Widget didn't load — fallback
+    setTimeout(() => {
+      document.getElementById('authGate').innerHTML = '<div class="gate-logo">SOLEnterprises</div><p style="color:#e87070;">Authentication failed to load.<br><a href="/account/" style="color:var(--gold);">Return to login</a></p>';
+    }, 4000);
+  }
+</script>
+</body>
+</html>

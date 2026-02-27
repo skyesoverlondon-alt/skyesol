@@ -125,6 +125,7 @@ const store = {
     if (name === "exports") loadInvoicePreview().catch(e=> showToast(e.message || "Failed to load invoice", false));
     if (name === "ghpush") loadGitHubPush().catch(e=> showToast(e.message || "Failed to load GitHub Push", false));
     if (name === "voice") loadVoice().catch(e=> showToast(e.message || "Failed to load Voice", false));
+    if (name === "monitor") refreshMonitorTab().catch(() => {});
   }
 
   $$(".tab").forEach(btn=> btn.addEventListener("click", ()=> switchTab(btn.dataset.tab)));
@@ -143,25 +144,64 @@ const store = {
 
     $("#summary").style.display = "grid";
 
-    $("#sCustCap").textContent = money(data?.month?.customer_cap_cents ?? data?.month?.cap_cents ?? 0);
-    $("#sCustSpent").textContent = money(data?.month?.customer_spent_cents ?? data?.month?.spent_cents ?? 0);
-    $("#sKeyCap").textContent = money(data?.month?.key_cap_cents ?? 0);
-    $("#sKeySpent").textContent = money(data?.month?.key_spent_cents ?? 0);
+    $("#sCustCap").textContent    = money(data?.month?.customer_cap_cents   ?? data?.month?.cap_cents   ?? 0);
+    $("#sCustSpent").textContent  = money(data?.month?.customer_spent_cents  ?? data?.month?.spent_cents ?? 0);
+    $("#sCustRemaining").textContent = money(data?.month?.customer_remaining_cents ?? 0);
+    $("#sKeyCap").textContent     = money(data?.month?.key_cap_cents  ?? 0);
+    $("#sKeySpent").textContent   = money(data?.month?.key_spent_cents ?? 0);
+
+    // Token totals from summary
+    const totalTok = (data?.month?.key_tokens || 0);
+    if ($("#sTotalTokens")) $("#sTotalTokens").textContent = totalTok ? totalTok.toLocaleString() : "—";
+
+    // Live-as-of timestamp
+    const asOfEl = $("#liveAsOf");
+    if (asOfEl) asOfEl.textContent = "as of " + new Date().toLocaleTimeString();
+    const dotEl = $("#livePollingDot");
+    if (dotEl) dotEl.style.display = "inline-block";
 
     $("#sCustomer").textContent = "#" + String(data?.customer?.id ?? "—");
     $("#sPlan").textContent = String(data?.customer?.plan_name ?? "—");
     $("#sLabel").textContent = String(data?.key?.label || "—");
-    $("#sLast4").textContent = String(data?.key?.key_last4 || "—");
 
-    const copyBtn = $("#copyKeyLast4");
-    if (data?.key?.key_last4) {
-      copyBtn.style.display = "inline-flex";
-      copyBtn.onclick = async ()=> {
-        await navigator.clipboard.writeText(String(data.key.key_last4));
-        showToast("Copied last4.", true);
+    // Full key display — user owns this key, show it
+    const fullKey = store.key;
+    const keyMasked = fullKey
+      ? fullKey.slice(0, 8) + "\u2022".repeat(Math.max(0, fullKey.length - 12)) + fullKey.slice(-4)
+      : "—";
+    let _keyRevealed = false;
+
+    const keyDisplayEl = $("#sKeyDisplay");
+    const copyFullKeyBtn = $("#copyFullKey");
+    const toggleMaskBtn = $("#toggleKeyMask");
+
+    if (keyDisplayEl) {
+      keyDisplayEl.textContent = keyMasked;
+      keyDisplayEl.title = "Click to copy full key";
+      keyDisplayEl.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(fullKey);
+          showToast("Full key copied.", true);
+        } catch { showToast("Clipboard unavailable.", false); }
       };
-    } else {
-      copyBtn.style.display = "none";
+    }
+    if (copyFullKeyBtn && fullKey) {
+      copyFullKeyBtn.style.display = "inline-flex";
+      copyFullKeyBtn.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(fullKey);
+          showToast("Full key copied.", true);
+        } catch { showToast("Clipboard unavailable.", false); }
+      };
+    }
+    if (toggleMaskBtn && fullKey) {
+      toggleMaskBtn.style.display = "inline-flex";
+      toggleMaskBtn.textContent = "Show Key";
+      toggleMaskBtn.onclick = () => {
+        _keyRevealed = !_keyRevealed;
+        if (keyDisplayEl) keyDisplayEl.textContent = _keyRevealed ? fullKey : keyMasked;
+        toggleMaskBtn.textContent = _keyRevealed ? "Hide Key" : "Show Key";
+      };
     }
 
     return data;
@@ -171,11 +211,37 @@ const store = {
     const qs = new URLSearchParams();
     if (month) qs.set("month", month);
     qs.set("limit", "200");
-    const data = await apiJson("/.netlify/functions/user-events?" + qs.toString());
+    let data;
+    try {
+      data = await apiJson("/.netlify/functions/user-events?" + qs.toString());
+    } catch (e) {
+      showToast((e.message || "Failed to load logs") + (e.status ? ` (${e.status})` : ""), false);
+      return;
+    }
     const body = $("#userEventsTable tbody");
     body.innerHTML = "";
 
-    for (const ev of (data?.events || [])) {
+    // Tally calls + avg cost from the events
+    const rows = data?.events || [];
+    const totalCalls = rows.length;
+    const totalCostCents = rows.reduce((s, r) => s + Number(r.cost_cents || 0), 0);
+    if ($("#sTotalCalls")) $("#sTotalCalls").textContent = totalCalls.toLocaleString();
+    if ($("#sAvgCost") && totalCalls) $("#sAvgCost").textContent = money(Math.round(totalCostCents / totalCalls));
+
+    // Provider breakdown table
+    const provRows = data?.summary_by_provider || [];
+    const provBody = $("#providerTableBody");
+    const provDiv  = $("#providerBreakdown");
+    if (provBody && provRows.length) {
+      provBody.innerHTML = provRows.map(r =>
+        `<tr><td>${escapeHtml(r.provider)}</td><td>${Number(r.calls || 0).toLocaleString()}</td><td>${money(r.cost_cents)}</td><td>${Number(r.input_tokens || 0).toLocaleString()}</td><td>${Number(r.output_tokens || 0).toLocaleString()}</td></tr>`
+      ).join("");
+      if (provDiv) provDiv.style.display = "block";
+    } else if (provDiv) {
+      provDiv.style.display = "none";
+    }
+
+    for (const ev of rows) {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${new Date(ev.created_at).toLocaleString()}</td>
@@ -189,6 +255,25 @@ const store = {
       body.appendChild(tr);
     }
     return data;
+  }
+
+  // ── Live polling — auto-refreshes caps/calls/cost every 30s when connected ──
+  let _livePollingTimer = null;
+
+  function startLivePolling() {
+    stopLivePolling();
+    _livePollingTimer = setInterval(async () => {
+      if (!store.key) return stopLivePolling();
+      const m = $("#monthPicker")?.value?.trim() || "";
+      try { await loadSummary(m); } catch {}
+      try { await loadLogs(m);    } catch {}
+    }, 30_000);
+  }
+
+  function stopLivePolling() {
+    if (_livePollingTimer) { clearInterval(_livePollingTimer); _livePollingTimer = null; }
+    const dot = $("#livePollingDot");
+    if (dot) dot.style.display = "none";
   }
 
   async function loadDevices(){
@@ -251,8 +336,8 @@ const store = {
   async function refreshAll(){
     const month = $("#monthPicker").value.trim();
     const m = month || "";
-    await loadSummary(m);
-    await loadLogs(m);
+    try { await loadSummary(m); } catch(e) { showToast(e.message || "Failed to load summary", false); }
+    try { await loadLogs(m);    } catch(e) { showToast(e.message || "Failed to load logs", false); }
   }
 
   async function connect(){
@@ -265,6 +350,7 @@ const store = {
       setConnected(true);
       showToast("Connected.", true);
       switchTab("overview");
+      startLivePolling();
 
       // prefill export month picker
       const exp = $("#exportMonthPicker");
@@ -276,13 +362,26 @@ const store = {
     }
   }
 
+  // --- Show/hide key input toggle ---
+  (function(){
+    const inp = $("#kaixuKey");
+    const btn = $("#toggleKeyInput");
+    if (!btn || !inp) return;
+    btn.addEventListener("click", () => {
+      const hidden = inp.type === "password";
+      inp.type = hidden ? "text" : "password";
+      btn.textContent = hidden ? "Hide" : "Show";
+    });
+  })();
+
   // --- UI wiring ---
   $("#connectBtn").addEventListener("click", connect);
   $("#monthBtn").addEventListener("click", refreshAll);
-  $("#disconnectBtn").addEventListener("click", ()=>{
+  $("#disconnectBtn")?.addEventListener("click", ()=>{
     store.key = "";
     keyInput.value = "";
     setConnected(false);
+    stopLivePolling();
     showToast("Disconnected.", true);
   });
 
@@ -353,6 +452,143 @@ const store = {
       if (exp) exp.value = monthKeyUTC();
     }
   })();
+
+  // ── 24/7 Gateway Heartbeat Monitor ───────────────────────────────────────
+  // Reads data recorded by the scheduled function (gateway-heartbeat.mjs)
+  // Runs on page load and auto-refreshes every 60 s. No user action needed.
+
+  function renderBars(containerId, items) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = "";
+    const sample = items.slice(-288); // max 24h
+    sample.forEach(r => {
+      const bar = document.createElement("div");
+      const ms = Number(r.ms || 0);
+      // height proportional to response time, clamp 4–40px
+      const h = Math.max(4, Math.min(40, 4 + (ms / 2000) * 36));
+      bar.style.cssText = `width:3px;height:${h}px;border-radius:2px;flex-shrink:0;background:${r.ok ? "#4ade80" : "#f87171"};opacity:0.85;`;
+      bar.title = `${new Date(r.ts).toLocaleString()} | ${r.ok ? "OK" : "DOWN"} | ${ms}ms`;
+      el.appendChild(bar);
+    });
+  }
+
+  function renderHbTable(tbodyId, items) {
+    const tbody = document.getElementById(tbodyId);
+    if (!tbody) return;
+    const recent = items.slice().reverse().slice(0, 50);
+    tbody.innerHTML = recent.map(r => {
+      const t = new Date(r.ts).toLocaleString();
+      const ok = r.ok ? `<span style="color:#4ade80;">\u2714 UP</span>` : `<span style="color:#f87171;">\u2716 DOWN</span>`;
+      const http = r.status != null ? r.status : "-";
+      const db = r.db === true ? "\u2714" : r.db === false ? "\u2716" : "-";
+      const ms = r.ms != null ? r.ms + " ms" : "-";
+      const err = escapeHtml(r.error || "");
+      return `<tr><td>${t}</td><td>${ok}</td><td>${http}</td><td>${db}</td><td>${ms}</td><td style="color:rgba(255,100,100,0.85);">${err}</td></tr>`;
+    }).join("");
+  }
+
+  function calcUptime(items) {
+    if (!items.length) return null;
+    const ok = items.filter(r => r.ok).length;
+    return ((ok / items.length) * 100).toFixed(1) + "%";
+  }
+
+  async function loadHeartbeat(includeHistory) {
+    const qs = includeHistory ? "?history=1" : "";
+    try {
+      const base = normalizeBase(baseStore.apiBase);
+      const url = (base || "") + "/.netlify/functions/gateway-heartbeat-read" + qs;
+      const res = await fetch(url);
+      return await res.json();
+    } catch { return null; }
+  }
+
+  async function refreshStatusStrip() {
+    const data = await loadHeartbeat(true);
+    const dot = document.getElementById("hbDot");
+    const statusEl = document.getElementById("hbStatus");
+    const checkedEl = document.getElementById("hbLastChecked");
+    const uptimeEl = document.getElementById("hbUptimePct");
+
+    if (!data || !data.last) {
+      if (dot) dot.style.background = "#888";
+      if (statusEl) statusEl.textContent = "No heartbeat data yet — first run in up to 5 min";
+      return;
+    }
+
+    const last = data.last;
+    const items = data.history?.items || [];
+    const ok = last.ok;
+
+    if (dot) dot.style.background = ok ? "#4ade80" : "#f87171";
+    const streak = data.failures?.streak || 0;
+    if (statusEl) statusEl.textContent = ok
+      ? `UP · ${last.ms} ms${last.db_ok === false ? " · ⚠ DB degraded" : ""}`
+      : `DOWN · ${last.error_type || "error"}: ${last.error || "no response"}${streak > 1 ? ` · ${streak} consecutive failures` : ""}`;
+    if (checkedEl) checkedEl.textContent = last.ts ? `Last check: ${new Date(last.ts).toLocaleString()}` : "";
+    if (uptimeEl && items.length) uptimeEl.textContent = `24h uptime: ${calcUptime(items)}`;
+
+    renderBars("hbBars", items);
+    renderHbTable("hbTableBody", items.slice(-20));
+  }
+
+  async function refreshMonitorTab() {
+    const data = await loadHeartbeat(true);
+    const last = data?.last;
+    const items = data?.history?.items || [];
+
+    const statusVal = document.getElementById("monStatusVal");
+    const msVal = document.getElementById("monMsVal");
+    const uptimeVal = document.getElementById("monUptimeVal");
+    const checkedVal = document.getElementById("monCheckedVal");
+    const lastRefresh = document.getElementById("monLastRefresh");
+
+    if (lastRefresh) lastRefresh.textContent = `Refreshed: ${new Date().toLocaleTimeString()}`;
+
+    if (!last) {
+      if (statusVal) statusVal.textContent = "No data yet";
+      return;
+    }
+    if (statusVal) {
+      const streak = data?.failures?.streak || 0;
+      statusVal.textContent = last.ok ? "✔ UP" : "✖ DOWN";
+      statusVal.style.color = last.ok ? "#4ade80" : "#f87171";
+      if (!last.ok && streak > 0) {
+        statusVal.textContent += ` (${streak} in a row)`;
+      }
+      if (last.db_ok === false) {
+        statusVal.textContent += " · ⚠ DB";
+      }
+    }
+    if (msVal) msVal.textContent = last.ms != null ? last.ms + " ms" : "—";
+    if (uptimeVal) uptimeVal.textContent = items.length ? calcUptime(items) : "—";
+    if (checkedVal && last.ts) checkedVal.textContent = new Date(last.ts).toLocaleString();
+
+    renderBars("monBars", items);
+    renderHbTable("monTableBody", items);
+  }
+
+  // Auto-start monitoring on page load — no button press needed
+  refreshStatusStrip();
+  setInterval(refreshStatusStrip, 30_000); // refresh strip every 30 s
+
+  // History toggle for the strip
+  const hbHistBtn = document.getElementById("hbHistoryToggle");
+  const hbHistPanel = document.getElementById("hbHistoryPanel");
+  if (hbHistBtn && hbHistPanel) {
+    hbHistBtn.addEventListener("click", () => {
+      const open = hbHistPanel.style.display !== "none";
+      hbHistPanel.style.display = open ? "none" : "block";
+      hbHistBtn.textContent = open ? "History" : "Hide History";
+    });
+  }
+
+  // Monitor tab refresh button
+  const monRefreshBtn = document.getElementById("monRefreshBtn");
+  if (monRefreshBtn) {
+    monRefreshBtn.addEventListener("click", () => refreshMonitorTab().catch(() => {}));
+  }
 
 
   // Base switch UI (optional: only runs if the modal exists on the page)

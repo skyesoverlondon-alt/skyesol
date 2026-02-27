@@ -48,12 +48,6 @@
   var tokenType = detectToken();
 
   waitForWidget(function (identity) {
-    /* Explicitly set the API URL so the widget works on custom domains
-       and doesn't fail to auto-detect the Netlify Identity instance.  */
-    identity.init({
-      APIUrl: "https://skyesol.netlify.app/.netlify/identity"
-    });
-
     /* If a token was found in the URL hash, open the widget so the
        Identity service can consume it and complete the action.        */
     if (tokenType) {
@@ -63,14 +57,30 @@
     }
 
     /* After any login (including the one triggered by confirmation),
-       redirect the user to a useful authenticated page.               */
-    identity.on("login", function () {
-      /* Use replaceState to drop the token hash from the URL so the
-         user can't accidentally re-trigger it on a page refresh.      */
+       smart-route the user based on role and first-visit status.      */
+    identity.on("login", function (user) {
+      /* Drop the token hash from the URL to prevent accidental replay. */
       if (window.history && window.history.replaceState) {
         window.history.replaceState(null, "", window.location.pathname);
       }
-      document.location.href = "/admin/";
+
+      var roles = (user && user.app_metadata && user.app_metadata.roles) || [];
+
+      /* Admins always go to the admin console. */
+      if (roles.indexOf("admin") !== -1) {
+        document.location.href = "/admin/";
+        return;
+      }
+
+      /* First-time members get the welcome/onboarding page;
+         returning members go straight to the member hub.             */
+      var seen = localStorage.getItem("sol_welcome_seen");
+      if (!seen) {
+        localStorage.setItem("sol_welcome_seen", "1");
+        document.location.href = "/welcome/";
+      } else {
+        document.location.href = "/members/";
+      }
     });
   });
 })();

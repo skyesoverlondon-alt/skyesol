@@ -27,19 +27,43 @@ GATEWAY DASHBOARD URL (browser / admin):
   https://skyesol.netlify.app/gateway
   (canonical redirect → /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html)
 
-KAIXU_GATEWAY_BASE = https://skyesol.netlify.app
+UPSTREAM GATEWAY (server-side only — never called directly from the browser):
+  https://skyesol.netlify.app/.netlify/functions/gateway-chat
+  https://skyesol.netlify.app/.netlify/functions/gateway-stream
 
-Non-stream endpoint:
-POST https://skyesol.netlify.app/.netlify/functions/gateway-chat
+⚠️  CORS RULE — CRITICAL: Browser apps MUST NOT fetch skyesol.netlify.app directly.
+    Cross-origin requests with an Authorization header trigger a CORS preflight
+    (OPTIONS). skyesol.netlify.app does not return CORS headers for OPTIONS, so
+    the browser blocks the fetch before it is ever sent. All AI fetches will fail.
 
-Streaming SSE endpoint:
-POST https://skyesol.netlify.app/.netlify/functions/gateway-stream
+CORRECT ROUTING PATTERN (MANDATORY FOR ALL APPS):
 
-Health / smoke-test endpoint:
-GET  https://skyesol.netlify.app/.netlify/functions/health
+  Each app is deployed on its own Netlify site and must have local proxy Netlify
+  functions that forward to skyesol server-side (no CORS involved):
+
+    netlify/functions/gateway-chat.js    ← proxies to skyesol gateway-chat
+    netlify/functions/gateway-stream.js  ← proxies to skyesol gateway-stream
+
+  In the browser, apps call their OWN site's functions (same-origin):
+    POST /.netlify/functions/gateway-chat
+    POST /.netlify/functions/gateway-stream
+
+  The GATEWAY_PRIMARY constant in every app must be:
+    const IS_LOCAL = (location.hostname === 'localhost' || ...);
+    const GATEWAY_PRIMARY = IS_LOCAL ? '/api' : '';   // '' = same-origin in prod
+    // fetch: `${GATEWAY_PRIMARY}/.netlify/functions/gateway-chat`
+
+  Local dev uses the /api/* redirect in netlify.toml:
+    [[redirects]]
+      from   = "/api/*"
+      to     = "https://skyesol.netlify.app/.netlify/functions/:splat"
+      status = 200
+
+Health / smoke-test endpoint (direct call is fine — HEAD request, no auth):
+  GET https://skyesol.netlify.app/.netlify/functions/health
 
 Authorization header (BOTH chat & stream endpoints):
-Authorization: Bearer <KAIXU_VIRTUAL_KEY>
+  Authorization: Bearer <KAIXU_VIRTUAL_KEY>
 
 Streaming requirement:
 
@@ -158,11 +182,10 @@ NETLIFY CONFIGURATION — netlify.toml
   [functions]
     directory = "netlify/functions"
 
-  NOTE: This site does NOT use the /api/* proxy redirect pattern.
-  Client apps that consume the gateway should call the function URLs directly:
-    POST https://skyesol.netlify.app/.netlify/functions/gateway-chat
-    POST https://skyesol.netlify.app/.netlify/functions/gateway-stream
-  Or use a proxy redirect in THEIR netlify.toml:
+  NOTE: skyesol.netlify.app does NOT return CORS headers — browser apps must
+  NEVER fetch it directly. Each client app must deploy its own gateway-chat.js
+  and gateway-stream.js proxy functions (see CORRECT ROUTING PATTERN above).
+  The /api/* redirect in the client app's netlify.toml covers local dev:
     [[redirects]]
       from   = "/api/*"
       to     = "https://skyesol.netlify.app/.netlify/functions/:splat"

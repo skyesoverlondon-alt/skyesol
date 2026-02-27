@@ -11,7 +11,8 @@
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#05050a">
 
-  <!-- Netlify Identity Widget — handles signup, login, email confirmation links -->
+  <!-- Netlify Identity Widget — set API URL before widget loads so auto-init points at the right site -->
+  <script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <style>
@@ -329,9 +330,6 @@
     }
 
     if (window.netlifyIdentity) {
-      netlifyIdentity.init({
-        APIUrl: 'https://skyesol.netlify.app/.netlify/identity'
-      });
       netlifyIdentity.on('init', user => applyUser(user));
       netlifyIdentity.on('login', user => {
         applyUser(user);
