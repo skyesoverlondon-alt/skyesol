@@ -2,12 +2,12 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-02-26T20:14:11.235Z",
-  "totalItems": 728,
+  "generatedAt": "2026-02-27T07:38:07.845Z",
+  "totalItems": 772,
   "categories": [
     {
       "name": "root",
-      "count": 29,
+      "count": 27,
       "items": [
         {
           "urlPath": "/404.html",
@@ -62,14 +62,6 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "credibility.html",
           "title": "Credibility Archive — Skyes Over London LC",
-          "ext": ".html",
-          "category": "root"
-        },
-        {
-          "urlPath": "/dashboard.html",
-          "prettyPath": null,
-          "file": "dashboard.html",
-          "title": "Dashboard · SOLEnterprises Monitoring",
           "ext": ".html",
           "category": "root"
         },
@@ -232,14 +224,6 @@ export const SITE_MENU = {
           "title": null,
           "ext": ".js",
           "category": "root"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Untitled.ipynb",
-          "title": null,
-          "ext": ".ipynb",
-          "category": "root"
         }
       ]
     },
@@ -272,30 +256,16 @@ export const SITE_MENU = {
       ]
     },
     {
-      "name": "about",
+      "name": "account",
       "count": 1,
       "items": [
         {
-          "urlPath": "/about/index.html",
-          "prettyPath": "/about/",
-          "file": "about/index.html",
-          "title": "About the Founder — Skyes Over London LC",
+          "urlPath": "/account/index.html",
+          "prettyPath": "/account/",
+          "file": "account/index.html",
+          "title": "Account · SOLEnterprises",
           "ext": ".html",
-          "category": "about"
-        }
-      ]
-    },
-    {
-      "name": "admin",
-      "count": 1,
-      "items": [
-        {
-          "urlPath": "/admin/index.html",
-          "prettyPath": "/admin/",
-          "file": "admin/index.html",
-          "title": "Admin · Skyes Over London LC",
-          "ext": ".html",
-          "category": "admin"
+          "category": "account"
         }
       ]
     },
@@ -310,34 +280,6 @@ export const SITE_MENU = {
           "title": null,
           "ext": "",
           "category": "APP IDEAS"
-        }
-      ]
-    },
-    {
-      "name": "arizona-llc-cost-breakdown",
-      "count": 1,
-      "items": [
-        {
-          "urlPath": "/arizona-llc-cost-breakdown/index.html",
-          "prettyPath": "/arizona-llc-cost-breakdown/",
-          "file": "arizona-llc-cost-breakdown/index.html",
-          "title": null,
-          "ext": ".html",
-          "category": "arizona-llc-cost-breakdown"
-        }
-      ]
-    },
-    {
-      "name": "arizona-tpt-license-who-needs-it",
-      "count": 1,
-      "items": [
-        {
-          "urlPath": "/arizona-tpt-license-who-needs-it/index.html",
-          "prettyPath": "/arizona-tpt-license-who-needs-it/",
-          "file": "arizona-tpt-license-who-needs-it/index.html",
-          "title": null,
-          "ext": ".html",
-          "category": "arizona-tpt-license-who-needs-it"
         }
       ]
     },
@@ -365,16 +307,8 @@ export const SITE_MENU = {
     },
     {
       "name": "blog",
-      "count": 3,
+      "count": 2,
       "items": [
-        {
-          "urlPath": "/blog/index.html",
-          "prettyPath": "/blog/",
-          "file": "blog/index.html",
-          "title": "Blog · Skyes Over London LC",
-          "ext": ".html",
-          "category": "blog"
-        },
         {
           "urlPath": "/blog/posts/my-new-post.html",
           "prettyPath": null,
@@ -395,7 +329,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Blogs",
-      "count": 235,
+      "count": 226,
       "items": [
         {
           "urlPath": "/Blogs/13th%20Sole%20Promotions/Establishing-Business-Development-Firm-Phoenix-AZ.html",
@@ -1806,14 +1740,6 @@ export const SITE_MENU = {
           "category": "Blogs"
         },
         {
-          "urlPath": "/Blogs/Editorials/WebPile%20Pro%E2%80%94Monaco%20Editor.html",
-          "prettyPath": null,
-          "file": "Blogs/Editorials/WebPile Pro—Monaco Editor.html",
-          "title": null,
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
           "urlPath": "/Blogs/Houston%20Texas%20Devs%20%26%20AI/houston-ai-bmc-software.html",
           "prettyPath": null,
           "file": "Blogs/Houston Texas Devs & AI/houston-ai-bmc-software.html",
@@ -2022,54 +1948,6 @@ export const SITE_MENU = {
           "category": "Blogs"
         },
         {
-          "urlPath": "/Blogs/Phoenix%20Arizona/arizona-llc-cost-breakdown/index.html",
-          "prettyPath": "/Blogs/Phoenix%20Arizona/arizona-llc-cost-breakdown/",
-          "file": "Blogs/Phoenix Arizona/arizona-llc-cost-breakdown/index.html",
-          "title": "Arizona LLC Cost Breakdown",
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
-          "urlPath": "/Blogs/Phoenix%20Arizona/arizona-tpt-license-who-needs-it/index.html",
-          "prettyPath": "/Blogs/Phoenix%20Arizona/arizona-tpt-license-who-needs-it/",
-          "file": "Blogs/Phoenix Arizona/arizona-tpt-license-who-needs-it/index.html",
-          "title": "Arizona TPT License: Who Needs It?",
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
-          "urlPath": "/Blogs/Phoenix%20Arizona/how-to-get-an-ein-arizona/index.html",
-          "prettyPath": "/Blogs/Phoenix%20Arizona/how-to-get-an-ein-arizona/",
-          "file": "Blogs/Phoenix Arizona/how-to-get-an-ein-arizona/index.html",
-          "title": "How to Get an EIN in Arizona",
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
-          "urlPath": "/Blogs/Phoenix%20Arizona/how-to-start-an-llc-in-arizona-phoenix/index.html",
-          "prettyPath": "/Blogs/Phoenix%20Arizona/how-to-start-an-llc-in-arizona-phoenix/",
-          "file": "Blogs/Phoenix Arizona/how-to-start-an-llc-in-arizona-phoenix/index.html",
-          "title": "How to Start an LLC in Arizona (Phoenix)",
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
-          "urlPath": "/Blogs/Phoenix%20Arizona/phoenix-business-license-requirements/index.html",
-          "prettyPath": "/Blogs/Phoenix%20Arizona/phoenix-business-license-requirements/",
-          "file": "Blogs/Phoenix Arizona/phoenix-business-license-requirements/index.html",
-          "title": "Phoenix Business License Requirements",
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
-          "urlPath": "/Blogs/Phoenix%20Arizona/phoenix-start-business-llc-compliance-playbook/index.html",
-          "prettyPath": "/Blogs/Phoenix%20Arizona/phoenix-start-business-llc-compliance-playbook/",
-          "file": "Blogs/Phoenix Arizona/phoenix-start-business-llc-compliance-playbook/index.html",
-          "title": "Phoenix Start Business & LLC Compliance Playbook",
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
           "urlPath": "/Blogs/PhoenixValleyBlogHome.html",
           "prettyPath": null,
           "file": "Blogs/PhoenixValleyBlogHome.html",
@@ -2190,14 +2068,6 @@ export const SITE_MENU = {
           "category": "Blogs"
         },
         {
-          "urlPath": "/Blogs/sol-ops-field-brief.html",
-          "prettyPath": null,
-          "file": "Blogs/sol-ops-field-brief.html",
-          "title": null,
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
           "urlPath": "/Blogs/web-development-phoenix-az-apex-operator-playbook.html",
           "prettyPath": null,
           "file": "Blogs/web-development-phoenix-az-apex-operator-playbook.html",
@@ -2210,14 +2080,6 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Blogs/Web Development in Phoenix, AZ.html",
           "title": "Web Development in Phoenix, AZ | Modern Websites, SEO, Speed & Conversions (2026 Guide)",
-          "ext": ".html",
-          "category": "Blogs"
-        },
-        {
-          "urlPath": "/Blogs/What-Even-Is-SEO.html",
-          "prettyPath": null,
-          "file": "Blogs/What-Even-Is-SEO.html",
-          "title": null,
           "ext": ".html",
           "category": "Blogs"
         },
@@ -3135,21 +2997,13 @@ export const SITE_MENU = {
     },
     {
       "name": "gateway",
-      "count": 11,
+      "count": 10,
       "items": [
         {
           "urlPath": "/gateway/dashboard.html",
           "prettyPath": null,
           "file": "gateway/dashboard.html",
           "title": "Kaixu Gateway Dashboard",
-          "ext": ".html",
-          "category": "gateway"
-        },
-        {
-          "urlPath": "/gateway/gate-proofx.html",
-          "prettyPath": null,
-          "file": "gateway/gate-proofx.html",
-          "title": "Gate Proofx",
           "ext": ".html",
           "category": "gateway"
         },
@@ -3242,34 +3096,6 @@ export const SITE_MENU = {
       ]
     },
     {
-      "name": "how-to-get-an-ein-arizona",
-      "count": 1,
-      "items": [
-        {
-          "urlPath": "/how-to-get-an-ein-arizona/index.html",
-          "prettyPath": "/how-to-get-an-ein-arizona/",
-          "file": "how-to-get-an-ein-arizona/index.html",
-          "title": null,
-          "ext": ".html",
-          "category": "how-to-get-an-ein-arizona"
-        }
-      ]
-    },
-    {
-      "name": "how-to-start-an-llc-in-arizona-phoenix",
-      "count": 1,
-      "items": [
-        {
-          "urlPath": "/how-to-start-an-llc-in-arizona-phoenix/index.html",
-          "prettyPath": "/how-to-start-an-llc-in-arizona-phoenix/",
-          "file": "how-to-start-an-llc-in-arizona-phoenix/index.html",
-          "title": null,
-          "ext": ".html",
-          "category": "how-to-start-an-llc-in-arizona-phoenix"
-        }
-      ]
-    },
-    {
       "name": "index",
       "count": 1,
       "items": [
@@ -3347,13 +3173,53 @@ export const SITE_MENU = {
     },
     {
       "name": "kAIxu",
-      "count": 2,
+      "count": 17,
       "items": [
+        {
+          "urlPath": "/kAIxu/docs.html",
+          "prettyPath": null,
+          "file": "kAIxu/docs.html",
+          "title": "Docs | kAIxU 6.7 | Skyes Over London LC",
+          "ext": ".html",
+          "category": "kAIxu"
+        },
         {
           "urlPath": "/kAIxu/index.html",
           "prettyPath": "/kAIxu/",
           "file": "kAIxu/index.html",
-          "title": null,
+          "title": "kAIxU 6.7 | Skyes Over London LC",
+          "ext": ".html",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": "/kAIxu/Its-kAIxU/k1.html",
+          "prettyPath": null,
+          "file": "kAIxu/Its-kAIxU/k1.html",
+          "title": "Skyes Over London LC - Kaixu AI",
+          "ext": ".html",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": "/kAIxu/Its-kAIxU/k2.html",
+          "prettyPath": null,
+          "file": "kAIxu/Its-kAIxU/k2.html",
+          "title": "Skyes Over London LC - Kaixu AI",
+          "ext": ".html",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": "/kAIxu/Its-kAIxU/k3.html",
+          "prettyPath": null,
+          "file": "kAIxu/Its-kAIxU/k3.html",
+          "title": "kAIxu 6.7 Deep Dive | Skyes Over London LC",
+          "ext": ".html",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": "/kAIxu/pricing.html",
+          "prettyPath": null,
+          "file": "kAIxu/pricing.html",
+          "title": "Pricing | kAIxU 6.7 | Skyes Over London LC",
           "ext": ".html",
           "category": "kAIxu"
         },
@@ -3361,8 +3227,88 @@ export const SITE_MENU = {
           "urlPath": "/kAIxu/RequestKaixuAPIKey.html",
           "prettyPath": null,
           "file": "kAIxu/RequestKaixuAPIKey.html",
-          "title": null,
+          "title": "Request a kAIxu API Key | Skyes Over London LC",
           "ext": ".html",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": "/kAIxu/trust.html",
+          "prettyPath": null,
+          "file": "kAIxu/trust.html",
+          "title": "Trust | kAIxU 6.7 | Skyes Over London LC",
+          "ext": ".html",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "kAIxu/_redirects",
+          "title": null,
+          "ext": "",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "kAIxu/assets/favicon.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "kAIxu/assets/site.js",
+          "title": null,
+          "ext": ".js",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "kAIxu/assets/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "kAIxu/Its-kAIxU/assets/favicon.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "kAIxu/Its-kAIxU/assets/site.js",
+          "title": null,
+          "ext": ".js",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "kAIxu/Its-kAIxU/assets/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "kAIxu/robots.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "kAIxu/sitemap.xml",
+          "title": null,
+          "ext": ".xml",
           "category": "kAIxu"
         }
       ]
@@ -3398,16 +3344,70 @@ export const SITE_MENU = {
       ]
     },
     {
-      "name": "network",
+      "name": "lib",
+      "count": 6,
+      "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "lib/db.js",
+          "title": null,
+          "ext": ".js",
+          "category": "lib"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "lib/env.js",
+          "title": null,
+          "ext": ".js",
+          "category": "lib"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "lib/gatewayClient.js",
+          "title": null,
+          "ext": ".js",
+          "category": "lib"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "lib/http.js",
+          "title": null,
+          "ext": ".js",
+          "category": "lib"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "lib/rag.js",
+          "title": null,
+          "ext": ".js",
+          "category": "lib"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "lib/systemPrompt.js",
+          "title": null,
+          "ext": ".js",
+          "category": "lib"
+        }
+      ]
+    },
+    {
+      "name": "members",
       "count": 1,
       "items": [
         {
-          "urlPath": "/network/index.html",
-          "prettyPath": "/network/",
-          "file": "network/index.html",
-          "title": "SOLE Network — SOLEnterprises Ecosystem",
+          "urlPath": "/members/index.html",
+          "prettyPath": "/members/",
+          "file": "members/index.html",
+          "title": "Member Hub · SOLEnterprises",
           "ext": ".html",
-          "category": "network"
+          "category": "members"
         }
       ]
     },
@@ -3448,34 +3448,6 @@ export const SITE_MENU = {
       ]
     },
     {
-      "name": "phoenix-business-license-requirements",
-      "count": 1,
-      "items": [
-        {
-          "urlPath": "/phoenix-business-license-requirements/index.html",
-          "prettyPath": "/phoenix-business-license-requirements/",
-          "file": "phoenix-business-license-requirements/index.html",
-          "title": null,
-          "ext": ".html",
-          "category": "phoenix-business-license-requirements"
-        }
-      ]
-    },
-    {
-      "name": "phoenix-start-business-llc-compliance-playbook",
-      "count": 1,
-      "items": [
-        {
-          "urlPath": "/phoenix-start-business-llc-compliance-playbook/index.html",
-          "prettyPath": "/phoenix-start-business-llc-compliance-playbook/",
-          "file": "phoenix-start-business-llc-compliance-playbook/index.html",
-          "title": null,
-          "ext": ".html",
-          "category": "phoenix-start-business-llc-compliance-playbook"
-        }
-      ]
-    },
-    {
       "name": "platforms",
       "count": 1,
       "items": [
@@ -3491,7 +3463,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Platforms-Apps-Infrastructure",
-      "count": 201,
+      "count": 244,
       "items": [
         {
           "urlPath": "/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html",
@@ -3590,34 +3562,170 @@ export const SITE_MENU = {
           "category": "Platforms-Apps-Infrastructure"
         },
         {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/",
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html",
+          "title": "Skyes Over London — kAIxU PDF Suite",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/01-valuation.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/01-valuation.html",
+          "title": "01 — Valuation Forge",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/02-trust-pack.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/02-trust-pack.html",
+          "title": "02 — Trust Pack Generator",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/03-contract-kit.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/03-contract-kit.html",
+          "title": "03 — Contract Kit Builder",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/04-proposal-engine.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/04-proposal-engine.html",
+          "title": "04 — Proposal Engine",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/05-invoice-receipt.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/05-invoice-receipt.html",
+          "title": "05 — Invoice + Receipt Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/06-commission-statement.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/06-commission-statement.html",
+          "title": "06 — Commission Statement",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/07-lead-intelligence.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/07-lead-intelligence.html",
+          "title": "07 — Lead Intelligence",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/08-brand-book.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/08-brand-book.html",
+          "title": "08 — Brand Identity Packet",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/09-onboarding-binder.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/09-onboarding-binder.html",
+          "title": "09 — Onboarding Binder",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/10-audit-snapshot.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/10-audit-snapshot.html",
+          "title": "10 — Audit Snapshot",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/11-incident-postmortem.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/11-incident-postmortem.html",
+          "title": "11 — Incident Postmortem",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/12-executive-brief.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/12-executive-brief.html",
+          "title": "12 — Executive Brief",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/13-offer-letter.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/13-offer-letter.html",
+          "title": "13 — Offer Letter",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/14-service-catalog.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/14-service-catalog.html",
+          "title": "14 — Service Catalog",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/15-certificate-factory.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/15-certificate-factory.html",
+          "title": "15 — Certificate Factory",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/16-policy-pack.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/16-policy-pack.html",
+          "title": "16 — Policy Pack",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/17-handoff-binder.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/17-handoff-binder.html",
+          "title": "17 — Handoff Binder",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/18-before-after-report.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/routes/18-before-after-report.html",
+          "title": "18 — Before/After Report",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/tool.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/tool.html",
+          "title": "Skyes Over London — kAIxU PDF Suite",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
           "urlPath": "/Platforms-Apps-Infrastructure/kAIxUBrandKit/index.html",
           "prettyPath": "/Platforms-Apps-Infrastructure/kAIxUBrandKit/",
           "file": "Platforms-Apps-Infrastructure/kAIxUBrandKit/index.html",
           "title": "Skyes Over London | Brand Kit + kAIxU",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUCHat/kAIxUchat.html",
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/kAIxUCHat/kAIxUchat.html",
-          "title": null,
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/dashboard.html",
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/dashboard.html",
-          "title": "Kaixu Gateway Dashboard",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html",
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html",
-          "title": "Gate Proofx",
           "ext": ".html",
           "category": "Platforms-Apps-Infrastructure"
         },
@@ -3662,19 +3770,27 @@ export const SITE_MENU = {
           "category": "Platforms-Apps-Infrastructure"
         },
         {
-          "urlPath": null,
+          "urlPath": "/Platforms-Apps-Infrastructure/QR-Code-Generator/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/QR-Code-Generator/",
+          "file": "Platforms-Apps-Infrastructure/QR-Code-Generator/index.html",
+          "title": "QR Code Generator | SOLEnterprises",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/RetroFighter.html",
           "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png",
-          "title": null,
-          "ext": ".png",
+          "file": "Platforms-Apps-Infrastructure/RetroFighter.html",
+          "title": "Retro Fighter - Skyes Sol",
+          "ext": ".html",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
           "urlPath": null,
           "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/logo.svg",
+          "file": "Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png",
           "title": null,
-          "ext": ".svg",
+          "ext": ".png",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
@@ -3952,6 +4068,158 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/kaixuGateway.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/skyfx.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/tools.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/tutorial.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/manifest.webmanifest",
+          "title": null,
+          "ext": ".webmanifest",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/netlify.toml",
+          "title": null,
+          "ext": ".toml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/netlify/functions/attachment-upload.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/netlify/functions/blob-get.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/netlify/functions/blob-put.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/netlify/functions/client-error-report.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/netlify/functions/vault-delete.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/netlify/functions/vault-get.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/netlify/functions/vault-list.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/netlify/functions/vault-save.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/kAIxUBrandKit/netlify.toml",
           "title": null,
           "ext": ".toml",
@@ -4027,6 +4295,14 @@ export const SITE_MENU = {
           "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/style.css",
           "title": null,
           "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/three-bg-gate.js",
+          "title": null,
+          "ext": ".js",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
@@ -4177,6 +4453,14 @@ export const SITE_MENU = {
           "urlPath": null,
           "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/_lib/db.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/_lib/defaults.js",
           "title": null,
           "ext": ".js",
           "category": "Platforms-Apps-Infrastructure"
@@ -4521,6 +4805,14 @@ export const SITE_MENU = {
           "urlPath": null,
           "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-chat.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-embed.js",
           "title": null,
           "ext": ".js",
           "category": "Platforms-Apps-Infrastructure"
@@ -5016,6 +5308,14 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/sql/migrate_v5_to_v6_key_vault.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/sql/schema_v2.sql",
           "title": null,
           "ext": ".sql",
@@ -5099,6 +5399,22 @@ export const SITE_MENU = {
           "file": "Platforms-Apps-Infrastructure/LocalSeoSnapshot/sw.js",
           "title": null,
           "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/QR-Code-Generator/assets/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/QR-Code-Generator/assets/logo.png",
+          "title": null,
+          "ext": ".png",
           "category": "Platforms-Apps-Infrastructure"
         }
       ]
@@ -5223,7 +5539,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Services",
-      "count": 38,
+      "count": 39,
       "items": [
         {
           "urlPath": "/Services/ai-data-apps.html",
@@ -5454,6 +5770,14 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Services/SkyePWAForge/SkyePWAForge.html",
           "title": "PWA Conversion — SkyePWA Forge™ (Website-as-App)",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeWay2Success/index.html",
+          "prettyPath": "/Services/SkyeWay2Success/",
+          "file": "Services/SkyeWay2Success/index.html",
+          "title": "SkyeWay to Success — Business Development Coaching | SkyeHub OfficeSpace",
           "ext": ".html",
           "category": "Services"
         },
@@ -5931,7 +6255,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Valley Verified ",
-      "count": 12,
+      "count": 11,
       "items": [
         {
           "urlPath": "/Valley%20Verified%20/dakayla-clark.html",
@@ -6020,34 +6344,18 @@ export const SITE_MENU = {
           "title": "SOLE Drop — Systems That Hold (3D Spectacle)",
           "ext": ".html",
           "category": "Valley Verified "
-        },
-        {
-          "urlPath": "/Valley%20Verified%20/ValleyVerified.html",
-          "prettyPath": null,
-          "file": "Valley Verified /ValleyVerified.html",
-          "title": null,
-          "ext": ".html",
-          "category": "Valley Verified "
         }
       ]
     },
     {
       "name": "Valuationx",
-      "count": 15,
+      "count": 14,
       "items": [
         {
           "urlPath": "/Valuationx/Build-Valuation1.html",
           "prettyPath": null,
           "file": "Valuationx/Build-Valuation1.html",
           "title": "SkyeSol • Proof-Asset Valuation Report (2026) — Editable Web",
-          "ext": ".html",
-          "category": "Valuationx"
-        },
-        {
-          "urlPath": "/Valuationx/Build-Valuation2.html",
-          "prettyPath": null,
-          "file": "Valuationx/Build-Valuation2.html",
-          "title": null,
           "ext": ".html",
           "category": "Valuationx"
         },
@@ -6168,6 +6476,20 @@ export const SITE_MENU = {
           "title": "Client Vault · Skyes Over London LC",
           "ext": ".html",
           "category": "vault"
+        }
+      ]
+    },
+    {
+      "name": "welcome",
+      "count": 1,
+      "items": [
+        {
+          "urlPath": "/welcome/index.html",
+          "prettyPath": "/welcome/",
+          "file": "welcome/index.html",
+          "title": "Welcome to SOLEnterprises",
+          "ext": ".html",
+          "category": "welcome"
         }
       ]
     }

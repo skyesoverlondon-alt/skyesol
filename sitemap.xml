@@ -2341,6 +2341,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/RetroFighter.html</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://skyesol.netlify.app/platforms.html</loc>
     <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
