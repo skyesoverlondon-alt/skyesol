@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Admin · SOLEnterprises</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+</head>
+<body>
+  <canvas id="three-bg"></canvas>
+
+  <nav class="main-nav" id="mainNav">
+    <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="/index.html">Home</a>
+      <a href="/admin.html">Admin Console</a>
+      <a href="/platforms.html">Contractor Portal</a>
+      <a href="/admin-executive.html" class="active">Executive</a>
+    </div>
+  </nav>
+
+  <div class="hero-wrapper" style="min-height: 60vh;">
+    <div class="hero-grid" style="text-align: center; display: block;">
+      <h1 style="font-size: 3rem; margin-bottom: 20px;">EXECUTIVE ADMIN</h1>
+      <p class="hero-subtitle">Restricted Access · Ops & Executive Level Only</p>
+      
+      <div style="margin-top: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <div class="platform-card" style="width: 300px; text-align: left;">
+          <div class="card-icon">📊</div>
+          <h3>System Vitals</h3>
+          <p>Real-time ecosystem health, revenue metrics, and global alerts.</p>
+          <a href="#" class="card-link">View Dashboard →</a>
+        </div>
+        
+        <div class="platform-card" style="width: 300px; text-align: left;">
+          <div class="card-icon">🔐</div>
+          <h3>Security Audit</h3>
+          <p>Access logs, role management, and critical infrastructure controls.</p>
+          <a href="#" class="card-link">Manage Security →</a>
+        </div>
+
+        <div class="platform-card" style="width: 300px; text-align: left;">
+          <div class="card-icon">⚡</div>
+          <h3>Deployments</h3>
+          <p>Push pipeline status, patch approvals, and rollback controls.</p>
+          <a href="#" class="card-link">View Pipeline →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+    <p>© Skyes Over London LC / SOLEnterprises.</p>
+  </footer>
+
+  <script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="js/netlify-identity-init.js"></script>
+  <script src="js/three-bg.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
