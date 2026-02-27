@@ -46,6 +46,7 @@ const DEFAULTS = {
 
   // ── Monitoring / Archive ────────────────────────────────
   MONITOR_ARCHIVE_STORE:             "blobs",
+  BLOBS_STORE:                       "sol_growth",
   MONITOR_ARCHIVE_BATCH_SIZE:        "500",
   MONITOR_ARCHIVE_MAX_BATCHES:       "20",
   MONITOR_RETENTION_DAYS:            "30",
@@ -59,6 +60,7 @@ const DEFAULTS = {
   VOICE_TELEPHONY_USD_PER_MIN:       "0.0085",
   VOICE_RECORDING_USD_PER_MIN:       "0.0025",
   VOICE_MARKUP_PCT:                  "31",
+  VOICE_FALLBACK_TRANSFER_NUMBER:    "",
 };
 
 for (const [key, value] of Object.entries(DEFAULTS)) {
