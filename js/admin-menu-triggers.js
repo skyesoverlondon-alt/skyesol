@@ -35,7 +35,8 @@
     return has6 && has7;
   }
 
-  // --- Street Fighter HUD Setup ---
+  // --- Street Fighter HUD Setup REMOVED per user request ---
+  /*
   const hudStyles = document.createElement('style');
   hudStyles.textContent = `
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -44,131 +45,9 @@
       left: 20px;
       bottom: 20px;
       z-index: 100000;
-      font-family: 'Press Start 2P', monospace;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      pointer-events: none;
-      text-transform: uppercase;
-      text-align: left;
-      /* CRT effect scanlines */
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-      background-size: 100% 2px, 3px 100%;
-      padding: 10px;
-      border: 3px solid #ffcc00;
-      box-shadow: 0 0 10px #ffcc00, inset 0 0 20px rgba(0,0,0,0.8);
-      border-radius: 4px;
-      width: 280px;
-      opacity: 0.9;
-      transition: opacity 0.3s;
-      cursor: pointer;
-    }
-    #sf-hud:hover {
-      border-color: #fff;
-      box-shadow: 0 0 15px #ffcc00, inset 0 0 20px rgba(0,0,0,0.6);
-    }
-    #sf-hud.hidden { opacity: 0; }
-    
-    .hud-row { display: flex; align-items: center; justify-content: space-between; }
-    .hud-label { color: #f00; text-shadow: 1px 1px 0 #fff; font-size: 10px; margin-right: 8px; }
-    
-    .buffer-display {
-      font-size: 12px;
-      color: #0ff;
-      text-shadow: 0 0 5px #0ff;
-      letter-spacing: 2px;
-      overflow: hidden;
-      white-space: nowrap;
-      width: 100%;
-      height: 20px;
-      background: rgba(0,0,0,0.5);
-      padding: 2px 5px;
-      border: 1px solid #444;
-    }
-
-    .super-bar-container {
-      width: 100%;
-      height: 12px;
-      background: #333;
-      border: 1px solid #fff;
-      position: relative;
-      margin-top: 5px;
-    }
-    .super-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #00f, #0ff);
-      width: 0%;
-      transition: width 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    }
-    .super-text {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      display: flex; /* Centered text */
-      align-items: center; justify-content: center;
-      font-size: 8px;
-      color: #fff;
-      text-shadow: 1px 1px 0 #000;
-      z-index: 2;
-    }
-
-    .combo-overlay {
-      position: absolute;
-      top: -40px;
-      left: 10px;
-      color: #ff0;
-      font-size: 20px;
-      text-shadow: 2px 2px 0 #f00;
-      opacity: 0;
-      transform: scale(0.5);
-      transition: all 0.1s;
-    }
-    .combo-active {
-      opacity: 1;
-      transform: scale(1.2) rotate(-5deg);
-    }
-    
-    .ko-overlay {
-        position: fixed;
-        top: 0; left: 0; width: 100vw; height: 100vh;
-        background: rgba(255,255,255,0.9);
-        display: flex; align-items: center; justify-content: center;
-        font-size: 100px;
-        color: #f00;
-        text-shadow: 5px 5px 0 #000;
-        z-index: 200000;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.1s;
-    }
-    .ko-show { opacity: 1; }
-  `;
-  document.head.appendChild(hudStyles);
-
-  const hud = document.createElement('div');
-  hud.id = 'sf-hud';
-  hud.title = "Click to Play Retro Fighter";
-  hud.onclick = (e) => {
-    // Prevent interfering with buffer updates if they were typing
-    if(!codeBuffer) window.location.href = '/Platforms-Apps-Infrastructure/RetroFighter.html';
-  };
-  hud.innerHTML = `
-    <div class="hud-row">
-      <span class="hud-label">P1 INPUT</span>
-      <div class="buffer-display" id="hud-buffer"></div>
-    </div>
-    <div class="super-bar-container">
-      <div class="super-bar-fill" id="hud-super-fill"></div>
-      <div class="super-text">SUPER COMBO</div>
-    </div>
-    <div class="combo-overlay" id="hud-combo">0 HITS!</div>
-  `;
-  document.body.appendChild(hud);
-
-  const koScreen = document.createElement('div');
-  koScreen.className = 'ko-overlay';
-  koScreen.innerHTML = 'K.O.';
+  ...
   document.body.appendChild(koScreen);
+  */
 
   // Helper to map keys to icons/text
   function mapKeyToIcon(k) {

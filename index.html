@@ -186,8 +186,20 @@
   <a href="sitemap-visual.html">Site Map</a></div>
   <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">Third-party references included for historical context. No endorsement implied. © Skyes Over London LC / SOLEnterprises.</p>
 </footer>
-<a href="/admin-menu.html" class="floating-glow-purple" id="adminMenuFloatLink" style="display:block;">ADMIN MENU</a>
-<a href="/admin.html" class="floating-glow-neon" id="contractorPortalLink" style="display:block; bottom: 90px;">CONTRACTOR PORTAL</a>
+<!-- 
+  Button Stack (Bottom to Top):
+  1. Purple Admin Menu (Demon Key) - Bottom (20px)
+  2. Contractor Portal (Teal) - Above Purple (60px)
+  3. Blue Admin Menu - Above Contractor (100px)
+  4. Executive Admin (Red) - Top (140px)
+  (Retro Fighter Removed)
+-->
+<a href="/admin-menu.html" class="floating-glow-purple" id="btnPurple" style="display:block;">ADMIN MENU</a>
+<a href="/platforms.html" class="floating-glow-teal" id="btnContractor" style="display:block;">CONTRACTOR PORTAL</a>
+<a href="/admin.html" class="floating-glow-neon" id="btnBlue" style="display:block;">ADMIN CONSOLE</a>
+<a href="/admin-executive.html" class="floating-glow-red" id="btnExec" style="display:block;">EXECUTIVE ADMIN</a>
+
+<script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
 
 <script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>

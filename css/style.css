@@ -1,32 +1,4 @@
-/* Floating neon admin menu link — 50% reduced size */
-.floating-glow-neon {
-  animation: floatGlowBlue 4.5s ease-in-out infinite;
-  background: linear-gradient(135deg, rgba(138,99,255,0.22), rgba(58,111,216,0.18));
-  box-shadow: 0 0 9px 3px #8a63ff, 0 0 18px 6px #3a6fd8;
-  color: #e8e6ff;
-  border: 1px solid #8a63ff;
-  border-radius: 5px;
-  font-size: 0.475rem;
-  font-family: 'Fira Code', monospace;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 4px 7px;
-  position: fixed;
-  bottom: 125px; /* Above Purple Button (80px) */
-  left: 12px;
-  right: auto;
-  z-index: 100002; /* Top of stack */
-  display: block;
-  transition: background .3s, border-color .3s, transform .12s;
-}
-.floating-glow-neon:hover {
-  background: linear-gradient(135deg, rgba(138,99,255,0.32), rgba(58,111,216,0.28));
-  border-color: #fff;
-  transform: translateY(-1px);
-}
-
-/* Purple Admin Menu Button */
+/* Purple Admin Menu Button (Bottom) */
 .floating-glow-purple {
   animation: floatGlowPurple 4.5s ease-in-out infinite;
   background: linear-gradient(135deg, rgba(200,50,255,0.22), rgba(138,99,255,0.18));
@@ -41,11 +13,96 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 80px; /* Above retro menu (approx 40px) */
-  left: 12px;
-  z-index: 100001; /* Above retro menu (100000) */
+  bottom: 20px; /* Position 1: Bottom */
+  left: 20px;
+  z-index: 100001;
   display: block;
   transition: background .3s, border-color .3s, transform .12s;
+}
+
+/* Contractor Portal (Position 2: Above Purple) */
+.floating-glow-teal {
+  animation: floatGlowTeal 4.5s ease-in-out infinite;
+  background: linear-gradient(135deg, rgba(50,255,200,0.22), rgba(99,255,138,0.18));
+  box-shadow: 0 0 9px 3px #32ffc8, 0 0 18px 6px #63ff8a;
+  color: #e6fffc;
+  border: 1px solid #32ffc8;
+  border-radius: 5px;
+  font-size: 0.475rem;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 4px 7px;
+  position: fixed;
+  bottom: 60px; /* Position 2: Above Purple (20+40) */
+  left: 20px;
+  z-index: 100002;
+  display: block;
+  transition: background .3s, border-color .3s, transform .12s;
+}
+.floating-glow-teal:hover {
+  background: linear-gradient(135deg, rgba(50,255,200,0.32), rgba(99,255,138,0.28));
+  border-color: #fff;
+  transform: translateY(-1px);
+}
+@keyframes floatGlowTeal {
+  0%, 100% { box-shadow: 0 0 9px 3px #32ffc8, 0 0 18px 6px #63ff8a; }
+  50% { box-shadow: 0 0 14px 5px #32ffc8, 0 0 22px 8px #63ff8a; }
+}
+
+/* Blue Admin Menu (Position 3: Above Contractor) */
+.floating-glow-neon {
+  animation: floatGlowBlue 4.5s ease-in-out infinite;
+  background: linear-gradient(135deg, rgba(138,99,255,0.22), rgba(58,111,216,0.18));
+  box-shadow: 0 0 9px 3px #8a63ff, 0 0 18px 6px #3a6fd8;
+  color: #e8e6ff;
+  border: 1px solid #8a63ff;
+  border-radius: 5px;
+  font-size: 0.475rem;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 4px 7px;
+  position: fixed;
+  bottom: 100px; /* Position 3: Above Contractor (60+40) */
+  left: 20px;
+  right: auto;
+  z-index: 100003;
+  display: block;
+  transition: background .3s, border-color .3s, transform .12s;
+}
+
+/* Executive Admin (Position 4: Top - Red) */
+.floating-glow-red {
+  animation: floatGlowRed 4.5s ease-in-out infinite;
+  background: linear-gradient(135deg, rgba(255,50,50,0.22), rgba(216,58,58,0.18));
+  box-shadow: 0 0 9px 3px #ff3232, 0 0 18px 6px #d83a3a;
+  color: #ffe6e6;
+  border: 1px solid #ff3232;
+  border-radius: 5px;
+  font-size: 0.475rem;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 4px 7px;
+  position: fixed;
+  bottom: 140px; /* Position 4: Top (100+40) */
+  left: 20px;
+  z-index: 100004;
+  display: block;
+  transition: background .3s, border-color .3s, transform .12s;
+}
+.floating-glow-red:hover {
+  background: linear-gradient(135deg, rgba(255,50,50,0.32), rgba(216,58,58,0.28));
+  border-color: #fff;
+  transform: translateY(-1px);
+}
+@keyframes floatGlowRed {
+  0%, 100% { box-shadow: 0 0 9px 3px #ff3232, 0 0 18px 6px #d83a3a; }
+  50% { box-shadow: 0 0 14px 5px #ff3232, 0 0 22px 8px #d83a3a; }
 }
 .floating-glow-purple:hover {
   background: linear-gradient(135deg, rgba(200,50,255,0.32), rgba(138,99,255,0.28));
