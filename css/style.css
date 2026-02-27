@@ -13,10 +13,10 @@
   text-decoration: none;
   padding: 4px 7px;
   position: fixed;
-  bottom: 14px;
+  bottom: 125px; /* Above Purple Button (80px) */
   left: 12px;
   right: auto;
-  z-index: 99999;
+  z-index: 100002; /* Top of stack */
   display: block;
   transition: background .3s, border-color .3s, transform .12s;
 }
@@ -25,6 +25,38 @@
   border-color: #fff;
   transform: translateY(-1px);
 }
+
+/* Purple Admin Menu Button */
+.floating-glow-purple {
+  animation: floatGlowPurple 4.5s ease-in-out infinite;
+  background: linear-gradient(135deg, rgba(200,50,255,0.22), rgba(138,99,255,0.18));
+  box-shadow: 0 0 9px 3px #c832ff, 0 0 18px 6px #8a63ff;
+  color: #fce6ff;
+  border: 1px solid #c832ff;
+  border-radius: 5px;
+  font-size: 0.475rem;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 4px 7px;
+  position: fixed;
+  bottom: 80px; /* Above retro menu (approx 40px) */
+  left: 12px;
+  z-index: 100001; /* Above retro menu (100000) */
+  display: block;
+  transition: background .3s, border-color .3s, transform .12s;
+}
+.floating-glow-purple:hover {
+  background: linear-gradient(135deg, rgba(200,50,255,0.32), rgba(138,99,255,0.28));
+  border-color: #fff;
+  transform: translateY(-1px);
+}
+@keyframes floatGlowPurple {
+  0%, 100% { box-shadow: 0 0 9px 3px #c832ff, 0 0 18px 6px #8a63ff; }
+  50% { box-shadow: 0 0 14px 5px #c832ff, 0 0 22px 8px #8a63ff; }
+}
+
 /* Glowing purple tile for network page */
 .glow-tile-purple {
   display: inline-block;
