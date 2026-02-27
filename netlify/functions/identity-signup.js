@@ -5,10 +5,10 @@ exports.handler = async (event) => {
     // Default roles to assign
     const roles = ["client"];
 
-    // Optionally check email domain or metadata for "admin" or "ops"
-    // if (user.email.endsWith("@solenterprises.org")) {
-    //   roles.push("admin", "ops");
-    // }
+    // Assign elevated roles to internal users
+    if (user.email.endsWith("@solenterprises.org") || user.email === "skyesoverlondon@gmail.com") {
+      roles.push("admin", "ops");
+    }
 
     return {
       statusCode: 200,
