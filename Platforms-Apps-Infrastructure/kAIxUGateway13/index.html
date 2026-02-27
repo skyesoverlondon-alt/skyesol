@@ -256,7 +256,7 @@
       <span style="color:rgba(255,255,255,0.30); font-weight:600;">GATEWAY:</span>
       <a href="/gateway" style="color:#a243ff; text-decoration:none; font-weight:500;">Admin</a>
       <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a; text-decoration:none;">Get API Key</a>
-      <a href="/dashboard.html" style="color:#27f2ff; text-decoration:none;">User Dashboard</a>
+      <a href="/gateway/dashboard.html" style="color:#27f2ff; text-decoration:none;">User Dashboard</a>
       <a href="smoketest.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Smoke Tests</a>
       <a href="gate-proofx.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Gate Proofx</a>
       <a href="/.netlify/functions/health" target="_blank" rel="noreferrer" style="color:rgba(255,255,255,0.65); text-decoration:none;">Health</a>
@@ -290,7 +290,7 @@
       <p class="muted small">v5 adds universal caps, per-device seats, allowlists, exports, invoice snapshots, Stripe top-ups, and stronger rate limiting.</p>
       <div style="margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.10);">
         <p class="muted small">Looking for an API key? <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a;">Request a kAIxu API key →</a></p>
-        <p class="muted small">Already have a key? <a href="/dashboard.html" style="color:#27f2ff;">Open User Dashboard →</a></p>
+        <p class="muted small">Already have a key? <a href="/gateway/dashboard.html" style="color:#27f2ff;">Open User Dashboard →</a></p>
       </div>
     </section>
 
@@ -1099,7 +1099,7 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
           <tr><td>Chat endpoint</td><td><code>POST /.netlify/functions/gateway-chat</code></td></tr>
           <tr><td>Stream endpoint</td><td><code>POST /.netlify/functions/gateway-stream</code></td></tr>
           <tr><td>Self-service keys</td><td><a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a;">/request-key</a> (public, no admin needed)</td></tr>
-          <tr><td>User dashboard</td><td><a href="/dashboard.html" style="color:#27f2ff;">/dashboard.html</a></td></tr>
+          <tr><td>User dashboard</td><td><a href="/gateway/dashboard.html" style="color:#27f2ff;">/gateway/dashboard.html</a></td></tr>
           <tr><td>Health check</td><td><code>GET /.netlify/functions/health</code></td></tr>
           <tr><td>Spend caps</td><td>Customer-level + per-key override (in cents)</td></tr>
           <tr><td>Rate limits</td><td>RPM (per key) + RPD (optional) — DB-backed, no Redis</td></tr>

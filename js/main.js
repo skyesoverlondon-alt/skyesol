@@ -234,6 +234,27 @@ function attachNav(){
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.pageYOffset > 60);
   }, { passive: true });
+
+  // ── Wire ALL dropdowns generically (covers kaixu, blog, platforms,
+  //    casestudies, company, leadership, member — any type not handled above)
+  links.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const type = dd.dataset.type || '';
+    if (type === 'services' || type === 'suite') return; // already wired above
+    const btn = dd.querySelector('.dropdown-toggle');
+    const menu = dd.querySelector('.dropdown-menu');
+    if (!btn || !menu || btn.dataset.genericBound) return;
+    btn.dataset.genericBound = 'true';
+    btn.addEventListener('click', event => {
+      event.stopPropagation();
+      closeAllDropdowns(dd);
+      dd.classList.toggle('expanded');
+    });
+    document.addEventListener('click', () => dd.classList.remove('expanded'));
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => dd.classList.remove('expanded'));
+    });
+    toggle.addEventListener('click', () => dd.classList.remove('expanded'));
+  });
 }
 
 // expose for partial-injected navs and run once on load

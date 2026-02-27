@@ -4,6 +4,9 @@
 /gateway         /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
 /gateway/        /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
 
+# Old PAI dashboard stub → canonical gateway dashboard
+/Platforms-Apps-Infrastructure/kAIxUGateway13/dashboard.html  /gateway/dashboard.html  301
+
 # Editorials canonical URLs (rewrite — no URL change)
 /editorials                 /Blogs/Editorials/index.html  200
 /editorials/                /Blogs/Editorials/index.html  200
@@ -38,7 +41,7 @@
 /assets/logo.png              /Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/logo.png                        200
 /assets/svs.css               /Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/svs.css                         200
 /assets/zip.js                /Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/zip.js                          200
-/assets/user.js               /Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js                           200
+/assets/user.js               /gateway/assets/user.js                          200
 
 /assets/dual_lane_funnel_system_brief.pdf            /Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/dual_lane_funnel_system_brief.pdf            200
 /assets/dual_lane_funnel_valuation_certificate.pdf  /Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/dual_lane_funnel_valuation_certificate.pdf  200
