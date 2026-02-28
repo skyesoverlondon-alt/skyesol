@@ -1,0 +1,630 @@
+functionsDirectory = "/workspaces/skyesol/netlify/functions"
+functionsDirectoryOrigin = "config"
+headersOrigin = "config"
+plugins = []
+
+[build]
+publish = "/workspaces/skyesol"
+publishOrigin = "config"
+functions = "/workspaces/skyesol/netlify/functions"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
+
+[functions]
+
+[functions."*"]
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+Content-Security-Policy = "default-src 'self' https: data: blob:; script-src 'self' https://cdnjs.cloudflare.com https://identity.netlify.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https:; frame-ancestors 'none';"
+
+[[headers]]
+for = "/sw.js"
+
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
+Service-Worker-Allowed = "/"
+
+[[headers]]
+for = "/manifest.json"
+
+[headers.values]
+Cache-Control = "public, max-age=86400"
+Content-Type = "application/manifest+json"
+
+[[headers]]
+for = "/SkyeDocx/service-worker.js"
+
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
+Service-Worker-Allowed = "/SkyeDocx/"
+
+[[headers]]
+for = "/SkyeDocx/sw.js"
+
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+for = "/SkyeDocx/manifest.webmanifest"
+
+[headers.values]
+Cache-Control = "no-cache"
+Content-Type = "application/manifest+json"
+
+[[headers]]
+for = "/SkyeDocx/manifest.json"
+
+[headers.values]
+Cache-Control = "no-cache"
+Content-Type = "application/manifest+json"
+
+[[redirects]]
+from = "/network"
+to = "/network.html"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/network/"
+to = "/network.html"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/gateway"
+to = "/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/gateway/"
+to = "/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials"
+to = "/Blogs/Editorials/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/"
+to = "/Blogs/Editorials/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/index.html"
+to = "/Blogs/Editorials/index.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/scottsdale-clubs/*"
+to = "/Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/tempe-clubs/*"
+to = "/Blogs/Editorials/ArizonaClubScene/TempeArizona/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/mesa-clubs/*"
+to = "/Blogs/Editorials/ArizonaClubScene/MesaArizona/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/glendale-clubs/*"
+to = "/Blogs/Editorials/ArizonaClubScene/GlendaleArizona/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/phoenix-clubs/*"
+to = "/Blogs/Editorials/ArizonaClubScene/PhoenixArizona/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/phoenix/*"
+to = "/Blogs/Editorials/Techwear/Phoenix-Arizona/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/phoenix-batch2/*"
+to = "/Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/africa/*"
+to = "/Blogs/Editorials/Techwear/Africas%20Got%20Sole!/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/little-linguist-jumpstart-kit/"
+to = "/Blogs/Editorials/APPS%20WEVE%20ENGINEERED/LittleLinguist.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/little-linguist-jumpstart-kit/*"
+to = "/Blogs/Editorials/APPS%20WEVE%20ENGINEERED/LittleLinguist.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/editorials/*"
+to = "/Blogs/Editorials/Techwear/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/jobseekers.html"
+to = "/Platforms-Apps-Infrastructure/DualLaneFunnel/public/jobseekers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/employers.html"
+to = "/Platforms-Apps-Infrastructure/DualLaneFunnel/public/employers.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/diagnostics.html"
+to = "/Platforms-Apps-Infrastructure/DualLaneFunnel/public/diagnostics.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/assets/intake.js"
+to = "/Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/intake.js"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/assets/funnel_diagram.png"
+to = "/Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/funnel_diagram.png"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/assets/icon-192.png"
+to = "/Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/icon-192.png"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/assets/logo.png"
+to = "/Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/logo.png"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/assets/svs.css"
+to = "/Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/svs.css"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/assets/zip.js"
+to = "/Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/zip.js"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/assets/user.js"
+to = "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/assets/dual_lane_funnel_system_brief.pdf"
+to = "/Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/dual_lane_funnel_system_brief.pdf"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/assets/dual_lane_funnel_valuation_certificate.pdf"
+to = "/Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/dual_lane_funnel_valuation_certificate.pdf"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/funnel-system-editorial.html"
+to = "/Platforms-Apps-Infrastructure/DualLaneFunnel/public/funnel-system-editorial.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/services/*"
+to = "/Services/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/get-started.html"
+to = "/get-started/"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/manifest.webmanifest"
+to = "/Platforms-Apps-Infrastructure/BusinessLaunchGo/manifest.webmanifest"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/gate-proofx.html"
+to = "/Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/Gate%20Proofx/index.html"
+to = "/Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/favicon.svg"
+to = "/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/logo.svg"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/icons/icon.svg"
+to = "/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/logo.svg"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/SkyeDocx/assets/brand/*"
+to = "/SkyeDocx/assets/icons/brand/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/Services/pwa-conversion.html"
+to = "/Services/SkyePWAForge/SkyePWAForge.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/Valley%20Verified/*"
+to = "/Valley%20Verified%20/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/Valley%20Verified/northstar.html"
+to = "/Valley%20Verified%20/NorthStar.html"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/case-studies"
+to = "/Case%20Studies/index.html"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/case-studies/"
+to = "/Case%20Studies/index.html"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/case-studies/index.html"
+to = "/Case%20Studies/index.html"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
+
+[[redirects]]
+from = "/case-studies/*"
+to = "/Case%20Studies/:splat"
+status = 301.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]

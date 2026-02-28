@@ -1,0 +1,382 @@
+<!-- pro.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0617" />
+  <title>PRO — Proof + Growth Engine | Skyes Over London LC</title>
+  <meta name="description" content="PRO package: CORE plus base production (1h photo + 1h video), custom 30-second jingle, full operational hardening binder, and funnel upgrade (qualification + follow-up)." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://SOLEnterprises.org/pro.html" />
+
+  <meta property="og:title" content="PRO — Proof + Growth Engine | Skyes Over London LC" />
+  <meta property="og:description" content="CORE + media + jingle + full ops binder + funnel upgrade." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://SOLEnterprises.org/pro.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <style>
+    :root{
+      --bg0:#07040f; --bg1:#0b0617; --ink:#efe8ff;
+      --muted: rgba(239,232,255,.72); --muted2: rgba(239,232,255,.58);
+      --line: rgba(196,167,255,.18);
+      --gold:#ffd46a; --gold2:#ffb84a; --violet:#b86bff; --violet2:#7c3cff; --blue:#48d7ff;
+      --shadow2: 0 12px 40px rgba(0,0,0,.38);
+      --radius: 22px; --radius2: 16px; --max: 1180px;
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 15% 10%, rgba(124,60,255,.35), transparent 60%),
+                  radial-gradient(900px 600px at 75% 25%, rgba(72,215,255,.22), transparent 62%),
+                  radial-gradient(1000px 700px at 55% 90%, rgba(255,212,106,.14), transparent 65%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+    .bg-canvas{position:fixed; inset:0; z-index:-3; width:100%; height:100%; display:block; opacity:.85;}
+    .aurora{position:fixed; inset:-20vh -10vw; z-index:-2; pointer-events:none;
+      background:
+        radial-gradient(900px 420px at 20% 20%, rgba(124,60,255,.22), transparent 60%),
+        radial-gradient(700px 380px at 70% 30%, rgba(72,215,255,.20), transparent 60%),
+        radial-gradient(700px 420px at 45% 75%, rgba(255,212,106,.14), transparent 62%),
+        linear-gradient(120deg, rgba(124,60,255,.12), rgba(72,215,255,.10), rgba(255,212,106,.08));
+      filter: blur(26px) saturate(130%); opacity:.85; animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift{from{transform:translate3d(-1.5%,-1.2%,0) scale(1.02)}to{transform:translate3d(1.8%,1.6%,0) scale(1.06)}}
+    .noise{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.12; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+    .floating-logo{
+      position:fixed; left:18px; top:16px; width:62px; z-index:50;
+      filter: drop-shadow(0 0 14px rgba(124,60,255,.55)) drop-shadow(0 0 16px rgba(255,212,106,.22));
+      animation: logoPulse 2.8s ease-in-out infinite; user-select:none;
+    }
+    @keyframes logoPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.05);opacity:.96}}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+    .topbar{position:sticky; top:0; z-index:20; backdrop-filter:blur(14px);
+      background:linear-gradient(180deg, rgba(7,4,15,.82), rgba(7,4,15,.42)); border-bottom:1px solid var(--line);
+    }
+    .topbar-inner{max-width:var(--max); margin:0 auto; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
+    .brandline{display:flex; align-items:center; gap:10px; padding-left:84px; min-height:44px;}
+    .brandline .title{font-weight:800; letter-spacing:.4px; font-size:14px; color:rgba(239,232,255,.92);}
+    .brandline .sub{font-size:12px; color:rgba(239,232,255,.58); margin-top:2px;}
+    .nav{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+    .nav a{color:rgba(239,232,255,.86); text-decoration:none; font-size:12px; padding:9px 10px;
+      border:1px solid rgba(196,167,255,.18); border-radius:999px;
+      background:linear-gradient(180deg, rgba(20,10,40,.38), rgba(20,10,40,.22));
+      transition:transform .15s ease, border-color .15s ease, filter .15s ease;
+    }
+    .nav a:hover{transform:translateY(-1px); border-color:rgba(255,212,106,.28); filter:brightness(1.06);}
+
+    .panel{border:1px solid var(--line); border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(18,10,34,.62), rgba(12,7,24,.32));
+      box-shadow:var(--shadow2); overflow:hidden; position:relative;
+    }
+    .panel::before{content:""; position:absolute; inset:-2px; pointer-events:none; filter:blur(18px);
+      background:
+        radial-gradient(600px 220px at 20% 0%, rgba(124,60,255,.22), transparent 70%),
+        radial-gradient(540px 240px at 85% 10%, rgba(72,215,255,.18), transparent 70%),
+        radial-gradient(640px 260px at 40% 120%, rgba(255,212,106,.10), transparent 70%);
+      opacity:.9;
+    }
+    .panel>*{position:relative; z-index:1;}
+
+    .hero{padding:54px 0 18px;}
+    .hero-inner{padding:26px 22px 22px;}
+    .kicker{display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(255,212,106,.92); background:linear-gradient(90deg, rgba(255,212,106,.12), rgba(72,215,255,.06), rgba(124,60,255,.10));
+      border:1px solid rgba(255,212,106,.20); padding:8px 12px; border-radius:999px;
+    }
+    h1{margin:14px 0 10px; font-size:44px; line-height:1.02; letter-spacing:-.02em;}
+    @media(max-width:520px){h1{font-size:36px}}
+    .lead{margin:0 0 16px; color:var(--muted); font-size:15px; line-height:1.55; max-width:74ch;}
+
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;}
+    .btn{appearance:none; border:none; cursor:pointer; text-decoration:none; font-weight:900; letter-spacing:.02em;
+      padding:12px 14px; border-radius:14px; display:inline-flex; align-items:center; gap:10px;
+      transition:transform .15s ease, filter .15s ease; user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px); filter:brightness(1.04);}
+    .btn-primary{color:#100815; background:linear-gradient(90deg, var(--gold), var(--gold2), var(--blue)); box-shadow:var(--shadow2);}
+    .btn-secondary{color:rgba(239,232,255,.92); background:linear-gradient(180deg, rgba(239,232,255,.10), rgba(239,232,255,.06));
+      border:1px solid rgba(196,167,255,.28); box-shadow:none;
+    }
+
+    .section{padding:18px 0;}
+    .section h2{margin:0 0 10px; font-size:22px; letter-spacing:-.01em;}
+    .section p{margin:0 0 12px; color:var(--muted); line-height:1.65; font-size:14px;}
+    .two{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+    @media(max-width:980px){.two{grid-template-columns:1fr}}
+    .list{margin:0; padding-left:18px; color:rgba(239,232,255,.78); line-height:1.65; font-size:13px;}
+    .list li{margin:8px 0;}
+    .list b{color:rgba(255,212,106,.92);}
+
+    .formwrap{padding:16px; border:1px solid rgba(196,167,255,.18);
+      background:linear-gradient(180deg, rgba(18,10,34,.52), rgba(12,7,24,.24));
+      border-radius:var(--radius); box-shadow:var(--shadow2); position:relative; overflow:hidden;
+    }
+    .formwrap::before{content:""; position:absolute; inset:-2px; pointer-events:none; filter:blur(18px); opacity:.8;
+      background: radial-gradient(640px 260px at 20% 10%, rgba(255,212,106,.10), transparent 70%),
+                  radial-gradient(640px 260px at 85% 20%, rgba(72,215,255,.12), transparent 70%),
+                  radial-gradient(640px 260px at 50% 120%, rgba(124,60,255,.14), transparent 70%);
+    }
+    .formwrap>*{position:relative; z-index:1;}
+    form{display:grid; gap:10px;}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+    @media(max-width:720px){.row{grid-template-columns:1fr}}
+    label{font-size:12px; color:rgba(239,232,255,.82); font-weight:800; letter-spacing:.02em;}
+    input,select,textarea{
+      width:100%; padding:12px 12px; border-radius:14px;
+      border:1px solid rgba(196,167,255,.20);
+      background: rgba(6,3,12,.55);
+      color: rgba(239,232,255,.92);
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{border-color: rgba(72,215,255,.34); box-shadow:0 0 0 3px rgba(72,215,255,.10);}
+    textarea{min-height:110px; resize:vertical;}
+    .fine{font-size:12px; color:var(--muted2); line-height:1.5; margin-top:6px;}
+    .link{color:rgba(255,212,106,.92); text-decoration:none; font-weight:900;}
+    .link:hover{text-decoration:underline;}
+    footer{padding:24px 0 44px; color:rgba(239,232,255,.62); font-size:12px; line-height:1.6;}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Service",
+    "name":"PRO — Proof + Growth Engine",
+    "provider":{"@type":"Organization","name":"Skyes Over London LC","email":"SkyesOverLondonLC@solenterprises.org","telephone":"+1-480-469-5416","url":"https://SOLEnterprises.org/"},
+    "areaServed":"US",
+    "description":"CORE plus base production (1 hour photo + 1 hour video), custom 30-second jingle, full operational hardening binder, and funnel upgrade (qualification + follow-up)."
+  }
+  </script>
+</head>
+<body>
+  <canvas class="bg-canvas" id="stars" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <img class="floating-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC Logo" border="0">
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brandline">
+        <div>
+          <div class="title">SKYES OVER LONDON LC</div>
+          <div class="sub">PRO — Proof + Growth Engine</div>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Ultimate</a>
+        <a href="core.html">Core</a>
+        <a href="#included">What’s Included</a>
+        <a href="#media">Media</a>
+        <a href="#intake">Intake</a>
+        <a href="obsidian.html">Obsidian</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="panel">
+        <div class="hero-inner">
+          <div class="kicker">⚡ PRO PACKAGE</div>
+          <h1>Proof that hits. Growth that compounds. Operations that stay clean.</h1>
+          <p class="lead">
+            PRO is where your brand turns into a serious presence. You get everything in CORE, then we add base production (photo + video), a custom 30-second jingle,
+            a full operational hardening binder, and a funnel upgrade so leads don’t stall.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#intake">Start PRO Intake →</a>
+            <a class="btn btn-secondary" href="#included">See What’s Included</a>
+            <a class="btn btn-secondary" href="obsidian.html">Need a Custom App? →</a>
+          </div>
+          <p class="fine">Standard start terms: <b>30% deposit</b> to begin build. Production scales into multi-hour/full-day shoots with full team options.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="included">
+      <h2>What’s included in PRO</h2>
+      <div class="two">
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">Everything in CORE</h3>
+          <ul class="list">
+            <li><b>7+ page website</b> built for conversion</li>
+            <li><b>Lead capture foundation</b> + tracking-ready setup</li>
+            <li><b>24 SEO blogs</b> across 3 months (geo + niche targeting)</li>
+            <li><b>Ops binder (lite)</b> upgraded to <b>full hardening</b> in PRO</li>
+          </ul>
+        </div>
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">PRO upgrades</h3>
+          <ul class="list">
+            <li><b>Media package:</b> 1 hour photo + 1 hour video (edited)</li>
+            <li><b>Custom jingle:</b> 30-second brand jingle</li>
+            <li><b>Full ops binder:</b> architecture, environment map, recovery, monitoring basics</li>
+            <li><b>Funnel upgrade:</b> qualification + follow-up cadence design</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="media">
+      <h2>Media + jingle deliverables</h2>
+      <div class="two">
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">Base Production (Included)</h3>
+          <ul class="list">
+            <li><b>Photo:</b> 1 hour session + edited photo set for web/Google Business/social</li>
+            <li><b>Video:</b> 1 hour session + short-form clips + a homepage hero cut</li>
+            <li><b>Usage:</b> content delivered ready for web, social, and ads</li>
+          </ul>
+        </div>
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">Music Promo (Included)</h3>
+          <ul class="list">
+            <li><b>30-second jingle</b> created for your brand</li>
+            <li><b>Use cases:</b> ads, intro/outro for videos, web hero, phone hold music</li>
+            <li><b>Handoff:</b> packaged for commercial use with clean delivery</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="intake">
+      <h2>PRO intake</h2>
+      <p>Submit your niche, target area, and what you want the media + funnel to accomplish.</p>
+
+      <div class="formwrap">
+        <form name="pro-intake" method="POST" data-netlify="true" action="/thank-you.html">
+          <input type="hidden" name="form-name" value="pro-intake" />
+          <input type="hidden" name="package" value="PRO — Proof + Growth Engine" />
+
+          <div class="row">
+            <div>
+              <label for="name">Full name</label>
+              <input id="name" name="name" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="company">Company</label>
+              <input id="company" name="company" autocomplete="organization" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="market">Target city/area</label>
+              <input id="market" name="market" placeholder="e.g., Phoenix, AZ / Mesa / Tempe" required />
+            </div>
+            <div>
+              <label for="industry">Industry / niche</label>
+              <input id="industry" name="industry" placeholder="e.g., logistics, auto repair, accounting" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="shoot">Production scope</label>
+              <select id="shoot" name="production_scope" required>
+                <option value="" selected disabled>Select one</option>
+                <option>Base (1 hour photo + 1 hour video)</option>
+                <option>Multi-hour (upgrade)</option>
+                <option>Full-day (upgrade)</option>
+                <option>Not sure — scope it for me</option>
+              </select>
+            </div>
+            <div>
+              <label for="timeline">Timeline</label>
+              <select id="timeline" name="timeline" required>
+                <option value="" selected disabled>Select one</option>
+                <option>ASAP (1–2 weeks)</option>
+                <option>2–4 weeks</option>
+                <option>30–60 days</option>
+                <option>60–90 days</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="notes">What should this system do for you?</label>
+            <textarea id="notes" name="notes" placeholder="Describe your offers, preferred clients, and what 'proof' looks like (bookings, calls, walk-ins, quotes, etc.)."></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Submit PRO Intake →</button>
+
+          <div class="fine">
+            Direct: <a class="link" href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> ·
+            <a class="link" href="tel:+14804695416">480-469-5416</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> Skyes Over London LC · <a class="link" href="index.html">Ultimate Stack</a></div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    (function(){
+      const c = document.getElementById('stars');
+      const ctx = c.getContext('2d', { alpha: true });
+      let W=0, H=0, stars=[], t=0;
+
+      function resize(){
+        const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+        W = c.width = Math.floor(window.innerWidth * dpr);
+        H = c.height = Math.floor(window.innerHeight * dpr);
+        c.style.width = window.innerWidth + 'px';
+        c.style.height = window.innerHeight + 'px';
+
+        const count = Math.floor((window.innerWidth * window.innerHeight) / 15000);
+        stars = Array.from({length: Math.max(80, Math.min(220, count))}, () => ({
+          x: Math.random()*W, y: Math.random()*H, z: Math.random()*1 + 0.2, r: Math.random()*1.15 + 0.3, tw: Math.random()*Math.PI*2
+        }));
+      }
+
+      function draw(){
+        t += 0.008;
+        ctx.clearRect(0,0,W,H);
+
+        const g = ctx.createRadialGradient(W*0.5,H*0.45, 0, W*0.5,H*0.55, Math.max(W,H)*0.65);
+        g.addColorStop(0, 'rgba(0,0,0,0)');
+        g.addColorStop(1, 'rgba(0,0,0,0.65)');
+        ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+        for(const s of stars){
+          s.tw += 0.01*s.z;
+          const drift = Math.sin(t*0.8 + s.tw) * (0.35*s.z);
+          s.y += 0.08*s.z;
+          if(s.y > H+10){ s.y = -10; s.x = Math.random()*W; }
+          const a = 0.55 + 0.35*Math.sin(s.tw + t*1.2);
+          ctx.beginPath();
+          ctx.arc(s.x + drift, s.y, s.r, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(239,232,255,${Math.max(0.10, a*0.35)})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize, { passive:true });
+      resize(); draw();
+    })();
+  </script>
+</body>
+</html>

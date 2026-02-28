@@ -1,0 +1,768 @@
+# kAIxu Gateway — Implementation Directives
+## How To Wire Every App Through The Gate (Stop Calling Providers Directly)
+
+**Gateway URL:** https://kaixu67.skyesoverlondon.workers.dev  
+**Auth:** Bearer token in `Authorization` header (never vendor keys)  
+**Format:** JSON in, JSON out (or SSE for streaming)
+
+---
+
+## ⚠ KAIXU_CANON — Injected Server-Side On Every Request (Cannot Be Overridden)
+
+The gate hardcodes a full identity block called `KAIXU_CANON` at the top of every request's system instruction, before any per-request `system` field you send. This is non-negotiable at the infrastructure level — no client call can remove or override it.
+
+**What this means for client code:**
+- Never send `KAIXU_CANON` from client code. It wastes tokens. The gate already injects it.
+- Your per-request `system` field is appended *after* the canon, not instead of it.
+- Your per-request `system` field is always appended *after* both the canon and `KAIXU_GLOBAL_SYSTEM` — it is additive, not a replacement. `KAIXU_GLOBAL_SYSTEM` is always included (if set) regardless of whether you send a `system` field or not.
+- The canon enforces identity (kAIxU origin story, vendor silence, etc.) regardless of what temperature, system prompt, or messages you send.
+
+**How it stacks on each request:**
+```
+[KAIXU_CANON]           ← always first, always there, injected by gate
+[KAIXU_GLOBAL_SYSTEM]   ← env-level system prompt (always included if set)
+[your system field]     ← your per-request instructions (optional, additive)
+[messages[]]            ← conversation history
+[input.content]         ← current user turn
+```
+
+All three system layers are always joined together — your per-request `system` is **appended after** both KAIXU_CANON and KAIXU_GLOBAL_SYSTEM, not instead of them.
+
+---
+
+## Mandatory: Gate-Only Calls (No Direct Provider Calls)
+
+- Do **not** call Gemini / OpenAI / Anthropic endpoints from any app. All AI traffic must flow through the gate.
+- Remove every provider key from client code, server code, `.env`, CI secrets, and infra variables. Only the gate holds the provider key.
+- Each app gets a cheap, easily-rotated gate token. If it leaks, rotate the token without touching provider keys.
+
+Old flow (ban this):
+```
+App → Google Gemini API (with your $$ key)
+```
+
+Required flow:
+```
+App → kAIxu Gate (with a gate token) → Google Gemini API (key never leaves the server)
+```
+
+Same results. Zero provider-key exposure. Centralized policy, metrics, and revocation.
+
+### Quick Migration Checklist (do this per repo)
+1) Search/replace any of these URLs to the gate base: `generativelanguage.googleapis.com`, `api.openai.com`, `api.anthropic.com` → `https://kaixu67.skyesoverlondon.workers.dev`.
+2) Delete usage of provider keys (`GEMINI_API_KEY`, `OPENAI_API_KEY`, etc.) from code and envs. Replace with one gate token (e.g., `KAIXU_GATE_TOKEN`).
+3) Swap request bodies to the gate shape (see sections below). If you already use OpenAI-style `messages[]`, it mostly works unchanged.
+4) Roll secrets: remove provider keys from CI/CD and hosting dashboards; add the gate token instead.
+5) Ship and verify with `/v1/health` and a smoke test to `/v1/generate`.
+
+---
+
+## The Four Endpoints
+
+| Method | Path | What it does |
+|--------|------|-------------|
+| `GET` | `/v1/health` | Check the gateway is up and configured |
+| `GET` | `/v1/models` | List available models |
+| `POST` | `/v1/generate` | Full response — waits for complete answer, returns JSON |
+| `POST` | `/v1/stream` | Streaming — returns SSE, bytes arrive in real time |
+
+---
+
+## Authentication
+
+Every request needs an `Authorization` header:
+
+```
+Authorization: Bearer YOUR_TOKEN
+```
+
+Alternatively the header `X-KAIXU-TOKEN: YOUR_TOKEN` works too.
+
+Where to get your token: ask whoever manages the gateway (`KAIXU_APP_TOKENS` env var). It's a comma-separated list — each value is a valid token. Tokens can be any string you want, e.g. `myapp-prod-v1`, a UUID, anything.
+
+**Frontends:** You can call the gate directly from the browser. The gate currently allows `Access-Control-Allow-Origin: *`. If you want to lock it down later, set `KAIXU_ALLOWED_ORIGINS` to a CSV of allowed origins and keep tokens server-side.
+
+**Backends:** Prefer storing the gate token server-side and proxying calls if you want full control over origin lock and rate enforcement.
+
+---
+
+## 1. Health Check — Verify The Gate Is Reachable
+
+Always a good first call to confirm your token is accepted.
+
+### curl
+```bash
+curl https://kaixu67.skyesoverlondon.workers.dev/v1/health \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+### JavaScript (fetch)
+```js
+const res = await fetch('https://kaixu67.skyesoverlondon.workers.dev/v1/health', {
+  headers: { 'Authorization': 'Bearer YOUR_TOKEN' }
+});
+const data = await res.json();
+// { ok: true, keyConfigured: true, authConfigured: true, openGate: false }
+```
+
+### Python (requests)
+```python
+import requests
+
+r = requests.get(
+    'https://kaixu67.skyesoverlondon.workers.dev/v1/health',
+    headers={'Authorization': 'Bearer YOUR_TOKEN'}
+)
+print(r.json())
+# {'ok': True, 'keyConfigured': True, 'authConfigured': True, 'openGate': False}
+```
+
+---
+
+## 2. Basic Text Generation — `/v1/generate`
+
+This is your main call for most use cases. Send a prompt, get back a complete answer.
+
+### The simplest possible call
+
+### curl
+```bash
+curl https://kaixu67.skyesoverlondon.workers.dev/v1/generate \
+  -X POST \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"input": {"type": "text", "content": "Explain WebSockets in one paragraph."}}'
+```
+
+### JavaScript (fetch)
+```js
+const BASE = 'https://kaixu67.skyesoverlondon.workers.dev';
+const TOKEN = 'YOUR_TOKEN';
+
+async function ask(prompt) {
+  const res = await fetch(`${BASE}/v1/generate`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      input: { type: 'text', content: prompt }
+    })
+  });
+
+  const data = await res.json();
+
+  if (!data.ok) throw new Error(data.error);
+  return data.text;
+}
+
+const answer = await ask('What is a REST API?');
+console.log(answer);
+```
+
+### Python
+```python
+import requests
+
+BASE = 'https://kaixu67.skyesoverlondon.workers.dev'
+TOKEN = 'YOUR_TOKEN'
+HEADERS = {
+    'Authorization': f'Bearer {TOKEN}',
+    'Content-Type': 'application/json'
+}
+
+def ask(prompt: str) -> str:
+    r = requests.post(
+        f'{BASE}/v1/generate',
+        headers=HEADERS,
+        json={'input': {'type': 'text', 'content': prompt}}
+    )
+    data = r.json()
+    if not data.get('ok'):
+        raise Exception(data.get('error', 'Unknown error'))
+    return data['text']
+
+print(ask('Summarise the CAP theorem in plain English.'))
+```
+
+**If you need the raw Gemini response** (for safety blocks/tool calls), add `includeRaw: true` and read `data.raw`.
+
+---
+
+## 3. The Response Object
+
+Every `/v1/generate` call returns this shape:
+
+```json
+{
+  "ok": true,
+  "model": "gemini-2.5-flash",
+  "text": "The answer from the model...",
+  "finishReason": "STOP",
+  "usage": {
+    "promptTokens": 14,
+    "candidatesTokens": 120,
+    "thoughtsTokens": 0,
+    "totalTokens": 134
+  }
+}
+```
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `ok` | boolean | `false` if something went wrong — check `error` field |
+| `model` | string | Which model actually answered |
+| `text` | string | The answer — this is what you want |
+| `finishReason` | string | `STOP` = complete answer. `MAX_TOKENS` = got cut off |
+| `usage.promptTokens` | number | Tokens in your input |
+| `usage.candidatesTokens` | number | Tokens in the answer |
+| `usage.thoughtsTokens` | number | Internal reasoning tokens (gemini-2.5-pro only) |
+| `usage.totalTokens` | number | Sum of all token usage |
+
+**Error response:**
+```json
+{
+  "ok": false,
+  "error": "Unauthorized"
+}
+```
+
+---
+
+## 4. Multi-Turn Conversations — Using `messages[]`
+
+For chat interfaces, pass the full conversation history as `messages[]` — same format as OpenAI.
+
+```js
+const messages = [
+  { role: 'user', content: 'My name is Skye.' },
+  { role: 'assistant', content: 'Hello Skye, how can I help you?' },
+  { role: 'user', content: 'What is my name?' }
+];
+
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${TOKEN}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ messages })
+});
+
+const data = await res.json();
+console.log(data.text); // "Your name is Skye."
+```
+
+The gateway converts `messages[]` to Gemini's `contents[]` format automatically. You don't need to think about Gemini's API format — send OpenAI-style `{ role, content }` objects and it works.
+
+**Building the messages array in a chat loop:**
+```js
+const messages = [];
+
+async function chat(userInput) {
+  messages.push({ role: 'user', content: userInput });
+
+  const res = await fetch(`${BASE}/v1/generate`, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages })
+  });
+
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error);
+
+  // Add the assistant reply to history so next turn has full context
+  messages.push({ role: 'assistant', content: data.text });
+
+  return data.text;
+}
+
+await chat('My favourite colour is indigo.');
+await chat('What colour did I just mention?'); // "indigo"
+```
+
+---
+
+## 5. System Instructions
+
+Tell the model who it is and how to behave:
+
+```js
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    system: 'You are a concise legal assistant. Answer in plain English. Never give legal advice.',
+    input: { type: 'text', content: 'What is habeas corpus?' }
+  })
+});
+```
+
+Per-request `system` is **appended after** KAIXU_CANON and the gateway's global system prompt (`KAIXU_GLOBAL_SYSTEM`) — it does not replace them. If you don't send one, the canon + global system still apply. All layers are always active.
+
+---
+
+## 6. Choosing a Model
+
+The gateway defaults to `gemini-2.5-flash`. To use a different model, pass `model`:
+
+```js
+body: JSON.stringify({
+  model: 'gemini-2.5-pro',   // the thinking model — smarter, slower
+  input: { type: 'text', content: 'Analyse the tradeoffs of microservices vs monoliths.' }
+})
+```
+
+**When to use which:**
+
+| Use Case | Model |
+|----------|-------|
+| Most things | `gemini-2.5-flash` (default) |
+| Complex reasoning, code review, long analysis | `gemini-2.5-pro` |
+
+**Get the model list dynamically:**
+```js
+const res = await fetch(`${BASE}/v1/models`, {
+  headers: { 'Authorization': `Bearer ${TOKEN}` }
+});
+const { models } = await res.json();
+// models = [{ id: 'gemini-2.5-flash', ... }, { id: 'gemini-2.5-pro', ... }]
+```
+
+---
+
+## 7. Generation Config — Temperature, Token Limits, etc.
+
+Pass `generationConfig` and it goes straight to Gemini verbatim:
+
+```js
+body: JSON.stringify({
+  input: { type: 'text', content: 'Write me a short poem.' },
+  generationConfig: {
+    temperature: 1.2,          // 0.0 = deterministic, 2.0 = wildly creative
+    topP: 0.95,
+    maxOutputTokens: 512,      // cap the answer length
+    stopSequences: ['END']     // stop generating if this string appears
+  }
+})
+```
+
+No server-side caps are applied — whatever you send in `generationConfig` is what Gemini gets.
+
+**Note on `gemini-2.5-pro`:** This model thinks internally before answering. If you set a low `maxOutputTokens`, it can burn all the tokens on thinking and return nothing. For `gemini-2.5-pro`, either omit `maxOutputTokens` entirely or set it high (`32768` or more).
+
+---
+
+## 8. JSON Output Mode
+
+Ask the model to return structured JSON instead of free text:
+
+```js
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    output: { format: 'json' },
+    input: {
+      type: 'text',
+      content: 'Return a JSON object with fields: name, capital, population for France.'
+    }
+  })
+});
+
+const data = await res.json();
+const country = JSON.parse(data.text);
+// { name: 'France', capital: 'Paris', population: 68000000 }
+```
+
+---
+
+## 9. Streaming — `/v1/stream`
+
+> **⚠ Netlify CDN blocks SSE.** If your app is hosted on Netlify (`*.netlify.app` or any Netlify-proxied domain), `/v1/stream` will silently fail — Netlify's CDN buffers the entire response before delivering it, breaking the streaming behaviour. For any Netlify-hosted app, use `/v1/generate` instead. `/v1/stream` works correctly from Cloudflare Workers, Vercel Edge, self-hosted servers, or direct browser calls to non-Netlify origins.
+
+Use streaming when:
+- Answers take more than 1-2 seconds
+- You want the UI to feel responsive as words appear
+- You're using `gemini-2.5-pro` (which can take 10-30s before first byte)
+
+The endpoint returns Server-Sent Events (SSE). Each `data:` line is a raw Gemini chunk.
+
+### JavaScript — ReadableStream
+```js
+async function streamAnswer(prompt, onChunk) {
+  const res = await fetch(`${BASE}/v1/stream`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      input: { type: 'text', content: prompt }
+    })
+  });
+
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop(); // keep incomplete line for next chunk
+
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      const raw = line.slice(6).trim();
+      if (raw === '[DONE]') return;
+
+      try {
+        const chunk = JSON.parse(raw);
+        const text = chunk.candidates?.[0]?.content?.parts
+          ?.filter(p => !p.thought)        // skip internal thinking
+          ?.map(p => p.text || '')
+          ?.join('') || '';
+        if (text) onChunk(text);
+      } catch {}
+    }
+  }
+}
+
+// Usage: stream tokens into a <div> as they arrive
+let output = '';
+await streamAnswer('Write a 500-word essay on stoicism.', chunk => {
+  output += chunk;
+  document.getElementById('output').textContent = output;
+});
+```
+
+### Python — httpx streaming
+```python
+import httpx
+import json
+
+BASE = 'https://kaixu67.skyesoverlondon.workers.dev'
+TOKEN = 'YOUR_TOKEN'
+
+def stream_answer(prompt: str):
+    with httpx.stream(
+        'POST',
+        f'{BASE}/v1/stream',
+        headers={
+            'Authorization': f'Bearer {TOKEN}',
+            'Content-Type': 'application/json'
+        },
+        json={'input': {'type': 'text', 'content': prompt}},
+        timeout=None   # no timeout — let the stream complete
+    ) as r:
+        buffer = ''
+        for chunk in r.iter_text():
+            buffer += chunk
+            while '\n' in buffer:
+                line, buffer = buffer.split('\n', 1)
+                if not line.startswith('data: '):
+                    continue
+                raw = line[6:].strip()
+                if raw == '[DONE]':
+                    return
+                try:
+                    data = json.loads(raw)
+                    parts = data.get('candidates', [{}])[0].get('content', {}).get('parts', [])
+                    text = ''.join(p.get('text', '') for p in parts if not p.get('thought'))
+                    if text:
+                        print(text, end='', flush=True)
+                except Exception:
+                    pass
+
+stream_answer('Explain the theory of general relativity step by step.')
+```
+
+---
+
+## 10. Migrating From Direct Gemini API Calls
+
+If your code currently calls Gemini directly, here's the mapping:
+
+**Before (direct Gemini):**
+```js
+const res = await fetch(
+  `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+  {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ role: 'user', parts: [{ text: 'Hello' }] }]
+    })
+  }
+);
+const raw = await res.json();
+const text = raw.candidates[0].content.parts[0].text;
+```
+
+**After (through the gate):**
+```js
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${TOKEN}`,  // ← replaces API key
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    input: { type: 'text', content: 'Hello' }  // ← simplified format
+  })
+});
+const data = await res.json();
+const text = data.text;  // ← already extracted for you
+```
+
+**Direct pass-through (if you already build Gemini-native bodies):**
+```js
+body: JSON.stringify({
+  contents: [{ role: 'user', parts: [{ text: 'Hello' }] }]
+})
+```
+
+---
+
+## 11. Migrating From OpenAI Calls
+
+The gateway uses OpenAI-style `messages[]` format, so most of your structure stays the same — just change the URL and auth:
+
+**Before (OpenAI):**
+```js
+const res = await fetch('https://api.openai.com/v1/chat/completions', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${OPENAI_KEY}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    model: 'gpt-4o',
+    messages: [
+      { role: 'system', content: 'You are a helpful assistant.' },
+      { role: 'user', content: 'Hello' }
+    ]
+  })
+});
+const data = await res.json();
+const text = data.choices[0].message.content;
+```
+
+**After (kAIxu gate):**
+```js
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${TOKEN}`,  // ← different token, same header
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    // system message goes in the 'system' field, not in messages[]
+    system: 'You are a helpful assistant.',
+    messages: [
+      { role: 'user', content: 'Hello' }
+    ]
+  })
+});
+const data = await res.json();
+const text = data.text;  // ← data.text instead of data.choices[0].message.content
+```
+
+**What changes:**
+- URL: `api.openai.com` → `kaixu67.skyesoverlondon.workers.dev`
+- Token: OpenAI key → your gate token (in the same `Authorization: Bearer` header)
+- `model`: `gpt-4o` → `gemini-2.5-flash` or `gemini-2.5-pro`
+- System message: move from `messages[]` to the top-level `system` field
+- Response: `data.choices[0].message.content` → `data.text`
+
+**Drop-in adapter for existing OpenAI clients (JS):**
+```js
+const BASE = 'https://kaixu67.skyesoverlondon.workers.dev';
+const TOKEN = process.env.KAIXU_GATE_TOKEN;
+
+async function openaiStyleChat({ messages, system, model = 'gemini-2.5-flash', ...rest }) {
+  const res = await fetch(`${BASE}/v1/generate`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ model, system, messages, ...rest })
+  });
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error);
+  return { content: data.text, finishReason: data.finishReason, usage: data.usage };
+}
+
+// usage
+await openaiStyleChat({ messages: [{ role: 'user', content: 'Hi' }] });
+```
+
+---
+
+## 12. Environment Setup For Teams
+
+Never hardcode the token. Store it as an environment variable and load it at runtime.
+
+### Node.js / Next.js / Vite (frontend-safe)
+```js
+// .env
+VITE_KAIXU_TOKEN=your_token_here
+VITE_KAIXU_BASE=https://kaixu67.skyesoverlondon.workers.dev
+
+// kaixu.js — re-usable client
+const BASE  = import.meta.env.VITE_KAIXU_BASE;
+const TOKEN = import.meta.env.VITE_KAIXU_TOKEN;
+
+export async function ask(prompt, options = {}) {
+  const res = await fetch(`${BASE}/v1/generate`, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ input: { type: 'text', content: prompt }, ...options })
+  });
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error);
+  return data;
+}
+```
+
+If you want to avoid exposing the gate token to the browser, create a thin API route (Next.js API route / server action) that stores the token server-side and proxies to the gate. The client then calls your API without seeing the token.
+
+### Python / Django / FastAPI
+```python
+# .env
+KAIXU_TOKEN=your_token_here
+KAIXU_BASE=https://kaixu67.skyesoverlondon.workers.dev
+
+# kaixu.py — re-usable client
+import os, requests
+
+BASE  = os.environ['KAIXU_BASE']
+TOKEN = os.environ['KAIXU_TOKEN']
+HEADERS = {'Authorization': f'Bearer {TOKEN}', 'Content-Type': 'application/json'}
+
+def ask(prompt: str, **kwargs) -> dict:
+    r = requests.post(
+        f'{BASE}/v1/generate',
+        headers=HEADERS,
+        json={'input': {'type': 'text', 'content': prompt}, **kwargs}
+    )
+    data = r.json()
+    if not data.get('ok'):
+        raise Exception(data.get('error'))
+    return data
+```
+
+### React Native / Expo
+```js
+// app.config.js / eas.json secrets or expo-constants
+import Constants from 'expo-constants';
+const BASE  = Constants.expoConfig.extra.kaixuBase;
+const TOKEN = Constants.expoConfig.extra.kaixuToken;
+```
+
+**Never commit tokens.** Add `.env` to `.gitignore`. On CI/CD (Vercel, Netlify, etc.), add the token as an environment variable in the platform dashboard.
+
+**Token hygiene when consolidating apps:**
+- One token per app/environment (`myapp-web-prod`, `myapp-web-stage`, `myapp-mobile-prod`).
+- Rotate tokens when people leave or when rotating deploy keys — no need to touch provider keys.
+- Keep a short-lived token list; revoke unused tokens monthly.
+
+---
+
+## 13. Error Handling — What The Gate Returns
+
+| HTTP Status | `ok` | When |
+|-------------|------|------|
+| 200 | `true` | Success |
+| 400 | `false` | Bad request body — missing required fields |
+| 401 | `false` | Missing or invalid token |
+| 405 | `false` | Wrong HTTP method |
+| 413 | `false` | Request body too large (>5MB default) |
+| 500 | `false` | Gateway misconfigured or Gemini error |
+
+**Robust error handling:**
+```js
+async function safeAsk(prompt) {
+  try {
+    const res = await fetch(`${BASE}/v1/generate`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ input: { type: 'text', content: prompt } })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok || !data.ok) {
+      console.error('Gate error:', data.error);
+      return null;
+    }
+
+    if (data.finishReason === 'MAX_TOKENS') {
+      console.warn('Response was cut off — try raising maxOutputTokens in generationConfig');
+    }
+
+    return data.text;
+  } catch (err) {
+    console.error('Network error:', err.message);
+    return null;
+  }
+}
+```
+
+---
+
+## 14. Full Request Body Reference
+
+All fields are optional except one of `input`, `messages`, or `contents`:
+
+```js
+{
+  // --- Model ---
+  "model": "gemini-2.5-flash",          // default: KAIXU_DEFAULT_MODEL
+
+  // --- Input (pick one) ---
+  "input": { "type": "text", "content": "Your prompt" },   // simple text
+  "messages": [{ "role": "user", "content": "..." }],      // OpenAI format
+  "contents": [{ "role": "user", "parts": [...] }],        // raw Gemini format
+
+  // --- Behaviour ---
+  "system": "You are a helpful assistant.",    // override system instruction
+  "generationConfig": {                        // passed to Gemini verbatim
+    "temperature": 0.7,
+    "maxOutputTokens": 8192,
+    "topP": 0.9,
+    "stopSequences": []
+  },
+  "output": { "format": "json" },             // json | text | markdown
+
+  // --- Advanced ---
+  "safetySettings": [...],                    // Gemini safety config
+  "tools": [...],                             // function calling tools
+  "toolConfig": {...},                        // tool config
+  "includeRaw": false                         // true = include raw Gemini response at .raw
+}
+```
+
+---
+## Migration/Launch Checklist (Gate-Only)
+
+- [ ] Replace all provider URLs with the gate base.
+- [ ] Remove provider API keys from code, env, and CI/CD; store only the gate token.
+- [ ] Add `KAIXU_GATE_TOKEN` (or similar) to app env and read it at runtime.
+- [ ] Hit `/v1/health` with your token; expect `ok: true`, `keyConfigured: true`, `authConfigured: true`.
+- [ ] Smoke test `/v1/generate` with a short prompt; confirm `ok: true` and text is returned.
+- [ ] For streaming UIs, switch to `/v1/stream` and handle SSE.
+- [ ] For multi-turn chat, send `messages[]`; move system prompts to top-level `system`.
+- [ ] For structured responses, set `output.format = 'json'` and parse `data.text`.
+- [ ] Never ship gate tokens or provider keys in git commits or client bundles.
+
+---
+
+*kAIxu Gate Delta — Skyes Over London LC — 2026*

@@ -1,0 +1,866 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0617" />
+  <title>Ultimate Business Launch Stack | Skyes Over London LC</title>
+  <meta name="description" content="A full business launch system: cinematic website (7+ pages), operational hardening documents, media package, custom jingle, 24 SEO blogs in 3 months, and a custom app that turns attention into customers." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://SOLEnterprises.org/" />
+
+  <meta property="og:title" content="Ultimate Business Launch Stack | Skyes Over London LC" />
+  <meta property="og:description" content="Website + ops hardening + media + jingle + 24 SEO blogs + custom app. Built to convert." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://SOLEnterprises.org/" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ultimate Business Launch Stack | Skyes Over London LC" />
+  <meta name="twitter:description" content="A full launch system that attracts, converts, and runs clean." />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <style>
+    :root{
+      --bg0:#07040f;
+      --bg1:#0b0617;
+      --ink:#efe8ff;
+      --muted: rgba(239,232,255,.72);
+      --muted2: rgba(239,232,255,.58);
+      --glass: rgba(20, 10, 40, .56);
+      --glass2: rgba(18, 10, 34, .36);
+      --line: rgba(196, 167, 255, .18);
+
+      --gold:#ffd46a;
+      --gold2:#ffb84a;
+      --violet:#b86bff;
+      --violet2:#7c3cff;
+      --blue:#48d7ff;
+      --blue2:#1aa7ff;
+
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --shadow2: 0 12px 40px rgba(0,0,0,.38);
+      --radius: 22px;
+      --radius2: 16px;
+      --max: 1180px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background: radial-gradient(1200px 700px at 15% 10%, rgba(124,60,255,.35), transparent 60%),
+                  radial-gradient(900px 600px at 75% 25%, rgba(72,215,255,.22), transparent 62%),
+                  radial-gradient(1000px 700px at 55% 90%, rgba(255,212,106,.14), transparent 65%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
+
+    /* Cinematic background layers */
+    .bg-canvas{
+      position:fixed; inset:0;
+      z-index:-3;
+      width:100%; height:100%;
+      display:block;
+      opacity:.85;
+    }
+    .aurora{
+      position:fixed; inset:-20vh -10vw;
+      z-index:-2;
+      pointer-events:none;
+      background:
+        radial-gradient(900px 420px at 20% 20%, rgba(124,60,255,.22), transparent 60%),
+        radial-gradient(700px 380px at 70% 30%, rgba(72,215,255,.20), transparent 60%),
+        radial-gradient(700px 420px at 45% 75%, rgba(255,212,106,.14), transparent 62%),
+        linear-gradient(120deg, rgba(124,60,255,.12), rgba(72,215,255,.10), rgba(255,212,106,.08));
+      filter: blur(26px) saturate(130%);
+      opacity:.85;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift{
+      from{ transform: translate3d(-1.5%, -1.2%, 0) scale(1.02) rotate(-.2deg); }
+      to{ transform: translate3d(1.8%, 1.6%, 0) scale(1.06) rotate(.35deg); }
+    }
+    .noise{
+      position:fixed; inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.12;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    /* Floating logo (no container) */
+    .floating-logo{
+      position:fixed;
+      left:18px; top:16px;
+      width:62px; height:auto;
+      z-index:50;
+      filter: drop-shadow(0 0 14px rgba(124,60,255,.55)) drop-shadow(0 0 16px rgba(255,212,106,.22));
+      animation: logoPulse 2.8s ease-in-out infinite;
+      transform-origin:center;
+      user-select:none;
+    }
+    @keyframes logoPulse{
+      0%,100%{ transform: translateZ(0) scale(1); opacity:1; }
+      50%{ transform: translateZ(0) scale(1.05); opacity:.96; }
+    }
+
+    /* Layout */
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 0 18px; }
+    .topbar{
+      position:sticky; top:0;
+      z-index:20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(7,4,15,.82), rgba(7,4,15,.42));
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding: 12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brandline{
+      display:flex; align-items:center; gap:10px;
+      padding-left:84px; /* make room for floating logo */
+      min-height:44px;
+    }
+    .brandline .title{
+      font-weight:800;
+      letter-spacing:.4px;
+      font-size:14px;
+      color:rgba(239,232,255,.92);
+    }
+    .brandline .sub{
+      font-size:12px;
+      color:var(--muted2);
+      margin-top:2px;
+    }
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      text-decoration:none;
+      color:rgba(239,232,255,.86);
+      font-size:12px;
+      padding:9px 10px;
+      border:1px solid rgba(196,167,255,.18);
+      border-radius:999px;
+      background: linear-gradient(180deg, rgba(20,10,40,.38), rgba(20,10,40,.22));
+      transition: transform .15s ease, border-color .15s ease, filter .15s ease;
+    }
+    .nav a:hover{ transform: translateY(-1px); border-color: rgba(255,212,106,.28); filter: brightness(1.06); }
+
+    .hero{
+      padding: 54px 0 18px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(18,10,34,.62), rgba(12,7,24,.32));
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+    .panel::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 220px at 20% 0%, rgba(124,60,255,.22), transparent 70%),
+        radial-gradient(540px 240px at 85% 10%, rgba(72,215,255,.18), transparent 70%),
+        radial-gradient(640px 260px at 40% 120%, rgba(255,212,106,.10), transparent 70%);
+      opacity:.9;
+      pointer-events:none;
+      filter: blur(18px);
+    }
+    .panel > *{ position:relative; z-index:1; }
+
+    .hero-left{ padding: 26px 22px 22px; }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,212,106,.92);
+      background: linear-gradient(90deg, rgba(255,212,106,.12), rgba(72,215,255,.06), rgba(124,60,255,.10));
+      border:1px solid rgba(255,212,106,.20);
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: 44px;
+      line-height:1.02;
+      letter-spacing:-.02em;
+    }
+    @media (max-width:520px){
+      h1{ font-size: 36px; }
+    }
+    .lead{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.55;
+      max-width: 62ch;
+    }
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin: 14px 0 2px;
+    }
+    .badge{
+      border:1px solid rgba(196,167,255,.20);
+      background: linear-gradient(180deg, rgba(20,10,40,.48), rgba(10,6,20,.22));
+      padding:10px 12px;
+      border-radius: 14px;
+      min-width: 170px;
+    }
+    .badge .b1{ font-weight:800; font-size:13px; color:rgba(239,232,255,.92); }
+    .badge .b2{ font-size:12px; color:var(--muted2); margin-top:4px; line-height:1.35; }
+
+    .cta-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
+    .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      text-decoration:none;
+      color:#100815;
+      font-weight:900;
+      letter-spacing:.02em;
+      padding: 12px 14px;
+      border-radius: 14px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      box-shadow: var(--shadow2);
+      transform: translateZ(0);
+      transition: transform .15s ease, filter .15s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.04); }
+
+    .btn-primary{
+      background: linear-gradient(90deg, var(--gold), var(--gold2), var(--blue));
+    }
+    .btn-secondary{
+      background: linear-gradient(180deg, rgba(239,232,255,.10), rgba(239,232,255,.06));
+      border:1px solid rgba(196,167,255,.28);
+      color:rgba(239,232,255,.92);
+      box-shadow:none;
+    }
+
+    .hero-right{ padding: 20px; display:flex; flex-direction:column; gap:12px; }
+    .mini{
+      border:1px solid rgba(196,167,255,.18);
+      background: linear-gradient(180deg, rgba(14,8,28,.62), rgba(12,7,24,.30));
+      border-radius: var(--radius2);
+      padding: 14px 14px 12px;
+    }
+    .mini h3{
+      margin:0 0 8px;
+      font-size:13px;
+      letter-spacing:.02em;
+    }
+    .mini p{
+      margin:0;
+      font-size:12px;
+      color:var(--muted2);
+      line-height:1.55;
+    }
+    .mini .em{
+      color: rgba(255,212,106,.92);
+      font-weight:800;
+    }
+
+    .section{ padding: 18px 0; }
+    .section h2{
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing:-.01em;
+    }
+    .section p{
+      margin:0 0 12px;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:14px;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){ .grid-3{ grid-template-columns:1fr; } }
+
+    .card{
+      border:1px solid rgba(196,167,255,.18);
+      background: linear-gradient(180deg, rgba(18,10,34,.56), rgba(12,7,24,.26));
+      border-radius: var(--radius);
+      padding: 16px 16px 14px;
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(520px 220px at 25% 0%, rgba(124,60,255,.18), transparent 68%),
+                  radial-gradient(520px 220px at 85% 10%, rgba(72,215,255,.14), transparent 70%);
+      opacity:.7;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .card > *{ position:relative; z-index:1; }
+    .card .top{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      margin-bottom: 8px;
+    }
+    .card .name{
+      font-weight:950;
+      font-size: 14px;
+      letter-spacing:.02em;
+    }
+    .pill{
+      font-size:11px;
+      color: rgba(255,212,106,.92);
+      border:1px solid rgba(255,212,106,.22);
+      background: rgba(255,212,106,.08);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+    .card ul{
+      margin: 10px 0 12px 18px;
+      padding:0;
+      color: rgba(239,232,255,.78);
+      font-size: 12.5px;
+      line-height:1.55;
+    }
+    .card a{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:900;
+      letter-spacing:.02em;
+      font-size:12px;
+      color: rgba(239,232,255,.92);
+      text-decoration:none;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(196,167,255,.22);
+      background: linear-gradient(180deg, rgba(20,10,40,.42), rgba(12,7,24,.18));
+      transition: transform .15s ease, border-color .15s ease, filter .15s ease;
+    }
+    .card a:hover{ transform: translateY(-1px); border-color: rgba(72,215,255,.26); filter: brightness(1.06); }
+
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 980px){ .two{ grid-template-columns:1fr; } }
+
+    .list{
+      margin:0;
+      padding-left: 18px;
+      color: rgba(239,232,255,.78);
+      line-height:1.65;
+      font-size: 13px;
+    }
+    .list li{ margin: 8px 0; }
+    .list b{ color: rgba(255,212,106,.92); }
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(196,167,255,.22), transparent);
+      margin: 14px 0;
+    }
+
+    .formwrap{
+      padding: 16px;
+      border:1px solid rgba(196,167,255,.18);
+      background: linear-gradient(180deg, rgba(18,10,34,.52), rgba(12,7,24,.24));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .formwrap::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(640px 260px at 20% 10%, rgba(255,212,106,.10), transparent 70%),
+                  radial-gradient(640px 260px at 85% 20%, rgba(72,215,255,.12), transparent 70%),
+                  radial-gradient(640px 260px at 50% 120%, rgba(124,60,255,.14), transparent 70%);
+      opacity:.8;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .formwrap > *{ position:relative; z-index:1; }
+
+    form{ display:grid; gap:10px; }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 720px){ .row{ grid-template-columns:1fr; } }
+
+    label{ font-size:12px; color: rgba(239,232,255,.82); font-weight:800; letter-spacing:.02em; }
+    input, select, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(196,167,255,.20);
+      outline:none;
+      background: rgba(6,3,12,.55);
+      color: rgba(239,232,255,.92);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(72,215,255,.34);
+      box-shadow: 0 0 0 3px rgba(72,215,255,.10);
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    .fine{
+      font-size:12px;
+      color: var(--muted2);
+      line-height:1.5;
+      margin-top: 6px;
+    }
+
+    footer{
+      padding: 24px 0 44px;
+      color: rgba(239,232,255,.62);
+      font-size: 12px;
+      line-height:1.6;
+    }
+    .footgrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:start;
+    }
+    @media (max-width: 980px){ .footgrid{ grid-template-columns:1fr; } }
+    .footbox{
+      border:1px solid rgba(196,167,255,.14);
+      border-radius: var(--radius);
+      background: rgba(10,6,20,.35);
+      padding: 14px;
+    }
+    .link{
+      color: rgba(255,212,106,.92);
+      text-decoration:none;
+      font-weight:900;
+    }
+    .link:hover{ text-decoration:underline; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Skyes Over London LC",
+    "url":"https://SOLEnterprises.org/",
+    "email":"SkyesOverLondonLC@solenterprises.org",
+    "telephone":"+1-480-469-5416",
+    "logo":"https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png",
+    "sameAs":[]
+  }
+  </script>
+</head>
+
+<body>
+  <canvas class="bg-canvas" id="stars" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Floating logo (no container) -->
+  <img class="floating-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC Logo" border="0">
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brandline">
+        <div>
+          <div class="title">SKYES OVER LONDON LC</div>
+          <div class="sub">Ultimate Business Launch Stack</div>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="#packages">Packages</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#process">Process</a>
+        <a href="#intake">Intake</a>
+        <a href="core.html">Core</a>
+        <a href="pro.html">Pro</a>
+        <a href="obsidian.html">Obsidian</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="panel">
+          <div class="hero-left">
+            <div class="kicker">⚡ FULL-SPECTRUM LAUNCH SYSTEM</div>
+            <h1>Not “a website.”<br/>A machine that attracts, converts, and runs clean.</h1>
+            <p class="lead">
+              The Ultimate Business Launch Stack is built for real operations: a cinematic 7+ page website, an operational hardening binder,
+              a media package (photo + video), a custom 30-second jingle, 24 SEO blogs over 3 months, and a custom app designed to solve a problem,
+              attract customers, or streamline your day-to-day.
+            </p>
+
+            <div class="badges">
+              <div class="badge">
+                <div class="b1">Conversion-First Build</div>
+                <div class="b2">Clear CTAs, proof systems, fast load, mobile-first structure.</div>
+              </div>
+              <div class="badge">
+                <div class="b1">Operational Hardening</div>
+                <div class="b2">Runbooks, environment map, security baseline, handoff clarity.</div>
+              </div>
+              <div class="badge">
+                <div class="b1">Growth Engine</div>
+                <div class="b2">24 geo + niche SEO posts designed to compound traffic.</div>
+              </div>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#intake">Start the Intake →</a>
+              <a class="btn btn-secondary" href="#packages">View Packages</a>
+              <a class="btn btn-secondary" href="#deliverables">See Everything Included</a>
+            </div>
+
+            <p class="fine">Standard start terms: <b>30% deposit</b> to begin build. Packages expand cleanly into multi-hour / full-day production and custom systems.</p>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <div class="hero-right">
+            <div class="mini">
+              <h3>💼 Best for</h3>
+              <p>Businesses that want a serious presence, clean operations, and a pipeline that doesn’t depend on luck.</p>
+            </div>
+            <div class="mini">
+              <h3>📸 Media baseline</h3>
+              <p><span class="em">1 hour photo</span> + <span class="em">1 hour video</span>, edited for web + Google Business + social + homepage hero.</p>
+            </div>
+            <div class="mini">
+              <h3>🎶 Jingle</h3>
+              <p>Custom <span class="em">30-second</span> brand jingle for ads, web hero, and video intros/outros.</p>
+            </div>
+            <div class="mini">
+              <h3>🧠 Custom App</h3>
+              <p>Build a tool that generates leads, solves a workflow problem, or makes your business run smoother.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="packages">
+      <h2>Package tiers</h2>
+      <p>Pick the lane that matches how fast you want results and how “enterprise-clean” you want the operations.</p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="top">
+            <div class="name">CORE — Launch Clean</div>
+            <div class="pill">7+ page build + SEO engine</div>
+          </div>
+          <p>Website + intake foundation + analytics + 24 SEO blogs + ops binder (lite).</p>
+          <ul>
+            <li>7+ page cinematic website</li>
+            <li>Lead capture + routing + tracking foundation</li>
+            <li>24 SEO blogs (3 months)</li>
+            <li>Operational hardening binder (lite)</li>
+          </ul>
+          <a href="core.html">Open CORE landing →</a>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <div class="name">PRO — Proof + Growth Engine</div>
+            <div class="pill">Media + jingle + full ops</div>
+          </div>
+          <p>CORE plus base production (photo/video), custom jingle, full ops binder, and funnel upgrade.</p>
+          <ul>
+            <li>Photo + video base package</li>
+            <li>Custom 30s jingle</li>
+            <li>Full operational hardening binder</li>
+            <li>Qualification + follow-up upgrade</li>
+          </ul>
+          <a href="pro.html">Open PRO landing →</a>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <div class="name">OBSIDIAN — Full Production + Systems</div>
+            <div class="pill">Custom app + platform lane</div>
+          </div>
+          <p>PRO plus a custom app build and production upgrade options (multi-hour/full-day, actors, scripting).</p>
+          <ul>
+            <li>Custom app build (lead magnet / ops / portal)</li>
+            <li>Admin dashboard lane + exports</li>
+            <li>Production upgrades (actors, scripting)</li>
+            <li>Enterprise add-ons optional</li>
+          </ul>
+          <a href="obsidian.html">Open OBSIDIAN landing →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="deliverables">
+      <h2>Everything included in the Ultimate Stack</h2>
+      <div class="two">
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">Website build (7+ pages minimum)</h3>
+          <ul class="list">
+            <li><b>Core pages:</b> Home, Services, About, Proof/Portfolio, Industries (or Who We Serve), Blog, Contact/Intake</li>
+            <li><b>Business pages:</b> FAQ, Privacy/Terms (as needed), Financing/Deposit, Support or Help lane</li>
+            <li><b>Conversion layer:</b> strong CTAs, proof walls, trust signals, fast load, mobile-first</li>
+            <li><b>Lead capture:</b> intake form + routing + tracking foundation</li>
+          </ul>
+        </div>
+
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">Operational hardening document stack</h3>
+          <ul class="list">
+            <li><b>Architecture overview:</b> what talks to what, and why</li>
+            <li><b>Environment map:</b> variables, secrets, where they live, rotation notes</li>
+            <li><b>Data flow + privacy notes:</b> what you collect, where it goes, retention guidance</li>
+            <li><b>Deployment runbook:</b> build, release, rollback steps</li>
+            <li><b>Monitoring + incident basics:</b> “what to do when…” playbook</li>
+            <li><b>Backup/recovery:</b> restore steps + recovery targets</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="two">
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">Media package</h3>
+          <ul class="list">
+            <li><b>Base:</b> 1 hour photo + 1 hour video</li>
+            <li><b>Deliverables:</b> edited photos for web/Google Business/social + short-form clips + homepage hero video cut</li>
+            <li><b>Upgrades:</b> multi-hour/full-day shoots, scripting, actors, full production team</li>
+          </ul>
+        </div>
+
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">Music promo + blog series</h3>
+          <ul class="list">
+            <li><b>Jingle:</b> custom 30-second brand jingle for ads/web/video</li>
+            <li><b>SEO series:</b> 24 blogs over 3 months</li>
+            <li><b>Optimization:</b> SEO/geo/metadata + internal linking plan to convert traffic</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <h2>Delivery process</h2>
+      <p>Controlled build sequence so you get results fast, then compounding momentum.</p>
+      <div class="two">
+        <div class="panel" style="padding:18px;">
+          <ul class="list">
+            <li><b>1) Intake + strategy:</b> goals, niche, target area, offers, proof assets</li>
+            <li><b>2) Build sprint:</b> site + tracking + intake + hardening docs</li>
+            <li><b>3) Content sprint:</b> 24 blog posts scheduled across 3 months</li>
+          </ul>
+        </div>
+        <div class="panel" style="padding:18px;">
+          <ul class="list">
+            <li><b>4) Production:</b> photo/video capture + editing pipeline</li>
+            <li><b>5) App sprint:</b> custom app build (Obsidian lane)</li>
+            <li><b>6) Launch + handoff:</b> training, admin notes, operational clarity</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="intake">
+      <h2>Start intake</h2>
+      <p>Send your niche, target area, and goals. We’ll scope your tier and build plan.</p>
+
+      <div class="formwrap">
+        <form name="ultimate-stack-intake" method="POST" data-netlify="true" action="/thank-you.html">
+          <input type="hidden" name="form-name" value="ultimate-stack-intake" />
+
+          <div class="row">
+            <div>
+              <label for="name">Full name</label>
+              <input id="name" name="name" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="company">Company</label>
+              <input id="company" name="company" autocomplete="organization" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="market">Target city/area</label>
+              <input id="market" name="market" placeholder="e.g., Phoenix, AZ / Mesa / Tempe" required />
+            </div>
+            <div>
+              <label for="industry">Industry / niche</label>
+              <input id="industry" name="industry" placeholder="e.g., logistics, auto repair, accounting" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="package">Package interest</label>
+              <select id="package" name="package" required>
+                <option value="" selected disabled>Select one</option>
+                <option>CORE — Launch Clean</option>
+                <option>PRO — Proof + Growth Engine</option>
+                <option>OBSIDIAN — Full Production + Systems</option>
+                <option>Not sure — scope it for me</option>
+              </select>
+            </div>
+            <div>
+              <label for="urgency">Timeline</label>
+              <select id="urgency" name="timeline" required>
+                <option value="" selected disabled>Select one</option>
+                <option>ASAP (1–2 weeks)</option>
+                <option>2–4 weeks</option>
+                <option>30–60 days</option>
+                <option>60–90 days</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="notes">What do you want this system to do for you?</label>
+            <textarea id="notes" name="notes" placeholder="Describe your goals, services, customers, and any problems you want the custom app to solve."></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Submit Intake →</button>
+
+          <div class="fine">
+            Or contact directly: <a class="link" href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> ·
+            <a class="link" href="tel:+14804695416">480-469-5416</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footgrid">
+        <div class="footbox">
+          <div style="font-weight:950;letter-spacing:.02em;color:rgba(239,232,255,.86);margin-bottom:6px;">Positioning</div>
+          <div>This isn’t a website. It’s a full business launch system—brand, content, media, automation, operational hardening, and a custom app that converts attention into customers.</div>
+        </div>
+        <div class="footbox">
+          <div style="font-weight:950;letter-spacing:.02em;color:rgba(239,232,255,.86);margin-bottom:6px;">Notes</div>
+          <div>Built to scale cleanly: new service landing pages, new cities/areas, expanded content packs, and production upgrades without rebuilding the foundation.</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;opacity:.72;">© <span id="y"></span> Skyes Over London LC</div>
+    </footer>
+  </main>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Starfield (lightweight, no dependencies)
+    (function(){
+      const c = document.getElementById('stars');
+      const ctx = c.getContext('2d', { alpha: true });
+      let W=0, H=0, stars=[], t=0;
+
+      function resize(){
+        const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+        W = c.width = Math.floor(window.innerWidth * dpr);
+        H = c.height = Math.floor(window.innerHeight * dpr);
+        c.style.width = window.innerWidth + 'px';
+        c.style.height = window.innerHeight + 'px';
+        ctx.setTransform(1,0,0,1,0,0);
+        ctx.scale(1,1);
+
+        const count = Math.floor((window.innerWidth * window.innerHeight) / 14000);
+        stars = Array.from({length: Math.max(90, Math.min(240, count))}, () => ({
+          x: Math.random()*W,
+          y: Math.random()*H,
+          z: Math.random()*1 + 0.2,
+          r: Math.random()*1.2 + 0.3,
+          tw: Math.random()*Math.PI*2
+        }));
+      }
+
+      function draw(){
+        t += 0.008;
+        ctx.clearRect(0,0,W,H);
+
+        // subtle vignette
+        const g = ctx.createRadialGradient(W*0.5,H*0.45, 0, W*0.5,H*0.55, Math.max(W,H)*0.65);
+        g.addColorStop(0, 'rgba(0,0,0,0)');
+        g.addColorStop(1, 'rgba(0,0,0,0.65)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,W,H);
+
+        for(const s of stars){
+          s.tw += 0.01*s.z;
+          const drift = Math.sin(t*0.8 + s.tw) * (0.35*s.z);
+          s.y += 0.08*s.z;
+          if(s.y > H+10){ s.y = -10; s.x = Math.random()*W; }
+
+          const a = 0.55 + 0.35*Math.sin(s.tw + t*1.2);
+          ctx.beginPath();
+          ctx.arc(s.x + drift, s.y, s.r, 0, Math.PI*2);
+          ctx.fillStyle = `rgba(239,232,255,${Math.max(0.10, a*0.35)})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize, { passive:true });
+      resize(); draw();
+    })();
+  </script>
+</body>
+</html>

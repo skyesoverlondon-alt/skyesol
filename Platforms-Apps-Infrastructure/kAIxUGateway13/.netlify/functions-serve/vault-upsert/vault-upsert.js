@@ -1,0 +1,1 @@
+module.exports = require('./workspaces/skyesol/netlify/functions/vault-upsert.js')

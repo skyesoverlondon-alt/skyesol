@@ -1,0 +1,21 @@
+{
+	"siteId": "cbcc48c2-deee-41b7-bb12-ca7c348d23c1",
+	"geolocation": {
+		"data": {
+			"city": "Phoenix",
+			"country": {
+				"code": "US",
+				"name": "United States"
+			},
+			"subdivision": {
+				"code": "AZ",
+				"name": "Arizona"
+			},
+			"timezone": "America/Phoenix",
+			"latitude": 33.4532,
+			"longitude": -112.0748,
+			"postalCode": "85036"
+		},
+		"timestamp": 1772109685414
+	}
+}

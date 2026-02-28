@@ -1,0 +1,87 @@
+<!-- thank-you.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0617" />
+  <title>Intake Received | Skyes Over London LC</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root{
+      --bg0:#07040f; --bg1:#0b0617; --ink:#efe8ff;
+      --muted: rgba(239,232,255,.72); --muted2: rgba(239,232,255,.58);
+      --line: rgba(196,167,255,.18);
+      --gold:#ffd46a; --gold2:#ffb84a; --blue:#48d7ff;
+      --shadow2: 0 12px 40px rgba(0,0,0,.38);
+      --radius: 22px; --max: 980px;
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 700px at 15% 10%, rgba(124,60,255,.35), transparent 60%),
+                  radial-gradient(900px 600px at 75% 25%, rgba(72,215,255,.22), transparent 62%),
+                  radial-gradient(1000px 700px at 55% 90%, rgba(255,212,106,.14), transparent 65%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+      display:flex; align-items:center; justify-content:center;
+      padding:18px;
+    }
+    .floating-logo{
+      position:fixed; left:18px; top:16px; width:62px; z-index:50;
+      filter: drop-shadow(0 0 14px rgba(124,60,255,.55)) drop-shadow(0 0 16px rgba(255,212,106,.22));
+      animation: logoPulse 2.8s ease-in-out infinite; user-select:none;
+    }
+    @keyframes logoPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.05);opacity:.96}}
+    .panel{
+      max-width: var(--max);
+      width:100%;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(18,10,34,.62), rgba(12,7,24,.32));
+      box-shadow: var(--shadow2);
+      padding: 22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .panel::before{
+      content:"";
+      position:absolute; inset:-2px; pointer-events:none; filter:blur(18px); opacity:.85;
+      background:
+        radial-gradient(640px 260px at 20% 10%, rgba(255,212,106,.10), transparent 70%),
+        radial-gradient(640px 260px at 85% 20%, rgba(72,215,255,.12), transparent 70%),
+        radial-gradient(640px 260px at 50% 120%, rgba(124,60,255,.14), transparent 70%);
+    }
+    .panel>*{position:relative; z-index:1;}
+    h1{margin:0 0 10px; font-size:34px; letter-spacing:-.02em;}
+    p{margin:0 0 12px; color:var(--muted); line-height:1.6;}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      font-weight:900; letter-spacing:.02em; text-decoration:none;
+      padding:12px 14px; border-radius:14px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2), var(--blue));
+      color:#100815;
+      box-shadow: var(--shadow2);
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.04); }
+    .fine{font-size:12px; color:var(--muted2); margin-top:12px;}
+    .link{color: rgba(255,212,106,.92); font-weight:900; text-decoration:none;}
+    .link:hover{text-decoration:underline;}
+  </style>
+</head>
+<body>
+  <img class="floating-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC Logo" border="0">
+
+  <div class="panel">
+    <h1>Intake received ✅</h1>
+    <p>We’ve got your submission. Next step is scope confirmation: target area, niche, goals, and package lane.</p>
+    <a class="btn" href="index.html">Back to Ultimate Stack →</a>
+    <div class="fine">
+      Contact: <a class="link" href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> ·
+      <a class="link" href="tel:+14804695416">480-469-5416</a>
+    </div>
+  </div>
+</body>
+</html>
