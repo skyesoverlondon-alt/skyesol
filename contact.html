@@ -17,7 +17,7 @@
 <title>Contact — Skyes Over London LC</title>
 <meta name="description" content="Governed AI platforms, multi-state operations, and execution-first leadership across the SOLEnterprises ecosystem.">
 <link rel="stylesheet" href="css/style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous" defer></script>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#05050a">
   <meta name="mobile-web-app-capable" content="yes">
@@ -86,95 +86,535 @@
   <div class="glow-tile-purple"><p style="color:#000000">For contracts, partnerships, operations alignment, AI platform integration, and high-integrity execution systems.</p></div>
 </div>
 
-<div class="divider"></div>
+<style>
+/* ── Intake Wizard ─────────────────────────────────────────────────── */
+.wizard-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+.wizard-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 36px;
+}
+.wiz-step-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+.wiz-dot-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.04);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+.wiz-dot-label {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+.wiz-step-dot.active .wiz-dot-num {
+  border-color: var(--accent, #ffd36a);
+  color: var(--accent, #ffd36a);
+  background: rgba(255,211,106,0.1);
+  box-shadow: 0 0 18px rgba(255,211,106,0.35);
+}
+.wiz-step-dot.active .wiz-dot-label { color: var(--accent, #ffd36a); }
+.wiz-step-dot.done .wiz-dot-num {
+  border-color: #4ade80;
+  color: #4ade80;
+  background: rgba(74,222,128,0.1);
+}
+.wiz-step-dot.done .wiz-dot-label { color: #4ade80; }
+.wiz-connector {
+  flex: 1;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  margin: 0 4px;
+  margin-bottom: 22px;
+  max-width: 60px;
+  transition: background 0.4s;
+}
+.wiz-connector.done { background: rgba(74,222,128,0.4); }
+.wiz-panel {
+  display: none;
+  animation: wizIn 0.35s cubic-bezier(0.25,0.46,0.45,0.94) both;
+}
+.wiz-panel.active { display: block; }
+@keyframes wizIn {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes wizBack {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.wiz-panel.going-back { animation: wizBack 0.35s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+.wiz-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 36px 40px;
+}
+.wiz-step-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent, #ffd36a);
+  margin-bottom: 6px;
+}
+.wiz-question {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.wiz-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 28px;
+}
+.wiz-field { margin-bottom: 18px; }
+.wiz-field label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+.wiz-field input, .wiz-field textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.wiz-field input:focus, .wiz-field textarea:focus {
+  border-color: var(--accent, #ffd36a);
+  box-shadow: 0 0 0 3px rgba(255,211,106,0.12);
+}
+.wiz-field textarea { min-height: 120px; resize: vertical; }
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.topic-btn {
+  padding: 16px 12px;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.65);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1.3;
+}
+.topic-btn:hover { border-color: rgba(255,211,106,0.4); color: #fff; background: rgba(255,211,106,0.06); }
+.topic-btn.selected {
+  border-color: var(--accent, #ffd36a);
+  background: rgba(255,211,106,0.12);
+  color: var(--accent, #ffd36a);
+  box-shadow: 0 0 18px rgba(255,211,106,0.2);
+}
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.timeline-btn {
+  padding: 20px 16px;
+  border-radius: 10px;
+  border: 2px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.timeline-btn:hover { border-color: rgba(255,211,106,0.4); background: rgba(255,211,106,0.06); }
+.timeline-btn.selected {
+  border-color: var(--accent, #ffd36a);
+  background: rgba(255,211,106,0.12);
+  box-shadow: 0 0 18px rgba(255,211,106,0.2);
+}
+.timeline-btn .tl-badge {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.timeline-btn.urgent .tl-badge { background: rgba(239,68,68,0.2); color: #f87171; }
+.timeline-btn.near .tl-badge { background: rgba(251,146,60,0.2); color: #fb923c; }
+.timeline-btn.planned .tl-badge { background: rgba(74,222,128,0.2); color: #4ade80; }
+.timeline-btn.exploring .tl-badge { background: rgba(148,163,184,0.2); color: #94a3b8; }
+.timeline-btn .tl-label { font-size: 15px; font-weight: 700; color: #fff; display: block; margin-bottom: 4px; }
+.timeline-btn .tl-desc { font-size: 11px; color: rgba(255,255,255,0.4); }
+.timeline-btn.selected .tl-label { color: var(--accent, #ffd36a); }
+.review-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.review-row {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.07);
+  align-items: flex-start;
+}
+.review-row .r-key {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  min-width: 90px;
+  padding-top: 1px;
+}
+.review-row .r-val { font-size: 14px; color: #fff; flex: 1; word-break: break-word; }
+.wiz-nav { display: flex; gap: 12px; justify-content: flex-end; margin-top: 28px; }
+.wiz-back {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.wiz-back:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+.wiz-next {
+  padding: 12px 32px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent, #ffd36a);
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+.wiz-next:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,211,106,0.35); }
+.wiz-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+.wiz-error { color: #f87171; font-size: 12px; margin-top: 8px; min-height: 18px; }
+.contact-direct {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.contact-direct a {
+  color: rgba(255,255,255,0.55);
+  font-size: 13px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+.contact-direct a:hover { color: var(--accent, #ffd36a); }
+.contact-direct .cd-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent, #ffd36a); flex-shrink: 0; }
+@media (max-width: 540px) {
+  .wiz-card { padding: 24px 20px; }
+  .wiz-question { font-size: 20px; }
+  .timeline-grid { grid-template-columns: 1fr; }
+  .wiz-dot-label { display: none; }
+  .wiz-connector { max-width: 24px; }
+}
+</style>
 
-<!-- CONTACT INFO -->
-<section class="content-section">
-  <div class="card-grid-2 stagger-children">
-    <div class="platform-card reveal">
-      <h3>Direct Contact</h3>
-      <div class="card-type">Founder · Skyes Over London</div>
-      <p style="margin-bottom:20px">For contracts, partnerships, operations alignment, and high-integrity execution systems. If you need a team that performs under pressure — this is the line.</p>
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="contact-item"><div class="label">Email</div><div class="value"><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a></div></div>
-        <div class="contact-item"><div class="label">Phone</div><div class="value"><a href="tel:+19862107040">986-210-7040</a></div></div>
-        <div class="contact-item"><div class="label">Base</div><div class="value">Phoenix, AZ</div></div>
-        <div class="contact-item"><div class="label">Operations</div><div class="value">AZ · TX · CO · IL</div></div>
+<!-- HIDDEN NETLIFY FORM (bot-crawlable, populated via JS on submit) -->
+<form name="sol-contact" method="POST" action="/thanks.html" data-netlify="true" data-netlify-honeypot="bot-field" id="netForm" style="display:none">
+  <input type="hidden" name="form-name" value="sol-contact">
+  <input type="hidden" name="bot-field">
+  <input type="hidden" name="name" id="nf-name">
+  <input type="hidden" name="email" id="nf-email">
+  <input type="hidden" name="company" id="nf-company">
+  <input type="hidden" name="topic" id="nf-topic">
+  <input type="hidden" name="message" id="nf-message">
+  <input type="hidden" name="timeline" id="nf-timeline">
+</form>
+
+<!-- 6-STEP INTAKE WIZARD -->
+<section class="content-section" style="padding-top:12px;padding-bottom:0">
+  <div class="wizard-wrap">
+    <div class="wizard-progress">
+      <div class="wiz-step-dot active" data-dot="1"><div class="wiz-dot-num">1</div><div class="wiz-dot-label">You</div></div>
+      <div class="wiz-connector" data-conn="1"></div>
+      <div class="wiz-step-dot" data-dot="2"><div class="wiz-dot-num">2</div><div class="wiz-dot-label">Company</div></div>
+      <div class="wiz-connector" data-conn="2"></div>
+      <div class="wiz-step-dot" data-dot="3"><div class="wiz-dot-num">3</div><div class="wiz-dot-label">Need</div></div>
+      <div class="wiz-connector" data-conn="3"></div>
+      <div class="wiz-step-dot" data-dot="4"><div class="wiz-dot-num">4</div><div class="wiz-dot-label">Details</div></div>
+      <div class="wiz-connector" data-conn="4"></div>
+      <div class="wiz-step-dot" data-dot="5"><div class="wiz-dot-num">5</div><div class="wiz-dot-label">Timeline</div></div>
+      <div class="wiz-connector" data-conn="5"></div>
+      <div class="wiz-step-dot" data-dot="6"><div class="wiz-dot-num">6</div><div class="wiz-dot-label">Review</div></div>
+    </div>
+
+    <!-- Step 1: Who are you -->
+    <div class="wiz-panel active" id="wiz-1">
+      <div class="wiz-card">
+        <div class="wiz-step-label">Step 1 of 6</div>
+        <div class="wiz-question">Who are you?</div>
+        <div class="wiz-sub">Name and email — that's all we need to start.</div>
+        <div class="wiz-field"><label>Your Name</label><input id="w-name" type="text" placeholder="First &amp; Last" autocomplete="name"></div>
+        <div class="wiz-field"><label>Email Address</label><input id="w-email" type="email" placeholder="you@company.com" autocomplete="email"></div>
+        <div class="wiz-error" id="err-1"></div>
+        <div class="wiz-nav"><button class="wiz-next" onclick="wizNext(1)">Continue &#8594;</button></div>
       </div>
     </div>
-    <div class="platform-card reveal">
-      <h3>Quick Links</h3>
-      <div class="card-type">SOLEnterprises Ecosystem</div>
-      <p style="margin-bottom:20px">Access any part of the SOLE network directly.</p>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <a href="https://www.solenterprises.org/" target="_blank" class="btn-outline" style="justify-content:center">SOLEnterprises.org</a>
-        <a href="https://solenteaiskyes.netlify.app/" target="_blank" class="btn-outline" style="justify-content:center">Kaixu AI Division</a>
-        <a href="https://solenterprisesnexusconnect.netlify.app/" target="_blank" class="btn-outline" style="justify-content:center">NexusConnect Hub</a>
-        <a href="https://skyesoverlondon.netlify.app/" target="_blank" class="btn-outline" style="justify-content:center">Skyes Over London Portfolio</a>
+
+    <!-- Step 2: Company -->
+    <div class="wiz-panel" id="wiz-2">
+      <div class="wiz-card">
+        <div class="wiz-step-label">Step 2 of 6</div>
+        <div class="wiz-question">Your organization?</div>
+        <div class="wiz-sub">Optional — helps us scope faster. Skip if you're an individual.</div>
+        <div class="wiz-field"><label>Company / Organization</label><input id="w-company" type="text" placeholder="Acme Corp / Independent" autocomplete="organization"></div>
+        <div class="wiz-field"><label>State(s) of Operation</label><input id="w-state" type="text" placeholder="e.g. AZ, TX, CO"></div>
+        <div class="wiz-error" id="err-2"></div>
+        <div class="wiz-nav">
+          <button class="wiz-back" onclick="wizBack(2)">&#8592; Back</button>
+          <button class="wiz-next" onclick="wizNext(2)">Continue &#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: What do you need -->
+    <div class="wiz-panel" id="wiz-3">
+      <div class="wiz-card">
+        <div class="wiz-step-label">Step 3 of 6</div>
+        <div class="wiz-question">What do you need?</div>
+        <div class="wiz-sub">Select the closest fit — elaborate in the next step.</div>
+        <div class="topic-grid">
+          <div class="topic-btn" onclick="selectTopic(this,'Platform Build')">Platform Build</div>
+          <div class="topic-btn" onclick="selectTopic(this,'AI Governance / Gateway')">AI Governance / Gateway</div>
+          <div class="topic-btn" onclick="selectTopic(this,'Operations / Logistics')">Operations / Logistics</div>
+          <div class="topic-btn" onclick="selectTopic(this,'Partnership')">Partnership</div>
+          <div class="topic-btn" onclick="selectTopic(this,'Vault Access')">Vault Access</div>
+          <div class="topic-btn" onclick="selectTopic(this,'Other')">Other</div>
+        </div>
+        <div class="wiz-error" id="err-3"></div>
+        <div class="wiz-nav">
+          <button class="wiz-back" onclick="wizBack(3)">&#8592; Back</button>
+          <button class="wiz-next" onclick="wizNext(3)">Continue &#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Message -->
+    <div class="wiz-panel" id="wiz-4">
+      <div class="wiz-card">
+        <div class="wiz-step-label">Step 4 of 6</div>
+        <div class="wiz-question">Tell me exactly what you need.</div>
+        <div class="wiz-sub">Objective, scope, constraints, budget range — the more specific, the faster we move.</div>
+        <div class="wiz-field"><label>Your Message</label><textarea id="w-message" placeholder="e.g. We need a multi-state compliance tracking portal integrated with our existing tools. Budget ~$15k. Decision maker is our COO. Need live in 60 days."></textarea></div>
+        <div class="wiz-error" id="err-4"></div>
+        <div class="wiz-nav">
+          <button class="wiz-back" onclick="wizBack(4)">&#8592; Back</button>
+          <button class="wiz-next" onclick="wizNext(4)">Continue &#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5: Timeline -->
+    <div class="wiz-panel" id="wiz-5">
+      <div class="wiz-card">
+        <div class="wiz-step-label">Step 5 of 6</div>
+        <div class="wiz-question">What's your timeline?</div>
+        <div class="wiz-sub">Pick the one that matches your reality.</div>
+        <div class="timeline-grid">
+          <div class="timeline-btn urgent" onclick="selectTimeline(this,'URGENT — Under 2 weeks')">
+            <div class="tl-badge">URGENT</div>
+            <span class="tl-label">Fire Drill</span>
+            <span class="tl-desc">Under 2 weeks</span>
+          </div>
+          <div class="timeline-btn near" onclick="selectTimeline(this,'NEAR — 1–2 months')">
+            <div class="tl-badge">NEAR</div>
+            <span class="tl-label">Fast Track</span>
+            <span class="tl-desc">1–2 months</span>
+          </div>
+          <div class="timeline-btn planned" onclick="selectTimeline(this,'PLANNED — 3–6 months')">
+            <div class="tl-badge">PLANNED</div>
+            <span class="tl-label">Standard</span>
+            <span class="tl-desc">3–6 months</span>
+          </div>
+          <div class="timeline-btn exploring" onclick="selectTimeline(this,'EXPLORING — No hard deadline')">
+            <div class="tl-badge">EXPLORING</div>
+            <span class="tl-label">Just Looking</span>
+            <span class="tl-desc">No hard deadline</span>
+          </div>
+        </div>
+        <div class="wiz-error" id="err-5"></div>
+        <div class="wiz-nav">
+          <button class="wiz-back" onclick="wizBack(5)">&#8592; Back</button>
+          <button class="wiz-next" onclick="wizNext(5)">Continue &#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 6: Review + Submit -->
+    <div class="wiz-panel" id="wiz-6">
+      <div class="wiz-card">
+        <div class="wiz-step-label">Step 6 of 6 — Review</div>
+        <div class="wiz-question">Look good?</div>
+        <div class="wiz-sub">We triage within one business day and respond with scope, timeline, and next action.</div>
+        <div class="review-grid">
+          <div class="review-row"><div class="r-key">Name</div><div class="r-val" id="rv-name">—</div></div>
+          <div class="review-row"><div class="r-key">Email</div><div class="r-val" id="rv-email">—</div></div>
+          <div class="review-row"><div class="r-key">Company</div><div class="r-val" id="rv-company">—</div></div>
+          <div class="review-row"><div class="r-key">Need</div><div class="r-val" id="rv-topic">—</div></div>
+          <div class="review-row"><div class="r-key">Message</div><div class="r-val" id="rv-message">—</div></div>
+          <div class="review-row"><div class="r-key">Timeline</div><div class="r-val" id="rv-timeline">—</div></div>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.25);margin-bottom:20px">By submitting you agree to our <a href="privacy.html" style="color:rgba(255,255,255,0.4)">Privacy Policy</a> and <a href="terms.html" style="color:rgba(255,255,255,0.4)">Terms</a>.</div>
+        <div class="wiz-nav">
+          <button class="wiz-back" onclick="wizBack(6)">&#8592; Edit</button>
+          <button class="wiz-next" id="submit-btn" onclick="wizSubmit()">Submit Inquiry &#10003;</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT FORM (Netlify Forms) -->
-<section class="content-section" style="padding-top:40px">
-  <div class="section-label reveal">Fast Intake</div>
-  <div class="section-title reveal">Send an Inquiry</div>
-  <div class="section-desc reveal">This form is routed through Netlify Forms. If you request Vault access, include your email and the portals you need.</div>
-
-  <div class="card-grid-2 stagger-children">
-    <div class="platform-card reveal">
-      <h3>Inquiry Form</h3>
-      <div class="card-type">Contracts · Partnerships · Platform Builds</div>
-      <form name="sol-contact" method="POST" action="/thanks.html" data-netlify="true" data-netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="sol-contact">
-        <p style="display:none"><label>Don’t fill this out: <input name="bot-field"></label></p>
-        <div class="field" style="margin-top:10px"><label>Your Name</label><input name="name" required></div>
-        <div class="field" style="margin-top:10px"><label>Email</label><input name="email" type="email" required></div>
-        <div class="field" style="margin-top:10px"><label>Company (optional)</label><input name="company"></div>
-        <div class="field" style="margin-top:10px"><label>Topic</label>
-          <select name="topic" required>
-            <option value="">Select…</option>
-            <option>Platform Build</option>
-            <option>AI Governance / Gateway</option>
-            <option>Operations / Logistics</option>
-            <option>Partnership</option>
-            <option>Vault Access</option>
-          </select>
-        </div>
-        <div class="field" style="margin-top:10px"><label>Message</label><textarea name="message" required placeholder="What are you trying to accomplish? Timeline, scope, constraints…"></textarea></div>
-        <div class="actions" style="margin-top:12px">
-          <button class="btn-gold" type="submit">Submit</button>
-          <a class="btn-outline" href="privacy.html">Privacy</a>
-          <a class="btn-outline" href="terms.html">Terms</a>
-        </div>
-        <p class="dim" style="margin-top:10px">Spam controls: honeypot enabled. For high-volume forms, add reCAPTCHA in Netlify settings.</p>
-      </form>
-    </div>
-
-    <div class="platform-card reveal">
-      <h3>What happens next</h3>
-      <div class="card-type">Triage → Scope → Execution</div>
-      <p style="margin-bottom:18px">We respond with a short triage note (scope, timeline, constraints) and the next action: discovery call, proposal, or direct execution.</p>
-      <div class="contact-item" style="margin-bottom:12px"><div class="label">Fastest path</div><div class="value">Include: objective, deadline, budget range, and decision maker.</div></div>
-      <div class="contact-item" style="margin-bottom:12px"><div class="label">Security buyers</div><div class="value">Ask for the Client Vault. We can share hardening controls, monitoring, and governance architecture.</div></div>
-      <div class="contact-item"><div class="label">Network health</div><div class="value"><a href="status.html">View portal status</a> · <a href="dashboard.html">Dashboard</a></div></div>
-    </div>
+<div class="content-section" style="padding-top:0">
+  <div class="contact-direct">
+    <a href="mailto:SkyesOverLondonLC@solenterprises.org"><div class="cd-dot"></div>SkyesOverLondonLC@solenterprises.org</a>
+    <a href="tel:+19862107040"><div class="cd-dot"></div>986-210-7040</a>
+    <a href="status.html"><div class="cd-dot"></div>Network Status</a>
+    <a href="vault.html"><div class="cd-dot"></div>Client Vault</a>
   </div>
-</section>
+</div>
 
 <div class="divider"></div>
 
-<!-- CTA -->
 <section class="contact-section content-section">
-  <div class="section-title reveal">Ready to Execute?</div>
-  <p class="section-desc reveal">Whether it's a contract, a platform build, a partnership, or operational scaling — the line is open.</p>
-  <div class="contact-buttons reveal">
-    <a href="mailto:SkyesOverLondonLC@solenterprises.org?subject=Inquiry%20—%20Skyes%20Over%20London%20LC" class="btn-gold">Email Now</a>
-    <a href="tel:+19862107040" class="btn-outline">Call Now</a>
-  </div>
-  <div style="text-align:center;margin-top:70px;padding:40px 0" class="reveal"><div class="floating-glow-fire" style="display:inline-block"><img src="https://cdn1.sharemyimage.com/2026/02/13/ChatGPT-Image-Feb-12-2026-05_54_17-PM.png" alt="SOL Tiger" style="height:300px;width:auto;max-width:90vw;object-fit:contain"></div></div>
+  <div style="text-align:center;padding:40px 0" class="reveal"><div class="floating-glow-fire" style="display:inline-block"><img src="https://cdn1.sharemyimage.com/2026/02/13/ChatGPT-Image-Feb-12-2026-05_54_17-PM.png" alt="SOL Tiger" style="height:260px;width:auto;max-width:90vw;object-fit:contain"></div></div>
 </section>
+
+<script>
+(function () {
+  'use strict';
+  var currentStep = 1;
+  var selectedTopic = '';
+  var selectedTimeline = '';
+  function showError(step, msg) { var el = document.getElementById('err-' + step); if (el) el.textContent = msg; }
+  function clearError(step) { var el = document.getElementById('err-' + step); if (el) el.textContent = ''; }
+  function updateDots(step) {
+    document.querySelectorAll('.wiz-step-dot').forEach(function(dot) {
+      var n = parseInt(dot.dataset.dot);
+      dot.classList.remove('active', 'done');
+      if (n === step) dot.classList.add('active');
+      else if (n < step) dot.classList.add('done');
+    });
+    document.querySelectorAll('.wiz-connector').forEach(function(conn) {
+      var n = parseInt(conn.dataset.conn);
+      conn.classList.toggle('done', n < step);
+    });
+  }
+  function goToStep(next, goingBack) {
+    var current = document.getElementById('wiz-' + currentStep);
+    var target  = document.getElementById('wiz-' + next);
+    if (!current || !target) return;
+    current.classList.remove('active');
+    target.classList.remove('going-back');
+    if (goingBack) target.classList.add('going-back');
+    void target.offsetWidth;
+    target.classList.add('active');
+    currentStep = next;
+    updateDots(next);
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' });
+  }
+  window.selectTopic = function(el, val) {
+    document.querySelectorAll('.topic-btn').forEach(function(b) { b.classList.remove('selected'); });
+    el.classList.add('selected');
+    selectedTopic = val;
+    clearError(3);
+  };
+  window.selectTimeline = function(el, val) {
+    document.querySelectorAll('.timeline-btn').forEach(function(b) { b.classList.remove('selected'); });
+    el.classList.add('selected');
+    selectedTimeline = val;
+    clearError(5);
+  };
+  window.wizNext = function(step) {
+    clearError(step);
+    if (step === 1) {
+      var name  = document.getElementById('w-name').value.trim();
+      var email = document.getElementById('w-email').value.trim();
+      if (!name) { showError(1, 'Please enter your name.'); return; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError(1, 'Please enter a valid email address.'); return; }
+    }
+    if (step === 3 && !selectedTopic) { showError(3, 'Please select what you need.'); return; }
+    if (step === 4) {
+      var msg = document.getElementById('w-message').value.trim();
+      if (msg.length < 20) { showError(4, 'Please add more detail — at least a sentence.'); return; }
+    }
+    if (step === 5 && !selectedTimeline) { showError(5, 'Please select your timeline.'); return; }
+    if (step === 5) {
+      var company = document.getElementById('w-company').value.trim();
+      var state   = document.getElementById('w-state').value.trim();
+      var cs = [company, state].filter(Boolean).join(', ') || 'Not provided';
+      document.getElementById('rv-name').textContent     = document.getElementById('w-name').value.trim();
+      document.getElementById('rv-email').textContent    = document.getElementById('w-email').value.trim();
+      document.getElementById('rv-company').textContent  = cs;
+      document.getElementById('rv-topic').textContent    = selectedTopic;
+      document.getElementById('rv-message').textContent  = document.getElementById('w-message').value.trim();
+      document.getElementById('rv-timeline').textContent = selectedTimeline;
+    }
+    goToStep(step + 1, false);
+  };
+  window.wizBack = function(step) { if (step > 1) goToStep(step - 1, true); };
+  window.wizSubmit = function() {
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    var company = document.getElementById('w-company').value.trim();
+    var state   = document.getElementById('w-state').value.trim();
+    document.getElementById('nf-name').value     = document.getElementById('w-name').value.trim();
+    document.getElementById('nf-email').value    = document.getElementById('w-email').value.trim();
+    document.getElementById('nf-company').value  = [company, state].filter(Boolean).join(', ');
+    document.getElementById('nf-topic').value    = selectedTopic;
+    document.getElementById('nf-message').value  = document.getElementById('w-message').value.trim();
+    document.getElementById('nf-timeline').value = selectedTimeline;
+    document.getElementById('netForm').submit();
+  };
+})();
+</script>
 
 <footer>
   <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
@@ -183,7 +623,7 @@
   <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
 </footer>
 
-<script src="js/three-bg.js"></script>
+<script src="js/three-bg.js" defer></script>
 <script src="js/main.js"></script>
 <script src="js/growth.js"></script>
 

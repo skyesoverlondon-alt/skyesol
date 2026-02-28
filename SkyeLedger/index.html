@@ -163,7 +163,7 @@
 
   <section class="content-section">
     <div class="section-title">Board-ready narratives</div>
-    <p class="section-desc">Summaries call `/api/gateway-chat`, while streaming commentary and dev-mode edits use `/api/gateway-stream`. All SSE parsing happens via `ReadableStream` and the shared `kaixuStreamChat` helper.</p>
+    <p class="section-desc">Summaries call kAIxu Gate v2, while streaming commentary and dev-mode edits use kAIxu Gate v2 stream. All SSE parsing happens via `ReadableStream` and the shared kAIxu Gate client.</p>
     <div class="intel-grid">
       <div class="intel-card">
         <h3>Source briefing</h3>
@@ -209,18 +209,18 @@
       </div>
       <div class="intel-card">
         <h3>Step 2 · Generate summary</h3>
-        <p>Click "Generate summary" to call `/api/gateway-chat`. The response fills the summary panel and updates the ledger meta data.</p>
+        <p>Click "Generate summary" to call kAIxu Gate v2. The response fills the summary panel and updates the ledger meta data.</p>
       </div>
       <div class="intel-card">
         <h3>Step 3 · Stream commentary</h3>
-        <p>Press "Stream insight" to start `/api/gateway-stream`, watch `meta/delta/done` events fill the timeline, and monitor the budget cards/diagnostics.</p>
+        <p>Press "Stream insight" to start kAIxu Gate v2 stream, watch `meta/delta/done` events fill the timeline, and monitor the budget cards/diagnostics.</p>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
-    <p>SkyeLedger · kAIxuGateway13 · kaixuStreamChat helper · BroadcastChannel diagnostics.</p>
+    <p>SkyeLedger · kAIxuGateway13 · kAIxu Gate client · BroadcastChannel diagnostics.</p>
   </footer>
 
   <div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">

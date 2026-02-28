@@ -97,30 +97,14 @@
       100% { transform: rotateX(75deg) translateY(50px); }
     }
 
-    /* Neon Stars */
-    #sol-boot-sequence .sol-stars-container {
+    /* Neon Stars — canvas-based (replaces 250 animated divs) */
+    #sol-boot-sequence .sol-stars-canvas {
       position: absolute;
       inset: 0;
       z-index: 0;
-      overflow: hidden;
       pointer-events: none;
-    }
-    #sol-boot-sequence .sol-star {
-      position: absolute;
-      border-radius: 50%;
-      background-color: #fff;
-      opacity: 0;
-      animation:
-        sol-twinkle var(--sol-twinkle-dur) var(--sol-twinkle-del) ease-in-out infinite alternate,
-        sol-drift   var(--sol-drift-dur) linear infinite alternate;
-    }
-    @keyframes sol-twinkle {
-      0%   { opacity: 0.1; box-shadow: 0 0 2px var(--sol-star-color); background-color: #fff; }
-      100% { opacity: 1;   box-shadow: 0 0 10px var(--sol-star-color), 0 0 25px var(--sol-star-color); background-color: var(--sol-star-color); }
-    }
-    @keyframes sol-drift {
-      0%   { transform: translate(0, 0); }
-      100% { transform: translate(var(--sol-drift-x), var(--sol-drift-y)); }
+      width: 100%;
+      height: 100%;
     }
 
     /* Console Core */
@@ -264,7 +248,7 @@
   const boot = document.createElement('div');
   boot.id = 'sol-boot-sequence';
   boot.innerHTML = `
-    <div class="sol-stars-container" id="sol-boot-stars"></div>
+    <canvas class="sol-stars-canvas" id="sol-boot-stars"></canvas>
     <div class="sol-scanlines"></div>
     <div class="sol-vignette"></div>
     <div class="sol-cyber-grid"></div>
@@ -305,25 +289,65 @@
   const progressBar = document.getElementById('sol-boot-bar');
   const starsEl     = document.getElementById('sol-boot-stars');
 
-  // Stars
-  const starColors = ['var(--sol-cyan)', 'var(--sol-purple)', 'var(--sol-gold)', '#ffffff'];
-  for (let i = 0; i < 250; i++) {
-    const s = document.createElement('div');
-    s.className = 'sol-star';
-    const size = Math.random() * 3 + 1;
-    const color = starColors[Math.floor(Math.random() * starColors.length)];
-    s.style.width  = size + 'px';
-    s.style.height = size + 'px';
-    s.style.left   = Math.random() * 100 + '%';
-    s.style.top    = Math.random() * 100 + '%';
-    s.style.setProperty('--sol-star-color',  color);
-    s.style.setProperty('--sol-twinkle-dur', (Math.random() * 2 + 1) + 's');
-    s.style.setProperty('--sol-twinkle-del', (Math.random() * 5) + 's');
-    s.style.setProperty('--sol-drift-x',     ((Math.random() - 0.5) * 200) + 'px');
-    s.style.setProperty('--sol-drift-y',     ((Math.random() - 0.5) * 200) + 'px');
-    s.style.setProperty('--sol-drift-dur',   (Math.random() * 20 + 20) + 's');
-    starsEl.appendChild(s);
+  // Canvas stars — 250 stars in a single canvas element (no DOM thrash)
+  const starCanvas = starsEl;
+  const ctx = starCanvas.getContext('2d');
+  const starData = [];
+  const STAR_COLORS_RAW = ['#00f3ff', '#a243ff', '#ffd36a', '#ffffff'];
+  const STAR_COUNT = 250;
+
+  function initStarCanvas() {
+    starCanvas.width  = boot.offsetWidth  || window.innerWidth;
+    starCanvas.height = boot.offsetHeight || window.innerHeight;
+    starData.length = 0;
+    for (let i = 0; i < STAR_COUNT; i++) {
+      starData.push({
+        x:        Math.random() * starCanvas.width,
+        y:        Math.random() * starCanvas.height,
+        r:        Math.random() * 1.5 + 0.5,
+        color:    STAR_COLORS_RAW[Math.floor(Math.random() * STAR_COLORS_RAW.length)],
+        phase:    Math.random() * Math.PI * 2,
+        speed:    Math.random() * 0.008 + 0.003,
+        driftX:   (Math.random() - 0.5) * 0.15,
+        driftY:   (Math.random() - 0.5) * 0.15,
+      });
+    }
   }
+
+  let starRafId;
+  function drawStars(ts) {
+    ctx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+    for (let i = 0; i < starData.length; i++) {
+      const s = starData[i];
+      s.x += s.driftX;
+      s.y += s.driftY;
+      if (s.x < 0) s.x = starCanvas.width;
+      if (s.x > starCanvas.width) s.x = 0;
+      if (s.y < 0) s.y = starCanvas.height;
+      if (s.y > starCanvas.height) s.y = 0;
+      const alpha = (Math.sin(ts * s.speed + s.phase) + 1) / 2;
+      ctx.globalAlpha = 0.1 + alpha * 0.9;
+      ctx.fillStyle = s.color;
+      ctx.shadowBlur = alpha > 0.7 ? 8 : 0;
+      ctx.shadowColor = s.color;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
+    starRafId = requestAnimationFrame(drawStars);
+  }
+
+  initStarCanvas();
+  starRafId = requestAnimationFrame(drawStars);
+
+  // Resize handler
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() { initStarCanvas(); }, 200);
+  });
 
   // Scramble text effect
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+<>?';
