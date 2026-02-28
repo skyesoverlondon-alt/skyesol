@@ -57,7 +57,7 @@
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--gb);
     }
-    .topbar-brand { display: flex; flex-direction: column; gap: 1px; }
+    .topbar-brand { display: flex; flex-direction: row; align-items: center; gap: 12px; }
     .topbar-kicker { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); font-weight: 700; }
     .topbar-name   { font-size: .95rem; font-weight: 800; color: var(--fg); }
     .topbar-sub    { font-size: .7rem; color: var(--muted); }
@@ -264,8 +264,8 @@
 
   <!-- ─── TOPBAR ──────────────────────────────────────────── -->
   <header class="topbar">
-    <div class="topbar-brand" style="display:flex;align-items:center;gap:12px;">
-      <img src="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png" alt="SOL" style="height:36px;width:36px;object-fit:contain;border-radius:6px;flex-shrink:0;">
+    <div class="topbar-brand">
+      <img src="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png" alt="SOL" style="height:34px;width:34px;object-fit:contain;border-radius:5px;flex-shrink:0;">
       <div>
         <div class="topbar-kicker">SKYE Standard</div>
         <div class="topbar-name">Skyes Over London LC</div>
