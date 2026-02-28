@@ -44,6 +44,13 @@ async function injectPartial(selector, url, position){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // ── Holographic Boot Sequence Background (site-wide) ──
+  if (!document.getElementById('sol-boot-sequence')) {
+    const bgScript = document.createElement('script');
+    bgScript.src = '/js/bg-boot.js';
+    document.head.appendChild(bgScript);
+  }
+
   injectPartial('nav.main-nav', '/partials/header.html', 'start');
   injectPartial('footer', '/partials/footer.html', 'end');
   // Ensure admin menu floating link exists on pages that include partials.js
