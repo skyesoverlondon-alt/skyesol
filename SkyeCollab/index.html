@@ -270,14 +270,12 @@
   <script src="../js/main.js"></script>
   <script src="../js/growth.js"></script>
   <script src="../js/sol-intro.js"></script>
+  <script src="../js/kaixu-gate.js"></script>
   <script>
-    const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
-    const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
-    const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
-    const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
-    const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.6 };
-    const PROVIDER_BRANDING = { gemini: 'Skyes Over London' };
-    const MODEL_BRANDING = { 'gemini-2.0-flash': 'skAIxU Flow6.7' };
+    // kAIxu Gate v2 — all AI calls route via kaixu-gate.js → kaixu67.skyesoverlondon.workers.dev
+    const DEFAULT_PAYLOAD = { model: 'gemini-2.5-flash', max_tokens: 8192, temperature: 0.6 };
+    const PROVIDER_BRANDING = { 'gemini-2.5-flash': 'Skyes Over London' };
+    const MODEL_BRANDING = { 'gemini-2.5-flash': 'skAIxU Flow6.7' };
 
     const diagChannel = new BroadcastChannel('kaixu_events');
     const keyInput = document.getElementById('kaixu-key');
@@ -301,7 +299,7 @@
       providerDisplay.textContent = PROVIDER_BRANDING[provider] || provider;
       modelDisplay.textContent = MODEL_BRANDING[model] || model;
     }
-    renderProviderModel(DEFAULT_PAYLOAD.provider, DEFAULT_PAYLOAD.model);
+    renderProviderModel('Skyes Over London', 'skAIxU Flow6.7');
     const diagnosticsEl = document.getElementById('diagnostics');
     const lastLabelEl = document.getElementById('last-label');
     const diagnosticLog = document.getElementById('diagnostic-log');
@@ -423,23 +421,8 @@
     }
 
     async function postToGateway(endpoints, payload) {
-      let lastError;
-      for (const endpoint of endpoints) {
-        try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${kaixuKey}`
-            },
-            body: JSON.stringify(payload)
-          });
-          return response;
-        } catch (err) {
-          lastError = err;
-        }
-      }
-      throw lastError || new Error('Gateway unreachable');
+      // Delegated to kaixu-gate.js — routes to kaixu67.skyesoverlondon.workers.dev/v1/generate
+      return kaixuGate.generate(endpoints, payload);
     }
 
     async function handleNonStreamResponse(response, label, prependAssistant = false) {
@@ -470,8 +453,7 @@
         return;
       }
       const data = await response.json();
-      appendMessage('assistant', data.output_text || data.result || 'No response text.');
-      updateBudget(data.month);
+      appendMessage('assistant', data.text || 'No response text.');
       updateStatus('QA answer ready.', false);
       logDiagnostic(label, data);
     }
@@ -493,83 +475,12 @@
       if (isError) livePill.classList.add('error'); else livePill.classList.remove('error');
     }
 
-    function kaixuStreamChat(key, payload, { onMeta, onDelta, onDone, onError }) {
-      const endpoints = [KAIXU_STREAM_ENDPOINT, KAIXU_FALLBACK_STREAM];
-      return new Promise(async (resolve) => {
-        let lastError;
-        for (const endpoint of endpoints) {
-          const controller = new AbortController();
-          try {
-            const response = await fetch(endpoint, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${key}`
-              },
-              body: JSON.stringify(payload),
-              signal: controller.signal
-            });
-            if (response.status === 402) {
-              onError && onError({ code: 402, message: 'Monthly cap reached' });
-              return resolve();
-            }
-            if (response.status === 401) {
-              onError && onError({ code: 401, message: 'Invalid Kaixu Key' });
-              return resolve();
-            }
-            if (!response.ok) {
-              const errorBody = await response.text().catch(() => '');
-              const message = errorBody || `Gateway error ${response.status}`;
-              onError && onError({ code: response.status, message });
-              return resolve();
-            }
-            if (!response.body) throw new Error('No stream body returned.');
-            await readSSEStream(response.body.getReader(), controller, { onMeta, onDelta, onDone, onError });
-            return resolve();
-          } catch (err) {
-            lastError = err;
-          }
-        }
-        onError && onError({ code: 'network', message: `All stream endpoints failed: ${lastError?.message || 'unknown'}` });
-        resolve();
-      });
+    function kaixuStreamChat(key, payload, { onMeta, onDelta, onDone, onError } = {}) {
+      // Delegated to kaixu-gate.js — uses /v1/generate (Netlify CDN blocks SSE)
+      return kaixuGate.streamChat(key, payload, { onMeta, onDelta, onDone, onError });
     }
 
-    async function readSSEStream(reader, controller, { onMeta, onDelta, onDone, onError }) {
-      const decoder = new TextDecoder();
-      let buffer = '';
-      try {
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-          const events = buffer.split('\n\n');
-          buffer = events.pop();
-          for (const chunk of events) {
-            const lines = chunk.split(/\r?\n/).filter(Boolean);
-            if (!lines.length) continue;
-            let eventName = 'message';
-            let dataLine = '';
-            for (const line of lines) {
-              if (line.startsWith('event:')) eventName = line.replace('event:', '').trim();
-              if (line.startsWith('data:')) dataLine += line.replace('data:', '').trim();
-            }
-            if (!dataLine) continue;
-            try {
-              const parsed = JSON.parse(dataLine);
-              if (eventName === 'meta') onMeta && onMeta(parsed);
-              if (eventName === 'delta') onDelta && onDelta(parsed);
-              if (eventName === 'done') onDone && onDone(parsed);
-              if (eventName === 'error') onError && onError(parsed);
-            } catch (err) {
-              console.warn('Invalid SSE payload', err);
-            }
-          }
-        }
-      } finally {
-        controller.abort();
-      }
-    }
+    // readSSEStream removed — gate v2 uses /v1/generate (JSON), not SSE
 
     function logDiagnostic(source, payload) {
       diagnosticsEl.textContent = `${source} @ ${new Date().toISOString()}`;

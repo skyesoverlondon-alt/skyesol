@@ -237,14 +237,12 @@
   <script src="../js/main.js"></script>
   <script src="../js/growth.js"></script>
   <script src="../js/sol-intro.js"></script>
+  <script src="../js/kaixu-gate.js"></script>
   <script>
-    const KAIXU_CHAT_ENDPOINT = '/api/gateway-chat';
-    const KAIXU_STREAM_ENDPOINT = '/api/gateway-stream';
-    const KAIXU_FALLBACK_CHAT = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-chat';
-    const KAIXU_FALLBACK_STREAM = 'https://kaixugateway13.netlify.app/.netlify/functions/gateway-stream';
-    const DEFAULT_PAYLOAD = { provider: 'gemini', model: 'gemini-2.0-flash', max_tokens: 8192, temperature: 0.45 };
-    const PROVIDER_BRANDING = { gemini: 'Skyes Over London' };
-    const MODEL_BRANDING = { 'gemini-2.0-flash': 'skAIxU Flow6.7' };
+    // kAIxu Gate v2 — all AI calls route via kaixu-gate.js → kaixu67.skyesoverlondon.workers.dev
+    const DEFAULT_PAYLOAD = { model: 'gemini-2.5-flash', max_tokens: 8192, temperature: 0.45 };
+    const PROVIDER_BRANDING = { 'gemini-2.5-flash': 'Skyes Over London' };
+    const MODEL_BRANDING = { 'gemini-2.5-flash': 'skAIxU Flow6.7' };
 
     const diagChannel = new BroadcastChannel('kaixu_events');
     const keyInput = document.getElementById('kaixu-key');
@@ -268,7 +266,7 @@
       providerDisplay.textContent = PROVIDER_BRANDING[provider] || provider;
       modelDisplay.textContent = MODEL_BRANDING[model] || model;
     }
-    renderProviderModel(DEFAULT_PAYLOAD.provider, DEFAULT_PAYLOAD.model);
+    renderProviderModel('Skyes Over London', 'skAIxU Flow6.7');
     const diagnosticsEl = document.getElementById('diagnostics');
     const lastLabelEl = document.getElementById('last-label');
     const diagnosticLog = document.getElementById('diagnostic-log');
@@ -377,95 +375,12 @@
       });
     }
 
-    async function kaixuStreamChat(key, payload, { controller, onMeta, onDelta, onDone, onError, onAbort }) {
-      const signal = controller ? controller.signal : new AbortController().signal;
-      if (controller) {
-        controller.signal.addEventListener('abort', () => onAbort && onAbort(), { once: true });
-      }
-      const endpoints = [KAIXU_STREAM_ENDPOINT, KAIXU_FALLBACK_STREAM];
-      for (const endpoint of endpoints) {
-        if (signal.aborted) return;
-        try {
-          const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${key}`
-            },
-            body: JSON.stringify(payload),
-            signal
-          });
-          if (response.status === 402) {
-            onError && onError({ code: 402, message: 'Monthly cap reached' });
-            return;
-          }
-          if (response.status === 401) {
-            onError && onError({ code: 401, message: 'Invalid Kaixu Key' });
-            return;
-          }
-          if (response.status === 429) {
-            onError && onError({ code: 429, message: 'Rate limited — retry shortly' });
-            return;
-          }
-          if (response.status >= 500) {
-            onError && onError({ code: response.status, message: 'Gateway / provider error (' + response.status + ')' });
-            return;
-          }
-          if (!response.ok) {
-            const errorBody = await response.text().catch(() => '');
-            onError && onError({ code: response.status, message: errorBody || `Gateway error ${response.status}` });
-            return;
-          }
-          if (!response.body) {
-            throw new Error('No stream body returned.');
-          }
-          await readSSEStream(response.body.getReader(), controller || new AbortController(), { onMeta, onDelta, onDone, onError });
-          return;
-        } catch (err) {
-          if (err.name === 'AbortError') {
-            onError && onError({ code: 'abort', message: 'Stream aborted' });
-            return;
-          }
-          if (endpoint === endpoints[endpoints.length - 1]) {
-            onError && onError({ code: 'network', message: err.message || 'Stream failed' });
-          }
-        }
-      }
+    async function kaixuStreamChat(key, payload, { controller, onMeta, onDelta, onDone, onError, onAbort } = {}) {
+      // Delegated to kaixu-gate.js — uses /v1/generate (Netlify CDN blocks SSE)
+      return kaixuGate.streamChat(key, payload, { controller, onMeta, onDelta, onDone, onError, onAbort });
     }
 
-    async function readSSEStream(reader, controller, { onMeta, onDelta, onDone, onError }) {
-      const decoder = new TextDecoder();
-      let buffer = '';
-      try {
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-          const events = buffer.split('\n\n');
-          buffer = events.pop();
-          for (const chunk of events) {
-            const lines = chunk.split(/\r?\n/).filter(Boolean);
-            if (!lines.length) continue;
-            let eventName = 'message';
-            let dataLine = '';
-            for (const line of lines) {
-              if (line.startsWith('event:')) eventName = line.replace('event:', '').trim();
-              if (line.startsWith('data:')) dataLine += line.replace('data:', '').trim();
-            }
-            if (!dataLine) continue;
-            try {
-              const parsed = JSON.parse(dataLine);
-              if (eventName === 'meta') onMeta && onMeta(parsed);
-              if (eventName === 'delta') onDelta && onDelta(parsed);
-              if (eventName === 'done') onDone && onDone(parsed);
-              if (eventName === 'error') onError && onError(parsed);
-            } catch (err) {
-              console.warn('Invalid SSE payload', err);
-            }
-          }
-        }
-      }
-    }
+    // readSSEStream removed — gate v2 uses /v1/generate (JSON), not SSE
 
     function updateBudget(monthData) {
       if (!monthData) return;
