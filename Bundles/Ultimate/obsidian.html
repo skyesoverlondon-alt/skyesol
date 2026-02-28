@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0617" />
+  <title>Ultimate OBSIDIAN — Full Production + Systems | Skyes Over London LC</title>
+  <meta name="description" content="Ultimate OBSIDIAN: PRO plus a custom app build, admin/dashboard lane, exportable outputs, production upgrades (multi-hour/full-day, actors, scripting), and enterprise add-ons." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Ultimate OBSIDIAN — Full Production + Systems" />
+  <meta property="og:description" content="Custom app + production upgrades + enterprise ops lane." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+<body>
+  <canvas class="bg-canvas" id="stars" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <img class="floating-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC Logo" border="0">
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brandline">
+        <div>
+          <div class="title">SKYES OVER LONDON LC</div>
+          <div class="sub">Ultimate OBSIDIAN — Full Production + Systems</div>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="../index.html">Bundles Hub</a>
+        <a href="index.html">Ultimate</a>
+        <a href="core.html">Core</a>
+        <a href="pro.html">Pro</a>
+        <a href="#app">Custom App</a>
+        <a href="#intake">Intake</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="panel">
+        <div class="hero-left">
+          <div class="kicker">⚡ ULTIMATE OBSIDIAN</div>
+          <h1>Platform lane. Full production. Systems that become real assets.</h1>
+          <p class="lead">
+            OBSIDIAN is the top lane: everything in PRO, plus a custom app built to generate leads, remove bottlenecks, or run a cleaner client experience.
+            Production scales to multi-hour/full-day, and full production (actors + scripting) is available.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#intake">Start OBSIDIAN Intake →</a>
+            <a class="btn btn-secondary" href="#app">See App Options</a>
+            <a class="btn btn-secondary" href="../revenue-ops/">Want speed-to-cash instead? →</a>
+          </div>
+          <p class="fine">Standard start terms: <b>30% deposit</b> to begin build.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="app">
+      <h2>Custom app options</h2>
+      <div class="two">
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">Lead Magnet App</h3>
+          <ul class="list">
+            <li>Audit/report/estimate generator</li>
+            <li>Lead capture + routing + follow-up context</li>
+            <li>Exportable summaries (PDF/email)</li>
+          </ul>
+        </div>
+        <div class="panel" style="padding:18px;">
+          <h3 style="margin:0 0 10px;font-size:14px;letter-spacing:.02em;">Ops / Portal / Conversion Utility</h3>
+          <ul class="list">
+            <li>Scheduling, onboarding, dispatch-lite, asset tracking</li>
+            <li>Client portal: status + documents + invoices</li>
+            <li>Conversion utilities: ROI, configurator, proposal builder</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="intake">
+      <h2>OBSIDIAN intake</h2>
+      <p>Tell us what you want the app to solve or generate, plus your production lane.</p>
+
+      <div class="formwrap">
+        <form name="ultimate-obsidian-intake" method="POST" data-netlify="true" action="/thank-you.html">
+          <input type="hidden" name="form-name" value="ultimate-obsidian-intake" />
+          <input type="hidden" name="package" value="Ultimate OBSIDIAN — Full Production + Systems" />
+
+          <div class="row">
+            <div><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required /></div>
+            <div><label for="company">Company</label><input id="company" name="company" autocomplete="organization" required /></div>
+          </div>
+
+          <div class="row">
+            <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+            <div><label for="phone">Phone</label><input id="phone" name="phone" autocomplete="tel" /></div>
+          </div>
+
+          <div class="row">
+            <div><label for="market">Target city/area</label><input id="market" name="market" required /></div>
+            <div><label for="industry">Industry / niche</label><input id="industry" name="industry" required /></div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="app_direction">App direction</label>
+              <select id="app_direction" name="app_direction" required>
+                <option value="" selected disabled>Select one</option>
+                <option>Lead Magnet App</option>
+                <option>Ops App</option>
+                <option>Client Portal</option>
+                <option>Conversion Utility</option>
+                <option>Not sure — scope it for me</option>
+              </select>
+            </div>
+            <div>
+              <label for="production_scope">Production scope</label>
+              <select id="production_scope" name="production_scope" required>
+                <option value="" selected disabled>Select one</option>
+                <option>Base (1 hour photo + 1 hour video)</option>
+                <option>Multi-hour (upgrade)</option>
+                <option>Full-day (upgrade)</option>
+                <option>Full production (actors + scripting)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="notes">Describe the system you want</label>
+            <textarea id="notes" name="notes" placeholder="What’s slow? What’s costing money? What should the app automate or generate?"></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Submit OBSIDIAN Intake →</button>
+
+          <div class="fine">
+            Direct: <a class="link" href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> ·
+            <a class="link" href="tel:+14804695416">480-469-5416</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer>© <span id="y"></span> Skyes Over London LC</footer>
+  </main>
+
+  <script src="../assets/common.js"></script>
+  <script src="../assets/stars.js"></script>
+  <script>
+    SkyeCommon.setYear();
+    SkyeStars.init('stars');
+  </script>
+</body>
+</html>
