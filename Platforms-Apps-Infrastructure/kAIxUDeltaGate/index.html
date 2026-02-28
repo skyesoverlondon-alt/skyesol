@@ -1,0 +1,1327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>kAIxu Gateway — Implementation Directives</title>
+  <meta name="description" content="kAIxu Gateway — How to wire any app through the gate instead of calling providers directly. Branded neural landing + embedded directive PDF." />
+  <meta name="color-scheme" content="dark" />
+  <style>
+    :root{
+      --bg0:#05040a; --bg1:#07060d;
+      --fg:#f2f0ff; --muted:#b7b2d9; --muted2:#8f89b9;
+      --gold:#ffd55a; --violet:#b86bff; --blue:#3bd6ff; --red:#ff6060;
+      --glass: rgba(255,255,255,0.06); --glass2: rgba(255,255,255,0.10);
+      --border: rgba(255,255,255,0.14);
+      --shadow: 0 22px 90px rgba(0,0,0,.60);
+      --radius: 20px; --radius2: 26px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font: 14px/1.55 var(--sans);
+      color: var(--fg);
+      background:
+        radial-gradient(1000px 700px at 18% 18%, rgba(184,107,255,.18), transparent 60%),
+        radial-gradient(1000px 700px at 82% 22%, rgba(59,214,255,.14), transparent 60%),
+        radial-gradient(1300px 900px at 50% 92%, rgba(255,213,90,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 40%, #060512);
+      overflow-x:hidden;
+    }
+    canvas#bg{ position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display:block; }
+    .aurora{
+      position: fixed; inset:-25% -10%;
+      background: conic-gradient(from 210deg at 50% 50%,
+        rgba(184,107,255,.16),
+        rgba(59,214,255,.14),
+        rgba(255,213,90,.09),
+        rgba(184,107,255,.16));
+      filter: blur(80px) saturate(140%);
+      opacity:.42;
+      animation: drift 12.5s ease-in-out infinite;
+      pointer-events:none; z-index: 0; mix-blend-mode: screen;
+    }
+    @keyframes drift{
+      0%{transform: translate3d(-2.5%, -1.3%, 0) rotate(-7deg) scale(1.05)}
+      50%{transform: translate3d(2.6%, 1.2%, 0) rotate(7deg) scale(1.08)}
+      100%{transform: translate3d(-2.5%, -1.3%, 0) rotate(-7deg) scale(1.05)}
+    }
+
+    /* Floating logo (no container) + subtle glow + pulse */
+    .logo {
+      position: fixed; top: 18px; left: 18px;
+      width: 74px; height: auto;
+      filter: drop-shadow(0 0 18px rgba(184,107,255,.48)) drop-shadow(0 0 26px rgba(255,213,90,.22));
+      animation: pulse 2.7s ease-in-out infinite;
+      z-index: 30; user-select:none; -webkit-user-drag: none;
+    }
+    @keyframes pulse { 0%,100%{ transform: scale(1); opacity:1 } 50%{ transform: scale(1.05); opacity:.93 } }
+
+    .wrap{ position:relative; z-index:2; max-width:1240px; margin:0 auto; padding: 78px 18px 80px; }
+    .topbar {
+      position: sticky; top: 0; z-index: 25;
+      margin: 0 auto 16px; padding: 10px 12px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.13);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 50px rgba(0,0,0,.45);
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; min-width: 240px; }
+    .brand .dot{ width:10px; height:10px; border-radius:999px; background: rgba(59,214,255,.72); box-shadow: 0 0 22px rgba(59,214,255,.55); }
+    .brand b{ letter-spacing:.2px }
+    .brand span{ color: var(--muted); font-size: 12px }
+    nav{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a{
+      text-decoration:none; color: var(--fg);
+      font-weight: 700; font-size: 12px; letter-spacing: .15px;
+      padding: 8px 10px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      transition: transform .08s ease, filter .2s ease, background .2s ease;
+      white-space:nowrap;
+    }
+    nav a:hover{ background: rgba(184,107,255,.16); filter: drop-shadow(0 0 18px rgba(184,107,255,.20)); }
+    nav a:active{ transform: translateY(1px) scale(.99) }
+
+    .grid{ display:grid; grid-template-columns: 1.05fr .95fr; gap: 16px; margin-top: 8px; }
+    @media (max-width: 980px){ .grid{ grid-template-columns: 1fr } }
+
+    .card {
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      overflow:hidden; position:relative;
+    }
+    .card::before {
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(900px 360px at 15% 10%, rgba(184,107,255,.18), transparent 60%),
+        radial-gradient(900px 360px at 85% 15%, rgba(59,214,255,.16), transparent 60%),
+        radial-gradient(1000px 460px at 50% 105%, rgba(255,213,90,.12), transparent 65%);
+      opacity:.9; pointer-events:none;
+    }
+    .card > *{ position:relative; z-index:1 }
+    .pad{ padding: 18px 18px 16px }
+    h1{ margin:0; font-size: 26px; letter-spacing: .2px }
+    h2{ margin: 0 0 10px; font-size: 16px; letter-spacing:.2px; }
+    .sub{ margin:8px 0 0; color: var(--muted); max-width: 70ch }
+
+    .pillrow{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 14px }
+    .pill {
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(0,0,0,.25);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .pill i{ width:10px; height:10px; border-radius:999px; display:inline-block; background: rgba(255,255,255,.23); box-shadow: 0 0 18px rgba(255,213,90,.20); }
+    .pill.ok i{ background: rgba(59,214,255,.72); box-shadow: 0 0 18px rgba(59,214,255,.50) }
+    .pill.bad i{ background: rgba(255,96,96,.82); box-shadow: 0 0 18px rgba(255,96,96,.50) }
+
+    .cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
+    .btn {
+      cursor:pointer;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: linear-gradient(180deg, rgba(184,107,255,.28), rgba(59,214,255,.18));
+      color: var(--fg);
+      font-weight: 780;
+      letter-spacing:.2px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      transition: transform .08s ease, filter .2s ease;
+      text-decoration:none;
+      display:inline-flex; align-items:center; gap:10px;
+    }
+    .btn.secondary {
+      background: rgba(0,0,0,.30);
+      border: 1px solid rgba(255,255,255,.14);
+      font-weight: 700;
+    }
+    .btn:active{ transform: translateY(1px) scale(.99) }
+    .btn:hover{ filter: drop-shadow(0 0 18px rgba(184,107,255,.25)) }
+
+    .prewrap{ background: rgba(0,0,0,.33); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); overflow:hidden; }
+    .prehead{ display:flex; justify-content:space-between; align-items:center; padding: 10px 12px; background: rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.10); }
+    .prehead b{ font-size: 12px; letter-spacing:.2px }
+    .prehead span{ color: var(--muted); font-size: 12px }
+    .copybtn {
+      cursor:pointer; font: 12px/1 var(--sans);
+      padding: 8px 10px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.28);
+      color: var(--fg); font-weight: 780;
+    }
+    pre{ margin:0; padding: 12px; font: 12px/1.5 var(--mono); color: var(--fg); overflow:auto; max-height: 540px; white-space: pre-wrap; word-break: break-word; }
+
+    .pdfwrap{ border-radius: var(--radius); overflow:hidden; border: 1px solid rgba(255,255,255,.12); background: rgba(0,0,0,.22); height: 760px; }
+    .pdfwrap iframe{ width:100%; height:100%; border:0; background: rgba(0,0,0,.1); }
+
+    .cols{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 980px){ .cols{ grid-template-columns: 1fr } }
+
+    .mini{ color: var(--muted); font-size: 12px; margin: 10px 0 0; }
+    .glowline{ height: 1px; background: linear-gradient(90deg, transparent, rgba(184,107,255,.7), rgba(59,214,255,.55), rgba(255,213,90,.5), transparent); opacity:.75; margin: 14px 0; }
+    .footer{ margin-top: 18px; padding: 14px 18px; color: var(--muted); font-size: 12px; text-align:center; opacity:.95; }
+    .kbadge{ font: 12px/1 var(--mono); padding: 8px 10px; border-radius: 14px; background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.12); color: var(--fg); overflow:auto; }
+    .field{ width:100%; padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.28); color: var(--fg); outline:none; }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; }
+    .row > *{ flex: 1 1 220px; }
+    .out{ min-height: 140px; max-height: 260px; overflow:auto; white-space: pre-wrap; font: 12px/1.45 var(--mono); background: rgba(0,0,0,.30); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:12px; }
+  </style>
+</head>
+<body>
+  <!-- SOL Platform Nav -->
+  <div id="sol-platnav" style="position:fixed;bottom:18px;right:18px;z-index:99999;display:flex;flex-direction:column;gap:6px;font-family:ui-sans-serif,system-ui,sans-serif;">
+    <a href="/index.html" style="padding:8px 15px;border-radius:999px;background:rgba(5,4,10,.92);border:1px solid rgba(255,255,255,.16);color:#f2f0ff;text-decoration:none;backdrop-filter:blur(12px);white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.15px;box-shadow:0 10px 34px rgba(0,0,0,.55);display:block;text-align:center;" onmouseover="this.style.borderColor='rgba(184,107,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.16)'">&#8592; SOL Home</a>
+    <a href="/Platforms-Apps-Infrastructure/" style="padding:8px 15px;border-radius:999px;background:rgba(5,4,10,.92);border:1px solid rgba(255,255,255,.16);color:#f2f0ff;text-decoration:none;backdrop-filter:blur(12px);white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.15px;box-shadow:0 10px 34px rgba(0,0,0,.55);display:block;text-align:center;" onmouseover="this.style.borderColor='rgba(59,214,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.16)'">&#11043; All Platforms</a>
+  </div>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <img class="logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC Logo" border="0" />
+
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <div>
+          <b>kAIxu Gateway • Implementation Directives</b><br/>
+          <span>Skyes Over London LC • 2026</span>
+        </div>
+      </div>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#endpoints">Endpoints</a>
+        <a href="#directive">Directive</a>
+        <a href="#pdf">PDF</a>
+        <a href="#tester">Tester</a>
+      </nav>
+    </div>
+
+    <section class="grid" id="overview">
+      <div class="card">
+        <div class="pad">
+          <h1>kAIxu Gateway — Wire Every App Through The Gate</h1>
+          <p class="sub">Apps talk to the kAIxu Gate. The gate talks to providers. Keys never leave the server. Tokens are disposable. ⚡️</p>
+
+          <div class="pillrow">
+            <span class="pill" id="healthPill"><i></i><span id="healthText">Checking gateway health…</span></span>
+            <span class="pill"><i></i><span>Gateway URL</span></span>
+            <span class="pill"><i></i><span class="kbadge" id="gateUrl">https://kaixu67.skyesoverlondon.workers.dev</span></span>
+          </div>
+
+          <div class="cta">
+            <a class="btn" href="#pdf">Open Embedded PDF</a>
+            <a class="btn secondary" href="kAIxu_Gateway_Implementation_Directives_2026.pdf" target="_blank" rel="noopener">Open PDF (New Tab)</a>
+            <button class="btn secondary" id="copyGate">Copy Gateway URL</button>
+          </div>
+
+          <div class="glowline"></div>
+
+          <div class="cols" id="endpoints">
+            <div>
+              <h2>The Four Endpoints</h2>
+              <div class="prewrap">
+                <div class="prehead">
+                  <b>PM / QA quick reference</b>
+                  <div><button class="copybtn" data-copy="endpoints">Copy</button></div>
+                </div>
+                <pre id="endpointsPre">GET  /v1/health   - Check gateway is up and configured
+GET  /v1/models   - List available models
+POST /v1/generate - Full response (JSON)
+POST /v1/stream   - Streaming (SSE)</pre>
+              </div>
+              <p class="mini">Health and models are ideal acceptance gates before integrating an app. Generate and stream are runtime calls.</p>
+            </div>
+
+            <div>
+              <h2>Authentication</h2>
+              <div class="prewrap">
+                <div class="prehead">
+                  <b>Accepted headers</b>
+                  <div><button class="copybtn" data-copy="auth">Copy</button></div>
+                </div>
+                <pre id="authPre">Authorization: Bearer YOUR_TOKEN
+X-KAIXU-TOKEN: YOUR_TOKEN</pre>
+              </div>
+              <p class="mini">Tokens come from the gateway allowlist (KAIXU_APP_TOKENS). If a token leaks, revoke it—no provider key rotation required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="pad" id="directive">
+          <h2>Directive Text (Word-for-Word)</h2>
+          <div class="prewrap">
+            <div class="prehead">
+              <b>Implementation Directives</b>
+              <div><span>Scroll</span> <button class="copybtn" data-copy="directiveText">Copy</button></div>
+            </div>
+            <pre id="directiveText"># kAIxu Gateway — Implementation Directives
+## How To Wire Any App Through The Gate Instead of Calling AI Providers Directly
+
+**Gateway URL:** `https://kaixu67.skyesoverlondon.workers.dev`  
+**Auth:** Bearer token in `Authorization` header  
+**Format:** JSON in, JSON out (or SSE for streaming)
+
+---
+
+## Why Call The Gate Instead Of Gemini Directly
+
+If you call Gemini directly from your app, the API key lives in your app — in environment variables, config files, or worse, bundled client-side code. Every developer who touches the project has access to it. Every leaked `.env` file costs you money.
+
+The gateway owns the key. Your app gets a disposable token. If a token leaks, you revoke it without touching the Gemini key. If a developer leaves, you revoke their token. You can give different tokens to different apps or teams and track usage per token later.
+
+Your app goes from this:
+```
+App → Google Gemini API (with your $$ key)
+```
+To this:
+```
+App → kAIxu Gate (with a cheap token) → Google Gemini API (key never leaves the server)
+```
+
+Same results. Zero key exposure.
+
+---
+
+## The Four Endpoints
+
+| Method | Path | What it does |
+|--------|------|-------------|
+| `GET` | `/v1/health` | Check the gateway is up and configured |
+| `GET` | `/v1/models` | List available models |
+| `POST` | `/v1/generate` | Full response — waits for complete answer, returns JSON |
+| `POST` | `/v1/stream` | Streaming — returns SSE, bytes arrive in real time |
+
+---
+
+## Authentication
+
+Every request needs an `Authorization` header:
+
+```
+Authorization: Bearer YOUR_TOKEN
+```
+
+Alternatively the header `X-KAIXU-TOKEN: YOUR_TOKEN` works too.
+
+Where to get your token: ask whoever manages the gateway (`KAIXU_APP_TOKENS` env var). It's a comma-separated list — each value is a valid token. Tokens can be any string you want, e.g. `myapp-prod-v1`, a UUID, anything.
+
+---
+
+## 1. Health Check — Verify The Gate Is Reachable
+
+Always a good first call to confirm your token is accepted.
+
+### curl
+```bash
+curl https://kaixu67.skyesoverlondon.workers.dev/v1/health \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
+
+### JavaScript (fetch)
+```js
+const res = await fetch('https://kaixu67.skyesoverlondon.workers.dev/v1/health', {
+  headers: { 'Authorization': 'Bearer YOUR_TOKEN' }
+});
+const data = await res.json();
+// { ok: true, keyConfigured: true, authConfigured: true, openGate: false }
+```
+
+### Python (requests)
+```python
+import requests
+
+r = requests.get(
+    'https://kaixu67.skyesoverlondon.workers.dev/v1/health',
+    headers={'Authorization': 'Bearer YOUR_TOKEN'}
+)
+print(r.json())
+# {'ok': True, 'keyConfigured': True, 'authConfigured': True, 'openGate': False}
+```
+
+---
+
+## 2. Basic Text Generation — `/v1/generate`
+
+This is your main call for most use cases. Send a prompt, get back a complete answer.
+
+### The simplest possible call
+
+### curl
+```bash
+curl https://kaixu67.skyesoverlondon.workers.dev/v1/generate \
+  -X POST \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"input": {"type": "text", "content": "Explain WebSockets in one paragraph."}}'
+```
+
+### JavaScript (fetch)
+```js
+const BASE = 'https://kaixu67.skyesoverlondon.workers.dev';
+const TOKEN = 'YOUR_TOKEN';
+
+async function ask(prompt) {
+  const res = await fetch(`${BASE}/v1/generate`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      input: { type: 'text', content: prompt }
+    })
+  });
+
+  const data = await res.json();
+
+  if (!data.ok) throw new Error(data.error);
+  return data.text;
+}
+
+const answer = await ask('What is a REST API?');
+console.log(answer);
+```
+
+### Python
+```python
+import requests
+
+BASE = 'https://kaixu67.skyesoverlondon.workers.dev'
+TOKEN = 'YOUR_TOKEN'
+HEADERS = {
+    'Authorization': f'Bearer {TOKEN}',
+    'Content-Type': 'application/json'
+}
+
+def ask(prompt: str) -&gt; str:
+    r = requests.post(
+        f'{BASE}/v1/generate',
+        headers=HEADERS,
+        json={'input': {'type': 'text', 'content': prompt}}
+    )
+    data = r.json()
+    if not data.get('ok'):
+        raise Exception(data.get('error', 'Unknown error'))
+    return data['text']
+
+print(ask('Summarise the CAP theorem in plain English.'))
+```
+
+---
+
+## 3. The Response Object
+
+Every `/v1/generate` call returns this shape:
+
+```json
+{
+  "ok": true,
+  "model": "gemini-2.5-flash",
+  "text": "The answer from the model...",
+  "finishReason": "STOP",
+  "usage": {
+    "promptTokens": 14,
+    "candidatesTokens": 120,
+    "thoughtsTokens": 0,
+    "totalTokens": 134
+  }
+}
+```
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `ok` | boolean | `false` if something went wrong — check `error` field |
+| `model` | string | Which model actually answered |
+| `text` | string | The answer — this is what you want |
+| `finishReason` | string | `STOP` = complete answer. `MAX_TOKENS` = got cut off |
+| `usage.promptTokens` | number | Tokens in your input |
+| `usage.candidatesTokens` | number | Tokens in the answer |
+| `usage.thoughtsTokens` | number | Internal reasoning tokens (gemini-2.5-pro only) |
+| `usage.totalTokens` | number | Sum of all token usage |
+
+**Error response:**
+```json
+{
+  "ok": false,
+  "error": "Unauthorized"
+}
+```
+
+---
+
+## 4. Multi-Turn Conversations — Using `messages[]`
+
+For chat interfaces, pass the full conversation history as `messages[]` — same format as OpenAI.
+
+```js
+const messages = [
+  { role: 'user', content: 'My name is Skye.' },
+  { role: 'assistant', content: 'Hello Skye, how can I help you?' },
+  { role: 'user', content: 'What is my name?' }
+];
+
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${TOKEN}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ messages })
+});
+
+const data = await res.json();
+console.log(data.text); // "Your name is Skye."
+```
+
+The gateway converts `messages[]` to Gemini's `contents[]` format automatically. You don't need to think about Gemini's API format — send OpenAI-style `{ role, content }` objects and it works.
+
+**Building the messages array in a chat loop:**
+```js
+const messages = [];
+
+async function chat(userInput) {
+  messages.push({ role: 'user', content: userInput });
+
+  const res = await fetch(`${BASE}/v1/generate`, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages })
+  });
+
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error);
+
+  // Add the assistant reply to history so next turn has full context
+  messages.push({ role: 'assistant', content: data.text });
+
+  return data.text;
+}
+
+await chat('My favourite colour is indigo.');
+await chat('What colour did I just mention?'); // "indigo"
+```
+
+---
+
+## 5. System Instructions
+
+Tell the model who it is and how to behave:
+
+```js
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    system: 'You are a concise legal assistant. Answer in plain English. Never give legal advice.',
+    input: { type: 'text', content: 'What is habeas corpus?' }
+  })
+});
+```
+
+Per-request `system` overrides the gateway's global system prompt (`KAIXU_GLOBAL_SYSTEM`). If you don't send one, the global default applies.
+
+---
+
+## 6. Choosing a Model
+
+The gateway defaults to `gemini-2.5-flash`. To use a different model, pass `model`:
+
+```js
+body: JSON.stringify({
+  model: 'gemini-2.5-pro',   // the thinking model — smarter, slower
+  input: { type: 'text', content: 'Analyse the tradeoffs of microservices vs monoliths.' }
+})
+```
+
+**When to use which:**
+
+| Use Case | Model |
+|----------|-------|
+| Most things | `gemini-2.5-flash` (default) |
+| Complex reasoning, code review, long analysis | `gemini-2.5-pro` |
+
+**Get the model list dynamically:**
+```js
+const res = await fetch(`${BASE}/v1/models`, {
+  headers: { 'Authorization': `Bearer ${TOKEN}` }
+});
+const { models } = await res.json();
+// models = [{ id: 'gemini-2.5-flash', ... }, { id: 'gemini-2.5-pro', ... }]
+```
+
+---
+
+## 7. Generation Config — Temperature, Token Limits, etc.
+
+Pass `generationConfig` and it goes straight to Gemini verbatim:
+
+```js
+body: JSON.stringify({
+  input: { type: 'text', content: 'Write me a short poem.' },
+  generationConfig: {
+    temperature: 1.2,          // 0.0 = deterministic, 2.0 = wildly creative
+    topP: 0.95,
+    maxOutputTokens: 512,      // cap the answer length
+    stopSequences: ['END']     // stop generating if this string appears
+  }
+})
+```
+
+No server-side caps are applied — whatever you send in `generationConfig` is what Gemini gets.
+
+**Note on `gemini-2.5-pro`:** This model thinks internally before answering. If you set a low `maxOutputTokens`, it can burn all the tokens on thinking and return nothing. For `gemini-2.5-pro`, either omit `maxOutputTokens` entirely or set it high (`32768` or more).
+
+---
+
+## 8. JSON Output Mode
+
+Ask the model to return structured JSON instead of free text:
+
+```js
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    output: { format: 'json' },
+    input: {
+      type: 'text',
+      content: 'Return a JSON object with fields: name, capital, population for France.'
+    }
+  })
+});
+
+const data = await res.json();
+const country = JSON.parse(data.text);
+// { name: 'France', capital: 'Paris', population: 68000000 }
+```
+
+---
+
+## 9. Streaming — `/v1/stream`
+
+Use streaming when:
+- Answers take more than 1-2 seconds
+- You want the UI to feel responsive as words appear
+- You're using `gemini-2.5-pro` (which can take 10-30s before first byte)
+
+The endpoint returns Server-Sent Events (SSE). Each `data:` line is a raw Gemini chunk.
+
+### JavaScript — ReadableStream
+```js
+async function streamAnswer(prompt, onChunk) {
+  const res = await fetch(`${BASE}/v1/stream`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      input: { type: 'text', content: prompt }
+    })
+  });
+
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop(); // keep incomplete line for next chunk
+
+    for (const line of lines) {
+      if (!line.startsWith('data: ')) continue;
+      const raw = line.slice(6).trim();
+      if (raw === '[DONE]') return;
+
+      try {
+        const chunk = JSON.parse(raw);
+        const text = chunk.candidates?.[0]?.content?.parts
+          ?.filter(p =&gt; !p.thought)        // skip internal thinking
+          ?.map(p =&gt; p.text || '')
+          ?.join('') || '';
+        if (text) onChunk(text);
+      } catch {}
+    }
+  }
+}
+
+// Usage: stream tokens into a &lt;div&gt; as they arrive
+let output = '';
+await streamAnswer('Write a 500-word essay on stoicism.', chunk =&gt; {
+  output += chunk;
+  document.getElementById('output').textContent = output;
+});
+```
+
+### Python — httpx streaming
+```python
+import httpx
+import json
+
+BASE = 'https://kaixu67.skyesoverlondon.workers.dev'
+TOKEN = 'YOUR_TOKEN'
+
+def stream_answer(prompt: str):
+    with httpx.stream(
+        'POST',
+        f'{BASE}/v1/stream',
+        headers={
+            'Authorization': f'Bearer {TOKEN}',
+            'Content-Type': 'application/json'
+        },
+        json={'input': {'type': 'text', 'content': prompt}},
+        timeout=None   # no timeout — let the stream complete
+    ) as r:
+        buffer = ''
+        for chunk in r.iter_text():
+            buffer += chunk
+            while '\n' in buffer:
+                line, buffer = buffer.split('\n', 1)
+                if not line.startswith('data: '):
+                    continue
+                raw = line[6:].strip()
+                if raw == '[DONE]':
+                    return
+                try:
+                    data = json.loads(raw)
+                    parts = data.get('candidates', [{}])[0].get('content', {}).get('parts', [])
+                    text = ''.join(p.get('text', '') for p in parts if not p.get('thought'))
+                    if text:
+                        print(text, end='', flush=True)
+                except Exception:
+                    pass
+
+stream_answer('Explain the theory of general relativity step by step.')
+```
+
+---
+
+## 10. Migrating From Direct Gemini API Calls
+
+If your code currently calls Gemini directly, here's the mapping:
+
+**Before (direct Gemini):**
+```js
+const res = await fetch(
+  `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+  {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ role: 'user', parts: [{ text: 'Hello' }] }]
+    })
+  }
+);
+const raw = await res.json();
+const text = raw.candidates[0].content.parts[0].text;
+```
+
+**After (through the gate):**
+```js
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${TOKEN}`,  // ← replaces API key
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    input: { type: 'text', content: 'Hello' }  // ← simplified format
+  })
+});
+const data = await res.json();
+const text = data.text;  // ← already extracted for you
+```
+
+Or if you want to pass Gemini's native `contents[]` format directly, you can do that too — the gateway passes it through unchanged:
+```js
+body: JSON.stringify({
+  contents: [{ role: 'user', parts: [{ text: 'Hello' }] }]
+})
+```
+
+---
+
+## 11. Migrating From OpenAI Calls
+
+The gateway uses OpenAI-style `messages[]` format, so most of your structure stays the same — just change the URL and auth:
+
+**Before (OpenAI):**
+```js
+const res = await fetch('https://api.openai.com/v1/chat/completions', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${OPENAI_KEY}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    model: 'gpt-4o',
+    messages: [
+      { role: 'system', content: 'You are a helpful assistant.' },
+      { role: 'user', content: 'Hello' }
+    ]
+  })
+});
+const data = await res.json();
+const text = data.choices[0].message.content;
+```
+
+**After (kAIxu gate):**
+```js
+const res = await fetch(`${BASE}/v1/generate`, {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${TOKEN}`,  // ← different token, same header
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    // system message goes in the 'system' field, not in messages[]
+    system: 'You are a helpful assistant.',
+    messages: [
+      { role: 'user', content: 'Hello' }
+    ]
+  })
+});
+const data = await res.json();
+const text = data.text;  // ← data.text instead of data.choices[0].message.content
+```
+
+**What changes:**
+- URL: `api.openai.com` → `kaixu67.skyesoverlondon.workers.dev`
+- Token: OpenAI key → your gate token (in the same `Authorization: Bearer` header)
+- `model`: `gpt-4o` → `gemini-2.5-flash` or `gemini-2.5-pro`
+- System message: move from `messages[]` to the top-level `system` field
+- Response: `data.choices[0].message.content` → `data.text`
+
+---
+
+## 12. Environment Setup For Teams
+
+Never hardcode the token. Store it as an environment variable and load it at runtime.
+
+### Node.js / Next.js / Vite
+```js
+// .env
+VITE_KAIXU_TOKEN=your_token_here
+VITE_KAIXU_BASE=https://kaixu67.skyesoverlondon.workers.dev
+
+// kaixu.js — re-usable client
+const BASE  = import.meta.env.VITE_KAIXU_BASE;
+const TOKEN = import.meta.env.VITE_KAIXU_TOKEN;
+
+export async function ask(prompt, options = {}) {
+  const res = await fetch(`${BASE}/v1/generate`, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ input: { type: 'text', content: prompt }, ...options })
+  });
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error);
+  return data;
+}
+```
+
+### Python / Django / FastAPI
+```python
+# .env
+KAIXU_TOKEN=your_token_here
+KAIXU_BASE=https://kaixu67.skyesoverlondon.workers.dev
+
+# kaixu.py — re-usable client
+import os, requests
+
+BASE  = os.environ['KAIXU_BASE']
+TOKEN = os.environ['KAIXU_TOKEN']
+HEADERS = {'Authorization': f'Bearer {TOKEN}', 'Content-Type': 'application/json'}
+
+def ask(prompt: str, **kwargs) -&gt; dict:
+    r = requests.post(
+        f'{BASE}/v1/generate',
+        headers=HEADERS,
+        json={'input': {'type': 'text', 'content': prompt}, **kwargs}
+    )
+    data = r.json()
+    if not data.get('ok'):
+        raise Exception(data.get('error'))
+    return data
+```
+
+### React Native / Expo
+```js
+// app.config.js / eas.json secrets or expo-constants
+import Constants from 'expo-constants';
+const BASE  = Constants.expoConfig.extra.kaixuBase;
+const TOKEN = Constants.expoConfig.extra.kaixuToken;
+```
+
+**Never commit tokens.** Add `.env` to `.gitignore`. On CI/CD (Vercel, Netlify, etc.), add the token as an environment variable in the platform dashboard.
+
+---
+
+## 13. Error Handling — What The Gate Returns
+
+| HTTP Status | `ok` | When |
+|-------------|------|------|
+| 200 | `true` | Success |
+| 400 | `false` | Bad request body — missing required fields |
+| 401 | `false` | Missing or invalid token |
+| 405 | `false` | Wrong HTTP method |
+| 413 | `false` | Request body too large (&gt;5MB default) |
+| 500 | `false` | Gateway misconfigured or Gemini error |
+
+**Robust error handling:**
+```js
+async function safeAsk(prompt) {
+  try {
+    const res = await fetch(`${BASE}/v1/generate`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${TOKEN}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ input: { type: 'text', content: prompt } })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok || !data.ok) {
+      console.error('Gate error:', data.error);
+      return null;
+    }
+
+    if (data.finishReason === 'MAX_TOKENS') {
+      console.warn('Response was cut off — try raising maxOutputTokens in generationConfig');
+    }
+
+    return data.text;
+  } catch (err) {
+    console.error('Network error:', err.message);
+    return null;
+  }
+}
+```
+
+---
+
+## 14. Full Request Body Reference
+
+All fields are optional except one of `input`, `messages`, or `contents`:
+
+```js
+{
+  // --- Model ---
+  "model": "gemini-2.5-flash",          // default: KAIXU_DEFAULT_MODEL
+
+  // --- Input (pick one) ---
+  "input": { "type": "text", "content": "Your prompt" },   // simple text
+  "messages": [{ "role": "user", "content": "..." }],      // OpenAI format
+  "contents": [{ "role": "user", "parts": [...] }],        // raw Gemini format
+
+  // --- Behaviour ---
+  "system": "You are a helpful assistant.",    // override system instruction
+  "generationConfig": {                        // passed to Gemini verbatim
+    "temperature": 0.7,
+    "maxOutputTokens": 8192,
+    "topP": 0.9,
+    "stopSequences": []
+  },
+  "output": { "format": "json" },             // json | text | markdown
+
+  // --- Advanced ---
+  "safetySettings": [...],                    // Gemini safety config
+  "tools": [...],                             // function calling tools
+  "toolConfig": {...},                        // tool config
+  "includeRaw": false                         // true = include raw Gemini response at .raw
+}
+```
+
+---
+
+## Quick Start Checklist
+
+- [ ] Get your bearer token from the gateway owner
+- [ ] Store it in an environment variable — never in code
+- [ ] Hit `/v1/health` first to confirm auth works
+- [ ] Use `input.content` for simple prompts
+- [ ] Use `messages[]` for multi-turn chat (OpenAI format)
+- [ ] Use `model: "gemini-2.5-pro"` only when you need deep reasoning
+- [ ] Use `/v1/stream` for anything that might take more than 2 seconds
+- [ ] Check `data.ok` and `data.finishReason` in every response
+- [ ] Never hardcode the token — environment variables only
+
+---
+
+*kAIxu Gate Delta — Skyes Over London LC — 2026*
+</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="pdf" style="margin-top:16px;">
+      <div class="pad">
+        <h2>Embedded PDF</h2>
+        <div class="pdfwrap">
+          <iframe src="kAIxu_Gateway_Implementation_Directives_2026.pdf#view=FitH" title="kAIxu Gateway Implementation Directives PDF"></iframe>
+        </div>
+        <p class="mini">If your browser blocks embedded PDFs, open it in a new tab using the button above.</p>
+      </div>
+    </section>
+
+    <section class="card" id="tester" style="margin-top:16px;">
+      <div class="pad">
+        <h2>Live Call Tester (Optional)</h2>
+        <p class="sub">This runs in the browser. It requires the gateway to allow CORS from this site. If you see CORS errors, use curl from the directive instead.</p>
+
+        <div class="row" style="margin-top:12px;">
+          <div>
+            <label class="mini">Gateway Base</label>
+            <input class="field" id="base" value="https://kaixu67.skyesoverlondon.workers.dev" />
+          </div>
+          <div>
+            <label class="mini">Token (never saved)</label>
+            <input class="field" id="token" placeholder="YOUR_TOKEN" />
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:10px;">
+          <div style="flex:2 1 420px;">
+            <label class="mini">Prompt</label>
+            <input class="field" id="prompt" value="Explain WebSockets in one paragraph." />
+          </div>
+          <div style="flex:1 1 240px;">
+            <label class="mini">Mode</label>
+            <select class="field" id="mode">
+              <option value="generate">/v1/generate (JSON)</option>
+              <option value="models">/v1/models (JSON)</option>
+              <option value="health">/v1/health (JSON)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cta" style="margin-top:12px;">
+          <button class="btn" id="run">Run</button>
+          <button class="btn secondary" id="copyCurl">Copy curl</button>
+          <button class="btn secondary" id="clear">Clear Output</button>
+        </div>
+
+        <div class="glowline"></div>
+        <div class="out" id="out">Ready.</div>
+
+        <div class="footer">
+          Skyes Over London LC • kAIxu Gateway • 2026
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Page logic: copy buttons, health check, live tester.
+       Intentionally a plain script — no dependency on Three.js CDN. -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const byId = (x) => document.getElementById(x);
+      const out = byId("out");
+      const gateUrlEl = byId("gateUrl");
+      const copyGateBtn = byId("copyGate");
+
+      const copyMap = {
+        endpoints: () => byId("endpointsPre").innerText,
+        auth: () => byId("authPre").innerText,
+        directiveText: () => byId("directiveText").innerText
+      };
+
+      document.querySelectorAll("[data-copy]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const key = btn.getAttribute("data-copy");
+          const text = copyMap[key] ? copyMap[key]() : "";
+          try {
+            await navigator.clipboard.writeText(text);
+            const prev = btn.textContent;
+            btn.textContent = "Copied";
+            setTimeout(() => (btn.textContent = prev), 900);
+          } catch {
+            const prev = btn.textContent;
+            btn.textContent = "Copy failed";
+            setTimeout(() => (btn.textContent = prev), 1200);
+          }
+        });
+      });
+
+      copyGateBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(gateUrlEl.innerText.trim());
+          copyGateBtn.textContent = "Copied";
+          setTimeout(() => (copyGateBtn.textContent = "Copy Gateway URL"), 1000);
+        } catch {
+          copyGateBtn.textContent = "Copy failed";
+          setTimeout(() => (copyGateBtn.textContent = "Copy Gateway URL"), 1200);
+        }
+      });
+
+      // Health pill (cross-origin; may fail if CORS blocked)
+      const pill = byId("healthPill");
+      const healthText = byId("healthText");
+      async function checkHealth() {
+        const base = "https://kaixu67.skyesoverlondon.workers.dev";
+        try {
+          const r = await fetch(`${base}/v1/health`, { cache: "no-store" });
+          const j = await r.json();
+          const ok = r.ok && j && j.ok;
+          pill.classList.remove("ok","bad");
+          pill.classList.add(ok ? "ok" : "bad");
+          healthText.textContent = ok ? "Gateway online" : "Gateway offline";
+        } catch {
+          pill.classList.remove("ok"); pill.classList.add("bad");
+          healthText.textContent = "Health check blocked (CORS?)";
+        }
+      }
+      checkHealth();
+
+      // Live tester
+      function mkCurl(base, token, mode, prompt) {
+        if (mode === "health") {
+          return `curl ${base}/v1/health -H "Authorization: Bearer ${token}"`;
+        }
+        if (mode === "models") {
+          return `curl ${base}/v1/models -H "Authorization: Bearer ${token}"`;
+        }
+        const safe = (prompt || "").replace(/'/g, "\\'");
+        return `curl ${base}/v1/generate -X POST -H "Authorization: Bearer ${token}" -H "Content-Type: application/json" -d '{"input":{"type":"text","content":"${safe}"}}'`;
+      }
+
+      byId("copyCurl").addEventListener("click", async () => {
+        const base = byId("base").value.trim();
+        const token = byId("token").value.trim() || "YOUR_TOKEN";
+        const mode = byId("mode").value;
+        const prompt = byId("prompt").value;
+        const cmd = mkCurl(base, token, mode, prompt);
+        try {
+          await navigator.clipboard.writeText(cmd);
+          const btn = byId("copyCurl");
+          const prev = btn.textContent;
+          btn.textContent = "Copied";
+          setTimeout(() => (btn.textContent = prev), 900);
+        } catch {}
+      });
+
+      byId("clear").addEventListener("click", () => {
+        out.textContent = "Ready.";
+      });
+
+      byId("run").addEventListener("click", async () => {
+        const base = byId("base").value.trim();
+        const token = byId("token").value.trim();
+        const prompt = byId("prompt").value;
+        const mode = byId("mode").value;
+
+        if (!base) { out.textContent = "Missing base URL."; return; }
+        if (!token) { out.textContent = "Missing token."; return; }
+
+        out.textContent = "Running...";
+        try {
+          let url = `${base}/v1/generate`;
+          let opts = {
+            method: "POST",
+            headers: {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ input: { type: "text", content: prompt } })
+          };
+
+          if (mode === "health") {
+            url = `${base}/v1/health`;
+            opts = { method: "GET", headers: { "Authorization": `Bearer ${token}` } };
+          } else if (mode === "models") {
+            url = `${base}/v1/models`;
+            opts = { method: "GET", headers: { "Authorization": `Bearer ${token}` } };
+          }
+
+          const r = await fetch(url, opts);
+          const txt = await r.text();
+          let pretty = txt;
+          try {
+            const j = JSON.parse(txt);
+            pretty = JSON.stringify(j, null, 2);
+          } catch {}
+          out.textContent = `HTTP ${r.status}\n\n${pretty}`;
+        } catch (e) {
+          out.textContent = `Error: ${e?.message || e}\n\nIf this mentions CORS, use curl from the directive text.`;
+        }
+      });
+    });
+  </script>
+
+  <!-- Three.js neural background — isolated module so CDN failures can't break page logic -->
+  <script type="module">
+    import * as THREE from "https://unpkg.com/three@0.161.0/build/three.module.js";
+
+    // Three.js neural background
+    const canvas = document.getElementById("bg");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 260);
+    camera.position.set(0, 0, 44);
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const N = 320;
+    const BOX = 30;
+    const LINK_DIST = 4.8;
+    const MAX_LINKS = 2400;
+
+    const pos = new Float32Array(N * 3);
+    const vel = new Float32Array(N * 3);
+    for (let i = 0; i < N; i++) {
+      const i3 = i * 3;
+      pos[i3+0] = (Math.random() * 2 - 1) * BOX;
+      pos[i3+1] = (Math.random() * 2 - 1) * BOX * 0.75;
+      pos[i3+2] = (Math.random() * 2 - 1) * BOX;
+      vel[i3+0] = (Math.random() * 2 - 1) * 0.06;
+      vel[i3+1] = (Math.random() * 2 - 1) * 0.06;
+      vel[i3+2] = (Math.random() * 2 - 1) * 0.06;
+    }
+
+    const pointsGeo = new THREE.BufferGeometry();
+    pointsGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+
+    const pointsMat = new THREE.PointsMaterial({
+      size: 0.14, transparent: true, opacity: 0.86,
+      depthWrite: false, blending: THREE.AdditiveBlending,
+      color: new THREE.Color(0xB86BFF)
+    });
+    const points = new THREE.Points(pointsGeo, pointsMat);
+    group.add(points);
+
+    const linePos = new Float32Array(MAX_LINKS * 2 * 3);
+    const lineGeo = new THREE.BufferGeometry();
+    lineGeo.setAttribute("position", new THREE.BufferAttribute(linePos, 3));
+    lineGeo.setDrawRange(0, 0);
+
+    const lineMatA = new THREE.LineBasicMaterial({
+      transparent: true, opacity: 0.22,
+      depthWrite: false, blending: THREE.AdditiveBlending,
+      color: new THREE.Color(0x3BD6FF)
+    });
+    const lineMatB = new THREE.LineBasicMaterial({
+      transparent: true, opacity: 0.10,
+      depthWrite: false, blending: THREE.AdditiveBlending,
+      color: new THREE.Color(0xFFD55A)
+    });
+
+    const linesA = new THREE.LineSegments(lineGeo, lineMatA);
+    const linesB = new THREE.LineSegments(lineGeo, lineMatB);
+    group.add(linesA);
+    group.add(linesB);
+
+    const mouse = new THREE.Vector2(0, 0);
+    let hasMouse = false;
+    window.addEventListener("pointermove", (e) => {
+      hasMouse = true;
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    }, { passive: true });
+
+    function resize() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+    const dir = new THREE.DirectionalLight(0xffffff, 0.35);
+    dir.position.set(1, 1, 1);
+    scene.add(dir);
+
+    const t0 = performance.now();
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = (performance.now() - t0) * 0.001;
+
+      for (let i = 0; i < N; i++) {
+        const i3 = i * 3;
+        vel[i3+0] += Math.sin(t * 0.7 + i * 0.01) * 0.00015;
+        vel[i3+1] += Math.cos(t * 0.9 + i * 0.01) * 0.00012;
+        vel[i3+2] += Math.sin(t * 0.6 + i * 0.02) * 0.00015;
+
+        pos[i3+0] += vel[i3+0];
+        pos[i3+1] += vel[i3+1];
+        pos[i3+2] += vel[i3+2];
+
+        const bx = BOX, by = BOX * 0.75, bz = BOX;
+        if (pos[i3+0] > bx || pos[i3+0] < -bx) vel[i3+0] *= -1;
+        if (pos[i3+1] > by || pos[i3+1] < -by) vel[i3+1] *= -1;
+        if (pos[i3+2] > bz || pos[i3+2] < -bz) vel[i3+2] *= -1;
+      }
+      pointsGeo.attributes.position.needsUpdate = true;
+
+      let ptr = 0;
+      let links = 0;
+      const max = MAX_LINKS * 2 * 3;
+
+      for (let i = 0; i < N; i++) {
+        const i3 = i * 3;
+        const ax = pos[i3+0], ay = pos[i3+1], az = pos[i3+2];
+        for (let j = i + 1; j < N; j++) {
+          const j3 = j * 3;
+          const bx = pos[j3+0], by = pos[j3+1], bz = pos[j3+2];
+          const dx = ax - bx, dy = ay - by, dz = az - bz;
+          const d2 = dx*dx + dy*dy + dz*dz;
+          if (d2 < LINK_DIST * LINK_DIST) {
+            if (ptr + 6 > max) break;
+            linePos[ptr++] = ax; linePos[ptr++] = ay; linePos[ptr++] = az;
+            linePos[ptr++] = bx; linePos[ptr++] = by; linePos[ptr++] = bz;
+            links++;
+            if (links > MAX_LINKS) break;
+          }
+        }
+        if (links > MAX_LINKS) break;
+      }
+      lineGeo.setDrawRange(0, links * 2);
+      lineGeo.attributes.position.needsUpdate = true;
+
+      const vio = new THREE.Color().setHSL(0.76, 0.85, 0.62 + Math.sin(t*0.9)*0.03);
+      const blu = new THREE.Color().setHSL(0.55, 0.90, 0.58 + Math.cos(t*0.7)*0.04);
+      const gol = new THREE.Color().setHSL(0.12, 0.90, 0.60 + Math.sin(t*0.6)*0.03);
+
+      pointsMat.color.copy(vio);
+      lineMatA.color.copy(blu);
+      lineMatB.color.copy(gol);
+
+      if (hasMouse) {
+        group.rotation.y = THREE.MathUtils.lerp(group.rotation.y, mouse.x * 0.26, 0.04);
+        group.rotation.x = THREE.MathUtils.lerp(group.rotation.x, mouse.y * 0.18, 0.04);
+      } else {
+        group.rotation.y = THREE.MathUtils.lerp(group.rotation.y, Math.sin(t*0.12)*0.08, 0.02);
+        group.rotation.x = THREE.MathUtils.lerp(group.rotation.x, Math.cos(t*0.10)*0.06, 0.02);
+      }
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>

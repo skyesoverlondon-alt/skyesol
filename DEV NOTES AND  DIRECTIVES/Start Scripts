@@ -1,0 +1,219 @@
+SKYESOL — DEV START SCRIPTS & SITE MAINTENANCE REFERENCE
+Last updated: 2026-02-28
+=========================================================
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. START THE LOCAL DEV SERVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This is a static site. There is NO "npm start" script. Use one of these:
+
+  RECOMMENDED (no install needed):
+    npx serve . -p 3000
+
+  ALTERNATIVE — Python:
+    python3 -m http.server 3000
+
+  ALTERNATIVE — Netlify CLI (runs functions too):
+    npm install -g netlify-cli
+    netlify dev
+
+Site is served at:   http://localhost:3000
+Admin panel:         http://localhost:3000/admin.html
+Admin menu:          http://localhost:3000/admin-menu.html
+Executive admin:     http://localhost:3000/admin-executive.html
+PAI Hub:             http://localhost:3000/Platforms-Apps-Infrastructure/
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. NPM SCRIPTS (package.json)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All scripts run from the repo root (/workspaces/skyesol):
+
+  npm run build
+    → Regenerates the admin site menu (site-map JSON used by admin tools).
+    → Script: scripts/generate-site-menu.mjs
+    → Run after adding new pages or renaming directories.
+    → Skips: node_modules, .git, xxDEVONLY, AI DIRECTIVES, template files.
+
+  npm run gen-sitemap
+    → Regenerates sitemap.xml for SEO.
+    → Script: scripts/generate-sitemap.js
+    → Site URL: https://skyesol.netlify.app
+    → Run whenever pages are added, removed, or renamed.
+    → Priority/changefreq per page are hardcoded in that script — update them
+      there if you add new core pages.
+
+  npm run link-check
+    → Scans all HTML files for broken internal links and missing rel attributes.
+    → Script: scripts/link-guardian.js
+    → Read-only (reports only, does not modify files).
+
+  npm run link-check:fix
+    → Same as link-check but also auto-patches fixable issues (like missing
+      rel="noopener noreferrer" on external links).
+    → Script: scripts/link-guardian.js --fix
+    → MODIFIES FILES — run before committing.
+
+  npm run audit:internal-links
+    → Deep audit of internal href targets across all HTML.
+    → Script: scripts/audit-internal-links.mjs
+    → Reports 404-style broken internal links.
+
+  npm run meta:check
+    → Checks all HTML files for missing or incomplete <meta> tags (title,
+      description, og:image, etc.).
+    → Script: scripts/meta-templater.js --check
+    → Read-only.
+
+  npm run meta:apply
+    → Applies the default and per-page meta tags defined in meta-templater.js
+      to all HTML files.
+    → Script: scripts/meta-templater.js
+    → MODIFIES FILES. Run carefully — review diffs after.
+    → Default og:image: https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. STANDALONE MAINTENANCE SCRIPTS
+   (run directly with node)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  node scripts/sync-blogs-manifest.js
+    → Rebuilds Blogs/blog-manifest.json by scanning the Blogs/ directory.
+    → Run after adding, removing, or renaming blog post HTML files.
+    → The blog feed (blog.html) reads from this manifest.
+
+  node scripts/sync-case-studies-index.js
+    → Rebuilds the Case Studies index from the Case Studies/ directory.
+    → Run after adding or removing case study files.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. GIT WORKFLOW
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Repo:     skyesoverlondon-alt/skyesol
+  Branch:   main (default + production)
+  Host:     Netlify — auto-deploys on push to main
+
+  Standard commit & push:
+    git add -A
+    git commit -m "your message"
+    git push origin main
+
+  Stage specific file:
+    git add index.html
+
+  Files with spaces in path (quote them):
+    git add "Skye Identity Standard: Global Command Center/index.html"
+
+  Check what's staged / dirty:
+    git status
+
+  View recent commits:
+    git log --oneline -10
+
+  Undo last commit (keep changes):
+    git reset --soft HEAD~1
+
+  Discard unstaged changes to a file:
+    git checkout -- filename.html
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. NETLIFY DEPLOYMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Deploy happens automatically on push to main.
+  No build step needed — publish dir is "." (repo root).
+
+  netlify.toml key settings:
+    [build]  publish = "."
+    [functions]  directory = "netlify/functions"
+
+  Cache headers configured for:
+    /sw.js              → no-cache (PWA service worker)
+    /manifest.json      → 24hr cache
+    /SkyeDocx/sw.js     → no-cache
+    /SkyeDocx/manifest  → no-cache
+
+  Force a redeploy without code changes:
+    git commit --allow-empty -m "force redeploy" && git push origin main
+
+  Netlify CLI (one-off manual deploy):
+    netlify deploy --prod
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. COMMON MAINTENANCE TASKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  AFTER ADDING A NEW PAGE:
+    1. Add entry to sitemap.xml (or run npm run gen-sitemap)
+    2. Add link to partials/header.html nav dropdown
+    3. Add card to platforms.html and/or PAI hub index.html if it's an app
+    4. Add entry to admin menu (admin-menu.html) if it's an admin tool
+    5. npm run build  (regenerates site menu for admin tools)
+    6. git add -A && git commit -m "..." && git push origin main
+
+  AFTER ADDING BLOG POSTS:
+    1. Drop HTML file into Blogs/ subdirectory
+    2. node scripts/sync-blogs-manifest.js
+    3. git add -A && git commit && git push
+
+  AFTER ADDING CASE STUDIES:
+    1. Drop HTML file into Case Studies/
+    2. node scripts/sync-case-studies-index.js
+    3. git add -A && git commit && git push
+
+  CHECK FOR BROKEN LINKS:
+    npm run link-check
+
+  FIX MISSING META TAGS:
+    npm run meta:check   (see what's missing)
+    npm run meta:apply   (apply fixes)
+
+  FULL AUDIT BEFORE DEPLOY:
+    npm run link-check
+    npm run audit:internal-links
+    npm run meta:check
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. PARTIALS / INJECTED ELEMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  js/partials.js
+    → Auto-injects header, footer, and a floating "ADMIN MENU" link on every
+      page that loads it.
+    → Floating link: <a id="adminMenuFloatLink" class="floating-glow-neon">
+    → To SUPPRESS the floating admin link on a specific page, add this before
+      the partials.js script tag:
+        <div id="adminMenuFloatLink" style="display:none;pointer-events:none;"></div>
+    → partials.js checks !getElementById('adminMenuFloatLink') before injecting,
+      so the pre-placed element blocks it.
+
+  partials/header.html
+    → Shared nav. Edit this to update the header/dropdown across all pages.
+    → After editing, test on both mobile and desktop (mobile uses hamburger menu).
+
+  js/admin-menu-triggers.js
+    → Handles admin shortcut trigger logic. Not the floating button itself.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. ENVIRONMENT / SECRETS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  env.template — copy this to .env and fill in values (never commit .env)
+  .env is gitignored.
+
+  Netlify env vars are set in the Netlify dashboard under:
+    Site settings → Environment variables
+
+  Local Netlify CLI env:
+    netlify env:list
+    netlify env:set VAR_NAME value

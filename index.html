@@ -188,19 +188,6 @@
   <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">Third-party references included for historical context. No endorsement implied. © Skyes Over London LC / SOLEnterprises.</p>
 </footer>
 
-<!-- FLOATING ADMIN BUTTON STACK (Bottom-Left) -->
-<!-- Button Stack (Bottom to Top):
-  1. Retro Menu (50% size) - Bottom (20px)
-  2. Purple Admin Menu - Above Retro (110px)
-  3. Contractor Portal (Teal) - Above Purple (160px)
-  4. Blue Admin Console - Above Contractor (210px)
-  5. Executive Admin (Red) - Top (260px)
--->
-<a href="/Platforms-Apps-Infrastructure/RetroFighter.html" id="btnRetro" style="position:fixed; bottom:20px; left:20px; z-index:100000; width:140px; height:70px; cursor:pointer;"><img src="https://cdn1.sharemyimage.com/2026/02/23/RetroFighterLogo.png" alt="Retro Fighter" style="width:100%; height:100%; border-radius:4px; box-shadow:0 0 10px #ffcc00; object-fit:cover;"></a>
-<a href="/admin-menu.html" class="floating-glow-purple" id="adminMenuFloatLink" style="display:block;">ADMIN MENU</a>
-<a href="/platforms.html" class="floating-glow-teal" id="btnContractor" style="display:block;">CONTRACTOR PORTAL</a>
-<a href="/admin.html" class="floating-glow-neon" id="btnBlue" style="display:block;">ADMIN CONSOLE</a>
-<a href="/admin-executive.html" class="floating-glow-red" id="btnExec" style="display:block;">EXECUTIVE ADMIN</a>
 
 <script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
 
@@ -353,6 +340,59 @@
     </div>
   </div>
 </div>
+  <!-- Suppress partials.js floating admin link injection on this page -->
+  <div id="adminMenuFloatLink" style="display:none;pointer-events:none;"></div>
+
+  <!-- ── BOTTOM-LEFT SPEED DIAL ─────────────────────────────────────── -->
+  <style>
+    #sol-fab-wrap{position:fixed;bottom:18px;left:18px;z-index:100005;display:flex;flex-direction:column-reverse;align-items:flex-start;gap:7px;font-family:'Fira Code',monospace;}
+    #sol-fab-toggle{cursor:pointer;padding:9px 14px;border-radius:8px;font-size:0.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;border:none;outline:none;background:linear-gradient(135deg,#c832ff,#8a63ff,#3a6fd8,#32ffc8,#ff3232);background-size:300% 300%;animation:sol-fab-gradient 5s ease infinite;color:#fff;box-shadow:0 0 18px rgba(184,107,255,.55),0 4px 18px rgba(0,0,0,.55);display:flex;align-items:center;gap:8px;transition:transform .15s;}
+    #sol-fab-toggle:hover{transform:scale(1.05);}
+    @keyframes sol-fab-gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    #sol-fab-items{display:flex;flex-direction:column-reverse;gap:6px;overflow:hidden;max-height:0;opacity:0;transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .25s ease;}
+    #sol-fab-items.open{max-height:400px;opacity:1;}
+    .sol-fab-item{display:block;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:0.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;transition:transform .12s,filter .2s;border:1px solid currentColor;}
+    .sol-fab-item:hover{transform:translateX(3px);filter:brightness(1.18);}
+    .sol-fab-retro{background:rgba(255,204,0,.14);color:#ffcc00;border-color:rgba(255,204,0,.55);box-shadow:0 0 10px rgba(255,204,0,.30);display:flex;align-items:center;gap:8px;}
+    .sol-fab-retro img{height:22px;width:auto;border-radius:3px;}
+    .sol-fab-purple{background:rgba(200,50,255,.16);color:#e8b0ff;border-color:rgba(200,50,255,.5);box-shadow:0 0 9px rgba(200,50,255,.28);}
+    .sol-fab-teal{background:rgba(50,255,200,.14);color:#7dfff0;border-color:rgba(50,255,200,.5);box-shadow:0 0 9px rgba(50,255,200,.28);}
+    .sol-fab-blue{background:rgba(138,99,255,.16);color:#c4b8ff;border-color:rgba(138,99,255,.5);box-shadow:0 0 9px rgba(138,99,255,.28);}
+    .sol-fab-red{background:rgba(255,50,50,.14);color:#ffb0b0;border-color:rgba(255,50,50,.5);box-shadow:0 0 9px rgba(255,50,50,.28);}
+  </style>
+  <div id="sol-fab-wrap">
+    <button id="sol-fab-toggle" aria-expanded="false" aria-label="Toggle quick menu">
+      <span id="sol-fab-icon">☰</span> MENU
+    </button>
+    <div id="sol-fab-items" role="menu">
+      <a href="/admin-executive.html" class="sol-fab-item sol-fab-red" role="menuitem">⬥ Executive Admin</a>
+      <a href="/admin.html" class="sol-fab-item sol-fab-blue" role="menuitem">⬥ Admin Console</a>
+      <a href="/platforms.html" class="sol-fab-item sol-fab-teal" role="menuitem">⬥ Contractor Portal</a>
+      <a href="/admin-menu.html" class="sol-fab-item sol-fab-purple" role="menuitem">⬥ Admin Menu</a>
+      <a href="/Platforms-Apps-Infrastructure/RetroFighter.html" class="sol-fab-item sol-fab-retro" role="menuitem"><img src="https://cdn1.sharemyimage.com/2026/02/23/RetroFighterLogo.png" alt="">RetroFighter</a>
+    </div>
+  </div>
+  <script>
+  (function(){
+    const toggle=document.getElementById('sol-fab-toggle');
+    const items=document.getElementById('sol-fab-items');
+    const icon=document.getElementById('sol-fab-icon');
+    let open=false;
+    toggle.addEventListener('click',function(){
+      open=!open;
+      items.classList.toggle('open',open);
+      toggle.setAttribute('aria-expanded',open);
+      icon.textContent=open?'✕':'☰';
+    });
+    document.addEventListener('click',function(e){
+      if(open&&!document.getElementById('sol-fab-wrap').contains(e.target)){
+        open=false;items.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');icon.textContent='☰';
+      }
+    });
+  })();
+  </script>
+
   <script src="/js/partials.js"></script>
 </body>
 <!-- Admin triggers moved to js/admin-menu-triggers.js -->

@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="theme-color" content="#07070b" />
+
+  <title>kAIxUchat — Secure Branded Chat + Gateway | Skyes Over London LC</title>
+  <meta name="title" content="kAIxUchat — Secure Branded Chat + Gateway | Skyes Over London LC" />
+  <meta name="description" content="kAIxUchat is the branded conversational UI for Kaixu Gate Delta: token-based access, model selection, streaming, and a gateway API that keeps keys server-side." />
+  <meta name="keywords" content="kAIxUchat, kAIxU, Kaixu Gate Delta, branded chat UI, AI gateway, token-based access, streaming SSE, Skyes Over London, SOLEnterprises" />
+  <meta name="author" content="Skyes Over London LC" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html" />
+  <meta property="og:title" content="kAIxUchat — Secure Branded Chat + Gateway" />
+  <meta property="og:description" content="Token-based chat UI + gateway API. Keep provider keys server-side. Stream responses. Ship apps that call the gate." />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <meta property="og:site_name" content="Skyes Over London LC" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="kAIxUchat — Secure Branded Chat + Gateway" />
+  <meta name="twitter:description" content="Token-based chat UI + gateway API. Keep provider keys server-side. Stream responses." />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "kAIxUchat",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Branded chat UI for the kAIxU brain with token-based access, model selection, and a gateway API that keeps keys server-side.",
+    "publisher": { "@type": "Organization", "name": "Skyes Over London LC" },
+    "url": "https://kaixu67.netlify.app/kaixuchat"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "/" },
+      { "@type": "ListItem", "position": 2, "name": "Platforms", "item": "/platforms.html" },
+      { "@type": "ListItem", "position": 3, "name": "kAIxUchat", "item": "/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html" }
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-ink: #07070b;
+      --color-paper: #0b0c12;
+      --color-cream: rgba(255,255,255,0.06);
+      --color-gold: #d7b35b;
+      --color-gold-dark: #a68a4a;
+      --color-rust: #b54a32;
+      --color-navy: #111427;
+      --color-slate: rgba(255,255,255,0.68);
+      --color-mist: rgba(255,255,255,0.82);
+      --color-shadow: rgba(0,0,0,0.45);
+      --color-violet: #8a63ff;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Instrument Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: radial-gradient(ellipse at 20% 10%, rgba(215,179,91,0.12), transparent 55%),
+                  radial-gradient(ellipse at 80% 20%, rgba(138,99,255,0.14), transparent 55%),
+                  linear-gradient(180deg, #07070b 0%, #0b0c12 100%);
+      color: rgba(255,255,255,0.92);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============================================
+       CINEMATIC OPENER
+       ============================================ */
+    .cinematic-opener {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100vh;
+      background: #050509;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: openerFadeOut 1s var(--ease-out-expo) 4.5s forwards;
+      pointer-events: none;
+    }
+    .cinematic-opener::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(138,99,255,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 50%, rgba(215,179,91,0.14) 0%, transparent 55%);
+      animation: gradientPulse 4s ease-in-out infinite;
+    }
+    @keyframes gradientPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+    .opener-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+    .opener-line { overflow: hidden; }
+    .opener-text {
+      font-family: var(--font-mono);
+      color: rgba(255,255,255,0.78);
+      font-size: clamp(0.9rem, 2.6vw, 1.2rem);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: slideUp 1s var(--ease-out-expo) 0.5s forwards;
+    }
+    .opener-title {
+      font-family: var(--font-display);
+      color: var(--color-gold);
+      font-size: clamp(2.3rem, 7.5vw, 5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      margin: 1.3rem 0;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: slideUp 1.2s var(--ease-out-expo) 1s forwards;
+    }
+    .opener-subtitle {
+      font-family: var(--font-body);
+      color: rgba(255,255,255,0.72);
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      opacity: 0;
+      animation: fadeIn 1.5s var(--ease-out-expo) 2s forwards;
+      max-width: 64ch;
+      margin: 0 auto;
+    }
+    .opener-divider {
+      width: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+      margin: 2rem auto;
+      animation: expandLine 1.5s var(--ease-out-expo) 1.5s forwards;
+    }
+    .opener-logo { margin-top: 2.6rem; opacity: 0; animation: fadeIn 1s var(--ease-out-expo) 2.5s forwards; }
+    .opener-company {
+      font-family: var(--font-mono);
+      color: rgba(255,255,255,0.45);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s var(--ease-out-expo) 3s forwards;
+    }
+    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes expandLine { to { width: 220px; } }
+    @keyframes openerFadeOut { to { opacity: 0; visibility: hidden; } }
+
+    .progress-bar {
+      position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+      width: 220px; height: 2px;
+      background: rgba(255,255,255,0.10);
+      border-radius: 2px; overflow: hidden;
+      z-index: 10001;
+      animation: fadeOut 0.5s var(--ease-out-expo) 4s forwards;
+    }
+    .progress-fill {
+      height: 100%; background: var(--color-gold); width: 0;
+      animation: progressFill 4s var(--ease-out-quart) forwards;
+    }
+    @keyframes progressFill { 0% { width: 0; } 100% { width: 100%; } }
+    @keyframes fadeOut { to { opacity: 0; } }
+
+    /* ============================================
+       SITE TOP NAV
+       ============================================ */
+    .site-top-nav {
+      position: sticky; top: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 14px; padding: 14px 24px;
+      background: rgba(5,5,10,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .site-top-nav .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 600; color: #f7f3e8;
+      text-decoration: none;
+      letter-spacing: 0.08em; text-transform: uppercase; font-size: 13px;
+    }
+    .site-top-nav .nav-logo img { height: 36px; width: auto; }
+    .site-top-nav .nav-links { display: flex; flex-wrap: wrap; gap: 12px; font-size: 14px; }
+    .site-top-nav .nav-links a {
+      color: #eae6dc; text-decoration: none;
+      padding: 6px 10px; border-radius: 6px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .site-top-nav .nav-links a:hover { background: rgba(255,255,255,0.08); color: var(--color-gold); }
+    @media(max-width: 720px) {
+      .site-top-nav { flex-direction: column; align-items: flex-start; }
+      .site-top-nav .nav-links { gap: 10px; }
+    }
+
+    /* ============================================
+       ARTICLE NAV
+       ============================================ */
+    .nav {
+      position: fixed; top: 65px; left: 0;
+      width: 100%; padding: 1.1rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 900; background: transparent;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    .nav.scrolled {
+      background: rgba(11,12,18,0.85);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+      padding: 0.75rem 3rem;
+    }
+    .nav-brand { display: flex; flex-direction: column; gap: 0.15rem; }
+    .nav-brand-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: rgba(255,255,255,0.92); }
+    .nav-brand-sub { font-family: var(--font-mono); font-size: 0.6rem; color: rgba(255,255,255,0.55); letter-spacing: 0.1em; text-transform: uppercase; }
+    .nav-links-inner { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links-inner a { font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.65); text-decoration: none; letter-spacing: 0.02em; transition: color 0.3s ease; }
+    .nav-links-inner a:hover { color: var(--color-gold); }
+    .nav-cta {
+      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.92);
+      padding: 0.75rem 1.25rem;
+      font-family: var(--font-body); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      text-decoration: none; border-radius: 0;
+      border: 1px solid rgba(215,179,91,0.35);
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { background: rgba(215,179,91,0.14); transform: translateY(-2px); box-shadow: 0 18px 40px rgba(0,0,0,0.35); }
+
+    /* ============================================
+       HERO
+       ============================================ */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; overflow: hidden; background: #07070b;
+    }
+    .hero-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+    .hero-video {
+      position: absolute; top: 50%; left: 50%;
+      min-width: 100%; min-height: 100%;
+      transform: translate(-50%, -50%); object-fit: cover; opacity: 0.55;
+      background:
+        radial-gradient(1200px 600px at 18% 30%, rgba(138,99,255,0.20), transparent 58%),
+        radial-gradient(900px 500px at 78% 22%, rgba(215,179,91,0.16), transparent 58%),
+        radial-gradient(700px 420px at 60% 90%, rgba(255,255,255,0.06), transparent 58%),
+        linear-gradient(135deg, #0a0a12 0%, #07070b 55%, #0b0c12 100%);
+      width: 100%; height: 100%;
+    }
+    .hero-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.75) 100%),
+                  linear-gradient(90deg, rgba(0,0,0,0.80) 0%, transparent 55%);
+    }
+    .hero-grain {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.04; pointer-events: none;
+    }
+    .hero-content {
+      position: relative; z-index: 10;
+      max-width: 1000px; padding: 0 5rem; padding-top: 10rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 1rem;
+      font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--color-gold); letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 2rem; opacity: 0;
+      animation: heroFadeUp 1s var(--ease-out-expo) 4.8s forwards;
+    }
+    .hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--color-gold); }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5.4rem);
+      font-weight: 500; color: rgba(255,255,255,0.95); line-height: 1.05;
+      margin-bottom: 2rem; opacity: 0;
+      animation: heroFadeUp 1.2s var(--ease-out-expo) 5s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--color-gold); }
+    .hero-title .violet { color: var(--color-violet); font-style: italic; }
+    .hero-description {
+      font-family: var(--font-body); font-size: 1.15rem;
+      color: rgba(255,255,255,0.78); line-height: 1.85;
+      max-width: 650px; margin-bottom: 1.75rem; opacity: 0;
+      animation: heroFadeUp 1.2s var(--ease-out-expo) 5.2s forwards;
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin-bottom: 2.5rem; opacity: 0;
+      animation: heroFadeUp 1.2s var(--ease-out-expo) 5.3s forwards;
+    }
+    .hero-badge {
+      font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.72);
+      padding: 0.45rem 1rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+    }
+    .hero-badge.gold { border-color: rgba(215,179,91,0.40); background: rgba(215,179,91,0.09); color: var(--color-gold); }
+    .hero-badge.violet { border-color: rgba(138,99,255,0.40); background: rgba(138,99,255,0.09); color: #b084ff; }
+    .hero-badge.green { border-color: rgba(73,255,168,0.30); background: rgba(73,255,168,0.07); color: #49ffa8; }
+    .hero-actions {
+      display: flex; gap: 1.5rem; flex-wrap: wrap; opacity: 0;
+      animation: heroFadeUp 1.2s var(--ease-out-expo) 5.4s forwards;
+    }
+    .hero-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      padding: 1.15rem 2.2rem;
+      font-family: var(--font-body); font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+      transition: all 0.4s var(--ease-out-expo); border-radius: 0;
+    }
+    .hero-btn-primary { background: var(--color-gold); color: #0a0a0a; }
+    .hero-btn-primary:hover { background: rgba(255,255,255,0.92); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
+    .hero-btn-secondary { background: transparent; color: rgba(255,255,255,0.92); border: 1px solid rgba(255,255,255,0.25); }
+    .hero-btn-secondary:hover { border-color: rgba(215,179,91,0.70); color: var(--color-gold); }
+    .hero-btn svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+    .hero-btn:hover svg { transform: translateX(4px); }
+    @keyframes heroFadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    .hero-scroll-indicator {
+      position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+      color: rgba(255,255,255,0.70); opacity: 0;
+      animation: heroFadeUp 1s var(--ease-out-expo) 5.6s forwards;
+    }
+    .hero-scroll-indicator span { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .scroll-line { width: 1px; height: 60px; background: linear-gradient(180deg, var(--color-gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+    @keyframes scrollPulse { 0%, 100% { opacity: 0.3; transform: scaleY(0.5); } 50% { opacity: 1; transform: scaleY(1); } }
+
+    /* ============================================
+       STATS BAR
+       ============================================ */
+    .stats-bar {
+      background: rgba(255,255,255,0.03);
+      padding: 4rem 5rem;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+      position: relative; overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .stats-bar::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse at 0% 50%, rgba(138,99,255,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 100% 50%, rgba(215,179,91,0.10) 0%, transparent 55%);
+    }
+    .stat-item {
+      position: relative; z-index: 2; text-align: center;
+      opacity: 0; transform: translateY(20px);
+      transition: all 0.8s var(--ease-out-expo);
+    }
+    .stat-item.visible { opacity: 1; transform: translateY(0); }
+    .stat-number { font-family: var(--font-display); font-size: 3.3rem; font-weight: 600; color: var(--color-gold); line-height: 1; margin-bottom: 0.5rem; }
+    .stat-label { font-family: var(--font-body); font-size: 0.85rem; color: rgba(255,255,255,0.70); letter-spacing: 0.06em; }
+
+    /* ============================================
+       LIVE STATUS PANEL
+       ============================================ */
+    .live-panel-section {
+      max-width: 1400px; margin: 0 auto; padding: 5rem 5rem 2rem;
+    }
+    .live-panel-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .live-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 2rem; position: relative; overflow: hidden;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    .live-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--color-gold);
+      transform: scaleY(0); transform-origin: top;
+      transition: transform 0.4s var(--ease-out-expo);
+    }
+    .live-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); border-color: rgba(215,179,91,0.22); }
+    .live-card:hover::before { transform: scaleY(1); }
+    .live-card-label {
+      font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.75rem;
+    }
+    .live-card-value { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: rgba(255,255,255,0.92); margin-bottom: 0.75rem; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+    .live-badge {
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em;
+      padding: 0.4rem 0.75rem; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.80);
+    }
+    .live-badge.ok { border-color: rgba(73,255,168,0.28); background: rgba(73,255,168,0.08); color: #49ffa8; }
+    .live-badge.err { border-color: rgba(255,77,109,0.28); background: rgba(255,77,109,0.08); color: #ff4d6d; }
+
+    /* ============================================
+       MAIN ARTICLE
+       ============================================ */
+    .article {
+      max-width: 1400px; margin: 0 auto; padding: 6rem 5rem;
+    }
+    .article-header {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+      margin-bottom: 6rem; padding-bottom: 6rem;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .article-meta { display: flex; flex-direction: column; gap: 2rem; }
+    .article-category { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(255,255,255,0.70); letter-spacing: 0.15em; text-transform: uppercase; }
+    .article-date { font-family: var(--font-body); font-size: 0.9rem; color: rgba(255,255,255,0.62); }
+    .article-author { display: flex; align-items: center; gap: 1rem; margin-top: auto; }
+    .author-avatar {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, rgba(138,99,255,0.9), rgba(215,179,91,0.75));
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1.1rem; color: #0a0a0a; font-weight: 700;
+    }
+    .author-info { display: flex; flex-direction: column; gap: 0.2rem; }
+    .author-name { font-family: var(--font-body); font-weight: 700; font-size: 0.95rem; color: rgba(255,255,255,0.90); }
+    .author-role { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(255,255,255,0.55); letter-spacing: 0.05em; }
+    .article-intro { font-family: var(--font-display); font-size: 1.75rem; font-weight: 400; line-height: 1.5; color: rgba(255,255,255,0.92); }
+    .article-intro em { font-style: italic; color: var(--color-gold); }
+
+    .article-body { display: grid; grid-template-columns: 260px 1fr; gap: 6rem; }
+    .article-sidebar { position: sticky; top: 130px; height: fit-content; }
+    .sidebar-nav { display: flex; flex-direction: column; gap: 0.75rem; }
+    .sidebar-nav-title {
+      font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.55);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 1rem; padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .sidebar-nav a {
+      font-family: var(--font-body); font-size: 0.95rem; color: rgba(255,255,255,0.68);
+      text-decoration: none; padding: 0.5rem 0; padding-left: 1rem;
+      border-left: 2px solid transparent; transition: all 0.3s ease;
+    }
+    .sidebar-nav a:hover, .sidebar-nav a.active { color: rgba(255,255,255,0.92); border-left-color: var(--color-gold); }
+
+    .article-content h2 {
+      font-family: var(--font-display); font-size: 2.2rem; font-weight: 500;
+      color: rgba(255,255,255,0.95); margin-top: 4rem; margin-bottom: 1.5rem; line-height: 1.2;
+    }
+    .article-content h2:first-child { margin-top: 0; }
+    .article-content h3 {
+      font-family: var(--font-display); font-size: 1.4rem; font-weight: 500;
+      color: rgba(255,255,255,0.92); margin-top: 2.5rem; margin-bottom: 1rem;
+    }
+    .article-content p { font-family: var(--font-body); font-size: 1.05rem; color: rgba(255,255,255,0.82); line-height: 1.9; margin-bottom: 1.5rem; }
+    .article-content p.lead { font-size: 1.2rem; color: rgba(255,255,255,0.70); line-height: 1.75; }
+    .article-content ul { margin: 1rem 0 1.5rem 1.5rem; }
+    .article-content li { font-size: 1rem; color: rgba(255,255,255,0.80); line-height: 1.9; margin-bottom: 0.5rem; }
+    .article-content code {
+      font-family: var(--font-mono); font-size: 0.88em;
+      color: var(--color-gold); background: rgba(215,179,91,0.10);
+      padding: 0.15em 0.45em; border-radius: 4px;
+    }
+
+    /* Feature Grid */
+    .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.75rem; margin: 2.5rem 0; }
+    .feature-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      padding: 2.25rem; position: relative; overflow: hidden;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%; background: var(--color-gold);
+      transform: scaleY(0); transform-origin: top; transition: transform 0.4s var(--ease-out-expo);
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); border-color: rgba(215,179,91,0.22); }
+    .feature-card:hover::before { transform: scaleY(1); }
+    .feature-icon {
+      width: 44px; height: 44px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;
+    }
+    .feature-icon svg { width: 22px; height: 22px; color: var(--color-gold); }
+    .feature-card h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 650; color: rgba(255,255,255,0.92); margin-bottom: 0.75rem; }
+    .feature-card p { font-size: 0.95rem; color: rgba(255,255,255,0.70); line-height: 1.75; margin-bottom: 0; }
+    .feature-tag {
+      display: inline-block; margin-top: 1rem;
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--color-gold); border: 1px solid rgba(215,179,91,0.30);
+      background: rgba(215,179,91,0.07); padding: 0.35rem 0.75rem; border-radius: 4px;
+    }
+
+    /* Code Box */
+    .codebox {
+      margin: 1.5rem 0; padding: 1.5rem;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-family: var(--font-mono); font-size: 0.83rem; line-height: 1.65;
+      color: rgba(255,255,255,0.88); overflow-x: auto; white-space: pre;
+    }
+
+    /* Pull Quote */
+    .pull-quote {
+      margin: 4rem 0; padding: 3rem 4rem;
+      background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+    }
+    .pull-quote::before {
+      content: '"'; position: absolute; top: -20px; left: 2rem;
+      font-family: var(--font-display); font-size: 8rem; color: var(--color-gold);
+      opacity: 0.25; line-height: 1;
+    }
+    .pull-quote blockquote { font-family: var(--font-display); font-size: 1.7rem; font-weight: 400; font-style: italic; color: rgba(255,255,255,0.94); line-height: 1.5; position: relative; z-index: 2; }
+    .pull-quote cite { display: block; font-family: var(--font-body); font-size: 0.9rem; font-style: normal; color: rgba(215,179,91,0.95); margin-top: 1.5rem; }
+
+    /* Animated List */
+    .animated-list { list-style: none; margin: 2rem 0; }
+    .animated-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem 0; border-bottom: 1px solid rgba(255,255,255,0.10);
+      opacity: 0; transform: translateX(-20px); transition: all 0.6s var(--ease-out-expo);
+    }
+    .animated-list li.visible { opacity: 1; transform: translateX(0); }
+    .list-icon {
+      width: 32px; height: 32px; background: var(--color-gold);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .list-icon svg { width: 16px; height: 16px; color: #0a0a0a; }
+    .list-content h5 { font-family: var(--font-body); font-weight: 700; font-size: 1rem; color: rgba(255,255,255,0.92); margin-bottom: 0.25rem; }
+    .list-content p { font-size: 0.95rem; color: rgba(255,255,255,0.70); margin-bottom: 0; line-height: 1.75; }
+
+    /* Issues Grid */
+    .issues-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.10);
+      margin: 2.5rem 0; border: 1px solid rgba(255,255,255,0.10);
+    }
+    .issue-card {
+      background: rgba(255,255,255,0.04); padding: 2.5rem;
+      position: relative; transition: all 0.4s var(--ease-out-expo);
+    }
+    .issue-card::after {
+      content: ''; position: absolute; bottom: 0; left: 2.5rem; right: 2.5rem;
+      height: 3px; background: var(--color-gold);
+      transform: scaleX(0); transition: transform 0.4s var(--ease-out-expo);
+    }
+    .issue-card:hover { background: rgba(255,255,255,0.06); }
+    .issue-card:hover::after { transform: scaleX(1); }
+    .issue-number { font-family: var(--font-display); font-size: 3rem; font-weight: 600; color: rgba(255,255,255,0.18); line-height: 1; margin-bottom: 1rem; transition: color 0.4s ease; }
+    .issue-card:hover .issue-number { color: rgba(215,179,91,0.85); }
+    .issue-card h4 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 650; color: rgba(255,255,255,0.92); margin-bottom: 0.75rem; }
+    .issue-card p { font-size: 0.95rem; color: rgba(255,255,255,0.70); line-height: 1.8; margin-bottom: 0; }
+
+    /* CTA Section */
+    .cta-section {
+      background: rgba(0,0,0,0.35); margin: 5rem -5rem;
+      padding: 5rem; position: relative; overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+      background: radial-gradient(ellipse at 100% 50%, rgba(138,99,255,0.16) 0%, transparent 60%);
+    }
+    .cta-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; }
+    .cta-text h3 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 500; color: rgba(255,255,255,0.95); margin-bottom: 1rem; }
+    .cta-text p { font-size: 1.05rem; color: rgba(255,255,255,0.72); margin-bottom: 0; }
+    .cta-button {
+      display: inline-flex; align-items: center; gap: 1rem;
+      padding: 1.5rem 3rem; background: var(--color-gold); color: #0a0a0a;
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 800;
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+      transition: all 0.4s var(--ease-out-expo); border-radius: 0;
+    }
+    .cta-button:hover { background: rgba(255,255,255,0.92); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); }
+    .cta-button svg { width: 18px; height: 18px; transition: transform 0.3s ease; }
+    .cta-button:hover svg { transform: translateX(4px); }
+
+    /* Request Form */
+    .form-section { max-width: 1400px; margin: 0 auto; padding: 0 5rem 6rem; }
+    .form-wrap {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10);
+      padding: 3rem;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-field label {
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(255,255,255,0.60);
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%; padding: 0.85rem 1rem;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.90); font-family: var(--font-body); font-size: 0.95rem;
+      outline: none; transition: border-color 0.3s ease;
+      border-radius: 0;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { border-color: rgba(215,179,91,0.45); box-shadow: 0 0 0 3px rgba(215,179,91,0.08); }
+    .form-field textarea { min-height: 120px; resize: vertical; }
+    .form-field select option { background: #0b0c12; }
+    .form-actions { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-top: 2rem; }
+
+    /* Debug / Technical */
+    .debug-section { max-width: 1400px; margin: 0 auto; padding: 0 5rem 5rem; }
+    details {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10); padding: 1.5rem;
+    }
+    summary {
+      cursor: pointer; user-select: none;
+      font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.75); text-transform: uppercase;
+    }
+    details p { font-size: 0.95rem; color: rgba(255,255,255,0.70); margin-top: 1rem; line-height: 1.8; }
+    details .codebox { margin-top: 1rem; }
+
+    /* Footer */
+    .footer {
+      background: rgba(0,0,0,0.45); padding: 6rem 5rem 3rem;
+      color: rgba(255,255,255,0.92); border-top: 1px solid rgba(255,255,255,0.10);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem;
+      margin-bottom: 4rem; padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .footer-brand h4 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 650; margin-bottom: 0.5rem; }
+    .footer-brand .subsidiary { font-family: var(--font-mono); font-size: 0.65rem; color: rgba(255,255,255,0.55); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .footer-brand p { font-size: 0.95rem; color: rgba(255,255,255,0.72); line-height: 1.75; max-width: 360px; }
+    .footer-links h5 { font-family: var(--font-body); font-weight: 800; font-size: 0.9rem; margin-bottom: 1.5rem; color: rgba(255,255,255,0.92); }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .footer-links a { font-size: 0.9rem; color: rgba(255,255,255,0.72); text-decoration: none; transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--color-gold); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .footer-copyright { font-family: var(--font-mono); font-size: 0.7rem; color: rgba(255,255,255,0.55); letter-spacing: 0.05em; }
+    .footer-legal { display: flex; gap: 2rem; }
+    .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.72); text-decoration: none; transition: color 0.3s ease; }
+    .footer-legal a:hover { color: var(--color-gold); }
+
+    /* Scroll animations */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s var(--ease-out-expo); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .article-body { grid-template-columns: 1fr; }
+      .article-sidebar { display: none; }
+      .live-panel-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 1024px) {
+      .nav { padding: 1rem 2rem; }
+      .nav-links-inner { display: none; }
+      .hero-content { padding: 0 3rem; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 3rem; }
+      .article { padding: 4rem 3rem; }
+      .article-header { grid-template-columns: 1fr; gap: 3rem; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .issues-grid { grid-template-columns: 1fr; }
+      .cta-section { margin: 4rem -3rem; padding: 4rem 3rem; }
+      .cta-content { grid-template-columns: 1fr; text-align: center; }
+      .footer { padding: 4rem 3rem 2rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .live-panel-section { padding: 4rem 3rem 2rem; }
+      .form-section { padding: 0 3rem 4rem; }
+      .debug-section { padding: 0 3rem 4rem; }
+    }
+    @media (max-width: 768px) {
+      .hero-content { padding: 0 1.5rem; padding-top: 7rem; }
+      .stats-bar { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .stat-number { font-size: 2.5rem; }
+      .article { padding: 3rem 1.5rem; }
+      .pull-quote { padding: 2rem; }
+      .pull-quote blockquote { font-size: 1.25rem; }
+      .cta-section { margin: 3rem -1.5rem; padding: 3rem 1.5rem; }
+      .cta-text h3 { font-size: 1.75rem; }
+      .footer { padding: 3rem 1.5rem 2rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .live-panel-grid { grid-template-columns: 1fr; }
+      .live-panel-section { padding: 3rem 1.5rem 1rem; }
+      .form-section { padding: 0 1.5rem 3rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .debug-section { padding: 0 1.5rem 3rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- SOL Platform Nav -->
+  <div id="sol-platnav" style="position:fixed;bottom:18px;right:18px;z-index:99999;display:flex;flex-direction:column;gap:6px;font-family:ui-sans-serif,system-ui,sans-serif;">
+    <a href="/index.html" style="padding:8px 15px;border-radius:999px;background:rgba(5,4,10,.92);border:1px solid rgba(255,255,255,.16);color:#f2f0ff;text-decoration:none;backdrop-filter:blur(12px);white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.15px;box-shadow:0 10px 34px rgba(0,0,0,.55);display:block;text-align:center;" onmouseover="this.style.borderColor='rgba(184,107,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.16)'">&#8592; SOL Home</a>
+    <a href="/Platforms-Apps-Infrastructure/" style="padding:8px 15px;border-radius:999px;background:rgba(5,4,10,.92);border:1px solid rgba(255,255,255,.16);color:#f2f0ff;text-decoration:none;backdrop-filter:blur(12px);white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.15px;box-shadow:0 10px 34px rgba(0,0,0,.55);display:block;text-align:center;" onmouseover="this.style.borderColor='rgba(59,214,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.16)'">&#11043; All Platforms</a>
+  </div>
+
+  <!-- Cinematic Opening Sequence -->
+  <div class="cinematic-opener" aria-hidden="true">
+    <div class="opener-content">
+      <div class="opener-line">
+        <p class="opener-text">Skyes Over London LC · Platform Overview</p>
+      </div>
+      <div class="opener-line">
+        <h1 class="opener-title">kAIxUchat</h1>
+      </div>
+      <div class="opener-divider"></div>
+      <p class="opener-subtitle">
+        A branded conversational interface backed by Kaixu Gate Delta — token-based access, model selection, streaming, and a gateway that keeps your keys server-side.
+      </p>
+      <div class="opener-logo">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC" style="height:52px;width:auto;filter:drop-shadow(0 0 18px rgba(215,179,91,0.45));" />
+      </div>
+      <p class="opener-company">A platform by Skyes Over London LC · Kaixu Gate Delta</p>
+    </div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+  </div>
+
+  <!-- Site Nav -->
+  <nav class="site-top-nav">
+    <a href="/index.html" class="nav-logo">
+      <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" />
+      <span>SOLEnterprises</span>
+    </a>
+    <div class="nav-links">
+      <a href="/index.html">Home</a>
+      <a href="/about.html">Founder</a>
+      <a href="/platforms.html">Platforms</a>
+      <a href="/network.html">Network</a>
+      <a href="/credibility.html">Credibility</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/status.html">Status</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Article Nav -->
+  <nav class="nav" id="nav" aria-label="Page sections">
+    <div class="nav-brand">
+      <span class="nav-brand-name">kAIxUchat</span>
+      <span class="nav-brand-sub">Kaixu Gate Delta · v6.7</span>
+    </div>
+    <ul class="nav-links-inner">
+      <li><a href="#scan">Deep Scan</a></li>
+      <li><a href="#business-value">Business Value</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#hardening">Hardening</a></li>
+      <li><a href="#integrate">Integrate</a></li>
+      <li><a href="#request">Access</a></li>
+    </ul>
+    <a href="#request" class="nav-cta">Request Access</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-video-container">
+      <div class="hero-video"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-grain"></div>
+    </div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Platform Feature · Kaixu Gate Delta</span>
+      <h1 class="hero-title">
+        Your <span class="violet">kAIxU</span> brain is live.<br />
+        Now give it a <em>front door</em>.
+      </h1>
+      <p class="hero-description">
+        kAIxUchat is a branded conversational interface backed by Kaixu Gate Delta — a clean gateway that accepts app tokens, supports model selection, and exposes a small, production-minded API surface for generation and streaming.
+      </p>
+      <div class="hero-badges">
+        <span class="hero-badge gold">Token-based access</span>
+        <span class="hero-badge violet">Streaming (SSE)</span>
+        <span class="hero-badge green">Keys stay server-side</span>
+        <span class="hero-badge">Conversations saved locally</span>
+        <span class="hero-badge">Minimal endpoints</span>
+      </div>
+      <div class="hero-actions">
+        <a href="https://kaixu67.netlify.app/kaixuchat" target="_blank" rel="noreferrer" class="hero-btn hero-btn-primary">
+          Open kAIxUchat Live
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        <a href="https://kaixu67.netlify.app/" target="_blank" rel="noreferrer" class="hero-btn hero-btn-secondary">
+          Gateway Console
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="stats-bar" aria-label="Platform metrics">
+    <div class="stat-item" data-delay="0">
+      <div class="stat-number" data-count="4">0</div>
+      <div class="stat-label">API Endpoints</div>
+    </div>
+    <div class="stat-item" data-delay="100">
+      <div class="stat-number">SSE</div>
+      <div class="stat-label">Live Streaming</div>
+    </div>
+    <div class="stat-item" data-delay="200">
+      <div class="stat-number" data-count="1">0</div>
+      <div class="stat-label">Token per App/Team</div>
+    </div>
+    <div class="stat-item" data-delay="300">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Keys in Frontend Code</div>
+    </div>
+  </section>
+
+  <!-- Live Status Panel -->
+  <section class="live-panel-section fade-up" aria-label="Live gateway status">
+    <div class="live-panel-grid">
+      <div class="live-card">
+        <div class="live-card-label">Live Gateway Status</div>
+        <div class="live-card-value" id="liveStatus">Checking…</div>
+        <div class="badge-row">
+          <span class="live-badge" id="bAuth">Auth: —</span>
+          <span class="live-badge" id="bGate">Open Gate: —</span>
+          <span class="live-badge" id="bKey">Key Config: —</span>
+        </div>
+      </div>
+      <div class="live-card">
+        <div class="live-card-label">Available Models</div>
+        <div class="live-card-value" id="liveModels">Loading…</div>
+        <div class="badge-row" id="modelBadges"></div>
+      </div>
+      <div class="live-card">
+        <div class="live-card-label">Quick Pitch</div>
+        <div class="live-card-value" style="font-size:1.1rem;line-height:1.55;">"Apps call the gate. The key stays server-side."</div>
+        <p style="font-size:0.88rem;color:rgba(255,255,255,0.60);margin-top:0.5rem;line-height:1.6;">Fast to demo. Clean to integrate. Built for real deployments.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Article -->
+  <article class="article">
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-category">Platform · AI Infrastructure · Chat UI</span>
+        <span class="article-date">February 28, 2026</span>
+        <div class="article-author">
+          <div class="author-avatar">KG</div>
+          <div class="author-info">
+            <span class="author-name">Kaixu Gate Delta Team</span>
+            <span class="author-role">Skyes Over London LC</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-intro">
+        <p>
+          A gateway that keeps your provider keys <em>server-side</em> while giving every app, team, and product its own scoped token. Token-based, streaming-capable, and minimal by design.
+        </p>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <aside class="article-sidebar" aria-label="On this page">
+        <nav class="sidebar-nav">
+          <span class="sidebar-nav-title">On This Page</span>
+          <a href="#scan">Deep Scan</a>
+          <a href="#business-value">Business Value</a>
+          <a href="#security">Security &amp; Governance</a>
+          <a href="#hardening">Hardening Roadmap</a>
+          <a href="#integrate">API Integration</a>
+          <a href="#request">Request Access</a>
+        </nav>
+      </aside>
+
+      <div class="article-content">
+
+        <!-- DEEP SCAN -->
+        <section id="scan" class="fade-up">
+          <h2>Deep Scan — What's on the Site Right Now</h2>
+          <p class="lead">Observable UI and API behaviors translated into client-facing value statements.</p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 16c0 1.1-.9 2-2 2H5l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v11z"/>
+                </svg>
+              </div>
+              <h4>kAIxUchat UI: Token + Model + Local Continuity</h4>
+              <p>The chat page is a focused experience: start a new conversation, paste an app token, choose a model, and chat. Conversations are auto-saved locally for continuity.</p>
+              <span class="feature-tag">User workflow is simple</span>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+                </svg>
+              </div>
+              <h4>Gateway Console: Minimal Endpoints, Clear Contract</h4>
+              <p>The gateway console documents a small endpoint surface: health, models, generate, and streaming (SSE). Example fetch usage keeps integration predictable.</p>
+              <span class="feature-tag">Developer-friendly API</span>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+              </div>
+              <h4>Hardening Posture: Not "Open by Default"</h4>
+              <p>Health telemetry shows the gateway is configured and the gate is not open by default. The console lists hardening actions: origin allowlists, unique app tokens, and rotation cadence.</p>
+              <span class="feature-tag">Production-oriented defaults</span>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+              </div>
+              <h4>Streaming Endpoint (SSE): Live Typing UX</h4>
+              <p>The streaming endpoint supports "live typing" UX in the client without complex client-side plumbing — built in from day one, not bolted on.</p>
+              <span class="feature-tag">Real-time by design</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- BUSINESS VALUE -->
+        <section id="business-value" class="fade-up">
+          <h2>Business Value in Plain English</h2>
+
+          <ul class="animated-list">
+            <li>
+              <div class="list-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+              </div>
+              <div class="list-content">
+                <h5>Controlled Access</h5>
+                <p>Share an app token per product or team instead of exposing a provider key. One leak revokes one token — not your entire ecosystem.</p>
+              </div>
+            </li>
+            <li>
+              <div class="list-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+              </div>
+              <div class="list-content">
+                <h5>Brand-First Demos</h5>
+                <p>Clients interact with "kAIxU" and your brand, not a generic vendor UI. The front door is yours.</p>
+              </div>
+            </li>
+            <li>
+              <div class="list-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <div class="list-content">
+                <h5>Faster Shipping</h5>
+                <p>Apps call one gateway contract instead of each app handling auth, models, streaming, and routing individually.</p>
+              </div>
+            </li>
+            <li>
+              <div class="list-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <div class="list-content">
+                <h5>Fewer Surprises</h5>
+                <p>Small endpoint surface means easier monitoring, logging, and security review. Complexity is the enemy of reliability.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <div class="pull-quote fade-up">
+          <blockquote>Apps call the gate. The key stays server-side.</blockquote>
+          <cite>— kAIxU Gate Delta design principle</cite>
+        </div>
+
+        <!-- SECURITY -->
+        <section id="security" class="fade-up">
+          <h2>Security &amp; Governance</h2>
+          <p class="lead">The gateway's technical posture translated into decision-maker language — procurement-friendly by design.</p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+              </div>
+              <h4>Keys Stay Server-Side</h4>
+              <p>Your apps authenticate with app tokens. The provider key remains behind the gate, reducing accidental exposure risk in frontend code and client devices.</p>
+              <span class="feature-tag">Attack surface reduced</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+              </div>
+              <h4>Origin Allowlists + Token Strategy</h4>
+              <p>Lock calls to approved domains and issue unique app tokens per product or team. If one token leaks, revoke it without burning the entire ecosystem.</p>
+              <span class="feature-tag">Containment by design</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <h4>Rotation Cadence</h4>
+              <p>Quarterly rotation is a clean baseline. Pair it with usage logging and rate limits and you have a strong foundation for enterprise procurement conversations.</p>
+              <span class="feature-tag">Operational discipline</span>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-5a2 2 0 012-2h2a2 2 0 012 2v5m-6 0h6M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+              </div>
+              <h4>Audit-Friendly Surface</h4>
+              <p>Four clean endpoints with predictable contracts — easier to monitor, log, and security-review than a sprawling API. Less surface area means less attack surface.</p>
+              <span class="feature-tag">Security by simplicity</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- HARDENING ROADMAP -->
+        <section id="hardening" class="fade-up">
+          <h2>Optional Hardening Roadmap</h2>
+          <p>Not required to advertise v1, but these are the cleanest enterprise upgrades to sell into larger clients.</p>
+
+          <div class="issues-grid">
+            <div class="issue-card">
+              <div class="issue-number">01</div>
+              <h4>Per-Token Rate Limits</h4>
+              <p>Burst control per app token to prevent abuse and cost spikes on a per-integration basis.</p>
+            </div>
+            <div class="issue-card">
+              <div class="issue-number">02</div>
+              <h4>WORM-Style Audit Trail</h4>
+              <p>Append-only logs for regulated clients where tamper-evident records are a procurement requirement.</p>
+            </div>
+            <div class="issue-card">
+              <div class="issue-number">03</div>
+              <h4>Structured Policy Layer</h4>
+              <p>Allow/deny tools, content classes, and system prompts scoped per app token — governance at the gate level.</p>
+            </div>
+            <div class="issue-card">
+              <div class="issue-number">04</div>
+              <h4>Tenant Isolation</h4>
+              <p>Namespaced memory and storage per customer — required for multi-tenant SaaS and enterprise deployments.</p>
+            </div>
+            <div class="issue-card">
+              <div class="issue-number">05</div>
+              <h4>Incident Kill Switch</h4>
+              <p>One-click revocation of a compromised token or origin — containment without downtime for the rest of the ecosystem.</p>
+            </div>
+            <div class="issue-card">
+              <div class="issue-number">06</div>
+              <h4>Usage Analytics</h4>
+              <p>Per-token usage dashboards for cost attribution, capacity planning, and anomaly detection across integrations.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- INTEGRATION -->
+        <section id="integrate" class="fade-up">
+          <h2>Integration — How Apps Call the Gate</h2>
+          <p class="lead">Keep the contract small and obvious. Apps call the gate; the brain lives behind it.</p>
+
+          <h3>API Surface</h3>
+          <ul>
+            <li><code>GET /v1/health</code> — operational truth in one hit</li>
+            <li><code>GET /v1/models</code> — models visible to this token</li>
+            <li><code>POST /v1/generate</code> — standard responses</li>
+            <li><code>POST /v1/stream</code> — streaming responses (SSE)</li>
+          </ul>
+
+          <h3>Example Request</h3>
+          <div class="codebox" role="region" aria-label="Example gateway fetch">fetch("https://kaixu67.netlify.app/v1/generate", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer YOUR_APP_TOKEN"
+  },
+  body: JSON.stringify({
+    model: "YOUR_MODEL_ID",
+    input: { type: "text", content: "Write a product overview in 5 bullet points." },
+    generationConfig: { temperature: 0.7 }
+  })
+});</div>
+
+          <div class="cta-section">
+            <div class="cta-content">
+              <div class="cta-text">
+                <h3>Ready to build on the gate?</h3>
+                <p>One clean API. Keys stay server-side. Streaming built in. Ship something real without exposing your provider credentials.</p>
+              </div>
+              <a href="https://kaixu67.netlify.app/" target="_blank" rel="noreferrer" class="cta-button">
+                Gateway Console
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- Request Access Form -->
+  <section class="form-section" id="request">
+    <div style="margin-bottom:2rem;">
+      <p style="font-family:var(--font-mono);font-size:0.7rem;color:rgba(255,255,255,0.55);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.75rem;">Request Access</p>
+      <h2 style="font-family:var(--font-display);font-size:2.2rem;font-weight:500;color:rgba(255,255,255,0.95);">Get a Demo or App Token</h2>
+      <p style="font-size:1rem;color:rgba(255,255,255,0.68);margin-top:0.75rem;max-width:600px;line-height:1.8;">Drop your details below and we'll get you access to a live demo or scoped app token for your integration.</p>
+    </div>
+    <div class="form-wrap">
+      <form name="kaixuchat-access" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="kaixuchat-access" />
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input id="name" name="name" autocomplete="name" required />
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="form-field">
+            <label for="company">Company</label>
+            <input id="company" name="company" autocomplete="organization" />
+          </div>
+          <div class="form-field">
+            <label for="usecase">Primary Use Case</label>
+            <select id="usecase" name="usecase" required>
+              <option value="" disabled selected>Select one…</option>
+              <option>Client-facing website assistant</option>
+              <option>Internal ops / SOP assistant</option>
+              <option>Sales + onboarding assistant</option>
+              <option>Document Q&amp;A (knowledge base)</option>
+              <option>Custom app integration</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field" style="margin-top:1.5rem;">
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" name="notes" placeholder="What do you want kAIxUchat to do for your org?"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="hero-btn hero-btn-primary" style="border-radius:0;cursor:pointer;border:none;">Send Request</button>
+          <a href="https://kaixu67.netlify.app/kaixuchat" target="_blank" rel="noreferrer" class="hero-btn hero-btn-secondary">View Live App</a>
+          <a href="https://kaixu67.netlify.app/v1/health" target="_blank" rel="noreferrer" class="hero-btn hero-btn-secondary">Health Endpoint</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Technical Debug -->
+  <section class="debug-section">
+    <details>
+      <summary>Live Technical Facts (auto-fetched)</summary>
+      <p>This panel fetches <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-gold);">/v1/health</code> and <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--color-gold);">/v1/models</code> from the gateway. If this page is hosted on a different domain and CORS blocks it, the marketing content still works — only the live proof widgets may fail.</p>
+      <div class="codebox" id="debugBox" aria-label="Live debug output">// waiting…</div>
+    </details>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>kAIxUchat</h4>
+        <div class="subsidiary">Skyes Over London LC · Kaixu Gate Delta</div>
+        <p>A branded conversational interface backed by a clean, production-minded AI gateway. Token access, server-side keys, streaming built in.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="https://kaixu67.netlify.app/kaixuchat" target="_blank" rel="noreferrer">Live App</a></li>
+          <li><a href="https://kaixu67.netlify.app/" target="_blank" rel="noreferrer">Gateway Console</a></li>
+          <li><a href="https://kaixu67.netlify.app/v1/health" target="_blank" rel="noreferrer">/v1/health</a></li>
+          <li><a href="https://kaixu67.netlify.app/v1/models" target="_blank" rel="noreferrer">/v1/models</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="/about.html">Founder</a></li>
+          <li><a href="/platforms.html">Platforms</a></li>
+          <li><a href="/network.html">Network</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>More</h5>
+        <ul>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/credibility.html">Credibility</a></li>
+          <li><a href="/status.html">Status</a></li>
+          <li><a href="/get-started/">Get Started</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copyright">© <span id="yr"></span> Skyes Over London LC · kAIxUchat / Kaixu Gate Delta</div>
+      <div class="footer-legal">
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 120) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { root: null, threshold: 0.1 });
+    document.querySelectorAll('.fade-up, .stat-item, .animated-list li').forEach(el => observer.observe(el));
+
+    // Animated stat counters
+    const animateCounter = (el, target) => {
+      const duration = 1200;
+      const increment = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) { el.textContent = target.toLocaleString(); clearInterval(timer); }
+        else { el.textContent = Math.floor(current).toLocaleString(); }
+      }, 16);
+    };
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const count = entry.target.dataset.count;
+          if (count) animateCounter(entry.target, parseInt(count));
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-number[data-count]').forEach(el => statObserver.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Sidebar active link
+    const sections = document.querySelectorAll('section[id]');
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id'); });
+      sidebarLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    });
+
+    // ====== Live proof widgets (health + models) ======
+    const GATE = "https://kaixu67.netlify.app";
+    const $ = id => document.getElementById(id);
+
+    function setBadge(el, label, ok) {
+      el.textContent = label;
+      el.className = 'live-badge ' + (ok ? 'ok' : 'err');
+    }
+    async function fetchJSON(path) {
+      const res = await fetch(GATE + path);
+      if (!res.ok) throw new Error(path + ' -> ' + res.status);
+      return res.json();
+    }
+    async function hydrate() {
+      $('yr').textContent = new Date().getFullYear();
+      const dbg = [];
+      try {
+        const health = await fetchJSON('/v1/health');
+        dbg.push({ health });
+        $('liveStatus').textContent = (health.ok ? 'Online' : 'Degraded') + (health.name ? ' · ' + health.name : '');
+        setBadge($('bAuth'), 'Auth: ' + (health.authConfigured ? 'On' : 'Off'), !!health.authConfigured);
+        setBadge($('bGate'), 'Open Gate: ' + (health.openGate ? 'Yes' : 'No'), !health.openGate);
+        setBadge($('bKey'), 'Key Config: ' + (health.keyConfigured ? 'Yes' : 'No'), !!health.keyConfigured);
+      } catch(e) {
+        $('liveStatus').textContent = 'Unable to fetch (check CORS)';
+        ['bAuth','bGate','bKey'].forEach(id => setBadge($(id), '—', false));
+        dbg.push({ health_error: String(e) });
+      }
+      try {
+        const models = await fetchJSON('/v1/models');
+        dbg.push({ models });
+        const list = Array.isArray(models.models) ? models.models : [];
+        $('liveModels').textContent = (list.length ? list.length + ' available' : '—') + (models.defaultModel ? ' · default set' : '');
+        const holder = $('modelBadges');
+        holder.innerHTML = '';
+        for (const m of list) {
+          const b = document.createElement('span');
+          b.className = 'live-badge';
+          b.textContent = (m.label || m.id || 'model').replace(/^gemini-/i, '').replace(/\s*\(.*\)\s*$/, '');
+          holder.appendChild(b);
+        }
+      } catch(e) {
+        $('liveModels').textContent = 'Unable to fetch (check CORS)';
+        $('modelBadges').innerHTML = '';
+        dbg.push({ models_error: String(e) });
+      }
+      $('debugBox').textContent = JSON.stringify(dbg, null, 2);
+    }
+    hydrate();
+  </script>
+</body>
+</html>
