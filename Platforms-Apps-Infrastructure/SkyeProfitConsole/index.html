@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d0015" />
+  <meta name="description" content="SkyeProfitConsole — Audit-Ready Revenue & Profit tracking, offline-first, built for small business owners who need clean books and provable numbers." />
+  <title>SkyeProfitConsole | Audit-Ready Revenue & Profit Console</title>
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:    #f5c842;
+      --gold-lt: #ffe082;
+      --violet:  #9b30ff;
+      --violet-lt: #c47aff;
+      --teal:    #00e5c8;
+      --bg:      #0d0015;
+      --bg2:     #160024;
+      --bg3:     #1c002e;
+      --text:    #e8e0f5;
+      --muted:   #8a7aaa;
+      --glass:   rgba(255,255,255,0.05);
+      --glass-border: rgba(255,255,255,0.10);
+      --radius:  14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── Aurora background ────────────────────────────── */
+    .bg-aurora {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 20% 10%, rgba(155,48,255,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(0,229,200,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 50% 50%, rgba(245,200,66,0.06) 0%, transparent 80%);
+    }
+
+    /* ─── Topbar ───────────────────────────────────────── */
+    .topbar {
+      position: sticky; top: 0; z-index: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px;
+      background: rgba(13,0,21,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .topbar-brand { font-size: 1rem; font-weight: 700; letter-spacing: .04em; color: var(--gold); }
+    .topbar-sub   { font-size: .75rem; color: var(--muted); margin-top: 1px; }
+
+    .topbar-cta {
+      display: flex; gap: 10px; align-items: center;
+    }
+
+    /* ─── Buttons ──────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 22px; border-radius: 8px; border: none;
+      font-size: .875rem; font-weight: 600; cursor: pointer;
+      text-decoration: none; transition: all .2s;
+    }
+    .btn-gold {
+      background: var(--gold); color: #0d0015;
+    }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245,200,66,.35); }
+
+    .btn-outline {
+      background: transparent; color: var(--gold);
+      border: 1.5px solid var(--gold);
+    }
+    .btn-outline:hover { background: rgba(245,200,66,.1); transform: translateY(-1px); }
+
+    .btn-lg { padding: 14px 30px; font-size: 1rem; border-radius: 10px; }
+
+    /* ─── Layout helpers ────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    section { padding: 80px 0; }
+    section:nth-child(even) { background: var(--bg2); position: relative; }
+
+    .section-tag {
+      display: inline-block; padding: 4px 14px; border-radius: 99px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      background: rgba(155,48,255,.18); color: var(--violet-lt);
+      border: 1px solid rgba(155,48,255,.3);
+      margin-bottom: 14px;
+    }
+    .section-tag.gold {
+      background: rgba(245,200,66,.12); color: var(--gold);
+      border-color: rgba(245,200,66,.3);
+    }
+    .section-tag.teal {
+      background: rgba(0,229,200,.10); color: var(--teal);
+      border-color: rgba(0,229,200,.25);
+    }
+
+    h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; line-height: 1.2; }
+    h3 { font-size: 1.15rem; font-weight: 700; }
+
+    .text-gold    { color: var(--gold); }
+    .text-violet  { color: var(--violet-lt); }
+    .text-teal    { color: var(--teal); }
+    .text-muted   { color: var(--muted); }
+    .text-center  { text-align: center; }
+
+    /* ─── Glass card ────────────────────────────────────── */
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color .25s, transform .2s;
+    }
+    .card:hover { border-color: rgba(155,48,255,.4); transform: translateY(-3px); }
+
+    .card-icon {
+      font-size: 2rem; margin-bottom: 14px;
+      display: block; line-height: 1;
+    }
+
+    /* ─── Grids ─────────────────────────────────────────── */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+
+    /* ─── Hero ──────────────────────────────────────────── */
+    #hero { padding: 100px 0 80px; text-align: center; }
+    #hero p.lead {
+      font-size: 1.2rem; color: var(--muted);
+      max-width: 680px; margin: 20px auto 36px;
+    }
+    .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .badge-row {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    .badge {
+      display: flex; align-items: center; gap: 7px;
+      padding: 6px 16px; border-radius: 99px;
+      font-size: .78rem; font-weight: 600;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      color: var(--text);
+    }
+    .badge .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .dot-gold   { background: var(--gold); }
+    .dot-teal   { background: var(--teal); }
+    .dot-violet { background: var(--violet-lt); }
+
+    /* ─── KPI showcase ──────────────────────────────────── */
+    .kpi-strip {
+      display: flex; flex-wrap: wrap; gap: 0;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 60px;
+    }
+    .kpi-item {
+      flex: 1 1 160px;
+      padding: 24px 20px;
+      text-align: center;
+      border-right: 1px solid var(--glass-border);
+    }
+    .kpi-item:last-child { border-right: none; }
+    .kpi-value { font-size: 1.6rem; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+    .kpi-label { font-size: .78rem; color: var(--muted); letter-spacing: .04em; }
+
+    /* ─── Feature rows ──────────────────────────────────── */
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .feature-row.flip { direction: rtl; }
+    .feature-row.flip > * { direction: ltr; }
+
+    .feature-graphic {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .feature-graphic .hl-gold   { color: var(--gold); font-weight: 700; }
+    .feature-graphic .hl-teal   { color: var(--teal); font-weight: 600; }
+    .feature-graphic .hl-violet { color: var(--violet-lt); font-weight: 600; }
+    .feature-graphic .row-item  { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--glass-border); }
+    .feature-graphic .row-item:last-child { border-bottom: none; }
+    .feature-graphic .tag {
+      font-size: .65rem; padding: 2px 8px; border-radius: 99px;
+      background: rgba(155,48,255,.2); color: var(--violet-lt);
+      border: 1px solid rgba(155,48,255,.3);
+      font-style: normal;
+    }
+    .feature-graphic .tag.gold  { background: rgba(245,200,66,.15); color: var(--gold); border-color: rgba(245,200,66,.3); }
+    .feature-graphic .tag.teal  { background: rgba(0,229,200,.12); color: var(--teal); border-color: rgba(0,229,200,.25); }
+
+    /* ─── Module list ────────────────────────────────────── */
+    .module-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .module-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 16px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 10px;
+      font-size: .9rem;
+    }
+    .module-list li .ico { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .module-list li strong { color: var(--gold); }
+
+    /* ─── Proof trail ────────────────────────────────────── */
+    .trail {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 0;
+      justify-content: center;
+      margin-top: 36px;
+    }
+    .trail-step {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 18px 20px;
+      text-align: center;
+      min-width: 120px;
+    }
+    .trail-step .ico { font-size: 1.6rem; margin-bottom: 8px; }
+    .trail-step .label { font-size: .8rem; font-weight: 700; color: var(--gold); }
+    .trail-step .sub { font-size: .7rem; color: var(--muted); margin-top: 4px; }
+    .trail-arrow { font-size: 1.4rem; color: var(--violet-lt); padding: 0 4px; align-self: center; }
+
+    /* ─── Checklist section ──────────────────────────────── */
+    .checklist { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .check-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 18px;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 10px;
+    }
+    .check-box {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: rgba(245,200,66,.18); border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: .9rem;
+    }
+    .check-text { font-size: .9rem; }
+    .check-text span { color: var(--muted); font-size: .8rem; display: block; }
+
+    /* ─── CTA final ──────────────────────────────────────── */
+    #cta-final {
+      text-align: center; padding: 100px 0;
+    }
+    #cta-final p {
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 580px; margin: 16px auto 36px;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    .page-footer {
+      background: var(--bg3);
+      border-top: 1px solid var(--glass-border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: .8rem; color: var(--muted);
+      position: relative; z-index: 1;
+    }
+    .page-footer a { color: var(--gold); text-decoration: none; }
+    .page-footer a:hover { text-decoration: underline; }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .feature-row, .feature-row.flip { grid-template-columns: 1fr; direction: ltr; }
+      .topbar { flex-direction: column; gap: 12px; text-align: center; }
+      .topbar-cta { justify-content: center; }
+      .kpi-strip { flex-direction: column; }
+      .kpi-item { border-right: none; border-bottom: 1px solid var(--glass-border); }
+      .kpi-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-aurora" aria-hidden="true"></div>
+
+  <!-- ─── TOPBAR ──────────────────────────────────────────── -->
+  <header class="topbar">
+    <div>
+      <div class="topbar-brand" style="display:flex;align-items:center;gap:10px;">
+        <img src="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png" alt="SOL" style="height:32px;width:32px;object-fit:contain;border-radius:6px;">
+        <span>⬡ SkyeProfitConsole</span>
+      </div>
+      <div class="topbar-sub">by Skyes Over London LC &nbsp;·&nbsp; Platforms-Apps-Infrastructure</div>
+    </div>
+    <div class="topbar-cta">
+      <a href="/Platforms-Apps-Infrastructure/" class="btn btn-outline" style="padding:8px 16px;font-size:.8rem;">⬡ All Platforms</a>
+      <a href="/index.html" class="btn btn-outline" style="padding:8px 16px;font-size:.8rem;">← SOL Home</a>
+      <a href="https://skyeprofitconsole.netlify.app/" target="_blank" rel="noopener" class="btn btn-gold">Launch App →</a>
+    </div>
+  </header>
+
+  <!-- ─── HERO ────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="container">
+      <div class="section-tag">Offline-First · Audit-Ready · Free</div>
+      <h1>
+        Your Books.<br>
+        <span class="text-gold">Provable.</span>
+        <span class="text-violet"> Clean.</span><br>
+        Every Month.
+      </h1>
+      <p class="lead">
+        SkyeProfitConsole is a full revenue + profit management console built for small business owners
+        who need consistent, auditable numbers — without a CPA on payroll.
+        Tracks the complete invoice → payment → deposit → books trail in your browser, offline, for free.
+      </p>
+      <div class="hero-cta">
+        <a href="https://skyeprofitconsole.netlify.app/" target="_blank" rel="noopener" class="btn btn-gold btn-lg">
+          🚀 Open the Console
+        </a>
+        <a href="#features" class="btn btn-outline btn-lg">
+          See What It Does ↓
+        </a>
+      </div>
+
+      <div class="badge-row">
+        <div class="badge"><span class="dot dot-teal"></span>Offline-First</div>
+        <div class="badge"><span class="dot dot-gold"></span>No Login Required</div>
+        <div class="badge"><span class="dot dot-violet"></span>Export to JSON &amp; CSV</div>
+        <div class="badge"><span class="dot dot-teal"></span>Audit Red Flags Detector</div>
+        <div class="badge"><span class="dot dot-gold"></span>6-Month Consistency Tracker</div>
+        <div class="badge"><span class="dot dot-violet"></span>Printable Proof Pack</div>
+      </div>
+
+      <div class="kpi-strip">
+        <div class="kpi-item">
+          <div class="kpi-value">6</div>
+          <div class="kpi-label">Core Modules</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">100%</div>
+          <div class="kpi-label">Offline-First</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">$0</div>
+          <div class="kpi-label">Cost to Use</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">Auto</div>
+          <div class="kpi-label">Audit Readiness Score</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-value">JSON + CSV</div>
+          <div class="kpi-label">Export Formats</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── AUDIT TRAIL ──────────────────────────────────────── -->
+  <section id="trail">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-tag gold">The Proof Chain</div>
+        <h2>Clean Books = <span class="text-gold">Provable Trail</span></h2>
+        <p class="text-muted" style="max-width:600px;margin:12px auto 0;">
+          Auditors and lenders don't just want numbers — they want the chain.
+          SkyeProfitConsole makes that chain automatic.
+        </p>
+      </div>
+
+      <div class="trail">
+        <div class="trail-step">
+          <div class="ico">🧾</div>
+          <div class="label">Invoice</div>
+          <div class="sub">Create &amp; track every invoice with client and due date</div>
+        </div>
+        <div class="trail-arrow">→</div>
+        <div class="trail-step">
+          <div class="ico">💳</div>
+          <div class="label">Payment</div>
+          <div class="sub">Log method, ref, and paid date against the invoice</div>
+        </div>
+        <div class="trail-arrow">→</div>
+        <div class="trail-step">
+          <div class="ico">🏦</div>
+          <div class="label">Bank Deposit</div>
+          <div class="sub">Record the deposit with date and amount</div>
+        </div>
+        <div class="trail-arrow">→</div>
+        <div class="trail-step">
+          <div class="ico">📒</div>
+          <div class="label">Reconcile</div>
+          <div class="sub">Match deposits to revenue entries with one click</div>
+        </div>
+        <div class="trail-arrow">→</div>
+        <div class="trail-step">
+          <div class="ico">✅</div>
+          <div class="label">Audit-Ready</div>
+          <div class="sub">Generate printable proof pack, score goes green</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FEATURES ─────────────────────────────────────────── -->
+  <section id="features">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="section-tag">Core Modules</div>
+        <h2>Six Modules. <span class="text-violet">One Console.</span></h2>
+        <p class="text-muted" style="max-width:580px;margin:12px auto 0;">Everything you need to run clean books — no spreadsheet juggling, no separate apps.</p>
+      </div>
+
+      <div class="grid-3">
+
+        <div class="card">
+          <span class="card-icon">📊</span>
+          <h3 class="text-gold">Dashboard</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Live snapshot of Revenue, Expenses, Net Profit, Net Margin, Unreconciled Deposits,
+            and Audit Readiness score for the active month. Quick-action buttons to jump to any module.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">💰</span>
+          <h3 class="text-gold">Revenue Log</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Log every sale with client name, category, payment method, linked invoice number, and notes.
+            Export to CSV for your accountant or auditor in one click.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">📋</span>
+          <h3 class="text-gold">Expense Tracker</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Track expenses by COGS vs OpEx — separating delivery costs from overhead so your margin
+            story holds up under scrutiny. Vendor, category, method, all logged.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🧾</span>
+          <h3 class="text-gold">Invoice Manager</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Create invoices with client, issue date, due date, and amount. Track status (draft → paid → overdue)
+            and log payment references so deposits can be matched.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🏦</span>
+          <h3 class="text-gold">Bank Deposits</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Every dollar that hits your account gets its own deposit record. Mark each as reconciled
+            once matched to revenue. Unreconciled count surfaces on the dashboard immediately.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🔄</span>
+          <h3 class="text-gold">Reconciliation</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Match bank deposits to revenue entries — the last step that closes your monthly books.
+            One-click reconcile with an audit trail of what matched to what.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONSISTENCY TRACKER ──────────────────────────────── -->
+  <section id="consistency">
+    <div class="container">
+      <div class="feature-row">
+        <div>
+          <div class="section-tag gold">6-Month Intelligence</div>
+          <h2>Know If Your Revenue Is <span class="text-gold">Actually Consistent</span></h2>
+          <p class="text-muted" style="margin:14px 0 20px;">
+            Lenders and investors don't care about one great month — they want to see consistent,
+            repeatable performance. SkyeProfitConsole automatically measures your revenue and profit
+            volatility using coefficient of variation so you know exactly where you stand.
+          </p>
+          <ul class="module-list">
+            <li>
+              <span class="ico">📈</span>
+              <div><strong>6-Month Average Revenue &amp; Profit</strong><br>
+              <span class="text-muted">Automatically compiled from your entered data, no formulas needed.</span></div>
+            </li>
+            <li>
+              <span class="ico">📉</span>
+              <div><strong>Volatility Score</strong><br>
+              <span class="text-muted">Coefficient of variation (std dev / mean) — lower is more consistent, shown instantly.</span></div>
+            </li>
+            <li>
+              <span class="ico">🚨</span>
+              <div><strong>Audit Red Flags Detector</strong><br>
+              <span class="text-muted">Flags months with revenue but no expenses, unmatched deposits, missing invoices, and more.</span></div>
+            </li>
+          </ul>
+        </div>
+        <div class="feature-graphic">
+          <div style="margin-bottom:16px;color:var(--gold);font-weight:700;">Consistency Tracker · Last 6 Months</div>
+          <div class="row-item">
+            <span>Avg Revenue</span>
+            <span class="hl-gold">$18,400</span>
+          </div>
+          <div class="row-item">
+            <span>Avg Profit</span>
+            <span class="hl-gold">$7,920</span>
+          </div>
+          <div class="row-item">
+            <span>Revenue Volatility</span>
+            <span class="hl-teal">12.4% <em class="tag teal">Consistent</em></span>
+          </div>
+          <div class="row-item">
+            <span>Profit Volatility</span>
+            <span class="hl-teal">9.1% <em class="tag teal">Strong</em></span>
+          </div>
+          <div style="margin-top:18px;color:var(--gold);font-weight:700;">Audit Red Flags</div>
+          <div class="row-item" style="color:var(--teal);">
+            <span>✅ No unreconciled deposits this month</span>
+          </div>
+          <div class="row-item" style="color:var(--teal);">
+            <span>✅ All invoices have payment records</span>
+          </div>
+          <div class="row-item" style="color:var(--teal);">
+            <span>✅ COGS + OpEx both logged</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── AUDIT PACK ───────────────────────────────────────── -->
+  <section id="auditpack">
+    <div class="container">
+      <div class="feature-row flip">
+        <div>
+          <div class="section-tag">Proof Pack</div>
+          <h2>Walk Into Any Audit <span class="text-violet">Ready</span></h2>
+          <p class="text-muted" style="margin:14px 0 20px;">
+            The Audit Readiness Pack collates everything an auditor, lender, or potential investor
+            wants to see — formatted and printable. No scrambling, no last-minute spreadsheets.
+          </p>
+          <div class="checklist">
+            <div class="check-item">
+              <div class="check-box">✓</div>
+              <div class="check-text">
+                Monthly Revenue Summary
+                <span>Category breakdown, method breakdown, total tied to bank deposits</span>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-box">✓</div>
+              <div class="check-text">
+                Expense Schedule (COGS + OpEx)
+                <span>Itemized by vendor and category with type classification</span>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-box">✓</div>
+              <div class="check-text">
+                Invoice Register
+                <span>All invoices with status, amount, payment ref, and matched deposit</span>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-box">✓</div>
+              <div class="check-text">
+                Bank Deposit Reconciliation Log
+                <span>Every deposit matched to revenue entries — the chain is closed</span>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-box">✓</div>
+              <div class="check-text">
+                Audit Readiness Score &amp; Checklist
+                <span>Auto-generated pass/fail checklist with explanations for each item</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="feature-graphic">
+          <div style="margin-bottom:16px;color:var(--violet-lt);font-weight:700;">Audit Readiness Pack · March 2025</div>
+          <div class="row-item">
+            <span>Total Revenue</span>
+            <span class="hl-gold">$22,150.00</span>
+          </div>
+          <div class="row-item">
+            <span>Total Expenses</span>
+            <span>$13,820.00</span>
+          </div>
+          <div class="row-item">
+            <span>Net Profit</span>
+            <span class="hl-gold">$8,330.00</span>
+          </div>
+          <div class="row-item">
+            <span>Net Margin</span>
+            <span class="hl-teal">37.6%</span>
+          </div>
+          <div class="row-item">
+            <span>Invoices Reconciled</span>
+            <span class="hl-teal">12 / 12 <em class="tag teal">100%</em></span>
+          </div>
+          <div class="row-item">
+            <span>Deposits Matched</span>
+            <span class="hl-teal">All Clear <em class="tag teal">✓</em></span>
+          </div>
+          <div class="row-item">
+            <span>Audit Score</span>
+            <span class="hl-gold"><strong>A+</strong> <em class="tag gold">READY</em></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── OFFLINE + EXPORT ─────────────────────────────────── -->
+  <section id="offline">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="section-tag teal">Offline-First Architecture</div>
+        <h2>Your Data Stays <span class="text-teal">With You</span></h2>
+        <p class="text-muted" style="max-width:600px;margin:12px auto 0;">
+          SkyeProfitConsole runs entirely in your browser. No server sends your financial data anywhere.
+          Export a backup anytime, import it on any device. Works without internet.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <span class="card-icon">📱</span>
+          <h3 style="color:var(--teal);">Works Offline</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Data is stored locally using browser storage. Open it on a plane, in a dead zone, anywhere.
+            No Wi-Fi needed to run your books.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📤</span>
+          <h3 style="color:var(--teal);">Export JSON Backup</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            One button exports your entire data set as a JSON file. Import it on any device
+            or browser to pick up exactly where you left off.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📊</span>
+          <h3 style="color:var(--teal);">CSV for Accountants</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Revenue, Expenses, Invoices, and Deposits each export to individual CSV files.
+            Drop them into QuickBooks, Excel, or hand them directly to your CPA.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHO IT'S FOR ─────────────────────────────────────── -->
+  <section id="who">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="section-tag gold">Built For</div>
+        <h2>Who <span class="text-gold">Uses This</span></h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <span class="card-icon">🏪</span>
+          <h3>Small Business Owners</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Running a service business and tired of messy spreadsheets? SkyeProfitConsole gives you
+            a real system — not just a table that sort of works.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🏗️</span>
+          <h3>Contractors &amp; Freelancers</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Invoice your clients, track deposits, reconcile, and hand your accountant clean CSV files
+            at year end. No bookkeeper required for the day-to-day.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🏦</span>
+          <h3>Loan Applicants</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Banks want consistent, provable revenue. The Audit Readiness Pack gives you exactly that —
+            formatted, reconciled, ready to submit.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA FINAL ────────────────────────────────────────── -->
+  <section id="cta-final">
+    <div class="container">
+      <div class="section-tag" style="margin:0 auto 14px;">Ready?</div>
+      <h2>Start Running <span class="text-gold">Audit-Ready Books</span><br>Right Now — No Signup.</h2>
+      <p>
+        SkyeProfitConsole opens in your browser in seconds. No account, no payment, no waiting.
+        Just clean, consistent, provable financials — every month.
+      </p>
+      <div class="hero-cta">
+        <a href="https://skyeprofitconsole.netlify.app/" target="_blank" rel="noopener" class="btn btn-gold btn-lg">
+          🚀 Launch SkyeProfitConsole
+        </a>
+        <a href="/Platforms-Apps-Infrastructure/" class="btn btn-outline btn-lg">
+          ⬡ More SOL Apps
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
+  <footer class="page-footer">
+    <p>
+      <strong>SkyeProfitConsole</strong> is a product of
+      <a href="/index.html">Skyes Over London LC</a> &nbsp;·&nbsp;
+      <a href="https://skyeprofitconsole.netlify.app/" target="_blank" rel="noopener">Open App ↗</a>
+      &nbsp;·&nbsp;
+      <a href="/Platforms-Apps-Infrastructure/">⬡ All Platforms</a>
+    </p>
+    <p style="margin-top:8px;">© 2025 Skyes Over London LC. All rights reserved.</p>
+  </footer>
+
+  <!-- ─── SOL PLATFORM NAV ─────────────────────────────────── -->
+  <div id="sol-platnav" style="
+    position:fixed;bottom:18px;right:18px;z-index:99999;
+    display:flex;flex-direction:column;gap:6px;align-items:flex-end;
+  ">
+    <a href="/index.html" style="
+      display:inline-flex;align-items:center;gap:6px;
+      padding:7px 14px;border-radius:99px;
+      background:rgba(13,0,21,0.88);backdrop-filter:blur(10px);
+      border:1px solid rgba(245,200,66,0.4);
+      color:#f5c842;font-size:.75rem;font-weight:700;
+      text-decoration:none;white-space:nowrap;
+    ">← SOL Home</a>
+    <a href="/Platforms-Apps-Infrastructure/" style="
+      display:inline-flex;align-items:center;gap:6px;
+      padding:7px 14px;border-radius:99px;
+      background:rgba(13,0,21,0.88);backdrop-filter:blur(10px);
+      border:1px solid rgba(155,48,255,0.4);
+      color:#c47aff;font-size:.75rem;font-weight:700;
+      text-decoration:none;white-space:nowrap;
+    ">⬡ All Platforms</a>
+  </div>
+
+</body>
+</html>

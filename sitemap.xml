@@ -2359,6 +2359,30 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/index.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/SkyeProfitConsole/index.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Skye%20Identity%20Standard%3A%20Global%20Command%20Center/index.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Skye%20Identity%20Standard%3A%20Global%20Command%20Center/SOC2CompanionPack.html</loc>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://skyesol.netlify.app/platforms.html</loc>
     <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>

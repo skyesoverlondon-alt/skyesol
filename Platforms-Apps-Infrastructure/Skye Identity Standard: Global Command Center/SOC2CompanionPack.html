@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#06030f" />
+  <meta name="description" content="SS-SOC2-001 Companion Pack — SOC 2 posture enforcement artifacts for the SKYE Standard. Checklist, Evidence Index, Scorecard, and Exception Form. No backend. Instant proof." />
+  <title>SS-SOC2-001 Companion Pack | SKYE Standard — Skyes Over London LC</title>
+
+  <style>
+    /* ─── Reset ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #06030f;
+      --ink2:      #0d0820;
+      --ink3:      #130c28;
+      --fg:        #edeaf8;
+      --muted:     #8a80b0;
+      --gold:      #f5c842;
+      --gold-lt:   #ffe082;
+      --violet:    #9b30ff;
+      --violet-lt: #c47aff;
+      --blue:      #3bd6ff;
+      --red:       #ff6b6b;
+      --green:     #49ffa8;
+      --glass:     rgba(255,255,255,0.055);
+      --gb:        rgba(255,255,255,0.10);
+      --r:         14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--ink);
+      color: var(--fg);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── Aurora ─────────────────────────────────────────── */
+    .aurora {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 55% at 15% 5%,  rgba(59,214,255,0.13)  0%, transparent 65%),
+        radial-gradient(ellipse 65% 45% at 85% 15%,  rgba(155,48,255,0.15)  0%, transparent 65%),
+        radial-gradient(ellipse 55% 65% at 50% 90%,  rgba(245,200,66,0.07)  0%, transparent 70%);
+    }
+
+    /* ─── Topbar ─────────────────────────────────────────── */
+    .topbar {
+      position: sticky; top: 0; z-index: 900;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 12px 28px;
+      background: rgba(6,3,15,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gb);
+    }
+    .topbar-brand { display: flex; flex-direction: column; gap: 1px; }
+    .topbar-kicker { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); font-weight: 700; }
+    .topbar-name   { font-size: .95rem; font-weight: 800; color: var(--fg); }
+    .topbar-sub    { font-size: .7rem; color: var(--muted); }
+    .topbar-cta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+    /* ─── Buttons ─────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 22px; border-radius: 8px; border: none;
+      font-size: .875rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; transition: all .2s;
+    }
+    .btn-gold    { background: var(--gold); color: #06030f; }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-1px); box-shadow: 0 6px 22px rgba(245,200,66,.35); }
+    .btn-outline { background: transparent; color: var(--fg); border: 1.5px solid var(--gb); }
+    .btn-outline:hover { background: var(--glass); transform: translateY(-1px); }
+    .btn-blue    { background: rgba(59,214,255,.15); color: var(--blue); border: 1.5px solid rgba(59,214,255,.3); }
+    .btn-blue:hover { background: rgba(59,214,255,.25); transform: translateY(-1px); }
+    .btn-lg { padding: 14px 30px; font-size: 1rem; border-radius: 10px; }
+
+    /* ─── Layout ─────────────────────────────────────────── */
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    section { padding: 80px 0; }
+    section.bg2 { background: var(--ink2); position: relative; }
+    section.bg3 { background: var(--ink3); position: relative; }
+
+    .tag {
+      display: inline-block; padding: 4px 13px; border-radius: 99px;
+      font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .tag-blue   { background: rgba(59,214,255,.12);  color: var(--blue);      border: 1px solid rgba(59,214,255,.28); }
+    .tag-violet { background: rgba(155,48,255,.15);  color: var(--violet-lt); border: 1px solid rgba(155,48,255,.3);  }
+    .tag-gold   { background: rgba(245,200,66,.12);  color: var(--gold);      border: 1px solid rgba(245,200,66,.3);  }
+    .tag-green  { background: rgba(73,255,168,.10);  color: var(--green);     border: 1px solid rgba(73,255,168,.25); }
+    .tag-red    { background: rgba(255,107,107,.10); color: var(--red);       border: 1px solid rgba(255,107,107,.25); }
+
+    h1 { font-size: clamp(2rem, 5.5vw, 3.6rem); font-weight: 900; line-height: 1.1; letter-spacing: -.02em; }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 800; line-height: 1.2; }
+    h3 { font-size: 1.1rem; font-weight: 700; }
+
+    .text-gold   { color: var(--gold); }
+    .text-blue   { color: var(--blue); }
+    .text-violet { color: var(--violet-lt); }
+    .text-green  { color: var(--green); }
+    .text-muted  { color: var(--muted); }
+    .text-center { text-align: center; }
+
+    /* ─── Glass cards ─────────────────────────────────────── */
+    .card {
+      background: var(--glass); border: 1px solid var(--gb);
+      border-radius: var(--r); padding: 28px;
+      transition: border-color .22s, transform .2s;
+    }
+    .card:hover { border-color: rgba(59,214,255,.3); transform: translateY(-3px); }
+    .card-icon { font-size: 2rem; display: block; margin-bottom: 14px; }
+
+    /* ─── Grids ──────────────────────────────────────────── */
+    .g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+    .g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
+    .g4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+
+    /* ─── Hero ───────────────────────────────────────────── */
+    #hero { padding: 96px 0 80px; text-align: center; }
+    #hero .lead {
+      font-size: 1.2rem; color: var(--muted); max-width: 680px; margin: 20px auto 38px; line-height: 1.75;
+    }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .badge-row {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 42px;
+    }
+    .badge {
+      display: flex; align-items: center; gap: 7px;
+      padding: 6px 14px; border-radius: 99px;
+      font-size: .76rem; font-weight: 600;
+      background: var(--glass); border: 1px solid var(--gb); color: var(--fg);
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .dot-gold   { background: var(--gold); }
+    .dot-blue   { background: var(--blue); }
+    .dot-violet { background: var(--violet-lt); }
+    .dot-green  { background: var(--green); }
+
+    /* ─── KPI strip ──────────────────────────────────────── */
+    .kpi-strip {
+      display: flex; flex-wrap: wrap;
+      background: var(--glass); border: 1px solid var(--gb);
+      border-radius: var(--r); overflow: hidden; margin-top: 56px;
+    }
+    .kpi-item {
+      flex: 1 1 140px; padding: 22px 18px; text-align: center;
+      border-right: 1px solid var(--gb);
+    }
+    .kpi-item:last-child { border-right: none; }
+    .kpi-val { font-size: 1.5rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 5px; }
+    .kpi-lbl { font-size: .73rem; color: var(--muted); letter-spacing: .05em; }
+
+    /* ─── Doc cards (the 4 companion docs) ──────────────── */
+    .doc-card {
+      background: var(--glass); border: 1px solid var(--gb);
+      border-radius: var(--r); padding: 28px 28px 22px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: border-color .22s, transform .2s;
+    }
+    .doc-card:hover { border-color: rgba(59,214,255,.35); transform: translateY(-4px); }
+    .doc-id { font-family: 'Fira Code', 'Courier New', monospace; font-size: .72rem; letter-spacing: .12em; color: var(--blue); font-weight: 700; }
+    .doc-title { font-size: 1.05rem; font-weight: 800; }
+    .doc-desc { font-size: .875rem; color: var(--muted); flex: 1; line-height: 1.6; }
+    .doc-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+
+    /* ─── Feature row ─────────────────────────────────────── */
+    .feat-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center;
+    }
+    .feat-row.flip { direction: rtl; }
+    .feat-row.flip > * { direction: ltr; }
+
+    .feat-graphic {
+      background: var(--glass); border: 1px solid var(--gb);
+      border-radius: var(--r); padding: 26px;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: .8rem; color: var(--muted); line-height: 1.9;
+    }
+    .feat-graphic .row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .feat-graphic .row:last-child { border-bottom: none; }
+    .feat-graphic .hl-gold   { color: var(--gold);      font-weight: 700; }
+    .feat-graphic .hl-blue   { color: var(--blue);      font-weight: 600; }
+    .feat-graphic .hl-green  { color: var(--green);     font-weight: 600; }
+    .feat-graphic .hl-red    { color: var(--red);       font-weight: 600; }
+    .feat-graphic .chip {
+      font-size: .62rem; padding: 2px 8px; border-radius: 99px;
+      font-style: normal; border: 1px solid;
+    }
+    .chip-g  { background: rgba(73,255,168,.12); color: var(--green);  border-color: rgba(73,255,168,.25); }
+    .chip-r  { background: rgba(255,107,107,.10); color: var(--red);   border-color: rgba(255,107,107,.25); }
+    .chip-y  { background: rgba(245,200,66,.12); color: var(--gold);   border-color: rgba(245,200,66,.28); }
+    .chip-b  { background: rgba(59,214,255,.10); color: var(--blue);   border-color: rgba(59,214,255,.25); }
+
+    /* ─── Rule table ─────────────────────────────────────── */
+    .rule-table { width: 100%; border-collapse: collapse; margin-top: 28px; }
+    .rule-table th {
+      text-align: left; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); padding: 8px 14px; border-bottom: 1px solid var(--gb);
+    }
+    .rule-table td { padding: 13px 14px; font-size: .88rem; border-bottom: 1px solid rgba(255,255,255,.05); vertical-align: top; }
+    .rule-table tr:last-child td { border-bottom: none; }
+    .rule-table tr:hover td { background: rgba(255,255,255,.03); }
+    .rule-table td:first-child { color: var(--gold); font-weight: 700; font-family: 'Fira Code','Courier New',monospace; font-size: .8rem; white-space: nowrap; }
+
+    /* ─── Flow steps ─────────────────────────────────────── */
+    .flow {
+      display: flex; align-items: center; flex-wrap: wrap;
+      justify-content: center; gap: 0; margin-top: 40px;
+    }
+    .flow-step {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 20px 22px; text-align: center; min-width: 130px;
+    }
+    .flow-ico   { font-size: 1.8rem; margin-bottom: 10px; }
+    .flow-label { font-size: .82rem; font-weight: 800; color: var(--blue); }
+    .flow-sub   { font-size: .7rem; color: var(--muted); margin-top: 4px; max-width: 120px; }
+    .flow-arrow { font-size: 1.3rem; color: var(--violet-lt); padding: 0 4px; align-self: center; }
+
+    /* ─── List items ─────────────────────────────────────── */
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .check-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 16px; background: var(--glass); border: 1px solid var(--gb);
+      border-radius: 10px; font-size: .9rem;
+    }
+    .check-list li .ico { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+    .check-list li strong { color: var(--blue); }
+
+    /* ─── CTA final ──────────────────────────────────────── */
+    #cta-final { text-align: center; padding: 100px 0; }
+    #cta-final p { font-size: 1.1rem; color: var(--muted); max-width: 580px; margin: 16px auto 38px; }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    .site-footer {
+      background: var(--ink3); border-top: 1px solid var(--gb);
+      padding: 32px 24px; text-align: center;
+      font-size: .78rem; color: var(--muted);
+      position: relative; z-index: 1;
+    }
+    .site-footer a { color: var(--gold); text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .feat-row, .feat-row.flip { grid-template-columns: 1fr; direction: ltr; }
+      .topbar { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .topbar-cta { justify-content: flex-start; }
+      .kpi-strip { flex-direction: column; }
+      .kpi-item { border-right: none; border-bottom: 1px solid var(--gb); }
+      .kpi-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="aurora" aria-hidden="true"></div>
+
+  <!-- ─── TOPBAR ──────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-brand" style="display:flex;align-items:center;gap:12px;">
+      <img src="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png" alt="SOL" style="height:36px;width:36px;object-fit:contain;border-radius:6px;flex-shrink:0;">
+      <div>
+        <div class="topbar-kicker">SKYE Standard</div>
+        <div class="topbar-name">Skyes Over London LC</div>
+        <div class="topbar-sub">SS-SOC2-001 Companion Pack · Compliance Center</div>
+      </div>
+    </div>
+    <div class="topbar-cta">
+      <a href="/Platforms-Apps-Infrastructure/" class="btn btn-outline" style="padding:8px 14px;font-size:.78rem;">⬡ All Platforms</a>
+      <a href="/index.html" class="btn btn-outline" style="padding:8px 14px;font-size:.78rem;">← SOL Home</a>
+      <a href="https://ss-soc2-001companionpack.netlify.app/" target="_blank" rel="noopener" class="btn btn-gold">Open Companion Pack →</a>
+    </div>
+  </header>
+
+  <!-- ─── HERO ────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="wrap">
+      <div class="tag tag-blue">SKYE Standard · SS-SOC2-001</div>
+      <h1>
+        SOC 2 Posture.<br>
+        <span class="text-blue">Enforced.</span>
+        <span class="text-gold"> Documented.</span><br>
+        <span class="text-violet">Instantly Retrievable.</span>
+      </h1>
+      <p class="lead">
+        The SS-SOC2-001 Companion Pack is a complete, offline-first SOC 2 enforcement toolkit built on the
+        SKYE Standard. Four compliance documents — Checklist, Evidence Index, Scorecard, and Exception Form —
+        running entirely in your browser. No backend. No subscriptions. Just proof.
+      </p>
+      <div class="cta-row">
+        <a href="https://ss-soc2-001companionpack.netlify.app/" target="_blank" rel="noopener" class="btn btn-gold btn-lg">
+          🔐 Open the Companion Pack
+        </a>
+        <a href="#documents" class="btn btn-blue btn-lg">
+          See All Four Documents ↓
+        </a>
+      </div>
+
+      <div class="badge-row">
+        <div class="badge"><span class="dot dot-blue"></span>No Backend</div>
+        <div class="badge"><span class="dot dot-gold"></span>No Login Required</div>
+        <div class="badge"><span class="dot dot-violet"></span>Offline-First</div>
+        <div class="badge"><span class="dot dot-green"></span>Export JSON &amp; CSV</div>
+        <div class="badge"><span class="dot dot-blue"></span>Print-Ready PDF</div>
+        <div class="badge"><span class="dot dot-gold"></span>Auto Posture Scoring</div>
+      </div>
+
+      <div class="kpi-strip">
+        <div class="kpi-item">
+          <div class="kpi-val">4</div>
+          <div class="kpi-lbl">Companion Documents</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">5 TSC</div>
+          <div class="kpi-lbl">Trust Service Criteria</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">0–5</div>
+          <div class="kpi-lbl">Posture Scoring Scale</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">L2+</div>
+          <div class="kpi-lbl">Production Gate</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">100%</div>
+          <div class="kpi-lbl">Offline &amp; Private</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHAT IS IT ───────────────────────────────────────── -->
+  <section class="bg2">
+    <div class="wrap">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="tag tag-violet">The Standard</div>
+        <h2>What Is the <span class="text-blue">SKYE Compliance Center</span>?</h2>
+        <p class="text-muted" style="max-width:640px;margin:14px auto 0;font-size:1.05rem;">
+          SOC 2 posture is the provable state of readiness — showing controls are designed, operating,
+          and backed by continuously retrievable evidence. The SS-SOC2-001 Companion Pack makes that enforcement
+          consistent across teams and geographies, with zero infrastructure required.
+        </p>
+      </div>
+
+      <div class="g3">
+        <div class="card">
+          <span class="card-icon">📐</span>
+          <h3 class="text-blue">Built on the SKYE Standard</h3>
+          <p class="text-muted" style="margin:8px 0 0;font-size:.9rem;">
+            SS-SOC2-001 is a formal standard owned by the Skyes Over London LC Security &amp; Trust Office.
+            Every artifact maps to the standard's enforcement rules — no guesswork, no interpretation drift.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔒</span>
+          <h3 class="text-blue">Local-Only, No Data Leaves</h3>
+          <p class="text-muted" style="margin:8px 0 0;font-size:.9rem;">
+            All edits save to your device via browser localStorage. No server receives your compliance data.
+            Export a JSON snapshot any time and import it on another device to pick up where you left off.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">⚡</span>
+          <h3 class="text-blue">Instant Evidence Production</h3>
+          <p class="text-muted" style="margin:8px 0 0;font-size:.9rem;">
+            The Evidence Rule is simple: if proof cannot be produced quickly, the control is treated as
+            non-operational. This pack gives you the system to produce that proof — fast.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── THE 4 DOCUMENTS ──────────────────────────────────── -->
+  <section id="documents">
+    <div class="wrap">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="tag tag-blue">Four Documents</div>
+        <h2>One Pack. <span class="text-gold">Four Enforcement Artifacts.</span></h2>
+        <p class="text-muted" style="max-width:640px;margin:14px auto 0;font-size:1rem;">
+          Use them in order: Checklist → Evidence Index → Scorecard → Exception Form (as needed).
+          Each exports to JSON and CSV; each has a print-ready branded PDF.
+        </p>
+      </div>
+
+      <div class="g2">
+
+        <div class="doc-card">
+          <div class="doc-id">SS-SOC2-001A</div>
+          <div class="doc-title">📋 Compliance Checklist</div>
+          <div class="tag tag-blue" style="align-self:flex-start;margin:0;">Implementation Status</div>
+          <p class="doc-desc">
+            The master control list — mandatory domains and applicable modules. Capture implementation
+            status (Not Started / In Progress / Implemented / Not Applicable) for every SOC 2 control.
+            Export your status as JSON for posture submissions or auditor review.
+          </p>
+          <div class="doc-btns">
+            <a href="https://ss-soc2-001companionpack.netlify.app/checklist" target="_blank" rel="noopener" class="btn btn-blue">Open Checklist</a>
+            <a href="https://ss-soc2-001companionpack.netlify.app/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.8rem;">Download PDF</a>
+          </div>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-id">SS-SOC2-001B</div>
+          <div class="doc-title">🗂️ Evidence Index</div>
+          <div class="tag tag-green" style="align-self:flex-start;margin:0;">Receipts Binder</div>
+          <p class="doc-desc">
+            The proof binder. Log every piece of evidence — screenshots, logs, configurations, reports —
+            with control mapping, artifact type, date, and reviewer. Export to CSV for auditor handoff.
+            If it's not in here, it doesn't exist.
+          </p>
+          <div class="doc-btns">
+            <a href="https://ss-soc2-001companionpack.netlify.app/evidence-index" target="_blank" rel="noopener" class="btn btn-blue">Open Evidence Index</a>
+            <a href="https://ss-soc2-001companionpack.netlify.app/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.8rem;">Download PDF</a>
+          </div>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-id">SS-SOC2-001C</div>
+          <div class="doc-title">📊 Posture Scorecard</div>
+          <div class="tag tag-gold" style="align-self:flex-start;margin:0;">0–5 Domain Scoring</div>
+          <p class="doc-desc">
+            Score each SOC 2 domain 0–5 against the SKYE tier framework. Auto-fail gates flag mandatory
+            gaps that block production promotion. Aggregate score maps to a SKYE posture tier (Level 1–4).
+            The single-page answer to "where do we stand?"
+          </p>
+          <div class="doc-btns">
+            <a href="https://ss-soc2-001companionpack.netlify.app/scorecard" target="_blank" rel="noopener" class="btn btn-blue">Open Scorecard</a>
+            <a href="https://ss-soc2-001companionpack.netlify.app/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.8rem;">Download PDF</a>
+          </div>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-id">SS-SOC2-001D</div>
+          <div class="doc-title">🚨 Exception Form</div>
+          <div class="tag tag-red" style="align-self:flex-start;margin:0;">Time-Bound Gaps</div>
+          <p class="doc-desc">
+            No permanent waivers. Every control gap gets a time-bound exception with a risk statement,
+            compensating controls, remediation owner, end date, and validation method. The Exception Form
+            is how you allow gaps without lying to yourself or your auditors.
+          </p>
+          <div class="doc-btns">
+            <a href="https://ss-soc2-001companionpack.netlify.app/exception-form" target="_blank" rel="noopener" class="btn btn-blue">Open Exception Form</a>
+            <a href="https://ss-soc2-001companionpack.netlify.app/" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.8rem;">Download PDF</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RECOMMENDED FLOW ─────────────────────────────────── -->
+  <section class="bg2">
+    <div class="wrap">
+      <div class="text-center">
+        <div class="tag tag-violet">Process</div>
+        <h2>The Recommended <span class="text-violet">Enforcement Flow</span></h2>
+        <p class="text-muted" style="max-width:580px;margin:12px auto 0;">
+          Run through the four artifacts in order every audit cycle. The output of each feeds the next.
+        </p>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-ico">📋</div>
+          <div class="flow-label">Checklist</div>
+          <div class="flow-sub">Capture implementation status for every mandatory control</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-ico">🗂️</div>
+          <div class="flow-label">Evidence Index</div>
+          <div class="flow-sub">Log and link artifacts that prove each control is operating</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-ico">📊</div>
+          <div class="flow-label">Scorecard</div>
+          <div class="flow-sub">Score each domain 0–5, identify auto-fail gates, confirm SKYE tier</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-ico">🚨</div>
+          <div class="flow-label">Exception Form</div>
+          <div class="flow-sub">Document any gaps as time-bound exceptions with owners and end dates</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-ico">✅</div>
+          <div class="flow-label">Posture Confirmed</div>
+          <div class="flow-sub">Export, print, and submit your full posture package</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SCORECARD DETAIL ─────────────────────────────────── -->
+  <section>
+    <div class="wrap">
+      <div class="feat-row">
+        <div>
+          <div class="tag tag-gold">Posture Scorecard</div>
+          <h2>Know Your <span class="text-gold">Exact Posture Level</span> — No Ambiguity</h2>
+          <p class="text-muted" style="margin:14px 0 20px;">
+            The Scorecard eliminates opinion from compliance. Each SOC 2 domain is scored 0–5 against
+            defined SKYE criteria. Auto-fail gates fire on mandatory gaps. The aggregate maps directly
+            to a production gate decision.
+          </p>
+          <ul class="check-list">
+            <li>
+              <span class="ico">🔴</span>
+              <div><strong>Level 0–1:</strong> Development-only. Block from production.</div>
+            </li>
+            <li>
+              <span class="ico">🟡</span>
+              <div><strong>Level 2:</strong> Minimum for client-data systems. No auto-fail gates.</div>
+            </li>
+            <li>
+              <span class="ico">🟢</span>
+              <div><strong>Level 3:</strong> Required for high-risk systems. Sustained cadence + full evidence.</div>
+            </li>
+            <li>
+              <span class="ico">⭐</span>
+              <div><strong>Level 4:</strong> Continuous posture. Automated controls + real-time alerting.</div>
+            </li>
+          </ul>
+        </div>
+        <div class="feat-graphic">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:14px;">Posture Scorecard — Live View</div>
+          <div class="row">
+            <span>Security (CC)</span>
+            <span class="hl-green">4.2 / 5 <em class="chip chip-g">Level 3</em></span>
+          </div>
+          <div class="row">
+            <span>Availability (A)</span>
+            <span class="hl-green">3.8 / 5 <em class="chip chip-g">Level 3</em></span>
+          </div>
+          <div class="row">
+            <span>Confidentiality (C)</span>
+            <span class="hl-blue">3.1 / 5 <em class="chip chip-b">Level 2</em></span>
+          </div>
+          <div class="row">
+            <span>Processing Integrity (PI)</span>
+            <span class="hl-blue">3.0 / 5 <em class="chip chip-b">Level 2</em></span>
+          </div>
+          <div class="row">
+            <span>Privacy (P)</span>
+            <span class="hl-red">1.8 / 5 <em class="chip chip-r">Auto-Fail</em></span>
+          </div>
+          <div style="margin-top:14px;" class="row">
+            <span style="color:var(--muted);">Aggregate Posture</span>
+            <span class="hl-gold"><strong>3.18</strong> <em class="chip chip-y">Action Required</em></span>
+          </div>
+          <div class="row">
+            <span style="color:var(--muted);">Production Gate</span>
+            <span class="hl-red">⛔ BLOCKED — Privacy auto-fail</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ENFORCEMENT RULES ────────────────────────────────── -->
+  <section class="bg3">
+    <div class="wrap">
+      <div class="text-center" style="margin-bottom:40px;">
+        <div class="tag tag-gold">Non-Negotiable Rules</div>
+        <h2>The <span class="text-gold">SKYE Enforcement Standard</span></h2>
+        <p class="text-muted" style="max-width:600px;margin:12px auto 0;">
+          These rules apply to every system handled by Skyes Over London LC.
+          The Companion Pack is built to enforce them — not suggest them.
+        </p>
+      </div>
+
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <table class="rule-table">
+          <thead>
+            <tr>
+              <th>Rule</th>
+              <th>What It Means</th>
+              <th>Enforced By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Level 2 Minimum</td>
+              <td>Systems handling client data must score Level 2+ average with no mandatory domain below 3 and no auto-fail gates triggered.</td>
+              <td>Scorecard + Evidence Index</td>
+            </tr>
+            <tr>
+              <td>Level 3 for High-Risk</td>
+              <td>High-risk systems must sustain Level 3: cadences current, minimal exceptions, full-period evidence, quarterly reviews complete.</td>
+              <td>Scorecard + Checklist</td>
+            </tr>
+            <tr>
+              <td>Evidence Rule</td>
+              <td>If proof cannot be produced quickly, the control is treated as non-operational — regardless of what the checklist says.</td>
+              <td>Evidence Index</td>
+            </tr>
+            <tr>
+              <td>No Permanent Waivers</td>
+              <td>Every gap requires a time-bound exception. No exceptions without an end date, remediation owner, and validation method.</td>
+              <td>Exception Form</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EVIDENCE INDEX DETAIL ────────────────────────────── -->
+  <section>
+    <div class="wrap">
+      <div class="feat-row flip">
+        <div>
+          <div class="tag tag-green">Evidence Index</div>
+          <h2>Your <span class="text-green">Receipts Binder</span> — Always Ready</h2>
+          <p class="text-muted" style="margin:14px 0 20px;">
+            The Evidence Index is where compliance becomes provable. Log every screenshot, log file,
+            configuration export, report, and policy document against the control it satisfies.
+            When an auditor asks, the answer is a CSV export — not a scramble.
+          </p>
+          <ul class="check-list">
+            <li><span class="ico">🗂️</span><div><strong>Control Mapping:</strong> Every artifact is linked to the exact SOC 2 control it evidences.</div></li>
+            <li><span class="ico">📅</span><div><strong>Date + Reviewer:</strong> Each entry records who gathered it and when, maintaining chain of custody.</div></li>
+            <li><span class="ico">📤</span><div><strong>CSV Export:</strong> Hand auditors a structured file — no manual reformatting required.</div></li>
+            <li><span class="ico">🔁</span><div><strong>Reusable Structure:</strong> Same format every audit cycle so reviewers know exactly where to look.</div></li>
+          </ul>
+        </div>
+        <div class="feat-graphic">
+          <div style="color:var(--green);font-weight:700;margin-bottom:14px;">Evidence Index — Sample Entries</div>
+          <div class="row">
+            <span>CC6.1 — Access Controls</span>
+            <span class="hl-green">✓ <em class="chip chip-g">Logged</em></span>
+          </div>
+          <div class="row">
+            <span>CC6.3 — MFA Enforcement</span>
+            <span class="hl-green">✓ <em class="chip chip-g">Logged</em></span>
+          </div>
+          <div class="row">
+            <span>CC7.2 — Security Monitoring</span>
+            <span class="hl-blue">~ <em class="chip chip-b">Pending</em></span>
+          </div>
+          <div class="row">
+            <span>A1.1 — Uptime SLA Evidence</span>
+            <span class="hl-green">✓ <em class="chip chip-g">Logged</em></span>
+          </div>
+          <div class="row">
+            <span>P3.1 — Privacy Notice</span>
+            <span class="hl-red">✗ <em class="chip chip-r">Missing</em></span>
+          </div>
+          <div class="row" style="margin-top:8px;">
+            <span style="color:var(--muted);">Total artifacts</span>
+            <span class="hl-gold">24 logged · 2 pending · 1 missing</span>
+          </div>
+          <div class="row">
+            <span style="color:var(--muted);">Export</span>
+            <span class="hl-blue">→ evidence_index_q1_2026.csv</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHO IT'S FOR ─────────────────────────────────────── -->
+  <section class="bg2">
+    <div class="wrap">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="tag tag-violet">Built For</div>
+        <h2>Who Uses the <span class="text-violet">Companion Pack</span></h2>
+      </div>
+      <div class="g3">
+        <div class="card">
+          <span class="card-icon">🏢</span>
+          <h3>Security &amp; Compliance Teams</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Run the full enforcement cycle — checklist to scorecard — on a defined cadence.
+            The pack gives you a standard format so nothing changes from cycle to cycle.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">👨‍💻</span>
+          <h3>Engineering &amp; DevOps</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Know your production gate status before pushing. The Scorecard answers "are we Level 2+?"
+            without waiting for a compliance team review.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🤝</span>
+          <h3>Prospective Partners &amp; Auditors</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Request a posture package from any SOL team or partner. The Companion Pack produces a
+            standardized, printable output that speaks for itself.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA FINAL ────────────────────────────────────────── -->
+  <section id="cta-final">
+    <div class="wrap">
+      <div class="tag tag-blue" style="margin:0 auto 14px;">Let's Go</div>
+      <h2>Enforce Your <span class="text-blue">SOC 2 Posture</span><br>Right Now — No Setup. No Login.</h2>
+      <p>
+        The SS-SOC2-001 Companion Pack opens in your browser in seconds.
+        All four documents are ready to use. Your data never leaves your device.
+      </p>
+      <div class="cta-row">
+        <a href="https://ss-soc2-001companionpack.netlify.app/" target="_blank" rel="noopener" class="btn btn-gold btn-lg">
+          🔐 Open the Companion Pack
+        </a>
+        <a href="/Platforms-Apps-Infrastructure/" class="btn btn-outline btn-lg">
+          ⬡ More SOL Platforms
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p>
+      <strong>SS-SOC2-001 Companion Pack</strong> · SKYE Standard ·
+      <a href="/index.html">Skyes Over London LC</a> &nbsp;·&nbsp;
+      <a href="https://ss-soc2-001companionpack.netlify.app/" target="_blank" rel="noopener">Open App ↗</a>
+      &nbsp;·&nbsp;
+      <a href="/Platforms-Apps-Infrastructure/">⬡ All Platforms</a>
+    </p>
+    <p style="margin-top:8px;">© 2026 Skyes Over London LC — Security &amp; Trust Office. Internal control standard. Distribution restricted to authorized teams and partners.</p>
+  </footer>
+
+  <!-- ─── SOL PLATFORM NAV ─────────────────────────────────── -->
+  <div id="sol-platnav" style="
+    position:fixed;bottom:18px;right:18px;z-index:99999;
+    display:flex;flex-direction:column;gap:6px;align-items:flex-end;
+  ">
+    <a href="/index.html" style="
+      display:inline-flex;align-items:center;gap:6px;
+      padding:7px 14px;border-radius:99px;
+      background:rgba(6,3,15,0.90);backdrop-filter:blur(10px);
+      border:1px solid rgba(245,200,66,0.4);
+      color:#f5c842;font-size:.75rem;font-weight:700;
+      text-decoration:none;white-space:nowrap;
+    ">← SOL Home</a>
+    <a href="/Platforms-Apps-Infrastructure/" style="
+      display:inline-flex;align-items:center;gap:6px;
+      padding:7px 14px;border-radius:99px;
+      background:rgba(6,3,15,0.90);backdrop-filter:blur(10px);
+      border:1px solid rgba(59,214,255,0.4);
+      color:#3bd6ff;font-size:.75rem;font-weight:700;
+      text-decoration:none;white-space:nowrap;
+    ">⬡ All Platforms</a>
+  </div>
+
+</body>
+</html>

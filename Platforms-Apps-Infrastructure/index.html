@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Platforms &amp; Apps — Skyes Over London LC</title>
+  <meta name="description" content="All platforms, tools, and apps built by Skyes Over London LC. AI infrastructure, branded utilities, and client-facing products." />
+  <meta name="robots" content="index, follow" />
+  <style>
+    :root{
+      --bg0:#05040a; --fg:#f2f0ff; --muted:#b7b2d9;
+      --gold:#ffd55a; --violet:#b86bff; --blue:#3bd6ff;
+      --border:rgba(255,255,255,0.12);
+      --sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Courier New",monospace;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{min-height:100%;font-family:var(--sans);color:var(--fg);background:
+      radial-gradient(900px 600px at 15% 12%, rgba(184,107,255,.18), transparent 60%),
+      radial-gradient(900px 600px at 85% 18%, rgba(59,214,255,.13), transparent 60%),
+      radial-gradient(1100px 800px at 50% 95%, rgba(255,213,90,.10), transparent 62%),
+      linear-gradient(180deg,#05040a 0%,#07060d 100%);
+      overflow-x:hidden;
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky;top:0;z-index:100;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:10px 24px;
+      background:rgba(5,4,10,0.88);
+      border-bottom:1px solid var(--border);
+      backdrop-filter:blur(12px);
+    }
+    .topbar-brand{display:flex;align-items:center;gap:12px;}
+    .topbar-logo{height:36px;width:auto;filter:drop-shadow(0 0 12px rgba(184,107,255,.4));}
+    .topbar-title{font-weight:700;font-size:14px;letter-spacing:.2px;}
+    .topbar-sub{font-size:11px;color:var(--muted);letter-spacing:.1px;}
+    .topbar-home{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 16px;border-radius:999px;
+      background:rgba(184,107,255,.15);border:1px solid rgba(184,107,255,.30);
+      color:var(--fg);text-decoration:none;font-size:12px;font-weight:700;
+      white-space:nowrap;transition:filter .2s;
+    }
+    .topbar-home:hover{filter:drop-shadow(0 0 14px rgba(184,107,255,.45));}
+
+    /* Hero */
+    .hero{max-width:900px;margin:0 auto;padding:64px 24px 40px;text-align:center;}
+    .hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;}
+    .hero-title{font-size:clamp(2rem,6vw,3.4rem);font-weight:800;line-height:1.1;letter-spacing:-.5px;margin-bottom:18px;}
+    .hero-title em{font-style:italic;color:var(--gold);}
+    .hero-desc{font-size:1.05rem;color:var(--muted);line-height:1.75;max-width:60ch;margin:0 auto 32px;}
+    .hero-count{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 18px;border-radius:999px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+      font-family:var(--mono);font-size:12px;color:var(--muted);
+    }
+    .hero-count b{color:var(--gold);}
+
+    /* Grid */
+    .grid-wrap{max-width:1280px;margin:0 auto;padding:0 24px 80px;}
+    .section-label{
+      font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+      color:rgba(255,255,255,.4);margin-bottom:20px;padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+      gap:16px;margin-bottom:40px;
+    }
+    .card{
+      position:relative;overflow:hidden;
+      border-radius:20px;
+      background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.11);
+      padding:22px 22px 18px;
+      text-decoration:none;color:inherit;
+      display:flex;flex-direction:column;gap:10px;
+      transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+      box-shadow:0 12px 44px rgba(0,0,0,.45);
+    }
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 22px 60px rgba(0,0,0,.55);
+      border-color:rgba(255,255,255,.22);
+    }
+    .card::before{
+      content:"";position:absolute;inset:-1px;border-radius:20px;
+      background:radial-gradient(600px 300px at 30% 0%, rgba(184,107,255,.14), transparent 65%);
+      pointer-events:none;
+    }
+    .card-tag{
+      display:inline-flex;align-items:center;gap:6px;align-self:flex-start;
+      font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+      padding:4px 10px;border-radius:999px;
+      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+      color:var(--muted);
+    }
+    .card-tag.ai{background:rgba(184,107,255,.12);border-color:rgba(184,107,255,.28);color:#d4aaff;}
+    .card-tag.tool{background:rgba(59,214,255,.10);border-color:rgba(59,214,255,.25);color:#88eaff;}
+    .card-tag.gateway{background:rgba(255,213,90,.10);border-color:rgba(255,213,90,.28);color:var(--gold);}
+    .card-tag.pwa{background:rgba(73,255,168,.10);border-color:rgba(73,255,168,.25);color:#49ffa8;}
+    .card-tag.game{background:rgba(255,96,96,.10);border-color:rgba(255,96,96,.25);color:#ff9090;}
+    .card-name{font-size:1.05rem;font-weight:700;line-height:1.3;}
+    .card-desc{font-size:13px;color:var(--muted);line-height:1.65;flex:1;}
+    .card-arrow{
+      align-self:flex-end;margin-top:4px;
+      font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.35);
+      letter-spacing:.1em;
+    }
+
+    /* Footer */
+    .footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:28px 24px;text-align:center;
+      font-size:12px;color:rgba(255,255,255,.4);
+      font-family:var(--mono);letter-spacing:.05em;
+    }
+    .footer a{color:rgba(255,255,255,.55);text-decoration:none;}
+    .footer a:hover{color:var(--gold);}
+
+    @media(max-width:600px){
+      .topbar{flex-direction:column;align-items:flex-start;gap:8px;}
+      .hero{padding:40px 16px 28px;}
+      .grid-wrap{padding:0 16px 60px;}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-brand">
+      <img class="topbar-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC" />
+      <div>
+        <div class="topbar-title">Platforms &amp; Apps</div>
+        <div class="topbar-sub">Skyes Over London LC · Infrastructure Hub</div>
+      </div>
+    </div>
+    <a href="/index.html" class="topbar-home">← SOL Home</a>
+  </div>
+
+  <div class="hero">
+    <p class="hero-eyebrow">Skyes Over London LC · Built Inventory</p>
+    <h1 class="hero-title">All Platforms &amp; <em>Apps</em></h1>
+    <p class="hero-desc">Every tool, gateway, and product built under the SOL umbrella. Click any card to open the app.</p>
+    <span class="hero-count"><b>14</b>&nbsp;apps &amp; tools</span>
+  </div>
+
+  <div class="grid-wrap">
+
+    <p class="section-label">AI Infrastructure &amp; Gateways</p>
+    <div class="cards">
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html">
+        <span class="card-tag gateway">Gateway</span>
+        <div class="card-name">kAIxU Delta Gate</div>
+        <div class="card-desc">Implementation directives hub — how to wire any app through the kAIxu gateway instead of calling AI providers directly. Embedded PDF + live tester.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html">
+        <span class="card-tag gateway">Gateway</span>
+        <div class="card-name">kAIxU Gateway 13</div>
+        <div class="card-desc">Full gateway deployment — token-based AI routing with Deno/Netlify backend, smoke tests, and admin console.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/GateProofx/index.html">
+        <span class="card-tag gateway">Gateway</span>
+        <div class="card-name">GateProofx</div>
+        <div class="card-desc">Gateway health and proof tool — validates token auth, endpoint availability, and live AI response integrity.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html">
+        <span class="card-tag ai">AI Chat</span>
+        <div class="card-name">kAIxUchat v6.7</div>
+        <div class="card-desc">Branded AI chat interface backed by Kaixu Gate Delta — token-based access, model selection, streaming, and server-side key management.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+    </div>
+
+    <p class="section-label">AI-Powered Tools &amp; Kits</p>
+    <div class="cards">
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html">
+        <span class="card-tag ai">AI Tool</span>
+        <div class="card-name">kAIxU PDF Pro</div>
+        <div class="card-desc">AI-powered PDF processing and document intelligence — extract, analyse, and query PDF content through the kAIxU gate.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/kAIxUBrandKit/index.html">
+        <span class="card-tag ai">AI Tool</span>
+        <div class="card-name">kAIxU Brand Kit</div>
+        <div class="card-desc">AI-assisted brand identity generation — logos, colour systems, copy, and brand voice — built on the SOL AI infrastructure stack.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/LocalSeoSnapshot/index.html">
+        <span class="card-tag tool">Tool</span>
+        <div class="card-name">Local SEO Snapshot</div>
+        <div class="card-desc">Instant local SEO audit and snapshot tool — capture rankings, citations, and competitive gaps for any local business in seconds.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+    </div>
+
+    <p class="section-label">Business &amp; Client Apps</p>
+    <div class="cards">
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/BusinessLaunchGo/index.html">
+        <span class="card-tag tool">Business</span>
+        <div class="card-name">BusinessLaunchGo</div>
+        <div class="card-desc">Rapid business launch checklist and intake system — streamline client onboarding from entity setup to first revenue action.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/DualLaneFunnel/public/index.html">
+        <span class="card-tag tool">Funnel</span>
+        <div class="card-name">Dual Lane Funnel</div>
+        <div class="card-desc">Two-lane conversion funnel for employers and job seekers — segmented intake, routing, and follow-up automation.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/SkyeProfitConsole/index.html">
+        <span class="card-tag tool" style="background:rgba(245,200,66,.13);border-color:rgba(245,200,66,.32);color:#f5c842;">Finance</span>
+        <div class="card-name">SkyeProfitConsole</div>
+        <div class="card-desc">Audit-ready revenue + profit console — track the full invoice → payment → deposit → books trail. Offline-first, export to JSON &amp; CSV, built-in audit readiness score.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+    </div>
+
+    <p class="section-label">Developer Utilities</p>
+    <div class="cards">
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html">
+        <span class="card-tag pwa">PWA</span>
+        <div class="card-name">BrandID Offline PWA</div>
+        <div class="card-desc">Offline-capable brand identity reference app — works without a connection, installable on any device as a progressive web app.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/QR-Code-Generator/index.html">
+        <span class="card-tag tool">Utility</span>
+        <div class="card-name">QR Code Generator</div>
+        <div class="card-desc">Fast, branded QR code generator — custom colours, logo overlays, and download-ready output. No third-party dependencies.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/JWTSecretGenerator.html">
+        <span class="card-tag tool">Dev Tool</span>
+        <div class="card-name">JWT Secret Generator</div>
+        <div class="card-desc">Cryptographically secure JWT secret generator — entropy analysis, format selection, and instant clipboard copy for dev and CI/CD workflows.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+    </div>
+
+    <p class="section-label">Experiments &amp; R&amp;D</p>
+    <div class="cards">
+
+      <a class="card" href="/Platforms-Apps-Infrastructure/RetroFighter.html">
+        <span class="card-tag game">Game</span>
+        <div class="card-name">RetroFighter</div>
+        <div class="card-desc">Browser-based retro fighting game — a pure-JS client-side build used to test animation pipelines and input handling for SOL interactive projects.</div>
+        <div class="card-arrow">Open →</div>
+      </a>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div style="margin-bottom:10px;">
+      <a href="/index.html">← SOL Home</a>
+      &nbsp;·&nbsp;
+      <a href="/platforms.html">Platforms Page</a>
+      &nbsp;·&nbsp;
+      <a href="/contact.html">Contact</a>
+    </div>
+    © 2026 Skyes Over London LC · All rights reserved
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#06030f" />
+  <meta name="description" content="SKYE Identity Standard (SIS) — Enterprise-grade SSO + SCIM production requirements, compliance checklists, and go-live preflight enforcement. Command Center by Skyes Over London LC." />
+  <title>SKYE Identity Standard (SIS) | Global Command Center — Skyes Over London LC</title>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #06030f;
+      --ink2:     #0b0620;
+      --ink3:     #100828;
+      --fg:       #edeaf8;
+      --muted:    #8a80b0;
+      --gold:     #f5c842;
+      --gold-lt:  #ffe082;
+      --violet:   #9b30ff;
+      --vlt:      #c47aff;
+      --blue:     #3bd6ff;
+      --green:    #49ffa8;
+      --red:      #ff6b6b;
+      --glass:    rgba(255,255,255,0.055);
+      --gb:       rgba(255,255,255,0.10);
+      --r:        14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--ink);
+      color: var(--fg);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* Aurora */
+    .aurora {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 75% 50% at 10% 8%,  rgba(155,48,255,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 65% 45% at 88% 20%,  rgba(59,214,255,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 60% at 50% 95%,  rgba(245,200,66,0.07) 0%, transparent 70%);
+    }
+
+    /* Topbar */
+    .topbar {
+      position: sticky; top: 0; z-index: 900;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 12px 28px;
+      background: rgba(6,3,15,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gb);
+    }
+    .tb-brand { display: flex; flex-direction: column; gap: 1px; }
+    .tb-kicker { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--vlt); font-weight: 700; }
+    .tb-name   { font-size: .95rem; font-weight: 800; }
+    .tb-sub    { font-size: .68rem; color: var(--muted); }
+    .tb-cta    { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 22px; border-radius: 8px; border: none;
+      font-size: .875rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; transition: all .2s;
+    }
+    .btn-gold    { background: var(--gold); color: #06030f; }
+    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(245,200,66,.35); }
+    .btn-violet  { background: rgba(155,48,255,.15); color: var(--vlt); border: 1.5px solid rgba(155,48,255,.35); }
+    .btn-violet:hover { background: rgba(155,48,255,.28); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--fg); border: 1.5px solid var(--gb); }
+    .btn-outline:hover { background: var(--glass); transform: translateY(-1px); }
+    .btn-blue    { background: rgba(59,214,255,.12); color: var(--blue); border: 1.5px solid rgba(59,214,255,.28); }
+    .btn-blue:hover { background: rgba(59,214,255,.24); transform: translateY(-1px); }
+    .btn-lg { padding: 14px 30px; font-size: 1rem; border-radius: 10px; }
+
+    /* Layout */
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    section { padding: 80px 0; }
+    section.bg2 { background: var(--ink2); position: relative; }
+    section.bg3 { background: var(--ink3); position: relative; }
+
+    /* Tags */
+    .tag {
+      display: inline-block; padding: 4px 13px; border-radius: 99px;
+      font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .tag-violet { background: rgba(155,48,255,.15); color: var(--vlt);   border: 1px solid rgba(155,48,255,.3); }
+    .tag-blue   { background: rgba(59,214,255,.12);  color: var(--blue);  border: 1px solid rgba(59,214,255,.28); }
+    .tag-gold   { background: rgba(245,200,66,.12);  color: var(--gold);  border: 1px solid rgba(245,200,66,.3); }
+    .tag-green  { background: rgba(73,255,168,.10);  color: var(--green); border: 1px solid rgba(73,255,168,.25); }
+
+    h1 { font-size: clamp(2rem, 5.5vw, 3.6rem); font-weight: 900; line-height: 1.1; letter-spacing: -.02em; }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 800; line-height: 1.2; }
+    h3 { font-size: 1.1rem; font-weight: 700; }
+
+    .text-gold   { color: var(--gold); }
+    .text-violet { color: var(--vlt); }
+    .text-blue   { color: var(--blue); }
+    .text-green  { color: var(--green); }
+    .text-muted  { color: var(--muted); }
+    .text-center { text-align: center; }
+
+    /* Glass card */
+    .card {
+      background: var(--glass); border: 1px solid var(--gb);
+      border-radius: var(--r); padding: 28px;
+      transition: border-color .22s, transform .2s;
+    }
+    .card:hover { border-color: rgba(155,48,255,.38); transform: translateY(-3px); }
+    .card-icon { font-size: 2rem; display: block; margin-bottom: 14px; }
+
+    /* Grids */
+    .g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+    .g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
+
+    /* Hero */
+    #hero { padding: 96px 0 80px; text-align: center; }
+    .lead { font-size: 1.2rem; color: var(--muted); max-width: 700px; margin: 20px auto 38px; line-height: 1.75; }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .badge-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 42px; }
+    .badge {
+      display: flex; align-items: center; gap: 7px;
+      padding: 6px 14px; border-radius: 99px;
+      font-size: .76rem; font-weight: 600;
+      background: var(--glass); border: 1px solid var(--gb); color: var(--fg);
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .dot-violet { background: var(--vlt); }
+    .dot-blue   { background: var(--blue); }
+    .dot-gold   { background: var(--gold); }
+    .dot-green  { background: var(--green); }
+
+    /* KPI strip */
+    .kpi-strip {
+      display: flex; flex-wrap: wrap;
+      background: var(--glass); border: 1px solid var(--gb);
+      border-radius: var(--r); overflow: hidden; margin-top: 56px;
+    }
+    .kpi-item { flex: 1 1 140px; padding: 22px 18px; text-align: center; border-right: 1px solid var(--gb); }
+    .kpi-item:last-child { border-right: none; }
+    .kpi-val { font-size: 1.5rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 5px; }
+    .kpi-lbl { font-size: .72rem; color: var(--muted); letter-spacing: .05em; }
+
+    /* Lane cards */
+    .lane-card {
+      background: var(--glass); border: 1px solid var(--gb);
+      border-radius: var(--r); padding: 32px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: border-color .22s, transform .2s;
+    }
+    .lane-card:hover { transform: translateY(-4px); }
+    .lane-card.violet { border-color: rgba(155,48,255,.3); }
+    .lane-card.violet:hover { border-color: rgba(155,48,255,.6); }
+    .lane-card.blue   { border-color: rgba(59,214,255,.25); }
+    .lane-card.blue:hover   { border-color: rgba(59,214,255,.6); }
+
+    .lane-id {
+      font-family: 'Fira Code','Courier New',monospace;
+      font-size: .7rem; letter-spacing: .14em; font-weight: 700;
+    }
+    .lane-title { font-size: 1.2rem; font-weight: 800; }
+    .lane-desc  { font-size: .9rem; color: var(--muted); flex: 1; line-height: 1.65; }
+    .lane-items { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .lane-items li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .875rem; color: var(--muted);
+    }
+    .lane-items li::before { content: "→"; color: var(--vlt); flex-shrink: 0; font-weight: 700; }
+    .lane-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+
+    /* Feature row */
+    .feat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; }
+    .feat-row.flip { direction: rtl; }
+    .feat-row.flip > * { direction: ltr; }
+
+    .feat-graphic {
+      background: var(--glass); border: 1px solid var(--gb);
+      border-radius: var(--r); padding: 26px;
+      font-family: 'Fira Code','Courier New',monospace;
+      font-size: .8rem; color: var(--muted); line-height: 1.9;
+    }
+    .feat-graphic .row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.06); align-items: center; }
+    .feat-graphic .row:last-child { border-bottom: none; }
+    .fg-gold  { color: var(--gold); font-weight: 700; }
+    .fg-blue  { color: var(--blue); font-weight: 600; }
+    .fg-green { color: var(--green); font-weight: 600; }
+    .fg-red   { color: var(--red);  font-weight: 600; }
+    .chip {
+      font-size: .62rem; padding: 2px 9px; border-radius: 99px;
+      font-style: normal; border: 1px solid; font-weight: 700;
+    }
+    .chip-g  { background: rgba(73,255,168,.12); color: var(--green); border-color: rgba(73,255,168,.25); }
+    .chip-r  { background: rgba(255,107,107,.10); color: var(--red);  border-color: rgba(255,107,107,.25); }
+    .chip-y  { background: rgba(245,200,66,.12); color: var(--gold);  border-color: rgba(245,200,66,.28); }
+    .chip-v  { background: rgba(155,48,255,.13); color: var(--vlt);   border-color: rgba(155,48,255,.28); }
+    .chip-b  { background: rgba(59,214,255,.10); color: var(--blue);  border-color: rgba(59,214,255,.25); }
+
+    /* Check list */
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .check-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 16px; background: var(--glass); border: 1px solid var(--gb);
+      border-radius: 10px; font-size: .9rem;
+    }
+    .check-list li .ico { flex-shrink: 0; margin-top: 1px; }
+    .check-list li strong { color: var(--vlt); }
+
+    /* Flow */
+    .flow { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 0; margin-top: 40px; }
+    .flow-step { display: flex; flex-direction: column; align-items: center; padding: 20px 22px; text-align: center; min-width: 130px; }
+    .flow-ico   { font-size: 1.8rem; margin-bottom: 10px; }
+    .flow-label { font-size: .82rem; font-weight: 800; color: var(--vlt); }
+    .flow-sub   { font-size: .7rem; color: var(--muted); margin-top: 4px; max-width: 120px; }
+    .flow-arr   { font-size: 1.3rem; color: var(--blue); padding: 0 4px; align-self: center; }
+
+    /* Cert card */
+    .cert-box {
+      background: linear-gradient(135deg, rgba(155,48,255,.12), rgba(59,214,255,.08));
+      border: 1.5px solid rgba(155,48,255,.4);
+      border-radius: var(--r); padding: 36px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cert-box::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(155,48,255,.15), transparent 70%);
+      pointer-events: none;
+    }
+    .cert-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 10px 22px; border-radius: 99px;
+      background: rgba(73,255,168,.12); border: 1.5px solid rgba(73,255,168,.35);
+      font-size: .85rem; font-weight: 800; color: var(--green); margin-bottom: 20px;
+    }
+
+    /* Nav cards */
+    .nav-card {
+      background: var(--glass); border: 1px solid var(--gb);
+      border-radius: var(--r); padding: 22px;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; gap: 8px;
+      transition: border-color .22s, transform .2s;
+    }
+    .nav-card:hover { border-color: rgba(155,48,255,.45); transform: translateY(-3px); }
+    .nav-card .nc-id   { font-family: 'Fira Code','Courier New',monospace; font-size: .68rem; letter-spacing: .12em; color: var(--blue); font-weight: 700; }
+    .nav-card .nc-name { font-size: 1rem; font-weight: 800; }
+    .nav-card .nc-desc { font-size: .83rem; color: var(--muted); line-height: 1.55; }
+    .nav-card .nc-arr  { font-size: .8rem; color: rgba(255,255,255,.3); align-self: flex-end; margin-top: 4px; }
+
+    /* CTA final */
+    #cta-final { text-align: center; padding: 100px 0; }
+    #cta-final p { font-size: 1.1rem; color: var(--muted); max-width: 580px; margin: 16px auto 38px; }
+
+    /* Footer */
+    .site-footer {
+      background: var(--ink3); border-top: 1px solid var(--gb);
+      padding: 32px 24px; text-align: center;
+      font-size: .78rem; color: var(--muted); position: relative; z-index: 1;
+    }
+    .site-footer a { color: var(--gold); text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .feat-row, .feat-row.flip { grid-template-columns: 1fr; direction: ltr; }
+      .topbar { flex-wrap: wrap; gap: 10px; }
+      .tb-cta { justify-content: flex-start; }
+      .kpi-strip { flex-direction: column; }
+      .kpi-item { border-right: none; border-bottom: 1px solid var(--gb); }
+      .kpi-item:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="aurora" aria-hidden="true"></div>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="tb-brand" style="display:flex;align-items:center;gap:12px;">
+      <img src="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png" alt="SOL" style="height:36px;width:36px;object-fit:contain;border-radius:6px;flex-shrink:0;">
+      <div>
+        <div class="tb-kicker">SKYE Standard · SIS</div>
+        <div class="tb-name">SKYE Identity Standard</div>
+        <div class="tb-sub">Global Command Center · Skyes Over London LC</div>
+      </div>
+    </div>
+    <div class="tb-cta">
+      <a href="/Platforms-Apps-Infrastructure/" class="btn btn-outline" style="padding:8px 14px;font-size:.78rem;">⬡ All Platforms</a>
+      <a href="/index.html" class="btn btn-outline" style="padding:8px 14px;font-size:.78rem;">← SOL Home</a>
+      <a href="https://skyeidentitystandardcommandcenter.netlify.app/" target="_blank" rel="noopener" class="btn btn-gold">Open Command Center →</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="wrap">
+      <div class="tag tag-violet">SKYE Standard · SIS-1.0 · Production Gate</div>
+      <h1>
+        Identity You Can<br>
+        <span class="text-violet">Enforce</span>
+        <span class="text-blue"> Worldwide.</span>
+      </h1>
+      <p class="lead">
+        The SKYE Identity Standard (SIS) is the enterprise-grade production gate
+        for SSO + SCIM across every SKYE deployment. It defines what "real SSO" and "real SCIM"
+        mean in the field, how we verify it, and how we ship it consistently across every
+        tenant, every market, every product line.
+      </p>
+      <div class="cta-row">
+        <a href="https://skyeidentitystandardcommandcenter.netlify.app/" target="_blank" rel="noopener" class="btn btn-gold btn-lg">
+          🔐 Open the Command Center
+        </a>
+        <a href="#lanes" class="btn btn-violet btn-lg">
+          See the Enforcement Lanes ↓
+        </a>
+      </div>
+
+      <div class="badge-row">
+        <div class="badge"><span class="dot dot-violet"></span>SSO Enforcement</div>
+        <div class="badge"><span class="dot dot-blue"></span>SCIM Lifecycle</div>
+        <div class="badge"><span class="dot dot-gold"></span>Production Gate</div>
+        <div class="badge"><span class="dot dot-green"></span>AE Compliance Checklist</div>
+        <div class="badge"><span class="dot dot-violet"></span>Engineer Preflight Script</div>
+        <div class="badge"><span class="dot dot-blue"></span>Evidence PDF Downloads</div>
+      </div>
+
+      <div class="kpi-strip">
+        <div class="kpi-item">
+          <div class="kpi-val">2</div>
+          <div class="kpi-lbl">Enforcement Lanes</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">SIS-1.0</div>
+          <div class="kpi-lbl">Standard Version</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">100%</div>
+          <div class="kpi-lbl">Tenant Gate Requirement</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">OIDC + SAML</div>
+          <div class="kpi-lbl">SSO Protocols</div>
+        </div>
+        <div class="kpi-item">
+          <div class="kpi-val">PDF + JSON</div>
+          <div class="kpi-lbl">Evidence Pack Formats</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT SIS GOVERNS -->
+  <section class="bg2">
+    <div class="wrap">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="tag tag-violet">The Standard</div>
+        <h2>What <span class="text-violet">SIS Governs</span></h2>
+        <p class="text-muted" style="max-width:660px;margin:14px auto 0;font-size:1.05rem;">
+          Enterprise identity is two distinct problems. SIS solves both — with enforcement,
+          not suggestions. Every SKYE deployment that handles enterprise tenants must pass both lanes.
+        </p>
+      </div>
+
+      <div class="g2">
+        <div class="lane-card violet">
+          <div class="lane-id" style="color:var(--vlt);">SIS LANE 1</div>
+          <div class="lane-title">🔑 SSO — Authentication</div>
+          <p class="lane-desc">
+            SKYE never becomes the customer's password vault when SSO is enabled.
+            Authentication is owned by the customer IdP and validated correctly via OIDC or SAML.
+            The customer controls authentication. We enforce that this is always true.
+          </p>
+          <ul class="lane-items">
+            <li>Tenant routing (domain / slug / discovery)</li>
+            <li>Correct token &amp; assertion validation (OIDC and SAML)</li>
+            <li>Session security + revocation on IdP signal</li>
+            <li>Policy enforcement — SSO required, password login disabled, MFA via IdP</li>
+          </ul>
+        </div>
+        <div class="lane-card blue">
+          <div class="lane-id" style="color:var(--blue);">SIS LANE 2</div>
+          <div class="lane-title">🔄 SCIM — Lifecycle &amp; Access</div>
+          <p class="lane-desc">
+            Users and groups are provisioned, updated, and deprovisioned automatically.
+            Access ends quickly and deterministically when the IdP says it ends.
+            No manual off-boarding. No lingering access. No exceptions.
+          </p>
+          <ul class="lane-items">
+            <li>Provision, update, disable, and optional delete via SCIM v2</li>
+            <li>Group sync mapped directly to SKYE roles</li>
+            <li>Idempotency + retry logic for unreliable pushes</li>
+            <li>Full auditability of every lifecycle change</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTION GATE -->
+  <section>
+    <div class="wrap">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="tag tag-gold">The Gate</div>
+        <h2>One Sentence That <span class="text-gold">Closes Every Deal</span></h2>
+      </div>
+
+      <div class="cert-box" style="max-width:780px;margin:0 auto 56px;">
+        <div class="cert-badge">✅ SKYE Production Certified</div>
+        <p style="font-size:1.2rem;font-weight:700;line-height:1.5;color:var(--fg);max-width:580px;margin:0 auto 16px;">
+          "SKYE supports enterprise identity the right way: SSO controls authentication,
+          SCIM controls lifecycle and access, and every change is audited."
+        </p>
+        <p class="text-muted" style="font-size:.9rem;max-width:540px;margin:0 auto;">
+          A tenant earns the SKYE Production Certified label only when both the
+          AE Compliance Checklist is completed and attached, and the Engineer Preflight
+          Script passes with manual SSO steps verified.
+        </p>
+      </div>
+
+      <div class="g3">
+        <div class="card" style="border-color:rgba(73,255,168,.25);">
+          <span class="card-icon">📋</span>
+          <h3 class="text-green">AE Compliance Checklist</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Pre-deployment verification for Account Executives — confirms the deal record
+            has all identity requirements documented and signed off before engineering begins.
+            Must be completed and attached to move to production.
+          </p>
+        </div>
+        <div class="card" style="border-color:rgba(59,214,255,.25);">
+          <span class="card-icon">⚙️</span>
+          <h3 class="text-blue">Engineer Preflight Script</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Technical validation checklist for engineers — step-by-step verification of
+            SSO token validation, SCIM endpoint behavior, session revocation, and group
+            sync. Pass output must be attached before go-live sign-off.
+          </p>
+        </div>
+        <div class="card" style="border-color:rgba(245,200,66,.25);">
+          <span class="card-icon">📥</span>
+          <h3 class="text-gold">Evidence Pack</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Downloadable PDF artifacts for every SIS document — Standard Binder,
+            AE Checklist, and Engineer Preflight — ready to attach to deal records,
+            audit packages, and partner submissions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENFORCEMENT FLOW -->
+  <section class="bg2">
+    <div class="wrap">
+      <div class="text-center">
+        <div class="tag tag-blue">Process</div>
+        <h2>The <span class="text-blue">Go-Live Enforcement Flow</span></h2>
+        <p class="text-muted" style="max-width:580px;margin:12px auto 0;">
+          Every enterprise tenant follows this path before receiving a SKYE Production Certified status.
+          No shortcuts. No overrides.
+        </p>
+      </div>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-ico">📖</div>
+          <div class="flow-label">Standard Binder</div>
+          <div class="flow-sub">Read and acknowledge the full SIS — all teams</div>
+        </div>
+        <div class="flow-arr">→</div>
+        <div class="flow-step">
+          <div class="flow-ico">📋</div>
+          <div class="flow-label">AE Checklist</div>
+          <div class="flow-sub">AE completes and attaches to deal record</div>
+        </div>
+        <div class="flow-arr">→</div>
+        <div class="flow-step">
+          <div class="flow-ico">⚙️</div>
+          <div class="flow-label">Engineer Preflight</div>
+          <div class="flow-sub">Engineer runs and attaches pass output</div>
+        </div>
+        <div class="flow-arr">→</div>
+        <div class="flow-step">
+          <div class="flow-ico">🔒</div>
+          <div class="flow-label">Manual SSO Verify</div>
+          <div class="flow-sub">Engineer verifies SSO steps in a live tenant</div>
+        </div>
+        <div class="flow-arr">→</div>
+        <div class="flow-step">
+          <div class="flow-ico">✅</div>
+          <div class="flow-label">Production Certified</div>
+          <div class="flow-sub">Both lanes green — SKYE cert label applied</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STANDARD BINDER / MODULES DETAIL -->
+  <section id="lanes">
+    <div class="wrap">
+      <div class="feat-row">
+        <div>
+          <div class="tag tag-violet">SIS Standard Binder</div>
+          <h2>The <span class="text-violet">Full Specification</span> — Not a Summary</h2>
+          <p class="text-muted" style="margin:14px 0 20px;">
+            The SIS Binder is the complete production specification — not guidelines, not best practices.
+            It defines the exact requirements for SSO and SCIM across SIS-Core and SIS-Enterprise tiers
+            that every SKYE deployment must satisfy before client data is involved.
+          </p>
+          <ul class="check-list">
+            <li><span class="ico">🔑</span><div><strong>SSO Protocol Coverage:</strong> OIDC and SAML 2.0 — tenant routing, token validation, session revocation, policy enforcement.</div></li>
+            <li><span class="ico">🔄</span><div><strong>SCIM v2 Lifecycle:</strong> Provisioning, deprovisioning, group sync, idempotency, and full audit trail requirements.</div></li>
+            <li><span class="ico">🏢</span><div><strong>SIS-Core vs SIS-Enterprise:</strong> Tiered requirements so every deployment is measured against the right standard for its scope.</div></li>
+            <li><span class="ico">🌍</span><div><strong>Global Enforcement:</strong> Consistent across every tenant, every market, every product line — no regional carve-outs.</div></li>
+          </ul>
+        </div>
+        <div class="feat-graphic">
+          <div style="color:var(--vlt);font-weight:700;margin-bottom:14px;">SIS Standard Binder — Modules</div>
+          <div class="row">
+            <span>SIS-Core · SSO Required</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Enforced</em></span>
+          </div>
+          <div class="row">
+            <span>OIDC Token Validation</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Pass</em></span>
+          </div>
+          <div class="row">
+            <span>SAML Assertion Validation</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Pass</em></span>
+          </div>
+          <div class="row">
+            <span>Session Revocation on IdP Signal</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Pass</em></span>
+          </div>
+          <div class="row">
+            <span>SCIM v2 Provision &amp; Deprovision</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Pass</em></span>
+          </div>
+          <div class="row">
+            <span>Group Sync → Role Mapping</span>
+            <span class="fg-blue">~ <em class="chip chip-b">Pending</em></span>
+          </div>
+          <div class="row">
+            <span>Audit Log Completeness</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Pass</em></span>
+          </div>
+          <div style="margin-top:12px;" class="row">
+            <span style="color:var(--muted);">Production Gate</span>
+            <span class="fg-gold"><strong>7/8 green</strong> <em class="chip chip-v">Review pending</em></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AE CHECKLIST DETAIL -->
+  <section class="bg3">
+    <div class="wrap">
+      <div class="feat-row flip">
+        <div>
+          <div class="tag tag-green">AE Compliance Checklist</div>
+          <h2>AEs: Know What <span class="text-green">You're Selling</span></h2>
+          <p class="text-muted" style="margin:14px 0 20px;">
+            The AE Compliance Checklist exists because identity misrepresentation
+            is one of the most common causes of enterprise churn. If an AE promises SSO
+            without knowing what SKYE's SSO actually does, everyone loses.
+            The checklist closes that gap before the deal is signed.
+          </p>
+          <ul class="check-list">
+            <li><span class="ico">💼</span><div><strong>Pre-Sale Verification:</strong> Confirm the customer's IdP, SSO protocol, and SCIM requirements before committing to a go-live timeline.</div></li>
+            <li><span class="ico">📄</span><div><strong>Deal Record Attachment:</strong> Completed checklist is attached to the deal record — audit trail starts here, not at engineering.</div></li>
+            <li><span class="ico">🤝</span><div><strong>Handoff Clarity:</strong> Engineering receives a complete spec. No re-scoping after kickoff because the AE guessed.</div></li>
+            <li><span class="ico">📥</span><div><strong>PDF Available:</strong> Downloadable PDF version for offline review, client signoff, or compliance packages.</div></li>
+          </ul>
+        </div>
+        <div class="feat-graphic">
+          <div style="color:var(--green);font-weight:700;margin-bottom:14px;">AE Checklist — Sample Items</div>
+          <div class="row">
+            <span>Customer IdP confirmed</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Okta</em></span>
+          </div>
+          <div class="row">
+            <span>SSO protocol agreed</span>
+            <span class="fg-green">✓ <em class="chip chip-g">SAML 2.0</em></span>
+          </div>
+          <div class="row">
+            <span>SCIM required?</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Yes</em></span>
+          </div>
+          <div class="row">
+            <span>Group sync required?</span>
+            <span class="fg-green">✓ <em class="chip chip-g">3 groups</em></span>
+          </div>
+          <div class="row">
+            <span>MFA via IdP confirmed</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Yes</em></span>
+          </div>
+          <div class="row">
+            <span>Password login disabled</span>
+            <span class="fg-green">✓ <em class="chip chip-g">Confirmed</em></span>
+          </div>
+          <div class="row">
+            <span>Checklist attached to deal</span>
+            <span class="fg-green">✓ <em class="chip chip-g">AE sign-off</em></span>
+          </div>
+          <div style="margin-top:12px;" class="row">
+            <span style="color:var(--muted);">Status</span>
+            <span class="fg-gold"><strong>Ready for Engineering Handoff</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVIGATE THE COMMAND CENTER -->
+  <section>
+    <div class="wrap">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="tag tag-blue">Inside the Command Center</div>
+        <h2>Five Sections. <span class="text-blue">One Source of Truth.</span></h2>
+        <p class="text-muted" style="max-width:600px;margin:12px auto 0;">Everything enforcement-related for enterprise identity lives here — no Confluence required.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+
+        <a href="https://skyeidentitystandardcommandcenter.netlify.app/" target="_blank" rel="noopener" class="nav-card">
+          <div class="nc-id">HOME</div>
+          <div class="nc-name">🏠 Command Center Home</div>
+          <div class="nc-desc">Overview of SIS, governance principles, and the SKYE Production Certified gate.</div>
+          <div class="nc-arr">Open →</div>
+        </a>
+
+        <a href="https://skyeidentitystandardcommandcenter.netlify.app/sis" target="_blank" rel="noopener" class="nav-card">
+          <div class="nc-id">SIS BINDER</div>
+          <div class="nc-name">📖 Standard Binder</div>
+          <div class="nc-desc">The full SIS specification — SSO and SCIM requirements for Core and Enterprise tiers.</div>
+          <div class="nc-arr">Open →</div>
+        </a>
+
+        <a href="https://skyeidentitystandardcommandcenter.netlify.app/ae-checklist" target="_blank" rel="noopener" class="nav-card">
+          <div class="nc-id">AE LANE</div>
+          <div class="nc-name">📋 AE Compliance Checklist</div>
+          <div class="nc-desc">Pre-sale identity verification — complete before deal sign-off and attach to the record.</div>
+          <div class="nc-arr">Open →</div>
+        </a>
+
+        <a href="https://skyeidentitystandardcommandcenter.netlify.app/engineer-preflight" target="_blank" rel="noopener" class="nav-card">
+          <div class="nc-id">ENG LANE</div>
+          <div class="nc-name">⚙️ Engineer Preflight</div>
+          <div class="nc-desc">Technical go-live script — SSO validation, SCIM testing, session revocation, and group sync.</div>
+          <div class="nc-arr">Open →</div>
+        </a>
+
+        <a href="https://skyeidentitystandardcommandcenter.netlify.app/downloads" target="_blank" rel="noopener" class="nav-card">
+          <div class="nc-id">DOWNLOADS</div>
+          <div class="nc-name">📥 Evidence Pack PDFs</div>
+          <div class="nc-desc">Branded PDF downloads for every SIS document — Standard Binder, AE Checklist, Preflight Script.</div>
+          <div class="nc-arr">Open →</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="bg2">
+    <div class="wrap">
+      <div class="text-center" style="margin-bottom:48px;">
+        <div class="tag tag-violet">Built For</div>
+        <h2>Who Uses the <span class="text-violet">SIS Command Center</span></h2>
+      </div>
+      <div class="g3">
+        <div class="card">
+          <span class="card-icon">💼</span>
+          <h3>Account Executives</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Use the AE Checklist before every enterprise deal closes. Know exactly what
+            you're promising on SSO and SCIM — so engineering isn't surprised after kickoff.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">👨‍💻</span>
+          <h3>Implementation Engineers</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            Run the Preflight Script on every enterprise tenant before go-live. Attach the
+            pass output to the deployment record. If it doesn't pass, it doesn't ship.
+          </p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🔍</span>
+          <h3>Security &amp; Compliance Reviewers</h3>
+          <p class="text-muted" style="margin:10px 0 0;font-size:.9rem;">
+            The SIS Binder and Evidence Pack give auditors and compliance reviewers
+            a standardized, printable record of every identity enforcement decision made
+            during tenant onboarding.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta-final">
+    <div class="wrap">
+      <div class="tag tag-violet" style="margin: 0 auto 14px;">Deploy With Confidence</div>
+      <h2>Open the <span class="text-violet">SKYE Identity Standard</span><br>Command Center — No Login.</h2>
+      <p>
+        Production-grade enterprise identity enforcement, in your browser, right now.
+        Standard Binder, AE Checklist, Engineer Preflight, and PDF Downloads ready to go.
+      </p>
+      <div class="cta-row">
+        <a href="https://skyeidentitystandardcommandcenter.netlify.app/" target="_blank" rel="noopener" class="btn btn-gold btn-lg">
+          🔐 Open the Command Center
+        </a>
+        <a href="/Platforms-Apps-Infrastructure/" class="btn btn-outline btn-lg">
+          ⬡ More SOL Platforms
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>
+      <strong>SKYE Identity Standard (SIS)</strong> · Global Command Center ·
+      <a href="/index.html">Skyes Over London LC</a> &nbsp;·&nbsp;
+      <a href="https://skyeidentitystandardcommandcenter.netlify.app/" target="_blank" rel="noopener">Open App ↗</a>
+      &nbsp;·&nbsp;
+      <a href="/Platforms-Apps-Infrastructure/">⬡ All Platforms</a>
+    </p>
+    <p style="margin-top:8px;">© 2026 Skyes Over London LC — Solenterprises AI Division. SIS is an enforcement system. Deployments that do not pass SIS are not labeled "SKYE Production Certified."</p>
+  </footer>
+
+  <!-- SOL PLATFORM NAV -->
+  <div id="sol-platnav" style="
+    position:fixed;bottom:18px;right:18px;z-index:99999;
+    display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+    <a href="/index.html" style="
+      display:inline-flex;align-items:center;gap:6px;
+      padding:7px 14px;border-radius:99px;
+      background:rgba(6,3,15,0.90);backdrop-filter:blur(10px);
+      border:1px solid rgba(245,200,66,0.4);
+      color:#f5c842;font-size:.75rem;font-weight:700;
+      text-decoration:none;white-space:nowrap;">← SOL Home</a>
+    <a href="/Platforms-Apps-Infrastructure/" style="
+      display:inline-flex;align-items:center;gap:6px;
+      padding:7px 14px;border-radius:99px;
+      background:rgba(6,3,15,0.90);backdrop-filter:blur(10px);
+      border:1px solid rgba(155,48,255,0.4);
+      color:#c47aff;font-size:.75rem;font-weight:700;
+      text-decoration:none;white-space:nowrap;">⬡ All Platforms</a>
+  </div>
+
+</body>
+</html>
+
