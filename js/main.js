@@ -2,25 +2,25 @@
    Main JS — Nav, Scroll Reveals, Counters
    ══════════════════════════════════════════════ */
 
-// ── Service Worker Registration (disabled for now to avoid stale cache) ─────────────────
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', () => {
-//     navigator.serviceWorker.register('/sw.js').then(reg => {
-//       console.info('SW registered', reg.scope);
-//       reg.addEventListener('updatefound', () => console.info('SW update found'));
-//       if (reg.installing) {
-//         reg.installing.addEventListener('statechange', ev => {
-//           if (ev.target && ev.target.state) {
-//             console.info('SW state change', ev.target.state);
-//           }
-//         });
-//       }
-//       navigator.serviceWorker.ready.then(() => console.info('SW ready'));
-//     }).catch(err => {
-//       console.error('SW registration failed', err);
-//     });
-//   });
-// }
+// ── Service Worker Registration ─────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+      console.info('SW registered', reg.scope);
+      reg.addEventListener('updatefound', () => console.info('SW update found'));
+      if (reg.installing) {
+        reg.installing.addEventListener('statechange', ev => {
+          if (ev.target && ev.target.state) {
+            console.info('SW state change', ev.target.state);
+          }
+        });
+      }
+      navigator.serviceWorker.ready.then(() => console.info('SW ready'));
+    }).catch(err => {
+      console.error('SW registration failed', err);
+    });
+  });
+}
 
 // ── NAV ──
 function attachNav(){

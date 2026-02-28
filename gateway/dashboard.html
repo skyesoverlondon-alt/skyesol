@@ -40,9 +40,37 @@
   }
   </script>
   <link rel="stylesheet" href="/gateway/assets/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@450;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
 </head>
 <body>
+  <canvas id="three-bg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
   <div class="bg"></div>
+
+  <!-- ══════ Site-wide nav aligned with Gateway 13 ══════ -->
+  <nav style="background:rgba(5,5,10,0.92); border-bottom:1px solid rgba(255,255,255,0.08); padding:6px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px; font-size:12px; font-family:'Inter',sans-serif; position:sticky; top:0; z-index:900; backdrop-filter:blur(12px);">
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <a href="/" style="color:#ffd36a; text-decoration:none; font-weight:600;">← SOLEnterprises</a>
+      <span style="color:rgba(255,255,255,0.20);">|</span>
+      <a href="/platforms.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Platforms</a>
+      <a href="/Services/WebBuilds.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Services</a>
+      <a href="/about.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Founder</a>
+      <a href="/contact.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Contact</a>
+      <span style="color:rgba(255,255,255,0.20);">|</span>
+      <a href="/SkyeDocx/homepage.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">SkyeDocx</a>
+      <a href="/blog.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Blog</a>
+      <a href="/network.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Network</a>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <span style="color:rgba(255,255,255,0.30); font-weight:600;">GATEWAY:</span>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html" style="color:#a243ff; text-decoration:none; font-weight:500;">Admin</a>
+      <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a; text-decoration:none;">Get API Key</a>
+      <a href="/gateway/dashboard.html" style="color:#27f2ff; text-decoration:none;">User Dashboard</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Smoke Tests</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Gate Proofx</a>
+      <a href="/.netlify/functions/health" target="_blank" rel="noreferrer" style="color:rgba(255,255,255,0.65); text-decoration:none;">Health</a>
+    </div>
+  </nav>
   <main class="shell">
     <header class="topbar">
       <div class="brand">
@@ -291,7 +319,6 @@
             <p class="muted small">After payment, the webhook credits <code>extra_cents</code> for that month and your apps can keep running.</p>
           </div>
         </div>
-<div class="card tabpanel" 
         <div class="card tabpanel" id="tab-ghpush" style="display:none;">
           <h2>GitHub Push</h2>
           <p class="muted">Push a ZIP into a GitHub repository as a single commit using your tenant’s connected GitHub token. This runs through the Kaixu GitHub Push Gateway pipeline (chunk upload → background commit).</p>
@@ -457,7 +484,6 @@
   </main>
 
   <script src="/gateway/assets/user.js"></script>
-
   <!-- Gateway Base modal (lets you point this UI at a dedicated gateway) -->
   <div id="baseModal" class="modalOverlay" style="display:none;">
     <div class="modal">
@@ -485,21 +511,43 @@
     </div>
   </div>
 
-  <section class="trust-block" style="padding:24px; background:#0f172a; color:#e2e8f0; border-top:1px solid rgba(255,255,255,0.06); box-shadow:0 -8px 30px rgba(0,0,0,0.3); margin-top:20px;">
-    <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-bottom:10px;">
-      <strong style="letter-spacing:0.08em; font-size:12px; color:#a5b4fc;">TRUSTED BY</strong>
-      <span style="padding:6px 12px; border-radius:999px; background:rgba(255,255,255,0.04);">SOL Enterprises</span>
-      <span style="padding:6px 12px; border-radius:999px; background:rgba(255,255,255,0.04);">Kaixu Gateway</span>
-      <span style="padding:6px 12px; border-radius:999px; background:rgba(255,255,255,0.04);">SkyeCode Nexus</span>
-    </div>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-bottom:16px;">
-      <div style="background:rgba(255,255,255,0.04); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">“Caps plus logs in one place let us ship faster.” — Ops Lead, SOL</div>
-      <div style="background:rgba(255,255,255,0.04); padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">“Exports and invoices were painless for finance.” — Finance Partner</div>
-    </div>
-    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; box-shadow:0 12px 40px rgba(0,0,0,0.35);">
-      <iframe title="Kaixu Gateway walkthrough" src="https://www.youtube.com/embed/XHOmBV4js_E" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"></iframe>
-    </div>
-  </section>
+  <script>
+    // Lightweight Galaxy background (mirrors Gateway 13 vibe without impacting perf)
+    (function() {
+      const canvas = document.getElementById('three-bg');
+      const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 22;
+
+      const stars = new THREE.Group();
+      const starGeo = new THREE.SphereGeometry(0.09, 6, 6);
+      const starMat = new THREE.MeshBasicMaterial({color:0x66ccff});
+      for (let i = 0; i < 320; i++) {
+        const star = new THREE.Mesh(starGeo, starMat);
+        star.position.set((Math.random()-0.5)*50, (Math.random()-0.5)*30, (Math.random()-0.5)*40);
+        stars.add(star);
+      }
+      scene.add(stars);
+
+      function resize() {
+        const w = window.innerWidth, h = window.innerHeight;
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      function animate() {
+        requestAnimationFrame(animate);
+        stars.rotation.y += 0.0009;
+        stars.rotation.x += 0.0003;
+        renderer.render(scene, camera);
+      }
+      animate();
+    })();
+  </script>
 
 </body>
 </html>

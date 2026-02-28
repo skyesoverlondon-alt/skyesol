@@ -2108,7 +2108,13 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html</loc>
-    <lastmod>2026-02-26</lastmod>
+    <lastmod>2026-02-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2319,6 +2325,12 @@
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html</loc>
     <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html</loc>
+    <lastmod>2026-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -6,7 +6,7 @@
    - API calls (/.netlify/)       → Network Only
 ═══════════════════════════════════════════ */
 
-const CACHE_NAME = 'sol-v1';
+const CACHE_NAME = 'sol-v2';
 const OFFLINE_URL = '/404.html';
 
 const PRECACHE = [
@@ -24,6 +24,8 @@ const PRECACHE = [
   '/admin.html',
   '/post.html',
   '/404.html',
+  '/manifest.json',
+  '/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png',
   '/css/style.css',
   '/js/main.js',
   '/js/growth.js',
