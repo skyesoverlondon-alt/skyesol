@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SovereignVariables — Environment Variable Manager & Audit Tool | SOL Platforms</title>
+  <meta name="description" content="SovereignVariables is an environment variable manager for Netlify and serverless projects. Document, audit, validate, and rotate your env vars — all locally in the browser, no data sent anywhere." />
+  <base href="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SovereignVariables — Env Var Manager & Audit Tool" />
+  <meta property="og:description" content="Manage, document, and audit your Netlify environment variables. Catch missing keys, validate payload size, generate .env templates — all in-browser." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/SovereignVariables.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+  <style>
+    :root {
+      --acc1: #65a30d;
+      --acc2: #1d4ed8;
+      --acc1-dim: rgba(101,163,13,0.10);
+      --acc2-dim: rgba(29,78,216,0.12);
+    }
+    .page-header .glow-tile-purple {
+      background: radial-gradient(ellipse at 50% 60%, rgba(101,163,13,0.14) 0%, rgba(29,78,216,0.12) 45%, transparent 75%);
+    }
+    .acc-text { color: var(--acc1); }
+    .acc2-text { color: #60a5fa; }
+    .badge-acc { display:inline-block; padding:4px 14px; border-radius:999px; font-size:0.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .badge-green { background:var(--acc1-dim); color:#86efac; border:1px solid rgba(101,163,13,0.28); }
+    .badge-blue  { background:var(--acc2-dim); color:#60a5fa; border:1px solid rgba(29,78,216,0.28); }
+
+    /* env widget */
+    .hero-widget { position:relative; width:min(520px,96vw); background:rgba(4,4,12,0.82); border:1px solid rgba(101,163,13,0.18); border-radius:16px; overflow:hidden; box-shadow:0 0 70px rgba(101,163,13,0.09),0 0 100px rgba(29,78,216,0.08); flex-shrink:0; font-family:'DM Mono',monospace; }
+    .widget-titlebar { display:flex; align-items:center; gap:8px; padding:10px 14px; background:rgba(255,255,255,0.03); border-bottom:1px solid rgba(255,255,255,0.07); }
+    .dot { width:10px; height:10px; border-radius:50%; }
+    .dot-r{background:#f87171;} .dot-y{background:#fbbf24;} .dot-g{background:#4ade80;}
+    .widget-title { font-size:0.68rem; color:rgba(255,255,255,0.35); margin-left:8px; letter-spacing:.05em; flex:1; }
+    .env-chip { font-size:0.58rem; font-weight:700; letter-spacing:.07em; padding:2px 9px; border-radius:999px; background:var(--acc1-dim); color:#86efac; border:1px solid rgba(101,163,13,0.22); text-transform:uppercase; }
+
+    .var-list { padding:10px; display:flex; flex-direction:column; gap:5px; }
+    .var-row { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px; padding:8px 10px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); border-radius:9px; }
+    .var-row.ok    { border-color:rgba(101,163,13,0.15); }
+    .var-row.warn  { border-color:rgba(251,191,36,0.18); }
+    .var-row.error { border-color:rgba(248,113,113,0.18); }
+    .var-key  { font-size:0.7rem; color:rgba(255,255,255,0.75); }
+    .var-val  { font-size:0.6rem; color:rgba(255,255,255,0.25); margin-top:1px; letter-spacing:.02em; }
+    .var-badge { font-size:0.55rem; font-weight:700; padding:2px 7px; border-radius:5px; text-transform:uppercase; flex-shrink:0; }
+    .vb-ok   { background:rgba(101,163,13,0.12); color:#86efac; border:1px solid rgba(101,163,13,0.22); }
+    .vb-warn { background:rgba(251,191,36,0.10); color:#fbbf24; border:1px solid rgba(251,191,36,0.2); }
+    .vb-miss { background:rgba(248,113,113,0.10); color:#f87171; border:1px solid rgba(248,113,113,0.2); }
+
+    .audit-bar { padding:10px 14px; border-top:1px solid rgba(255,255,255,0.06); display:flex; gap:14px; }
+    .audit-stat { text-align:center; }
+    .audit-num { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; line-height:1; }
+    .an-ok { color:#86efac; } .an-warn { color:#fbbf24; } .an-err { color:#f87171; }
+    .audit-lbl { font-size:0.55rem; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:.06em; margin-top:1px; }
+    .size-bar-wrap { flex:1; display:flex; flex-direction:column; justify-content:center; gap:4px; }
+    .size-label { font-size:0.58rem; color:rgba(255,255,255,0.35); }
+    .size-bar { height:6px; border-radius:3px; background:rgba(255,255,255,0.06); overflow:hidden; }
+    .size-fill { height:100%; border-radius:3px; background:linear-gradient(90deg,#65a30d,#1d4ed8); width:69%; }
+
+    .widget-footer { display:flex; align-items:center; gap:8px; padding:8px 14px; background:rgba(101,163,13,0.06); border-top:1px solid rgba(101,163,13,0.12); font-size:0.58rem; color:rgba(255,255,255,0.28); }
+    .wf-dot { width:6px; height:6px; border-radius:50%; background:#86efac; animation:pulse 2s infinite; flex-shrink:0; }
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+    .wf-status { color:#86efac; font-weight:700; }
+    .wf-actions { margin-left:auto; display:flex; gap:8px; }
+    .wf-btn { font-size:0.58rem; padding:2px 9px; border-radius:6px; background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.4); border:1px solid rgba(255,255,255,0.08); }
+
+    .btn-green-solid { display:inline-flex; align-items:center; gap:8px; padding:14px 32px; background:linear-gradient(135deg,var(--acc1),#3f6212); color:#000; font-weight:800; font-size:0.95rem; border-radius:10px; text-decoration:none; transition:opacity .2s,transform .15s; }
+    .btn-green-solid:hover { opacity:.87; transform:translateY(-2px); }
+    .btn-blue-outline { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; background:transparent; color:#60a5fa; font-weight:600; font-size:0.95rem; border-radius:10px; text-decoration:none; border:1.5px solid rgba(29,78,216,0.35); transition:background .2s,transform .15s; }
+    .btn-blue-outline:hover { background:var(--acc2-dim); transform:translateY(-2px); }
+
+    .feature-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
+    .feature-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:16px; padding:26px 24px; transition:border-color .25s,transform .2s; }
+    .feature-card:hover { border-color:rgba(101,163,13,0.2); transform:translateY(-3px); }
+    .feature-icon { width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:14px; }
+    .icon-g { background:var(--acc1-dim); } .icon-b { background:var(--acc2-dim); }
+    .feature-card h3 { font-size:1.05rem; font-weight:700; margin-bottom:8px; color:#fff; }
+    .feature-card p  { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.6; margin:0; }
+
+    .metric-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:14px; }
+    .metric-tile { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:22px 18px; text-align:center; }
+    .m1 { font-family:'Bebas Neue',sans-serif; font-size:2.4rem; color:var(--acc1); line-height:1; }
+    .m2 { font-family:'Bebas Neue',sans-serif; font-size:2.4rem; color:#60a5fa; line-height:1; }
+    .metric-tile .lbl { font-size:0.72rem; color:rgba(255,255,255,0.4); margin-top:4px; }
+
+    .steps { display:flex; flex-direction:column; }
+    .step { display:grid; grid-template-columns:56px 1fr; gap:20px; padding:24px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .step:last-child { border-bottom:none; }
+    .step-n { width:56px; height:56px; border-radius:14px; background:linear-gradient(135deg,#65a30d,#1d4ed8); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:#fff; flex-shrink:0; }
+    .step-c h3 { font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:6px; }
+    .step-c p  { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.6; margin:0; }
+    .step-tag { display:inline-block; font-family:'DM Mono',monospace; font-size:0.68rem; padding:2px 10px; border-radius:6px; background:var(--acc1-dim); color:#86efac; border:1px solid rgba(101,163,13,0.18); margin-bottom:8px; }
+
+    .audience-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(215px,1fr)); gap:12px; }
+    .audience-chip { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:16px; display:flex; align-items:center; gap:12px; font-size:0.85rem; font-weight:600; color:rgba(255,255,255,0.72); }
+    .chip-icon { font-size:1.2rem; flex-shrink:0; }
+
+    .cta-box { background:linear-gradient(135deg,rgba(101,163,13,0.09) 0%,rgba(29,78,216,0.08) 100%); border:1px solid rgba(101,163,13,0.16); border-radius:24px; padding:56px 40px; text-align:center; }
+    @media(max-width:700px){ .hero-split{flex-direction:column!important;} .hero-widget{width:100%;} .cta-box{padding:36px 18px;} }
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+<nav class="main-nav" id="mainNav">
+  <a href="/" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="36" /></a>
+  <div class="nav-links desktop-only">
+    <a href="/platforms.html">Platforms</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/about.html">About</a><a href="/contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="https://sovereignvariables.netlify.app/" target="_blank" rel="noopener" class="nav-cta">Open SovereignVariables →</a>
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+<div class="mega-nav-overlay" id="megaNav">
+  <button class="mega-nav-close" id="megaNavClose">&#10005;</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Developer Tools</div>
+      <a href="/Platforms-Apps-Infrastructure/2026/SovereignVariables.html">SovereignVariables</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html">kAIxuAppForge</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/KaixuGitPush.html">KaixuGitPush</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html">kAIxU PDF Pro</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Platforms</div>
+      <a href="/platforms.html">All Platforms</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/NexusForge.html">NexusForge</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyePortalVault.html">SkyePortalVault</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Company</div>
+      <a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Get Started</div>
+      <a href="https://sovereignvariables.netlify.app/" target="_blank" rel="noopener">Open App</a>
+      <a href="/get-started/">Get Started</a><a href="/contact.html">Talk to SOL</a>
+    </div>
+  </div>
+</div>
+
+<header class="page-header">
+  <div class="glow-tile-purple"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="badge-acc badge-green">Env Var Manager</span>
+        <span class="badge-acc badge-blue">Offline · No Upload</span>
+        <span class="badge-acc badge-green">Netlify Ready</span>
+      </div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;color:#fff;margin:0;">
+        Sovereign<br/><span class="acc-text">Variables</span>
+      </h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.65;margin:0;">
+        SovereignVariables is an <strong style="color:#86efac;">in-browser environment variable manager and auditor</strong> built for Netlify and serverless developers. Document every var, catch missing keys, validate your Lambda payload size, generate .env templates, and plan key rotations — all privately in your browser. No data leaves your machine.
+      </p>
+    </div>
+    <div class="hero-split" style="display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#86efac;">◆</span> Audit all env vars — set, missing, optional, deprecated</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#86efac;">◆</span> Check Lambda payload size against the 4 KB AWS limit</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#86efac;">◆</span> Document each variable with purpose, type, and required/optional flag</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#86efac;">◆</span> Generate .env.template files with comments and placeholders</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#86efac;">◆</span> Track rotation schedules — know which keys are overdue</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#86efac;">◆</span> 100% offline — no backend, no upload, no account required</li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="https://sovereignvariables.netlify.app/" target="_blank" rel="noopener" class="btn-green-solid">Open SovereignVariables →</a>
+          <a href="#features" class="btn-blue-outline">Explore Features</a>
+        </div>
+        <p style="margin-top:16px;font-size:0.75rem;color:rgba(255,255,255,0.3);">Free. No login. No secrets leave your browser. Part of the <a href="/platforms.html" style="color:#60a5fa;">SOL developer stack →</a></p>
+      </div>
+      <div class="hero-widget">
+        <div class="widget-titlebar">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="widget-title">SovereignVariables — Audit</span>
+          <span class="env-chip">Local Only</span>
+        </div>
+        <div class="var-list">
+          <div class="var-row ok">
+            <div><div class="var-key">ADMIN_PASSWORD</div><div class="var-val">••••••••••••••••••  ·  Required  ·  JWT gate</div></div>
+            <div class="var-badge vb-ok">Set ✓</div>
+          </div>
+          <div class="var-row ok">
+            <div><div class="var-key">JWT_SECRET</div><div class="var-val">••••••••••••••••••  ·  Required  ·  64+ chars</div></div>
+            <div class="var-badge vb-ok">Set ✓</div>
+          </div>
+          <div class="var-row ok">
+            <div><div class="var-key">KAIXU_VIRTUAL_KEY</div><div class="var-val">••••••••  ·  Required  ·  AI gateway auth</div></div>
+            <div class="var-badge vb-ok">Set ✓</div>
+          </div>
+          <div class="var-row warn">
+            <div><div class="var-key">STRIPE_SECRET_KEY</div><div class="var-val">Optional  ·  Payments  ·  Last rotated: 89d ago</div></div>
+            <div class="var-badge vb-warn">Rotate?</div>
+          </div>
+          <div class="var-row error">
+            <div><div class="var-key">DB_ENCRYPTION_KEY</div><div class="var-val">Required  ·  Vault security  ·  NOT SET</div></div>
+            <div class="var-badge vb-miss">Missing</div>
+          </div>
+          <div class="var-row warn">
+            <div><div class="var-key">TWILIO_AUTH_TOKEN</div><div class="var-val">Optional  ·  Voice  ·  Last rotated: 120d ago</div></div>
+            <div class="var-badge vb-warn">Overdue</div>
+          </div>
+        </div>
+        <div class="audit-bar">
+          <div class="audit-stat"><div class="audit-num an-ok">14</div><div class="audit-lbl">Set</div></div>
+          <div class="audit-stat"><div class="audit-num an-warn">3</div><div class="audit-lbl">Rotate</div></div>
+          <div class="audit-stat"><div class="audit-num an-err">1</div><div class="audit-lbl">Missing</div></div>
+          <div class="size-bar-wrap">
+            <div class="size-label">Lambda payload · 2,861 / 4,096 bytes (69%)</div>
+            <div class="size-bar"><div class="size-fill"></div></div>
+          </div>
+        </div>
+        <div class="widget-footer">
+          <div class="wf-dot"></div>
+          <span class="wf-status">Audit Complete</span>
+          <span>· 18 vars · Local only</span>
+          <div class="wf-actions">
+            <div class="wf-btn">Export .env.template</div>
+            <div class="wf-btn">Copy Report</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="badge-acc badge-green" style="margin-bottom:12px;display:inline-block;">The Problem</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Env vars are the most important config in your stack — and they're the least managed</h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:560px;margin:12px auto 0;line-height:1.65;">Somewhere in your Netlify dashboard there's a key that hasn't been rotated in 8 months. Somewhere in your code a function is silently failing because a required var was never set. You probably don't know either.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">🕵️</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Missing Vars Fail Silently</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">A required env var that's not set doesn't throw a clear error at deploy time — your function boots and then fails at runtime, often with a cryptic message that takes hours to trace back to a missing key. SovereignVariables audits your manifest against expected vars before you hit production.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">📏</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">The 4 KB Lambda Limit</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Netlify Functions run on AWS Lambda, which caps the total env var payload at 4,096 bytes. Add enough vars and your functions will fail to boot with a cryptic AWS error. SovereignVariables tracks your payload byte count in real time and warns you before you hit the wall.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">🔄</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Keys That Never Get Rotated</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">API keys and secrets should rotate. In practice, they sit in a dashboard and nobody tracks how old they are. SovereignVariables lets you log the last rotation date for every key and flags ones that exceed your rotation policy — before a breach does it for you.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">📄</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">No Documentation Means Onboarding Hell</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">When you bring someone new onto a project — or return to one yourself after 6 months — nobody remembers what DEMONKEY is or why KEY_PEPPER can't be changed after keys are created. SovereignVariables documents every variable with purpose, type, and critical constraints.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal" id="features">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-green" style="margin-bottom:12px;display:inline-block;">Features</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0 0 8px;">Own your config. Know your vars. Ship without surprises.</h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:520px;line-height:1.65;">SovereignVariables gives you a complete picture of your environment — what's set, what's missing, what's at risk, and what you need to document before the next developer joins.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon icon-g">🔍</div>
+        <h3>Full Env Var Audit</h3>
+        <p>Input your var manifest — required, optional, and deprecated keys. SovereignVariables runs an audit across the full list, marking each as Set, Missing, or Warning (old rotation date). The audit report shows your full config health at a glance before you touch production.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-b">📏</div>
+        <h3>Lambda Payload Size Checker</h3>
+        <p>Track the byte size of your Netlify env var payload in real time. SovereignVariables counts the total bytes for all your current vars and displays a progress bar toward the 4,096-byte AWS Lambda limit. Know your margin, remove unused vars, and avoid a silent function boot failure.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-g">📝</div>
+        <h3>Variable Documentation Builder</h3>
+        <p>For each var, add a plain-English description, type (string, boolean, URL, secret), required/optional flag, default value, and critical constraints. SovereignVariables generates a formatted documentation sheet for every key in your manifest — the reference that new team members actually need.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-b">🔄</div>
+        <h3>Rotation Tracker</h3>
+        <p>Log the last rotation date for each API key or secret. Set a rotation policy (e.g. 90 days for payment keys, 180 days for non-sensitive vars). SovereignVariables flags every key that's overdue for rotation with a warning indicator and optional export of the rotation schedule.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-g">📤</div>
+        <h3>.env.template Generator</h3>
+        <p>Export a clean .env.template file from your documented manifest — with every key listed, commented with its purpose and constraints, and placeholder values for required secrets. Drop it in the repo root as the onboarding reference. Update SovereignVariables and regenerate when vars change.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-b">🛡️</div>
+        <h3>Sensitive Key Risk Flags</h3>
+        <p>Tag any key as high-sensitivity (payment keys, encryption keys, admin passwords). SovereignVariables highlights these in the audit view, reminds you never to commit them, and includes a risk-level column in the exported documentation. Awareness before exposure.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-g">🏷️</div>
+        <h3>Group & Category Organization</h3>
+        <p>Organize vars into groups — Governance, Security, AI/Inference, Database, Payments, Communications, Monitoring. The audit view filters by group so you can review just the payment keys, just the AI keys, or just the security secrets without scrolling through the full manifest.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-b">💾</div>
+        <h3>100% Local — No Upload, No Account</h3>
+        <p>Your env var names and documentation stay in your browser's localStorage. Nothing is transmitted to any server. No account required, no cloud sync, no SaaS risk. The entire audit and documentation workflow runs client-side. Secrets stay sovereign.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-g">📋</div>
+        <h3>Netlify Dashboard Checklist Export</h3>
+        <p>Generate a Netlify-specific checklist: which vars to set in the dashboard, which to keep out of the code, which are auto-injected by Netlify (like URL and DEPLOY_URL). The output is formatted for the Netlify Environment Variables UI — exactly the order and categories that make sense in the dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-blue" style="margin-bottom:12px;display:inline-block;">Key Numbers</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin:0;">The config facts every Netlify dev should know</h2>
+    </div>
+    <div class="metric-row">
+      <div class="metric-tile"><div class="m2">4 KB</div><div class="lbl">Lambda Env Var Limit</div></div>
+      <div class="metric-tile"><div class="m1">$0</div><div class="lbl">Cost to Use — Free Forever</div></div>
+      <div class="metric-tile"><div class="m2">90d</div><div class="lbl">Recommended Key Rotation</div></div>
+      <div class="metric-tile"><div class="m1">0</div><div class="lbl">Data Sent to Any Server</div></div>
+      <div class="metric-tile"><div class="m2">100%</div><div class="lbl">Offline — Browser Only</div></div>
+      <div class="metric-tile"><div class="m1">1</div><div class="lbl">Source of Truth for Your Config</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-green" style="margin-bottom:12px;display:inline-block;">How It Works</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Input → Audit → Document → Export</h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:480px;margin:8px 0 0;line-height:1.65;">Four steps to full config sovereignty — know what you have, document what it does, and export what the team needs.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-c">
+          <div class="step-tag">Input</div>
+          <h3>Define your variable manifest — required, optional, and high-sensitivity keys</h3>
+          <p>Add every env var your project uses. Mark each as required, optional, or deprecated. Flag high-sensitivity keys (payment keys, encryption keys, auth secrets). Organize vars into groups that match how your Netlify dashboard is structured. The manifest is stored locally — start from scratch or paste from an existing .env file for fast import.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-c">
+          <div class="step-tag">Audit</div>
+          <h3>Run the audit — see what's set, what's missing, what's overdue for rotation</h3>
+          <p>Input which vars you currently have set (names only, no values), and SovereignVariables compares your manifest against the actual set. Missing required vars are flagged immediately. Vars over the rotation threshold show a warning. The payload size checker shows your total byte count and remaining margin against the 4 KB Lambda limit. The audit runs in your browser in under a second.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-c">
+          <div class="step-tag">Document</div>
+          <h3>Write the purpose, type, and constraints for every key in the manifest</h3>
+          <p>For each variable, fill in a purpose description, data type, default value (if any), rotation policy, and any critical constraints (like "KEY_PEPPER cannot be changed after keys are created — changing it orphans all existing hashed keys"). The documentation builder formats these entries into a human-readable reference sheet that survives in the repo and survives team turnover.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <div class="step-c">
+          <div class="step-tag">Export</div>
+          <h3>Export the .env.template, audit report, rotation schedule, and Netlify checklist</h3>
+          <p>Export four artifacts: a .env.template for the repo (var names + descriptions, safe-to-commit); an audit report (what's set, missing, and at risk); a rotation schedule (which keys are overdue and when the next rotation is due); and a Netlify dashboard checklist (what to set where). Your config is now documented, audited, and operationally governed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-green" style="margin-bottom:12px;display:inline-block;">Who It's For</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">For every developer who's ever said "I think that var is set"</h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-chip"><span class="chip-icon">🧑‍💻</span>Solo devs managing multiple Netlify projects</div>
+      <div class="audience-chip"><span class="chip-icon">🏢</span>Small dev teams onboarding new members</div>
+      <div class="audience-chip"><span class="chip-icon">🔐</span>Security-conscious operators running sensitive APIs</div>
+      <div class="audience-chip"><span class="chip-icon">🚀</span>Startups deploying serverless functions at pace</div>
+      <div class="audience-chip"><span class="chip-icon">🔧</span>Agencies managing client site environments</div>
+      <div class="audience-chip"><span class="chip-icon">📋</span>CTOs doing config audits before compliance reviews</div>
+      <div class="audience-chip"><span class="chip-icon">🤖</span>AI app builders managing multiple gateway keys</div>
+      <div class="audience-chip"><span class="chip-icon">🛡️</span>Operators who rotate keys and want a system for it</div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <span class="badge-acc badge-green" style="margin-bottom:16px;display:inline-block;">Get Started</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:0 0 16px;line-height:1.1;">
+        Your config deserves the same care as your code.<br/><span class="acc-text">Start auditing. Stay sovereign.</span>
+      </h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 36px;line-height:1.65;">SovereignVariables is a free, offline-first env var manager for developers who want full visibility into their Netlify config — without uploading a single secret to any server. Document it. Audit it. Own it.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://sovereignvariables.netlify.app/" target="_blank" rel="noopener" class="btn-green-solid" style="font-size:1.05rem;padding:16px 36px;">Open SovereignVariables →</a>
+        <a href="/platforms.html" class="btn-blue-outline">See All Developer Tools</a>
+      </div>
+      <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">Free forever · No login · No data uploaded · Works offline · Part of the SOL dev stack</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="40" />
+        <p>Skyes Over London LC — building developer tools and operator platforms for people who take their stack seriously.</p>
+        <div class="footer-contact">
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="tel:9862107040">986-210-7040</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <span class="footer-col-label">Developer Tools</span>
+          <a href="/Platforms-Apps-Infrastructure/2026/SovereignVariables.html">SovereignVariables</a>
+          <a href="/Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html">kAIxuAppForge</a>
+          <a href="/Platforms-Apps-Infrastructure/2026/KaixuGitPush.html">KaixuGitPush</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-label">Company</span>
+          <a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-label">Legal</span>
+          <a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Skyes Over London LC. All rights reserved.</span></div>
+  </div>
+</footer>
+<script src="/js/three.min.js" defer></script>
+<script src="/assets/app.js" defer></script>
+<script src="/js/main.js" defer></script>
+<script src="/js/growth.js" defer></script>
+<script src="/js/partials.js" defer></script>
+</body>
+</html>
+

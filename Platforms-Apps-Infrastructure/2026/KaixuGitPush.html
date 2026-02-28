@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <link rel="canonical" href="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/KaixuGitPush.html">
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <meta name="twitter:description" content="statikAI — AI-powered static site builder and deploy pipeline. Generate, build, and push production-ready static sites to Netlify in seconds. Powered by KaixuPush.">
+  <meta name="twitter:title" content="statikAI — AI Static Site Builder & Deploy Pipeline · SOLEnterprises">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/KaixuGitPush.html">
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="statikAI — AI-powered static site builder and deploy pipeline. Generate, build, and push production-ready static sites to Netlify in seconds. Powered by KaixuPush.">
+  <meta property="og:title" content="statikAI — AI Static Site Builder & Deploy Pipeline · SOLEnterprises">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>statikAI — AI Static Site Builder &amp; Deploy Pipeline · SOLEnterprises</title>
+  <meta name="description" content="statikAI is the AI-powered static site generator and deploy pipeline. Describe the site, generate the build, push to Netlify via the KaixuPush deploy proxy — tracked, metered, and live in seconds.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SOLEnterprises">
+  <link rel="apple-touch-icon" href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png">
+
+  <style>
+    /* ── statikAI accent: neon coral → electric violet ── */
+    :root {
+      --sk-coral:  #fb7185;
+      --sk-violet: #818cf8;
+      --sk-green:  #4ade80;
+      --sk-glow:   rgba(251,113,133,0.15);
+    }
+
+    .sk-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(251,113,133,0.18), rgba(129,140,248,0.12));
+      border: 1px solid var(--sk-coral);
+      border-radius: 4px;
+      color: #fecdd3;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 1.2rem;
+    }
+
+    .sk-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .sk-cta-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--sk-coral), var(--sk-violet));
+      color: #fff;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--sk-coral);
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .sk-cta-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .sk-cta-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--sk-coral);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--sk-coral);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .sk-cta-ghost:hover { background: rgba(251,113,133,0.08); transform: translateY(-2px); }
+
+    /* Deploy pipeline terminal widget */
+    .sk-deploy-widget {
+      max-width: 500px;
+      margin: 3rem auto 0;
+      background: #060409;
+      border: 1px solid rgba(251,113,133,0.28);
+      border-radius: 10px;
+      overflow: hidden;
+      font-family: 'Fira Code', monospace;
+    }
+    .sk-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #0c0710;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(251,113,133,0.1);
+    }
+    .sk-dot { width:11px; height:11px; border-radius:50%; }
+    .sk-dot-r { background:#f87171; }
+    .sk-dot-y { background:#facc15; }
+    .sk-dot-g { background:#4ade80; }
+    .sk-title-text {
+      margin-left: auto;
+      font-size: 0.63rem;
+      color: rgba(251,113,133,0.4);
+      letter-spacing: 0.1em;
+    }
+    .sk-deploy-body {
+      padding: 1.4rem 1.6rem;
+      font-size: 0.78rem;
+      line-height: 2;
+    }
+    .sk-line-dim    { color: rgba(251,113,133,0.25); }
+    .sk-line-cmd    { color: var(--sk-coral); }
+    .sk-line-step   { color: var(--sk-violet); }
+    .sk-line-file   { color: #fbbf24; }
+    .sk-line-ok     { color: var(--sk-green); }
+    .sk-line-url    { color: #67e8f9; text-decoration: underline; }
+    .sk-progress-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 0 0 2px 2px;
+      overflow: hidden;
+    }
+    .sk-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--sk-coral), var(--sk-violet));
+      border-radius: 2px;
+      animation: skFillBar 2.8s ease-in-out infinite;
+    }
+    @keyframes skFillBar {
+      0%   { width: 0%; }
+      60%  { width: 100%; }
+      100% { width: 100%; opacity: 0; }
+    }
+
+    /* Feature grid */
+    .sk-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.5rem;
+    }
+    .sk-feature-card {
+      background: rgba(251,113,133,0.03);
+      border: 1px solid rgba(251,113,133,0.15);
+      border-radius: 8px;
+      padding: 1.6rem 1.4rem;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .sk-feature-card:hover {
+      border-color: rgba(251,113,133,0.42);
+      background: rgba(251,113,133,0.06);
+    }
+    .sk-feature-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .sk-feature-card h4 {
+      color: var(--sk-coral);
+      font-size: 0.92rem;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .sk-feature-card p {
+      color: rgba(220,216,208,0.72);
+      font-size: 0.87rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* Pipeline steps */
+    .sk-pipeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      margin-top: 2.5rem;
+    }
+    .sk-pipeline::before {
+      content: '';
+      position: absolute;
+      left: 28px; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, var(--sk-coral), var(--sk-violet), transparent);
+    }
+    .sk-pipe-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.4rem 0;
+    }
+    .sk-pipe-num {
+      flex-shrink: 0;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(251,113,133,0.22), rgba(129,140,248,0.12));
+      border: 1px solid var(--sk-coral);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 1rem;
+      color: #fecdd3;
+      font-weight: bold;
+      position: relative; z-index: 1;
+    }
+    .sk-pipe-body h4 { color: var(--text); font-size: 1rem; margin: 0 0 0.4rem; }
+    .sk-pipe-body p  { color: rgba(220,216,208,0.7); font-size: 0.88rem; line-height: 1.65; margin: 0; }
+
+    /* Pipeline terminal demo */
+    .sk-term-demo {
+      background: #060409;
+      border: 1px solid rgba(251,113,133,0.15);
+      border-radius: 8px;
+      padding: 1.6rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      line-height: 2;
+      margin-top: 2.2rem;
+      overflow-x: auto;
+    }
+    .sk-term-demo .td-p  { color: rgba(251,113,133,0.4); }
+    .sk-term-demo .td-c  { color: var(--sk-coral); }
+    .sk-term-demo .td-s  { color: var(--sk-violet); }
+    .sk-term-demo .td-f  { color: #fbbf24; }
+    .sk-term-demo .td-ok { color: var(--sk-green); }
+    .sk-term-demo .td-u  { color: #67e8f9; }
+    .sk-term-demo .td-d  { color: rgba(251,113,133,0.22); }
+
+    /* Comparison table */
+    .sk-compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 2rem;
+    }
+    .sk-compare-table th {
+      background: rgba(251,113,133,0.1);
+      color: #fecdd3;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(251,113,133,0.2);
+    }
+    .sk-compare-table td {
+      padding: 12px 16px;
+      color: rgba(220,216,208,0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .sk-compare-table tr:hover td { background: rgba(251,113,133,0.03); }
+    .sk-hl  { background: rgba(251,113,133,0.05); }
+    .sk-yes { color: #4ade80; font-weight: bold; }
+    .sk-no  { color: rgba(220,216,208,0.25); }
+    .sk-meh { color: #facc15; }
+
+    /* Quote */
+    .sk-quote {
+      border-left: 3px solid var(--sk-coral);
+      background: rgba(251,113,133,0.04);
+      border-radius: 0 6px 6px 0;
+      padding: 1.4rem 1.6rem;
+      margin: 2.5rem 0 0;
+    }
+    .sk-quote p    { color: rgba(220,216,208,0.85); font-size:1.05rem; font-style:italic; line-height:1.7; margin:0 0 0.6rem; }
+    .sk-quote cite { font-size:0.78rem; color:var(--sk-coral); font-family:'Fira Code',monospace; letter-spacing:.06em; text-transform:uppercase; }
+
+    /* Final CTA */
+    .sk-final-cta {
+      background: linear-gradient(135deg, rgba(251,113,133,0.09), rgba(129,140,248,0.06));
+      border: 1px solid rgba(251,113,133,0.2);
+      border-radius: 10px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .sk-final-cta h2 { font-size: clamp(1.6rem,4vw,2.5rem); margin-bottom:1rem; color: var(--text); }
+    .sk-final-cta p  { color: rgba(220,216,208,0.7); max-width:560px; margin:0 auto 2rem; line-height:1.7; }
+
+    @media(max-width:600px){
+      .sk-compare-table th,.sk-compare-table td { padding:9px 10px; font-size:.78rem; }
+      .sk-pipeline::before { left:24px; }
+      .sk-pipe-num { width:48px; height:48px; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+
+<!-- NAV -->
+<nav class="main-nav" id="mainNav">
+  <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="/index.html">Home</a>
+    <div class="nav-dropdown" data-type="services">
+      <button type="button" class="dropdown-toggle">Services</button>
+      <div class="dropdown-menu">
+        <a href="/Services/WebBuilds.html">Web Builds</a>
+        <a href="/Services/ai-data-apps.html">AI &amp; Data Apps</a>
+        <a href="/Services/portals-hubs.html">Portals &amp; Hubs</a>
+        <a href="/Services/ecommerce-payments.html">Ecommerce &amp; Payments</a>
+        <a href="/Services/intake-routing.html">Intake &amp; Routing</a>
+        <a href="/Services/trust-surfaces.html">Trust Surfaces</a>
+        <a href="/Services/api-integration.html">API &amp; Integrations</a>
+        <a href="/Services/brand-identity.html">Brand Identity</a>
+        <a href="/Services/notification-comms.html">Notifications</a>
+        <a href="/Services/docs-knowledge.html">Docs &amp; Knowledge</a>
+        <a href="/Services/platform-migration.html">Migration</a>
+        <a href="/Services/security-audit.html">Security</a>
+        <a href="/Services/analytics-dashboards.html">Analytics</a>
+        <a href="/Services/lifecycle-retention.html">Retention</a>
+        <a href="/Services/mvp-launchpad.html">MVP Builds</a>
+        <a href="/Services/seo-content.html">SEO &amp; Content</a>
+      </div>
+    </div>
+    <a href="/about.html">Founder</a>
+    <div class="nav-dropdown" data-type="suite">
+      <button type="button" class="dropdown-toggle">SkyeSuite</button>
+      <div class="dropdown-menu">
+        <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="/SkyeFlow/index.html">SkyeFlow</a>
+        <a href="/SkyeArchive/index.html">SkyeArchive</a>
+        <a href="/SkyeSlides/index.html">SkyeSlides</a>
+        <a href="/SkyeDrive/index.html">SkyeDrive</a>
+        <a href="/SkyeCollab/index.html">SkyeCollab</a>
+        <a href="/SkyeSheets/index.html">SkyeSheets</a>
+        <a href="/SkyeLedger/index.html">SkyeLedger</a>
+        <a href="/SkyeOps/index.html">SkyeOps</a>
+      </div>
+    </div>
+    <a href="/platforms.html">Platforms</a>
+    <a href="/network.html">Network</a>
+    <a href="/credibility.html">Credibility</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <button class="menu-btn" id="menuBtn">☰ MENU</button>
+</nav>
+
+<!-- HERO -->
+<div class="page-header">
+  <div class="sk-badge">AI Site Generator · KaixuPush Deploy · Netlify · Tracked · Metered · Live in Seconds</div>
+  <div class="section-label">SOLEnterprises · 2026 Platform Division · KaixuPush Ecosystem</div>
+  <h1><span style="color:#fb7185">statik</span><span style="color:#818cf8">AI</span></h1>
+  <div class="glow-tile-purple">
+    <p style="color:#000000">Describe the site. Generate the build. Push to production. statikAI is the AI-powered static site builder and deploy pipeline — turning a plain-language brief into a production-ready static site, pushed to Netlify via the KaixuPush deploy proxy in a single tracked, metered deploy chain.</p>
+  </div>
+
+  <!-- Live deploy terminal widget -->
+  <div class="sk-deploy-widget">
+    <div class="sk-titlebar">
+      <div class="sk-dot sk-dot-r"></div>
+      <div class="sk-dot sk-dot-y"></div>
+      <div class="sk-dot sk-dot-g"></div>
+      <div class="sk-title-text">statikAI · deploy pipeline</div>
+    </div>
+    <div class="sk-deploy-body">
+      <span class="td-d">// statikAI · KaixuPush Deploy Proxy</span><br>
+      <span class="td-p">statik &gt;</span> <span class="td-c">generate</span>(<span class="td-f">"Phoenix law firm landing page"</span>)<br>
+      <span class="td-d">&nbsp;&nbsp;▸ AI build complete · 12 files · 48.2 KB</span><br>
+      <span class="td-p">statik &gt;</span> <span class="td-s">push-init</span> · project: <span class="td-f">phoenix-law-v2</span><br>
+      <span class="td-d">&nbsp;&nbsp;▸ Uploading chunks · digest verified</span><br>
+      <span class="td-p">statik &gt;</span> <span class="td-s">push-complete</span> · deploy_id: <span class="td-f">6a9f2c</span><br>
+      <span class="td-d">&nbsp;&nbsp;▸ Netlify finalizing · state: ready</span><br>
+      <span class="td-ok">✓ Live:</span> <span class="td-u">https://phoenix-law-v2.netlify.app</span><br>
+      <span class="td-d">&nbsp;&nbsp;▸ deploy logged · billed · invoice ready</span>
+    </div>
+    <div class="sk-progress-bar"><div class="sk-progress-fill"></div></div>
+  </div>
+
+  <div class="sk-cta-row">
+    <a href="https://statikai.netlify.app/" target="_blank" rel="noopener" class="sk-cta-primary">Open statikAI →</a>
+    <a href="#how-it-works" class="sk-cta-ghost">See the Pipeline ↓</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- THE PROBLEM -->
+<section class="content-section">
+  <div class="section-label reveal">The Problem</div>
+  <div class="section-title reveal">Static Sites Take Two Days When They Should Take Twenty Minutes</div>
+  <div class="section-desc reveal">A client needs a landing page. A project needs a microsite. A campaign needs a deployment. The creative brief exists. The business need is clear. But the gap between "we need a site" and "the URL is live" runs through a maze of scaffolding, file management, git pushes, CI configurations, and Netlify dashboard navigation — every time, for every project, regardless of how simple the site actually is.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">⏳</div>
+      <h3>Setup Overhead Kills Momentum</h3>
+      <div class="card-type">Scaffolding Before Work</div>
+      <p>Every new static site starts with the same overhead: initialise a project, configure a build, connect a repo, link to Netlify, set up environment variables, push the first empty commit. By the time the actual content begins, the momentum is already gone. Simple sites deserve a simple pipeline — one that starts with the brief, not the boilerplate.</p>
+      <div class="card-tags"><span>Scaffolding Overhead</span><span>Repo Setup</span><span>Config Friction</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🔁</div>
+      <h3>Rebuilding the Same Sites Over and Over</h3>
+      <div class="card-type">No Repeatable Generate-Deploy Chain</div>
+      <p>Agencies and operators build the same site archetypes repeatedly: law firm landing page, local service site, product microsite, campaign page. Each time, the code is written from scratch, the deploy is configured manually, and the handoff is documented after the fact. Without a generate-and-push pipeline, every project starts at zero.</p>
+      <div class="card-tags"><span>Repetitive Builds</span><span>Manual Deploy</span><span>Zero Reuse</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🧾</div>
+      <h3>Deploys Without Tracking or Billing</h3>
+      <div class="card-type">Invisible Infrastructure Cost</div>
+      <p>When sites are deployed manually — drag-and-drop, CLI pushes, direct Netlify dashboard deploys — there's no tracking layer, no deploy history, no metered billing record. Agencies and platform operators who push on behalf of clients have no structured way to log, invoice, or audit the deployment activity they generate.</p>
+      <div class="card-tags"><span>No Deploy Log</span><span>Untracked Bandwidth</span><span>No Invoice Chain</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE SOLUTION -->
+<section class="content-section">
+  <div class="section-label reveal">The Solution</div>
+  <div class="section-title reveal">statikAI — Brief to Build to Live URL. One Pipeline.</div>
+  <div class="section-desc reveal">statikAI combines AI-powered site generation with the KaixuPush deploy proxy to create a complete generate-and-ship pipeline. Describe the site, generate the static build, push through the KaixuPush API to Netlify — tracked, metered, and billed — with the live URL returned in seconds.</div>
+
+  <div class="sk-feature-grid stagger-children">
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">🤖</div>
+      <h4>AI Site Generation</h4>
+      <p>Describe the site in plain language — the type, the client, the industry, the content sections, the tone. statikAI generates a production-quality static HTML/CSS build from the brief, structured for immediate deployment. No scaffolding, no template selection, no manual component assembly. The brief becomes the build.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">🚀</div>
+      <h4>KaixuPush Deploy Proxy</h4>
+      <p>Every site pushed through statikAI routes through the KaixuPush deploy pipeline — a structured Netlify deployment proxy that handles chunked file uploads, digest verification, deploy state polling, and URL resolution. The push is not a drag-and-drop — it's a full API-driven deploy chain with status tracking from init to ready.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">📊</div>
+      <h4>Tracked &amp; Metered Deploys</h4>
+      <p>Every deploy is logged: push ID, project ID, branch, deploy state, file count, bytes uploaded, and timestamp. Deploy history is queryable by project and month. Usage events — deploys ready, bytes uploaded — are metered in real time. Nothing falls through the cracks of an unseen Netlify dashboard action.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">🧾</div>
+      <h4>Per-Month Invoice Generation</h4>
+      <p>For platform operators and agencies managing deploys on behalf of clients, statikAI's KaixuPush backend generates per-customer, per-month invoices from actual usage data — deploys ready, bytes uploaded, pricing version. The invoice is derived from the metered pipeline, not manually calculated.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">🔑</div>
+      <h4>API Key Authentication</h4>
+      <p>Every push is authenticated with a Kaixu Bearer key scoped to a customer identity. Project registration (project ID + Netlify Site ID) is required before the first deploy. The authentication layer means every push is tied to an owner, every deploy is attributable, and rogue pushes are structurally impossible.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">🔄</div>
+      <h4>GitHub Push Integration</h4>
+      <p>Beyond direct file pushes, statikAI supports GitHub repository pushes through the KaixuPush GitHub integration — push a repository's content to a Netlify site directly from the pipeline, with chunked upload support for large repos. Branch targeting, commit messages, and job tracking are all included.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- METRICS -->
+<section class="content-section">
+  <div class="section-label reveal">Pipeline Specs</div>
+  <div class="section-title reveal">Built for Production-Volume Static Deployment</div>
+  <div class="card-grid-3 stagger-children" style="margin-top:2rem">
+    <div class="metric-card reveal">
+      <div class="metric-number">SHA-256</div>
+      <div class="metric-label">Digest Verification per File</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">Chunked</div>
+      <div class="metric-label">Upload Pipeline (large builds)</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">Real-Time</div>
+      <div class="metric-label">Deploy State Polling</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">Per-Push</div>
+      <div class="metric-label">Usage Event Metering</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">Monthly</div>
+      <div class="metric-label">Invoice Generation per Customer</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">GitHub</div>
+      <div class="metric-label">Repo Push Integration</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="content-section" id="how-it-works">
+  <div class="section-label reveal">Pipeline Walkthrough</div>
+  <div class="section-title reveal">Five Steps from Brief to Live URL</div>
+  <div class="section-desc reveal">The statikAI pipeline is end-to-end — from the plain-language brief that starts the build, to the live Netlify URL returned when the deploy is confirmed ready. Every step is tracked in the KaixuPush deploy log.</div>
+
+  <div class="sk-pipeline">
+    <div class="sk-pipe-step reveal">
+      <div class="sk-pipe-num">01</div>
+      <div class="sk-pipe-body">
+        <h4>Register a Project</h4>
+        <p>Before the first push, register the project in statikAI — give it a project ID, a human-readable name, and the Netlify Site ID it will deploy to. The project registration binds future deploys to a specific Netlify site, customer account, and billing record. Registration is a one-time step per project. All subsequent pushes reference the project ID.</p>
+      </div>
+    </div>
+    <div class="sk-pipe-step reveal">
+      <div class="sk-pipe-num">02</div>
+      <div class="sk-pipe-body">
+        <h4>Generate the Site with AI</h4>
+        <p>Describe the site in the statikAI generator — business type, content sections, tone, colour direction, target audience. The AI build produces a complete static site: structured HTML, embedded CSS, optimised for immediate Netlify deployment. No template selection, no drag-and-drop builders, no manual component assembly. Plain language in, production-ready files out.</p>
+      </div>
+    </div>
+    <div class="sk-pipe-step reveal">
+      <div class="sk-pipe-num">03</div>
+      <div class="sk-pipe-body">
+        <h4>Push via KaixuPush Init</h4>
+        <p>The generated build is pushed to the KaixuPush pipeline with the project ID, branch target, and deploy title. The push-init function creates a Netlify digest deploy — all files are SHA-256 hashed, the digest manifest is submitted to Netlify's API, and required file digests are returned for upload. The deploy is registered in the push log immediately.</p>
+      </div>
+    </div>
+    <div class="sk-pipe-step reveal">
+      <div class="sk-pipe-num">04</div>
+      <div class="sk-pipe-body">
+        <h4>Upload Files &amp; Complete the Deploy</h4>
+        <p>Files required by Netlify (those not already in their CDN cache from previous deploys) are uploaded through the push-upload pipeline — chunked for large builds, streamed for standard builds. Each upload is logged as a usage event. When all required files are uploaded, push-complete finalises the deploy and polls for the ready state — returning the live SSL URL when confirmed.</p>
+      </div>
+    </div>
+    <div class="sk-pipe-step reveal">
+      <div class="sk-pipe-num">05</div>
+      <div class="sk-pipe-body">
+        <h4>Track, Invoice &amp; Repeat</h4>
+        <p>The deploy is logged in the push history: push ID, state, bytes uploaded, file counts, and timestamp. Usage events accumulate in the metering layer throughout the month. At any point, generate a per-customer invoice for the month — structured from actual metered data, not estimated usage. Repeat for the next project with a new brief and a single push-init call.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pipeline terminal illustration -->
+  <div class="sk-term-demo reveal">
+    <span class="td-d">// statikAI · KaixuPush Pipeline · Phoenix Law Firm Landing Page</span><br><br>
+    <span class="td-p">statik &gt;</span> <span class="td-c">project.register</span>({ id: <span class="td-f">"phoenix-law-v2"</span>, site_id: <span class="td-f">"a3b8f2c1-..."</span> })<br>
+    <span class="td-d">&nbsp;&nbsp;▸ Project registered · customer billing attached</span><br><br>
+    <span class="td-p">statik &gt;</span> <span class="td-c">ai.generate</span>(<span class="td-f">"Phoenix AZ law firm · personal injury · 5 sections"</span>)<br>
+    <span class="td-d">&nbsp;&nbsp;▸ Build complete · 12 files · 48.2 KB · SHA-256 digests ready</span><br><br>
+    <span class="td-p">statik &gt;</span> <span class="td-s">push-init</span>({ projectId: <span class="td-f">"phoenix-law-v2"</span>, branch: <span class="td-f">"main"</span> })<br>
+    <span class="td-d">&nbsp;&nbsp;▸ deploy_id: 6a9f2c · required: 4 files (8 cached)</span><br><br>
+    <span class="td-p">statik &gt;</span> <span class="td-s">push-upload</span> · 4 files · <span class="td-d">18.7 KB · event: file_upload × 4</span><br>
+    <span class="td-p">statik &gt;</span> <span class="td-s">push-complete</span>({ pushId: <span class="td-f">"psh_7x2k"</span> }) · polling state …<br><br>
+    <span class="td-ok">✓ state: ready</span> · <span class="td-u">https://phoenix-law-v2.netlify.app</span><br>
+    <span class="td-d">&nbsp;&nbsp;▸ deploy logged · event: deploy_ready · billing updated</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO IT'S FOR -->
+<section class="content-section">
+  <div class="section-label reveal">Who It's For</div>
+  <div class="section-title reveal">Built for Every Operator Deploying at Volume</div>
+  <div class="section-desc reveal">statikAI is not a website builder for one-off personal projects. It's a deploy pipeline for operators, agencies, and platform builders who need to deploy static sites at volume — with tracking, billing, and a repeatable generation chain baked in.</div>
+
+  <div class="sk-feature-grid stagger-children">
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">🏗️</div>
+      <h4>Web Agencies</h4>
+      <p>Agencies building local business sites, campaign pages, and client microsites at volume need a pipeline that eliminates per-project scaffolding overhead. statikAI generates the build from the creative brief and pushes to the client's Netlify site through a tracked, invoiceable deploy chain — without a git repo, CI configuration, or Netlify dashboard for every project.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">⚙️</div>
+      <h4>Platform Builders</h4>
+      <p>Developers building platforms that need to publish static sites on behalf of their users — white-label site builders, local marketing platforms, client portal generators — can use statikAI's KaixuPush API as the deploy layer. Every user-initiated site publish routes through a tracked, metered deploy pipeline with per-customer billing built in.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">🚀</div>
+      <h4>Rapid MVP Teams</h4>
+      <p>Teams moving from brief to deployed product in hours, not days, need a deployment path that doesn't require infrastructure setup before the first line of content. statikAI gives MVP teams a working URL before the CI pipeline is even configured — and a tracked deploy record for every iteration along the way.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">💼</div>
+      <h4>Freelancers &amp; Solo Operators</h4>
+      <p>Solo operators managing multiple client sites need a deploy chain that scales without adding operational complexity. One API key, multiple registered projects, a push-init call for each new deploy, and a monthly invoice per client — statikAI turns a portfolio of site deployments into a structured, billable service without a custom backend.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">🌐</div>
+      <h4>Local Business Service Providers</h4>
+      <p>Operators building sites for local businesses — law firms, contractors, medical providers, retail — want to generate industry-appropriate static sites without rebuilding the same layouts from scratch each time. The AI generation layer produces correctly-structured local business sites from a brief, eliminating the repetitive manual build work.</p>
+    </div>
+    <div class="sk-feature-card reveal">
+      <div class="sk-feature-icon">🔌</div>
+      <h4>API Integrators</h4>
+      <p>Development teams integrating static site deployment into larger automation workflows — content pipelines, CMS-triggered deploys, form-to-site generators — can use statikAI's KaixuPush API endpoints as a programmable deploy layer. Authenticated, tracked, and metered deploys from any upstream trigger in the pipeline.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- USE CASES -->
+<section class="content-section">
+  <div class="section-label reveal">Real Deployments</div>
+  <div class="section-title reveal">What statikAI Replaces in a Real Workflow</div>
+
+  <div class="card-grid-2 stagger-children" style="margin-top:2.5rem">
+    <div class="strength-card reveal">
+      <h4>🏢 Scenario: Agency Multi-Client Deployment</h4>
+      <p>A Phoenix web agency manages 15 active client sites across various industries. Without statikAI: each new client requires a github repo, Netlify site setup, environment configuration, and a first commit before any content begins. With statikAI: register the project once (project ID + Netlify Site ID), generate the build from the intake brief, push via KaixuPush, get the live URL back. Generate a monthly invoice per client from actual deploy usage. The agency's deploy process scales without growing its infrastructure team.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>🌐 Scenario: White-Label Site Builder Platform</h4>
+      <p>A developer is building a white-label site builder where business owners can publish their own branded sites. The platform needs to push sites to individual Netlify projects on behalf of users — tracked and billed per user. Integrating statikAI's KaixuPush API as the deploy layer means every publish button press routes through an authenticated, metered, invoiceable deploy chain — without the platform developer building a custom Netlify deploy backend from scratch.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>⚡ Scenario: Campaign Microsite in Under 30 Minutes</h4>
+      <p>A marketing team needs a dedicated landing page for a campaign that goes live in 24 hours. Traditional path: brief the developer, wait for build, wait for review, configure deploy, push, debug DNS. statikAI path: brief the AI generator, review the output, push via KaixuPush, get the live URL in one session. The Netlify site was registered once at the campaign series level. The specific campaign's page is a new push-init call with a new branch or title — tracked separately in the deploy log.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>🔄 Scenario: GitHub Repo Deploy for Client Handoff</h4>
+      <p>An agency delivers a completed project to a client via a GitHub repository. The client wants the current repository state live on their Netlify site without connecting their own repo to Netlify. The statikAI GitHub push integration pushes the repository content directly to the client's Netlify site through the KaixuPush GitHub pipeline — authenticated with the client's Kaixu key, branch-targeted, chunk-uploaded for large repos, and logged as a tracked deploy event.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARISON -->
+<section class="content-section">
+  <div class="section-label reveal">Competitive Contrast</div>
+  <div class="section-title reveal">statikAI vs. The Standard Deploy Options</div>
+  <div class="section-desc reveal">Netlify Drop is manual. Git-connected deploys require repo setup. CLI tools require a local environment. statikAI is the only option that combines AI generation, API-driven push, deploy tracking, and per-customer invoice generation in a single pipeline.</div>
+
+  <div style="overflow-x:auto;margin-top:2rem">
+    <table class="sk-compare-table reveal">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="sk-hl">statikAI</th>
+          <th>Netlify Drop</th>
+          <th>Git Deploy</th>
+          <th>Netlify CLI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AI site generation from brief</td>
+          <td class="sk-hl sk-yes">✓ Built-in</td>
+          <td class="sk-no">✗ No</td>
+          <td class="sk-no">✗ No</td>
+          <td class="sk-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>API-driven deploy (no UI required)</td>
+          <td class="sk-hl sk-yes">✓ KaixuPush API</td>
+          <td class="sk-no">✗ Manual drag-drop</td>
+          <td class="sk-yes">✓ Git push</td>
+          <td class="sk-yes">✓ CLI command</td>
+        </tr>
+        <tr>
+          <td>SHA-256 digest verification per file</td>
+          <td class="sk-hl sk-yes">✓ Yes</td>
+          <td class="sk-no">✗ No</td>
+          <td class="sk-yes">✓ Via Netlify</td>
+          <td class="sk-yes">✓ Via Netlify</td>
+        </tr>
+        <tr>
+          <td>Per-deploy tracking &amp; history log</td>
+          <td class="sk-hl sk-yes">✓ Full log</td>
+          <td class="sk-no">✗ Netlify UI only</td>
+          <td class="sk-meh">⚠ Netlify UI only</td>
+          <td class="sk-meh">⚠ Netlify UI only</td>
+        </tr>
+        <tr>
+          <td>Per-customer metered billing</td>
+          <td class="sk-hl sk-yes">✓ Built-in</td>
+          <td class="sk-no">✗ No</td>
+          <td class="sk-no">✗ No</td>
+          <td class="sk-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Monthly invoice generation</td>
+          <td class="sk-hl sk-yes">✓ From usage data</td>
+          <td class="sk-no">✗ No</td>
+          <td class="sk-no">✗ No</td>
+          <td class="sk-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>GitHub repo push integration</td>
+          <td class="sk-hl sk-yes">✓ Yes</td>
+          <td class="sk-no">✗ No</td>
+          <td class="sk-yes">✓ Native</td>
+          <td class="sk-meh">⚠ Indirect</td>
+        </tr>
+        <tr>
+          <td>No local environment required</td>
+          <td class="sk-hl sk-yes">✓ Full web app</td>
+          <td class="sk-yes">✓ Browser only</td>
+          <td class="sk-no">✗ Git client required</td>
+          <td class="sk-no">✗ Node.js required</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- API REFERENCE -->
+<section class="content-section">
+  <div class="section-label reveal">API Overview</div>
+  <div class="section-title reveal">The KaixuPush Endpoints Behind statikAI</div>
+  <div class="section-desc reveal">Every statikAI deploy routes through the KaixuPush function layer. The API is accessible directly for platform integrators who want to embed the deploy pipeline in their own systems.</div>
+
+  <div class="card-grid-2 stagger-children" style="margin-top:2.5rem">
+    <div class="strength-card reveal">
+      <h4>🔧 Core Deploy API</h4>
+      <p><code style="color:#fb7185;font-size:0.8rem">push-init</code> — Initiate a deploy, submit file digests, receive required upload list.<br><br>
+      <code style="color:#fb7185;font-size:0.8rem">push-upload</code> — Upload required files to the open deploy.<br><br>
+      <code style="color:#fb7185;font-size:0.8rem">push-upload-chunk</code> — Stream large files in chunks to the upload pipeline.<br><br>
+      <code style="color:#fb7185;font-size:0.8rem">push-complete</code> — Finalise the deploy and poll for the ready state.<br><br>
+      <code style="color:#fb7185;font-size:0.8rem">push-status</code> — Query the current state of any active deploy.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>📋 Management &amp; Billing API</h4>
+      <p><code style="color:#818cf8;font-size:0.8rem">push-projects</code> — List registered projects for a customer.<br><br>
+      <code style="color:#818cf8;font-size:0.8rem">push-billing</code> — Query metered usage for a billing period.<br><br>
+      <code style="color:#818cf8;font-size:0.8rem">push-whoami</code> — Verify API key identity and role before a push session.<br><br>
+      <code style="color:#818cf8;font-size:0.8rem">gh-push-init + gh-push-upload-chunk</code> — GitHub repo push with chunked upload and background processing.<br><br>
+      <code style="color:#818cf8;font-size:0.8rem">push-job-retry</code> — Retry a failed deploy job without re-uploading unchanged files.</p>
+    </div>
+  </div>
+
+  <div class="sk-quote reveal">
+    <p>"A deployment pipeline that lets clients push sites to Netlify through your gateway. Each deploy is tracked, metered, and invoiced — the infrastructure layer that turns Netlify into a multi-tenant deploy service."</p>
+    <cite>— KaixuPush · Deploy Proxy · SOLEnterprises Gateway Documentation</cite>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ECOSYSTEM FIT -->
+<section class="content-section">
+  <div class="section-label reveal">Ecosystem Fit</div>
+  <div class="section-title reveal">statikAI Inside the SOL Stack</div>
+  <div class="section-desc reveal">statikAI is the deploy layer. Generated sites feed into SkyeDocx contracts, deploy history feeds into SkyeLedger invoices, and project logs feed into SkyeOps runbooks.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">📄</div>
+      <h3>statikAI → SkyeDocx</h3>
+      <div class="card-type">Deploy to Contract</div>
+      <p>When a statikAI deploy goes live, generate a SkyeDocx delivery contract that includes the live URL, deploy ID, and project scope as embedded exhibits. The delivery documentation writes itself from the deploy log — no manual writeup required.</p>
+      <div class="card-tags"><span>Delivery Contract</span><span>URL Exhibit</span><span>Deploy Record</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">💰</div>
+      <h3>statikAI → SkyeLedger</h3>
+      <div class="card-type">Deploy to Invoice</div>
+      <p>Pull the monthly KaixuPush invoice data directly into SkyeLedger as a revenue entry — deploys delivered, bytes consumed, billing total. The deploy pipeline's metered usage becomes the ledger line item without manual data entry.</p>
+      <div class="card-tags"><span>Usage Invoice</span><span>Revenue Entry</span><span>Metered Billing</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">⚙️</div>
+      <h3>statikAI → SkyeOps</h3>
+      <div class="card-type">Deploy to Runbook</div>
+      <p>Convert a completed statikAI deploy workflow into a SkyeOps runbook — capturing the project ID, generation brief, push sequence, and deploy resolution as a repeatable SOP. The next project of the same type runs from the runbook, not from memory.</p>
+      <div class="card-tags"><span>Deploy SOP</span><span>Project Runbook</span><span>Workflow Template</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section class="content-section">
+  <div class="ix-final-cta sk-final-cta reveal">
+    <div class="section-label" style="margin-bottom:1rem">Deploy Your First Site Now</div>
+    <h2>Brief to Build to Live.<br>In One Pipeline.</h2>
+    <p>Every static site you're still scaffolding manually is time the pipeline should already be handling. statikAI turns a plain-language brief into a tracked, metered, invoiceable Netlify deploy — from first description to live URL in a single session.</p>
+    <div class="sk-cta-row">
+      <a href="https://statikai.netlify.app/" target="_blank" rel="noopener" class="sk-cta-primary">Open statikAI →</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:0.78rem;color:rgba(220,216,208,0.3);font-family:'Fira Code',monospace;letter-spacing:.05em">AI site generation · KaixuPush deploy · tracked · metered · invoiced</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+  <p><strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 986-210-7040</p>
+  <div class="footer-links">
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/vault.html">Vault</a>
+    <a href="/admin.html">Admin</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/sitemap-visual.html">Site Map</a>
+  </div>
+  <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
+</footer>
+
+<script src="/js/three-bg.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/growth.js"></script>
+
+<script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/js/netlify-identity-init.js"></script>
+
+<!-- MEGA NAV OVERLAY -->
+<div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+  <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Navigate</div>
+      <a href="/index.html">Home</a>
+      <a href="/about.html">Founder</a>
+      <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="/platforms.html">Platforms</a>
+      <a href="/network.html">Network</a>
+      <a href="/credibility.html">Credibility</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/status.html">Status</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Platforms &amp; Apps</div>
+      <a href="/Platforms-Apps-Infrastructure/index.html">⬡ All Platforms Hub</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html">kAIxU Chat</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html">Gateway13</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html">Delta Gate</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html">kAIxU PDF Pro</a>
+      <a href="https://statikai.netlify.app/" target="_blank" rel="noopener">statikAI ↗</a>
+      <a href="https://skaixuidepro.netlify.app/" target="_blank" rel="noopener">skAIxU IDE Pro ↗</a>
+      <a href="https://0riginx.netlify.app/" target="_blank" rel="noopener">0riginx ↗</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Blog Categories</div>
+      <a href="/blog.html">All Posts</a>
+      <a href="/blog.html#phoenix">Phoenix AZ</a>
+      <a href="/blog.html#skaixu">SkAIxu IDE</a>
+      <a href="/blog.html#houston">Houston</a>
+      <a href="/blog.html#ai">Colorado AI</a>
+      <a href="/blog.html#devs">Devs &amp; AI</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Company</div>
+      <a href="/sitemap-visual.html">Site Map</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+    </div>
+  </div>
+</div>
+<script src="/js/partials.js"></script>
+</body>
+</html>

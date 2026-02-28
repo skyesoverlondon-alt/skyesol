@@ -1,0 +1,1818 @@
+<!-- FILE: index.html  |  Skye Route & Dispatch Vault — In-Depth Ad Landing Page (Single-File, Drop-Ready) -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0620" />
+  <title>Skye Route & Dispatch Vault (SkyeRouteX) — Offline Dispatch + Proof-of-Delivery</title>
+  <meta name="description" content="Offline-first dispatch ops with proof-of-delivery and exportable logs. Built for real-world routes when coverage fails." />
+  <meta property="og:title" content="Skye Route & Dispatch Vault — Offline Dispatch + Proof-of-Delivery" />
+  <meta property="og:description" content="Dispatch that doesn't blink when the signal dies. Proof-of-delivery + exportable logs in an offline-first flow." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://skyeroutex.netlify.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root{
+      --bg0:#060316;
+      --bg1:#0a0422;
+      --bg2:#12073a;
+
+      --violet:#a855f7;      /* neon purple */
+      --violet2:#7c3aed;
+      --gold:#fbbf24;        /* neon gold */
+      --blue:#38bdf8;        /* electric blue */
+      --mint:#34d399;
+
+      --text:#eef2ff;
+      --muted:rgba(238,242,255,.72);
+      --soft:rgba(238,242,255,.12);
+      --glass:rgba(255,255,255,.07);
+      --glass2:rgba(255,255,255,.10);
+
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --radius: 22px;
+
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 15% 10%, rgba(168,85,247,.22), transparent 60%),
+                  radial-gradient(900px 700px at 85% 25%, rgba(56,189,248,.18), transparent 62%),
+                  radial-gradient(900px 700px at 40% 95%, rgba(251,191,36,.14), transparent 62%),
+                  linear-gradient(180deg, var(--bg0), var(--bg2) 55%, var(--bg1));
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    button{ font-family:inherit; }
+
+    /* Background canvas */
+    #skyCanvas{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:-3;
+      opacity:.75;
+      filter: contrast(1.05) saturate(1.15);
+    }
+
+    /* Aurora overlay */
+    .aurora{
+      position:fixed;
+      inset:-10%;
+      z-index:-2;
+      pointer-events:none;
+      opacity:.55;
+      mix-blend-mode:screen;
+      filter: blur(16px) saturate(1.25);
+      background:
+        radial-gradient(60% 40% at 20% 40%, rgba(56,189,248,.22), transparent 70%),
+        radial-gradient(60% 45% at 70% 35%, rgba(168,85,247,.24), transparent 72%),
+        radial-gradient(55% 40% at 45% 70%, rgba(251,191,36,.14), transparent 70%),
+        conic-gradient(from 190deg at 45% 55%,
+          rgba(56,189,248,.0),
+          rgba(56,189,248,.20),
+          rgba(168,85,247,.22),
+          rgba(251,191,36,.14),
+          rgba(56,189,248,.0));
+      animation: auroraFloat 16s ease-in-out infinite;
+    }
+    @keyframes auroraFloat{
+      0%   { transform: translate3d(-1.5%, -1.0%, 0) rotate(-2deg) scale(1.02); }
+      50%  { transform: translate3d(1.5%, 1.2%, 0) rotate(2deg) scale(1.06); }
+      100% { transform: translate3d(-1.5%, -1.0%, 0) rotate(-2deg) scale(1.02); }
+    }
+
+    /* Subtle film grain */
+    .grain{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.12;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+      animation: grainMove 10s steps(8) infinite;
+    }
+    @keyframes grainMove{
+      0%{ transform:translate3d(0,0,0); }
+      100%{ transform:translate3d(-3%, 2%, 0); }
+    }
+
+    /* Floating logo: no container, subtle glow, slight pulse */
+    .floating-logo{
+      position:fixed;
+      top:18px;
+      left:18px;
+      z-index:50;
+      width:64px;
+      height:auto;
+      filter:
+        drop-shadow(0 0 10px rgba(168,85,247,.45))
+        drop-shadow(0 0 16px rgba(56,189,248,.30))
+        drop-shadow(0 0 18px rgba(251,191,36,.20));
+      animation: logoPulse 2.6s ease-in-out infinite;
+      transform-origin:center;
+    }
+    @keyframes logoPulse{
+      0%,100%{ transform: translate3d(0,0,0) scale(1); opacity:1; }
+      50%{ transform: translate3d(0,-1px,0) scale(1.03); opacity:.98; }
+    }
+
+    /* Top nav */
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(6,3,22,.82), rgba(6,3,22,.42));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 18px 14px 104px; /* space for floating logo */
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .brandline{
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .brandline .kicker{
+      font-size:12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(238,242,255,.72);
+    }
+    .brandline .title{
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:.04em;
+    }
+    .navlinks{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      color:rgba(238,242,255,.86);
+      font-size:12px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      user-select:none;
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      border-color: rgba(56,189,248,.35);
+      background: rgba(56,189,248,.08);
+    }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      color:rgba(238,242,255,.92);
+      cursor:pointer;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+      box-shadow: 0 10px 28px rgba(0,0,0,.28);
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(168,85,247,.38);
+      box-shadow: 0 18px 40px rgba(0,0,0,.38);
+    }
+    .btn.primary{
+      border-color: rgba(56,189,248,.30);
+      background:
+        radial-gradient(120% 160% at 30% 20%, rgba(56,189,248,.30), transparent 55%),
+        radial-gradient(120% 160% at 70% 80%, rgba(168,85,247,.28), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      box-shadow:
+        0 16px 46px rgba(0,0,0,.45),
+        0 0 0 1px rgba(56,189,248,.18) inset;
+    }
+    .btn.gold{
+      border-color: rgba(251,191,36,.30);
+      background:
+        radial-gradient(120% 160% at 30% 20%, rgba(251,191,36,.24), transparent 55%),
+        radial-gradient(120% 160% at 70% 80%, rgba(56,189,248,.18), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      box-shadow:
+        0 16px 46px rgba(0,0,0,.45),
+        0 0 0 1px rgba(251,191,36,.14) inset;
+    }
+    .btn.ghost{
+      background: rgba(255,255,255,.04);
+      border-color: rgba(255,255,255,.10);
+      box-shadow:none;
+    }
+
+    /* Layout */
+    main{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 18px 64px;
+    }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+      padding-top:10px;
+    }
+    @media (max-width: 980px){
+      .hero{ grid-template-columns:1fr; }
+    }
+
+    .card{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(1100px 600px at 15% 20%, rgba(168,85,247,.20), transparent 60%),
+        radial-gradient(900px 600px at 85% 20%, rgba(56,189,248,.16), transparent 60%),
+        radial-gradient(900px 650px at 40% 110%, rgba(251,191,36,.11), transparent 62%);
+      pointer-events:none;
+      opacity:.9;
+    }
+
+    .card > *{ position:relative; z-index:1; }
+
+    .hero-left{
+      padding:26px 22px 22px;
+      min-height: 340px;
+    }
+    .hero-right{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-height: 340px;
+    }
+
+    .badgeRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+      margin-bottom:10px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      font-size:12px;
+      color:rgba(238,242,255,.86);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--mint);
+      box-shadow: 0 0 0 4px rgba(52,211,153,.18);
+    }
+    .dot.offline{
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(251,191,36,.18);
+    }
+
+    h1{
+      margin:6px 0 10px;
+      font-size: clamp(30px, 4.1vw, 48px);
+      line-height:1.08;
+      letter-spacing:-.02em;
+    }
+    .subhead{
+      font-size: 15px;
+      line-height:1.55;
+      color: rgba(238,242,255,.82);
+      max-width: 56ch;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:16px;
+      align-items:center;
+    }
+
+    .micro{
+      margin-top:14px;
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      color: rgba(238,242,255,.70);
+      font-size: 12px;
+    }
+    .micro span{
+      display:inline-flex;
+      gap:8px; align-items:center;
+      padding:8px 10px;
+      border-radius:12px;
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .spark{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--blue);
+      box-shadow: 0 0 18px rgba(56,189,248,.55);
+    }
+
+    /* Sections */
+    .section{
+      margin-top:18px;
+      padding:18px;
+    }
+    .sectionHead{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .sectionHead h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.02em;
+    }
+    .sectionHead p{
+      margin:0;
+      color: rgba(238,242,255,.68);
+      font-size: 13px;
+      max-width: 66ch;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 980px){
+      .grid3{ grid-template-columns:1fr; }
+    }
+    .tile{
+      padding:14px 14px 12px;
+      border-radius:18px;
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.09);
+      position:relative;
+      overflow:hidden;
+    }
+    .tile::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(200px 160px at 20% 20%, rgba(56,189,248,.12), transparent 60%),
+        radial-gradient(200px 160px at 80% 30%, rgba(168,85,247,.14), transparent 60%),
+        radial-gradient(240px 180px at 60% 80%, rgba(251,191,36,.10), transparent 60%);
+      transform: rotate(8deg);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .tile > *{ position:relative; z-index:1; }
+    .tile h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing:.02em;
+    }
+    .tile p{
+      margin:0;
+      color: rgba(238,242,255,.72);
+      font-size: 13px;
+      line-height:1.5;
+    }
+    .icon{
+      width:34px; height:34px; border-radius:12px;
+      display:grid; place-items:center;
+      margin-bottom:10px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
+    }
+    .icon svg{ width:18px; height:18px; }
+
+    /* Demo panel */
+    .demoWrap{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 980px){
+      .demoWrap{ grid-template-columns:1fr; }
+    }
+    .panel{
+      padding:14px;
+      border-radius:18px;
+      background: rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.09);
+      overflow:hidden;
+    }
+    .panelHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .panelHead h3{
+      margin:0;
+      font-size: 14px;
+      letter-spacing:.02em;
+    }
+    .statusPill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      font-size:12px;
+      color: rgba(238,242,255,.86);
+    }
+    .statusLight{
+      width:8px; height:8px; border-radius:999px;
+      background: var(--mint);
+      box-shadow: 0 0 0 4px rgba(52,211,153,.18);
+    }
+    .statusLight.offline{
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(251,191,36,.18);
+    }
+
+    label{
+      display:block;
+      font-size:12px;
+      color: rgba(238,242,255,.72);
+      margin:8px 0 6px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:11px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      color: rgba(238,242,255,.92);
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(56,189,248,.40);
+      box-shadow: 0 0 0 4px rgba(56,189,248,.12);
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 560px){
+      .row{ grid-template-columns:1fr; }
+    }
+
+    .list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .item{
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .item strong{ font-size:13px; }
+    .item small{ color: rgba(238,242,255,.70); }
+    .tag{
+      font-size:11px;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      white-space:nowrap;
+      color: rgba(238,242,255,.82);
+    }
+    .tag.ok{ border-color: rgba(52,211,153,.28); }
+    .tag.warn{ border-color: rgba(251,191,36,.28); }
+
+    .miniActions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .miniActions .btn{ padding:10px 12px; border-radius:12px; font-size:12px; }
+
+    /* FAQ */
+    .faq{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 980px){
+      .faq{ grid-template-columns:1fr; }
+    }
+    details{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      padding:12px 12px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:700;
+      font-size:13px;
+      color: rgba(238,242,255,.92);
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{
+      margin:10px 0 0;
+      color: rgba(238,242,255,.72);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .chev{
+      width:14px; height:14px;
+      opacity:.8;
+      transition: transform .18s ease;
+    }
+    details[open] .chev{ transform: rotate(180deg); }
+
+    /* Footer CTA */
+    .bigCta{
+      margin-top:18px;
+      padding:18px;
+      text-align:center;
+    }
+    .bigCta h2{
+      margin:0 0 8px;
+      font-size: 20px;
+      letter-spacing:.02em;
+    }
+    .bigCta p{
+      margin:0 auto 14px;
+      max-width: 70ch;
+      color: rgba(238,242,255,.72);
+      font-size: 13px;
+      line-height:1.55;
+    }
+
+    /* Vault Gate overlay (Demo) */
+    .gate{
+      position:fixed;
+      inset:0;
+      z-index:1000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      background: rgba(0,0,0,.62);
+      backdrop-filter: blur(12px);
+    }
+    .gate.show{ display:flex; }
+    .gateCard{
+      width:min(520px, 100%);
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      box-shadow: 0 30px 90px rgba(0,0,0,.70);
+      overflow:hidden;
+      position:relative;
+    }
+    .gateCard::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 440px at 15% 15%, rgba(56,189,248,.18), transparent 60%),
+        radial-gradient(700px 440px at 85% 25%, rgba(168,85,247,.20), transparent 60%),
+        radial-gradient(700px 440px at 50% 120%, rgba(251,191,36,.12), transparent 60%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .gateInner{ position:relative; z-index:1; padding:16px; }
+    .gateTop{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding-bottom:10px;
+      margin-bottom:10px;
+    }
+    .gateTop h3{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: rgba(238,242,255,.88);
+    }
+    .gateTop .hint{
+      font-size:12px;
+      color: rgba(238,242,255,.68);
+    }
+    .gateGrid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    .inline{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:space-between;
+    }
+    .checkbox{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:12px;
+      color: rgba(238,242,255,.78);
+      user-select:none;
+    }
+    .checkbox input{ width:auto; }
+
+    .error{
+      display:none;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(251,191,36,.25);
+      background: rgba(251,191,36,.08);
+      color: rgba(255,240,200,.92);
+      font-size:12px;
+      line-height:1.4;
+    }
+    .error.show{ display:block; }
+
+    /* Tiny legal */
+    .tiny{
+      margin-top:14px;
+      font-size:11px;
+      color: rgba(238,242,255,.58);
+      line-height:1.45;
+    }
+    .tiny a{ text-decoration:underline; text-underline-offset:2px; }
+  </style>
+</head>
+
+<body>
+  <!-- Cinematic background layers -->
+  <canvas id="skyCanvas" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Floating logo (no container) -->
+  <img class="floating-logo"
+       src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png"
+       alt="Skyes Over London LC Logo" border="0" />
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brandline">
+        <div class="kicker">Dispatch ops • offline-first</div>
+        <div class="title">Skye Route & Dispatch Vault (SkyeRouteX)</div>
+      </div>
+      <nav class="navlinks" aria-label="Primary">
+        <a class="pill" href="#features">Features</a>
+        <a class="pill" href="#how">How it works</a>
+        <a class="pill" href="#demo">Vault Demo</a>
+        <a class="pill" href="#faq">FAQ</a>
+        <a class="pill" href="#contact">Contact</a>
+        <a class="btn primary" href="https://skyeroutex.netlify.app/" target="_blank" rel="noopener">
+          Open SkyeRouteX
+          <span aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="card hero-left">
+        <div class="badgeRow" aria-label="Status badges">
+          <span class="badge" id="heroStatus">
+            <span class="dot" id="heroDot"></span>
+            <span id="heroStatusText">Ready • Offline-capable</span>
+          </span>
+          <span class="badge">
+            <span class="spark" aria-hidden="true"></span>
+            Proof-of-Delivery + Exportable Logs
+          </span>
+          <span class="badge">
+            Vault Gate (PIN) • Optional
+          </span>
+        </div>
+
+        <h1>Dispatch that doesn’t blink when the signal dies. ⚡</h1>
+
+        <p class="subhead">
+          Skye Route & Dispatch Vault is built for real-world routes: warehouses, elevators, rural stretches, loading docks,
+          parking lots—places where “refresh the app” is fantasy. Run dispatch operations offline-first, capture proof-of-delivery,
+          and export clean logs that make billing, disputes, and audits dramatically easier.
+        </p>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="https://skyeroutex.netlify.app/" target="_blank" rel="noopener">
+            Launch the Vault
+            <span aria-hidden="true">→</span>
+          </a>
+          <a class="btn gold" href="#demo">
+            Try the Offline Vault Demo
+            <span aria-hidden="true">⚙</span>
+          </a>
+          <a class="btn ghost" href="#features">
+            See What’s Inside
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <div class="micro" aria-label="Highlights">
+          <span><span class="spark" aria-hidden="true"></span> Offline-first workflow</span>
+          <span><span class="spark" aria-hidden="true"></span> POD-ready completion trail</span>
+          <span><span class="spark" aria-hidden="true"></span> Exportable evidence logs</span>
+          <span><span class="spark" aria-hidden="true"></span> Vault Gate PIN option</span>
+        </div>
+      </div>
+
+      <div class="card hero-right" aria-label="Pain to power">
+        <div class="sectionHead" style="margin:0 0 4px;">
+          <h2 style="font-size:16px; margin:0;">Why teams switch</h2>
+          <p style="margin:0; max-width:none;">Because chaos is expensive.</p>
+        </div>
+
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M21 12a9 9 0 1 1-9-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Coverage drops → dispatch goes blind</h3>
+          <p>SkyeRouteX is designed so routes and status flows remain usable even when connectivity fails.</p>
+        </div>
+
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 7h16M4 12h10M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M18 10l2 2-4 4-2-2 4-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>“Delivered” with no proof = disputes</h3>
+          <p>Proof-of-delivery support + exportable logs create a defensible completion trail.</p>
+        </div>
+
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 7h10v10H7z" stroke="currentColor" stroke-width="2"/>
+              <path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="2" opacity=".45"/>
+            </svg>
+          </div>
+          <h3>Records scattered across tools</h3>
+          <p>A vault is a single source of truth: routes, stops, statuses, and exports in one operational flow.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="card section" id="features" aria-label="Features">
+      <div class="sectionHead">
+        <h2>Built for field reality. Engineered for clean ops.</h2>
+        <p>SkyeRouteX isn’t “tracking.” It’s dispatch control + evidence.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M12 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M21 12a9 9 0 1 1-9-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+            </svg>
+          </div>
+          <h3>Offline-first dispatch</h3>
+          <p>Routes and updates are designed to keep working when the network isn’t. The job continues. The record stays coherent.</p>
+        </div>
+
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M9 12l2 2 4-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 12a8 8 0 1 1-8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+            </svg>
+          </div>
+          <h3>Proof-of-delivery readiness</h3>
+          <p>Completion is meant to be provable: consistent status changes, structured stops, and exportable logs for disputes and billing.</p>
+        </div>
+
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 4h12v16H6z" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 8h8M8 12h8M8 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".85"/>
+            </svg>
+          </div>
+          <h3>Exportable logs</h3>
+          <p>When it’s time to reconcile, audit, or invoice: export a clean record. If it can’t be exported, it can’t be defended.</p>
+        </div>
+
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3l7 4v10l-7 4-7-4V7l7-4z" stroke="currentColor" stroke-width="2" opacity=".9"/>
+              <path d="M12 7v10" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+            </svg>
+          </div>
+          <h3>Dashboard flow</h3>
+          <p>A dispatch day needs a control surface: start routes, view overview, update status—without app gymnastics.</p>
+        </div>
+
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M6 11h12v9H6z" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 15v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Vault Gate PIN option</h3>
+          <p>Enable a PIN gate when you need it. Remember unlock for a shift window. Practical security for busy dispatch.</p>
+        </div>
+
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M12 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+              <path d="M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".35"/>
+            </svg>
+          </div>
+          <h3>No fragile dependencies</h3>
+          <p>This landing page is a single file. Drop-deploy it anywhere. The demo stores data locally so you can test offline.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="card section" id="how" aria-label="How it works">
+      <div class="sectionHead">
+        <h2>The operational rhythm</h2>
+        <p>Open the vault → build the route → run the day → export the proof.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M21 12a9 9 0 1 1-9-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+            </svg>
+          </div>
+          <h3>1) Start fast</h3>
+          <p>Dispatch isn’t a ceremony. Open the console, confirm readiness, create a new route.</p>
+        </div>
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 7h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M4 12h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>2) Work the route</h3>
+          <p>Track stops, update statuses, keep the sequence coherent—even when connectivity is unreliable.</p>
+        </div>
+        <div class="tile">
+          <div class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7 11h10v10H7z" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 15h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".85"/>
+              <path d="M9 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".65"/>
+            </svg>
+          </div>
+          <h3>3) Export the evidence</h3>
+          <p>Clean logs make disputes smaller, billing faster, and operations easier to review.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO -->
+    <section class="card section" id="demo" aria-label="Vault Demo">
+      <div class="sectionHead">
+        <h2>Offline Vault Demo (runs locally in your browser)</h2>
+        <p>Create a route, add stops, mark delivery, export logs. Toggle “offline” and watch nothing break.</p>
+      </div>
+
+      <div class="demoWrap">
+        <!-- Demo Controls -->
+        <div class="panel" aria-label="Demo controls">
+          <div class="panelHead">
+            <h3>Vault Gate + Dispatch Controls</h3>
+            <div class="statusPill" role="status" aria-live="polite">
+              <span class="statusLight" id="netLight"></span>
+              <span id="netLabel">Online</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="demoRouteName">Route Name</label>
+              <input id="demoRouteName" placeholder="e.g., Phoenix AM Run" maxlength="60" />
+            </div>
+            <div>
+              <label for="demoDriver">Driver / Unit</label>
+              <input id="demoDriver" placeholder="e.g., Unit 13 • T. Norman" maxlength="60" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="demoStop">Add Stop (Address / Name)</label>
+              <input id="demoStop" placeholder="e.g., 2140 W Camelback Rd" maxlength="80" />
+            </div>
+            <div>
+              <label for="demoNote">Stop Note (optional)</label>
+              <input id="demoNote" placeholder="e.g., Dock 3 • call on arrival" maxlength="80" />
+            </div>
+          </div>
+
+          <div class="miniActions">
+            <button class="btn primary" id="btnNewRoute" type="button">New Route</button>
+            <button class="btn" id="btnAddStop" type="button">Add Stop</button>
+            <button class="btn gold" id="btnToggleOffline" type="button">Toggle Offline</button>
+            <button class="btn ghost" id="btnResetDemo" type="button">Reset Demo</button>
+          </div>
+
+          <hr style="border:0; border-top:1px solid rgba(255,255,255,.08); margin:14px 0;">
+
+          <div class="row">
+            <div>
+              <label for="pinEnable">Vault Gate (Demo)</label>
+              <select id="pinEnable">
+                <option value="off">Disabled</option>
+                <option value="on">Enabled (PIN required)</option>
+              </select>
+            </div>
+            <div>
+              <label for="pinSet">Set / Change PIN</label>
+              <input id="pinSet" type="password" placeholder="Enter new PIN" inputmode="numeric" />
+            </div>
+          </div>
+
+          <div class="miniActions">
+            <button class="btn" id="btnSavePin" type="button">Save PIN</button>
+            <button class="btn ghost" id="btnLockNow" type="button">Lock Vault Now</button>
+          </div>
+
+          <p class="tiny">
+            Demo data is stored locally (on this device) so you can test “offline-first” behavior.
+            This is a lightweight simulation of the vault concept, not a replacement for your production app.
+          </p>
+        </div>
+
+        <!-- Demo Dashboard -->
+        <div class="panel" aria-label="Demo dashboard">
+          <div class="panelHead">
+            <h3>Route Dashboard</h3>
+            <div class="statusPill">
+              <span style="opacity:.85;">Overview</span>
+              <span style="opacity:.55;">•</span>
+              <span style="opacity:.85;">Status</span>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:10px;">
+            <span class="badge" style="background:rgba(0,0,0,.20); border-color:rgba(255,255,255,.10);">
+              <span class="spark" aria-hidden="true"></span>
+              <span id="dashRoute">No active route</span>
+            </span>
+            <span class="badge" style="background:rgba(0,0,0,.20); border-color:rgba(255,255,255,.10);">
+              Driver: <span id="dashDriver" style="opacity:.95; margin-left:6px;">—</span>
+            </span>
+            <span class="badge" style="background:rgba(0,0,0,.20); border-color:rgba(255,255,255,.10);">
+              Stops: <span id="dashStops" style="opacity:.95; margin-left:6px;">0</span>
+            </span>
+          </div>
+
+          <ul class="list" id="stopList" aria-label="Stops list"></ul>
+
+          <div class="miniActions" style="margin-top:12px;">
+            <button class="btn primary" id="btnExportJson" type="button">Export Logs (JSON)</button>
+            <button class="btn gold" id="btnExportCsv" type="button">Export Logs (CSV)</button>
+            <button class="btn ghost" id="btnCopySummary" type="button">Copy Summary</button>
+          </div>
+
+          <div id="exportNote" class="tiny" style="margin-top:10px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO IT'S FOR -->
+    <section class="card section" aria-label="Who it's for">
+      <div class="sectionHead">
+        <h2>Who SkyeRouteX is built for</h2>
+        <p>Dispatch teams that want speed, reliability, and a defensible delivery record.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="tile">
+          <h3>Local delivery & last-mile</h3>
+          <p>Parts, appliances, furniture, medical supply, B2B drops. If you run stops, you need clean logs.</p>
+        </div>
+        <div class="tile">
+          <h3>Service dispatch</h3>
+          <p>Install/repair/maintenance where “completed” needs a traceable record of what happened and when.</p>
+        </div>
+        <div class="tile">
+          <h3>Owner-operators scaling up</h3>
+          <p>Graduate from texts and screenshots into a route vault that holds the operational truth.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="card section" id="faq" aria-label="FAQ">
+      <div class="sectionHead">
+        <h2>FAQ</h2>
+        <p>Direct answers. No smoke. No fluff.</p>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>
+            What does “offline-first” actually mean?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </summary>
+          <p>
+            Offline-first means the workflow is designed to function even when network availability is poor.
+            Instead of failing hard when the signal drops, the app keeps the core route and status flow usable and consistent.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            What’s the point of “exportable logs”?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </summary>
+          <p>
+            Exports give you a portable evidence trail: route activity, stop status, timestamps, and completion details.
+            That helps with billing, internal review, and resolving disputes faster because the record is structured.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            Is Vault Gate required?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </summary>
+          <p>
+            No. Vault Gate is optional. Enable it when you want an extra access layer (PIN) for shared devices or sensitive ops.
+            In the demo, you can simulate “remember unlock for 12 hours” like a shift window.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            Where do I start?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </summary>
+          <p>
+            Launch SkyeRouteX, create a route, add stops, then run your normal status flow.
+            The goal is a clean day: consistent updates + a usable completion record.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <!-- BIG CTA + CONTACT -->
+    <section class="card bigCta" id="contact" aria-label="Contact and call-to-action">
+      <h2>Turn dispatch into evidence. 🧾⚡</h2>
+      <p>
+        Skye Route & Dispatch Vault is built to keep operations moving when connectivity fails,
+        while still producing proof-of-delivery and exportable logs that help your business run cleaner.
+      </p>
+      <div class="ctaRow" style="justify-content:center;">
+        <a class="btn primary" href="https://skyeroutex.netlify.app/" target="_blank" rel="noopener">
+          Open SkyeRouteX
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a class="btn gold" href="mailto:SkyesOverLondonLC@solenterprises.org?subject=SkyeRouteX%20Demo%20Request&body=Name%3A%0ACompany%3A%0AUse%20case%3A%0A%0AWhat%20dispatch%20problem%20are%20you%20solving%3F">
+          Request a Demo
+          <span aria-hidden="true">✉</span>
+        </a>
+        <a class="btn ghost" href="tel:+14804695416">
+          Call • (480) 469-5416
+          <span aria-hidden="true">☎</span>
+        </a>
+      </div>
+
+      <p class="tiny" style="margin-top:14px;">
+        © <span id="year"></span> Skyes Over London LC. This page is a marketing landing page + demo simulation.
+      </p>
+    </section>
+  </main>
+
+  <!-- Vault Gate (Demo Overlay) -->
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Vault Gate">
+    <div class="gateCard">
+      <div class="gateInner">
+        <div class="gateTop">
+          <h3>Vault Gate</h3>
+          <div class="hint">Unlock dispatch console</div>
+        </div>
+
+        <div class="gateGrid">
+          <div class="error" id="gateError">Invalid PIN. Try again.</div>
+
+          <label for="gatePin">Enter PIN</label>
+          <input id="gatePin" type="password" inputmode="numeric" autocomplete="one-time-code" placeholder="••••" />
+
+          <div class="inline">
+            <label class="checkbox">
+              <input id="gateRemember" type="checkbox" />
+              Remember unlock for 12 hours (this device)
+            </label>
+            <button class="btn primary" id="gateUnlock" type="button">Unlock</button>
+          </div>
+
+          <p class="tiny">
+            This is the demo gate. In production, access control policies can be aligned to your operational requirements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /***********************
+     * CINEMATIC STARFIELD *
+     ***********************/
+    (function starfield(){
+      const c = document.getElementById('skyCanvas');
+      const ctx = c.getContext('2d', { alpha: true });
+      let w=0,h=0, dpr=1;
+      let stars=[];
+      let t=0;
+
+      function resize(){
+        dpr = Math.min(2, window.devicePixelRatio || 1);
+        w = c.width = Math.floor(window.innerWidth * dpr);
+        h = c.height = Math.floor(window.innerHeight * dpr);
+        c.style.width = window.innerWidth + 'px';
+        c.style.height = window.innerHeight + 'px';
+
+        const count = Math.floor((window.innerWidth * window.innerHeight) / 9000);
+        stars = new Array(count).fill(0).map(()=>({
+          x: Math.random()*w,
+          y: Math.random()*h,
+          r: (Math.random()*1.4 + 0.3)*dpr,
+          s: (Math.random()*0.35 + 0.08)*dpr,
+          a: Math.random()*0.6 + 0.25,
+          hue: Math.random() < 0.6 ? 210 : (Math.random()<0.7 ? 275 : 45)
+        }));
+      }
+
+      function draw(){
+        t += 0.006;
+        ctx.clearRect(0,0,w,h);
+
+        // soft vignette
+        const g = ctx.createRadialGradient(w*0.5,h*0.55, Math.min(w,h)*0.08, w*0.5,h*0.55, Math.min(w,h)*0.72);
+        g.addColorStop(0,'rgba(0,0,0,0)');
+        g.addColorStop(1,'rgba(0,0,0,.35)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0,0,w,h);
+
+        for(const s of stars){
+          s.y += s.s * (1 + Math.sin(t + s.x*0.0008)*0.35);
+          if(s.y > h + 20*dpr) s.y = -20*dpr;
+
+          const tw = (Math.sin(t*2 + s.x*0.001 + s.y*0.001) + 1) * 0.5;
+          const alpha = (0.12 + s.a*0.9) * (0.55 + tw*0.45);
+
+          ctx.beginPath();
+          ctx.fillStyle = `hsla(${s.hue}, 95%, 70%, ${alpha})`;
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize, { passive:true });
+      resize();
+      draw();
+    })();
+
+    /********************
+     * YEAR FOOTER      *
+     ********************/
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /********************
+     * HERO STATUS      *
+     ********************/
+    const heroDot = document.getElementById('heroDot');
+    const heroStatusText = document.getElementById('heroStatusText');
+
+    function setHeroNet(online){
+      if(online){
+        heroDot.classList.remove('offline');
+        heroStatusText.textContent = 'Ready • Offline-capable';
+      } else {
+        heroDot.classList.add('offline');
+        heroStatusText.textContent = 'Offline Mode • Still Operational';
+      }
+    }
+
+    /********************
+     * DEMO STORAGE     *
+     ********************/
+    const LS = {
+      route: 'svx_demo_route_v1',
+      pinEnabled: 'svx_demo_pin_enabled_v1',
+      pinHash: 'svx_demo_pin_hash_v1',
+      unlockUntil: 'svx_demo_unlock_until_v1',
+      demoOffline: 'svx_demo_offline_v1'
+    };
+
+    function now(){ return Date.now(); }
+
+    function safeJsonParse(s, fallback){
+      try{ return JSON.parse(s); }catch{ return fallback; }
+    }
+
+    function loadRoute(){
+      return safeJsonParse(localStorage.getItem(LS.route), null);
+    }
+
+    function saveRoute(route){
+      localStorage.setItem(LS.route, JSON.stringify(route));
+      renderDashboard();
+    }
+
+    function resetDemo(){
+      localStorage.removeItem(LS.route);
+      localStorage.removeItem(LS.demoOffline);
+      // keep PIN settings (operator preference)
+      renderNetwork();
+      renderDashboard();
+      note('Demo reset. PIN settings preserved.');
+    }
+
+    /********************
+     * NETWORK TOGGLE   *
+     ********************/
+    const netLight = document.getElementById('netLight');
+    const netLabel = document.getElementById('netLabel');
+
+    function isDemoOffline(){
+      return localStorage.getItem(LS.demoOffline) === '1';
+    }
+
+    function setDemoOffline(v){
+      localStorage.setItem(LS.demoOffline, v ? '1' : '0');
+      renderNetwork();
+    }
+
+    function renderNetwork(){
+      const offline = isDemoOffline();
+      if(offline){
+        netLight.classList.add('offline');
+        netLabel.textContent = 'Offline';
+      } else {
+        netLight.classList.remove('offline');
+        netLabel.textContent = 'Online';
+      }
+      setHeroNet(!offline);
+    }
+
+    /********************
+     * DASHBOARD RENDER *
+     ********************/
+    const dashRoute = document.getElementById('dashRoute');
+    const dashDriver = document.getElementById('dashDriver');
+    const dashStops = document.getElementById('dashStops');
+    const stopList = document.getElementById('stopList');
+    const exportNote = document.getElementById('exportNote');
+
+    function fmtTime(ts){
+      const d = new Date(ts);
+      return d.toLocaleString(undefined, { year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+    }
+
+    function renderDashboard(){
+      const r = loadRoute();
+      exportNote.textContent = '';
+      stopList.innerHTML = '';
+
+      if(!r){
+        dashRoute.textContent = 'No active route';
+        dashDriver.textContent = '—';
+        dashStops.textContent = '0';
+        return;
+      }
+
+      dashRoute.textContent = `${r.name} • ${r.id}`;
+      dashDriver.textContent = r.driver || '—';
+      dashStops.textContent = String(r.stops.length);
+
+      for(const s of r.stops){
+        const li = document.createElement('li');
+        li.className = 'item';
+
+        const left = document.createElement('div');
+        left.style.display = 'flex';
+        left.style.flexDirection = 'column';
+        left.style.gap = '2px';
+
+        const title = document.createElement('strong');
+        title.textContent = s.label;
+
+        const meta = document.createElement('small');
+        const bits = [];
+        bits.push(`Added: ${fmtTime(s.createdAt)}`);
+        if(s.note) bits.push(`Note: ${s.note}`);
+        if(s.deliveredAt) bits.push(`Delivered: ${fmtTime(s.deliveredAt)}`);
+        meta.textContent = bits.join(' • ');
+
+        left.appendChild(title);
+        left.appendChild(meta);
+
+        const right = document.createElement('div');
+        right.style.display='flex';
+        right.style.flexDirection='column';
+        right.style.gap='8px';
+        right.style.alignItems='flex-end';
+
+        const tag = document.createElement('span');
+        tag.className = 'tag ' + (s.status === 'Delivered' ? 'ok' : 'warn');
+        tag.textContent = s.status;
+
+        const actions = document.createElement('div');
+        actions.style.display = 'flex';
+        actions.style.gap = '8px';
+
+        const btn = document.createElement('button');
+        btn.type='button';
+        btn.className = 'btn ' + (s.status === 'Delivered' ? 'ghost' : 'primary');
+        btn.style.padding='8px 10px';
+        btn.style.borderRadius='12px';
+        btn.style.fontSize='12px';
+        btn.textContent = (s.status === 'Delivered') ? 'Reopen' : 'Mark Delivered';
+
+        btn.addEventListener('click', ()=>{
+          const rr = loadRoute();
+          if(!rr) return;
+
+          const target = rr.stops.find(x=>x.id===s.id);
+          if(!target) return;
+
+          if(target.status === 'Delivered'){
+            target.status = 'In Progress';
+            target.deliveredAt = null;
+          } else {
+            target.status = 'Delivered';
+            target.deliveredAt = now();
+          }
+          rr.updatedAt = now();
+          saveRoute(rr);
+          note(`Stop updated: ${target.label} → ${target.status}`);
+        });
+
+        const del = document.createElement('button');
+        del.type='button';
+        del.className='btn ghost';
+        del.style.padding='8px 10px';
+        del.style.borderRadius='12px';
+        del.style.fontSize='12px';
+        del.textContent='Remove';
+
+        del.addEventListener('click', ()=>{
+          const rr = loadRoute();
+          if(!rr) return;
+          rr.stops = rr.stops.filter(x=>x.id!==s.id);
+          rr.updatedAt = now();
+          saveRoute(rr);
+          note(`Stop removed: ${s.label}`);
+        });
+
+        actions.appendChild(btn);
+        actions.appendChild(del);
+
+        right.appendChild(tag);
+        right.appendChild(actions);
+
+        li.appendChild(left);
+        li.appendChild(right);
+        stopList.appendChild(li);
+      }
+    }
+
+    function note(msg){
+      exportNote.textContent = msg;
+    }
+
+    /********************
+     * ROUTE ACTIONS    *
+     ********************/
+    const demoRouteName = document.getElementById('demoRouteName');
+    const demoDriver = document.getElementById('demoDriver');
+    const demoStop = document.getElementById('demoStop');
+    const demoNote = document.getElementById('demoNote');
+
+    document.getElementById('btnNewRoute').addEventListener('click', ()=>{
+      const name = (demoRouteName.value || '').trim() || 'New Route';
+      const driver = (demoDriver.value || '').trim();
+      const id = 'SVX-' + Math.random().toString(36).slice(2,6).toUpperCase() + '-' + (Math.random()*9000|0);
+
+      const route = {
+        id,
+        name,
+        driver,
+        createdAt: now(),
+        updatedAt: now(),
+        stops: []
+      };
+
+      saveRoute(route);
+      note(`Route created: ${name} (${id})`);
+    });
+
+    document.getElementById('btnAddStop').addEventListener('click', ()=>{
+      const r = loadRoute();
+      if(!r){
+        note('Create a route first (New Route).');
+        return;
+      }
+      const label = (demoStop.value || '').trim();
+      if(!label){
+        note('Enter a stop address/name before adding.');
+        return;
+      }
+
+      const stop = {
+        id: 'STOP-' + Math.random().toString(36).slice(2,8).toUpperCase(),
+        label,
+        note: (demoNote.value || '').trim(),
+        status: 'In Progress',
+        createdAt: now(),
+        deliveredAt: null
+      };
+
+      r.stops.push(stop);
+      r.updatedAt = now();
+      saveRoute(r);
+
+      demoStop.value = '';
+      demoNote.value = '';
+      note(`Stop added: ${stop.label}`);
+    });
+
+    document.getElementById('btnToggleOffline').addEventListener('click', ()=>{
+      setDemoOffline(!isDemoOffline());
+      note(isDemoOffline() ? 'Offline mode enabled. Demo remains operational.' : 'Online mode enabled.');
+    });
+
+    document.getElementById('btnResetDemo').addEventListener('click', resetDemo);
+
+    /********************
+     * EXPORT LOGS      *
+     ********************/
+    function downloadFile(filename, content, mime){
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url), 500);
+    }
+
+    function routeToCsv(r){
+      const header = ['route_id','route_name','driver','stop_id','stop_label','stop_note','status','added_at','delivered_at','exported_at'];
+      const exportedAt = fmtTime(now());
+      const rows = [header.join(',')];
+
+      const esc = (v)=>{
+        const s = (v ?? '').toString();
+        if(/[",\n]/.test(s)) return '"' + s.replaceAll('"','""') + '"';
+        return s;
+      };
+
+      for(const s of r.stops){
+        rows.push([
+          esc(r.id),
+          esc(r.name),
+          esc(r.driver),
+          esc(s.id),
+          esc(s.label),
+          esc(s.note),
+          esc(s.status),
+          esc(fmtTime(s.createdAt)),
+          esc(s.deliveredAt ? fmtTime(s.deliveredAt) : ''),
+          esc(exportedAt)
+        ].join(','));
+      }
+      return rows.join('\n');
+    }
+
+    document.getElementById('btnExportJson').addEventListener('click', ()=>{
+      const r = loadRoute();
+      if(!r){ note('No active route to export.'); return; }
+
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        route: r
+      };
+      downloadFile(`SkyeRouteX_${r.id}_logs.json`, JSON.stringify(payload, null, 2), 'application/json');
+      note('Exported JSON logs.');
+    });
+
+    document.getElementById('btnExportCsv').addEventListener('click', ()=>{
+      const r = loadRoute();
+      if(!r){ note('No active route to export.'); return; }
+      const csv = routeToCsv(r);
+      downloadFile(`SkyeRouteX_${r.id}_logs.csv`, csv, 'text/csv');
+      note('Exported CSV logs.');
+    });
+
+    document.getElementById('btnCopySummary').addEventListener('click', async ()=>{
+      const r = loadRoute();
+      if(!r){ note('No active route.'); return; }
+
+      const delivered = r.stops.filter(s=>s.status==='Delivered').length;
+      const total = r.stops.length;
+
+      const text =
+`SkyeRouteX Route Summary
+Route: ${r.name} (${r.id})
+Driver: ${r.driver || '—'}
+Stops: ${total}
+Delivered: ${delivered}
+Updated: ${fmtTime(r.updatedAt)}
+Mode: ${isDemoOffline() ? 'Offline (simulated)' : 'Online'}
+`;
+
+      try{
+        await navigator.clipboard.writeText(text);
+        note('Summary copied to clipboard.');
+      }catch{
+        note('Clipboard blocked by browser. Use export instead.');
+      }
+    });
+
+    /********************
+     * VAULT GATE (DEMO)*
+     ********************/
+    const gate = document.getElementById('gate');
+    const gatePin = document.getElementById('gatePin');
+    const gateRemember = document.getElementById('gateRemember');
+    const gateUnlock = document.getElementById('gateUnlock');
+    const gateError = document.getElementById('gateError');
+
+    const pinEnable = document.getElementById('pinEnable');
+    const pinSet = document.getElementById('pinSet');
+    const btnSavePin = document.getElementById('btnSavePin');
+    const btnLockNow = document.getElementById('btnLockNow');
+
+    function pinEnabled(){
+      return localStorage.getItem(LS.pinEnabled) === '1';
+    }
+
+    function setPinEnabled(v){
+      localStorage.setItem(LS.pinEnabled, v ? '1' : '0');
+    }
+
+    function getUnlockUntil(){
+      const v = Number(localStorage.getItem(LS.unlockUntil) || '0');
+      return Number.isFinite(v) ? v : 0;
+    }
+
+    function setUnlockUntil(ts){
+      localStorage.setItem(LS.unlockUntil, String(ts));
+    }
+
+    async function sha256Hex(str){
+      const enc = new TextEncoder().encode(str);
+      const buf = await crypto.subtle.digest('SHA-256', enc);
+      const bytes = new Uint8Array(buf);
+      return [...bytes].map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+
+    async function setPin(pin){
+      const h = await sha256Hex(pin);
+      localStorage.setItem(LS.pinHash, h);
+    }
+
+    function hasPin(){
+      return !!localStorage.getItem(LS.pinHash);
+    }
+
+    async function checkPin(pin){
+      const stored = localStorage.getItem(LS.pinHash);
+      if(!stored) return false;
+      const h = await sha256Hex(pin);
+      return h === stored;
+    }
+
+    function showGate(){
+      gateError.classList.remove('show');
+      gatePin.value = '';
+      gateRemember.checked = false;
+      gate.classList.add('show');
+      setTimeout(()=>gatePin.focus(), 80);
+    }
+
+    function hideGate(){
+      gate.classList.remove('show');
+    }
+
+    function shouldGateBeOpen(){
+      if(!pinEnabled()) return false;
+      if(!hasPin()) return true; // enabled but no pin set -> require setup
+      const until = getUnlockUntil();
+      return now() > until;
+    }
+
+    function refreshGateState(){
+      // sync UI dropdown from storage
+      pinEnable.value = pinEnabled() ? 'on' : 'off';
+
+      if(shouldGateBeOpen()){
+        showGate();
+      } else {
+        hideGate();
+      }
+    }
+
+    pinEnable.addEventListener('change', ()=>{
+      const v = pinEnable.value === 'on';
+      setPinEnabled(v);
+
+      if(v){
+        if(!hasPin()){
+          note('Vault Gate enabled. Set a PIN to complete setup.');
+          showGate();
+        } else {
+          note('Vault Gate enabled.');
+          // lock immediately when enabling
+          setUnlockUntil(0);
+          refreshGateState();
+        }
+      } else {
+        note('Vault Gate disabled.');
+        setUnlockUntil(0);
+        hideGate();
+      }
+    });
+
+    btnSavePin.addEventListener('click', async ()=>{
+      const pin = (pinSet.value || '').trim();
+      if(!pin){
+        note('Enter a PIN first.');
+        return;
+      }
+      if(pin.length < 4){
+        note('PIN should be at least 4 digits/characters.');
+        return;
+      }
+      await setPin(pin);
+      pinSet.value = '';
+      setPinEnabled(true);
+      pinEnable.value = 'on';
+      setUnlockUntil(0);
+      note('PIN saved. Vault Gate is enabled.');
+      refreshGateState();
+    });
+
+    btnLockNow.addEventListener('click', ()=>{
+      if(!pinEnabled()){
+        note('Vault Gate is disabled. Enable it first if you want a lock.');
+        return;
+      }
+      setUnlockUntil(0);
+      note('Vault locked.');
+      refreshGateState();
+    });
+
+    gateUnlock.addEventListener('click', async ()=>{
+      if(!pinEnabled()){
+        hideGate();
+        return;
+      }
+
+      // if enabled but no PIN hash exists, force user to set via side panel
+      if(!hasPin()){
+        gateError.textContent = 'Vault Gate is enabled, but no PIN is set. Set a PIN in the demo controls, then try again.';
+        gateError.classList.add('show');
+        return;
+      }
+
+      const pin = (gatePin.value || '').trim();
+      const ok = await checkPin(pin);
+
+      if(!ok){
+        gateError.textContent = 'Invalid PIN. Try again.';
+        gateError.classList.add('show');
+        gatePin.focus();
+        return;
+      }
+
+      gateError.classList.remove('show');
+
+      if(gateRemember.checked){
+        setUnlockUntil(now() + 12 * 60 * 60 * 1000);
+      } else {
+        // unlocked for a short window if not remembered
+        setUnlockUntil(now() + 10 * 60 * 1000);
+      }
+
+      note('Vault unlocked.');
+      hideGate();
+    });
+
+    gatePin.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter') gateUnlock.click();
+      if(e.key === 'Escape') {
+        // do nothing; vault stays locked
+      }
+    });
+
+    /********************
+     * INIT             *
+     ********************/
+    (function init(){
+      // default settings
+      if(localStorage.getItem(LS.pinEnabled) === null) setPinEnabled(false);
+      if(localStorage.getItem(LS.demoOffline) === null) setDemoOffline(false);
+
+      renderNetwork();
+      renderDashboard();
+      refreshGateState();
+
+      // keep gate state periodically (for remember-unlock expiry)
+      setInterval(refreshGateState, 15000);
+    })();
+  </script>
+</body>
+</html>

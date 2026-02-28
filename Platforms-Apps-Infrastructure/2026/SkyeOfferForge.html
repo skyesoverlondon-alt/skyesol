@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyeOfferForge — Pricing Offer & Proposal Builder | SOL Platforms</title>
+  <meta name="description" content="SkyeOfferForge builds formal pricing offer letters, financing schedules, and sales proposals — fast. Configure your scope, set your tiers and payment terms, and export a client-ready PDF. No Word docs, no copy-paste pricing tables." />
+  <base href="/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SkyeOfferForge — Pricing Offer & Proposal Builder" />
+  <meta property="og:description" content="Build formal offer letters with deposit schedules, tiered pricing, and scope summaries — exported as polished, client-ready PDFs." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+
+  <!-- Netlify Identity -->
+  <script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <style>
+    /* ── SkyeOfferForge accent: Flame #ea580c + Steel #0891b2 ── */
+    :root {
+      --acc1: #ea580c;
+      --acc2: #0891b2;
+      --acc1-dim: rgba(234,88,12,0.12);
+      --acc2-dim: rgba(8,145,178,0.13);
+    }
+
+    .page-header .glow-tile-purple {
+      background: radial-gradient(ellipse at 50% 60%, rgba(234,88,12,0.18) 0%, rgba(8,145,178,0.15) 45%, transparent 75%);
+    }
+
+    .acc-text  { color: var(--acc1); }
+    .acc2-text { color: var(--acc2); }
+
+    .badge-acc {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .badge-flame { background: var(--acc1-dim); color: var(--acc1); border: 1px solid rgba(234,88,12,0.3); }
+    .badge-steel { background: var(--acc2-dim); color: #38bdf8; border: 1px solid rgba(8,145,178,0.3); }
+
+    /* ── Hero: offer builder widget ── */
+    .hero-widget {
+      position: relative;
+      width: min(500px, 96vw);
+      background: rgba(4,4,12,0.78);
+      border: 1px solid rgba(234,88,12,0.22);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 70px rgba(234,88,12,0.10), 0 0 120px rgba(8,145,178,0.10);
+      flex-shrink: 0;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .widget-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #f87171; }
+    .dot-y { background: #fbbf24; }
+    .dot-g { background: #4ade80; }
+    .widget-title-text { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-left: 8px; letter-spacing: .05em; flex: 1; }
+    .status-pill {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: rgba(234,88,12,0.12);
+      color: var(--acc1);
+      border: 1px solid rgba(234,88,12,0.25);
+      text-transform: uppercase;
+    }
+
+    /* Offer builder form side */
+    .offer-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .offer-form-panel {
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-label { font-size: 0.58rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .form-value {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 7px;
+      padding: 6px 9px;
+      font-family: 'DM Mono', monospace;
+    }
+    .form-value.highlight { color: var(--acc1); border-color: rgba(234,88,12,0.22); background: rgba(234,88,12,0.07); }
+
+    /* Offer preview panel */
+    .offer-preview-panel { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .preview-label { font-size: 0.55rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 2px; }
+    .offer-letterhead {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .letterhead-title { font-size: 0.72rem; font-weight: 700; color: var(--acc1); margin-bottom: 4px; }
+    .letterhead-meta { font-size: 0.58rem; color: rgba(255,255,255,0.35); margin-bottom: 8px; }
+    .schedule-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.62rem;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.55);
+    }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row .amt { color: var(--acc2); font-family: 'DM Mono', monospace; font-weight: 600; font-size: 0.65rem; color: #38bdf8; }
+    .export-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .export-btn {
+      flex: 1;
+      text-align: center;
+      padding: 5px 0;
+      border-radius: 7px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      cursor: default;
+    }
+    .export-pdf  { background: rgba(234,88,12,0.12); color: var(--acc1); border: 1px solid rgba(234,88,12,0.25); }
+    .export-send { background: rgba(8,145,178,0.12); color: #38bdf8; border: 1px solid rgba(8,145,178,0.25); }
+
+    /* status strip */
+    .offer-footer-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      background: rgba(234,88,12,0.06);
+      border-top: 1px solid rgba(234,88,12,0.12);
+      font-size: 0.58rem;
+      color: rgba(255,255,255,0.3);
+    }
+    .forge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--acc1); animation: pulse 2s infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:.3;} }
+    .forge-status { color: var(--acc1); font-weight: 600; }
+    .draft-label { margin-left: auto; font-family: 'DM Mono', monospace; font-size: 0.6rem; color: rgba(255,255,255,0.35); }
+
+    /* ── Buttons ── */
+    .btn-flame-solid {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--acc1) 0%, #c2410c 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-flame-solid:hover { opacity: .87; transform: translateY(-2px); }
+
+    .btn-steel-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      color: #38bdf8;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1.5px solid rgba(8,145,178,0.4);
+      transition: background .2s, transform .15s;
+    }
+    .btn-steel-outline:hover { background: var(--acc2-dim); transform: translateY(-2px); }
+
+    /* feature grid */
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); gap: 20px; }
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 26px 24px;
+      transition: border-color .25s, transform .2s;
+    }
+    .feature-card:hover { border-color: rgba(234,88,12,0.22); transform: translateY(-3px); }
+    .feature-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 14px; }
+    .icon-flame { background: var(--acc1-dim); }
+    .icon-steel { background: var(--acc2-dim); }
+    .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .feature-card p  { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin: 0; }
+
+    /* metrics */
+    .metric-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 14px; }
+    .metric-tile { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 18px; text-align: center; }
+    .metric-tile .num  { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--acc1); line-height: 1; }
+    .metric-tile .num2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: #38bdf8; line-height: 1; }
+    .metric-tile .lbl  { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+    /* pipeline */
+    .pipeline { display: flex; flex-direction: column; gap: 0; }
+    .pipeline-step {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .pipeline-step:last-child { border-bottom: none; }
+    .ps-num {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0891b2, var(--acc1));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .ps-content h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .ps-content p  { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin: 0; }
+    .ps-tag {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      padding: 2px 10px;
+      border-radius: 6px;
+      background: rgba(234,88,12,0.1);
+      color: var(--acc1);
+      border: 1px solid rgba(234,88,12,0.2);
+      margin-bottom: 8px;
+    }
+
+    /* audience */
+    .audience-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px,1fr)); gap: 12px; }
+    .audience-chip {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.85rem; font-weight: 600;
+      color: rgba(255,255,255,0.75);
+    }
+    .chip-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+    /* vs table */
+    .vs-table { width: 100%; border-collapse: collapse; }
+    .vs-table th { padding: 12px 16px; font-size: 0.75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,0.4); border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; }
+    .vs-table td { padding: 13px 16px; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .vs-table tr:last-child td { border-bottom: none; }
+    .col-feature { color: rgba(255,255,255,0.7); font-weight: 500; }
+    .col-sv  { color: var(--acc1); font-weight: 600; }
+    .col-alt { color: rgba(255,255,255,0.3); }
+    .tick  { color: var(--acc1); font-size: 1.05rem; }
+    .tick2 { color: #38bdf8; font-size: 1.05rem; }
+    .cross { color: rgba(255,255,255,0.18); font-size: 1.05rem; }
+
+    /* CTA box */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(234,88,12,0.09) 0%, rgba(8,145,178,0.08) 100%);
+      border: 1px solid rgba(234,88,12,0.18);
+      border-radius: 24px;
+      padding: 56px 40px;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .hero-split { flex-direction: column !important; }
+      .hero-widget { width: 100%; }
+      .offer-body { grid-template-columns: 1fr; }
+      .offer-preview-panel { display: none; }
+      .cta-box { padding: 36px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="three-bg"></canvas>
+
+<!-- Navigation -->
+<nav class="main-nav" id="mainNav">
+  <a href="/" class="nav-logo">
+    <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="36" />
+  </a>
+  <div class="nav-links desktop-only">
+    <a href="/platforms.html">Platforms</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="https://skyeofferforge.netlify.app/" target="_blank" rel="noopener" class="nav-cta">Open SkyeOfferForge →</a>
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- Mega-nav overlay -->
+<div class="mega-nav-overlay" id="megaNav">
+  <button class="mega-nav-close" id="megaNavClose">&#10005;</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Platforms</div>
+      <a href="/platforms.html">All Platforms</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html">SkyeOfferForge</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyePortalVault.html">SkyePortalVault</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/KaixuPush.html">KaixuPush</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Dev Tools</div>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyeKIDE.html">SkyeKIDE</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html">skAIxU IDE Pro</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyeChat.html">SkyeChat</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/DGUI.html">DGUI</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Company</div>
+      <a href="/about.html">About</a>
+      <a href="/portfolio.html">Portfolio</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Get Started</div>
+      <a href="https://skyeofferforge.netlify.app/" target="_blank" rel="noopener">Open App</a>
+      <a href="/get-started/">Get Started</a>
+      <a href="/contact.html">Talk to SOL</a>
+    </div>
+  </div>
+</div>
+
+<!-- Page Header / Hero -->
+<header class="page-header">
+  <div class="glow-tile-purple"></div>
+  <div class="container" style="position:relative;z-index:2;">
+
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:40px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="badge-acc badge-flame">Offer Builder</span>
+        <span class="badge-acc badge-steel">Proposal Generator</span>
+        <span class="badge-acc badge-flame">PDF Export</span>
+      </div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;color:#fff;margin:0;">
+        Skye<br/><span class="acc-text">Offer Forge</span>
+      </h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.65;margin:0;">
+        SkyeOfferForge is a <strong style="color:var(--acc1);">precision offer and proposal builder</strong> for service operators. Configure your scope, tier structure, pricing, deposit terms, and financing schedule — then forge a formal, client-ready offer PDF in minutes. No Word templates. No copy-paste rate tables.
+      </p>
+    </div>
+
+    <!-- Hero split -->
+    <div class="hero-split" style="display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap;">
+
+      <!-- Left: bullets + CTAs -->
+      <div style="flex:1;min-width:280px;">
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> Formal offer letters with scope, tiers, and pricing tables
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> Deposit + installment scheduling built in
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> AI-assisted scope copy via kAIxU
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> Export to branded PDF — ready to send to client
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> Tiered pricing engine — show multiple package options
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> Signature block + payment terms built into every offer
+          </li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="https://skyeofferforge.netlify.app/" target="_blank" rel="noopener" class="btn-flame-solid">Open SkyeOfferForge →</a>
+          <a href="#features" class="btn-steel-outline">Explore Features</a>
+        </div>
+        <p style="margin-top:16px;font-size:0.75rem;color:rgba(255,255,255,0.3);">
+          Part of the SOL operator platform. <a href="/contact.html" style="color:#38bdf8;">Talk to SOL →</a>
+        </p>
+      </div>
+
+      <!-- Right: offer builder widget -->
+      <div class="hero-widget">
+        <div class="widget-titlebar">
+          <span class="dot dot-r"></span>
+          <span class="dot dot-y"></span>
+          <span class="dot dot-g"></span>
+          <span class="widget-title-text">SkyeOfferForge — New Offer</span>
+          <span class="status-pill">⚡ Draft Ready</span>
+        </div>
+
+        <div class="offer-body">
+          <!-- Form Panel -->
+          <div class="offer-form-panel">
+            <div class="form-group">
+              <div class="form-label">Client</div>
+              <div class="form-value">Meridian Growth LLC</div>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Offer Title</div>
+              <div class="form-value">Brand Strategy Build</div>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Total Value</div>
+              <div class="form-value highlight">$18,500</div>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Deposit</div>
+              <div class="form-value">30% — $5,550</div>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Term</div>
+              <div class="form-value">12 months</div>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Monthly</div>
+              <div class="form-value highlight">$1,079 / mo</div>
+            </div>
+          </div>
+
+          <!-- Preview Panel -->
+          <div class="offer-preview-panel">
+            <div class="preview-label">Offer Preview</div>
+            <div class="offer-letterhead">
+              <div class="letterhead-title">FORMAL OFFER LETTER</div>
+              <div class="letterhead-meta">Meridian Growth LLC · Feb 28, 2026</div>
+              <div class="schedule-row">
+                <span>Deposit (30%)</span>
+                <span class="amt">$5,550</span>
+              </div>
+              <div class="schedule-row">
+                <span>Month 1–12</span>
+                <span class="amt">$1,079/mo</span>
+              </div>
+              <div class="schedule-row">
+                <span>Total Value</span>
+                <span class="amt">$18,500</span>
+              </div>
+              <div class="schedule-row">
+                <span>Scope · Brand Strategy</span>
+                <span style="color:rgba(255,255,255,0.3);font-size:0.58rem;">Included</span>
+              </div>
+              <div class="schedule-row">
+                <span>Signature Block</span>
+                <span style="color:rgba(255,255,255,0.3);font-size:0.58rem;">Pending</span>
+              </div>
+            </div>
+            <div class="export-row">
+              <div class="export-btn export-pdf">↓ Export PDF</div>
+              <div class="export-btn export-send">✉ Send Offer</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="offer-footer-strip">
+          <div class="forge-dot"></div>
+          <span class="forge-status">Offer Calculated</span>
+          <span>· 1 tier · 12-month term</span>
+          <span class="draft-label">meridian-brand-offer.pdf</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- The Problem -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="badge-acc badge-steel" style="margin-bottom:12px;display:inline-block;">The Problem</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        Pricing delivered in a Word doc is an apology for your rate
+      </h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:560px;margin:12px auto 0;line-height:1.65;">
+        The way you present your pricing communicates how seriously you take your own value. A copy-pasted rate table in a Google Doc doesn't say "serious operator." A formal offer letter with deposit schedule, payment terms, and scope breakdown does.
+      </p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">📄</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Word Doc "Proposals"</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin:0;line-height:1.5;">A list of bullet points with a number at the bottom isn't a proposal — it's a quote slip. Clients who receive formal, structured offers close faster and ghost less.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">🔢</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Manual Pricing Math</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin:0;line-height:1.5;">Calculating 30% of $18,500 divided across 12 months while trying to write the offer letter is how you send clients wrong numbers. The forge calculates it exactly, every time.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">🔄</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">No Payment Structure</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin:0;line-height:1.5;">Clients stall on lump-sum pricing. An offer that shows a structureed deposit + installment plan makes the number feel manageable and signals you've done this before.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">⏱️</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Slow Offer Turnaround</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);margin:0;line-height:1.5;">Taking 48 hours to deliver a pricing offer after a discovery call loses deals. SkyeOfferForge lets you forge and send a formal offer within minutes while the conversation is still warm.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="content-section reveal" id="features">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-flame" style="margin-bottom:12px;display:inline-block;">Features</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0 0 8px;">
+        Every feature is a deal closer.
+      </h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:520px;line-height:1.65;">Built for operators who send high-value offers and can't afford to look unprepared when the client opens the PDF.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon icon-flame">💰</div>
+        <h3>Pricing & Payment Schedule Builder</h3>
+        <p>Enter a total value, choose a deposit percentage (10–50%), and a payment term (6, 12, 18, or 24 months). SkyeOfferForge instantly calculates the exact deposit amount, monthly installment, and total schedule — no spreadsheet required.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-steel">📊</div>
+        <h3>Tiered Pricing Engine</h3>
+        <p>Build multi-tier offers with Good / Better / Best pricing structures. Define what's included at each tier, set the price range, and let clients see the value delta between tiers clearly in the offer document — without needing a separate deck.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-flame">📋</div>
+        <h3>Formal Offer Letter Format</h3>
+        <p>Every offer outputs as a formal letter — not a quote form. Client name, offer title, effective date, scope summary, pricing table, payment schedule, and a signature block are all structured by default. It reads like an enterprise engagement document.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-steel">🤖</div>
+        <h3>AI-Assisted Scope Copy</h3>
+        <p>Provide your service area and bullet-point scope, and the kAIxU layer drafts professional scope language — what's included, what's excluded, deliverables, and assumptions. The kind of scope language that protects you when clients push for "just one more thing."</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-flame">📄</div>
+        <h3>Branded PDF Export</h3>
+        <p>Export the completed offer as a polished, branded PDF — your logo, your colors, your contact information in the header. The PDF is formatted for print and screen, ready to attach to an email or drop into SkyePortalVault for client access.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-steel">✍️</div>
+        <h3>Signature Block Built In</h3>
+        <p>Every offer includes a formatted signature block — client acceptance line, date, and printed name fields. Whether you collect signatures digitally or by PDF, the structure is already in the document without you adding it manually every time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-flame">🧩</div>
+        <h3>Offer Template Library</h3>
+        <p>Save your most common offer structures as templates — your standard brand strategy offer, your retainer template, your project-based pricing structure. Forge a new offer from a saved template in under two minutes for repeat services.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-steel">🔗</div>
+        <h3>Direct Portal Delivery</h3>
+        <p>Push a completed offer directly into the client's SkyePortalVault — authenticated, gated, and logged. No email attachment. The client receives a notification, logs into their portal, and downloads the formal offer from their own secure document vault.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-flame">📈</div>
+        <h3>Offer History & Version Tracking</h3>
+        <p>Every offer you forge is saved with a version slug. When a client requests changes, you revise and re-export — the history shows the original, the revision, and the final accepted version. No confusion about "which price we agreed on."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metrics -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-steel" style="margin-bottom:12px;display:inline-block;">By the Numbers</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin:0;">SkyeOfferForge in production</h2>
+    </div>
+    <div class="metric-row">
+      <div class="metric-tile">
+        <div class="num">&lt;5m</div>
+        <div class="lbl">Offer Built & Exported</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num2">100%</div>
+        <div class="lbl">Payment Math Automated</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num">4</div>
+        <div class="lbl">Payment Term Options</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num2">PDF</div>
+        <div class="lbl">Client-Ready Export Format</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num">∞</div>
+        <div class="lbl">Saved Templates</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num2">SOL</div>
+        <div class="lbl">Ecosystem Integrated</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="content-section reveal" id="how">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-flame" style="margin-bottom:12px;display:inline-block;">How It Works</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        Configure → Price → Forge → Send
+      </h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:480px;margin:8px 0 0;line-height:1.65;">From blank to branded PDF offer letter in four focused steps — no formatting, no math, no templates to maintain in Google Docs.</p>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="ps-num">01</div>
+        <div class="ps-content">
+          <div class="ps-tag">Configure Offer</div>
+          <h3>Name the client, the offer, and the scope summary</h3>
+          <p>Enter the client name, company, offer title (e.g. "Q2 Brand Strategy Build"), and a scope summary. Optionally use the kAIxU AI layer to expand bullet-point scope notes into formal, professionally worded scope language — what's included, what's excluded, deliverable definitions, and standard assumptions.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="ps-num">02</div>
+        <div class="ps-content">
+          <div class="ps-tag">Set Pricing & Terms</div>
+          <h3>Enter total value, deposit %, and payment term</h3>
+          <p>Enter the total engagement value. Select your deposit percentage — SkyeOfferForge instantly calculates the deposit amount and the remaining balance. Choose a payment term (6, 12, 18, or 24 months) and the monthly installment is calculated automatically. If you have multiple tiers, build each tier separately with its own price and scope delta.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="ps-num">03</div>
+        <div class="ps-content">
+          <div class="ps-tag">Preview & Forge</div>
+          <h3>Preview the formatted offer, then generate the PDF</h3>
+          <p>Review the offer in the live preview panel — client name, offer title, scope, pricing table, payment schedule, and signature block are all structured and formatted. Make any last adjustments, then forge the PDF. The branded export is ready in seconds — your logo, your colors, professional layout, print-ready.</p>
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <div class="ps-num">04</div>
+        <div class="ps-content">
+          <div class="ps-tag">Send or Deliver</div>
+          <h3>Send the PDF directly or push to SkyePortalVault</h3>
+          <p>Download the PDF and attach it to an email, or push the offer directly into the client's SkyePortalVault for gated, authenticated delivery. Either way, the offer is on the client's screen within minutes of the discovery call ending — while the conversation is still fresh and the momentum is still there.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Who It's For -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-flame" style="margin-bottom:12px;display:inline-block;">Who It's For</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        For operators who price their work seriously
+      </h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-chip"><span class="chip-icon">🏢</span>Agencies quoting brand, web, and marketing engagements</div>
+      <div class="audience-chip"><span class="chip-icon">⚖️</span>Consultants sending retainer and project proposals</div>
+      <div class="audience-chip"><span class="chip-icon">💼</span>Freelancers with high-value service offerings</div>
+      <div class="audience-chip"><span class="chip-icon">🔧</span>Service firms quoting multi-phase project builds</div>
+      <div class="audience-chip"><span class="chip-icon">📐</span>Architects, engineers, and design studios</div>
+      <div class="audience-chip"><span class="chip-icon">📊</span>Financial advisors structuring engagement packages</div>
+      <div class="audience-chip"><span class="chip-icon">🎓</span>Coaches and educators pricing program tiers</div>
+      <div class="audience-chip"><span class="chip-icon">🏗️</span>Contractors with deposit + installment pricing models</div>
+    </div>
+  </div>
+</section>
+
+<!-- vs table -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:32px;">
+      <span class="badge-acc badge-steel" style="margin-bottom:12px;display:inline-block;">Comparison</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        SkyeOfferForge vs the way everyone else does it
+      </h2>
+    </div>
+    <div style="overflow-x:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.07);">
+      <table class="vs-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th style="color:var(--acc1);">SkyeOfferForge</th>
+            <th>Word / Google Docs</th>
+            <th>Generic Invoice Tools</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-feature">Formal Offer Letter Format</td>
+            <td class="col-sv"><span class="tick">✓</span> Built-in structure</td>
+            <td class="col-alt">⚠ Manual formatting</td>
+            <td class="col-alt"><span class="cross">✗</span> Invoice only</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Deposit + Installment Calculator</td>
+            <td class="col-sv"><span class="tick">✓</span> Auto-calculated</td>
+            <td class="col-alt"><span class="cross">✗</span> Manual math</td>
+            <td class="col-alt">⚠ Basic split only</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Tiered Pricing Engine</td>
+            <td class="col-sv"><span class="tick">✓</span> Multi-tier support</td>
+            <td class="col-alt">⚠ Manual table</td>
+            <td class="col-alt"><span class="cross">✗</span> None</td>
+          </tr>
+          <tr>
+            <td class="col-feature">AI Scope Copy Assist</td>
+            <td class="col-sv"><span class="tick">✓</span> kAIxU integrated</td>
+            <td class="col-alt"><span class="cross">✗</span> You write it all</td>
+            <td class="col-alt"><span class="cross">✗</span> None</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Branded PDF Export</td>
+            <td class="col-sv"><span class="tick">✓</span> Auto-formatted</td>
+            <td class="col-alt">⚠ Manual formatting</td>
+            <td class="col-alt"><span class="tick2">✓</span> Basic</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Offer Version History</td>
+            <td class="col-sv"><span class="tick">✓</span> Versioned slugs</td>
+            <td class="col-alt">⚠ Manual file naming</td>
+            <td class="col-alt"><span class="cross">✗</span> None</td>
+          </tr>
+          <tr>
+            <td class="col-feature">SkyePortalVault Delivery</td>
+            <td class="col-sv"><span class="tick">✓</span> One-click push</td>
+            <td class="col-alt"><span class="cross">✗</span> Email attachment</td>
+            <td class="col-alt"><span class="cross">✗</span> None</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SOL Ecosystem -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="badge-acc badge-flame" style="margin-bottom:12px;display:inline-block;">SOL Ecosystem</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        SkyeOfferForge inside the SOL sales stack
+      </h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:12px auto 0;line-height:1.65;">The offer is the handoff point between winning the room and starting the work. The rest of the SOL stack handles everything before and after it.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon icon-flame">⬡</div>
+        <h3>kAIxU PDF Pro — Full Document Suite</h3>
+        <p>SkyeOfferForge is powered by the kAIxU PDF Pro engine. The full suite includes 18 document types — valuations, contracts, SOWs, executive briefs, service catalogs, and more — for operators who need every client document, not just the offer.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-steel">🔐</div>
+        <h3>SkyePortalVault — Deliver the Offer</h3>
+        <p>Push the forged offer PDF directly into the client's portal vault. They receive an access notification, log in with their identity credentials, and download the formal offer from a gated, branded portal — not an email thread.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-flame">📄</div>
+        <h3>SkyeDocx — Draft the SOW</h3>
+        <p>Once the offer is accepted, SkyeDocx picks up the work. Draft the Statement of Work, onboarding documents, and project brief using the same scope language from the offer — no double-entry, no "wait, what did we agree on?" moments.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-steel">◬</div>
+        <h3>SkyeFlow — Trigger Onboarding</h3>
+        <p>When an offer is accepted, SkyeFlow automations kick in — send the welcome sequence, trigger contract generation, create the client portal, and initiate the deposit invoice. The next step runs itself so you can start the work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="content-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <span class="badge-acc badge-flame" style="margin-bottom:16px;display:inline-block;">Get Started</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:0 0 16px;line-height:1.1;">
+        Your next offer should close.<br/>
+        <span class="acc-text">Forge it like it means business.</span>
+      </h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 36px;line-height:1.65;">
+        Formal offer letter. Deposit + installment math. Tiered pricing. AI scope copy. Branded PDF export. Version history. Portal delivery. SkyeOfferForge puts every deal-closing element into one document — fast, accurate, and professional.
+      </p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://skyeofferforge.netlify.app/" target="_blank" rel="noopener" class="btn-flame-solid" style="font-size:1.05rem;padding:16px 36px;">
+          Open SkyeOfferForge →
+        </a>
+        <a href="/contact.html" class="btn-steel-outline" style="font-size:1rem;padding:15px 28px;">
+          Talk to SOL
+        </a>
+      </div>
+      <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">
+        Part of the SOL operator platform. <a href="/contact.html" style="color:rgba(255,255,255,0.35);">Contact SOL to get access →</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="40" />
+        <p>Skyes Over London LC — building precision operator tools that turn pricing conversations into formal, deal-closing offer documents.</p>
+        <div class="footer-contact">
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="tel:9862107040">986-210-7040</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <span class="footer-col-label">Platforms</span>
+          <a href="/Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html">SkyeOfferForge</a>
+          <a href="/Platforms-Apps-Infrastructure/2026/SkyePortalVault.html">SkyePortalVault</a>
+          <a href="/Platforms-Apps-Infrastructure/2026/SkyeChat.html">SkyeChat</a>
+          <a href="/Platforms-Apps-Infrastructure/2026/KaixuPush.html">KaixuPush</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-label">Company</span>
+          <a href="/about.html">About</a>
+          <a href="/portfolio.html">Portfolio</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-label">Legal</span>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Skyes Over London LC. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="/js/three.min.js" defer></script>
+<script src="/assets/app.js" defer></script>
+<script src="/js/main.js" defer></script>
+<script src="/js/growth.js" defer></script>
+<script src="/js/partials.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KaiLine — AI Writing &amp; Messaging Pipeline for Operators | SOL Platforms</title>
+  <meta name="description" content="KaiLine is an offline-first AI-powered writing and messaging pipeline for operators — draft emails, proposals, social posts, and client messages with guided prompts and reusable templates." />
+  <base href="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="KaiLine — AI Writing Pipeline for Operators" />
+  <meta property="og:description" content="Stop staring at blank message boxes. KaiLine gives operators a guided writing pipeline — AI-assisted drafts, reusable message templates, and a structured workflow for every piece of writing your business produces." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+  <style>
+    :root { --acc1:#4f46e5; --acc2:#0891b2; --acc1-dim:rgba(79,70,229,0.12); --acc2-dim:rgba(8,145,178,0.12); }
+    .page-header .glow-tile-purple { background:radial-gradient(ellipse at 50% 60%,rgba(79,70,229,0.16) 0%,rgba(8,145,178,0.10) 45%,transparent 75%); }
+    .acc-text{color:var(--acc1);}
+    .badge-acc{display:inline-block;padding:4px 14px;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .badge-indigo{background:var(--acc1-dim);color:#a5b4fc;border:1px solid rgba(79,70,229,0.3);}
+    .badge-cyan{background:var(--acc2-dim);color:#67e8f9;border:1px solid rgba(8,145,178,0.3);}
+    .hero-widget{position:relative;width:min(480px,96vw);background:rgba(4,4,12,0.88);border:1px solid rgba(79,70,229,0.18);border-radius:16px;overflow:hidden;box-shadow:0 0 70px rgba(79,70,229,0.10);flex-shrink:0;font-family:'DM Sans',sans-serif;}
+    .widget-titlebar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .dot{width:10px;height:10px;border-radius:50%;} .dot-r{background:#f87171;} .dot-y{background:#fbbf24;} .dot-g{background:#4ade80;}
+    .widget-title{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-left:8px;flex:1;}
+    .pipeline-ui{padding:12px;}
+    .pl-label{font-size:0.62rem;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;}
+    .pl-type-row{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap;}
+    .pl-type{font-size:0.6rem;font-weight:700;padding:3px 9px;border-radius:5px;cursor:pointer;}
+    .plt-active{background:linear-gradient(135deg,#4f46e5,#0891b2);color:#fff;}
+    .plt-inactive{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.08);}
+    .pl-prompt{background:rgba(79,70,229,0.07);border:1px solid rgba(79,70,229,0.14);border-radius:8px;padding:9px 11px;font-size:0.62rem;color:rgba(255,255,255,0.5);line-height:1.4;margin-bottom:8px;}
+    .pl-output{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:9px 11px;font-size:0.65rem;color:rgba(255,255,255,0.65);line-height:1.5;font-family:'DM Mono',monospace;}
+    .pl-actions{display:flex;gap:6px;margin-top:8px;}
+    .pl-action{font-size:0.6rem;font-weight:700;padding:4px 10px;border-radius:6px;cursor:pointer;}
+    .pla-copy{background:linear-gradient(135deg,#4f46e5,#0891b2);color:#fff;}
+    .pla-save{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.1);}
+    .widget-footer{display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(79,70,229,0.06);border-top:1px solid rgba(79,70,229,0.12);font-size:0.6rem;color:rgba(255,255,255,0.28);}
+    .btn-indigo{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,var(--acc1),#3730a3);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;text-decoration:none;transition:opacity .2s,transform .15s;}
+    .btn-indigo:hover{opacity:.87;transform:translateY(-2px);}
+    .btn-cyan-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:transparent;color:#67e8f9;font-weight:600;font-size:0.95rem;border-radius:10px;text-decoration:none;border:1.5px solid rgba(8,145,178,0.35);transition:background .2s,transform .15s;}
+    .btn-cyan-outline:hover{background:var(--acc2-dim);transform:translateY(-2px);}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+    .feature-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:26px 24px;transition:border-color .25s,transform .2s;}
+    .feature-card:hover{border-color:rgba(79,70,229,0.2);transform:translateY(-3px);}
+    .feature-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
+    .icon-i{background:var(--acc1-dim);} .icon-c{background:var(--acc2-dim);}
+    .feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:#fff;} .feature-card p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .metric-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+    .metric-tile{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 18px;text-align:center;}
+    .m1{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#a5b4fc;line-height:1;} .m2{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#67e8f9;line-height:1;}
+    .metric-tile .lbl{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:4px;}
+    .steps{display:flex;flex-direction:column;gap:0;}
+    .step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .step:last-child{border-bottom:none;}
+    .step-n{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#4f46e5,#0891b2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#fff;flex-shrink:0;}
+    .step-c h3{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;} .step-c p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .step-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:0.68rem;padding:2px 10px;border-radius:6px;background:var(--acc1-dim);color:#a5b4fc;border:1px solid rgba(79,70,229,0.2);margin-bottom:8px;}
+    .audience-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;}
+    .audience-chip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;font-size:0.85rem;font-weight:600;color:rgba(255,255,255,0.72);}
+    .chip-icon{font-size:1.2rem;flex-shrink:0;}
+    .cta-box{background:linear-gradient(135deg,rgba(79,70,229,0.09) 0%,rgba(8,145,178,0.08) 100%);border:1px solid rgba(79,70,229,0.16);border-radius:24px;padding:56px 40px;text-align:center;}
+    @media(max-width:700px){.hero-split{flex-direction:column!important;}.hero-widget{width:100%;}.cta-box{padding:36px 18px;}}
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+<nav class="main-nav" id="mainNav">
+  <a href="/" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="36" /></a>
+  <div class="nav-links desktop-only"><a href="/platforms.html">Platforms</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></div>
+  <div class="nav-actions">
+    <a href="https://kailine.netlify.app/" target="_blank" rel="noopener" class="nav-cta">Open KaiLine →</a>
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+<div class="mega-nav-overlay" id="megaNav">
+  <button class="mega-nav-close" id="megaNavClose">&#10005;</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col"><div class="mega-nav-heading">Writing Tools</div><a href="/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html">KaiLine</a><a href="/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeIntakeVault.html">SkyeIntakeVault</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Platforms</div><a href="/platforms.html">All Platforms</a><a href="/Platforms-Apps-Infrastructure/2026/NexusForge.html">NexusForge</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Company</div><a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Get Started</div><a href="https://kailine.netlify.app/" target="_blank" rel="noopener">Open KaiLine</a><a href="/get-started/">Get Started</a></div>
+  </div>
+</div>
+<header class="page-header">
+  <div class="glow-tile-purple"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="badge-acc badge-indigo">AI Writing</span><span class="badge-acc badge-cyan">Offline First</span><span class="badge-acc badge-indigo">Message Pipeline</span></div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;color:#fff;margin:0;">Kai<span class="acc-text">Line</span></h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.65;margin:0;">KaiLine is the <strong style="color:#a5b4fc;">AI-powered writing and messaging pipeline for operators</strong> — guided prompts, reusable templates, and a structured drafting workflow for every email, proposal, client message, and social post your business produces. Stop staring at blank screens.</p>
+    </div>
+    <div class="hero-split" style="display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#a5b4fc;">◆</span> AI-guided message drafts — choose a type, answer prompts, get a complete draft</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#a5b4fc;">◆</span> Template library — save and reuse your best messages as named templates</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#a5b4fc;">◆</span> Message types: Proposals, Follow-ups, Invoices, Cold outreach, Apologies, Announcements</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#a5b4fc;">◆</span> Tone controls — professional, warm, direct, casual — for every draft</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#a5b4fc;">◆</span> Offline-first PWA — draft messages without an internet connection</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#a5b4fc;">◆</span> Draft history — save every draft with recipient context and revision notes</li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;"><a href="https://kailine.netlify.app/" target="_blank" rel="noopener" class="btn-indigo">Open KaiLine →</a><a href="#features" class="btn-cyan-outline">Explore Features</a></div>
+      </div>
+      <div class="hero-widget">
+        <div class="widget-titlebar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="widget-title">KaiLine — Writing Pipeline</span></div>
+        <div class="pipeline-ui">
+          <div class="pl-label">Message Type</div>
+          <div class="pl-type-row">
+            <div class="pl-type plt-active">Proposal</div>
+            <div class="pl-type plt-inactive">Follow-up</div>
+            <div class="pl-type plt-inactive">Cold Outreach</div>
+            <div class="pl-type plt-inactive">Announcement</div>
+          </div>
+          <div class="pl-label">Guided Prompt</div>
+          <div class="pl-prompt">🤖 Who is this proposal for, what service are you offering, and what's the key value you want to emphasize?</div>
+          <div class="pl-label">AI Draft</div>
+          <div class="pl-output">Hi Marcus,
+
+Following up on our conversation — I'd love to put together a proposal for the portal project you mentioned...
+
+Here's what I'm thinking for scope and timeline...</div>
+          <div class="pl-actions"><div class="pl-action pla-copy">📋 Copy Draft</div><div class="pl-action pla-save">💾 Save Template</div></div>
+        </div>
+        <div class="widget-footer"><span style="color:#a5b4fc;font-weight:700;">Offline Ready</span><span>· Draft saved</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;"><span class="badge-acc badge-indigo" style="margin-bottom:12px;display:inline-block;">The Problem</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Operators write dozens of messages a week and most of them start from a blank screen every time</h2></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">😵</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Blank Screen Paralysis</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">You know you need to send the follow-up, write the proposal, or respond to the client request — but you open your email, stare at a blank compose window, and close it to do something easier instead. KaiLine gives you guided prompts that kickstart the draft so you never face blank-screen paralysis again.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🔄</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Rewriting the Same Messages Repeatedly</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">You've written the same proposal format 30 times. The same invoice-follow-up message 15 times. The same project-complete announcement 8 times. KaiLine's template library saves your best messages as named templates — one click to load, fill in the variables, and send.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🎯</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Tone Inconsistency Across Messages</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">One day you're formal and corporate. The next day the email is too casual. When you write every message from scratch, your tone drifts based on your mood. KaiLine's tone controls give you a consistent voice setting — select Professional, Warm, or Direct and all your drafts match that register.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">📶</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">AI Writing Tools Require Internet Access</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">ChatGPT, Claude, Jasper — all require a live internet connection. If you're on a plane, at an event, or in a client's office with no guest Wi-Fi, you can't use them. KaiLine runs offline-first — your templates and guided prompts are available and functional with no internet required.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal" id="features">
+  <div class="container">
+    <div style="margin-bottom:36px;"><span class="badge-acc badge-indigo" style="margin-bottom:12px;display:inline-block;">Features</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0 0 8px;">Every message you need. Drafted in minutes.</h2></div>
+    <div class="feature-grid">
+      <div class="feature-card"><div class="feature-icon icon-i">🤖</div><h3>AI-Guided Drafts</h3><p>Choose your message type, answer 2–3 guided prompts about your specific situation, and KaiLine produces a complete draft. The prompts are designed to extract the key context — recipient, purpose, tone, key points — so the draft is specific, not generic.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-c">📚</div><h3>Template Library</h3><p>Save any draft as a named template with variable placeholders — [Client Name], [Project], [Amount], [Deadline]. Load a template, fill the variables, and send. Your best-performing messages become your permanent repeatable assets, not one-time compositions you recreate.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-i">🎯</div><h3>Message Types</h3><p>Select from built-in message categories — Proposals, Project Scoping, Follow-Ups, Invoice Reminders, Cold Outreach, Project Completion, Apologies, Announcements, Referral Asks, and more. Each type has its own guided prompt set calibrated for that message's specific purpose and needs.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-c">🎤</div><h3>Tone Controls</h3><p>Select your tone before generating — Professional, Warm &amp; Personal, Direct &amp; Brief, Casual &amp; Friendly, or Formal &amp; Legal. Every draft is shaped by the selected tone so your communication style stays consistent regardless of what message type you're drafting.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-i">📶</div><h3>Offline-First PWA</h3><p>Install KaiLine on your phone and laptop. Templates, draft history, and guided prompts work fully offline — on planes, at events, in low-connectivity environments. Draft the message while the context is fresh and send it later when you're back online.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-c">🗓️</div><h3>Draft History</h3><p>Every draft you generate is saved to your draft history with a timestamp, recipient context, and the message type used. Revisit past drafts, compare versions, pull a draft you wrote six months ago for a similar situation, and build on your own body of written work.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-i">✂️</div><h3>Edit &amp; Refine Tools</h3><p>After the initial draft, use KaiLine's edit tools — shorten, expand, rephrase opening, punch up the CTA, or adjust formality level. Refine the draft in KaiLine before copying to your email or platform so you send something polished rather than a raw first draft.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-c">💾</div><h3>Export &amp; Backup</h3><p>Export your full template library and draft history as JSON for backup and migration. Your templates are valuable business IP — refined communication assets you've built over time. They stay in your hands, portable to any device or future platform.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;"><span class="badge-acc badge-cyan" style="margin-bottom:12px;display:inline-block;">At a Glance</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin:0;">Draft faster. Sound better. Send more.</h2></div>
+    <div class="metric-row">
+      <div class="metric-tile"><div class="m1">&lt;3min</div><div class="lbl">To Draft a Message</div></div>
+      <div class="metric-tile"><div class="m2">10+</div><div class="lbl">Message Types</div></div>
+      <div class="metric-tile"><div class="m1">∞</div><div class="lbl">Saved Templates</div></div>
+      <div class="metric-tile"><div class="m2">5</div><div class="lbl">Tone Controls</div></div>
+      <div class="metric-tile"><div class="m1">PWA</div><div class="lbl">Works Offline</div></div>
+      <div class="metric-tile"><div class="m2">$0</div><div class="lbl">Subscription</div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:36px;"><span class="badge-acc badge-indigo" style="margin-bottom:12px;display:inline-block;">How It Works</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Select → Prompt → Draft → Send</h2></div>
+    <div class="steps">
+      <div class="step"><div class="step-n">01</div><div class="step-c"><div class="step-tag">Select</div><h3>Choose your message type and tone</h3><p>Open KaiLine and select what you need to write from the message type menu — Proposal, Follow-Up, Cold Outreach, Announcement, etc. Then select your tone: Professional, Warm, Direct, Casual, or Formal. KaiLine configures its guided prompts and drafting approach based on your selections.</p></div></div>
+      <div class="step"><div class="step-n">02</div><div class="step-c"><div class="step-tag">Prompt</div><h3>Answer guided questions about your specific situation</h3><p>KaiLine asks 2–3 targeted questions — who you're writing to, what you're asking for or offering, what the key context is. Answer briefly in plain language. KaiLine's prompts are designed to extract enough detail to make the draft specific and relevant, not a generic fill-in-the-blank template.</p></div></div>
+      <div class="step"><div class="step-n">03</div><div class="step-c"><div class="step-tag">Draft</div><h3>Review the draft and use edit tools to refine before copying</h3><p>KaiLine generates a complete draft based on your type, tone, and prompt answers. Read it, then use the edit toolbar to shorten, expand, rephrase the opener, or punch up the CTA. When the draft is right, copy it to your clipboard with one click.</p></div></div>
+      <div class="step"><div class="step-n">04</div><div class="step-c"><div class="step-tag">Send</div><h3>Save the best drafts as templates and build your library over time</h3><p>After sending, save the draft as a named template if it worked well — "Standard Proposal - Consulting", "Late Invoice Follow-Up", "Conference Follow-Up". Over time your KaiLine template library becomes your personal communication playbook shaped by your own experience and voice.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;"><span class="badge-acc badge-indigo" style="margin-bottom:12px;display:inline-block;">Who It's For</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">For operators who spend too much time writing when they should be doing</h2></div>
+    <div class="audience-grid">
+      <div class="audience-chip"><span class="chip-icon">💼</span>Solo operators writing proposals and follow-ups daily</div>
+      <div class="audience-chip"><span class="chip-icon">🚀</span>Founders drafting partnership and investor outreach</div>
+      <div class="audience-chip"><span class="chip-icon">📈</span>Sales professionals who need consistent outreach messaging</div>
+      <div class="audience-chip"><span class="chip-icon">🎨</span>Creatives drafting client proposals and project scopes</div>
+      <div class="audience-chip"><span class="chip-icon">🎓</span>Consultants with high-volume client communication requirements</div>
+      <div class="audience-chip"><span class="chip-icon">📝</span>Writers building a personal template library for their practice</div>
+      <div class="audience-chip"><span class="chip-icon">📨</span>Operators who want professional messaging without hiring a copywriter</div>
+      <div class="audience-chip"><span class="chip-icon">📶</span>Anyone who needs offline writing tools on the go</div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <span class="badge-acc badge-indigo" style="margin-bottom:16px;display:inline-block;">Start Drafting</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:0 0 16px;line-height:1.1;">Stop staring at blank screens.<br/><span class="acc-text">Start drafting in minutes.</span></h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 36px;line-height:1.65;">AI-guided drafts, 10+ message types, tone controls, template library, draft history, and offline-first PWA — KaiLine is the writing pipeline your communication deserves, no subscription required.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;"><a href="https://kailine.netlify.app/" target="_blank" rel="noopener" class="btn-indigo" style="font-size:1.05rem;padding:16px 36px;">Open KaiLine →</a><a href="/platforms.html" class="btn-cyan-outline">See All Platforms</a></div>
+      <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">PWA · Offline First · Free · No Subscription</p>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="40" /><p>Skyes Over London LC — building operator tools for the modern solo business.</p><div class="footer-contact"><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a><a href="tel:9862107040">986-210-7040</a></div></div>
+      <div class="footer-links">
+        <div class="footer-col"><span class="footer-col-label">Writing Tools</span><a href="/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html">KaiLine</a><a href="/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeIntakeVault.html">SkyeIntakeVault</a></div>
+        <div class="footer-col"><span class="footer-col-label">Company</span><a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+        <div class="footer-col"><span class="footer-col-label">Legal</span><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Skyes Over London LC. All rights reserved.</span></div>
+  </div>
+</footer>
+<script src="/js/three.min.js" defer></script><script src="/assets/app.js" defer></script><script src="/js/main.js" defer></script><script src="/js/growth.js" defer></script><script src="/js/partials.js" defer></script>
+</body>
+</html>

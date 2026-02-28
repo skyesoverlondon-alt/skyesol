@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <link rel="canonical" href="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Offline%20First%20Tools/SkyeNoteVault.html">
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
+  <meta name="twitter:description" content="SkyeNote — Offline-first note vaulting. Capture, structure, and protect operator notes without a cloud dependency.">
+  <meta name="twitter:title" content="SkyeNote — Offline-First Note Vault · SOLEnterprises">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Offline%20First%20Tools/SkyeNoteVault.html">
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="SkyeNote — Offline-first note vaulting. Capture, structure, and protect operator notes without a cloud dependency.">
+  <meta property="og:title" content="SkyeNote — Offline-First Note Vault · SOLEnterprises">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyeNote — Offline-First Note Vault · SOLEnterprises</title>
+  <meta name="description" content="SkyeNote is an offline-first note vaulting tool built for operators. Capture structured notes, tag and search locally, and export without a single cloud call.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SOLEnterprises">
+  <link rel="apple-touch-icon" href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png">
+
+  <style>
+    /* ── SkyeNote-specific overrides ── */
+    .sn-hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(138,99,255,0.25), rgba(58,111,216,0.18));
+      border: 1px solid #8a63ff;
+      border-radius: 4px;
+      color: #c4b5fd;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 1.2rem;
+    }
+    .sn-hero-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .sn-cta-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, #8a63ff, #3a6fd8);
+      color: #fff;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid #8a63ff;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .sn-cta-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .sn-cta-ghost {
+      display: inline-block;
+      background: transparent;
+      color: #8a63ff;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid #8a63ff;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .sn-cta-ghost:hover { background: rgba(138,99,255,0.12); transform: translateY(-2px); }
+
+    .sn-use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.5rem;
+    }
+    .sn-use-case-card {
+      background: rgba(138,99,255,0.06);
+      border: 1px solid rgba(138,99,255,0.2);
+      border-radius: 8px;
+      padding: 1.6rem 1.4rem;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .sn-use-case-card:hover {
+      border-color: rgba(138,99,255,0.55);
+      background: rgba(138,99,255,0.1);
+    }
+    .sn-use-case-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+    }
+    .sn-use-case-card h4 {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .sn-use-case-card p {
+      color: rgba(220,216,208,0.75);
+      font-size: 0.88rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .sn-compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 0.88rem;
+    }
+    .sn-compare-table th {
+      background: rgba(138,99,255,0.15);
+      color: #c4b5fd;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(138,99,255,0.3);
+    }
+    .sn-compare-table td {
+      padding: 12px 16px;
+      color: rgba(220,216,208,0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .sn-compare-table tr:hover td {
+      background: rgba(138,99,255,0.05);
+    }
+    .sn-check { color: #4ade80; font-weight: bold; }
+    .sn-cross { color: rgba(220,216,208,0.3); }
+    .sn-col-highlight { background: rgba(138,99,255,0.08); }
+
+    .sn-workflow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2.5rem;
+      position: relative;
+    }
+    .sn-workflow-steps::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, #8a63ff, transparent);
+    }
+    .sn-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.4rem 0;
+    }
+    .sn-step-num {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(138,99,255,0.3), rgba(58,111,216,0.2));
+      border: 1px solid #8a63ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 1.1rem;
+      color: #c4b5fd;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+    }
+    .sn-step-body h4 {
+      color: var(--text);
+      font-size: 1rem;
+      margin: 0 0 0.4rem;
+    }
+    .sn-step-body p {
+      color: rgba(220,216,208,0.7);
+      font-size: 0.88rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .sn-quote-block {
+      border-left: 3px solid #8a63ff;
+      background: rgba(138,99,255,0.07);
+      border-radius: 0 6px 6px 0;
+      padding: 1.4rem 1.6rem;
+      margin: 2rem 0;
+    }
+    .sn-quote-block p {
+      color: rgba(220,216,208,0.85);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.7;
+      margin: 0 0 0.6rem;
+    }
+    .sn-quote-block cite {
+      font-size: 0.78rem;
+      color: #8a63ff;
+      font-family: 'Fira Code', monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .sn-terminal-demo {
+      background: #0d0d14;
+      border: 1px solid rgba(138,99,255,0.25);
+      border-radius: 8px;
+      padding: 1.6rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      color: #a0ff9b;
+      line-height: 1.8;
+      margin-top: 2rem;
+      overflow-x: auto;
+    }
+    .sn-terminal-demo .t-label {
+      color: rgba(138,99,255,0.7);
+      user-select: none;
+    }
+    .sn-terminal-demo .t-comment {
+      color: rgba(220,216,208,0.35);
+    }
+    .sn-terminal-demo .t-key {
+      color: #8a63ff;
+    }
+    .sn-terminal-demo .t-val {
+      color: #fbbf24;
+    }
+
+    .sn-final-cta {
+      background: linear-gradient(135deg, rgba(138,99,255,0.12), rgba(58,111,216,0.08));
+      border: 1px solid rgba(138,99,255,0.25);
+      border-radius: 10px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .sn-final-cta h2 {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .sn-final-cta p {
+      color: rgba(220,216,208,0.7);
+      max-width: 560px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 600px) {
+      .sn-compare-table th, .sn-compare-table td { padding: 9px 10px; font-size: 0.79rem; }
+      .sn-workflow-steps::before { left: 24px; }
+      .sn-step-num { width: 48px; height: 48px; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+
+<!-- NAV -->
+<nav class="main-nav" id="mainNav">
+  <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="/index.html">Home</a>
+    <div class="nav-dropdown" data-type="services">
+      <button type="button" class="dropdown-toggle">Services</button>
+      <div class="dropdown-menu">
+        <a href="/Services/WebBuilds.html">Web Builds</a>
+        <a href="/Services/ai-data-apps.html">AI &amp; Data Apps</a>
+        <a href="/Services/portals-hubs.html">Portals &amp; Hubs</a>
+        <a href="/Services/ecommerce-payments.html">Ecommerce &amp; Payments</a>
+        <a href="/Services/intake-routing.html">Intake &amp; Routing</a>
+        <a href="/Services/trust-surfaces.html">Trust Surfaces</a>
+        <a href="/Services/api-integration.html">API &amp; Integrations</a>
+        <a href="/Services/brand-identity.html">Brand Identity</a>
+        <a href="/Services/notification-comms.html">Notifications</a>
+        <a href="/Services/docs-knowledge.html">Docs &amp; Knowledge</a>
+        <a href="/Services/platform-migration.html">Migration</a>
+        <a href="/Services/security-audit.html">Security</a>
+        <a href="/Services/analytics-dashboards.html">Analytics</a>
+        <a href="/Services/lifecycle-retention.html">Retention</a>
+        <a href="/Services/mvp-launchpad.html">MVP Builds</a>
+        <a href="/Services/seo-content.html">SEO &amp; Content</a>
+      </div>
+    </div>
+    <a href="/about.html">Founder</a>
+    <div class="nav-dropdown" data-type="suite">
+      <button type="button" class="dropdown-toggle">SkyeSuite</button>
+      <div class="dropdown-menu">
+        <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="/SkyeFlow/index.html">SkyeFlow</a>
+        <a href="/SkyeArchive/index.html">SkyeArchive</a>
+        <a href="/SkyeSlides/index.html">SkyeSlides</a>
+        <a href="/SkyeDrive/index.html">SkyeDrive</a>
+        <a href="/SkyeCollab/index.html">SkyeCollab</a>
+        <a href="/SkyeSheets/index.html">SkyeSheets</a>
+        <a href="/SkyeLedger/index.html">SkyeLedger</a>
+        <a href="/SkyeOps/index.html">SkyeOps</a>
+      </div>
+    </div>
+    <a href="/platforms.html">Platforms</a>
+    <a href="/network.html">Network</a>
+    <a href="/credibility.html">Credibility</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <button class="menu-btn" id="menuBtn">☰ MENU</button>
+</nav>
+
+<!-- HERO -->
+<div class="page-header">
+  <div class="sn-hero-badge">Offline-First · No Cloud Required · PWA-Ready</div>
+  <div class="section-label">SOLEnterprises · Offline Mini Ops Suite</div>
+  <h1>SkyeNote<span style="color:#8a63ff"> Vault</span></h1>
+  <div class="glow-tile-purple">
+    <p style="color:#000000">Your notes. Your device. Your control. SkyeNote is the operator-grade note vault that works when Wi-Fi doesn't — structured capture, local search, and export-ready outputs with zero cloud dependency.</p>
+  </div>
+  <div class="sn-hero-cta-row">
+    <a href="https://offlineminiopssuite.netlify.app/skyenote/" target="_blank" rel="noopener" class="sn-cta-primary">Open SkyeNote →</a>
+    <a href="#how-it-works" class="sn-cta-ghost">See How It Works ↓</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- THE PROBLEM -->
+<section class="content-section">
+  <div class="section-label reveal">The Problem</div>
+  <div class="section-title reveal">Cloud Notes Fail at the Worst Times</div>
+  <div class="section-desc reveal">Field meetings. Client walkthroughs. Dead zones. Battery-saving airplane mode. The moment you need to capture something critical is exactly when cloud-first tools let you down — spinning loaders, login walls, sync conflicts, and notes that disappear into a broken connection.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">📡</div>
+      <h3>Connectivity Tax</h3>
+      <div class="card-type">Cloud-First Tools</div>
+      <p>Every major note app — Notion, Google Docs, Evernote — assumes you're online. Lose signal and your workspace freezes. Try to sync later and you get conflicts. Your most important captures become gambles on uptime.</p>
+      <div class="card-tags"><span>Sync Conflicts</span><span>Login Walls</span><span>Offline Gaps</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🔐</div>
+      <h3>Privacy Trade-Off</h3>
+      <div class="card-type">Data You Can't Control</div>
+      <p>Cloud tools index your notes for AI training, expose them to breach risk, and lock them behind subscription walls. Operator notes — client details, meeting context, deal intelligence — don't belong on someone else's server.</p>
+      <div class="card-tags"><span>Data Sovereignty</span><span>Breach Risk</span><span>Vendor Lock-In</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🌀</div>
+      <h3>Complexity Overhead</h3>
+      <div class="card-type">Tools That Need Tools</div>
+      <p>Most note apps require accounts, plugins, workspace configuration, and monthly fees before you can type a single sentence. The overhead kills the habit. You need something that opens and works — no ceremony.</p>
+      <div class="card-tags"><span>No Setup</span><span>Instant Open</span><span>No Subscriptions</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE SOLUTION -->
+<section class="content-section">
+  <div class="section-label reveal">The Solution</div>
+  <div class="section-title reveal">SkyeNote — Built for Brutal Reality</div>
+  <div class="section-desc reveal">SkyeNote is engineered around every failure mode of cloud tools. No server calls during capture. No sync conflicts. No login required. Your notes live in your browser's local storage and IndexedDB — persistent, fast, and entirely under your control.</div>
+
+  <div class="card-grid-2 stagger-children" style="margin-top:2.5rem">
+    <div class="strength-card reveal">
+      <h4>📴 True Offline-First Architecture</h4>
+      <p>SkyeNote functions at 100% capability with no internet connection. Service workers cache the full app shell. Notes are written to IndexedDB locally — nothing waits on a network response. Open it on a plane, in a basement, or in a rural client meeting and it behaves identically to a 5G connection.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>⚡ Instant Capture — No Friction</h4>
+      <p>No login. No workspace selection. No template wizard. SkyeNote opens to a blank composer in under a second. Add a title, body, tags. Hit save. That's the entire flow. When you're in a meeting and need to capture something fast, speed is the feature.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>🏷️ Structured Tagging &amp; Local Search</h4>
+      <p>Tag every note at creation. Search runs entirely client-side across titles, body content, and tags — no server query, no latency. Find a client note from six months ago in milliseconds without touching a network stack.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>📤 Export-Ready Output</h4>
+      <p>Export individual notes or full vaults to plain text, Markdown, or JSON. Paste into any system — SkyeDocx, a client email, a project management tool, or a plain file folder. SkyeNote doesn't lock your data.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>🔒 Zero Data Transmission</h4>
+      <p>Nothing about your notes leaves the device unless you explicitly export. No analytics pipelines, no AI indexing, no third-party integrations calling home. The privacy model is structural, not a policy promise.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>📱 PWA-Installable Everywhere</h4>
+      <p>Install SkyeNote to your home screen on iOS, Android, or desktop Chrome. It behaves like a native app — full-screen, standalone, with the offline cache preloaded. One install, all devices, no app store required.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- METRICS -->
+<section class="content-section">
+  <div class="section-label reveal">Performance</div>
+  <div class="section-title reveal">Built to Be Fast. Built to Last.</div>
+  <div class="card-grid-3 stagger-children" style="margin-top:2rem">
+    <div class="metric-card reveal">
+      <div class="metric-number">0ms</div>
+      <div class="metric-label">Network Latency on Capture</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">100%</div>
+      <div class="metric-label">Offline Capability</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">&lt;1s</div>
+      <div class="metric-label">Cold Open Time</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">∞</div>
+      <div class="metric-label">Notes Stored Locally</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">$0</div>
+      <div class="metric-label">Monthly Subscription Cost</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">0</div>
+      <div class="metric-label">External Server Calls</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="content-section" id="how-it-works">
+  <div class="section-label reveal">Workflow</div>
+  <div class="section-title reveal">How SkyeNote Works</div>
+  <div class="section-desc reveal">Five steps from zero to a structured, searchable, exportable note vault. No configuration required.</div>
+
+  <div class="sn-workflow-steps">
+    <div class="sn-step reveal">
+      <div class="sn-step-num">01</div>
+      <div class="sn-step-body">
+        <h4>Install or Open in Browser</h4>
+        <p>Navigate to <strong>offlineminiopssuite.netlify.app/skyenote</strong> or install the PWA to your home screen. The service worker caches everything on first load. After that, no network is needed — ever.</p>
+      </div>
+    </div>
+    <div class="sn-step reveal">
+      <div class="sn-step-num">02</div>
+      <div class="sn-step-body">
+        <h4>Capture with Zero Friction</h4>
+        <p>The composer is the first thing you see. Title, body, tags. No sidebar navigation, no workspace setup. If you have something to write, write it — SkyeNote gets out of the way.</p>
+      </div>
+    </div>
+    <div class="sn-step reveal">
+      <div class="sn-step-num">03</div>
+      <div class="sn-step-body">
+        <h4>Notes Save Locally and Instantly</h4>
+        <p>Hit save and the note writes to IndexedDB in &lt;10ms. No spinner. No "saving…" indicator. No sync queue. Your note is there the moment you commit it — even if your device goes offline immediately after.</p>
+      </div>
+    </div>
+    <div class="sn-step reveal">
+      <div class="sn-step-num">04</div>
+      <div class="sn-step-body">
+        <h4>Search and Retrieve Instantly</h4>
+        <p>Type any word from a note's title, body, or tag list. Results surface client-side in real time — no debounced API call, no loading state. Full-text search across your entire vault without leaving the device.</p>
+      </div>
+    </div>
+    <div class="sn-step reveal">
+      <div class="sn-step-num">05</div>
+      <div class="sn-step-body">
+        <h4>Export on Your Terms</h4>
+        <p>Export any note or your entire vault as Markdown, plain text, or JSON. Paste into SkyeDocx for a contract, drop into an email to a client, or archive to a folder. SkyeNote produces portable output, not a proprietary format.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terminal-style illustration -->
+  <div class="sn-terminal-demo reveal">
+    <span class="t-label">// SkyeNote — Local Storage Model</span><br><br>
+    <span class="t-label">IndexedDB</span> · <span class="t-comment">skyenote_vault</span><br>
+    ├── <span class="t-key">note_001</span> · <span class="t-val">"Client Intake — Apex Operator Call"</span> · <span class="t-comment">tags: [intake, client, q1]</span><br>
+    ├── <span class="t-key">note_002</span> · <span class="t-val">"SOL Sprint Review — Feb 28"</span> · <span class="t-comment">tags: [sprint, internal, skyeops]</span><br>
+    ├── <span class="t-key">note_003</span> · <span class="t-val">"Houston Site Visit Notes"</span> · <span class="t-comment">tags: [field, houston, devops]</span><br>
+    └── <span class="t-key">note_004</span> · <span class="t-val">"Vendor Contract Negotiation Talking Points"</span> · <span class="t-comment">tags: [vendor, legal, q2]</span><br><br>
+    <span class="t-label">Search:</span> <span class="t-val">"houston"</span> → <span class="t-comment">1 result · 0ms · no network</span><br>
+    <span class="t-label">Export:</span> <span class="t-comment">note_003.md → ready. 0 API calls made.</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- USE CASES -->
+<section class="content-section">
+  <div class="section-label reveal">Who It's For</div>
+  <div class="section-title reveal">Built for Operators in the Field</div>
+  <div class="section-desc reveal">SkyeNote is not a journaling app. It's an operator tool — built for the people running projects, meetings, and client relationships where information loss has real costs.</div>
+
+  <div class="sn-use-case-grid stagger-children">
+    <div class="sn-use-case-card reveal">
+      <div class="sn-use-case-icon">🏗️</div>
+      <h4>Field Operators</h4>
+      <p>Capture site walkthrough notes, punch-list items, and deficiency logs at the property — no signal required. Notes are waiting for you when you get back to the truck.</p>
+    </div>
+    <div class="sn-use-case-card reveal">
+      <div class="sn-use-case-icon">🤝</div>
+      <h4>Client-Facing Teams</h4>
+      <p>Log client intake context, objections, follow-up items, and commitments during the call itself. No fumbling with a cloud tool that needs a password. The note is done before the meeting ends.</p>
+    </div>
+    <div class="sn-use-case-card reveal">
+      <div class="sn-use-case-icon">⚖️</div>
+      <h4>Independent Contractors</h4>
+      <p>Track scope notes, client-said/I-said records, and change request context locally. When a dispute comes up months later, you have a timestamped local record — not a "I think I remember" defense.</p>
+    </div>
+    <div class="sn-use-case-card reveal">
+      <div class="sn-use-case-icon">✈️</div>
+      <h4>Remote &amp; Travel Workers</h4>
+      <p>Airport terminals, client buildings with locked networks, international data restrictions. SkyeNote caches fully and runs with no connectivity. Your most expensive work hours aren't dead time anymore.</p>
+    </div>
+    <div class="sn-use-case-card reveal">
+      <div class="sn-use-case-icon">📋</div>
+      <h4>Ops &amp; Process Teams</h4>
+      <p>Draft SOPs, capture runbook steps, and build procedure notes directly in SkyeNote. Export to Markdown and drop straight into SkyeDocx for formatting. No copy-paste corruption.</p>
+    </div>
+    <div class="sn-use-case-card reveal">
+      <div class="sn-use-case-icon">🔬</div>
+      <h4>Research &amp; Dev</h4>
+      <p>Tag research notes, code decisions, and architecture decisions by project. Search across months of context without leaving the device or switching tools. The vault grows with you.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARISON -->
+<section class="content-section">
+  <div class="section-label reveal">Competitive Contrast</div>
+  <div class="section-title reveal">SkyeNote vs. The Alternative</div>
+  <div class="section-desc reveal">Not every note tool is the same tool. Here's why offline-first architecture isn't a minor feature — it's the entire design philosophy.</div>
+
+  <div style="overflow-x:auto;margin-top:2rem">
+    <table class="sn-compare-table reveal">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="sn-col-highlight">SkyeNote</th>
+          <th>Notion</th>
+          <th>Google Docs</th>
+          <th>Apple Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Works fully offline</td>
+          <td class="sn-col-highlight sn-check">✓ Yes</td>
+          <td class="sn-cross">✗ Partial</td>
+          <td class="sn-cross">✗ Partial</td>
+          <td class="sn-check">✓ Yes</td>
+        </tr>
+        <tr>
+          <td>No account required</td>
+          <td class="sn-col-highlight sn-check">✓ Yes</td>
+          <td class="sn-cross">✗ Required</td>
+          <td class="sn-cross">✗ Required</td>
+          <td class="sn-cross">✗ Apple ID</td>
+        </tr>
+        <tr>
+          <td>Data stays on device</td>
+          <td class="sn-col-highlight sn-check">✓ Always</td>
+          <td class="sn-cross">✗ Cloud-synced</td>
+          <td class="sn-cross">✗ Google servers</td>
+          <td class="sn-cross">✗ iCloud</td>
+        </tr>
+        <tr>
+          <td>PWA installable (cross-platform)</td>
+          <td class="sn-col-highlight sn-check">✓ Yes</td>
+          <td class="sn-cross">✗ Native app only</td>
+          <td class="sn-cross">✗ No</td>
+          <td class="sn-cross">✗ iOS/macOS only</td>
+        </tr>
+        <tr>
+          <td>Tag &amp; full-text local search</td>
+          <td class="sn-col-highlight sn-check">✓ Yes</td>
+          <td class="sn-check">✓ Yes</td>
+          <td class="sn-cross">✗ Per-doc only</td>
+          <td class="sn-check">✓ Yes</td>
+        </tr>
+        <tr>
+          <td>Markdown export</td>
+          <td class="sn-col-highlight sn-check">✓ Yes</td>
+          <td class="sn-check">✓ Paid only</td>
+          <td class="sn-cross">✗ No</td>
+          <td class="sn-cross">✗ No</td>
+        </tr>
+        <tr>
+          <td>Monthly cost</td>
+          <td class="sn-col-highlight sn-check">$0 Free</td>
+          <td class="sn-cross">$8–$16/mo</td>
+          <td class="sn-cross">Google Workspace</td>
+          <td class="sn-check">Free (iCloud req.)</td>
+        </tr>
+        <tr>
+          <td>Open in &lt;1 second</td>
+          <td class="sn-col-highlight sn-check">✓ Yes</td>
+          <td class="sn-cross">✗ Slow boot</td>
+          <td class="sn-cross">✗ Auth required</td>
+          <td class="sn-check">✓ Yes</td>
+        </tr>
+        <tr>
+          <td>Zero vendor lock-in</td>
+          <td class="sn-col-highlight sn-check">✓ Portable JSON/MD</td>
+          <td class="sn-cross">✗ Proprietary format</td>
+          <td class="sn-cross">✗ Google-dependent</td>
+          <td class="sn-cross">✗ Apple ecosystem</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INTEGRATION WITH SOL ECOSYSTEM -->
+<section class="content-section">
+  <div class="section-label reveal">Ecosystem Fit</div>
+  <div class="section-title reveal">SkyeNote Inside the SOL Stack</div>
+  <div class="section-desc reveal">SkyeNote is designed as a capture layer — not a destination. Notes flow from SkyeNote into SkyeDocx, SkyeFlow, and SkyeOps without friction.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">📄</div>
+      <h3>SkyeNote → SkyeDocx</h3>
+      <div class="card-type">Notes to Contracts</div>
+      <p>Export a client meeting note from SkyeNote into SkyeDocx and convert it directly into a scoped proposal or contract. Meeting context becomes billable scope in one step — no re-typing, no lost detail.</p>
+      <div class="card-tags"><span>Export to MD</span><span>Paste to Contract</span><span>Scope Capture</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🔁</div>
+      <h3>SkyeNote → SkyeFlow</h3>
+      <div class="card-type">Notes to Workflows</div>
+      <p>Tag a note with a workflow trigger and pipe it into SkyeFlow for task assignment and process execution. Capture the decision in the field — the workflow follows automatically.</p>
+      <div class="card-tags"><span>Tag-Triggered</span><span>Process Input</span><span>Auto-Route</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">⚙️</div>
+      <h3>SkyeNote → SkyeOps</h3>
+      <div class="card-type">Notes to Runbooks</div>
+      <p>Convert field notes into SkyeOps runbook steps. Documentation written during execution — not after the fact. The most accurate SOPs are the ones written in the moment they happen.</p>
+      <div class="card-tags"><span>Live Documentation</span><span>Runbook Input</span><span>Audit-Ready</span></div>
+    </div>
+  </div>
+
+  <div class="sn-quote-block reveal" style="margin-top:2.5rem">
+    <p>"The best capture tool is the one that disappears. You shouldn't be thinking about the tool — you should be thinking about what you're capturing. SkyeNote is built to stay invisible until you need it, and then be instantaneous when you do."</p>
+    <cite>— SOLEnterprises · Offline Mini Ops Suite Design Principle</cite>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section class="content-section">
+  <div class="sn-final-cta reveal">
+    <div class="section-label" style="margin-bottom:1rem">Ready to Use Now</div>
+    <h2>Your Vault. Your Device.<br>Your Rules.</h2>
+    <p>SkyeNote is live, free, and works right now — no account, no setup, no subscription. Install it to your home screen and it's there every time you need it, whether you're online or not.</p>
+    <div class="sn-hero-cta-row">
+      <a href="https://offlineminiopssuite.netlify.app/skyenote/" target="_blank" rel="noopener" class="sn-cta-primary">Launch SkyeNote — Free →</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:0.78rem;color:rgba(220,216,208,0.4);font-family:'Fira Code',monospace;letter-spacing:.05em">No login required · No cloud storage · Data never leaves your device</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+  <p><strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 986-210-7040</p>
+  <div class="footer-links">
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/vault.html">Vault</a>
+    <a href="/admin.html">Admin</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/sitemap-visual.html">Site Map</a>
+  </div>
+  <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
+</footer>
+
+<script src="/js/three-bg.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/growth.js"></script>
+
+<script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/js/netlify-identity-init.js"></script>
+
+<!-- MEGA NAV OVERLAY -->
+<div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+  <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Navigate</div>
+      <a href="/index.html">Home</a>
+      <a href="/about.html">Founder</a>
+      <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="/platforms.html">Platforms</a>
+      <a href="/network.html">Network</a>
+      <a href="/credibility.html">Credibility</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/status.html">Status</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Platforms &amp; Apps</div>
+      <a href="/Platforms-Apps-Infrastructure/index.html">⬡ All Platforms Hub</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html">kAIxU Chat</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html">Gateway13</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html">Delta Gate</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html">kAIxU PDF Pro</a>
+      <a href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html">BrandID PWA</a>
+      <a href="https://offlineminiopssuite.netlify.app/skyenote/" target="_blank" rel="noopener">SkyeNote Vault ↗</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Blog Categories</div>
+      <a href="/blog.html">All Posts</a>
+      <a href="/blog.html#phoenix">Phoenix AZ</a>
+      <a href="/blog.html#skaixu">SkAIxu IDE</a>
+      <a href="/blog.html#houston">Houston</a>
+      <a href="/blog.html#ai">Colorado AI</a>
+      <a href="/blog.html#devs">Devs &amp; AI</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Company</div>
+      <a href="/sitemap-visual.html">Site Map</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+    </div>
+  </div>
+</div>
+<script src="/js/partials.js"></script>
+</body>
+</html>

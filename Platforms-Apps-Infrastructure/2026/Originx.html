@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <link rel="canonical" href="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/Originx.html">
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
+  <meta name="twitter:description" content="0riginx — Brand provenance and identity origin platform. Document, timestamp, and prove the origin of your brand, work, and creative output.">
+  <meta name="twitter:title" content="0riginx — Brand Origin & Provenance Platform · SOLEnterprises">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/Originx.html">
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="0riginx — Brand provenance and identity origin platform. Document, timestamp, and prove the origin of your brand, work, and creative output.">
+  <meta property="og:title" content="0riginx — Brand Origin & Provenance Platform · SOLEnterprises">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0riginx — Brand Origin &amp; Provenance Platform · SOLEnterprises</title>
+  <meta name="description" content="0riginx is the brand provenance and identity origin platform. Document the source, timestamp the creation, and prove the authenticity of your brand assets, creative work, and intellectual property.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SOLEnterprises">
+  <link rel="apple-touch-icon" href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png">
+
+  <style>
+    /* ── 0riginx accent: deep violet → hot orange ── */
+    :root {
+      --ox-violet: #a855f7;
+      --ox-orange: #f97316;
+      --ox-amber:  #fbbf24;
+      --ox-glow:   rgba(168,85,247,0.2);
+    }
+
+    .ox-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(168,85,247,0.22), rgba(249,115,22,0.14));
+      border: 1px solid var(--ox-violet);
+      border-radius: 4px;
+      color: #d8b4fe;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 1.2rem;
+    }
+
+    .ox-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .ox-cta-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--ox-violet), var(--ox-orange));
+      color: #fff;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--ox-violet);
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .ox-cta-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .ox-cta-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--ox-violet);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--ox-violet);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .ox-cta-ghost:hover { background: rgba(168,85,247,0.1); transform: translateY(-2px); }
+
+    /* Provenance stamp mockup */
+    .ox-stamp-widget {
+      max-width: 440px;
+      margin: 3rem auto 0;
+      background: linear-gradient(145deg, #0e0814, #100a0a);
+      border: 1px solid rgba(168,85,247,0.35);
+      border-radius: 10px;
+      padding: 2rem 1.8rem;
+      font-family: 'Fira Code', monospace;
+      position: relative;
+      overflow: hidden;
+    }
+    .ox-stamp-widget::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(168,85,247,0.06) 0%, rgba(249,115,22,0.04) 100%);
+      pointer-events: none;
+    }
+    .ox-stamp-corner {
+      position: absolute;
+      top: 14px; right: 16px;
+      font-size: 0.6rem;
+      color: rgba(168,85,247,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .ox-stamp-title {
+      font-size: 0.65rem;
+      color: rgba(168,85,247,0.55);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .ox-stamp-name {
+      font-size: 1.4rem;
+      color: #d8b4fe;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.03em;
+    }
+    .ox-stamp-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.74rem;
+    }
+    .ox-stamp-row:last-child { border-bottom: none; }
+    .ox-stamp-key   { color: rgba(217,213,205,0.45); }
+    .ox-stamp-val   { color: #d8b4fe; }
+    .ox-stamp-hash  { color: var(--ox-orange); font-size: 0.68rem; }
+    .ox-stamp-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.3);
+      border-radius: 4px;
+      color: #4ade80;
+      font-size: 0.62rem;
+      padding: 2px 8px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+    }
+    .ox-stamp-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: oxPulse 2s ease-in-out infinite;
+    }
+    @keyframes oxPulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+    /* Feature grid */
+    .ox-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.5rem;
+    }
+    .ox-feature-card {
+      background: rgba(168,85,247,0.04);
+      border: 1px solid rgba(168,85,247,0.18);
+      border-radius: 8px;
+      padding: 1.6rem 1.4rem;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .ox-feature-card:hover {
+      border-color: rgba(168,85,247,0.5);
+      background: rgba(168,85,247,0.08);
+    }
+    .ox-feature-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .ox-feature-card h4 {
+      color: var(--ox-violet);
+      font-size: 0.92rem;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .ox-feature-card p {
+      color: rgba(220,216,208,0.72);
+      font-size: 0.87rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* Timeline chain */
+    .ox-chain {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2.5rem;
+      position: relative;
+    }
+    .ox-chain::before {
+      content: '';
+      position: absolute;
+      left: 28px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--ox-violet), var(--ox-orange), transparent);
+    }
+    .ox-chain-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.4rem 0;
+    }
+    .ox-chain-num {
+      flex-shrink: 0;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(168,85,247,0.25), rgba(249,115,22,0.15));
+      border: 1px solid var(--ox-violet);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 1.05rem;
+      color: #d8b4fe;
+      font-weight: bold;
+      position: relative; z-index: 1;
+    }
+    .ox-chain-body h4 { color: var(--text); font-size: 1rem; margin: 0 0 0.4rem; }
+    .ox-chain-body p  { color: rgba(220,216,208,0.7); font-size: 0.88rem; line-height: 1.65; margin: 0; }
+
+    /* Terminal provenance chain */
+    .ox-chain-demo {
+      background: #08050f;
+      border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 8px;
+      padding: 1.6rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      line-height: 1.95;
+      margin-top: 2.2rem;
+      overflow-x: auto;
+    }
+    .ox-chain-demo .cd-dim   { color: rgba(168,85,247,0.3); }
+    .ox-chain-demo .cd-ts    { color: rgba(168,85,247,0.65); }
+    .ox-chain-demo .cd-asset { color: var(--ox-amber); }
+    .ox-chain-demo .cd-hash  { color: var(--ox-orange); font-size: 0.72rem; }
+    .ox-chain-demo .cd-owner { color: #d8b4fe; }
+    .ox-chain-demo .cd-ok    { color: #4ade80; }
+    .ox-chain-demo .cd-event { color: rgba(220,216,208,0.5); }
+
+    /* Comparison table */
+    .ox-compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 2rem;
+    }
+    .ox-compare-table th {
+      background: rgba(168,85,247,0.12);
+      color: #d8b4fe;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(168,85,247,0.25);
+    }
+    .ox-compare-table td {
+      padding: 12px 16px;
+      color: rgba(220,216,208,0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.045);
+    }
+    .ox-compare-table tr:hover td { background: rgba(168,85,247,0.04); }
+    .ox-hl  { background: rgba(168,85,247,0.07); }
+    .ox-yes { color: #4ade80; font-weight: bold; }
+    .ox-no  { color: rgba(220,216,208,0.28); }
+
+    /* Quote */
+    .ox-quote {
+      border-left: 3px solid var(--ox-violet);
+      background: rgba(168,85,247,0.05);
+      border-radius: 0 6px 6px 0;
+      padding: 1.4rem 1.6rem;
+      margin: 2.5rem 0 0;
+    }
+    .ox-quote p    { color: rgba(220,216,208,0.85); font-size: 1.05rem; font-style: italic; line-height: 1.7; margin: 0 0 0.6rem; }
+    .ox-quote cite { font-size: 0.78rem; color: var(--ox-violet); font-family: 'Fira Code', monospace; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* Final CTA */
+    .ox-final-cta {
+      background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(249,115,22,0.06));
+      border: 1px solid rgba(168,85,247,0.22);
+      border-radius: 10px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .ox-final-cta h2 { font-size: clamp(1.6rem,4vw,2.5rem); margin-bottom: 1rem; color: var(--text); }
+    .ox-final-cta p  { color: rgba(220,216,208,0.7); max-width: 560px; margin: 0 auto 2rem; line-height: 1.7; }
+
+    /* Originx wordmark */
+    .ox-wordmark {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+    }
+    .ox-wordmark .zero { color: var(--ox-orange); }
+    .ox-wordmark .rest { color: #d8b4fe; }
+
+    @media(max-width:600px){
+      .ox-compare-table th,.ox-compare-table td { padding:9px 10px; font-size:.79rem; }
+      .ox-chain::before { left:24px; }
+      .ox-chain-num { width:48px; height:48px; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+
+<!-- NAV -->
+<nav class="main-nav" id="mainNav">
+  <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="/index.html">Home</a>
+    <div class="nav-dropdown" data-type="services">
+      <button type="button" class="dropdown-toggle">Services</button>
+      <div class="dropdown-menu">
+        <a href="/Services/WebBuilds.html">Web Builds</a>
+        <a href="/Services/ai-data-apps.html">AI &amp; Data Apps</a>
+        <a href="/Services/portals-hubs.html">Portals &amp; Hubs</a>
+        <a href="/Services/ecommerce-payments.html">Ecommerce &amp; Payments</a>
+        <a href="/Services/intake-routing.html">Intake &amp; Routing</a>
+        <a href="/Services/trust-surfaces.html">Trust Surfaces</a>
+        <a href="/Services/api-integration.html">API &amp; Integrations</a>
+        <a href="/Services/brand-identity.html">Brand Identity</a>
+        <a href="/Services/notification-comms.html">Notifications</a>
+        <a href="/Services/docs-knowledge.html">Docs &amp; Knowledge</a>
+        <a href="/Services/platform-migration.html">Migration</a>
+        <a href="/Services/security-audit.html">Security</a>
+        <a href="/Services/analytics-dashboards.html">Analytics</a>
+        <a href="/Services/lifecycle-retention.html">Retention</a>
+        <a href="/Services/mvp-launchpad.html">MVP Builds</a>
+        <a href="/Services/seo-content.html">SEO &amp; Content</a>
+      </div>
+    </div>
+    <a href="/about.html">Founder</a>
+    <div class="nav-dropdown" data-type="suite">
+      <button type="button" class="dropdown-toggle">SkyeSuite</button>
+      <div class="dropdown-menu">
+        <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="/SkyeFlow/index.html">SkyeFlow</a>
+        <a href="/SkyeArchive/index.html">SkyeArchive</a>
+        <a href="/SkyeSlides/index.html">SkyeSlides</a>
+        <a href="/SkyeDrive/index.html">SkyeDrive</a>
+        <a href="/SkyeCollab/index.html">SkyeCollab</a>
+        <a href="/SkyeSheets/index.html">SkyeSheets</a>
+        <a href="/SkyeLedger/index.html">SkyeLedger</a>
+        <a href="/SkyeOps/index.html">SkyeOps</a>
+      </div>
+    </div>
+    <a href="/platforms.html">Platforms</a>
+    <a href="/network.html">Network</a>
+    <a href="/credibility.html">Credibility</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <button class="menu-btn" id="menuBtn">☰ MENU</button>
+</nav>
+
+<!-- HERO -->
+<div class="page-header">
+  <div class="ox-badge">Brand Provenance · Origin Timestamping · Identity Chain · Dispute-Ready</div>
+  <div class="section-label">SOLEnterprises · 2026 Platform Division</div>
+  <h1><span style="color:#f97316">0</span>riginx<span style="color:#a855f7"> Platform</span></h1>
+  <div class="glow-tile-purple">
+    <p style="color:#000000">Where did it come from? When was it created? Who owns it? 0riginx is the brand provenance and identity origin platform — built to document, timestamp, and prove the origin of your brand assets, creative work, and intellectual property before someone else claims credit for it.</p>
+  </div>
+
+  <!-- Provenance stamp mockup -->
+  <div class="ox-stamp-widget">
+    <div class="ox-stamp-corner">Provenance Record</div>
+    <div class="ox-stamp-title">0riginx · Verified Origin Stamp</div>
+    <div class="ox-stamp-name">SOLEnterprises Brand Identity v1.0</div>
+    <div class="ox-stamp-row">
+      <span class="ox-stamp-key">Created</span>
+      <span class="ox-stamp-val">2026-02-16 · 10:24 AM CST</span>
+    </div>
+    <div class="ox-stamp-row">
+      <span class="ox-stamp-key">Origin Hash</span>
+      <span class="ox-stamp-hash">0x4f7a9c2e · SHA-256</span>
+    </div>
+    <div class="ox-stamp-row">
+      <span class="ox-stamp-key">Owner</span>
+      <span class="ox-stamp-val">Skyes Over London LC</span>
+    </div>
+    <div class="ox-stamp-row">
+      <span class="ox-stamp-key">Asset Type</span>
+      <span class="ox-stamp-val">Brand Identity · Logo · Color System</span>
+    </div>
+    <div class="ox-stamp-row">
+      <span class="ox-stamp-key">Chain Events</span>
+      <span class="ox-stamp-val">3 · Last: Feb 28, 2026</span>
+    </div>
+    <div class="ox-stamp-verified">
+      <div class="ox-stamp-dot"></div>
+      Origin Verified · 0riginx Network
+    </div>
+  </div>
+
+  <div class="ox-cta-row">
+    <a href="https://0riginx.netlify.app/" target="_blank" rel="noopener" class="ox-cta-primary">Open 0riginx →</a>
+    <a href="#how-it-works" class="ox-cta-ghost">See How It Works ↓</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- THE PROBLEM -->
+<section class="content-section">
+  <div class="section-label reveal">The Problem</div>
+  <div class="section-title reveal">Originality Without Proof Is Just a Claim</div>
+  <div class="section-desc reveal">You built the brand. You designed the system. You wrote the copy. You created the product. Then someone replicates it, launches six months later, and when a dispute surfaces — they have documentation and you have a folder of unsorted files with no timestamps. Originality without a provenance chain is one bad actor away from being worthless.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">🕳️</div>
+      <h3>No Default Timestamp Layer</h3>
+      <div class="card-type">Creation Without Documentation</div>
+      <p>File modification dates are trivially altered. Email timestamps are client-side and unverifiable. Cloud sync dates reflect upload, not creation. The standard digital record of "when you made it" is useless the moment someone challenges it in a serious dispute.</p>
+      <div class="card-tags"><span>Altered Timestamps</span><span>Unverifiable Dates</span><span>No Chain of Custody</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">📋</div>
+      <h3>Identity Without Provenance</h3>
+      <div class="card-type">Brand Theft and Replication</div>
+      <p>Brand identities, creative systems, design frameworks, and proprietary methodologies get replicated constantly — by competitors, by former contractors, by clients who repurpose deliverables beyond scope. Proving origin after the fact is nearly impossible without a documented chain.</p>
+      <div class="card-tags"><span>Brand Replication</span><span>IP Disputes</span><span>Scope Violations</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🔀</div>
+      <h3>Attribution Collapse</h3>
+      <div class="card-type">Creative Work Without a Trail</div>
+      <p>Agencies deliver work. Contractors produce output. Writers publish content. Developers ship systems. When the relationship ends and the work is repurposed, who created what — and when — becomes contested. Attribution collapses when no one documented the origin at the time of creation.</p>
+      <div class="card-tags"><span>Contractor Disputes</span><span>Attribution Loss</span><span>Scope Creep Evidence</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE SOLUTION -->
+<section class="content-section">
+  <div class="section-label reveal">The Solution</div>
+  <div class="section-title reveal">0riginx — The Provenance Layer Your Work Deserves</div>
+  <div class="section-desc reveal">0riginx creates a documented, timestamped, tamper-evident origin chain for every brand asset, creative output, and intellectual property record you register. Not a watermark. Not a folder with dates. A verifiable provenance record that holds up when it's challenged.</div>
+
+  <div class="ox-feature-grid stagger-children">
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">🔏</div>
+      <h4>Origin Timestamping</h4>
+      <p>Register any asset — a brand identity, a logo system, a written document, a design framework, a proprietary methodology, a codebase snapshot — and receive a cryptographically-derived origin stamp with a creation timestamp that cannot be retroactively altered.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">⛓️</div>
+      <h4>Provenance Chain</h4>
+      <p>Every asset builds a chain of custody. Register the origin, then record every significant modification, transfer, publication, and licensing event. The chain is append-only — events are added in sequence and the record shows every state transition the asset has ever been through.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">🏷️</div>
+      <h4>Asset Classification &amp; Tagging</h4>
+      <p>Classify every registration by asset type — brand identity, creative work, IP, methodology, content, code, or product. Tag by project, client, engagement, or category. Search and filter your provenance library by any dimension instantly.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">👤</div>
+      <h4>Ownership Attribution</h4>
+      <p>Bind every origin record to an owner identity. Record contributor roles, client relationships, contractor scopes, and licensing terms at the time of creation — not reconstructed after the fact. When attribution is contested, the record was written before the dispute existed.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">📤</div>
+      <h4>Dispute-Ready Export</h4>
+      <p>Export any origin record or full provenance chain as a structured PDF certificate, JSON data package, or signed CSV. Formatted for legal review, IP submissions, client dispute resolution, and audit response. Clean, professional, and ready the moment you need it.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">🗂️</div>
+      <h4>IP Portfolio Registry</h4>
+      <p>Maintain a complete portfolio of every registered asset in your 0riginx account. See creation timelines, chain event counts, ownership status, and export readiness at a glance. Your intellectual property portfolio organised, documented, and defensible.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- METRICS -->
+<section class="content-section">
+  <div class="section-label reveal">Platform Strength</div>
+  <div class="section-title reveal">Built for the Dispute That Hasn't Happened Yet</div>
+  <div class="card-grid-3 stagger-children" style="margin-top:2rem">
+    <div class="metric-card reveal">
+      <div class="metric-number">T+0</div>
+      <div class="metric-label">Timestamp at Creation</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">∞</div>
+      <div class="metric-label">Chain Events per Asset</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">SHA-256</div>
+      <div class="metric-label">Asset Hash Algorithm</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">100%</div>
+      <div class="metric-label">Export Portability</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">0</div>
+      <div class="metric-label">Retroactive Edits Allowed</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">1-click</div>
+      <div class="metric-label">Dispute Package Export</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="content-section" id="how-it-works">
+  <div class="section-label reveal">Workflow</div>
+  <div class="section-title reveal">Register. Chain. Prove.</div>
+  <div class="section-desc reveal">From creation to a verifiable provenance record in five moves. No legal background required — the platform handles the structure, you supply the facts.</div>
+
+  <div class="ox-chain">
+    <div class="ox-chain-step reveal">
+      <div class="ox-chain-num">01</div>
+      <div class="ox-chain-body">
+        <h4>Register the Asset at Origin</h4>
+        <p>The moment you create something that has value — a brand identity, a proprietary document, a methodology, a creative system — register it in 0riginx immediately. Provide the asset name, type, description, and ownership details. The platform generates an origin timestamp and a hash fingerprint at the moment of registration. That record is the start of the chain.</p>
+      </div>
+    </div>
+    <div class="ox-chain-step reveal">
+      <div class="ox-chain-num">02</div>
+      <div class="ox-chain-body">
+        <h4>Attach Supporting Documentation</h4>
+        <p>Upload the source material — design files, draft documents, screenshots, specification logs, version notes, or any artifact that evidences the work at that point in time. Every attachment is hashed and timestamped as part of the origin record. Supporting evidence embedded in the chain, not in a separate folder that can be questioned.</p>
+      </div>
+    </div>
+    <div class="ox-chain-step reveal">
+      <div class="ox-chain-num">03</div>
+      <div class="ox-chain-body">
+        <h4>Record Chain Events as Work Evolves</h4>
+        <p>Every significant modification, publication, transfer, licensing, or delivery event gets appended to the chain. A brand update, a version release, a contractor handoff, a client delivery — each event is logged with a timestamp, actor identity, and event type. The chain grows in sequence. Nothing is deleted or altered.</p>
+      </div>
+    </div>
+    <div class="ox-chain-step reveal">
+      <div class="ox-chain-num">04</div>
+      <div class="ox-chain-body">
+        <h4>Assign and Document Ownership</h4>
+        <p>Bind the asset to an owner identity. Record contributor attributions, client relationships, scope boundaries, and licensing terms directly against the chain record. When ownership splits, transfers, or is contested — the original assignment and any subsequent changes are documented in sequence, not reconstructed from memory.</p>
+      </div>
+    </div>
+    <div class="ox-chain-step reveal">
+      <div class="ox-chain-num">05</div>
+      <div class="ox-chain-body">
+        <h4>Export a Verified Provenance Certificate</h4>
+        <p>When a dispute arises — or before one does — export the full provenance chain as a structured certificate. The export includes the origin timestamp, hash fingerprint, event chain, owner attributions, and all attached documentation in a single formatted package. Hand to legal counsel, submit to a platform dispute process, or present to a client — the record was built before the dispute existed.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Provenance chain illustration -->
+  <div class="ox-chain-demo reveal">
+    <span class="cd-dim">// 0riginx · Provenance Chain · SOLEnterprises Brand Identity</span><br><br>
+    <span class="cd-ts">2026-02-16 10:24:07 CST</span> · <span class="cd-event">ORIGIN_REGISTERED</span> · <span class="cd-asset">"SOLEnterprises Brand Identity v1.0"</span><br>
+    &nbsp;&nbsp;<span class="cd-dim">owner:</span> <span class="cd-owner">Skyes Over London LC</span> · <span class="cd-dim">hash:</span> <span class="cd-hash">sha256:4f7a9c2e…</span><br><br>
+    <span class="cd-ts">2026-02-17 08:55:32 CST</span> · <span class="cd-event">ASSET_PUBLISHED</span>     · <span class="cd-asset">logo1_transparent.png → CDN</span><br>
+    &nbsp;&nbsp;<span class="cd-dim">event_hash:</span> <span class="cd-hash">sha256:a1b3d8f2…</span> · <span class="cd-dim">actor:</span> <span class="cd-owner">Skyes Over London LC</span><br><br>
+    <span class="cd-ts">2026-02-23 10:24:00 CST</span> · <span class="cd-event">VERSION_UPDATE</span>      · <span class="cd-asset">"Brand Identity v1.1 — Updated palette"</span><br>
+    &nbsp;&nbsp;<span class="cd-dim">event_hash:</span> <span class="cd-hash">sha256:c9e2f7a4…</span> · <span class="cd-dim">actor:</span> <span class="cd-owner">Skyes Over London LC</span><br><br>
+    <span class="cd-dim">Chain integrity: </span><span class="cd-ok">✓ VERIFIED</span> · <span class="cd-dim">3 events · tamper-evident · export ready</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO IT'S FOR -->
+<section class="content-section">
+  <div class="section-label reveal">Who It's For</div>
+  <div class="section-title reveal">Built for Creators Who Can't Afford to Lose What They Built</div>
+  <div class="section-desc reveal">0riginx is not a copyright registration service or a legal layer. It's an origin documentation platform — built for operators, agencies, developers, and creators who need a timestamped, structured record of their creative output before someone challenges ownership.</div>
+
+  <div class="ox-feature-grid stagger-children">
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">🎨</div>
+      <h4>Brand &amp; Creative Agencies</h4>
+      <p>Register every brand system, design framework, and creative methodology you deliver. When a former client reuses deliverables beyond scope or a competitor replicates your approach — the timestamped origin record and chain of custody documentation is already built.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">💻</div>
+      <h4>Developers &amp; Software Architects</h4>
+      <p>Register proprietary architectures, codebase snapshots, and system design frameworks at creation. Document version events, contributor attributions, and client delivery handoffs. When ownership of a system is contested post-engagement, the chain answers the question.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">✍️</div>
+      <h4>Writers &amp; Content Creators</h4>
+      <p>Register original manuscripts, editorial frameworks, content systems, and creative methodologies. Timestamp every draft version and publication event. Ghost-writing attribution, content scope disputes, and platform ownership questions all resolve faster with a documented origin chain.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">🏢</div>
+      <h4>Operators &amp; Business Founders</h4>
+      <p>Register proprietary business frameworks, operational methodologies, and internal system designs. When you build something that defines your competitive advantage — document it at creation, not after a competitor starts using it.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">🤝</div>
+      <h4>Agencies with Contractor Networks</h4>
+      <p>Record contributor scope, delivery attributions, and work-for-hire designations at the start of every engagement. When a contractor claims ownership of deliverables after the relationship ends, the origin record shows who created what, under what scope, and for whom.</p>
+    </div>
+    <div class="ox-feature-card reveal">
+      <div class="ox-feature-icon">⚖️</div>
+      <h4>Disputed IP Situations</h4>
+      <p>Already in a dispute? Retroactively documenting origin is still better than nothing — but 0riginx is built for pre-dispute registration. The most defensible record is the one that predates the dispute by weeks or months, not the one assembled in response to it.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- USE CASE DEEP DIVES -->
+<section class="content-section">
+  <div class="section-label reveal">Real Scenarios</div>
+  <div class="section-title reveal">When 0riginx Changes the Outcome</div>
+  <div class="section-desc reveal">These situations happen constantly to operators who assumed ownership was obvious. It isn't. Provenance documentation is the difference between a resolved dispute and a lost asset.</div>
+
+  <div class="card-grid-2 stagger-children" style="margin-top:2.5rem">
+    <div class="strength-card reveal">
+      <h4>🏷️ Scenario: Former Client Replicates Your Brand System</h4>
+      <p>You designed a complete brand identity for a client under a project scope. The engagement ends. Twelve months later, a competitor appears using a near-identical visual system. You believe it was derived from your proprietary framework — but you have no timestamped documentation of when your system was created. Without a 0riginx record, the dispute is your word against their launch date. With it, the origin timestamp and methodology documentation predate their registration by a year.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>💻 Scenario: Contractor Claims Ownership of Codebase</h4>
+      <p>A contractor contributed to a platform build under a work-for-hire arrangement. After the engagement ends, they claim the core architecture was their original IP and file a dispute. You have the Slack threads and invoices — but no structured origin record. A 0riginx chain registered at the start of the engagement, with timestamped architecture documentation and contractor-scope annotations, resolves the dispute before it reaches legal counsel.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>✍️ Scenario: Ghost-Written Content Used Beyond License</h4>
+      <p>You authored a content system and licensed it to a client for a specific use case. They publish it in contexts outside the agreed scope — or republish it under their own identity after the license expires. Proving the original attribution and license terms requires a chain of custody record, not just an email thread. 0riginx timestamps the authorship at creation and records the license event separately in the chain.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>🚀 Scenario: Methodology Replicated by a Competitor</h4>
+      <p>You built a proprietary operator framework — a structured intake system, a pricing model architecture, a service delivery methodology — that defines how your business works. A competitor launches something functionally identical. Proving your framework existed before theirs requires a documented, timestamped record of the original creation. A 0riginx origin record at the time of development is the only evidence that predates their launch.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARISON -->
+<section class="content-section">
+  <div class="section-label reveal">Competitive Contrast</div>
+  <div class="section-title reveal">0riginx vs. The Alternatives</div>
+  <div class="section-desc reveal">Copyright registration is slow and jurisdiction-dependent. NDAs protect future disclosure, not past creation. 0riginx fills the gap that existing tools leave open — the documented, timestamped, portable origin record.</div>
+
+  <div style="overflow-x:auto;margin-top:2rem">
+    <table class="ox-compare-table reveal">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="ox-hl">0riginx</th>
+          <th>Copyright Office</th>
+          <th>NDA / Legal</th>
+          <th>Folder + Timestamps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Instant origin registration</td>
+          <td class="ox-hl ox-yes">✓ Immediate</td>
+          <td class="ox-no">✗ Weeks to months</td>
+          <td class="ox-no">✗ Not applicable</td>
+          <td class="ox-no">✗ Unverifiable</td>
+        </tr>
+        <tr>
+          <td>Append-only provenance chain</td>
+          <td class="ox-hl ox-yes">✓ Yes</td>
+          <td class="ox-no">✗ No chain</td>
+          <td class="ox-no">✗ No chain</td>
+          <td class="ox-no">✗ No chain</td>
+        </tr>
+        <tr>
+          <td>Cryptographic hash fingerprint</td>
+          <td class="ox-hl ox-yes">✓ SHA-256</td>
+          <td class="ox-no">✗ No</td>
+          <td class="ox-no">✗ No</td>
+          <td class="ox-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Dispute-ready export package</td>
+          <td class="ox-hl ox-yes">✓ 1-click PDF/JSON</td>
+          <td class="ox-no">✗ Manual process</td>
+          <td class="ox-no">✗ No export</td>
+          <td class="ox-no">✗ Unstructured</td>
+        </tr>
+        <tr>
+          <td>Contributor attribution recording</td>
+          <td class="ox-hl ox-yes">✓ Per event</td>
+          <td class="ox-no">✗ Owner only</td>
+          <td class="ox-yes">✓ In clauses</td>
+          <td class="ox-no">✗ Not structured</td>
+        </tr>
+        <tr>
+          <td>International / jurisdiction-agnostic</td>
+          <td class="ox-hl ox-yes">✓ Platform-native</td>
+          <td class="ox-no">✗ Single jurisdiction</td>
+          <td class="ox-no">✗ Jurisdiction-bound</td>
+          <td class="ox-yes">✓ Universal</td>
+        </tr>
+        <tr>
+          <td>Works without a lawyer</td>
+          <td class="ox-hl ox-yes">✓ Self-service</td>
+          <td class="ox-no">✗ Complex filings</td>
+          <td class="ox-no">✗ Requires counsel</td>
+          <td class="ox-yes">✓ Yes</td>
+        </tr>
+        <tr>
+          <td>Documents chain of custody events</td>
+          <td class="ox-hl ox-yes">✓ Full chain</td>
+          <td class="ox-no">✗ No</td>
+          <td class="ox-no">✗ No</td>
+          <td class="ox-no">✗ No</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ECOSYSTEM FIT -->
+<section class="content-section">
+  <div class="section-label reveal">Ecosystem Fit</div>
+  <div class="section-title reveal">0riginx Inside the SOL Stack</div>
+  <div class="section-desc reveal">0riginx is the provenance layer. Origin records flow into contracts, audit packages, and IP documentation throughout the SOL ecosystem.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">📄</div>
+      <h3>0riginx → SkyeDocx</h3>
+      <div class="card-type">Origin to Contract</div>
+      <p>Export a 0riginx provenance certificate and embed it directly into a SkyeDocx contract as an attached IP exhibit. Every agreement that involves a creative deliverable closes with the origin chain documented — before the work changes hands.</p>
+      <div class="card-tags"><span>IP Exhibit</span><span>Contract Attachment</span><span>Pre-Delivery Record</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🔐</div>
+      <h3>0riginx → SkyeOps</h3>
+      <div class="card-type">Origin to Runbook</div>
+      <p>Register proprietary SOPs and operational frameworks in 0riginx at the time of creation. Link the origin record to the SkyeOps runbook entry. The methodology is documented, timestamped, and owner-attributed — not just stored in a shared folder.</p>
+      <div class="card-tags"><span>Methodology IP</span><span>SOP Attribution</span><span>Runbook Provenance</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🛡️</div>
+      <h3>0riginx → SkyeLedger</h3>
+      <div class="card-type">Origin to Valuation</div>
+      <p>Link 0riginx registered IP assets to SkyeLedger entries as documented intangible assets. A registered brand identity, proprietary codebase, or creative framework with a verified provenance chain is a ledger-ready asset — not just an assumption in a valuation.</p>
+      <div class="card-tags"><span>IP Valuation</span><span>Intangible Assets</span><span>Audit-Ready</span></div>
+    </div>
+  </div>
+
+  <div class="ox-quote reveal">
+    <p>"Ownership is not assumed — it's documented. The creator who registers origin at the moment of creation owns the dispute before it starts. 0riginx exists because waiting until a challenge arrives is already too late."</p>
+    <cite>— SOLEnterprises · 2026 Platform Division</cite>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section class="content-section">
+  <div class="ox-final-cta reveal">
+    <div class="section-label" style="margin-bottom:1rem">Register Your First Asset Now</div>
+    <h2>Your Work Has an Origin.<br>Prove It.</h2>
+    <p>Every day you create without a provenance record is a day someone else could claim credit. 0riginx takes less than two minutes to register an asset — and the timestamp starts counting from right now.</p>
+    <div class="ox-cta-row">
+      <a href="https://0riginx.netlify.app/" target="_blank" rel="noopener" class="ox-cta-primary">Launch 0riginx →</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:0.78rem;color:rgba(220,216,208,0.35);font-family:'Fira Code',monospace;letter-spacing:.05em">Brand provenance · IP origin timestamping · Dispute-ready export</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+  <p><strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 986-210-7040</p>
+  <div class="footer-links">
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/vault.html">Vault</a>
+    <a href="/admin.html">Admin</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/sitemap-visual.html">Site Map</a>
+  </div>
+  <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
+</footer>
+
+<script src="/js/three-bg.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/growth.js"></script>
+
+<script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/js/netlify-identity-init.js"></script>
+
+<!-- MEGA NAV OVERLAY -->
+<div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+  <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Navigate</div>
+      <a href="/index.html">Home</a>
+      <a href="/about.html">Founder</a>
+      <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="/platforms.html">Platforms</a>
+      <a href="/network.html">Network</a>
+      <a href="/credibility.html">Credibility</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/status.html">Status</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Platforms &amp; Apps</div>
+      <a href="/Platforms-Apps-Infrastructure/index.html">⬡ All Platforms Hub</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html">kAIxU Chat</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html">Gateway13</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html">Delta Gate</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html">kAIxU PDF Pro</a>
+      <a href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html">BrandID PWA</a>
+      <a href="https://0riginx.netlify.app/" target="_blank" rel="noopener">0riginx ↗</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Blog Categories</div>
+      <a href="/blog.html">All Posts</a>
+      <a href="/blog.html#phoenix">Phoenix AZ</a>
+      <a href="/blog.html#skaixu">SkAIxu IDE</a>
+      <a href="/blog.html#houston">Houston</a>
+      <a href="/blog.html#ai">Colorado AI</a>
+      <a href="/blog.html#devs">Devs &amp; AI</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Company</div>
+      <a href="/sitemap-visual.html">Site Map</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+    </div>
+  </div>
+</div>
+<script src="/js/partials.js"></script>
+</body>
+</html>

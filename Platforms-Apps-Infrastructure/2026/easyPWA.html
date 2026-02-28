@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>easyPWA — Turn Any Site Into a Progressive Web App | SOL Platforms</title>
+  <meta name="description" content="easyPWA is the fastest way to convert any website into a fully installable Progressive Web App — service worker, manifest, offline mode, install prompt, and push notifications, all generated in minutes." />
+  <base href="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="easyPWA — PWA Factory for Operators" />
+  <meta property="og:description" content="Stop letting your site be just a site. easyPWA generates a complete PWA layer — manifest, service worker, install prompt, offline cache — in minutes with zero config." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/easyPWA.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+  <style>
+    :root { --acc1:#7c3aed; --acc2:#0284c7; --acc1-dim:rgba(124,58,237,0.10); --acc2-dim:rgba(2,132,199,0.12); }
+    .page-header .glow-tile-purple { background:radial-gradient(ellipse at 50% 60%,rgba(124,58,237,0.16) 0%,rgba(2,132,199,0.12) 45%,transparent 75%); }
+    .acc-text{color:var(--acc1);} .acc2-text{color:#38bdf8;}
+    .badge-acc{display:inline-block;padding:4px 14px;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .badge-violet{background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(124,58,237,0.28);}
+    .badge-sky{background:var(--acc2-dim);color:#38bdf8;border:1px solid rgba(2,132,199,0.28);}
+    .hero-widget{position:relative;width:min(520px,96vw);background:rgba(4,4,12,0.82);border:1px solid rgba(124,58,237,0.18);border-radius:16px;overflow:hidden;box-shadow:0 0 70px rgba(124,58,237,0.09),0 0 110px rgba(2,132,199,0.08);flex-shrink:0;font-family:'DM Sans',sans-serif;}
+    .widget-titlebar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .dot{width:10px;height:10px;border-radius:50%;} .dot-r{background:#f87171;} .dot-y{background:#fbbf24;} .dot-g{background:#4ade80;}
+    .widget-title{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-left:8px;letter-spacing:.05em;flex:1;}
+    .pwa-chip{font-size:0.58rem;font-weight:700;letter-spacing:.07em;padding:2px 9px;border-radius:999px;background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(124,58,237,0.22);text-transform:uppercase;}
+    .pwa-steps{padding:14px;display:flex;flex-direction:column;gap:8px;}
+    .pwa-step{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 12px;}
+    .pwa-step.done{border-color:rgba(124,58,237,0.2);} .pwa-step.active{border-color:rgba(2,132,199,0.28);}
+    .step-num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;flex-shrink:0;}
+    .sn-done{background:rgba(74,222,128,0.15);color:#4ade80;} .sn-active{background:rgba(2,132,199,0.15);color:#38bdf8;animation:pulse 2s infinite;} .sn-wait{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.25);}
+    .step-text{font-size:0.72rem;color:rgba(255,255,255,0.55);flex:1;} .step-text strong{color:#fff;font-weight:600;}
+    .step-badge{font-size:0.58rem;padding:2px 8px;border-radius:6px;}
+    .sb-done{background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.2);}
+    .sb-active{background:rgba(2,132,199,0.1);color:#38bdf8;border:1px solid rgba(2,132,199,0.2);}
+    .sb-wait{background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.07);}
+    .pwa-file-list{margin:0 14px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(124,58,237,0.12);border-radius:10px;padding:10px 12px;}
+    .file-row{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:0.65rem;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+    .file-row:last-child{border-bottom:none;} .file-name{color:rgba(255,255,255,0.6);flex:1;} .file-size{color:rgba(255,255,255,0.2);}
+    .file-status{padding:1px 7px;border-radius:4px;font-size:0.58rem;} .fs-ready{background:rgba(74,222,128,0.1);color:#4ade80;} .fs-gen{background:rgba(2,132,199,0.1);color:#38bdf8;}
+    .widget-footer{display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(124,58,237,0.06);border-top:1px solid rgba(124,58,237,0.12);font-size:0.6rem;color:rgba(255,255,255,0.28);}
+    .s-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;flex-shrink:0;}
+    .w-actions{margin-left:auto;display:flex;gap:8px;} .w-action{font-size:0.58rem;padding:2px 9px;border-radius:6px;background:rgba(124,58,237,0.08);color:var(--acc1);border:1px solid rgba(124,58,237,0.18);}
+    .btn-violet{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,var(--acc1),#5b21b6);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;text-decoration:none;transition:opacity .2s,transform .15s;}
+    .btn-violet:hover{opacity:.87;transform:translateY(-2px);}
+    .btn-sky-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:transparent;color:#38bdf8;font-weight:600;font-size:0.95rem;border-radius:10px;text-decoration:none;border:1.5px solid rgba(2,132,199,0.35);transition:background .2s,transform .15s;}
+    .btn-sky-outline:hover{background:var(--acc2-dim);transform:translateY(-2px);}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+    .feature-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:26px 24px;transition:border-color .25s,transform .2s;}
+    .feature-card:hover{border-color:rgba(124,58,237,0.2);transform:translateY(-3px);}
+    .feature-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
+    .icon-v{background:var(--acc1-dim);} .icon-s{background:var(--acc2-dim);}
+    .feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:#fff;} .feature-card p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .metric-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px;}
+    .metric-tile{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 18px;text-align:center;}
+    .m1{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--acc1);line-height:1;} .m2{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#38bdf8;line-height:1;}
+    .metric-tile .lbl{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:4px;}
+    .steps{display:flex;flex-direction:column;gap:0;}
+    .step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .step:last-child{border-bottom:none;}
+    .step-n{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#0284c7);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#fff;flex-shrink:0;}
+    .step-c h3{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;} .step-c p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .step-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:0.68rem;padding:2px 10px;border-radius:6px;background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(124,58,237,0.18);margin-bottom:8px;}
+    .audience-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;}
+    .audience-chip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;font-size:0.85rem;font-weight:600;color:rgba(255,255,255,0.72);}
+    .chip-icon{font-size:1.2rem;flex-shrink:0;}
+    .cta-box{background:linear-gradient(135deg,rgba(124,58,237,0.09) 0%,rgba(2,132,199,0.08) 100%);border:1px solid rgba(124,58,237,0.16);border-radius:24px;padding:56px 40px;text-align:center;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+    @media(max-width:700px){.hero-split{flex-direction:column!important;}.hero-widget{width:100%;}.cta-box{padding:36px 18px;}}
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+<nav class="main-nav" id="mainNav">
+  <a href="/" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="36" /></a>
+  <div class="nav-links desktop-only">
+    <a href="/platforms.html">Platforms</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="https://itspwafactory.netlify.app/" target="_blank" rel="noopener" class="nav-cta">Open easyPWA →</a>
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+<div class="mega-nav-overlay" id="megaNav">
+  <button class="mega-nav-close" id="megaNavClose">&#10005;</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col"><div class="mega-nav-heading">Dev Tools</div>
+      <a href="/Platforms-Apps-Infrastructure/2026/easyPWA.html">easyPWA</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html">kAIxuAppForge</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyeKIDE.html">SkyeKIDE</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Platforms</div>
+      <a href="/platforms.html">All Platforms</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/NexusForge.html">NexusForge Studio</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyePortalVault.html">SkyePortalVault</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Company</div>
+      <a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Get Started</div>
+      <a href="https://itspwafactory.netlify.app/" target="_blank" rel="noopener">Open easyPWA</a>
+      <a href="/get-started/">Get Started</a><a href="/contact.html">Talk to SOL</a></div>
+  </div>
+</div>
+
+<header class="page-header">
+  <div class="glow-tile-purple"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="badge-acc badge-violet">PWA Generator</span>
+        <span class="badge-acc badge-sky">Offline-First</span>
+        <span class="badge-acc badge-violet">Zero Config</span>
+      </div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;color:#fff;margin:0;">
+        easy<span class="acc-text">PWA</span><br/>The PWA Factory
+      </h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.65;margin:0;">
+        easyPWA is the <strong style="color:var(--acc1);">fastest path from website to installable app</strong> — generate a complete Progressive Web App layer in minutes. Service worker, web manifest, offline caching, install prompt, and push notification hooks — all configured and ready to drop into any project.
+      </p>
+    </div>
+    <div class="hero-split" style="display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Auto-generates <code style="color:#38bdf8;background:rgba(56,189,248,0.08);padding:1px 6px;border-radius:4px;">manifest.json</code> with all required fields</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Offline-first service worker with configurable caching strategies</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Custom install prompt UI — branded, dismissible, timed</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Push notification boilerplate ready out of the box</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Icon set generation — all sizes from a single source image</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Lighthouse PWA score validator built in — ship with confidence</li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="https://itspwafactory.netlify.app/" target="_blank" rel="noopener" class="btn-violet">Open easyPWA Factory →</a>
+          <a href="#features" class="btn-sky-outline">Explore Features</a>
+        </div>
+        <p style="margin-top:16px;font-size:0.75rem;color:rgba(255,255,255,0.3);">Part of the <a href="/platforms.html" style="color:#38bdf8;">SOL Dev Tools platform →</a></p>
+      </div>
+      <div class="hero-widget">
+        <div class="widget-titlebar">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="widget-title">easyPWA Factory — Generating…</span>
+          <span class="pwa-chip">Live Build</span>
+        </div>
+        <div class="pwa-steps">
+          <div class="pwa-step done">
+            <div class="step-num sn-done">✓</div>
+            <div class="step-text"><strong>Site URL analyzed</strong> — icons, colors, name extracted</div>
+            <div class="step-badge sb-done">Done</div>
+          </div>
+          <div class="pwa-step done">
+            <div class="step-num sn-done">✓</div>
+            <div class="step-text"><strong>manifest.json</strong> — generated with all 11 required fields</div>
+            <div class="step-badge sb-done">Done</div>
+          </div>
+          <div class="pwa-step active">
+            <div class="step-num sn-active">⟳</div>
+            <div class="step-text"><strong>sw.js</strong> — caching strategy: stale-while-revalidate</div>
+            <div class="step-badge sb-active">Building…</div>
+          </div>
+          <div class="pwa-step">
+            <div class="step-num sn-wait">4</div>
+            <div class="step-text"><strong>Icons</strong> — 192×192, 512×512, maskable, apple-touch</div>
+            <div class="step-badge sb-wait">Queued</div>
+          </div>
+          <div class="pwa-step">
+            <div class="step-num sn-wait">5</div>
+            <div class="step-text"><strong>Install prompt</strong> — branded A2HS banner code</div>
+            <div class="step-badge sb-wait">Queued</div>
+          </div>
+        </div>
+        <div class="pwa-file-list">
+          <div class="file-row"><span class="file-icon">📄</span><span class="file-name">manifest.json</span><span class="file-size">1.2 KB</span><span class="file-status fs-ready">Ready</span></div>
+          <div class="file-row"><span class="file-icon">⚙️</span><span class="file-name">sw.js</span><span class="file-size">—</span><span class="file-status fs-gen">Generating</span></div>
+          <div class="file-row"><span class="file-icon">🖼️</span><span class="file-name">icons/</span><span class="file-size">—</span><span class="file-status fs-gen">Queued</span></div>
+          <div class="file-row"><span class="file-icon">📝</span><span class="file-name">install-prompt.js</span><span class="file-size">—</span><span class="file-status fs-gen">Queued</span></div>
+        </div>
+        <div class="widget-footer">
+          <div class="s-dot"></div>
+          <span style="color:#4ade80;font-weight:700;">2 / 5 Complete</span>
+          <span>· Lighthouse target: 100</span>
+          <div class="w-actions"><div class="w-action">Download ZIP</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="badge-acc badge-violet" style="margin-bottom:12px;display:inline-block;">The Problem</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">PWA setup is a 3-hour config chore that stops most teams from doing it at all</h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:560px;margin:12px auto 0;line-height:1.65;">Manifest spec, service worker APIs, caching strategies, icon requirements, VAPID keys for push — it's a lot of spec to hold in your head just to make a site installable.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">📋</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">The Manifest Maze</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">A complete web app manifest requires 11+ fields, multiple icon sizes, careful display and orientation settings, and proper scope definitions. One wrong field and Chrome silently skips the install prompt. easyPWA generates a spec-perfect manifest from your site URL in seconds.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">⚙️</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Service Worker Complexity</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Cache-first, network-first, stale-while-revalidate — three distinct strategies with different tradeoffs for different asset types. The service worker spec is powerful but punishing for beginners. easyPWA generates a well-commented, production-ready sw.js matched to your site's structure.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">🖼️</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Icon Hell</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">PWA installations require icons in 8+ sizes — 72, 96, 128, 144, 152, 192, 384, 512px — plus a maskable variant for Android adaptive icons and an apple-touch-icon for iOS. easyPWA generates the complete icon set from a single source image, no Photoshop required.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">🔔</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Push Notification Boilerplate</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Setting up push notifications requires VAPID key generation, a push subscription handler in the service worker, backend subscription storage, and a notification dispatcher — hours of boilerplate before you send a single notification. easyPWA pre-wires the full push stack, ready to connect to your backend.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal" id="features">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-violet" style="margin-bottom:12px;display:inline-block;">Features</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0 0 8px;">Everything required for a production-grade PWA, generated in one session.</h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:520px;line-height:1.65;">No Workbox boilerplate to wrestle. No Lighthouse trial and error. easyPWA handles the spec compliance so you focus on building the actual product.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card"><div class="feature-icon icon-v">📄</div><h3>Manifest Generator</h3><p>Enter your app name, start URL, theme color, and background color — easyPWA outputs a fully compliant <code style="color:#38bdf8;font-size:0.8rem;">manifest.json</code> with proper display, orientation, scope, and icon references. Copy-paste ready.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-s">⚙️</div><h3>Service Worker Builder</h3><p>Choose your caching strategy — cache-first for assets, network-first for API calls, stale-while-revalidate for pages — and easyPWA generates a clean, annotated <code style="color:#38bdf8;font-size:0.8rem;">sw.js</code> with install, activate, and fetch handlers.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">🖼️</div><h3>Icon Factory</h3><p>Upload one high-resolution source image (512×512 minimum) and easyPWA generates the complete icon set — all 8 standard PWA sizes, Android maskable icons with safe-zone padding, and the apple-touch-icon. Download as a ZIP.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-s">📲</div><h3>Install Prompt UI</h3><p>easyPWA generates a custom, branded install banner — triggered on your schedule, styled to your colors, with dismiss logic and a deferred re-prompt after the user returns. Better install conversion, every time.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">🔔</div><h3>Push Notification Stack</h3><p>Generates the full push notification boilerplate — VAPID key generation script, client-side subscription handler, service worker push event listener, and a notification display template. Connect to your backend and you're live.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-s">✅</div><h3>Lighthouse PWA Validator</h3><p>Before you download, easyPWA runs a Lighthouse PWA audit and flags any compliance gaps — missing icon sizes, incorrect HTTPS assumptions, service worker registration errors. Ship with a 100 PWA score on the first try.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">📦</div><h3>One-Click ZIP Download</h3><p>Everything generated — manifest, service worker, icon set, install prompt JS, and a README with integration instructions — packaged into a single ZIP. Drop it into your project root and add two script lines to your HTML.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-s">📡</div><h3>Offline Fallback Page</h3><p>Generates a styled offline fallback page matched to your brand colors — shown automatically when the user is offline and the resource isn't in cache. Replace Chrome's dinosaur game with a branded offline experience.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-sky" style="margin-bottom:12px;display:inline-block;">At a Glance</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin:0;">What you get in one factory session</h2>
+    </div>
+    <div class="metric-row">
+      <div class="metric-tile"><div class="m1">&lt;5m</div><div class="lbl">From URL to PWA Files</div></div>
+      <div class="metric-tile"><div class="m2">100</div><div class="lbl">Lighthouse PWA Score</div></div>
+      <div class="metric-tile"><div class="m1">8+</div><div class="lbl">Icon Sizes Generated</div></div>
+      <div class="metric-tile"><div class="m2">3</div><div class="lbl">Caching Strategies</div></div>
+      <div class="metric-tile"><div class="m1">1</div><div class="lbl">ZIP — All Files Included</div></div>
+      <div class="metric-tile"><div class="m2">0</div><div class="lbl">Framework Dependencies</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-violet" style="margin-bottom:12px;display:inline-block;">How It Works</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Enter URL → Configure → Generate → Drop In</h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:480px;margin:8px 0 0;line-height:1.65;">Four steps from plain website to installable PWA — no toolchain required.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-c">
+          <div class="step-tag">Input</div>
+          <h3>Enter your site URL — easyPWA crawls it to extract name, colors, and icons</h3>
+          <p>Paste your site URL into the factory. easyPWA fetches the page, parses the title and meta tags for the app name and description, extracts theme color from your existing meta or CSS variables, and pulls any existing favicon or logo for the icon generation step. You can override any detected value before generating.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-c">
+          <div class="step-tag">Configure</div>
+          <h3>Choose display mode, caching strategy, and which PWA features you need</h3>
+          <p>Use the configuration panel to set your display mode (standalone, fullscreen, browser, minimal-ui), your preferred caching strategy, which file types to pre-cache, whether to include push notification boilerplate, and install prompt timing. Everything has sensible defaults — easyPWA picks the right strategy for your site type automatically.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-c">
+          <div class="step-tag">Generate</div>
+          <h3>Hit generate — manifest, service worker, icons, and prompt JS are produced</h3>
+          <p>Click Generate and the factory runs: manifest.json is built from your config, sw.js is assembled with the correct event handlers, the icon set is generated in all required dimensions, and the install prompt JS is configured with your timing rules. A Lighthouse compliance check runs in parallel — any issues surface before you download.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <div class="step-c">
+          <div class="step-tag">Drop In</div>
+          <h3>Download the ZIP, add two lines to your HTML, and your site is a PWA</h3>
+          <p>Download the output ZIP — it includes all generated files plus a README with the exact HTML snippets to add to your <code style="color:#38bdf8;font-size:0.85rem;">&lt;head&gt;</code>: the manifest link, service worker registration script, and install prompt trigger. Add those two code blocks to your HTML, deploy, and your site becomes a Lighthouse-100 PWA.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-violet" style="margin-bottom:12px;display:inline-block;">Who It's For</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">For anyone who wants their site to work like an app</h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-chip"><span class="chip-icon">🧑‍💻</span>Developers who want PWA compliance without hours of boilerplate</div>
+      <div class="audience-chip"><span class="chip-icon">🏢</span>Small business owners whose site needs offline capability</div>
+      <div class="audience-chip"><span class="chip-icon">🚀</span>Startups shipping MVPs that need an app-store-like install experience</div>
+      <div class="audience-chip"><span class="chip-icon">🛒</span>E-commerce operators improving mobile conversion with installability</div>
+      <div class="audience-chip"><span class="chip-icon">📱</span>Teams building tools users return to daily — log, track, report</div>
+      <div class="audience-chip"><span class="chip-icon">🎨</span>Designers who built a site and want to upgrade it to a PWA quickly</div>
+      <div class="audience-chip"><span class="chip-icon">📰</span>Content publishers needing offline reading and push notifications</div>
+      <div class="audience-chip"><span class="chip-icon">🏗️</span>Agencies adding PWA to every client site delivery as a standard</div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <span class="badge-acc badge-violet" style="margin-bottom:16px;display:inline-block;">Launch the Factory</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:0 0 16px;line-height:1.1;">
+        Your site deserves to be installable.<br/><span class="acc-text">Generate your PWA layer in under 5 minutes.</span>
+      </h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 36px;line-height:1.65;">easyPWA eliminates every tedious part of Progressive Web App setup — manifest configuration, service worker strategy, icon generation, install prompt logic — so you can ship a Lighthouse-100 PWA from any existing site without a toolchain or a week of documentation reading.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://itspwafactory.netlify.app/" target="_blank" rel="noopener" class="btn-violet" style="font-size:1.05rem;padding:16px 36px;">Open easyPWA Factory →</a>
+        <a href="/platforms.html" class="btn-sky-outline">See All Platforms</a>
+      </div>
+      <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">Free to use · No account required · Download is fully yours · No runtime dependency</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="40" />
+        <p>Skyes Over London LC — building AI-powered creative and developer tools for operators and small teams.</p>
+        <div class="footer-contact">
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="tel:9862107040">986-210-7040</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col"><span class="footer-col-label">Dev Tools</span>
+          <a href="/Platforms-Apps-Infrastructure/2026/easyPWA.html">easyPWA</a>
+          <a href="/Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html">kAIxuAppForge</a>
+          <a href="/Platforms-Apps-Infrastructure/2026/SkyeKIDE.html">SkyeKIDE</a></div>
+        <div class="footer-col"><span class="footer-col-label">Company</span>
+          <a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+        <div class="footer-col"><span class="footer-col-label">Legal</span>
+          <a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Skyes Over London LC. All rights reserved.</span></div>
+  </div>
+</footer>
+<script src="/js/three.min.js" defer></script>
+<script src="/assets/app.js" defer></script>
+<script src="/js/main.js" defer></script>
+<script src="/js/growth.js" defer></script>
+<script src="/js/partials.js" defer></script>
+</body>
+</html>
+

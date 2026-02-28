@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebPilePro — Web Resource Stack Manager for Developers | SOL Platforms</title>
+  <meta name="description" content="WebPilePro is an offline-first web resource manager for developers — save URLs, organize links by project, tag resources, and build searchable stacks without browser bookmarks or tabs." />
+  <base href="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="WebPilePro — Web Resource Stack Manager" />
+  <meta property="og:description" content="WebPilePro replaces your browser bookmark chaos with a fast, searchable, offline-first resource stack — save URLs with notes, organize by project, and find what you actually need." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+  <style>
+    :root { --acc1:#06b6d4; --acc2:#7c3aed; --acc1-dim:rgba(6,182,212,0.10); --acc2-dim:rgba(124,58,237,0.12); }
+    .page-header .glow-tile-purple { background:radial-gradient(ellipse at 50% 60%,rgba(6,182,212,0.16) 0%,rgba(124,58,237,0.12) 45%,transparent 75%); }
+    .acc-text{color:var(--acc1);} .acc2-text{color:#c4b5fd;}
+    .badge-acc{display:inline-block;padding:4px 14px;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .badge-cyan{background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(6,182,212,0.28);}
+    .badge-violet{background:var(--acc2-dim);color:#c4b5fd;border:1px solid rgba(124,58,237,0.28);}
+    .hero-widget{position:relative;width:min(480px,96vw);background:rgba(4,4,12,0.88);border:1px solid rgba(6,182,212,0.18);border-radius:16px;overflow:hidden;box-shadow:0 0 70px rgba(6,182,212,0.09),0 0 110px rgba(124,58,237,0.08);flex-shrink:0;font-family:'DM Sans',sans-serif;}
+    .widget-titlebar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .dot{width:10px;height:10px;border-radius:50%;} .dot-r{background:#f87171;} .dot-y{background:#fbbf24;} .dot-g{background:#4ade80;}
+    .widget-title{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-left:8px;flex:1;}
+    .stack-tabs{display:flex;gap:0;padding:10px 12px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .stack-tab{padding:6px 12px;font-size:0.68rem;font-weight:700;border-radius:8px 8px 0 0;cursor:pointer;}
+    .stack-tab.active{background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(6,182,212,0.18);border-bottom:none;}
+    .stack-tab.inactive{color:rgba(255,255,255,0.3);}
+    .pile-list{padding:10px 12px;display:flex;flex-direction:column;gap:5px;}
+    .pile-item{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:8px 10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:8px;}
+    .pile-fav{font-size:0.8rem;opacity:.4;}
+    .pile-info{display:flex;flex-direction:column;gap:2px;}
+    .pile-title{font-size:0.75rem;font-weight:600;color:rgba(255,255,255,0.75);}
+    .pile-url{font-family:'DM Mono',monospace;font-size:0.58rem;color:rgba(255,255,255,0.25);}
+    .pile-tags{display:flex;gap:4px;}
+    .pile-tag{font-size:0.55rem;font-weight:700;padding:1px 6px;border-radius:5px;}
+    .pt-cyan{background:var(--acc1-dim);color:var(--acc1);}
+    .pt-violet{background:var(--acc2-dim);color:#c4b5fd;}
+    .pile-action{font-size:0.65rem;color:rgba(255,255,255,0.25);cursor:pointer;}
+    .pile-search{margin:8px 12px 0;background:rgba(255,255,255,0.04);border:1px solid rgba(6,182,212,0.15);border-radius:8px;padding:8px 12px;font-size:0.72rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:8px;}
+    .widget-footer{display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(6,182,212,0.06);border-top:1px solid rgba(6,182,212,0.12);font-size:0.6rem;color:rgba(255,255,255,0.28);margin-top:10px;}
+    .btn-cyan{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,var(--acc1),#0e7490);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;text-decoration:none;transition:opacity .2s,transform .15s;}
+    .btn-cyan:hover{opacity:.87;transform:translateY(-2px);}
+    .btn-violet-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:transparent;color:#c4b5fd;font-weight:600;font-size:0.95rem;border-radius:10px;text-decoration:none;border:1.5px solid rgba(124,58,237,0.35);transition:background .2s,transform .15s;}
+    .btn-violet-outline:hover{background:var(--acc2-dim);transform:translateY(-2px);}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+    .feature-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:26px 24px;transition:border-color .25s,transform .2s;}
+    .feature-card:hover{border-color:rgba(6,182,212,0.2);transform:translateY(-3px);}
+    .feature-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
+    .icon-c{background:var(--acc1-dim);} .icon-v{background:var(--acc2-dim);}
+    .feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:#fff;} .feature-card p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .metric-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+    .metric-tile{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 18px;text-align:center;}
+    .m1{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--acc1);line-height:1;} .m2{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#c4b5fd;line-height:1;}
+    .metric-tile .lbl{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:4px;}
+    .steps{display:flex;flex-direction:column;gap:0;}
+    .step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .step:last-child{border-bottom:none;}
+    .step-n{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#06b6d4,#7c3aed);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#fff;flex-shrink:0;}
+    .step-c h3{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;} .step-c p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .step-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:0.68rem;padding:2px 10px;border-radius:6px;background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(6,182,212,0.18);margin-bottom:8px;}
+    .audience-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;}
+    .audience-chip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;font-size:0.85rem;font-weight:600;color:rgba(255,255,255,0.72);}
+    .chip-icon{font-size:1.2rem;flex-shrink:0;}
+    .cta-box{background:linear-gradient(135deg,rgba(6,182,212,0.09) 0%,rgba(124,58,237,0.08) 100%);border:1px solid rgba(6,182,212,0.16);border-radius:24px;padding:56px 40px;text-align:center;}
+    @media(max-width:700px){.hero-split{flex-direction:column!important;}.hero-widget{width:100%;}.cta-box{padding:36px 18px;}}
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+<nav class="main-nav" id="mainNav">
+  <a href="/" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="36" /></a>
+  <div class="nav-links desktop-only">
+    <a href="/platforms.html">Platforms</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/about.html">About</a><a href="/contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="https://webpilepro.netlify.app/" target="_blank" rel="noopener" class="nav-cta">Open WebPilePro →</a>
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+<div class="mega-nav-overlay" id="megaNav">
+  <button class="mega-nav-close" id="megaNavClose">&#10005;</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col"><div class="mega-nav-heading">Developer Tools</div><a href="/Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html">WebPilePro</a><a href="/Platforms-Apps-Infrastructure/2026/NexusForge.html">NexusForge</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Platforms</div><a href="/platforms.html">All Platforms</a><a href="/Platforms-Apps-Infrastructure/2026/easyPWA.html">easyPWA</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Company</div><a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Get Started</div><a href="https://webpilepro.netlify.app/" target="_blank" rel="noopener">Open WebPilePro</a><a href="/get-started/">Get Started</a></div>
+  </div>
+</div>
+<header class="page-header">
+  <div class="glow-tile-purple"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="badge-acc badge-cyan">Resource Stack</span>
+        <span class="badge-acc badge-violet">Offline First</span>
+        <span class="badge-acc badge-cyan">Developer Tool</span>
+      </div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;color:#fff;margin:0;">Web<span class="acc-text">Pile</span>Pro</h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.65;margin:0;">WebPilePro is the <strong style="color:var(--acc1);">offline-first web resource stack manager</strong> — save URLs with notes, organize links by project, tag resources, and build a searchable stack of references that actually works when you need it. Replaces bookmark chaos permanently.</p>
+    </div>
+    <div class="hero-split" style="display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Save any URL with a title, notes, and tags in under 10 seconds</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Organize links into project stacks — each project has its own pile</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Full-text search across all URLs, titles, and your notes</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Tag system — find all "auth" or "CSS" resources instantly across stacks</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Offline-first PWA — your entire resource library available without Wi-Fi</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Browser extension (optional) — clip any page in one click</li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="https://webpilepro.netlify.app/" target="_blank" rel="noopener" class="btn-cyan">Open WebPilePro →</a>
+          <a href="#features" class="btn-violet-outline">Explore Features</a>
+        </div>
+      </div>
+      <div class="hero-widget">
+        <div class="widget-titlebar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="widget-title">WebPilePro — Dev Resources</span></div>
+        <div class="stack-tabs">
+          <div class="stack-tab active">Auth Stack</div>
+          <div class="stack-tab inactive">CSS/UI</div>
+          <div class="stack-tab inactive">APIs</div>
+          <div class="stack-tab inactive">All Piles</div>
+        </div>
+        <div class="pile-search">🔍 <span style="opacity:.5;">Search your stacks...</span></div>
+        <div class="pile-list">
+          <div class="pile-item"><span class="pile-fav">★</span><div class="pile-info"><div class="pile-title">JWT.io — JWT Debugger &amp; Decoder</div><div class="pile-url">jwt.io</div><div class="pile-tags"><span class="pile-tag pt-cyan">jwt</span><span class="pile-tag pt-violet">auth</span></div></div><span class="pile-action">→</span></div>
+          <div class="pile-item"><span class="pile-fav" style="opacity:.15;">★</span><div class="pile-info"><div class="pile-title">Netlify Identity Docs</div><div class="pile-url">docs.netlify.com/security/...</div><div class="pile-tags"><span class="pile-tag pt-violet">netlify</span><span class="pile-tag pt-cyan">auth</span></div></div><span class="pile-action">→</span></div>
+          <div class="pile-item"><span class="pile-fav">★</span><div class="pile-info"><div class="pile-title">OWASP Auth Cheat Sheet</div><div class="pile-url">cheatsheetseries.owasp.org</div><div class="pile-tags"><span class="pile-tag pt-cyan">security</span><span class="pile-tag pt-violet">auth</span></div></div><span class="pile-action">→</span></div>
+        </div>
+        <div class="widget-footer"><div style="width:6px;height:6px;border-radius:50%;background:#4ade80;flex-shrink:0;"></div><span style="color:#4ade80;font-weight:700;">Offline Ready</span><span>· 3 stacks · 47 resources saved</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;"><span class="badge-acc badge-cyan" style="margin-bottom:12px;display:inline-block;">The Problem</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Browser bookmarks are where great resources go to be forgotten forever</h2></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">📑</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Bookmarks Have Zero Context</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">A bookmark is just a URL and whatever title the page happened to have. Six months later you have 400 bookmarks and no memory of why you saved that Medium post from 2023. WebPilePro saves URLs with your own notes, tags, and project context — so you know why it mattered.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🗂️</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Tabs Are Not a Storage System</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Keeping 40 tabs open to avoid losing a resource you might need later is not a workflow — it's anxiety management. WebPilePro gives you a real place to put links so you can close the tab immediately and find it again when you actually need it.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🔍</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">You Can't Search What You Don't Tag</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Browser bookmarks have primitive search — it searches the URL and page title, not your context, not your notes, not the tags you would have added if the capability existed. WebPilePro's full-text search covers titles, URLs, your notes, AND tags simultaneously.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">📶</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Cloud Bookmark Tools Require an Account</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Pocket, Raindrop, Notion — all require an account, store your data in the cloud, and lock you into a subscription to get the features that matter. WebPilePro runs offline-first with all data local, no account required, and no monthly fee.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal" id="features">
+  <div class="container">
+    <div style="margin-bottom:36px;"><span class="badge-acc badge-cyan" style="margin-bottom:12px;display:inline-block;">Features</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0 0 8px;">Save it, tag it, find it. Your resource stack, always available.</h2></div>
+    <div class="feature-grid">
+      <div class="feature-card"><div class="feature-icon icon-c">🔗</div><h3>Quick Save with Context</h3><p>Save any URL in under 10 seconds — paste the URL, add your own title (or keep the auto-detected one), write a note about why you're saving it, add tags, and select which project stack it belongs to. More context than a bookmark, less friction than a note.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">📚</div><h3>Project Stacks</h3><p>Organize resources into named project stacks — one for each active project, research topic, or technology area. Switch between stacks in one click. Each stack shows its resource count and recently added items at a glance.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-c">🔍</div><h3>Full-Text Search</h3><p>Search across ALL your saved resources simultaneously — URL, your custom title, your notes, and tags. Results appear instantly as you type. Find that authentication article from three months ago in two keystrokes regardless of which stack it's in.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">🏷️</div><h3>Tag System</h3><p>Tag resources with any combination of terms — technology area, resource type, project phase, priority level. Filter your entire library to only show resources with a specific tag. A tag search for "css" shows every CSS resource across all your stacks instantly.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-c">📶</div><h3>Offline-First PWA</h3><p>Install WebPilePro once and access your entire resource library without internet. All stacks, resources, notes, and tags are cached locally via service worker. Reference your saved docs API links in a conference room, coffee shop, or flight with dead Wi-Fi.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">🧩</div><h3>Browser Extension Clip</h3><p>The optional WebPilePro browser extension adds a one-click clip button to every page. Click it, choose a stack, add a note and tags, save — never leave the page you're on. The clipped resource appears in your WebPilePro app immediately.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-c">⭐</div><h3>Favorites &amp; Read-Later Queue</h3><p>Star any resource as a favorite for instant access from the sidebar. Move resources to a Read Later queue to curate what you actually plan to revisit. Star and queue counts show on the stack view so you know what's waiting without opening the full list.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">💾</div><h3>Export &amp; Backup</h3><p>Export your entire resource library — all stacks, resources, notes, and tags — as a single JSON file. Import it back on any device. No account, no sync service, no subscription required to move your data between devices.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;"><span class="badge-acc badge-violet" style="margin-bottom:12px;display:inline-block;">At a Glance</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin:0;">Every resource. Findable. Always.</h2></div>
+    <div class="metric-row">
+      <div class="metric-tile"><div class="m1">&lt;10s</div><div class="lbl">To Save a Resource</div></div>
+      <div class="metric-tile"><div class="m2">Full</div><div class="lbl">Text Search</div></div>
+      <div class="metric-tile"><div class="m1">0</div><div class="lbl">Cloud Accounts Needed</div></div>
+      <div class="metric-tile"><div class="m2">PWA</div><div class="lbl">Works Offline</div></div>
+      <div class="metric-tile"><div class="m1">∞</div><div class="lbl">Project Stacks</div></div>
+      <div class="metric-tile"><div class="m2">$0</div><div class="lbl">Subscription</div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:36px;"><span class="badge-acc badge-cyan" style="margin-bottom:12px;display:inline-block;">How It Works</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Install → Save → Tag → Find</h2></div>
+    <div class="steps">
+      <div class="step"><div class="step-n">01</div><div class="step-c"><div class="step-tag">Install</div><h3>Open WebPilePro and install it as a PWA — your resource library is offline-ready immediately</h3><p>Visit WebPilePro in your browser and install from the PWA prompt. All app functionality is cached immediately — from this point your library is available offline on any device where you've installed it.</p></div></div>
+      <div class="step"><div class="step-n">02</div><div class="step-c"><div class="step-tag">Save</div><h3>Paste a URL, add a note and tags, assign to a stack — done in under 10 seconds</h3><p>Hit "+ New Resource," paste the URL, add your context note ("good JWT explainer for auth refactor"), add tags ("jwt", "auth", "security"), select your stack ("Auth Stack"), and save. No form fields you'd never fill out — just what matters.</p></div></div>
+      <div class="step"><div class="step-n">03</div><div class="step-c"><div class="step-tag">Tag</div><h3>Build your tag vocabulary as you save — tags become your personal search taxonomy</h3><p>Tags autocomplete from your existing tags as you type — so once you've used "css", "auth", and "performance", you can apply them to new resources instantly. Your tag set develops naturally with your work, creating a search taxonomy that matches how you actually think.</p></div></div>
+      <div class="step"><div class="step-n">04</div><div class="step-c"><div class="step-tag">Find</div><h3>Search or filter to find any resource instantly — full text, by tag, or by stack</h3><p>When you need a resource, use full-text search (finds across URLs, titles, notes, and tags), filter by tag ("show me everything tagged 'auth'"), or browse a specific stack ("show me my CSS/UI pile"). Three ways to find what you need — pick the one that matches your brain in the moment.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;"><span class="badge-acc badge-cyan" style="margin-bottom:12px;display:inline-block;">Who It's For</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">For developers and operators who are drowning in browser tabs and forgotten bookmarks</h2></div>
+    <div class="audience-grid">
+      <div class="audience-chip"><span class="chip-icon">🧑‍💻</span>Developers saving docs, tutorials, and code references by project</div>
+      <div class="audience-chip"><span class="chip-icon">🎨</span>Designers collecting inspiration, component libraries, and UI resources</div>
+      <div class="audience-chip"><span class="chip-icon">📚</span>Researchers building curated stacks of reference materials</div>
+      <div class="audience-chip"><span class="chip-icon">📝</span>Writers saving article references and source material by piece</div>
+      <div class="audience-chip"><span class="chip-icon">🚀</span>Founders tracking competitive analysis links and market research</div>
+      <div class="audience-chip"><span class="chip-icon">🧑‍🏫</span>Educators curating course resources by topic and module</div>
+      <div class="audience-chip"><span class="chip-icon">💼</span>Consultants building client-specific resource libraries</div>
+      <div class="audience-chip"><span class="chip-icon">🔒</span>Privacy-conscious users who won't use cloud bookmark services</div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <span class="badge-acc badge-cyan" style="margin-bottom:16px;display:inline-block;">Build Your Stack</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:0 0 16px;line-height:1.1;">Close the tabs.<br/><span class="acc-text">Build a stack that actually works.</span></h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 36px;line-height:1.65;">Save URLs with context, organize by project, search everything, work offline. Your resource library — built for how you actually use it.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://webpilepro.netlify.app/" target="_blank" rel="noopener" class="btn-cyan" style="font-size:1.05rem;padding:16px 36px;">Open WebPilePro →</a>
+        <a href="/platforms.html" class="btn-violet-outline">See All Platforms</a>
+      </div>
+      <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">Offline First · No Account · Full-Text Search · Free Forever</p>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="40" /><p>Skyes Over London LC — building AI-powered creative and developer tools for operators and small teams.</p><div class="footer-contact"><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a><a href="tel:9862107040">986-210-7040</a></div></div>
+      <div class="footer-links">
+        <div class="footer-col"><span class="footer-col-label">Developer Tools</span><a href="/Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html">WebPilePro</a><a href="/Platforms-Apps-Infrastructure/2026/easyPWA.html">easyPWA</a></div>
+        <div class="footer-col"><span class="footer-col-label">Company</span><a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+        <div class="footer-col"><span class="footer-col-label">Legal</span><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Skyes Over London LC. All rights reserved.</span></div>
+  </div>
+</footer>
+<script src="/js/three.min.js" defer></script><script src="/assets/app.js" defer></script><script src="/js/main.js" defer></script><script src="/js/growth.js" defer></script><script src="/js/partials.js" defer></script>
+</body>
+</html>

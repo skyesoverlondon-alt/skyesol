@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <link rel="canonical" href="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Offline%20First%20Tools/SkyeCashLedger.html">
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
+  <meta name="twitter:description" content="SkyeCash — Offline-first cash ledger. Log income, expenses, and cash flow locally with zero cloud dependency, zero subscriptions, and zero data exposure.">
+  <meta name="twitter:title" content="SkyeCash — Offline-First Cash Ledger · SOLEnterprises">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Offline%20First%20Tools/SkyeCashLedger.html">
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="SkyeCash — Offline-first cash ledger. Log income, expenses, and cash flow locally with zero cloud dependency, zero subscriptions, and zero data exposure.">
+  <meta property="og:title" content="SkyeCash — Offline-First Cash Ledger · SOLEnterprises">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyeCash — Offline-First Cash Ledger · SOLEnterprises</title>
+  <meta name="description" content="SkyeCash is an offline-first cash ledger for operators. Log income and expenses locally, track cash flow, and export clean records — no bank sync, no cloud, no subscription.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SOLEnterprises">
+  <link rel="apple-touch-icon" href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png">
+
+  <style>
+    /* ── SkyeCash accent: emerald green → gold ── */
+    :root {
+      --sc-green: #10b981;
+      --sc-gold:  #f59e0b;
+      --sc-red:   #f43f5e;
+      --sc-glow:  rgba(16,185,129,0.18);
+    }
+
+    .sc-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(245,158,11,0.12));
+      border: 1px solid var(--sc-green);
+      border-radius: 4px;
+      color: #6ee7b7;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 1.2rem;
+    }
+
+    .sc-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .sc-cta-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--sc-green), #059669);
+      color: #fff;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--sc-green);
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .sc-cta-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .sc-cta-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--sc-green);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--sc-green);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .sc-cta-ghost:hover { background: rgba(16,185,129,0.1); transform: translateY(-2px); }
+
+    /* Ledger hero widget */
+    .sc-ledger-widget {
+      background: #080e0b;
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 10px;
+      padding: 1.8rem;
+      max-width: 460px;
+      margin: 3rem auto 0;
+      font-family: 'Fira Code', monospace;
+    }
+    .sc-widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(16,185,129,0.15);
+      padding-bottom: 0.9rem;
+    }
+    .sc-widget-title {
+      font-size: 0.7rem;
+      color: rgba(110,231,183,0.55);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .sc-widget-balance {
+      font-size: 1.6rem;
+      color: var(--sc-green);
+      letter-spacing: 0.04em;
+    }
+    .sc-widget-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.78rem;
+    }
+    .sc-widget-row:last-child { border-bottom: none; }
+    .sc-wr-label { color: rgba(220,216,208,0.65); }
+    .sc-wr-tag   { color: rgba(110,231,183,0.45); font-size: 0.68rem; margin-left:0.5rem; }
+    .sc-wr-in    { color: var(--sc-green); font-weight: bold; }
+    .sc-wr-out   { color: var(--sc-red); }
+    .sc-widget-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-size: 0.7rem;
+      color: rgba(110,231,183,0.35);
+    }
+
+    /* Feature grid */
+    .sc-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.5rem;
+    }
+    .sc-feature-card {
+      background: rgba(16,185,129,0.04);
+      border: 1px solid rgba(16,185,129,0.18);
+      border-radius: 8px;
+      padding: 1.6rem 1.4rem;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .sc-feature-card:hover {
+      border-color: rgba(16,185,129,0.5);
+      background: rgba(16,185,129,0.08);
+    }
+    .sc-feature-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .sc-feature-card h4 {
+      color: var(--sc-green);
+      font-size: 0.92rem;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .sc-feature-card p {
+      color: rgba(220,216,208,0.72);
+      font-size: 0.87rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* Terminal ledger log */
+    .sc-log-demo {
+      background: #05100a;
+      border: 1px solid rgba(16,185,129,0.2);
+      border-radius: 8px;
+      padding: 1.6rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.81rem;
+      line-height: 1.95;
+      margin-top: 2.2rem;
+      overflow-x: auto;
+    }
+    .sc-log-demo .ld-dim  { color: rgba(110,231,183,0.28); }
+    .sc-log-demo .ld-date { color: rgba(16,185,129,0.6); }
+    .sc-log-demo .ld-desc { color: #fbbf24; }
+    .sc-log-demo .ld-in   { color: #10b981; font-weight: bold; }
+    .sc-log-demo .ld-out  { color: #f43f5e; }
+    .sc-log-demo .ld-cat  { color: rgba(110,231,183,0.45); }
+    .sc-log-demo .ld-bal  { color: #6ee7b7; }
+
+    /* Steps */
+    .sc-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2.5rem;
+      position: relative;
+    }
+    .sc-steps::before {
+      content: '';
+      position: absolute;
+      left: 28px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--sc-green), transparent);
+    }
+    .sc-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.4rem 0;
+    }
+    .sc-step-num {
+      flex-shrink: 0;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(5,150,105,0.18));
+      border: 1px solid var(--sc-green);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 1.05rem;
+      color: #6ee7b7;
+      font-weight: bold;
+      position: relative; z-index: 1;
+    }
+    .sc-step-body h4 { color: var(--text); font-size: 1rem; margin: 0 0 0.4rem; }
+    .sc-step-body p  { color: rgba(220,216,208,0.7); font-size: 0.88rem; line-height: 1.65; margin: 0; }
+
+    /* Comparison table */
+    .sc-compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 2rem;
+    }
+    .sc-compare-table th {
+      background: rgba(16,185,129,0.12);
+      color: #6ee7b7;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(16,185,129,0.25);
+    }
+    .sc-compare-table td {
+      padding: 12px 16px;
+      color: rgba(220,216,208,0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.045);
+    }
+    .sc-compare-table tr:hover td { background: rgba(16,185,129,0.04); }
+    .sc-hl  { background: rgba(16,185,129,0.07); }
+    .sc-yes { color: #4ade80; font-weight: bold; }
+    .sc-no  { color: rgba(220,216,208,0.28); }
+
+    /* Quote */
+    .sc-quote {
+      border-left: 3px solid var(--sc-green);
+      background: rgba(16,185,129,0.05);
+      border-radius: 0 6px 6px 0;
+      padding: 1.4rem 1.6rem;
+      margin: 2.5rem 0 0;
+    }
+    .sc-quote p    { color: rgba(220,216,208,0.85); font-size: 1.05rem; font-style: italic; line-height: 1.7; margin: 0 0 0.6rem; }
+    .sc-quote cite { font-size: 0.78rem; color: var(--sc-green); font-family: 'Fira Code', monospace; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* Final CTA */
+    .sc-final-cta {
+      background: linear-gradient(135deg, rgba(16,185,129,0.09), rgba(5,150,105,0.06));
+      border: 1px solid rgba(16,185,129,0.22);
+      border-radius: 10px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .sc-final-cta h2 { font-size: clamp(1.6rem,4vw,2.5rem); margin-bottom: 1rem; color: var(--text); }
+    .sc-final-cta p  { color: rgba(220,216,208,0.7); max-width: 540px; margin: 0 auto 2rem; line-height: 1.7; }
+
+    @media(max-width:600px){
+      .sc-compare-table th,.sc-compare-table td{padding:9px 10px;font-size:.79rem}
+      .sc-steps::before{left:24px}
+      .sc-step-num{width:48px;height:48px}
+    }
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+
+<!-- NAV -->
+<nav class="main-nav" id="mainNav">
+  <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="/index.html">Home</a>
+    <div class="nav-dropdown" data-type="services">
+      <button type="button" class="dropdown-toggle">Services</button>
+      <div class="dropdown-menu">
+        <a href="/Services/WebBuilds.html">Web Builds</a>
+        <a href="/Services/ai-data-apps.html">AI &amp; Data Apps</a>
+        <a href="/Services/portals-hubs.html">Portals &amp; Hubs</a>
+        <a href="/Services/ecommerce-payments.html">Ecommerce &amp; Payments</a>
+        <a href="/Services/intake-routing.html">Intake &amp; Routing</a>
+        <a href="/Services/trust-surfaces.html">Trust Surfaces</a>
+        <a href="/Services/api-integration.html">API &amp; Integrations</a>
+        <a href="/Services/brand-identity.html">Brand Identity</a>
+        <a href="/Services/notification-comms.html">Notifications</a>
+        <a href="/Services/docs-knowledge.html">Docs &amp; Knowledge</a>
+        <a href="/Services/platform-migration.html">Migration</a>
+        <a href="/Services/security-audit.html">Security</a>
+        <a href="/Services/analytics-dashboards.html">Analytics</a>
+        <a href="/Services/lifecycle-retention.html">Retention</a>
+        <a href="/Services/mvp-launchpad.html">MVP Builds</a>
+        <a href="/Services/seo-content.html">SEO &amp; Content</a>
+      </div>
+    </div>
+    <a href="/about.html">Founder</a>
+    <div class="nav-dropdown" data-type="suite">
+      <button type="button" class="dropdown-toggle">SkyeSuite</button>
+      <div class="dropdown-menu">
+        <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="/SkyeFlow/index.html">SkyeFlow</a>
+        <a href="/SkyeArchive/index.html">SkyeArchive</a>
+        <a href="/SkyeSlides/index.html">SkyeSlides</a>
+        <a href="/SkyeDrive/index.html">SkyeDrive</a>
+        <a href="/SkyeCollab/index.html">SkyeCollab</a>
+        <a href="/SkyeSheets/index.html">SkyeSheets</a>
+        <a href="/SkyeLedger/index.html">SkyeLedger</a>
+        <a href="/SkyeOps/index.html">SkyeOps</a>
+      </div>
+    </div>
+    <a href="/platforms.html">Platforms</a>
+    <a href="/network.html">Network</a>
+    <a href="/credibility.html">Credibility</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <button class="menu-btn" id="menuBtn">☰ MENU</button>
+</nav>
+
+<!-- HERO -->
+<div class="page-header">
+  <div class="sc-badge">Offline-First · Cash Ledger · PWA-Ready · Zero Bank Sync</div>
+  <div class="section-label">SOLEnterprises · Offline Mini Ops Suite</div>
+  <h1>SkyeCash<span style="color:#10b981"> Ledger</span></h1>
+  <div class="glow-tile-purple">
+    <p style="color:#000000">The operator's cash tracking layer. Log income and expenses on the spot, watch your running balance update instantly, and export clean records — all locally, no bank connection, no subscription, no financial data on anyone else's server.</p>
+  </div>
+
+  <!-- Live ledger widget mockup -->
+  <div class="sc-ledger-widget">
+    <div class="sc-widget-header">
+      <span class="sc-widget-title">SkyeCash · Running Balance</span>
+      <span class="sc-widget-balance">+$4,320.00</span>
+    </div>
+    <div class="sc-widget-row">
+      <span class="sc-wr-label">Client Payment — Apex Group<span class="sc-wr-tag">#invoice</span></span>
+      <span class="sc-wr-in">+$2,800.00</span>
+    </div>
+    <div class="sc-widget-row">
+      <span class="sc-wr-label">Software Tools — Monthly<span class="sc-wr-tag">#ops</span></span>
+      <span class="sc-wr-out">–$240.00</span>
+    </div>
+    <div class="sc-widget-row">
+      <span class="sc-wr-label">Contractor Payment — Design<span class="sc-wr-tag">#payroll</span></span>
+      <span class="sc-wr-out">–$800.00</span>
+    </div>
+    <div class="sc-widget-row">
+      <span class="sc-wr-label">Consulting Retainer — Feb<span class="sc-wr-tag">#invoice</span></span>
+      <span class="sc-wr-in">+$2,560.00</span>
+    </div>
+    <div class="sc-widget-footer">
+      <span>4 entries · Feb 28, 2026</span>
+      <span>0 network calls · local only</span>
+    </div>
+  </div>
+
+  <div class="sc-cta-row">
+    <a href="https://offlineminiopssuite.netlify.app/skyecash/" target="_blank" rel="noopener" class="sc-cta-primary">Open SkyeCash →</a>
+    <a href="#how-it-works" class="sc-cta-ghost">See How It Works ↓</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- THE PROBLEM -->
+<section class="content-section">
+  <div class="section-label reveal">The Problem</div>
+  <div class="section-title reveal">Financial Tools That Create More Risk Than They Solve</div>
+  <div class="section-desc reveal">Most small-operator cash tracking tools require bank account connections, personal financial data stored on third-party servers, and monthly fees just to see your own records. The tools designed to give you financial clarity are the ones creating financial exposure.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">🏦</div>
+      <h3>Forced Bank Sync</h3>
+      <div class="card-type">Plaid / Open Banking Tools</div>
+      <p>QuickBooks, Wave, Mint — they all want read-access to your bank. That access aggregates your transaction history on their servers, creates a breach surface for your financial data, and requires active maintenance every time credentials change or tokens expire.</p>
+      <div class="card-tags"><span>Credential Exposure</span><span>Breach Surface</span><span>Token Rot</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">💸</div>
+      <h3>Subscription Wall on Your Own Data</h3>
+      <div class="card-type">SaaS Accounting Tools</div>
+      <p>FreshBooks, QuickBooks, Xero — the moment your subscription lapses, your records are inaccessible. You're renting access to your own financial history. Miss a payment and you can't pull records for a tax audit or client dispute.</p>
+      <div class="card-tags"><span>Paywall on Records</span><span>Vendor Lock-In</span><span>Audit Risk</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🐢</div>
+      <h3>Complexity for Simple Problems</h3>
+      <div class="card-type">Enterprise Accounting Overhead</div>
+      <p>Operators who need to log cash in and cash out don't need a chart of accounts, a reconciliation workflow, and a payroll module. They need a ledger. The tool complexity scales to enterprise — the user just needed to track a $500 payment.</p>
+      <div class="card-tags"><span>Over-Engineered</span><span>Learning Curve</span><span>Wrong Tool</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE SOLUTION -->
+<section class="content-section">
+  <div class="section-label reveal">The Solution</div>
+  <div class="section-title reveal">SkyeCash — A Ledger That Works Like a Ledger</div>
+  <div class="section-desc reveal">SkyeCash strips the problem back to first principles. You have money coming in and money going out. You want to see your balance, categorize entries, and export a clean record. No bank sync. No OAuth tokens. No server. Local, instant, permanent.</div>
+
+  <div class="sc-feature-grid stagger-children">
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">💵</div>
+      <h4>Income &amp; Expense Logging</h4>
+      <p>Log any transaction in seconds — amount, description, category, date, and notes. Income and expense entries update your running balance instantly in the browser. No round-trip to a server. The math is done client-side before you finish typing.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">📴</div>
+      <h4>Full Offline Operation</h4>
+      <p>SkyeCash is cached by a service worker on first load. Open it at a job site, in a car, on a plane, or in any location without connectivity. Every feature — entry logging, balance tracking, search, export — runs identically with zero network access.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">🗂️</div>
+      <h4>Category Tagging &amp; Filtering</h4>
+      <p>Tag every entry with a category — invoices, payroll, materials, overhead, travel, tools. Filter the ledger by category to see what a single cost center actually costs. Client-side filtering returns results instantly without a database query.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">🔎</div>
+      <h4>Full-Text Local Search</h4>
+      <p>Search across entry descriptions, amounts, dates, and tags. Results are computed from IndexedDB locally — no API, no latency. Find a specific payment from six months ago in under a second without touching a network stack.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">📊</div>
+      <h4>Running Balance &amp; Period Summaries</h4>
+      <p>See your current balance at all times. Pull period summaries — weekly, monthly, custom date range. Income vs. expense breakdowns by category, computed locally from your ledger. Financial clarity without a BI tool subscription.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">📤</div>
+      <h4>Export-Ready Records</h4>
+      <p>Export your full ledger or filtered date ranges as CSV, JSON, or formatted Markdown. Hand to your accountant, drop into a tax prep folder, attach to a client audit response, or archive to SkyeDocx. Clean portable output every time.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- METRICS -->
+<section class="content-section">
+  <div class="section-label reveal">Performance</div>
+  <div class="section-title reveal">Fast, Private, Free — No Trade-Offs</div>
+  <div class="card-grid-3 stagger-children" style="margin-top:2rem">
+    <div class="metric-card reveal">
+      <div class="metric-number">0</div>
+      <div class="metric-label">Bank Connections Required</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">100%</div>
+      <div class="metric-label">Offline Capability</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">&lt;1s</div>
+      <div class="metric-label">Entry Commit Time</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">∞</div>
+      <div class="metric-label">Transactions Stored Locally</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">$0</div>
+      <div class="metric-label">Monthly Cost</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">0</div>
+      <div class="metric-label">External Calls per Entry</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="content-section" id="how-it-works">
+  <div class="section-label reveal">Workflow</div>
+  <div class="section-title reveal">Log a Transaction in Four Moves</div>
+  <div class="section-desc reveal">From open to committed ledger entry in under 20 seconds. No onboarding wizard. No account setup. No bank authorization flow.</div>
+
+  <div class="sc-steps">
+    <div class="sc-step reveal">
+      <div class="sc-step-num">01</div>
+      <div class="sc-step-body">
+        <h4>Open or Install SkyeCash</h4>
+        <p>Navigate to <strong>offlineminiopssuite.netlify.app/skyecash</strong> or install the PWA. The service worker caches everything on first load. Every subsequent open — including fully offline — is instant. No login screen, no OAuth, straight to the ledger.</p>
+      </div>
+    </div>
+    <div class="sc-step reveal">
+      <div class="sc-step-num">02</div>
+      <div class="sc-step-body">
+        <h4>Log the Entry</h4>
+        <p>Select income or expense, enter the amount, add a description, pick a category, and optionally add a note. Four fields. Hit save. The entry writes to IndexedDB in milliseconds and your running balance updates on screen before you lift your finger.</p>
+      </div>
+    </div>
+    <div class="sc-step reveal">
+      <div class="sc-step-num">03</div>
+      <div class="sc-step-body">
+        <h4>Browse, Filter, and Search Your Ledger</h4>
+        <p>Open the ledger view to see all entries in reverse-chronological order. Filter by category, date range, or transaction type. Search by keyword or amount. Every result is client-side — no loading state, no pagination limit, no API call.</p>
+      </div>
+    </div>
+    <div class="sc-step reveal">
+      <div class="sc-step-num">04</div>
+      <div class="sc-step-body">
+        <h4>Export When You Need Clean Records</h4>
+        <p>Export any filtered view or your complete ledger as CSV, JSON, or Markdown. The export is generated locally from IndexedDB — no server request, no processing delay. Clean, structured financial records ready for your accountant, your audit response, or your own archive.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ledger log illustration -->
+  <div class="sc-log-demo reveal">
+    <span class="ld-dim">// SkyeCash — IndexedDB Ledger · Feb 2026</span><br><br>
+    <span class="ld-date">2026-02-03</span> · <span class="ld-desc">"Client invoice — NorthStar Finance"</span>         · <span class="ld-in">+$3,200.00</span> · <span class="ld-cat">[invoice]</span><br>
+    <span class="ld-date">2026-02-07</span> · <span class="ld-desc">"Contractor — UX design sprint"</span>               · <span class="ld-out">–$1,100.00</span> · <span class="ld-cat">[payroll]</span><br>
+    <span class="ld-date">2026-02-12</span> · <span class="ld-desc">"Hosting &amp; infra — monthly tools"</span>          · <span class="ld-out">–$318.00</span>  · <span class="ld-cat">[overhead]</span><br>
+    <span class="ld-date">2026-02-19</span> · <span class="ld-desc">"Retainer payment — Apex operator"</span>            · <span class="ld-in">+$2,500.00</span> · <span class="ld-cat">[invoice]</span><br>
+    <span class="ld-date">2026-02-28</span> · <span class="ld-desc">"Materials — field visit supplies"</span>           · <span class="ld-out">–$94.50</span>   · <span class="ld-cat">[materials]</span><br><br>
+    <span class="ld-dim">February balance: </span><span class="ld-bal">+$4,187.50</span> · <span class="ld-dim">5 entries · 0 API calls · export ready</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO IT'S FOR -->
+<section class="content-section">
+  <div class="section-label reveal">Who It's For</div>
+  <div class="section-title reveal">Built for Operators Who Handle Real Money</div>
+  <div class="section-desc reveal">SkyeCash is not a hobby budgeting tool. It's a cash-flow tracking layer for operators running projects, billing clients, and paying people — where incomplete records have real financial and legal consequences.</div>
+
+  <div class="sc-feature-grid stagger-children">
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">🧾</div>
+      <h4>Freelancers &amp; Consultants</h4>
+      <p>Log every invoice payment and every operational expense as it happens. End-of-year tax prep goes from a scramble to a one-click export. Your accountant gets a clean CSV instead of a shoebox of bank statements.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">🏗️</div>
+      <h4>Field &amp; Trade Operators</h4>
+      <p>Log material costs, subcontractor payments, and job deposits on-site with no signal. When you're back in range, the ledger is complete and accurate — not reconstructed from memory three days later.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">🏢</div>
+      <h4>Small Business Operators</h4>
+      <p>Track operating cash flow without a $50/month accounting subscription. Know exactly what you've invoiced, what you've paid out, and what your net position is — without touching a bank dashboard or waiting for sync.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">🤝</div>
+      <h4>Event &amp; Project Managers</h4>
+      <p>Run a project-specific ledger for every engagement. Log vendor payments, client deposits, and expense reimbursements by project tag. Export a complete project P&amp;L when the engagement closes — no accountant required.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">⚖️</div>
+      <h4>Dispute-Proof Recordkeeping</h4>
+      <p>When a client disputes a payment or a contractor claims they weren't paid, your local ledger is the first line of evidence. Timestamped, categorized, and exportable in seconds. The record that matters is on your device.</p>
+    </div>
+    <div class="sc-feature-card reveal">
+      <div class="sc-feature-icon">🌐</div>
+      <h4>International &amp; Remote Operators</h4>
+      <p>No bank API to authorize across borders. No OAuth token to expire in a foreign country. No sync to wait for on a slow connection. SkyeCash logs cash flow wherever you are, in any currency you specify.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARISON -->
+<section class="content-section">
+  <div class="section-label reveal">Competitive Contrast</div>
+  <div class="section-title reveal">SkyeCash vs. The Market</div>
+  <div class="section-desc reveal">Accounting tools are built for accountants. SkyeCash is built for operators who need a ledger that works, not a subscription that grows.</div>
+
+  <div style="overflow-x:auto;margin-top:2rem">
+    <table class="sc-compare-table reveal">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="sc-hl">SkyeCash</th>
+          <th>QuickBooks</th>
+          <th>Wave</th>
+          <th>FreshBooks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Full offline operation</td>
+          <td class="sc-hl sc-yes">✓ Yes</td>
+          <td class="sc-no">✗ No</td>
+          <td class="sc-no">✗ No</td>
+          <td class="sc-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>No account required</td>
+          <td class="sc-hl sc-yes">✓ Yes</td>
+          <td class="sc-no">✗ Required</td>
+          <td class="sc-no">✗ Required</td>
+          <td class="sc-no">✗ Required</td>
+        </tr>
+        <tr>
+          <td>Financial data stays on device</td>
+          <td class="sc-hl sc-yes">✓ Always</td>
+          <td class="sc-no">✗ Intuit servers</td>
+          <td class="sc-no">✗ Cloud</td>
+          <td class="sc-no">✗ Cloud</td>
+        </tr>
+        <tr>
+          <td>No bank sync required</td>
+          <td class="sc-hl sc-yes">✓ Never needed</td>
+          <td class="sc-no">✗ Core feature</td>
+          <td class="sc-no">✗ Core feature</td>
+          <td class="sc-no">✗ Core feature</td>
+        </tr>
+        <tr>
+          <td>PWA-installable</td>
+          <td class="sc-hl sc-yes">✓ Yes</td>
+          <td class="sc-no">✗ Native app</td>
+          <td class="sc-no">✗ No</td>
+          <td class="sc-no">✗ Native app</td>
+        </tr>
+        <tr>
+          <td>Instant entry (&lt;1s commit)</td>
+          <td class="sc-hl sc-yes">✓ Yes</td>
+          <td class="sc-no">✗ Slow sync</td>
+          <td class="sc-no">✗ Slow sync</td>
+          <td class="sc-no">✗ Slow sync</td>
+        </tr>
+        <tr>
+          <td>CSV / JSON export always free</td>
+          <td class="sc-hl sc-yes">✓ Yes</td>
+          <td class="sc-no">✗ Paid plan</td>
+          <td class="sc-yes">✓ Yes</td>
+          <td class="sc-no">✗ Paid plan</td>
+        </tr>
+        <tr>
+          <td>Records accessible if you stop paying</td>
+          <td class="sc-hl sc-yes">✓ Always on device</td>
+          <td class="sc-no">✗ Locked</td>
+          <td class="sc-yes">✓ Free tier</td>
+          <td class="sc-no">✗ Locked</td>
+        </tr>
+        <tr>
+          <td>Monthly cost</td>
+          <td class="sc-hl sc-yes">$0</td>
+          <td class="sc-no">$30–$200/mo</td>
+          <td class="sc-yes">Free + paid</td>
+          <td class="sc-no">$17–$55/mo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ECOSYSTEM FIT -->
+<section class="content-section">
+  <div class="section-label reveal">Ecosystem Fit</div>
+  <div class="section-title reveal">SkyeCash Inside the SOL Stack</div>
+  <div class="section-desc reveal">SkyeCash is the cash-entry layer. Financial data flows from SkyeCash into invoices, ledger reports, and accountability documents without re-entry or reformatting.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">📄</div>
+      <h3>SkyeCash → SkyeDocx</h3>
+      <div class="card-type">Ledger to Invoice</div>
+      <p>Pull a filtered export from SkyeCash by client tag or date range and paste directly into SkyeDocx to generate an itemized invoice or client financial summary. Every line item traced back to a logged entry — no estimate, no reconstruction.</p>
+      <div class="card-tags"><span>Itemized Invoice</span><span>Tagged Export</span><span>One-Step Flow</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">📊</div>
+      <h3>SkyeCash → SkyeSheets</h3>
+      <div class="card-type">Ledger to Analysis</div>
+      <p>Drop a CSV export into SkyeSheets for cash flow analysis, burn rate modeling, and category breakdowns. Visualize where money is going across time without a dedicated analytics subscription or a finance background.</p>
+      <div class="card-tags"><span>CSV Drop-In</span><span>Burn Rate</span><span>Category Analysis</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🔐</div>
+      <h3>SkyeCash → SkyeLedger</h3>
+      <div class="card-type">Cash to Full Ledger</div>
+      <p>When operations scale and a full double-entry ledger is needed, SkyeCash exports feed cleanly into SkyeLedger. Start with simple cash tracking — graduate to the full accounting layer when the business requires it.</p>
+      <div class="card-tags"><span>Upgrade Path</span><span>Data Migration</span><span>Double-Entry Ready</span></div>
+    </div>
+  </div>
+
+  <div class="sc-quote reveal">
+    <p>"Financial clarity shouldn't cost $200/month and a bank connection. The simplest cash tracking tool should also be the safest — your balance and transaction history shouldn't live anywhere except your own device."</p>
+    <cite>— SOLEnterprises · Offline Mini Ops Suite Design Principle</cite>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section class="content-section">
+  <div class="sc-final-cta reveal">
+    <div class="section-label" style="margin-bottom:1rem">Log Your First Entry Now</div>
+    <h2>Your Money. Your Device.<br>Your Ledger.</h2>
+    <p>SkyeCash is live, free, and requires nothing. Open it, log a transaction, and your balance is updated — no bank sync, no account, no monthly fee. Financial clarity starts the moment you open the app.</p>
+    <div class="sc-cta-row">
+      <a href="https://offlineminiopssuite.netlify.app/skyecash/" target="_blank" rel="noopener" class="sc-cta-primary">Launch SkyeCash — Free →</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:0.78rem;color:rgba(220,216,208,0.35);font-family:'Fira Code',monospace;letter-spacing:.05em">No bank sync · No cloud storage · Financial data never leaves your device</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+  <p><strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 986-210-7040</p>
+  <div class="footer-links">
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/vault.html">Vault</a>
+    <a href="/admin.html">Admin</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/sitemap-visual.html">Site Map</a>
+  </div>
+  <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
+</footer>
+
+<script src="/js/three-bg.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/growth.js"></script>
+
+<script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/js/netlify-identity-init.js"></script>
+
+<!-- MEGA NAV OVERLAY -->
+<div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+  <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Navigate</div>
+      <a href="/index.html">Home</a>
+      <a href="/about.html">Founder</a>
+      <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="/platforms.html">Platforms</a>
+      <a href="/network.html">Network</a>
+      <a href="/credibility.html">Credibility</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/status.html">Status</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Platforms &amp; Apps</div>
+      <a href="/Platforms-Apps-Infrastructure/index.html">⬡ All Platforms Hub</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html">kAIxU Chat</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html">Gateway13</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html">Delta Gate</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html">kAIxU PDF Pro</a>
+      <a href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html">BrandID PWA</a>
+      <a href="https://offlineminiopssuite.netlify.app/skyenote/" target="_blank" rel="noopener">SkyeNote Vault ↗</a>
+      <a href="https://offlineminiopssuite.netlify.app/skyefocus/" target="_blank" rel="noopener">SkyeFocus Log ↗</a>
+      <a href="https://offlineminiopssuite.netlify.app/skyecash/" target="_blank" rel="noopener">SkyeCash Ledger ↗</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Blog Categories</div>
+      <a href="/blog.html">All Posts</a>
+      <a href="/blog.html#phoenix">Phoenix AZ</a>
+      <a href="/blog.html#skaixu">SkAIxu IDE</a>
+      <a href="/blog.html#houston">Houston</a>
+      <a href="/blog.html#ai">Colorado AI</a>
+      <a href="/blog.html#devs">Devs &amp; AI</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Company</div>
+      <a href="/sitemap-visual.html">Site Map</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+    </div>
+  </div>
+</div>
+<script src="/js/partials.js"></script>
+</body>
+</html>

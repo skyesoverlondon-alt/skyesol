@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <link rel="canonical" href="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Offline%20First%20Tools/SkyeFocusLog.html">
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
+  <meta name="twitter:description" content="SkyeFocus — Offline-first focus sessions and work logging. Track deep work blocks, log output, and review productivity without a cloud dependency.">
+  <meta name="twitter:title" content="SkyeFocus — Offline-First Focus &amp; Work Log · SOLEnterprises">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Offline%20First%20Tools/SkyeFocusLog.html">
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="SkyeFocus — Offline-first focus sessions and work logging. Track deep work blocks, log output, and review productivity without a cloud dependency.">
+  <meta property="og:title" content="SkyeFocus — Offline-First Focus &amp; Work Log · SOLEnterprises">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyeFocus — Offline-First Focus &amp; Work Log · SOLEnterprises</title>
+  <meta name="description" content="SkyeFocus is an offline-first focus session tracker and work log. Run timed deep-work blocks, log output, review history — all locally with zero cloud calls.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SOLEnterprises">
+  <link rel="apple-touch-icon" href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png">
+
+  <style>
+    /* ── SkyeFocus accent: electric cyan → indigo ── */
+    :root {
+      --sf-cyan:  #22d3ee;
+      --sf-indigo: #6366f1;
+      --sf-glow: rgba(34,211,238,0.18);
+    }
+
+    .sf-hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(34,211,238,0.2), rgba(99,102,241,0.15));
+      border: 1px solid var(--sf-cyan);
+      border-radius: 4px;
+      color: #a5f3fc;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 1.2rem;
+    }
+
+    .sf-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .sf-cta-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--sf-cyan), var(--sf-indigo));
+      color: #05050a;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--sf-cyan);
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .sf-cta-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .sf-cta-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--sf-cyan);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--sf-cyan);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .sf-cta-ghost:hover { background: rgba(34,211,238,0.1); transform: translateY(-2px); }
+
+    /* Timer ring illustration */
+    .sf-ring-demo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin: 3rem auto 0;
+      max-width: 340px;
+    }
+    .sf-ring {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 3px solid var(--sf-cyan);
+      box-shadow: 0 0 28px 4px rgba(34,211,238,0.25), inset 0 0 18px rgba(34,211,238,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(5,5,10,0.7);
+      animation: sfPulse 3s ease-in-out infinite;
+    }
+    @keyframes sfPulse {
+      0%, 100% { box-shadow: 0 0 28px 4px rgba(34,211,238,0.25), inset 0 0 18px rgba(34,211,238,0.08); }
+      50%       { box-shadow: 0 0 42px 8px rgba(34,211,238,0.4),  inset 0 0 28px rgba(34,211,238,0.14); }
+    }
+    .sf-ring-time {
+      font-family: 'Fira Code', monospace;
+      font-size: 2.6rem;
+      color: var(--sf-cyan);
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+    .sf-ring-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      color: rgba(165,243,252,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-top: 4px;
+    }
+    .sf-ring-status {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: #4ade80;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* Feature grid */
+    .sf-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.5rem;
+    }
+    .sf-feature-card {
+      background: rgba(34,211,238,0.04);
+      border: 1px solid rgba(34,211,238,0.18);
+      border-radius: 8px;
+      padding: 1.6rem 1.4rem;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .sf-feature-card:hover {
+      border-color: rgba(34,211,238,0.5);
+      background: rgba(34,211,238,0.08);
+    }
+    .sf-feature-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .sf-feature-card h4 {
+      color: var(--sf-cyan);
+      font-size: 0.92rem;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .sf-feature-card p {
+      color: rgba(220,216,208,0.72);
+      font-size: 0.87rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* Session log illustration */
+    .sf-log-demo {
+      background: #0a0a12;
+      border: 1px solid rgba(34,211,238,0.2);
+      border-radius: 8px;
+      padding: 1.6rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.81rem;
+      line-height: 1.9;
+      margin-top: 2.2rem;
+      overflow-x: auto;
+    }
+    .sf-log-demo .sl-dim   { color: rgba(165,243,252,0.3); }
+    .sf-log-demo .sl-date  { color: rgba(34,211,238,0.6); }
+    .sf-log-demo .sl-task  { color: #fbbf24; }
+    .sf-log-demo .sl-dur   { color: #4ade80; }
+    .sf-log-demo .sl-tag   { color: var(--sf-indigo); }
+    .sf-log-demo .sl-note  { color: rgba(220,216,208,0.5); }
+
+    /* Workflow steps */
+    .sf-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2.5rem;
+      position: relative;
+    }
+    .sf-steps::before {
+      content: '';
+      position: absolute;
+      left: 28px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--sf-cyan), transparent);
+    }
+    .sf-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.4rem 0;
+    }
+    .sf-step-num {
+      flex-shrink: 0;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(34,211,238,0.25), rgba(99,102,241,0.18));
+      border: 1px solid var(--sf-cyan);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 1.05rem;
+      color: #a5f3fc;
+      font-weight: bold;
+      position: relative; z-index: 1;
+    }
+    .sf-step-body h4 { color: var(--text); font-size: 1rem; margin: 0 0 0.4rem; }
+    .sf-step-body p  { color: rgba(220,216,208,0.7); font-size: 0.88rem; line-height: 1.65; margin: 0; }
+
+    /* Comparison table */
+    .sf-compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 2rem;
+    }
+    .sf-compare-table th {
+      background: rgba(34,211,238,0.12);
+      color: #a5f3fc;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(34,211,238,0.25);
+    }
+    .sf-compare-table td {
+      padding: 12px 16px;
+      color: rgba(220,216,208,0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.045);
+    }
+    .sf-compare-table tr:hover td { background: rgba(34,211,238,0.04); }
+    .sf-hl  { background: rgba(34,211,238,0.07); }
+    .sf-yes { color: #4ade80; font-weight: bold; }
+    .sf-no  { color: rgba(220,216,208,0.28); }
+
+    /* Quote */
+    .sf-quote {
+      border-left: 3px solid var(--sf-cyan);
+      background: rgba(34,211,238,0.05);
+      border-radius: 0 6px 6px 0;
+      padding: 1.4rem 1.6rem;
+      margin: 2.5rem 0 0;
+    }
+    .sf-quote p { color: rgba(220,216,208,0.85); font-size: 1.05rem; font-style: italic; line-height: 1.7; margin: 0 0 0.6rem; }
+    .sf-quote cite { font-size: 0.78rem; color: var(--sf-cyan); font-family: 'Fira Code', monospace; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* Final CTA */
+    .sf-final-cta {
+      background: linear-gradient(135deg, rgba(34,211,238,0.09), rgba(99,102,241,0.07));
+      border: 1px solid rgba(34,211,238,0.22);
+      border-radius: 10px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .sf-final-cta h2 { font-size: clamp(1.6rem,4vw,2.5rem); margin-bottom: 1rem; color: var(--text); }
+    .sf-final-cta p  { color: rgba(220,216,208,0.7); max-width: 540px; margin: 0 auto 2rem; line-height: 1.7; }
+
+    @media (max-width:600px) {
+      .sf-compare-table th, .sf-compare-table td { padding: 9px 10px; font-size: 0.79rem; }
+      .sf-steps::before { left: 24px; }
+      .sf-step-num { width: 48px; height: 48px; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+
+<!-- NAV -->
+<nav class="main-nav" id="mainNav">
+  <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="/index.html">Home</a>
+    <div class="nav-dropdown" data-type="services">
+      <button type="button" class="dropdown-toggle">Services</button>
+      <div class="dropdown-menu">
+        <a href="/Services/WebBuilds.html">Web Builds</a>
+        <a href="/Services/ai-data-apps.html">AI &amp; Data Apps</a>
+        <a href="/Services/portals-hubs.html">Portals &amp; Hubs</a>
+        <a href="/Services/ecommerce-payments.html">Ecommerce &amp; Payments</a>
+        <a href="/Services/intake-routing.html">Intake &amp; Routing</a>
+        <a href="/Services/trust-surfaces.html">Trust Surfaces</a>
+        <a href="/Services/api-integration.html">API &amp; Integrations</a>
+        <a href="/Services/brand-identity.html">Brand Identity</a>
+        <a href="/Services/notification-comms.html">Notifications</a>
+        <a href="/Services/docs-knowledge.html">Docs &amp; Knowledge</a>
+        <a href="/Services/platform-migration.html">Migration</a>
+        <a href="/Services/security-audit.html">Security</a>
+        <a href="/Services/analytics-dashboards.html">Analytics</a>
+        <a href="/Services/lifecycle-retention.html">Retention</a>
+        <a href="/Services/mvp-launchpad.html">MVP Builds</a>
+        <a href="/Services/seo-content.html">SEO &amp; Content</a>
+      </div>
+    </div>
+    <a href="/about.html">Founder</a>
+    <div class="nav-dropdown" data-type="suite">
+      <button type="button" class="dropdown-toggle">SkyeSuite</button>
+      <div class="dropdown-menu">
+        <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="/SkyeFlow/index.html">SkyeFlow</a>
+        <a href="/SkyeArchive/index.html">SkyeArchive</a>
+        <a href="/SkyeSlides/index.html">SkyeSlides</a>
+        <a href="/SkyeDrive/index.html">SkyeDrive</a>
+        <a href="/SkyeCollab/index.html">SkyeCollab</a>
+        <a href="/SkyeSheets/index.html">SkyeSheets</a>
+        <a href="/SkyeLedger/index.html">SkyeLedger</a>
+        <a href="/SkyeOps/index.html">SkyeOps</a>
+      </div>
+    </div>
+    <a href="/platforms.html">Platforms</a>
+    <a href="/network.html">Network</a>
+    <a href="/credibility.html">Credibility</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <button class="menu-btn" id="menuBtn">☰ MENU</button>
+</nav>
+
+<!-- HERO -->
+<div class="page-header">
+  <div class="sf-hero-badge">Offline-First · Session Logging · PWA-Ready · No Account</div>
+  <div class="section-label">SOLEnterprises · Offline Mini Ops Suite</div>
+  <h1>SkyeFocus<span style="color:#22d3ee"> Log</span></h1>
+  <div class="glow-tile-purple">
+    <p style="color:#000000">The operator's focus engine. Run structured deep-work sessions, log what you shipped, and review your output history — all locally, all instantly, zero cloud dependency. Real work happens offline. SkyeFocus keeps up.</p>
+  </div>
+
+  <!-- Animated timer ring -->
+  <div class="sf-ring-demo">
+    <div class="sf-ring">
+      <div class="sf-ring-time">25:00</div>
+      <div class="sf-ring-label">Focus Block</div>
+    </div>
+    <div class="sf-ring-status">● Session Ready</div>
+  </div>
+
+  <div class="sf-cta-row">
+    <a href="https://offlineminiopssuite.netlify.app/skyefocus/" target="_blank" rel="noopener" class="sf-cta-primary">Open SkyeFocus →</a>
+    <a href="#how-it-works" class="sf-cta-ghost">See How It Works ↓</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- THE PROBLEM -->
+<section class="content-section">
+  <div class="section-label reveal">The Problem</div>
+  <div class="section-title reveal">Productivity Tools That Fight Your Focus</div>
+  <div class="section-desc reveal">Every subscription timer app, cloud-backed work tracker, and SaaS productivity suite has the same failure mode: they require attention to manage themselves. Notifications, login re-prompts, sync states, paywalled history. The tool becomes the distraction.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">🔔</div>
+      <h3>Interrupt-First Design</h3>
+      <div class="card-type">SaaS Timer Apps</div>
+      <p>Most productivity apps are built to re-engage you — push notifications, streak badges, social leaderboards. Every engagement trigger is an interruption. The app designed to protect your focus is the one breaking it.</p>
+      <div class="card-tags"><span>Notification Flood</span><span>Re-Engagement Loops</span><span>Distraction by Design</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">☁️</div>
+      <h3>Cloud-Gated History</h3>
+      <div class="card-type">Subscription Work Trackers</div>
+      <p>Your session history, your completed blocks, your logged output — locked behind a monthly fee and a working internet connection. Lose connectivity mid-session and the log is gone. The data you built belongs to their server, not you.</p>
+      <div class="card-tags"><span>Paywalled Logs</span><span>Sync Dependency</span><span>Lost Sessions</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">⚙️</div>
+      <h3>Setup Before Work</h3>
+      <div class="card-type">Project Management Overhead</div>
+      <p>Jira tickets. Asana tasks. Notion boards. Toggl projects. Before you can log a single second of work, you're three menus deep in configuration. The overhead shifts from the work to the system that's supposed to track it.</p>
+      <div class="card-tags"><span>Pre-Work Friction</span><span>Tool Overhead</span><span>Configuration Hell</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE SOLUTION -->
+<section class="content-section">
+  <div class="section-label reveal">The Solution</div>
+  <div class="section-title reveal">SkyeFocus — Work First, Log Second, Nothing Else</div>
+  <div class="section-desc reveal">SkyeFocus is engineered around one principle: the tool disappears when you're working and surfaces when you need it. Timed focus blocks, structured session logging, and a local history vault — all running client-side, all available offline, zero accounts required.</div>
+
+  <div class="sf-feature-grid stagger-children">
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">⏱️</div>
+      <h4>Configurable Focus Blocks</h4>
+      <p>Set any duration — 25-minute Pomodoro, 50-minute deep work, 90-minute flow state blocks. The timer runs client-side. Close the tab, reopen it, go offline mid-session — the clock keeps going. No sync dependency on the countdown.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">📓</div>
+      <h4>Session Logging at Close</h4>
+      <p>When a block ends, log what you shipped: task name, output summary, tags, and a quality rating. The log entry writes to IndexedDB in milliseconds. Your session record is permanent and local the moment you commit it.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">📴</div>
+      <h4>100% Offline Operation</h4>
+      <p>Service workers cache the full app shell on first load. Every subsequent open — online or off — is instant. Running in a conference room, on a plane, in a client's building with no guest Wi-Fi: SkyeFocus doesn't care.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">🔎</div>
+      <h4>Local Session History &amp; Search</h4>
+      <p>Every closed session is stored and searchable. Filter by date range, task tag, or keyword. Results return client-side in real time — no API call, no loading state, no pagination limit. Your entire work history on device.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">📊</div>
+      <h4>Productivity Patterns — On Device</h4>
+      <p>Daily and weekly session summaries. Total focused hours, block completion rate, most productive tags. Analytics computed locally from your IndexedDB log — no data leaves the device, no third-party analytics involved.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">📤</div>
+      <h4>Export Logs Anywhere</h4>
+      <p>Export your session history as CSV, JSON, or Markdown. Drop it into SkyeDocx for a weekly deliverable report, SkyeSheets for analysis, or a client invoice as time verification. Portable output, zero vendor lock-in.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- METRICS -->
+<section class="content-section">
+  <div class="section-label reveal">Performance</div>
+  <div class="section-title reveal">Numbers That Matter for Deep Work</div>
+  <div class="card-grid-3 stagger-children" style="margin-top:2rem">
+    <div class="metric-card reveal">
+      <div class="metric-number">0</div>
+      <div class="metric-label">Interruption Triggers</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">100%</div>
+      <div class="metric-label">Offline Session Fidelity</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">&lt;1s</div>
+      <div class="metric-label">App Open Time</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">∞</div>
+      <div class="metric-label">Sessions Logged Locally</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">$0</div>
+      <div class="metric-label">Cost to Use Forever</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">0</div>
+      <div class="metric-label">External Calls per Session</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="content-section" id="how-it-works">
+  <div class="section-label reveal">Workflow</div>
+  <div class="section-title reveal">A Focus Session in Five Moves</div>
+  <div class="section-desc reveal">From open to logged output in under 30 seconds. No onboarding. No workspace setup. No account prompt.</div>
+
+  <div class="sf-steps">
+    <div class="sf-step reveal">
+      <div class="sf-step-num">01</div>
+      <div class="sf-step-body">
+        <h4>Open or Install SkyeFocus</h4>
+        <p>Go to <strong>offlineminiopssuite.netlify.app/skyefocus</strong> or install the PWA. First load caches the full app. Every open after — including fully offline — is instantaneous. No login screen, no account wall, straight to the timer.</p>
+      </div>
+    </div>
+    <div class="sf-step reveal">
+      <div class="sf-step-num">02</div>
+      <div class="sf-step-body">
+        <h4>Name Your Block and Start</h4>
+        <p>Label the session (task or project name), set the duration, and start. That's two fields and one click. The timer begins immediately — no confirmation dialogs, no loading states, no tutorial overlay. Work starts now.</p>
+      </div>
+    </div>
+    <div class="sf-step reveal">
+      <div class="sf-step-num">03</div>
+      <div class="sf-step-body">
+        <h4>Work Through the Block</h4>
+        <p>The app stays out of the way. No mid-session prompts. No notification spam. The countdown runs client-side — you can minimize the tab, switch apps, or go offline. The timer doesn't care about your network state.</p>
+      </div>
+    </div>
+    <div class="sf-step reveal">
+      <div class="sf-step-num">04</div>
+      <div class="sf-step-body">
+        <h4>Log Your Output When Done</h4>
+        <p>Session ends. A simple log form surfaces: what did you ship, quality rating, tags. Fill it in while it's fresh — takes 15 seconds. Hit save and the entry writes to local IndexedDB instantly. That session is permanently recorded on device.</p>
+      </div>
+    </div>
+    <div class="sf-step reveal">
+      <div class="sf-step-num">05</div>
+      <div class="sf-step-body">
+        <h4>Review History and Export</h4>
+        <p>Open the log view any time. Search, filter by date or tag, see daily totals and completion rates. Export the full log to CSV or JSON when you need to report output, invoice time, or archive a sprint's work record.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Log illustration -->
+  <div class="sf-log-demo reveal">
+    <span class="sl-dim">// SkyeFocus — IndexedDB Session Log</span><br><br>
+    <span class="sl-date">2026-02-28 09:00</span> · <span class="sl-task">"SkyeNote promotional copy"</span> · <span class="sl-dur">50min ✓</span> · <span class="sl-tag">[writing, marketing]</span> · <span class="sl-note">Shipped full ad page draft</span><br>
+    <span class="sl-date">2026-02-28 10:05</span> · <span class="sl-task">"Gateway13 policy schema review"</span>  · <span class="sl-dur">25min ✓</span> · <span class="sl-tag">[dev, gateway]</span>  · <span class="sl-note">Finalized v2 cap logic</span><br>
+    <span class="sl-date">2026-02-28 11:30</span> · <span class="sl-task">"Client intake call — Apex group"</span>   · <span class="sl-dur">50min ✓</span> · <span class="sl-tag">[client, sales]</span>  · <span class="sl-note">Proposal scope captured</span><br>
+    <span class="sl-date">2026-02-28 14:00</span> · <span class="sl-task">"SkyeFocusLog page build"</span>           · <span class="sl-dur">90min ✓</span> · <span class="sl-tag">[dev, skyeops]</span>  · <span class="sl-note">Complete. Zero API calls.</span><br><br>
+    <span class="sl-dim">Daily total: 3h 55min · 4 blocks completed · 0 network requests</span><br>
+    <span class="sl-dim">Export: session_log_2026-02-28.csv → ready.</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO IT'S FOR -->
+<section class="content-section">
+  <div class="section-label reveal">Who It's For</div>
+  <div class="section-title reveal">Built for Output-Driven Operators</div>
+  <div class="section-desc reveal">SkyeFocus isn't a wellness app or a streak tracker. It's a work infrastructure tool built for operators who bill on output, lead on delivery, and can't afford to lose session data to a sync failure.</div>
+
+  <div class="sf-feature-grid stagger-children">
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">💻</div>
+      <h4>Freelancers &amp; Contractors</h4>
+      <p>Log every billable session with timestamp and output notes. When a client questions your hours, your local log is the receipt — timestamped, tagged, and exportable in seconds. No cloud platform required as evidence.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">🏗️</div>
+      <h4>Operators &amp; Project Leads</h4>
+      <p>Track what you shipped each day across projects without a project management subscription. Daily session exports feed directly into status reports, sprint summaries, and stakeholder updates.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">🔬</div>
+      <h4>Developers &amp; Engineers</h4>
+      <p>Tag sessions by feature, bug, or sprint ticket. Track how long deep work actually takes versus estimates. Review weekly patterns to identify where context-switching is destroying throughput.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">✈️</div>
+      <h4>Remote &amp; Travel Professionals</h4>
+      <p>Airport lounges, client sites, international trips with data restrictions. SkyeFocus caches offline and runs identically regardless of connectivity. Your focus infrastructure travels with you.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">📝</div>
+      <h4>Writers &amp; Content Creators</h4>
+      <p>Structure writing sessions by word count target, draft stage, or content type. Log completion notes at the end of each block. Export a clean output record that doubles as a content production log.</p>
+    </div>
+    <div class="sf-feature-card reveal">
+      <div class="sf-feature-icon">🎓</div>
+      <h4>Students &amp; Researchers</h4>
+      <p>Track study blocks by subject, reading sessions by paper, and research sprints by milestone. Build a study history that shows actual hours invested — not just time since the last app open.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARISON -->
+<section class="content-section">
+  <div class="section-label reveal">Competitive Contrast</div>
+  <div class="section-title reveal">SkyeFocus vs. The Market</div>
+  <div class="section-desc reveal">The productivity app market is full of cloud timers that track you more than they track your work. Here's how offline-first focus infrastructure stacks up.</div>
+
+  <div style="overflow-x:auto;margin-top:2rem">
+    <table class="sf-compare-table reveal">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="sf-hl">SkyeFocus</th>
+          <th>Toggl Track</th>
+          <th>Forest App</th>
+          <th>Clockify</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Full offline operation</td>
+          <td class="sf-hl sf-yes">✓ Yes</td>
+          <td class="sf-no">✗ Partial</td>
+          <td class="sf-no">✗ Partial</td>
+          <td class="sf-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>No account required</td>
+          <td class="sf-hl sf-yes">✓ Yes</td>
+          <td class="sf-no">✗ Required</td>
+          <td class="sf-no">✗ Required</td>
+          <td class="sf-no">✗ Required</td>
+        </tr>
+        <tr>
+          <td>Session log stays on device</td>
+          <td class="sf-hl sf-yes">✓ Always</td>
+          <td class="sf-no">✗ Cloud</td>
+          <td class="sf-no">✗ Cloud</td>
+          <td class="sf-no">✗ Cloud</td>
+        </tr>
+        <tr>
+          <td>Zero push notifications</td>
+          <td class="sf-hl sf-yes">✓ Yes</td>
+          <td class="sf-no">✗ Weekly emails</td>
+          <td class="sf-no">✗ Streak alerts</td>
+          <td class="sf-no">✗ Reminders</td>
+        </tr>
+        <tr>
+          <td>PWA-installable (all platforms)</td>
+          <td class="sf-hl sf-yes">✓ Yes</td>
+          <td class="sf-no">✗ Native app</td>
+          <td class="sf-no">✗ Mobile only</td>
+          <td class="sf-yes">✓ Yes</td>
+        </tr>
+        <tr>
+          <td>Session output logging</td>
+          <td class="sf-hl sf-yes">✓ Built-in</td>
+          <td class="sf-no">✗ Notes only</td>
+          <td class="sf-no">✗ No</td>
+          <td class="sf-yes">✓ Limited</td>
+        </tr>
+        <tr>
+          <td>Free full history access</td>
+          <td class="sf-hl sf-yes">✓ Always</td>
+          <td class="sf-no">✗ 90-day limit</td>
+          <td class="sf-no">✗ Paid</td>
+          <td class="sf-yes">✓ Yes</td>
+        </tr>
+        <tr>
+          <td>CSV / JSON export</td>
+          <td class="sf-hl sf-yes">✓ Yes</td>
+          <td class="sf-yes">✓ Paid plan</td>
+          <td class="sf-no">✗ No</td>
+          <td class="sf-yes">✓ Yes</td>
+        </tr>
+        <tr>
+          <td>Monthly cost</td>
+          <td class="sf-hl sf-yes">$0</td>
+          <td class="sf-no">$9–$18/mo</td>
+          <td class="sf-no">$2–$4/mo</td>
+          <td class="sf-yes">Free tier</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ECOSYSTEM FIT -->
+<section class="content-section">
+  <div class="section-label reveal">Ecosystem Fit</div>
+  <div class="section-title reveal">SkyeFocus Inside the SOL Stack</div>
+  <div class="section-desc reveal">SkyeFocus is the work-tracking layer. Session data flows out to reports, invoices, SOPs, and sprint records without copy-paste or manual entry.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">📄</div>
+      <h3>SkyeFocus → SkyeDocx</h3>
+      <div class="card-type">Sessions to Invoices</div>
+      <p>Export a filtered session log — by client tag, date range, or project — and paste directly into SkyeDocx as time-and-output documentation. Billable hours with session-level evidence, not ballpark estimates.</p>
+      <div class="card-tags"><span>Time Log → Invoice</span><span>Output Notes</span><span>One-Step Export</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">📊</div>
+      <h3>SkyeFocus → SkyeSheets</h3>
+      <div class="card-type">Sessions to Analysis</div>
+      <p>Drop a CSV export into SkyeSheets and run velocity analysis, capacity planning, and sprint retrospective data. See which tag categories consume the most time — without a BI tool subscription.</p>
+      <div class="card-tags"><span>CSV Export</span><span>Velocity Tracking</span><span>Capacity Data</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">⚙️</div>
+      <h3>SkyeFocus → SkyeOps</h3>
+      <div class="card-type">Sessions to Runbooks</div>
+      <p>Recurring session patterns reveal where processes need documentation. Log the steps in SkyeFocus, convert the output notes into SkyeOps runbook entries. Turn repeated work into a documented, repeatable system.</p>
+      <div class="card-tags"><span>Pattern Detection</span><span>Runbook Seeding</span><span>Process Capture</span></div>
+    </div>
+  </div>
+
+  <div class="sf-quote reveal">
+    <p>"Deep work is a finite resource. The tool that tracks it shouldn't burn any of it. SkyeFocus is designed to be zero-overhead — open it, start, close it, log. That's the entire surface area."</p>
+    <cite>— SOLEnterprises · Offline Mini Ops Suite Design Principle</cite>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section class="content-section">
+  <div class="sf-final-cta reveal">
+    <div class="section-label" style="margin-bottom:1rem">Start Your First Session Now</div>
+    <h2>Focus Starts Here.<br>The Log Follows.</h2>
+    <p>SkyeFocus is live, free, and requires nothing — no login, no setup, no subscription. Open it, set your block, start. Everything else is already handled.</p>
+    <div class="sf-cta-row">
+      <a href="https://offlineminiopssuite.netlify.app/skyefocus/" target="_blank" rel="noopener" class="sf-cta-primary">Launch SkyeFocus — Free →</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:0.78rem;color:rgba(220,216,208,0.35);font-family:'Fira Code',monospace;letter-spacing:.05em">No login required · No cloud sync · Session data stays on your device</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+  <p><strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 986-210-7040</p>
+  <div class="footer-links">
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/vault.html">Vault</a>
+    <a href="/admin.html">Admin</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/sitemap-visual.html">Site Map</a>
+  </div>
+  <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
+</footer>
+
+<script src="/js/three-bg.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/growth.js"></script>
+
+<script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/js/netlify-identity-init.js"></script>
+
+<!-- MEGA NAV OVERLAY -->
+<div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+  <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Navigate</div>
+      <a href="/index.html">Home</a>
+      <a href="/about.html">Founder</a>
+      <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="/platforms.html">Platforms</a>
+      <a href="/network.html">Network</a>
+      <a href="/credibility.html">Credibility</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/status.html">Status</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Platforms &amp; Apps</div>
+      <a href="/Platforms-Apps-Infrastructure/index.html">⬡ All Platforms Hub</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html">kAIxU Chat</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html">Gateway13</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html">Delta Gate</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html">kAIxU PDF Pro</a>
+      <a href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html">BrandID PWA</a>
+      <a href="https://offlineminiopssuite.netlify.app/skyenote/" target="_blank" rel="noopener">SkyeNote Vault ↗</a>
+      <a href="https://offlineminiopssuite.netlify.app/skyefocus/" target="_blank" rel="noopener">SkyeFocus Log ↗</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Blog Categories</div>
+      <a href="/blog.html">All Posts</a>
+      <a href="/blog.html#phoenix">Phoenix AZ</a>
+      <a href="/blog.html#skaixu">SkAIxu IDE</a>
+      <a href="/blog.html#houston">Houston</a>
+      <a href="/blog.html#ai">Colorado AI</a>
+      <a href="/blog.html#devs">Devs &amp; AI</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Company</div>
+      <a href="/sitemap-visual.html">Site Map</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+    </div>
+  </div>
+</div>
+<script src="/js/partials.js"></script>
+</body>
+</html>

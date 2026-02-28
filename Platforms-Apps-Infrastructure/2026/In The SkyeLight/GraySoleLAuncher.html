@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GraySole Launcher — Operator App Launcher &amp; Tool Hub | SOL Platforms</title>
+  <meta name="description" content="GraySole Launcher is an offline-first personal app launcher for operators — organize all your deployed tools, portals, and systems in one branded hub with quick-launch shortcuts and status pings." />
+  <base href="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GraySole Launcher — Operator App Launcher &amp; Tool Hub" />
+  <meta property="og:description" content="Stop hunting through bookmarks for your own tools. GraySole Launcher gives operators a personal hub for every deployed app, portal, and system — organized, searchable, and always one click away." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+  <style>
+    :root { --acc1:#22c55e; --acc2:#64748b; --acc1-dim:rgba(34,197,94,0.10); --acc2-dim:rgba(100,116,139,0.14); }
+    .page-header .glow-tile-purple { background:radial-gradient(ellipse at 50% 60%,rgba(34,197,94,0.14) 0%,rgba(100,116,139,0.10) 45%,transparent 75%); }
+    .acc-text{color:var(--acc1);}
+    .badge-acc{display:inline-block;padding:4px 14px;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .badge-green{background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(34,197,94,0.28);}
+    .badge-slate{background:var(--acc2-dim);color:#94a3b8;border:1px solid rgba(100,116,139,0.28);}
+    .hero-widget{position:relative;width:min(480px,96vw);background:rgba(4,4,12,0.88);border:1px solid rgba(34,197,94,0.18);border-radius:16px;overflow:hidden;box-shadow:0 0 70px rgba(34,197,94,0.08);flex-shrink:0;font-family:'DM Sans',sans-serif;}
+    .widget-titlebar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .dot{width:10px;height:10px;border-radius:50%;} .dot-r{background:#f87171;} .dot-y{background:#fbbf24;} .dot-g{background:#4ade80;}
+    .widget-title{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-left:8px;flex:1;}
+    .launcher-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px;}
+    .launcher-item{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:border-color .2s,transform .15s;text-align:center;}
+    .launcher-item:hover{border-color:rgba(34,197,94,0.25);transform:scale(1.04);}
+    .li-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+    .li-g{background:var(--acc1-dim);} .li-s{background:rgba(100,116,139,0.15);}
+    .li-name{font-size:0.65rem;font-weight:700;color:rgba(255,255,255,0.65);}
+    .li-status{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+    .st-on{background:#4ade80;} .st-idle{background:#fbbf24;}
+    .launcher-search{margin:0 12px 10px;background:rgba(255,255,255,0.03);border:1px solid rgba(34,197,94,0.12);border-radius:8px;padding:8px 12px;font-size:0.7rem;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:6px;}
+    .widget-footer{display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(34,197,94,0.06);border-top:1px solid rgba(34,197,94,0.12);font-size:0.6rem;color:rgba(255,255,255,0.28);}
+    .btn-green{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,var(--acc1),#15803d);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;text-decoration:none;transition:opacity .2s,transform .15s;}
+    .btn-green:hover{opacity:.87;transform:translateY(-2px);}
+    .btn-slate-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:transparent;color:#94a3b8;font-weight:600;font-size:0.95rem;border-radius:10px;text-decoration:none;border:1.5px solid rgba(100,116,139,0.35);transition:background .2s,transform .15s;}
+    .btn-slate-outline:hover{background:var(--acc2-dim);transform:translateY(-2px);}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+    .feature-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:26px 24px;transition:border-color .25s,transform .2s;}
+    .feature-card:hover{border-color:rgba(34,197,94,0.2);transform:translateY(-3px);}
+    .feature-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
+    .icon-g{background:var(--acc1-dim);} .icon-s{background:var(--acc2-dim);}
+    .feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:#fff;} .feature-card p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .metric-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+    .metric-tile{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 18px;text-align:center;}
+    .m1{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--acc1);line-height:1;} .m2{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#94a3b8;line-height:1;}
+    .metric-tile .lbl{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:4px;}
+    .steps{display:flex;flex-direction:column;gap:0;}
+    .step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .step:last-child{border-bottom:none;}
+    .step-n{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#22c55e,#64748b);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#fff;flex-shrink:0;}
+    .step-c h3{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;} .step-c p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .step-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:0.68rem;padding:2px 10px;border-radius:6px;background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(34,197,94,0.18);margin-bottom:8px;}
+    .audience-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;}
+    .audience-chip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;font-size:0.85rem;font-weight:600;color:rgba(255,255,255,0.72);}
+    .chip-icon{font-size:1.2rem;flex-shrink:0;}
+    .cta-box{background:linear-gradient(135deg,rgba(34,197,94,0.09) 0%,rgba(100,116,139,0.08) 100%);border:1px solid rgba(34,197,94,0.16);border-radius:24px;padding:56px 40px;text-align:center;}
+    @media(max-width:700px){.hero-split{flex-direction:column!important;}.hero-widget{width:100%;}.cta-box{padding:36px 18px;}}
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+<nav class="main-nav" id="mainNav">
+  <a href="/" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="36" /></a>
+  <div class="nav-links desktop-only"><a href="/platforms.html">Platforms</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></div>
+  <div class="nav-actions">
+    <a href="https://graysolepr0v213.netlify.app/" target="_blank" rel="noopener" class="nav-cta">Open GraySole →</a>
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+<div class="mega-nav-overlay" id="megaNav">
+  <button class="mega-nav-close" id="megaNavClose">&#10005;</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col"><div class="mega-nav-heading">Operator Tools</div><a href="/Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html">GraySole Launcher</a><a href="/Platforms-Apps-Infrastructure/2026/SkyeOpsConsole.html">SkyeOpsConsole</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Platforms</div><a href="/platforms.html">All Platforms</a><a href="/Platforms-Apps-Infrastructure/2026/NexusForge.html">NexusForge</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Company</div><a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Get Started</div><a href="https://graysolepr0v213.netlify.app/" target="_blank" rel="noopener">Open GraySole Launcher</a><a href="/get-started/">Get Started</a></div>
+  </div>
+</div>
+<header class="page-header">
+  <div class="glow-tile-purple"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="badge-acc badge-green">App Launcher</span><span class="badge-acc badge-slate">Operator Hub</span><span class="badge-acc badge-green">Offline First</span></div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;color:#fff;margin:0;">Gray<span class="acc-text">Sole</span><br/>Launcher</h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.65;margin:0;">GraySole Launcher is the <strong style="color:var(--acc1);">personal operator hub</strong> — organize every deployed app, portal, tool, and system in one place with quick-launch tiles, live status pings, and searchable app metadata. Stop hunting bookmarks for your own tools.</p>
+    </div>
+    <div class="hero-split" style="display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Add any URL as a launcher tile — name, icon, category, and description</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Live status ping — green/yellow/red shows if each app is responding</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Category groups — organize apps by type (Finance, Client Portals, Dev Tools)</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Keyboard shortcuts and quick-search to launch any app in seconds</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Offline-first PWA — your launcher is available even when individual apps aren't</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Shareable hub — publish a branded launcher page for your team or clients</li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;"><a href="https://graysolepr0v213.netlify.app/" target="_blank" rel="noopener" class="btn-green">Open GraySole Launcher →</a><a href="#features" class="btn-slate-outline">Explore Features</a></div>
+      </div>
+      <div class="hero-widget">
+        <div class="widget-titlebar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="widget-title">GraySole Launcher — Operator Hub</span></div>
+        <div class="launcher-search">🔍 <span>Search apps...</span></div>
+        <div class="launcher-grid">
+          <div class="launcher-item"><div class="li-icon li-g">💼</div><div class="li-name">ExecLedger</div><div class="li-status st-on"></div></div>
+          <div class="launcher-item"><div class="li-icon li-g">🔐</div><div class="li-name">ExecSignIn</div><div class="li-status st-on"></div></div>
+          <div class="launcher-item"><div class="li-icon li-g">📊</div><div class="li-name">SkyeOps</div><div class="li-status st-on"></div></div>
+          <div class="launcher-item"><div class="li-icon li-s">🔗</div><div class="li-name">WebPilePro</div><div class="li-status st-on"></div></div>
+          <div class="launcher-item"><div class="li-icon li-s">📅</div><div class="li-name">ConnectLog</div><div class="li-status st-idle"></div></div>
+          <div class="launcher-item"><div class="li-icon li-g">⚡</div><div class="li-name">NexusForge</div><div class="li-status st-on"></div></div>
+        </div>
+        <div class="widget-footer"><div style="width:6px;height:6px;border-radius:50%;background:#4ade80;flex-shrink:0;"></div><span style="color:#4ade80;font-weight:700;">5 of 6 online</span><span>· Offline Ready</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;"><span class="badge-acc badge-green" style="margin-bottom:12px;display:inline-block;">The Problem</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Operators with 10+ tools spend 20 minutes a day finding the right one to open</h2></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">📑</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Bookmark Folders Don't Scale</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Browser bookmark folders work fine for 10 links. By 50 deployed tools across multiple clients, environments, and systems, bookmark folders become a nested hierarchy no one can navigate under pressure. GraySole gives each tool a named, searchable tile you can see at a glance.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🟡</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">No Way to Know If an App Is Down</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Without GraySole's status ping, you click a bookmark, wait for the page to load, and only then discover the app is returning a 503. GraySole pings every registered app on load and shows green/yellow/red status so you know before you click what's actually running.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">📱</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Your Tools Aren't on Your Home Screen</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Your deployed apps live in some bookmarks folder on desktop but you switch to mobile constantly. GraySole installs as a PWA on every device — one hub on your phone home screen that has every tool you operate, accessible anywhere, even when some of those tools are offline.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🤝</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Client Handoffs Are Confusing</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">When you hand off a set of tools to a client or team member, sending a list of URLs in an email is the usual approach. GraySole's shareable hub lets you publish a branded launcher page that gives them a single organized URL for every tool they have access to.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal" id="features">
+  <div class="container">
+    <div style="margin-bottom:36px;"><span class="badge-acc badge-green" style="margin-bottom:12px;display:inline-block;">Features</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0 0 8px;">One hub. Every tool. Always one click away.</h2></div>
+    <div class="feature-grid">
+      <div class="feature-card"><div class="feature-icon icon-g">🚀</div><h3>Quick-Launch Tiles</h3><p>Every registered app or URL becomes a named tile with a custom icon, category tag, and one-click launch. Tiles show status at a glance and open the target URL in one tap — no bookmark hunting, no address bar typing.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-s">🔴</div><h3>Live Status Pings</h3><p>GraySole pings each registered URL when you open the launcher and displays a live green/yellow/red status indicator on every tile. Know which apps are up before you click — save troubleshooting time by seeing outages immediately.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-g">🗂️</div><h3>Category Groups</h3><p>Organize your launcher tiles into named category groups — Finance &amp; Ledger, Client Portals, Dev Tools, Admin Systems, or any grouping that matches your operation. Collapse and expand groups to keep your hub uncluttered as it grows.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-s">⌨️</div><h3>Keyboard Quick-Launch</h3><p>Hit a configurable keyboard shortcut to open the GraySole search bar from anywhere. Type the first few characters of any app name and press Enter to launch it — never reach for the mouse or touch the bookmarks bar again.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-g">📱</div><h3>Offline-First PWA</h3><p>Install GraySole on your phone, tablet, and desktop — it runs offline-first with the full launcher UI cached locally. Even when individual apps are down or you're on a plane, your launcher and app catalog are available for reference.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-s">🌐</div><h3>Shareable Team Hub</h3><p>Publish your GraySole hub as a branded page and share a single URL with your team or clients. They get an organized, searchable launcher for every tool they have access to — no more "where do I find X" questions in Slack.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-g">📝</div><h3>App Notes &amp; Credentials Hints</h3><p>Each launcher tile can store a private notes field — login hints, environment notes (dev vs prod), or quick reference info. Notes are stored locally and never transmitted. A quick tap on the info icon shows the notes without opening the app.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-s">⚖️</div><h3>Environment Tagging</h3><p>Tag each app tile as Production, Staging, Dev, or Client — and filter the launcher to show only the environment you're working in. Eliminate the risk of hitting production when you meant staging by clearly separating environment tiles.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;"><span class="badge-acc badge-slate" style="margin-bottom:12px;display:inline-block;">At a Glance</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin:0;">All your tools. One hub. Always on.</h2></div>
+    <div class="metric-row">
+      <div class="metric-tile"><div class="m1">∞</div><div class="lbl">Apps to Register</div></div>
+      <div class="metric-tile"><div class="m2">Live</div><div class="lbl">Status Pings</div></div>
+      <div class="metric-tile"><div class="m1">PWA</div><div class="lbl">Works Offline</div></div>
+      <div class="metric-tile"><div class="m2">1-tap</div><div class="lbl">Launch Any App</div></div>
+      <div class="metric-tile"><div class="m1">$0</div><div class="lbl">Subscription</div></div>
+      <div class="metric-tile"><div class="m2">Share</div><div class="lbl">Team Launcher Hub</div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:36px;"><span class="badge-acc badge-green" style="margin-bottom:12px;display:inline-block;">How It Works</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Install → Register → Organize → Launch</h2></div>
+    <div class="steps">
+      <div class="step"><div class="step-n">01</div><div class="step-c"><div class="step-tag">Install</div><h3>Open GraySole Launcher and install it as a PWA on every device you use</h3><p>Visit GraySole Launcher in your browser and install from the PWA prompt. Install on your phone, tablet, and desktop — your app catalog syncs across devices via the optional JSON backup system so every device sees the same launcher.</p></div></div>
+      <div class="step"><div class="step-n">02</div><div class="step-c"><div class="step-tag">Register</div><h3>Add each app you operate as a named tile with icon, category, and optional notes</h3><p>Tap "+ Add App," enter the URL, give it a name and icon emoji, assign a category group, add environment tag (Prod/Staging/Dev), and write an optional private notes field. Takes 30 seconds per app. Add all your current tools in one session.</p></div></div>
+      <div class="step"><div class="step-n">03</div><div class="step-c"><div class="step-tag">Organize</div><h3>Arrange tiles into category groups — customize your hub layout to match your workflow</h3><p>Drag tiles into position within each category group. Rename or reorder groups. Pin your most-used tiles to a top-row "Favorites" section for instant access. The layout you create is saved locally and persists across sessions.</p></div></div>
+      <div class="step"><div class="step-n">04</div><div class="step-c"><div class="step-tag">Launch</div><h3>Open GraySole each day — see status, search, and launch any tool in one click</h3><p>GraySole becomes your daily starting point. Open it, see which apps are green, use keyboard search to jump to any tool, and launch in one tap. No more bookmark hunting, no more pasting URLs, no more wondering which environment you're in.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;"><span class="badge-acc badge-green" style="margin-bottom:12px;display:inline-block;">Who It's For</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">For operators who run more tools than they can keep in bookmarks</h2></div>
+    <div class="audience-grid">
+      <div class="audience-chip"><span class="chip-icon">💻</span>Solo operators managing 10+ deployed apps and portals</div>
+      <div class="audience-chip"><span class="chip-icon">🏗️</span>Developers switching between dev, staging, and production environments</div>
+      <div class="audience-chip"><span class="chip-icon">🚀</span>Founders running a tech stack with tools across multiple providers</div>
+      <div class="audience-chip"><span class="chip-icon">🧑‍🏫</span>Agencies managing portals and tools for multiple clients</div>
+      <div class="audience-chip"><span class="chip-icon">💼</span>Consultants who set up and hand off tool stacks to clients</div>
+      <div class="audience-chip"><span class="chip-icon">📊</span>Operations managers with a complex internal tooling ecosystem</div>
+      <div class="audience-chip"><span class="chip-icon">🔧</span>IT admins who need a fast launcher for system and admin tools</div>
+      <div class="audience-chip"><span class="chip-icon">🤝</span>Team leads creating a shared hub for onboarding new members</div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <span class="badge-acc badge-green" style="margin-bottom:16px;display:inline-block;">Build Your Hub</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:0 0 16px;line-height:1.1;">Every tool you operate.<br/><span class="acc-text">One hub. One click.</span></h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 36px;line-height:1.65;">Quick-launch tiles, live status pings, category groups, keyboard shortcuts, and offline-first PWA — GraySole Launcher is the operator hub your bookmark folder could never be.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;"><a href="https://graysolepr0v213.netlify.app/" target="_blank" rel="noopener" class="btn-green" style="font-size:1.05rem;padding:16px 36px;">Open GraySole Launcher →</a><a href="/platforms.html" class="btn-slate-outline">See All Platforms</a></div>
+      <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">PWA · Offline First · Free · No Account Required</p>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="40" /><p>Skyes Over London LC — building operator tools for the modern solo business.</p><div class="footer-contact"><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a><a href="tel:9862107040">986-210-7040</a></div></div>
+      <div class="footer-links">
+        <div class="footer-col"><span class="footer-col-label">Operator Tools</span><a href="/Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html">GraySole Launcher</a><a href="/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html">SkyeOpsConsole</a></div>
+        <div class="footer-col"><span class="footer-col-label">Company</span><a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+        <div class="footer-col"><span class="footer-col-label">Legal</span><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Skyes Over London LC. All rights reserved.</span></div>
+  </div>
+</footer>
+<script src="/js/three.min.js" defer></script><script src="/assets/app.js" defer></script><script src="/js/main.js" defer></script><script src="/js/growth.js" defer></script><script src="/js/partials.js" defer></script>
+</body>
+</html>

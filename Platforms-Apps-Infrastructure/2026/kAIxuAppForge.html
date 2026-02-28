@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kAIxuAppForge — AI App Generator & Scaffold Builder | SOL Platforms</title>
+  <meta name="description" content="kAIxuAppForge turns plain-language prompts into functional app scaffolds. Describe your app, choose a stack, and export working HTML/JS/CSS or deploy directly to Netlify. Powered by the kAIxU intelligence layer." />
+  <base href="/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="kAIxuAppForge — AI App Generator & Scaffold Builder" />
+  <meta property="og:description" content="Describe your app in plain language. kAIxuAppForge generates the structure, components, and logic — no blank-canvas paralysis, no boilerplate from scratch." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+
+  <style>
+    /* ── kAIxuAppForge accent: Solar Yellow #facc15 + Royal Blue #2563eb ── */
+    :root {
+      --acc1: #facc15;
+      --acc2: #2563eb;
+      --acc1-dim: rgba(250,204,21,0.10);
+      --acc2-dim: rgba(37,99,235,0.12);
+    }
+
+    .page-header .glow-tile-purple {
+      background: radial-gradient(ellipse at 50% 60%, rgba(250,204,21,0.14) 0%, rgba(37,99,235,0.12) 45%, transparent 75%);
+    }
+
+    .acc-text  { color: var(--acc1); }
+    .acc2-text { color: var(--acc2); }
+
+    .badge-acc {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .badge-yellow { background: var(--acc1-dim); color: var(--acc1); border: 1px solid rgba(250,204,21,0.28); }
+    .badge-blue   { background: var(--acc2-dim); color: #60a5fa; border: 1px solid rgba(37,99,235,0.28); }
+
+    /* ── Hero: forge terminal widget ── */
+    .hero-widget {
+      position: relative;
+      width: min(520px, 96vw);
+      background: rgba(4,4,12,0.82);
+      border: 1px solid rgba(250,204,21,0.18);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 70px rgba(250,204,21,0.09), 0 0 100px rgba(37,99,235,0.09);
+      flex-shrink: 0;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .widget-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #f87171; }
+    .dot-y { background: #fbbf24; }
+    .dot-g { background: #4ade80; }
+    .widget-title { font-size: 0.68rem; color: rgba(255,255,255,0.35); margin-left: 8px; letter-spacing: .05em; flex: 1; }
+    .model-chip {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      padding: 2px 9px;
+      border-radius: 999px;
+      background: rgba(250,204,21,0.10);
+      color: var(--acc1);
+      border: 1px solid rgba(250,204,21,0.22);
+      text-transform: uppercase;
+    }
+
+    /* prompt area */
+    .prompt-area {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .prompt-label {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+    .prompt-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(250,204,21,0.14);
+      border-radius: 9px;
+      padding: 11px 13px;
+      font-size: 0.73rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
+    }
+    .prompt-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 13px;
+      background: var(--acc1);
+      vertical-align: -2px;
+      margin-left: 2px;
+      animation: blink 1.1s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0;} }
+
+    .config-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .config-pill {
+      font-size: 0.58rem;
+      padding: 4px 10px;
+      border-radius: 7px;
+      background: rgba(37,99,235,0.10);
+      color: #60a5fa;
+      border: 1px solid rgba(37,99,235,0.2);
+      letter-spacing: .04em;
+    }
+    .forge-btn {
+      margin-left: auto;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--acc1), #ca8a04);
+      color: #000;
+      border: none;
+      cursor: pointer;
+      letter-spacing: .04em;
+    }
+
+    /* output tree */
+    .output-area {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .output-label { font-size: 0.6rem; color: rgba(255,255,255,0.3); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 9px; }
+
+    .file-tree { display: flex; flex-direction: column; gap: 3px; }
+    .tree-line {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.55);
+      padding: 2px 0;
+    }
+    .tree-indent { color: rgba(255,255,255,0.15); flex-shrink: 0; }
+    .tree-folder { color: var(--acc1); }
+    .tree-file-js  { color: #fbbf24; }
+    .tree-file-html{ color: #fb923c; }
+    .tree-file-css { color: #60a5fa; }
+    .tree-file-json{ color: #a3e635; }
+    .tree-file-md  { color: rgba(255,255,255,0.35); }
+
+    .status-bar {
+      padding: 8px 14px;
+      background: rgba(37,99,235,0.07);
+      border-top: 1px solid rgba(37,99,235,0.12);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.6rem;
+    }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%,100%{opacity:1;}50%{opacity:.3;} }
+    .status-text { color: #4ade80; font-weight: 700; }
+    .status-detail { color: rgba(255,255,255,0.28); }
+    .deploy-chip {
+      margin-left: auto;
+      font-size: 0.58rem;
+      padding: 2px 10px;
+      border-radius: 6px;
+      background: rgba(250,204,21,0.08);
+      color: var(--acc1);
+      border: 1px solid rgba(250,204,21,0.18);
+    }
+
+    /* ── Buttons ── */
+    .btn-yellow-solid {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--acc1) 0%, #ca8a04 100%);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-yellow-solid:hover { opacity: .88; transform: translateY(-2px); }
+
+    .btn-blue-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      color: #60a5fa;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 1.5px solid rgba(37,99,235,0.35);
+      transition: background .2s, transform .15s;
+    }
+    .btn-blue-outline:hover { background: var(--acc2-dim); transform: translateY(-2px); }
+
+    /* feature grid */
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 26px 24px;
+      transition: border-color .25s, transform .2s;
+    }
+    .feature-card:hover { border-color: rgba(250,204,21,0.2); transform: translateY(-3px); }
+    .feature-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 14px; }
+    .icon-yellow { background: var(--acc1-dim); }
+    .icon-blue   { background: var(--acc2-dim); }
+    .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .feature-card p  { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin: 0; }
+
+    /* metrics */
+    .metric-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 14px; }
+    .metric-tile { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 22px 18px; text-align: center; }
+    .metric-tile .num  { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--acc1); line-height: 1; }
+    .metric-tile .num2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: #60a5fa; line-height: 1; }
+    .metric-tile .lbl  { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+    /* how it works */
+    .steps-grid { display: flex; flex-direction: column; gap: 0; }
+    .step-row {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .step-row:last-child { border-bottom: none; }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: linear-gradient(135deg, #facc15, #2563eb);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #fff; flex-shrink: 0;
+    }
+    .step-content h3 { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .step-content p  { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; margin: 0; }
+    .step-tag {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      padding: 2px 10px; border-radius: 6px;
+      background: rgba(250,204,21,0.08); color: var(--acc1);
+      border: 1px solid rgba(250,204,21,0.18);
+      margin-bottom: 8px;
+    }
+
+    /* audience */
+    .audience-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px,1fr)); gap: 12px; }
+    .audience-chip {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.85rem; font-weight: 600;
+      color: rgba(255,255,255,0.72);
+    }
+    .chip-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+    /* vs table */
+    .vs-table { width: 100%; border-collapse: collapse; }
+    .vs-table th { padding: 12px 16px; font-size: 0.75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,0.4); border-bottom: 1px solid rgba(255,255,255,0.08); text-align: left; }
+    .vs-table td { padding: 13px 16px; font-size: 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .vs-table tr:last-child td { border-bottom: none; }
+    .col-feature { color: rgba(255,255,255,0.65); font-weight: 500; }
+    .col-sol  { color: var(--acc1); font-weight: 600; }
+    .col-alt  { color: rgba(255,255,255,0.28); }
+    .tick  { color: var(--acc1); font-size: 1.05rem; }
+    .tick2 { color: #60a5fa; font-size: 1.05rem; }
+    .cross { color: rgba(255,255,255,0.15); font-size: 1.05rem; }
+
+    /* CTA box */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(250,204,21,0.08) 0%, rgba(37,99,235,0.08) 100%);
+      border: 1px solid rgba(250,204,21,0.16);
+      border-radius: 24px;
+      padding: 56px 40px;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .hero-split { flex-direction: column !important; }
+      .hero-widget { width: 100%; }
+      .cta-box { padding: 36px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="three-bg"></canvas>
+
+<!-- Navigation -->
+<nav class="main-nav" id="mainNav">
+  <a href="/" class="nav-logo">
+    <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="36" />
+  </a>
+  <div class="nav-links desktop-only">
+    <a href="/platforms.html">Platforms</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="https://kaixuappforge.netlify.app/" target="_blank" rel="noopener" class="nav-cta">Open kAIxuAppForge →</a>
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+
+<!-- Mega-nav overlay -->
+<div class="mega-nav-overlay" id="megaNav">
+  <button class="mega-nav-close" id="megaNavClose">&#10005;</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">kAIxU Tools</div>
+      <a href="/Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html">kAIxuAppForge</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html">skAIxU IDE Pro</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/KaixuGitPush.html">KaixuGitPush</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/KaixuPush.html">KaixuPush</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Platforms</div>
+      <a href="/platforms.html">All Platforms</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html">SkyeOfferForge</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyePortalVault.html">SkyePortalVault</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/SkyeChat.html">SkyeChat</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Company</div>
+      <a href="/about.html">About</a>
+      <a href="/portfolio.html">Portfolio</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-heading">Get Started</div>
+      <a href="https://kaixuappforge.netlify.app/" target="_blank" rel="noopener">Open App</a>
+      <a href="/kAIxu/RequestKaixuAPIKey.html">Get API Key</a>
+      <a href="/contact.html">Talk to SOL</a>
+    </div>
+  </div>
+</div>
+
+<!-- Page Header / Hero -->
+<header class="page-header">
+  <div class="glow-tile-purple"></div>
+  <div class="container" style="position:relative;z-index:2;">
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="badge-acc badge-yellow">AI App Generator</span>
+        <span class="badge-acc badge-blue">kAIxU Powered</span>
+        <span class="badge-acc badge-yellow">No Boilerplate</span>
+      </div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;color:#fff;margin:0;">
+        kAIxu<br /><span class="acc-text">App Forge</span>
+      </h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.65;margin:0;">
+        kAIxuAppForge turns your plain-language idea into a <strong style="color:var(--acc1);">working app scaffold</strong> — full file structure, components, logic, and deploy-ready output — powered by the kAIxU intelligence layer. Describe what you need. Forge it in seconds.
+      </p>
+    </div>
+
+    <!-- Hero split -->
+    <div class="hero-split" style="display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap;">
+
+      <!-- Left: bullets + CTAs -->
+      <div style="flex:1;min-width:280px;">
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> Describe your app in plain language — no technical spec required
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> kAIxU generates file structure, HTML, JS, CSS, and config
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> Choose your stack: Vanilla, PWA, offline-first, API-backed
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> Preview the scaffold live, download as ZIP, or deploy to Netlify
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> Extend the output with kAIxU chat — iterate fast in the forge
+          </li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);">
+            <span style="color:var(--acc1);">◆</span> No account required for single-session builds
+          </li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="https://kaixuappforge.netlify.app/" target="_blank" rel="noopener" class="btn-yellow-solid">Open kAIxuAppForge →</a>
+          <a href="#features" class="btn-blue-outline">Explore Features</a>
+        </div>
+        <p style="margin-top:16px;font-size:0.75rem;color:rgba(255,255,255,0.3);">
+          Powered by the <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#60a5fa;">kAIxU gateway →</a> · Part of the <a href="/platforms.html" style="color:#60a5fa;">SOL developer stack</a>
+        </p>
+      </div>
+
+      <!-- Right: forge terminal widget -->
+      <div class="hero-widget">
+        <div class="widget-titlebar">
+          <span class="dot dot-r"></span>
+          <span class="dot dot-y"></span>
+          <span class="dot dot-g"></span>
+          <span class="widget-title">kAIxuAppForge — Prompt → Scaffold</span>
+          <span class="model-chip">kAIxU</span>
+        </div>
+
+        <div class="prompt-area">
+          <div class="prompt-label">App Prompt</div>
+          <div class="prompt-box">
+            Build me an HVAC field service app with job scheduling, offline invoice generation, technician notes, and a customer history log. PWA, mobile-first, works offline.<span class="prompt-cursor"></span>
+          </div>
+          <div class="config-row">
+            <span class="config-pill">Stack: Vanilla + PWA</span>
+            <span class="config-pill">Offline: IndexedDB</span>
+            <span class="config-pill">Export: ZIP + Netlify</span>
+            <button class="forge-btn">⚡ Forge App</button>
+          </div>
+        </div>
+
+        <div class="output-area">
+          <div class="output-label">Generated Scaffold</div>
+          <div class="file-tree">
+            <div class="tree-line"><span class="tree-folder">📁</span> hvac-field-service/</div>
+            <div class="tree-line"><span class="tree-indent">  ├──</span><span class="tree-file-html">📄</span> index.html</div>
+            <div class="tree-line"><span class="tree-indent">  ├──</span><span class="tree-file-js">📄</span> app.js</div>
+            <div class="tree-line"><span class="tree-indent">  ├──</span><span class="tree-file-css">📄</span> style.css</div>
+            <div class="tree-line"><span class="tree-indent">  ├──</span><span class="tree-file-js">📄</span> sw.js <span style="font-size:0.58rem;color:rgba(255,255,255,0.25);margin-left:6px;">service worker</span></div>
+            <div class="tree-line"><span class="tree-indent">  ├──</span><span class="tree-file-json">📄</span> manifest.json</div>
+            <div class="tree-line"><span class="tree-folder">  └── 📁</span> modules/</div>
+            <div class="tree-line"><span class="tree-indent">      ├──</span><span class="tree-file-js">📄</span> scheduler.js</div>
+            <div class="tree-line"><span class="tree-indent">      ├──</span><span class="tree-file-js">📄</span> invoice.js</div>
+            <div class="tree-line"><span class="tree-indent">      ├──</span><span class="tree-file-js">📄</span> storage.js</div>
+            <div class="tree-line"><span class="tree-indent">      └──</span><span class="tree-file-js">📄</span> customers.js</div>
+          </div>
+        </div>
+
+        <div class="status-bar">
+          <div class="status-dot"></div>
+          <span class="status-text">Forge Complete</span>
+          <span class="status-detail">· 11 files · 2,840 lines · PWA ready</span>
+          <span class="deploy-chip">↓ Download ZIP</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- The Problem -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="badge-acc badge-yellow" style="margin-bottom:12px;display:inline-block;">The Problem</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        The distance between "I have an idea" and "I have an app" is brutal
+      </h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:580px;margin:12px auto 0;line-height:1.65;">
+        Not because the technology is hard — but because getting started is. Every new project begins with a forest of decisions, blank files, and boilerplate that has nothing to do with what you're actually trying to build.
+      </p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">🧊</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Blank Canvas Paralysis</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">You open a new folder. You create index.html. You stop. What's the file structure? Which modules? What naming convention? The app is obvious in your head. Getting it on screen stops most developers cold.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">⚙️</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Boilerplate Tax</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Every project needs a service worker registration, a manifest, a CSS reset, a storage layer, a router. That's six files of boilerplate before you've written a single line of actual product logic. kAIxuAppForge generates all of it from one prompt.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">🔧</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Wrong Tool, Wrong Stack</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">No-code builders box you into their patterns. Full frameworks like React or Next.js are overkill for a tool that runs in a browser tab. kAIxuAppForge matches the scaffold to the job — PWA, vanilla, offline-first, or API-backed.</p>
+      </div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;">
+        <div style="font-size:1.4rem;margin-bottom:10px;">🕒</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Setup Time Kills Momentum</h3>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">The window of excitement for a new app idea is hours, not days. If setup takes a full day before you write a single feature, the idea loses energy. kAIxuAppForge gets you from prompt to preview in under a minute.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="content-section reveal" id="features">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-yellow" style="margin-bottom:12px;display:inline-block;">Features</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0 0 8px;">
+        From prompt to production scaffold in one forge.
+      </h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:540px;line-height:1.65;">kAIxuAppForge is not a code autocomplete — it's a full scaffold generator. Give it your app concept; it builds the structure, wires the logic, and outputs deploy-ready files.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon icon-yellow">🔨</div>
+        <h3>Plain-Language Prompt Interface</h3>
+        <p>No technical spec required. Describe your app like you'd explain it to a contractor: what it does, who uses it, what data it tracks, and how it should behave. kAIxU interprets the business logic and produces the technical scaffold to match.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-blue">📁</div>
+        <h3>Full File Structure Generation</h3>
+        <p>Every forge produces a complete, properly organized file tree — HTML entry points, JS modules by function (routing, storage, UI, API), CSS layers, and config files. You get a real project structure, not a single monolith file.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-yellow">🌐</div>
+        <h3>PWA & Offline-First Support</h3>
+        <p>Tell the forge "make it installable" or "works offline" and it generates a full service worker, manifest.json, cache strategy, and IndexedDB storage layer — the same patterns powering the SOL Offline First tool stack, generated automatically for your use case.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-blue">⚡</div>
+        <h3>Stack Selection</h3>
+        <p>Choose from Vanilla JS (zero dependencies), PWA, API-backed (Netlify Functions + fetch), or kAIxU-integrated (includes gateway client for AI features inside your generated app). The forge adjusts the scaffold, dependencies, and config to match the stack you pick.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-yellow">👁️</div>
+        <h3>Live Scaffold Preview</h3>
+        <p>Before downloading anything, the forge renders a preview of your generated app — the file tree, key code fragments, and a live sandbox where the UI runs. See what was built, evaluate the structure, and prompt for changes before exporting.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-blue">📦</div>
+        <h3>ZIP Download & Netlify Deploy</h3>
+        <p>Export the full scaffold as a ZIP ready to drop into any editor. Or connect your Netlify account and deploy directly from the forge — the app goes live on its own Netlify URL in under 60 seconds. Either path, the output is production-structure-ready from day one.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-yellow">🤖</div>
+        <h3>In-Forge Iteration with kAIxU</h3>
+        <p>After the initial forge, open the kAIxU chat panel to refine the output. "Add a dark mode toggle," "add a CSV export to the data table," "add a confirmation modal before deleting a record" — kAIxU modifies the generated files inline, keeping the structure consistent.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-blue">🔑</div>
+        <h3>kAIxU Gateway Integration Layer</h3>
+        <p>For apps that need AI features — a prompt field, a document generator, an analysis tool — the forge can include a full kAIxuGateway13 integration layer: the gateway client, streaming chat setup, API key handling, and fallback logic all pre-wired and ready to configure.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-yellow">📊</div>
+        <h3>Token Draw & Complexity Report</h3>
+        <p>Every forge generates a complexity report — lines of code produced, modules created, estimated features built, and token cost for the generation call. Understand what was built, what it cost in AI inference, and what the next iteration might add before prompting again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metrics -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-blue" style="margin-bottom:12px;display:inline-block;">By the Numbers</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin:0;">The Forge delivers fast, complete, structured output</h2>
+    </div>
+    <div class="metric-row">
+      <div class="metric-tile">
+        <div class="num">&lt;60s</div>
+        <div class="lbl">Prompt to Scaffold</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num2">10+</div>
+        <div class="lbl">Files per Forge</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num">4</div>
+        <div class="lbl">Stack Options</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num2">PWA</div>
+        <div class="lbl">Offline-First Support</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num">ZIP</div>
+        <div class="lbl">Instant Export</div>
+      </div>
+      <div class="metric-tile">
+        <div class="num2">Live</div>
+        <div class="lbl">Netlify Deploy Option</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="content-section reveal" id="how">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-yellow" style="margin-bottom:12px;display:inline-block;">How It Works</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        Describe → Forge → Preview → Ship
+      </h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:480px;margin:8px 0 0;line-height:1.65;">Four steps from idea to a working app scaffold you own and control.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-row">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-tag">Describe</div>
+          <h3>Write your app idea in plain language — no spec, no framework decision yet</h3>
+          <p>Type what the app does, who it's for, what data it manages, and any key behaviors (offline, mobile-first, multi-user, etc.). kAIxuAppForge reads the intent, not the technical vocabulary. "A job tracking app for a one-person plumbing operation with client history, quote generation, and invoice export" is a perfect prompt. No code required to start.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-tag">Configure</div>
+          <h3>Choose your stack, features, and output format before the forge fires</h3>
+          <p>Select your stack (Vanilla / PWA / API-backed / kAIxU-integrated), toggle PWA support, offline storage type, light/dark theming, and whether you want the kAIxU gateway pre-wired. These settings shape how the scaffold is generated — same idea, different configurations produce meaningfully different output structures.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-tag">Forge + Iterate</div>
+          <h3>kAIxU generates the full scaffold — review it live and iterate in the forge</h3>
+          <p>The forge streams the generation live — watch the file tree populate, code panels fill, and the live preview render in real time. When the initial scaffold is complete, open the in-forge kAIxU chat and refine specific files or request new features. The forge tracks what was generated and applies changes cleanly to the existing structure rather than regenerating from scratch.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-tag">Ship</div>
+          <h3>Download the ZIP or push directly to Netlify — the scaffold is yours</h3>
+          <p>Export the complete project as a structured ZIP file — open it in VS Code, drop it in a repo, or push it to any host. Or skip the local step entirely: connect your Netlify account and the forge deploys the scaffold directly. Either way, the code is yours — no platform lock-in, no ongoing license, no kAIxuAppForge dependency in the final output.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What the Forge Builds -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:36px;text-align:center;">
+      <span class="badge-acc badge-blue" style="margin-bottom:12px;display:inline-block;">App Types</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        What kAIxuAppForge builds well
+      </h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:500px;margin:10px auto 0;">The forge is optimized for operator tools, business utilities, and web apps — not marketing sites or content-heavy pages.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:18px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:8px;">🔧</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px;">Field Service Tools</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);line-height:1.5;">Job scheduling, route logging, work order intake, tech notes, offline invoice generation — all the patterns field teams need built into a single PWA.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:18px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:8px;">📋</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px;">Client Portal & Intake Apps</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);line-height:1.5;">Client-facing intake forms, document request checklists, status pages, approval workflows — apps that let clients self-serve outside your inbox.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:18px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:8px;">📊</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px;">Internal Dashboards</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);line-height:1.5;">KPI dashboards, team operations tools, dispatch boards, project trackers — internal-facing apps that replace spreadsheets and chat threads.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:18px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:8px;">🤖</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px;">AI-Integrated Utilities</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);line-height:1.5;">Apps with AI features built in — a proposal drafting assistant, a scope analyzer, a report generator — using the kAIxU gateway integration layer forged directly into the scaffold.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:18px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:8px;">🗂️</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px;">Offline Vaults & Trackers</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);line-height:1.5;">Expense trackers, lead vaults, note databases, time logs — offline-first tools that store data locally in IndexedDB and export to CSV or JSON on demand.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:18px 16px;">
+        <div style="font-size:1.1rem;margin-bottom:8px;">📑</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px;">Document & PDF Generators</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);line-height:1.5;">Proposal builders, invoice generators, contract formatters, and estimate sheets — apps that take structured input and output a formatted PDF for signature or delivery.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Who It's For -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-yellow" style="margin-bottom:12px;display:inline-block;">Who It's For</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        For builders who want output, not setup
+      </h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-chip"><span class="chip-icon">🧑‍💻</span>Solo developers prototyping fast without boilerplate</div>
+      <div class="audience-chip"><span class="chip-icon">🏢</span>Agency teams scaffolding client tools quickly</div>
+      <div class="audience-chip"><span class="chip-icon">🔧</span>Operators building internal tools for their own business</div>
+      <div class="audience-chip"><span class="chip-icon">🚀</span>Indie hackers who need a working base, not a library</div>
+      <div class="audience-chip"><span class="chip-icon">🤖</span>AI builders wiring kAIxU features into custom UIs</div>
+      <div class="audience-chip"><span class="chip-icon">📱</span>PWA builders who want offline-first from day one</div>
+      <div class="audience-chip"><span class="chip-icon">💼</span>Consultants building client-facing portal apps</div>
+      <div class="audience-chip"><span class="chip-icon">📊</span>Ops teams replacing spreadsheets with real tools</div>
+    </div>
+  </div>
+</section>
+
+<!-- vs Table -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:32px;">
+      <span class="badge-acc badge-blue" style="margin-bottom:12px;display:inline-block;">Comparison</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        kAIxuAppForge vs the other ways to start
+      </h2>
+    </div>
+    <div style="overflow-x:auto;border-radius:16px;border:1px solid rgba(255,255,255,0.07);">
+      <table class="vs-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th style="color:var(--acc1);">kAIxuAppForge</th>
+            <th>From Scratch (blank folder)</th>
+            <th>No-Code Builder</th>
+            <th>Hire a Dev</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-feature">Time to First Working File</td>
+            <td class="col-sol"><span class="tick">✓</span> Under 60 seconds</td>
+            <td class="col-alt">Hours–days</td>
+            <td class="col-alt">Minutes (limited)</td>
+            <td class="col-alt">Days–weeks</td>
+          </tr>
+          <tr>
+            <td class="col-feature">You Own the Code</td>
+            <td class="col-sol"><span class="tick">✓</span> 100% — no dependency</td>
+            <td class="col-alt"><span class="tick2">✓</span> Yes, you write it</td>
+            <td class="col-alt"><span class="cross">✗</span> Platform locked</td>
+            <td class="col-alt"><span class="tick2">✓</span> If contracted</td>
+          </tr>
+          <tr>
+            <td class="col-feature">PWA / Offline Support</td>
+            <td class="col-sol"><span class="tick">✓</span> One toggle</td>
+            <td class="col-alt">Manual — hours of setup</td>
+            <td class="col-alt"><span class="cross">✗</span> Rarely supported</td>
+            <td class="col-alt">Yes, at extra cost</td>
+          </tr>
+          <tr>
+            <td class="col-feature">AI Features Pre-Wired</td>
+            <td class="col-sol"><span class="tick">✓</span> kAIxU gateway built-in</td>
+            <td class="col-alt">Manual integration</td>
+            <td class="col-alt"><span class="cross">✗</span> Platform dependent</td>
+            <td class="col-alt">Yes, at full dev rate</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Proper File Structure</td>
+            <td class="col-sol"><span class="tick">✓</span> Multi-module, organized</td>
+            <td class="col-alt">Depends on discipline</td>
+            <td class="col-alt"><span class="cross">✗</span> Black box</td>
+            <td class="col-alt"><span class="tick2">✓</span> If specified</td>
+          </tr>
+          <tr>
+            <td class="col-feature">No Platform Subscription</td>
+            <td class="col-sol"><span class="tick">✓</span> Pay per forge / API</td>
+            <td class="col-alt"><span class="tick2">✓</span> Free (your time)</td>
+            <td class="col-alt"><span class="cross">✗</span> Monthly seat fee</td>
+            <td class="col-alt"><span class="cross">✗</span> Ongoing dev cost</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- kAIxU Ecosystem -->
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="badge-acc badge-yellow" style="margin-bottom:12px;display:inline-block;">kAIxU Ecosystem</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">
+        kAIxuAppForge is the entry point to the kAIxU developer stack
+      </h2>
+      <p style="color:rgba(255,255,255,0.45);max-width:540px;margin:12px auto 0;line-height:1.65;">Once the scaffold is forged, extend it with the rest of the kAIxU and SOL platform tier — or feed the generated app back into the forge and keep iterating.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon icon-yellow">🔑</div>
+        <h3>kAIxuGateway13</h3>
+        <p>The AI inference gateway powering every kAIxU app. kAIxuAppForge can generate a full gateway integration layer directly into your scaffold — streaming, API key handling, rate limiting, and usage tracking all pre-wired. Get your API key at the kAIxU key request form to start building.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-blue">🛠️</div>
+        <h3>skAIxU IDE Pro</h3>
+        <p>After forging the scaffold, open it in skAIxU IDE Pro — the AI-native development environment. Continue refining the codebase with full AI pair programming, multi-file awareness, and scoped context. The forge gives you the foundation; the IDE takes it to production.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-yellow">📄</div>
+        <h3>kAIxU PDF Pro</h3>
+        <p>If your forged app needs document output — proposals, invoices, contracts, certificates — wire in kAIxU PDF Pro's 18-tool document generation suite. The forge can scaffold the integration point; PDF Pro handles the document logic.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon icon-blue">🔀</div>
+        <h3>SkyeFlow</h3>
+        <p>Add automation and workflow triggers to your forged app via SkyeFlow. Connect your app's events — a form submission, a status change, a new record — to SkyeFlow-governed AI workflows that draft responses, trigger actions, or route data automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="content-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <span class="badge-acc badge-yellow" style="margin-bottom:16px;display:inline-block;">Get Started</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:0 0 16px;line-height:1.1;">
+        The app in your head is one prompt away.<br/>
+        <span class="acc-text">Stop setting up. Start forging.</span>
+      </h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:540px;margin:0 auto 36px;line-height:1.65;">
+        kAIxuAppForge takes your plain-language app description and produces a full, organized, deploy-ready scaffold — file structure, working logic, PWA support, and optional kAIxU gateway integration — in under 60 seconds. Your code, your structure, your deploy. No blank canvas. No boilerplate sprint.
+      </p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://kaixuappforge.netlify.app/" target="_blank" rel="noopener" class="btn-yellow-solid" style="font-size:1.05rem;padding:16px 36px;">
+          Open kAIxuAppForge →
+        </a>
+        <a href="/kAIxu/RequestKaixuAPIKey.html" class="btn-blue-outline" style="font-size:1rem;padding:15px 28px;">
+          Get a kAIxU API Key
+        </a>
+      </div>
+      <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">
+        Powered by kAIxuGateway13 · Part of the SOL developer stack · Output code is fully yours
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="40" />
+        <p>Skyes Over London LC — building AI-powered developer tools and operator platforms on the kAIxU intelligence layer.</p>
+        <div class="footer-contact">
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="tel:9862107040">986-210-7040</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <span class="footer-col-label">kAIxU Tools</span>
+          <a href="/Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html">kAIxuAppForge</a>
+          <a href="/Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html">skAIxU IDE Pro</a>
+          <a href="/Platforms-Apps-Infrastructure/2026/KaixuGitPush.html">KaixuGitPush</a>
+          <a href="/kAIxu/RequestKaixuAPIKey.html">Get API Key</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-label">Company</span>
+          <a href="/about.html">About</a>
+          <a href="/portfolio.html">Portfolio</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/contact.html">Contact</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-label">Legal</span>
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Skyes Over London LC. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="/js/three.min.js" defer></script>
+<script src="/assets/app.js" defer></script>
+<script src="/js/main.js" defer></script>
+<script src="/js/growth.js" defer></script>
+<script src="/js/partials.js" defer></script>
+
+</body>
+</html>
+

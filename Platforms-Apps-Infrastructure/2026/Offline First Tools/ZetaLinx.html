@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZetaLinx — Smart Link Hub &amp; Operator Link Manager | SOL Platforms</title>
+  <meta name="description" content="ZetaLinx is an offline-first smart link hub for operators — manage your full link library, build a custom link-in-bio page, and track link performance without a monthly subscription." />
+  <base href="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ZetaLinx — Smart Link Hub &amp; Operator Link Manager" />
+  <meta property="og:description" content="One hub for every link you share. ZetaLinx gives operators a smart link library, a customizable link page, and click tracking — all offline-first with no Linktree subscription required." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+  <style>
+    :root { --acc1:#9333ea; --acc2:#f97316; --acc1-dim:rgba(147,51,234,0.11); --acc2-dim:rgba(249,115,22,0.11); }
+    .page-header .glow-tile-purple { background:radial-gradient(ellipse at 50% 60%,rgba(147,51,234,0.16) 0%,rgba(249,115,22,0.10) 45%,transparent 75%); }
+    .acc-text{color:var(--acc1);}
+    .badge-acc{display:inline-block;padding:4px 14px;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .badge-purple{background:var(--acc1-dim);color:#c084fc;border:1px solid rgba(147,51,234,0.3);}
+    .badge-orange{background:var(--acc2-dim);color:#fb923c;border:1px solid rgba(249,115,22,0.3);}
+    .hero-widget{position:relative;width:min(480px,96vw);background:rgba(4,4,12,0.88);border:1px solid rgba(147,51,234,0.18);border-radius:16px;overflow:hidden;box-shadow:0 0 70px rgba(147,51,234,0.1);flex-shrink:0;font-family:'DM Sans',sans-serif;}
+    .widget-titlebar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .dot{width:10px;height:10px;border-radius:50%;} .dot-r{background:#f87171;} .dot-y{background:#fbbf24;} .dot-g{background:#4ade80;}
+    .widget-title{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-left:8px;flex:1;}
+    .link-page-preview{padding:14px 12px;}
+    .lp-header{text-align:center;margin-bottom:12px;padding:10px;}
+    .lp-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#f97316);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;font-weight:700;}
+    .lp-name{font-size:0.78rem;font-weight:700;color:rgba(255,255,255,0.8);}
+    .lp-bio{font-size:0.62rem;color:rgba(255,255,255,0.35);}
+    .lp-link{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.03);border:1px solid rgba(147,51,234,0.18);border-radius:9px;padding:9px 12px;margin-bottom:6px;transition:border-color .2s;}
+    .lp-link:hover{border-color:rgba(147,51,234,0.4);}
+    .ll-label{font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.7);}
+    .ll-url{font-family:'DM Mono',monospace;font-size:0.58rem;color:rgba(255,255,255,0.3);}
+    .ll-clicks{font-size:0.6rem;color:#c084fc;font-weight:700;background:var(--acc1-dim);padding:2px 7px;border-radius:5px;}
+    .widget-footer{display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(147,51,234,0.06);border-top:1px solid rgba(147,51,234,0.12);font-size:0.6rem;color:rgba(255,255,255,0.28);}
+    .btn-purple{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,var(--acc1),#7e22ce);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;text-decoration:none;transition:opacity .2s,transform .15s;}
+    .btn-purple:hover{opacity:.87;transform:translateY(-2px);}
+    .btn-orange-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:transparent;color:#fb923c;font-weight:600;font-size:0.95rem;border-radius:10px;text-decoration:none;border:1.5px solid rgba(249,115,22,0.35);transition:background .2s,transform .15s;}
+    .btn-orange-outline:hover{background:var(--acc2-dim);transform:translateY(-2px);}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+    .feature-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:26px 24px;transition:border-color .25s,transform .2s;}
+    .feature-card:hover{border-color:rgba(147,51,234,0.2);transform:translateY(-3px);}
+    .feature-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
+    .icon-p{background:var(--acc1-dim);} .icon-o{background:var(--acc2-dim);}
+    .feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:#fff;} .feature-card p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .metric-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+    .metric-tile{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 18px;text-align:center;}
+    .m1{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#c084fc;line-height:1;} .m2{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#fb923c;line-height:1;}
+    .metric-tile .lbl{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:4px;}
+    .steps{display:flex;flex-direction:column;gap:0;}
+    .step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .step:last-child{border-bottom:none;}
+    .step-n{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#9333ea,#f97316);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#fff;flex-shrink:0;}
+    .step-c h3{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;} .step-c p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .step-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:0.68rem;padding:2px 10px;border-radius:6px;background:var(--acc1-dim);color:#c084fc;border:1px solid rgba(147,51,234,0.2);margin-bottom:8px;}
+    .audience-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;}
+    .audience-chip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;font-size:0.85rem;font-weight:600;color:rgba(255,255,255,0.72);}
+    .chip-icon{font-size:1.2rem;flex-shrink:0;}
+    .cta-box{background:linear-gradient(135deg,rgba(147,51,234,0.09) 0%,rgba(249,115,22,0.08) 100%);border:1px solid rgba(147,51,234,0.16);border-radius:24px;padding:56px 40px;text-align:center;}
+    @media(max-width:700px){.hero-split{flex-direction:column!important;}.hero-widget{width:100%;}.cta-box{padding:36px 18px;}}
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+<nav class="main-nav" id="mainNav">
+  <a href="/" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="36" /></a>
+  <div class="nav-links desktop-only"><a href="/platforms.html">Platforms</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></div>
+  <div class="nav-actions">
+    <a href="https://zetalinx.netlify.app/" target="_blank" rel="noopener" class="nav-cta">Open ZetaLinx →</a>
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+<div class="mega-nav-overlay" id="megaNav">
+  <button class="mega-nav-close" id="megaNavClose">&#10005;</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col"><div class="mega-nav-heading">Link Tools</div><a href="/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html">ZetaLinx</a><a href="/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html">ConnectLog</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Platforms</div><a href="/platforms.html">All Platforms</a><a href="/Platforms-Apps-Infrastructure/2026/NexusForge.html">NexusForge</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Company</div><a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Get Started</div><a href="https://zetalinx.netlify.app/" target="_blank" rel="noopener">Open ZetaLinx</a><a href="/get-started/">Get Started</a></div>
+  </div>
+</div>
+<header class="page-header">
+  <div class="glow-tile-purple"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;"><span class="badge-acc badge-purple">Link Hub</span><span class="badge-acc badge-orange">Offline First</span><span class="badge-acc badge-purple">Click Tracking</span></div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;color:#fff;margin:0;">Zeta<span class="acc-text">Linx</span></h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.65;margin:0;">ZetaLinx is the <strong style="color:#c084fc;">smart operator link hub</strong> — build your custom link-in-bio page, manage your full link library with categories and click tracking, and share a single URL that routes clients, collaborators, and followers to everything you've built. No Linktree subscription needed.</p>
+    </div>
+    <div class="hero-split" style="display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#c084fc;">◆</span> Custom link-in-bio page — branded, shareable, and hosted at your own URL</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#c084fc;">◆</span> Full link library with categories, descriptions, and custom icons per link</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#c084fc;">◆</span> Click tracking — see which links get tapped and which get ignored</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#c084fc;">◆</span> Multiple link pages — one for clients, one for social, one per project or division</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#c084fc;">◆</span> Offline-first PWA — manage your links and view your hub without internet</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:#c084fc;">◆</span> Schedule links — set start and end dates for promotions or time-sensitive resources</li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;"><a href="https://zetalinx.netlify.app/" target="_blank" rel="noopener" class="btn-purple">Open ZetaLinx →</a><a href="#features" class="btn-orange-outline">Explore Features</a></div>
+      </div>
+      <div class="hero-widget">
+        <div class="widget-titlebar"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="widget-title">ZetaLinx — Link Page Preview</span></div>
+        <div class="link-page-preview">
+          <div class="lp-header"><div class="lp-avatar">Z</div><div class="lp-name">Skye Sol — SOL Platforms</div><div class="lp-bio">Operator tools, consulting &amp; digital growth🚀</div></div>
+          <div class="lp-link"><div><div class="ll-label">⚡ NexusForge — Operator OS</div><div class="ll-url">nexusforge.netlify.app</div></div><span class="ll-clicks">142 clicks</span></div>
+          <div class="lp-link"><div><div class="ll-label">💼 Book a Strategy Call</div><div class="ll-url">cal.com/skye-sol</div></div><span class="ll-clicks">87 clicks</span></div>
+          <div class="lp-link"><div><div class="ll-label">📄 Free Pricing Framework</div><div class="ll-url">skyesol.netlify.app/resources</div></div><span class="ll-clicks">63 clicks</span></div>
+          <div class="lp-link"><div><div class="ll-label">👨‍💼 LinkedIn Profile</div><div class="ll-url">linkedin.com/in/skyesol</div></div><span class="ll-clicks">41 clicks</span></div>
+        </div>
+        <div class="widget-footer"><span style="color:#c084fc;font-weight:700;">4 links · 333 total clicks</span><span>· Offline Ready</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;"><span class="badge-acc badge-purple" style="margin-bottom:12px;display:inline-block;">The Problem</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">You have 20 important links and one place to put them — a bio field with 150 characters</h2></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🔗</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Bio Links Can't Fit Your Ecosystem</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">One Instagram bio link. One Twitter/X profile URL. You have a booking link, a portfolio, a resource page, a shop, a consultation form, a newsletter signup, and five tools you've shipped. ZetaLinx gives you a single hub URL that links to all of them, organized by category.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">💸</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Linktree Charges for Features You Need</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Custom branding, analytics, scheduling, multiple pages — these are Pro or higher Linktree features behind a monthly subscription. ZetaLinx gives you all of it as an offline-first app you control and operate yourself, with no vendor dependency.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🙅</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">No Way to Know What Links Get Clicked</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">If you're sending people to a list of links and you can't see which ones get clicked, you're guessing which content resonates. ZetaLinx tracks clicks per link so you know which of your offers, tools, and content people actually act on — and which ones to cut.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">📅</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Promotions Need a Different Link Set</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">When you run a launch, limited offer, or event, you want to temporarily surface specific links and hide others — without manually managing them. ZetaLinx's scheduled links let you set start/end dates so your link page automatically shows the right links at the right time.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal" id="features">
+  <div class="container">
+    <div style="margin-bottom:36px;"><span class="badge-acc badge-purple" style="margin-bottom:12px;display:inline-block;">Features</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0 0 8px;">Every link you share. One hub you control.</h2></div>
+    <div class="feature-grid">
+      <div class="feature-card"><div class="feature-icon icon-p">🌐</div><h3>Custom Link-in-Bio Page</h3><p>Build a fully branded link page with your name, bio, avatar, custom colors, and unlimited link rows. Share one URL across every platform and profile — everyone lands on your hub and chooses where to go next. Your brand, your page, your rules.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-o">📊</div><h3>Click Tracking &amp; Analytics</h3><p>ZetaLinx counts every click per link and shows totals, trends, and top performers in your analytics panel. See which offers get attention, which content resonates, and which links you can cut — data-driven link management without a full analytics platform.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-p">🗂️</div><h3>Multi-Page Link Hubs</h3><p>Create separate link pages for different audiences — a client hub, a social media hub, a per-project hub, or a division hub. Each page has its own URL, branding, and link set. Switch between managing all your pages from one ZetaLinx dashboard.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-o">📅</div><h3>Scheduled Links</h3><p>Set a start and end date per link and it automatically appears and disappears from your public page. Run a launch with a "limited time offer" link, schedule your event registration link for exactly the open period, and never manually edit your page for time-based promotions again.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-p">📶</div><h3>Offline-First PWA</h3><p>ZetaLinx runs offline-first. Manage your link library, edit your hub page, and view analytics without an internet connection. Install on your phone and desktop — your links and page settings are always available regardless of connectivity.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-o">🏷️</div><h3>Link Categories</h3><p>Organize your links into named category sections on your hub page — "Book a Call", "Free Resources", "Tools I Built", "Connect". Visitors can scan by category to find what they need. Clean, organized hub pages convert better than a long unsorted list.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-p">📤</div><h3>QR Code Per Page</h3><p>Generate a QR code for any ZetaLinx hub page and download it for print — business cards, event materials, presentations, signage. Scan leads directly to your full link hub. Update the links behind the QR code without reprinting the code.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-o">💾</div><h3>Export &amp; Backup</h3><p>Export your link library and hub page configuration as JSON for full backup and portability. Import it back on any device or migrate to a new deployment without losing your link history, click data, or page settings. You own your link data.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;"><span class="badge-acc badge-orange" style="margin-bottom:12px;display:inline-block;">At a Glance</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin:0;">One link. Everywhere you share.</h2></div>
+    <div class="metric-row">
+      <div class="metric-tile"><div class="m1">∞</div><div class="lbl">Links per Hub</div></div>
+      <div class="metric-tile"><div class="m2">Live</div><div class="lbl">Click Tracking</div></div>
+      <div class="metric-tile"><div class="m1">Multi</div><div class="lbl">Hub Pages</div></div>
+      <div class="metric-tile"><div class="m2">Auto</div><div class="lbl">Scheduled Links</div></div>
+      <div class="metric-tile"><div class="m1">QR</div><div class="lbl">Code Export</div></div>
+      <div class="metric-tile"><div class="m2">$0</div><div class="lbl">Subscription</div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:36px;"><span class="badge-acc badge-purple" style="margin-bottom:12px;display:inline-block;">How It Works</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Build → Organize → Share → Track</h2></div>
+    <div class="steps">
+      <div class="step"><div class="step-n">01</div><div class="step-c"><div class="step-tag">Build</div><h3>Set up your hub page with your name, bio, and branding</h3><p>Open ZetaLinx, enter your name, bio, avatar emoji or image, and pick your page's accent color. Then add your links one by one — label, URL, icon, category, and optional description. Your hub page previews in real time as you build.</p></div></div>
+      <div class="step"><div class="step-n">02</div><div class="step-c"><div class="step-tag">Organize</div><h3>Group links into categories and set any time-sensitive links to auto-schedule</h3><p>Create category sections and drag links into them. For any link that should only appear during a specific window, set a start and end date. Reorder categories by dragging. Preview mobile and desktop views before publishing.</p></div></div>
+      <div class="step"><div class="step-n">03</div><div class="step-c"><div class="step-tag">Share</div><h3>Drop your ZetaLinx hub URL into every bio, profile, and signature</h3><p>Copy your hub URL and paste it into your Instagram bio, Twitter/X profile, LinkedIn About section, email signature, and business card. Download the QR code for physical materials. Now every channel points to one organized hub you control.</p></div></div>
+      <div class="step"><div class="step-n">04</div><div class="step-c"><div class="step-tag">Track</div><h3>Watch your analytics panel to see which links get clicked and optimize</h3><p>ZetaLinx records every click with a timestamp. Your analytics panel shows click counts per link, total hub traffic, and trend lines over time. Use click data to decide which links to promote at the top, which to cut, and which content to create more of.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;"><span class="badge-acc badge-purple" style="margin-bottom:12px;display:inline-block;">Who It's For</span><h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">For operators who share links across multiple platforms and profiles</h2></div>
+    <div class="audience-grid">
+      <div class="audience-chip"><span class="chip-icon">📱</span>Content creators and influencers replacing Linktree</div>
+      <div class="audience-chip"><span class="chip-icon">🚀</span>Founders sharing their product stack and resources</div>
+      <div class="audience-chip"><span class="chip-icon">💼</span>Consultants routing clients to booking, portfolio, and tools</div>
+      <div class="audience-chip"><span class="chip-icon">🎨</span>Creatives linking portfolio, shop, and social in one hub</div>
+      <div class="audience-chip"><span class="chip-icon">🎓</span>Course creators linking courseware, community, and freebies</div>
+      <div class="audience-chip"><span class="chip-icon">🗂️</span>Operators managing multiple brands or divisions</div>
+      <div class="audience-chip"><span class="chip-icon">🏢</span>Small businesses replacing their linktree for free</div>
+      <div class="audience-chip"><span class="chip-icon">🔒</span>Privacy-first operators who won't rely on third-party link tools</div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <span class="badge-acc badge-purple" style="margin-bottom:16px;display:inline-block;">Build Your Hub</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:0 0 16px;line-height:1.1;">Every link you share.<br/><span class="acc-text">One hub you own.</span></h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 36px;line-height:1.65;">Custom hub page, click tracking, multi-page support, scheduled links, QR export, and offline-first PWA — ZetaLinx is the link hub that Linktree charges Pro rates for, deployed by you at no subscription cost.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;"><a href="https://zetalinx.netlify.app/" target="_blank" rel="noopener" class="btn-purple" style="font-size:1.05rem;padding:16px 36px;">Open ZetaLinx →</a><a href="/platforms.html" class="btn-orange-outline">See All Platforms</a></div>
+      <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">PWA · Offline First · Free · No Subscription</p>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="40" /><p>Skyes Over London LC — building operator tools for the modern solo business.</p><div class="footer-contact"><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a><a href="tel:9862107040">986-210-7040</a></div></div>
+      <div class="footer-links">
+        <div class="footer-col"><span class="footer-col-label">Link Tools</span><a href="/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html">ZetaLinx</a><a href="/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html">ConnectLog</a></div>
+        <div class="footer-col"><span class="footer-col-label">Company</span><a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+        <div class="footer-col"><span class="footer-col-label">Legal</span><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Skyes Over London LC. All rights reserved.</span></div>
+  </div>
+</footer>
+<script src="/js/three.min.js" defer></script><script src="/assets/app.js" defer></script><script src="/js/main.js" defer></script><script src="/js/growth.js" defer></script><script src="/js/partials.js" defer></script>
+</body>
+</html>

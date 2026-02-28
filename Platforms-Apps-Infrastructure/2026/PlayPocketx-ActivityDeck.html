@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlayPocketx Activity Deck — Offline-First Activity Cards for Operators | SOL Platforms</title>
+  <meta name="description" content="PlayPocketx is a pocket-sized activity deck for operators, facilitators, and team leads — offline-first card draws, brainstorm prompts, icebreakers, and retrospective kits that work anywhere." />
+  <base href="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="PlayPocketx Activity Deck — Offline-First Activity Cards" />
+  <meta property="og:description" content="Pull a card, run the activity. PlayPocketx gives operators, facilitators, and team leads an always-available pocket deck of icebreakers, brainstorms, retros, and warm-ups — no internet required." />
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+  <style>
+    :root { --acc1:#ec4899; --acc2:#8b5cf6; --acc1-dim:rgba(236,72,153,0.10); --acc2-dim:rgba(139,92,246,0.12); }
+    .page-header .glow-tile-purple { background:radial-gradient(ellipse at 50% 60%,rgba(236,72,153,0.16) 0%,rgba(139,92,246,0.12) 45%,transparent 75%); }
+    .acc-text{color:var(--acc1);} .acc2-text{color:#c4b5fd;}
+    .badge-acc{display:inline-block;padding:4px 14px;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+    .badge-pink{background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(236,72,153,0.28);}
+    .badge-purple{background:var(--acc2-dim);color:#c4b5fd;border:1px solid rgba(139,92,246,0.28);}
+    .hero-widget{position:relative;width:min(460px,96vw);background:rgba(4,4,12,0.88);border:1px solid rgba(236,72,153,0.18);border-radius:16px;overflow:hidden;box-shadow:0 0 70px rgba(236,72,153,0.09),0 0 110px rgba(139,92,246,0.08);flex-shrink:0;}
+    .widget-titlebar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.07);}
+    .dot{width:10px;height:10px;border-radius:50%;} .dot-r{background:#f87171;} .dot-y{background:#fbbf24;} .dot-g{background:#4ade80;}
+    .widget-title{font-size:0.68rem;color:rgba(255,255,255,0.35);margin-left:8px;flex:1;}
+    .deck-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px;}
+    .deck-card{border-radius:12px;padding:14px 12px;display:flex;flex-direction:column;gap:6px;cursor:pointer;transition:transform .15s;}
+    .deck-card:hover{transform:scale(1.03);}
+    .deck-card.pink{background:linear-gradient(135deg,rgba(236,72,153,0.2),rgba(236,72,153,0.08));border:1px solid rgba(236,72,153,0.25);}
+    .deck-card.purple{background:linear-gradient(135deg,rgba(139,92,246,0.2),rgba(139,92,246,0.08));border:1px solid rgba(139,92,246,0.25);}
+    .deck-card.blue{background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(59,130,246,0.08));border:1px solid rgba(59,130,246,0.25);}
+    .deck-card.green{background:linear-gradient(135deg,rgba(34,197,94,0.2),rgba(34,197,94,0.08));border:1px solid rgba(34,197,94,0.25);}
+    .card-type{font-size:0.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.7;}
+    .card-name{font-size:0.82rem;font-weight:700;color:#fff;}
+    .card-count{font-family:'DM Mono',monospace;font-size:0.6rem;opacity:.45;}
+    .active-card{margin:0 16px 16px;background:rgba(236,72,153,0.08);border:1.5px solid rgba(236,72,153,0.25);border-radius:14px;padding:20px;text-align:center;}
+    .ac-label{font-size:0.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--acc1);margin-bottom:8px;}
+    .ac-prompt{font-size:0.88rem;font-weight:600;color:#fff;line-height:1.5;margin-bottom:12px;}
+    .ac-btn{display:inline-block;padding:7px 18px;background:linear-gradient(135deg,#ec4899,#8b5cf6);color:#fff;font-size:0.72rem;font-weight:700;border-radius:8px;cursor:pointer;}
+    .deck-footer{display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(236,72,153,0.06);border-top:1px solid rgba(236,72,153,0.12);font-size:0.6rem;color:rgba(255,255,255,0.28);}
+    .btn-pink{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,var(--acc1),#be185d);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;text-decoration:none;transition:opacity .2s,transform .15s;}
+    .btn-pink:hover{opacity:.87;transform:translateY(-2px);}
+    .btn-purple-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:transparent;color:#c4b5fd;font-weight:600;font-size:0.95rem;border-radius:10px;text-decoration:none;border:1.5px solid rgba(139,92,246,0.35);transition:background .2s,transform .15s;}
+    .btn-purple-outline:hover{background:var(--acc2-dim);transform:translateY(-2px);}
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+    .feature-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:26px 24px;transition:border-color .25s,transform .2s;}
+    .feature-card:hover{border-color:rgba(236,72,153,0.2);transform:translateY(-3px);}
+    .feature-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px;}
+    .icon-p{background:var(--acc1-dim);} .icon-v{background:var(--acc2-dim);}
+    .feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:#fff;} .feature-card p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .metric-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+    .metric-tile{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 18px;text-align:center;}
+    .m1{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--acc1);line-height:1;} .m2{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#c4b5fd;line-height:1;}
+    .metric-tile .lbl{font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:4px;}
+    .steps{display:flex;flex-direction:column;gap:0;}
+    .step{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+    .step:last-child{border-bottom:none;}
+    .step-n{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#ec4899,#8b5cf6);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#fff;flex-shrink:0;}
+    .step-c h3{font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:6px;} .step-c p{font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;}
+    .step-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:0.68rem;padding:2px 10px;border-radius:6px;background:var(--acc1-dim);color:var(--acc1);border:1px solid rgba(236,72,153,0.18);margin-bottom:8px;}
+    .audience-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;}
+    .audience-chip{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;font-size:0.85rem;font-weight:600;color:rgba(255,255,255,0.72);}
+    .chip-icon{font-size:1.2rem;flex-shrink:0;}
+    .cta-box{background:linear-gradient(135deg,rgba(236,72,153,0.09) 0%,rgba(139,92,246,0.08) 100%);border:1px solid rgba(236,72,153,0.16);border-radius:24px;padding:56px 40px;text-align:center;}
+    @media(max-width:700px){.hero-split{flex-direction:column!important;}.hero-widget{width:100%;}.cta-box{padding:36px 18px;}}
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+<nav class="main-nav" id="mainNav">
+  <a href="/" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="36" /></a>
+  <div class="nav-links desktop-only">
+    <a href="/platforms.html">Platforms</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/about.html">About</a><a href="/contact.html">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <a href="https://playpocketx.netlify.app/" target="_blank" rel="noopener" class="nav-cta">Open PlayPocketx →</a>
+    <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+<div class="mega-nav-overlay" id="megaNav">
+  <button class="mega-nav-close" id="megaNavClose">&#10005;</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col"><div class="mega-nav-heading">Team Tools</div>
+      <a href="/Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html">PlayPocketx</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/ConnectLog.html">ConnectLog</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Platforms</div>
+      <a href="/platforms.html">All Platforms</a>
+      <a href="/Platforms-Apps-Infrastructure/2026/NexusForge.html">NexusForge Studio</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Company</div>
+      <a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+    <div class="mega-nav-col"><div class="mega-nav-heading">Get Started</div>
+      <a href="https://playpocketx.netlify.app/" target="_blank" rel="noopener">Open PlayPocketx</a>
+      <a href="/get-started/">Get Started</a></div>
+  </div>
+</div>
+<header class="page-header">
+  <div class="glow-tile-purple"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:40px;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="badge-acc badge-pink">Activity Deck</span>
+        <span class="badge-acc badge-purple">Offline First</span>
+        <span class="badge-acc badge-pink">Facilitator Tool</span>
+      </div>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,6vw,4.5rem);line-height:1.05;color:#fff;margin:0;">
+        Play<span class="acc-text">Pocketx</span><br/>Activity Deck
+      </h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,0.55);max-width:520px;line-height:1.65;margin:0;">
+        PlayPocketx is the <strong style="color:var(--acc1);">offline-first activity deck for operators, facilitators, and team leads</strong> — pull a card, run the activity. Icebreakers, brainstorm prompts, retrospectives, and warm-ups that work anywhere, even without Wi-Fi.
+      </p>
+    </div>
+    <div class="hero-split" style="display:flex;align-items:flex-start;gap:48px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:280px;">
+        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> 80+ activity cards across 4 deck types</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Offline-first PWA — works without internet once installed</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Draw a card, see the full activity brief, run it in 5–15 min</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Timer built in — start the activity right from the card</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Deck filters — set group size, energy level, and time budget</li>
+          <li style="display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.7);"><span style="color:var(--acc1);">◆</span> Favorites and session history — replay what worked</li>
+        </ul>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <a href="https://playpocketx.netlify.app/" target="_blank" rel="noopener" class="btn-pink">Open PlayPocketx →</a>
+          <a href="#features" class="btn-purple-outline">Explore Decks</a>
+        </div>
+      </div>
+      <div class="hero-widget">
+        <div class="widget-titlebar">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="widget-title">PlayPocketx — Activity Deck</span>
+        </div>
+        <div class="deck-grid">
+          <div class="deck-card pink"><div class="card-type">Icebreaker</div><div class="card-name">Two Truths &amp; A Twist</div><div class="card-count">12 cards</div></div>
+          <div class="deck-card purple"><div class="card-type">Brainstorm</div><div class="card-name">Reverse Storm</div><div class="card-count">18 cards</div></div>
+          <div class="deck-card blue"><div class="card-type">Retro</div><div class="card-name">Signal &amp; Noise</div><div class="card-count">22 cards</div></div>
+          <div class="deck-card green"><div class="card-type">Warm-Up</div><div class="card-name">One Word Check-In</div><div class="card-count">28 cards</div></div>
+        </div>
+        <div class="active-card">
+          <div class="ac-label">🃏 Current Card</div>
+          <div class="ac-prompt">"Name one thing that's been working well this week, and one thing you'd change about how you approach it."</div>
+          <div class="ac-btn">Draw Next Card →</div>
+        </div>
+        <div class="deck-footer">
+          <div style="width:6px;height:6px;border-radius:50%;background:#4ade80;flex-shrink:0;"></div>
+          <span style="color:#4ade80;font-weight:700;">Offline Ready</span>
+          <span>· 80 cards · 4 decks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="badge-acc badge-pink" style="margin-bottom:12px;display:inline-block;">The Problem</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Facilitators shouldn't have to Google "icebreaker ideas" five minutes before a meeting</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;">
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🔍</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Activity Hunting Kills Momentum</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Searching for the right icebreaker mid-prep means scrolling through blog posts, Pinterest boards, and YouTube videos and still not finding something that fits your group. PlayPocketx curates and delivers a ready-to-run card in one tap.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">📶</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Wi-Fi Dependency at the Worst Times</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Workshops happen in conference rooms with spotty Wi-Fi, retreat centers with no internet, and client offices where you're on a guest network that blocks apps. PlayPocketx installs as a PWA and runs fully offline — no connection needed after the first load.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">⏱️</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">Activities Without Structure Don't Land</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">A good activity prompt without facilitation instructions, timing guidance, and group-size context often falls flat. PlayPocketx cards include the prompt, how-to-facilitate notes, suggested timing, and energy level — everything to run it confidently.</p></div>
+      <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px 20px;"><div style="font-size:1.4rem;margin-bottom:10px;">🔁</div><h3 style="font-size:0.95rem;font-weight:700;color:#fff;margin:0 0 6px;">No Memory of What Worked Before</h3><p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin:0;line-height:1.5;">Facilitators who run the same group repeatedly lose track of which activities landed and which fell flat. PlayPocketx session history and favorites let you build a personal library of what works for your team — without a spreadsheet.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal" id="features">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-pink" style="margin-bottom:12px;display:inline-block;">Features</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0 0 8px;">80+ ready-to-run activities. One tap. No prep required.</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card"><div class="feature-icon icon-p">🃏</div><h3>4 Curated Decks</h3><p>Icebreaker, Brainstorm, Retrospective, and Warm-Up decks — each card is a complete activity with prompt, facilitation notes, timing, and group-size recommendation. No searching, just drawing.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">📶</div><h3>Offline-First PWA</h3><p>Install PlayPocketx once and it runs fully offline. Service worker caches all 80+ cards and their full activity content — Wi-Fi dead zones, retreat centers, and conference rooms with locked networks don't slow you down.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-p">⏱️</div><h3>Built-In Activity Timer</h3><p>Each card has a suggested time range. Tap "Start Timer" and a visible countdown runs on screen — visible to the whole room if you're projecting. Soft end-of-time alert so you can wrap up cleanly.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">🎯</div><h3>Deck Filters</h3><p>Before drawing, set filters for group size (2–5, 6–15, 16+), energy level (Low / Medium / High), and time available (5 min, 10 min, 15 min) — PlayPocketx only draws cards that fit your constraints.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-p">⭐</div><h3>Favorites &amp; Session History</h3><p>Star any card to add it to Favorites. After each session, your draw history is saved so you know exactly what you ran, when, and can replay a crowd favorite in seconds for a different group.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">🔀</div><h3>Shuffle Draw Mode</h3><p>Shuffle the entire deck and draw randomly for maximum variety, or browse the deck and hand-pick a card by category — PlayPocketx supports both show-me-what-to-run and I-know-what-I-want workflows.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-p">📋</div><h3>Facilitation Briefs</h3><p>Every card includes a facilitator brief — the prompt to read aloud, step-by-step run instructions, common stumbling points to watch for, and a debrief question to close out the activity with intention.</p></div>
+      <div class="feature-card"><div class="feature-icon icon-v">📱</div><h3>Install Anywhere</h3><p>PlayPocketx is a full PWA — install it on your phone home screen, your tablet, or any device. One install covers all your facilitation contexts with no app store download required and automatic updates in the background.</p></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-purple" style="margin-bottom:12px;display:inline-block;">At a Glance</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;margin:0;">Every meeting deserves a great opener</h2>
+    </div>
+    <div class="metric-row">
+      <div class="metric-tile"><div class="m1">80+</div><div class="lbl">Activity Cards</div></div>
+      <div class="metric-tile"><div class="m2">4</div><div class="lbl">Card Decks</div></div>
+      <div class="metric-tile"><div class="m1">0</div><div class="lbl">Internet Required</div></div>
+      <div class="metric-tile"><div class="m2">5m</div><div class="lbl">Shortest Activity</div></div>
+      <div class="metric-tile"><div class="m1">1</div><div class="lbl">Tap to Draw</div></div>
+      <div class="metric-tile"><div class="m2">∞</div><div class="lbl">Session Replays</div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="badge-acc badge-pink" style="margin-bottom:12px;display:inline-block;">How It Works</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">Install → Filter → Draw → Run</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-n">01</div><div class="step-c"><div class="step-tag">Install</div><h3>Open PlayPocketx in your browser and install it as a PWA from the prompt</h3><p>On first visit, your browser shows an "Add to Home Screen" install prompt. Tap it and PlayPocketx installs as a native-like app — it appears on your home screen, opens full-screen, and all 80+ cards are cached offline immediately.</p></div></div>
+      <div class="step"><div class="step-n">02</div><div class="step-c"><div class="step-tag">Filter</div><h3>Set your filters — group size, energy level, and time available</h3><p>Before drawing, use the three filter controls to narrow the deck to cards that fit your situation. Running a 20-person all-hands with 5 minutes to spare and need medium energy? Set those filters and only the right cards will draw.</p></div></div>
+      <div class="step"><div class="step-n">03</div><div class="step-c"><div class="step-tag">Draw</div><h3>Tap "Draw a Card" — get the prompt, facilitation brief, and timer in one screen</h3><p>The drawn card fills the screen with everything you need: the activity name and deck type, the exact prompt to read aloud, step-by-step facilitation notes, and the activity timer pre-set to the suggested duration. No scrolling required — it's all visible at once.</p></div></div>
+      <div class="step"><div class="step-n">04</div><div class="step-c"><div class="step-tag">Run</div><h3>Start the timer, run the activity, and save it to favorites if it lands</h3><p>Tap "Start Timer" to begin. Run the activity. After completion, the debrief question prompts you to close with intention. Then choose: star it as a favorite, draw another card, or view your session history to log what you ran today.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="badge-acc badge-pink" style="margin-bottom:12px;display:inline-block;">Who It's For</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;margin:0;">For anyone who runs meetings, workshops, or team sessions</h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-chip"><span class="chip-icon">🎤</span>Facilitators running workshops and training sessions</div>
+      <div class="audience-chip"><span class="chip-icon">👔</span>Team leads opening weekly standups and retros</div>
+      <div class="audience-chip"><span class="chip-icon">📚</span>Coaches running group coaching sessions</div>
+      <div class="audience-chip"><span class="chip-icon">🧑‍💼</span>HR teams facilitating onboarding and culture sessions</div>
+      <div class="audience-chip"><span class="chip-icon">🎓</span>Educators opening class sessions with warm-up activities</div>
+      <div class="audience-chip"><span class="chip-icon">🚀</span>Startup founders running offsite team building days</div>
+      <div class="audience-chip"><span class="chip-icon">🤝</span>Community organizers running member engagement events</div>
+      <div class="audience-chip"><span class="chip-icon">💡</span>Innovation leads facilitating design sprints and ideation</div>
+    </div>
+  </div>
+</section>
+<section class="content-section reveal">
+  <div class="container">
+    <div class="cta-box">
+      <span class="badge-acc badge-pink" style="margin-bottom:16px;display:inline-block;">Pull Your First Card</span>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:0 0 16px;line-height:1.1;">Your next great meeting opener<br/><span class="acc-text">is one tap away.</span></h2>
+      <p style="color:rgba(255,255,255,0.5);max-width:520px;margin:0 auto 36px;line-height:1.65;">80+ curated activity cards across four decks. Offline-first. Built-in timers. Facilitation briefs on every card. No prep required.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://playpocketx.netlify.app/" target="_blank" rel="noopener" class="btn-pink" style="font-size:1.05rem;padding:16px 36px;">Open PlayPocketx →</a>
+        <a href="/platforms.html" class="btn-purple-outline">See All Platforms</a>
+      </div>
+      <p style="margin-top:20px;font-size:0.75rem;color:rgba(255,255,255,0.25);">PWA · Offline First · 80+ Activity Cards · No Prep Required</p>
+    </div>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL" height="40" /><p>Skyes Over London LC — building AI-powered creative and developer tools for operators and small teams.</p><div class="footer-contact"><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a><a href="tel:9862107040">986-210-7040</a></div></div>
+      <div class="footer-links">
+        <div class="footer-col"><span class="footer-col-label">Team Tools</span><a href="/Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html">PlayPocketx</a><a href="/Platforms-Apps-Infrastructure/2026/ConnectLog.html">ConnectLog</a></div>
+        <div class="footer-col"><span class="footer-col-label">Company</span><a href="/about.html">About</a><a href="/portfolio.html">Portfolio</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a></div>
+        <div class="footer-col"><span class="footer-col-label">Legal</span><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Skyes Over London LC. All rights reserved.</span></div>
+  </div>
+</footer>
+<script src="/js/three.min.js" defer></script><script src="/assets/app.js" defer></script><script src="/js/main.js" defer></script><script src="/js/growth.js" defer></script><script src="/js/partials.js" defer></script>
+</body>
+</html>

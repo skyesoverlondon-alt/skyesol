@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <link rel="canonical" href="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html">
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <meta name="twitter:description" content="skAIxU IDE Pro Deluxe Suite — the intelligence IDE and app command center. Scope, build, proof, and export deliverable-grade work in a repeatable system.">
+  <meta name="twitter:title" content="skAIxU IDE Pro Deluxe Suite — Intelligence That Ships · SOLEnterprises">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html">
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="skAIxU IDE Pro Deluxe Suite — the intelligence IDE and app command center. Scope, build, proof, and export deliverable-grade work in a repeatable system.">
+  <meta property="og:title" content="skAIxU IDE Pro Deluxe Suite — Intelligence That Ships · SOLEnterprises">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>skAIxU IDE Pro Deluxe Suite — Intelligence That Ships · SOLEnterprises</title>
+  <meta name="description" content="skAIxU IDE Pro Deluxe Suite is the intelligence IDE and system launcher built for operators who need a repeatable chain from idea to deliverable. Includes IDE, Neural Space Pro, kAIxu Magic, prompt patterns, and a free Launch Kit.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SOLEnterprises">
+  <link rel="apple-touch-icon" href="/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png">
+
+  <style>
+    /* ── skAIxU IDE Pro accent: electric lime → neon sky ── */
+    :root {
+      --ix-lime:   #a3e635;
+      --ix-sky:    #0ea5e9;
+      --ix-glow:   rgba(163,230,53,0.18);
+    }
+
+    .ix-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(163,230,53,0.18), rgba(14,165,233,0.12));
+      border: 1px solid var(--ix-lime);
+      border-radius: 4px;
+      color: #d9f99d;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 1.2rem;
+    }
+
+    .ix-cta-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .ix-cta-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--ix-lime), var(--ix-sky));
+      color: #020617;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--ix-lime);
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .ix-cta-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .ix-cta-ghost {
+      display: inline-block;
+      background: transparent;
+      color: var(--ix-lime);
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: 1px solid var(--ix-lime);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .ix-cta-ghost:hover { background: rgba(163,230,53,0.08); transform: translateY(-2px); }
+
+    /* IDE terminal mockup */
+    .ix-ide-widget {
+      max-width: 520px;
+      margin: 3rem auto 0;
+      background: #060b0f;
+      border: 1px solid rgba(163,230,53,0.3);
+      border-radius: 10px;
+      overflow: hidden;
+      font-family: 'Fira Code', monospace;
+    }
+    .ix-ide-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #0d1117;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(163,230,53,0.12);
+    }
+    .ix-dot { width:11px; height:11px; border-radius:50%; }
+    .ix-dot-r { background:#f87171; }
+    .ix-dot-y { background:#facc15; }
+    .ix-dot-g { background:var(--ix-lime); }
+    .ix-ide-filename {
+      margin-left: auto;
+      font-size: 0.65rem;
+      color: rgba(163,230,53,0.45);
+      letter-spacing: 0.1em;
+    }
+    .ix-ide-body {
+      padding: 1.4rem 1.6rem;
+      font-size: 0.78rem;
+      line-height: 2;
+    }
+    .ix-ln  { color: rgba(163,230,53,0.22); user-select:none; display:inline-block; width:22px; }
+    .ix-kw  { color: var(--ix-sky); }
+    .ix-fn  { color: var(--ix-lime); }
+    .ix-str { color: #fbbf24; }
+    .ix-cm  { color: rgba(163,230,53,0.3); font-style:italic; }
+    .ix-ok  { color: #4ade80; }
+    .ix-cursor {
+      display:inline-block;
+      width:8px; height:14px;
+      background:var(--ix-lime);
+      border-radius:1px;
+      animation:ixBlink 1s step-end infinite;
+      vertical-align:text-bottom;
+    }
+    @keyframes ixBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* Feature grid */
+    .ix-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.5rem;
+    }
+    .ix-feature-card {
+      background: rgba(163,230,53,0.03);
+      border: 1px solid rgba(163,230,53,0.16);
+      border-radius: 8px;
+      padding: 1.6rem 1.4rem;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .ix-feature-card:hover {
+      border-color: rgba(163,230,53,0.45);
+      background: rgba(163,230,53,0.07);
+    }
+    .ix-feature-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .ix-feature-card h4 {
+      color: var(--ix-lime);
+      font-size: 0.92rem;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+    .ix-feature-card p {
+      color: rgba(220,216,208,0.72);
+      font-size: 0.87rem;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* Sub-app toolkit cards */
+    .ix-toolkit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+    .ix-toolkit-card {
+      background: linear-gradient(145deg, rgba(14,165,233,0.06), rgba(163,230,53,0.03));
+      border: 1px solid rgba(14,165,233,0.22);
+      border-radius: 8px;
+      padding: 1.5rem 1.3rem;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .ix-toolkit-card:hover { border-color: rgba(14,165,233,0.5); transform: translateY(-3px); }
+    .ix-toolkit-url {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.62rem;
+      color: rgba(14,165,233,0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .ix-toolkit-card h4 { color: #bae6fd; font-size: 1rem; margin: 0 0 0.4rem; }
+    .ix-toolkit-card p  { color: rgba(220,216,208,0.65); font-size: 0.84rem; line-height:1.6; margin:0; }
+
+    /* Workflow chain */
+    .ix-workflow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+    .ix-workflow-step {
+      background: rgba(163,230,53,0.04);
+      border: 1px solid rgba(163,230,53,0.2);
+      border-radius: 8px;
+      padding: 1.6rem 1.3rem;
+      position: relative;
+    }
+    .ix-workflow-step::after {
+      content: '→';
+      position: absolute;
+      right: -14px; top: 50%;
+      transform: translateY(-50%);
+      color: rgba(163,230,53,0.3);
+      font-size: 1.1rem;
+      font-family: 'Fira Code', monospace;
+    }
+    .ix-workflow-step:last-child::after { display:none; }
+    .ix-step-num {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.62rem;
+      color: rgba(163,230,53,0.45);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .ix-step-title { color: var(--ix-lime); font-size: 1rem; font-weight: 600; margin: 0 0 0.5rem; }
+    .ix-step-desc  { color: rgba(220,216,208,0.7); font-size: 0.85rem; line-height:1.65; margin:0; }
+
+    /* Terminal demo */
+    .ix-term-demo {
+      background: #060b0f;
+      border: 1px solid rgba(163,230,53,0.18);
+      border-radius: 8px;
+      padding: 1.6rem;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      line-height: 2;
+      margin-top: 2.2rem;
+      overflow-x: auto;
+    }
+    .ix-term-demo .td-prompt { color: rgba(163,230,53,0.4); }
+    .ix-term-demo .td-cmd    { color: var(--ix-lime); }
+    .ix-term-demo .td-step   { color: var(--ix-sky); }
+    .ix-term-demo .td-val    { color: #fbbf24; }
+    .ix-term-demo .td-ok     { color: #4ade80; }
+    .ix-term-demo .td-dim    { color: rgba(163,230,53,0.25); }
+
+    /* Comparison table */
+    .ix-compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 2rem;
+    }
+    .ix-compare-table th {
+      background: rgba(163,230,53,0.1);
+      color: #d9f99d;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(163,230,53,0.22);
+    }
+    .ix-compare-table td {
+      padding: 12px 16px;
+      color: rgba(220,216,208,0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .ix-compare-table tr:hover td { background: rgba(163,230,53,0.03); }
+    .ix-hl  { background: rgba(163,230,53,0.05); }
+    .ix-yes { color: #4ade80; font-weight: bold; }
+    .ix-no  { color: rgba(220,216,208,0.25); }
+    .ix-meh { color: #facc15; }
+
+    /* Quote */
+    .ix-quote {
+      border-left: 3px solid var(--ix-lime);
+      background: rgba(163,230,53,0.04);
+      border-radius: 0 6px 6px 0;
+      padding: 1.4rem 1.6rem;
+      margin: 2.5rem 0 0;
+    }
+    .ix-quote p    { color: rgba(220,216,208,0.85); font-size: 1.05rem; font-style:italic; line-height:1.7; margin:0 0 0.6rem; }
+    .ix-quote cite { font-size: 0.78rem; color: var(--ix-lime); font-family:'Fira Code',monospace; letter-spacing:.06em; text-transform:uppercase; }
+
+    /* Final CTA */
+    .ix-final-cta {
+      background: linear-gradient(135deg, rgba(163,230,53,0.08), rgba(14,165,233,0.06));
+      border: 1px solid rgba(163,230,53,0.2);
+      border-radius: 10px;
+      padding: 3.5rem 2rem;
+      text-align: center;
+    }
+    .ix-final-cta h2 { font-size: clamp(1.6rem,4vw,2.5rem); margin-bottom:1rem; color: var(--text); }
+    .ix-final-cta p  { color: rgba(220,216,208,0.7); max-width:560px; margin:0 auto 2rem; line-height:1.7; }
+
+    @media(max-width:700px){
+      .ix-workflow-step::after { display:none; }
+      .ix-compare-table th,.ix-compare-table td { padding:9px 10px; font-size:.78rem; }
+    }
+  </style>
+</head>
+<body>
+<canvas id="three-bg"></canvas>
+
+<!-- NAV -->
+<nav class="main-nav" id="mainNav">
+  <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="/index.html">Home</a>
+    <div class="nav-dropdown" data-type="services">
+      <button type="button" class="dropdown-toggle">Services</button>
+      <div class="dropdown-menu">
+        <a href="/Services/WebBuilds.html">Web Builds</a>
+        <a href="/Services/ai-data-apps.html">AI &amp; Data Apps</a>
+        <a href="/Services/portals-hubs.html">Portals &amp; Hubs</a>
+        <a href="/Services/ecommerce-payments.html">Ecommerce &amp; Payments</a>
+        <a href="/Services/intake-routing.html">Intake &amp; Routing</a>
+        <a href="/Services/trust-surfaces.html">Trust Surfaces</a>
+        <a href="/Services/api-integration.html">API &amp; Integrations</a>
+        <a href="/Services/brand-identity.html">Brand Identity</a>
+        <a href="/Services/notification-comms.html">Notifications</a>
+        <a href="/Services/docs-knowledge.html">Docs &amp; Knowledge</a>
+        <a href="/Services/platform-migration.html">Migration</a>
+        <a href="/Services/security-audit.html">Security</a>
+        <a href="/Services/analytics-dashboards.html">Analytics</a>
+        <a href="/Services/lifecycle-retention.html">Retention</a>
+        <a href="/Services/mvp-launchpad.html">MVP Builds</a>
+        <a href="/Services/seo-content.html">SEO &amp; Content</a>
+      </div>
+    </div>
+    <a href="/about.html">Founder</a>
+    <div class="nav-dropdown" data-type="suite">
+      <button type="button" class="dropdown-toggle">SkyeSuite</button>
+      <div class="dropdown-menu">
+        <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+        <a href="/SkyeFlow/index.html">SkyeFlow</a>
+        <a href="/SkyeArchive/index.html">SkyeArchive</a>
+        <a href="/SkyeSlides/index.html">SkyeSlides</a>
+        <a href="/SkyeDrive/index.html">SkyeDrive</a>
+        <a href="/SkyeCollab/index.html">SkyeCollab</a>
+        <a href="/SkyeSheets/index.html">SkyeSheets</a>
+        <a href="/SkyeLedger/index.html">SkyeLedger</a>
+        <a href="/SkyeOps/index.html">SkyeOps</a>
+      </div>
+    </div>
+    <a href="/platforms.html">Platforms</a>
+    <a href="/network.html">Network</a>
+    <a href="/credibility.html">Credibility</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <button class="menu-btn" id="menuBtn">☰ MENU</button>
+</nav>
+
+<!-- HERO -->
+<div class="page-header">
+  <div class="ix-badge">Intelligence IDE · App Command Center · Multi-Brain · Deliverable-Grade Output</div>
+  <div class="section-label">SOLEnterprises · 2026 Platform Division · skAIxU System</div>
+  <h1>sk<span style="color:#a3e635">AI</span>xU <span style="color:#0ea5e9">IDE Pro</span><br><span style="font-size:0.55em;letter-spacing:0.04em;color:rgba(220,216,208,0.55)">Deluxe Suite</span></h1>
+  <div class="glow-tile-purple">
+    <p style="color:#000000">Most builders context-switch between an AI chat tab, a code editor, a preview window, and a delivery doc — and still produce output that needs to be rebuilt before it ships. skAIxU IDE Pro Deluxe Suite is the intelligence IDE and app command center that keeps everything inside one repeatable system: scope, build, proof, export.</p>
+  </div>
+
+  <!-- IDE code editor mockup -->
+  <div class="ix-ide-widget">
+    <div class="ix-ide-titlebar">
+      <div class="ix-dot ix-dot-r"></div>
+      <div class="ix-dot ix-dot-y"></div>
+      <div class="ix-dot ix-dot-g"></div>
+      <div class="ix-ide-filename">skaixu_session.workflow · IDE Pro</div>
+    </div>
+    <div class="ix-ide-body">
+      <span class="ix-ln">01</span> <span class="ix-cm">// skAIxU IDE Pro Deluxe Suite — Active Session</span><br>
+      <span class="ix-ln">02</span> <span class="ix-kw">const</span> <span class="ix-fn">session</span> = <span class="ix-fn">skAIxU</span>.<span class="ix-fn">init</span>({<br>
+      <span class="ix-ln">03</span> &nbsp;&nbsp;mode: <span class="ix-str">"pro-deluxe"</span>,<br>
+      <span class="ix-ln">04</span> &nbsp;&nbsp;brains: [<span class="ix-str">"gemini-2.0-flash"</span>, <span class="ix-str">"gpt-4o"</span>],<br>
+      <span class="ix-ln">05</span> &nbsp;&nbsp;workflow: [<span class="ix-str">"SCOPE"</span>, <span class="ix-str">"BUILD"</span>, <span class="ix-str">"PROOF"</span>, <span class="ix-str">"EXPORT"</span>]<br>
+      <span class="ix-ln">06</span> });<br>
+      <span class="ix-ln">07</span> <br>
+      <span class="ix-ln">08</span> <span class="ix-fn">session</span>.<span class="ix-fn">scope</span>(<span class="ix-str">"Client delivery · Phoenix AZ web build"</span>);<br>
+      <span class="ix-ln">09</span> <span class="ix-fn">session</span>.<span class="ix-fn">build</span>(); <span class="ix-cm">// real-time preview active</span><br>
+      <span class="ix-ln">10</span> <span class="ix-fn">session</span>.<span class="ix-fn">proof</span>(); <span class="ix-ok">✓ deliverable-grade</span><br>
+      <span class="ix-ln">11</span> <span class="ix-fn">session</span>.<span class="ix-fn">export</span>(<span class="ix-str">"netlify-drop"</span>); <span class="ix-cm">// shipped</span><br>
+      <span class="ix-ln">12</span> <span class="ix-cursor"></span>
+    </div>
+  </div>
+
+  <div class="ix-cta-row">
+    <a href="https://skaixuidepro.netlify.app/" target="_blank" rel="noopener" class="ix-cta-primary">Launch skAIxU System →</a>
+    <a href="#workflow" class="ix-cta-ghost">See the Workflow ↓</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- THE PROBLEM -->
+<section class="content-section">
+  <div class="section-label reveal">The Problem</div>
+  <div class="section-title reveal">AI Tools Without a System Are Just Expensive Autocomplete</div>
+  <div class="section-desc reveal">You open ChatGPT in one tab, your editor in another, a preview server in a third, and a Google Doc for the delivery writeup. Every time you switch, you lose the thread. The AI doesn't know what you built yesterday. The editor doesn't know what the AI suggested. And the delivery doc is reconstructed from memory at the end of a session that produced half of what it should have. This is the standard workflow for most builders — and it's broken by design.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">🔀</div>
+      <h3>Context Switching Destroys Output</h3>
+      <div class="card-type">The Tab Sprawl Problem</div>
+      <p>AI chat. Code editor. Browser preview. Delivery doc. Project brief. Every tool lives in a separate tab, a separate mental model, and a separate context. The intelligence you built in one place doesn't transfer to the next. You spend as much time re-establishing context as you do producing work.</p>
+      <div class="card-tags"><span>Tab Sprawl</span><span>Context Loss</span><span>Workflow Fragmentation</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🤖</div>
+      <h3>AI Without Workflow Structure Produces Drafts, Not Deliverables</h3>
+      <div class="card-type">Prompt-and-Pray Development</div>
+      <p>When AI assistance is a standalone chat tab with no workflow structure, the output is a draft — not a deliverable. There's no scope checkpoint, no proof step, no packaging layer. You iterate until it looks right, then scramble to package it. The last 20% of every project takes 60% of the time because the workflow structure was missing from the start.</p>
+      <div class="card-tags"><span>No Scope Layer</span><span>Draft Output</span><span>Final Mile Chaos</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">📦</div>
+      <h3>Delivery Is an Afterthought</h3>
+      <div class="card-type">The Packaging Problem</div>
+      <p>Agencies and builders build things they can't efficiently hand off. The code works. The design is final. But the delivery package — the documentation, the deployment instructions, the client-ready presentation — is assembled from scratch at the end of every project. There's no repeatable delivery chain built into the tooling.</p>
+      <div class="card-tags"><span>No Delivery Chain</span><span>Manual Packaging</span><span>Handoff Friction</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE SOLUTION -->
+<section class="content-section">
+  <div class="section-label reveal">The Solution</div>
+  <div class="section-title reveal">skAIxU IDE Pro Deluxe Suite — One System. Idea to Ship.</div>
+  <div class="section-desc reveal">skAIxU IDE Pro Deluxe Suite is not an AI chatbot. It's not a standalone code editor. It's an intelligence command center — a structured workflow environment where AI assistance, code execution, preview, and delivery packaging all exist inside a single, repeatable chain of execution.</div>
+
+  <div class="ix-feature-grid stagger-children">
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">⬡</div>
+      <h4>SKAIXU.SYSTEM App Launcher</h4>
+      <p>The hub that connects the entire suite. From the App Launcher, access every intelligence tool in the ecosystem — IDE Pro, Neural Space Pro, kAIxu Magic, and the full multi-brain workspace — in a single, organized command center. No tab sprawl. Everything routes through one system.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">💻</div>
+      <h4>skAIxU IDE — Neural Dev Workspace</h4>
+      <p>A web-based intelligence IDE with real-time preview posture, multi-brain AI support, and a structured workflow layer built directly into the editing environment. Write code, run AI assistance, preview output, and package deliverables — without leaving the IDE or losing the project context between steps.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">🧠</div>
+      <h4>Neural Space Pro</h4>
+      <p>A dedicated neural workspace for deep intelligence work — drafting systems, refining outputs, and running complex multi-step AI operations with a structured scratchpad environment. Neural Space Pro is where the thinking happens before it becomes production code or a client deliverable.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">✨</div>
+      <h4>kAIxu Magic</h4>
+      <p>Advanced intelligence tooling with rapid-execution capabilities for creators who need results fast. kAIxu Magic handles the accelerated output layer — quick drafts, instant structure, rapid iteration — while the IDE's proof and export workflow handles quality and packaging.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">📐</div>
+      <h4>Prompt Patterns &amp; Launch Kit</h4>
+      <p>The free skAIxU Launch Kit comes built into the system — a curated collection of prompt patterns, an execution checklist, and a delivery workflow blueprint that can be applied across projects. Not generic advice. Operator-grade patterns that install consistent habits into every build session from day one.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">🔗</div>
+      <h4>Multi-Brain AI Support</h4>
+      <p>Route intelligence tasks to the right model. skAIxU IDE Pro Deluxe Suite supports multi-brain operations — using different AI providers for different stages of the workflow: drafting with one model, reviewing with another, exporting with a third. The workflow, not the model choice, is what controls output quality.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- METRICS -->
+<section class="content-section">
+  <div class="section-label reveal">System Specs</div>
+  <div class="section-title reveal">Built for Operators Who Ship Real Work</div>
+  <div class="card-grid-3 stagger-children" style="margin-top:2rem">
+    <div class="metric-card reveal">
+      <div class="metric-number">4-Step</div>
+      <div class="metric-label">Repeatable Workflow Chain</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">4+</div>
+      <div class="metric-label">Integrated Sub-Apps</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">Multi-Brain</div>
+      <div class="metric-label">AI Provider Support</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">Real-Time</div>
+      <div class="metric-label">Preview Posture in IDE</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">Free</div>
+      <div class="metric-label">Launch Kit Included</div>
+    </div>
+    <div class="metric-card reveal">
+      <div class="metric-number">0</div>
+      <div class="metric-label">Tab Switches Required</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="content-section" id="workflow">
+  <div class="section-label reveal">Workflow</div>
+  <div class="section-title reveal">Scope. Build. Proof. Export.</div>
+  <div class="section-desc reveal">The skAIxU IDE Pro workflow is a four-step chain of execution designed to transform a rough idea into a deliverable-grade build without a single context switch. Every step is supported inside the system — no external tools required at any stage.</div>
+
+  <div class="ix-workflow stagger-children">
+    <div class="ix-workflow-step reveal">
+      <div class="ix-step-num">Step 01</div>
+      <div class="ix-step-title">SCOPE</div>
+      <div class="ix-step-desc">Define the target, the constraints, and the acceptance criteria before a single line is written. Scope clarity at the start prevents rework at the end. The system prompts for the project brief, the deliverable definition, and the quality threshold — making the objective inspectable before the build begins.</div>
+    </div>
+    <div class="ix-workflow-step reveal">
+      <div class="ix-step-num">Step 02</div>
+      <div class="ix-step-title">BUILD</div>
+      <div class="ix-step-desc">Generate structure, then refine deliberately. The IDE Pro build phase uses multi-brain AI support to produce an initial architecture, then iterates through controlled revision cycles — not free-form prompt-and-see sessions. Real-time preview posture keeps the output visible as it evolves. Iteration is a sequence, not a scramble.</div>
+    </div>
+    <div class="ix-workflow-step reveal">
+      <div class="ix-step-num">Step 03</div>
+      <div class="ix-step-title">PROOF</div>
+      <div class="ix-step-desc">Before anything ships, it gets proofed. The proof step adds quality verification artifacts — clarity notes, checklist review, output inspection, and revision documentation. Proofed output is inspectable output: work that can be reviewed quickly, revised cleanly, and handed off without drama.</div>
+    </div>
+    <div class="ix-workflow-step reveal">
+      <div class="ix-step-num">Step 04</div>
+      <div class="ix-step-title">EXPORT</div>
+      <div class="ix-step-desc">Package the deliverable. The export step produces a deployment-ready output — Netlify Drop, static build, documentation package, or structured handoff. Delivery readiness is built into the end of every workflow cycle, not assembled from scratch after the work is technically done.</div>
+    </div>
+  </div>
+
+  <!-- Terminal session illustration -->
+  <div class="ix-term-demo reveal">
+    <span class="td-dim">// skAIxU IDE Pro · Active Workflow Session · Phoenix AZ Client Delivery</span><br><br>
+    <span class="td-prompt">skaixu &gt;</span> <span class="td-cmd">session.start</span>({ project: <span class="td-val">"E-commerce Rebuild"</span>, mode: <span class="td-val">"pro-deluxe"</span> })<br>
+    <span class="td-dim">  ▸ Multi-brain initialized: gemini-2.0-flash · gpt-4o</span><br>
+    <span class="td-dim">  ▸ Real-time preview: active</span><br><br>
+    <span class="td-prompt">skaixu &gt;</span> <span class="td-step">SCOPE</span> — target defined, constraints locked, acceptance criteria set<br>
+    <span class="td-prompt">skaixu &gt;</span> <span class="td-step">BUILD</span> — structure generated, 3 revision cycles, preview confirmed<br>
+    <span class="td-prompt">skaixu &gt;</span> <span class="td-step">PROOF</span> — quality artifacts added, clarity notes written, checklist: <span class="td-ok">✓ pass</span><br>
+    <span class="td-prompt">skaixu &gt;</span> <span class="td-step">EXPORT</span> — netlify-drop ready · handoff package compiled<br><br>
+    <span class="td-ok">✓ Session complete</span> · <span class="td-dim">deliverable-grade output · 0 context switches · ship it</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TOOLKIT BREAKDOWN -->
+<section class="content-section">
+  <div class="section-label reveal">The Suite</div>
+  <div class="section-title reveal">Four Tools. One System. Every Build Stage Covered.</div>
+  <div class="section-desc reveal">The Deluxe Suite isn't a single app — it's a system of interconnected intelligence tools, each built for a specific layer of the development and delivery workflow. Access all four from the SKAIXU.SYSTEM App Launcher.</div>
+
+  <div class="ix-toolkit-grid stagger-children">
+    <a href="https://skaixuidepro.netlify.app/" target="_blank" rel="noopener" class="ix-toolkit-card reveal">
+      <div class="ix-toolkit-url">skaixuidepro.netlify.app/ ↗</div>
+      <h4>SKAIXU.SYSTEM App Launcher</h4>
+      <p>The command center hub. Launch any tool in the suite, manage active sessions, access the Launch Kit, and navigate the full intelligence ecosystem from a single organized entry point.</p>
+    </a>
+    <a href="https://skaixuidepro.netlify.app/skaixuide/" target="_blank" rel="noopener" class="ix-toolkit-card reveal">
+      <div class="ix-toolkit-url">skaixuidepro.netlify.app/skaixuide/ ↗</div>
+      <h4>skAIxU IDE</h4>
+      <p>Neural-powered development workspace with real-time preview posture and multi-brain AI support. The core build environment — where code is written, refined, and verified inside a structured workflow layer.</p>
+    </a>
+    <a href="https://skaixuidepro.netlify.app/neural-space-pro/" target="_blank" rel="noopener" class="ix-toolkit-card reveal">
+      <div class="ix-toolkit-url">skaixuidepro.netlify.app/neural-space-pro/ ↗</div>
+      <h4>Neural Space Pro</h4>
+      <p>Dedicated intelligence workspace for deep creative and technical ideation. Draft systems, refine outputs, and run multi-step AI operations with a structured scratchpad built for serious operators.</p>
+    </a>
+    <a href="https://skaixuidepro.netlify.app/kaixumagic/" target="_blank" rel="noopener" class="ix-toolkit-card reveal">
+      <div class="ix-toolkit-url">skaixuidepro.netlify.app/kaixumagic/ ↗</div>
+      <h4>kAIxu Magic</h4>
+      <p>High-velocity intelligence tooling for rapid output generation. Accelerate the early build phase with instant structure, quick drafts, and rapid iteration — then feed the output into the IDE's proof and export chain.</p>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO IT'S FOR -->
+<section class="content-section">
+  <div class="section-label reveal">Who It's For</div>
+  <div class="section-title reveal">Built for Builders Who Need to Ship, Not Just Create</div>
+  <div class="section-desc reveal">skAIxU IDE Pro Deluxe Suite is built for the builder who produces output that must be packaged, reviewed, handed off, and deployed — not just drafted and saved.</div>
+
+  <div class="ix-feature-grid stagger-children">
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">🏗️</div>
+      <h4>Agencies Shipping Client Work</h4>
+      <p>Every client project needs a scoped brief, a build phase, a quality proof step, and a packaged delivery. skAIxU IDE Pro installs that structure into every project by default — not as additional overhead, but as the workflow that replaces the chaos that currently fills the same time.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">🚀</div>
+      <h4>Founders Building Products</h4>
+      <p>Product development without a workflow structure means every sprint produces something that works but can't be efficiently iterated. The Scope → Build → Proof → Export chain gives founders a repeatable system for moving from idea to deployed feature without rebuilding the workflow from scratch each time.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">⚙️</div>
+      <h4>Internal Teams Standardising Delivery</h4>
+      <p>When a team shares a workflow, output becomes predictable. skAIxU IDE Pro gives internal development teams a standard chain of execution — so the quality of the delivery package doesn't depend on which team member managed the sprint.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">🎯</div>
+      <h4>Operators Who Need a Command Center</h4>
+      <p>Operators who manage multiple active projects need a system that keeps context intact between sessions. The SKAIXU.SYSTEM App Launcher provides the command center layer — one entry point for all active intelligence work, across every project in the pipeline.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">📋</div>
+      <h4>Developers Tired of Prompt-and-Pray</h4>
+      <p>If you've been using AI tools as a tab and wondering why the output consistently needs an extra rebuild pass before it ships — the workflow structure is what's missing. skAIxU IDE Pro replaces prompt sessions with a repeatable execution chain that produces deliverable-grade output by design.</p>
+    </div>
+    <div class="ix-feature-card reveal">
+      <div class="ix-feature-icon">🌐</div>
+      <h4>Web Builders &amp; Netlify Operators</h4>
+      <p>The export chain terminates at Netlify Drop — production-ready static builds packaged for immediate deployment. Web builders who live in the Netlify ecosystem get a workflow that moves from project brief to deployed URL inside a single system, without a separate build pipeline or manual packaging step.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- USE CASES -->
+<section class="content-section">
+  <div class="section-label reveal">Real Workflows</div>
+  <div class="section-title reveal">What Changes When the System Is Right</div>
+
+  <div class="card-grid-2 stagger-children" style="margin-top:2.5rem">
+    <div class="strength-card reveal">
+      <h4>🏢 Scenario: Agency Client Delivery</h4>
+      <p>An agency receives a web build brief for a Phoenix AZ e-commerce client. Without skAIxU: 4 hours of tab switching, two rounds of client revisions because the delivery scope wasn't clear, a delivery doc assembled at midnight before handoff. With skAIxU IDE Pro: scope is defined and locked in step one. The build iterates inside the IDE with real-time preview. The proof step catches the issues before the client sees them. Netlify Drop deploys in the export step. The delivery package writes itself.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>⚡ Scenario: Rapid MVP Sprint</h4>
+      <p>A founder needs a functional MVP deployed within 48 hours. kAIxu Magic accelerates the initial structure generation. Neural Space Pro handles the system design and content architecture. skAIxU IDE builds and refines the functional implementation with real-time preview. The export chain packages and deploys to Netlify. The launch kit's prompt patterns mean the brief was scope-tight from minute one — no rework spiral.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>📐 Scenario: Repeatable Internal Builds</h4>
+      <p>An internal team ships three client portals per month. Before: each project is a unique workflow that depends on the lead developer's habits. After: every project runs through the same Scope → Build → Proof → Export chain inside skAIxU IDE Pro. Delivery time drops because the team stops rebuilding the workflow for each project. Quality floor rises because the proof step is mandatory, not optional.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>🔄 Scenario: Multi-Project Operator</h4>
+      <p>An operator manages four active builds simultaneously — two agency projects, one internal tool, one product sprint. Without a command center, context between sessions is lost and re-established manually every time. The SKAIXU.SYSTEM App Launcher maintains session context across all four projects, routes intelligence tasks to the right tool for each stage, and keeps delivery packaging on track for every active workflow — simultaneously.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPARISON -->
+<section class="content-section">
+  <div class="section-label reveal">Competitive Contrast</div>
+  <div class="section-title reveal">skAIxU IDE Pro vs. The Standard Stack</div>
+  <div class="section-desc reveal">Cursor is a code editor with AI. GitHub Copilot is an autocomplete layer. ChatGPT is a chat tab. skAIxU IDE Pro Deluxe Suite is a workflow system — the only tool that addresses the entire chain from scope to delivery inside one environment.</div>
+
+  <div style="overflow-x:auto;margin-top:2rem">
+    <table class="ix-compare-table reveal">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th class="ix-hl">skAIxU IDE Pro</th>
+          <th>Cursor</th>
+          <th>GitHub Copilot</th>
+          <th>ChatGPT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Structured workflow chain (Scope→Export)</td>
+          <td class="ix-hl ix-yes">✓ Built-in</td>
+          <td class="ix-no">✗ No</td>
+          <td class="ix-no">✗ No</td>
+          <td class="ix-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Multi-brain AI provider support</td>
+          <td class="ix-hl ix-yes">✓ Yes</td>
+          <td class="ix-meh">⚠ Limited</td>
+          <td class="ix-no">✗ GitHub models only</td>
+          <td class="ix-no">✗ OpenAI only</td>
+        </tr>
+        <tr>
+          <td>Real-time preview posture in IDE</td>
+          <td class="ix-hl ix-yes">✓ Yes</td>
+          <td class="ix-yes">✓ Yes</td>
+          <td class="ix-no">✗ Editor plugin only</td>
+          <td class="ix-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Proof / delivery packaging step</td>
+          <td class="ix-hl ix-yes">✓ Built-in</td>
+          <td class="ix-no">✗ No</td>
+          <td class="ix-no">✗ No</td>
+          <td class="ix-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>App Launcher / command center hub</td>
+          <td class="ix-hl ix-yes">✓ SKAIXU.SYSTEM</td>
+          <td class="ix-no">✗ No</td>
+          <td class="ix-no">✗ No</td>
+          <td class="ix-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Free Launch Kit (patterns + checklist)</td>
+          <td class="ix-hl ix-yes">✓ Included</td>
+          <td class="ix-no">✗ No</td>
+          <td class="ix-no">✗ No</td>
+          <td class="ix-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Netlify Drop export chain</td>
+          <td class="ix-hl ix-yes">✓ Yes</td>
+          <td class="ix-meh">⚠ Manual</td>
+          <td class="ix-no">✗ No</td>
+          <td class="ix-no">✗ No</td>
+        </tr>
+        <tr>
+          <td>Works as browser-native app (no install)</td>
+          <td class="ix-hl ix-yes">✓ Full web app</td>
+          <td class="ix-no">✗ Desktop install required</td>
+          <td class="ix-no">✗ IDE extension</td>
+          <td class="ix-yes">✓ Browser</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LAUNCH KIT -->
+<section class="content-section">
+  <div class="section-label reveal">Free Launch Kit</div>
+  <div class="section-title reveal">The Habits Are Already Built In</div>
+  <div class="section-desc reveal">Every session in skAIxU IDE Pro Deluxe Suite comes with the free skAIxU Launch Kit — a downloadable set of operator-grade resources that install the right habits before the first prompt is written.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="strength-card reveal">
+      <h4>📐 Prompt Pattern Library</h4>
+      <p>Curated prompt structures for every stage of the workflow — scoping prompts that produce tight briefs, build prompts that generate production-quality structure on the first pass, proof prompts that catch quality gaps before delivery. Not generic advice. Patterns that have been run through real builds.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>✅ Execution Checklist</h4>
+      <p>A step-by-step delivery checklist that maps to the Scope → Build → Proof → Export workflow. Every checkpoint is actionable — not a reminder to "review the code," but a specific gate that must pass before the session advances. Treat it as a mandatory protocol, not optional guidance.</p>
+    </div>
+    <div class="strength-card reveal">
+      <h4>🗺️ Workflow Blueprint</h4>
+      <p>A reusable delivery workflow template that structures an entire project engagement from first brief to handoff. Apply it to agency client work, internal builds, or product sprints. The blueprint adapts to the project type while keeping the four-step chain intact across every execution.</p>
+    </div>
+  </div>
+
+  <div class="ix-quote reveal">
+    <p>"SkAIxu IDE Pro is strongest when used as a repeatable system. The goal is not 'more output.' The goal is inspectable output: work that can be reviewed quickly, revised cleanly, and delivered without drama."</p>
+    <cite>— skAIxU IDE Pro · Operator Documentation · SOLEnterprises 2026</cite>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ECOSYSTEM FIT -->
+<section class="content-section">
+  <div class="section-label reveal">Ecosystem Fit</div>
+  <div class="section-title reveal">skAIxU IDE Pro Inside the SOL Stack</div>
+  <div class="section-desc reveal">The IDE Pro Deluxe Suite is the build layer. It routes intelligence work into the SOL ecosystem — contracts via SkyeDocx, workflows via SkyeFlow, operational runbooks via SkyeOps.</div>
+
+  <div class="card-grid-3 stagger-children" style="margin-top:2.5rem">
+    <div class="platform-card reveal">
+      <div class="card-icon">📄</div>
+      <h3>skAIxU IDE Pro → SkyeDocx</h3>
+      <div class="card-type">Build to Contract</div>
+      <p>Export a build summary from the IDE Pro proof step and feed it directly into a SkyeDocx contract as the project scope exhibit. The scope document isn't written from memory — it's generated from the scope log that was written before the first line of the build.</p>
+      <div class="card-tags"><span>Scope Export</span><span>Contract Attach</span><span>Client Handoff</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">⚙️</div>
+      <h3>skAIxU IDE Pro → SkyeFlow</h3>
+      <div class="card-type">Build to Workflow Automation</div>
+      <p>Trigger SkyeFlow automation sequences directly from an IDE Pro export. Route the packaged deliverable through an automated client review, approval, and delivery workflow — so the handoff process runs on rails after the build is complete.</p>
+      <div class="card-tags"><span>Delivery Automation</span><span>Client Review Loop</span><span>Approval Chain</span></div>
+    </div>
+    <div class="platform-card reveal">
+      <div class="card-icon">🎯</div>
+      <h3>skAIxU IDE Pro → SkyeOps</h3>
+      <div class="card-type">Build to Runbook</div>
+      <p>Convert a completed IDE Pro build workflow into a SkyeOps runbook. The next time the same build type is needed, the SOP is already documented — derived from the actual workflow that shipped the last version, not written from scratch by a team lead after the fact.</p>
+      <div class="card-tags"><span>Workflow SOP</span><span>Runbook Generation</span><span>Build Documentation</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FINAL CTA -->
+<section class="content-section">
+  <div class="ix-final-cta reveal">
+    <div class="section-label" style="margin-bottom:1rem">Launch the System Now</div>
+    <h2>Build Like a System.<br>Not a Sprint.</h2>
+    <p>The next project you start with a chat tab and a crossed-fingers prompt is the last one that should run that way. skAIxU IDE Pro Deluxe Suite gives you the workflow that makes every build repeatable — and every delivery professional.</p>
+    <div class="ix-cta-row">
+      <a href="https://skaixuidepro.netlify.app/" target="_blank" rel="noopener" class="ix-cta-primary">Launch skAIxU System →</a>
+      <a href="https://skaixuidepro.netlify.app/skaixuide/" target="_blank" rel="noopener" class="ix-cta-ghost">Open IDE Direct →</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:0.78rem;color:rgba(220,216,208,0.3);font-family:'Fira Code',monospace;letter-spacing:.05em">Intelligence IDE · Multi-brain · Real-time preview · Free Launch Kit included</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
+  <p><strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 986-210-7040</p>
+  <div class="footer-links">
+    <a href="/blog.html">Blog</a>
+    <a href="/status.html">Status</a>
+    <a href="/vault.html">Vault</a>
+    <a href="/admin.html">Admin</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/sitemap-visual.html">Site Map</a>
+  </div>
+  <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
+</footer>
+
+<script src="/js/three-bg.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/growth.js"></script>
+
+<script>window.netlifyIdentityWidget = { APIUrl: 'https://skyesol.netlify.app/.netlify/identity' };</script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="/js/netlify-identity-init.js"></script>
+
+<!-- MEGA NAV OVERLAY -->
+<div id="megaNav" class="mega-nav" role="dialog" aria-label="Site navigation">
+  <button class="mega-nav-close" id="megaNavClose">✕ CLOSE</button>
+  <div class="mega-nav-grid">
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Navigate</div>
+      <a href="/index.html">Home</a>
+      <a href="/about.html">Founder</a>
+      <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
+      <a href="/platforms.html">Platforms</a>
+      <a href="/network.html">Network</a>
+      <a href="/credibility.html">Credibility</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/status.html">Status</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Platforms &amp; Apps</div>
+      <a href="/Platforms-Apps-Infrastructure/index.html">⬡ All Platforms Hub</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html">kAIxU Chat</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html">Gateway13</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html">Delta Gate</a>
+      <a href="/Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/index.html">kAIxU PDF Pro</a>
+      <a href="https://skaixuidepro.netlify.app/" target="_blank" rel="noopener">skAIxU IDE Pro ↗</a>
+      <a href="https://0riginx.netlify.app/" target="_blank" rel="noopener">0riginx ↗</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Blog Categories</div>
+      <a href="/blog.html">All Posts</a>
+      <a href="/blog.html#phoenix">Phoenix AZ</a>
+      <a href="/blog.html#skaixu">SkAIxu IDE</a>
+      <a href="/blog.html#houston">Houston</a>
+      <a href="/blog.html#ai">Colorado AI</a>
+      <a href="/blog.html#devs">Devs &amp; AI</a>
+    </div>
+    <div class="mega-nav-col">
+      <div class="mega-nav-label">Company</div>
+      <a href="/sitemap-visual.html">Site Map</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Use</a>
+    </div>
+  </div>
+</div>
+<script src="/js/partials.js"></script>
+</body>
+</html>
