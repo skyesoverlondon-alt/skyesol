@@ -341,6 +341,7 @@ body::after {
   align-items: center;
   gap: 6px;
   transition: color .3s;
+  touch-action: manipulation;
 }
 .dropdown-toggle::after {
   content: '▾';
@@ -388,7 +389,7 @@ body::after {
 }
 .dropdown-menu a:hover { color: var(--gold); }
 .dropdown-menu a.active { color: var(--gold); }
-.nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 22px; cursor: pointer; }
+.nav-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 22px; cursor: pointer; touch-action: manipulation; }
 
 /* ══ PAGE HEADER (non-home pages) ══ */
 .page-header {
@@ -767,9 +768,11 @@ footer a { color: var(--gold); text-decoration: none; }
 
 /* ══ RESPONSIVE ══ */
 @media (max-width: 900px) {
-  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: rgba(5,5,8,0.95); padding: 20px 40px; gap: 14px; border-bottom: 1px solid rgba(201,168,76,0.08); }
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: rgba(5,5,8,0.95); padding: 20px 40px; gap: 14px; border-bottom: 1px solid rgba(201,168,76,0.08); z-index: 100015; }
   .nav-links.open { display: flex; }
-  .nav-toggle { display: block; }
+  .nav-toggle { display: block; touch-action: manipulation; }
+  /* Hide the mega-nav trigger on mobile — the hamburger dropdown handles it */
+  .menu-btn { display: none !important; }
   .nav-dropdown { width: 100%; }
   .nav-dropdown .dropdown-menu {
     position: static;
