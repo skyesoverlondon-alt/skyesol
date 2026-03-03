@@ -1,3 +1,44 @@
+function ensureStyleSheet(href){
+  if (!document || !document.head) return;
+  const exists = Array.from(document.querySelectorAll('link[rel="stylesheet"]'))
+    .some(link => (link.getAttribute('href') || '').includes(href));
+  if (exists) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  document.head.appendChild(link);
+}
+
+function ensureScript(src, callback){
+  if (!document || !document.head) {
+    if (typeof callback === 'function') callback();
+    return;
+  }
+
+  const found = Array.from(document.querySelectorAll('script[src]'))
+    .find(s => (s.getAttribute('src') || '').includes(src));
+
+  if (found) {
+    if (typeof callback === 'function') {
+      if (found.dataset.loaded === 'true') {
+        callback();
+      } else {
+        found.addEventListener('load', callback, { once: true });
+      }
+    }
+    return;
+  }
+
+  const script = document.createElement('script');
+  script.src = src;
+  script.async = false;
+  script.onload = () => {
+    script.dataset.loaded = 'true';
+    if (typeof callback === 'function') callback();
+  };
+  document.head.appendChild(script);
+}
+
 async function injectPartial(selector, url, position){
   if (!document || !document.body) return;
   try {
@@ -26,6 +67,15 @@ async function injectPartial(selector, url, position){
       if (typeof window.SOL.attachMegaNav === 'function') {
         window.SOL.attachMegaNav();
       }
+    } else if (node.matches('nav.main-nav')) {
+      ensureScript('/js/main.js', () => {
+        if (window.SOL && typeof window.SOL.attachNav === 'function') {
+          window.SOL.attachNav();
+        }
+        if (window.SOL && typeof window.SOL.attachMegaNav === 'function') {
+          window.SOL.attachMegaNav();
+        }
+      });
     }
 
     // Ensure admin menu triggers script is loaded once footer/header are present
@@ -44,6 +94,10 @@ async function injectPartial(selector, url, position){
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Ensure pages using partial headers always have the nav style/runtime stack.
+  ensureStyleSheet('/css/style.css');
+  ensureScript('/js/main.js');
+
   // ── Holographic Boot Sequence Background (site-wide) ──
   if (!document.getElementById('sol-boot-sequence')) {
     const bgScript = document.createElement('script');
