@@ -1251,6 +1251,25 @@
         });
       }
     })();
+
+    // Loader fallback (non-module path)
+    (function(){
+      let loaderHidden = false;
+      const hideLoader = () => {
+        if (loaderHidden) return;
+        const loader = document.getElementById('loader');
+        if (!loader) return;
+        loaderHidden = true;
+        loader.style.opacity = '0';
+        setTimeout(() => {
+          if (loader && loader.parentNode) loader.remove();
+        }, 1000);
+      };
+
+      window.addEventListener('load', () => setTimeout(hideLoader, 650));
+      document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 2200));
+      setTimeout(hideLoader, 5000);
+    })();
   </script>
 
   <!-- MAIN THREE.JS SCRIPT -->
@@ -1264,8 +1283,11 @@
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loader');
+        if (!loader) return;
         loader.style.opacity = '0';
-        setTimeout(() => loader.remove(), 1000);
+        setTimeout(() => {
+          if (loader && loader.parentNode) loader.remove();
+        }, 1000);
       }, 650);
     });
 

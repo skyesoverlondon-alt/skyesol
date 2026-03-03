@@ -2007,6 +2007,29 @@
     });
   }
 })();
+
+(() => {
+    let introHidden = false;
+    const hideIntro = () => {
+        if (introHidden) return;
+        const intro = document.getElementById('skyes-intro');
+        if (!intro) {
+            introHidden = true;
+            return;
+        }
+        introHidden = true;
+        intro.style.opacity = '0';
+        intro.style.pointerEvents = 'none';
+        setTimeout(() => {
+            if (intro && intro.parentNode) intro.remove();
+        }, 900);
+        document.body.classList.add('app-ready');
+    };
+
+    window.addEventListener('load', () => setTimeout(hideIntro, 5800));
+    document.addEventListener('DOMContentLoaded', () => setTimeout(hideIntro, 7600));
+    setTimeout(hideIntro, 10000);
+})();
 </script>
   <script src="/js/SkyeSolINTRO.js"></script>
 </body>
