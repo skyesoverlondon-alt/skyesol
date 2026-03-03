@@ -326,6 +326,7 @@
       byKey.set(key, { ...existing, ...post });
     });
     posts = Array.from(byKey.values());
+    renderNetWorksMenu(posts);
 
     const allTags = new Set();
     posts.forEach(p => (p.tags || []).forEach(t => allTags.add(t)));
@@ -360,6 +361,34 @@
     if (tagSelect) tagSelect.addEventListener('change', applyFilters);
 
     applyFilters();
+
+    function renderNetWorksMenu(allPosts){
+      const menuMount = $('#netWorksMenu');
+      if (!menuMount) return;
+
+      const netWorksPosts = allPosts
+        .filter((post) => {
+          const tags = Array.isArray(post?.tags) ? post.tags : [];
+          const hasTag = tags.some((tag) => String(tag).toLowerCase().includes('the net works'));
+          const staticUrl = String(post?.staticUrl || '').toLowerCase();
+          const slug = String(post?.slug || '').toLowerCase();
+          return hasTag || staticUrl.includes('the net works/featuring') || slug.startsWith('the-net-works-');
+        })
+        .sort((a, b) => new Date(b.published_at || 0) - new Date(a.published_at || 0));
+
+      if (!netWorksPosts.length) {
+        menuMount.innerHTML = '<span class="chip">No THE NET WORKS posts found yet.</span>';
+        return;
+      }
+
+      menuMount.innerHTML = netWorksPosts
+        .slice(0, 24)
+        .map((post) => {
+          const href = post.staticUrl ? post.staticUrl : `post.html?s=${encodeURIComponent(post.slug || '')}`;
+          return `<a class="chip" href="${href}">${esc(post.title || 'Untitled Post')}</a>`;
+        })
+        .join('');
+    }
 
     function blogCard(p){
       const img = p.cover_image ? `<div class="blog-cover"><img src="${esc(p.cover_image)}" alt="${esc(p.title)}" loading="lazy"></div>` : '';

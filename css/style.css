@@ -450,6 +450,8 @@ body::after {
   box-shadow: var(--glow-gold-strong);
   animation: subtlePulse 2.2s ease-in-out infinite;
   z-index: 3;
+  position: relative;
+  pointer-events: auto;
 }
 .hero-superide-cta:hover {
   box-shadow: var(--glow-gold-strong);

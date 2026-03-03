@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKYE INTRO</title>
+  <style>
+    :root {
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      background: #05050b;
+      color: #fff;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .cinematic-opener {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #05050b;
+      pointer-events: none;
+    }
+
+    .cinematic-opener::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 22% 52%, rgba(255, 211, 106, .14) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 52%, rgba(162, 67, 255, .16) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 75%, rgba(39, 242, 255, .08) 0%, transparent 60%);
+      animation: gradientPulse 4s ease-in-out infinite;
+    }
+
+    .opener-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+      max-width: 980px;
+    }
+
+    .opener-line { overflow: hidden; }
+
+    .opener-text {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: rgba(255, 255, 255, .72);
+      font-size: clamp(.9rem, 2.6vw, 1.15rem);
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: slideUp 1s var(--ease-out-expo) .5s forwards;
+    }
+
+    .opener-title {
+      font-family: Georgia, Times, "Times New Roman", serif;
+      color: #ffd36a;
+      font-size: clamp(2.2rem, 7.8vw, 5.2rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin: 1.25rem 0;
+      opacity: 0;
+      transform: translateY(100%);
+      animation: slideUp 1.2s var(--ease-out-expo) 1s forwards;
+    }
+
+    .opener-divider {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #27f2ff, #ffd36a, #a243ff, transparent);
+      margin: 1.8rem auto;
+      opacity: .9;
+      animation: expandLine 1.5s var(--ease-out-expo) 1.5s forwards;
+    }
+
+    .opener-subtitle {
+      color: rgba(255, 255, 255, .70);
+      font-size: clamp(.95rem, 2vw, 1.1rem);
+      letter-spacing: .04em;
+      line-height: 1.85;
+      max-width: 72ch;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeIn 1.2s var(--ease-out-expo) 2s forwards;
+    }
+
+    .opener-logo {
+      margin-top: 2.4rem;
+      opacity: 0;
+      animation: fadeIn 1s var(--ease-out-expo) 2.45s forwards;
+      display: flex;
+      justify-content: center;
+    }
+
+    .sol-logo {
+      width: 180px;
+      height: 180px;
+      filter: drop-shadow(0 0 16px rgba(255, 211, 106, .18)) drop-shadow(0 0 18px rgba(39, 242, 255, .10));
+      animation: pulseLogo 2.8s ease-in-out infinite;
+    }
+
+    .sol-logo text {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .opener-company {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: rgba(255, 255, 255, .44);
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s var(--ease-out-expo) 3s forwards;
+    }
+
+    .progress-bar {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+      height: 2px;
+      background: rgba(255, 255, 255, .10);
+      border-radius: 2px;
+      overflow: hidden;
+      z-index: 10001;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #27f2ff, #ffd36a, #a243ff);
+      animation: progressFill 4s var(--ease-out-quart) forwards;
+      box-shadow: 0 0 18px rgba(39, 242, 255, .28);
+    }
+
+    .cinematic-opener.out { animation: openerFadeOut 1s var(--ease-out-expo) forwards; }
+    .progress-bar.out { animation: barFadeOut .5s var(--ease-out-expo) forwards; }
+
+    @keyframes gradientPulse { 0%,100%{opacity:.55} 50%{opacity:1} }
+    @keyframes slideUp { to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { to{opacity:1} }
+    @keyframes expandLine { to{width:240px} }
+    @keyframes progressFill { 0%{width:0} 100%{width:100%} }
+    @keyframes pulseLogo { 0%,100%{transform:translateY(0) scale(1);opacity:.92} 50%{transform:translateY(-2px) scale(1.02);opacity:1} }
+    @keyframes openerFadeOut { to{opacity:0;visibility:hidden} }
+    @keyframes barFadeOut { to{opacity:0} }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cinematic-opener::before,
+      .sol-logo,
+      .progress-fill { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cinematic-opener" aria-hidden="true">
+    <div class="opener-content">
+      <div class="opener-line"><p class="opener-text">A Skyes Over London LC Publication</p></div>
+      <div class="opener-line"><h1 class="opener-title">About<br/>Skyes Over London</h1></div>
+      <div class="opener-divider"></div>
+      <p class="opener-subtitle">Operator-grade AI + web infrastructure built with a proof-first discipline: gateways, brains, IDEs, portals, and systems that can be verified, governed, and shipped.</p>
+
+      <div class="opener-logo">
+        <svg class="sol-logo" viewBox="0 0 540 540" role="img" aria-label="Skyes Over London Intro logo">
+          <defs>
+            <linearGradient id="skyeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#27f2ff" stop-opacity=".35" />
+              <stop offset="55%" stop-color="#ffd36a" stop-opacity=".42" />
+              <stop offset="100%" stop-color="#a243ff" stop-opacity=".35" />
+            </linearGradient>
+          </defs>
+          <circle cx="270" cy="270" r="250" fill="url(#skyeGrad)" stroke="rgba(255,255,255,.22)" stroke-width="4" />
+          <text x="270" y="280" text-anchor="middle" font-size="82" fill="#ffffff">SKYE</text>
+        </svg>
+      </div>
+
+      <p class="opener-company">A subsidiary of Solenterprises International Nexus &amp; Holdings LLC</p>
+    </div>
+  </div>
+
+  <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
+
+  <script>
+    (function () {
+      var opener = document.querySelector('.cinematic-opener');
+      var bar = document.querySelector('.progress-bar');
+
+      window.setTimeout(function () {
+        opener.classList.add('out');
+        bar.classList.add('out');
+      }, 4600);
+
+      window.setTimeout(function () {
+        if (opener && opener.parentNode) opener.parentNode.removeChild(opener);
+        if (bar && bar.parentNode) bar.parentNode.removeChild(bar);
+        document.body.style.overflow = 'auto';
+        document.body.style.height = 'auto';
+      }, 5700);
+    })();
+  </script>
+</body>
+</html>
