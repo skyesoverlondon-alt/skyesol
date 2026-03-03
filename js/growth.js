@@ -272,6 +272,15 @@
   // ─────────────────────────────────────────────
   // Blog (public)
   // ─────────────────────────────────────────────
+  async function getManifestPosts(){
+    try {
+      const data = await jsonFetch('/Blogs/blog-manifest.json');
+      return Array.isArray(data?.posts) ? data.posts : [];
+    } catch {
+      return [];
+    }
+  }
+
   async function renderBlogList(){
     const mount = $('#blogList');
     if (!mount) return;
@@ -280,7 +289,8 @@
     const tagSelect = $('#blogTag');
     const notice = $('#blogNotice');
 
-      let posts = [];
+    let posts = [];
+    let seedPosts = [];
     let mode = 'api';
     try {
       const data = await jsonFetch(`${state.apiBase}/blog-list`);
@@ -288,7 +298,7 @@
     } catch (e){
       mode = 'readonly';
       // fall back to a tiny baked-in seed so the page never looks broken
-      posts = [
+      seedPosts = [
         {
           slug: 'welcome',
           title: 'Field Notes: Welcome to the SOL Growth Platform',
@@ -304,8 +314,19 @@
       }
     }
 
-    const merged = staticPosts.filter(sp => !posts.some(p => p.slug === sp.slug));
-    posts = [...merged, ...posts];
+    const manifestPosts = await getManifestPosts();
+    const byKey = new Map();
+    [...staticPosts, ...manifestPosts, ...seedPosts, ...posts].forEach((post) => {
+      const slugKey = String(post?.slug || '').trim().toLowerCase();
+      const urlKey = String(post?.staticUrl || '').trim().toLowerCase();
+      const key = slugKey || urlKey || `${String(post?.title || '').trim().toLowerCase()}|${String(post?.published_at || '').trim()}`;
+      if (!key) return;
+
+      const existing = byKey.get(key) || {};
+      byKey.set(key, { ...existing, ...post });
+    });
+    posts = Array.from(byKey.values());
+
     const allTags = new Set();
     posts.forEach(p => (p.tags || []).forEach(t => allTags.add(t)));
     if (tagSelect) {

@@ -441,10 +441,18 @@ body::after {
   height: 2px; background: linear-gradient(90deg, transparent 10%, var(--gold) 50%, transparent 90%);
   animation: subtlePulse 3s ease-in-out infinite; z-index: 10;
 }
-.hero-img-col { position: relative; display: flex; align-items: center; justify-content: center; }
+.hero-img-col { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
 .hero-img-col .founder-hero-img {
   width: 100%; max-width: 440px; height: auto; border-radius: 8px;
   animation: floatGlow 4s ease-in-out infinite; position: relative; z-index: 3;
+}
+.hero-superide-cta {
+  box-shadow: var(--glow-gold-strong);
+  animation: subtlePulse 2.2s ease-in-out infinite;
+  z-index: 3;
+}
+.hero-superide-cta:hover {
+  box-shadow: var(--glow-gold-strong);
 }
 .hero-img-col::before {
   content: ''; position: absolute; width: 110%; height: 110%; top: -5%; left: -5%;
@@ -813,6 +821,7 @@ footer a { color: var(--gold); text-decoration: none; }
   .hero-txt-col { order: 2; padding-right: 0; align-items: center; }
   .hero-subtitle { margin-left: auto; margin-right: auto; }
   .hero-cta-row { justify-content: center; }
+  .hero-superide-cta { width: min(100%, 360px); justify-content: center; }
   .profile-grid, .card-grid-2, .evolution-grid { grid-template-columns: 1fr; gap: 20px; }
   .card-grid-3, .card-grid-4, .partnerships-grid { grid-template-columns: 1fr; gap: 14px; }
   .contact-row { grid-template-columns: 1fr; }

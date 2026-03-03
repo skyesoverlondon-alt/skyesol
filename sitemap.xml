@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
     <loc>https://skyesol.netlify.app/</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -81,6 +81,12 @@
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Editorials/APPS%20WEVE%20ENGINEERED/FamilyMedPassport.html</loc>
     <lastmod>2026-02-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Blogs/Editorials/APPS%20WEVE%20ENGINEERED/kAIxuSuperIDE.html</loc>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1190,13 +1196,13 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Houston%20Texas%20Devs%20&amp;%20AI/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/In%20The%20SkyeLight/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1298,145 +1304,145 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Field%20Guide/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-axon.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-microchip.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-radiusai.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-tsmc.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-waymo.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase%202/06-waymo-phoenix-robotaxi-field-guide.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase%202/07-axon-scottsdale-public-safety-ai-field-guide.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase%202/08-nextiva-scottsdale-unified-cxm-ai-field-guide.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase%202/09-radiusai-tempe-computer-vision-retail-field-guide.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase%202/10-nucleusteq-phoenix-enterprise-data-ai-field-guide.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase%202/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase1/01-intel-phoenix-ai-field-guide.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase1/02-godaddy-tempe-agentic-ai-field-guide.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase1/03-onsemi-scottsdale-ai-datacenter-power.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase1/04-insight-chandler-ai-systems-integrator.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase1/05-early-warning-scottsdale-identity-ai.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase1/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase3/01-waymo-phoenix-autonomous-ai.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase3/02-axon-scottsdale-public-safety-ai.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase3/03-nextiva-scottsdale-ai-cx.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase3/04-paradox-scottsdale-olivia-ai-hiring.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase3/05-qbotica-phoenix-agentic-automation.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Blogs/Phoenix%20Arizona/AI/Phase3/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -2504,7 +2510,7 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Pages/Services.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2732,19 +2738,19 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Access222/404.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Access222/ae/index.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Access222/ae/portal/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -2756,37 +2762,37 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Access222/checkout/index.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Access222/index.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Access222/offline.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Access222/routing/index.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Access222/services/access-222/index.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Access222/thanks/index.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3050,7 +3056,7 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/NeuralSpacePro/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3080,7 +3086,7 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/Repo%20Live/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3116,13 +3122,13 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/SkyeProofx/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Platforms-Apps/index.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3494,7 +3500,7 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/SolenteAI/Security-Data-Handling/index.html</loc>
-    <lastmod>2026-03-01</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3548,7 +3554,7 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/THE%20NET%20WORKS/FEATURING/cards-snippet.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3560,7 +3566,7 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/THE%20NET%20WORKS/FEATURING/healthcare-ai-in-metro-phoenix-fast-wins-real-patients-no-camera-drama.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -3602,7 +3608,7 @@
   </url>
   <url>
     <loc>https://skyesol.netlify.app/THE%20NET%20WORKS/FEATURING/OrchestratingTomorrow.html</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
