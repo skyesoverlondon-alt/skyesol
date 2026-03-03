@@ -1,16 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Directory | SOL</title>
+  <base href="/">
+  <link rel="canonical" href="https://skyesol.netlify.app/directory/index.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directory | SOLEnterprises Ecosystem</title>
+  <meta name="description" content="Directory access for verified operators, references, and core company pathways.">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous" defer></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
 </head>
 <body>
-  <main>
-    <h1>Directory</h1>
-    <p>Placeholder page for the directory. Swap in the real directory experience when ready.</p>
-    <p><a href="/index.html">Return home</a></p>
-  </main>
-  <script src="/js/partials.js"></script>
+<canvas id="three-bg"></canvas>
+
+<div class="page-header">
+  <div class="section-label">Company · Reference Index</div>
+  <h1>Operations <span>Directory</span></h1>
+  <div class="glow-tile-purple"><p style="color:#000000">Centralized references to resources, credibility, network assets, and delivery proof.</p></div>
+</div>
+
+<div class="divider"></div>
+
+<section class="content-section">
+  <div class="card-grid-2 stagger-children">
+    <div class="strength-card reveal"><h4><a href="/resources/phoenix-business-resource-directory/index.html">Phoenix Business Resource Directory</a></h4><p>Launch and compliance references for Arizona-focused operators.</p></div>
+    <div class="strength-card reveal"><h4><a href="/credibility.html">Credibility</a></h4><p>Trust signals, verifiable records, and delivery-grade proof surface.</p></div>
+    <div class="strength-card reveal"><h4><a href="/network.html">Network</a></h4><p>Distributed ecosystem overview across active portals and systems.</p></div>
+    <div class="strength-card reveal"><h4><a href="/Case Studies/index.html">Case Studies</a></h4><p>Execution outcomes and implementation records by delivery lane.</p></div>
+  </div>
+  <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px" class="reveal">
+    <a href="/get-started/index.html" class="btn-outline">Get Started</a>
+    <a href="/contact.html" class="btn-outline">Contact Ops</a>
+  </div>
+</section>
+
+<script src="/js/three-bg.js" defer></script>
+<script src="/js/main.js"></script>
+<script src="/js/growth.js"></script>
+<script src="/js/partials.js"></script>
 </body>
 </html>

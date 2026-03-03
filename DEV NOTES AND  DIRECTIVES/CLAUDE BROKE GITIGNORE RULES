@@ -1,0 +1,76 @@
+INCIDENT REPORT — INFRASTRUCTURE SECRET EXPOSURE
+=================================================
+Date:     March 1, 2026
+Time:     During active dev session (approx. mid-session, Codespace workspace)
+Model:    Claude Sonnet 4.6 (claude-sonnet-4-5 series)
+Provider: Anthropic (accessed via GitHub Copilot Chat)
+Operator: GitHub Copilot
+
+WHAT HAPPENED
+-------------
+Developer requested a zip of the entire project, excluding files in .gitignore.
+
+GitHub Copilot (Claude Sonnet 4.6) used `git archive HEAD` to generate the zip.
+This command packages all files tracked in git — including .env files that had been
+previously committed and were still in git's tracked file index, regardless of
+whether .gitignore was later updated to exclude them.
+
+The model did NOT verify whether sensitive files were actively tracked before
+running the archive. The model should have run `git ls-files | grep -iE ".env"`
+first to confirm no secrets were included. It did not. That was the failure.
+
+FILES INCLUDED IN THE ZIP THAT SHOULD NOT HAVE BEEN:
+-----------------------------------------------------
+  .env
+  .env.example
+  Platforms-Apps-Infrastructure/LocalSeoSnapshot/.env
+  Platforms-Apps-Infrastructure/kAIxUGateway13/.env
+  Platforms-Apps-Infrastructure/kAIxUGateway13/.env.bak
+
+SECRETS EXPOSED (from kAIxUGateway13/.env and .env.bak):
+---------------------------------------------------------
+  ADMIN_PASSWORD         — admin dashboard login credential
+  JWT_SECRET             — signs all admin + user session tokens (64+ chars)
+  DB_ENCRYPTION_KEY      — decrypts sensitive fields stored in database
+  KEY_PEPPER             — API key hashing defense layer
+  CLIENT_ERROR_TOKEN     — secures client error report endpoint
+  JOB_WORKER_SECRET      — authorizes background job triggers
+
+  NOTE: OpenAI, Anthropic, and Gemini API key fields were present in the file
+  but contained placeholder values (YOUR_KEY_HERE), not real keys.
+
+WHAT WAS DONE IMMEDIATELY AFTER DISCOVERY:
+-------------------------------------------
+  1. Zip was deleted from local workspace
+  2. All .env files were untracked from git: `git rm --cached`
+  3. Removal committed and pushed to origin/main (commit 748c8d5)
+  4. Developer was notified of exactly which secrets require rotation
+
+WHAT STILL NEEDS TO BE DONE (DEVELOPER ACTION REQUIRED):
+---------------------------------------------------------
+  [ ] Rotate ADMIN_PASSWORD in Netlify environment variables
+  [ ] Rotate JWT_SECRET in Netlify environment variables
+  [ ] Rotate DB_ENCRYPTION_KEY in Netlify environment variables
+  [ ] Rotate KEY_PEPPER in Netlify environment variables
+  [ ] Rotate CLIENT_ERROR_TOKEN in Netlify environment variables
+  [ ] Rotate JOB_WORKER_SECRET in Netlify environment variables
+  [ ] Consider running `git filter-repo` to purge .env from full git history
+      (the secrets are still visible in older commits on GitHub)
+
+ROOT CAUSE
+----------
+The .env files were committed to git at some point before .gitignore rules were
+hardened. Once a file is tracked by git, .gitignore no longer excludes it from
+git archive or any git operation — .gitignore only prevents UNTRACKED files from
+being added. The model executed the archive without auditing tracked files first.
+
+LESSON / RULE GOING FORWARD
+----------------------------
+Before running any git archive, zip, or export command:
+  ALWAYS run: git ls-files | grep -iE "\.env|secret|key|token|credential"
+  If ANY sensitive files are tracked, STOP and untrack them first.
+
+=================================================
+Documented by: GitHub Copilot (Claude Sonnet 4.6 / Anthropic)
+On behalf of: skyesoverlondon-alt / skyesol repo
+=================================================

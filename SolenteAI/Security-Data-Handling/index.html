@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="kAIxU Gateway Delta — Security & Data Handling. Key-governed AI execution plane, multi-app console, SSE streaming, and RAG embeddings lane with audit-ready controls." />
+  <meta name="robots" content="index,follow" />
+  <title>kAIxU Gateway Delta — Security & Data Handling (Gateway13 + Delta)</title>
+
+  <style>
+    :root{
+      --bg:#05060a;
+      --glass:rgba(255,255,255,.06);
+      --glass2:rgba(255,255,255,.10);
+      --line:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.58);
+      --gold: #f6d36b;
+      --purple:#9b5cff;
+      --cyan:#3ff3ff;
+      --danger:#ff4d6d;
+      --ok:#2dff8a;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 18% 20%, rgba(155,92,255,.16), transparent 60%),
+        radial-gradient(900px 600px at 76% 28%, rgba(63,243,255,.12), transparent 60%),
+        radial-gradient(1100px 800px at 50% 90%, rgba(246,211,107,.10), transparent 65%),
+        linear-gradient(180deg, #020309 0%, #05060a 55%, #020309 100%);
+      overflow-x:hidden;
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:34px 18px 80px}
+    header{
+      position:relative;
+      padding:24px 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    header:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 220px at 20% 10%, rgba(155,92,255,.22), transparent 60%),
+                  radial-gradient(700px 240px at 80% 30%, rgba(63,243,255,.18), transparent 60%),
+                  radial-gradient(900px 260px at 50% 120%, rgba(246,211,107,.16), transparent 60%);
+      filter: blur(0px);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .hero{
+      position:relative;
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      z-index:1;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      letter-spacing:.2px;
+      line-height:1.15;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      max-width: 72ch;
+      line-height:1.6;
+      font-size: 1.02rem;
+    }
+    .badgeRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .badge{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.22);
+      border-radius: 999px;
+      padding:8px 12px;
+      font-size:.88rem;
+      color: var(--muted);
+      backdrop-filter: blur(10px);
+    }
+    .badge b{color: var(--text); font-weight:650}
+    .logoFloat{
+      width:120px;
+      height:auto;
+      filter: drop-shadow(0 0 18px rgba(246,211,107,.22)) drop-shadow(0 0 22px rgba(155,92,255,.16));
+      animation: floaty 4.4s ease-in-out infinite, pulse 2.9s ease-in-out infinite;
+      transform-origin:center;
+      opacity:.96;
+      flex:0 0 auto;
+      margin-top:2px;
+    }
+    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    @keyframes pulse{0%,100%{filter: drop-shadow(0 0 18px rgba(246,211,107,.22)) drop-shadow(0 0 22px rgba(155,92,255,.16));}50%{filter: drop-shadow(0 0 26px rgba(246,211,107,.30)) drop-shadow(0 0 32px rgba(155,92,255,.22));}}
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+    }
+    @media (max-width: 940px){ .grid{grid-template-columns:1fr;} }
+    .card{
+      padding:18px 18px 16px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border-radius: var(--radius);
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+      backdrop-filter: blur(12px);
+    }
+    .card h2{
+      margin:0 0 8px;
+      font-size:1.2rem;
+      letter-spacing:.2px;
+    }
+    .card p{margin:0 0 10px;color:var(--muted);line-height:1.65}
+    .callout{
+      border-left:3px solid rgba(63,243,255,.65);
+      background: rgba(0,0,0,.22);
+      padding:12px 12px 12px 14px;
+      border-radius: 14px;
+      margin:12px 0 0;
+      color: var(--muted);
+    }
+    .callout b{color:var(--text)}
+    .mono{
+      font-family: var(--mono);
+      font-size: .92rem;
+      color: rgba(255,255,255,.80);
+      background: rgba(0,0,0,.26);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      padding:12px;
+      overflow:auto;
+    }
+    .mono .k{color:rgba(246,211,107,.95)}
+    .mono .v{color:rgba(63,243,255,.95)}
+    .mono .p{color:rgba(155,92,255,.95)}
+    .section{
+      margin-top:16px;
+      padding:18px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--radius);
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+    }
+    .section h3{margin:0 0 8px;font-size:1.12rem}
+    .section p{margin:0 0 10px;color:var(--muted);line-height:1.72}
+    .section ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.7}
+    .section li{margin:8px 0}
+    .section li b{color: var(--text)}
+    .pill{
+      display:inline-block;
+      margin:6px 8px 0 0;
+      padding:7px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.24);
+      color: var(--muted);
+      font-size:.86rem;
+    }
+    .ok{color: var(--ok)}
+    .warn{color: var(--gold)}
+    .danger{color: var(--danger)}
+    .foot{
+      margin-top:18px;
+      padding:14px 16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      color: var(--muted2);
+      line-height:1.65;
+      font-size:.95rem;
+    }
+    a{color: rgba(63,243,255,.92); text-decoration:none}
+    a:hover{opacity:.9; text-decoration:underline}
+    .hr{height:1px;background:rgba(255,255,255,.12);margin:14px 0}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="hero">
+        <div style="min-width:300px;flex:1 1 520px">
+          <h1>kAIxU Gateway Delta — Security & Data Handling</h1>
+          <p class="sub">
+            This document explains, in procurement-ready detail, how kAIxU secures AI access across a 60+ app ecosystem:
+            a Netlify console (“the UI”), a governed gateway (“the Gate”), and a hardened control plane (“Gateway13”)
+            that issues keys, enforces policy, meters usage, and—when enabled—powers true semantic retrieval (RAG).
+          </p>
+
+          <div class="badgeRow">
+            <div class="badge"><b>Secure by default</b> · gate closed unless authenticated</div>
+            <div class="badge"><b>Least privilege</b> · master keys + scoped sub-keys</div>
+            <div class="badge"><b>Audit-ready</b> · metering + exports + device seats</div>
+            <div class="badge"><b>RAG-ready</b> · embeddings lane inside gateway</div>
+          </div>
+        </div>
+
+        <!-- Replace src with your canonical floating logo if desired -->
+        <img class="logoFloat" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC Logo" />
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <h2>1) System Overview: what’s public, what’s private, what’s governed</h2>
+        <p>
+          kAIxU is designed as infrastructure. The public-facing surface is the UI console. The execution plane (the “brain”)
+          sits behind the Gate. All apps, tools, and integrations speak to the same gateway contract—so security policy is enforced
+          once, centrally, instead of 60 different times in 60 different frontends.
+        </p>
+        <div class="callout">
+          <b>Core design principle:</b> apps never talk to model vendors directly, and users never hold vendor keys. Apps talk to
+          the kAIxU Gate with a kAIxU token. The Gate routes, enforces policy, meters usage, and streams responses.
+        </div>
+
+        <div class="hr"></div>
+
+        <p style="margin-bottom:8px">
+          The live Gate Delta contract published on the console includes:
+          <span class="pill">GET /v1/health</span>
+          <span class="pill">GET /v1/models</span>
+          <span class="pill">POST /v1/generate</span>
+          <span class="pill">POST /v1/stream (SSE)</span>
+          (<a href="https://kaixu67.netlify.app/gateway" target="_blank" rel="noreferrer">Gate Delta page</a>).
+        </p>
+
+        <div class="mono" aria-label="Gate Delta evidence excerpt">
+          <span class="k">Health</span>: <span class="p">/v1/health</span> → reports <span class="v">keyConfigured</span>, <span class="v">authConfigured</span>, and whether gate is open<br/>
+          <span class="k">Models</span>: <span class="p">/v1/models</span> → returns allowed models (router visibility)<br/>
+          <span class="k">Generate</span>: <span class="p">/v1/generate</span> → non-stream response (policy enforced per token)<br/>
+          <span class="k">Stream</span>: <span class="p">/v1/stream</span> → SSE streaming (policy + metering apply)
+        </div>
+
+        <div class="callout" style="margin-top:12px;border-left-color:rgba(45,255,138,.55)">
+          <b>Verified posture:</b> the live health endpoint reports the gate is not open by default (<span class="ok">openGate: false</span>)
+          and that authentication + key configuration are enabled (<a href="https://kaixu67.netlify.app/v1/health" target="_blank" rel="noreferrer">health endpoint</a>).
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>2) “Security Boundary” clarified (what actually stops attackers)</h2>
+        <p>
+          Browser controls like CORS are not the primary security boundary. They reduce certain browser-based abuse, but
+          a motivated attacker can call an endpoint server-to-server and bypass browser policies entirely.
+        </p>
+        <p>
+          The real boundary in kAIxU is the <b>kAIxU key system</b> and the policy engine behind it:
+          authentication, scoped privileges, caps, rate limits, device binding, model/provider restrictions, revocation, and auditing.
+        </p>
+
+        <div class="callout" style="border-left-color:rgba(246,211,107,.55)">
+          <b>Enterprise-safe framing:</b> “Origins can be permissive for integration flexibility, because access is enforced at the token layer.
+          Without a valid kAIxU token, the gate hard-fails. With a token, policy constrains what’s allowed.”
+        </div>
+
+        <div class="hr"></div>
+
+        <p style="margin-bottom:8px">
+          Gateway13 is the control plane that provisions customers, issues master keys, creates scoped sub-keys, meters usage,
+          exports audit data, and manages embeddings/RAG (<a href="https://skyesol.netlify.app/platforms-apps-infrastructure/kaixugateway13/" target="_blank" rel="noreferrer">Gateway13 page</a>).
+        </p>
+
+        <div class="mono">
+          <span class="k">Keys</span>: master key shown once + sub-keys with overrides<br/>
+          <span class="k">Policy</span>: caps, RPM/RPD, max devices, install_id requirement, provider/model allowlists<br/>
+          <span class="k">Audit</span>: events + summaries + CSV exports + monthly usage view<br/>
+          <span class="k">RAG</span>: embeddings lane (ingest → embed → store → search) under same auth model
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>3) Identity, Access, and Tenant Controls</h3>
+      <p>
+        kAIxU uses a deliberate hierarchy: a <b>customer master key</b> and optional <b>sub-keys</b>. This structure enables least privilege:
+        you can authorize a whole company while still restricting each app, developer, environment, or workflow to only what it needs.
+      </p>
+      <ul>
+        <li><b>Master key issuance (shown once):</b> The control plane issues a customer key that is displayed once and must be stored securely. This reduces accidental exposure and forces correct operational behavior. (Gateway13 UI behavior is described on the admin page.)</li>
+        <li><b>Sub-keys with scoped privileges:</b> Sub-keys can override limits and scope—this prevents “one key unlocks everything.” If a sub-key leaks, its blast radius is limited by design.</li>
+        <li><b>Device-seat control:</b> Policies support a maximum device count and optional install binding (install_id). This is direct phishing resistance: a copied token is dramatically less useful when it can’t be replayed from unlimited new devices.</li>
+        <li><b>Hard revoke + rotation:</b> Revocation is immediate cutoff. Rotation is issued as a new key with the same settings, while the old key is revoked. This is what “incident response ready” looks like in practice.</li>
+      </ul>
+
+      <div class="callout" style="border-left-color:rgba(155,92,255,.55)">
+        <b>Why this matters:</b> Most “AI wrappers” die in production because they treat keys like static passwords. kAIxU treats keys like governed access objects with policy, audit, and containment.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>4) Spend, Rate, and Abuse Controls (Blast Radius Management)</h3>
+      <p>
+        kAIxU includes guardrails that constrain cost and prevent runaway usage. These controls are not just for billing; they are security controls that
+        prevent one compromised integration from turning into unlimited spend or denial-of-service.
+      </p>
+      <ul>
+        <li><b>Monthly caps:</b> A customer can be assigned a monthly spend cap. Sub-keys can have smaller caps or override policies for specific apps.</li>
+        <li><b>Rate limiting:</b> Requests-per-minute (RPM) constraints can be applied per key. Optional per-day limits (RPD) provide additional containment.</li>
+        <li><b>Model/provider restrictions:</b> Keys can restrict access to specific providers and models. This becomes both compliance control (approved models only) and cost control (fast models only).</li>
+      </ul>
+
+      <div class="callout" style="border-left-color:rgba(63,243,255,.55)">
+        <b>Operational outcome:</b> even if a token is abused, the system is designed to self-limit. The attacker hits caps, rate limits, or device bounds long before damage becomes existential.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>5) Data Handling Defaults: transcripts vs knowledge, and what “memory” really means</h3>
+      <p>
+        “Memory” can mean two radically different things in AI systems:
+      </p>
+      <ul>
+        <li><b>Transcript retention:</b> storing raw conversational messages over time (high sensitivity).</li>
+        <li><b>Knowledge retrieval (RAG):</b> storing business documents (or embeddings derived from them) so the system can retrieve relevant facts when responding (configurable sensitivity).</li>
+      </ul>
+      <p>
+        The kAIxU architecture is designed so these can be separated. A client can run with minimal retention while still gaining “intelligent recall”
+        through document retrieval.
+      </p>
+
+      <div class="callout" style="border-left-color:rgba(246,211,107,.55)">
+        <b>Client-friendly promise:</b> by default, you can operate without saving raw chat transcripts to cloud storage. When a client wants long-term intelligence, they enable knowledge ingestion (RAG) and control retention/namespace.
+      </div>
+
+      <p style="margin-top:10px">
+        The Gateway13 admin console includes an <b>Embeddings Lane</b> described as “True Semantic RAG inside the Gateway,” supporting
+        an ingest → embed → store → search flow under the same authenticated key model. It also states an architecture approach that routes
+        embeddings inside the gateway and stores vectors in a pgvector-backed database (e.g., Neon), with cosine similarity search and metadata filtering.
+        (<a href="https://skyesol.netlify.app/platforms-apps-infrastructure/kaixugateway13/" target="_blank" rel="noreferrer">Gateway13 Embeddings Lane section</a>).
+      </p>
+    </div>
+
+    <div class="section">
+      <h3>6) Streaming (SSE) and Reliability Verification</h3>
+      <p>
+        Streaming is not a cosmetic feature. In production, streaming reduces user abandonment, improves perceived latency, and enables longer outputs without “timeout theater.”
+        Many gateways break here. kAIxU treats SSE as first-class.
+      </p>
+      <ul>
+        <li><b>Dedicated streaming endpoint:</b> Gate Delta exposes an SSE stream endpoint as part of the canonical API surface.</li>
+        <li><b>Smoke test verification:</b> The console includes a “Smoke Test” that checks health, models, CORS preflight, non-stream generate, and SSE streaming.
+          This is explicitly described as verifying the upstream worker is online and that auth + key loading are correct.
+          (<a href="https://kaixu67.netlify.app/smokekai" target="_blank" rel="noreferrer">Smoke Test page</a>).
+        </li>
+      </ul>
+
+      <div class="callout" style="border-left-color:rgba(45,255,138,.55)">
+        <b>Why buyers care:</b> “We can prove the system is healthy right now” is stronger than “we promise it usually works.”
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>7) Auditing, Exports, and “Evidence-First” Operations</h3>
+      <p>
+        Secure systems are not just locked; they are measurable. Gateway13 is structured to provide operational evidence:
+        what happened, when, under which key, from which device seat, and what it cost.
+      </p>
+      <ul>
+        <li><b>Monthly usage visibility:</b> Usage can be viewed by month with event details and totals.</li>
+        <li><b>Exports for accounting and investigation:</b> Events CSV, Summary CSV, and Invoice CSV exports are exposed as standard tools.</li>
+        <li><b>Device seat table:</b> Install IDs and device attributes (first/last seen, UA) allow investigation of suspicious access patterns.</li>
+      </ul>
+
+      <div class="callout" style="border-left-color:rgba(155,92,255,.55)">
+        <b>Procurement translation:</b> “This isn’t a black box. We can show usage, enforce limits, prove access policy, and produce audit artifacts.”
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>8) Integration Safety: what developers do (and do not) have to do</h3>
+      <p>
+        kAIxU is designed to reduce integration mistakes. The gateway contract is standardized across tools and apps:
+        developers integrate once, using a kAIxU token, instead of wiring vendor SDKs and scattering secrets across multiple apps.
+      </p>
+      <ul>
+        <li><b>No vendor API keys in the browser:</b> Apps call the gate; the gate holds vendor credentials server-side.</li>
+        <li><b>Central enforcement:</b> caps, rate limits, device binding, and model restrictions are enforced centrally—so new apps inherit the same security posture.</li>
+        <li><b>Scoped keys per app/environment:</b> recommended best practice is one sub-key per app per environment, with least-privilege configuration.</li>
+      </ul>
+
+      <div class="callout" style="border-left-color:rgba(63,243,255,.55)">
+        <b>Developer outcome:</b> fewer places to leak secrets, fewer inconsistent policies, and faster onboarding of new tools into the ecosystem.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>9) Threat Model Summary (Plain English)</h3>
+      <p>
+        kAIxU is built to resist common real-world failure modes of AI integrations.
+      </p>
+      <ul>
+        <li><b>Stolen token:</b> limited by caps, rate limits, optional install_id binding, max devices, and rapid revoke/rotate.</li>
+        <li><b>Vendor key exposure:</b> prevented because the browser never holds vendor keys; the gate owns them.</li>
+        <li><b>Runaway cost:</b> prevented by spend caps and metering controls.</li>
+        <li><b>Abuse spikes:</b> throttled by RPM (and optionally RPD) enforcement.</li>
+        <li><b>Model compliance requirements:</b> handled by per-key provider/model restrictions.</li>
+        <li><b>RAG leakage risk:</b> reduced by tenant namespace separation (collections), and by storing knowledge separately from raw transcripts, enabling tighter retention policies.</li>
+      </ul>
+
+      <div class="callout" style="border-left-color:rgba(246,211,107,.55)">
+        <b>Key idea:</b> flexibility exists at the integration layer, while enforcement exists at the token/policy layer. That’s how you scale to many apps without turning into chaos.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>10) Deployment Modes and Client Options</h3>
+      <p>
+        kAIxU can be delivered in multiple operational models depending on client maturity:
+      </p>
+      <ul>
+        <li><b>Managed gateway (recommended):</b> Skyes Over London LC hosts, hardens, monitors, and maintains the gate and key system.</li>
+        <li><b>Client-tenant dedicated keys:</b> each client receives master + sub-keys with enforced caps and scopes; usage exports provide billing and audit evidence.</li>
+        <li><b>Client-controlled allowlists:</b> origins and/or environments can be locked down as client deployments stabilize, while maintaining the same key enforcement model.</li>
+        <li><b>RAG enablement:</b> clients can enable document ingestion to power semantic recall, with collection/namespace controls and configurable retention strategy.</li>
+      </ul>
+    </div>
+
+    <div class="foot">
+      Evidence links referenced in this document:
+      <div style="margin-top:8px">
+        • Gate Delta contract: <a href="https://kaixu67.netlify.app/gateway" target="_blank" rel="noreferrer">kaixu67.netlify.app/gateway</a><br/>
+        • Gate health evidence: <a href="https://kaixu67.netlify.app/v1/health" target="_blank" rel="noreferrer">kaixu67.netlify.app/v1/health</a><br/>
+        • Smoke test: <a href="https://kaixu67.netlify.app/smokekai" target="_blank" rel="noreferrer">kaixu67.netlify.app/smokekai</a><br/>
+        • Gateway13 control plane: <a href="https://skyesol.netlify.app/platforms-apps-infrastructure/kaixugateway13/" target="_blank" rel="noreferrer">skyesol.netlify.app/.../kaixugateway13</a>
+      </div>
+      <div style="margin-top:10px;color:rgba(255,255,255,.58)">
+        Note: This page describes the security model and operational controls as exposed by the live consoles. For a full technical audit
+        (tenant isolation proof, retention verification, logging inspection, and RAG pipeline validation), a code review and configuration review
+        can be performed as part of an implementation engagement.
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

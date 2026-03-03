@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE NET WORKS · FEATURING Dispatch Index</title>
+  <meta name="description" content="Index of THE NET WORKS FEATURING dispatches.">
+  <link rel="canonical" href="https://skyesol.netlify.app/THE%20NET%20WORKS/FEATURING/index.html">
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; font-family: Inter, Arial, sans-serif; background: #05050a; color: #f4f4f5; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { margin: 0 0 10px; font-size: 2rem; }
+    p { color: #c4c4ca; }
+    .top-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 24px; }
+    .top-links a { color: #9eeaf9; border: 1px solid #2d6a76; padding: 8px 12px; border-radius: 999px; text-decoration: none; }
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    li { border: 1px solid #22232a; border-radius: 12px; background: #0f1016; }
+    a.post { display: block; padding: 12px 14px; color: #f4f4f5; text-decoration: none; }
+    a.post:hover { background: #151621; }
+    .meta { display: block; font-size: .82rem; color: #b5b5be; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>THE NET WORKS · FEATURING</h1>
+    <p>Dispatch index for all FEATURING pages in this folder.</p>
+    <div class="top-links">
+      <a href="/blog.html">Back to Blog</a>
+      <a href="/sitemap-visual.html">Visual Sitemap</a>
+    </div>
+
+    <ul id="postList"></ul>
+  </main>
+
+  <script>
+    const posts = [
+      "ai-that-doesn-t-spy-phoenix-eldercare-and-radar-based-fall-risk-signals.html",
+      "asu-s-principled-ai-push-when-a-university-treats-genai-like-infrastructure.html",
+      "autonomy-in-the-desert-honeywell-s-phoenix-tests-and-the-reality-of-ai-in-the-air.html",
+      "expanding-to-the-tokyo-node.html",
+      "healthcare-ai-in-metro-phoenix-fast-wins-real-patients-no-camera-drama.html",
+      "latent-space-cartography.html",
+      "microchip-in-chandler-embedded-ml-as-the-quiet-workhorse-of-the-valley.html",
+      "next-gen-neuromorphic-hardware.html",
+      "nxp-and-physical-ai-the-industrial-version-of-intelligence-phoenix-businesses-actually-use.html",
+      "onsemi-in-scottsdale-power-electronics-as-ai-s-hidden-bottleneck.html",
+      "phoenix-ai-index-the-companies-institutions-and-infrastructure-that-actually-matter.html",
+      "phoenix-s-physical-ai-corridor-chips-power-and-edge-intelligence.html",
+      "post-scarcity-economics-agi.html",
+      "quantum-state-integration-in-neural-nets.html",
+      "skyes-over-london-acquires-deepmind-top-talent.html",
+      "skyes-over-london-strategic-memo.html",
+      "solenteai-closes-12b-series-c.html",
+      "synthetic-consciousness.html",
+      "tgen-in-downtown-phoenix-data-heavy-biotech-and-the-next-wave-of-applied-ai.html",
+      "the-architecture-of-agi-breaking-the-compute-barrier.html",
+      "the-ethics-of-synthetic-cognition.html",
+      "the-illusion-of-alignment.html",
+      "tsmc-arizona-and-the-local-ai-supply-chain-phoenix-as-a-strategic-node.html",
+      "wavex-and-the-arizona-commerce-authority-a-new-kind-of-ai-venture-studio-in-phoenix.html",
+      "workforce-ai-in-the-east-valley-intel-community-colleges-as-a-talent-multiplier.html",
+      "zero-shot-multimodal-synthesis.html"
+    ];
+
+    const dateMap = {
+      "phoenix-s-physical-ai-corridor-chips-power-and-edge-intelligence.html": "Feb 28, 2026",
+      "asu-s-principled-ai-push-when-a-university-treats-genai-like-infrastructure.html": "Feb 27, 2026",
+      "wavex-and-the-arizona-commerce-authority-a-new-kind-of-ai-venture-studio-in-phoenix.html": "Feb 26, 2026",
+      "healthcare-ai-in-metro-phoenix-fast-wins-real-patients-no-camera-drama.html": "Feb 25, 2026",
+      "autonomy-in-the-desert-honeywell-s-phoenix-tests-and-the-reality-of-ai-in-the-air.html": "Feb 24, 2026",
+      "ai-that-doesn-t-spy-phoenix-eldercare-and-radar-based-fall-risk-signals.html": "Feb 22, 2026",
+      "microchip-in-chandler-embedded-ml-as-the-quiet-workhorse-of-the-valley.html": "Feb 20, 2026",
+      "onsemi-in-scottsdale-power-electronics-as-ai-s-hidden-bottleneck.html": "Feb 18, 2026",
+      "nxp-and-physical-ai-the-industrial-version-of-intelligence-phoenix-businesses-actually-use.html": "Feb 16, 2026",
+      "tsmc-arizona-and-the-local-ai-supply-chain-phoenix-as-a-strategic-node.html": "Feb 14, 2026",
+      "tgen-in-downtown-phoenix-data-heavy-biotech-and-the-next-wave-of-applied-ai.html": "Feb 11, 2026",
+      "workforce-ai-in-the-east-valley-intel-community-colleges-as-a-talent-multiplier.html": "Feb 08, 2026",
+      "phoenix-ai-index-the-companies-institutions-and-infrastructure-that-actually-matter.html": "Feb 04, 2026"
+    };
+
+    const friendly = (filename) => filename
+      .replace(/\.html$/i, '')
+      .replace(/-/g, ' ')
+      .replace(/\b\w/g, c => c.toUpperCase())
+      .replace(/\bAgi\b/g, 'AGI')
+      .replace(/\bAi\b/g, 'AI')
+      .replace(/\bAsu\b/g, 'ASU')
+      .replace(/\bTsmc\b/g, 'TSMC')
+      .replace(/\bNxp\b/g, 'NXP');
+
+    const list = document.getElementById('postList');
+    list.innerHTML = posts
+      .map(name => {
+        const date = dateMap[name] ? `<span class="meta">${date}</span>` : '';
+        return `<li><a class="post" href="./${encodeURIComponent(name)}">${friendly(name)}${date}</a></li>`;
+      })
+      .join('');
+  </script>
+</body>
+</html>

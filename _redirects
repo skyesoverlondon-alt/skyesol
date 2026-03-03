@@ -114,3 +114,10 @@
 /case-studies/               /Case%20Studies/index.html  301
 /case-studies/index.html     /Case%20Studies/index.html  301
 /case-studies/*              /Case%20Studies/:splat      301
+
+# Blog canonical alias
+/blog/index.html             /blog.html                                                       301
+
+# THE NET WORKS FEATURING dispatch aliases
+/insights/phoenix-dispatch/:slug/   /THE%20NET%20WORKS/FEATURING/:slug.html                  301
+/insights/phoenix-dispatch/:slug    /THE%20NET%20WORKS/FEATURING/:slug.html                  301

@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#190b2b" />
+  <meta name="description" content="Drop a repo ZIP or folder and run tests live in your browser." />
+  <title>ZipRepoTest Fix v5</title>
+  <link rel="icon" href="./brand-logo.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brandLogo" src="./brand-logo.svg" alt="logo" />
+        <div>
+          <div class="brandTitle">ZipRepoTest Fix v5</div>
+          <div class="brandSub">No service worker. No module script files. Inline boot. ZIP + Folder support.</div>
+        </div>
+      </div>
+      <div class="row" style="margin:0;">
+        <button id="resetBtn" class="btn btnGhost">Reset</button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>Preflight</h2>
+        <div class="kv">
+          <span id="pillBoot" class="pill warn">boot: …</span>
+          <span id="pillXiso" class="pill warn">crossOriginIsolated: …</span>
+          <span id="pillSAB" class="pill warn">SharedArrayBuffer: …</span>
+          <span id="pillDeps" class="pill warn">deps: …</span>
+        </div>
+        <div id="preflightHint" class="hint hidden"></div>
+
+        <div style="height:1px; background:rgba(255,255,255,.10); margin:14px 0;"></div>
+
+        <h2>Load repo</h2>
+        <div id="dropZone" class="dropZone" tabindex="0">
+          <div style="font-weight:900;">Drop ZIP or Folder here</div>
+          <div class="muted small" style="margin-top:6px;">If drop does nothing, use the buttons (folder APIs vary by browser).</div>
+        </div>
+
+        <div class="row">
+          <button id="pickZipBtn" class="btn">Choose ZIP</button>
+          <button id="pickFolderFsBtn" class="btn">Choose Folder (FS API)</button>
+          <button id="pickFolderBtn" class="btn">Choose Folder (Legacy)</button>
+
+          <input id="zipPicker" type="file" accept=".zip" class="hidden" />
+          <input id="folderPicker" type="file" class="hidden" webkitdirectory directory multiple />
+        </div>
+
+        <div id="sourceMeta" class="meta hidden"></div>
+
+        <h2 style="margin-top:14px;">Detected</h2>
+        <div id="detectedBox" class="meta hidden"></div>
+
+        <div id="pkgBox" class="row hidden">
+          <label class="label">package.json location</label>
+          <select id="pkgSelect" class="select"></select>
+        </div>
+
+        <div id="warnBox" class="hint hidden"></div>
+      </section>
+
+      <section class="card">
+        <h2>Run</h2>
+        <div class="row">
+          <label class="label">Project subdir</label>
+          <input id="subdirInput" class="input mono" value="." />
+        </div>
+
+        <div class="row">
+          <label class="label">Command</label>
+          <select id="cmdSelect" class="select">
+            <option value="npm test --if-present">npm test --if-present</option>
+            <option value="npm run build --if-present">npm run build --if-present</option>
+            <option value="npm run lint --if-present">npm run lint --if-present</option>
+            <option value="npm run typecheck --if-present">npm run typecheck --if-present</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <button id="prepareBtn" class="btn btnGold" disabled>Prepare (mount + install)</button>
+          <button id="runBtn" class="btn btnPrimary" disabled>Run</button>
+          <button id="stopBtn" class="btn btnGhost" disabled>Stop</button>
+          <button id="reportBtn" class="btn btnGhost" disabled>Download Report</button>
+        </div>
+
+        <div id="status" class="muted small" style="margin-top:10px; min-height:18px;"></div>
+
+        <div class="consoleWrap">
+          <div class="consoleHeader">
+            <div>Live Console</div>
+            <div id="consoleHint" class="muted small"></div>
+          </div>
+          <pre id="console" class="console"></pre>
+        </div>
+
+        <div id="errors" class="hint hidden" style="border-color: rgba(251,113,133,.45); background: rgba(251,113,133,.10); color: rgba(255,230,235,.95);"></div>
+      </section>
+
+      <section class="card span2">
+        <h2>Files</h2>
+        <div id="tree" class="tree muted small">No repo loaded.</div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module">
+    const el = (id) => document.getElementById(id);
+    const show = (id,on=true)=> el(id).classList.toggle("hidden", !on);
+    const setText = (id,txt)=> { el(id).textContent = txt; };
+    const pill = (id,label,ok,kind)=>{
+      const p = el(id);
+      p.textContent = label;
+      p.className = "pill " + (ok ? "ok" : (kind || "warn"));
+    };
+    const hint = (msg)=>{
+      if(!msg){ show("preflightHint", false); setText("preflightHint",""); return; }
+      show("preflightHint", true); setText("preflightHint", msg);
+    };
+    const warn = (msg)=>{
+      if(!msg){ show("warnBox", false); setText("warnBox",""); return; }
+      show("warnBox", true); setText("warnBox", msg);
+    };
+    const errBox = (msg)=>{
+      if(!msg){ show("errors", false); setText("errors",""); return; }
+      show("errors", true); setText("errors", msg);
+    };
+
+    const state = {
+      JSZip: null,
+      WebContainer: null,
+      wc: null,
+      sourceType: null,
+      sourceName: "",
+      zip: null,
+      folderFiles: [],
+      allPaths: [],
+      pkgPaths: [],
+      selectedPkg: null,
+      prefix: "",
+      tree: null,
+      prepared: false,
+      currentProc: null,
+      log: "",
+      report: null
+    };
+
+    function resetCommands(){
+      const cmd = el("cmdSelect");
+      cmd.innerHTML = "";
+      ["npm test --if-present","npm run build --if-present","npm run lint --if-present","npm run typecheck --if-present"]
+        .forEach(v=>{
+          const o=document.createElement("option"); o.value=v; o.textContent=v; cmd.appendChild(o);
+        });
+    }
+
+    function resetAll(){
+      state.sourceType=null; state.sourceName=""; state.zip=null; state.folderFiles=[];
+      state.allPaths=[]; state.pkgPaths=[]; state.selectedPkg=null; state.prefix="";
+      state.tree=null; state.prepared=false; state.currentProc=null; state.log=""; state.report=null;
+
+      setText("tree","No repo loaded.");
+      show("sourceMeta", false);
+      show("detectedBox", false);
+      show("pkgBox", false);
+      el("pkgSelect").innerHTML = "";
+      el("subdirInput").value = ".";
+      setText("status","");
+      errBox("");
+      warn("");
+      el("prepareBtn").disabled=true;
+      el("runBtn").disabled=true;
+      el("stopBtn").disabled=true;
+      el("reportBtn").disabled=true;
+      el("console").textContent="";
+      resetCommands();
+    }
+
+    function consoleWrite(chunk){
+      const pre = el("console");
+      state.log += chunk;
+      if(state.log.length > 200000) state.log = state.log.slice(-200000);
+      pre.textContent = state.log;
+      pre.scrollTop = pre.scrollHeight;
+    }
+
+    function renderFileList(paths){
+      const max = 900;
+      const lines = [...paths].sort((a,b)=>a.localeCompare(b));
+      const out = lines.slice(0,max);
+      if(lines.length>max) out.push(`… (${lines.length-max} more)`);
+      setText("tree", out.length?out.join("\n"):"No files.");
+    }
+
+    function findPkgPaths(paths){
+      return paths
+        .filter(p => p.toLowerCase().endsWith("package.json"))
+        .filter(p => !p.toLowerCase().includes("/node_modules/") && !p.toLowerCase().startsWith("node_modules/"))
+        .sort((a,b)=>a.localeCompare(b));
+    }
+
+    function dirname(path){
+      const idx = path.lastIndexOf("/");
+      return idx === -1 ? "." : (path.slice(0, idx) || ".");
+    }
+    function normalizeSubdir(p){
+      if(!p || p === ".") return ".";
+      return p.replace(/^\//,"").replace(/\/$/,"");
+    }
+
+    function computePrefixFromPaths(paths){
+      const parts = paths.map(p => p.split("/").filter(Boolean));
+      if(parts.length === 0) return "";
+      const first = parts[0][0];
+      if(first && parts.every(a => a[0] === first)) return first + "/";
+      return "";
+    }
+    function stripPrefixFromList(paths, prefix){
+      return paths.map(p => (prefix && p.startsWith(prefix)) ? p.slice(prefix.length).replace(/^\/+/, "") : p.replace(/^\/+/, "")).filter(Boolean);
+    }
+
+    function isLikelyText(path){
+      const p = path.toLowerCase();
+      const exts = [".js",".mjs",".cjs",".ts",".tsx",".jsx",".json",".md",".txt",".yml",".yaml",".toml",".ini",".env",".gitignore",".npmrc",".html",".css",".scss",".less",".svg",".xml",".csv",".sh",".py",".go",".java",".kt",".rs",".c",".cpp",".h",".hpp"];
+      return exts.some(e=>p.endsWith(e));
+    }
+    function setTreeEntry(tree, parts, contents){
+      if(parts.length===1){ tree[parts[0]] = { file:{ contents } }; return; }
+      const dir = parts[0];
+      if(!tree[dir]) tree[dir] = { directory:{} };
+      if(!tree[dir].directory) tree[dir].directory = {};
+      setTreeEntry(tree[dir].directory, parts.slice(1), contents);
+    }
+
+    async function preflight(){
+      pill("pillBoot","boot: running", true, "ok");
+      const xiso = !!window.crossOriginIsolated;
+      const sab = typeof SharedArrayBuffer !== "undefined";
+      pill("pillXiso", `crossOriginIsolated: ${xiso}`, xiso, xiso ? "ok" : "bad");
+      pill("pillSAB", `SharedArrayBuffer: ${sab}`, sab, sab ? "ok" : (xiso ? "bad" : "warn"));
+
+      if(!xiso){
+        hint("Headers not applied. In Netlify Drop, make sure the _headers file is at the site root. Then hard refresh (Ctrl+Shift+R).");
+        return false;
+      }
+      if(!sab){
+        hint("SharedArrayBuffer blocked by browser policy. This prevents WebContainers from booting.");
+        return false;
+      }
+      hint("");
+      return true;
+    }
+
+    async function loadDeps(){
+      try{
+        const zipMod = await import("https://esm.sh/jszip@3.10.1");
+        state.JSZip = zipMod.default || zipMod;
+      }catch(e){
+        pill("pillDeps", "deps: JSZip failed", false, "bad");
+        hint("JSZip import blocked. Network/extensions can block esm.sh.");
+        throw e;
+      }
+
+      try{
+        const wcMod = await import("https://esm.sh/@webcontainer/api@1.6.1");
+        state.WebContainer = wcMod.WebContainer;
+      }catch(e){
+        pill("pillDeps", "deps: WebContainer failed", false, "bad");
+        hint("WebContainer import blocked. Network/extensions can block esm.sh.");
+        throw e;
+      }
+
+      pill("pillDeps", "deps: loaded", true, "ok");
+      return true;
+    }
+
+    async function bootWC(){
+      if(state.wc) return state.wc;
+      setText("status","Booting runtime…");
+      state.wc = await state.WebContainer.boot({ workdirName:"workspace" });
+      setText("status","Runtime ready.");
+      return state.wc;
+    }
+    async function clearProject(){
+      try{ await state.wc.fs.rm("/project", { recursive:true, force:true }); }catch{}
+      try{ await state.wc.fs.mkdir("/project", { recursive:true }); }catch{}
+    }
+
+    function parseCommand(cmd){
+      const out=[]; let cur=""; let q=null;
+      for(let i=0;i<cmd.length;i++){
+        const ch=cmd[i];
+        if(q){ if(ch===q){ q=null; continue; } cur+=ch; continue; }
+        if(ch==="'"||ch==='"'){ q=ch; continue; }
+        if(ch===" "){ if(cur){ out.push(cur); cur=""; } continue; }
+        cur+=ch;
+      }
+      if(cur) out.push(cur);
+      return out;
+    }
+    async function runProc(cmd, cwd){
+      const parts = parseCommand(cmd);
+      const bin = parts.shift(); const args = parts;
+      const proc = await state.wc.spawn(bin, args, { cwd, output:true });
+      state.currentProc = proc;
+      proc.output.pipeTo(new WritableStream({ write(data){ consoleWrite(data); } }));
+      const code = await proc.exit;
+      state.currentProc = null;
+      return code;
+    }
+
+    async function chooseInstallCommand(cwd){
+      const exists = async (name) => { try{ await state.wc.fs.stat(`${cwd}/${name}`); return true; }catch{ return false; } };
+      if(await exists("pnpm-lock.yaml")) return "pnpm install";
+      if(await exists("yarn.lock")) return "yarn install";
+      if(await exists("package-lock.json")) return "npm ci";
+      return "npm install";
+    }
+    async function installDeps(cwd){
+      const first = await chooseInstallCommand(cwd);
+      consoleWrite(`== ${first} ==\n`);
+      let code = await runProc(first, cwd);
+      if(code === 0) return { ok:true, cmd:first };
+
+      if(first.startsWith("npm ")){
+        consoleWrite(`\n== npm install --legacy-peer-deps (fallback) ==\n`);
+        const c2 = await runProc("npm install --legacy-peer-deps", cwd);
+        if(c2 === 0) return { ok:true, cmd:"npm install --legacy-peer-deps" };
+      }
+
+      consoleWrite(`\n== npm install (fallback) ==\n`);
+      const c3 = await runProc("npm install", cwd);
+      if(c3 === 0) return { ok:true, cmd:"npm install" };
+
+      return { ok:false, cmd:first, code };
+    }
+
+    async function setSelectedPkg(pkgPath){
+      state.selectedPkg = pkgPath;
+      el("subdirInput").value = normalizeSubdir(dirname(pkgPath));
+      resetCommands();
+
+      let pkgObj = null;
+      try{
+        if(state.sourceType === "zip"){
+          const originalPkg = state.prefix ? (state.prefix + pkgPath) : pkgPath;
+          const txt = await state.zip.file(originalPkg).async("string");
+          pkgObj = JSON.parse(txt);
+        }else if(state.sourceType === "folder"){
+          const found = state.folderFiles.find(x => x.path === pkgPath);
+          if(found){
+            const txt = await found.file.text();
+            pkgObj = JSON.parse(txt);
+          }
+        }
+      }catch{}
+
+      const scripts = pkgObj?.scripts ? Object.keys(pkgObj.scripts) : [];
+      const cmdSel = el("cmdSelect");
+      const existing = new Set([...cmdSel.options].map(o=>o.value));
+      for(const s of scripts){
+        const v = s==="test" ? "npm test" : `npm run ${s}`;
+        if(existing.has(v)) continue;
+        const o=document.createElement("option");
+        o.value=v; o.textContent=v;
+        cmdSel.appendChild(o);
+        existing.add(v);
+      }
+
+      show("detectedBox", true);
+      setText("detectedBox", JSON.stringify({
+        kind: "node",
+        packageJson: pkgPath,
+        packageName: pkgObj?.name || "",
+        scripts
+      }, null, 2));
+
+      el("prepareBtn").disabled = false;
+      el("runBtn").disabled = true;
+      warn("");
+      setText("status", "Ready. Click Prepare.");
+    }
+
+    async function buildTreeFromZip(){
+      const zip = state.zip;
+      const prefix = state.prefix;
+      const tree = {};
+      const decoder = new TextDecoder("utf-8", { fatal:false });
+
+      const entries = [];
+      zip.forEach((path, file)=>{
+        if(file.dir) return;
+        let p = path.replaceAll("\\","/");
+        if(prefix && p.startsWith(prefix)) p = p.slice(prefix.length);
+        p = p.replace(/^\/+/, "");
+        if(!p) return;
+        const low = p.toLowerCase();
+        if(low.includes("/.git/") || low.startsWith(".git/")) return;
+        if(low.includes("/node_modules/") || low.startsWith("node_modules/")) return;
+        entries.push({ p, file });
+      });
+
+      for(const e of entries){
+        const parts = e.p.split("/").filter(Boolean);
+        const buf = await e.file.async("uint8array");
+        const contents = isLikelyText(e.p) ? decoder.decode(buf) : buf;
+        setTreeEntry(tree, parts, contents);
+      }
+      return tree;
+    }
+
+    async function buildTreeFromFolder(){
+      const tree = {};
+      const decoder = new TextDecoder("utf-8", { fatal:false });
+
+      for(const item of state.folderFiles){
+        const p = item.path.replace(/^\/+/, "");
+        if(!p) continue;
+        const low = p.toLowerCase();
+        if(low.includes("/.git/") || low.startsWith(".git/")) continue;
+        if(low.includes("/node_modules/") || low.startsWith("node_modules/")) continue;
+        const parts = p.split("/").filter(Boolean);
+        const buf = new Uint8Array(await item.file.arrayBuffer());
+        const contents = isLikelyText(p) ? decoder.decode(buf) : buf;
+        setTreeEntry(tree, parts, contents);
+      }
+      return tree;
+    }
+
+    async function finalizeDetection(){
+      state.pkgPaths = findPkgPaths(state.allPaths);
+
+      show("sourceMeta", true);
+      setText("sourceMeta", `${state.sourceType.toUpperCase()} • ${state.sourceName}\nfiles: ${state.allPaths.length}\npackages: ${state.pkgPaths.length}`);
+
+      if(state.pkgPaths.length === 0){
+        show("detectedBox", true);
+        setText("detectedBox", JSON.stringify({ kind:"unknown", packageJsonFound:false }, null, 2));
+        warn("No package.json found. This browser runner can only EXECUTE Node/JS projects. (It will still show files.)");
+        setText("status","Loaded (not runnable).");
+        el("prepareBtn").disabled = true;
+        return;
+      }
+
+      setText("status","Building mount tree…");
+      state.tree = state.sourceType === "zip" ? await buildTreeFromZip() : await buildTreeFromFolder();
+
+      const sel = el("pkgSelect");
+      sel.innerHTML = "";
+
+      if(state.pkgPaths.length === 1){
+        show("pkgBox", false);
+        await setSelectedPkg(state.pkgPaths[0]);
+      }else{
+        show("pkgBox", true);
+        state.pkgPaths.forEach(p=>{
+          const o=document.createElement("option");
+          o.value=p; o.textContent=p;
+          sel.appendChild(o);
+        });
+        const best = state.pkgPaths.slice().sort((a,b)=>a.split("/").length - b.split("/").length)[0];
+        sel.value = best;
+        await setSelectedPkg(best);
+        sel.onchange = async ()=> { await setSelectedPkg(sel.value); };
+      }
+    }
+
+    async function handleZipFile(file){
+      resetAll();
+      if(!file || !file.name?.toLowerCase().endsWith(".zip")) return errBox("Please choose a .zip file.");
+
+      state.sourceType = "zip";
+      state.sourceName = file.name;
+
+      setText("status","Reading ZIP…");
+      const zip = await state.JSZip.loadAsync(await file.arrayBuffer());
+      state.zip = zip;
+
+      const orig = [];
+      zip.forEach((path, entry)=>{ if(!entry.dir) orig.push(path.replaceAll("\\","/")); });
+
+      state.prefix = computePrefixFromPaths(orig);
+      state.allPaths = stripPrefixFromList(orig, state.prefix);
+
+      renderFileList(state.allPaths);
+      await finalizeDetection();
+    }
+
+    async function handleFolderLegacy(files){
+      resetAll();
+      if(!files || files.length === 0) return errBox("No files received from folder picker.");
+
+      state.sourceType = "folder";
+      const items = [];
+      const paths = [];
+      for(const f of files){
+        const rp = (f.webkitRelativePath || f.name || "").replaceAll("\\","/");
+        if(!rp) continue;
+        items.push({ path: rp, file: f });
+        paths.push(rp);
+      }
+      const prefix = computePrefixFromPaths(paths);
+      state.folderFiles = items.map(x => ({ path: stripPrefixFromList([x.path], prefix)[0], file: x.file })).filter(x=>x.path);
+      state.allPaths = state.folderFiles.map(x=>x.path);
+      state.sourceName = prefix ? prefix.replace(/\/$/,"") : "folder";
+
+      renderFileList(state.allPaths);
+      await finalizeDetection();
+    }
+
+    async function handleFolderFsApi(){
+      resetAll();
+      if(!("showDirectoryPicker" in window)){
+        errBox("File System Access API not available in this browser. Use Choose Folder (Legacy).");
+        return;
+      }
+      state.sourceType = "folder";
+      setText("status","Opening folder picker…");
+
+      const dir = await window.showDirectoryPicker();
+      state.sourceName = dir.name || "folder";
+      const files = [];
+
+      async function walk(handle, base){
+        for await (const [name, entry] of handle.entries()){
+          if(entry.kind === "file"){
+            const f = await entry.getFile();
+            files.push({ path: (base + name).replaceAll("\\","/"), file: f });
+          }else if(entry.kind === "directory"){
+            await walk(entry, (base + name + "/").replaceAll("\\","/"));
+          }
+        }
+      }
+      await walk(dir, "");
+
+      state.folderFiles = files;
+      state.allPaths = files.map(x=>x.path);
+
+      renderFileList(state.allPaths);
+      await finalizeDetection();
+    }
+
+    async function prepare(){
+      errBox(""); warn(""); state.log=""; el("console").textContent=""; el("reportBtn").disabled=true; state.report=null;
+
+      if(!state.tree) return errBox("No runnable Node project loaded yet.");
+      if(!state.selectedPkg) return errBox("No package.json selected.");
+
+      await bootWC();
+      await clearProject();
+
+      setText("status","Mounting files…");
+      await state.wc.mount(state.tree, { mountPoint:"/project" });
+
+      const subdir = normalizeSubdir((el("subdirInput").value||".").trim()||".");
+      const cwd = subdir==="."?"/project":(`/project/${subdir}`);
+
+      setText("status","Installing dependencies…");
+      const res = await installDeps(cwd);
+
+      if(!res.ok){
+        setText("status","Install failed.");
+        errBox("Dependency install failed. Common causes: native deps (node-gyp), unsupported binaries, private registries, peer conflicts.");
+        state.prepared=false;
+        el("runBtn").disabled=true;
+        return;
+      }
+
+      setText("status","Prepared.");
+      state.prepared=true;
+      el("runBtn").disabled=false;
+    }
+
+    async function runSelected(){
+      errBox(""); warn("");
+      if(!state.prepared) return errBox("Click Prepare first.");
+
+      el("runBtn").disabled=true;
+      el("prepareBtn").disabled=true;
+      el("stopBtn").disabled=false;
+
+      const subdir = normalizeSubdir((el("subdirInput").value||".").trim()||".");
+      const cwd = subdir==="."?"/project":(`/project/${subdir}`);
+      const cmd = el("cmdSelect").value;
+
+      setText("status","Running…");
+      consoleWrite(`\n== ${cmd} ==\n`);
+
+      const startedAt = new Date().toISOString();
+      const code = await runProc(cmd, cwd);
+      const endedAt = new Date().toISOString();
+
+      setText("status", code===0 ? "Success." : "Failed.");
+      consoleWrite(`\n== exit ${code} ==\n`);
+
+      state.report = {
+        sourceType: state.sourceType,
+        sourceName: state.sourceName,
+        packageJson: state.selectedPkg,
+        subdir,
+        command: cmd,
+        exitCode: code,
+        ok: code===0,
+        startedAt,
+        endedAt,
+        log: state.log
+      };
+      el("reportBtn").disabled=false;
+
+      el("stopBtn").disabled=true;
+      el("prepareBtn").disabled=false;
+      el("runBtn").disabled=false;
+    }
+
+    function stop(){
+      if(state.currentProc){ try{ state.currentProc.kill(); }catch{} }
+      el("stopBtn").disabled=true;
+      setText("status","Stopped.");
+      consoleWrite("\n== stopped ==\n");
+    }
+
+    function downloadReport(){
+      if(!state.report) return;
+      const blob = new Blob([JSON.stringify(state.report,null,2)], { type:"application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href=url; a.download="ziprepotest-report.json";
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function wire(){
+      const dz = el("dropZone");
+      const zipPicker = el("zipPicker");
+      const folderPicker = el("folderPicker");
+
+      el("resetBtn").addEventListener("click", resetAll);
+      el("pickZipBtn").addEventListener("click", ()=> zipPicker.click());
+      el("pickFolderBtn").addEventListener("click", ()=> folderPicker.click());
+      el("pickFolderFsBtn").addEventListener("click", ()=> handleFolderFsApi().catch(e=>errBox(e?.message||String(e))));
+
+      zipPicker.addEventListener("change", async (e)=>{
+        const f = e.target.files?.[0];
+        if(f) await handleZipFile(f).catch(e=>errBox(e?.message||String(e)));
+        zipPicker.value="";
+      });
+
+      folderPicker.addEventListener("change", async (e)=>{
+        const files = e.target.files;
+        if(files && files.length) await handleFolderLegacy(files).catch(e=>errBox(e?.message||String(e)));
+        folderPicker.value="";
+      });
+
+      dz.addEventListener("dragover", (e)=>{ e.preventDefault(); dz.classList.add("dragover"); });
+      dz.addEventListener("dragleave", ()=> dz.classList.remove("dragover"));
+      dz.addEventListener("drop", async (e)=>{
+        e.preventDefault();
+        dz.classList.remove("dragover");
+
+        const f = e.dataTransfer?.files?.[0];
+        if(f && f.name && f.name.toLowerCase().endsWith(".zip")){
+          await handleZipFile(f).catch(er=>errBox(er?.message||String(er)));
+          return;
+        }
+
+        errBox("Folder drop is unreliable across browsers. Use Choose Folder (FS API) or Choose Folder (Legacy).");
+      });
+
+      el("prepareBtn").addEventListener("click", ()=> prepare().catch(e=>errBox(e?.message||String(e))));
+      el("runBtn").addEventListener("click", ()=> runSelected().catch(e=>errBox(e?.message||String(e))));
+      el("stopBtn").addEventListener("click", stop);
+      el("reportBtn").addEventListener("click", downloadReport);
+    }
+
+    // Boot
+    (async ()=>{
+      pill("pillBoot","boot: starting", false, "warn");
+      wire();
+      resetAll();
+
+      const ok = await preflight();
+      if(!ok){
+        pill("pillDeps","deps: blocked by headers", false, "warn");
+        return;
+      }
+      try{
+        pill("pillDeps","deps: loading…", false, "warn");
+        await loadDeps();
+      }catch(e){
+        errBox(String(e?.message||e));
+        return;
+      }
+    })();
+  </script>
+</body>
+</html>

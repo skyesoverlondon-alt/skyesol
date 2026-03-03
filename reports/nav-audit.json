@@ -1,0 +1,3945 @@
+{
+  "scannedHtml": 567,
+  "totalInternalRootLinks": 20610,
+  "missingTargets": [
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/resources/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/404.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/404.html",
+      "href": "/assets/site.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/404.html",
+      "href": "/services/access-222/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/404.html",
+      "href": "/checkout/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/index.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/index.html",
+      "href": "/assets/site.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/index.html",
+      "href": "/services/access-222/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/index.html",
+      "href": "/checkout/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/index.html",
+      "href": "/ae/portal/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/portal/index.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/portal/index.html",
+      "href": "/assets/site.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/portal/index.html",
+      "href": "/ae/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/sop/index.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/sop/index.html",
+      "href": "/assets/site.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/sop/index.html",
+      "href": "/ae/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/sop/index.html",
+      "href": "/services/access-222/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/checkout/index.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/checkout/index.html",
+      "href": "/assets/site.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/checkout/index.html",
+      "href": "/services/access-222/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/checkout/index.html",
+      "href": "/services/access-222/#intake"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/checkout/index.html",
+      "href": "/ae/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/index.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/index.html",
+      "href": "/assets/site.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/index.html",
+      "href": "/services/access-222/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/index.html",
+      "href": "/services/access-222/#intake"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/index.html",
+      "href": "/ae/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/index.html",
+      "href": "/checkout/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/offline.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/offline.html",
+      "href": "/assets/site.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/services/access-222/index.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/services/access-222/index.html",
+      "href": "/assets/site.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/services/access-222/index.html",
+      "href": "/checkout/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/services/access-222/index.html",
+      "href": "/ae/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/thanks/index.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/thanks/index.html",
+      "href": "/assets/site.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/thanks/index.html",
+      "href": "/checkout/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/thanks/index.html",
+      "href": "/services/access-222/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/thanks/index.html",
+      "href": "/ae/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/BusinessLaunchGo/index.html",
+      "href": "/manifest.webmanifest"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/BusinessLaunchGo/index.html",
+      "href": "/assets/icon-192.png"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/BusinessLaunchGo/index.html",
+      "href": "/assets/svs.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/diagnostics.html",
+      "href": "/jobseekers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/diagnostics.html",
+      "href": "/employers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/diagnostics.html",
+      "href": "/diagnostics.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/employers.html",
+      "href": "/jobseekers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/employers.html",
+      "href": "/employers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/employers.html",
+      "href": "/diagnostics.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/funnel-system-editorial.html",
+      "href": "/assets/dual_lane_funnel_system_brief.pdf"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/funnel-system-editorial.html",
+      "href": "/assets/dual_lane_funnel_valuation_certificate.pdf"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/index.html",
+      "href": "/jobseekers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/index.html",
+      "href": "/employers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/index.html",
+      "href": "/funnel-system-editorial.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/index.html",
+      "href": "/diagnostics.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/jobseekers.html",
+      "href": "/jobseekers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/jobseekers.html",
+      "href": "/employers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/jobseekers.html",
+      "href": "/diagnostics.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/privacy.html",
+      "href": "/jobseekers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/privacy.html",
+      "href": "/employers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/terms.html",
+      "href": "/jobseekers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/terms.html",
+      "href": "/employers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/thank-you.html",
+      "href": "/jobseekers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/thank-you.html",
+      "href": "/employers.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/thank-you.html",
+      "href": "/diagnostics.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/GateProofx/index.html",
+      "href": "/dashboard.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/GateProofx/index.html",
+      "href": "/.netlify/functions/health"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Repo Live/index.html",
+      "href": "/brand-logo.svg"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Repo Live/index.html",
+      "href": "/styles.css"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+      "href": "/.netlify/functions/health"
+    },
+    {
+      "file": "gateway/dashboard.html",
+      "href": "/Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html"
+    },
+    {
+      "file": "gateway/dashboard.html",
+      "href": "/.netlify/functions/health"
+    }
+  ],
+  "malformedProtocolRelative": [],
+  "unencodedSpaceHrefs": [
+    {
+      "file": "404.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "404.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "404.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "Case Studies/index.html",
+      "href": "/Case Studies/index.html"
+    },
+    {
+      "file": "Case Studies/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Case Studies/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Case Studies/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Case Studies/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Case Studies/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Case Studies/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeCashLedger.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeFocusLog.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeIntakeVault.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeNoteVault.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeRoutex.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuGitPush.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuGitPush.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuGitPush.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeIntakeVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeCashLedger.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeCashLedger.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeCashLedger.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeFocusLog.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeFocusLog.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeFocusLog.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeNoteVault.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeNoteVault.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeNoteVault.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeRoutex.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Originx.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Originx.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Originx.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/Blogs/In The SkyeLight/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "href": "/Blogs/Houston Texas Devs &amp; AI/"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/QR-Code-Generator/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/QR-Code-Generator/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/QR-Code-Generator/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "SkyeArchive/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "SkyeArchive/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "SkyeArchive/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "SkyeCollab/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "SkyeCollab/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "SkyeCollab/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "SkyeDrive/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "SkyeDrive/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "SkyeDrive/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "SkyeFlow/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "SkyeFlow/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "SkyeFlow/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "SkyeLedger/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "SkyeLedger/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "SkyeLedger/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "SkyeOps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "SkyeOps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "SkyeOps/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "SkyeSheets/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "SkyeSheets/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "SkyeSheets/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "SkyeSlides/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "SkyeSlides/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "SkyeSlides/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "Valley Verified /MichoacanosTireShop.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "Valley Verified /MichoacanosTireShop.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html"
+    },
+    {
+      "file": "Valley Verified /MichoacanosTireShop.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "Valley Verified /MichoacanosTireShop.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "Valley Verified /MichoacanosTireShop.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "Valley Verified /MichoacanosTireShop.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "Valley Verified /SentinelWebAuthority-Verified.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "Valley Verified /SentinelWebAuthority-Verified.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "Valley Verified /SentinelWebAuthority-Verified.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "about.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "about.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "about.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "admin.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "admin.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "admin.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "blog.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "blog.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "blog.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "contact/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "contact/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "contact/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "contact.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "contact.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "contact.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "credibility/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "credibility/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "credibility/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "credibility.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "credibility.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "credibility.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "index/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "index/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "index/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "network.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "network.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "network.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "partials/header.html",
+      "href": "/Case Studies/index.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeIntakeVault.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeRoutex.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "platforms.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "post.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "post.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "post.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "privacy/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "privacy/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "privacy/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "privacy.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "privacy.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "privacy.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "status/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "status/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "status/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "status.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "status.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "status.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "terms/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "terms/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "terms/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "terms.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "terms.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "terms.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "thanks.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "thanks.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "thanks.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "vault/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "vault/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "vault/index.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    },
+    {
+      "file": "vault.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Profit Console/index.html"
+    },
+    {
+      "file": "vault.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html"
+    },
+    {
+      "file": "vault.html",
+      "href": "/Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html"
+    }
+  ],
+  "navCandidates": [
+    {
+      "file": "partials/header.html",
+      "score": 10
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/QR-Code-Generator/index.html",
+      "score": 8
+    },
+    {
+      "file": "Valley Verified /MichoacanosTireShop.html",
+      "score": 8
+    },
+    {
+      "file": "Platforms-Apps/index.html",
+      "score": 7
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuGitPush.html",
+      "score": 7
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeCashLedger.html",
+      "score": 7
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeFocusLog.html",
+      "score": 7
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeNoteVault.html",
+      "score": 7
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Originx.html",
+      "score": 7
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html",
+      "score": 7
+    },
+    {
+      "file": "SkyeArchive/index.html",
+      "score": 7
+    },
+    {
+      "file": "SkyeCollab/index.html",
+      "score": 7
+    },
+    {
+      "file": "SkyeDrive/index.html",
+      "score": 7
+    },
+    {
+      "file": "SkyeFlow/index.html",
+      "score": 7
+    },
+    {
+      "file": "SkyeLedger/index.html",
+      "score": 7
+    },
+    {
+      "file": "SkyeOps/index.html",
+      "score": 7
+    },
+    {
+      "file": "SkyeSheets/index.html",
+      "score": 7
+    },
+    {
+      "file": "Valley Verified /SentinelWebAuthority-Verified.html",
+      "score": 7
+    },
+    {
+      "file": "about.html",
+      "score": 7
+    },
+    {
+      "file": "admin.html",
+      "score": 7
+    },
+    {
+      "file": "blog.html",
+      "score": 7
+    },
+    {
+      "file": "contact/index.html",
+      "score": 7
+    },
+    {
+      "file": "contact.html",
+      "score": 7
+    },
+    {
+      "file": "credibility/index.html",
+      "score": 7
+    },
+    {
+      "file": "credibility.html",
+      "score": 7
+    },
+    {
+      "file": "index/index.html",
+      "score": 7
+    },
+    {
+      "file": "index.html",
+      "score": 7
+    },
+    {
+      "file": "network.html",
+      "score": 7
+    },
+    {
+      "file": "platforms.html",
+      "score": 7
+    },
+    {
+      "file": "post.html",
+      "score": 7
+    },
+    {
+      "file": "privacy/index.html",
+      "score": 7
+    },
+    {
+      "file": "privacy.html",
+      "score": 7
+    },
+    {
+      "file": "status/index.html",
+      "score": 7
+    },
+    {
+      "file": "status.html",
+      "score": 7
+    },
+    {
+      "file": "terms/index.html",
+      "score": 7
+    },
+    {
+      "file": "terms.html",
+      "score": 7
+    },
+    {
+      "file": "thanks.html",
+      "score": 7
+    },
+    {
+      "file": "vault/index.html",
+      "score": 7
+    },
+    {
+      "file": "vault.html",
+      "score": 7
+    },
+    {
+      "file": "Blogs/Editorials/NorthStar/phoenix-quickbooks-cleanup-ledger-rescue.html",
+      "score": 6
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/bar-louie-westgate-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/carousel-arcade-bar-westgate-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/chicken-n-pickle-glendale-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/desert-diamond-casino-west-valley-the-rock-bar-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/fat-tuesday-westgate-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/fine-ash-cigars-bar-lounge-westgate-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/index.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/mcfaddens-social-house-westgate-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/popstroke-glendale-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/state-48-funk-house-brewery-glendale-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/stir-crazy-comedy-club-westgate-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/the-lola-cocktail-lab-eatery-westgate-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/topgolf-phoenix-glendale-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/GlendaleArizona/yard-house-westgate-glendale-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/12-west-brewing-downtown-mesa-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/alchemy-48-speakeasy-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/arizona-distilling-co-mesa-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/chupacabra-taproom-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/cider-corps-mesa-taproom-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/denim-diamonds-mesa-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/index.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/level-1-arcade-bar-downtown-mesa-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/local-legends-mesa-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/mesa-amphitheatre-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/pedal-haus-brewery-mesa-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/phantom-fox-beer-company-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/the-monastery-bar-grill-mesa-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/MesaArizona/the-nile-theater-mesa-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/bitter-twisted-cocktail-parlour-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/charlies-phoenix-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/cobra-arcade-bar-phoenix-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/crescent-ballroom-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/gracies-tax-bar-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/hannys-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/index.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/karamba-nightclub-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/little-rituals-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/pigtails-downtown-phoenix-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/the-duce-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/the-van-buren-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/the-womack-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/PhoenixArizona/valley-bar-phoenix-nightlife-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/11-11-nightclub-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/bottled-blonde-scottsdale-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/cake-nightclub-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/casa-amigos-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/cottontail-lounge-w-scottsdale-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/dierks-bentleys-whiskey-row-scottsdale-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/el-hefe-scottsdale-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/index.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/maya-day-night-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/riot-house-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/rockbar-inc-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/the-beverly-on-main-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/the-hot-chick-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/ScottsdaleArizona/wasted-grain-scottsdale-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/alibi-rooftop-lounge-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/casa-tempe-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/darkstar-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/devils-hideaway-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/fat-tuesday-tempe-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/idle-hands-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/index.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/low-key-piano-bar-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/monkey-pants-bar-grill-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/skysill-rooftop-lounge-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/society-tempe-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/sunbar-tempe-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/varsity-tavern-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/ArizonaClubScene/TempeArizona/yucca-tap-room-tempe-club-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/ashluxe-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/free-the-youth-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/galxboy-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/grade-africa-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/index.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/jekkah-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/kitu-kali-africa-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/nairobi-apparel-district-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/nkwo-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/one-way-kenya-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/orange-culture-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/unknown-government-unknwngov-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/wafflesncream-waf-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Africas Got Sole!/we-are-gods-africa-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/antique-sugar-vintage-clothing-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/bad-birdie-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/bunky-boutique-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/dixxon-flannel-co-tempe-showroom-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/fourtillfour-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/index.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/kimes-ranch-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/kiss-me-kate-boutique-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/norde-scottsdale-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/objects-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/phoenix-general-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/purple-lizard-boutique-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/pxg-apparel-parsons-xtreme-golf-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/Phoenix-Arizona-Batch-2/rolling-rack-boutique-phoenix-batch2-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/all-in-one-phx-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/common-hype-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/cowtown-skateboards-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/hands-eyes-mind-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/index.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/ito-brand-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/king-duck-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/manor-phx-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/oxdx-clothing-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/phoenix-fashion-week-shop-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/rebel-reaper-clothing-company-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/state-forty-eight-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/throne-of-grace-clothing-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/Phoenix-Arizona/trill-hip-hop-shop-phoenix-editorial.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/acronym-techwear-precision-systems.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/and-wander-mountain-fashion-hybrid.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/arcteryx-veilance-urban-systems.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/boris-bidjan-saberi-11bybbs-material-ritual.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/cp-company-garment-dye-innovation.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/demobaza-dystopian-avant-garde-cyber.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/guerrilla-group-industrial-fiction-garments.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/hamcus-dystopian-utility-modular.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/index.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/maharishi-pacifist-military-utility.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/riot-division-monoproduct-techwear-philosophy.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/stone-island-material-research-culture.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/ten-c-forever-collection-anti-obsolescence.html",
+      "score": 5
+    },
+    {
+      "file": "Blogs/Editorials/Techwear/vollebak-clothes-from-the-future.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/best-buy-retail-fulfillment-last-mile-proof.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/cvs-pharmacy-medication-delivery-ops-chain-of-custody.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/globe-life-liberty-national-trust-first-sales-ops-reporting.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/index-named-accounts.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/index-ultimate-13.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/index.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/instacart-marketplace-ops-high-velocity-fulfillment.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/invidia-healthcare-delivery-enablement-exception-control.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/jitsu-delivery-route-intelligence-closeouts-exceptions.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/one-point-patient-care-patient-focused-delivery-proof.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/roadie-on-demand-delivery-partner-ops-enablement.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/uber-mobility-delivery-ops-structured-escalations.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-ai-governance-ops-traceability-cost-control.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-brand-ecosystem-multi-site-division-consistency.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-confidentiality-first-marketing-premium-proof.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-enterprise-lead-capture-intake-routing-platform.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-enterprise-trust-stack-operational-proof.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-finance-compliance-ops-documentation-discipline.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-gig-workforce-orchestration-rapid-ramp.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-healthcare-last-mile-medication-delivery-statewide.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-incident-readiness-exceptions-escalations-proof.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-insurance-sales-ops-trust-first-intake-reporting.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-marketplace-delivery-enablement-multi-partner.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-retail-delivery-high-volume-partner-integrations.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/ultimate-sales-delivery-unification-pipeline-to-production.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/2026/workwhile-workforce-ramp-fast-staffing-programs.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/404-navigation-repair-multi-page.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/The First Batch Proof Served.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/accounting-bookkeeping-catch-up-project-plan.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/accounting-client-portal-lite-status-clarity.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/accounting-executive-intake-pack-standard-attachments.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/accounting-monthly-close-ritual-system.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/accounting-payroll-onboarding-compliance-pack.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/accounting-service-menu-packaging-scope-control.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/accounting-tax-document-vault-organized-inputs.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ae-portal-contractor-sales-structure.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ai-gateway-vendor-routing-governance.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ai-saas-client-facing-model-naming-consistency.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ai-saas-cost-guardrails-policy-gates.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ai-saas-kaixu-gateway-headers-diagnostics.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ai-saas-offline-first-dispatch-vault-pattern.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ai-saas-prompt-library-reusable-excellence.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ai-saas-seo-content-engine-publishing-pipeline.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ai-saas-support-agent-escalation-blueprint.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/ai-saas-valuation-reporter-feature-inventory.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/barbershop-premium-visuals-local-seo.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/contractor-portal-ae-sales-lead-stages-commissions.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/contractor-portal-onboarding-kit-sell-correctly.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/contractor-portal-partner-referral-lane-trackable.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/directory-city-category-clusters-seo-scale.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/directory-local-deals-convert-browsers-into-leads.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/directory-microsites-one-city-many-niches.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/directory-vendor-vetting-workflow-premium.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/executive-filler-pro-free-high-value.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/family-hub-multi-page-trust-site.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/freight-quote-navigator-quote-pipeline.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/index.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/landing-page-factory-high-end-at-scale.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/local-contractor-instant-quote-qualification.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/logistics-after-hours-quote-capture.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/logistics-broker-compliance-trust-page.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/logistics-carrier-onboarding-compliance-intake.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/logistics-dispatch-standard-load-intake.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/logistics-freight-ops-dashboard-lightweight.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/logistics-lane-intelligence-seo-to-quotes.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/logistics-pod-collection-invoicing-workflow.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/logistics-rate-confirmation-vault.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/nexus-connect-ecosystem-portal.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/nonprofit-donation-volunteer-system.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/northstar-officexaccounting-executive-command.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-attorney-pre-qualification-intake.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-auto-detailer-booking-pipeline.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-cleaning-recurring-membership.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-fitness-coach-high-ticket-qualification.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-hvac-quote-intake-tech-ready.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-landscaping-seasonal-packages.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-med-spa-consultation-funnel.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-mobile-notary-instant-scheduling.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-moving-quote-system-scope-control.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/phoenix-roofer-storm-lead-capture.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/proof-pack-offers-close-faster.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/skyeleticx-league-governance-launch.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/skyesol-brand-hub-holding-company.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/tattoo-studio-consultation-pipeline-portfolio.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/temp-agency-free-elite-build-converts.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/tire-shop-call-us-to-book-now.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/valley-verified-trust-platform.html",
+      "score": 5
+    },
+    {
+      "file": "Case Studies/website-valuation-pack-sellable-assets.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+      "score": 5
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+      "score": 5
+    },
+    {
+      "file": "SkyeSlides/index.html",
+      "score": 5
+    },
+    {
+      "file": "404.html",
+      "score": 4
+    },
+    {
+      "file": "Blogs/PayHawk Is Revolutionizing Pay Plan Design for Small Businesses.html",
+      "score": 4
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_02_preview-to-patch-targeting-click-to-edit-that-stops-ambiguity.html",
+      "score": 4
+    },
+    {
+      "file": "leadership/SkyesOverLondon.html",
+      "score": 4
+    },
+    {
+      "file": "leadership/dakayla-clark.html",
+      "score": 4
+    },
+    {
+      "file": "Blogs/Editorials/NorthStar/arizona-tpt-record-posture-phoenix-operators.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Editorials/NorthStar/bank-ready-financials-phoenix-loans-lines.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Editorials/NorthStar/phoenix-1099-contractor-tracking-year-end-ready.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Editorials/NorthStar/phoenix-cash-flow-forecasting-13-week-clarity.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Editorials/NorthStar/phoenix-payroll-cadence-quarter-close-discipline.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Editorials/NorthStar/phoenix-year-end-close-30-day-playbook.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Editorials/One-Website-Can't-Carry-Your-Authority-Alone.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Editorials/billions_stolen_fom_American_workers.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-ai-bmc-software.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-ai-cemvita.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-ai-chaione.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-ai-data-gumbo.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-ai-halliburton-digital.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-ai-kbr.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-ai-pros.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-ai-slb-innovation-factori.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-dev-hpe-headquarters.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-dev-softeq.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-enterprise-chevron-hq.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-space-axiom-space.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Houston Texas Devs & AI/houston-space-intuitive-machines.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_01_patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_03_offline-first-ide-local-persistence-that-survives-real-life.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_04_pwa-install-portable-workspace-your-ide-in-one-tap.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_05_governance-first-ai-routing-model-access-designed-like-security.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_06_undo-redo-as-a-safety-rail-reliability-for-rapid-iteration.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_07_from-prompt-chaos-to-engineering-discipline-a-practical-loop.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_08_element-level-refactors-without-breaking-layout.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_09_agency-workflow-faster-client-builds-without-losing-control.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_10_auditability-without-enterprise-overhead.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_11_why-production-endpoints-must-be-closed-by-default.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_12_pattern-libraries-patch-recipes-scale-changes-without-drift.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Skaixu/skaixu_blog_13_the-operator-s-ide-designing-for-pressure-not-demos.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/SkyeDocx.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/template.html",
+      "score": 3
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html",
+      "score": 3
+    },
+    {
+      "file": "Services/TEMPLATE.html",
+      "score": 3
+    },
+    {
+      "file": "Services/WebBuilds/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/WebBuilds.html",
+      "score": 3
+    },
+    {
+      "file": "Services/ai-data-apps/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/ai-data-apps.html",
+      "score": 3
+    },
+    {
+      "file": "Services/analytics-dashboards/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/analytics-dashboards.html",
+      "score": 3
+    },
+    {
+      "file": "Services/api-integration/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/api-integration.html",
+      "score": 3
+    },
+    {
+      "file": "Services/brand-identity/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/brand-identity.html",
+      "score": 3
+    },
+    {
+      "file": "Services/docs-knowledge/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/docs-knowledge.html",
+      "score": 3
+    },
+    {
+      "file": "Services/ecommerce-payments/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/ecommerce-payments.html",
+      "score": 3
+    },
+    {
+      "file": "Services/intake-routing/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/intake-routing.html",
+      "score": 3
+    },
+    {
+      "file": "Services/lifecycle-retention/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/lifecycle-retention.html",
+      "score": 3
+    },
+    {
+      "file": "Services/mvp-launchpad/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/mvp-launchpad.html",
+      "score": 3
+    },
+    {
+      "file": "Services/notification-comms/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/notification-comms.html",
+      "score": 3
+    },
+    {
+      "file": "Services/platform-migration/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/platform-migration.html",
+      "score": 3
+    },
+    {
+      "file": "Services/portals-hubs/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/portals-hubs.html",
+      "score": 3
+    },
+    {
+      "file": "Services/security-audit/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/security-audit.html",
+      "score": 3
+    },
+    {
+      "file": "Services/seo-content/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/seo-content.html",
+      "score": 3
+    },
+    {
+      "file": "Services/trust-surfaces/index.html",
+      "score": 3
+    },
+    {
+      "file": "Services/trust-surfaces.html",
+      "score": 3
+    },
+    {
+      "file": "sitemap-visual.html",
+      "score": 3
+    },
+    {
+      "file": "Blogs/Editorials/APPS WEVE ENGINEERED/FamilyMedPassport.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/APPS WEVE ENGINEERED/LittleLinguist.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/APPS WEVE ENGINEERED/skAIxU.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/APPS WEVE ENGINEERED/skAIxUtheProIDE.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/adobe-firefly.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/anthropic.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/apple-core-ml.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/databricks-mosaic-ai.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/github-copilot.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/google-vertex-ai.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/meta-ai.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/nvidia-cuda.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/openai.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/perplexity.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/salesforce-einstein-agentforce.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/scale-ai.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Colorado AI/vercel.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/ai-gateway-one-contract.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/magic-links-done-right.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/minimal-rbac-that-works.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/neon-schema-versioning.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/netlify-functions-practical-patterns.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/observability-for-ai-apps.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/offline-first-ai-patterns.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/prompt-hygiene-production.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/rag-retrieval-that-doesnt-lie.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/script-to-system-productizing-dev-work.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/shipping-like-a-scientist.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/token-economics-indisputable-billing.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Editorials/Devs & AI/why-blocked-ux.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/In The SkyeLight/northstar-office-accounting-editorial.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/In The SkyeLight/originx-editorial.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/In The SkyeLight/skye-profit-console-editorial (1).html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Field Guide/index.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-axon.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-microchip.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-radiusai.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-tsmc.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-waymo.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase 2/06-waymo-phoenix-robotaxi-field-guide.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase 2/07-axon-scottsdale-public-safety-ai-field-guide.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase 2/08-nextiva-scottsdale-unified-cxm-ai-field-guide.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase 2/09-radiusai-tempe-computer-vision-retail-field-guide.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase 2/10-nucleusteq-phoenix-enterprise-data-ai-field-guide.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase 2/index.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase1/01-intel-phoenix-ai-field-guide.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase1/02-godaddy-tempe-agentic-ai-field-guide.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase1/03-onsemi-scottsdale-ai-datacenter-power.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase1/04-insight-chandler-ai-systems-integrator.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase1/05-early-warning-scottsdale-identity-ai.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase1/index.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase3/01-waymo-phoenix-autonomous-ai.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase3/02-axon-scottsdale-public-safety-ai.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase3/03-nextiva-scottsdale-ai-cx.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase3/04-paradox-scottsdale-olivia-ai-hiring.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase3/05-qbotica-phoenix-agentic-automation.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AI/Phase3/index.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-01-phoenix-enterprise-systems-axon-godaddy-banner.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-02-valley-logistics-loop-amazon-republic-skyharbor.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-03-retail-at-speed-sprouts-circlek-discounttire.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-04-semiconductor-discipline-intel-tsmc-honeywell.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-05-healthcare-grade-reliability-mayo-phxchildrens-honorhealth.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-06-audited-revenue-fintech-amex-usaa-wellsfargo.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-07-real-estate-construction-ops-carvana-offerpad-taylormorrison.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-08-heat-resilient-operations-srp-aps-cityofphoenix.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-09-customer-support-intake-discipline-discover-amex-usaa.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-10-hiring-onboarding-systems-asu-gcu-maricopa.html",
+      "score": 2
+    },
+    {
+      "file": "DEV NOTES AND  DIRECTIVES/the standard for editorials.html",
+      "score": 2
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/funnel-system-editorial.html",
+      "score": 2
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+      "score": 2
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html",
+      "score": 2
+    },
+    {
+      "file": "gateway/dashboard.html",
+      "score": 2
+    },
+    {
+      "file": "kAIxu/Its-kAIxU/k1.html",
+      "score": 2
+    },
+    {
+      "file": "kAIxu/Its-kAIxU/k2.html",
+      "score": 2
+    },
+    {
+      "file": "Blogs/13th Sole Promotions/Establishing-Business-Development-Firm-Phoenix-AZ.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/13th Sole Promotions/Mysfit's-Modern-Juke-Joint-Experience.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/13th Sole Promotions/Mysfit’s-Modern-Juke-Joint-Experience.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Editorials/APPS WEVE ENGINEERED/KidMedPassport.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Mysfit'sModernJukeJointExperience.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Mysfit’sModernJukeJointExperience.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/01_phoenix_start_business_playbook.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/02_how_to_start_llc_arizona_phoenix.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/03_arizona_llc_cost_breakdown.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/04_phoenix_business_license_requirements.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/05_arizona_tpt_license_who_needs_it.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/06_how_to_get_an_ein_arizona.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/07_arizona_statutory_agent_registered_agent.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/08_phoenix_home_based_business_zoning_rules.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/09_phoenix_sales_tax_vs_arizona_tpt.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/Phoenix Arizona/10_arizona_contracts_deposits_invoicing_system.html",
+      "score": 1
+    },
+    {
+      "file": "Blogs/WhenLeadsGoUp,FireDrillsGoUpToo.html",
+      "score": 1
+    },
+    {
+      "file": "Bundles/Revenue-Ops/core.html",
+      "score": 1
+    },
+    {
+      "file": "Bundles/Revenue-Ops/index.html",
+      "score": 1
+    },
+    {
+      "file": "Bundles/Revenue-Ops/obsidian.html",
+      "score": 1
+    },
+    {
+      "file": "Bundles/Revenue-Ops/pro.html",
+      "score": 1
+    },
+    {
+      "file": "Bundles/Ultimate/core.html",
+      "score": 1
+    },
+    {
+      "file": "Bundles/Ultimate/index.html",
+      "score": 1
+    },
+    {
+      "file": "Bundles/Ultimate/obsidian.html",
+      "score": 1
+    },
+    {
+      "file": "Bundles/Ultimate/pro.html",
+      "score": 1
+    },
+    {
+      "file": "Bundles/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeIntakeVault.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeRoutex.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/portal/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/ae/sop/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/checkout/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/services/access-222/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/Access222/thanks/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/diagnostics.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/employers.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/jobseekers.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/privacy.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/terms.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/DualLaneFunnel/public/thank-you.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/GateProofx/index.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/tool.html",
+      "score": 1
+    },
+    {
+      "file": "Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html",
+      "score": 1
+    },
+    {
+      "file": "Services/SkyePWAForge/SkyePWAForge.html",
+      "score": 1
+    },
+    {
+      "file": "Services/SkyeWay2Success/index.html",
+      "score": 1
+    },
+    {
+      "file": "Services/Ultimate Business Launch Stack/core.html",
+      "score": 1
+    },
+    {
+      "file": "Services/Ultimate Business Launch Stack/index.html",
+      "score": 1
+    },
+    {
+      "file": "Services/Ultimate Business Launch Stack/obsidian.html",
+      "score": 1
+    },
+    {
+      "file": "Services/Ultimate Business Launch Stack/pro.html",
+      "score": 1
+    },
+    {
+      "file": "SkyeDocx/homepage.html",
+      "score": 1
+    },
+    {
+      "file": "SkyeDocx/index.html",
+      "score": 1
+    },
+    {
+      "file": "Valley Verified /MoralesTire-Auto.html",
+      "score": 1
+    },
+    {
+      "file": "Valley Verified /NorthStar.html",
+      "score": 1
+    },
+    {
+      "file": "Valley Verified /NorthStar2.html",
+      "score": 1
+    },
+    {
+      "file": "Valley Verified /NorthStarOfficial.html",
+      "score": 1
+    },
+    {
+      "file": "Valley Verified /SentinelWebAuthority.html",
+      "score": 1
+    },
+    {
+      "file": "Valley Verified /SkyeLetix.html",
+      "score": 1
+    },
+    {
+      "file": "Valley Verified /SoleDrop-Verified.html",
+      "score": 1
+    },
+    {
+      "file": "Valley Verified /dakayla-clark.html",
+      "score": 1
+    },
+    {
+      "file": "Valley Verified /gray-skyes.html",
+      "score": 1
+    },
+    {
+      "file": "account/index.html",
+      "score": 1
+    },
+    {
+      "file": "admin-executive.html",
+      "score": 1
+    },
+    {
+      "file": "kAIxu/Its-kAIxU/k3.html",
+      "score": 1
+    },
+    {
+      "file": "kAIxu/docs.html",
+      "score": 1
+    },
+    {
+      "file": "kAIxu/index.html",
+      "score": 1
+    },
+    {
+      "file": "kAIxu/pricing.html",
+      "score": 1
+    },
+    {
+      "file": "kAIxu/trust.html",
+      "score": 1
+    },
+    {
+      "file": "members/index.html",
+      "score": 1
+    }
+  ],
+  "navPatterns": {
+    "mainNav": 324,
+    "megaNav": 66,
+    "solFab": 1,
+    "menuBtn": 293
+  }
+}

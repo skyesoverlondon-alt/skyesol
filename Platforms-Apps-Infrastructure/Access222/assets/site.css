@@ -1,0 +1,284 @@
+/* Skyesol Access 222 — single-file friendly CSS (no external deps) */
+:root{
+  --bg0:#05030a;
+  --bg1:#080515;
+  --ink:#e9e4ff;
+  --muted:#b8addb;
+  --glass: rgba(255,255,255,.06);
+  --glass2: rgba(255,255,255,.10);
+  --line: rgba(255,255,255,.12);
+  --gold:#ffd44d;
+  --gold2:#ffb800;
+  --purple:#b15cff;
+  --violet:#6d3cff;
+  --blue:#1fc7ff;
+  --danger:#ff4d7d;
+  --ok:#2effb6;
+  --shadow: 0 20px 80px rgba(0,0,0,.55);
+  --radius: 18px;
+  --radius2: 26px;
+  --max: 1120px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background:
+    radial-gradient(1400px 900px at 20% 10%, rgba(177,92,255,.20), transparent 60%),
+    radial-gradient(1100px 800px at 85% 15%, rgba(255,212,77,.18), transparent 55%),
+    radial-gradient(900px 700px at 65% 85%, rgba(31,199,255,.14), transparent 55%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+  overflow-x:hidden;
+}
+
+a{color:inherit}
+.container{max-width:var(--max); margin:0 auto; padding:0 18px}
+nav{
+  position:sticky; top:0; z-index:50;
+  background: linear-gradient(180deg, rgba(5,3,10,.92), rgba(5,3,10,.62));
+  backdrop-filter: blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  height:68px;
+}
+.brand{
+  display:flex; align-items:center; gap:12px; text-decoration:none;
+}
+.brand .mark{
+  width:42px; height:42px; border-radius:14px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,212,77,.45), rgba(177,92,255,.25) 45%, rgba(31,199,255,.14) 70%, rgba(255,255,255,.05));
+  box-shadow: 0 0 18px rgba(177,92,255,.18), 0 0 22px rgba(255,212,77,.12);
+  border:1px solid rgba(255,255,255,.14);
+  position:relative;
+  overflow:hidden;
+}
+.brand .mark:after{
+  content:"";
+  position:absolute; inset:-40%;
+  background: conic-gradient(from 220deg, rgba(255,212,77,.0), rgba(255,212,77,.35), rgba(177,92,255,.0), rgba(31,199,255,.22), rgba(255,212,77,.0));
+  animation: spin 10s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.brand .text{line-height:1.05}
+.brand .text .t{font-weight:800; letter-spacing:.3px}
+.brand .text .s{font-size:12px; color:var(--muted)}
+
+.nav-links{display:flex; gap:10px; align-items:center}
+.pill{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  text-decoration:none;
+  font-weight:650;
+  letter-spacing:.15px;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+.pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.2)}
+.pill.primary{
+  border-color: rgba(255,212,77,.35);
+  background: linear-gradient(180deg, rgba(255,212,77,.12), rgba(255,212,77,.04));
+  box-shadow: 0 0 0 1px rgba(255,212,77,.10) inset, 0 0 24px rgba(255,212,77,.12);
+}
+.pill.primary:hover{border-color: rgba(255,212,77,.55)}
+.pill .dot{
+  width:8px; height:8px; border-radius:50%;
+  background: radial-gradient(circle, var(--gold), var(--gold2));
+  box-shadow: 0 0 10px rgba(255,212,77,.55);
+}
+
+.hero{
+  padding:48px 0 26px;
+}
+.grid{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:18px;
+  align-items:stretch;
+}
+.card{
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.card .pad{padding:22px}
+.kicker{
+  font-family: var(--mono);
+  font-size:12px;
+  color: rgba(255,212,77,.95);
+  letter-spacing: .65px;
+  text-transform: uppercase;
+}
+h1{
+  margin:10px 0 10px;
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 1.04;
+  letter-spacing: -.5px;
+}
+.sub{
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+  margin:0 0 16px;
+}
+.badges{
+  display:flex; flex-wrap:wrap; gap:10px;
+  margin-top:14px;
+}
+.badge{
+  display:inline-flex; gap:10px; align-items:center;
+  padding:10px 12px;
+  border-radius: 14px;
+  border:1px solid var(--line);
+  background: rgba(0,0,0,.18);
+}
+.badge b{font-weight:800}
+.badge small{display:block; color:var(--muted); margin-top:1px}
+
+.split{
+  display:grid; grid-template-columns: 1fr; gap:12px;
+}
+.price{
+  display:flex; align-items:flex-end; gap:10px;
+}
+.price .amt{
+  font-size: 44px; font-weight: 900;
+  letter-spacing:-1px;
+  background: linear-gradient(90deg, rgba(255,212,77,1), rgba(177,92,255,1), rgba(31,199,255,1));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.price .per{color:var(--muted); padding-bottom:8px}
+
+hr.sep{
+  border:none; border-top:1px solid var(--line);
+  margin:18px 0;
+}
+
+.section{padding: 22px 0 52px}
+.h2{
+  font-size: 18px;
+  letter-spacing:.2px;
+  margin:0 0 10px;
+}
+.cols{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.tile{
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  border-radius: var(--radius);
+  padding:16px;
+}
+.tile h3{margin:0 0 8px; font-size:16px}
+.tile p{margin:0; color:var(--muted); line-height:1.55; font-size:14px}
+.tile .tag{
+  display:inline-block; margin-top:10px;
+  font-family: var(--mono); font-size: 11px;
+  color: rgba(255,212,77,.92);
+}
+
+.list{
+  margin:10px 0 0; padding:0 0 0 18px; color:var(--muted);
+  line-height:1.65;
+}
+.list li{margin:6px 0}
+
+.form{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+}
+.field{
+  display:flex; flex-direction:column; gap:6px;
+}
+.field label{font-size:12px; color: var(--muted)}
+.field input, .field select, .field textarea{
+  padding:12px 12px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.25);
+  color: var(--ink);
+  outline:none;
+}
+.field input:focus, .field select:focus, .field textarea:focus{
+  border-color: rgba(255,212,77,.45);
+  box-shadow: 0 0 0 3px rgba(255,212,77,.12);
+}
+.field textarea{min-height: 110px; resize: vertical}
+.full{grid-column: 1 / -1}
+.actions{
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  margin-top:8px;
+}
+button{
+  cursor:pointer;
+  border:none;
+  padding:12px 14px;
+  border-radius: 999px;
+  font-weight:800;
+  letter-spacing:.2px;
+  color: #120b22;
+  background: linear-gradient(90deg, rgba(255,212,77,1), rgba(255,184,0,1));
+  box-shadow: 0 0 0 1px rgba(255,212,77,.18) inset, 0 18px 60px rgba(255,184,0,.16);
+  transition: transform .12s ease, filter .12s ease;
+}
+button:hover{transform: translateY(-1px); filter:brightness(1.03)}
+.mini{
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.callout{
+  border:1px solid rgba(255,212,77,.30);
+  background: linear-gradient(180deg, rgba(255,212,77,.11), rgba(255,212,77,.04));
+  border-radius: var(--radius);
+  padding:14px 14px;
+}
+.callout b{color: rgba(255,212,77,.98)}
+footer{
+  border-top:1px solid var(--line);
+  padding:18px 0 30px;
+  color: var(--muted);
+  font-size: 12px;
+}
+code{font-family: var(--mono); font-size: 12px}
+
+.notice{
+  border:1px solid rgba(31,199,255,.30);
+  background: linear-gradient(180deg, rgba(31,199,255,.10), rgba(31,199,255,.04));
+  border-radius: var(--radius);
+  padding:14px;
+}
+.notice b{color: rgba(31,199,255,.92)}
+
+@media (max-width: 980px){
+  .grid{grid-template-columns:1fr}
+  .cols{grid-template-columns:1fr}
+  .form{grid-template-columns:1fr}
+  .nav-links{gap:8px}
+}
+
+/* Skye Visual Standard — logo float + deeper glass */
+.brand .mark{ background:none !important; overflow:visible !important; }
+.brand .mark:after{ content:none !important; }
+.brand .mark img{ width:100%; height:100%; object-fit:contain;
+  filter: drop-shadow(0 0 20px rgba(255,212,77,.22)) drop-shadow(0 0 26px rgba(177,92,255,.18));
+  animation: floatPulse 3.8s ease-in-out infinite;
+}
+@keyframes floatPulse{ 0%,100%{transform:translateY(0) scale(1);} 50%{transform:translateY(-2px) scale(1.01);} }
+.card{ backdrop-filter: blur(18px); }
+.tile{ backdrop-filter: blur(16px); transition: transform .14s ease, border-color .14s ease, background .14s ease; }
+.tile:hover{ transform: translateY(-2px); border-color: rgba(255,212,77,.18); background: rgba(255,255,255,.055); }

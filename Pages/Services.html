@@ -1,1 +1,146 @@
-<!doctype html><title>Services placeholder page</title><p>Services placeholder page</p>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Services Hub | Skyes Over London</title>
+	<meta name="description" content="Browse all Skyes Over London services, programs, and execution lanes in one place." />
+	<style>
+		:root {
+			color-scheme: dark;
+			--bg: #07060e;
+			--panel: rgba(255,255,255,.05);
+			--panel2: rgba(255,255,255,.08);
+			--text: #f3f1ff;
+			--muted: #bdb7d8;
+			--line: rgba(255,255,255,.14);
+			--accent: #b86bff;
+			--accent2: #3bd6ff;
+		}
+		* { box-sizing: border-box; }
+		body {
+			margin: 0;
+			font: 15px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+			color: var(--text);
+			background:
+				radial-gradient(900px 600px at 10% 10%, rgba(184,107,255,.16), transparent 60%),
+				radial-gradient(900px 600px at 90% 0%, rgba(59,214,255,.12), transparent 60%),
+				var(--bg);
+		}
+		.wrap {
+			max-width: 1180px;
+			margin: 0 auto;
+			padding: 30px 16px 64px;
+		}
+		.hero, .section {
+			border: 1px solid var(--line);
+			border-radius: 18px;
+			background: var(--panel);
+			backdrop-filter: blur(8px);
+		}
+		.hero { padding: 22px; margin-bottom: 16px; }
+		h1 { margin: 0 0 8px; font-size: clamp(30px, 4vw, 44px); line-height: 1.1; }
+		.sub { margin: 0; color: var(--muted); max-width: 80ch; }
+		.actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+		.btn {
+			text-decoration: none;
+			color: var(--text);
+			border: 1px solid var(--line);
+			border-radius: 999px;
+			padding: 9px 14px;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			font-weight: 700;
+			background: var(--panel2);
+		}
+		.btn.primary {
+			background: linear-gradient(135deg, rgba(184,107,255,.34), rgba(59,214,255,.22));
+		}
+		.section { padding: 16px; margin-top: 14px; }
+		h2 { margin: 4px 0 10px; font-size: 19px; }
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 10px;
+		}
+		.card {
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			background: rgba(0,0,0,.24);
+			padding: 12px;
+		}
+		.card a {
+			color: var(--text);
+			text-decoration: none;
+			font-weight: 700;
+			font-size: 14px;
+		}
+		.card p {
+			margin: 6px 0 0;
+			color: var(--muted);
+			font-size: 13px;
+			line-height: 1.45;
+		}
+		.foot {
+			margin-top: 16px;
+			color: var(--muted);
+			font-size: 12px;
+			text-align: center;
+			opacity: .9;
+		}
+		@media (max-width: 980px) { .grid { grid-template-columns: 1fr 1fr; } }
+		@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+	</style>
+</head>
+<body>
+	<main class="wrap">
+		<section class="hero">
+			<h1>Services Hub</h1>
+			<p class="sub">This is the central directory for all service lanes, delivery programs, and execution packages. Start with intake routing if you want guided qualification and deal structuring.</p>
+			<div class="actions">
+				<a class="btn primary" href="/Services/intake-routing/">Start Intake Routing</a>
+				<a class="btn" href="/contact/">Talk to an Account Executive</a>
+				<a class="btn" href="/Services/">Open Services Folder Route</a>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>Core Service Lanes</h2>
+			<div class="grid">
+				<div class="card"><a href="/Services/ai-data-apps/">AI Data Apps</a><p>AI integrations and operational app workflows.</p></div>
+				<div class="card"><a href="/Services/analytics-dashboards/">Analytics Dashboards</a><p>KPI visibility, reporting, and decisions support.</p></div>
+				<div class="card"><a href="/Services/api-integration/">API Integration</a><p>System-to-system connections and automation rails.</p></div>
+				<div class="card"><a href="/Services/brand-identity/">Brand Identity</a><p>Positioning, voice, and visual consistency.</p></div>
+				<div class="card"><a href="/Services/docs-knowledge/">Docs Knowledge</a><p>Documentation systems and internal knowledge bases.</p></div>
+				<div class="card"><a href="/Services/ecommerce-payments/">Ecommerce Payments</a><p>Checkout, billing, and payment infrastructure.</p></div>
+				<div class="card"><a href="/Services/lifecycle-retention/">Lifecycle Retention</a><p>Retention systems, follow-up, and reactivation.</p></div>
+				<div class="card"><a href="/Services/mvp-launchpad/">MVP Launchpad</a><p>Rapid validation and launch-ready MVP execution.</p></div>
+				<div class="card"><a href="/Services/notification-comms/">Notification Comms</a><p>Triggered messaging across channels.</p></div>
+				<div class="card"><a href="/Services/platform-migration/">Platform Migration</a><p>Controlled migrations with minimal disruption.</p></div>
+				<div class="card"><a href="/Services/portals-hubs/">Portals Hubs</a><p>Client, internal, and operational portal builds.</p></div>
+				<div class="card"><a href="/Services/security-audit/">Security Audit</a><p>Practical risk review and hardening priorities.</p></div>
+				<div class="card"><a href="/Services/seo-content/">SEO Content</a><p>Search-ready editorial and service content systems.</p></div>
+				<div class="card"><a href="/Services/trust-surfaces/">Trust Surfaces</a><p>Credibility layers that improve conversion confidence.</p></div>
+				<div class="card"><a href="/Services/WebBuilds/">Web Builds</a><p>Website delivery tracks and execution packages.</p></div>
+				<div class="card"><a href="/Services/intake-routing/">Intake Routing</a><p>Qualification gate and route-to-service logic.</p></div>
+			</div>
+		</section>
+
+		<section class="section">
+			<h2>Programs & Packages</h2>
+			<div class="grid">
+				<div class="card"><a href="/Services/SkyeWay2Success/">SkyeWay2Success</a><p>Structured launch-and-growth operating track.</p></div>
+				<div class="card"><a href="/Services/SkyePWAForge/SkyePWAForge.html">SkyePWAForge</a><p>PWA-focused implementation and rollout support.</p></div>
+				<div class="card"><a href="/Services/Ultimate%20Business%20Launch%20Stack/">Ultimate Business Launch Stack</a><p>Full launch stack program hub.</p></div>
+				<div class="card"><a href="/Services/Ultimate%20Business%20Launch%20Stack/core.html">UBLS Core</a><p>Core package tier.</p></div>
+				<div class="card"><a href="/Services/Ultimate%20Business%20Launch%20Stack/obsidian.html">UBLS Obsidian</a><p>Mid-tier execution package.</p></div>
+				<div class="card"><a href="/Services/Ultimate%20Business%20Launch%20Stack/pro.html">UBLS Pro</a><p>High-intensity launch package.</p></div>
+			</div>
+		</section>
+
+		<div class="foot">Skyes Over London LC • Services Hub</div>
+	</main>
+	<script src="/js/partials.js"></script>
+</body>
+</html>

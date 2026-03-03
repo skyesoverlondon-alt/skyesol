@@ -1,0 +1,62 @@
+[
+  {
+    "source": "Blogs/PhoenixValleyBlogHome.html",
+    "href": "${escapeHtml(p.path)}",
+    "resolved": "Blogs/${escapeHtml(p.path)}"
+  },
+  {
+    "source": "Platforms-Apps-Infrastructure/GateProofx/index.html",
+    "href": "/.netlify/functions/health",
+    "resolved": ".netlify/functions/health"
+  },
+  {
+    "source": "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+    "href": "/.netlify/functions/health",
+    "resolved": ".netlify/functions/health"
+  },
+  {
+    "source": "THE NET WORKS/FEATURING/index.html",
+    "href": "./${encodeURIComponent(name)}",
+    "resolved": "THE NET WORKS/FEATURING/${encodeURIComponent(name)}"
+  },
+  {
+    "source": "Valley Verified /NorthStar.html",
+    "href": "${it.url}",
+    "resolved": "Valley Verified /${it.url}"
+  },
+  {
+    "source": "Valley Verified /NorthStar2.html",
+    "href": "${CANON.blog}",
+    "resolved": "Valley Verified /${CANON.blog}"
+  },
+  {
+    "source": "Valley Verified /NorthStar2.html",
+    "href": "${CANON.series}",
+    "resolved": "Valley Verified /${CANON.series}"
+  },
+  {
+    "source": "Valley Verified /NorthStar2.html",
+    "href": "${CANON[p.canon]}",
+    "resolved": "Valley Verified /${CANON[p.canon]}"
+  },
+  {
+    "source": "Valley Verified /NorthStar2.html",
+    "href": "${url}",
+    "resolved": "Valley Verified /${url}"
+  },
+  {
+    "source": "admin-menu.html",
+    "href": "${escapeHtml(it.urlPath)}",
+    "resolved": "${escapeHtml(it.urlPath)}"
+  },
+  {
+    "source": "admin-menu.html",
+    "href": "/${file}",
+    "resolved": "${file}"
+  },
+  {
+    "source": "gateway/dashboard.html",
+    "href": "/.netlify/functions/health",
+    "resolved": ".netlify/functions/health"
+  }
+]

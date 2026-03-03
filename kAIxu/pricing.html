@@ -24,13 +24,45 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,450;0,600;0,700;1,450;1,600&family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
+
+  <style>
+    /* Minimal, page-local styling for the long-context checkbox row (uses your existing design language) */
+    .checkrow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px;
+      background: rgba(255,255,255,.03);
+    }
+    .checkrow input{
+      width: 18px;
+      height: 18px;
+      accent-color: #f5c451;
+      cursor: pointer;
+    }
+    .checkrow span{
+      font-size: 13px;
+      color: rgba(255,255,255,.86);
+      line-height: 1.25;
+    }
+    .checkhint{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,.62);
+      line-height: 1.35;
+    }
+  </style>
 </head>
+
 <body class="locked" data-page="pricing">
   <div class="watermark" aria-hidden="true"></div>
   <div class="bgfx" aria-hidden="true"><canvas id="stars"></canvas></div>
   <div class="grain" aria-hidden="true"></div>
   <div class="scanlines" aria-hidden="true"></div>
   <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC Logo" border="0" class="sol-float-logo" />
+
   <div class="cinematic-opener" aria-hidden="true">
     <div class="opener-content">
       <div class="opener-line"><p class="opener-text">CALIBRATING PRICING...</p></div>
@@ -44,6 +76,7 @@
     </div>
     <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
   </div>
+
   <nav class="nav" id="nav" aria-label="Primary">
     <div class="nav-brand">
       <img class="sol-logo" style="width:56px; animation-duration:3.2s;" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC logo" loading="lazy" />
@@ -68,6 +101,7 @@
       </a>
     </div>
   </nav>
+
   <main>
     <section class="hero" aria-label="Pricing hero">
       <div class="hero-overlay" aria-hidden="true"></div>
@@ -79,8 +113,16 @@
           Forecast with the estimator, then select the plan that matches your footprint.
         </p>
         <div class="hero-actions">
-          <a href="#plans" class="hero-btn hero-btn-primary">Plans <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-          <a href="#rates" class="hero-btn hero-btn-secondary">Rates <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m4-4H8"/></svg></a>
+          <a href="#plans" class="hero-btn hero-btn-primary">Plans
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a href="#rates" class="hero-btn hero-btn-secondary">Rates
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m4-4H8"/>
+            </svg>
+          </a>
         </div>
         <div class="pill-row" aria-label="Signals">
           <span class="pill"><i aria-hidden="true"></i> Billing <b>Monthly</b></span>
@@ -136,28 +178,62 @@
           </thead>
           <tbody>
             <tr>
-              <td><div class="row-title">kAIxU 6.7 Flash</div><div class="row-sub">Fast, cost-efficient</div></td>
+              <td><div class="row-title">kAIxU 6.7 Flash-Lite</div><div class="row-sub">Fast, cost-efficient</div></td>
               <td>$0.14</td><td>$0.56</td><td>Up to 512K</td>
-              <td>Summaries • extraction • support • rapid iteration</td>
+              <td>Summaries • extraction • routing • support • rapid iteration</td>
+            </tr>
+            <tr>
+              <td><div class="row-title">kAIxU 6.7 Flash</div><div class="row-sub">Higher throughput + quality</div></td>
+              <td>$0.29</td><td>$1.16</td><td>Up to 1M</td>
+              <td>Production chat • bulk generation • structured outputs • high-volume pipelines</td>
+            </tr>
+            <tr>
+              <td><div class="row-title">kAIxU 6.7 Flash Vision</div><div class="row-sub">Text + vision lane</div></td>
+              <td>$0.49</td><td>$1.96</td><td>Up to 1M</td>
+              <td>UI analysis • screenshots • documents • visual extraction • multimodal workflows</td>
+            </tr>
+            <tr>
+              <td><div class="row-title">kAIxU 6.7 Builder</div><div class="row-sub">Code-output focused</div></td>
+              <td>$1.99</td><td>$7.95</td><td>Up to 1M</td>
+              <td>Code generation • refactors • tests • SDK scaffolding • structured engineering outputs</td>
             </tr>
             <tr>
               <td><div class="row-title">kAIxU 6.7 Pro</div><div class="row-sub">Reasoning + code strength</div></td>
               <td>$7.05</td><td>$21.15</td><td>Up to 2M</td>
-              <td>Complex drafts • system output • code generation</td>
+              <td>Complex drafts • system output • code generation • agent planning</td>
+            </tr>
+            <tr>
+              <td><div class="row-title">kAIxU 6.7 Pro Long</div><div class="row-sub">Long-context lane</div></td>
+              <td>$9.85</td><td>$29.55</td><td>Up to 2M</td>
+              <td>Large prompts • multi-file analysis • deep RAG synthesis • long documents</td>
             </tr>
             <tr>
               <td><div class="row-title">kAIxU 6.7 Ultra</div><div class="row-sub">Highest output density</div></td>
               <td>$12.69</td><td>$38.07</td><td>Up to 2M</td>
-              <td>Multi-document synthesis • long-form strategy • deep planning</td>
+              <td>Multi-document synthesis • long-form strategy • deep planning • high-stakes drafting</td>
+            </tr>
+            <tr>
+              <td><div class="row-title">kAIxU 6.7 Sovereign</div><div class="row-sub">Frontier execution lane</div></td>
+              <td>$19.65</td><td>$98.25</td><td>Up to 1M</td>
+              <td>Mission-critical reasoning • tool-use orchestration • autonomous agents • executive workflows</td>
+            </tr>
+            <tr>
+              <td><div class="row-title">kAIxU 6.7 Crown</div><div class="row-sub">Flagship priority lane</div></td>
+              <td>$28.50</td><td>$142.50</td><td>Up to 1M</td>
+              <td>Maximum quality under load • top-tier decision support • premium delivery • priority workloads</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="pull-quote"><blockquote>Pricing is only useful if you can forecast it. kAIxU ships with an estimator for operational clarity.</blockquote><cite>— kAIxU 6.7 Pricing Standard</cite></div>
+      <div class="pull-quote">
+        <blockquote>Pricing is only useful if you can forecast it. kAIxU ships with an estimator for operational clarity.</blockquote>
+        <cite>— kAIxU 6.7 Pricing Standard</cite>
+      </div>
 
       <h3 id="est">Estimator</h3>
       <p class="lead">Estimate monthly cost using expected token totals.</p>
+
       <div class="panel" aria-label="Estimator">
         <form id="estimator" aria-label="kAIxU estimator">
           <div class="estimator">
@@ -169,22 +245,41 @@
                 <option value="scale">kAIxU Scale — $1,890/mo</option>
               </select>
             </div>
+
             <div class="field">
               <label for="model">Model</label>
               <select id="model" name="model">
-                <option value="flash" selected>kAIxU 6.7 Flash</option>
+                <option value="flash_lite" selected>kAIxU 6.7 Flash-Lite</option>
+                <option value="flash">kAIxU 6.7 Flash</option>
+                <option value="flash_vision">kAIxU 6.7 Flash Vision</option>
+                <option value="builder">kAIxU 6.7 Builder</option>
                 <option value="pro">kAIxU 6.7 Pro</option>
                 <option value="ultra">kAIxU 6.7 Ultra</option>
+                <option value="sovereign">kAIxU 6.7 Sovereign</option>
+                <option value="crown">kAIxU 6.7 Crown</option>
               </select>
             </div>
+
+            <!-- Long-context toggle -->
+            <div class="field">
+              <label for="longContext">Prompt size</label>
+              <div class="checkrow">
+                <input type="checkbox" id="longContext" name="longContext" />
+                <span>My prompts exceed 200K tokens (use long-context rates when available)</span>
+              </div>
+              <div class="checkhint">When enabled, the estimator automatically applies long-context pricing for lanes that support it (e.g., Pro → Pro Long).</div>
+            </div>
+
             <div class="field">
               <label for="inTokens">Input tokens / month</label>
               <input id="inTokens" name="inTokens" inputmode="numeric" value="12000000" />
             </div>
+
             <div class="field">
               <label for="outTokens">Output tokens / month</label>
               <input id="outTokens" name="outTokens" inputmode="numeric" value="3000000" />
             </div>
+
             <div class="estimator-output" aria-live="polite">
               <div class="k">Estimated monthly total</div>
               <div class="v" id="estTotal">$0.00</div>
@@ -198,8 +293,16 @@
         <h3>Deploy kAIxU</h3>
         <p>Open the docs for authentication, request format, and production patterns.</p>
         <div class="cta-actions">
-          <a class="btn primary" href="/docs#quickstart">QUICKSTART <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-          <a class="btn" href="/docs#keys">GET API KEY <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg></a>
+          <a class="btn primary" href="/docs#quickstart">QUICKSTART
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a class="btn" href="/docs#keys">GET API KEY
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
         </div>
       </div>
     </section>
@@ -251,6 +354,101 @@
       </div>
     </footer>
   </main>
+
+  <script>
+    // Inline estimator engine (single-file export). Rates are per 1M tokens (USD).
+    (function(){
+      const planEl = document.getElementById("plan");
+      const modelEl = document.getElementById("model");
+      const longEl = document.getElementById("longContext");
+      const inEl = document.getElementById("inTokens");
+      const outEl = document.getElementById("outTokens");
+      const totalEl = document.getElementById("estTotal");
+      const breakdownEl = document.getElementById("estBreakdown");
+
+      if(!planEl || !modelEl || !inEl || !outEl || !totalEl || !breakdownEl) return;
+
+      const PLANS = {
+        starter: { name: "kAIxU Starter", monthly: 249 },
+        team:    { name: "kAIxU Team",    monthly: 799 },
+        scale:   { name: "kAIxU Scale",   monthly: 1890 }
+      };
+
+      // Display rates are per 1M tokens (USD). Keep these aligned with the rates table above.
+      const MODELS = {
+        flash_lite:  { name: "kAIxU 6.7 Flash-Lite",   inRate: 0.14,  outRate: 0.56 },
+        flash:       { name: "kAIxU 6.7 Flash",        inRate: 0.29,  outRate: 1.16 },
+        flash_vision: { name: "kAIxU 6.7 Flash Vision", inRate: 0.49, outRate: 1.96 },
+        builder:     { name: "kAIxU 6.7 Builder",      inRate: 1.99,  outRate: 7.95 },
+
+        // Pro supports long-context pricing variant (Pro Long).
+        pro:         { name: "kAIxU 6.7 Pro",          inRate: 7.05,  outRate: 21.15, longVariant: "pro_long" },
+        pro_long:    { name: "kAIxU 6.7 Pro Long",     inRate: 9.85,  outRate: 29.55 },
+
+        ultra:       { name: "kAIxU 6.7 Ultra",        inRate: 12.69, outRate: 38.07 },
+        sovereign:   { name: "kAIxU 6.7 Sovereign",    inRate: 19.65, outRate: 98.25 },
+        crown:       { name: "kAIxU 6.7 Crown",        inRate: 28.50, outRate: 142.50 }
+      };
+
+      const parseNum = (v) => {
+        const s = String(v || "").replace(/[, _]/g, "").trim();
+        const n = Number(s);
+        return Number.isFinite(n) ? Math.max(0, n) : 0;
+      };
+
+      const money = (n) => n.toLocaleString("en-US", { style:"currency", currency:"USD" });
+
+      function resolveModel(baseKey, wantsLong){
+        const base = MODELS[baseKey] || MODELS.flash_lite;
+        if(!wantsLong) return { effective: base, usedLong:false, base };
+        if(base.longVariant && MODELS[base.longVariant]) return { effective: MODELS[base.longVariant], usedLong:true, base };
+        return { effective: base, usedLong:false, base };
+      }
+
+      function calc(){
+        const planKey = (planEl.value in PLANS) ? planEl.value : "starter";
+        const baseModelKey = (modelEl.value in MODELS) ? modelEl.value : "flash_lite";
+        const wantsLong = !!(longEl && longEl.checked);
+
+        const plan = PLANS[planKey];
+        const { effective, usedLong } = resolveModel(baseModelKey, wantsLong);
+
+        const inTokens = parseNum(inEl.value);
+        const outTokens = parseNum(outEl.value);
+
+        const usageIn = (inTokens / 1_000_000) * effective.inRate;
+        const usageOut = (outTokens / 1_000_000) * effective.outRate;
+        const usageTotal = usageIn + usageOut;
+        const grand = plan.monthly + usageTotal;
+
+        totalEl.textContent = money(grand);
+
+        const modeLabel = wantsLong
+          ? (usedLong ? "Long-context pricing applied" : "Long-context pricing not applicable for this lane")
+          : "Standard pricing applied";
+
+        breakdownEl.innerHTML =
+          `<div><b>Plan:</b> ${plan.name} — ${money(plan.monthly)}/mo</div>` +
+          `<div><b>Model:</b> ${effective.name}</div>` +
+          `<div><b>Mode:</b> ${modeLabel}</div>` +
+          `<div style="margin-top:6px;"><b>Usage:</b></div>` +
+          `<div>Input: ${inTokens.toLocaleString()} tokens × ${money(effective.inRate)} / 1M = <b>${money(usageIn)}</b></div>` +
+          `<div>Output: ${outTokens.toLocaleString()} tokens × ${money(effective.outRate)} / 1M = <b>${money(usageOut)}</b></div>` +
+          `<div style="margin-top:6px;"><b>Usage subtotal:</b> ${money(usageTotal)}</div>`;
+      }
+
+      ["change","input"].forEach(evt => {
+        planEl.addEventListener(evt, calc);
+        modelEl.addEventListener(evt, calc);
+        inEl.addEventListener(evt, calc);
+        outEl.addEventListener(evt, calc);
+        if(longEl) longEl.addEventListener(evt, calc);
+      });
+
+      calc();
+    })();
+  </script>
+
   <script defer src="assets/site.js"></script>
 </body>
 </html>

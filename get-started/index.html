@@ -1,16 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Get Started | SOL</title>
+  <base href="/">
+  <link rel="canonical" href="https://skyesol.netlify.app/get-started/index.html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started | SOLEnterprises Ecosystem</title>
+  <meta name="description" content="Start here for account setup, intake routing, service selection, and operational contact.">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous" defer></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
 </head>
 <body>
-  <main>
-    <h1>Get Started</h1>
-    <p>This is a placeholder. Replace with the real onboarding flow.</p>
-    <p><a href="/index.html">Return home</a></p>
-  </main>
-  <script src="/js/partials.js"></script>
+<canvas id="three-bg"></canvas>
+
+<div class="page-header">
+  <div class="section-label">Company · Intake Routing</div>
+  <h1>Get <span>Started</span></h1>
+  <div class="glow-tile-purple"><p style="color:#000000">Choose your route: account access, intake submission, service selection, or direct operator contact.</p></div>
+</div>
+
+<div class="divider"></div>
+
+<section class="content-section">
+  <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap" class="reveal">
+    <a href="/account/" class="btn-outline">Sign In / Account</a>
+    <a href="/Services/intake-routing.html" class="btn-outline">Start Intake</a>
+    <a href="/Services/index.html" class="btn-outline">View Services</a>
+    <a href="/contact.html" class="btn-outline">Contact Ops</a>
+    <a href="/index.html" class="btn-outline">Return Home</a>
+  </div>
+</section>
+
+<script src="/js/three-bg.js" defer></script>
+<script src="/js/main.js"></script>
+<script src="/js/growth.js"></script>
+<script src="/js/partials.js"></script>
 </body>
 </html>

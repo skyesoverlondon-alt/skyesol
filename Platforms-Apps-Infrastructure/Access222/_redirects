@@ -1,0 +1,7 @@
+# Pretty URLs and convenience redirects
+/services/access-222    /services/access-222/    301
+/ae                     /ae/                     301
+/routing                /routing/                301
+/checkout               /routing/                301
+/checkout/              /routing/                301
+/thanks                 /thanks/                 301

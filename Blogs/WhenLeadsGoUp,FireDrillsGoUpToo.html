@@ -685,12 +685,20 @@
     .mini{
       display:flex; gap:10px; flex-wrap:wrap; align-items:center;
     }
-    .mini a{
+    .mini a,
+    .mini button{
       color:rgba(244,240,255,.86);
       text-decoration:none;
       border-bottom:1px solid rgba(246,211,107,.20);
+      background:transparent;
+      border-top:none;
+      border-left:none;
+      border-right:none;
+      padding:0;
+      cursor:pointer;
     }
-    .mini a:hover{border-bottom-color: rgba(102,242,255,.24)}
+    .mini a:hover,
+    .mini button:hover{border-bottom-color: rgba(102,242,255,.24)}
   </style>
 </head>
 
@@ -715,7 +723,7 @@
       <a class="chip" href="#signal">Signal Chain</a>
       <a class="chip" href="#leaks">Leak Finder</a>
       <a class="chip" href="#consult">System Map</a>
-      <a class="chip" href="javascript:void(0)" id="openPalette">Press <kbd>K</kbd></a>
+      <button class="chip" id="openPalette" type="button">Press <kbd>K</kbd></button>
     </nav>
 
     <div class="hud-right">
@@ -1122,7 +1130,7 @@
           <span style="opacity:.6">·</span>
           <a href="#consult">Request a System Map</a>
           <span style="opacity:.6">·</span>
-          <a href="javascript:void(0)" id="openPalette3">Command palette</a>
+          <button id="openPalette3" type="button">Command palette</button>
         </div>
       </div>
       <div style="margin-top:8px;">
@@ -1136,7 +1144,7 @@
     <div class="palette">
       <div class="pal-top">
         <input id="palSearch" placeholder="Type to navigate… (Esc to close)" autocomplete="off" />
-        <a class="chip" href="javascript:void(0)" id="closePalette">Close <kbd>Esc</kbd></a>
+        <button class="chip" id="closePalette" type="button">Close <kbd>Esc</kbd></button>
       </div>
       <div class="pal-list" id="palList" role="listbox" aria-label="Navigation commands">
         <div class="pal-item" data-go="#article" role="option">

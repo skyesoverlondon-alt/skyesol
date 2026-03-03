@@ -1,0 +1,17 @@
+{
+  "name": "SkyeProofx",
+  "short_name": "SkyeProofx",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07060a",
+  "theme_color": "#14091f",
+  "description": "Client-side proof vault with AES-GCM encryption and SHA-256 receipts.",
+  "icons": [
+    {
+      "src": "https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
