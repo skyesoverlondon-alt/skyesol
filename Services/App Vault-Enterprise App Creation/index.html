@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Business App Vault | Skyes Over London LC</title>
+
+  <meta name="title" content="Business App Vault | Skyes Over London LC" />
+  <meta name="description" content="Skyes Over London LC is the company behind the companies that need tech. Choose brand-ready business app lanes, deploy fast, and upgrade with kAIxU Powered intelligence." />
+  <meta name="author" content="Skyes Over London LC" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#05050b" />
+
+  <meta property="og:title" content="Business App Vault | Skyes Over London LC" />
+  <meta property="og:description" content="Pick the system lane you need. We brand it as your company. Upgrade with kAIxU Powered intelligence when you're ready." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    :root{
+      --bg:#05050b;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.035);
+      --stroke:rgba(255,255,255,.12);
+      --stroke2:rgba(255,255,255,.18);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.56);
+
+      --gold:#ffd36a;
+      --purple:#a243ff;
+      --cyan:#27f2ff;
+
+      --display:'Playfair Display', Georgia, serif;
+      --body:'Instrument Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      --radius:22px;
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+      --ease-out-quart:cubic-bezier(0.25,1,0.5,1);
+
+      --max:1180px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family:var(--body);
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    body.locked{overflow:hidden; height:100vh;}
+
+    /* Ambient starfield */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      z-index:-2;
+      background:
+        radial-gradient(ellipse at 18% 22%, rgba(255,211,106,.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 82% 28%, rgba(162,67,255,.11) 0%, transparent 58%),
+        radial-gradient(ellipse at 50% 85%, rgba(39,242,255,.07) 0%, transparent 62%),
+        radial-gradient(circle at 30% 60%, rgba(255,255,255,.06) 0%, transparent 40%),
+        radial-gradient(circle at 70% 40%, rgba(255,255,255,.05) 0%, transparent 42%),
+        linear-gradient(180deg, #05050b 0%, #070712 40%, #05050b 100%);
+      filter:saturate(1.12);
+      animation: ambience 10s ease-in-out infinite;
+    }
+    @keyframes ambience{0%,100%{opacity:.92}50%{opacity:1}}
+
+    body::after{
+      content:"";
+      position:fixed; inset:-40px;
+      z-index:-3;
+      background-image: radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px);
+      background-size: 46px 46px;
+      opacity:.06;
+      transform:rotate(6deg);
+      pointer-events:none;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .nav{display:none !important;}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px;}
+
+    /* kAIxU killer AI logo (no container) */
+    .kaixu-logo{
+      position:fixed;
+      top:18px;
+      left:18px;
+      width:88px;
+      height:auto;
+      z-index:9999;
+      filter:
+        drop-shadow(0 0 14px rgba(255,211,106,.22))
+        drop-shadow(0 0 18px rgba(39,242,255,.14))
+        drop-shadow(0 0 22px rgba(162,67,255,.12));
+      animation: kaixuFloat 3.2s ease-in-out infinite;
+      user-select:none;
+      -webkit-user-drag:none;
+      opacity:.96;
+    }
+    @keyframes kaixuFloat{
+      0%,100%{transform:translateY(0) scale(1); opacity:.92;}
+      50%{transform:translateY(-3px) scale(1.02); opacity:1;}
+    }
+
+    /* Cinematic opener */
+    .cinematic-opener{
+      position:fixed; inset:0;
+      z-index:10000;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      background:#05050b;
+      pointer-events:none;
+      animation: openerFadeOut 1s var(--ease-out-expo) 4.6s forwards;
+    }
+    .cinematic-opener::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 22% 52%, rgba(255,211,106,.14) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 52%, rgba(162,67,255,.16) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 75%, rgba(39,242,255,.08) 0%, transparent 60%);
+      animation: gradientPulse 4s ease-in-out infinite;
+    }
+    @keyframes gradientPulse{0%,100%{opacity:.55}50%{opacity:1}}
+
+    .opener-content{position:relative; z-index:2; text-align:center; padding:2rem; max-width:980px;}
+    .opener-line{overflow:hidden;}
+    .opener-text{
+      font-family:var(--mono);
+      color:rgba(255,255,255,.72);
+      font-size:clamp(.9rem,2.6vw,1.15rem);
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      opacity:0;
+      transform:translateY(100%);
+      animation:slideUp 1s var(--ease-out-expo) .5s forwards;
+    }
+    .opener-title{
+      font-family:var(--display);
+      color:var(--gold);
+      font-size:clamp(2.2rem,7.8vw,5.2rem);
+      font-weight:700;
+      line-height:1.05;
+      margin:1.25rem 0;
+      opacity:0;
+      transform:translateY(100%);
+      animation:slideUp 1.2s var(--ease-out-expo) 1s forwards;
+    }
+    .opener-divider{
+      width:0; height:1px;
+      background:linear-gradient(90deg, transparent, var(--cyan), var(--gold), var(--purple), transparent);
+      margin:1.8rem auto;
+      animation:expandLine 1.5s var(--ease-out-expo) 1.5s forwards;
+      opacity:.9;
+    }
+    .opener-subtitle{
+      font-family:var(--body);
+      color:rgba(255,255,255,.70);
+      font-size:clamp(.95rem,2vw,1.1rem);
+      letter-spacing:.04em;
+      opacity:0;
+      animation:fadeIn 1.2s var(--ease-out-expo) 2.0s forwards;
+      max-width:78ch;
+      margin:0 auto;
+      line-height:1.85;
+    }
+    .opener-logo{
+      margin-top:2.2rem;
+      opacity:0;
+      animation:fadeIn 1s var(--ease-out-expo) 2.45s forwards;
+      display:flex;
+      justify-content:center;
+    }
+    .opener-logo img{
+      width:176px;
+      height:auto;
+      filter: drop-shadow(0 0 16px rgba(255,211,106,.18)) drop-shadow(0 0 18px rgba(39,242,255,.10));
+      animation: pulseLogo 2.8s ease-in-out infinite;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    @keyframes pulseLogo{
+      0%,100%{transform:translateY(0) scale(1); opacity:.92;}
+      50%{transform:translateY(-2px) scale(1.02); opacity:1;}
+    }
+    .opener-company{
+      font-family:var(--mono);
+      color:rgba(255,255,255,.44);
+      font-size:.72rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      margin-top:1rem;
+      opacity:0;
+      animation:fadeIn 1s var(--ease-out-expo) 3.0s forwards;
+      line-height:1.6;
+    }
+    @keyframes slideUp{to{opacity:1; transform:translateY(0)}}
+    @keyframes fadeIn{to{opacity:1}}
+    @keyframes expandLine{to{width:240px}}
+    @keyframes openerFadeOut{to{opacity:0; visibility:hidden}}
+
+    .progress-bar{
+      position:fixed;
+      bottom:40px;
+      left:50%;
+      transform:translateX(-50%);
+      width:240px;
+      height:2px;
+      background:rgba(255,255,255,.10);
+      border-radius:2px;
+      overflow:hidden;
+      z-index:10001;
+      animation:fadeOut .5s var(--ease-out-expo) 4.0s forwards;
+    }
+    .progress-fill{
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      animation:progressFill 4s var(--ease-out-quart) forwards;
+      box-shadow:0 0 18px rgba(39,242,255,.28);
+    }
+    @keyframes progressFill{0%{width:0}100%{width:100%}}
+    @keyframes fadeOut{to{opacity:0}}
+
+    /* Nav */
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:80;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background:linear-gradient(180deg, rgba(5,5,11,.78), rgba(5,5,11,.42));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding-left:104px; /* avoid overlap with fixed logo */
+      min-height:44px;
+    }
+    .brand .title{
+      font-family:var(--display);
+      font-size:1.12rem;
+      font-weight:700;
+      color:var(--gold);
+      line-height:1;
+      letter-spacing:.01em;
+    }
+    .brand .sub{
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--muted2);
+      margin-top:6px;
+      line-height:1.4;
+    }
+    .menu{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .menu a{
+      font-family:var(--mono);
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.76);
+      padding:10px 10px;
+      border-radius:12px;
+      transition:transform .2s var(--ease-out-quart), background .2s var(--ease-out-quart), color .2s var(--ease-out-quart);
+    }
+    .menu a:hover{
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.92);
+      transform:translateY(-1px);
+    }
+    .cta{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .btn{
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      color:rgba(255,255,255,.92);
+      border-radius:16px;
+      padding:11px 14px;
+      font-family:var(--mono);
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:transform .2s var(--ease-out-quart), border-color .2s var(--ease-out-quart), box-shadow .2s var(--ease-out-quart);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.22)}
+    .btn.primary{
+      border:1px solid rgba(255,211,106,.35);
+      background:linear-gradient(90deg, rgba(39,242,255,.16), rgba(255,211,106,.18), rgba(162,67,255,.16));
+      box-shadow: 0 14px 45px rgba(0,0,0,.35);
+    }
+    .btn .dot{
+      width:8px;height:8px;border-radius:999px;
+      background:var(--cyan);
+      box-shadow:0 0 16px rgba(39,242,255,.45);
+    }
+
+    /* Mobile menu */
+    .burger{
+      display:none;
+      width:44px;height:44px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.88);
+      cursor:pointer;
+    }
+    .mobile{
+      display:none;
+      padding:12px 0 16px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .mobile a{
+      display:block;
+      padding:12px 10px;
+      border-radius:14px;
+      font-family:var(--mono);
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.80);
+    }
+    .mobile a:hover{background:rgba(255,255,255,.06)}
+    .nav.open .mobile{display:block}
+
+    /* Layout sections */
+    main{padding-bottom:22px}
+    section{padding:54px 0}
+    .hero{padding:74px 0 38px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .card{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-60px;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(39,242,255,.10) 0%, transparent 45%),
+        radial-gradient(circle at 70% 40%, rgba(255,211,106,.11) 0%, transparent 46%),
+        radial-gradient(circle at 55% 80%, rgba(162,67,255,.10) 0%, transparent 52%);
+      opacity:.75;
+      filter: blur(14px);
+      pointer-events:none;
+    }
+    .card > *{position:relative; z-index:2}
+
+    .kicker{
+      font-family:var(--mono);
+      font-size:.78rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.70);
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .kicker .spark{
+      width:10px;height:10px;border-radius:999px;
+      background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      box-shadow:0 0 22px rgba(39,242,255,.28);
+    }
+    h1,h2,h3,h4{font-family:var(--display)}
+    .hero h1{
+      color:var(--gold);
+      font-size:clamp(2.3rem,5.4vw,3.6rem);
+      line-height:1.04;
+      margin:14px 0 12px;
+      letter-spacing:.01em;
+    }
+    .lead{
+      color:rgba(255,255,255,.74);
+      font-size:1.04rem;
+      line-height:1.9;
+      max-width:78ch;
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+      align-items:center;
+    }
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+    .pill{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      border-radius:999px;
+      padding:10px 12px;
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.70);
+    }
+
+    .aside h3{
+      color:rgba(255,255,255,.90);
+      font-size:1.3rem;
+      margin-bottom:10px;
+    }
+    .aside p{
+      color:rgba(255,255,255,.72);
+      line-height:1.9;
+      font-size:.98rem;
+    }
+    .aside .mini{
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color:rgba(255,255,255,.62);
+      font-family:var(--mono);
+      font-size:.75rem;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      line-height:1.7;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:16px;
+    }
+    .section-title h2{
+      font-size:2.05rem;
+      color:var(--gold);
+      letter-spacing:.01em;
+      line-height:1.1;
+    }
+    .section-title p{
+      color:rgba(255,255,255,.62);
+      font-family:var(--mono);
+      font-size:.74rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      line-height:1.5;
+      max-width:60ch;
+      text-align:right;
+    }
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(39,242,255,.35), rgba(255,211,106,.35), rgba(162,67,255,.35), transparent);
+      opacity:.7;
+      margin:18px 0 0;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+    }
+    .span-6{grid-column: span 6;}
+    .span-12{grid-column: span 12;}
+    .block{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      padding:22px;
+    }
+    .block h3{
+      font-size:1.55rem;
+      color:rgba(255,255,255,.94);
+      margin-bottom:8px;
+    }
+    .block p{
+      color:rgba(255,255,255,.72);
+      line-height:1.9;
+      font-size:1rem;
+    }
+    .quote{
+      margin-top:14px;
+      padding:16px 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      color:rgba(255,255,255,.78);
+      line-height:1.9;
+      font-size:1.02rem;
+      position:relative;
+    }
+    .quote b{
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.62);
+      display:block;
+      margin-bottom:8px;
+      line-height:1.5;
+    }
+
+    .list{
+      margin-top:14px;
+      display:grid;
+      gap:10px;
+    }
+    .li{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .li .icon{
+      width:10px;height:10px;border-radius:999px;
+      margin-top:6px;
+      background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      box-shadow:0 0 18px rgba(39,242,255,.24);
+      flex:0 0 auto;
+    }
+    .li b{
+      font-family:var(--mono);
+      font-size:.80rem;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.88);
+      display:block;
+      margin-bottom:2px;
+      line-height:1.45;
+    }
+    .li span{
+      color:rgba(255,255,255,.70);
+      line-height:1.8;
+      display:block;
+      font-size:.98rem;
+    }
+
+    .lanes{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      margin-top:14px;
+    }
+    .lane{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      padding:20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.34);
+      position:relative;
+      overflow:hidden;
+    }
+    .lane .top{
+      font-family:var(--mono);
+      font-size:.74rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.62);
+      margin-bottom:10px;
+      line-height:1.5;
+    }
+    .lane h4{
+      font-family:var(--display);
+      font-size:1.35rem;
+      color:rgba(255,255,255,.92);
+      margin-bottom:8px;
+      line-height:1.15;
+    }
+    .lane p{
+      color:rgba(255,255,255,.72);
+      line-height:1.85;
+      font-size:1rem;
+    }
+    .price-chip{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .chip{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      border-radius:999px;
+      padding:10px 12px;
+      font-family:var(--mono);
+      font-size:.70rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.70);
+      line-height:1.4;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .chip .glow{
+      width:8px;height:8px;border-radius:999px;
+      background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      box-shadow:0 0 18px rgba(39,242,255,.22);
+    }
+    .chip strong{
+      color:rgba(255,255,255,.92);
+      font-weight:700;
+      letter-spacing:.10em;
+    }
+
+    .packages{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      margin-top:14px;
+    }
+    .pkg{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      padding:22px;
+      box-shadow: 0 14px 48px rgba(0,0,0,.38);
+      position:relative;
+      overflow:hidden;
+    }
+    .pkg.featured{
+      border-color: rgba(255,211,106,.28);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+    }
+    .pkg .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      border-radius:999px;
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.74);
+      line-height:1.4;
+    }
+    .pkg h4{
+      margin:14px 0 8px;
+      font-size:1.55rem;
+      color:rgba(255,255,255,.94);
+      line-height:1.15;
+    }
+    .pkg .sub{
+      color:rgba(255,255,255,.72);
+      line-height:1.85;
+      font-size:1rem;
+      margin-bottom:12px;
+    }
+    .pkg .amount{
+      font-family:var(--display);
+      font-size:2.05rem;
+      color:var(--gold);
+      letter-spacing:.01em;
+      margin:10px 0 8px;
+      line-height:1.05;
+    }
+    .pkg .smallnote{
+      color:rgba(255,255,255,.62);
+      line-height:1.75;
+      font-size:.98rem;
+      margin-bottom:12px;
+    }
+    .pkg .bullets{
+      display:grid;
+      gap:10px;
+      margin-top:10px;
+    }
+    .pkg .b{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      color:rgba(255,255,255,.72);
+      line-height:1.8;
+    }
+    .pkg .b i{
+      width:10px;height:10px;border-radius:999px;
+      margin-top:6px;
+      background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      box-shadow:0 0 18px rgba(39,242,255,.22);
+      flex:0 0 auto;
+    }
+
+    .form-wrap{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      padding:22px;
+      box-shadow: 0 14px 48px rgba(0,0,0,.38);
+    }
+    form{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    .field{grid-column: span 6; display:flex; flex-direction:column; gap:8px;}
+    .field.full{grid-column: span 12;}
+    label{
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.62);
+      line-height:1.4;
+    }
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.22);
+      color:rgba(255,255,255,.92);
+      outline:none;
+      font-family:var(--body);
+      font-size:1rem;
+    }
+    textarea{min-height:120px; resize:vertical}
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(39,242,255,.28);
+      box-shadow: 0 0 0 4px rgba(39,242,255,.07);
+    }
+    .hint{
+      margin-top:8px;
+      color:rgba(255,255,255,.62);
+      line-height:1.85;
+      font-size:1rem;
+    }
+    .fine{
+      margin-top:10px;
+      color:rgba(255,255,255,.52);
+      line-height:1.75;
+      font-size:.95rem;
+    }
+    .hidden{display:none}
+
+    details{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      padding:18px 18px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.34);
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-family:var(--display);
+      font-size:1.18rem;
+      color:rgba(255,255,255,.92);
+      line-height:1.3;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{
+      margin-top:10px;
+      color:rgba(255,255,255,.72);
+      line-height:1.9;
+      font-size:1rem;
+    }
+
+    .estimator{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      margin-top:14px;
+    }
+    .est-result{
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.10);
+      padding:18px;
+    }
+    .est-result .big{
+      font-family:var(--display);
+      font-size:1.85rem;
+      color:var(--gold);
+      margin-top:8px;
+      line-height:1.1;
+    }
+    .est-result .row{
+      margin-top:10px;
+      color:rgba(255,255,255,.72);
+      line-height:1.8;
+      font-size:1rem;
+    }
+    .est-result .row b{
+      font-family:var(--mono);
+      font-size:.75rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.62);
+      display:block;
+      margin-bottom:4px;
+      line-height:1.5;
+    }
+    .est-note{
+      margin-top:10px;
+      color:rgba(255,255,255,.56);
+      line-height:1.75;
+      font-size:.95rem;
+    }
+
+    footer{
+      padding:34px 0 46px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.22));
+    }
+    .foot{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      color:rgba(255,255,255,.58);
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      line-height:1.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns: 1fr}
+      .section-title{flex-direction:column; align-items:flex-start}
+      .section-title p{text-align:left; max-width:80ch}
+      .lanes{grid-template-columns:1fr}
+      .packages{grid-template-columns:1fr}
+      .field{grid-column: span 12;}
+      .estimator{grid-template-columns:1fr;}
+    }
+    @media (max-width: 860px){
+      .menu, .cta{display:none}
+      .burger{display:inline-flex; align-items:center; justify-content:center}
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important}
+      body::before{animation:none !important}
+      .cinematic-opener, .progress-fill, .kaixu-logo, .opener-logo img{animation:none !important;}
+    }
+  </style>
+</head>
+
+<body class="locked">
+  <div id="siteHeaderMount"></div>
+  <!-- kAIxU killer AI logo (no container) -->
+  <img class="kaixu-logo" src="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" alt="kAIxU logo" loading="eager" />
+
+  <!-- Cinematic intro -->
+  <div class="cinematic-opener" aria-hidden="true">
+    <div class="opener-content">
+      <div class="opener-line">
+        <p class="opener-text">A Skyes Over London LC Publication</p>
+      </div>
+      <div class="opener-line">
+        <h1 class="opener-title">Business App Vault<br/>Brand-Ready Systems</h1>
+      </div>
+      <div class="opener-divider"></div>
+      <p class="opener-subtitle">
+        Skyes Over London LC is the company behind the companies that need tech. Pick the business lane you need, we brand it as your company, and we launch it fast.
+        When you want intelligence inside the system, we turn on <b>kAIxU Powered</b>.
+      </p>
+
+      <div class="opener-logo">
+        <img src="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" alt="kAIxU logo" loading="eager" />
+      </div>
+
+      <p class="opener-company">
+        Operator-grade AI + web infrastructure<br/>
+        Skyes Over London LC
+      </p>
+    </div>
+
+    <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
+  </div>
+
+  <!-- Nav -->
+  <header class="nav" id="top">
+    <div class="wrap">
+      <div class="nav-inner">
+        <div class="brand">
+          <div>
+            <div class="title">Business App Vault</div>
+            <div class="sub">Skyes Over London LC • company behind companies</div>
+          </div>
+        </div>
+
+        <nav class="menu" aria-label="Primary">
+          <a href="#what">What it is</a>
+          <a href="#lanes">System lanes</a>
+          <a href="#deliverables">Deliverables</a>
+          <a href="#pricing">Base pricing</a>
+          <a href="#kaixu">kAIxU Powered</a>
+          <a href="#packages">Packages</a>
+          <a href="#faq">FAQ</a>
+          <a href="#access">Request Access</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="#access"><span class="dot"></span> Request Access</a>
+          <a class="btn primary" href="#pricing"><span class="dot"></span> View Pricing</a>
+        </div>
+
+        <button class="burger" id="burger" aria-label="Open menu">☰</button>
+      </div>
+
+      <div class="mobile" id="mobile">
+        <a href="#what">What it is</a>
+        <a href="#lanes">System lanes</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#pricing">Base pricing</a>
+        <a href="#kaixu">kAIxU Powered</a>
+        <a href="#packages">Packages</a>
+        <a href="#faq">FAQ</a>
+        <a href="#access">Request Access</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="card">
+            <div class="kicker"><span class="spark"></span> pick a lane • brand it • launch it • upgrade it</div>
+
+            <h1>Your company needs an app.<br/>We already have it built.</h1>
+
+            <p class="lead">
+              Most businesses don’t need a custom invention. They need a working system: intake, front office, delivery, client portals, contractor portals, sales tracking, reporting.
+              Skyes Over London LC builds these lanes once at an operator level, proves they work, and deploys them repeatedly under the client’s brand.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#access"><span class="dot"></span> Launch My Lane</a>
+              <a class="btn" href="#lanes"><span class="dot"></span> Browse Lanes</a>
+              <a class="btn" href="#pricing"><span class="dot"></span> Base Pricing</a>
+              <a class="btn" href="#kaixu"><span class="dot"></span> kAIxU Powered</a>
+            </div>
+
+            <div class="pill-row">
+              <span class="pill">White-label ready</span>
+              <span class="pill">Built for real operations</span>
+              <span class="pill">Fast launch</span>
+              <span class="pill">Upgradeable</span>
+              <span class="pill">Proof-first</span>
+            </div>
+          </div>
+
+          <div class="card aside">
+            <h3>Plain English</h3>
+            <p>
+              This is “apps on the shelf.” Your customer tells you what they need. You pick the lane. You brand it as their company. You launch it.
+              If they want it smarter, you add <b>kAIxU Powered</b> as an upgrade.
+            </p>
+            <div class="mini">
+              Payment structure: 20% to start • remaining 80% split over 6 / 12 / 18 / 24 / 36 / 48 months
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT IT IS -->
+    <section id="what">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>What this is</h2>
+          <p>not “a template” • a repeatable system lane</p>
+        </div>
+
+        <div class="grid">
+          <div class="block span-6">
+            <h3>Skyes Over London LC is the company behind companies</h3>
+            <p>
+              Companies come to you and say: “We need an app.” What they really mean is: “We need an operating lane that runs our workflow.”
+              Skyes Over London LC delivers that lane as a brand-ready system — already built, already proven, already structured to launch.
+            </p>
+            <div class="quote">
+              <b>One sentence positioning</b>
+              We’re the company behind the companies that need tech — pick the lane you need, we brand it as your company, and we launch it fast.
+            </div>
+          </div>
+
+          <div class="block span-6">
+            <h3>White-label is standard</h3>
+            <p>
+              Your client’s system can be silent white-label or co-branded. Either way, the experience is theirs: their logo, their wording, their domain, their workflow steps.
+              They don’t feel like they “bought software.” They feel like they acquired a platform.
+            </p>
+            <div class="list">
+              <div class="li"><div class="icon"></div><div><b>Brand identity baked in</b><span>Logo, colors, language, pages, and portal feel built for them.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Staff-friendly UX</b><span>No training department required. Simple flows, obvious actions.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Upgradeable model</b><span>Add lanes and add intelligence over time without rebuilding.</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+      </div>
+    </section>
+
+    <!-- LANES -->
+    <section id="lanes">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>System lanes (the Vault)</h2>
+          <p>each lane has a base price • white-label launch included</p>
+        </div>
+
+        <div class="lanes">
+          <div class="lane">
+            <div class="top">Lane 01</div>
+            <h4>Intake Lane</h4>
+            <p>Lead capture, intake forms, file upload, routing, follow-up steps, and “what happens next” tracking.</p>
+            <div class="price-chip">
+              <span class="chip"><span class="glow"></span> Base Price <strong>$9,500</strong></span>
+              <span class="chip"><span class="glow"></span> 20% Down <strong>$1,900</strong></span>
+            </div>
+          </div>
+
+          <div class="lane">
+            <div class="top">Lane 02</div>
+            <h4>Front Office Lane</h4>
+            <p>Calls, tasks, notes, customer records, staff workflow, daily accountability, and internal handoffs.</p>
+            <div class="price-chip">
+              <span class="chip"><span class="glow"></span> Base Price <strong>$12,500</strong></span>
+              <span class="chip"><span class="glow"></span> 20% Down <strong>$2,500</strong></span>
+            </div>
+          </div>
+
+          <div class="lane">
+            <div class="top">Lane 03</div>
+            <h4>Delivery Lane</h4>
+            <p>Dispatch + delivery ops: jobs, drivers, daily totals, performance, status, proof, and reporting.</p>
+            <div class="price-chip">
+              <span class="chip"><span class="glow"></span> Base Price <strong>$18,500</strong></span>
+              <span class="chip"><span class="glow"></span> 20% Down <strong>$3,700</strong></span>
+            </div>
+          </div>
+
+          <div class="lane">
+            <div class="top">Lane 04</div>
+            <h4>Client Portal Lane</h4>
+            <p>Customers log in to request service, upload docs, see status updates, and communicate in one place.</p>
+            <div class="price-chip">
+              <span class="chip"><span class="glow"></span> Base Price <strong>$14,500</strong></span>
+              <span class="chip"><span class="glow"></span> 20% Down <strong>$2,900</strong></span>
+            </div>
+          </div>
+
+          <div class="lane">
+            <div class="top">Lane 05</div>
+            <h4>Contractor Lane</h4>
+            <p>Onboarding, assignments, submissions, approvals, performance, and payout workflow visibility.</p>
+            <div class="price-chip">
+              <span class="chip"><span class="glow"></span> Base Price <strong>$16,500</strong></span>
+              <span class="chip"><span class="glow"></span> 20% Down <strong>$3,300</strong></span>
+            </div>
+          </div>
+
+          <div class="lane">
+            <div class="top">Lane 06</div>
+            <h4>Sales Lane</h4>
+            <p>Leads, scripts, stages, follow-ups, deal tracking, and simple reporting that actually gets used.</p>
+            <div class="price-chip">
+              <span class="chip"><span class="glow"></span> Base Price <strong>$11,500</strong></span>
+              <span class="chip"><span class="glow"></span> 20% Down <strong>$2,300</strong></span>
+            </div>
+          </div>
+
+          <div class="lane">
+            <div class="top">Lane 07</div>
+            <h4>Reporting Lane</h4>
+            <p>Weekly/monthly summaries, exports, activity history, and proof packs for leadership and partners.</p>
+            <div class="price-chip">
+              <span class="chip"><span class="glow"></span> Base Price <strong>$13,500</strong></span>
+              <span class="chip"><span class="glow"></span> 20% Down <strong>$2,700</strong></span>
+            </div>
+          </div>
+
+          <div class="lane">
+            <div class="top">Lane 08</div>
+            <h4>Multi-Lane Operating System (3 lanes)</h4>
+            <p>Bundle lanes together so intake flows into operations, operations flows into reporting, and nothing gets lost.</p>
+            <div class="price-chip">
+              <span class="chip"><span class="glow"></span> Base Price <strong>$32,500</strong></span>
+              <span class="chip"><span class="glow"></span> 20% Down <strong>$6,500</strong></span>
+            </div>
+          </div>
+
+          <div class="lane">
+            <div class="top">Lane 09</div>
+            <h4>Custom Lane Build</h4>
+            <p>When a business needs a unique lane, we build it the same way: operator-first, scalable, and upgradeable.</p>
+            <div class="price-chip">
+              <span class="chip"><span class="glow"></span> Starting at <strong>$25,000</strong></span>
+              <span class="chip"><span class="glow"></span> 20% Down <strong>$5,000</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="hint" style="margin-top:14px;">
+          Base pricing covers a clean white-label launch. Large user counts, multi-location complexity, heavy workflow customization, or multi-lane linking can increase scope (we quote it clean).
+        </p>
+
+        <div class="divider"></div>
+      </div>
+    </section>
+
+    <!-- DELIVERABLES -->
+    <section id="deliverables">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Deliverables (what they actually get)</h2>
+          <p>the obvious stuff • delivered clean • in human terms</p>
+        </div>
+
+        <div class="grid">
+          <div class="block span-6">
+            <h3>Baseline deliverables (every launch)</h3>
+            <p>Your client receives a live, branded system they can use immediately — not a concept, not a “phase one,” not a half-finished demo.</p>
+
+            <div class="list">
+              <div class="li"><div class="icon"></div><div><b>A live branded portal</b><span>The lane launches under their name and brand look.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Login access for staff</b><span>Users can sign in and do their job inside the system.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Workflow language + forms</b><span>Their wording, their steps, their real intake questions.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>A simple “how to use it” guide</b><span>Written for humans. No complicated terminology.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Launch handoff</b><span>Admin login, staff logins, links, and a walkthrough session.</span></div></div>
+            </div>
+          </div>
+
+          <div class="block span-6">
+            <h3>Operational deliverables (business-grade)</h3>
+            <p>This is what makes it feel like a real system, not “just a webpage.”</p>
+
+            <div class="list">
+              <div class="li"><div class="icon"></div><div><b>Role-based access (basic)</b><span>Owner / manager / staff visibility controls.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Activity history</b><span>Accountability: who did what, and when.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Exports</b><span>They can pull their information when needed.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Proof pack option</b><span>Snapshots + summaries for leadership reporting and partner receipts.</span></div></div>
+            </div>
+
+            <div class="quote">
+              <b>The real difference</b>
+              Most shops sell “builds.” We sell operating lanes — designed to run real work, and scale into a full business system.
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+      </div>
+    </section>
+
+    <!-- PRICING + PAYMENT STRUCTURE -->
+    <section id="pricing">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Base pricing + payment structure</h2>
+          <p>20% to start • remaining 80% split over time</p>
+        </div>
+
+        <div class="grid">
+          <div class="block span-6">
+            <h3>How payments work (your standard)</h3>
+            <p>
+              Every lane has a base price. To start any build, it’s <b>20% up front</b>. The remaining <b>80%</b> is split evenly across one of these terms:
+              <b>6, 12, 18, 24, 36, or 48 months</b>.
+            </p>
+            <div class="quote">
+              <b>Client-safe wording</b>
+              Pay 20% to begin. Choose a monthly plan (6–48 months). The remaining 80% is divided evenly across the plan. Simple.
+            </div>
+          </div>
+
+          <div class="block span-6">
+            <h3>Payment estimator (instant)</h3>
+            <p>Select a lane and term to show the down payment and monthly amount (based on your 20% / 80% structure).</p>
+
+            <div class="estimator">
+              <div class="est-controls">
+                <div class="field full">
+                  <label for="estLane">Choose a lane</label>
+                  <select id="estLane" name="estLane"></select>
+                </div>
+
+                <div class="field full">
+                  <label for="estTerm">Choose a term</label>
+                  <select id="estTerm" name="estTerm">
+                    <option value="6">6 months</option>
+                    <option value="12" selected>12 months</option>
+                    <option value="18">18 months</option>
+                    <option value="24">24 months</option>
+                    <option value="36">36 months</option>
+                    <option value="48">48 months</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="est-result" aria-live="polite">
+                <div class="row">
+                  <b>Base price</b>
+                  <div class="big" id="estBase">$0.00</div>
+                </div>
+                <div class="row">
+                  <b>Down payment (20%)</b>
+                  <div id="estDown">$0.00</div>
+                </div>
+                <div class="row">
+                  <b>Monthly (remaining 80% / term)</b>
+                  <div id="estMonthly">$0.00</div>
+                </div>
+                <div class="est-note" id="estNote">
+                  This estimator uses the simple split: 20% down + remaining 80% divided evenly. (No additional fees shown here.)
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="divider"></div>
+      </div>
+    </section>
+
+    <!-- kAIxU POWERED -->
+    <section id="kaixu">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>kAIxU Powered (upgrade)</h2>
+          <p>the lane is the product • AI is paid by usage</p>
+        </div>
+
+        <div class="grid">
+          <div class="block span-6">
+            <h3>What “kAIxU Powered” means</h3>
+            <p>
+              kAIxU Powered is intelligence inside the workflow: the system helps staff move faster, reduce mistakes, and convert messy information into clean actions.
+            </p>
+
+            <div class="list">
+              <div class="li"><div class="icon"></div><div><b>Summarize</b><span>Turns long customer messages into the key points.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Next steps</b><span>Turns requests into clear action items for staff.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Draft replies + updates</b><span>Creates clean customer updates and follow-ups fast.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Missing info checks</b><span>Flags what’s missing before the job gets delayed.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Reports</b><span>Builds summaries and recaps without extra work.</span></div></div>
+            </div>
+          </div>
+
+          <div class="block span-6">
+            <h3>kAIxU pricing (simple)</h3>
+            <p>
+              kAIxU is an add-on upgrade. The lane can run without AI. When the client turns on kAIxU Powered, they pay for:
+              (1) the one-time integration, and (2) AI usage when they actually use it.
+            </p>
+
+            <div class="quote">
+              <b>Base add-on pricing</b>
+              kAIxU Powered integration: <b>$7,500</b> per lane (one-time).<br/>
+              AI usage: billed separately based on consumption (requests/messages). Usage caps available.
+            </div>
+
+            <div class="list">
+              <div class="li"><div class="icon"></div><div><b>Usage caps</b><span>So budgets never get surprised.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Usage visibility</b><span>So leadership can see what’s being used.</span></div></div>
+              <div class="li"><div class="icon"></div><div><b>Upgrade anytime</b><span>Turn it on later without rebuilding the lane.</span></div></div>
+            </div>
+
+            <p class="hint">
+              If a client wants metering + key controls + billing controls, we attach your existing governance lane as an add-on (Xinth).
+            </p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section id="packages">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Packages</h2>
+          <p>clear base pricing • financed with 20% down</p>
+        </div>
+
+        <div class="packages">
+          <div class="pkg">
+            <div class="tag">Package 01 • Launch</div>
+            <h4>Lane Install (White-Label Launch)</h4>
+            <div class="amount">From $9,500</div>
+            <div class="smallnote">
+              Base lane pricing depends on which lane you choose. Financing available: 20% down + monthly plan.
+            </div>
+            <p class="sub">
+              One lane installed and branded to the client so they can run real operations immediately.
+            </p>
+            <div class="bullets">
+              <div class="b"><i></i><span>Choose 1 lane (intake, front office, delivery, etc.)</span></div>
+              <div class="b"><i></i><span>Branding applied (logo, wording, domain-ready)</span></div>
+              <div class="b"><i></i><span>Staff logins + basic roles</span></div>
+              <div class="b"><i></i><span>Human walkthrough + launch handoff</span></div>
+            </div>
+          </div>
+
+          <div class="pkg featured">
+            <div class="tag">Package 02 • Most Popular</div>
+            <h4>Lane + kAIxU Powered</h4>
+            <div class="amount">Lane Price + $7,500</div>
+            <div class="smallnote">
+              Add kAIxU Powered to any lane. AI usage billed separately (fuel plan). Financing applies to the setup work.
+            </div>
+            <p class="sub">
+              The lane becomes smarter inside the workflow: summaries, next steps, replies, updates, and reports.
+            </p>
+            <div class="bullets">
+              <div class="b"><i></i><span>Everything in Lane Install</span></div>
+              <div class="b"><i></i><span>kAIxU workflow actions embedded where it matters</span></div>
+              <div class="b"><i></i><span>Usage caps + usage visibility</span></div>
+              <div class="b"><i></i><span>AI usage billed separately (fuel plan)</span></div>
+            </div>
+          </div>
+
+          <div class="pkg">
+            <div class="tag">Package 03 • Platform</div>
+            <h4>Multi-Lane Operating System</h4>
+            <div class="amount">$32,500</div>
+            <div class="smallnote">
+              Base bundle includes 3 connected lanes. Financing available: 20% down + monthly plan.
+            </div>
+            <p class="sub">
+              A connected system bundle so intake flows into operations, and operations flows into reporting.
+            </p>
+            <div class="bullets">
+              <div class="b"><i></i><span>Up to 3 lanes installed and connected</span></div>
+              <div class="b"><i></i><span>Unified branding across all lanes</span></div>
+              <div class="b"><i></i><span>Roles and access rules across lanes</span></div>
+              <div class="b"><i></i><span>Optional client portal + kAIxU upgrade</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid" style="margin-top:16px;">
+          <div class="block span-12">
+            <h3>Xinth governance + billing add-on (optional)</h3>
+            <p>
+              When a client wants key controls, metering, exports, rate rules, and billing controls, we attach your governance lane (Xinth) as an add-on.
+              This is the “control plane” layer behind the branded lanes.
+            </p>
+            <div class="quote">
+              <b>Base add-on pricing</b>
+              Xinth governance + billing lane onboarding: <b>$12,500</b> (one-time)<br/>
+              Control plane access: <b>$1,250/month</b> (governance, metering, exports, admin controls)
+            </div>
+            <p class="hint">
+              Monthly platform fees are separate from financed build work. We keep pricing clean and itemized.
+            </p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>FAQ</h2>
+          <p>answers in human terms</p>
+        </div>
+
+        <div class="grid">
+          <div class="span-6">
+            <details>
+              <summary>Is this just a template?</summary>
+              <p>
+                No. The lane concept is “build once, prove it, deploy many.” Each deployment is branded, configured to the client’s workflow, and launched with real deliverables.
+              </p>
+            </details>
+          </div>
+
+          <div class="span-6">
+            <details>
+              <summary>Do clients need to be technical?</summary>
+              <p>
+                No. They use it like a normal system: log in, do the workflow, track status. We provide the human guide and the walkthrough.
+              </p>
+            </details>
+          </div>
+
+          <div class="span-6">
+            <details>
+              <summary>How does the 20% + monthly plan work?</summary>
+              <p>
+                Pay 20% to begin. Choose a plan length (6–48 months). The remaining 80% is split evenly across the plan.
+              </p>
+            </details>
+          </div>
+
+          <div class="span-6">
+            <details>
+              <summary>How does kAIxU billing work?</summary>
+              <p>
+                The lane is the product. kAIxU is fuel. Clients only pay for AI usage when they use kAIxU features, and usage can be capped so budgets stay clean.
+              </p>
+            </details>
+          </div>
+
+          <div class="span-12">
+            <details>
+              <summary>What should a client say to get started?</summary>
+              <p>
+                “We need a system for intake/front office/delivery/client portal. We want it branded as our company. We may want kAIxU Powered later.”
+              </p>
+            </details>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+      </div>
+    </section>
+
+    <!-- REQUEST ACCESS -->
+    <section id="access">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Request access</h2>
+          <p>simple form • clean follow-up</p>
+        </div>
+
+        <div class="grid">
+          <div class="form-wrap span-12">
+            <h3 style="font-size:1.55rem; color:rgba(255,255,255,.94); margin-bottom:8px;">Tell us the lane you need</h3>
+            <p style="color:rgba(255,255,255,.72); line-height:1.9; font-size:1rem;">
+              Use plain English. We’ll recommend the right lane bundle and the cleanest launch path.
+            </p>
+
+            <form name="business-app-vault-leads" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="business-app-vault-leads" />
+              <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" placeholder="Your name" required />
+              </div>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@company.com" required />
+              </div>
+
+              <div class="field">
+                <label for="company">Company</label>
+                <input id="company" name="company" placeholder="Company / brand" />
+              </div>
+
+              <div class="field">
+                <label for="lane">Lane needed</label>
+                <select id="lane" name="lane">
+                  <option>Intake Lane</option>
+                  <option>Front Office Lane</option>
+                  <option>Delivery Lane</option>
+                  <option>Client Portal Lane</option>
+                  <option>Contractor Lane</option>
+                  <option>Sales Lane</option>
+                  <option>Reporting Lane</option>
+                  <option>Multi-Lane Operating System (3 lanes)</option>
+                  <option>Custom Lane Build</option>
+                  <option>Not sure</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="notes">Describe the use-case</label>
+                <textarea id="notes" name="notes" placeholder="Example: We need intake + front office. 12 staff users. Want it branded to our company. Might want kAIxU Powered for summaries and follow-ups."></textarea>
+              </div>
+
+              <div class="field full" style="display:flex; flex-direction:row; align-items:center; gap:12px;">
+                <button class="btn primary" type="submit"><span class="dot"></span> Send Request</button>
+                <a class="btn" href="#top"><span class="dot"></span> Back to Top</a>
+              </div>
+            </form>
+
+            <p class="fine">
+              Skyes Over London LC • Business App Vault • kAIxU Powered optional upgrade • 20% down + monthly plan available
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>© <span id="year"></span> Skyes Over London LC</div>
+        <div>Business App Vault • Brand-Ready Lanes • kAIxU Powered</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      // Intro unlock
+      window.addEventListener('load', () => {
+        setTimeout(() => { document.body.classList.remove('locked'); }, 5200);
+      });
+
+      // Year
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Mobile menu
+      const nav = document.querySelector('.nav');
+      const burger = document.getElementById('burger');
+      const mobile = document.getElementById('mobile');
+
+      function closeMenu(){ nav.classList.remove('open'); }
+      burger?.addEventListener('click', () => nav.classList.toggle('open'));
+      mobile?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+      // Smooth anchors (respect reduced motion)
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const id = a.getAttribute('href');
+          if(!id || id.length < 2) return;
+          const el = document.querySelector(id);
+          if(!el) return;
+          e.preventDefault();
+          el.scrollIntoView({behavior: prefersReduced ? 'auto' : 'smooth', block:'start'});
+        });
+      });
+
+      // Pricing estimator data (base lane pricing)
+      const lanePrices = {
+        "Intake Lane": 9500,
+        "Front Office Lane": 12500,
+        "Delivery Lane": 18500,
+        "Client Portal Lane": 14500,
+        "Contractor Lane": 16500,
+        "Sales Lane": 11500,
+        "Reporting Lane": 13500,
+        "Multi-Lane Operating System (3 lanes)": 32500
+      };
+
+      const estLane = document.getElementById('estLane');
+      const estTerm = document.getElementById('estTerm');
+      const estBase = document.getElementById('estBase');
+      const estDown = document.getElementById('estDown');
+      const estMonthly = document.getElementById('estMonthly');
+
+      function money(n){
+        return n.toLocaleString(undefined, { style:'currency', currency:'USD' });
+      }
+
+      function updateEstimator(){
+        const lane = estLane.value;
+        const term = parseInt(estTerm.value, 10);
+        const base = lanePrices[lane] || 0;
+        const down = base * 0.20;
+        const remaining = base - down;
+        const monthly = term ? (remaining / term) : 0;
+
+        estBase.textContent = money(base);
+        estDown.textContent = money(down);
+        estMonthly.textContent = money(monthly) + " / month";
+      }
+
+      // Populate lane selector
+      Object.keys(lanePrices).forEach((k) => {
+        const opt = document.createElement('option');
+        opt.value = k;
+        opt.textContent = k + " — " + money(lanePrices[k]);
+        estLane.appendChild(opt);
+      });
+      estLane.value = "Front Office Lane";
+
+      estLane.addEventListener('change', updateEstimator);
+      estTerm.addEventListener('change', updateEstimator);
+      updateEstimator();
+    })();
+  </script>
+  <script src="/js/main.js"></script>
+  <script src="/js/partials.js"></script>
+</body>
+</html>

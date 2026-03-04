@@ -1,0 +1,3669 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>WebPile Pro Enterprise — Dev Sandbox Studio</title>
+  <meta name="description" content="Enterprise-grade HTML/CSS/JS sandbox studio: multi-file Monaco editor, isolated preview, console capture, validation, version history, and exportable ZIP packs." />
+
+  <!-- PWA meta (tool works without these files; they are included in Export Pack) -->
+  <meta name="theme-color" content="#05010c" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="WebPile Pro" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+
+  <style>
+    :root{
+      --bg0:#05010c;
+      --bg1:#09021a;
+      --panel:#0d0526;
+      --panel2:#0b0320;
+      --ink:#ecf1ff;
+      --muted:#a8b2d6;
+      --line:#1b0f3a;
+
+      --p0:#7c3cff;
+      --p1:#ff2bd6;
+      --c0:#27d6ff;
+      --g0:#ffcf5b;
+      --g1:#ff8a2a;
+
+      --ok:#7bff6a;
+      --warn:#ffcf5b;
+      --bad:#ff4d6d;
+
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --r: 18px;
+      --r2: 12px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 900px at 20% 20%, rgba(124,60,255,.28), transparent 60%),
+        radial-gradient(900px 700px at 80% 25%, rgba(255,43,214,.18), transparent 55%),
+        radial-gradient(900px 700px at 65% 85%, rgba(39,214,255,.10), transparent 55%),
+        radial-gradient(900px 700px at 15% 85%, rgba(255,207,91,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow:auto;
+    }
+
+    /* Subtle starfield */
+    .stars, .stars:before, .stars:after{
+      position:fixed; inset:0; content:"";
+      background-repeat:repeat;
+      pointer-events:none;
+      opacity:.18;
+      mix-blend-mode:screen;
+    }
+    .stars{
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.9) 50%, transparent 51%),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.7) 50%, transparent 51%),
+        radial-gradient(1px 1px at 55% 35%, rgba(255,255,255,.6) 50%, transparent 51%),
+        radial-gradient(1px 1px at 80% 70%, rgba(255,255,255,.75) 50%, transparent 51%),
+        radial-gradient(1px 1px at 92% 20%, rgba(255,255,255,.55) 50%, transparent 51%);
+      background-size: 320px 320px;
+    }
+    .stars:before{
+      background-image:
+        radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,.6) 50%, transparent 51%),
+        radial-gradient(1px 1px at 45% 10%, rgba(255,255,255,.55) 50%, transparent 51%),
+        radial-gradient(1px 1px at 70% 45%, rgba(255,255,255,.7) 50%, transparent 51%),
+        radial-gradient(1px 1px at 88% 88%, rgba(255,255,255,.65) 50%, transparent 51%);
+      background-size: 420px 420px;
+      opacity:.16;
+      transform:translate3d(0,0,0);
+      animation: drift1 18s linear infinite;
+    }
+    .stars:after{
+      background-image:
+        radial-gradient(1px 1px at 25% 25%, rgba(255,255,255,.6) 50%, transparent 51%),
+        radial-gradient(1px 1px at 60% 60%, rgba(255,255,255,.7) 50%, transparent 51%),
+        radial-gradient(1px 1px at 85% 40%, rgba(255,255,255,.55) 50%, transparent 51%),
+        radial-gradient(1px 1px at 10% 90%, rgba(255,255,255,.5) 50%, transparent 51%);
+      background-size: 520px 520px;
+      opacity:.14;
+      animation: drift2 26s linear infinite;
+    }
+    @keyframes drift1{ from{transform:translateY(0)} to{transform:translateY(-60px)} }
+    @keyframes drift2{ from{transform:translateX(0)} to{transform:translateX(-70px)} }
+
+    .app{
+      min-height:calc(100vh - 140px);
+      display:flex;
+      flex-direction:column;
+      padding:14px;
+      gap:12px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:12px;
+      padding:12px 14px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(180deg, rgba(13,5,38,.86), rgba(9,2,26,.70));
+      border-radius:var(--r);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 300px;
+      flex: 1 1 auto;
+    }
+    .sigil{
+      width:42px;height:42px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,207,91,.45), transparent 60%),
+        radial-gradient(22px 22px at 75% 30%, rgba(255,43,214,.25), transparent 60%),
+        radial-gradient(26px 26px at 55% 78%, rgba(39,214,255,.18), transparent 65%),
+        linear-gradient(180deg, rgba(124,60,255,.30), rgba(9,2,26,.10));
+      box-shadow: 0 0 0 1px rgba(124,60,255,.10) inset, 0 14px 30px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .sigil:after{
+      content:"";
+      position:absolute; inset:-60%;
+      background: conic-gradient(from 0deg, rgba(255,207,91,.0), rgba(255,207,91,.18), rgba(124,60,255,.0), rgba(39,214,255,.14), rgba(255,43,214,.0));
+      animation: spin 8s linear infinite;
+    }
+    @keyframes spin{ to{ transform: rotate(360deg); } }
+
+    .brand h1{
+      margin:0;
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:800;
+      line-height:1.2;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .brand p{
+      margin:2px 0 0;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.2;
+    }
+
+    .controls{
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-start;
+      width:auto;
+      flex: 1 1 520px;
+    }
+
+    .pill{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(11,3,32,.55);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.15) inset;
+      font-size:12px;
+      color:var(--muted);
+      user-select:none;
+      white-space: nowrap;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(16,7,46,.85), rgba(10,3,30,.75));
+      color:var(--ink);
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.02em;
+      cursor:pointer;
+      transition: transform .08s ease, border-color .18s ease, filter .18s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+    }
+    .btn:hover{ filter:brightness(1.06); border-color: rgba(124,60,255,.35); }
+    .btn:active{ transform: translateY(1px); }
+    .btn.primary{
+      border-color: rgba(255,207,91,.35);
+      background:
+        radial-gradient(220px 90px at 20% 0%, rgba(255,207,91,.22), transparent 60%),
+        linear-gradient(180deg, rgba(255,207,91,.16), rgba(124,60,255,.08));
+    }
+    .btn.danger{
+      border-color: rgba(255,77,109,.35);
+      background:
+        radial-gradient(220px 90px at 20% 0%, rgba(255,77,109,.20), transparent 60%),
+        linear-gradient(180deg, rgba(255,77,109,.12), rgba(10,3,30,.75));
+    }
+    .btn.ghost{
+      border-color: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow:none;
+    }
+
+    select, input[type="number"], input[type="text"]{
+      background: rgba(11,3,32,.55);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--ink);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+      outline:none;
+    }
+    select:focus, input[type="number"]:focus, input[type="text"]:focus{
+      border-color: rgba(39,214,255,.40);
+      box-shadow: 0 0 0 3px rgba(39,214,255,.10);
+    }
+
+    .toggle{
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer;
+    }
+    .switch{
+      width:44px; height:24px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      position:relative;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.18) inset;
+      flex: 0 0 auto;
+    }
+    .knob{
+      width:18px; height:18px; border-radius:999px;
+      position:absolute; top:2px; left:3px;
+      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.35));
+      box-shadow: 0 10px 18px rgba(0,0,0,.35);
+      transition: left .18s ease, background .18s ease;
+    }
+    .toggle[data-on="true"] .switch{
+      border-color: rgba(124,60,255,.45);
+      background: rgba(124,60,255,.18);
+    }
+    .toggle[data-on="true"] .knob{
+      left:22px;
+      background: linear-gradient(180deg, rgba(255,207,91,.85), rgba(255,138,42,.35));
+    }
+
+    .grid{
+      flex:1;
+      min-height:0;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:12px;
+    }
+
+    .card{
+      min-height:0;
+      border-radius:var(--r);
+      border:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(13,5,38,.74), rgba(9,2,26,.55));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      backdrop-filter: blur(10px);
+    }
+    .cardHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(11,3,32,.70), rgba(11,3,32,.35));
+      flex-wrap:wrap;
+    }
+    .cardHead .title{
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .cardHead .title b{
+      font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    }
+    .cardHead .title span{
+      font-size:12px; color:var(--muted);
+      max-width: 65ch;
+    }
+    .cardBody{
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .editorWrap{
+      min-height:0;
+      flex:1;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .tabsRow{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .tabs{
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+      max-width: 100%;
+    }
+    .tab{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .tab b{
+      font-family: var(--mono);
+      font-weight:800;
+      color: var(--ink);
+      letter-spacing:.01em;
+    }
+    .tab.active{
+      border-color: rgba(255,207,91,.35);
+      background: rgba(255,207,91,.10);
+      color: rgba(255,226,160,.95);
+    }
+    .tab .dotMini{
+      width:6px; height:6px; border-radius:999px;
+      background: rgba(255,255,255,.20);
+      box-shadow:none;
+    }
+    .tab.dirty .dotMini{ background: rgba(255,207,91,.95); }
+
+    /* Monaco container takes full remaining height */
+    #monacoHost{
+      flex:1;
+      min-height:0;
+      width:100%;
+      background: linear-gradient(180deg, rgba(7,2,26,.55), rgba(7,2,26,.25));
+      position:relative;
+    }
+
+    /* Loading overlay */
+    .monacoLoading{
+      position:absolute; inset:0;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      gap:10px;
+      color: rgba(236,241,255,.92);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      background:
+        radial-gradient(800px 400px at 50% 20%, rgba(124,60,255,.18), transparent 60%),
+        linear-gradient(180deg, rgba(7,2,26,.75), rgba(7,2,26,.45));
+      border:1px solid rgba(255,255,255,.06);
+      padding: 18px;
+      text-align:center;
+    }
+    .spinner{
+      width:22px; height:22px; border-radius:999px;
+      border:2px solid rgba(255,255,255,.18);
+      border-top-color: rgba(255,207,91,.85);
+      animation: spin2 .9s linear infinite;
+    }
+    @keyframes spin2{ to{ transform: rotate(360deg); } }
+
+    .fallbackEditor{
+      position:absolute; inset:0;
+      display:none;
+      flex-direction:column;
+      padding: 12px;
+      gap: 10px;
+    }
+    .fallbackEditor textarea{
+      width:100%;
+      height:100%;
+      resize:none;
+      border-radius: var(--r2);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 12.5px;
+      padding: 12px;
+      outline:none;
+      line-height: 1.45;
+    }
+    .fallbackNote{
+      font-size:12px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .statusbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 14px;
+      border-top:1px solid rgba(255,255,255,.08);
+      background: rgba(11,3,32,.35);
+      color:var(--muted);
+      font-size:12px;
+      flex-wrap:wrap;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background: rgba(255,255,255,.25);
+      box-shadow: 0 0 0 2px rgba(0,0,0,.25);
+      display:inline-block;
+      margin-right:8px;
+      vertical-align:middle;
+    }
+    .dot.ok{ background: rgba(123,255,106,.9); }
+    .dot.warn{ background: rgba(255,207,91,.95); }
+    .dot.bad{ background: rgba(255,77,109,.95); }
+
+    .previewWrap{
+      flex:1;
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+      padding:12px;
+      gap:10px;
+    }
+
+    .deviceRow{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .frame{
+      flex:1;
+      min-height:0;
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+      padding:12px;
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .frame:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 240px at 10% 0%, rgba(124,60,255,.14), transparent 55%),
+        radial-gradient(700px 240px at 90% 0%, rgba(255,207,91,.10), transparent 55%);
+      pointer-events:none;
+    }
+
+    .viewport{
+      width:100%;
+      height:100%;
+      max-width: 100%;
+      border-radius: var(--r2);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 20px 40px rgba(0,0,0,.45);
+      background: #0b0b0f;
+      position:relative;
+    }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      background:#fff;
+    }
+
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.35;
+    }
+    .kbd{
+      font-family: var(--mono);
+      font-size:11px;
+      padding:1px 6px;
+      border-radius:7px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--ink);
+    }
+
+    .footerNote{
+      position:fixed;
+      right:16px; bottom:14px;
+      color: rgba(168,178,214,.70);
+      font-size:11px;
+      user-select:none;
+      pointer-events:none;
+    }
+
+    .banner{
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,207,91,.22);
+      background: rgba(255,207,91,.10);
+      color: rgba(255,226,160,.92);
+      font-size: 11px;
+      display:none;
+      white-space: nowrap;
+    }
+    .banner.show{ display:inline-flex; align-items:center; gap:8px; }
+    .banner .dot{ margin-right:0; box-shadow:none; width:7px; height:7px; }
+
+    /* Modals */
+    .modal{
+      position: fixed;
+      inset: 0;
+      background: rgba(7,2,26,.86);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 9999;
+    }
+    .modal.show{ display:flex; }
+    .modalCard{
+      width: min(980px, 92vw);
+      max-height: 86vh;
+      overflow: hidden;
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(13,5,38,.95), rgba(9,2,26,.88));
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+    }
+    .modalHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(11,3,32,.45);
+      flex-wrap:wrap;
+    }
+    .modalHead b{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .modalBody{
+      padding: 14px;
+      overflow:auto;
+      min-height:0;
+    }
+    .modalFoot{
+      padding: 12px 14px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(11,3,32,.35);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .row .meta{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      min-width:0;
+    }
+    .row .meta b{
+      font-size:12px;
+      letter-spacing:.02em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 62ch;
+    }
+    .row .meta span{
+      font-size:12px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width: 72ch;
+    }
+    .row .actions{
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .kpi{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      border-radius: 16px;
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
+      min-width: 0;
+    }
+    .kpi b{
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: rgba(255,226,160,.92);
+    }
+    .kpi span{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 18px;
+      background: rgba(11,3,32,.88);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      padding: 10px 14px;
+      box-shadow: var(--shadow);
+      color: var(--ink);
+      font-size: 12px;
+      display:none;
+      align-items:center;
+      gap: 10px;
+      z-index: 10000;
+      max-width: min(920px, 92vw);
+    }
+    .toast.show{ display:flex; }
+
+    .sep{
+      height:1px;
+      background: rgba(255,255,255,.08);
+      margin: 10px 0;
+    }
+
+    .consolePane{
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height: 180px;
+      max-height: 38vh;
+    }
+    .consoleHead{
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      background: rgba(11,3,32,.30);
+      flex-wrap:wrap;
+    }
+    .consoleHead b{
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color: rgba(255,226,160,.92);
+    }
+    .consoleBody{
+      padding: 10px 12px;
+      overflow:auto;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.4;
+      color: rgba(236,241,255,.92);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .logLine{ margin: 0 0 8px; }
+    .logLine .lvl{
+      display:inline-block;
+      width: 54px;
+      opacity: .75;
+    }
+    .logLine.warn{ color: rgba(255,226,160,.92); }
+    .logLine.error{ color: rgba(255,77,109,.95); }
+    .logLine.info{ color: rgba(39,214,255,.92); }
+
+    @media (max-width: 1120px){
+      body{ overflow:auto; }
+      .grid{ grid-template-columns: 1fr; }
+      .app{ height:auto; min-height:100%; }
+      .footerNote{ position:static; padding: 0 14px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div id="siteHeaderMount"></div>
+
+  <div class="app" id="app">
+    <div class="topbar">
+      <div class="brand">
+        <div class="sigil" aria-hidden="true"></div>
+        <div>
+          <h1>
+            WebPile Pro Enterprise
+            <span class="banner" id="protoBanner"><span class="dot warn"></span>Open via Netlify / https for best PWA + Monaco</span>
+            <span class="banner" id="cdnBanner"><span class="dot warn"></span>Running from CDN fallback (vendorize for locked-down networks)</span>
+          </h1>
+          <p>Multi-file Monaco studio → isolated preview, console capture, validation, version history, ZIP export.</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <div class="pill" title="Active project">
+          <span class="dot ok"></span>
+          <span id="projectPill">Project: —</span>
+        </div>
+
+        <button class="btn" id="projectsBtn" title="Manage projects">Projects</button>
+        <button class="btn" id="historyBtn" title="Snapshots & diff">History</button>
+        <button class="btn" id="consoleBtn" title="Open console panel">Console</button>
+        <button class="btn" id="validateBtn" title="Validate and scan current project">Validate</button>
+        <button class="btn" id="helpBtn" title="Quick tutorial">Help</button>
+
+        <div class="pill" id="cloudPill" title="Storage mode (local vs Neon cloud)">
+          <span class="dot warn" id="cloudDot"></span>
+          <span id="cloudText">Storage: Local</span>
+        </div>
+
+        <div class="toggle pill" id="cloudToggle" data-on="false" title="Cloud sync via Neon (requires sign-in).">
+          <span>Cloud</span>
+          <div class="switch" aria-hidden="true"><div class="knob"></div></div>
+        </div>
+
+        <button class="btn" id="accountBtn" title="Sign in / manage account">Account</button>
+
+
+        <div class="toggle pill" id="autoToggle" data-on="true" title="Auto renders while you type.">
+          <span>Auto</span>
+          <div class="switch" aria-hidden="true"><div class="knob"></div></div>
+        </div>
+
+        <div class="toggle pill" id="modeToggle" data-on="false" title="Safe blocks scripts; Full allows scripts (still sandboxed).">
+          <span id="modeLabel">Safe</span>
+          <div class="switch" aria-hidden="true"><div class="knob"></div></div>
+          <span style="color:var(--muted)">Full</span>
+        </div>
+
+        <button class="btn primary" id="renderBtn" title="Render now (Ctrl/⌘ + Enter)">Render</button>
+        <button class="btn" id="exportBtn" title="Export project as zip">Export ZIP</button>
+        <button class="btn" id="importBtn" title="Import .html or .zip">Import</button>
+        <input id="filePicker" type="file" accept=".zip,.html,.htm,text/html,application/zip" style="display:none" />
+        <button class="btn danger" id="resetBtn" title="Reset project files to templates (irreversible)">Reset</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Editor -->
+      <section class="card">
+        <div class="cardHead">
+          <div class="title">
+            <b>Editor</b>
+            <span id="editorSub">Files · <span class="kbd">Ctrl</span>/<span class="kbd">⌘</span>+<span class="kbd">Enter</span> render · <span class="kbd">Ctrl</span>/<span class="kbd">⌘</span>+<span class="kbd">S</span> snapshot</span>
+          </div>
+          <div class="tabsRow">
+            <div class="tabs" id="fileTabs" aria-label="Project files"></div>
+            <button class="btn ghost" id="addFileBtn" title="Add a file to this project">+ File</button>
+            <button class="btn" id="renameFileBtn" title="Rename active file">Rename</button>
+            <button class="btn danger" id="deleteFileBtn" title="Delete active file">Delete</button>
+            <label class="pill" style="gap:10px" title="Debounce in milliseconds for auto-render">
+              <span>Debounce</span>
+              <input id="debounceMs" type="number" min="0" max="5000" step="50" value="350" style="width:90px" />
+              <span>ms</span>
+            </label>
+            <button class="btn" id="formatBtn" title="Format document (Shift + Alt + F in Monaco)">Format</button>
+            <button class="btn" id="copyBtn" title="Copy active file to clipboard">Copy</button>
+          </div>
+        </div>
+
+        <div class="cardBody editorWrap">
+          <div id="monacoHost">
+            <div class="monacoLoading" id="monacoLoading">
+              <div class="spinner" aria-hidden="true"></div>
+              <div id="loadLine">Loading editor…</div>
+              <div style="opacity:.78; text-transform:none; letter-spacing:0; max-width:700px; line-height:1.4;">
+                Enterprise notes: this tool prefers local vendor assets for Monaco/JSZip, but can fall back to CDN. In locked networks, export a pack and vendorize dependencies.
+              </div>
+            </div>
+
+            <div id="monaco" style="position:absolute; inset:0;"></div>
+
+            <div class="fallbackEditor" id="fallbackEditor">
+              <div class="fallbackNote">
+                Monaco couldn’t load (usually a network block). You’re in fallback mode (plain textarea). Preview, export, history, validation still work.
+              </div>
+              <textarea id="fallbackTextarea" spellcheck="false"></textarea>
+            </div>
+          </div>
+
+          <div class="statusbar">
+            <div>
+              <span id="saveDot" class="dot ok"></span>
+              <span id="saveText">Ready</span>
+            </div>
+            <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+              <span id="stats">0 chars · 0 lines</span>
+              <span class="pill" style="padding:6px 10px; background:rgba(255,255,255,.03)" title="Preview token (rotates each render)">Session: <span id="sessionToken" style="font-family:var(--mono); color:rgba(255,226,160,.92)"></span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preview -->
+      <section class="card">
+        <div class="cardHead">
+          <div class="title">
+            <b>Preview</b>
+            <span id="previewSub">Safe Mode (scripts blocked) · isolated sandbox</span>
+          </div>
+          <div class="deviceRow">
+            <div class="toggle pill" id="isolationToggle" data-on="true" title="Isolated preview keeps your tool storage safer. Compatibility mode allows same-origin (riskier).">
+              <span>Isolated</span>
+              <div class="switch" aria-hidden="true"><div class="knob"></div></div>
+            </div>
+
+            <div class="toggle pill" id="instrumentToggle" data-on="true" title="Capture console/errors from preview into Console panel.">
+              <span>Capture</span>
+              <div class="switch" aria-hidden="true"><div class="knob"></div></div>
+            </div>
+
+            <label class="pill" style="gap:10px" title="Network policy (best-effort blocking for fetch/XHR/WS)">
+              <span>Network</span>
+              <select id="networkSel">
+                <option value="block">Block</option>
+                <option value="allow">Allow</option>
+              </select>
+            </label>
+
+            <label class="pill" style="gap:10px" title="Change viewport width">
+              <span>Device</span>
+              <select id="deviceSel">
+                <option value="responsive">Responsive</option>
+                <option value="1440">Desktop 1440</option>
+                <option value="1280">Laptop 1280</option>
+                <option value="1024">Tablet 1024</option>
+                <option value="768">Tablet 768</option>
+                <option value="430">Mobile 430</option>
+                <option value="390">Mobile 390</option>
+              </select>
+            </label>
+
+            <label class="pill" style="gap:10px" title="Scale the preview (visual only)">
+              <span>Scale</span>
+              <select id="scaleSel">
+                <option value="1">100%</option>
+                <option value="0.9">90%</option>
+                <option value="0.8">80%</option>
+                <option value="0.7">70%</option>
+              </select>
+            </label>
+
+            <button class="btn" id="openBtn" title="Open current composed preview in a new tab">Open Tab</button>
+            <button class="btn" id="reloadBtn" title="Reload iframe">Reload</button>
+          </div>
+        </div>
+
+        <div class="cardBody previewWrap">
+          <div class="frame">
+            <div class="viewport" id="viewport">
+              <iframe id="preview" title="Preview"></iframe>
+            </div>
+          </div>
+
+          <div class="hint">
+            Safe is for layout/CSS. Full runs scripts. “Isolated” keeps preview from reading your tool storage (recommended). Export ZIP for client handoff.
+          </div>
+
+          <div class="consolePane" id="consolePane" style="display:none">
+            <div class="consoleHead">
+              <b>Console</b>
+              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                <span class="pill" style="padding:6px 10px" id="consoleCount">0 entries</span>
+                <button class="btn ghost" id="clearConsoleBtn">Clear</button>
+                <button class="btn" id="copyConsoleBtn">Copy</button>
+                <button class="btn danger" id="closeConsoleBtn">Close</button>
+              </div>
+            </div>
+            <div class="consoleBody" id="consoleBody"></div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer id="siteFooterMount"></footer>
+  <div id="adminMenuFloatLink" style="display:none;pointer-events:none;"></div>
+
+  <div class="footerNote">Single-file studio · enterprise defaults: isolated preview + network block + version snapshots</div>
+
+  <!-- Projects Modal -->
+  <div class="modal" id="projectsModal" aria-hidden="true">
+    <div class="modalCard">
+      <div class="modalHead">
+        <b>Projects</b>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <input id="newProjectName" type="text" placeholder="New project name…" style="width:min(420px, 70vw)" />
+          <button class="btn primary" id="createProjectBtn">Create</button>
+          <button class="btn danger" id="closeProjectsBtn">Close</button>
+        </div>
+      </div>
+      <div class="modalBody">
+        <div class="hint">Projects are stored locally (IndexedDB). Export ZIP creates a shareable artifact. “Duplicate” is your safe branch button.</div>
+        <div class="sep"></div>
+        <div class="list" id="projectsList"></div>
+      </div>
+      <div class="modalFoot">
+        <span class="hint" id="projectsFooter">—</span>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button class="btn" id="exportToolBtn" title="Export this tool as a Netlify-ready pack">Export Tool Pack</button>
+          <button class="btn danger" id="nukeAllBtn" title="Deletes all local projects and snapshots">Delete All Local Data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- History Modal -->
+  <div class="modal" id="historyModal" aria-hidden="true">
+    <div class="modalCard">
+      <div class="modalHead">
+        <b>History</b>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <input id="snapshotLabel" type="text" placeholder="Snapshot label (optional)..." style="width:min(420px, 70vw)" />
+          <button class="btn primary" id="snapshotBtn" title="Create a snapshot now">Snapshot</button>
+          <button class="btn danger" id="closeHistoryBtn">Close</button>
+        </div>
+      </div>
+      <div class="modalBody">
+        <div class="hint">Snapshots are local “restore points”. Use them like commits. Keep the last 30 per project.</div>
+        <div class="sep"></div>
+        <div class="list" id="historyList"></div>
+      </div>
+      <div class="modalFoot">
+        <span class="hint" id="historyFooter">—</span>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button class="btn" id="diffBtn" title="Diff two snapshots">Diff</button>
+          <button class="btn danger" id="deleteSnapshotsBtn" title="Delete all snapshots for this project">Clear Project History</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Validate Modal -->
+  <div class="modal" id="validateModal" aria-hidden="true">
+    <div class="modalCard">
+      <div class="modalHead">
+        <b>Validate & Scan</b>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button class="btn primary" id="runValidateBtn">Run</button>
+          <button class="btn danger" id="closeValidateBtn">Close</button>
+        </div>
+      </div>
+      <div class="modalBody">
+        <div class="hint">This is a local static scan (no uploads). It checks HTML parse errors, duplicate IDs, missing metadata, risky sandbox settings, and basic JS/network red flags.</div>
+        <div class="sep"></div>
+        <div class="grid2" id="validateKpis"></div>
+        <div class="sep"></div>
+        <div class="list" id="validateList"></div>
+      </div>
+      <div class="modalFoot">
+        <span class="hint" id="validateFooter">—</span>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button class="btn" id="copyValidateBtn">Copy Report</button>
+          <button class="btn" id="exportEvidenceBtn" title="Export validation report + checksums as a zip">Export Evidence Pack</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Modal -->
+  <div class="modal" id="helpModal" aria-hidden="true">
+    <div class="modalCard">
+      <div class="modalHead">
+        <b>Help</b>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button class="btn danger" id="closeHelpBtn">Close</button>
+        </div>
+      </div>
+      <div class="modalBody">
+        <div class="kpi">
+          <b>Quick Start</b>
+          <span>1) Edit files (tabs) → 2) Render (Auto or Ctrl/⌘+Enter) → 3) Validate → 4) Export ZIP for Netlify/client handoff</span>
+        </div>
+        <div class="sep"></div>
+
+        <div class="row" style="align-items:flex-start" id="orgSwitchRow">
+          <div class="meta">
+            <b>Organization</b>
+            <span class="hint">Switch which org your session is scoped to (multi-tenant).</span>
+          </div>
+          <div class="actions" style="gap:8px; align-items:flex-start">
+            <select id="orgSelect" style="min-width:260px"></select>
+            <button class="btn" id="switchOrgBtn">Switch</button>
+            <span class="hint" id="orgSwitchMsg">—</span>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="grid2">
+          <div class="kpi">
+            <b>Email Verification</b>
+            <span>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px">
+                <span class="hint" id="verifyStatus">—</span>
+                <button class="btn" id="resendVerifyBtn">Resend verification link</button>
+                <input id="verifyTokenInput" type="text" placeholder="paste verify token (dev/outbox)" />
+                <button class="btn primary" id="verifyTokenBtn">Verify Token</button>
+                <span class="hint" id="verifyMsg">—</span>
+              </div>
+            </span>
+          </div>
+
+          <div class="kpi">
+            <b>Password Reset</b>
+            <span>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px">
+                <input id="resetEmail" type="text" placeholder="email@company.com" />
+                <button class="btn" id="requestResetBtn">Request reset link</button>
+                <span class="hint" id="resetReqMsg">—</span>
+
+                <div style="height:1px; background:rgba(255,255,255,.08); margin:6px 0;"></div>
+
+                <input id="resetToken" type="text" placeholder="paste reset token (from email/outbox)" />
+                <input id="resetNewPassword" type="password" placeholder="new password" />
+                <button class="btn primary" id="doResetBtn">Reset Password</button>
+                <span class="hint" id="resetDoMsg">—</span>
+              </div>
+            </span>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="grid2">
+          <div class="kpi">
+            <b>Shortcuts</b>
+            <span>Render: Ctrl/⌘+Enter · Snapshot: Ctrl/⌘+S · Open Console: Ctrl/⌘+`</span>
+          </div>
+          <div class="kpi">
+            <b>Security Defaults</b>
+            <span>Isolated preview ON · Safe mode blocks scripts · Network policy defaults to Block</span>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="kpi">
+          <b>Vendorizing (Locked Networks)</b>
+          <span>Create folder vendor/monaco/min/… and vendor/jszip.min.js. This tool auto-detects local vendor files and avoids CDN. Export Tool Pack gives you a starter folder structure.</span>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="hint">
+          Philosophy: the preview runs in a sandboxed iframe. Full mode is for your own scripts — keep “Isolated” on unless you must use same-origin APIs. This tool never uploads your code anywhere.
+        </div>
+      </div>
+      <div class="modalFoot">
+        <span class="hint">Build: <span id="buildInfo"></span></span>
+        <span class="hint">OIDC SSO: <code>/api/oidc/start?orgId=&lt;ORG_UUID&gt;</code> · SCIM: <code>/api/scim/v2/Users</code></span>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button class="btn" id="openProjectsFromHelpBtn">Open Projects</button>
+          <button class="btn" id="openValidateFromHelpBtn">Run Validate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Account Modal -->
+  <div class="modal" id="accountModal" aria-hidden="true">
+    <div class="modalCard">
+      <div class="modalHead">
+        <b>Account</b>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <span class="pill" style="padding:6px 10px" id="authStatePill">Signed out</span>
+          <button class="btn danger" id="closeAccountBtn">Close</button>
+        </div>
+      </div>
+      <div class="modalBody">
+        <div class="grid2" style="align-items:start">
+          <div class="kpi">
+            <b>Cloud Storage</b>
+            <span>Neon Postgres via Netlify Functions · HttpOnly sessions · CSRF protected</span>
+          </div>
+          <div class="kpi">
+            <b>Tip</b>
+            <span>Register once, then toggle Cloud on. Your projects will sync across devices.</span>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="row" style="align-items:flex-start">
+          <div class="meta">
+            <b>Current Session</b>
+            <span id="meLine">—</span>
+          </div>
+          <div class="actions">
+            <button class="btn" id="refreshMeBtn">Refresh</button>
+            <button class="btn danger" id="logoutBtn">Logout</button>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="grid2">
+          <div class="kpi">
+            <b>Login</b>
+            <span>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px">
+                <input id="loginEmail" type="text" placeholder="email@company.com" />
+                <input id="loginPassword" type="password" placeholder="password" />
+                <button class="btn primary" id="loginBtn">Login</button>
+                <span class="hint" id="loginMsg">—</span>
+              </div>
+            </span>
+          </div>
+
+          <div class="kpi">
+            <b>Register</b>
+            <span>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px">
+                <input id="regOrg" type="text" placeholder="Org name (e.g., Skyes Over London)" />
+                <input id="regEmail" type="text" placeholder="email@company.com" />
+                <input id="regPassword" type="password" placeholder="password (10+ chars)" />
+                <button class="btn primary" id="registerBtn">Create Account</button>
+                <span class="hint" id="registerMsg">—</span>
+              </div>
+            </span>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="hint">
+          If login/registration seems stuck: your browser may be blocking third-party cookies or you’re on <span class="kbd">file://</span>.
+          Deploy on Netlify (https) for Secure cookies.
+        </div>
+      </div>
+      <div class="modalFoot">
+        <span class="hint">API: <span class="kbd">/api/health</span> · Cloud requires Neon schema.sql</span>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button class="btn" id="openHealthBtn">Health Check</button>
+          <button class="btn" id="copyEnvBtn">Copy Env Template</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="toast" id="toast"><span class="dot ok" id="toastDot"></span><span id="toastText">—</span></div>
+
+  <script src="/js/partials.js" defer></script>
+  <script>
+    (function(){
+      'use strict';
+
+      // ---------- Build metadata ----------
+      const BUILD = {
+        name: 'WebPile Pro Enterprise',
+        version: '2.0.0-enterprise-singlefile',
+        date: new Date().toISOString()
+      };
+
+      // ---------- DOM ----------
+      const el = (id) => document.getElementById(id);
+      const els = {
+        protoBanner: el('protoBanner'),
+        cdnBanner: el('cdnBanner'),
+        projectPill: el('projectPill'),
+
+        projectsBtn: el('projectsBtn'),
+        historyBtn: el('historyBtn'),
+        consoleBtn: el('consoleBtn'),
+        validateBtn: el('validateBtn'),
+        helpBtn: el('helpBtn'),
+
+
+        cloudPill: el('cloudPill'),
+        cloudDot: el('cloudDot'),
+        cloudText: el('cloudText'),
+        cloudToggle: el('cloudToggle'),
+        accountBtn: el('accountBtn'),
+
+        autoToggle: el('autoToggle'),
+        modeToggle: el('modeToggle'),
+        modeLabel: el('modeLabel'),
+        renderBtn: el('renderBtn'),
+        exportBtn: el('exportBtn'),
+        importBtn: el('importBtn'),
+        filePicker: el('filePicker'),
+        resetBtn: el('resetBtn'),
+
+        fileTabs: el('fileTabs'),
+        addFileBtn: el('addFileBtn'),
+        renameFileBtn: el('renameFileBtn'),
+        deleteFileBtn: el('deleteFileBtn'),
+        debounceMs: el('debounceMs'),
+        formatBtn: el('formatBtn'),
+        copyBtn: el('copyBtn'),
+
+        monacoLoading: el('monacoLoading'),
+        loadLine: el('loadLine'),
+        monacoEl: el('monaco'),
+        fallbackEditor: el('fallbackEditor'),
+        fallbackTextarea: el('fallbackTextarea'),
+
+        saveDot: el('saveDot'),
+        saveText: el('saveText'),
+        stats: el('stats'),
+        sessionToken: el('sessionToken'),
+
+        previewSub: el('previewSub'),
+        isolationToggle: el('isolationToggle'),
+        instrumentToggle: el('instrumentToggle'),
+        networkSel: el('networkSel'),
+        deviceSel: el('deviceSel'),
+        scaleSel: el('scaleSel'),
+        openBtn: el('openBtn'),
+        reloadBtn: el('reloadBtn'),
+        viewport: el('viewport'),
+        iframe: el('preview'),
+
+        consolePane: el('consolePane'),
+        consoleCount: el('consoleCount'),
+        consoleBody: el('consoleBody'),
+        clearConsoleBtn: el('clearConsoleBtn'),
+        copyConsoleBtn: el('copyConsoleBtn'),
+        closeConsoleBtn: el('closeConsoleBtn'),
+
+        projectsModal: el('projectsModal'),
+        closeProjectsBtn: el('closeProjectsBtn'),
+        newProjectName: el('newProjectName'),
+        createProjectBtn: el('createProjectBtn'),
+        projectsList: el('projectsList'),
+        projectsFooter: el('projectsFooter'),
+        exportToolBtn: el('exportToolBtn'),
+        nukeAllBtn: el('nukeAllBtn'),
+
+        historyModal: el('historyModal'),
+        closeHistoryBtn: el('closeHistoryBtn'),
+        snapshotLabel: el('snapshotLabel'),
+        snapshotBtn: el('snapshotBtn'),
+        historyList: el('historyList'),
+        historyFooter: el('historyFooter'),
+        diffBtn: el('diffBtn'),
+        deleteSnapshotsBtn: el('deleteSnapshotsBtn'),
+
+        validateModal: el('validateModal'),
+        closeValidateBtn: el('closeValidateBtn'),
+        runValidateBtn: el('runValidateBtn'),
+        validateKpis: el('validateKpis'),
+        validateList: el('validateList'),
+        validateFooter: el('validateFooter'),
+        copyValidateBtn: el('copyValidateBtn'),
+        exportEvidenceBtn: el('exportEvidenceBtn'),
+
+        helpModal: el('helpModal'),
+        closeHelpBtn: el('closeHelpBtn'),
+        buildInfo: el('buildInfo'),
+        openProjectsFromHelpBtn: el('openProjectsFromHelpBtn'),
+        openValidateFromHelpBtn: el('openValidateFromHelpBtn'),
+
+
+        accountModal: el('accountModal'),
+        closeAccountBtn: el('closeAccountBtn'),
+        authStatePill: el('authStatePill'),
+        meLine: el('meLine'),
+        refreshMeBtn: el('refreshMeBtn'),
+        logoutBtn: el('logoutBtn'),
+
+        // Org switching + verification + password reset
+        orgSelect: el('orgSelect'),
+        switchOrgBtn: el('switchOrgBtn'),
+        orgSwitchMsg: el('orgSwitchMsg'),
+        verifyStatus: el('verifyStatus'),
+        resendVerifyBtn: el('resendVerifyBtn'),
+        verifyTokenInput: el('verifyTokenInput'),
+        verifyTokenBtn: el('verifyTokenBtn'),
+        verifyMsg: el('verifyMsg'),
+        resetEmail: el('resetEmail'),
+        requestResetBtn: el('requestResetBtn'),
+        resetReqMsg: el('resetReqMsg'),
+        resetToken: el('resetToken'),
+        resetNewPassword: el('resetNewPassword'),
+        doResetBtn: el('doResetBtn'),
+        resetDoMsg: el('resetDoMsg'),
+
+        loginEmail: el('loginEmail'),
+        loginPassword: el('loginPassword'),
+        loginBtn: el('loginBtn'),
+        loginMsg: el('loginMsg'),
+        regOrg: el('regOrg'),
+        regEmail: el('regEmail'),
+        regPassword: el('regPassword'),
+        registerBtn: el('registerBtn'),
+        registerMsg: el('registerMsg'),
+        openHealthBtn: el('openHealthBtn'),
+        copyEnvBtn: el('copyEnvBtn'),
+
+
+        toast: el('toast'),
+        toastDot: el('toastDot'),
+        toastText: el('toastText'),
+      };
+
+      // ---------- Visual hints ----------
+      window.addEventListener('DOMContentLoaded', () => {
+        if (location.protocol === 'file:') els.protoBanner.classList.add('show');
+        els.buildInfo.textContent = BUILD.version + ' · ' + BUILD.date;
+      });
+
+      // ---------- Utilities ----------
+      const now = () => Date.now();
+      const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+      const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+      const fmtTime = (ms) => new Date(ms).toLocaleString();
+      const uid = () => (crypto && crypto.randomUUID) ? crypto.randomUUID() : ('id-' + Math.random().toString(16).slice(2) + '-' + Date.now());
+      const sanitizeName = (s) => (String(s || '').trim() || 'Project').replace(/[^\w\- ]+/g, '').replace(/\s+/g, ' ').slice(0, 64);
+      const sanitizePath = (s) => (String(s || '').trim() || 'file.txt').replace(/[/\\]+/g, '/').replace(/^\//, '').replace(/\.\./g, '_').slice(0, 120);
+      const bytes = (s) => new TextEncoder().encode(String(s || ''));
+      const sha256Hex = async (text) => {
+        const buf = await crypto.subtle.digest('SHA-256', bytes(text));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+      };
+
+      const toast = (msg, kind='ok', ms=1400) => {
+        els.toastDot.className = 'dot ' + kind;
+        els.toastText.textContent = msg;
+        els.toast.classList.add('show');
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => els.toast.classList.remove('show'), ms);
+      };
+
+      const setSave = (kind, msg) => {
+        els.saveDot.className = 'dot ' + (kind || 'ok');
+        els.saveText.textContent = msg || '';
+      };
+
+      // ---------- Dependency loader (prefer local vendor, fallback to CDN) ----------
+      const DEP = {
+        monacoVer: '0.53.0',
+        monacoLocalBase: './vendor/monaco/min',
+        monacoCdnBase:  'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.53.0/min',
+        jszipLocal: './vendor/jszip.min.js',
+        jszipCdn: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js'
+      };
+
+      const loadScript = (src) => new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = () => resolve(src);
+        s.onerror = () => reject(new Error('Failed to load: ' + src));
+        document.head.appendChild(s);
+      });
+
+      const tryLoad = async (candidates) => {
+        let lastErr = null;
+        for (const src of candidates) {
+          try {
+            await loadScript(src);
+            return src;
+          } catch (e) {
+            lastErr = e;
+          }
+        }
+        throw lastErr || new Error('No candidates loaded');
+      };
+
+      
+      // ---------- Cloud API (Neon-backed) ----------
+      const cookieGet = (name) => {
+        try {
+          const parts = ('; ' + document.cookie).split('; ' + name + '=');
+          if (parts.length < 2) return '';
+          return parts.pop().split(';').shift() || '';
+        } catch (_) { return ''; }
+      };
+
+      const apiRequest = async (path, { method = 'GET', body = null } = {}) => {
+        const headers = { 'x-request-id': (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) };
+        const csrf = cookieGet('wpp_csrf');
+        if (method !== 'GET' && method !== 'HEAD') headers['x-csrf-token'] = csrf || '';
+        if (body != null) headers['content-type'] = 'application/json';
+
+        const res = await fetch('/api' + path, {
+          method,
+          headers,
+          credentials: 'include',
+          body: body != null ? JSON.stringify(body) : null
+        });
+
+        const txt = await res.text();
+        let json;
+        try { json = JSON.parse(txt); } catch (_) { json = { ok: false, error: 'bad_json', raw: txt }; }
+        if (!res.ok || json.ok === false) {
+          const err = new Error(json.error || ('http_' + res.status));
+          err.detail = json.detail || json.message || null;
+          err.status = res.status;
+          throw err;
+        }
+        return json;
+      };
+
+      const updateCloudUI = () => {
+        const authed = !!state.cloud.me;
+        const cloudOn = !!state.cloud.enabled;
+
+        // Cloud pill
+        if (!cloudOn) {
+          els.cloudText.textContent = 'Storage: Local';
+          els.cloudDot.className = 'dot ok';
+        } else if (cloudOn && !authed) {
+          els.cloudText.textContent = 'Storage: Cloud (sign-in required)';
+          els.cloudDot.className = 'dot warn';
+        } else {
+          els.cloudText.textContent = 'Storage: Cloud (Neon)';
+          els.cloudDot.className = 'dot ok';
+        }
+
+        // Toggle visual state
+        els.cloudToggle.dataset.on = String(cloudOn && authed);
+
+        // Account session pill + org switch + verification state
+        if (!authed) {
+          els.authStatePill.textContent = 'Signed out';
+          els.meLine.textContent = '—';
+
+          if (els.verifyStatus) els.verifyStatus.textContent = '—';
+          if (els.orgSelect) {
+            els.orgSelect.innerHTML = '<option value="">Sign in to view orgs</option>';
+            els.orgSelect.disabled = true;
+          }
+          if (els.switchOrgBtn) els.switchOrgBtn.disabled = true;
+          if (els.orgSwitchMsg) els.orgSwitchMsg.textContent = '—';
+        } else {
+          const email = state.cloud.me.user.email;
+          const orgName = state.cloud.me.org.name;
+          const role = state.cloud.me.role;
+          const verified = !!state.cloud.me.user.emailVerified;
+
+          els.authStatePill.textContent = `${email} · ${orgName} · ${role}${verified ? '' : ' · UNVERIFIED'}`;
+          els.meLine.textContent = `${email} · Org: ${orgName} · Role: ${role} · Email: ${verified ? 'verified' : 'UNVERIFIED'}`;
+
+          if (els.verifyStatus) {
+            els.verifyStatus.textContent = verified
+              ? 'Email verified ✅'
+              : 'Email NOT verified. If REQUIRE_EMAIL_VERIFICATION=true, project writes will be blocked until verified.';
+          }
+
+          // Org dropdown
+          if (els.orgSelect) {
+            const orgs = state.cloud.me.orgs || [];
+            els.orgSelect.disabled = orgs.length === 0;
+            els.orgSelect.innerHTML = orgs.map(o => `<option value="${o.id}">${o.name} (${o.role})</option>`).join('') || '<option value="">No orgs</option>';
+            els.orgSelect.value = state.cloud.me.org.id;
+          }
+          if (els.switchOrgBtn) els.switchOrgBtn.disabled = false;
+          if (els.orgSwitchMsg) els.orgSwitchMsg.textContent = '—';
+        }
+      };
+
+      const refreshMe = async (silent = false) => {
+        try {
+          const r = await apiRequest('/me', { method: 'GET' });
+          state.cloud.me = r.data || null;
+          state.cloud.ready = true;
+          updateCloudUI();
+          if (!silent) toast(state.cloud.me ? 'Signed in' : 'Signed out', state.cloud.me ? 'ok' : 'warn', 1200);
+          return state.cloud.me;
+        } catch (e) {
+          state.cloud.me = null;
+          state.cloud.ready = true;
+          updateCloudUI();
+          if (!silent) toast('Auth check failed', 'warn', 1600);
+          return null;
+        }
+      };
+
+      const handleMagicLinks = async () => {
+        try {
+          const url = new URL(location.href);
+          const qs = url.searchParams;
+          const verifyToken = qs.get('verifyToken');
+          const resetToken = qs.get('resetToken');
+
+          if (verifyToken) {
+            openModal(els.accountModal);
+            if (els.verifyTokenInput) els.verifyTokenInput.value = verifyToken;
+            if (els.verifyMsg) els.verifyMsg.textContent = 'Verifying from link…';
+            await apiRequest('/auth/verify-email', { method:'POST', body: { token: verifyToken } });
+            await refreshMe(true);
+            toast('Email verified', 'ok', 1400);
+            if (els.verifyMsg) els.verifyMsg.textContent = 'Verified ✅';
+            qs.delete('verifyToken');
+          }
+
+          if (resetToken) {
+            openModal(els.accountModal);
+            if (els.resetToken) els.resetToken.value = resetToken;
+            if (els.resetDoMsg) els.resetDoMsg.textContent = 'Paste a new password and click Reset Password.';
+            qs.delete('resetToken');
+          }
+
+          // Clean URL
+          history.replaceState({}, '', url.pathname + (qs.toString() ? '?' + qs.toString() : '') + url.hash);
+        } catch (_) { /* ignore */ }
+      };
+
+
+
+      const setCloudEnabled = async (enabled) => {
+        // Only allow enabling if authenticated.
+        if (enabled && !state.cloud.me) {
+          openModal(els.accountModal);
+          toast('Sign in to enable Cloud', 'warn', 1600);
+          return false;
+        }
+        state.cloud.enabled = !!enabled;
+        await kvSet('cloudEnabled', state.cloud.enabled);
+        updateCloudUI();
+        return true;
+      };
+
+// ---------- Storage (IndexedDB with localStorage fallback) ----------
+      const DB = {
+        name: 'webpile_pro_enterprise_db_v1',
+        version: 1,
+        db: null
+      };
+
+      const idbOpen = () => new Promise((resolve, reject) => {
+        try {
+          const req = indexedDB.open(DB.name, DB.version);
+          req.onupgradeneeded = () => {
+            const db = req.result;
+            if (!db.objectStoreNames.contains('projects')) {
+              const store = db.createObjectStore('projects', { keyPath: 'id' });
+              store.createIndex('updatedAt', 'updatedAt', { unique: false });
+            }
+            if (!db.objectStoreNames.contains('snapshots')) {
+              const store = db.createObjectStore('snapshots', { keyPath: 'id' });
+              store.createIndex('projectId', 'projectId', { unique: false });
+              store.createIndex('createdAt', 'createdAt', { unique: false });
+            }
+            if (!db.objectStoreNames.contains('kv')) {
+              db.createObjectStore('kv', { keyPath: 'key' });
+            }
+          };
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error || new Error('IndexedDB open failed'));
+        } catch (e) { reject(e); }
+      });
+
+      const tx = (storeName, mode='readonly') => {
+        const t = DB.db.transaction(storeName, mode);
+        return t.objectStore(storeName);
+      };
+
+      const idbPut = (storeName, val) => new Promise((resolve, reject) => {
+        try {
+          const store = tx(storeName, 'readwrite');
+          const req = store.put(val);
+          req.onsuccess = () => resolve(val);
+          req.onerror = () => reject(req.error);
+        } catch (e) { reject(e); }
+      });
+
+      const idbGet = (storeName, key) => new Promise((resolve, reject) => {
+        try {
+          const store = tx(storeName, 'readonly');
+          const req = store.get(key);
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => reject(req.error);
+        } catch (e) { reject(e); }
+      });
+
+      const idbGetAll = (storeName, indexName=null, query=null) => new Promise((resolve, reject) => {
+        try {
+          const store = tx(storeName, 'readonly');
+          const source = indexName ? store.index(indexName) : store;
+          const req = source.getAll(query);
+          req.onsuccess = () => resolve(req.result || []);
+          req.onerror = () => reject(req.error);
+        } catch (e) { reject(e); }
+      });
+
+      const idbDelete = (storeName, key) => new Promise((resolve, reject) => {
+        try {
+          const store = tx(storeName, 'readwrite');
+          const req = store.delete(key);
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => reject(req.error);
+        } catch (e) { reject(e); }
+      });
+
+      const idbClear = (storeName) => new Promise((resolve, reject) => {
+        try {
+          const store = tx(storeName, 'readwrite');
+          const req = store.clear();
+          req.onsuccess = () => resolve(true);
+          req.onerror = () => reject(req.error);
+        } catch (e) { reject(e); }
+      });
+
+      const kvGet = async (key) => {
+        try {
+          const row = await idbGet('kv', key);
+          return row ? row.value : null;
+        } catch (_) {
+          try { return JSON.parse(localStorage.getItem('WPP_KV_' + key) || 'null'); } catch (_) { return null; }
+        }
+      };
+      const kvSet = async (key, value) => {
+        try {
+          await idbPut('kv', { key, value });
+        } catch (_) {
+          try { localStorage.setItem('WPP_KV_' + key, JSON.stringify(value)); } catch(_) {}
+        }
+      };
+
+      // ---------- Storage abstraction (Local IndexedDB vs Cloud Neon) ----------
+      const storage = {
+        isCloud() { return !!(state.cloud.enabled && state.cloud.me); },
+
+        async listProjects() {
+          if (this.isCloud()) {
+            const r = await apiRequest('/projects', { method: 'GET' });
+            // Normalize shape to match local
+            return (r.data || []).map(p => ({
+              id: p.id,
+              name: p.name,
+              createdAt: new Date(p.created_at).getTime(),
+              updatedAt: new Date(p.updated_at).getTime(),
+              _cloud: true
+            }));
+          }
+          if (!DB.db) throw new Error('Local storage unavailable (IndexedDB blocked)');
+          return await idbGetAll('projects');
+        },
+
+        async getProject(id) {
+          if (this.isCloud()) {
+            const r = await apiRequest(`/projects/${id}`, { method: 'GET' });
+            const p = r.data.project;
+            return {
+              id: p.id,
+              name: p.name,
+              createdAt: new Date(p.created_at).getTime(),
+              updatedAt: new Date(p.updated_at).getTime(),
+              files: (r.data.files || []).map(f => ({
+                path: f.path,
+                language: f.language,
+                content: f.content
+              })),
+              settings: {
+                auto: true,
+                fullMode: false,
+                isolated: true,
+                instrument: true,
+                network: 'block',
+                debounce: 350,
+                device: 'responsive',
+                scale: '1',
+              },
+              _cloud: true
+            };
+          }
+          if (!DB.db) throw new Error('Local storage unavailable (IndexedDB blocked)');
+          return await idbGet('projects', id);
+        },
+
+        async createProject(project) {
+          if (this.isCloud()) {
+            const body = {
+              name: project.name,
+              files: (project.files || []).map(f => ({ path: f.path, language: f.language, content: f.content }))
+            };
+            const r = await apiRequest('/projects', { method: 'POST', body });
+            const id = r.data.id;
+            // Fetch back to ensure canonical
+            return await this.getProject(id);
+          }
+          if (!DB.db) throw new Error('Local storage unavailable (IndexedDB blocked)');
+          await idbPut('projects', project);
+          return project;
+        },
+
+        async saveProject(project) {
+          if (this.isCloud()) {
+            const body = {
+              name: project.name,
+              files: (project.files || []).map(f => ({ path: f.path, language: f.language, content: f.content }))
+            };
+            await apiRequest(`/projects/${project.id}`, { method: 'PUT', body });
+            return true;
+          }
+          if (!DB.db) throw new Error('Local storage unavailable (IndexedDB blocked)');
+          await idbPut('projects', project);
+          return true;
+        },
+
+        async deleteProject(id) {
+          if (this.isCloud()) {
+            await apiRequest(`/projects/${id}`, { method: 'DELETE' });
+            return true;
+          }
+          if (!DB.db) throw new Error('Local storage unavailable (IndexedDB blocked)');
+          await idbDelete('projects', id);
+          return true;
+        },
+
+        async listSnapshots(projectId) {
+          if (this.isCloud()) {
+            const r = await apiRequest(`/projects/${projectId}/snapshots`, { method: 'GET' });
+            return (r.data || []).map(s => ({
+              id: s.id,
+              projectId,
+              createdAt: new Date(s.created_at).getTime(),
+              label: s.label || '',
+              _cloud: true
+            }));
+          }
+          if (!DB.db) return [];
+          const all = await idbGetAll('snapshots', 'projectId', projectId);
+          all.sort((a,b) => b.createdAt - a.createdAt);
+          return all;
+        },
+
+        async createSnapshot(projectId, label, projectJson) {
+          if (this.isCloud()) {
+            const r = await apiRequest(`/projects/${projectId}/snapshots`, { method: 'POST', body: { label, projectJson } });
+            return r.data.id;
+          }
+          if (!DB.db) return null;
+          const snap = { id: uid(), projectId, createdAt: now(), label, project: projectJson };
+          await idbPut('snapshots', snap);
+          return snap.id;
+        },
+
+        async getSnapshot(snapshotId) {
+          if (this.isCloud()) {
+            const r = await apiRequest(`/snapshots/${snapshotId}`, { method: 'GET' });
+            return r.data;
+          }
+          if (!DB.db) return null;
+          return await idbGet('snapshots', snapshotId);
+        },
+
+        async clearLocalAll() {
+          if (!DB.db) return true;
+          await idbClear('projects');
+          await idbClear('snapshots');
+          await idbClear('kv');
+          return true;
+        }
+      };
+
+
+      // ---------- Project model ----------
+      const TEMPLATES = {
+        'index.html': `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My WebPile Preview</title>
+  <style>
+    /* WEBPILE:CSS */
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>WebPile Pro Enterprise</h1>
+    <p>Edit index.html, styles.css, and app.js. Render with Ctrl/⌘+Enter.</p>
+    <button id="btn">Click me</button>
+  </main>
+
+  <script>
+    /* WEBPILE:JS */
+  <\/script>
+</body>
+</html>`,
+        'styles.css': `:root{ color-scheme: dark; }
+body{ margin:0; padding:32px; font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial; background:#0b0b12; color:#eef; }
+.card{ max-width:900px; margin:0 auto; padding:24px; border-radius:18px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12) }
+h1{ margin:0 0 10px; letter-spacing:.06em; text-transform:uppercase }
+p{ opacity:.85; line-height:1.5 }
+button{ margin-top:14px; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.18); background:#7c3cff; color:white; font-weight:800; cursor:pointer }`,
+        'app.js': `document.getElementById('btn')?.addEventListener('click', () => {
+  console.log('Hello from app.js ✅', { at: new Date().toISOString() });
+});`
+      };
+
+      const defaultProject = (name='New Project') => ({
+        id: uid(),
+        name: sanitizeName(name),
+        createdAt: now(),
+        updatedAt: now(),
+        files: [
+          { path: 'index.html', language: 'html', content: TEMPLATES['index.html'] },
+          { path: 'styles.css', language: 'css', content: TEMPLATES['styles.css'] },
+          { path: 'app.js', language: 'javascript', content: TEMPLATES['app.js'] },
+        ],
+        settings: {
+          auto: true,
+          fullMode: false,
+          isolated: true,
+          instrument: true,
+          network: 'block',
+          debounce: 350,
+          device: 'responsive',
+          scale: '1',
+        }
+      });
+
+      const inferLang = (path) => {
+        const p = String(path).toLowerCase();
+        if (p.endsWith('.html') || p.endsWith('.htm')) return 'html';
+        if (p.endsWith('.css')) return 'css';
+        if (p.endsWith('.js') || p.endsWith('.mjs') || p.endsWith('.cjs')) return 'javascript';
+        if (p.endsWith('.json')) return 'json';
+        if (p.endsWith('.md')) return 'markdown';
+        return 'plaintext';
+      };
+
+      // ---------- Runtime state ----------
+      const state = {
+        usingCdn: false,
+        monacoBase: null,
+
+        cloud: { enabled: false, me: null, ready: false },
+
+        project: null,
+        activeFile: 'index.html',
+        dirtyFiles: new Set(),
+
+        editor: null,
+        modelByPath: new Map(),
+
+        fallbackMode: false,
+
+        renderTimer: null,
+        lastRenderHash: '',
+        sessionToken: '',
+
+        console: [],
+        lastValidateReport: null,
+
+        snapshots: [],
+        projects: []
+      };
+
+      // ---------- Migration from older single-file version (best-effort) ----------
+      const migrateLegacy = async () => {
+        // Legacy keys from your previous file: HTML_PREVIEW_STUDIO__CODE_V2_MONACO + WEBPILE_PRO_FILES_V1
+        let legacy = null;
+        try { legacy = localStorage.getItem('HTML_PREVIEW_STUDIO__CODE_V2_MONACO'); } catch(_) {}
+        if (legacy && legacy.trim()) {
+          const p = defaultProject('Migrated — Single HTML');
+          p.files = [
+            { path:'index.html', language:'html', content: legacy },
+            { path:'styles.css', language:'css', content: '/* migrated: split your CSS out if you want */\n' },
+            { path:'app.js', language:'javascript', content: '// migrated: split your JS out if you want\n' }
+          ];
+          p.updatedAt = now();
+          await storage.saveProject(p);
+          try { localStorage.removeItem('HTML_PREVIEW_STUDIO__CODE_V2_MONACO'); } catch(_) {}
+          toast('Migrated legacy editor state into a project', 'ok', 1800);
+          return;
+        }
+
+        // Legacy WebPile list
+        let legacyList = null;
+        try { legacyList = JSON.parse(localStorage.getItem('WEBPILE_PRO_FILES_V1') || 'null'); } catch(_) {}
+        if (Array.isArray(legacyList) && legacyList.length) {
+          for (const entry of legacyList.slice(0, 50)) {
+            const p = defaultProject('Migrated — ' + (entry.name || 'Site'));
+            p.files = [
+              { path:'index.html', language:'html', content: String(entry.content || '') },
+              { path:'styles.css', language:'css', content: '/* migrated */\n' },
+              { path:'app.js', language:'javascript', content: '// migrated\n' }
+            ];
+            p.updatedAt = now();
+            await storage.saveProject(p);
+          }
+          try { localStorage.removeItem('WEBPILE_PRO_FILES_V1'); } catch(_) {}
+          toast('Migrated legacy WebPile sites into projects', 'ok', 1800);
+        }
+      };
+
+      // ---------- Monaco / editor layer ----------
+      const createMonacoTheme = (monaco) => {
+        try {
+          monaco.editor.defineTheme('kaixuNebula', {
+            base: 'vs-dark',
+            inherit: true,
+            rules: [
+              { token: '', foreground: 'EAF0FF' },
+              { token: 'tag', foreground: '27D6FF' },
+              { token: 'attribute.name', foreground: 'FFCF5B' },
+              { token: 'attribute.value', foreground: 'FF2BD6' },
+              { token: 'string', foreground: 'FF2BD6' },
+              { token: 'comment', foreground: 'A8B2D6' }
+            ],
+            colors: {
+              'editor.background': '#07021a',
+              'editor.lineHighlightBackground': '#0b0320',
+              'editorCursor.foreground': '#ffcf5b',
+              'editor.selectionBackground': '#2a145a',
+              'editor.inactiveSelectionBackground': '#1b0f3a',
+              'editorIndentGuide.background': '#1b0f3a',
+              'editorIndentGuide.activeBackground': '#7c3cff',
+              'editorLineNumber.foreground': '#6f78a2',
+              'editorLineNumber.activeForeground': '#ffcf5b',
+              'editorWidget.background': '#0b0320',
+              'editorSuggestWidget.background': '#0b0320',
+              'editorSuggestWidget.border': '#1b0f3a',
+              'editorSuggestWidget.selectedBackground': '#1b0f3a'
+            }
+          });
+        } catch (_) {}
+      };
+
+      const setActiveModel = (path) => {
+        state.activeFile = path;
+        if (state.fallbackMode) {
+          els.fallbackTextarea.value = getFile(path).content || '';
+          renderFileTabs();
+          updateStats();
+          return;
+        }
+
+        const m = state.modelByPath.get(path);
+        if (!m || !state.editor) return;
+
+        state.editor.setModel(m);
+        renderFileTabs();
+        updateStats();
+      };
+
+      const getFile = (path) => {
+        const files = state.project?.files || [];
+        return files.find(f => f.path === path) || files[0] || null;
+      };
+
+      const setFileContent = (path, content) => {
+        const f = getFile(path);
+        if (!f) return;
+        f.content = String(content ?? '');
+        state.project.updatedAt = now();
+        state.dirtyFiles.add(path);
+        renderFileTabs();
+      };
+
+      const renderFileTabs = () => {
+        const files = state.project?.files || [];
+        els.fileTabs.innerHTML = '';
+        for (const f of files) {
+          const btn = document.createElement('div');
+          btn.className = 'tab' + (f.path === state.activeFile ? ' active' : '') + (state.dirtyFiles.has(f.path) ? ' dirty' : '');
+          btn.title = f.path;
+          btn.innerHTML = `<span class="dotMini"></span><b>${escapeHtml(f.path)}</b>`;
+          btn.addEventListener('click', () => setActiveModel(f.path));
+          els.fileTabs.appendChild(btn);
+        }
+      };
+
+      const updateStats = () => {
+        const v = getActiveContent() || '';
+        const lines = v.length ? (v.match(/\n/g)?.length ?? 0) + 1 : 0;
+        els.stats.textContent = `${v.length.toLocaleString()} chars · ${lines.toLocaleString()} lines`;
+      };
+
+      const getActiveContent = () => {
+        if (!state.project) return '';
+        if (state.fallbackMode) return els.fallbackTextarea.value || '';
+        const model = state.modelByPath.get(state.activeFile);
+        return model ? model.getValue() : (getFile(state.activeFile)?.content || '');
+      };
+
+      const applyEditorToProject = () => {
+        if (!state.project) return;
+        if (state.fallbackMode) {
+          setFileContent(state.activeFile, els.fallbackTextarea.value || '');
+          return;
+        }
+        for (const f of state.project.files) {
+          const m = state.modelByPath.get(f.path);
+          if (m) f.content = m.getValue();
+        }
+        state.project.updatedAt = now();
+      };
+
+      const persistProject = async (msg='Saved') => {
+        if (!state.project) return;
+        applyEditorToProject();
+        try {
+          await storage.saveProject(state.project);
+          state.dirtyFiles.clear();
+          setSave('ok', msg);
+          renderFileTabs();
+        } catch (e) {
+          setSave('warn', 'Save failed (storage blocked)');
+        }
+      };
+
+      const schedulePersist = () => {
+        clearTimeout(schedulePersist._t);
+        schedulePersist._t = setTimeout(() => persistProject('Autosaved'), 450);
+      };
+
+      const scheduleRender = () => {
+        if (!state.project?.settings?.auto) return;
+        const ms = clamp(Number(els.debounceMs.value || 0), 0, 5000);
+        state.project.settings.debounce = ms;
+        clearTimeout(state.renderTimer);
+        state.renderTimer = setTimeout(() => renderNow(false), ms);
+      };
+
+      // ---------- Compose / preview ----------
+      const escapeHtml = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      const hashStr = (s) => {
+        let h = 2166136261;
+        for (let i = 0; i < s.length; i++) {
+          h ^= s.charCodeAt(i);
+          h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24);
+        }
+        return (h >>> 0).toString(16);
+      };
+
+      const applyViewport = () => {
+        const s = state.project?.settings || {};
+        const vw = s.device === 'responsive' ? null : Number(s.device);
+        const scale = Number(s.scale || '1');
+        els.viewport.style.width = vw ? `${vw}px` : '100%';
+        els.viewport.style.transformOrigin = 'top center';
+        els.viewport.style.transform = scale === 1 ? 'none' : `scale(${scale})`;
+        els.viewport.style.height = '100%';
+      };
+
+      const setSandbox = () => {
+        const s = state.project?.settings || {};
+        // IMPORTANT: For security, Full mode does NOT automatically enable allow-same-origin.
+        // "Isolated" means: no allow-same-origin. Compatibility means: allow-same-origin (riskier).
+        const allowSameOrigin = !s.isolated;
+        if (s.fullMode) {
+          const parts = [
+            'allow-scripts',
+            'allow-forms',
+            'allow-modals',
+            'allow-popups',
+            'allow-pointer-lock'
+          ];
+          if (allowSameOrigin) parts.push('allow-same-origin');
+          els.iframe.setAttribute('sandbox', parts.join(' '));
+        } else {
+          els.iframe.setAttribute('sandbox', 'allow-forms allow-modals allow-popups');
+        }
+      };
+
+      const buildInstrumentation = (token, networkPolicy) => {
+        // Token gates messages so other frames can't spam our console UI.
+        return `
+<script>
+(()=> {
+  const __WPP_TOKEN__ = ${JSON.stringify(token)};
+  const send = (type, payload) => {
+    try { parent.postMessage({ __webpile:true, token: __WPP_TOKEN__, type, payload }, '*'); } catch(_) {}
+  };
+  const ser = (v) => {
+    try {
+      if (v instanceof Error) return { __error:true, name:v.name, message:v.message, stack:v.stack };
+      if (typeof v === 'bigint') return String(v) + 'n';
+      if (v && typeof v === 'object') return JSON.parse(JSON.stringify(v));
+      return v;
+    } catch(e) {
+      try { return String(v); } catch(_) { return '[unserializable]'; }
+    }
+  };
+
+  ['log','info','warn','error','debug'].forEach(level => {
+    const orig = console[level];
+    console[level] = function(...args){
+      send('console', { level, args: args.map(ser), ts: Date.now() });
+      try { orig.apply(console, args); } catch(_) {}
+    };
+  });
+
+  window.addEventListener('error', (e) => {
+    send('error', { message: e.message, filename: e.filename, lineno: e.lineno, colno: e.colno, stack: e.error && e.error.stack, ts: Date.now() });
+  });
+
+  window.addEventListener('unhandledrejection', (e) => {
+    send('rejection', { reason: ser(e.reason), ts: Date.now() });
+  });
+
+  if (${JSON.stringify(networkPolicy)} === 'block') {
+    const deny = (kind, url) => {
+      send('netblock', { kind, url: String(url), ts: Date.now() });
+      throw new Error('Network blocked by WebPile policy: ' + url);
+    };
+    try {
+      const _fetch = window.fetch;
+      if (_fetch) window.fetch = new Proxy(_fetch, { apply(t, thisArg, args){ return deny('fetch', args && args[0]); }});
+    } catch(_) {}
+    try {
+      const _open = XMLHttpRequest.prototype.open;
+      XMLHttpRequest.prototype.open = function(method, url){ deny('xhr', url); return _open.apply(this, arguments); };
+    } catch(_) {}
+    try {
+      const _WS = window.WebSocket;
+      window.WebSocket = function(url){ deny('ws', url); return new _WS(url); };
+    } catch(_) {}
+  }
+
+  send('ready', { ts: Date.now() });
+})();
+<\/script>`;
+      };
+
+      const composeHtml = () => {
+        const htmlFile = (state.project.files.find(f => f.path.toLowerCase().endsWith('.html')) || getFile('index.html'));
+        const cssFile = getFile('styles.css');
+        const jsFile  = getFile('app.js');
+
+        let html = String(htmlFile?.content || '');
+        const css = String(cssFile?.content || '');
+        const js  = String(jsFile?.content || '');
+
+        // Light composition:
+        // - If placeholders exist, replace them.
+        // - Otherwise inject CSS before </head> and JS before </body>.
+        const cssTag = `\n<style id="__webpile_css__">\n${css}\n</style>\n`;
+        const jsTag  = `\n<script id="__webpile_js__">\n${js}\n<\/script>\n`;
+
+        if (html.includes('/* WEBPILE:CSS */')) {
+          html = html.replace('/* WEBPILE:CSS */', css.replace(/\$/g,'$$$$'));
+        } else if (html.includes('<!--WEBPILE:CSS-->')) {
+          html = html.replace('<!--WEBPILE:CSS-->', cssTag);
+        } else if (css.trim()) {
+          if (html.includes('</head>')) html = html.replace('</head>', cssTag + '</head>');
+          else html = cssTag + html;
+        }
+
+        if (html.includes('/* WEBPILE:JS */')) {
+          html = html.replace('/* WEBPILE:JS */', js.replace(/\$/g,'$$$$'));
+        } else if (html.includes('<!--WEBPILE:JS-->')) {
+          html = html.replace('<!--WEBPILE:JS-->', jsTag);
+        } else if (js.trim()) {
+          if (html.includes('</body>')) html = html.replace('</body>', jsTag + '</body>');
+          else html = html + jsTag;
+        }
+
+        // Preview safety affordances: set base target _blank to avoid inside-iframe navigation surprises.
+        const baseTag = `<base target="_blank" rel="noopener noreferrer">`;
+        if (html.includes('</head>')) {
+          html = html.replace('</head>', baseTag + '\n</head>');
+        }
+
+        // Instrumentation injection (optional; only meaningful in Full mode)
+        const s = state.project.settings;
+        if (s.fullMode && s.instrument) {
+          const inj = buildInstrumentation(state.sessionToken, s.network);
+          if (html.includes('</head>')) html = html.replace('</head>', inj + '\n</head>');
+          else html = inj + html;
+        }
+
+        return html;
+      };
+
+      const clearConsole = () => {
+        state.console = [];
+        els.consoleBody.textContent = '';
+        els.consoleCount.textContent = '0 entries';
+      };
+
+      const appendConsole = (kind, payload) => {
+        const level = payload?.level || kind;
+        const ts = payload?.ts || now();
+        const args = payload?.args || (payload?.reason ? [payload.reason] : []);
+        const msg = (args || []).map(a => {
+          if (a && a.__error) return `${a.name}: ${a.message}\n${a.stack || ''}`;
+          if (typeof a === 'object') return JSON.stringify(a, null, 2);
+          return String(a);
+        }).join(' ');
+
+        const line = { level, ts, msg };
+        state.console.push(line);
+        if (state.console.length > 400) state.console.shift();
+
+        const p = document.createElement('div');
+        const lvl = (level || 'log').toLowerCase();
+        p.className = 'logLine ' + (lvl.includes('warn') ? 'warn' : lvl.includes('error') ? 'error' : lvl.includes('info') ? 'info' : '');
+        p.innerHTML = `<span class="lvl">${escapeHtml(lvl)}</span> ${escapeHtml(new Date(ts).toLocaleTimeString())}  ${escapeHtml(msg)}`;
+        els.consoleBody.appendChild(p);
+        els.consoleBody.scrollTop = els.consoleBody.scrollHeight;
+        els.consoleCount.textContent = `${state.console.length} entries`;
+      };
+
+      window.addEventListener('message', (e) => {
+        const d = e.data;
+        if (!d || d.__webpile !== true) return;
+        if (d.token !== state.sessionToken) return;
+        if (!state.project?.settings?.instrument) return;
+
+        if (d.type === 'console') appendConsole('console', d.payload);
+        if (d.type === 'error') appendConsole('error', { level:'error', args:[{__error:true,name:'Error',message:d.payload?.message || 'Error',stack:d.payload?.stack || ''}], ts:d.payload?.ts });
+        if (d.type === 'rejection') appendConsole('rejection', { level:'error', args:[d.payload?.reason || 'unhandledrejection'], ts:d.payload?.ts });
+        if (d.type === 'netblock') appendConsole('netblock', { level:'warn', args:[`NETWORK BLOCKED: ${d.payload?.kind} → ${d.payload?.url}`], ts:d.payload?.ts });
+      });
+
+      const renderNow = (force=false) => {
+        if (!state.project) return;
+        applyEditorToProject();
+        setSandbox();
+        state.sessionToken = uid();
+        els.sessionToken.textContent = state.sessionToken.slice(0, 8);
+
+        const composed = composeHtml();
+        const h = hashStr(composed + '|' + JSON.stringify(state.project.settings));
+        if (!force && h === state.lastRenderHash) return;
+        state.lastRenderHash = h;
+
+        // Clear console on each render to avoid cross-run confusion.
+        clearConsole();
+
+        try {
+          els.iframe.srcdoc = composed;
+          els.previewSub.textContent = state.project.settings.fullMode
+            ? `Full Mode (scripts allowed) · ${state.project.settings.isolated ? 'isolated sandbox' : 'compatibility sandbox (same-origin)'} · network: ${state.project.settings.network}`
+            : 'Safe Mode (scripts blocked) · isolated sandbox';
+          setSave('ok', state.project.settings.auto ? 'Rendered (auto)' : 'Rendered');
+        } catch (e) {
+          setSave('warn', 'Render used blob fallback');
+          const blob = new Blob([composed], { type: 'text/html;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          els.iframe.src = url;
+          setTimeout(() => URL.revokeObjectURL(url), 60000);
+        }
+      };
+
+      const openPreviewTab = () => {
+        const composed = composeHtml();
+        const blob = new Blob([composed], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank', 'noopener,noreferrer');
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+      };
+
+      // ---------- Validation (local static scan) ----------
+      const validateProject = async () => {
+        applyEditorToProject();
+        const files = state.project.files;
+        const report = {
+          project: { id: state.project.id, name: state.project.name, updatedAt: state.project.updatedAt },
+          settings: { ...state.project.settings },
+          totals: { files: files.length, bytes: files.reduce((a,f)=>a + bytes(f.content).length, 0) },
+          issues: [],
+          hashes: {}
+        };
+
+        // Hashes (for evidence pack)
+        for (const f of files) {
+          report.hashes[f.path] = await sha256Hex(f.content || '');
+        }
+
+        const html = String((files.find(f=>inferLang(f.path)==='html')?.content) || '');
+        let doc = null;
+        try { doc = new DOMParser().parseFromString(html, 'text/html'); } catch(_) {}
+
+        // HTML parse error (best-effort)
+        if (doc) {
+          const pe = doc.querySelector('parsererror');
+          if (pe) report.issues.push({ severity:'error', code:'HTML_PARSE', message:'HTML parser error detected (browser parsererror node).', detail: pe.textContent?.slice(0, 240) || '' });
+        } else {
+          report.issues.push({ severity:'warn', code:'HTML_PARSE', message:'Could not parse HTML via DOMParser.', detail:'' });
+        }
+
+        // Basic metadata
+        const hasTitle = doc && doc.querySelector('title');
+        if (!hasTitle) report.issues.push({ severity:'warn', code:'META_TITLE', message:'Missing <title>.', detail:'Add a title for accessibility and professional polish.' });
+
+        const hasCharset = /<meta\s+charset=/i.test(html);
+        if (!hasCharset) report.issues.push({ severity:'warn', code:'META_CHARSET', message:'Missing <meta charset>.', detail:'Add <meta charset="utf-8"> early in <head>.' });
+
+        const hasViewport = /<meta\s+name=["']viewport["']/i.test(html);
+        if (!hasViewport) report.issues.push({ severity:'warn', code:'META_VIEWPORT', message:'Missing viewport meta.', detail:'Add <meta name="viewport" content="width=device-width,initial-scale=1">.' });
+
+        // Duplicate IDs
+        if (doc) {
+          const ids = [...doc.querySelectorAll('[id]')].map(n=>n.getAttribute('id')).filter(Boolean);
+          const seen = new Map();
+          for (const id of ids) seen.set(id, (seen.get(id) || 0) + 1);
+          const dups = [...seen.entries()].filter(([_,c])=>c>1).slice(0, 20);
+          if (dups.length) report.issues.push({ severity:'warn', code:'DUP_IDS', message:`Duplicate IDs found (${dups.length}).`, detail: dups.map(([i,c])=>`${i}×${c}`).join(', ') });
+        }
+
+        // Script/network red flags (heuristics)
+        const js = String(getFile('app.js')?.content || '');
+        const combinedJs = html + '\n' + js;
+        const looksLikeEval = /\beval\s*\(|new\s+Function\s*\(/.test(combinedJs);
+        if (looksLikeEval) report.issues.push({ severity:'warn', code:'JS_EVAL', message:'Possible eval/new Function usage detected.', detail:'Avoid eval in production; it complicates CSP and security reviews.' });
+
+        const looksLikeInlineRemote = /<script[^>]+src=/i.test(html) || /<link[^>]+href=/i.test(html);
+        if (looksLikeInlineRemote && state.project.settings.network === 'block') {
+          report.issues.push({ severity:'info', code:'NET_BLOCK_MAY_BREAK', message:'Remote resources detected while Network policy is Block.', detail:'If your preview relies on remote fetch/XHR/WS it will be blocked. Script/link/image tags may still load depending on browser.' });
+        }
+
+        // Sandbox risk check
+        if (state.project.settings.fullMode && !state.project.settings.isolated) {
+          report.issues.push({ severity:'warn', code:'SAME_ORIGIN', message:'Compatibility mode (allow-same-origin) enabled in Full Mode.', detail:'This is riskier: preview code can access same-origin storage if not otherwise isolated. Keep Isolated on by default.' });
+        }
+
+        // Tool file size advisory
+        if (report.totals.bytes > 3_000_000) {
+          report.issues.push({ severity:'warn', code:'SIZE_BIG', message:'Project size is large (>3MB).', detail:'Very large files can slow the browser and editor.' });
+        }
+
+        // Summary counts
+        report.counts = {
+          error: report.issues.filter(i=>i.severity==='error').length,
+          warn: report.issues.filter(i=>i.severity==='warn').length,
+          info: report.issues.filter(i=>i.severity==='info').length
+        };
+
+        return report;
+      };
+
+      const renderValidateUI = (report) => {
+        els.validateKpis.innerHTML = '';
+        const k = (label, value) => {
+          const d = document.createElement('div');
+          d.className = 'kpi';
+          d.innerHTML = `<b>${escapeHtml(label)}</b><span>${escapeHtml(String(value))}</span>`;
+          els.validateKpis.appendChild(d);
+        };
+        k('Project', report.project.name);
+        k('Files', report.totals.files);
+        k('Bytes', report.totals.bytes.toLocaleString());
+        k('Issues', `E:${report.counts.error}  W:${report.counts.warn}  I:${report.counts.info}`);
+        els.validateList.innerHTML = '';
+        if (!report.issues.length) {
+          const r = document.createElement('div');
+          r.className = 'row';
+          r.innerHTML = `<div class="meta"><b>No issues found</b><span>Nice. This is a clean baseline.</span></div>`;
+          els.validateList.appendChild(r);
+        } else {
+          for (const it of report.issues) {
+            const r = document.createElement('div');
+            r.className = 'row';
+            const sev = it.severity === 'error' ? 'bad' : it.severity === 'warn' ? 'warn' : 'ok';
+            r.innerHTML = `<div class="meta"><b><span class="dot ${sev}" style="margin-right:8px"></span>${escapeHtml(it.code)} · ${escapeHtml(it.message)}</b><span>${escapeHtml(it.detail || '')}</span></div>`;
+            els.validateList.appendChild(r);
+          }
+        }
+        els.validateFooter.textContent = `Report built ${new Date().toLocaleString()} · SHA-256 checksums included`;
+      };
+
+      const reportToText = (report) => {
+        const lines = [];
+        lines.push(`${BUILD.name} Validation Report`);
+        lines.push(`Project: ${report.project.name} (${report.project.id})`);
+        lines.push(`Updated: ${fmtTime(report.project.updatedAt)}`);
+        lines.push(`Files: ${report.totals.files} · Bytes: ${report.totals.bytes}`);
+        lines.push(`Issues: error=${report.counts.error}, warn=${report.counts.warn}, info=${report.counts.info}`);
+        lines.push('');
+        for (const it of report.issues) {
+          lines.push(`[${it.severity.toUpperCase()}] ${it.code} — ${it.message}`);
+          if (it.detail) lines.push(`  ${it.detail}`);
+        }
+        lines.push('');
+        lines.push('Checksums (SHA-256):');
+        for (const [k,v] of Object.entries(report.hashes || {})) lines.push(`  ${k}  ${v}`);
+        return lines.join('\n');
+      };
+
+      // ---------- Snapshots ----------
+      const listSnapshots = async (projectId) => {
+        return await storage.listSnapshots(projectId);
+      };
+
+      const enforceSnapshotLimit = async (projectId, limit=30) => {
+        if (storage.isCloud()) return; // server-side retention handled separately
+        const snaps = await listSnapshots(projectId);
+        if (snaps.length <= limit) return;
+        const toDel = snaps.slice(limit);
+        for (const s of toDel) await idbDelete('snapshots', s.id);
+      };
+
+      const createSnapshot = async (label='') => {
+        if (!state.project) return;
+        await persistProject('Saved before snapshot');
+
+        const cleanLabel = String(label || '').trim().slice(0, 120);
+        const projectJson = JSON.parse(JSON.stringify(state.project));
+
+        await storage.createSnapshot(state.project.id, cleanLabel, projectJson);
+        await enforceSnapshotLimit(state.project.id, 30);
+        toast(storage.isCloud() ? 'Snapshot created (cloud)' : 'Snapshot created', 'ok');
+      };
+
+      const restoreSnapshot = async (snap) => {
+        if (!snap) return;
+
+        let projectObj = snap.project || null;
+
+        // Cloud snapshots don't include the full project JSON in the list; fetch it.
+        if (!projectObj && storage.isCloud()) {
+          const row = await storage.getSnapshot(snap.id);
+          projectObj = row?.project_json || null;
+        }
+
+        if (!projectObj) return;
+
+        state.project = projectObj;
+
+        // Persist restored state back to active backend (local or cloud)
+        await storage.saveProject(state.project);
+
+        await loadProjectIntoEditor(state.project.id, { keepActiveFile: true });
+        toast(storage.isCloud() ? 'Snapshot restored (cloud)' : 'Snapshot restored', 'ok', 1600);
+      };
+
+      const renderHistoryList = async () => {
+        const snaps = await listSnapshots(state.project.id);
+        state.snapshots = snaps;
+        els.historyList.innerHTML = '';
+
+        if (!snaps.length) {
+          const r = document.createElement('div');
+          r.className = 'row';
+          r.innerHTML = `<div class="meta"><b>No snapshots yet</b><span>Create one with Ctrl/⌘+S or the Snapshot button.</span></div>`;
+          els.historyList.appendChild(r);
+        } else {
+          for (const s of snaps) {
+            const r = document.createElement('div');
+            r.className = 'row';
+
+            const label = s.label ? ` · ${s.label}` : '';
+            const fileCount = s.project?.files?.length;
+            const fileLine = (typeof fileCount === 'number') ? `${fileCount} files` : (storage.isCloud() ? 'Cloud snapshot' : 'Snapshot');
+            const updatedAt = s.project?.updatedAt ? new Date(s.project.updatedAt).toLocaleString() : new Date(s.createdAt).toLocaleString();
+
+            r.innerHTML = `
+              <div class="meta">
+                <b>${escapeHtml(new Date(s.createdAt).toLocaleString())}${escapeHtml(label)}</b>
+                <span>${escapeHtml(fileLine)} · ${escapeHtml(updatedAt)}</span>
+              </div>
+              <div class="actions">
+                <button class="btn" data-act="restore">Restore</button>
+                <button class="btn" data-act="export">Export ZIP</button>
+                <button class="btn danger" data-act="delete">Delete</button>
+              </div>
+            `;
+
+            r.querySelector('[data-act="restore"]').addEventListener('click', () => restoreSnapshot(s));
+
+            r.querySelector('[data-act="export"]').addEventListener('click', async () => {
+              let proj = s.project || null;
+              if (!proj && storage.isCloud()) {
+                const row = await storage.getSnapshot(s.id);
+                proj = row?.project_json || null;
+              }
+              if (!proj) { toast('Snapshot export unavailable', 'warn'); return; }
+              exportProjectZip(proj, `${state.project.name} — snapshot`);
+            });
+
+            r.querySelector('[data-act="delete"]').addEventListener('click', async () => {
+              if (!confirm('Delete this snapshot?')) return;
+
+              if (storage.isCloud()) {
+                try {
+                  await apiRequest(`/snapshots/${s.id}`, { method:'DELETE', body:{} });
+                  toast('Snapshot deleted (cloud)', 'ok');
+                } catch (e) {
+                  toast('Snapshot delete failed', 'warn');
+                }
+                await renderHistoryList();
+                return;
+              }
+
+              await idbDelete('snapshots', s.id);
+              await renderHistoryList();
+              toast('Snapshot deleted', 'ok');
+            });
+
+            els.historyList.appendChild(r);
+          }
+        }
+
+        els.historyFooter.textContent = `${snaps.length} snapshot(s)`;
+      };
+
+
+      // Diff (simple textual diff summary; Monaco diff editor would be heavier UI)
+      const diffTwoSnapshots = async () => {
+        const snaps = state.snapshots || [];
+        if (snaps.length < 2) { toast('Need 2 snapshots to diff', 'warn'); return; }
+
+        // Pick latest two by default.
+        let a = snaps[0].project || null;
+        let b = snaps[1].project || null;
+        if ((!a || !b) && storage.isCloud()) {
+          const ra = await storage.getSnapshot(snaps[0].id);
+          const rb = await storage.getSnapshot(snaps[1].id);
+          a = ra?.project_json || null;
+          b = rb?.project_json || null;
+        }
+        if (!a || !b) { toast('Diff unavailable (snapshot bodies missing)', 'warn'); return; }
+        const aMap = new Map(a.files.map(f=>[f.path, f.content]));
+        const bMap = new Map(b.files.map(f=>[f.path, f.content]));
+        const paths = Array.from(new Set([...aMap.keys(), ...bMap.keys()])).sort();
+
+        const out = [];
+        out.push(`Diff (latest vs previous)`);
+        out.push(`A: ${new Date(snaps[0].createdAt).toLocaleString()} ${snaps[0].label || ''}`);
+        out.push(`B: ${new Date(snaps[1].createdAt).toLocaleString()} ${snaps[1].label || ''}`);
+        out.push('');
+        for (const p of paths) {
+          const aa = aMap.get(p);
+          const bb = bMap.get(p);
+          if (aa == null) out.push(`+ ${p} (added)`);
+          else if (bb == null) out.push(`- ${p} (removed)`);
+          else if (aa !== bb) out.push(`~ ${p} (changed)`);
+        }
+        out.push('');
+        out.push('Tip: for detailed diffs, export both snapshots and use a real diff tool.');
+        await navigator.clipboard.writeText(out.join('\n')).catch(()=>{});
+        toast('Diff summary copied to clipboard', 'ok', 1600);
+      };
+
+      // ---------- ZIP export/import ----------
+      const ensureJSZip = async () => {
+        if (window.JSZip) return true;
+        try {
+          const src = await tryLoad([DEP.jszipLocal, DEP.jszipCdn]);
+          if (src === DEP.jszipCdn) {
+            state.usingCdn = true;
+            els.cdnBanner.classList.add('show');
+          }
+          return !!window.JSZip;
+        } catch (e) {
+          toast('JSZip unavailable (export/import disabled)', 'warn', 1800);
+          return false;
+        }
+      };
+
+      const exportProjectZip = async (project, nameOverride=null) => {
+        const ok = await ensureJSZip();
+        if (!ok) return;
+
+        const zip = new JSZip();
+        const root = sanitizeName(nameOverride || project.name).replace(/\s+/g,'_') || 'project';
+        const folder = zip.folder(root);
+
+        // Write files
+        for (const f of project.files) folder.file(f.path, f.content || '');
+
+        // webpile.json manifest
+        const manifest = {
+          tool: BUILD,
+          project: { id: project.id, name: project.name, createdAt: project.createdAt, updatedAt: project.updatedAt },
+          files: project.files.map(f => ({ path:f.path, language:f.language, bytes: bytes(f.content).length })),
+          settings: project.settings
+        };
+        folder.file('webpile.json', JSON.stringify(manifest, null, 2));
+
+        // checksums
+        const checks = [];
+        for (const f of project.files) {
+          const h = await sha256Hex(f.content || '');
+          checks.push(`${h}  ${f.path}`);
+        }
+        folder.file('checksums.sha256', checks.join('\n') + '\n');
+
+        const blob = await zip.generateAsync({ type: 'blob' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${root}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+        toast('Exported ZIP', 'ok');
+      };
+
+      const exportEvidencePack = async () => {
+        if (!state.lastValidateReport) {
+          toast('Run Validate first', 'warn');
+          return;
+        }
+        const ok = await ensureJSZip();
+        if (!ok) return;
+
+        const zip = new JSZip();
+        const root = sanitizeName(state.project.name).replace(/\s+/g,'_') + '__evidence';
+        const folder = zip.folder(root);
+
+        folder.file('validation_report.txt', reportToText(state.lastValidateReport));
+        folder.file('validation_report.json', JSON.stringify(state.lastValidateReport, null, 2));
+
+        const checks = [];
+        for (const [p,h] of Object.entries(state.lastValidateReport.hashes || {})) checks.push(`${h}  ${p}`);
+        folder.file('checksums.sha256', checks.join('\n') + '\n');
+
+        const blob = await zip.generateAsync({ type: 'blob' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${root}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+        toast('Evidence Pack exported', 'ok');
+      };
+
+      const exportToolPack = async () => {
+        const ok = await ensureJSZip();
+        if (!ok) return;
+
+        // Tool pack: index.html + tiny README + placeholder folders.
+        const zip = new JSZip();
+        const root = 'webpile-pro-enterprise';
+        const folder = zip.folder(root);
+        folder.file('index.html', document.documentElement.outerHTML);
+
+        folder.file('README.txt', [
+          'WebPile Pro Enterprise — Tool Pack',
+          '',
+          'Deploy (Netlify Drop):',
+          '1) Unzip this folder.',
+          '2) Drag the folder into Netlify Drop (or upload via Netlify UI).',
+          '',
+          'Vendorizing Monaco/JSZip (recommended for locked-down networks):',
+          '- Place Monaco under: vendor/monaco/min/vs/... (Monaco "min" build)',
+          '- Place JSZip at: vendor/jszip.min.js',
+          '',
+          'Once vendor files exist, the tool will prefer them and avoid CDN fallbacks.',
+          '',
+          'Optional PWA files:',
+          '- manifest.webmanifest, icons/, sw.js',
+          '- You can create these if you want install/offline caching for the tool itself.',
+          ''
+        ].join('\n'));
+
+        // Placeholder folders
+        folder.folder('vendor').folder('monaco').folder('min');
+        folder.folder('icons');
+
+        const blob = await zip.generateAsync({ type: 'blob' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${root}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+        toast('Tool Pack exported', 'ok');
+      };
+
+      const importZipAsProject = async (file) => {
+        const ok = await ensureJSZip();
+        if (!ok) return null;
+
+        const buf = await file.arrayBuffer();
+        const zip = await JSZip.loadAsync(buf);
+        const entries = [];
+        zip.forEach((relPath, entry) => entries.push({ relPath, entry }));
+
+        // Attempt to find webpile.json
+        let manifestEntry = entries.find(e => e.relPath.toLowerCase().endsWith('webpile.json'));
+        let rootPrefix = '';
+        if (manifestEntry) {
+          rootPrefix = manifestEntry.relPath.slice(0, -'webpile.json'.length);
+        } else {
+          // Guess: use top folder
+          const top = entries.map(e => e.relPath.split('/')[0]).filter(Boolean);
+          rootPrefix = (top[0] ? top[0] + '/' : '');
+        }
+
+        // Read files (skip folders)
+        const files = [];
+        for (const e of entries) {
+          if (e.entry.dir) continue;
+          const rp = e.relPath;
+          if (!rp.startsWith(rootPrefix)) continue;
+          const sub = rp.slice(rootPrefix.length);
+          if (!sub || sub.toLowerCase() === 'webpile.json' || sub.toLowerCase() === 'checksums.sha256') continue;
+          // Avoid importing vendor/tool files as project content.
+          if (sub.startsWith('vendor/') || sub.startsWith('icons/')) continue;
+          const content = await e.entry.async('string');
+          files.push({ path: sanitizePath(sub), language: inferLang(sub), content });
+        }
+
+        if (!files.length) {
+          toast('ZIP contained no importable files', 'warn');
+          return null;
+        }
+
+        const p = defaultProject('Imported — ' + (file.name || 'ZIP'));
+        p.files = files;
+        p.updatedAt = now();
+
+        if (storage.isCloud()) {
+          const created = await storage.createProject(p);
+          toast('Imported ZIP as cloud project', 'ok', 1600);
+          return created;
+        }
+
+        await storage.saveProject(p);
+        toast('Imported ZIP as new project', 'ok', 1600);
+        return p;
+      };
+
+      const importHtmlToActive = async (file) => {
+        const text = await file.text();
+        if (!text.trim()) return;
+        if (!state.project) return;
+        const htmlFile = state.project.files.find(f => inferLang(f.path) === 'html') || getFile('index.html');
+        htmlFile.path = htmlFile.path || 'index.html';
+        htmlFile.language = 'html';
+        htmlFile.content = text;
+        state.project.updatedAt = now();
+        await persistProject('Imported HTML');
+        await loadProjectIntoEditor(state.project.id);
+        renderNow(true);
+        toast('Imported HTML into project', 'ok');
+      };
+
+      // ---------- Projects UI ----------
+      const listProjects = async () => {
+        let projects = [];
+        try {
+          projects = await storage.listProjects();
+        } catch (e) {
+          projects = [];
+          els.projectsList.innerHTML = '';
+          els.projectsFooter.textContent = 'Storage unavailable (check IndexedDB or Cloud auth).';
+          toast('Projects unavailable', 'warn', 1600);
+          return;
+        }
+
+        projects.sort((a,b)=> (b.updatedAt || 0) - (a.updatedAt || 0));
+        state.projects = projects;
+        els.projectsList.innerHTML = '';
+
+        for (const p of projects) {
+          const row = document.createElement('div');
+          row.className = 'row';
+
+          const filesLabel = p._cloud ? 'Cloud project' : `${(p.files?.length || 0)} files`;
+          row.innerHTML = `
+            <div class="meta">
+              <b>${escapeHtml(p.name || 'Untitled')}</b>
+              <span>${escapeHtml(filesLabel)} · Updated ${escapeHtml(fmtTime(p.updatedAt || p.createdAt || now()))}</span>
+            </div>
+            <div class="actions">
+              <button class="btn primary" data-act="open">Open</button>
+              <button class="btn" data-act="dup">Duplicate</button>
+              <button class="btn" data-act="export">Export</button>
+              <button class="btn danger" data-act="del">Delete</button>
+            </div>
+          `;
+
+          row.querySelector('[data-act="open"]').addEventListener('click', async () => {
+            await loadProjectIntoEditor(p.id);
+            closeModal(els.projectsModal);
+          });
+
+          row.querySelector('[data-act="export"]').addEventListener('click', async () => {
+            const full = p.files ? p : await storage.getProject(p.id);
+            exportProjectZip(full);
+          });
+
+          row.querySelector('[data-act="dup"]').addEventListener('click', async () => {
+            const full = p.files ? p : await storage.getProject(p.id);
+            const d = JSON.parse(JSON.stringify(full));
+            d.name = sanitizeName((full.name || 'Project') + ' — Copy');
+            d.createdAt = now();
+            d.updatedAt = now();
+            // For cloud creates, server assigns id; local keeps id.
+            if (storage.isCloud()) {
+              const created = await storage.createProject(d);
+              toast('Duplicated (cloud)', 'ok');
+              await listProjects();
+              await loadProjectIntoEditor(created.id);
+            } else {
+              d.id = uid();
+              await storage.createProject(d);
+              toast('Duplicated (local)', 'ok');
+              await listProjects();
+            }
+          });
+
+          row.querySelector('[data-act="del"]').addEventListener('click', async () => {
+            if (!confirm('Delete project "' + (p.name || 'Untitled') + '"?')) return;
+
+            if (storage.isCloud()) {
+              await storage.deleteProject(p.id);
+              toast('Deleted (cloud)', 'ok');
+              if (state.project?.id === p.id) await bootstrapProject();
+              else await listProjects();
+              return;
+            }
+
+            // Local: delete snapshots + project
+            const snaps = await listSnapshots(p.id);
+            for (const s of snaps) await idbDelete('snapshots', s.id);
+            await storage.deleteProject(p.id);
+            toast('Deleted (local)', 'ok');
+
+            if (state.project?.id === p.id) {
+              await bootstrapProject();
+            } else {
+              await listProjects();
+            }
+          });
+
+          els.projectsList.appendChild(row);
+        }
+
+        els.projectsFooter.textContent = `${projects.length} ${storage.isCloud() ? 'cloud' : 'local'} project(s)`;
+      };
+
+      const bootstrapProject = async () => {
+        const key = storage.isCloud() ? 'lastProjectId_cloud' : 'lastProjectId_local';
+        const lastId = await kvGet(key);
+
+        let p = null;
+        if (lastId) {
+          try { p = await storage.getProject(lastId); } catch (_) { p = null; }
+        }
+
+        if (!p) {
+          let existing = [];
+          try { existing = await storage.listProjects(); } catch (_) { existing = []; }
+          if (existing.length) {
+            p = await storage.getProject(existing[0].id);
+          } else {
+            // Create starter project in the active storage backend
+            const starter = defaultProject('WebPile Starter');
+            p = await storage.createProject(starter);
+          }
+        }
+
+        await loadProjectIntoEditor(p.id);
+      };
+
+      const loadProjectIntoEditor = async (projectId, opts={}) => {
+        const p = await storage.getProject(projectId);
+        if (!p) return;
+        state.project = p;
+
+        // Persist "last opened"
+        const lastKey = storage.isCloud() ? 'lastProjectId_cloud' : 'lastProjectId_local';
+        await kvSet(lastKey, p.id);
+
+        // Sync UI controls
+        const s = state.project.settings || {};
+        els.autoToggle.dataset.on = String(!!s.auto);
+        els.modeToggle.dataset.on = String(!!s.fullMode);
+        els.modeLabel.textContent = s.fullMode ? 'Full' : 'Safe';
+        els.debounceMs.value = clamp(Number(s.debounce ?? 350), 0, 5000);
+        els.isolationToggle.dataset.on = String(!!s.isolated);
+        els.instrumentToggle.dataset.on = String(!!s.instrument);
+        els.networkSel.value = s.network || 'block';
+        els.deviceSel.value = s.device || 'responsive';
+        els.scaleSel.value = s.scale || '1';
+        applyViewport();
+
+        els.projectPill.textContent = 'Project: ' + state.project.name;
+
+        // Ensure active file exists
+        const files = state.project.files || [];
+        if (!files.length) state.project.files = defaultProject(state.project.name).files;
+
+        if (!opts.keepActiveFile) state.activeFile = (files[0]?.path || 'index.html');
+
+        // Render file tabs
+        renderFileTabs();
+
+        // Load into Monaco or fallback editor
+        await initEditorIfNeeded();
+
+        // Set up models
+        if (!state.fallbackMode) {
+          const monaco = window.monaco;
+          state.modelByPath.forEach(m => { try { m.dispose(); } catch(_) {} });
+          state.modelByPath.clear();
+
+          for (const f of state.project.files) {
+            const lang = f.language || inferLang(f.path);
+            f.language = lang;
+            const model = monaco.editor.createModel(String(f.content || ''), lang);
+            state.modelByPath.set(f.path, model);
+            model.onDidChangeContent(() => {
+              state.dirtyFiles.add(f.path);
+              schedulePersist();
+              scheduleRender();
+              updateStats();
+              renderFileTabs();
+            });
+          }
+
+          if (!state.editor) throw new Error('Editor missing');
+          const active = state.modelByPath.get(state.activeFile) ? state.activeFile : state.project.files[0].path;
+          setActiveModel(active);
+          state.editor.focus();
+
+          // Keybindings: render + snapshot + console
+          state.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => renderNow(true));
+          state.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => createSnapshot('Quick save'));
+          state.editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Backquote, () => toggleConsole(true));
+        } else {
+          els.fallbackTextarea.value = getFile(state.activeFile).content || '';
+          updateStats();
+          els.fallbackTextarea.oninput = () => {
+            setFileContent(state.activeFile, els.fallbackTextarea.value || '');
+            schedulePersist();
+            scheduleRender();
+            updateStats();
+          };
+        }
+
+        // Initial render for project
+        renderNow(true);
+      };
+
+      // ---------- Editor init (Monaco preferred, fallback textarea) ----------
+      const initEditorIfNeeded = async () => {
+        if (state.editor || state.fallbackMode) return;
+
+        // If Monaco loader isn't present, try to load it (local first).
+        els.loadLine.textContent = 'Loading Monaco/JSZip…';
+
+        // Load JSZip opportunistically (used for export/import; ok if it fails)
+        try {
+          const jszipSrc = await tryLoad([DEP.jszipLocal, DEP.jszipCdn]);
+          if (jszipSrc === DEP.jszipCdn) { state.usingCdn = true; els.cdnBanner.classList.add('show'); }
+        } catch (_) { /* ok */ }
+
+        // Load Monaco AMD loader
+        let loaderSrc = null;
+        try {
+          // Try local loader first (vendor/monaco/min/vs/loader.js)
+          loaderSrc = await tryLoad([
+            DEP.monacoLocalBase + '/vs/loader.js',
+            DEP.monacoLocalBase + '/vs/loader.min.js',
+            DEP.monacoCdnBase  + '/vs/loader.min.js'
+          ]);
+        } catch (e) {
+          // Fallback mode
+          state.fallbackMode = true;
+          els.monacoLoading.style.display = 'none';
+          els.fallbackEditor.style.display = 'flex';
+          toast('Monaco blocked → fallback editor enabled', 'warn', 2200);
+          return;
+        }
+
+        // Determine base for worker and require config
+        state.monacoBase = loaderSrc.includes(DEP.monacoLocalBase) ? DEP.monacoLocalBase : DEP.monacoCdnBase;
+        if (!loaderSrc.includes(DEP.monacoLocalBase)) {
+          state.usingCdn = true;
+          els.cdnBanner.classList.add('show');
+        }
+
+        // Worker loader: data: worker imports workerMain from the chosen base
+        window.MonacoEnvironment = {
+          getWorkerUrl: function(workerId, label) {
+            const src = `
+              self.MonacoEnvironment = { baseUrl: "${state.monacoBase}/" };
+              importScripts("${state.monacoBase}/vs/base/worker/workerMain.min.js");
+            `;
+            return "data:text/javascript;charset=utf-8," + encodeURIComponent(src);
+          }
+        };
+
+        // Configure require
+        if (typeof require === 'undefined') {
+          state.fallbackMode = true;
+          els.monacoLoading.style.display = 'none';
+          els.fallbackEditor.style.display = 'flex';
+          toast('Monaco loader missing require() → fallback editor', 'warn', 2200);
+          return;
+        }
+
+        els.loadLine.textContent = 'Initializing Monaco…';
+        require.config({ paths: { 'vs': state.monacoBase + '/vs' } });
+
+        await new Promise((resolve, reject) => {
+          require(['vs/editor/editor.main'], () => resolve(), reject);
+        });
+
+        const monaco = window.monaco;
+        createMonacoTheme(monaco);
+
+        state.editor = monaco.editor.create(els.monacoEl, {
+          theme: 'kaixuNebula',
+          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+          fontSize: 12.5,
+          lineNumbers: 'on',
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
+          smoothScrolling: true,
+          cursorBlinking: 'smooth',
+          cursorSmoothCaretAnimation: 'on',
+          renderWhitespace: 'selection',
+          wordWrap: 'off',
+          automaticLayout: true,
+          padding: { top: 10, bottom: 10 }
+        });
+
+        els.monacoLoading.style.display = 'none';
+        toast('Monaco ready', 'ok', 1200);
+      };
+
+      // ---------- Modals ----------
+      const openModal = (m) => { m.classList.add('show'); m.setAttribute('aria-hidden','false'); };
+      const closeModal = (m) => { m.classList.remove('show'); m.setAttribute('aria-hidden','true'); };
+
+      // ---------- Console toggle ----------
+      const toggleConsole = (on=null) => {
+        const show = on == null ? (els.consolePane.style.display === 'none') : !!on;
+        els.consolePane.style.display = show ? '' : 'none';
+        if (show) els.consoleBody.scrollTop = els.consoleBody.scrollHeight;
+      };
+
+      // ---------- File operations ----------
+      const addFile = async () => {
+        const name = prompt('New file path (e.g., extra.js, components/ui.css):', 'extra.js');
+        if (!name) return;
+        const path = sanitizePath(name);
+        if (state.project.files.some(f => f.path === path)) { toast('File already exists', 'warn'); return; }
+        const f = { path, language: inferLang(path), content: '' };
+        state.project.files.push(f);
+        state.project.updatedAt = now();
+        await persistProject('File added');
+        await loadProjectIntoEditor(state.project.id, { keepActiveFile: true });
+        setActiveModel(path);
+        toast('File added', 'ok');
+      };
+
+      const renameActiveFile = async () => {
+        const current = state.activeFile;
+        const f = getFile(current);
+        if (!f) return;
+        const name = prompt('Rename file', f.path);
+        if (!name) return;
+        const path = sanitizePath(name);
+        if (path === f.path) return;
+        if (state.project.files.some(x => x.path === path)) { toast('That name already exists', 'warn'); return; }
+
+        // Update file record
+        f.path = path;
+        f.language = inferLang(path);
+
+        // Update Monaco model mapping
+        if (!state.fallbackMode) {
+          const m = state.modelByPath.get(current);
+          state.modelByPath.delete(current);
+          if (m) state.modelByPath.set(path, m);
+        }
+
+        state.activeFile = path;
+        state.project.updatedAt = now();
+        await persistProject('File renamed');
+        renderFileTabs();
+        toast('File renamed', 'ok');
+      };
+
+      const deleteActiveFile = async () => {
+        const current = state.activeFile;
+        const files = state.project.files || [];
+        if (files.length <= 1) { toast('Cannot delete the last file', 'warn'); return; }
+        if (!confirm('Delete file "' + current + '"?')) return;
+
+        // Remove file
+        const idx = files.findIndex(f => f.path === current);
+        if (idx < 0) return;
+        files.splice(idx, 1);
+
+        if (!state.fallbackMode) {
+          const m = state.modelByPath.get(current);
+          if (m) { try { m.dispose(); } catch(_) {} }
+          state.modelByPath.delete(current);
+        }
+
+        state.activeFile = files[Math.max(0, idx-1)]?.path || files[0].path;
+        state.project.updatedAt = now();
+        await persistProject('File deleted');
+        await loadProjectIntoEditor(state.project.id, { keepActiveFile: true });
+        toast('File deleted', 'ok');
+      };
+
+      const resetProject = async () => {
+        if (!confirm('Reset this project to templates? This overwrites all current files.')) return;
+        const name = state.project.name;
+        const p = defaultProject(name);
+        p.id = state.project.id;
+        p.createdAt = state.project.createdAt;
+        p.updatedAt = now();
+        await storage.saveProject(p);
+        await loadProjectIntoEditor(p.id);
+        toast('Project reset', 'ok');
+      };
+
+      const copyActiveFile = async () => {
+        try {
+          await navigator.clipboard.writeText(getActiveContent() || '');
+          toast('Copied', 'ok', 900);
+        } catch (_) {
+          toast('Clipboard blocked', 'warn', 1400);
+        }
+      };
+
+      const formatActive = async () => {
+        if (state.fallbackMode) {
+          toast('Formatting requires Monaco', 'warn');
+          return;
+        }
+        try {
+          const act = state.editor.getAction('editor.action.formatDocument');
+          if (act) await act.run();
+          toast('Formatted', 'ok', 900);
+        } catch (_) {
+          toast('Format unavailable (workers blocked)', 'warn', 1400);
+        }
+      };
+
+      // ---------- Global keybindings ----------
+      window.addEventListener('keydown', async (e) => {
+        const isMac = navigator.platform.toUpperCase().includes('MAC');
+        const cmdOrCtrl = isMac ? e.metaKey : e.ctrlKey;
+
+        if (cmdOrCtrl && e.key === 'Enter') {
+          e.preventDefault();
+          renderNow(true);
+        }
+        if (cmdOrCtrl && (e.key === 's' || e.key === 'S')) {
+          e.preventDefault();
+          await createSnapshot('Quick save');
+        }
+        if (cmdOrCtrl && e.key === '`') {
+          e.preventDefault();
+          toggleConsole();
+        }
+        if (e.key === 'Escape') {
+          // Close topmost modal if open
+          const modals = [els.validateModal, els.historyModal, els.projectsModal, els.helpModal];
+          for (const m of modals) {
+            if (m.classList.contains('show')) { closeModal(m); break; }
+          }
+        }
+      });
+
+      // ---------- Wire UI events ----------
+
+      // Account + Cloud
+      els.accountBtn.addEventListener('click', async () => {
+        await refreshMe(true);
+        openModal(els.accountModal);
+      });
+      els.closeAccountBtn.addEventListener('click', () => closeModal(els.accountModal));
+      els.refreshMeBtn.addEventListener('click', async () => { await refreshMe(false); });
+
+      els.openHealthBtn.addEventListener('click', async () => {
+        try {
+          const r = await apiRequest('/health', { method:'GET' });
+          toast('API healthy', 'ok', 1400);
+          els.loginMsg.textContent = `health: ${r.service} @ ${r.time}`;
+        } catch (e) {
+          toast('API health failed', 'warn', 1600);
+          els.loginMsg.textContent = 'health check failed';
+        }
+      });
+
+      els.copyEnvBtn.addEventListener('click', async () => {
+        const t = `NEON_DATABASE_URL="postgresql://USER:PASSWORD@HOST/DB?sslmode=require"\nAPP_JWT_SECRET="CHANGE_ME_TO_A_LONG_RANDOM_SECRET"\nAPP_BASE_URL="https://YOUR-SITE.netlify.app"\nORIGIN_ALLOWLIST="https://YOUR-SITE.netlify.app,https://YOURDOMAIN.com"\nRATE_LIMIT_MODE="db"\nRATE_LIMIT_PER_MINUTE="120"\nAUTH_RATE_LIMIT_PER_MINUTE="30"\nLOGIN_MAX_ATTEMPTS="10"\nLOGIN_LOCK_MINUTES="15"\nREQUIRE_EMAIL_VERIFICATION="false"\nMAIL_MODE="outbox"\nCOOKIE_SECURE="true"\n`;
+        try { await navigator.clipboard.writeText(t); toast('Env template copied', 'ok', 1100); } catch(_) { toast('Clipboard blocked', 'warn'); }
+      });
+
+      els.loginBtn.addEventListener('click', async () => {
+        els.loginMsg.textContent = 'Logging in…';
+        try {
+          const r = await apiRequest('/auth/login', { method:'POST', body: { email: els.loginEmail.value, password: els.loginPassword.value } });
+          state.cloud.me = r.data;
+          updateCloudUI();
+          if (r.data?.dev?.verifyToken && els.verifyTokenInput) {
+            els.verifyTokenInput.value = r.data.dev.verifyToken;
+            if (els.verifyMsg) els.verifyMsg.textContent = r.data.dev.verifyUrl ? `Dev verify link: ${r.data.dev.verifyUrl}` : 'Dev verify token captured.';
+          }
+          els.loginMsg.textContent = 'Login OK';
+          els.registerMsg.textContent = '—';
+          toast('Login OK', 'ok', 1200);
+
+          // Auto-enable cloud if the user toggled it earlier
+          const wanted = await kvGet('cloudEnabled');
+          if (wanted) await setCloudEnabled(true);
+
+        } catch (e) {
+          els.loginMsg.textContent = `Login failed: ${e.message}${e.detail ? ' ('+e.detail+')' : ''}`;
+          toast('Login failed', 'bad', 1400);
+        }
+      });
+
+      els.registerBtn.addEventListener('click', async () => {
+        els.registerMsg.textContent = 'Creating account…';
+        try {
+          const r = await apiRequest('/auth/register', { method:'POST', body: { orgName: els.regOrg.value, email: els.regEmail.value, password: els.regPassword.value } });
+          state.cloud.me = r.data;
+          updateCloudUI();
+          if (r.data?.dev?.verifyToken && els.verifyTokenInput) {
+            els.verifyTokenInput.value = r.data.dev.verifyToken;
+            if (els.verifyMsg) els.verifyMsg.textContent = r.data.dev.verifyUrl ? `Dev verify link: ${r.data.dev.verifyUrl}` : 'Dev verify token captured.';
+          }
+          els.registerMsg.textContent = 'Account created';
+          els.loginMsg.textContent = '—';
+          toast('Account created', 'ok', 1400);
+
+          // Enable cloud immediately after registration
+          await setCloudEnabled(true);
+          // If email verification is required, keep the modal open so the user can verify immediately.
+          if (r.data?.user?.emailVerified) {
+            closeModal(els.accountModal);
+          } else {
+            if (els.verifyMsg) els.verifyMsg.textContent = r.data?.dev?.verifyUrl
+              ? `Dev mode: verify link ready. Paste token above or open: ${r.data.dev.verifyUrl}`
+              : 'Verification link queued. Check Neon email_outbox (or your email system) and paste the token above.';
+          }
+          await bootstrapProject();
+
+        } catch (e) {
+          els.registerMsg.textContent = `Register failed: ${e.message}${e.detail ? ' ('+e.detail+')' : ''}`;
+          toast('Register failed', 'bad', 1600);
+        }
+
+      // Org switching
+      els.switchOrgBtn.addEventListener('click', async () => {
+        els.orgSwitchMsg.textContent = 'Switching…';
+        try {
+          const orgId = els.orgSelect.value;
+          const r = await apiRequest('/auth/switch-org', { method:'POST', body: { orgId } });
+          state.cloud.me = r.data;
+          updateCloudUI();
+          els.orgSwitchMsg.textContent = 'Switched';
+          toast('Org switched', 'ok', 1200);
+          await bootstrapProject();
+        } catch (e) {
+          els.orgSwitchMsg.textContent = `Switch failed: ${e.message}`;
+          toast('Org switch failed', 'bad', 1400);
+        }
+      });
+
+      // Email verification
+      els.resendVerifyBtn.addEventListener('click', async () => {
+        const email = (state.cloud.me && state.cloud.me.user && state.cloud.me.user.email) ? state.cloud.me.user.email : (els.loginEmail.value || els.regEmail.value || '');
+        els.verifyMsg.textContent = 'Sending verification…';
+        try {
+          const r = await apiRequest('/auth/resend-verification', { method:'POST', body: { email } });
+          if (r.data?.dev?.verifyToken && els.verifyTokenInput) els.verifyTokenInput.value = r.data.dev.verifyToken;
+          els.verifyMsg.textContent = r.data?.dev?.verifyUrl ? `Dev verify link: ${r.data.dev.verifyUrl}` : 'Verification link queued (check email_outbox).';
+          toast('Verification queued', 'ok', 1200);
+        } catch (e) {
+          els.verifyMsg.textContent = `Failed: ${e.message}`;
+          toast('Verification failed', 'bad', 1400);
+        }
+      });
+
+      els.verifyTokenBtn.addEventListener('click', async () => {
+        const token = (els.verifyTokenInput.value || '').trim();
+        if (!token) { els.verifyMsg.textContent = 'Paste a token first.'; return; }
+        els.verifyMsg.textContent = 'Verifying…';
+        try {
+          await apiRequest('/auth/verify-email', { method:'POST', body: { token } });
+          els.verifyMsg.textContent = 'Verified ✅ (refreshing session…)';
+          toast('Email verified', 'ok', 1400);
+          await refreshMe(true);
+          updateCloudUI();
+        } catch (e) {
+          els.verifyMsg.textContent = `Verify failed: ${e.message}`;
+          toast('Verify failed', 'bad', 1400);
+        }
+      });
+
+      // Password reset
+      els.requestResetBtn.addEventListener('click', async () => {
+        const email = (els.resetEmail.value || '').trim();
+        els.resetReqMsg.textContent = 'Requesting…';
+        try {
+          const r = await apiRequest('/auth/request-reset', { method:'POST', body: { email } });
+          if (r.data?.dev?.resetToken && els.resetToken) els.resetToken.value = r.data.dev.resetToken;
+          els.resetReqMsg.textContent = r.data?.dev?.resetUrl ? `Dev reset link: ${r.data.dev.resetUrl}` : 'Reset link queued (check email_outbox).';
+          toast('Reset queued', 'ok', 1200);
+        } catch (e) {
+          els.resetReqMsg.textContent = `Failed: ${e.message}`;
+          toast('Reset failed', 'bad', 1400);
+        }
+      });
+
+      els.doResetBtn.addEventListener('click', async () => {
+        const token = (els.resetToken.value || '').trim();
+        const newPassword = (els.resetNewPassword.value || '');
+        els.resetDoMsg.textContent = 'Resetting…';
+        try {
+          await apiRequest('/auth/reset', { method:'POST', body: { token, newPassword } });
+          els.resetDoMsg.textContent = 'Password reset. Please login again.';
+          toast('Password reset', 'ok', 1400);
+          state.cloud.me = null;
+          await setCloudEnabled(false);
+          updateCloudUI();
+        } catch (e) {
+          els.resetDoMsg.textContent = `Failed: ${e.message}${e.detail ? ' ('+e.detail+')' : ''}`;
+          toast('Reset failed', 'bad', 1400);
+        }
+      });
+
+      });
+
+      els.logoutBtn.addEventListener('click', async () => {
+        try {
+          await apiRequest('/auth/logout', { method:'POST', body: {} });
+        } catch (_) {}
+        state.cloud.me = null;
+        await setCloudEnabled(false);
+        updateCloudUI();
+        toast('Logged out', 'ok', 1200);
+        await bootstrapProject();
+      });
+
+      els.cloudToggle.addEventListener('click', async () => {
+        // Toggle Cloud mode. Requires auth.
+        if (!state.cloud.ready) await refreshMe(true);
+        const want = !(state.cloud.enabled && state.cloud.me);
+        const ok = await setCloudEnabled(want);
+        if (ok) {
+          toast(state.cloud.enabled ? 'Cloud enabled' : 'Cloud disabled', 'ok', 1200);
+          await bootstrapProject();
+        }
+      });
+
+      els.projectsBtn.addEventListener('click', async () => {
+        await listProjects();
+        openModal(els.projectsModal);
+        els.newProjectName.focus();
+      });
+      els.closeProjectsBtn.addEventListener('click', () => closeModal(els.projectsModal));
+      els.createProjectBtn.addEventListener('click', async () => {
+        const name = sanitizeName(els.newProjectName.value || 'New Project');
+        const p = defaultProject(name);
+        const created = await storage.createProject(p);
+        els.newProjectName.value = '';
+        await listProjects();
+        await loadProjectIntoEditor(created.id);
+        closeModal(els.projectsModal);
+        toast('Project created', 'ok');
+      });
+
+      els.historyBtn.addEventListener('click', async () => {
+        await renderHistoryList();
+        openModal(els.historyModal);
+        els.snapshotLabel.focus();
+      });
+      els.closeHistoryBtn.addEventListener('click', () => closeModal(els.historyModal));
+      els.snapshotBtn.addEventListener('click', async () => {
+        await createSnapshot(els.snapshotLabel.value || '');
+        els.snapshotLabel.value = '';
+        await renderHistoryList();
+      });
+      els.deleteSnapshotsBtn.addEventListener('click', async () => {
+        if (!confirm('Delete all snapshots for this project?')) return;
+        const snaps = await listSnapshots(state.project.id);
+        for (const s of snaps) await idbDelete('snapshots', s.id);
+        await renderHistoryList();
+        toast('Project history cleared', 'ok');
+      });
+      els.diffBtn.addEventListener('click', diffTwoSnapshots);
+
+      els.consoleBtn.addEventListener('click', () => toggleConsole(true));
+      els.closeConsoleBtn.addEventListener('click', () => toggleConsole(false));
+      els.clearConsoleBtn.addEventListener('click', () => { clearConsole(); toast('Console cleared', 'ok', 900); });
+      els.copyConsoleBtn.addEventListener('click', async () => {
+        const txt = state.console.map(l => `[${new Date(l.ts).toLocaleTimeString()}] ${l.level}: ${l.msg}`).join('\n');
+        try { await navigator.clipboard.writeText(txt); toast('Console copied', 'ok', 900); } catch(_) { toast('Clipboard blocked', 'warn'); }
+      });
+
+      els.validateBtn.addEventListener('click', () => openModal(els.validateModal));
+      els.closeValidateBtn.addEventListener('click', () => closeModal(els.validateModal));
+      els.runValidateBtn.addEventListener('click', async () => {
+        setSave('ok', 'Validating…');
+        const rep = await validateProject();
+        state.lastValidateReport = rep;
+        renderValidateUI(rep);
+        toast('Validation complete', rep.counts.error ? 'bad' : rep.counts.warn ? 'warn' : 'ok', 1400);
+      });
+      els.copyValidateBtn.addEventListener('click', async () => {
+        if (!state.lastValidateReport) return;
+        const t = reportToText(state.lastValidateReport);
+        try { await navigator.clipboard.writeText(t); toast('Report copied', 'ok'); } catch(_) { toast('Clipboard blocked', 'warn'); }
+      });
+      els.exportEvidenceBtn.addEventListener('click', exportEvidencePack);
+
+      els.helpBtn.addEventListener('click', () => openModal(els.helpModal));
+      els.closeHelpBtn.addEventListener('click', () => closeModal(els.helpModal));
+      els.openProjectsFromHelpBtn.addEventListener('click', async () => {
+        closeModal(els.helpModal);
+        await listProjects();
+        openModal(els.projectsModal);
+      });
+      els.openValidateFromHelpBtn.addEventListener('click', async () => {
+        closeModal(els.helpModal);
+        openModal(els.validateModal);
+        // run immediately
+        els.runValidateBtn.click();
+      });
+
+      els.exportBtn.addEventListener('click', () => exportProjectZip(state.project));
+      els.exportToolBtn.addEventListener('click', exportToolPack);
+
+      els.importBtn.addEventListener('click', () => els.filePicker.click());
+      els.filePicker.addEventListener('change', async (e) => {
+        const f = e.target.files && e.target.files[0];
+        els.filePicker.value = '';
+        if (!f) return;
+        const name = (f.name || '').toLowerCase();
+        try {
+          if (name.endsWith('.zip')) {
+            const p = await importZipAsProject(f);
+            if (p) await loadProjectIntoEditor(p.id);
+          } else if (name.endsWith('.html') || name.endsWith('.htm') || f.type.includes('text/html')) {
+            await importHtmlToActive(f);
+          } else {
+            toast('Unsupported file type', 'warn');
+          }
+        } catch (err) {
+          toast('Import failed', 'bad', 1800);
+        }
+      });
+
+      els.resetBtn.addEventListener('click', resetProject);
+
+      els.addFileBtn.addEventListener('click', addFile);
+      els.renameFileBtn.addEventListener('click', renameActiveFile);
+      els.deleteFileBtn.addEventListener('click', deleteActiveFile);
+      els.formatBtn.addEventListener('click', formatActive);
+      els.copyBtn.addEventListener('click', copyActiveFile);
+
+      els.debounceMs.addEventListener('change', async () => {
+        const ms = clamp(Number(els.debounceMs.value || 0), 0, 5000);
+        state.project.settings.debounce = ms;
+        await persistProject('Settings saved');
+      });
+
+      els.autoToggle.addEventListener('click', async () => {
+        state.project.settings.auto = !state.project.settings.auto;
+        els.autoToggle.dataset.on = String(state.project.settings.auto);
+        await persistProject('Settings saved');
+        if (state.project.settings.auto) renderNow(true);
+      });
+
+      els.modeToggle.addEventListener('click', async () => {
+        state.project.settings.fullMode = !state.project.settings.fullMode;
+        els.modeToggle.dataset.on = String(state.project.settings.fullMode);
+        els.modeLabel.textContent = state.project.settings.fullMode ? 'Full' : 'Safe';
+        await persistProject('Settings saved');
+        renderNow(true);
+      });
+
+      els.isolationToggle.addEventListener('click', async () => {
+        state.project.settings.isolated = !state.project.settings.isolated;
+        els.isolationToggle.dataset.on = String(state.project.settings.isolated);
+        await persistProject('Settings saved');
+        renderNow(true);
+      });
+
+      els.instrumentToggle.addEventListener('click', async () => {
+        state.project.settings.instrument = !state.project.settings.instrument;
+        els.instrumentToggle.dataset.on = String(state.project.settings.instrument);
+        await persistProject('Settings saved');
+        renderNow(true);
+      });
+
+      els.networkSel.addEventListener('change', async () => {
+        state.project.settings.network = els.networkSel.value;
+        await persistProject('Settings saved');
+        renderNow(true);
+      });
+
+      els.deviceSel.addEventListener('change', async () => {
+        state.project.settings.device = els.deviceSel.value;
+        applyViewport();
+        await persistProject('Settings saved');
+      });
+
+      els.scaleSel.addEventListener('change', async () => {
+        state.project.settings.scale = els.scaleSel.value;
+        applyViewport();
+        await persistProject('Settings saved');
+      });
+
+      els.openBtn.addEventListener('click', openPreviewTab);
+      els.reloadBtn.addEventListener('click', () => renderNow(true));
+      els.renderBtn.addEventListener('click', () => renderNow(true));
+
+      // Delete all data
+      els.nukeAllBtn.addEventListener('click', async () => {
+        if (!confirm('Delete ALL local projects + snapshots? This cannot be undone.')) return;
+        await storage.clearLocalAll();
+        toast('Local data wiped', 'ok', 1600);
+        await bootstrapProject();
+        closeModal(els.projectsModal);
+      });
+
+      // ---------- App bootstrap ----------
+      const bootstrap = async () => {
+        setSave('ok', 'Starting…');
+
+        // Open DB
+        try {
+          DB.db = await idbOpen();
+        } catch (e) {
+          // Storage blocked: keep running with in-memory project (no persistence).
+          toast('IndexedDB blocked — running without persistence', 'warn', 2500);
+          DB.db = null;
+        }
+
+        // Migration (only if DB is available)
+        if (DB.db) {
+          await migrateLegacy();
+        }
+
+
+        // Cloud session + preference (works even if IndexedDB is blocked)
+        await refreshMe(true);
+        const cloudPref = await kvGet('cloudEnabled');
+        if (cloudPref && state.cloud.me) {
+          await setCloudEnabled(true);
+        } else {
+          await setCloudEnabled(false);
+        }
+
+
+        // Ensure at least one project
+        if (storage.isCloud()) {
+          await bootstrapProject();
+        } else if (DB.db) {
+          await bootstrapProject();
+        } else {
+          // In-memory mode (local-only until you sign in & enable Cloud)
+          state.project = defaultProject('Ephemeral Project');
+          els.projectPill.textContent = 'Project: ' + state.project.name + ' (no persistence)';
+          await initEditorIfNeeded();
+          renderFileTabs();
+          if (state.fallbackMode) {
+            els.fallbackTextarea.value = getFile('index.html').content;
+            updateStats();
+          } else {
+            // Create models
+            const monaco = window.monaco;
+            for (const f of state.project.files) {
+              const model = monaco.editor.createModel(String(f.content || ''), f.language || inferLang(f.path));
+              state.modelByPath.set(f.path, model);
+            }
+            state.editor.setModel(state.modelByPath.get('index.html'));
+            state.editor.onDidChangeModelContent(() => {
+              applyEditorToProject();
+              scheduleRender();
+              updateStats();
+            });
+          }
+          applyViewport();
+          renderNow(true);
+        }
+
+        setSave('ok', 'Ready');
+      };
+
+      bootstrap().then(() => handleMagicLinks()).catch((e) => {
+        setSave('bad', 'Startup failed');
+        toast('Startup failed', 'bad', 2200);
+        // Fallback: show textarea editor anyway
+        state.fallbackMode = true;
+        els.monacoLoading.style.display = 'none';
+        els.fallbackEditor.style.display = 'flex';
+        els.fallbackTextarea.value = TEMPLATES['index.html'];
+        els.fallbackTextarea.oninput = () => updateStats();
+        updateStats();
+      });
+
+    })();
+  </script>
+</body>
+</html>

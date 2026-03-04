@@ -42,8 +42,19 @@ function ensureScript(src, callback){
 async function injectPartial(selector, url, position){
   if (!document || !document.body) return;
   try {
-    const res = await fetch(url, { cache: 'no-cache' });
+    const freshUrl = `${url}${url.includes('?') ? '&' : '?'}v=20260303`;
+    const fetchOnce = (targetUrl) => fetch(targetUrl, {
+      cache: 'reload',
+      headers: { 'cache-control': 'no-cache, no-store, must-revalidate' }
+    });
+
+    let res = await fetchOnce(freshUrl);
+    if (!res.ok) {
+      const fallbackUrl = `${freshUrl}&r=${Date.now()}`;
+      res = await fetchOnce(fallbackUrl);
+    }
     if (!res.ok) return;
+
     const html = await res.text();
     const wrapper = document.createElement('div');
     wrapper.innerHTML = html.trim();
@@ -57,6 +68,12 @@ async function injectPartial(selector, url, position){
       document.body.prepend(node);
     } else {
       document.body.appendChild(node);
+    }
+
+    if (node.matches('nav.main-nav')) {
+      document.querySelectorAll('nav.main-nav').forEach((navEl, index) => {
+        if (index > 0) navEl.remove();
+      });
     }
 
     // Re-bind nav + mega nav when header is swapped in
@@ -93,7 +110,7 @@ async function injectPartial(selector, url, position){
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function initPartials(){
   // Ensure pages using partial headers always have the nav style/runtime stack.
   ensureStyleSheet('/css/style.css');
   ensureScript('/js/main.js');
@@ -105,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(bgScript);
   }
 
-  injectPartial('nav.main-nav', '/partials/header.html', 'start');
+  injectPartial('nav.main-nav, #siteHeaderMount', '/partials/header.html', 'start');
   injectPartial('footer', '/partials/footer.html', 'end');
   // Ensure admin menu floating link exists on pages that include partials.js
   if (!document.getElementById('adminMenuFloatLink')) {
@@ -117,4 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
     a.style.display = 'block';
     document.body.appendChild(a);
   }
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPartials);
+} else {
+  initPartials();
+}

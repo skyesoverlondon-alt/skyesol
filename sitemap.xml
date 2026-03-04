@@ -3283,7 +3283,79 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://skyesol.netlify.app/Services/kAIxUGatedPlatform.html</loc>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/index.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUAgentOpsCommandCenter.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUClientPortalOrchestrator.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUClientSuccessPilot.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUComplianceControlTower.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUExecutiveSignalsBoard.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUGatedPlatform.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUKnowledgeVaultGuardrails.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUProposalOpsEngine.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxURevenueIntelligenceGrid.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUIncidentResponseGrid.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUWorkflowAutomationLanes.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/kAIxU-Powered-Platforms/kAIxUGrowthFunnelOrchestrator.html</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -3433,13 +3505,31 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://skyesol.netlify.app/Services/WebBuilds.html</loc>
+    <loc>https://skyesol.netlify.app/Services/WebBuilds/ExecutiveAuthority.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/WebBuilds/ExecutiveWebBuilds.html</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://skyesol.netlify.app/Services/WebBuilds/index.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/WebBuilds/WebBuilds.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/WebBuilds/Skye%20Ops%20Beacon</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -3839,5 +3929,53 @@
     <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/App%20Vault-Enterprise%20App%20Creation/index.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/Lane-Vault%21/index.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/Lane-Vault%21/intake-lane.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/Lane-Vault%21/front-office-lane.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/Lane-Vault%21/delivery-lane.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/Lane-Vault%21/client-portal-lane.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/Lane-Vault%21/contractor-lane.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/Lane-Vault%21/reporting-lane.html</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

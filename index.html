@@ -39,7 +39,7 @@
     <div class="nav-dropdown" data-type="services">
       <button type="button" class="dropdown-toggle">Services</button>
       <div class="dropdown-menu">
-        <a href="/Services/WebBuilds.html">Web Builds</a>
+        <a href="/Services/WebBuilds/WebBuilds.html">Web Builds</a>
         <a href="/Services/ai-data-apps.html">AI &amp; Data Apps</a>
         <a href="/Services/portals-hubs.html">Portals &amp; Hubs</a>
         <a href="/Services/ecommerce-payments.html">Ecommerce &amp; Payments</a>
@@ -90,6 +90,12 @@
       <div class="hero-tagline">SKYE·OPS // An Intelligence Ecosystem</div>
       <h1>Skyes Over<br><span>London LC</span></h1>
       <p class="hero-subtitle">Executive Operator · Systems Builder · AI Product Engineer — governed AI systems, multi-state operations, and execution-first leadership across the SOLEnterprises ecosystem.</p>
+      <div class="hero-search-wrap">
+        <form class="hero-search" id="homeSearchForm" role="search" aria-label="Search SOLEnterprises site">
+          <input id="homeSearchInput" type="search" name="q" placeholder="Search anything across SOLEnterprises…" autocomplete="off" />
+          <button type="submit" class="btn-gold">Search</button>
+        </form>
+      </div>
       <div class="hero-cta-row">
         <a href="about.html" class="btn-gold">Meet the Founder</a>
         <a href="/Platforms-Apps-Infrastructure/index.html" class="btn-gold">All Apps &amp; Platforms</a>
@@ -170,6 +176,24 @@
     <a href="credibility.html" class="btn-outline">Credibility Archive</a>
   </div>
   <div style="text-align:center;margin-top:70px;padding:40px 0" class="reveal"><div class="floating-glow-fire" style="display:inline-block"><img src="https://cdn1.sharemyimage.com/2026/02/13/ChatGPT-Image-Feb-12-2026-05_54_17-PM.png" alt="SOL Tiger" style="height:300px;width:auto;max-width:90vw;object-fit:contain"></div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURED EDITORIAL -->
+<section class="content-section">
+  <div class="section-label reveal">Featured Editorial</div>
+  <div class="section-title reveal">WebPile Pro — Monaco Editor</div>
+  <div class="section-desc reveal">A short operator-grade brief on why Monaco-first browser IDE workflows outperform generic editor stacks in production delivery.</div>
+  <div class="card-grid-3 stagger-children">
+    <article class="platform-card reveal" style="grid-column:span 3;max-width:900px">
+      <div class="card-icon">🧩</div>
+      <h3>Patch-Driven Monaco Workflows</h3>
+      <div class="card-type">Editorial · Apps We Engineer</div>
+      <p>From diff clarity to governance readiness, this piece explains why Monaco is the right editing core for high-signal web IDE execution.</p>
+      <a href="/Blogs/Editorials/WebPile%20Pro%E2%80%94Monaco%20Editor.html" class="card-link">Read editorial →</a>
+    </article>
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -438,6 +462,22 @@
   <div id="az-ops-glow">
     <a href="/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-01-phoenix-enterprise-systems-axon-godaddy-banner.html" title="Phoenix AZ Ops Editorials">🌵 Phoenix AZ Ops</a>
   </div>
+  <script>
+  (function(){
+    const form = document.getElementById('homeSearchForm');
+    const input = document.getElementById('homeSearchInput');
+    if (!form || !input) return;
+
+    form.addEventListener('submit', function(event){
+      event.preventDefault();
+      const query = (input.value || '').trim();
+      if (!query) return;
+      const host = (window.location.hostname || 'solenterprises.org').replace(/^www\./, '');
+      const url = 'https://www.google.com/search?q=' + encodeURIComponent('site:' + host + ' ' + query);
+      window.open(url, '_blank', 'noopener');
+    });
+  })();
+  </script>
   <script src="/js/partials.js"></script>
 </body>
 <!-- Admin triggers moved to js/admin-menu-triggers.js -->

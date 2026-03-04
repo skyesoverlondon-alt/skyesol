@@ -1,0 +1,49 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# API router
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api"
+  status = 200
+  force = true
+
+# SPA fallback (so deep links don't 404)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+
+# Security headers (Fortune-500 baseline)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; connect-src 'self'; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
+
+
+# Environment split (set different Neon DB URLs in Netlify UI per context)
+[context.production.environment]
+  APP_ENV = "production"
+
+[context.branch-deploy.environment]
+  # Branch deploys (e.g., staging branch)
+  APP_ENV = "staging"
+  RATE_LIMIT_MODE = "db"
+
+[context.deploy-preview.environment]
+  # PR previews
+  APP_ENV = "preview"
+  RATE_LIMIT_MODE = "memory"
+  REQUIRE_EMAIL_VERIFICATION = "false"
+
+
+[functions."siem_deliver"]
+  schedule = "*/5 * * * *"

@@ -49,7 +49,7 @@ function attachNav(){
     { name: 'SkyeOps', href: '/SkyeOps/index.html', match: /SkyeOps/i }
   ];
   const servicePages = [
-    { name: 'Web Builds', href: '/Services/WebBuilds.html', match: /WebBuilds/i },
+    { name: 'Web Builds', href: '/Services/WebBuilds/WebBuilds.html', match: /WebBuilds/i },
     { name: 'AI & Data Apps', href: '/Services/ai-data-apps.html', match: /ai-data-apps/i },
     { name: 'Portals & Hubs', href: '/Services/portals-hubs.html', match: /portals-hubs/i },
     { name: 'Ecommerce & Payments', href: '/Services/ecommerce-payments.html', match: /ecommerce-payments/i },
@@ -314,57 +314,189 @@ attachMegaNav();
 // ── Mega Nav ───────────────────────────────────────
 function attachMegaNav(){
   const menuBtn   = document.getElementById('menuBtn');
-  const megaNav   = document.getElementById('megaNav');
-  const megaClose = document.getElementById('megaNavClose');
-  if (!menuBtn || !megaNav) return;
-  if (menuBtn.dataset.megaBound === 'true') return; // avoid double-binding
-  menuBtn.dataset.megaBound = 'true';
+  if (!menuBtn) return;
 
-  const servicePages = [
-    { name: 'Web Builds', href: '/Services/WebBuilds.html' },
-    { name: 'AI & Data Apps', href: '/Services/ai-data-apps.html' },
-    { name: 'Portals & Hubs', href: '/Services/portals-hubs.html' },
-    { name: 'Ecommerce & Payments', href: '/Services/ecommerce-payments.html' },
-    { name: 'Intake & Routing', href: '/Services/intake-routing.html' },
-    { name: 'Trust Surfaces', href: '/Services/trust-surfaces.html' }
-  ];
-  const grid = megaNav.querySelector('.mega-nav-grid');
-  if (grid) {
-    const cols = Array.from(grid.querySelectorAll('.mega-nav-col'));
-    let servicesCol = cols.find(col => {
-      const label = col.querySelector('.mega-nav-label');
-      return label && label.textContent.trim().toLowerCase() === 'services';
-    });
-    const platformCol = cols.find(col => {
-      const label = col.querySelector('.mega-nav-label');
-      return label && label.textContent.trim().toLowerCase() === 'platform';
-    });
-    if (!servicesCol) {
-      servicesCol = document.createElement('div');
-      servicesCol.className = 'mega-nav-col';
-      servicesCol.setAttribute('data-col', 'services');
-      const label = document.createElement('div');
-      label.className = 'mega-nav-label';
-      label.textContent = 'Services';
-      servicesCol.appendChild(label);
-      const insertBeforeNode = platformCol || null;
-      if (insertBeforeNode) {
-        grid.insertBefore(servicesCol, insertBeforeNode);
-      } else {
-        grid.appendChild(servicesCol);
-      }
-    }
-    const existingTexts = new Set(Array.from(servicesCol.querySelectorAll('a')).map(a => a.textContent.trim()));
-    servicePages.forEach(page => {
-      if (existingTexts.has(page.name)) return;
-      const anchor = document.createElement('a');
-      anchor.textContent = page.name;
-      anchor.href = page.href;
-      servicesCol.appendChild(anchor);
-    });
+  let megaNav = document.getElementById('megaNav');
+  if (!megaNav) {
+    megaNav = document.createElement('div');
+    megaNav.id = 'megaNav';
+    megaNav.className = 'mega-nav';
+    megaNav.setAttribute('role', 'dialog');
+    megaNav.setAttribute('aria-label', 'Site navigation');
+    megaNav.innerHTML = '<button class="mega-nav-close" id="megaNavClose">&#x2715; CLOSE</button><div class="mega-nav-grid"></div>';
+    document.body.appendChild(megaNav);
   }
+
+  let megaClose = megaNav.querySelector('#megaNavClose');
+  if (!megaClose) {
+    megaClose = document.createElement('button');
+    megaClose.className = 'mega-nav-close';
+    megaClose.id = 'megaNavClose';
+    megaClose.innerHTML = '&#x2715; CLOSE';
+    megaNav.prepend(megaClose);
+  }
+
+  let grid = megaNav.querySelector('.mega-nav-grid');
+  if (!grid) {
+    grid = document.createElement('div');
+    grid.className = 'mega-nav-grid';
+    megaNav.appendChild(grid);
+  }
+
+  function normalizeHref(href) {
+    if (!href) return null;
+    try {
+      const parsed = new URL(href, window.location.origin);
+      return parsed.pathname + (parsed.search || '');
+    } catch {
+      return href;
+    }
+  }
+
+  function titleFromPath(pathname) {
+    if (!pathname || pathname === '/') return 'Home';
+    const clean = decodeURIComponent(pathname).replace(/\/+$/, '');
+    const bits = clean.split('/').filter(Boolean);
+    if (!bits.length) return 'Home';
+    let tail = bits[bits.length - 1];
+    if (/^index\.html?$/i.test(tail) && bits.length > 1) {
+      tail = bits[bits.length - 2];
+    }
+    return tail.replace(/\.html?$/i, '').replace(/[-_]+/g, ' ').trim() || 'Page';
+  }
+
+  function pushUnique(map, folder, item) {
+    if (!folder || !item || !item.href) return;
+    const key = folder.trim() || 'Root';
+    const list = map.get(key) || [];
+    if (!list.some(existing => existing.href === item.href)) {
+      list.push(item);
+      map.set(key, list);
+    }
+  }
+
+  function collectExistingGroups() {
+    const groups = new Map();
+    const cols = Array.from(grid.querySelectorAll('.mega-nav-col'));
+    cols.forEach(col => {
+      let folder = null;
+      Array.from(col.children).forEach(node => {
+        if (node.classList && node.classList.contains('mega-nav-label')) {
+          folder = node.textContent.trim() || folder || 'Links';
+          if (!groups.has(folder)) groups.set(folder, []);
+          return;
+        }
+        if (node.tagName === 'A') {
+          const href = normalizeHref(node.getAttribute('href'));
+          const title = node.textContent.trim() || titleFromPath(href || '/');
+          pushUnique(groups, folder || 'Links', { title, href });
+        }
+      });
+    });
+    return groups;
+  }
+
+  function sortGroups(groups) {
+    const entries = Array.from(groups.entries()).map(([folder, links]) => {
+      const sortedLinks = links.slice().sort((left, right) => left.title.localeCompare(right.title));
+      return [folder, sortedLinks];
+    });
+    entries.sort((left, right) => {
+      if (left[0] === 'Root') return -1;
+      if (right[0] === 'Root') return 1;
+      return left[0].localeCompare(right[0]);
+    });
+    return entries;
+  }
+
+  function renderGroups(groups) {
+    const sorted = sortGroups(groups);
+    grid.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+    sorted.forEach(([folder, links], index) => {
+      const col = document.createElement('div');
+      col.className = 'mega-nav-col mega-folder';
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'mega-folder-toggle';
+      toggle.setAttribute('aria-expanded', index === 0 ? 'true' : 'false');
+      toggle.innerHTML = '<span class="mega-folder-name"></span><span class="mega-folder-count"></span>';
+      toggle.querySelector('.mega-folder-name').textContent = folder;
+      toggle.querySelector('.mega-folder-count').textContent = String(links.length);
+
+      const list = document.createElement('div');
+      list.className = 'mega-folder-links';
+      links.forEach(link => {
+        const anchor = document.createElement('a');
+        anchor.href = link.href;
+        anchor.textContent = link.title;
+        list.appendChild(anchor);
+      });
+
+      if (index === 0) col.classList.add('expanded');
+      toggle.addEventListener('click', () => {
+        const expanded = col.classList.toggle('expanded');
+        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+
+      col.appendChild(toggle);
+      col.appendChild(list);
+      fragment.appendChild(col);
+    });
+    grid.appendChild(fragment);
+  }
+
+  async function hydrateFromSitemap() {
+    let xmlText = '';
+    try {
+      const response = await fetch('/sitemap.xml', { cache: 'no-cache' });
+      if (!response.ok) throw new Error('sitemap unavailable');
+      xmlText = await response.text();
+    } catch {
+      return;
+    }
+
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(xmlText, 'application/xml');
+    const locs = Array.from(xml.querySelectorAll('url > loc'));
+    if (!locs.length) return;
+
+    const groups = new Map();
+    locs.forEach(loc => {
+      const raw = (loc.textContent || '').trim();
+      if (!raw) return;
+      let url;
+      try {
+        url = new URL(raw, window.location.origin);
+      } catch {
+        return;
+      }
+      const path = url.pathname || '/';
+      const bits = decodeURIComponent(path).replace(/^\/+/, '').split('/').filter(Boolean);
+      const folder = bits.length ? bits[0] : 'Root';
+      const href = normalizeHref(path + (url.search || ''));
+      const title = titleFromPath(path);
+      pushUnique(groups, folder, { title, href });
+    });
+
+    if (!groups.size) return;
+    renderGroups(groups);
+  }
+
+  if (megaNav.dataset.built !== 'true') {
+    const existingGroups = collectExistingGroups();
+    if (existingGroups.size) {
+      renderGroups(existingGroups);
+    }
+    megaNav.dataset.built = 'true';
+    hydrateFromSitemap();
+  }
+
   function openNav()  { megaNav.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
   function closeNav() { megaNav.style.display = 'none';  document.body.style.overflow = ''; }
+
+  if (menuBtn.dataset.megaBound === 'true') return; // avoid double-binding
+  menuBtn.dataset.megaBound = 'true';
   menuBtn.addEventListener('click', openNav);
   if (megaClose) megaClose.addEventListener('click', closeNav);
   megaNav.addEventListener('click', function(e){ if (e.target === megaNav) closeNav(); });

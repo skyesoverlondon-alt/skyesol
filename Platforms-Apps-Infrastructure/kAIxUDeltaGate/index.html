@@ -150,6 +150,25 @@
     .btn:active{ transform: translateY(1px) scale(.99) }
     .btn:hover{ filter: drop-shadow(0 0 18px rgba(184,107,255,.25)) }
 
+    .btn-neon{
+      background: linear-gradient(90deg, rgba(59,214,255,.30), rgba(184,107,255,.34), rgba(255,213,90,.26));
+      border: 1px solid rgba(59,214,255,.75);
+      color: #ffffff;
+      box-shadow:
+        0 0 12px rgba(59,214,255,.75),
+        0 0 24px rgba(184,107,255,.45),
+        0 0 42px rgba(59,214,255,.30),
+        0 18px 50px rgba(0,0,0,.50);
+      animation: neonPulse 2s ease-in-out infinite;
+    }
+    .btn-neon:hover{
+      filter: drop-shadow(0 0 14px rgba(59,214,255,.90)) drop-shadow(0 0 28px rgba(184,107,255,.55));
+    }
+    @keyframes neonPulse{
+      0%,100%{ box-shadow: 0 0 10px rgba(59,214,255,.60), 0 0 22px rgba(184,107,255,.38), 0 0 34px rgba(59,214,255,.22), 0 16px 46px rgba(0,0,0,.48); }
+      50%{ box-shadow: 0 0 14px rgba(59,214,255,.90), 0 0 30px rgba(184,107,255,.58), 0 0 48px rgba(59,214,255,.30), 0 20px 56px rgba(0,0,0,.52); }
+    }
+
     .prewrap{ background: rgba(0,0,0,.33); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); overflow:hidden; }
     .prehead{ display:flex; justify-content:space-between; align-items:center; padding: 10px 12px; background: rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.10); }
     .prehead b{ font-size: 12px; letter-spacing:.2px }
@@ -221,6 +240,7 @@
           </div>
 
           <div class="cta">
+            <a class="btn btn-neon" href="https://kaixu67.netlify.app/" target="_blank" rel="noopener">Launch Delta Gate Live</a>
             <a class="btn" href="#pdf">Open Embedded PDF</a>
             <a class="btn secondary" href="kAIxu_Gateway_Implementation_Directives_2026.pdf" target="_blank" rel="noopener">Open PDF (New Tab)</a>
             <button class="btn secondary" id="copyGate">Copy Gateway URL</button>

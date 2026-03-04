@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "slo": [
+    {
+      "name": "api_availability",
+      "target": 0.9995,
+      "window_days": 30
+    },
+    {
+      "name": "auth_success_rate",
+      "target": 0.999,
+      "window_days": 30
+    },
+    {
+      "name": "siem_delivery_success",
+      "target": 0.999,
+      "window_days": 30
+    }
+  ]
+}

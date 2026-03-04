@@ -1,0 +1,33 @@
+{
+  "name": "webpile-pro-f500-neon",
+  "private": true,
+  "type": "module",
+  "version": "3.4.0",
+  "description": "WebPile Pro Enterprise \u2014 Fortune 500 Neon-backed dev tool (Netlify Functions + Neon Postgres)",
+  "scripts": {
+    "dev": "echo \"Deploy via Netlify. For local dev use netlify dev if installed.\"",
+    "check": "node --check netlify/functions/api.mjs",
+    "test": "node --test",
+    "sbom": "node tools/sbom.mjs",
+    "audit:high": "npm audit --audit-level=high",
+    "check:syntax": "node --check netlify/functions/api.mjs",
+    "sbom:gen": "node tools/sbom.mjs",
+    "sbom:sign": "node tools/sbom-sign.mjs",
+    "sbom:verify": "node tools/sbom-verify.mjs",
+    "ci:gate": "npm run check:syntax && npm run test && npm run sbom:gen && node tools/ci-sbom-sign.mjs",
+    "test:coverage": "node --test --experimental-test-coverage",
+    "release:bundle": "node tools/release-bundle.mjs",
+    "release:sign": "node tools/release-sign.mjs",
+    "release:verify": "node tools/release-verify.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "0.9.5",
+    "bcryptjs": "2.4.3",
+    "cookie": "0.6.0",
+    "jsonwebtoken": "9.0.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.9.2"
+}

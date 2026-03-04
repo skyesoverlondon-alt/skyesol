@@ -6,7 +6,7 @@
    - API calls (/.netlify/)       → Network Only
 ═══════════════════════════════════════════ */
 
-const CACHE_NAME = 'sol-v2';
+const CACHE_NAME = 'sol-v3';
 const OFFLINE_URL = '/404.html';
 
 const PRECACHE = [
@@ -28,8 +28,11 @@ const PRECACHE = [
   '/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png',
   '/css/style.css',
   '/js/main.js',
+  '/js/partials.js',
   '/js/growth.js',
   '/js/three-bg.js',
+  '/partials/header.html',
+  '/partials/footer.html',
   '/SkyeDocx/homepage.html',
 ];
 

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Client Portal Lane — Customer Vault | Skyes Over London LC</title>
+  <meta name="title" content="Client Portal Lane — Customer Vault | Skyes Over London LC" />
+  <meta name="description" content="A branded customer portal where clients log in to request service, upload documents, view status updates, and communicate—without flooding your phone lines." />
+  <meta name="author" content="Skyes Over London LC" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#05050b" />
+  <style>
+    :root{
+      --bg:#05050b; --text:rgba(255,255,255,.92); --muted:rgba(255,255,255,.72); --muted2:rgba(255,255,255,.56);
+      --gold:#ffd36a; --purple:#a243ff; --cyan:#27f2ff;
+      --display:'Playfair Display', Georgia, serif; --body:'Instrument Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --radius:22px; --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --ease-out-expo:cubic-bezier(0.16,1,0.3,1); --ease-out-quart:cubic-bezier(0.25,1,0.5,1);
+      --max:1180px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{font-family:var(--body); background:var(--bg); color:var(--text); overflow-x:hidden;}
+    body.locked{overflow:hidden; height:100vh;}
+
+    body::before{
+      content:""; position:fixed; inset:0; z-index:-2;
+      background:
+        radial-gradient(ellipse at 18% 22%, rgba(255,211,106,.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 82% 28%, rgba(162,67,255,.11) 0%, transparent 58%),
+        radial-gradient(ellipse at 50% 85%, rgba(39,242,255,.07) 0%, transparent 62%),
+        radial-gradient(circle at 30% 60%, rgba(255,255,255,.06) 0%, transparent 40%),
+        radial-gradient(circle at 70% 40%, rgba(255,255,255,.05) 0%, transparent 42%),
+        linear-gradient(180deg, #05050b 0%, #070712 40%, #05050b 100%);
+      filter:saturate(1.12);
+      animation: ambience 10s ease-in-out infinite;
+    }
+    @keyframes ambience{0%,100%{opacity:.92}50%{opacity:1}}
+    body::after{
+      content:""; position:fixed; inset:-40px; z-index:-3;
+      background-image: radial-gradient(rgba(255,255,255,.18) 1px, transparent 1px);
+      background-size: 46px 46px; opacity:.06; transform:rotate(6deg); pointer-events:none;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .nav{display:none !important;}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px;}
+
+    /* kAIxU logo (no container) */
+    .kaixu-logo{
+      position:fixed; top:18px; left:18px; width:88px; height:auto; z-index:9999;
+      filter: drop-shadow(0 0 14px rgba(255,211,106,.22)) drop-shadow(0 0 18px rgba(39,242,255,.14)) drop-shadow(0 0 22px rgba(162,67,255,.12));
+      animation: kaixuFloat 3.2s ease-in-out infinite;
+      user-select:none; -webkit-user-drag:none; opacity:.96;
+    }
+    @keyframes kaixuFloat{0%,100%{transform:translateY(0) scale(1); opacity:.92;}50%{transform:translateY(-3px) scale(1.02); opacity:1;}}
+
+    /* cinematic intro */
+    .cinematic-opener{
+      position:fixed; inset:0; z-index:10000;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      background:#05050b; pointer-events:none;
+      animation: openerFadeOut 1s var(--ease-out-expo) 4.6s forwards;
+    }
+    .cinematic-opener::before{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 22% 52%, rgba(255,211,106,.14) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 52%, rgba(162,67,255,.16) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 75%, rgba(39,242,255,.08) 0%, transparent 60%);
+      animation: gradientPulse 4s ease-in-out infinite;
+    }
+    @keyframes gradientPulse{0%,100%{opacity:.55}50%{opacity:1}}
+    .opener-content{position:relative; z-index:2; text-align:center; padding:2rem; max-width:980px;}
+    .opener-line{overflow:hidden;}
+    .opener-text{
+      font-family:var(--mono); color:rgba(255,255,255,.72);
+      font-size:clamp(.9rem,2.6vw,1.15rem);
+      letter-spacing:.28em; text-transform:uppercase;
+      opacity:0; transform:translateY(100%);
+      animation:slideUp 1s var(--ease-out-expo) .5s forwards;
+    }
+    .opener-title{
+      font-family:var(--display); color:var(--gold);
+      font-size:clamp(2.2rem,7.8vw,5.2rem);
+      font-weight:700; line-height:1.05; margin:1.25rem 0;
+      opacity:0; transform:translateY(100%);
+      animation:slideUp 1.2s var(--ease-out-expo) 1s forwards;
+    }
+    .opener-divider{
+      width:0; height:1px;
+      background:linear-gradient(90deg, transparent, var(--cyan), var(--gold), var(--purple), transparent);
+      margin:1.8rem auto;
+      animation:expandLine 1.5s var(--ease-out-expo) 1.5s forwards;
+      opacity:.9;
+    }
+    .opener-subtitle{
+      font-family:var(--body); color:rgba(255,255,255,.70);
+      font-size:clamp(.95rem,2vw,1.1rem);
+      letter-spacing:.04em;
+      opacity:0; animation:fadeIn 1.2s var(--ease-out-expo) 2.0s forwards;
+      max-width:78ch; margin:0 auto; line-height:1.85;
+    }
+    .opener-logo{margin-top:2.2rem; opacity:0; animation:fadeIn 1s var(--ease-out-expo) 2.45s forwards; display:flex; justify-content:center;}
+    .opener-logo img{
+      width:176px; height:auto;
+      filter: drop-shadow(0 0 16px rgba(255,211,106,.18)) drop-shadow(0 0 18px rgba(39,242,255,.10));
+      animation: pulseLogo 2.8s ease-in-out infinite;
+      user-select:none; -webkit-user-drag:none;
+    }
+    @keyframes pulseLogo{0%,100%{transform:translateY(0) scale(1); opacity:.92;}50%{transform:translateY(-2px) scale(1.02); opacity:1;}}
+    .opener-company{
+      font-family:var(--mono); color:rgba(255,255,255,.44);
+      font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; margin-top:1rem;
+      opacity:0; animation:fadeIn 1s var(--ease-out-expo) 3.0s forwards; line-height:1.6;
+    }
+    @keyframes slideUp{to{opacity:1; transform:translateY(0)}}
+    @keyframes fadeIn{to{opacity:1}}
+    @keyframes expandLine{to{width:240px}}
+    @keyframes openerFadeOut{to{opacity:0; visibility:hidden}}
+    .progress-bar{position:fixed; bottom:40px; left:50%; transform:translateX(-50%); width:240px; height:2px;
+      background:rgba(255,255,255,.10); border-radius:2px; overflow:hidden; z-index:10001; animation:fadeOut .5s var(--ease-out-expo) 4.0s forwards;
+    }
+    .progress-fill{height:100%; width:0; background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      animation:progressFill 4s var(--ease-out-quart) forwards; box-shadow:0 0 18px rgba(39,242,255,.28);
+    }
+    @keyframes progressFill{0%{width:0}100%{width:100%}}
+    @keyframes fadeOut{to{opacity:0}}
+
+    /* nav */
+    .nav{position:sticky; top:0; z-index:80; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      background:linear-gradient(180deg, rgba(5,5,11,.78), rgba(5,5,11,.42)); border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0;}
+    .brand{display:flex; align-items:center; gap:12px; padding-left:104px; min-height:44px;}
+    .brand .title{font-family:var(--display); font-size:1.12rem; font-weight:700; color:var(--gold); line-height:1; letter-spacing:.01em;}
+    .brand .sub{font-family:var(--mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted2); margin-top:6px; line-height:1.4;}
+    .menu{display:flex; gap:14px; align-items:center;}
+    .menu a{font-family:var(--mono); font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.76);
+      padding:10px 10px; border-radius:12px; transition:transform .2s var(--ease-out-quart), background .2s var(--ease-out-quart), color .2s var(--ease-out-quart);
+    }
+    .menu a:hover{background:rgba(255,255,255,.06); color:rgba(255,255,255,.92); transform:translateY(-1px);}
+    .cta{display:flex; gap:10px; align-items:center;}
+    .btn{border:1px solid rgba(255,255,255,.14); background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04)); color:rgba(255,255,255,.92);
+      border-radius:16px; padding:11px 14px; font-family:var(--mono); font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;
+      transition:transform .2s var(--ease-out-quart), border-color .2s var(--ease-out-quart), box-shadow .2s var(--ease-out-quart);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25); display:inline-flex; align-items:center; gap:10px; white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.22);}
+    .btn.primary{border:1px solid rgba(255,211,106,.35); background:linear-gradient(90deg, rgba(39,242,255,.16), rgba(255,211,106,.18), rgba(162,67,255,.16)); box-shadow: 0 14px 45px rgba(0,0,0,.35);}
+    .btn .dot{width:8px;height:8px;border-radius:999px; background:var(--cyan); box-shadow:0 0 16px rgba(39,242,255,.45);}
+    .burger{display:none; width:44px;height:44px; border-radius:16px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:rgba(255,255,255,.88); cursor:pointer;}
+    .mobile{display:none; padding:12px 0 16px; border-top:1px solid rgba(255,255,255,.08);}
+    .mobile a{display:block; padding:12px 10px; border-radius:14px; font-family:var(--mono); font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.80);}
+    .mobile a:hover{background:rgba(255,255,255,.06);}
+    .nav.open .mobile{display:block;}
+
+    /* layout */
+    main{padding-bottom:22px;}
+    section{padding:54px 0;}
+    .hero{padding:74px 0 38px;}
+    .hero-grid{display:grid; grid-template-columns: 1.25fr .75fr; gap:18px; align-items:stretch;}
+    .card{border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10); box-shadow: var(--shadow); padding:26px; position:relative; overflow:hidden;
+    }
+    .card::before{content:""; position:absolute; inset:-60px;
+      background: radial-gradient(circle at 18% 22%, rgba(39,242,255,.10) 0%, transparent 45%),
+                 radial-gradient(circle at 70% 40%, rgba(255,211,106,.11) 0%, transparent 46%),
+                 radial-gradient(circle at 55% 80%, rgba(162,67,255,.10) 0%, transparent 52%);
+      opacity:.75; filter: blur(14px); pointer-events:none;
+    }
+    .card > *{position:relative; z-index:2;}
+    .kicker{font-family:var(--mono); font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.70);
+      display:flex; gap:10px; align-items:center;
+    }
+    .kicker .spark{width:10px;height:10px;border-radius:999px; background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple)); box-shadow:0 0 22px rgba(39,242,255,.28);}
+    h1,h2,h3,h4{font-family:var(--display);}
+    .hero h1{color:var(--gold); font-size:clamp(2.3rem,5.4vw,3.6rem); line-height:1.04; margin:14px 0 12px; letter-spacing:.01em;}
+    .lead{color:rgba(255,255,255,.74); font-size:1.04rem; line-height:1.9; max-width:78ch;}
+    .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; align-items:center;}
+    .pill-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;}
+    .pill{border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.04); border-radius:999px; padding:10px 12px;
+      font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.70);
+    }
+    .aside h3{color:rgba(255,255,255,.90); font-size:1.3rem; margin-bottom:10px;}
+    .aside p{color:rgba(255,255,255,.72); line-height:1.9; font-size:.98rem;}
+    .aside .mini{margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,.10); color:rgba(255,255,255,.62);
+      font-family:var(--mono); font-size:.75rem; letter-spacing:.10em; text-transform:uppercase; line-height:1.7;
+    }
+
+    .section-title{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:16px;}
+    .section-title h2{font-size:2.05rem; color:var(--gold); letter-spacing:.01em; line-height:1.1;}
+    .section-title p{color:rgba(255,255,255,.62); font-family:var(--mono); font-size:.74rem; letter-spacing:.16em; text-transform:uppercase;
+      line-height:1.5; max-width:60ch; text-align:right;
+    }
+    .divider{height:1px; background:linear-gradient(90deg, transparent, rgba(39,242,255,.35), rgba(255,211,106,.35), rgba(162,67,255,.35), transparent);
+      opacity:.7; margin:18px 0 0;
+    }
+
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:16px;}
+    .span-6{grid-column: span 6;}
+    .span-12{grid-column: span 12;}
+    .block{border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10); box-shadow: 0 12px 40px rgba(0,0,0,.35); padding:22px;
+    }
+    .block h3{font-size:1.55rem; color:rgba(255,255,255,.94); margin-bottom:8px;}
+    .block p{color:rgba(255,255,255,.72); line-height:1.9; font-size:1rem;}
+    .quote{margin-top:14px; padding:16px 16px; border-radius:18px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.03);
+      color:rgba(255,255,255,.78); line-height:1.9; font-size:1.02rem;
+    }
+    .quote b{font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.62); display:block;
+      margin-bottom:8px; line-height:1.5;
+    }
+    .list{margin-top:14px; display:grid; gap:10px;}
+    .li{display:flex; gap:10px; align-items:flex-start; padding:12px; border-radius:16px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08);}
+    .li .icon{width:10px;height:10px;border-radius:999px; margin-top:6px; background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      box-shadow:0 0 18px rgba(39,242,255,.24); flex:0 0 auto;
+    }
+    .li b{font-family:var(--mono); font-size:.80rem; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.88); display:block;
+      margin-bottom:2px; line-height:1.45;
+    }
+    .li span{color:rgba(255,255,255,.70); line-height:1.8; display:block; font-size:.98rem;}
+
+    .pricing{display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-top:14px;}
+    .pkg{border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10); padding:22px; box-shadow: 0 14px 48px rgba(0,0,0,.38); position:relative; overflow:hidden;
+    }
+    .pkg.featured{border-color: rgba(255,211,106,.28); box-shadow: 0 18px 60px rgba(0,0,0,.45);}
+    .pkg .tag{display:inline-flex; align-items:center; gap:10px; border-radius:999px; padding:10px 12px; border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04); font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.74);
+      line-height:1.4;
+    }
+    .pkg h4{margin:14px 0 8px; font-size:1.55rem; color:rgba(255,255,255,.94); line-height:1.15;}
+    .pkg .amount{font-family:var(--display); font-size:2.05rem; color:var(--gold); letter-spacing:.01em; margin:10px 0 8px; line-height:1.05;}
+    .pkg .sub{color:rgba(255,255,255,.72); line-height:1.85; font-size:1rem; margin-bottom:12px;}
+    .pkg .bullets{display:grid; gap:10px; margin-top:10px;}
+    .pkg .b{display:flex; gap:10px; align-items:flex-start; padding:12px; border-radius:16px; background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08); color:rgba(255,255,255,.72); line-height:1.8;
+    }
+    .pkg .b i{width:10px;height:10px;border-radius:999px; margin-top:6px; background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      box-shadow:0 0 18px rgba(39,242,255,.22); flex:0 0 auto;
+    }
+    .hint{margin-top:10px; color:rgba(255,255,255,.62); line-height:1.85; font-size:1rem;}
+
+    footer{padding:34px 0 46px; border-top:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.22));}
+    .foot{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; color:rgba(255,255,255,.58);
+      font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; line-height:1.7;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns: 1fr}
+      .section-title{flex-direction:column; align-items:flex-start}
+      .section-title p{text-align:left; max-width:80ch}
+      .pricing{grid-template-columns:1fr}
+      .span-6{grid-column: span 12;}
+    }
+    @media (max-width: 860px){
+      .menu, .cta{display:none}
+      .burger{display:inline-flex; align-items:center; justify-content:center}
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important}
+      body::before{animation:none !important}
+      .cinematic-opener, .progress-fill, .kaixu-logo, .opener-logo img{animation:none !important;}
+    }
+</style>
+</head>
+<body class="locked">
+  <div id="siteHeaderMount"></div>
+  <img class="kaixu-logo" src="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" alt="kAIxU logo" loading="eager" />
+
+  <div class="cinematic-opener" aria-hidden="true">
+    <div class="opener-content">
+      <div class="opener-line"><p class="opener-text">A Skyes Over London LC Publication</p></div>
+      <div class="opener-line"><h1 class="opener-title">Client Portal Lane — Customer Vault</h1></div>
+      <div class="opener-divider"></div>
+      <p class="opener-subtitle">A branded customer portal where clients log in to request service, upload documents, view status updates, and communicate—without flooding your phone lines.</p>
+      <div class="opener-logo"><img src="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" alt="kAIxU logo" loading="eager" /></div>
+      <p class="opener-company">Operator-grade AI + web infrastructure<br/>Skyes Over London LC</p>
+    </div>
+    <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
+  </div>
+
+  <header class="nav" id="top">
+    <div class="wrap">
+      <div class="nav-inner">
+        <div class="brand">
+          <div>
+            <div class="title">Client Portal Lane — Customer Vault</div>
+            <div class="sub">customer login • status updates • document exchange</div>
+          </div>
+        </div>
+
+        <nav class="menu" aria-label="Primary">
+          <a href="#overview">Overview</a>
+<a href="#deliverables">Deliverables</a>
+<a href="#process">Onboarding</a>
+<a href="#addons">Add-ons</a>
+<a href="#pricing">Pricing</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="index.html"><span class="dot"></span> Services</a>
+          <a class="btn primary" href="#pricing"><span class="dot"></span> Pricing</a>
+        </div>
+
+        <button class="burger" id="burger" aria-label="Open menu">☰</button>
+      </div>
+
+      <div class="mobile" id="mobile">
+        <a href="#overview">Overview</a>
+<a href="#deliverables">Deliverables</a>
+<a href="#process">Onboarding</a>
+<a href="#addons">Add-ons</a>
+<a href="#pricing">Pricing</a>
+        <a href="index.html">Services</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="card">
+            <div class="kicker"><span class="spark"></span> customer login • status updates • document exchange</div>
+            <h1>Client Portal Lane — Customer Vault</h1>
+            <p class="lead">A branded customer portal where clients log in to request service, upload documents, view status updates, and communicate—without flooding your phone lines.</p>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#deliverables"><span class="dot"></span> Deliverables</a>
+              <a class="btn" href="#process"><span class="dot"></span> Onboarding</a>
+              <a class="btn" href="#pricing"><span class="dot"></span> Pricing</a>
+            </div>
+
+            <div class="pill-row">
+              <span class="pill">White-label ready</span>
+              <span class="pill">Proof-first</span>
+              <span class="pill">Operator-grade</span>
+              <span class="pill">Upgradeable</span>
+            </div>
+          </div>
+
+          <div class="card aside">
+            <h3>Payment structure</h3>
+            <p>20% to start. Remaining 80% split evenly over 6 / 12 / 18 / 24 / 36 / 48 months.</p>
+            <div class="mini">Base pricing shown. Final scope is itemized by users, workflows, integrations, and branding depth.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+<section id="overview">
+  <div class="wrap">
+    <div class="section-title">
+      <h2>Overview</h2>
+      <p>what it is • who it’s for • what it replaces</p>
+    </div>
+    <div class="grid">
+      <div class="block span-6"><h3>What it is</h3><p>A branded customer portal where clients log in to request service, upload documents, view status updates, and communicate—without flooding your phone lines.</p><div class="list"><div class="li"><div class="icon"></div><div><b>White-label ready</b><span>Deployed under your client’s brand, domain, and workflow language.</span></div></div><div class="li"><div class="icon"></div><div><b>Operator-grade</b><span>Designed to run real work without brittle manual processes.</span></div></div><div class="li"><div class="icon"></div><div><b>Proof-first</b><span>Includes exports and visibility so leadership can see what’s happening.</span></div></div></div><div class="quote"><b>Positioning</b>Skyes Over London LC builds the lanes behind business operations—so companies can launch working systems fast, then upgrade into intelligence and governance when ready.</div></div>
+<div class="block span-6"><h3>Who it’s for</h3><p>Teams that need a real system now: service businesses, multi-location operators, agencies, internal ops teams, and companies replacing spreadsheets + DMs with a controlled portal.</p><div class="list"><div class="li"><div class="icon"></div><div><b>Growing operations</b><span>When leads/jobs are falling through the cracks.</span></div></div><div class="li"><div class="icon"></div><div><b>Staff accountability</b><span>When leadership needs visibility and status control.</span></div></div><div class="li"><div class="icon"></div><div><b>Repeatable expansion</b><span>When you plan to add more lanes later (multi-lane OS).</span></div></div></div><div class="quote"><b>Outcome</b>Your client stops asking, “Where is that lead/job?” and starts running a lane with clear states, owners, and receipts.</div></div>
+    </div>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<section id="deliverables">
+  <div class="wrap">
+    <div class="section-title">
+      <h2>Deliverables</h2>
+      <p>everything included • no surprises • business-ready</p>
+    </div>
+    <div class="grid">
+      <div class="block span-6"><h3>Baseline deliverables (always included)</h3><p>The non-negotiable “it’s real” package every client gets at launch.</p><div class="list"><div class="li"><div class="icon"></div><div><b>Live branded portal</b><span>A working system deployed under the client’s identity.</span></div></div><div class="li"><div class="icon"></div><div><b>Admin + staff logins</b><span>Owner/admin access plus staff accounts as needed.</span></div></div><div class="li"><div class="icon"></div><div><b>Basic roles</b><span>Owner / manager / staff visibility rules.</span></div></div><div class="li"><div class="icon"></div><div><b>Human walkthrough guide</b><span>Plain-English guide so non-technical teams can operate day one.</span></div></div><div class="li"><div class="icon"></div><div><b>Launch handoff session</b><span>A walkthrough session plus a clear next-steps plan.</span></div></div></div><div class="quote"><b>No half builds</b>This lane ships as an operational system, not a placeholder. Deliverables are spelled out and handed off with proof.</div></div>
+<div class="block span-6"><h3>Lane-specific deliverables</h3><p>The lane features that directly run the workflow.</p><div class="list"><div class="li"><div class="icon"></div><div><b>Customer login portal</b><span>Clients log in securely to access their requests and files.</span></div></div><div class="li"><div class="icon"></div><div><b>Request submission</b><span>Clients submit service requests with structured fields.</span></div></div><div class="li"><div class="icon"></div><div><b>Status updates</b><span>Clients see where things stand without calling your office.</span></div></div><div class="li"><div class="icon"></div><div><b>Document exchange</b><span>Clients upload docs; staff responds with approvals/requests.</span></div></div></div><div class="quote"><b>Built to be used</b>If staff can’t use it daily, it doesn’t ship. Everything in this section is designed for day-to-day operation.</div></div>
+<div class="block span-12"><h3>Operational deliverables (business-grade)</h3><p>The parts that make this feel like infrastructure instead of a webpage.</p><div class="list"><div class="li"><div class="icon"></div><div><b>Activity history</b><span>Basic “who did what” tracking for accountability.</span></div></div><div class="li"><div class="icon"></div><div><b>Status states</b><span>Clear states so work moves in a controlled way.</span></div></div><div class="li"><div class="icon"></div><div><b>Export lane</b><span>Export key data for reporting/accounting/backup.</span></div></div><div class="li"><div class="icon"></div><div><b>Proof-first reporting</b><span>Snapshots and receipts so leadership can verify outcomes.</span></div></div><div class="li"><div class="icon"></div><div><b>Support lane</b><span>A clean channel for fixes and small adjustments post-launch.</span></div></div></div></div>
+    </div>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-title">
+      <h2>Onboarding</h2>
+      <p>simple steps • fast launch • proof-first handoff</p>
+    </div>
+    <div class="grid">
+      <div class="block span-6"><h3>Step 1: Scope in plain English</h3><p>We capture the workflow in human language, confirm user count, and lock deliverables.</p><div class="list"><div class="li"><div class="icon"></div><div><b>Client inputs</b><span>Logo, business name, staff access list, workflow steps.</span></div></div><div class="li"><div class="icon"></div><div><b>Scope lock</b><span>What’s included vs. itemized add-ons.</span></div></div><div class="li"><div class="icon"></div><div><b>Launch plan</b><span>Target launch and handoff expectations.</span></div></div></div></div>
+<div class="block span-6"><h3>Step 2: White-label configuration</h3><p>We brand the portal and configure the workflow so it matches the client’s operation.</p><div class="list"><div class="li"><div class="icon"></div><div><b>Branding</b><span>Logo, colors, language, and UI identity.</span></div></div><div class="li"><div class="icon"></div><div><b>Workflow mapping</b><span>Forms, steps, routing, dashboards.</span></div></div><div class="li"><div class="icon"></div><div><b>Access</b><span>Admin/staff roles and permissions.</span></div></div></div></div>
+<div class="block span-6"><h3>Step 3: Proof-first launch</h3><p>We go live, create access, and provide the handoff kit so leadership sees it as real.</p><div class="list"><div class="li"><div class="icon"></div><div><b>Live link + admin access</b><span>Working system delivered and verified.</span></div></div><div class="li"><div class="icon"></div><div><b>Walkthrough session</b><span>Team training and operating procedures.</span></div></div><div class="li"><div class="icon"></div><div><b>Proof pack starter</b><span>Initial export/snapshot so the client has receipts.</span></div></div></div></div>
+<div class="block span-6"><h3>Step 4: Upgrade paths</h3><p>Add kAIxU Powered and/or Xinth governance when the client wants more intelligence and billing control.</p><div class="list"><div class="li"><div class="icon"></div><div><b>kAIxU Powered</b><span>Workflow intelligence add-on.</span></div></div><div class="li"><div class="icon"></div><div><b>Xinth control plane</b><span>Keys, caps, metering, billing controls.</span></div></div><div class="li"><div class="icon"></div><div><b>Multi-lane expansion</b><span>Connect lanes into a full operating system.</span></div></div></div></div>
+    </div>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<section id="addons">
+  <div class="wrap">
+    <div class="section-title">
+      <h2>Add-ons</h2>
+      <p>upgrade paths • intelligence • governance</p>
+    </div>
+    <div class="grid">
+      <div class="block span-12"><h3>Add-ons (optional upgrades)</h3><p>Upgrades are itemized cleanly so clients can approve line-by-line.</p><div class="list"><div class="li"><div class="icon"></div><div><b>kAIxU Powered upgrade</b><span>Embed intelligence inside the workflow (summaries, next steps, drafts, missing-info checks, reports). One-time setup per lane: $7,500. AI usage billed separately as fuel. Usage caps available.</span></div></div><div class="li"><div class="icon"></div><div><b>Xinth governance + billing</b><span>Attach governance for keys, caps, metering, and billing controls. Onboarding: $12,500. Platform access: $1,250/month (control plane operations).</span></div></div><div class="li"><div class="icon"></div><div><b>Maintenance plan</b><span>Optional ongoing care for lane updates, small tweaks, and support: $249/month per lane (or quoted for multi-lane programs).</span></div></div></div><div class="quote"><b>Simple explanation</b>The lane is the product. kAIxU is fuel. Xinth is the control plane when you need governance and billing.</div></div>
+    </div>
+    <div class="divider"></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-title">
+      <h2>Base pricing</h2>
+      <p>20% down • remaining 80% financed • terms 6–48 months</p>
+    </div>
+    <div class="pricing">
+      
+<div class="pkg featured">
+  <div class="tag">Base • White-label launch</div>
+  <h4>Core lane install</h4>
+  <div class="amount">$14,500</div>
+  <div class="sub">20% down ($2,900) to begin. Remaining 80% financed across 6 / 12 / 18 / 24 / 36 / 48 months. Base pricing includes full deliverables listed on this page.</div>
+  <div class="bullets"><div class="b"><i></i><span>Example monthly (12 mo): $967/mo after down payment</span></div><div class="b"><i></i><span>Example monthly (24 mo): $483/mo after down payment</span></div><div class="b"><i></i><span>Example monthly (36 mo): $322/mo after down payment</span></div><div class="b"><i></i><span>Clean itemization for any scope expansion</span></div></div>
+</div>
+
+<div class="pkg">
+  <div class="tag">Upgrade • kAIxU Powered</div>
+  <h4>Workflow intelligence add-on</h4>
+  <div class="amount">$7,500 + usage</div>
+  <div class="sub">One-time embedding per lane. AI usage billed separately as fuel (requests/messages). Usage caps available.</div>
+  <div class="bullets"><div class="b"><i></i><span>Summaries • next steps • draft replies • reports</span></div><div class="b"><i></i><span>Missing-info checks to reduce delays</span></div><div class="b"><i></i><span>Usage visibility + caps</span></div><div class="b"><i></i><span>Attach Xinth for billing control when needed</span></div></div>
+</div>
+
+<div class="pkg">
+  <div class="tag">Governance • Xinth</div>
+  <h4>Control plane add-on</h4>
+  <div class="amount">$12,500 + $1,250/mo</div>
+  <div class="sub">Keys, caps, metering, exports, and billing controls behind your branded lane.</div>
+  <div class="bullets"><div class="b"><i></i><span>Master keys + sub-keys</span></div><div class="b"><i></i><span>Rate rules + device binding</span></div><div class="b"><i></i><span>Usage metering + CSV exports</span></div><div class="b"><i></i><span>Rotation/revoke + governance receipts</span></div></div>
+</div>
+
+    </div>
+    <p class="hint">Base pricing is the starting line. Final scope is quoted cleanly based on users, workflows, and integrations. Financing applies to the build. Platform/usage fees (if selected) are billed separately.</p>
+    <div class="divider"></div>
+  </div>
+</section>
+
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot">
+        <div>© <span id="year"></span> Skyes Over London LC</div>
+        <div>Business App Vault • Brand-Ready Lanes • kAIxU Powered</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      window.addEventListener('load', () => {
+        setTimeout(() => { document.body.classList.remove('locked'); }, 5200);
+      });
+
+      const yearEl = document.getElementById('year');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      const nav = document.querySelector('.nav');
+      const burger = document.getElementById('burger');
+      const mobile = document.getElementById('mobile');
+      function closeMenu(){ nav.classList.remove('open'); }
+      burger?.addEventListener('click', () => nav.classList.toggle('open'));
+      mobile?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const id = a.getAttribute('href');
+          if(!id || id.length < 2) return;
+          const el = document.querySelector(id);
+          if(!el) return;
+          e.preventDefault();
+          el.scrollIntoView({behavior: prefersReduced ? 'auto' : 'smooth', block:'start'});
+        });
+      });
+    })();
+  </script>
+  <script src="/js/main.js"></script>
+  <script src="/js/partials.js"></script>
+</body>
+</html>

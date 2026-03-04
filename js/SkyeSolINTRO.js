@@ -76,7 +76,7 @@
       + '<div class="opener-line"><h1 class="opener-title">About<br/>Skyes Over London</h1></div>'
       + '<div class="opener-divider"></div>'
       + '<p class="opener-subtitle">Operator-grade AI + web infrastructure built with a proof-first discipline: gateways, brains, IDEs, portals, and systems that can be verified, governed, and shipped.</p>'
-      + '<div class="opener-logo"><img class="sol-logo" src="' + INTRO_IMAGE + '" alt="Skyes Over London LC top image" loading="eager" decoding="sync" fetchpriority="high" width="180" height="180" /></div>'
+      + '<div class="opener-logo"><img class="sol-logo" src="' + INTRO_IMAGE + '" alt="Skyes Over London LC top image" loading="eager" /></div>'
       + '<p class="opener-company">A subsidiary of Solenterprises International Nexus &amp; Holdings LLC</p>'
       + '</div>'
       + '<div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>'

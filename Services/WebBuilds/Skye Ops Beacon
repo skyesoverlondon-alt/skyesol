@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Primary Meta Tags -->
+  <meta charset="UTF-8" />
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>Skye Ops Beacon — Automated Reputation + Local Ranking Engine | Skyes Over London LC</title>
+  <meta name="title" content="Skye Ops Beacon — Automated Reputation + Local Ranking Engine | Skyes Over London LC" />
+  <meta name="description" content="Skye Ops Beacon installs an automated review + listing + content + trust pipeline that increases local rankings, improves conversion, and keeps your brand emitting signals every week." />
+  <meta name="keywords" content="local seo, google business profile, review engine, citations, schema, reputation management, phoenix, web systems, Skyes Over London LC" />
+  <meta name="author" content="Skyes Over London LC Editorial" />
+  <meta name="publisher" content="Solenterprises International Nexus & Holdings LLC" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="category" content="Local Authority, Reputation, SEO Systems" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://skyesol.netlify.app/Services/WebBuilds/Skye%20Ops%20Beacon" />
+  <link rel="alternate" hreflang="en-US" href="https://skyesol.netlify.app/Services/WebBuilds/Skye%20Ops%20Beacon" />
+  <link rel="alternate" hreflang="x-default" href="https://skyesol.netlify.app/Services/WebBuilds/Skye%20Ops%20Beacon" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://skyesol.netlify.app/Services/WebBuilds/Skye%20Ops%20Beacon" />
+  <meta property="og:title" content="Skye Ops Beacon — Automated Reputation + Local Ranking Engine" />
+  <meta property="og:description" content="Install a weekly signal system: reviews, listings, trust modules, GBP posts, micro-blogs, reporting — built like infrastructure." />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Skyes Over London LC — Skye Ops Beacon" />
+  <meta property="og:site_name" content="Skyes Over London LC" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://skyesol.netlify.app/Services/WebBuilds/Skye%20Ops%20Beacon" />
+  <meta name="twitter:title" content="Skye Ops Beacon — Automated Reputation + Local Ranking Engine" />
+  <meta name="twitter:description" content="Install a weekly signal system: reviews, listings, trust modules, GBP posts, micro-blogs, reporting — built like infrastructure." />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#080812" />
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Article",
+    "headline":"Skye Ops Beacon — Automated Reputation + Local Ranking Engine",
+    "description":"Skye Ops Beacon installs an automated review + listing + content + trust pipeline that increases local rankings, improves conversion, and keeps your brand emitting signals every week.",
+    "image":["https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png"],
+    "author":{"@type":"Organization","name":"Skyes Over London LC Editorial"},
+    "publisher":{"@type":"Organization","name":"Solenterprises International Nexus & Holdings LLC","logo":{"@type":"ImageObject","url":"https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png"}},
+    "mainEntityOfPage":{"@type":"WebPage","@id":"https://skyesol.netlify.app/Services/WebBuilds/Skye%20Ops%20Beacon"},
+    "datePublished":"2026-03-03",
+    "dateModified":"2026-03-03",
+    "inLanguage":"en-US",
+    "keywords":"local seo, google business profile, reviews, citations, schema, reputation"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Service",
+    "name":"Skye Ops Beacon",
+    "serviceType":"Automated Reputation + Local Ranking Engine",
+    "provider":{"@type":"Organization","name":"Skyes Over London LC"},
+    "areaServed":"US",
+    "offers":[
+      {"@type":"Offer","name":"Beacon Setup (Standard)","price":"4500","priceCurrency":"USD"},
+      {"@type":"Offer","name":"Beacon Pulse","price":"1250","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","unitText":"MONTH"}},
+      {"@type":"Offer","name":"Beacon Growth","price":"2500","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","unitText":"MONTH"}},
+      {"@type":"Offer","name":"Beacon Authority","price":"4750","priceCurrency":"USD","priceSpecification":{"@type":"UnitPriceSpecification","unitText":"MONTH"}}
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,450;0,600;0,700;1,450;1,600&family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --ink:#07070c;
+      --paper:#070812;
+      --paper2:#0b0c18;
+      --glass:rgba(255,255,255,.06);
+      --glass2:rgba(0,0,0,.30);
+      --stroke:rgba(255,255,255,.12);
+      --stroke2:rgba(255,255,255,.08);
+
+      --gold:#ffd36a;
+      --gold2:#ffefb0;
+      --purple:#a243ff;
+      --purple2:#e0a7ff;
+      --cyan:#27f2ff;
+      --mist:rgba(255,255,255,.82);
+      --slate:rgba(255,255,255,.64);
+
+      --display:'Playfair Display', Georgia, serif;
+      --body:'Instrument Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+      --ease-out-quart:cubic-bezier(0.25,1,0.5,1);
+
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --shadow2: 0 12px 40px rgba(0,0,0,.40);
+
+      --r:18px;
+      --max:1400px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{
+      font-family:var(--body);
+      color:rgba(255,255,255,.92);
+      background:
+        radial-gradient(1200px 740px at 18% 12%, rgba(162,67,255,.26), transparent 58%),
+        radial-gradient(1100px 820px at 82% 22%, rgba(39,242,255,.16), transparent 58%),
+        radial-gradient(900px 700px at 62% 88%, rgba(255,211,106,.14), transparent 60%),
+        linear-gradient(180deg, var(--paper), #05050b 45%, var(--paper2));
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    a{color:inherit;text-decoration:none}
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+      outline:2px solid rgba(39,242,255,.70);
+      outline-offset:3px;
+      border-radius:12px;
+    }
+
+    /* Watermark */
+    .watermark{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:.10;
+      background:
+        radial-gradient(900px 520px at 50% 40%, rgba(162,67,255,.10), transparent 62%),
+        radial-gradient(820px 520px at 52% 62%, rgba(255,211,106,.10), transparent 62%),
+        url("https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png") center 42% / min(560px, 70vw) no-repeat;
+      filter: drop-shadow(0 0 18px rgba(255,211,106,.10));
+    }
+
+    /* Background FX */
+    .bgfx{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.70;}
+    canvas#stars{width:100%; height:100%; display:block;}
+    .grain{
+      position:fixed; inset:0; z-index:1; pointer-events:none;
+      opacity:.12; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      background-size:260px 260px;
+    }
+    .scanlines{
+      position:fixed; inset:0; z-index:1; pointer-events:none;
+      opacity:.08;
+      background:repeating-linear-gradient(to bottom, rgba(255,255,255,.05), rgba(255,255,255,.05) 1px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 6px);
+    }
+
+    /* Cinematic opener */
+    body.locked{overflow:hidden; height:100vh;}
+    .cinematic-opener{
+      position:fixed; inset:0;
+      z-index:10000;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      background:#05050b;
+      pointer-events:none;
+      animation: openerFadeOut 1s var(--ease-out-expo) 4.6s forwards;
+    }
+    .cinematic-opener::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 22% 52%, rgba(255,211,106,.14) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 52%, rgba(162,67,255,.16) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 75%, rgba(39,242,255,.08) 0%, transparent 60%);
+      animation: gradientPulse 4s ease-in-out infinite;
+    }
+    @keyframes gradientPulse{0%,100%{opacity:.55}50%{opacity:1}}
+
+    .opener-content{position:relative; z-index:2; text-align:center; padding:2rem;}
+    .opener-line{overflow:hidden;}
+    .opener-text{
+      font-family:var(--mono);
+      color:rgba(255,255,255,.72);
+      font-size:clamp(.9rem,2.6vw,1.15rem);
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      opacity:0;
+      transform:translateY(100%);
+      animation:slideUp 1s var(--ease-out-expo) .5s forwards;
+    }
+    .opener-title{
+      font-family:var(--display);
+      color:var(--gold);
+      font-size:clamp(2.2rem,7.8vw,5.2rem);
+      font-weight:700;
+      line-height:1.05;
+      margin:1.25rem 0;
+      opacity:0;
+      transform:translateY(100%);
+      animation:slideUp 1.2s var(--ease-out-expo) 1s forwards;
+    }
+    .opener-subtitle{
+      font-family:var(--body);
+      color:rgba(255,255,255,.70);
+      font-size:clamp(.95rem,2vw,1.1rem);
+      letter-spacing:.04em;
+      opacity:0;
+      animation:fadeIn 1.2s var(--ease-out-expo) 2.0s forwards;
+      max-width:78ch;
+      margin:0 auto;
+    }
+    .opener-divider{
+      width:0; height:1px;
+      background:linear-gradient(90deg, transparent, var(--cyan), var(--gold), var(--purple), transparent);
+      margin:1.8rem auto;
+      animation:expandLine 1.5s var(--ease-out-expo) 1.5s forwards;
+      opacity:.9;
+    }
+    .opener-logo{
+      margin-top:2.4rem;
+      opacity:0;
+      animation:fadeIn 1s var(--ease-out-expo) 2.45s forwards;
+      display:flex;
+      justify-content:center;
+    }
+
+    /* Required SOL logo (floating, no container) */
+    .sol-logo{
+      width:180px;
+      height:auto;
+      filter: drop-shadow(0 0 16px rgba(255,211,106,.18)) drop-shadow(0 0 18px rgba(39,242,255,.10));
+      animation: pulseLogo 2.8s ease-in-out infinite;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    @keyframes pulseLogo{
+      0%,100%{transform:translateY(0) scale(1); opacity:.92;}
+      50%{transform:translateY(-2px) scale(1.02); opacity:1;}
+    }
+
+    .opener-company{
+      font-family:var(--mono);
+      color:rgba(255,255,255,.44);
+      font-size:.72rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      margin-top:1rem;
+      opacity:0;
+      animation:fadeIn 1s var(--ease-out-expo) 3.0s forwards;
+    }
+
+    @keyframes slideUp{to{opacity:1; transform:translateY(0)}}
+    @keyframes fadeIn{to{opacity:1}}
+    @keyframes expandLine{to{width:240px}}
+    @keyframes openerFadeOut{to{opacity:0; visibility:hidden}}
+
+    .progress-bar{
+      position:fixed;
+      bottom:40px;
+      left:50%;
+      transform:translateX(-50%);
+      width:240px;
+      height:2px;
+      background:rgba(255,255,255,.10);
+      border-radius:2px;
+      overflow:hidden;
+      z-index:10001;
+      animation:fadeOut .5s var(--ease-out-expo) 4.0s forwards;
+    }
+    .progress-fill{
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      animation:progressFill 4s var(--ease-out-quart) forwards;
+      box-shadow:0 0 18px rgba(39,242,255,.28);
+    }
+    @keyframes progressFill{0%{width:0}100%{width:100%}}
+    @keyframes fadeOut{to{opacity:0}}
+
+    /* NAV */
+    .nav{
+      position:fixed; top:0; left:0;
+      width:100%;
+      padding:1.25rem 3rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+      background:transparent;
+      transition:all .4s var(--ease-out-expo);
+      border-bottom:1px solid rgba(255,255,255,0);
+    }
+    .nav.scrolled{
+      background:rgba(5,5,11,.70);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      padding:.9rem 3rem;
+    }
+    .nav-brand{display:flex; align-items:center; gap:14px;}
+    .nav-brand-title{display:flex; flex-direction:column; gap:2px; line-height:1.0;}
+    .nav-brand-name{
+      font-family:var(--display);
+      font-size:1.05rem;
+      font-weight:700;
+      color:rgba(255,255,255,.92);
+      letter-spacing:.02em;
+    }
+    .nav-brand-sub{
+      font-family:var(--mono);
+      font-size:.62rem;
+      color:rgba(255,255,255,.58);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .nav-links{display:flex; gap:2rem; list-style:none;}
+    .nav-links a{
+      font-family:var(--body);
+      font-size:.86rem;
+      font-weight:600;
+      color:rgba(255,255,255,.66);
+      transition:color .25s ease, transform .25s ease;
+      letter-spacing:.02em;
+    }
+    .nav-links a:hover{color:var(--gold2); transform:translateY(-1px);}
+    .nav-cta{
+      display:inline-flex; align-items:center; gap:.65rem;
+      padding:.78rem 1.15rem;
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.92);
+      border:1px solid rgba(255,211,106,.25);
+      font-family:var(--mono);
+      font-size:.74rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      transition:all .3s ease;
+    }
+    .nav-cta:hover{
+      background:rgba(255,211,106,.10);
+      border-color:rgba(39,242,255,.30);
+      transform:translateY(-2px);
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      z-index:2;
+    }
+    .hero-overlay{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.72) 100%),
+        linear-gradient(90deg, rgba(0,0,0,.78) 0%, transparent 56%);
+      z-index:2;
+    }
+    .hero-content{
+      position:relative;
+      z-index:3;
+      max-width:1040px;
+      padding:0 5rem;
+      padding-top:8rem;
+    }
+    .hero-eyebrow{
+      display:inline-flex; align-items:center; gap:1rem;
+      font-family:var(--mono);
+      font-size:.72rem;
+      color:var(--gold);
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      margin-bottom:1.8rem;
+      opacity:0;
+      animation: heroFadeUp 1s var(--ease-out-expo) 4.85s forwards;
+    }
+    .hero-eyebrow::before{
+      content:""; width:40px; height:1px;
+      background:linear-gradient(90deg, var(--cyan), var(--gold));
+      opacity:.9;
+    }
+    .hero-title{
+      font-family:var(--display);
+      font-size:clamp(2.9rem,6.8vw,5.4rem);
+      font-weight:700;
+      color:rgba(255,255,255,.96);
+      line-height:1.05;
+      margin-bottom:1.6rem;
+      opacity:0;
+      animation: heroFadeUp 1.1s var(--ease-out-expo) 5.05s forwards;
+    }
+    .hero-title em{font-style:italic; color:var(--gold2);}
+    .hero-description{
+      font-family:var(--body);
+      font-size:1.12rem;
+      color:rgba(255,255,255,.76);
+      line-height:1.9;
+      max-width:78ch;
+      margin-bottom:2.3rem;
+      opacity:0;
+      animation: heroFadeUp 1.1s var(--ease-out-expo) 5.25s forwards;
+    }
+    .hero-actions{
+      display:flex; gap:1.2rem; flex-wrap:wrap;
+      opacity:0;
+      animation: heroFadeUp 1.1s var(--ease-out-expo) 5.45s forwards;
+    }
+    .hero-btn{
+      display:inline-flex; align-items:center; gap:.75rem;
+      padding:1.05rem 2.1rem;
+      font-family:var(--mono);
+      font-size:.78rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      transition:all .35s var(--ease-out-expo);
+      border-radius:0;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.04);
+    }
+    .hero-btn svg{width:16px;height:16px; transition:transform .25s ease;}
+    .hero-btn:hover svg{transform:translateX(4px);}
+    .hero-btn-primary{
+      background:linear-gradient(90deg, rgba(39,242,255,.20), rgba(255,211,106,.20), rgba(162,67,255,.20));
+      border-color:rgba(255,211,106,.35);
+      color:rgba(255,255,255,.94);
+    }
+    .hero-btn-primary:hover{
+      transform:translateY(-3px);
+      box-shadow:0 20px 45px rgba(0,0,0,.40);
+      border-color:rgba(39,242,255,.30);
+      background:rgba(255,255,255,.06);
+    }
+    .hero-btn-secondary:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,211,106,.40);
+      background:rgba(255,211,106,.08);
+    }
+    @keyframes heroFadeUp{from{opacity:0; transform:translateY(28px)}to{opacity:1; transform:translateY(0)}}
+
+    .hero-scroll-indicator{
+      position:absolute; bottom:3rem; left:50%;
+      transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center;
+      gap:.75rem;
+      color:rgba(255,255,255,.68);
+      opacity:0;
+      animation: heroFadeUp 1s var(--ease-out-expo) 5.65s forwards;
+      z-index:3;
+    }
+    .hero-scroll-indicator span{
+      font-family:var(--mono);
+      font-size:.65rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+    .scroll-line{
+      width:1px; height:60px;
+      background:linear-gradient(180deg, var(--gold), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+      opacity:.9;
+    }
+    @keyframes scrollPulse{0%,100%{opacity:.3; transform:scaleY(.5)}50%{opacity:1; transform:scaleY(1)}}
+
+    /* Pills */
+    .pill-row{margin-top:2.2rem; display:flex; gap:.8rem; flex-wrap:wrap;}
+    .pill{
+      display:inline-flex; align-items:center; gap:.55rem;
+      padding:.55rem .85rem;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      font-family:var(--mono);
+      font-size:.68rem;
+      letter-spacing:.08em;
+      color:rgba(255,255,255,.76);
+    }
+    .pill i{
+      width:8px;height:8px;border-radius:50%;
+      background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      box-shadow:0 0 14px rgba(39,242,255,.18);
+    }
+    .pill b{color:rgba(255,255,255,.92); font-weight:800}
+
+    /* STATS */
+    .stats-bar{
+      position:relative; z-index:2;
+      padding:3.6rem 5rem;
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0,1fr));
+      gap:1.6rem;
+      background:rgba(255,255,255,.04);
+      border-top:1px solid rgba(255,255,255,.08);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      overflow:hidden;
+    }
+    .stats-bar::before{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 0% 50%, rgba(255,211,106,.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 100% 50%, rgba(162,67,255,.12) 0%, transparent 55%);
+      opacity:.9; pointer-events:none;
+    }
+    .stat-item{
+      position:relative; z-index:2;
+      text-align:center;
+      opacity:0; transform:translateY(18px);
+      transition:opacity .8s var(--ease-out-expo), transform .8s var(--ease-out-expo);
+    }
+    .stat-item.visible{opacity:1; transform:translateY(0)}
+    .stat-number{
+      font-family:var(--display);
+      font-size:2.4rem;
+      font-weight:700;
+      color:var(--gold2);
+      letter-spacing:.01em;
+      margin-bottom:.4rem;
+      text-shadow:0 0 20px rgba(255,211,106,.10);
+    }
+    .stat-label{
+      font-family:var(--mono);
+      font-size:.70rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.62);
+      line-height:1.45;
+    }
+
+    /* Article */
+    .article{
+      position:relative;
+      z-index:2;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:5.5rem 5rem 4.5rem;
+    }
+    .article-header{
+      display:grid;
+      grid-template-columns: 1.1fr;
+      gap:2rem;
+      margin-bottom:3.5rem;
+    }
+    .article-meta{
+      display:flex;
+      align-items:center;
+      gap:1.5rem;
+      flex-wrap:wrap;
+    }
+    .article-category{
+      font-family:var(--mono);
+      font-size:.70rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.70);
+      padding:.55rem .85rem;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+    }
+    .article-date{
+      font-family:var(--mono);
+      font-size:.70rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+    }
+    .article-author{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      margin-left:auto;
+    }
+    .author-avatar{
+      width:42px;height:42px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-family:var(--mono);
+      font-weight:800;
+      color:rgba(0,0,0,.85);
+      background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      box-shadow:0 10px 26px rgba(0,0,0,.35);
+    }
+    .author-info{display:flex;flex-direction:column;gap:2px}
+    .author-name{font-family:var(--body);font-weight:800;color:rgba(255,255,255,.92)}
+    .author-role{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+    .article-intro{
+      padding:1.8rem 2rem;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow2);
+      line-height:1.95;
+      color:rgba(255,255,255,.78);
+    }
+
+    .article-body{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:2.2rem;
+      align-items:start;
+    }
+    .article-sidebar{
+      position:sticky;
+      top:110px;
+      padding:1.4rem 1.3rem;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow2);
+    }
+    .sidebar-nav{display:flex;flex-direction:column;gap:.65rem}
+    .sidebar-nav-title{
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.70);
+      margin-bottom:.45rem;
+    }
+    .sidebar-nav a{
+      font-family:var(--body);
+      font-weight:700;
+      font-size:.92rem;
+      color:rgba(255,255,255,.66);
+      padding:.45rem .55rem;
+      border-left:2px solid transparent;
+      transition:all .25s ease;
+    }
+    .sidebar-nav a:hover{color:var(--gold2); border-left-color:rgba(255,211,106,.55)}
+    .sidebar-nav a.active{color:rgba(255,255,255,.92); border-left-color:rgba(39,242,255,.65); background:rgba(0,0,0,.18)}
+
+    .article-content{display:flex; flex-direction:column; gap:2.2rem;}
+    .article-content h2{
+      font-family:var(--display);
+      font-size:2.25rem;
+      line-height:1.15;
+      margin-bottom:.85rem;
+      color:rgba(255,255,255,.96);
+    }
+    .article-content p{
+      color:rgba(255,255,255,.76);
+      line-height:1.95;
+      font-size:1.03rem;
+      margin-bottom:1.05rem;
+    }
+    .lead{font-size:1.12rem !important; color:rgba(255,255,255,.82) !important;}
+
+    .pull-quote{
+      margin:1.2rem 0;
+      padding:1.9rem 2rem;
+      border:1px solid rgba(255,211,106,.22);
+      background:linear-gradient(180deg, rgba(255,211,106,.08), rgba(255,255,255,.03));
+      box-shadow:var(--shadow2);
+    }
+    .pull-quote blockquote{
+      font-family:var(--display);
+      font-size:1.55rem;
+      line-height:1.35;
+      color:rgba(255,255,255,.92);
+      margin-bottom:.8rem;
+    }
+    .pull-quote cite{
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.60);
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:1.2rem;
+      margin-top:1.2rem;
+    }
+    .feature-card{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow2);
+      padding:1.55rem 1.55rem;
+      transition:transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .feature-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,211,106,.22);
+      background:rgba(255,255,255,.05);
+    }
+    .feature-icon{
+      width:38px;height:38px;
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(90deg, rgba(39,242,255,.12), rgba(255,211,106,.12), rgba(162,67,255,.12));
+      margin-bottom:1rem;
+    }
+    .feature-icon svg{width:18px;height:18px;color:rgba(255,255,255,.86)}
+    .feature-card h4{
+      font-family:var(--body);
+      font-weight:900;
+      font-size:1.05rem;
+      margin-bottom:.55rem;
+      color:rgba(255,255,255,.92);
+    }
+    .feature-card p{
+      margin:0;
+      font-size:.98rem;
+      color:rgba(255,255,255,.70);
+    }
+
+    .animated-list{
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+      margin-top:1.2rem;
+    }
+    .animated-list li{
+      display:flex;
+      gap:1rem;
+      padding:1.25rem 1.25rem;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--shadow2);
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .8s var(--ease-out-expo), transform .8s var(--ease-out-expo);
+    }
+    .animated-list li.visible{opacity:1; transform:translateY(0)}
+    .list-icon{
+      width:34px;height:34px;
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.22);
+      flex:0 0 auto;
+    }
+    .list-icon svg{width:18px;height:18px;color:var(--gold2)}
+    .list-content h5{
+      font-family:var(--body);
+      font-size:1.05rem;
+      font-weight:900;
+      color:rgba(255,255,255,.92);
+      margin-bottom:.25rem;
+    }
+    .list-content p{margin:0; color:rgba(255,255,255,.72); font-size:1.0rem}
+
+    .cta-section{
+      margin-top:1.25rem;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.22));
+      box-shadow:var(--shadow);
+      padding:1.8rem 1.8rem;
+    }
+    .cta-text h3{
+      font-family:var(--display);
+      font-size:1.85rem;
+      color:rgba(255,255,255,.96);
+      margin-bottom:.75rem;
+    }
+    .cta-text p{margin-bottom:1rem}
+    .cta-actions{
+      display:flex;
+      gap:.9rem;
+      flex-wrap:wrap;
+      margin-top:1.15rem;
+    }
+    .dlbtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.6rem;
+      padding:.9rem 1.05rem;
+      border:1px solid rgba(255,211,106,.28);
+      background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.92);
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:all .25s ease;
+    }
+    .dlbtn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(39,242,255,.30);
+      background:rgba(255,211,106,.08);
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+    .dlbtn svg{width:16px;height:16px}
+
+    /* Fade-up utility */
+    .fade-up{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .85s var(--ease-out-expo), transform .85s var(--ease-out-expo);
+    }
+    .fade-up.visible{opacity:1; transform:translateY(0);}
+
+    /* Footer */
+    .footer{
+      position:relative;
+      z-index:2;
+      padding:4.4rem 5rem 2.4rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.18);
+    }
+    .footer-grid{
+      max-width:var(--max);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      gap:2.2rem;
+    }
+    .footer-brand h4{
+      font-family:var(--display);
+      font-size:1.45rem;
+      color:rgba(255,255,255,.94);
+      margin-bottom:.35rem;
+    }
+    .subsidiary{
+      font-family:var(--mono);
+      font-size:.66rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.54);
+      margin-bottom:.9rem;
+    }
+    .footer-brand p{color:rgba(255,255,255,.70); line-height:1.9; max-width:60ch;}
+    .footer-links h5{
+      font-family:var(--mono);
+      font-size:.75rem;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.72);
+      margin-bottom:.75rem;
+    }
+    .footer-links ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+    .footer-links a{color:rgba(255,255,255,.64); font-weight:700; transition:color .2s ease;}
+    .footer-links a:hover{color:var(--gold2)}
+    .footer-bottom{
+      max-width:var(--max);
+      margin:2.2rem auto 0;
+      padding-top:1.4rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      color:rgba(255,255,255,.55);
+      font-family:var(--mono);
+      font-size:.70rem;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+    .footer-legal{display:flex;gap:1.1rem;flex-wrap:wrap}
+    .footer-legal a{color:rgba(255,255,255,.60)}
+    .footer-legal a:hover{color:rgba(255,255,255,.86)}
+
+    /* Responsive */
+    @media (max-width: 1100px){
+      .nav{padding:1.1rem 1.4rem}
+      .nav.scrolled{padding:.85rem 1.4rem}
+      .nav-links{display:none}
+      .hero-content{padding:0 1.6rem; padding-top:7.7rem}
+      .stats-bar{padding:3.0rem 1.6rem; grid-template-columns:repeat(2,minmax(0,1fr))}
+      .article{padding:4.8rem 1.6rem 4.0rem}
+      .article-body{grid-template-columns: 1fr}
+      .article-sidebar{position:relative; top:0}
+      .footer{padding:4.0rem 1.6rem 2.2rem}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      .stats-bar{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+      .hero-actions .hero-btn{width:100%; justify-content:center}
+      .cta-actions .dlbtn{width:100%}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .cinematic-opener, .progress-fill, .scroll-line, .sol-logo{animation:none !important;}
+      .fade-up, .animated-list li{transition:none !important;}
+    }
+  </style>
+</head>
+
+<body class="locked">
+  <!-- Background layers -->
+  <div class="watermark" aria-hidden="true"></div>
+  <div class="bgfx" aria-hidden="true"><canvas id="stars"></canvas></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Cinematic Opening Sequence -->
+  <div class="cinematic-opener" aria-hidden="true">
+    <div class="opener-content">
+      <div class="opener-line">
+        <p class="opener-text">A Skyes Over London LC Publication</p>
+      </div>
+      <div class="opener-line">
+        <h1 class="opener-title">Skye Ops Beacon<br/>Local Authority Engine</h1>
+      </div>
+      <div class="opener-divider"></div>
+      <p class="opener-subtitle">
+        A weekly signal system: reviews, listings, trust modules, GBP posts, micro-blogs, and reporting —
+        installed like infrastructure for local ranking dominance.
+      </p>
+
+      <div class="opener-logo">
+        <img class="sol-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC logo" loading="eager" />
+      </div>
+      <p class="opener-company">A subsidiary of Solenterprises International Nexus &amp; Holdings LLC</p>
+    </div>
+
+    <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" aria-label="Primary">
+    <div class="nav-brand">
+      <img class="sol-logo" style="width:56px; animation-duration:3.2s;" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC logo" loading="lazy" />
+      <div class="nav-brand-title">
+        <span class="nav-brand-name">Skyes Over London LC</span>
+        <span class="nav-brand-sub">Service • Ops Beacon</span>
+      </div>
+    </div>
+
+    <ul class="nav-links" aria-label="Page sections">
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#install">The Install</a></li>
+      <li><a href="#monthly">Monthly Signals</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#payments">Payment Terms</a></li>
+    </ul>
+
+    <a class="nav-cta" href="https://skyesol.netlify.app/contact" target="_blank" rel="noopener">
+      Request Ops Beacon
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <span class="hero-eyebrow">Ops Beacon • Reputation + Local Ranking Engine</span>
+
+      <h1 class="hero-title">Local rankings are not luck.<br/>They’re <em>signals</em>.</h1>
+
+      <p class="hero-description">
+        Skye Ops Beacon installs an automated reputation + listing + content + trust pipeline that keeps your business emitting
+        weekly authority signals. It is built for operators who want consistent lead flow and a local footprint that looks enterprise-grade.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#pricing" class="hero-btn hero-btn-primary">
+          View Pricing
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+
+        <a href="https://skyesol.netlify.app/contact" class="hero-btn hero-btn-secondary" target="_blank" rel="noopener">
+          Request Access
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="pill-row" aria-label="Quick signals">
+        <span class="pill"><i aria-hidden="true"></i> Engine <b>GBP + On-Site</b></span>
+        <span class="pill"><i aria-hidden="true"></i> Trust <b>Schema + Reviews</b></span>
+        <span class="pill"><i aria-hidden="true"></i> Output <b>Weekly Signals</b></span>
+        <span class="pill"><i aria-hidden="true"></i> Control <b>Report Loop</b></span>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span>Scroll to explore</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar" aria-label="Ops Beacon summary">
+    <div class="stat-item" data-delay="0">
+      <div class="stat-number" data-count="4">0</div>
+      <div class="stat-label">GBP Posts<br/>Per Month</div>
+    </div>
+    <div class="stat-item" data-delay="120">
+      <div class="stat-number" data-count="4">0</div>
+      <div class="stat-label">Micro Blogs<br/>Per Month</div>
+    </div>
+    <div class="stat-item" data-delay="240">
+      <div class="stat-number" data-count="1">0</div>
+      <div class="stat-label">Beacon Report<br/>Monthly</div>
+    </div>
+    <div class="stat-item" data-delay="360">
+      <div class="stat-number">Signal-Driven</div>
+      <div class="stat-label">Authority Posture<br/>Installed</div>
+    </div>
+  </section>
+
+  <!-- Main Article -->
+  <article class="article" aria-label="Service editorial">
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-category">Local Authority • Reputation • Weekly Signals</span>
+        <span class="article-date" id="articleDate">March 03, 2026</span>
+
+        <div class="article-author">
+          <div class="author-avatar">SL</div>
+          <div class="author-info">
+            <span class="author-name">Skyes Over London Editorial</span>
+            <span class="author-role">Operations Authority Desk</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-intro">
+        <p>
+          Local businesses lose when their footprint is inconsistent, their reviews are random, and their site stops emitting fresh signals.
+          Ops Beacon installs the engine that keeps authority compounding: reputation flow, listings posture, trust modules, and a monthly reporting loop.
+        </p>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <aside class="article-sidebar" aria-label="On this page">
+        <nav class="sidebar-nav">
+          <span class="sidebar-nav-title">On This Page</span>
+          <a href="#problem">The Problem</a>
+          <a href="#install">Setup & Install</a>
+          <a href="#monthly">Monthly Signal Production</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#payments">Payment Terms</a>
+          <a href="#add-ons">Add-Ons</a>
+        </nav>
+      </aside>
+
+      <div class="article-content">
+
+        <section id="problem" class="fade-up">
+          <h2>The Problem: Local Rankings Break When Signals Go Quiet</h2>
+          <p class="lead">
+            Local visibility is won through consistency: accurate business data, review velocity, fresh updates, and trust posture across the site and profile.
+            Most businesses don’t lose because they’re “bad.” They lose because their signals are weak.
+          </p>
+          <p>
+            If your Google Business Profile is unmanaged, your listings are inconsistent, and your site has no structured trust posture,
+            rankings drift. Ops Beacon fixes this by installing a repeatable weekly signal engine.
+          </p>
+        </section>
+
+        <div class="pull-quote fade-up">
+          <blockquote>Local dominance is not a campaign. It’s a rhythm.</blockquote>
+          <cite>— Ops Beacon posture</cite>
+        </div>
+
+        <section id="install" class="fade-up">
+          <h2>Setup & Install: The Control Plane Goes In First</h2>
+          <p>
+            Ops Beacon begins with a one-time install phase: audit posture, lock the canonical business identity, install the review engine,
+            and deploy on-site trust modules that match local intent.
+          </p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </div>
+              <h4>Local Footprint Audit</h4>
+              <p>GBP posture, site index sanity, NAP consistency plan, and a competitor signal-gap snapshot.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h4>Beacon Profile Pack</h4>
+              <p>Canonical NAP lock, service areas, category map, offer language, and an FAQ seed set.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <h4>Review Engine Install</h4>
+              <p>Review request page, QR codes, scripts, routing logic, and a monthly review target posture.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 4h6m0 0v6m0-6L10 14" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 9v10a2 2 0 002 2h10a2 2 0 002-2v-4" />
+                </svg>
+              </div>
+              <h4>Listings & Citations Pack</h4>
+              <p>Submission queue, duplicate/incorrect listing fix list, and a 60-day authority citation plan.</p>
+            </div>
+          </div>
+
+          <ul class="animated-list">
+            <li>
+              <div class="list-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <div class="list-content">
+                <h5>Site Beacon Modules (Installed Into the Site)</h5>
+                <p>Trust strip, LocalBusiness/Service/FAQ schema, geo service area section, sitewide CTA, map + conversion modules.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section id="monthly" class="fade-up">
+          <h2>Monthly Signal Production: The Weekly Rhythm</h2>
+          <p class="lead">
+            After installation, Beacon runs as a monthly signal engine. The goal is consistent authority output, not random posting.
+          </p>
+
+          <ul class="animated-list">
+            <li>
+              <div class="list-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <div class="list-content">
+                <h5>Weekly Signal Drops (Every Month)</h5>
+                <p>4 Google Business Profile posts • 4 on-site micro blogs • 1 proof update • 1 offer rotation.</p>
+              </div>
+            </li>
+
+            <li>
+              <div class="list-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <div class="list-content">
+                <h5>Beacon Report (Monthly)</h5>
+                <p>GBP calls/messages/directions, traffic + queries, review velocity, and next-month priorities (one-page posture).</p>
+              </div>
+            </li>
+
+            <li>
+              <div class="list-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <div class="list-content">
+                <h5>Safeguards</h5>
+                <p>Policy-safe review messaging posture, citation consistency check routine, and quarterly refresh plan.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="pull-quote fade-up">
+            <blockquote>Beacon doesn’t “market.” It emits signals that make the map and the site hard to ignore.</blockquote>
+            <cite>— Monthly operations posture</cite>
+          </div>
+        </section>
+
+        <section id="pricing" class="fade-up">
+          <h2>Pricing: Installation + Monthly Engine</h2>
+          <p class="lead">
+            Beacon is sold as a system: one-time setup install + monthly signal production plan.
+          </p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h4>Beacon Setup (Standard) — $4,500</h4>
+              <p>
+                Includes: audit + profile pack + review engine install + citations plan + site beacon modules install.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h4>Beacon Pulse — $1,250 / month</h4>
+              <p>
+                4 GBP posts • 4 micro blogs • reporting • review engine monitoring posture.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h4>Beacon Growth — $2,500 / month</h4>
+              <p>
+                Pulse + citations work queue + quarterly page improvements posture.
+              </p>
+            </div>
+
+            <div class="feature-card">
+              <h4>Beacon Authority — $4,750 / month</h4>
+              <p>
+                Growth + 2 geo pages per month + 1 proof/portfolio page per month + offer testing rotation.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="payments" class="fade-up">
+          <h2>Payment Terms: 25% Deposit + Installments (Setup)</h2>
+          <p class="lead">
+            Deposit secures the install slot. Remaining balance can be structured across 6, 12, 18, 24, or 36 months.
+          </p>
+
+          <ul class="animated-list">
+            <li>
+              <div class="list-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+              </div>
+              <div class="list-content">
+                <h5>Beacon Setup (Standard) — $4,500</h5>
+                <p>
+                  Deposit: $1,125 • Remainder: $3,375 • Monthly: 6 mo $562.50 • 12 mo $281.25 • 18 mo $187.50 • 24 mo $140.63 • 36 mo $93.75
+                </p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="cta-section" aria-label="Request section">
+            <div class="cta-text">
+              <h3>Request Ops Beacon</h3>
+              <p>
+                Submit your request through the Skyes Over London contact pipeline. Ops Beacon can run on an existing site,
+                and it pairs naturally with Executive Authority when the footprint is ready to scale.
+              </p>
+
+              <div class="cta-actions">
+                <a class="dlbtn" href="https://skyesol.netlify.app/contact" target="_blank" rel="noopener">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8l-9 6-9-6" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8v10h18V8" />
+                  </svg>
+                  Open Request Form
+                </a>
+
+                <a class="dlbtn" href="mailto:SkyesOverLondonLC@solenterprises.org">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8l-9 6-9-6" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8v10h18V8" />
+                  </svg>
+                  Email
+                </a>
+
+                <a class="dlbtn" href="tel:4804695416">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2 5a2 2 0 012-2h3l2 5-2 1c1.5 3.5 4.5 6.5 8 8l1-2 5 2v3a2 2 0 01-2 2C9.5 22 2 14.5 2 5z" />
+                  </svg>
+                  Call
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="add-ons" class="fade-up">
+          <h2>Add-Ons: When the Footprint Is Ready to Go Higher</h2>
+          <p class="lead">
+            Beacon strengthens the core footprint. When the client is ready for dominance, it upgrades cleanly into higher authority systems.
+          </p>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h4>kAIxU Receptionist Add-On</h4>
+              <p>Automated intake triage + instant qualification + follow-up automation (usage billed separately).</p>
+            </div>
+
+            <div class="feature-card">
+              <h4>Executive Authority Upgrade Path</h4>
+              <p>After 60–90 days of Beacon signals, satellites can be deployed to compound backlinks and topical dominance.</p>
+            </div>
+          </div>
+
+          <div class="pull-quote fade-up">
+            <blockquote>Beacon makes the core footprint undeniable. Executive Authority makes it unavoidable.</blockquote>
+            <cite>— Authority ladder</cite>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- Footer -->
+  <footer class="footer" aria-label="Footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Skyes Over London LC</h4>
+        <div class="subsidiary">A subsidiary of Solenterprises International Nexus &amp; Holdings LLC</div>
+        <p>
+          Ops Beacon is a local authority engine: automated reviews, listings posture, on-site trust modules, and a monthly reporting loop —
+          built for consistent lead flow and ranking stability.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <h5>Service</h5>
+        <ul>
+          <li><a href="#install">Setup & Install</a></li>
+          <li><a href="#monthly">Monthly Signals</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#payments">Payment Terms</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="https://skyesol.netlify.app/" target="_blank" rel="noopener">SkyeSol</a></li>
+          <li><a href="https://skyesol.netlify.app/contact" target="_blank" rel="noopener">Contact</a></li>
+          <li><a href="mailto:SkyesOverLondonLC@solenterprises.org">Email</a></li>
+          <li><a href="tel:4804695416">Call</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#top">Back to Top</a></li>
+          <li><a href="https://solenterprises.org" target="_blank" rel="noopener">SOLEnterprises</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 Skyes Over London LC • SOLEnterprises Ecosystem</div>
+      <div class="footer-legal">
+        <a href="#pricing">Pricing</a>
+        <a href="https://skyesol.netlify.app/contact" target="_blank" rel="noopener">Request</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      // Release body scroll after opener
+      window.addEventListener('load', () => {
+        setTimeout(() => { document.body.classList.remove('locked'); }, 5200);
+      });
+
+      // Nav scroll effect
+      const nav = document.getElementById('nav');
+      const onScrollNav = () => {
+        if (window.scrollY > 40) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      };
+      window.addEventListener('scroll', onScrollNav, { passive:true });
+      onScrollNav();
+
+      // Date stamp (local)
+      const d = new Date();
+      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+      const stamp = months[d.getMonth()] + " " + String(d.getDate()).padStart(2,'0') + ", " + d.getFullYear();
+      const dateEl = document.getElementById('articleDate');
+      if (dateEl) dateEl.textContent = stamp;
+
+      // Intersection Observer for scroll animations
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.fade-up, .stat-item, .animated-list li').forEach(el => io.observe(el));
+
+      // Count-up for stat numbers (only numeric)
+      const countUp = (el, target) => {
+        const dur = 900;
+        const start = performance.now();
+        const from = 0;
+        const tick = (t) => {
+          const p = Math.min(1, (t - start) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = Math.round(from + (target - from) * eased);
+          el.textContent = String(val);
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+
+      const cio = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const el = e.target;
+          const target = parseInt(el.getAttribute('data-count') || '0', 10);
+          if (Number.isFinite(target)) countUp(el, target);
+          cio.unobserve(el);
+        });
+      }, { threshold: 0.6 });
+
+      document.querySelectorAll('.stat-number[data-count]').forEach(el => cio.observe(el));
+
+      // Smooth scroll for internal anchors
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (ev) => {
+          const href = a.getAttribute('href');
+          if (!href || href.length < 2) return;
+          const target = document.querySelector(href);
+          if (!target) return;
+          ev.preventDefault();
+          target.scrollIntoView({ behavior:'smooth', block:'start' });
+        });
+      });
+
+      // Sidebar active link highlight
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+      const sidebarLinks = Array.from(document.querySelectorAll('.sidebar-nav a[href^="#"]'));
+      const linkMap = new Map(sidebarLinks.map(a => [a.getAttribute('href').slice(1), a]));
+      if (sidebarLinks.length && sections.length){
+        const sio = new IntersectionObserver((entries) => {
+          const v = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+          if (!v) return;
+          sidebarLinks.forEach(a => a.classList.remove('active'));
+          const id = v.target.id;
+          const l = linkMap.get(id);
+          if (l) l.classList.add('active');
+        }, { threshold: [0.2, 0.35, 0.5, 0.65] });
+
+        sections.forEach(s => sio.observe(s));
+      }
+
+      // Stars canvas (lightweight)
+      const canvas = document.getElementById('stars');
+      if (canvas){
+        const ctx = canvas.getContext('2d', { alpha:true });
+        const DPR = Math.min(2, window.devicePixelRatio || 1);
+        let W=0,H=0,stars=[];
+
+        function resize(){
+          W = canvas.clientWidth;
+          H = canvas.clientHeight;
+          canvas.width = Math.floor(W * DPR);
+          canvas.height = Math.floor(H * DPR);
+          ctx.setTransform(DPR,0,0,DPR,0,0);
+          const n = Math.max(80, Math.round((W*H)/9000));
+          stars = new Array(n).fill(0).map(()=>({
+            x: Math.random()*W,
+            y: Math.random()*H,
+            r: Math.random()*1.3 + 0.2,
+            v: Math.random()*0.25 + 0.05,
+            a: Math.random()*0.55 + 0.12,
+            hue: Math.random() < 0.05 ? "gold" : (Math.random() < 0.10 ? "cyan" : (Math.random() < 0.06 ? "purple" : "white"))
+          }));
+        }
+
+        function dot(s){
+          let color = `rgba(255,255,255,${s.a})`;
+          if (s.hue === "gold") color = `rgba(255,211,106,${s.a*0.9})`;
+          if (s.hue === "cyan") color = `rgba(39,242,255,${s.a*0.85})`;
+          if (s.hue === "purple") color = `rgba(162,67,255,${s.a*0.75})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+          ctx.fillStyle = color;
+          ctx.fill();
+        }
+
+        let t0 = performance.now();
+        function frame(t){
+          const dt = Math.min(33, t - t0); t0 = t;
+          ctx.clearRect(0,0,W,H);
+
+          const g1 = ctx.createRadialGradient(W*0.25, H*0.18, 10, W*0.25, H*0.18, Math.max(W,H)*0.65);
+          g1.addColorStop(0, "rgba(162,67,255,0.10)");
+          g1.addColorStop(1, "rgba(162,67,255,0.00)");
+          ctx.fillStyle = g1; ctx.fillRect(0,0,W,H);
+
+          const g2 = ctx.createRadialGradient(W*0.78, H*0.22, 10, W*0.78, H*0.22, Math.max(W,H)*0.60);
+          g2.addColorStop(0, "rgba(39,242,255,0.08)");
+          g2.addColorStop(1, "rgba(39,242,255,0.00)");
+          ctx.fillStyle = g2; ctx.fillRect(0,0,W,H);
+
+          const g3 = ctx.createRadialGradient(W*0.62, H*0.88, 10, W*0.62, H*0.88, Math.max(W,H)*0.62);
+          g3.addColorStop(0, "rgba(255,211,106,0.07)");
+          g3.addColorStop(1, "rgba(255,211,106,0.00)");
+          ctx.fillStyle = g3; ctx.fillRect(0,0,W,H);
+
+          for (const s of stars){
+            s.y += s.v * (dt/16.7);
+            if (s.y > H + 2){ s.y = -2; s.x = Math.random()*W; }
+            dot(s);
+          }
+          requestAnimationFrame(frame);
+        }
+
+        const ro = new ResizeObserver(resize);
+        ro.observe(canvas);
+        resize();
+        requestAnimationFrame(frame);
+      }
+    })();
+  </script>
+
+  <!-- PWA registration hooks (safe if you add files later) -->
+  <script>
+    (function(){
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/service-worker.js").catch(()=>{});
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

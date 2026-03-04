@@ -1,0 +1,569 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "serialNumber": "urn:uuid:e827eda8-65c2-4a1f-b335-0eb1c280811b",
+  "metadata": {
+    "timestamp": "2026-02-22T22:45:25.294Z",
+    "tools": [
+      {
+        "vendor": "WebPile Pro",
+        "name": "sbom.mjs",
+        "version": "1.0.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "webpile-pro-f500-neon",
+      "version": "2.3.0",
+      "purl": "pkg:npm/webpile-pro-f500-neon@2.3.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "@neondatabase/serverless",
+      "version": "0.9.5",
+      "purl": "pkg:npm/@neondatabase/serverless@0.9.5",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "b2215ab3a808b6abfac03fe9667bddbb7e3012a806de7484eb359976ae63d8312c6be56f5fc8bfe475c93a8d3aaabc396b13d79fe9460b1791f8d2da48f217ba"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@types/node",
+      "version": "25.3.0",
+      "purl": "pkg:npm/@types/node@25.3.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "e0addba89a57a6a7e0d972862bd6e90d373ac4eff1a143ff441592ec0b5132e83acd915a45e9222f38d5b40a1932abb1a006f306fcb99f143bbde4b9798cdff0"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "@types/pg",
+      "version": "8.11.6",
+      "purl": "pkg:npm/@types/pg@8.11.6",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "ff65a69815c72ec7d1ab37c75bb04d67c49b63313c39293b8b75a3158bdf8111e3ed2d718fed7a25ee5f50abf7955755ce4ff39fd4d73aa7fe6af142148134c9"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "bcryptjs",
+      "version": "2.4.3",
+      "purl": "pkg:npm/bcryptjs@2.4.3",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "57f1f2fd7f55b7b7f705b3c9122f0175514c0721e2fa3357ad8916de1b9ac9b57f910d0a260d18e8f90431b9fecde4fe8be4a2299fc732a246208b782d90ea35"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "buffer-equal-constant-time",
+      "version": "1.0.1",
+      "purl": "pkg:npm/buffer-equal-constant-time@1.0.1",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "cd1a54883c1dff193a003a8f3004c6f2f73d54fae4724ed3d3b388c748278e62409c79d35573501b7bdfbd636e899224c2ef4aaca740d6224a7ec7d357113a34"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "cookie",
+      "version": "0.6.0",
+      "purl": "pkg:npm/cookie@0.6.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "53bd5cc936a6ba1d4244d09fa4663ab68dbc971bcdc0f1b81aecff1158e07f7266cefd2f943a756ad4fd792e5d0e33181ee7291db5a7b3a2f07f704acfab2f77"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "ecdsa-sig-formatter",
+      "version": "1.0.11",
+      "purl": "pkg:npm/ecdsa-sig-formatter@1.0.11",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "9da825dd162b6cdbfa91091e248a6de8d259cbcb702c1ff6bedcfac8df59e2f44a1cde3f41924811baa88402d283029d9e4b2e63793901d769e6583cb15a1571"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jsonwebtoken",
+      "version": "9.0.2",
+      "purl": "pkg:npm/jsonwebtoken@9.0.2",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "3d1a7aeaf27ceb9492a8e960a92f21ba34f953800e80c7e1af0608b8885f29aa12099722aeb980490afc097edc520f9132287e860ce7ae3a7df68f96e2924b1d"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jwa",
+      "version": "1.4.2",
+      "purl": "pkg:npm/jwa@1.4.2",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "79e1f924efb6d49efca8cbd32037415e274177a9c6da46638393a1cffd5fa5adbc67809cb16533275659c85abfdf3dcdd7b699cbe66e0681e58c049b2f559f3b"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jws",
+      "version": "3.2.3",
+      "purl": "pkg:npm/jws@3.2.3",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "6f2889d052d174b75255245e3bf53813b4681323822a712710f323ab71f15adbf32ec574f3f8b94502ac1553640a576b09a3ebdaf0cd00e32c7ecf13fc7cdeee"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lodash.includes",
+      "version": "4.3.0",
+      "purl": "pkg:npm/lodash.includes@4.3.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "5b7071ea67644531ad9492123af543fe56ea8d394f3d40d33279576459d5c22f4d289ead88093a2d5765859326d7b5598acaa129c833a4ee56cfdd4f0ade5bd3"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lodash.isboolean",
+      "version": "3.0.3",
+      "purl": "pkg:npm/lodash.isboolean@3.0.3",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "073e66ba9cb64956cf1d4441f7c540730f9a1e1e2f455e483cd8482d40ac3b3466b13992435ee322eaa8a407a7b56a1e864b7119df5efe16c85eaf7cd3fd5026"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lodash.isinteger",
+      "version": "4.0.4",
+      "purl": "pkg:npm/lodash.isinteger@4.0.4",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "0c1c2d11637671a1d0f7f8a688d784039cacd49a11b517d8ddded5f7092ab5bc9c9c0993bd14666c72835786b411873aefcfdd89ad23aed7b8b6363054169950"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lodash.isnumber",
+      "version": "3.0.3",
+      "purl": "pkg:npm/lodash.isnumber@3.0.3",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "418ab3a5fc0edff0967f75cff99fad910b1f68b2ff1275255d6564224e4550f738b017537a112a64e36ec91b763faecf5c093e35799305c73def3c3db75150af"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lodash.isplainobject",
+      "version": "4.0.6",
+      "purl": "pkg:npm/lodash.isplainobject@4.0.6",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "a125f3696ca908c1e43c2dcdbc111a3c77f42ac0399af3eb38f810583b1b83c9fba2b676f743340660bf8e0459e2f709e834c0863aec49881db16fc5f8c14e04"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lodash.isstring",
+      "version": "4.0.1",
+      "purl": "pkg:npm/lodash.isstring@4.0.1",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "d302717f11f5c203b71ab6ee3fe7534e4ee8a7ee8be354025db188344983fa7cbf1bf782a86cf1c82b21ef5e7d4be9a00c37286ab9c1c3a3c2d4f4b9fb050683"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "lodash.once",
+      "version": "4.1.1",
+      "purl": "pkg:npm/lodash.once@4.1.1",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "49be3ceda4ce0abf5dad054bf292313b356169f3a364df54539e2188df0f537b8089257b971d7260da5b3667b1d8f2ba752268353489514b304fae75cb0c3732"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "ms",
+      "version": "2.1.3",
+      "purl": "pkg:npm/ms@2.1.3",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "e85973b9b4cb646dc9d9afcd542025784863ceae68c601f268253dc985ef70bb2fa1568726afece715c8ebf5d73fab73ed1f7100eb479d23bfb57b45dd645394"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "obuf",
+      "version": "1.1.2",
+      "purl": "pkg:npm/obuf@1.1.2",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "3d7d70bb402601d3ea38bd665a1aa694e77c90e219430199c3aae1eee6f2f5f4dce6585a39614b5f723a47586b17d937cd4638d1eea282c2c69035caf762c936"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pg-int8",
+      "version": "1.0.1",
+      "purl": "pkg:npm/pg-int8@1.0.1",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "582b5a6d2eadddcf129290c15256f59233acee5ebac6c19d2a920f66c838c11f81dfebbd500ba6da8752b05f6d9efc60f348786712d6332e294633ac148a90a7"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pg-numeric",
+      "version": "1.0.2",
+      "purl": "pkg:npm/pg-numeric@1.0.2",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "04cfd3867af0e639b690a2c4e6e2645eaa84c51518feda0b1dd6bae578054c14c5619ca8a5b2a305edbd222dd16e4be5b0ca05c03fad1de19a0a38efd201e5cb"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pg-protocol",
+      "version": "1.11.0",
+      "purl": "pkg:npm/pg-protocol@1.11.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "a5fb3193633d33706e1a00ce7eecb7ed5351457de398a80c8dcbc0716a8d0e96527f87149aff0748e97956245016c7c04459f42ae5104e02f154c6cdab9356de"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pg-types",
+      "version": "4.1.0",
+      "purl": "pkg:npm/pg-types@4.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "a365c56a720ccbfdfe993870ebd3bc7789f5139cec2e174ef8e3eab307b3bbb6797a43f88580ea9438e598ea5831bcd8d81af4b9f0b024b74321778d57071616"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "postgres-array",
+      "version": "3.0.4",
+      "purl": "pkg:npm/postgres-array@3.0.4",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "9c051219f48318e68e0041b0aac458dbb18f39e6bb08d8a924f380ee53db744a71e4a837ab374fd006960b9325853595f6ce21157dfd9e899567e0b8b6718e25"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "postgres-bytea",
+      "version": "3.0.0",
+      "purl": "pkg:npm/postgres-bytea@3.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "08d7788e29bd4453e439b1d28d51e556bc685505f3eeabb0345a73ed1635a2434d99ee3dfac572893bd34686e22d5e78f07c7f85bd411be884ee1f78f775b317"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "postgres-date",
+      "version": "2.1.0",
+      "purl": "pkg:npm/postgres-date@2.1.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "2bb26eae2f20b605d57037d9b6d14a566860969edea4a6f52b8a60ae42f17a18ea92b80f85f1ba38ef0b1cb91f6aa91ba633519eb6b4d7c5f002bd7240558670"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "postgres-interval",
+      "version": "3.0.0",
+      "purl": "pkg:npm/postgres-interval@3.0.0",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "0523439dbc990974b1800fb57f9514d869b0868234694e723314463bc09d144718d81405f719bfecca8a9d8a0cd6724393c9ce34d58393d59e4a678f16141d97"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "postgres-range",
+      "version": "1.1.4",
+      "purl": "pkg:npm/postgres-range@1.1.4",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "8bf85bc4813df34dc0963ffacad2fb50743146f66423d3b84b2f89dc719ce05e28a3fd9e4008d348d2746dfc72b1eddb1f49ee55eb0293edc844b68cb46dc7eb"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "safe-buffer",
+      "version": "5.2.1",
+      "purl": "pkg:npm/safe-buffer@5.2.1",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "ae9dd2a34eca71d9a629b1af81a37141226bedb1954959394bd12ad45fa9a5b468ef4f9879a0f1930e4377c34f37e183e9b8e7626d95b8fb825e6a6e62f9825d"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "semver",
+      "version": "7.7.4",
+      "purl": "pkg:npm/semver@7.7.4",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "bc5282d8812d427561a53efc875629f30cf0adff0233e33328c1c62597c1b738593727111675ec1e4e84e53c4892432c80d4bb99d5f700607bc7640cd9d8b894"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "undici-types",
+      "version": "7.18.2",
+      "purl": "pkg:npm/undici-types@7.18.2",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "02cb82cdf7c61c9c9b49a46b9abe5e1ebf359b0254de48f0e8cfaea6b5af09788d78df52386c10dc99fc8dbf26dd9ea2cd58249e7d51d054c21003f642b2d8ff"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:npm/webpile-pro-f500-neon@2.3.0",
+      "dependsOn": [
+        "pkg:npm/@neondatabase/serverless@0.9.5",
+        "pkg:npm/bcryptjs@2.4.3",
+        "pkg:npm/cookie@0.6.0",
+        "pkg:npm/jsonwebtoken@9.0.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/@neondatabase/serverless@0.9.5",
+      "dependsOn": [
+        "pkg:npm/@types/pg@8.11.6"
+      ]
+    },
+    {
+      "ref": "pkg:npm/@types/node@25.3.0",
+      "dependsOn": [
+        "pkg:npm/undici-types@7.18.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/@types/pg@8.11.6",
+      "dependsOn": [
+        "pkg:npm/@types/node@25.3.0",
+        "pkg:npm/pg-protocol@1.11.0",
+        "pkg:npm/pg-types@4.1.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/bcryptjs@2.4.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/buffer-equal-constant-time@1.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/cookie@0.6.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/ecdsa-sig-formatter@1.0.11",
+      "dependsOn": [
+        "pkg:npm/safe-buffer@5.2.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/jsonwebtoken@9.0.2",
+      "dependsOn": [
+        "pkg:npm/jws@3.2.3",
+        "pkg:npm/lodash.includes@4.3.0",
+        "pkg:npm/lodash.isboolean@3.0.3",
+        "pkg:npm/lodash.isinteger@4.0.4",
+        "pkg:npm/lodash.isnumber@3.0.3",
+        "pkg:npm/lodash.isplainobject@4.0.6",
+        "pkg:npm/lodash.isstring@4.0.1",
+        "pkg:npm/lodash.once@4.1.1",
+        "pkg:npm/ms@2.1.3",
+        "pkg:npm/semver@7.7.4"
+      ]
+    },
+    {
+      "ref": "pkg:npm/jwa@1.4.2",
+      "dependsOn": [
+        "pkg:npm/buffer-equal-constant-time@1.0.1",
+        "pkg:npm/ecdsa-sig-formatter@1.0.11",
+        "pkg:npm/safe-buffer@5.2.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/jws@3.2.3",
+      "dependsOn": [
+        "pkg:npm/jwa@1.4.2",
+        "pkg:npm/safe-buffer@5.2.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/lodash.includes@4.3.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/lodash.isboolean@3.0.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/lodash.isinteger@4.0.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/lodash.isnumber@3.0.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/lodash.isplainobject@4.0.6",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/lodash.isstring@4.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/lodash.once@4.1.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/ms@2.1.3",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/obuf@1.1.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pg-int8@1.0.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pg-numeric@1.0.2",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pg-protocol@1.11.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/pg-types@4.1.0",
+      "dependsOn": [
+        "pkg:npm/pg-int8@1.0.1",
+        "pkg:npm/pg-numeric@1.0.2",
+        "pkg:npm/postgres-array@3.0.4",
+        "pkg:npm/postgres-bytea@3.0.0",
+        "pkg:npm/postgres-date@2.1.0",
+        "pkg:npm/postgres-interval@3.0.0",
+        "pkg:npm/postgres-range@1.1.4"
+      ]
+    },
+    {
+      "ref": "pkg:npm/postgres-array@3.0.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/postgres-bytea@3.0.0",
+      "dependsOn": [
+        "pkg:npm/obuf@1.1.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/postgres-date@2.1.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/postgres-interval@3.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/postgres-range@1.1.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/safe-buffer@5.2.1",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/semver@7.7.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/undici-types@7.18.2",
+      "dependsOn": []
+    }
+  ]
+}
