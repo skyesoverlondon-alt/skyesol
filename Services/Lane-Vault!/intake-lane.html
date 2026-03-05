@@ -267,7 +267,6 @@
 </style>
 </head>
 <body class="locked">
-  <div id="siteHeaderMount"></div>
   <img class="kaixu-logo" src="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" alt="kAIxU logo" loading="eager" />
 
   <div class="cinematic-opener" aria-hidden="true">
@@ -490,33 +489,5 @@
     })();
   </script>
   <script src="/js/main.js"></script>
-  <script src="/js/partials.js"></script>
-  <div id="siteFooterMount" data-sol-partial="footer"></div>
-  <script id="sol-global-partials-injector">
-    (function(){
-      const mountHeader = document.getElementById('siteHeaderMount');
-      const mountFooter = document.getElementById('siteFooterMount');
-      const inject = async (url, mount) => {
-        if (!mount || mount.dataset.loaded === 'true') return;
-        try {
-          const res = await fetch(url, { cache: 'no-cache' });
-          if (!res.ok) return;
-          mount.innerHTML = await res.text();
-          mount.dataset.loaded = 'true';
-        } catch (err) {
-          console.warn('Global partial inject failed for', url, err);
-        }
-      };
-      const run = () => {
-        inject('/partials/header.html', mountHeader);
-        inject('/partials/footer.html', mountFooter);
-      };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run, { once: true });
-      } else {
-        run();
-      }
-    })();
-  </script>
-</body>
+  <script src="/js/partials.js"></script></body>
 </html>

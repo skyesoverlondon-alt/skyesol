@@ -9,7 +9,6 @@
   <script defer src="./assets/intake.js"></script>
 </head>
 <body>
-  <div id="siteHeaderMount" data-sol-partial="header"></div>
   <img class="watermark" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London watermark" />
 
   <header class="header">
@@ -155,34 +154,5 @@
       <div>© 2026 Skyes Over London LC</div>
       <div style="margin-top:6px;"><a href="./privacy.html">Privacy</a> • <a href="./terms.html">Terms</a></div>
     </div>
-  </footer>
-  <script src="/js/SkyeSolINTRO.js"></script>
-  <div id="siteFooterMount" data-sol-partial="footer"></div>
-  <script id="sol-global-partials-injector">
-    (function(){
-      const mountHeader = document.getElementById('siteHeaderMount');
-      const mountFooter = document.getElementById('siteFooterMount');
-      const inject = async (url, mount) => {
-        if (!mount || mount.dataset.loaded === 'true') return;
-        try {
-          const res = await fetch(url, { cache: 'no-cache' });
-          if (!res.ok) return;
-          mount.innerHTML = await res.text();
-          mount.dataset.loaded = 'true';
-        } catch (err) {
-          console.warn('Global partial inject failed for', url, err);
-        }
-      };
-      const run = () => {
-        inject('/partials/header.html', mountHeader);
-        inject('/partials/footer.html', mountFooter);
-      };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run, { once: true });
-      } else {
-        run();
-      }
-    })();
-  </script>
-</body>
+  </footer></body>
 </html>

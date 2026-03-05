@@ -49,7 +49,6 @@ footer{text-align:center;padding:60px 24px 30px;border-top:1px solid rgba(201,16
 </style>
 </head>
 <body>
-  <div id="siteHeaderMount" data-sol-partial="header"></div>
 <canvas id="three-bg"></canvas>
 
 <nav class="main-nav" id="mainNav">
@@ -396,34 +395,5 @@ footer{text-align:center;padding:60px 24px 30px;border-top:1px solid rgba(201,16
   if(!canvas)return;const ctx=canvas.getContext('2d');let w,h,t=0;const blobs=Array.from({length:18},()=>({x:Math.random(),y:Math.random(),r:Math.random()*0.18+0.08,s:Math.random()*0.6+0.2,c:Math.random()}));const colors=[[201,168,76],[140,110,255],[58,111,216],[232,76,48]];function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;}window.addEventListener('resize',resize);resize();function lerp(a,b,u){return a+(b-a)*u;}function draw(){t+=0.005;ctx.clearRect(0,0,w,h);ctx.globalCompositeOperation='lighter';blobs.forEach((b,i)=>{const cx=(b.x+Math.sin(t*b.s+i)*0.08+1)%1*w;const cy=(b.y+Math.cos(t*b.s*0.7+i)*0.06+1)%1*h;const r=b.r*Math.max(w,h);const g=ctx.createRadialGradient(cx,cy,r*0.15,cx,cy,r);const col=colors[i%colors.length];const col2=colors[(i+1)%colors.length];const mix=(Math.sin(t*1.5+i)+1)/2;const r1=Math.floor(lerp(col[0],col2[0],mix));const g1=Math.floor(lerp(col[1],col2[1],mix));const b1=Math.floor(lerp(col[2],col2[2],mix));g.addColorStop(0,`rgba(${r1},${g1},${b1},0.22)`);g.addColorStop(1,'rgba(7,7,15,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();});ctx.globalCompositeOperation='source-over';requestAnimationFrame(draw);}draw();})();
 </script>
 <script src="/js/main.js"></script>
-  <script src="/js/partials.js"></script>
-  <script src="/js/SkyeSolINTRO.js"></script>
-  <div id="siteFooterMount" data-sol-partial="footer"></div>
-  <script id="sol-global-partials-injector">
-    (function(){
-      const mountHeader = document.getElementById('siteHeaderMount');
-      const mountFooter = document.getElementById('siteFooterMount');
-      const inject = async (url, mount) => {
-        if (!mount || mount.dataset.loaded === 'true') return;
-        try {
-          const res = await fetch(url, { cache: 'no-cache' });
-          if (!res.ok) return;
-          mount.innerHTML = await res.text();
-          mount.dataset.loaded = 'true';
-        } catch (err) {
-          console.warn('Global partial inject failed for', url, err);
-        }
-      };
-      const run = () => {
-        inject('/partials/header.html', mountHeader);
-        inject('/partials/footer.html', mountFooter);
-      };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run, { once: true });
-      } else {
-        run();
-      }
-    })();
-  </script>
-</body>
+  <script src="/js/partials.js"></script></body>
 </html>

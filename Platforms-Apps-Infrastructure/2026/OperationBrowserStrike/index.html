@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-  <div id="siteHeaderMount" data-sol-partial="header"></div>
   <nav class="ecosystem-dock" aria-label="Skye ecosystem navigation">
     <a href="/index.html">SOL Home</a>
     <a href="/platforms.html">Platforms</a>
@@ -181,33 +180,5 @@
     </main>
   </div>
 
-  <script type="module" src="./js/main.js"></script>
-  <div id="siteFooterMount" data-sol-partial="footer"></div>
-  <script id="sol-global-partials-injector">
-    (function(){
-      const mountHeader = document.getElementById('siteHeaderMount');
-      const mountFooter = document.getElementById('siteFooterMount');
-      const inject = async (url, mount) => {
-        if (!mount || mount.dataset.loaded === 'true') return;
-        try {
-          const res = await fetch(url, { cache: 'no-cache' });
-          if (!res.ok) return;
-          mount.innerHTML = await res.text();
-          mount.dataset.loaded = 'true';
-        } catch (err) {
-          console.warn('Global partial inject failed for', url, err);
-        }
-      };
-      const run = () => {
-        inject('/partials/header.html', mountHeader);
-        inject('/partials/footer.html', mountFooter);
-      };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run, { once: true });
-      } else {
-        run();
-      }
-    })();
-  </script>
-</body>
+  <script type="module" src="./js/main.js"></script></body>
 </html>

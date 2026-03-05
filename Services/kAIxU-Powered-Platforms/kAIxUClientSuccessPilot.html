@@ -8,7 +8,6 @@
   <meta name="description" content="Post-sale success operations with onboarding, adoption scoring, renewal signals, and escalation governance." />
 </head>
 <body>
-  <div id="siteHeaderMount" data-sol-partial="header"></div>
   <main>
     <h1>kAIxU Client Success Pilot</h1>
     <p>Post-sale success operations with onboarding, adoption scoring, renewal signals, and escalation governance.</p>
@@ -18,35 +17,7 @@
       <li>$16,900 professional</li>
       <li>$31,500 enterprise</li>
     </ul>
-  </main>
-  <div id="siteFooterMount" data-sol-partial="footer"></div>
-  <script id="sol-global-partials-injector">
-    (function(){
-      const mountHeader = document.getElementById('siteHeaderMount');
-      const mountFooter = document.getElementById('siteFooterMount');
-      const inject = async (url, mount) => {
-        if (!mount || mount.dataset.loaded === 'true') return;
-        try {
-          const res = await fetch(url, { cache: 'no-cache' });
-          if (!res.ok) return;
-          mount.innerHTML = await res.text();
-          mount.dataset.loaded = 'true';
-        } catch (err) {
-          console.warn('Global partial inject failed for', url, err);
-        }
-      };
-      const run = () => {
-        inject('/partials/header.html', mountHeader);
-        inject('/partials/footer.html', mountFooter);
-      };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run, { once: true });
-      } else {
-        run();
-      }
-    })();
-  </script>
-</body>
+  </main></body>
 </html><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,6 +77,6 @@
   </main>
   <footer><div class="wrap"><div class="foot"><div>© <span id="year"></span> Skyes Over London LC</div><div>kAIxU • Powered Platforms</div></div></div></footer>
   <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-  <script src="/js/three-bg.js" defer></script><script src="/js/main.js"></script><script src="/js/partials.js"></script><script src="/js/SkyeSolINTRO.js"></script>
+  <script src="/js/three-bg.js" defer></script><script src="/js/main.js"></script><script src="/js/partials.js"></script>
 </body>
 </html>

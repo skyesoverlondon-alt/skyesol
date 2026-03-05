@@ -1,0 +1,24 @@
+/* Shared styling fallback for SkyeMedia service pages. */
+:root {
+  --bg: #07070d;
+  --panel: #11131a;
+  --text: #eef2ff;
+  --muted: #a2a8be;
+  --accent: #6fe6ff;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at 18% 10%, #1b1f2f 0%, var(--bg) 60%);
+  color: var(--text);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+}
+
+a { color: var(--accent); }
+.wrap { width: min(1120px, 92vw); margin: 0 auto; }
+.card, .block, .quote { background: var(--panel); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; }
+.section-title h2, h1, h2, h3 { color: #ffffff; }
+.small, .muted, .sub { color: var(--muted); }
+.btn { display: inline-block; text-decoration: none; cursor: pointer; }

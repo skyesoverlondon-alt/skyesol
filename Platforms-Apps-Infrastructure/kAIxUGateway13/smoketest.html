@@ -244,7 +244,6 @@
 </head>
 
 <body>
-  <div id="siteHeaderMount" data-sol-partial="header"></div>
 	<div class="watermark" aria-hidden="true"></div>
 	<div class="grain" aria-hidden="true"></div>
 	<div class="scanlines" aria-hidden="true"></div>
@@ -704,34 +703,5 @@
 			window.addEventListener('scroll', onScroll, { passive: true });
 			onScroll();
 		})();
-	</script>
-  <script src="/js/SkyeSolINTRO.js"></script>
-  <div id="siteFooterMount" data-sol-partial="footer"></div>
-  <script id="sol-global-partials-injector">
-    (function(){
-      const mountHeader = document.getElementById('siteHeaderMount');
-      const mountFooter = document.getElementById('siteFooterMount');
-      const inject = async (url, mount) => {
-        if (!mount || mount.dataset.loaded === 'true') return;
-        try {
-          const res = await fetch(url, { cache: 'no-cache' });
-          if (!res.ok) return;
-          mount.innerHTML = await res.text();
-          mount.dataset.loaded = 'true';
-        } catch (err) {
-          console.warn('Global partial inject failed for', url, err);
-        }
-      };
-      const run = () => {
-        inject('/partials/header.html', mountHeader);
-        inject('/partials/footer.html', mountFooter);
-      };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run, { once: true });
-      } else {
-        run();
-      }
-    })();
-  </script>
-</body>
+	</script></body>
 </html>

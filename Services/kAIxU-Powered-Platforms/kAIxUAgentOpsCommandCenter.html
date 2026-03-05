@@ -8,7 +8,6 @@
   <meta name="description" content="Multi-agent command layer with approvals, runbooks, observability, and execution governance." />
 </head>
 <body>
-  <div id="siteHeaderMount" data-sol-partial="header"></div>
   <main>
     <h1>kAIxU AgentOps Command Center</h1>
     <p>Multi-agent command layer with approvals, runbooks, observability, and execution governance.</p>
@@ -18,35 +17,7 @@
       <li>$22,500 professional</li>
       <li>$45,000 enterprise</li>
     </ul>
-  </main>
-  <div id="siteFooterMount" data-sol-partial="footer"></div>
-  <script id="sol-global-partials-injector">
-    (function(){
-      const mountHeader = document.getElementById('siteHeaderMount');
-      const mountFooter = document.getElementById('siteFooterMount');
-      const inject = async (url, mount) => {
-        if (!mount || mount.dataset.loaded === 'true') return;
-        try {
-          const res = await fetch(url, { cache: 'no-cache' });
-          if (!res.ok) return;
-          mount.innerHTML = await res.text();
-          mount.dataset.loaded = 'true';
-        } catch (err) {
-          console.warn('Global partial inject failed for', url, err);
-        }
-      };
-      const run = () => {
-        inject('/partials/header.html', mountHeader);
-        inject('/partials/footer.html', mountFooter);
-      };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run, { once: true });
-      } else {
-        run();
-      }
-    })();
-  </script>
-</body>
+  </main></body>
 </html><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -260,6 +231,5 @@
   <script src="/js/three-bg.js" defer></script>
   <script src="/js/main.js"></script>
   <script src="/js/partials.js"></script>
-  <script src="/js/SkyeSolINTRO.js"></script>
 </body>
 </html>

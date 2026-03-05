@@ -922,7 +922,6 @@
 </head>
 
 <body>
-  <div id="siteHeaderMount" data-sol-partial="header"></div>
   <!-- Floating Logos (NO container, subtle glow, float + pulse) -->
   <img
     class="floating-logo primary"
@@ -1684,7 +1683,6 @@
 
   <script src="/js/main.js"></script>
   <script src="/js/partials.js"></script>
-  <script src="/js/SkyeSolINTRO.js"></script>
   <script>
     (function(){
       // Sticky nav shading
@@ -1733,33 +1731,5 @@
         requestAnimationFrame(tick);
       }
     })();
-  </script>
-  <div id="siteFooterMount" data-sol-partial="footer"></div>
-  <script id="sol-global-partials-injector">
-    (function(){
-      const mountHeader = document.getElementById('siteHeaderMount');
-      const mountFooter = document.getElementById('siteFooterMount');
-      const inject = async (url, mount) => {
-        if (!mount || mount.dataset.loaded === 'true') return;
-        try {
-          const res = await fetch(url, { cache: 'no-cache' });
-          if (!res.ok) return;
-          mount.innerHTML = await res.text();
-          mount.dataset.loaded = 'true';
-        } catch (err) {
-          console.warn('Global partial inject failed for', url, err);
-        }
-      };
-      const run = () => {
-        inject('/partials/header.html', mountHeader);
-        inject('/partials/footer.html', mountFooter);
-      };
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run, { once: true });
-      } else {
-        run();
-      }
-    })();
-  </script>
-</body>
+  </script></body>
 </html>

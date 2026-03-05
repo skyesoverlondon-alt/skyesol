@@ -1,12 +1,11 @@
 [build]
   publish = "."
 
+# CRITICAL: Do not disable root functions for this site.
+# Gateway 13/admin auth/API depend on live function routes under `/.netlify/functions/*`.
+# If this directory is changed to a disabled/empty path, login and gateway APIs 404 immediately.
 [functions]
-  # Temporary deploy safety switch:
-  # Netlify function uploads currently fail because site env vars exceed
-  # the 4KB-per-function limit. Pointing to an empty directory allows
-  # static deploys to succeed until env vars are trimmed in dashboard.
-  directory = "netlify/functions-disabled"
+  directory = "netlify/functions"
 
 # The site is plain HTML/CSS/JS. We keep build intentionally empty.
 # Functions are deployed via Netlify CLI (recommended) or Git-based builds.
