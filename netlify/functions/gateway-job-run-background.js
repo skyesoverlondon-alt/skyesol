@@ -1,5 +1,5 @@
 import { q } from "./_lib/db.js";
-import { callOpenAI, callAnthropic, callGemini, normalizeProviderName } from "./_lib/providers.js";
+import { callOpenAI, callAnthropic, callGemini, resolveProvider, resolveUpstreamTarget } from "./_lib/providers.js";
 import { costCents } from "./_lib/pricing.js";
 import { monthKeyUTC } from "./_lib/http.js";
 
@@ -43,8 +43,12 @@ export default async (req) => {
     request = job.request || {};
   }
 
-  const provider = normalizeProviderName(job.provider || request.provider || "");
-  const model = String(job.model || request.model || "");
+  const requested_provider = String(request.requested_provider || job.provider || request.provider || "").trim();
+  const requested_model = String(request.requested_model || job.model || request.model || "").trim();
+  const base_provider = resolveProvider(requested_provider);
+  const target = resolveUpstreamTarget(base_provider, requested_model);
+  const provider = target.provider;
+  const model = target.model;
   const messages = Array.isArray(request.messages) ? request.messages : [];
   const max_tokens = Number.isFinite(request.max_tokens) ? parseInt(request.max_tokens, 10) : 4096;
   const temperature = Number.isFinite(request.temperature) ? request.temperature : 1;
@@ -54,7 +58,7 @@ export default async (req) => {
     if (provider === "openai") result = await callOpenAI({ model, messages, max_tokens, temperature });
     else if (provider === "anthropic") result = await callAnthropic({ model, messages, max_tokens, temperature });
     else if (provider === "gemini") result = await callGemini({ model, messages, max_tokens, temperature });
-    else throw new Error("Unknown provider. Use openai|anthropic|gemini|Skyes Over London.");
+    else throw new Error("Unknown provider");
 
     const output_text = result.output_text || "";
     const input_tokens = result.input_tokens || 0;
@@ -64,7 +68,11 @@ export default async (req) => {
     const meta = {
       raw: result.raw || null,
       max_tokens,
-      temperature
+      temperature,
+      requested_provider,
+      requested_model,
+      effective_provider: provider,
+      effective_model: model
     };
 
     await q(

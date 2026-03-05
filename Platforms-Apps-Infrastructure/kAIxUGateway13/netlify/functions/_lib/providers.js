@@ -47,19 +47,78 @@ function upstreamError(provider, res, body) {
   return err;
 }
 
-// Accept branded/provider aliases while keeping canonical internal routing names.
+const BUILTIN_MODEL_ALIASES = Object.freeze({
+  "KAIXU_PRIME6_7": { provider: "openai", model: "gpt-4o-mini" },
+  "KAIXU_PRIME7": { provider: "openai", model: "gpt-4o" }
+});
+
+function aliasToken(value) {
+  return String(value || "")
+    .replace(/[^A-Za-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .toUpperCase();
+}
+
+function buildEnvAliasMap() {
+  const out = new Map();
+  for (const [k, v] of Object.entries(process.env || {})) {
+    const m = /^KAIXU_ALIAS_(.+)_(PROVIDER|MODEL)$/.exec(k);
+    if (!m) continue;
+    const token = m[1];
+    const field = m[2].toLowerCase();
+    const cur = out.get(token) || {};
+    cur[field] = String(v || "").trim();
+    out.set(token, cur);
+  }
+  return out;
+}
+
+const ENV_MODEL_ALIASES = buildEnvAliasMap();
+
+function lookupModelAlias(requestedModel) {
+  const token = aliasToken(requestedModel);
+  if (!token) return null;
+
+  const envAlias = ENV_MODEL_ALIASES.get(token);
+  if (envAlias && envAlias.model) return envAlias;
+
+  return BUILTIN_MODEL_ALIASES[token] || null;
+}
+
+export function resolveProvider(raw) {
+  const v = String(raw || "").trim().toLowerCase();
+  if (v === "openai" || v === "anthropic" || v === "gemini") return v;
+  if (v === "skyes over london" || v === "skyes over london lc" || v === "skyes" || v === "kaixu") return "openai";
+  return "openai";
+}
+
+// Backward-compatible alias used elsewhere in the codebase.
 export function normalizeProviderName(input) {
-  const raw = String(input || "").trim().toLowerCase();
-  if (!raw) return "";
+  return resolveProvider(input);
+}
 
-  if (raw === "openai" || raw === "anthropic" || raw === "gemini") return raw;
+export function resolveUpstreamTarget(provider, requestedModel) {
+  const fallbackProvider = resolveProvider(provider);
+  const fallbackModel = String(requestedModel || "").trim();
 
-  const compact = raw.replace(/[\s_-]+/g, " ");
-  if (compact === "skyes over london" || compact === "skyes over london lc") {
-    return "openai";
+  const alias = lookupModelAlias(fallbackModel);
+  if (!alias) {
+    return {
+      provider: fallbackProvider,
+      model: fallbackModel,
+      alias_key: null
+    };
   }
 
-  return raw;
+  return {
+    provider: resolveProvider(alias.provider || fallbackProvider),
+    model: String(alias.model || fallbackModel).trim(),
+    alias_key: fallbackModel
+  };
+}
+
+export function resolveUpstreamModel(provider, requestedModel) {
+  return resolveUpstreamTarget(provider, requestedModel).model;
 }
 
 /**
