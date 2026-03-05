@@ -375,8 +375,12 @@ const store = {
   })();
 
   // --- UI wiring ---
-  $("#connectBtn").addEventListener("click", connect);
-  $("#monthBtn").addEventListener("click", refreshAll);
+  // Support both legacy and current button IDs so auth wiring does not break.
+  const connectBtn = $("#connectBtn") || $("#saveKeyBtn");
+  const monthBtn = $("#monthBtn") || $("#loadMonthBtn") || $("#refreshBtn");
+
+  connectBtn?.addEventListener("click", connect);
+  monthBtn?.addEventListener("click", refreshAll);
   $("#disconnectBtn")?.addEventListener("click", ()=>{
     store.key = "";
     keyInput.value = "";
