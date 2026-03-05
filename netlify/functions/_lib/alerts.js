@@ -45,7 +45,7 @@ export async function maybeCapAlerts({
   key_cap_cents,
   key_spent_cents
 }) {
-  const warnPct = parseFloat(process.env.CAP_WARN_PCT || "80");
+  const warnPct = parseFloat(process.env.CAP_WARN_PCT || "85");
 
   const custP = pct(customer_spent_cents || 0, customer_cap_cents || 0);
   const keyP = pct(key_spent_cents || 0, key_cap_cents || 0);
