@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>0megaGate Branded Runbook (HTML Edition)</title>
+  <style>
+    :root{--bg:#06070d;--panel:#0f1220;--ink:#eef1ff;--muted:#b7bfdc;--line:#2a3356;--accent:#ffd36a}
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#0a0f1f);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+    .head{position:sticky;top:0;z-index:5;background:rgba(6,7,13,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px 0;margin-bottom:16px}
+    h1{margin:0 0 6px;font-size:1.35rem;color:var(--accent)}
+    p{margin:0;color:var(--muted);font-size:.95rem}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .btn{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none;background:#131a33}
+    .panel{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px;overflow:auto}
+    pre{margin:0;white-space:pre-wrap;word-break:break-word;line-height:1.35;font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#e8ecff}
+  </style>
+</head>
+<body>
+  <div class="head">
+    <div class="wrap">
+      <h1>0megaGate Branded Runbook (HTML Edition)</h1>
+      <p>Rendered from the official PDF to provide an HTML fallback when PDF hosting is restricted.</p>
+      <div class="actions">
+        <a class="btn" href="./0megaGate_Branded_Runbook.pdf.pdf" target="_blank" rel="noopener">Open Original PDF</a>
+        <a class="btn" href="./0megaGate_Branded_Runbook.pdf.pdf" download>Download PDF</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="panel">
+      <pre>
+ 0megaGate
+ HardenedXinthLine - Standalone Gate + Control Plane
+
+ A contract-stable gateway that lets every app become a thin client: point to one base URL and stop
+ re-implementing AI plumbing.
+
+
+ Document build: 2026-03-04 - Contract version: 2026.03.03
+
+
+
+
+         Deployment warning (non-negotiable): Lord kAIxu, this must be deployed via Git or it will not be useful to
+         you. Netlify Functions + redirects must run server-side.
+
+
+
+
+Skyes Over London LC - SOLEnterprises Ecosystem - Proprietary
+Executive Summary
+0megaGate is the production-grade evolution of the Xinth gate line. It exposes a stable public contract
+under /v1 and enforces governance in a single place (the gate), so your apps never embed provider keys
+or custom AI glue.
+The gate includes: token and key lanes, CORS controls, rate limiting, device binding, usage metering,
+audit trails, exports, and a built-in smoke verification console.
+
+
+
+   - One forever base URL for all apps (Netlify front-door).
+   - Worker executor abstracts the underlying AI provider - callers only see kAIxU branded models.
+   - Key issuance + rotation + revocation (per-customer), with caps (RPM/RPD/monthly) and
+   allowlists.
+   - Device binding (install_id) with revoke/unrevoke controls.
+   - Exportable usage evidence (events CSV, summary CSV, invoice CSV).
+   - Smoke UI generates JSON proof artifacts on demand.
+
+
+
+       Stand-alone means: a new Netlify site + a new Cloudflare Worker + (optionally) new DB/KV namespaces.
+       Existing gates can stay online; 0megaGate becomes the default route for your ecosystem.
+
+
+
+
+     Skyes Over London LC - SOLEnterprises Ecosystem - Proprietary
+Public Contract (Stable /v1)
+Client apps should code against the following endpoints and never call providers directly:
+
+   METHOD         PATH                                   PURPOSE
+
+   GET            /v1/health                             Gateway status + config flags
+
+   GET            /v1/models                             Branded model discovery
+
+   POST           /v1/generate                           Blocking generation (recommended for
+                                                         Netlify-hosted apps)
+
+   POST           /v1/stream                             SSE streaming generation
+
+   POST           /v1/embeddings                         Text embeddings
+
+   POST           /v1/embed                              Alias of /v1/embeddings
+
+   GET            /.well-known/kaixu-gateway             Discovery document (machine-readable)
+
+
+
+Authentication Headers
+
+   Preferred        Authorization: Bearer                           App token / virtual key
+
+   Alt              X-KAIXU-TOKEN:                                  Header token (legacy-friendly)
+
+   Key lane         X-KAIXU-KEY:                                    Service-key lane for headless/server callers
+
+
+         Streaming note: /v1/stream uses Server-Sent Events. Netlify's CDN can buffer streaming responses, so
+         Netlify-hosted browser apps should prefer /v1/generate unless they call the Worker base directly.
+
+
+
+
+  Skyes Over London LC - SOLEnterprises Ecosystem - Proprietary
+Governance &amp; Management (Xinth-grade controls)
+0megaGate keeps governance in the gate. Keys are issued and controlled by the platform so customers
+and internal apps never handle vendor credentials.
+Key management capabilities
+
+
+   - Create sub-keys (prefix kx_live_) per customer.
+
+   - Set per-key caps: monthly cap (cents), RPM limit, RPD limit.
+   - Set device policies: max devices, require install_id.
+   - Set allowlists: allowed providers and allowed models.
+
+   - Rotate keys (issue new key, keep policy), revoke/unrevoke keys.
+   - Admin-only reveal flow for encrypted keys stored in vault.
+
+
+Device binding
+When require_install_id is enabled for a key, callers must send a stable install identifier. Devices can be
+listed and revoked (per key or customer).
+
+
+Usage metering + exports
+Usage events are recorded with provider, model, token counts, cost cents, and install_id. Admin can
+export:
+   - Events CSV (usage_events) for a month, optionally filtered by key.
+   - Summary CSV (monthly rollup for a customer).
+
+   - Invoice CSV snapshot (per-key spend + totals).
+
+
+       Security posture: openGate is false by default. Vendor names are abstracted; clients only see Skyes Over
+       London + kAIxU-branded model IDs.
+
+
+
+
+ Skyes Over London LC - SOLEnterprises Ecosystem - Proprietary
+        Deployment Checklist (Standalone Gate)
+        0megaGate deploys as two cooperating surfaces: (1) Netlify front-door (routes, UI, Functions) and (2)
+        Cloudflare Worker executor (policy + provider proxy).
+        A) Cloudflare Worker
+
+
+           1. Deploy worker/ (new worker name for 0megaGate).
+           2. Set secrets: KAIXU_GEMINI_API_KEY and KAIXU_APP_TOKENS (comma-separated).
+           3. Optional: set KAIXU_ALLOWED_ORIGINS for strict CORS; otherwise allow-all is used.
+
+           4. Confirm /v1/health and /v1/models respond from the worker URL.
+
+
+        B) Netlify Front-Door
+
+           1. Deploy the repo via Git (Netlify Drop will not run Functions reliably).
+           2. Set KAIXU_V1_UPSTREAM to your worker base URL (no trailing slash).
+
+           3. Verify netlify.toml redirects map /v1/* to /.netlify/functions/v1-proxy/*.
+           4. Open /gateway.html and run the built-in smoke test at /smokeKai.html.
+
+
+
+        Minimum environment variables (sanitized)
+
+           VAR                               NEED                PURPOSE                             EXAMPLE
+
+           KAIXU_GEMINI_API_KEY              Required            Gemini provider key (stored only
+                                                                 on the gate)
+
+           KAIXU_APP_TOKENS                  Required            Comma-separated app tokens /        tokenA,toke
+                                                                                                     nB
+                                                                 virtual keys
+
+           KAIXU_OPEN_GATE                   Optional            Set to 1 to allow unauthenticated   0
+                                                                 calls (not recommended)
+
+           KAIXU_ALLOWED_ORIGINS             Optional            CORS allowlist origins              https://app
+                                                                                                     .example.co
+                                                                                                     m
+
+           KAIXU_DEFAULT_MODEL               Optional            Default model if not specified      kAIxU6.7-fl
+                                                                                                     ash
+
+           KAIXU_V1_UPSTREAM                 Required            Worker base URL used by             https://.wo
+                                                                                                     rkers.dev
+                                             (Netlify)           v1-proxy function
+
+
+
+
+Skyes Over London LC - SOLEnterprises Ecosystem - Proprietary
+  Smoke System &amp; Proof Artifacts
+  0megaGate ships with a built-in smoke console. It verifies health, models, CORS, blocking generation,
+  and SSE streaming, then exports a JSON proof artifact.
+  Built-in Smoke UI
+
+
+     Gateway console        /gateway.html                         Operator entry surface
+
+     Smoke Test             /smokeKai.html                        Runs all tests + exports JSON report
+
+     Coverage               /smokeCoverageKai.html                Explains test coverage + posture
+
+
+
+  Evidence discipline (recommended naming)
+
+     - 0megagate-ui-smoke-YYYY-MM-DD.png
+
+     - 0megagate-ui-smoke-YYYY-MM-DD.json
+     - 0megagate-cli-smoke-YYYY-MM-DD.json (optional)
+
+
+
+  Common setup failures
+
+     - Smoke UI loads but /v1 tests fail: KAIXU_V1_UPSTREAM is missing or incorrect in Netlify.
+
+     - Health works but generate fails: KAIXU_GEMINI_API_KEY missing in Worker secrets.
+
+     - Browser app blocked: CORS allowlist missing origin in KAIXU_ALLOWED_ORIGINS.
+     - Streaming appears frozen from Netlify app: CDN buffering; use /v1/generate or call Worker
+     directly.
+
+
+
+          Operator rule: do not hardcode provider names or vendor model IDs in client apps. Keep the brand surface
+          stable: kAIxU models only.
+
+
+
+
+Issued by: Skyes Over London LC - System Engineering Desk
+Contact: SkyesOverLondonLC@solenterprises.org - (480) 469-5416
+
+Skyes Over London LC - SOLEnterprises Ecosystem - Proprietary
+      </pre>
+    </div>
+  </div>
+</body>
+</html>
