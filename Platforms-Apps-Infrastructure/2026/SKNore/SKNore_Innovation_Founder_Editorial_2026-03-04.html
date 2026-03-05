@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <title>SKNore — Protected-File Exfiltration Deny-List Guard | Skyes Over London LC</title>
+  <meta name="description" content="SKNore is an operator-grade deny-list guard that prevents protected-file exfiltration in AI workflows. It blocks high-risk paths, filters suspicious content patterns, and provides governance posture for RAG, vaults, and multi-tenant AI systems." />
+  <meta name="keywords" content="SKNore, file exfiltration prevention, AI security, LLM security, denylist guard, path traversal, secret scanning, data leakage prevention, RAG governance, Skyes Over London, SOLEnterprises, kAIxU" />
+  <meta name="author" content="Skyes Over London Editorial Desk" />
+  <meta name="publisher" content="Solenterprises International Nexus & Holdings LLC" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+  <meta name="theme-color" content="#080812" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="SKNore — Protected-File Exfiltration Deny-List Guard" />
+  <meta property="og:description" content="A proof-first security primitive: block protected-file exfiltration paths and content patterns before your AI system leaks what it can see." />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <meta property="og:site_name" content="Skyes Over London LC" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SKNore — Protected-File Exfiltration Deny-List Guard" />
+  <meta name="twitter:description" content="Operator-grade deny-list guard for AI workflows: path controls, pattern filters, governance posture." />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,450;0,600;0,700;1,450;1,600&family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --ink:#07070c;
+      --paper:#070812;
+      --paper2:#0b0c18;
+      --glass:rgba(255,255,255,.06);
+      --glass2:rgba(0,0,0,.30);
+      --stroke:rgba(255,255,255,.12);
+      --stroke2:rgba(255,255,255,.08);
+
+      --gold:#ffd36a;
+      --gold2:#ffefb0;
+      --purple:#7517FF; /* SVS purple (locked) */
+      --purple2:#e0a7ff;
+      --cyan:#27f2ff;
+      --mist:rgba(255,255,255,.84);
+      --slate:rgba(255,255,255,.64);
+
+      --display:'Playfair Display', Georgia, serif;
+      --body:'Instrument Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --mono:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+      --ease-out-quart:cubic-bezier(0.25,1,0.5,1);
+
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --shadow2: 0 12px 40px rgba(0,0,0,.40);
+
+      --r:18px;
+      --max:1400px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{
+      font-family:var(--body);
+      color:rgba(255,255,255,.92);
+      background:
+        radial-gradient(1200px 740px at 18% 12%, rgba(117,23,255,.22), transparent 58%),
+        radial-gradient(1100px 820px at 82% 22%, rgba(39,242,255,.16), transparent 58%),
+        radial-gradient(900px 700px at 62% 88%, rgba(255,211,106,.14), transparent 60%),
+        linear-gradient(180deg, var(--paper), #05050b 45%, var(--paper2));
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    a{color:inherit;text-decoration:none}
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+      outline:2px solid rgba(39,242,255,.70);
+      outline-offset:3px;
+      border-radius:12px;
+    }
+
+    /* Background layers */
+    .watermark{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:.10;
+      background:
+        radial-gradient(900px 520px at 50% 40%, rgba(117,23,255,.10), transparent 62%),
+        radial-gradient(820px 520px at 52% 62%, rgba(255,211,106,.10), transparent 62%),
+        url("https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png") center 44% / min(560px, 70vw) no-repeat;
+      filter: drop-shadow(0 0 18px rgba(255,211,106,.10));
+    }
+    .bgfx{position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.70;}
+    canvas#stars{width:100%; height:100%; display:block;}
+    .grain{
+      position:fixed; inset:0; z-index:1; pointer-events:none;
+      opacity:.12; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      background-size:260px 260px;
+    }
+    .scanlines{
+      position:fixed; inset:0; z-index:1; pointer-events:none;
+      opacity:.08;
+      background:repeating-linear-gradient(to bottom, rgba(255,255,255,.05), rgba(255,255,255,.05) 1px, rgba(0,0,0,0) 3px, rgba(0,0,0,0) 6px);
+    }
+
+    /* Cinematic opener */
+    body.locked{overflow:hidden; height:100vh;}
+    .cinematic-opener{
+      position:fixed; inset:0;
+      z-index:10000;
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      background:#05050b;
+      pointer-events:none;
+      animation: openerFadeOut 1s var(--ease-out-expo) 4.6s forwards;
+    }
+    .cinematic-opener::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 22% 52%, rgba(255,211,106,.14) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 52%, rgba(117,23,255,.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 75%, rgba(39,242,255,.08) 0%, transparent 60%);
+      animation: gradientPulse 4s ease-in-out infinite;
+    }
+    @keyframes gradientPulse{0%,100%{opacity:.55}50%{opacity:1}}
+
+    .opener-content{position:relative; z-index:2; text-align:center; padding:2rem; max-width:980px;}
+    .opener-line{overflow:hidden;}
+    .opener-text{
+      font-family:var(--mono);
+      color:rgba(255,255,255,.72);
+      font-size:clamp(.9rem,2.6vw,1.15rem);
+      letter-spacing:.28em;
+      text-transform:uppercase;
+      opacity:0;
+      transform:translateY(100%);
+      animation:slideUp 1s var(--ease-out-expo) .5s forwards;
+    }
+    .opener-title{
+      font-family:var(--display);
+      color:var(--gold);
+      font-size:clamp(2.2rem,7.8vw,5.2rem);
+      font-weight:700;
+      line-height:1.05;
+      margin:1.25rem 0;
+      opacity:0;
+      transform:translateY(100%);
+      animation:slideUp 1.2s var(--ease-out-expo) 1s forwards;
+    }
+    .opener-subtitle{
+      font-family:var(--body);
+      color:rgba(255,255,255,.70);
+      font-size:clamp(.95rem,2vw,1.1rem);
+      letter-spacing:.04em;
+      opacity:0;
+      animation:fadeIn 1.2s var(--ease-out-expo) 2.0s forwards;
+      max-width:76ch;
+      margin:0 auto;
+      line-height:1.85;
+    }
+    .opener-divider{
+      width:0; height:1px;
+      background:linear-gradient(90deg, transparent, var(--cyan), var(--gold), var(--purple), transparent);
+      margin:1.8rem auto;
+      animation:expandLine 1.5s var(--ease-out-expo) 1.5s forwards;
+      opacity:.9;
+    }
+    .opener-logo{
+      margin-top:2.4rem;
+      opacity:0;
+      animation:fadeIn 1s var(--ease-out-expo) 2.45s forwards;
+      display:flex;
+      justify-content:center;
+      gap:18px;
+      align-items:center;
+    }
+
+    .sol-logo{
+      width:150px;
+      height:auto;
+      filter: drop-shadow(0 0 16px rgba(255,211,106,.18)) drop-shadow(0 0 18px rgba(39,242,255,.10));
+      animation: pulseLogo 2.8s ease-in-out infinite;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    .kaixu-logo{
+      width:118px;
+      height:auto;
+      filter: drop-shadow(0 0 18px rgba(117,23,255,.28)) drop-shadow(0 0 18px rgba(255,211,106,.10));
+      animation: pulseLogo 2.6s ease-in-out infinite;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+    @keyframes pulseLogo{
+      0%,100%{transform:translateY(0) scale(1); opacity:.92;}
+      50%{transform:translateY(-2px) scale(1.02); opacity:1;}
+    }
+
+    .opener-company{
+      font-family:var(--mono);
+      color:rgba(255,255,255,.44);
+      font-size:.72rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      margin-top:1rem;
+      opacity:0;
+      animation:fadeIn 1s var(--ease-out-expo) 3.0s forwards;
+    }
+
+    @keyframes slideUp{to{opacity:1; transform:translateY(0)}}
+    @keyframes fadeIn{to{opacity:1}}
+    @keyframes expandLine{to{width:240px}}
+    @keyframes openerFadeOut{to{opacity:0; visibility:hidden}}
+
+    .progress-bar{
+      position:fixed;
+      bottom:40px;
+      left:50%;
+      transform:translateX(-50%);
+      width:240px;
+      height:2px;
+      background:rgba(255,255,255,.10);
+      border-radius:2px;
+      overflow:hidden;
+      z-index:10001;
+      animation:fadeOut .5s var(--ease-out-expo) 4.0s forwards;
+    }
+    .progress-fill{
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg, var(--cyan), var(--gold), var(--purple));
+      animation:progressFill 4s var(--ease-out-quart) forwards;
+      box-shadow:0 0 18px rgba(39,242,255,.28);
+    }
+    @keyframes progressFill{0%{width:0}100%{width:100%}}
+    @keyframes fadeOut{to{opacity:0}}
+
+    /* NAV */
+    .nav{
+      position:fixed; top:0; left:0;
+      width:100%;
+      padding:1.25rem 3rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+      background:transparent;
+      transition:all .4s var(--ease-out-expo);
+      border-bottom:1px solid rgba(255,255,255,0);
+    }
+    .nav.scrolled{
+      background:rgba(5,5,11,.70);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      padding:.9rem 3rem;
+    }
+    .nav-brand{display:flex; align-items:center; gap:14px;}
+    .nav-brand img{width:44px; height:auto; filter: drop-shadow(0 0 12px rgba(255,211,106,.14)); animation:pulseLogo 3.2s ease-in-out infinite;}
+    .nav-brand-title{display:flex; flex-direction:column; gap:2px; line-height:1.0;}
+    .nav-brand-name{font-family:var(--display); font-size:1.05rem; font-weight:700; color:rgba(255,255,255,.92);}
+    .nav-brand-sub{font-family:var(--mono); font-size:.62rem; color:rgba(255,255,255,.58); letter-spacing:.12em; text-transform:uppercase;}
+
+    .nav-links{display:flex; gap:1.8rem; list-style:none; flex-wrap:wrap;}
+    .nav-links a{
+      font-family:var(--body);
+      font-size:.86rem;
+      font-weight:600;
+      color:rgba(255,255,255,.66);
+      transition:color .25s ease, transform .25s ease;
+      letter-spacing:.02em;
+    }
+    .nav-links a:hover{color:var(--gold2); transform:translateY(-1px);}
+    .nav-cta{
+      display:inline-flex;
+      align-items:center;
+      gap:.65rem;
+      padding:.78rem 1.15rem;
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.92);
+      border:1px solid rgba(255,211,106,.25);
+      font-family:var(--mono);
+      font-size:.74rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      transition:all .3s ease;
+    }
+    .nav-cta:hover{
+      background:rgba(255,211,106,.10);
+      border-color:rgba(39,242,255,.30);
+      transform:translateY(-2px);
+      box-shadow:0 18px 40px rgba(0,0,0,.35);
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      z-index:2;
+    }
+    .hero-overlay{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.74) 100%),
+        linear-gradient(90deg, rgba(0,0,0,.78) 0%, transparent 58%);
+      z-index:2;
+    }
+    .hero-content{
+      position:relative;
+      z-index:3;
+      max-width:980px;
+      padding:0 5rem;
+    }
+    .hero-eyebrow{
+      font-family:var(--mono);
+      font-size:.74rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.68);
+    }
+    .hero-title{
+      margin-top:1rem;
+      font-family:var(--display);
+      font-size:clamp(2.3rem,5.4vw,4.4rem);
+      font-weight:700;
+      line-height:1.05;
+      color:rgba(255,255,255,.96);
+      text-shadow:0 18px 70px rgba(0,0,0,.55);
+    }
+    .hero-title em{color:var(--gold); font-style:italic;}
+    .hero-description{
+      margin-top:1.1rem;
+      font-size:1.12rem;
+      line-height:1.85;
+      color:rgba(255,255,255,.74);
+      max-width:72ch;
+    }
+    .hero-actions{margin-top:1.7rem; display:flex; gap:1rem; flex-wrap:wrap;}
+    .hero-btn{
+      display:inline-flex; align-items:center; gap:.75rem;
+      padding:.95rem 1.15rem;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      font-weight:800;
+      transition:transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .hero-btn:hover{transform:translateY(-2px); border-color:rgba(255,211,106,.30); background:rgba(255,211,106,.10);}
+    .hero-btn-primary{
+      border-color:rgba(255,211,106,.32);
+      background:linear-gradient(90deg, rgba(255,211,106,.18), rgba(117,23,255,.12));
+    }
+    .hero-btn-secondary{border-color:rgba(39,242,255,.22);}
+
+    .hero-scroll-indicator{
+      position:absolute;
+      left:5rem;
+      bottom:3rem;
+      z-index:4;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      color:rgba(255,255,255,.64);
+      font-family:var(--mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:.68rem;
+    }
+    .scroll-line{width:42px;height:1px;background:linear-gradient(90deg, transparent, rgba(255,255,255,.55)); position:relative; overflow:hidden;}
+    .scroll-line::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(90deg, transparent, rgba(255,211,106,.95), transparent);
+      transform:translateX(-100%);
+      animation:scrollSweep 1.9s ease-in-out infinite;
+    }
+    @keyframes scrollSweep{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+
+    /* STATS */
+    .stats-bar{
+      background:rgba(255,255,255,.03);
+      padding:4rem 5rem;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:2rem;
+      position:relative;
+      overflow:hidden;
+      border-top:1px solid rgba(255,255,255,.08);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      z-index:2;
+    }
+    .stats-bar::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 0% 50%, rgba(255,211,106,.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 100% 50%, rgba(117,23,255,.10) 0%, transparent 55%);
+    }
+    .stat-item{position:relative; z-index:2; text-align:center; opacity:0; transform:translateY(20px); transition:all .8s var(--ease-out-expo);}
+    .stat-item.visible{opacity:1; transform:translateY(0);}
+    .stat-number{
+      font-family:var(--display);
+      font-size:3.1rem;
+      font-weight:600;
+      color:var(--gold);
+      line-height:1;
+      margin-bottom:.55rem;
+    }
+    .stat-label{
+      font-family:var(--body);
+      font-size:.86rem;
+      color:rgba(255,255,255,.70);
+      letter-spacing:.06em;
+    }
+
+    /* ARTICLE */
+    .article{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:8rem 5rem;
+      position:relative;
+      z-index:2;
+    }
+    .article-header{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:6rem;
+      margin-bottom:6rem;
+      padding-bottom:6rem;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .article-meta{display:flex; flex-direction:column; gap:2rem;}
+    .article-category{
+      font-family:var(--mono);
+      font-size:.7rem;
+      color:rgba(255,255,255,.70);
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+    .article-date{font-family:var(--body); font-size:.9rem; color:rgba(255,255,255,.62);}
+    .article-author{display:flex; align-items:center; gap:1rem; margin-top:auto;}
+    .author-avatar{
+      width:48px; height:48px;
+      background:linear-gradient(135deg, rgba(255,211,106,.92), rgba(117,23,255,.78));
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--display);
+      font-size:1.1rem;
+      color:#0a0a0a;
+      font-weight:700;
+    }
+    .author-info{display:flex; flex-direction:column; gap:.2rem;}
+    .author-name{font-family:var(--body); font-weight:800; font-size:.95rem; color:rgba(255,255,255,.92);}
+    .author-role{font-family:var(--mono); font-size:.7rem; color:rgba(255,255,255,.55); letter-spacing:.05em;}
+
+    .article-intro{
+      font-family:var(--display);
+      font-size:1.75rem;
+      font-weight:400;
+      line-height:1.55;
+      color:rgba(255,255,255,.92);
+    }
+    .article-intro em{font-style:italic; color:var(--gold);}
+
+    .article-body{display:grid; grid-template-columns:280px 1fr; gap:6rem;}
+    .article-sidebar{position:sticky; top:120px; height:fit-content;}
+    .sidebar-nav{display:flex; flex-direction:column; gap:.75rem;}
+    .sidebar-nav-title{
+      font-family:var(--mono);
+      font-size:.65rem;
+      color:rgba(255,255,255,.55);
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      margin-bottom:1rem;
+      padding-bottom:1rem;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .sidebar-nav a{
+      font-size:.92rem;
+      color:rgba(255,255,255,.62);
+      padding:.2rem 0;
+      transition:color .2s ease;
+    }
+    .sidebar-nav a.active, .sidebar-nav a:hover{color:var(--gold2);}
+
+    .article-content section{margin-bottom:2.6rem;}
+    h2{
+      font-family:var(--display);
+      font-size:2rem;
+      margin-bottom:1rem;
+      color:rgba(255,255,255,.94);
+    }
+    p{color:rgba(255,255,255,.74); line-height:1.9; font-size:1.02rem;}
+    p.lead{color:rgba(255,255,255,.88); font-size:1.12rem; font-weight:650;}
+    .pull-quote{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      padding:2.2rem 2.2rem;
+      border-radius:18px;
+      margin:2.6rem 0;
+    }
+    .pull-quote blockquote{
+      font-family:var(--display);
+      font-size:1.55rem;
+      line-height:1.55;
+      color:rgba(255,255,255,.92);
+    }
+    .pull-quote cite{
+      display:block;
+      margin-top:1rem;
+      font-family:var(--mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:.72rem;
+      color:rgba(255,255,255,.55);
+    }
+
+    .cards{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:1rem; margin-top:1.15rem;}
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      border-radius:16px;
+      padding:1.25rem 1.25rem;
+      transition:transform .25s ease, border-color .25s ease;
+    }
+    .card:hover{transform:translateY(-2px); border-color:rgba(255,211,106,.24);}
+    .card h4{font-family:var(--body); font-size:1.02rem; margin-bottom:.35rem; color:rgba(255,255,255,.92);}
+    .card p{font-size:.96rem; line-height:1.75; color:rgba(255,255,255,.70);}
+
+    .badge-row{display:flex; gap:.6rem; flex-wrap:wrap; margin:.9rem 0 0;}
+    .badge{
+      font-family:var(--mono);
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:.55rem .75rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.22);
+      color:rgba(255,255,255,.70);
+    }
+    .badge.gold{border-color:rgba(255,211,106,.26); color:rgba(255,239,176,.92);}
+
+    .valuation-box{
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.22));
+      border-radius:18px;
+      padding:1.6rem 1.6rem;
+      margin-top:1.1rem;
+    }
+    .valuation-grid{display:grid; grid-template-columns:1fr auto; gap:1rem; align-items:end;}
+    .valuation-price{
+      font-family:var(--display);
+      font-size:2.4rem;
+      color:var(--gold);
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+    .valuation-meta{
+      font-family:var(--mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:.72rem;
+      color:rgba(255,255,255,.60);
+      text-align:right;
+      line-height:1.6;
+    }
+
+    /* CTA */
+    .cta-section{
+      background:rgba(0,0,0,.26);
+      margin:4.6rem -5rem;
+      padding:4.6rem 5rem;
+      border-top:1px solid rgba(255,255,255,.10);
+      border-bottom:1px solid rgba(255,255,255,.10);
+      position:relative;
+      overflow:hidden;
+      z-index:2;
+    }
+    .cta-section::before{
+      content:"";
+      position:absolute; inset:-10%;
+      background:
+        radial-gradient(ellipse at 100% 50%, rgba(255,211,106,.14) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 40%, rgba(39,242,255,.10) 0%, transparent 62%),
+        radial-gradient(ellipse at 80% 70%, rgba(117,23,255,.12) 0%, transparent 62%);
+      opacity:.95;
+    }
+    .cta-content{position:relative; z-index:2; display:grid; grid-template-columns:1fr auto; gap:2.6rem; align-items:center;}
+    .cta-text h3{font-family:var(--display); font-size:2.1rem; font-weight:800; color:rgba(255,255,255,.96); margin-bottom:.8rem;}
+    .cta-text p{margin:0; font-size:1.06rem; color:rgba(255,255,255,.74); max-width:76ch;}
+    .cta-stack{margin-top:1.2rem; display:flex; flex-wrap:wrap; gap:.6rem;}
+    .cta-pill{
+      padding:.6rem .8rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      font-size:.92rem;
+      color:rgba(255,255,255,.74);
+    }
+    .cta-pill b{color:var(--gold2); letter-spacing:.04em;}
+    .cta-button{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:1rem 1.2rem;
+      border-radius:14px;
+      background:linear-gradient(90deg, rgba(255,211,106,.20), rgba(117,23,255,.14));
+      border:1px solid rgba(255,211,106,.28);
+      font-family:var(--mono);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:.76rem;
+      box-shadow:0 18px 50px rgba(0,0,0,.45);
+      transition:transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .cta-button:hover{transform:translateY(-2px); border-color:rgba(39,242,255,.30); background:rgba(255,211,106,.14);}
+
+    /* Footer */
+    .footer{
+      padding:4.2rem 5rem 2.4rem;
+      border-top:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      position:relative;
+      z-index:2;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:4rem;
+      margin-bottom:3.2rem;
+      padding-bottom:3.2rem;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .footer-brand h4{font-family:var(--display); font-size:1.5rem; font-weight:650; margin-bottom:.5rem;}
+    .footer-brand .subsidiary{
+      font-family:var(--mono);
+      font-size:.65rem;
+      color:rgba(255,255,255,.55);
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      margin-bottom:1.5rem;
+    }
+    .footer-brand p{font-size:.95rem; color:rgba(255,255,255,.72); line-height:1.75; max-width:360px;}
+    .footer-links h5{font-family:var(--body); font-weight:800; font-size:.9rem; margin-bottom:1.5rem; color:rgba(255,255,255,.92);}
+    .footer-links ul{list-style:none; display:flex; flex-direction:column; gap:.75rem;}
+    .footer-links a{font-size:.9rem; color:rgba(255,255,255,.72); transition:color .3s ease;}
+    .footer-links a:hover{color:var(--gold2);}
+    .footer-bottom{display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;}
+    .footer-copyright{
+      font-family:var(--mono);
+      font-size:.7rem;
+      color:rgba(255,255,255,.55);
+      letter-spacing:.05em;
+    }
+    .footer-legal{display:flex; gap:2rem; flex-wrap:wrap;}
+    .footer-legal a{font-size:.8rem; color:rgba(255,255,255,.72); transition:color .3s ease;}
+    .footer-legal a:hover{color:var(--gold2);}
+
+    /* Scroll animations */
+    .fade-up{opacity:0; transform:translateY(40px); transition:all .8s var(--ease-out-expo);}
+    .fade-up.visible{opacity:1; transform:translateY(0);}
+
+    /* Responsive */
+    @media (max-width: 1200px){
+      .article-body{grid-template-columns:1fr;}
+      .article-sidebar{display:none;}
+      .footer-grid{grid-template-columns:1fr 1fr;}
+      .cards{grid-template-columns:1fr;}
+      .stats-bar{grid-template-columns:repeat(2,1fr);}
+    }
+    @media (max-width: 1024px){
+      .nav{padding:1rem 2rem;}
+      .nav-links{display:none;}
+      .hero-content{padding:0 3rem;}
+      .stats-bar{padding:3rem;}
+      .article{padding:5rem 3rem;}
+      .article-header{grid-template-columns:1fr; gap:3rem;}
+      .cta-section{margin:4rem -3rem; padding:4rem 3rem;}
+      .cta-content{grid-template-columns:1fr; text-align:center;}
+      .footer{padding:4rem 3rem 2rem;}
+      .footer-grid{grid-template-columns:1fr 1fr; gap:3rem;}
+      .hero-scroll-indicator{left:3rem;}
+    }
+    @media (max-width: 768px){
+      .hero-content{padding:0 1.5rem; padding-top:6rem;}
+      .stats-bar{grid-template-columns:1fr; padding:2rem 1.5rem;}
+      .stat-number{font-size:2.5rem;}
+      .article{padding:3rem 1.5rem;}
+      .pull-quote{padding:2rem;}
+      .pull-quote blockquote{font-size:1.25rem;}
+      .cta-section{margin:3rem -1.5rem; padding:3rem 1.5rem;}
+      .cta-text h3{font-size:1.75rem;}
+      .footer{padding:3rem 1.5rem 2rem;}
+      .footer-grid{grid-template-columns:1fr;}
+      .footer-bottom{flex-direction:column; gap:1.5rem; text-align:center;}
+      .hero-scroll-indicator{left:1.5rem;}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .cinematic-opener, .progress-fill, .scroll-line, .sol-logo, .kaixu-logo{animation:none !important;}
+      .fade-up, .stat-item{transition:none !important;}
+      html{scroll-behavior:auto;}
+    }
+  </style>
+</head>
+
+<body class="locked">
+  <div id="siteHeaderMount" data-sol-partial="header"></div>
+  <div class="watermark" aria-hidden="true"></div>
+  <div class="bgfx" aria-hidden="true"><canvas id="stars"></canvas></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Cinematic Opening Sequence -->
+  <div class="cinematic-opener" aria-hidden="true">
+    <div class="opener-content">
+      <div class="opener-line">
+        <p class="opener-text">A Skyes Over London LC Publication</p>
+      </div>
+      <div class="opener-line">
+        <h1 class="opener-title">SKNore<br/>Exfiltration Guard</h1>
+      </div>
+      <div class="opener-divider"></div>
+      <p class="opener-subtitle">
+        A deny-list security primitive designed to stop protected-file leakage in AI workflows —
+        by blocking high-risk paths and filtering suspicious content patterns before the model ever sees them.
+      </p>
+
+      <div class="opener-logo">
+        <img class="sol-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC logo" loading="eager" />
+        <img class="kaixu-logo" src="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" alt="kAIxU logo" loading="eager" />
+      </div>
+      <p class="opener-company">A subsidiary of Solenterprises International Nexus &amp; Holdings LLC</p>
+    </div>
+
+    <div class="progress-bar" aria-hidden="true"><div class="progress-fill"></div></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" aria-label="Primary">
+    <div class="nav-brand">
+      <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC logo" loading="lazy" />
+      <div class="nav-brand-title">
+        <span class="nav-brand-name">Skyes Over London LC</span>
+        <span class="nav-brand-sub">Founder Editorial • Security Primitive</span>
+      </div>
+    </div>
+
+    <ul class="nav-links" aria-label="Page sections">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#problem">The Problem</a></li>
+      <li><a href="#innovation">The Innovation</a></li>
+      <li><a href="#inside">What’s Inside</a></li>
+      <li><a href="#usecases">Use-Cases</a></li>
+      <li><a href="#binder">Deep Scan Binder</a></li>
+      <li><a href="#valuation">Valuation</a></li>
+      <li><a href="#founder">About</a></li>
+    </ul>
+
+    <a class="nav-cta" href="#contact">Contact Hub</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <span class="hero-eyebrow">Security Primitive • AI Guardrails • Governance Posture</span>
+
+      <h1 class="hero-title">Stop protected data from leaking.<br/>Make AI <em>safe to connect</em>.</h1>
+
+      <p class="hero-description">
+        SKNore exists for a painfully modern reality: once your AI system can “see” files, it can be tricked into
+        <b>describing, quoting, summarizing, or reconstructing</b> the very things you must keep private.
+        This is how secrets leave companies — not through hacking a firewall, but through persuading the most helpful part of your stack.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#valuation" class="hero-btn hero-btn-primary">See the locked valuation</a>
+        <a href="#inside" class="hero-btn hero-btn-secondary">How it works</a>
+        <a href="#contact" class="hero-btn hero-btn-secondary">Deploy with Skyes</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span>Scroll to explore</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar" aria-label="System signals">
+    <div class="stat-item" data-delay="0">
+      <div class="stat-number">Deny</div>
+      <div class="stat-label">Path & Pattern<br/>Blocklist</div>
+    </div>
+    <div class="stat-item" data-delay="120">
+      <div class="stat-number">Gate</div>
+      <div class="stat-label">Pre-Model<br/>Filtering</div>
+    </div>
+    <div class="stat-item" data-delay="240">
+      <div class="stat-number">Proof</div>
+      <div class="stat-label">Operator-Grade<br/>Policy Surface</div>
+    </div>
+    <div class="stat-item" data-delay="360">
+      <div class="stat-number">Ship</div>
+      <div class="stat-label">Drop-In Security<br/>Primitive</div>
+    </div>
+  </section>
+
+  <!-- Main Article -->
+  <article class="article" aria-label="SKNore Innovation Editorial">
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="article-category">AI Security • Guardrails • Data Governance</span>
+        <span class="article-date">March 4, 2026</span>
+
+        <div class="article-author">
+          <div class="author-avatar">SL</div>
+          <div class="author-info">
+            <span class="author-name">Skyes Over London Editorial Desk</span>
+            <span class="author-role">Proof-First Engineering</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-intro">
+        <p>
+          The fastest way to lose enterprise trust is to ship a system that can accidentally reveal what it can access.
+          SKNore is built to make that failure mode <em>boring</em>: denied by default, governed by policy, and inspectable as a security artifact.
+        </p>
+      </div>
+    </header>
+
+    <div class="article-body">
+      <aside class="article-sidebar" aria-label="On this page">
+        <nav class="sidebar-nav">
+          <span class="sidebar-nav-title">In This Editorial</span>
+          <a href="#overview">Overview</a>
+          <a href="#problem">The Problem</a>
+          <a href="#innovation">The Innovation</a>
+          <a href="#inside">What’s Inside</a>
+          <a href="#usecases">Use-Cases</a>
+          <a href="#binder">Deep Scan Binder</a>
+          <a href="#valuation">Valuation</a>
+          <a href="#founder">About the Founder</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </aside>
+
+      <div class="article-content">
+
+        <section id="overview" class="fade-up">
+          <h2>Overview</h2>
+          <p class="lead">
+            SKNore is a deny-list guard for AI workflows that touch files, vaults, docs, exports, and RAG pipelines.
+            Its job is simple: <b>prevent protected-file exfiltration</b> — even when the attacker speaks politely.
+          </p>
+          <p>
+            In many AI stacks, “file access” is treated like a feature. In real environments, file access is a liability unless it is governed.
+            SKNore treats access like a controlled surface: it blocks high-risk paths, flags known sensitive patterns, and prevents “helpful leaks”
+            from escaping the system through prompts, tool calls, or retrieval results.
+          </p>
+
+          <div class="badge-row">
+            <span class="badge gold">Operator-grade</span>
+            <span class="badge">Deny-by-default</span>
+            <span class="badge">Path traversal resistance</span>
+            <span class="badge">Secret/policy pattern filters</span>
+            <span class="badge">RAG-safe posture</span>
+          </div>
+        </section>
+
+        <div class="pull-quote fade-up">
+          <blockquote>Security failures rarely look like “hacking.” Most of the time, they look like a feature doing exactly what it was designed to do.</blockquote>
+          <cite>— SKNore principle</cite>
+        </div>
+
+        <section id="problem" class="fade-up">
+          <h2>The Problem: Helpful Models, Dangerous Access</h2>
+          <p class="lead">
+            LLMs do not “steal” data. They comply. If your system can read a file, a sufficiently clever prompt can persuade it to describe the file,
+            paraphrase it, reconstruct it, or leak enough fragments to become a breach.
+          </p>
+          <p>
+            The threat isn’t theoretical. Modern AI products routinely connect models to:
+            internal documents, invoice exports, HR folders, support transcripts, contracts, source code, dashboards, and private keys.
+            The moment those connectors exist, attackers stop targeting your firewall and start targeting your assistants.
+          </p>
+          <p>
+            Worse: many exfiltration attempts look like ordinary work.
+            “Summarize the onboarding doc.” “Extract all API endpoints.” “List the admin users.” “Show me the config file so I can debug.”
+            The system sees a reasonable request and performs it — unless you have an explicit mechanism to say:
+            <b>this is protected; deny it</b>.
+          </p>
+
+          <div class="cards">
+            <div class="card">
+              <h4>Exfiltration by prompt</h4>
+              <p>Asking directly for secrets, keys, credentials, customer lists, pricing, contracts, or internal policies.</p>
+            </div>
+            <div class="card">
+              <h4>Exfiltration by disguise</h4>
+              <p>Requests framed as debugging, compliance, audits, migration, or “help me fix my build,” designed to obtain raw artifacts.</p>
+            </div>
+            <div class="card">
+              <h4>Exfiltration by traversal</h4>
+              <p>Path tricks, relative jumps, alternate encodings, and “open this file near that file” tactics to reach protected locations.</p>
+            </div>
+            <div class="card">
+              <h4>Exfiltration by retrieval</h4>
+              <p>RAG pulling sensitive chunks into context; once it’s in context, it’s one question away from being repeated.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="innovation" class="fade-up">
+          <h2>The Innovation: A Deny-List That Actually Behaves Like Policy</h2>
+          <p class="lead">
+            SKNore is not “a regex file.” It is a guard rail architecture: a set of checks that run before an AI tool reads, loads, streams, or returns content.
+          </p>
+          <p>
+            In practice, SKNore applies layered controls:
+            a path gate (where the file is), a content gate (what the content resembles), and a policy gate (what you have declared protected).
+            That triad matters: attackers can sometimes evade one check. Evading all three is much harder — and usually noisy enough to log.
+          </p>
+
+          <div class="pull-quote fade-up">
+            <blockquote>Make the secure choice the default choice. Everything else is theater.</blockquote>
+            <cite>— Skyes Over London LC</cite>
+          </div>
+
+          <p>
+            The critical design decision is timing: SKNore runs <b>pre-model</b>. It does not ask the model “should I do this?”
+            It blocks access at the systems layer. That’s the difference between governance and vibes.
+          </p>
+        </section>
+
+        <section id="inside" class="fade-up">
+          <h2>What’s Inside: Capabilities That Matter in Production</h2>
+          <p class="lead">
+            SKNore’s capabilities are chosen for how real breaches happen: file-system shortcuts, ambiguous naming, and “reasonable” requests that are actually extraction attempts.
+          </p>
+
+          <div class="cards">
+            <div class="card">
+              <h4>Path deny-list + canonicalization</h4>
+              <p>Normalize paths, block traversal patterns, and deny known protected directories and file types (secrets, envs, keys, backups).</p>
+            </div>
+            <div class="card">
+              <h4>Content signature filters</h4>
+              <p>Detect high-risk content patterns: API keys, token formats, private key blocks, credential shapes, and policy-marked documents.</p>
+            </div>
+            <div class="card">
+              <h4>RAG chunk gating</h4>
+              <p>Apply deny rules to retrieved chunks before they enter context; stop “sensitive-by-retrieval” leaks before the model sees them.</p>
+            </div>
+            <div class="card">
+              <h4>Audit-friendly decisions</h4>
+              <p>Every deny is explainable as a rule match: which policy, which signature, which path category — suitable for governance reporting.</p>
+            </div>
+          </div>
+
+          <p>
+            SKNore is designed to be composable. You can place it in front of file reading, in front of vault access,
+            in front of retrieval, and in front of export pipelines. Anywhere content crosses from “storage” to “assistant,” SKNore can sit.
+          </p>
+
+          <div class="badge-row">
+            <span class="badge gold">Composable</span>
+            <span class="badge">Connector-safe</span>
+            <span class="badge">Multi-tenant aware</span>
+            <span class="badge">Policy-first</span>
+          </div>
+        </section>
+
+        <section class="fade-up">
+          <h2>Threat Model Coverage (Plain English)</h2>
+          <p class="lead">
+            SKNore defends against the most common, most expensive leakage patterns — the ones that happen when organizations connect AI to real data too early.
+          </p>
+          <p>
+            It blocks:
+            direct secret requests, “read the config” debugging tricks, traversal attempts, sensitive-file enumeration, and RAG-based accidental leakage.
+            It does not replace broader security controls (authentication, authorization, rate limits, tenant boundaries),
+            but it makes a critical piece of the AI attack surface <b>deterministic</b>.
+          </p>
+          <p>
+            Deterministic matters because it produces proof.
+            You can test a deny rule. You can run a smoke suite. You can export evidence.
+            “The model promised not to do it” is not proof; “the guard blocked it” is.
+          </p>
+        </section>
+
+        <section id="usecases" class="fade-up">
+          <h2>Use-Case Snapshots: Where SKNore Prints Money</h2>
+          <p class="lead">
+            SKNore is a security primitive that becomes valuable the moment you sell AI systems into regulated or enterprise environments.
+            It is the difference between “cool demo” and “approved deployment.”
+          </p>
+
+          <div class="cards">
+            <div class="card">
+              <h4>Enterprise RAG products</h4>
+              <p>Prevent sensitive documents from being pulled into context accidentally; avoid “answers” that quote internal files.</p>
+            </div>
+            <div class="card">
+              <h4>Internal copilots</h4>
+              <p>Block access to payroll, HR, legal, and executive folders while still allowing safe knowledge work.</p>
+            </div>
+            <div class="card">
+              <h4>Support + ticket systems</h4>
+              <p>Deny leakage of customer PII, access tokens, and internal escalation notes from being repeated back to end users.</p>
+            </div>
+            <div class="card">
+              <h4>Developer tools</h4>
+              <p>Stop “show me .env” and “dump the config” prompts from turning into credential spills in code assistants.</p>
+            </div>
+          </div>
+
+          <p>
+            In other words: SKNore is a gate you sell to organizations that already understand the cost of a leak.
+            The product value is not “better answers.” It is avoiding the single email that starts with:
+            <b>“Why did your assistant show me that?”</b>
+          </p>
+        </section>
+
+        <section id="valuation" class="fade-up">
+          <h2>Locked Valuation</h2>
+          <p class="lead">
+            This innovation is valued as a premium security primitive with direct enterprise risk-reduction value and a clear integration path
+            into gateways, RAG lanes, vaults, and multi-tenant AI products.
+          </p>
+
+          <div class="valuation-box">
+            <div class="valuation-grid">
+              <div>
+                <div class="valuation-price">$175,000 USD</div>
+                <p style="margin-top:.4rem; color:rgba(255,255,255,.72);">
+                  Classification: <b style="color:var(--gold2);">Tentative / Unverified</b> until live smoke evidence of deployment is provided.
+                </p>
+              </div>
+              <div class="valuation-meta">
+                As-of: 2026-03-04<br/>
+                Ledger: Tentative<br/>
+                Re-rate: on smoke + telemetry proof
+              </div>
+            </div>
+            <p style="margin-top:1rem;">
+              The decisive valuation reflects replacement cost (engineering + testing + hardening),
+              monetization leverage (sold as a standard “security lane” across products),
+              and enterprise uplift (compliance posture, procurement readiness, reduced breach probability).
+            </p>
+          </div>
+        </section>
+
+        <section id="binder" class="fade-up">
+          <h2>Deep Scan Valuation Binder (PDF)</h2>
+          <p class="lead">
+            Official supporting binder for this editorial valuation and risk posture.
+          </p>
+          <p>
+            Open the binder inline below, or use direct actions for a full-tab view and download.
+          </p>
+
+          <div class="badge-row" style="margin-bottom:1rem;">
+            <a class="hero-btn hero-btn-secondary" href="./SKNore_Deep_Scan_Valuation_Binder_2026-03-04%20(1).pdf" target="_blank" rel="noopener">Open PDF</a>
+            <a class="hero-btn hero-btn-secondary" href="./SKNore_Deep_Scan_Valuation_Binder_2026-03-04%20(1).pdf" download>Download PDF</a>
+          </div>
+
+          <div class="valuation-box" style="padding:.8rem;">
+            <iframe
+              src="./SKNore_Deep_Scan_Valuation_Binder_2026-03-04%20(1).pdf#view=FitH"
+              title="SKNore Deep Scan Valuation Binder"
+              style="width:100%; min-height:78vh; border:0; border-radius:12px; background:rgba(0,0,0,.2);"
+              loading="lazy">
+            </iframe>
+          </div>
+        </section>
+
+        <section id="founder" class="fade-up">
+          <h2>About the Founder</h2>
+          <p class="lead">
+            Skyes Over London LC builds operator-grade systems: governed access, measurable usage, exportable proof, and stable delivery under real constraints.
+          </p>
+          <p>
+            This editorial exists because innovation without proof is just marketing. The Skyes ecosystem is built around a proof-first discipline:
+            smoke tests, ledgers, evidence packs, and contract-stable gateways. SKNore fits that worldview — it turns “please don’t leak” into a
+            rule-driven control that can be tested, logged, and shipped as an enterprise surface.
+          </p>
+          <p>
+            For enterprise builds, governance posture, or to wire SKNore into your gateway/RAG lane:
+            <b>SkyesOverLondonLC@solenterprises.org</b> • <b>(480) 469-5416</b>
+          </p>
+        </section>
+
+        <section id="contact" class="fade-up">
+          <h2>Contact</h2>
+          <p class="lead">To deploy SKNore inside your stack (or bundle it into your product suite), use the official channels below.</p>
+
+          <div class="badge-row">
+            <span class="badge gold">Email: SkyesOverLondonLC@solenterprises.org</span>
+            <span class="badge">Phone: (480) 469-5416</span>
+            <span class="badge">Web: skyesol.netlify.app</span>
+          </div>
+        </section>
+
+        <div class="pull-quote fade-up">
+          <blockquote>Once your AI can touch real data, governance stops being optional. SKNore is governance you can ship.</blockquote>
+          <cite>— Skyes Over London LC Editorial Desk</cite>
+        </div>
+
+      </div>
+    </div>
+  </article>
+
+  <!-- CTA -->
+  <section class="cta-section" aria-label="Deployment CTA">
+    <div class="cta-content">
+      <div class="cta-text">
+        <h3>Make AI safe to connect to reality.</h3>
+        <p>
+          If you’re building AI products that touch files, vaults, exports, or retrieval, SKNore is a clean, sellable security lane.
+          We wire it into gateways, RAG lanes, and multi-tenant governance so your system produces receipts — not incidents.
+        </p>
+        <div class="cta-stack" aria-label="Contact details">
+          <span class="cta-pill">Email: <b>SkyesOverLondonLC@solenterprises.org</b></span>
+          <span class="cta-pill">Phone: <b>(480) 469-5416</b></span>
+          <span class="cta-pill">Ecosystem: <b>SOLEnterprises</b></span>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:.9rem; align-items:flex-end;">
+        <a class="cta-button" href="#contact">Open Contact Hub</a>
+        <a class="cta-button" style="border-color:rgba(39,242,255,.26);" href="#valuation">View Valuation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" aria-label="Footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Skyes Over London LC</h4>
+        <div class="subsidiary">A subsidiary of Solenterprises International Nexus &amp; Holdings LLC</div>
+        <p>
+          Proof-first engineering for AI + web infrastructure: gateways, brains, portals, security lanes, and operator systems.
+          This page is structured to rank, convert, and communicate real governance posture.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <h5>Security</h5>
+        <ul>
+          <li><a href="#overview">SKNore Overview</a></li>
+          <li><a href="#innovation">Innovation</a></li>
+          <li><a href="#valuation">Valuation</a></li>
+          <li><a href="#founder">About</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="https://skyesol.netlify.app/" target="_blank" rel="noopener">SkyeSol</a></li>
+          <li><a href="https://solenterprises.org" target="_blank" rel="noopener">SOLEnterprises</a></li>
+          <li><a href="mailto:SkyesOverLondonLC@solenterprises.org">Email</a></li>
+          <li><a href="tel:14804695416">Call</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#top">Back to Top</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#valuation">Ledger</a></li>
+          <li><a href="#overview">Scope</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">© 2026 Skyes Over London LC • SOLEnterprises Ecosystem</div>
+      <div class="footer-legal">
+        <a href="#top">Top</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      // Release body scroll after opener
+      window.addEventListener('load', () => {
+        setTimeout(() => { document.body.classList.remove('locked'); }, 5200);
+      });
+
+      // Nav scrolled state
+      const nav = document.getElementById('nav');
+      const onScroll = () => {
+        if (window.scrollY > 40) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+      };
+      window.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+
+      // Stars canvas (lightweight)
+      const canvas = document.getElementById('stars');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
+      const stars = Array.from({length: 180}, () => ({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: Math.random()*1.3 + 0.2,
+        v: Math.random()*0.35 + 0.05
+      }));
+
+      function resize(){
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize, {passive:true});
+
+      function tick(){
+        ctx.clearRect(0,0,w,h);
+        ctx.fillStyle = 'rgba(255,255,255,0.75)';
+        for (const s of stars){
+          s.y += s.v;
+          if (s.y > h) { s.y = -10; s.x = Math.random()*w; }
+          ctx.globalAlpha = 0.55 + Math.random()*0.35;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(tick);
+      }
+      tick();
+
+      // Intersection Observer for fade-up + stat reveal
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.fade-up, .stat-item').forEach(el => io.observe(el));
+
+      // Sidebar active link highlight
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+      const sidebarLinks = Array.from(document.querySelectorAll('.sidebar-nav a[href^="#"]'));
+      const linkMap = new Map(sidebarLinks.map(a => [a.getAttribute('href').slice(1), a]));
+      if (sidebarLinks.length && sections.length){
+        const sio = new IntersectionObserver((entries) => {
+          const v = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+          if (!v) return;
+          sidebarLinks.forEach(a => a.classList.remove('active'));
+          const id = v.target.id;
+          const l = linkMap.get(id);
+          if (l) l.classList.add('active');
+        }, { threshold: [0.2, 0.35, 0.5, 0.65] });
+
+        sections.forEach(s => sio.observe(s));
+      }
+
+      // Smooth scroll for internal anchors
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (ev) => {
+          const href = a.getAttribute('href');
+          if (!href || href.length < 2) return;
+          const target = document.querySelector(href);
+          if (!target) return;
+          ev.preventDefault();
+          target.scrollIntoView({ behavior:'smooth', block:'start' });
+        });
+      });
+    })();
+  </script>
+  <div id="siteFooterMount" data-sol-partial="footer"></div>
+  <script id="sol-global-partials-injector">
+    (function(){
+      const mountHeader = document.getElementById('siteHeaderMount');
+      const mountFooter = document.getElementById('siteFooterMount');
+      const inject = async (url, mount) => {
+        if (!mount || mount.dataset.loaded === 'true') return;
+        try {
+          const res = await fetch(url, { cache: 'no-cache' });
+          if (!res.ok) return;
+          mount.innerHTML = await res.text();
+          mount.dataset.loaded = 'true';
+        } catch (err) {
+          console.warn('Global partial inject failed for', url, err);
+        }
+      };
+      const run = () => {
+        inject('/partials/header.html', mountHeader);
+        inject('/partials/footer.html', mountFooter);
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run, { once: true });
+      } else {
+        run();
+      }
+    })();
+  </script>
+</body>
+</html>

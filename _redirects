@@ -118,6 +118,9 @@
 # Blog canonical alias
 /blog/index.html             /blog.html                                                       301
 
+# Operation Browser Strike canonical route
+/Platforms-Apps-Infrastructure/2026/In%20The%20SkyeLight/OperationBrowserStrike.html  /Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/index.html  301
+
 # THE NET WORKS FEATURING dispatch aliases
 /insights/phoenix-dispatch/:slug/   /THE%20NET%20WORKS/FEATURING/:slug.html                  301
 /insights/phoenix-dispatch/:slug    /THE%20NET%20WORKS/FEATURING/:slug.html                  301

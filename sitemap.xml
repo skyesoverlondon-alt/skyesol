@@ -3271,6 +3271,102 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/index.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-01-smb-company-os.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-02-field-service-ops-home-services.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-03-property-mgmt-maintenance-ops.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-04-contact-center-support-ops.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-05-compliance-proof-as-a-service-trust-center.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-06-identity-access-governance-business-keycards.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-07-creator-agency-ops-content-delivery-system.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-08-public-sector-requests-citizen-services-portal.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-09-healthcare-adjacent-ops-non-clinical.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-10-legal-intake-case-flow.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-11-insurance-adjuster-claims-ops.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-12-franchise-multi-location-operating-system.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-13-logistics-fleet-dispatch-ops.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-14-retail-dtc-brand-operations.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Services/SkyeCorp/0megaPhase/pack-15-task-agents-inside-business-apps-kaixu-layer.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://skyesol.netlify.app/Services/intake-routing.html</loc>
     <lastmod>2026-03-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -4013,5 +4109,17 @@
     <lastmod>2026-03-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/index.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://skyesol.netlify.app/Platforms-Apps-Infrastructure/2026/In%20The%20SkyeLight/OperationBrowserStrike.html</loc>
+    <lastmod>2026-03-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

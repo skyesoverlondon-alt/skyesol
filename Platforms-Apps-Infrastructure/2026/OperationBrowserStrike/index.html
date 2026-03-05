@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operation Browser Strike</title>
+  <meta name="description" content="Operation Browser Strike - a fast browser arena shooter with waves, upgrades, and boss fights." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="theme-color" content="#070b16" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div id="siteHeaderMount" data-sol-partial="header"></div>
+  <nav class="ecosystem-dock" aria-label="Skye ecosystem navigation">
+    <a href="/index.html">SOL Home</a>
+    <a href="/platforms.html">Platforms</a>
+    <a href="/Platforms-Apps-Infrastructure/index.html">Apps Hub</a>
+  </nav>
+
+  <div class="app">
+    <header class="hud">
+      <div class="hud-group">
+        <div class="stat"><span>HP</span><strong id="hpStat">100 / 100</strong></div>
+        <div class="stat"><span>Shield</span><strong id="shieldStat">0</strong></div>
+      </div>
+      <div class="hud-group center">
+        <div class="stat"><span>Wave</span><strong id="waveStat">1</strong></div>
+        <div class="stat"><span>Score</span><strong id="scoreStat">0</strong></div>
+        <div class="stat"><span>Best</span><strong id="bestStat">0</strong></div>
+        <div class="stat"><span>Timer</span><strong id="timerStat">00:00</strong></div>
+        <div class="stat"><span>Combo</span><strong id="comboStat">x1</strong></div>
+        <div class="stat"><span>Lives</span><strong id="livesStat">3</strong></div>
+      </div>
+      <div class="hud-group">
+        <button id="settingsBtn" class="btn small ghost">Settings</button>
+        <button id="pauseBtn" class="btn small">Pause</button>
+        <button id="muteBtn" class="btn small">SFX: On</button>
+      </div>
+    </header>
+
+    <div class="xp-wrap">
+      <div id="xpBar" class="xp-bar"></div>
+      <span id="xpLabel">Lv 1</span>
+      <span id="objectiveTicker" class="objective-ticker">Objective: Survive wave 1</span>
+    </div>
+
+    <main class="arena-wrap">
+      <canvas id="gameCanvas" width="1280" height="720" aria-label="Operation Browser Strike game area"></canvas>
+      <div id="damageVignette" class="damage-vignette" aria-hidden="true"></div>
+      <div id="missionAnnouncer" class="mission-announcer" aria-live="polite"></div>
+
+      <section id="startScreen" class="overlay show">
+        <div class="panel">
+          <h1>Operation Browser Strike</h1>
+          <p>Survive escalating waves, pick upgrades, and crush every boss cycle.</p>
+          <p><a class="ecosystem-link" href="/network.html">Stay connected to the SOL ecosystem while in mission mode</a></p>
+          <div class="career-panel" id="careerPanel">
+            <div><span>Total Kills</span><strong id="careerKills">0</strong></div>
+            <div><span>Best Wave</span><strong id="careerBestWave">1</strong></div>
+            <div><span>Total Runs</span><strong id="careerRuns">0</strong></div>
+            <div><span>Play Time</span><strong id="careerTime">00:00</strong></div>
+          </div>
+          <div class="multiplayer-panel">
+            <h3>Fireteam Network <span class="coming-soon-pill">Coming Soon</span></h3>
+            <p class="small-note">Multiplayer rollout is temporarily gated while campaign/offline polish ships. Setup fields are shown for pre-launch prep.</p>
+            <div class="settings-grid">
+              <label>Realtime Server URL
+                <input id="mpServerUrl" type="text" placeholder="wss://your-realtime-host.example/ws" disabled />
+              </label>
+              <label>Room
+                <input id="mpRoom" type="text" placeholder="alpha-squad" disabled />
+              </label>
+              <label>Callsign
+                <input id="mpPlayerName" type="text" placeholder="SKYE-01" disabled />
+              </label>
+              <label>Room Token (optional)
+                <input id="mpToken" type="password" placeholder="secret token if server requires auth" disabled />
+              </label>
+            </div>
+            <div class="stack" style="margin-top:10px;">
+              <button id="mpConnectBtn" class="btn small" disabled>Connect Fireteam</button>
+              <button id="mpDisconnectBtn" class="btn small ghost" disabled>Disconnect</button>
+            </div>
+            <p id="mpStatus" class="small-note">Network status: Coming soon</p>
+          </div>
+          <ul>
+            <li>Move: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or arrows</li>
+            <li>Aim: mouse</li>
+            <li>Shoot: hold left click or <kbd>Space</kbd></li>
+            <li>Dash: <kbd>Shift</kbd></li>
+            <li>Gamepad: left stick move, right stick aim, <kbd>RT/R2</kbd> shoot, <kbd>LB/L1</kbd> dash</li>
+          </ul>
+          <div class="stack">
+            <button id="startBtn" class="btn">Launch Mission</button>
+            <button id="resetBestBtn" class="btn ghost">Reset Best Score</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="pauseScreen" class="overlay">
+        <div class="panel small-panel">
+          <h2>Mission Paused</h2>
+          <div class="stack">
+            <button id="resumeBtn" class="btn">Resume</button>
+            <button id="restartBtn" class="btn ghost">Restart Run</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="upgradeScreen" class="overlay">
+        <div class="panel">
+          <h2>Level Up - Choose Upgrade</h2>
+          <div id="upgradeOptions" class="card-grid"></div>
+        </div>
+      </section>
+
+      <section id="gameOverScreen" class="overlay">
+        <div class="panel">
+          <h2>Run Terminated</h2>
+          <p id="gameOverSummary">Score: 0 · Wave: 1</p>
+          <div class="stack">
+            <button id="playAgainBtn" class="btn">Play Again</button>
+            <button id="backToMenuBtn" class="btn ghost">Main Menu</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="settingsScreen" class="overlay">
+        <div class="panel small-panel">
+          <h2>Mission Settings</h2>
+          <div class="settings-grid">
+            <label>Starting HP
+              <input id="settingStartHp" type="range" min="100" max="320" step="10" />
+              <span id="settingStartHpValue">100</span>
+            </label>
+            <label>Extra Lives
+              <input id="settingExtraLives" type="range" min="0" max="8" step="1" />
+              <span id="settingExtraLivesValue">3</span>
+            </label>
+            <label>Enemy Intensity
+              <input id="settingEnemyIntensity" type="range" min="0.7" max="1.5" step="0.05" />
+              <span id="settingEnemyIntensityValue">1.00</span>
+            </label>
+            <label>Mode
+              <select id="settingGameMode">
+                <option value="survival">Survival</option>
+                <option value="campaign">Campaign</option>
+              </select>
+            </label>
+            <label class="toggle-line"><input id="settingGamepadEnabled" type="checkbox" /> Enable Gamepad</label>
+            <label>Gamepad Deadzone
+              <input id="settingGamepadDeadzone" type="range" min="0.05" max="0.4" step="0.01" />
+              <span id="settingGamepadDeadzoneValue">0.18</span>
+            </label>
+          </div>
+          <div class="stack" style="margin-top:12px; justify-content:center;">
+            <button id="controllerMapBtn" class="btn ghost">Controller Mapping</button>
+            <button id="settingsCancelBtn" class="btn ghost">Cancel</button>
+            <button id="settingsSaveBtn" class="btn">Save</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="controllerMapScreen" class="overlay">
+        <div class="panel small-panel">
+          <h2>Controller Mapping</h2>
+          <p class="small-note">Press buttons on Backbone or any gamepad to verify mapping live.</p>
+          <p id="controllerStatus" class="small-note">No controller detected</p>
+          <div class="mapping-grid">
+            <div><span>Move X/Y</span><strong id="mapMoveAxis">0.00 / 0.00</strong></div>
+            <div><span>Aim X/Y</span><strong id="mapAimAxis">0.00 / 0.00</strong></div>
+            <div><span>Shoot</span><strong id="mapShootBtn">Not pressed</strong></div>
+            <div><span>Dash</span><strong id="mapDashBtn">Not pressed</strong></div>
+            <div><span>Pause</span><strong id="mapPauseBtn">Not pressed</strong></div>
+          </div>
+          <div class="stack" style="margin-top:12px; justify-content:center;">
+            <button id="controllerMapCloseBtn" class="btn">Back</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./js/main.js"></script>
+  <div id="siteFooterMount" data-sol-partial="footer"></div>
+  <script id="sol-global-partials-injector">
+    (function(){
+      const mountHeader = document.getElementById('siteHeaderMount');
+      const mountFooter = document.getElementById('siteFooterMount');
+      const inject = async (url, mount) => {
+        if (!mount || mount.dataset.loaded === 'true') return;
+        try {
+          const res = await fetch(url, { cache: 'no-cache' });
+          if (!res.ok) return;
+          mount.innerHTML = await res.text();
+          mount.dataset.loaded = 'true';
+        } catch (err) {
+          console.warn('Global partial inject failed for', url, err);
+        }
+      };
+      const run = () => {
+        inject('/partials/header.html', mountHeader);
+        inject('/partials/footer.html', mountFooter);
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run, { once: true });
+      } else {
+        run();
+      }
+    })();
+  </script>
+</body>
+</html>

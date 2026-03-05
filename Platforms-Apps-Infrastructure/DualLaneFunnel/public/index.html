@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./assets/style.css" />
 </head>
 <body>
+  <div id="siteHeaderMount" data-sol-partial="header"></div>
   <!-- SOL Platform Nav -->
   <div id="sol-platnav" style="position:fixed;bottom:18px;right:18px;z-index:99999;display:flex;flex-direction:column;gap:6px;font-family:ui-sans-serif,system-ui,sans-serif;">
     <a href="/index.html" style="padding:8px 15px;border-radius:999px;background:rgba(5,4,10,.92);border:1px solid rgba(255,255,255,.16);color:#f2f0ff;text-decoration:none;backdrop-filter:blur(12px);white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.15px;box-shadow:0 10px 34px rgba(0,0,0,.55);display:block;text-align:center;" onmouseover="this.style.borderColor='rgba(184,107,255,.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,.16)'">&#8592; SOL Home</a>
@@ -100,5 +101,32 @@
     </div>
   </footer>
   <script src="/js/SkyeSolINTRO.js"></script>
+  <div id="siteFooterMount" data-sol-partial="footer"></div>
+  <script id="sol-global-partials-injector">
+    (function(){
+      const mountHeader = document.getElementById('siteHeaderMount');
+      const mountFooter = document.getElementById('siteFooterMount');
+      const inject = async (url, mount) => {
+        if (!mount || mount.dataset.loaded === 'true') return;
+        try {
+          const res = await fetch(url, { cache: 'no-cache' });
+          if (!res.ok) return;
+          mount.innerHTML = await res.text();
+          mount.dataset.loaded = 'true';
+        } catch (err) {
+          console.warn('Global partial inject failed for', url, err);
+        }
+      };
+      const run = () => {
+        inject('/partials/header.html', mountHeader);
+        inject('/partials/footer.html', mountFooter);
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run, { once: true });
+      } else {
+        run();
+      }
+    })();
+  </script>
 </body>
 </html>

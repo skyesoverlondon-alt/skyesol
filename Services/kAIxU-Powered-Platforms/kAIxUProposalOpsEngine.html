@@ -8,6 +8,7 @@
   <meta name="description" content="Proposal production governance with pricing controls, approval routing, and close-ready handoff lanes." />
 </head>
 <body>
+  <div id="siteHeaderMount" data-sol-partial="header"></div>
   <main>
     <h1>kAIxU Proposal Ops Engine</h1>
     <p>Proposal production governance with pricing controls, approval routing, and close-ready handoff lanes.</p>
@@ -18,5 +19,32 @@
       <li>$33,500 enterprise</li>
     </ul>
   </main>
+  <div id="siteFooterMount" data-sol-partial="footer"></div>
+  <script id="sol-global-partials-injector">
+    (function(){
+      const mountHeader = document.getElementById('siteHeaderMount');
+      const mountFooter = document.getElementById('siteFooterMount');
+      const inject = async (url, mount) => {
+        if (!mount || mount.dataset.loaded === 'true') return;
+        try {
+          const res = await fetch(url, { cache: 'no-cache' });
+          if (!res.ok) return;
+          mount.innerHTML = await res.text();
+          mount.dataset.loaded = 'true';
+        } catch (err) {
+          console.warn('Global partial inject failed for', url, err);
+        }
+      };
+      const run = () => {
+        inject('/partials/header.html', mountHeader);
+        inject('/partials/footer.html', mountFooter);
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', run, { once: true });
+      } else {
+        run();
+      }
+    })();
+  </script>
 </body>
 </html>

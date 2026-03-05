@@ -2,6 +2,21 @@
   "generatedAt": "2026-03-03T07:52:35.201Z",
   "posts": [
     {
+      "slug": "sknore-innovation-founder-editorial-2026-03-04",
+      "title": "SKNore - Protected-File Exfiltration Deny-List Guard",
+      "excerpt": "Founder editorial on SKNore: a deny-list security primitive that blocks protected-file exfiltration in AI workflows with path, pattern, and policy controls.",
+      "published_at": "2026-03-04T00:00:00.000Z",
+      "tags": [
+        "Editorials",
+        "SKNore",
+        "AI Security",
+        "Data Governance",
+        "RAG Security",
+        "Skyes Over London LC"
+      ],
+      "staticUrl": "Platforms-Apps-Infrastructure/2026/SKNore/SKNore_Innovation_Founder_Editorial_2026-03-04.html"
+    },
+    {
       "slug": "editorials-apps-weve-engineered-kaixusuperide",
       "title": "kAIxU Super IDE: Build. Govern. Deploy.",
       "excerpt": "The enterprise-grade browser IDE platform from Skyes Over London LC: editing, governance, proof exports, and streaming kAIxU brains in one command surface.",

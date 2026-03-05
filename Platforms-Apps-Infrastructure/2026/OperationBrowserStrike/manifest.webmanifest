@@ -1,0 +1,10 @@
+{
+  "name": "Operation Browser Strike",
+  "short_name": "OBS",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#070b16",
+  "theme_color": "#070b16",
+  "description": "Campaign + survival arena shooter with controller support and optional fireteam multiplayer.",
+  "icons": []
+}
