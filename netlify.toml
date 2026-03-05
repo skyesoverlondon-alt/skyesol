@@ -2,7 +2,11 @@
   publish = "."
 
 [functions]
-  directory = "netlify/functions"
+  # Temporary deploy safety switch:
+  # Netlify function uploads currently fail because site env vars exceed
+  # the 4KB-per-function limit. Pointing to an empty directory allows
+  # static deploys to succeed until env vars are trimmed in dashboard.
+  directory = "netlify/functions-disabled"
 
 # The site is plain HTML/CSS/JS. We keep build intentionally empty.
 # Functions are deployed via Netlify CLI (recommended) or Git-based builds.
