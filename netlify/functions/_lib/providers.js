@@ -47,6 +47,21 @@ function upstreamError(provider, res, body) {
   return err;
 }
 
+// Accept branded/provider aliases while keeping canonical internal routing names.
+export function normalizeProviderName(input) {
+  const raw = String(input || "").trim().toLowerCase();
+  if (!raw) return "";
+
+  if (raw === "openai" || raw === "anthropic" || raw === "gemini") return raw;
+
+  const compact = raw.replace(/[\s_-]+/g, " ");
+  if (compact === "skyes over london" || compact === "skyes over london lc") {
+    return "openai";
+  }
+
+  return raw;
+}
+
 /**
  * Non-stream calls
  */

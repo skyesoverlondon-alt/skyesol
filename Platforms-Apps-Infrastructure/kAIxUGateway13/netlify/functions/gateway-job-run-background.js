@@ -1,5 +1,5 @@
 import { q } from "./_lib/db.js";
-import { callOpenAI, callAnthropic, callGemini } from "./_lib/providers.js";
+import { callOpenAI, callAnthropic, callGemini, normalizeProviderName } from "./_lib/providers.js";
 import { costCents } from "./_lib/pricing.js";
 import { getBearer, monthKeyUTC } from "./_lib/http.js";
 import { resolveAuth, lookupKeyById, getMonthRollup, getKeyMonthRollup, customerCapCents, keyCapCents } from "./_lib/authz.js";
@@ -91,7 +91,7 @@ export default async (req) => {
   const ip_hash = (telemetry.ip_hash || "").toString().trim().slice(0, 128) || null;
   const ua = (telemetry.ua || "").toString().trim().slice(0, 240) || null;
 
-  const provider = String(job.provider || request.provider || "").toLowerCase();
+  const provider = normalizeProviderName(job.provider || request.provider || "");
   const model = String(job.model || request.model || "");
   const messages = Array.isArray(request.messages) ? request.messages : [];
   const max_tokens = Number.isFinite(request.max_tokens) ? parseInt(request.max_tokens, 10) : 4096;
@@ -144,7 +144,7 @@ export default async (req) => {
     if (provider === "openai") result = await callOpenAI({ model, messages, max_tokens, temperature });
     else if (provider === "anthropic") result = await callAnthropic({ model, messages, max_tokens, temperature });
     else if (provider === "gemini") result = await callGemini({ model, messages, max_tokens, temperature });
-    else throw new Error("Unknown provider. Use openai|anthropic|gemini.");
+    else throw new Error("Unknown provider. Use openai|anthropic|gemini|Skyes Over London.");
 
     const output_text = result.output_text || "";
     const input_tokens = result.input_tokens || 0;

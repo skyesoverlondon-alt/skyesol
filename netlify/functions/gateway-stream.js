@@ -4,7 +4,7 @@ import { q } from "./_lib/db.js";
 import { costCents } from "./_lib/pricing.js";
 import { resolveAuth, getMonthRollup, getKeyMonthRollup, customerCapCents, keyCapCents } from "./_lib/authz.js";
 import { enforceRpm } from "./_lib/ratelimit.js";
-import { streamOpenAI, streamAnthropic, streamGemini } from "./_lib/providers.js";
+import { streamOpenAI, streamAnthropic, streamGemini, normalizeProviderName } from "./_lib/providers.js";
 import { hmacSha256Hex } from "./_lib/crypto.js";
 import { maybeCapAlerts } from "./_lib/alerts.js";
 import { enforceDevice } from "./_lib/devices.js";
@@ -28,13 +28,13 @@ export default wrap(async (req) => {
   let body;
   try { body = await req.json(); } catch { return badRequest("Invalid JSON", cors); }
 
-  const provider = (body.provider || "").toString().trim().toLowerCase();
+  const provider = normalizeProviderName(body.provider);
   const model = (body.model || "").toString().trim();
   const messages_in = body.messages;
   const max_tokens = Number.isFinite(body.max_tokens) ? parseInt(body.max_tokens, 10) : 1024;
   const temperature = Number.isFinite(body.temperature) ? body.temperature : 1;
 
-  if (!provider) return badRequest("Missing provider (openai|anthropic|gemini)", cors);
+  if (!provider) return badRequest("Missing provider (openai|anthropic|gemini|Skyes Over London)", cors);
   if (!model) return badRequest("Missing model", cors);
   if (!Array.isArray(messages_in) || messages_in.length === 0) return badRequest("Missing messages[]", cors);
 
@@ -143,7 +143,7 @@ export default wrap(async (req) => {
         else if (provider === "anthropic") adapter = await streamAnthropic({ model, messages, max_tokens, temperature });
         else if (provider === "gemini") adapter = await streamGemini({ model, messages, max_tokens, temperature });
         else {
-          send("error", { error: "Unknown provider. Use openai|anthropic|gemini." });
+          send("error", { error: "Unknown provider. Use openai|anthropic|gemini|Skyes Over London." });
           clearInterval(ping);
 controller.close();
           return;

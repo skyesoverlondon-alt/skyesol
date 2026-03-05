@@ -4,6 +4,7 @@ import { q } from "./_lib/db.js";
 import { enforceKaixuMessages, KAIXU_SYSTEM_HASH, SCHEMA_VERSION, BUILD_ID } from "./_lib/kaixu.js";
 import { lookupKey, getMonthRollup, getKeyMonthRollup, customerCapCents, keyCapCents } from "./_lib/authz.js";
 import { enforceRpm } from "./_lib/ratelimit.js";
+import { normalizeProviderName } from "./_lib/providers.js";
 import { randomUUID } from "crypto";
 
 function siteOrigin(req) {
@@ -23,13 +24,13 @@ export default wrap(async (req) => {
   let body;
   try { body = await req.json(); } catch { return badRequest("Invalid JSON", cors); }
 
-  const provider = (body.provider || "").toString().trim().toLowerCase();
+  const provider = normalizeProviderName(body.provider);
   const model = (body.model || "").toString().trim();
   const messages_in = body.messages;
   const max_tokens = Number.isFinite(body.max_tokens) ? parseInt(body.max_tokens, 10) : 4096;
   const temperature = Number.isFinite(body.temperature) ? body.temperature : 1;
 
-  if (!provider) return badRequest("Missing provider (openai|anthropic|gemini)", cors);
+  if (!provider) return badRequest("Missing provider (openai|anthropic|gemini|Skyes Over London)", cors);
   if (!model) return badRequest("Missing model", cors);
   if (!Array.isArray(messages_in) || messages_in.length === 0) return badRequest("Missing messages[]", cors);
 

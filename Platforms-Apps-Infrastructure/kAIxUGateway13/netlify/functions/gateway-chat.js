@@ -2,7 +2,7 @@ import { wrap } from "./_lib/wrap.js";
 import { buildCors, json, badRequest, getBearer, monthKeyUTC, getInstallId, getClientIp, getUserAgent } from "./_lib/http.js";
 import { q } from "./_lib/db.js";
 import { costCents } from "./_lib/pricing.js";
-import { callOpenAI, callAnthropic, callGemini } from "./_lib/providers.js";
+import { callOpenAI, callAnthropic, callGemini, normalizeProviderName } from "./_lib/providers.js";
 import { resolveAuth, getMonthRollup, getKeyMonthRollup, customerCapCents, keyCapCents } from "./_lib/authz.js";
 import { enforceRpm } from "./_lib/ratelimit.js";
 import { hmacSha256Hex } from "./_lib/crypto.js";
@@ -22,13 +22,13 @@ export default wrap(async (req) => {
   let body;
   try { body = await req.json(); } catch { return badRequest("Invalid JSON", cors); }
 
-  const provider = (body.provider || "").toString().trim().toLowerCase();
+  const provider = normalizeProviderName(body.provider);
   const model = (body.model || "").toString().trim();
   const messages_in = body.messages;
   const max_tokens = Number.isFinite(body.max_tokens) ? parseInt(body.max_tokens, 10) : 1024;
   const temperature = Number.isFinite(body.temperature) ? body.temperature : 1;
 
-  if (!provider) return badRequest("Missing provider (openai|anthropic|gemini)", cors);
+  if (!provider) return badRequest("Missing provider (openai|anthropic|gemini|Skyes Over London)", cors);
   if (!model) return badRequest("Missing model", cors);
   if (!Array.isArray(messages_in) || messages_in.length === 0) return badRequest("Missing messages[]", cors);
 
@@ -101,7 +101,7 @@ export default wrap(async (req) => {
     if (provider === "openai") result = await callOpenAI({ model, messages, max_tokens, temperature });
     else if (provider === "anthropic") result = await callAnthropic({ model, messages, max_tokens, temperature });
     else if (provider === "gemini") result = await callGemini({ model, messages, max_tokens, temperature });
-    else return badRequest("Unknown provider. Use openai|anthropic|gemini.", cors);
+    else return badRequest("Unknown provider. Use openai|anthropic|gemini|Skyes Over London.", cors);
   } catch (e) {
     return json(500, { error: e?.message || "Provider error", provider }, cors);
   }
