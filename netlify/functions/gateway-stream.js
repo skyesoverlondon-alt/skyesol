@@ -21,7 +21,7 @@ const PUBLIC_PROVIDER_NAME = process.env.KAIXU_PUBLIC_PROVIDER_NAME || "Skyes Ov
  */
 export default wrap(async (req) => {
   const cors = buildCors(req);
-  if (req.method === "OPTIONS") return new Response("", { status: 204, headers: cors });
+  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
   if (req.method !== "POST") return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers: { ...cors, "content-type": "application/json" } });
 
   const token = getBearer(req);
