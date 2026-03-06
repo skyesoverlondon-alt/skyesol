@@ -2,13 +2,21 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-02-27T07:38:07.845Z",
-  "totalItems": 772,
+  "generatedAt": "2026-03-06T18:25:54.283Z",
+  "totalItems": 1179,
   "categories": [
     {
       "name": "root",
-      "count": 27,
+      "count": 35,
       "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "_fix_nav.py",
+          "title": null,
+          "ext": ".py",
+          "category": "root"
+        },
         {
           "urlPath": "/404.html",
           "prettyPath": null,
@@ -21,7 +29,23 @@ export const SITE_MENU = {
           "urlPath": "/about.html",
           "prettyPath": null,
           "file": "about.html",
-          "title": "About the Founder — Skyes Over London LC",
+          "title": "About Skyes Over London LC | Operator-Grade AI + Web Infrastructure",
+          "ext": ".html",
+          "category": "root"
+        },
+        {
+          "urlPath": "/AboutSkyesOverLondon.html",
+          "prettyPath": null,
+          "file": "AboutSkyesOverLondon.html",
+          "title": "About Skyes Over London LC | Operator-Grade AI + Web Infrastructure",
+          "ext": ".html",
+          "category": "root"
+        },
+        {
+          "urlPath": "/admin-executive.html",
+          "prettyPath": null,
+          "file": "admin-executive.html",
+          "title": "Executive Admin · SOLEnterprises",
           "ext": ".html",
           "category": "root"
         },
@@ -66,6 +90,14 @@ export const SITE_MENU = {
           "category": "root"
         },
         {
+          "urlPath": "/dashboard.html",
+          "prettyPath": null,
+          "file": "dashboard.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "root"
+        },
+        {
           "urlPath": "/index.html",
           "prettyPath": "/",
           "file": "index.html",
@@ -101,7 +133,7 @@ export const SITE_MENU = {
           "urlPath": "/portfolio.html",
           "prettyPath": null,
           "file": "portfolio.html",
-          "title": "Portfolio placeholder",
+          "title": "Portfolio | SOLEnterprises Ecosystem",
           "ext": ".html",
           "category": "root"
         },
@@ -125,7 +157,23 @@ export const SITE_MENU = {
           "urlPath": "/sitemap-visual.html",
           "prettyPath": null,
           "file": "sitemap-visual.html",
-          "title": "Site Navigation Map — SOLEnterprises",
+          "title": "Site Ecology - Live Folder Map",
+          "ext": ".html",
+          "category": "root"
+        },
+        {
+          "urlPath": "/SKYE%20Founder%20For%20Apps.html",
+          "prettyPath": null,
+          "file": "SKYE Founder For Apps.html",
+          "title": "About Skyes Over London LC | Operator-Grade AI + Web Infrastructure",
+          "ext": ".html",
+          "category": "root"
+        },
+        {
+          "urlPath": "/SKYE%20INTRO.html",
+          "prettyPath": null,
+          "file": "SKYE INTRO.html",
+          "title": "SKYE INTRO",
           "ext": ".html",
           "category": "root"
         },
@@ -212,9 +260,25 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "Screenshot 2026-03-06 2.18.22 AM - Display 3.png",
+          "title": null,
+          "ext": ".png",
+          "category": "root"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "sitemap.xml",
           "title": null,
           "ext": ".xml",
+          "category": "root"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "skyesol-project.zip",
+          "title": null,
+          "ext": ".zip",
           "category": "root"
         },
         {
@@ -306,30 +370,8 @@ export const SITE_MENU = {
       ]
     },
     {
-      "name": "blog",
-      "count": 2,
-      "items": [
-        {
-          "urlPath": "/blog/posts/my-new-post.html",
-          "prettyPath": null,
-          "file": "blog/posts/my-new-post.html",
-          "title": "Placeholder blog post",
-          "ext": ".html",
-          "category": "blog"
-        },
-        {
-          "urlPath": "/blog/posts/phoenix-llc-checklist.html",
-          "prettyPath": null,
-          "file": "blog/posts/phoenix-llc-checklist.html",
-          "title": "Placeholder blog post",
-          "ext": ".html",
-          "category": "blog"
-        }
-      ]
-    },
-    {
       "name": "Blogs",
-      "count": 226,
+      "count": 274,
       "items": [
         {
           "urlPath": "/Blogs/13th%20Sole%20Promotions/Establishing-Business-Development-Firm-Phoenix-AZ.html",
@@ -376,6 +418,22 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Blogs/Editorials/APPS WEVE ENGINEERED/FamilyMedPassport.html",
           "title": "FamilyMed Passport: Free Emergency Setup Kit + Medical Passport PDF",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Editorials/APPS%20WEVE%20ENGINEERED/index.html",
+          "prettyPath": "/Blogs/Editorials/APPS%20WEVE%20ENGINEERED/",
+          "file": "Blogs/Editorials/APPS WEVE ENGINEERED/index.html",
+          "title": "Apps We've Engineered | SOLEnterprises",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Editorials/APPS%20WEVE%20ENGINEERED/kAIxuSuperIDE.html",
+          "prettyPath": null,
+          "file": "Blogs/Editorials/APPS WEVE ENGINEERED/kAIxuSuperIDE.html",
+          "title": "kAIxU Super IDE: The Enterprise Browser IDE That Ships | Skyes Over London LC",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -527,7 +585,7 @@ export const SITE_MENU = {
           "urlPath": "/Blogs/Editorials/ArizonaClubScene/index.html",
           "prettyPath": "/Blogs/Editorials/ArizonaClubScene/",
           "file": "Blogs/Editorials/ArizonaClubScene/index.html",
-          "title": null,
+          "title": "Arizona Club Scene | Editorial Hub",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -1036,6 +1094,14 @@ export const SITE_MENU = {
           "category": "Blogs"
         },
         {
+          "urlPath": "/Blogs/Editorials/Colorado%20AI/index.html",
+          "prettyPath": "/Blogs/Editorials/Colorado%20AI/",
+          "file": "Blogs/Editorials/Colorado AI/index.html",
+          "title": "Colorado AI & Dev Field Notes | SOLEnterprises",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
           "urlPath": "/Blogs/Editorials/Colorado%20AI/meta-ai.html",
           "prettyPath": null,
           "file": "Blogs/Editorials/Colorado AI/meta-ai.html",
@@ -1096,6 +1162,14 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Blogs/Editorials/Devs & AI/ai-gateway-one-contract.html",
           "title": "AI Gateways: One Contract to Rule Multi‑Provider Models | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Editorials/Devs%20%26%20AI/index.html",
+          "prettyPath": "/Blogs/Editorials/Devs%20%26%20AI/",
+          "file": "Blogs/Editorials/Devs & AI/index.html",
+          "title": "Devs & AI | Engineering Field Notes | SOLEnterprises",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -1199,7 +1273,7 @@ export const SITE_MENU = {
           "urlPath": "/Blogs/Editorials/disclaimer.html",
           "prettyPath": null,
           "file": "Blogs/Editorials/disclaimer.html",
-          "title": "Editorials Disclaimer",
+          "title": "Editorial Disclaimer | SOLEnterprises",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -1207,7 +1281,7 @@ export const SITE_MENU = {
           "urlPath": "/Blogs/Editorials/index.html",
           "prettyPath": "/Blogs/Editorials/",
           "file": "Blogs/Editorials/index.html",
-          "title": "Editorials Index",
+          "title": "Editorials Hub | SOLEnterprises",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -1224,6 +1298,14 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Blogs/Editorials/NorthStar/bank-ready-financials-phoenix-loans-lines.html",
           "title": "Bank-Ready Financials: How Phoenix Businesses Win Loans and Lines of Credit | NorthStar Office & Accounting LLC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Editorials/NorthStar/index.html",
+          "prettyPath": "/Blogs/Editorials/NorthStar/",
+          "file": "Blogs/Editorials/NorthStar/index.html",
+          "title": "NorthStar Office & Accounting | SOLEnterprises",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -1279,7 +1361,7 @@ export const SITE_MENU = {
           "urlPath": "/Blogs/Editorials/privacy.html",
           "prettyPath": null,
           "file": "Blogs/Editorials/privacy.html",
-          "title": "Editorials Privacy",
+          "title": "Editorial Privacy Notice | SOLEnterprises",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -1735,7 +1817,15 @@ export const SITE_MENU = {
           "urlPath": "/Blogs/Editorials/terms.html",
           "prettyPath": null,
           "file": "Blogs/Editorials/terms.html",
-          "title": "Editorials Terms",
+          "title": "Editorial Terms | SOLEnterprises",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Editorials/WebPile%20Pro%E2%80%94Monaco%20Editor.html",
+          "prettyPath": null,
+          "file": "Blogs/Editorials/WebPile Pro—Monaco Editor.html",
+          "title": "WebPile Pro — Monaco Editor | Skyes Over London LC",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -1844,6 +1934,54 @@ export const SITE_MENU = {
           "category": "Blogs"
         },
         {
+          "urlPath": "/Blogs/Houston%20Texas%20Devs%20%26%20AI/index.html",
+          "prettyPath": "/Blogs/Houston%20Texas%20Devs%20%26%20AI/",
+          "file": "Blogs/Houston Texas Devs & AI/index.html",
+          "title": "Houston Texas Devs & AI",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/In%20The%20SkyeLight/GatewayXnth.html",
+          "prettyPath": null,
+          "file": "Blogs/In The SkyeLight/GatewayXnth.html",
+          "title": "kAIxU Gate Xinth (kAIxu0s): Verified Gateway Surface + Smoke Proof | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/In%20The%20SkyeLight/index.html",
+          "prettyPath": "/Blogs/In%20The%20SkyeLight/",
+          "file": "Blogs/In The SkyeLight/index.html",
+          "title": "In The SkyeLight",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/In%20The%20SkyeLight/northstar-office-accounting-editorial.html",
+          "prettyPath": null,
+          "file": "Blogs/In The SkyeLight/northstar-office-accounting-editorial.html",
+          "title": "NorthStar Office & Accounting: Back-Office Command for Operators | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/In%20The%20SkyeLight/originx-editorial.html",
+          "prettyPath": null,
+          "file": "Blogs/In The SkyeLight/originx-editorial.html",
+          "title": "OriginX: The Vault for Your Voice — Lyric Safe & Splitter | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/In%20The%20SkyeLight/skye-profit-console-editorial%20(1).html",
+          "prettyPath": null,
+          "file": "Blogs/In The SkyeLight/skye-profit-console-editorial (1).html",
+          "title": "Skye Profit Console: The Audit-Ready Revenue & Profit Cockpit | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
           "urlPath": "/Blogs/Mysfit'sModernJukeJointExperience.html",
           "prettyPath": null,
           "file": "Blogs/Mysfit'sModernJukeJointExperience.html",
@@ -1944,6 +2082,278 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Blogs/Phoenix Arizona/10_arizona_contracts_deposits_invoicing_system.html",
           "title": "Arizona Contracts, Deposits & Invoicing (Phoenix Operator System That Actually Collects)",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Field%20Guide/index.html",
+          "prettyPath": "/Blogs/Phoenix%20Arizona/AI/Field%20Guide/",
+          "file": "Blogs/Phoenix Arizona/AI/Field Guide/index.html",
+          "title": "PHOENIX AI FIELD GUIDE Series Hub | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-axon.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-axon.html",
+          "title": "PHOENIX AI FIELD GUIDE Axon in Scottsdale | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-microchip.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-microchip.html",
+          "title": "PHOENIX AI FIELD GUIDE Microchip in Chandler | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-radiusai.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-radiusai.html",
+          "title": "PHOENIX AI FIELD GUIDE RadiusAI in Tempe | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-tsmc.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-tsmc.html",
+          "title": "PHOENIX AI FIELD GUIDE TSMC Arizona | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Field%20Guide/phx-ai-field-guide-waymo.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Field Guide/phx-ai-field-guide-waymo.html",
+          "title": "PHOENIX AI FIELD GUIDE Waymo in Metro Phoenix | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase%202/06-waymo-phoenix-robotaxi-field-guide.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase 2/06-waymo-phoenix-robotaxi-field-guide.html",
+          "title": "Waymo in Metro Phoenix: Autonomous Mobility as Infrastructure | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase%202/07-axon-scottsdale-public-safety-ai-field-guide.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase 2/07-axon-scottsdale-public-safety-ai-field-guide.html",
+          "title": "Axon in Scottsdale: Generative AI With Guardrails for Public Safety | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase%202/08-nextiva-scottsdale-unified-cxm-ai-field-guide.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase 2/08-nextiva-scottsdale-unified-cxm-ai-field-guide.html",
+          "title": "Nextiva in Scottsdale: AI-Powered Customer Experience as a Platform | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase%202/09-radiusai-tempe-computer-vision-retail-field-guide.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase 2/09-radiusai-tempe-computer-vision-retail-field-guide.html",
+          "title": "RadiusAI in Tempe: Computer Vision and the Future of Retail Checkout | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase%202/10-nucleusteq-phoenix-enterprise-data-ai-field-guide.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase 2/10-nucleusteq-phoenix-enterprise-data-ai-field-guide.html",
+          "title": "NucleusTeq in Phoenix: Enterprise Data + AI Modernization as a Service | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase%202/index.html",
+          "prettyPath": "/Blogs/Phoenix%20Arizona/AI/Phase%202/",
+          "file": "Blogs/Phoenix Arizona/AI/Phase 2/index.html",
+          "title": "Phoenix AI Field Guide: Five More Metro Phoenix AI Company Profiles (Pack 04) | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase1/01-intel-phoenix-ai-field-guide.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase1/01-intel-phoenix-ai-field-guide.html",
+          "title": "Intel in Greater Phoenix: The Compute Gravity Well | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase1/02-godaddy-tempe-agentic-ai-field-guide.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase1/02-godaddy-tempe-agentic-ai-field-guide.html",
+          "title": "GoDaddy in Tempe: Agentic AI for Small Business | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase1/03-onsemi-scottsdale-ai-datacenter-power.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase1/03-onsemi-scottsdale-ai-datacenter-power.html",
+          "title": "onsemi in Scottsdale: Powering AI Data Centers from Grid to Core | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase1/04-insight-chandler-ai-systems-integrator.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase1/04-insight-chandler-ai-systems-integrator.html",
+          "title": "Insight in Chandler: The Integrator Layer of Phoenix AI | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase1/05-early-warning-scottsdale-identity-ai.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase1/05-early-warning-scottsdale-identity-ai.html",
+          "title": "Early Warning in Scottsdale: Identity Intelligence for the Zelle Era | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase1/index.html",
+          "prettyPath": "/Blogs/Phoenix%20Arizona/AI/Phase1/",
+          "file": "Blogs/Phoenix Arizona/AI/Phase1/index.html",
+          "title": "Phoenix AI Field Guide: The Companies Shaping the Valley’s AI Stack | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase3/01-waymo-phoenix-autonomous-ai.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase3/01-waymo-phoenix-autonomous-ai.html",
+          "title": "Waymo in Metro Phoenix: Autonomous AI That Ships | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase3/02-axon-scottsdale-public-safety-ai.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase3/02-axon-scottsdale-public-safety-ai.html",
+          "title": "Axon in Scottsdale: AI for Public Safety Operations | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase3/03-nextiva-scottsdale-ai-cx.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase3/03-nextiva-scottsdale-ai-cx.html",
+          "title": "Nextiva in Scottsdale: AI-Powered Customer Experience at Scale | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase3/04-paradox-scottsdale-olivia-ai-hiring.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase3/04-paradox-scottsdale-olivia-ai-hiring.html",
+          "title": "Paradox in Scottsdale: Olivia and the Rise of Conversational Hiring AI | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase3/05-qbotica-phoenix-agentic-automation.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AI/Phase3/05-qbotica-phoenix-agentic-automation.html",
+          "title": "qBotica in Phoenix: Agentic AI and Intelligent Automation as a Service | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AI/Phase3/index.html",
+          "prettyPath": "/Blogs/Phoenix%20Arizona/AI/Phase3/",
+          "file": "Blogs/Phoenix Arizona/AI/Phase3/index.html",
+          "title": "Phoenix AI Field Guide: Pack 05 — Autonomy, Public Safety, CX, Hiring, Automation | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-01-phoenix-enterprise-systems-axon-godaddy-banner.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-01-phoenix-enterprise-systems-axon-godaddy-banner.html",
+          "title": "Phoenix Enterprise Systems Playbook: Axon, GoDaddy, Banner Health Patterns | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-02-valley-logistics-loop-amazon-republic-skyharbor.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-02-valley-logistics-loop-amazon-republic-skyharbor.html",
+          "title": "Valley Logistics Loop: Dispatch Discipline in Phoenix | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-03-retail-at-speed-sprouts-circlek-discounttire.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-03-retail-at-speed-sprouts-circlek-discounttire.html",
+          "title": "Retail at Speed in Phoenix: Conversion Stack Patterns | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-04-semiconductor-discipline-intel-tsmc-honeywell.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-04-semiconductor-discipline-intel-tsmc-honeywell.html",
+          "title": "Semiconductor Discipline in Phoenix: Change Control and Proof | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-05-healthcare-grade-reliability-mayo-phxchildrens-honorhealth.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-05-healthcare-grade-reliability-mayo-phxchildrens-honorhealth.html",
+          "title": "Healthcare-Grade Reliability in Phoenix: Proof-First Operations | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-06-audited-revenue-fintech-amex-usaa-wellsfargo.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-06-audited-revenue-fintech-amex-usaa-wellsfargo.html",
+          "title": "Audited Revenue in Phoenix: The Fintech Discipline Playbook | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-07-real-estate-construction-ops-carvana-offerpad-taylormorrison.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-07-real-estate-construction-ops-carvana-offerpad-taylormorrison.html",
+          "title": "Phoenix Real Estate + Construction Ops: The Proof Pipeline Playbook | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-08-heat-resilient-operations-srp-aps-cityofphoenix.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-08-heat-resilient-operations-srp-aps-cityofphoenix.html",
+          "title": "Heat-Resilient Operations in Phoenix: The Scheduling + Safety Playbook | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-09-customer-support-intake-discipline-discover-amex-usaa.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-09-customer-support-intake-discipline-discover-amex-usaa.html",
+          "title": "Customer Support Discipline in Phoenix: The Intake + Ticketing Playbook | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/Phoenix%20Arizona/AZ%20Operations/editorial-10-hiring-onboarding-systems-asu-gcu-maricopa.html",
+          "prettyPath": null,
+          "file": "Blogs/Phoenix Arizona/AZ Operations/editorial-10-hiring-onboarding-systems-asu-gcu-maricopa.html",
+          "title": "Hiring + Onboarding Systems in Phoenix: The Workforce Operations Playbook | Skyes Over London LC",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -2068,6 +2478,14 @@ export const SITE_MENU = {
           "category": "Blogs"
         },
         {
+          "urlPath": "/Blogs/sol-ops-field-brief.html",
+          "prettyPath": null,
+          "file": "Blogs/sol-ops-field-brief.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
           "urlPath": "/Blogs/web-development-phoenix-az-apex-operator-playbook.html",
           "prettyPath": null,
           "file": "Blogs/web-development-phoenix-az-apex-operator-playbook.html",
@@ -2080,6 +2498,14 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Blogs/Web Development in Phoenix, AZ.html",
           "title": "Web Development in Phoenix, AZ | Modern Websites, SEO, Speed & Conversions (2026 Guide)",
+          "ext": ".html",
+          "category": "Blogs"
+        },
+        {
+          "urlPath": "/Blogs/What-Even-Is-SEO.html",
+          "prettyPath": null,
+          "file": "Blogs/What-Even-Is-SEO.html",
+          "title": "Redirecting…",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -2142,8 +2568,158 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "Bundles",
+      "count": 18,
+      "items": [
+        {
+          "urlPath": "/Bundles/index.html",
+          "prettyPath": "/Bundles/",
+          "file": "Bundles/index.html",
+          "title": "Service Bundles | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/Revenue-Ops/core.html",
+          "prettyPath": null,
+          "file": "Bundles/Revenue-Ops/core.html",
+          "title": "Revenue Ops CORE — Speed-to-Cash Foundation | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/revenue-ops/index.html",
+          "prettyPath": "/Bundles/revenue-ops/",
+          "file": "Bundles/revenue-ops/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/Revenue-Ops/index.html",
+          "prettyPath": "/Bundles/Revenue-Ops/",
+          "file": "Bundles/Revenue-Ops/index.html",
+          "title": "Revenue Ops Accelerator | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/Revenue-Ops/obsidian.html",
+          "prettyPath": null,
+          "file": "Bundles/Revenue-Ops/obsidian.html",
+          "title": "Revenue Ops OBSIDIAN — Custom Systems + Scale | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/Revenue-Ops/pro.html",
+          "prettyPath": null,
+          "file": "Bundles/Revenue-Ops/pro.html",
+          "title": "Revenue Ops PRO — Proof + Automation Upgrade | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/thank-you.html",
+          "prettyPath": null,
+          "file": "Bundles/thank-you.html",
+          "title": "Intake Received | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/Ultimate/core.html",
+          "prettyPath": null,
+          "file": "Bundles/Ultimate/core.html",
+          "title": "Ultimate CORE — Launch Clean | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/ultimate/index.html",
+          "prettyPath": "/Bundles/ultimate/",
+          "file": "Bundles/ultimate/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/Ultimate/index.html",
+          "prettyPath": "/Bundles/Ultimate/",
+          "file": "Bundles/Ultimate/index.html",
+          "title": "Ultimate Business Launch Stack | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/Ultimate/obsidian.html",
+          "prettyPath": null,
+          "file": "Bundles/Ultimate/obsidian.html",
+          "title": "Ultimate OBSIDIAN — Full Production + Systems | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": "/Bundles/Ultimate/pro.html",
+          "prettyPath": null,
+          "file": "Bundles/Ultimate/pro.html",
+          "title": "Ultimate PRO — Proof + Growth Engine | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Bundles/_redirects",
+          "title": null,
+          "ext": "",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Bundles/assets/common.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Bundles/assets/site.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Bundles/assets/stars.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Bundles/robots.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Bundles"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Bundles/sitemap.xml",
+          "title": null,
+          "ext": ".xml",
+          "category": "Bundles"
+        }
+      ]
+    },
+    {
       "name": "Case Studies",
-      "count": 91,
+      "count": 88,
       "items": [
         {
           "urlPath": "/Case%20Studies/2026/best-buy-retail-fulfillment-last-mile-proof.html",
@@ -2506,30 +3082,6 @@ export const SITE_MENU = {
           "category": "Case Studies"
         },
         {
-          "urlPath": "/Case%20Studies/case-study-collections-collapse/index.html",
-          "prettyPath": "/Case%20Studies/case-study-collections-collapse/",
-          "file": "Case Studies/case-study-collections-collapse/index.html",
-          "title": "Case Study — Collections Collapse Recovery",
-          "ext": ".html",
-          "category": "Case Studies"
-        },
-        {
-          "urlPath": "/Case%20Studies/case-study-home-occupation/index.html",
-          "prettyPath": "/Case%20Studies/case-study-home-occupation/",
-          "file": "Case Studies/case-study-home-occupation/index.html",
-          "title": "Case Study — Home Occupation Clearance (Phoenix, AZ)",
-          "ext": ".html",
-          "category": "Case Studies"
-        },
-        {
-          "urlPath": "/Case%20Studies/case-study-tpt-surprise/index.html",
-          "prettyPath": "/Case%20Studies/case-study-tpt-surprise/",
-          "file": "Case Studies/case-study-tpt-surprise/index.html",
-          "title": "Case Study — Surprise, AZ TPT License & Compliance",
-          "ext": ".html",
-          "category": "Case Studies"
-        },
-        {
           "urlPath": "/Case%20Studies/contractor-portal-ae-sales-lead-stages-commissions.html",
           "prettyPath": null,
           "file": "Case Studies/contractor-portal-ae-sales-lead-stages-commissions.html",
@@ -2883,7 +3435,7 @@ export const SITE_MENU = {
           "urlPath": "/case-study-collections-collapse/index.html",
           "prettyPath": "/case-study-collections-collapse/",
           "file": "case-study-collections-collapse/index.html",
-          "title": "Case study placeholder",
+          "title": "Case Study | Collections Collapse Recovery",
           "ext": ".html",
           "category": "case-study-collections-collapse"
         }
@@ -2897,7 +3449,7 @@ export const SITE_MENU = {
           "urlPath": "/case-study-home-occupation/index.html",
           "prettyPath": "/case-study-home-occupation/",
           "file": "case-study-home-occupation/index.html",
-          "title": "Case study placeholder",
+          "title": "Case Study | Home Occupation Compliance",
           "ext": ".html",
           "category": "case-study-home-occupation"
         }
@@ -2911,7 +3463,7 @@ export const SITE_MENU = {
           "urlPath": "/case-study-tpt-surprise/index.html",
           "prettyPath": "/case-study-tpt-surprise/",
           "file": "case-study-tpt-surprise/index.html",
-          "title": "Case study placeholder",
+          "title": "Case Study | TPT Surprise Remediation",
           "ext": ".html",
           "category": "case-study-tpt-surprise"
         }
@@ -2968,6 +3520,68 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "DEV NOTES AND  DIRECTIVES",
+      "count": 7,
+      "items": [
+        {
+          "urlPath": "/DEV%20NOTES%20AND%20%20DIRECTIVES/the%20standard%20for%20editorials.html",
+          "prettyPath": null,
+          "file": "DEV NOTES AND  DIRECTIVES/the standard for editorials.html",
+          "title": "SKAIXU.SYSTEM: The Operator’s App Launcher (and the Free Launch Kit) | Skyes Over London LC",
+          "ext": ".html",
+          "category": "DEV NOTES AND  DIRECTIVES"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "DEV NOTES AND  DIRECTIVES/Background Wallpaper",
+          "title": null,
+          "ext": "",
+          "category": "DEV NOTES AND  DIRECTIVES"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "DEV NOTES AND  DIRECTIVES/CLAUDE BROKE GITIGNORE RULES",
+          "title": null,
+          "ext": "",
+          "category": "DEV NOTES AND  DIRECTIVES"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "DEV NOTES AND  DIRECTIVES/kAIxU Delta GATE Implementation Directives (1).txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "DEV NOTES AND  DIRECTIVES"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "DEV NOTES AND  DIRECTIVES/kAIxuGateway13_integrationMaster.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "DEV NOTES AND  DIRECTIVES"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "DEV NOTES AND  DIRECTIVES/Service Ideas",
+          "title": null,
+          "ext": "",
+          "category": "DEV NOTES AND  DIRECTIVES"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "DEV NOTES AND  DIRECTIVES/Start Scripts",
+          "title": null,
+          "ext": "",
+          "category": "DEV NOTES AND  DIRECTIVES"
+        }
+      ]
+    },
+    {
       "name": "directory",
       "count": 1,
       "items": [
@@ -2975,7 +3589,7 @@ export const SITE_MENU = {
           "urlPath": "/directory/index.html",
           "prettyPath": "/directory/",
           "file": "directory/index.html",
-          "title": "Directory | SOL",
+          "title": "Directory | SOLEnterprises Ecosystem",
           "ext": ".html",
           "category": "directory"
         }
@@ -2983,15 +3597,69 @@ export const SITE_MENU = {
     },
     {
       "name": "divisions",
-      "count": 1,
+      "count": 2,
       "items": [
+        {
+          "urlPath": "/divisions/Dossier.html",
+          "prettyPath": null,
+          "file": "divisions/Dossier.html",
+          "title": "Division Dossier | SOLEnterprises",
+          "ext": ".html",
+          "category": "divisions"
+        },
         {
           "urlPath": "/divisions/index.html",
           "prettyPath": "/divisions/",
           "file": "divisions/index.html",
-          "title": "Divisions | SOL",
+          "title": "Divisions | SOLEnterprises Ecosystem",
           "ext": ".html",
           "category": "divisions"
+        }
+      ]
+    },
+    {
+      "name": "docs",
+      "count": 5,
+      "items": [
+        {
+          "urlPath": "/docs/index.html",
+          "prettyPath": "/docs/",
+          "file": "docs/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "docs"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "docs/ai-endpoints-usage.json",
+          "title": null,
+          "ext": ".json",
+          "category": "docs"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "docs/functions-endpoints-map.json",
+          "title": null,
+          "ext": ".json",
+          "category": "docs"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "docs/Gateway-Bind.md",
+          "title": null,
+          "ext": ".md",
+          "category": "docs"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "docs/netlify-functions-env-allowlist.md",
+          "title": null,
+          "ext": ".md",
+          "category": "docs"
         }
       ]
     },
@@ -3089,7 +3757,7 @@ export const SITE_MENU = {
           "urlPath": "/get-started/index.html",
           "prettyPath": "/get-started/",
           "file": "get-started/index.html",
-          "title": "Get Started | SOL",
+          "title": "Get Started | SOLEnterprises Ecosystem",
           "ext": ".html",
           "category": "get-started"
         }
@@ -3110,8 +3778,118 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "insights",
+      "count": 13,
+      "items": [
+        {
+          "urlPath": "/insights/phoenix-dispatch/ai-that-doesn-t-spy-phoenix-eldercare-and-radar-based-fall-risk-signals/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/ai-that-doesn-t-spy-phoenix-eldercare-and-radar-based-fall-risk-signals/",
+          "file": "insights/phoenix-dispatch/ai-that-doesn-t-spy-phoenix-eldercare-and-radar-based-fall-risk-signals/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/asu-s-principled-ai-push-when-a-university-treats-genai-like-infrastructure/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/asu-s-principled-ai-push-when-a-university-treats-genai-like-infrastructure/",
+          "file": "insights/phoenix-dispatch/asu-s-principled-ai-push-when-a-university-treats-genai-like-infrastructure/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/autonomy-in-the-desert-honeywell-s-phoenix-tests-and-the-reality-of-ai-in-the-air/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/autonomy-in-the-desert-honeywell-s-phoenix-tests-and-the-reality-of-ai-in-the-air/",
+          "file": "insights/phoenix-dispatch/autonomy-in-the-desert-honeywell-s-phoenix-tests-and-the-reality-of-ai-in-the-air/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/healthcare-ai-in-metro-phoenix-fast-wins-real-patients-no-camera-drama/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/healthcare-ai-in-metro-phoenix-fast-wins-real-patients-no-camera-drama/",
+          "file": "insights/phoenix-dispatch/healthcare-ai-in-metro-phoenix-fast-wins-real-patients-no-camera-drama/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/microchip-in-chandler-embedded-ml-as-the-quiet-workhorse-of-the-valley/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/microchip-in-chandler-embedded-ml-as-the-quiet-workhorse-of-the-valley/",
+          "file": "insights/phoenix-dispatch/microchip-in-chandler-embedded-ml-as-the-quiet-workhorse-of-the-valley/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/nxp-and-physical-ai-the-industrial-version-of-intelligence-phoenix-businesses-actually-use/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/nxp-and-physical-ai-the-industrial-version-of-intelligence-phoenix-businesses-actually-use/",
+          "file": "insights/phoenix-dispatch/nxp-and-physical-ai-the-industrial-version-of-intelligence-phoenix-businesses-actually-use/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/onsemi-in-scottsdale-power-electronics-as-ai-s-hidden-bottleneck/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/onsemi-in-scottsdale-power-electronics-as-ai-s-hidden-bottleneck/",
+          "file": "insights/phoenix-dispatch/onsemi-in-scottsdale-power-electronics-as-ai-s-hidden-bottleneck/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/phoenix-ai-index-the-companies-institutions-and-infrastructure-that-actually-matter/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/phoenix-ai-index-the-companies-institutions-and-infrastructure-that-actually-matter/",
+          "file": "insights/phoenix-dispatch/phoenix-ai-index-the-companies-institutions-and-infrastructure-that-actually-matter/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/phoenix-s-physical-ai-corridor-chips-power-and-edge-intelligence/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/phoenix-s-physical-ai-corridor-chips-power-and-edge-intelligence/",
+          "file": "insights/phoenix-dispatch/phoenix-s-physical-ai-corridor-chips-power-and-edge-intelligence/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/tgen-in-downtown-phoenix-data-heavy-biotech-and-the-next-wave-of-applied-ai/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/tgen-in-downtown-phoenix-data-heavy-biotech-and-the-next-wave-of-applied-ai/",
+          "file": "insights/phoenix-dispatch/tgen-in-downtown-phoenix-data-heavy-biotech-and-the-next-wave-of-applied-ai/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/tsmc-arizona-and-the-local-ai-supply-chain-phoenix-as-a-strategic-node/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/tsmc-arizona-and-the-local-ai-supply-chain-phoenix-as-a-strategic-node/",
+          "file": "insights/phoenix-dispatch/tsmc-arizona-and-the-local-ai-supply-chain-phoenix-as-a-strategic-node/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/wavex-and-the-arizona-commerce-authority-a-new-kind-of-ai-venture-studio-in-phoenix/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/wavex-and-the-arizona-commerce-authority-a-new-kind-of-ai-venture-studio-in-phoenix/",
+          "file": "insights/phoenix-dispatch/wavex-and-the-arizona-commerce-authority-a-new-kind-of-ai-venture-studio-in-phoenix/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        },
+        {
+          "urlPath": "/insights/phoenix-dispatch/workforce-ai-in-the-east-valley-intel-community-colleges-as-a-talent-multiplier/index.html",
+          "prettyPath": "/insights/phoenix-dispatch/workforce-ai-in-the-east-valley-intel-community-colleges-as-a-talent-multiplier/",
+          "file": "insights/phoenix-dispatch/workforce-ai-in-the-east-valley-intel-community-colleges-as-a-talent-multiplier/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "insights"
+        }
+      ]
+    },
+    {
       "name": "js",
-      "count": 7,
+      "count": 12,
       "items": [
         {
           "urlPath": null,
@@ -3124,7 +3902,31 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "js/bg-boot.js",
+          "title": null,
+          "ext": ".js",
+          "category": "js"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "js/growth.js",
+          "title": null,
+          "ext": ".js",
+          "category": "js"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "js/header-canonicalize.js",
+          "title": null,
+          "ext": ".js",
+          "category": "js"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "js/kaixu-gate.js",
           "title": null,
           "ext": ".js",
           "category": "js"
@@ -3156,6 +3958,14 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "js/SkyeSolINTRO.js",
+          "title": null,
+          "ext": ".js",
+          "category": "js"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "js/sol-intro.js",
           "title": null,
           "ext": ".js",
@@ -3168,12 +3978,34 @@ export const SITE_MENU = {
           "title": null,
           "ext": ".js",
           "category": "js"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "js/three.min.js",
+          "title": null,
+          "ext": ".js",
+          "category": "js"
+        }
+      ]
+    },
+    {
+      "name": "kaixu",
+      "count": 1,
+      "items": [
+        {
+          "urlPath": "/kaixu/requestkaixuapikey/index.html",
+          "prettyPath": "/kaixu/requestkaixuapikey/",
+          "file": "kaixu/requestkaixuapikey/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "kaixu"
         }
       ]
     },
     {
       "name": "kAIxu",
-      "count": 17,
+      "count": 18,
       "items": [
         {
           "urlPath": "/kAIxu/docs.html",
@@ -3188,6 +4020,14 @@ export const SITE_MENU = {
           "prettyPath": "/kAIxu/",
           "file": "kAIxu/index.html",
           "title": "kAIxU 6.7 | Skyes Over London LC",
+          "ext": ".html",
+          "category": "kAIxu"
+        },
+        {
+          "urlPath": "/kAIxu/Its-kAIxU/getkaixu-api.html",
+          "prettyPath": null,
+          "file": "kAIxu/Its-kAIxU/getkaixu-api.html",
+          "title": "Redirecting…",
           "ext": ".html",
           "category": "kAIxu"
         },
@@ -3315,7 +4155,7 @@ export const SITE_MENU = {
     },
     {
       "name": "leadership",
-      "count": 3,
+      "count": 4,
       "items": [
         {
           "urlPath": "/leadership/dakayla-clark.html",
@@ -3329,7 +4169,7 @@ export const SITE_MENU = {
           "urlPath": "/leadership/index.html",
           "prettyPath": "/leadership/",
           "file": "leadership/index.html",
-          "title": "Leadership | SOL",
+          "title": "Leadership Home | SOLEnterprises Ecosystem",
           "ext": ".html",
           "category": "leadership"
         },
@@ -3338,6 +4178,14 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "leadership/SkyesOverLondon.html",
           "title": "Skyes Over London - Operator Profile | SOL",
+          "ext": ".html",
+          "category": "leadership"
+        },
+        {
+          "urlPath": "/leadership/skyesoverlondon/index.html",
+          "prettyPath": "/leadership/skyesoverlondon/",
+          "file": "leadership/skyesoverlondon/index.html",
+          "title": "Skyes Over London | Executive Profile",
           "ext": ".html",
           "category": "leadership"
         }
@@ -3412,6 +4260,20 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "netlify",
+      "count": 1,
+      "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "netlify/functions-disabled/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "netlify"
+        }
+      ]
+    },
+    {
       "name": "Pages",
       "count": 1,
       "items": [
@@ -3419,7 +4281,7 @@ export const SITE_MENU = {
           "urlPath": "/Pages/Services.html",
           "prettyPath": null,
           "file": "Pages/Services.html",
-          "title": "Services placeholder page",
+          "title": "Services Hub | Skyes Over London",
           "ext": ".html",
           "category": "Pages"
         }
@@ -3427,7 +4289,7 @@ export const SITE_MENU = {
     },
     {
       "name": "partials",
-      "count": 2,
+      "count": 3,
       "items": [
         {
           "urlPath": "/partials/footer.html",
@@ -3444,27 +4306,641 @@ export const SITE_MENU = {
           "title": null,
           "ext": ".html",
           "category": "partials"
+        },
+        {
+          "urlPath": "/partials/intro.html",
+          "prettyPath": null,
+          "file": "partials/intro.html",
+          "title": null,
+          "ext": ".html",
+          "category": "partials"
         }
       ]
     },
     {
-      "name": "platforms",
+      "name": "Platforms-Apps",
       "count": 1,
       "items": [
         {
-          "urlPath": "/platforms/index.html",
-          "prettyPath": "/platforms/",
-          "file": "platforms/index.html",
-          "title": "Kaixu Platforms — SOLEnterprises AI Division",
+          "urlPath": "/Platforms-Apps/index.html",
+          "prettyPath": "/Platforms-Apps/",
+          "file": "Platforms-Apps/index.html",
+          "title": "Platforms & Apps — SOLEnterprises",
           "ext": ".html",
-          "category": "platforms"
+          "category": "Platforms-Apps"
+        }
+      ]
+    },
+    {
+      "name": "platforms-apps-infrastructure",
+      "count": 1,
+      "items": [
+        {
+          "urlPath": "/platforms-apps-infrastructure/kaixugateway13/index.html",
+          "prettyPath": "/platforms-apps-infrastructure/kaixugateway13/",
+          "file": "platforms-apps-infrastructure/kaixugateway13/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "platforms-apps-infrastructure"
         }
       ]
     },
     {
       "name": "Platforms-Apps-Infrastructure",
-      "count": 244,
+      "count": 383,
       "items": [
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/ConnectLog.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/ConnectLog.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/DGUI.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/DGUI.html",
+          "title": "DGUI — Visual Developer Dashboard Builder | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/easyPWA.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/easyPWA.html",
+          "title": "easyPWA — Turn Any Site Into a Progressive Web App | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
+          "title": "ExecSignIn Pro — Secure Authentication for Operator Portals | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/index.html",
+          "title": "SkyeBookx Pro Suite Hub",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxu/Catalyst.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxu/Catalyst.html",
+          "title": "kAIxu Catalyst - Systems & Combat Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuAtlas.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuAtlas.html",
+          "title": "kAIxu Atlas - Cartography & Geography Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuAtmos.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuAtmos.html",
+          "title": "kAIxu Atmos - Soundscape & Audio Log Designer",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuBestiary.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuBestiary.html",
+          "title": "kAIxu Bestiary - Biological Archive",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuBlueprint.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuBlueprint.html",
+          "title": "kAIxu Blueprint - Architectural & Structural Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuChronos.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuChronos.html",
+          "title": "kAIxu Chronos - Timeline & History Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuCodex.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuCodex.html",
+          "title": "kAIxu Codex - Lore & Law Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuCodexv2.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuCodexv2.html",
+          "title": "kAIxu Codex - World Building Encyclopedia",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuFaction.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuFaction.html",
+          "title": "kAIxu Faction - Political & Guild Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuForge.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuForge.html",
+          "title": "kAIxu Forge - Item & Gadget Designer",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuGig.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuGig.html",
+          "title": "kAIxu Gig - Tour & Performance Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuGrimoire.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuGrimoire.html",
+          "title": "kAIxu Grimoire - Magic & Spellcraft Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuLexicon.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuLexicon.html",
+          "title": "kAIxu Lexicon - Language & Script Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuMatrix.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuMatrix.html",
+          "title": "kAIxu Matrix - Ecosystem Incubation Core",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuMythos.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuMythos.html",
+          "title": "kAIxu Mythos - Deity & Pantheon Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuPersona.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuPersona.html",
+          "title": "kAIxu Persona - Character Design Studio",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuPress.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuPress.html",
+          "title": "kAIxu Press - EPK & Media Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuPrime.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuPrime.html",
+          "title": "kAIxu Prime - Sovereign Ecosystem Hub",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuQuest.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuQuest.html",
+          "title": "kAIxu Quest - Game Design & Mission Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuRadio.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuRadio.html",
+          "title": "kAIxu Radio - Broadcast & Distribution Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuScript.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuScript.html",
+          "title": "kAIxu Script - Cinematic Screenwriter",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuSonic.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuSonic.html",
+          "title": "kAIxu Sonic - Artist Composition Suite",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuTerminal.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuTerminal.html",
+          "title": "kAIxu Terminal - Network & Cryptography Architect",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/kAIxuVision.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/kAIxuVision.html",
+          "title": "kAIxu Vision - Cinematic Storyboarder",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx%3APro-Suite/SkyeBookX-Cloud-Edition.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/SkyeBookX-Cloud-Edition.html",
+          "title": "SkyeBookX - kAIxU Edition",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/In%20The%20SkyeLight/ExecLedgerPro.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/ExecLedgerPro.html",
+          "title": "ExecLedgerPro — Executive Financial Ledger for Operators | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/In%20The%20SkyeLight/GraySoleLAuncher.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/GraySoleLAuncher.html",
+          "title": "GraySole Launcher — Operator App Launcher & Tool Hub | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/In%20The%20SkyeLight/OperationBrowserStrike.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/OperationBrowserStrike.html",
+          "title": "Operation: Browser Strike - Realistic",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/In%20The%20SkyeLight/WebPilePro.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/In The SkyeLight/WebPilePro.html",
+          "title": "WebPilePro — Web Resource Stack Manager for Developers | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/kAIxuAppForge.html",
+          "title": "kAIxuAppForge — AI App Generator & Scaffold Builder | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/KaixuGitPush.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/KaixuGitPush.html",
+          "title": "statikAI — AI Static Site Builder & Deploy Pipeline · SOLEnterprises",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/KaixuPush.html",
+          "title": "KaixuPush — Managed Netlify Deploy Proxy | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/LocalSeoSnapshot.html",
+          "title": "Local SEO Snapshot — 0–100 Local Search Audit Engine | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/NexusForge.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/NexusForge.html",
+          "title": "NexusForge Studio — Creative Build Studio for Operators | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/NexusOperator.html",
+          "title": "NexusOperator — The Operator Manifesto & Command Playbook | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/ConnectLog.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ConnectLog.html",
+          "title": "ConnectLog — Offline-First Networking & Contact Log | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/KaiLine.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/KaiLine.html",
+          "title": "KaiLine — AI Writing & Messaging Pipeline for Operators | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/SkyeCashLedger.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeCashLedger.html",
+          "title": "SkyeCash — Offline-First Cash Ledger · SOLEnterprises",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/SkyeFocusLog.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeFocusLog.html",
+          "title": "SkyeFocus — Offline-First Focus & Work Log · SOLEnterprises",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/SkyeIntakeVault.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeIntakeVault.html",
+          "title": "Skye Intake Vault — Offline Intake + Proof Engine",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/SkyeLeadVault.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeLeadVault.html",
+          "title": "SkyeLeadVault — Offline Lead Tracker & Pipeline Vault | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/SkyeNoteVault.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeNoteVault.html",
+          "title": "SkyeNote — Offline-First Note Vault · SOLEnterprises",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/SkyeOpsConsole.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeOpsConsole.html",
+          "title": "SkyeOpsConsole — Offline-First Operations Dashboard for Field Operators | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/SkyeRoutex.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeRoutex.html",
+          "title": "Skye Route & Dispatch Vault (SkyeRouteX) — Offline Dispatch • Proof-of-Delivery • Exportable Logs",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/SkyeSplitEngine.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/SkyeSplitEngine.html",
+          "title": "SkyeSplitEngine — Offline-First Bill & Commission Splitter for Teams | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Offline%20First%20Tools/ZetaLinx.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Offline First Tools/ZetaLinx.html",
+          "title": "ZetaLinx — Smart Link Hub & Operator Link Manager | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/",
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/index.html",
+          "title": "Operation Browser Strike",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/Originx.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/Originx.html",
+          "title": "0riginx — Brand Origin & Provenance Platform · SOLEnterprises",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/PlayPocketx-ActivityDeck.html",
+          "title": "PlayPocketx Activity Deck — Offline-First Activity Cards for Operators | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/SignInPro.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/SignInPro.html",
+          "title": "SignInPro — Branded Auth & Magic Link Builder for Netlify | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/skAIxU-IDE-ProDeluxeSuite.html",
+          "title": "skAIxU IDE Pro Deluxe Suite — Intelligence That Ships · SOLEnterprises",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/SKNore/SKNore_Deep_Scan_Valuation_Binder_2026-03-04.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/SKNore/SKNore_Deep_Scan_Valuation_Binder_2026-03-04.html",
+          "title": "SKNore Deep Scan Valuation Binder (HTML Edition)",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/SKNore/SKNore_Innovation_Founder_Editorial_2026-03-04.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/SKNore/SKNore_Innovation_Founder_Editorial_2026-03-04.html",
+          "title": "SKNore — Protected-File Exfiltration Deny-List Guard | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/SkyeChat.html",
+          "title": "SkyeChat — Kaixu-Powered Operator Chat | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/SkyeKIDE.html",
+          "title": "SkyeKIDE — Kaixu-Powered Browser IDE | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/SkyeLeadVault.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/SkyeLeadVault.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/SkyeOfferForge.html",
+          "title": "SkyeOfferForge — Pricing Offer & Proposal Builder | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/SkyePortalVault.html",
+          "title": "SkyePortalVault — Secure Client Portal & Document Vault | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
+          "title": "SovereignVariables — Environment Variable Manager & Audit Tool | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/404.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/404.html",
+          "title": "404 — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/ae/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/ae/",
+          "file": "Platforms-Apps-Infrastructure/Access222/ae/index.html",
+          "title": "AE Portal — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/ae/portal/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/ae/portal/",
+          "file": "Platforms-Apps-Infrastructure/Access222/ae/portal/index.html",
+          "title": "AE Login — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/ae/sop/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/ae/sop/",
+          "file": "Platforms-Apps-Infrastructure/Access222/ae/sop/index.html",
+          "title": "AE SOP — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/checkout/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/checkout/",
+          "file": "Platforms-Apps-Infrastructure/Access222/checkout/index.html",
+          "title": "Moved — Access 222 Routing",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/",
+          "file": "Platforms-Apps-Infrastructure/Access222/index.html",
+          "title": "Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/offline.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/offline.html",
+          "title": "Offline — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/routing/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/routing/",
+          "file": "Platforms-Apps-Infrastructure/Access222/routing/index.html",
+          "title": "Account Executive Routing — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/services/access-222/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/services/access-222/",
+          "file": "Platforms-Apps-Infrastructure/Access222/services/access-222/index.html",
+          "title": "Service — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Access222/thanks/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/thanks/",
+          "file": "Platforms-Apps-Infrastructure/Access222/thanks/index.html",
+          "title": "Submitted — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
         {
           "urlPath": "/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/index.html",
           "prettyPath": "/Platforms-Apps-Infrastructure/BrandID-Offline-PWA/",
@@ -3550,6 +5026,14 @@ export const SITE_MENU = {
           "prettyPath": "/Platforms-Apps-Infrastructure/GateProofx/",
           "file": "Platforms-Apps-Infrastructure/GateProofx/index.html",
           "title": "Gate Proofx · Gateway Data Explorer",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/",
+          "file": "Platforms-Apps-Infrastructure/index.html",
+          "title": "Platforms & Apps — Skyes Over London LC",
           "ext": ".html",
           "category": "Platforms-Apps-Infrastructure"
         },
@@ -3730,6 +5214,30 @@ export const SITE_MENU = {
           "category": "Platforms-Apps-Infrastructure"
         },
         {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUChatv6.7/kAIxUChatv67.html",
+          "title": "kAIxUchat — Secure Branded Chat + Gateway | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/kAIxUDeltaGate/",
+          "file": "Platforms-Apps-Infrastructure/kAIxUDeltaGate/index.html",
+          "title": "kAIxu Gateway — Implementation Directives",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html",
+          "title": "Redirecting...",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
           "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
           "prettyPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/",
           "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
@@ -3770,10 +5278,50 @@ export const SITE_MENU = {
           "category": "Platforms-Apps-Infrastructure"
         },
         {
+          "urlPath": "/Platforms-Apps-Infrastructure/NeuralSpacePro/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/NeuralSpacePro/",
+          "file": "Platforms-Apps-Infrastructure/NeuralSpacePro/index.html",
+          "title": "kAIxu Neural Space Pro",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Offline%20First%20Tools/SkyeCashLedger.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Offline First Tools/SkyeCashLedger.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Offline%20First%20Tools/SkyeFocusLog.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Offline First Tools/SkyeFocusLog.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Offline%20First%20Tools/SkyeNoteVault.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Offline First Tools/SkyeNoteVault.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
           "urlPath": "/Platforms-Apps-Infrastructure/QR-Code-Generator/index.html",
           "prettyPath": "/Platforms-Apps-Infrastructure/QR-Code-Generator/",
           "file": "Platforms-Apps-Infrastructure/QR-Code-Generator/index.html",
           "title": "QR Code Generator | SOLEnterprises",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Repo%20Live/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Repo%20Live/",
+          "file": "Platforms-Apps-Infrastructure/Repo Live/index.html",
+          "title": "ZipRepoTest Fix v5",
           "ext": ".html",
           "category": "Platforms-Apps-Infrastructure"
         },
@@ -3786,11 +5334,331 @@ export const SITE_MENU = {
           "category": "Platforms-Apps-Infrastructure"
         },
         {
+          "urlPath": "/Platforms-Apps-Infrastructure/Skye%20Identity%20Standard%3A%20Global%20Command%20Center/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Skye%20Identity%20Standard%3A%20Global%20Command%20Center/",
+          "file": "Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/index.html",
+          "title": "SKYE Identity Standard (SIS) | Global Command Center — Skyes Over London LC",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Skye%20Identity%20Standard%3A%20Global%20Command%20Center/SOC2CompanionPack.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Skye Identity Standard: Global Command Center/SOC2CompanionPack.html",
+          "title": "SS-SOC2-001 Companion Pack | SKYE Standard — Skyes Over London LC",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/Skye%20Profit%20Console/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/Skye%20Profit%20Console/",
+          "file": "Platforms-Apps-Infrastructure/Skye Profit Console/index.html",
+          "title": "SkyeProfitConsole | Audit-Ready Revenue & Profit Console",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/SkyeProfitConsole/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/SkyeProfitConsole/",
+          "file": "Platforms-Apps-Infrastructure/SkyeProfitConsole/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/SkyeProofx/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/SkyeProofx/",
+          "file": "Platforms-Apps-Infrastructure/SkyeProofx/index.html",
+          "title": "SkyeProofx — Proof Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/suite-gateway-nav.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/css/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/js/game.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/js/main.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/js/multiplayer.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/js/state.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/js/ui.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/manifest.webmanifest",
+          "title": null,
+          "ext": ".webmanifest",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/MULTIPLAYER_SETUP.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/realtime-relay/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/realtime-relay/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/realtime-relay/server.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/_headers",
+          "title": null,
+          "ext": "",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/_redirects",
+          "title": null,
+          "ext": "",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/ae/portal/portal.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/ae/sop/sop.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/assets/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/assets/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/assets/logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/assets/site.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/assets/site.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/assets/sky3d.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/buildInfo.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/netlify.toml",
+          "title": null,
+          "ext": ".toml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/netlify/functions/ae-auth.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/netlify/functions/ae-logout.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/netlify/functions/ae-verify.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/robots.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/service-worker.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Access222/sitemap.xml",
+          "title": null,
+          "ext": ".xml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
           "urlPath": null,
           "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/icon-512.png",
           "title": null,
           "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/BrandID-Offline-PWA/assets/logo.svg",
+          "title": null,
+          "ext": ".svg",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
@@ -4271,6 +6139,22 @@ export const SITE_MENU = {
           "file": "Platforms-Apps-Infrastructure/kAIxUBrandKit/SkyesOverLondon_kAIxU_BuildReport_Valuation_DETAILED.pdf",
           "title": null,
           "ext": ".pdf",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUDeltaGate/kAIxu_Gateway_Implementation_Directives_2026.pdf",
+          "title": null,
+          "ext": ".pdf",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUDeltaGate/README.md",
+          "title": null,
+          "ext": ".md",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
@@ -5404,6 +7288,38 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/NeuralSpacePro/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/NeuralSpacePro/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/NeuralSpacePro/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/NeuralSpacePro/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/QR-Code-Generator/assets/icon-512.png",
           "title": null,
           "ext": ".png",
@@ -5416,13 +7332,101 @@ export const SITE_MENU = {
           "title": null,
           "ext": ".png",
           "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Repo Live/_headers",
+          "title": null,
+          "ext": "",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Repo Live/brand-logo.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Repo Live/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Repo Live/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Repo Live/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/Repo Live/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/SkyeProofx/LICENSES.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/SkyeProofx/manifest.webmanifest",
+          "title": null,
+          "ext": ".webmanifest",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/SkyeProofx/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/SkyeProofx/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
         }
       ]
     },
     {
       "name": "pricing",
-      "count": 1,
+      "count": 2,
       "items": [
+        {
+          "urlPath": "/pricing/index.html",
+          "prettyPath": "/pricing/",
+          "file": "pricing/index.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "pricing"
+        },
         {
           "urlPath": null,
           "prettyPath": null,
@@ -5449,8 +7453,16 @@ export const SITE_MENU = {
     },
     {
       "name": "reports",
-      "count": 1,
+      "count": 7,
       "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "reports/broken-links-report.json",
+          "title": null,
+          "ext": ".json",
+          "category": "reports"
+        },
         {
           "urlPath": null,
           "prettyPath": null,
@@ -5458,18 +7470,66 @@ export const SITE_MENU = {
           "title": null,
           "ext": ".json",
           "category": "reports"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "reports/missing-links-no-redirects.json",
+          "title": null,
+          "ext": ".json",
+          "category": "reports"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "reports/nav-audit.json",
+          "title": null,
+          "ext": ".json",
+          "category": "reports"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "reports/placeholder-links-live.json",
+          "title": null,
+          "ext": ".json",
+          "category": "reports"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "reports/placeholder-links.json",
+          "title": null,
+          "ext": ".json",
+          "category": "reports"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "reports/stub-pages-todo.md",
+          "title": null,
+          "ext": ".md",
+          "category": "reports"
         }
       ]
     },
     {
       "name": "resources",
-      "count": 1,
+      "count": 2,
       "items": [
+        {
+          "urlPath": "/resources/index.html",
+          "prettyPath": "/resources/",
+          "file": "resources/index.html",
+          "title": "Resources | SOL",
+          "ext": ".html",
+          "category": "resources"
+        },
         {
           "urlPath": "/resources/phoenix-business-resource-directory/index.html",
           "prettyPath": "/resources/phoenix-business-resource-directory/",
           "file": "resources/phoenix-business-resource-directory/index.html",
-          "title": "Phoenix Business Resource Directory",
+          "title": "Phoenix Business Resource Directory | SOLEnterprises",
           "ext": ".html",
           "category": "resources"
         }
@@ -5477,8 +7537,16 @@ export const SITE_MENU = {
     },
     {
       "name": "scripts",
-      "count": 7,
+      "count": 8,
       "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "scripts/audit-functions-deploy.js",
+          "title": null,
+          "ext": ".js",
+          "category": "scripts"
+        },
         {
           "urlPath": null,
           "prettyPath": null,
@@ -5539,8 +7607,24 @@ export const SITE_MENU = {
     },
     {
       "name": "Services",
-      "count": 39,
+      "count": 130,
       "items": [
+        {
+          "urlPath": "/Services/0megaGate/0megaGate_Branded_Runbook.html",
+          "prettyPath": null,
+          "file": "Services/0megaGate/0megaGate_Branded_Runbook.html",
+          "title": "0megaGate Branded Runbook (HTML Edition)",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/0megaGate/0megagate-product-page.html",
+          "prettyPath": null,
+          "file": "Services/0megaGate/0megagate-product-page.html",
+          "title": "0megaGate — Hardened AI Gateway-in-a-Box | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
         {
           "urlPath": "/Services/ai-data-apps.html",
           "prettyPath": null,
@@ -5586,6 +7670,14 @@ export const SITE_MENU = {
           "prettyPath": "/Services/api-integration/",
           "file": "Services/api-integration/index.html",
           "title": "API & Integration Layer — ConnectBridge™",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/App%20Vault-Enterprise%20App%20Creation/index.html",
+          "prettyPath": "/Services/App%20Vault-Enterprise%20App%20Creation/",
+          "file": "Services/App Vault-Enterprise App Creation/index.html",
+          "title": "Business App Vault | Skyes Over London LC",
           "ext": ".html",
           "category": "Services"
         },
@@ -5638,6 +7730,14 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
+          "urlPath": "/Services/index.html",
+          "prettyPath": "/Services/",
+          "file": "Services/index.html",
+          "title": "SOLEnterprises Services Hub",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
           "urlPath": "/Services/intake-routing.html",
           "prettyPath": null,
           "file": "Services/intake-routing.html",
@@ -5650,6 +7750,214 @@ export const SITE_MENU = {
           "prettyPath": "/Services/intake-routing/",
           "file": "Services/intake-routing/index.html",
           "title": "Intake & Routing — Queues and Handoffs",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/index.html",
+          "prettyPath": "/Services/kAIxU-Powered-Platforms/",
+          "file": "Services/kAIxU-Powered-Platforms/index.html",
+          "title": "kAIxU Powered Platforms | 12 Services in One",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUAgentOpsCommandCenter.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUAgentOpsCommandCenter.html",
+          "title": "kAIxU AgentOps Command Center",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUClientPortalOrchestrator.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUClientPortalOrchestrator.html",
+          "title": "kAIxU Client Portal Orchestrator",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUClientSuccessPilot.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUClientSuccessPilot.html",
+          "title": "kAIxU Client Success Pilot",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUComplianceControlTower.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUComplianceControlTower.html",
+          "title": "kAIxU Compliance Control Tower",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUExecutiveSignalsBoard.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUExecutiveSignalsBoard.html",
+          "title": "kAIxU Executive Signals Board",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUGatedPlatform.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUGatedPlatform.html",
+          "title": "kAIxU Gated Platform",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUGrowthFunnelOrchestrator.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUGrowthFunnelOrchestrator.html",
+          "title": "kAIxU Growth Funnel Orchestrator",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUIncidentResponseGrid.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUIncidentResponseGrid.html",
+          "title": "kAIxU Incident Response Grid",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUKnowledgeVaultGuardrails.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUKnowledgeVaultGuardrails.html",
+          "title": "kAIxU Knowledge Vault + Guardrails",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUProposalOpsEngine.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUProposalOpsEngine.html",
+          "title": "kAIxU Proposal Ops Engine",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxURevenueIntelligenceGrid.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxURevenueIntelligenceGrid.html",
+          "title": "kAIxU Revenue Intelligence Grid",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/kAIxU-Powered-Platforms/kAIxUWorkflowAutomationLanes.html",
+          "prettyPath": null,
+          "file": "Services/kAIxU-Powered-Platforms/kAIxUWorkflowAutomationLanes.html",
+          "title": "kAIxU Workflow Automation Lanes",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/billing-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/billing-lane.html",
+          "title": "Billing Lane — Invoices, Estimates & Receipts | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/client-portal-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/client-portal-lane.html",
+          "title": "Client Portal Lane — Customer Vault | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/compliance-vault-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/compliance-vault-lane.html",
+          "title": "Compliance Vault Lane — Documents, Policies & Proof | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/contractor-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/contractor-lane.html",
+          "title": "Contractor Lane — Workforce + Wage Center | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/delivery-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/delivery-lane.html",
+          "title": "Delivery Lane — Dispatch + Driver Ops | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/front-office-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/front-office-lane.html",
+          "title": "Front Office Lane — Command Desk | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/hr-onboarding-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/hr-onboarding-lane.html",
+          "title": "HR Lane — Employee Onboarding & Policy Acknowledgment | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/index.html",
+          "prettyPath": "/Services/Lane-Vault!/",
+          "file": "Services/Lane-Vault!/index.html",
+          "title": "Skye Vault • Twelve Lane Pack | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/intake-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/intake-lane.html",
+          "title": "Intake Lane — Lead + Intake Vault | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/inventory-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/inventory-lane.html",
+          "title": "Inventory Lane — Supply & Stock Control | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/reporting-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/reporting-lane.html",
+          "title": "Reporting Lane — Proof Pack Console | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/scheduling-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/scheduling-lane.html",
+          "title": "Scheduling Lane — Appointment & Booking Console | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Lane-Vault!/support-lane.html",
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/support-lane.html",
+          "title": "Support Lane — Ticketing & Resolution Desk | Skyes Over London LC",
           "ext": ".html",
           "category": "Services"
         },
@@ -5766,6 +8074,302 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
+          "urlPath": "/Services/SkyeApparel/custom-uniform-program.html",
+          "prettyPath": null,
+          "file": "Services/SkyeApparel/custom-uniform-program.html",
+          "title": "Custom Uniform Program — Business & Team Apparel | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeApparel/embroidery-patch-program.html",
+          "prettyPath": null,
+          "file": "Services/SkyeApparel/embroidery-patch-program.html",
+          "title": "Embroidery + Patch Program — Premium Branding | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeApparel/index.html",
+          "prettyPath": "/Services/SkyeApparel/",
+          "file": "Services/SkyeApparel/index.html",
+          "title": "Skye Apparel • Six Pack | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeApparel/merch-kit-events.html",
+          "prettyPath": null,
+          "file": "Services/SkyeApparel/merch-kit-events.html",
+          "title": "Merch Kit — Events, Artists, Teams & Organizations | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeApparel/pod-brand-starter.html",
+          "prettyPath": null,
+          "file": "Services/SkyeApparel/pod-brand-starter.html",
+          "title": "Print-On-Demand Brand Starter — Fast Merch Engine | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeApparel/signature-drop.html",
+          "prettyPath": null,
+          "file": "Services/SkyeApparel/signature-drop.html",
+          "title": "Signature Drop — Concept to Launch Capsule | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeApparel/streetwear-capsule.html",
+          "prettyPath": null,
+          "file": "Services/SkyeApparel/streetwear-capsule.html",
+          "title": "Streetwear Capsule — Premium Graphics & Cut Sew | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/index.html",
+          "prettyPath": "/Services/SkyeCorp/0megaPhase/",
+          "file": "Services/SkyeCorp/0megaPhase/index.html",
+          "title": "SKYEPACK 0MEGAPHASE • 0MEGAPHASE MENU SHEET | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-01-smb-company-os.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-01-smb-company-os.html",
+          "title": "SMB COMPANY OS | SkyePack 0megaPhase 01 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-02-field-service-ops-home-services.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-02-field-service-ops-home-services.html",
+          "title": "FIELD SERVICE OPS (HOME SERVICES) | SkyePack 0megaPhase 02 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-03-property-mgmt-maintenance-ops.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-03-property-mgmt-maintenance-ops.html",
+          "title": "PROPERTY MGMT + MAINTENANCE OPS | SkyePack 0megaPhase 03 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-04-contact-center-support-ops.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-04-contact-center-support-ops.html",
+          "title": "CONTACT CENTER + SUPPORT OPS | SkyePack 0megaPhase 04 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-05-compliance-proof-as-a-service-trust-center.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-05-compliance-proof-as-a-service-trust-center.html",
+          "title": "COMPLIANCE + PROOF-AS-A-SERVICE (TRUST CENTER) | SkyePack 0megaPhase 05 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-06-identity-access-governance-business-keycards.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-06-identity-access-governance-business-keycards.html",
+          "title": "IDENTITY + ACCESS GOVERNANCE (BUSINESS KEYCARDS) | SkyePack 0megaPhase 06 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-07-creator-agency-ops-content-delivery-system.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-07-creator-agency-ops-content-delivery-system.html",
+          "title": "CREATOR / AGENCY OPS (CONTENT DELIVERY SYSTEM) | SkyePack 0megaPhase 07 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-08-public-sector-requests-citizen-services-portal.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-08-public-sector-requests-citizen-services-portal.html",
+          "title": "PUBLIC SECTOR REQUESTS (CITIZEN SERVICES PORTAL) | SkyePack 0megaPhase 08 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-09-healthcare-adjacent-ops-non-clinical.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-09-healthcare-adjacent-ops-non-clinical.html",
+          "title": "HEALTHCARE-ADJACENT OPS (NON-CLINICAL) | SkyePack 0megaPhase 09 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-10-legal-intake-case-flow.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-10-legal-intake-case-flow.html",
+          "title": "LEGAL INTAKE + CASE FLOW | SkyePack 0megaPhase 10 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-11-insurance-adjuster-claims-ops.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-11-insurance-adjuster-claims-ops.html",
+          "title": "INSURANCE / ADJUSTER CLAIMS OPS | SkyePack 0megaPhase 11 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-12-franchise-multi-location-operating-system.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-12-franchise-multi-location-operating-system.html",
+          "title": "FRANCHISE / MULTI-LOCATION OPERATING SYSTEM | SkyePack 0megaPhase 12 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-13-logistics-fleet-dispatch-ops.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-13-logistics-fleet-dispatch-ops.html",
+          "title": "LOGISTICS / FLEET / DISPATCH OPS | SkyePack 0megaPhase 13 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-14-retail-dtc-brand-operations.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-14-retail-dtc-brand-operations.html",
+          "title": "RETAIL / DTC BRAND OPERATIONS | SkyePack 0megaPhase 14 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/0megaPhase/pack-15-task-agents-inside-business-apps-kaixu-layer.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/0megaPhase/pack-15-task-agents-inside-business-apps-kaixu-layer.html",
+          "title": "TASK AGENTS INSIDE BUSINESS APPS (kAIxU LAYER) | SkyePack 0megaPhase 15 • SkyePack 0megaPhase • Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/Phase1/index.html",
+          "prettyPath": "/Services/SkyeCorp/Phase1/",
+          "file": "Services/SkyeCorp/Phase1/index.html",
+          "title": "AI Task-Agent Services — Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/Phase1/services/compliance-audit-agent.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/Phase1/services/compliance-audit-agent.html",
+          "title": "kAIxU Compliance & Audit Agent — Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/Phase1/services/financeguard-agent.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/Phase1/services/financeguard-agent.html",
+          "title": "kAIxU FinanceGuard Agent — Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/Phase1/services/hiring-onboarding-agent.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/Phase1/services/hiring-onboarding-agent.html",
+          "title": "kAIxU Hiring & Onboarding Agent — Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/Phase1/services/opsdesk-agent.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/Phase1/services/opsdesk-agent.html",
+          "title": "kAIxU OpsDesk Agent Suite — Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/Phase1/services/sales-followup-agent.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/Phase1/services/sales-followup-agent.html",
+          "title": "kAIxU Sales Follow-Up Agent — Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeCorp/Phase1/services/supportcopilot-agent.html",
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/Phase1/services/supportcopilot-agent.html",
+          "title": "kAIxU SupportCopilot Agent — Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeMedia-(Photo/brand-photo-day.html",
+          "prettyPath": null,
+          "file": "Services/SkyeMedia-(Photo/brand-photo-day.html",
+          "title": "Brand Photo Day — Executive + Team Coverage | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeMedia-(Photo/event-coverage.html",
+          "prettyPath": null,
+          "file": "Services/SkyeMedia-(Photo/event-coverage.html",
+          "title": "Event Coverage — Photo + Highlight Film | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeMedia-(Photo/index.html",
+          "prettyPath": "/Services/SkyeMedia-(Photo/",
+          "file": "Services/SkyeMedia-(Photo/index.html",
+          "title": "Skye Media • Six Pack | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeMedia-(Photo/product-photo-pack.html",
+          "prettyPath": null,
+          "file": "Services/SkyeMedia-(Photo/product-photo-pack.html",
+          "title": "Product Photo Pack — E‑Commerce & Catalog | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeMedia-(Photo/real-estate-location.html",
+          "prettyPath": null,
+          "file": "Services/SkyeMedia-(Photo/real-estate-location.html",
+          "title": "Location Showcase — Real Estate & Facilities Media | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeMedia-(Photo/social-reels-pack.html",
+          "prettyPath": null,
+          "file": "Services/SkyeMedia-(Photo/social-reels-pack.html",
+          "title": "Social Reels Pack — Short‑Form Video Sprint | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeMedia-(Photo/testimonial-casefilm.html",
+          "prettyPath": null,
+          "file": "Services/SkyeMedia-(Photo/testimonial-casefilm.html",
+          "title": "Testimonial + Case Film — Proof‑First Video | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
           "urlPath": "/Services/SkyePWAForge/SkyePWAForge.html",
           "prettyPath": null,
           "file": "Services/SkyePWAForge/SkyePWAForge.html",
@@ -5798,10 +8402,58 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/WebBuilds/WebBuilds.html",
+          "urlPath": "/Services/Ultimate%20Business%20Launch%20Stack/core.html",
           "prettyPath": null,
-          "file": "Services/WebBuilds/WebBuilds.html",
-          "title": "CineFrame™ — Cinematic Web Productization",
+          "file": "Services/Ultimate Business Launch Stack/core.html",
+          "title": "CORE — Launch Clean | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Ultimate%20Business%20Launch%20Stack/index.html",
+          "prettyPath": "/Services/Ultimate%20Business%20Launch%20Stack/",
+          "file": "Services/Ultimate Business Launch Stack/index.html",
+          "title": "Ultimate Business Launch Stack | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Ultimate%20Business%20Launch%20Stack/obsidian.html",
+          "prettyPath": null,
+          "file": "Services/Ultimate Business Launch Stack/obsidian.html",
+          "title": "OBSIDIAN — Full Production + Systems | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Ultimate%20Business%20Launch%20Stack/pro.html",
+          "prettyPath": null,
+          "file": "Services/Ultimate Business Launch Stack/pro.html",
+          "title": "PRO — Proof + Growth Engine | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/Ultimate%20Business%20Launch%20Stack/thankyou.html",
+          "prettyPath": null,
+          "file": "Services/Ultimate Business Launch Stack/thankyou.html",
+          "title": "Intake Received | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/WebBuilds/ExecutiveAuthority.html",
+          "prettyPath": null,
+          "file": "Services/WebBuilds/ExecutiveAuthority.html",
+          "title": "Executive Authority | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/WebBuilds/ExecutiveWebBuilds.html",
+          "prettyPath": null,
+          "file": "Services/WebBuilds/ExecutiveWebBuilds.html",
+          "title": "Website Builds + Executive Authority Tiers | Skyes Over London LC",
           "ext": ".html",
           "category": "Services"
         },
@@ -5809,6 +8461,30 @@ export const SITE_MENU = {
           "urlPath": "/Services/WebBuilds/index.html",
           "prettyPath": "/Services/WebBuilds/",
           "file": "Services/WebBuilds/index.html",
+          "title": "Web Builds Services | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/WebBuilds/SkyeConversionForge.html",
+          "prettyPath": null,
+          "file": "Services/WebBuilds/SkyeConversionForge.html",
+          "title": "Skye Conversion Forge — Intake + Follow-Up + Booking System | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/WebBuilds/SkyeSignalVault.html",
+          "prettyPath": null,
+          "file": "Services/WebBuilds/SkyeSignalVault.html",
+          "title": "Skye Signal Vault — Conversion + Trust + Proof System | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/WebBuilds/WebBuilds.html",
+          "prettyPath": null,
+          "file": "Services/WebBuilds/WebBuilds.html",
           "title": "CineFrame™ — Cinematic Web Productization",
           "ext": ".html",
           "category": "Services"
@@ -5848,9 +8524,129 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "Services/Lane-Vault!/assets/site.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/README-vol2.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/Lane-Vault!/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeApparel/assets/site.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeApparel/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeApparel/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/Phase1/assets/site.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/Phase1/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeCorp/Phase1/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeMedia-(Photo/assets/site.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeMedia-(Photo/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeMedia-(Photo/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "Services/SkyePWAForge/SOL_SkyePWA_Forge_Flyer.pdf",
           "title": null,
           "ext": ".pdf",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/Ultimate Business Launch Stack/_redirects",
+          "title": null,
+          "ext": "",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/WebBuilds/Skye Ops Beacon",
+          "title": null,
+          "ext": "",
           "category": "Services"
         }
       ]
@@ -6196,6 +8992,20 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "SolenteAI",
+      "count": 1,
+      "items": [
+        {
+          "urlPath": "/SolenteAI/Security-Data-Handling/index.html",
+          "prettyPath": "/SolenteAI/Security-Data-Handling/",
+          "file": "SolenteAI/Security-Data-Handling/index.html",
+          "title": "kAIxU Gateway Delta — Security & Data Handling (Gateway13 + Delta)",
+          "ext": ".html",
+          "category": "SolenteAI"
+        }
+      ]
+    },
+    {
       "name": "sql",
       "count": 3,
       "items": [
@@ -6250,6 +9060,276 @@ export const SITE_MENU = {
           "title": "Terms · Skyes Over London LC",
           "ext": ".html",
           "category": "terms"
+        }
+      ]
+    },
+    {
+      "name": "THE NET WORKS",
+      "count": 33,
+      "items": [
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/ai-that-doesn-t-spy-phoenix-eldercare-and-radar-based-fall-risk-signals.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/ai-that-doesn-t-spy-phoenix-eldercare-and-radar-based-fall-risk-signals.html",
+          "title": "AI That Doesn’t Spy: Phoenix Eldercare and Radar-Based Fall Risk Signals | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/asu-s-principled-ai-push-when-a-university-treats-genai-like-infrastructure.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/asu-s-principled-ai-push-when-a-university-treats-genai-like-infrastructure.html",
+          "title": "ASU’s Principled AI Push: When a University Treats GenAI Like Infrastructure | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/autonomy-in-the-desert-honeywell-s-phoenix-tests-and-the-reality-of-ai-in-the-air.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/autonomy-in-the-desert-honeywell-s-phoenix-tests-and-the-reality-of-ai-in-the-air.html",
+          "title": "Autonomy in the Desert: Honeywell’s Phoenix Tests and the Reality of “AI in the Air” | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/cards-snippet.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/cards-snippet.html",
+          "title": null,
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/expanding-to-the-tokyo-node.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/expanding-to-the-tokyo-node.html",
+          "title": "Expanding to the Tokyo Node | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/healthcare-ai-in-metro-phoenix-fast-wins-real-patients-no-camera-drama.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/healthcare-ai-in-metro-phoenix-fast-wins-real-patients-no-camera-drama.html",
+          "title": "Healthcare AI in Metro Phoenix: Fast Wins, Real Patients, No Camera Drama | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/index.html",
+          "prettyPath": "/THE%20NET%20WORKS/FEATURING/",
+          "file": "THE NET WORKS/FEATURING/index.html",
+          "title": "THE NET WORKS · FEATURING Dispatch Index",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/latent-space-cartography.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/latent-space-cartography.html",
+          "title": "Latent Space Cartography | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/microchip-in-chandler-embedded-ml-as-the-quiet-workhorse-of-the-valley.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/microchip-in-chandler-embedded-ml-as-the-quiet-workhorse-of-the-valley.html",
+          "title": "Microchip in Chandler: Embedded ML as the Quiet Workhorse of the Valley | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/next-gen-neuromorphic-hardware.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/next-gen-neuromorphic-hardware.html",
+          "title": "Next-Gen Neuromorphic Hardware | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/nxp-and-physical-ai-the-industrial-version-of-intelligence-phoenix-businesses-actually-use.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/nxp-and-physical-ai-the-industrial-version-of-intelligence-phoenix-businesses-actually-use.html",
+          "title": "NXP and “Physical AI”: The Industrial Version of Intelligence Phoenix Businesses Actually Use | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/onsemi-in-scottsdale-power-electronics-as-ai-s-hidden-bottleneck.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/onsemi-in-scottsdale-power-electronics-as-ai-s-hidden-bottleneck.html",
+          "title": "onsemi in Scottsdale: Power Electronics as AI’s Hidden Bottleneck | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/OrchestratingTomorrow.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/OrchestratingTomorrow.html",
+          "title": "Orchestrating Tomorrow | Skyes Over London",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/phoenix-ai-index-the-companies-institutions-and-infrastructure-that-actually-matter.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/phoenix-ai-index-the-companies-institutions-and-infrastructure-that-actually-matter.html",
+          "title": "Phoenix AI Index: The Companies, Institutions, and Infrastructure That Actually Matter | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/phoenix-s-physical-ai-corridor-chips-power-and-edge-intelligence.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/phoenix-s-physical-ai-corridor-chips-power-and-edge-intelligence.html",
+          "title": "Phoenix’s Physical AI Corridor: Chips, Power, and Edge Intelligence | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/post-scarcity-economics-agi.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/post-scarcity-economics-agi.html",
+          "title": "Post-Scarcity Economics & AGI | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/quantum-state-integration-in-neural-nets.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/quantum-state-integration-in-neural-nets.html",
+          "title": "Quantum State Integration in Neural Nets | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/skyes-over-london-acquires-deepmind-top-talent.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/skyes-over-london-acquires-deepmind-top-talent.html",
+          "title": "Skyes Over London Acquires DeepMind Top Talent | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/skyes-over-london-strategic-memo.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/skyes-over-london-strategic-memo.html",
+          "title": "Skyes Over London Strategic Memo | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/solenteai-closes-12b-series-c.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/solenteai-closes-12b-series-c.html",
+          "title": "SolenteAI Closes $1.2B Series C | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/synthetic-consciousness.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/synthetic-consciousness.html",
+          "title": "Synthetic Consciousness | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/tgen-in-downtown-phoenix-data-heavy-biotech-and-the-next-wave-of-applied-ai.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/tgen-in-downtown-phoenix-data-heavy-biotech-and-the-next-wave-of-applied-ai.html",
+          "title": "TGen in Downtown Phoenix: Data-Heavy Biotech and the Next Wave of Applied AI | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/the-architecture-of-agi-breaking-the-compute-barrier.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/the-architecture-of-agi-breaking-the-compute-barrier.html",
+          "title": "The Architecture of AGI: Breaking the Compute Barrier | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/the-ethics-of-synthetic-cognition.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/the-ethics-of-synthetic-cognition.html",
+          "title": "The Ethics of Synthetic Cognition | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/the-illusion-of-alignment.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/the-illusion-of-alignment.html",
+          "title": "The Illusion of Alignment | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/tsmc-arizona-and-the-local-ai-supply-chain-phoenix-as-a-strategic-node.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/tsmc-arizona-and-the-local-ai-supply-chain-phoenix-as-a-strategic-node.html",
+          "title": "TSMC Arizona and the Local AI Supply Chain: Phoenix as a Strategic Node | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/wavex-and-the-arizona-commerce-authority-a-new-kind-of-ai-venture-studio-in-phoenix.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/wavex-and-the-arizona-commerce-authority-a-new-kind-of-ai-venture-studio-in-phoenix.html",
+          "title": "WaveX and the Arizona Commerce Authority: A New Kind of AI Venture Studio in Phoenix | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/workforce-ai-in-the-east-valley-intel-community-colleges-as-a-talent-multiplier.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/workforce-ai-in-the-east-valley-intel-community-colleges-as-a-talent-multiplier.html",
+          "title": "Workforce AI in the East Valley: Intel + Community Colleges as a Talent Multiplier | SolenteAI Phoenix Dispatch",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/FEATURING/zero-shot-multimodal-synthesis.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/zero-shot-multimodal-synthesis.html",
+          "title": "Zero-Shot Multimodal Synthesis | SolenteAI Dispatches | Skyes Over London LC",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": "/THE%20NET%20WORKS/OrchestratingTomorrow.html",
+          "prettyPath": null,
+          "file": "THE NET WORKS/OrchestratingTomorrow.html",
+          "title": "Redirecting…",
+          "ext": ".html",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/Architecture-of-AGI:BreakingComputeBarriers",
+          "title": null,
+          "ext": "",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "THE NET WORKS"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "THE NET WORKS/FEATURING/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "THE NET WORKS"
         }
       ]
     },
@@ -6476,6 +9556,236 @@ export const SITE_MENU = {
           "title": "Client Vault · Skyes Over London LC",
           "ext": ".html",
           "category": "vault"
+        }
+      ]
+    },
+    {
+      "name": "WebPile Pro—Monaco Editor",
+      "count": 28,
+      "items": [
+        {
+          "urlPath": "/WebPile%20Pro%E2%80%94Monaco%20Editor/index.html",
+          "prettyPath": "/WebPile%20Pro%E2%80%94Monaco%20Editor/",
+          "file": "WebPile Pro—Monaco Editor/index.html",
+          "title": "WebPile Pro Enterprise — Dev Sandbox Studio",
+          "ext": ".html",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/icons/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/icons/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/manifest.webmanifest",
+          "title": null,
+          "ext": ".webmanifest",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/netlify.toml",
+          "title": null,
+          "ext": ".toml",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/netlify/functions/api.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/netlify/functions/siem_deliver.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/package-lock.json",
+          "title": null,
+          "ext": ".json",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/rls.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/sbom.cdx.json",
+          "title": null,
+          "ext": ".json",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/SBOM.md",
+          "title": null,
+          "ext": ".md",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/schema.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/SECURITY.md",
+          "title": null,
+          "ext": ".md",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/slo.json",
+          "title": null,
+          "ext": ".json",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/SLO.md",
+          "title": null,
+          "ext": ".md",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/test/internal.test.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/test/saml_c14n.test.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/test/siem.test.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/test/static.test.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/tools/ci-sbom-sign.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/tools/release-bundle.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/tools/release-sign.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/tools/release-verify.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/tools/sbom-sign.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/tools/sbom-verify.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "WebPile Pro—Monaco Editor/tools/sbom.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "WebPile Pro—Monaco Editor"
         }
       ]
     },
