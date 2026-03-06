@@ -1,0 +1,1030 @@
+{
+  "summary": {
+    "referencedEndpoints": 90,
+    "missingImplementations": 0,
+    "generatedAt": "2026-03-06T13:43:03.743Z"
+  },
+  "endpoints": [
+    {
+      "endpoint": "/.netlify/functions/admin-customers",
+      "name": "admin-customers",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-customers.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-devices",
+      "name": "admin-devices",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-devices.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/admin-devices.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js",
+        "netlify/functions/admin-devices.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-export",
+      "name": "admin-export",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-export.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/admin-export.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js",
+        "netlify/functions/admin-export.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-gh-jobs",
+      "name": "admin-gh-jobs",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-gh-jobs.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-github-repos",
+      "name": "admin-github-repos",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-github-repos.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-github-token",
+      "name": "admin-github-token",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-github-token.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_GITHUB_PUSH.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-invoices",
+      "name": "admin-invoices",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-invoices.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/admin-invoices.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js",
+        "netlify/functions/admin-invoices.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-keys",
+      "name": "admin-keys",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-keys.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-login",
+      "name": "admin-login",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-login.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-monitor-events",
+      "name": "admin-monitor-events",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-monitor-events.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-monitor-prune",
+      "name": "admin-monitor-prune",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-monitor-prune.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-monitor-stream",
+      "name": "admin-monitor-stream",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-monitor-stream.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-netlify-token",
+      "name": "admin-netlify-token",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-netlify-token.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-push-deploys",
+      "name": "admin-push-deploys",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-push-deploys.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/admin-push-deploys.js",
+        "gateway/assets/app.js",
+        "netlify/functions/admin-push-deploys.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-push-invoices",
+      "name": "admin-push-invoices",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-push-invoices.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/admin-push-invoices.js",
+        "gateway/assets/app.js",
+        "netlify/functions/admin-push-invoices.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-push-jobs",
+      "name": "admin-push-jobs",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-push-jobs.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/admin-push-jobs.js",
+        "gateway/assets/app.js",
+        "netlify/functions/admin-push-jobs.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-push-projects",
+      "name": "admin-push-projects",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-push-projects.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/admin-push-projects.js",
+        "gateway/assets/app.js",
+        "netlify/functions/admin-push-projects.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-site-menu",
+      "name": "admin-site-menu",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-site-menu.mjs",
+      "callers": [
+        "admin-menu.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-topup",
+      "name": "admin-topup",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-topup.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/admin-topup.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js",
+        "netlify/functions/admin-topup.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-usage",
+      "name": "admin-usage",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-usage.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-voice-numbers",
+      "name": "admin-voice-numbers",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-voice-numbers.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/admin-voice-usage",
+      "name": "admin-voice-usage",
+      "status": "ok",
+      "functionFile": "netlify/functions/admin-voice-usage.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/ae-auth",
+      "name": "ae-auth",
+      "status": "ok",
+      "functionFile": "netlify/functions/ae-auth.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/Access222/ae/portal/portal.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/ae-logout",
+      "name": "ae-logout",
+      "status": "ok",
+      "functionFile": "netlify/functions/ae-logout.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/Access222/ae/sop/sop.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/ae-verify",
+      "name": "ae-verify",
+      "status": "ok",
+      "functionFile": "netlify/functions/ae-verify.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/Access222/ae/portal/portal.js",
+        "Platforms-Apps-Infrastructure/Access222/ae/sop/sop.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/attachment-upload",
+      "name": "attachment-upload",
+      "status": "ok",
+      "functionFile": "netlify/functions/attachment-upload.mjs",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/blob-get",
+      "name": "blob-get",
+      "status": "ok",
+      "functionFile": "netlify/functions/blob-get.mjs",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/blob-put",
+      "name": "blob-put",
+      "status": "ok",
+      "functionFile": "netlify/functions/blob-put.mjs",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/blob-store-pack",
+      "name": "blob-store-pack",
+      "status": "ok",
+      "functionFile": "netlify/functions/blob-store-pack.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/client-error-report",
+      "name": "client-error-report",
+      "status": "ok",
+      "functionFile": "netlify/functions/client-error-report.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/app.js",
+        "Platforms-Apps-Infrastructure/BusinessLaunchGo/index.html",
+        "Platforms-Apps-Infrastructure/LocalSeoSnapshot/app.js",
+        "Platforms-Apps-Infrastructure/LocalSeoSnapshot/index.html",
+        "Platforms-Apps-Infrastructure/LocalSeoSnapshot/readme.md",
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUBrandKit/README.md",
+        "Platforms-Apps-Infrastructure/kAIxUBrandKit/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/kaixu-client.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/kaixu-client.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-chat",
+      "name": "gateway-chat",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-chat.js",
+      "callers": [
+        "Blogs/Editorials/Devs & AI/ai-gateway-one-contract.html",
+        "Blogs/Editorials/Devs & AI/observability-for-ai-apps.html",
+        "Blogs/Editorials/Devs & AI/prompt-hygiene-production.html",
+        "Blogs/Editorials/Devs & AI/script-to-system-productizing-dev-work.html",
+        "Blogs/Editorials/Devs & AI/shipping-like-a-scientist.html",
+        "Blogs/Editorials/Devs & AI/why-blocked-ux.html",
+        "Platforms-Apps-Infrastructure/NeuralSpacePro/index.html",
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/README.md",
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/kaixuGateway.js",
+        "Platforms-Apps-Infrastructure/kAIxUBrandKit/netlify/functions/kaixu-generate.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_CLIENT_APPS.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html",
+        "gateway/dashboard.html",
+        "kAIxu/RequestKaixuAPIKey.html",
+        "netlify/functions/kaixu-generate.js",
+        "netlify/functions/request-key.mjs"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-embed",
+      "name": "gateway-embed",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-embed.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-embed.js",
+        "netlify/functions/gateway-embed-search.js",
+        "netlify/functions/gateway-embed.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-embed-collections",
+      "name": "gateway-embed-collections",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-embed-collections.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-embed-search",
+      "name": "gateway-embed-search",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-embed-search.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-heartbeat-read",
+      "name": "gateway-heartbeat-read",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-heartbeat-read.mjs",
+      "callers": [
+        "gateway/assets/user.js",
+        "netlify/functions/gateway-heartbeat-read.mjs"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-job-result",
+      "name": "gateway-job-result",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-job-result.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/kaixu-client.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_CLIENT_APPS.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-job-submit.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html",
+        "gateway/assets/kaixu-client.js",
+        "netlify/functions/gateway-job-submit.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-job-run-background",
+      "name": "gateway-job-run-background",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-job-run-background.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-job-status.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-job-submit.js",
+        "netlify/functions/gateway-job-status.js",
+        "netlify/functions/gateway-job-submit.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-job-status",
+      "name": "gateway-job-status",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-job-status.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/kaixu-client.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_CLIENT_APPS.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-job-submit.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html",
+        "gateway/assets/kaixu-client.js",
+        "netlify/functions/gateway-job-submit.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-job-submit",
+      "name": "gateway-job-submit",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-job-submit.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/kaixu-client.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_CLIENT_APPS.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/examples/job-client.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html",
+        "gateway/assets/kaixu-client.js",
+        "gateway/examples/job-client.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-stream",
+      "name": "gateway-stream",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-stream.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/README.md",
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/kaixuGateway.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/kaixu-client.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_CLIENT_APPS.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/examples/sse-client.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-stream.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/kaixu-client.js",
+        "gateway/dashboard.html",
+        "gateway/examples/sse-client.js",
+        "netlify/functions/gateway-stream.js",
+        "netlify/functions/request-key.mjs"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gh-my-jobs",
+      "name": "gh-my-jobs",
+      "status": "ok",
+      "functionFile": "netlify/functions/gh-my-jobs.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "gateway/assets/user.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gh-push-background",
+      "name": "gh-push-background",
+      "status": "ok",
+      "functionFile": "netlify/functions/gh-push-background.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gh-job-retry.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gh-push-upload-complete.js",
+        "netlify/functions/gh-job-retry.js",
+        "netlify/functions/gh-push-upload-complete.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gh-push-init",
+      "name": "gh-push-init",
+      "status": "ok",
+      "functionFile": "netlify/functions/gh-push-init.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_GITHUB_PUSH.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gh-push-status",
+      "name": "gh-push-status",
+      "status": "ok",
+      "functionFile": "netlify/functions/gh-push-status.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_GITHUB_PUSH.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gh-push-upload-chunk",
+      "name": "gh-push-upload-chunk",
+      "status": "ok",
+      "functionFile": "netlify/functions/gh-push-upload-chunk.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_GITHUB_PUSH.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gh-push-init.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js",
+        "netlify/functions/gh-push-init.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gh-push-upload-complete",
+      "name": "gh-push-upload-complete",
+      "status": "ok",
+      "functionFile": "netlify/functions/gh-push-upload-complete.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_GITHUB_PUSH.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gh-push-init.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js",
+        "netlify/functions/gh-push-init.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/github-create-repo",
+      "name": "github-create-repo",
+      "status": "ok",
+      "functionFile": "netlify/functions/github-create-repo.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/github-oauth-callback",
+      "name": "github-oauth-callback",
+      "status": "ok",
+      "functionFile": "netlify/functions/github-oauth-callback.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_GITHUB_PUSH.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/github-oauth-start",
+      "name": "github-oauth-start",
+      "status": "ok",
+      "functionFile": "netlify/functions/github-oauth-start.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_GITHUB_PUSH.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/github-repos",
+      "name": "github-repos",
+      "status": "ok",
+      "functionFile": "netlify/functions/github-repos.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/github-token",
+      "name": "github-token",
+      "status": "ok",
+      "functionFile": "netlify/functions/github-token.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "gateway/assets/user.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/github-whoami",
+      "name": "github-whoami",
+      "status": "ok",
+      "functionFile": "netlify/functions/github-whoami.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/health",
+      "name": "health",
+      "status": "ok",
+      "functionFile": "netlify/functions/health.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/DualLaneFunnel/README.md",
+        "Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/intake.js",
+        "Platforms-Apps-Infrastructure/GateProofx/index.html",
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/README.md",
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/kaixuGateway.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_CLIENT_APPS.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html",
+        "gateway/assets/app.js",
+        "gateway/assets/user.js",
+        "gateway/dashboard.html",
+        "netlify/functions/gateway-heartbeat.mjs",
+        "netlify/functions/request-key.mjs"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/intake",
+      "name": "intake",
+      "status": "ok",
+      "functionFile": "netlify/functions/intake.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/DualLaneFunnel/README.md",
+        "Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/intake.js",
+        "Platforms-Apps-Infrastructure/DualLaneFunnel/public/funnel-system-editorial.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/kaixu-generate",
+      "name": "kaixu-generate",
+      "status": "ok",
+      "functionFile": "netlify/functions/kaixu-generate.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUBrandKit/index.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/monitor-archive-access",
+      "name": "monitor-archive-access",
+      "status": "ok",
+      "functionFile": "netlify/functions/monitor-archive-access.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/GateProofx/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/neon-health",
+      "name": "neon-health",
+      "status": "ok",
+      "functionFile": "netlify/functions/neon-health.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/neon-lead-upsert",
+      "name": "neon-lead-upsert",
+      "status": "ok",
+      "functionFile": "netlify/functions/neon-lead-upsert.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/portal-status",
+      "name": "portal-status",
+      "status": "ok",
+      "functionFile": "netlify/functions/portal-status.mjs",
+      "callers": [
+        "xxDEVONLY/PROJECT-README.md"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-complete",
+      "name": "push-complete",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-complete.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/2026/KaixuPush.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-complete-background",
+      "name": "push-complete-background",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-complete-background.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/push-complete-background.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/push-complete.js",
+        "netlify/functions/push-complete-background.js",
+        "netlify/functions/push-complete.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-file-status",
+      "name": "push-file-status",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-file-status.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/2026/KaixuPush.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-init",
+      "name": "push-init",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-init.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/2026/KaixuPush.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-status",
+      "name": "push-status",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-status.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/2026/KaixuPush.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-upload",
+      "name": "push-upload",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-upload.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/2026/KaixuPush.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-upload-chunk",
+      "name": "push-upload-chunk",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-upload-chunk.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/2026/KaixuPush.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-upload-complete",
+      "name": "push-upload-complete",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-upload-complete.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/2026/KaixuPush.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-uploadfile-background",
+      "name": "push-uploadfile-background",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-uploadfile-background.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/push-job-retry.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/push-upload-complete.js",
+        "netlify/functions/push-job-retry.js",
+        "netlify/functions/push-upload-complete.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/push-whoami",
+      "name": "push-whoami",
+      "status": "ok",
+      "functionFile": "netlify/functions/push-whoami.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "gateway/assets/user.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/request-key",
+      "name": "request-key",
+      "status": "ok",
+      "functionFile": "netlify/functions/request-key.mjs",
+      "callers": [
+        "kAIxu/RequestKaixuAPIKey.html",
+        "netlify/functions/request-key.mjs"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/session-token",
+      "name": "session-token",
+      "status": "ok",
+      "functionFile": "netlify/functions/session-token.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/session-token.js",
+        "account/index.html",
+        "netlify/functions/session-token.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/siem_deliver",
+      "name": "siem_deliver",
+      "status": "ok",
+      "functionFile": "netlify/functions/siem_deliver.mjs",
+      "callers": [
+        "WebPile Pro—Monaco Editor/README.md"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/stripe-create-checkout",
+      "name": "stripe-create-checkout",
+      "status": "ok",
+      "functionFile": "netlify/functions/stripe-create-checkout.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/app.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/stripe-create-checkout.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/app.js",
+        "netlify/functions/stripe-create-checkout.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/stripe-webhook",
+      "name": "stripe-webhook",
+      "status": "ok",
+      "functionFile": "netlify/functions/stripe-webhook.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/stripe-webhook.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "netlify/functions/stripe-webhook.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/user-devices",
+      "name": "user-devices",
+      "status": "ok",
+      "functionFile": "netlify/functions/user-devices.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/user-devices.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js",
+        "netlify/functions/user-devices.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/user-events",
+      "name": "user-events",
+      "status": "ok",
+      "functionFile": "netlify/functions/user-events.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/user-events.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js",
+        "netlify/functions/user-events.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/user-export",
+      "name": "user-export",
+      "status": "ok",
+      "functionFile": "netlify/functions/user-export.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/user-export.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js",
+        "netlify/functions/user-export.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/user-invoices",
+      "name": "user-invoices",
+      "status": "ok",
+      "functionFile": "netlify/functions/user-invoices.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/user-invoices.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js",
+        "netlify/functions/user-invoices.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/user-summary",
+      "name": "user-summary",
+      "status": "ok",
+      "functionFile": "netlify/functions/user-summary.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/user-summary.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js",
+        "netlify/functions/user-summary.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/user-topup-checkout",
+      "name": "user-topup-checkout",
+      "status": "ok",
+      "functionFile": "netlify/functions/user-topup-checkout.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/user-topup-checkout.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js",
+        "netlify/functions/user-topup-checkout.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/user-voice-calls",
+      "name": "user-voice-calls",
+      "status": "ok",
+      "functionFile": "netlify/functions/user-voice-calls.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/user-voice-summary",
+      "name": "user-voice-summary",
+      "status": "ok",
+      "functionFile": "netlify/functions/user-voice-summary.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/user.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/user.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/v1-proxy",
+      "name": "v1-proxy",
+      "status": "ok",
+      "functionFile": "netlify/functions/v1-proxy.js",
+      "callers": [
+        "Services/0megaGate/0megaGate_Branded_Runbook.html",
+        "netlify/functions/v1-proxy.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/vault-delete",
+      "name": "vault-delete",
+      "status": "ok",
+      "functionFile": "netlify/functions/vault-delete.mjs",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/vault-get",
+      "name": "vault-get",
+      "status": "ok",
+      "functionFile": "netlify/functions/vault-get.mjs",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/vault-list",
+      "name": "vault-list",
+      "status": "ok",
+      "functionFile": "netlify/functions/vault-list.mjs",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/vault-save",
+      "name": "vault-save",
+      "status": "ok",
+      "functionFile": "netlify/functions/vault-save.mjs",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/app.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/voice-twilio-inbound",
+      "name": "voice-twilio-inbound",
+      "status": "ok",
+      "functionFile": "netlify/functions/voice-twilio-inbound.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/voice-twilio-inbound.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "netlify/functions/voice-twilio-inbound.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/voice-twilio-status",
+      "name": "voice-twilio-status",
+      "status": "ok",
+      "functionFile": "netlify/functions/voice-twilio-status.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/voice-twilio-status.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "netlify/functions/voice-twilio-status.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/voice-twilio-turn",
+      "name": "voice-twilio-turn",
+      "status": "ok",
+      "functionFile": "netlify/functions/voice-twilio-turn.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/voice-twilio-inbound.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/voice-twilio-turn.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "netlify/functions/voice-twilio-inbound.js",
+        "netlify/functions/voice-twilio-turn.js"
+      ]
+    }
+  ]
+}

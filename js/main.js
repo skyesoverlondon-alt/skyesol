@@ -262,7 +262,6 @@ window.SOL = window.SOL || {};
 window.SOL.attachNav = attachNav;
 window.SOL.attachMegaNav = attachMegaNav;
 attachNav();
-attachMegaNav();
 
 // ── SCROLL REVEAL ──
 (function(){
@@ -484,12 +483,17 @@ function attachMegaNav(){
   }
 
   if (megaNav.dataset.built !== 'true') {
-    const existingGroups = collectExistingGroups();
-    if (existingGroups.size) {
-      renderGroups(existingGroups);
+    // Use authored menu columns when a page provides them.
+    // Otherwise, build a fallback from known links/sitemap so MENU is never blank.
+    const hasAuthoredColumns = grid.querySelectorAll('.mega-nav-col').length > 0;
+    if (!hasAuthoredColumns) {
+      const existingGroups = collectExistingGroups();
+      if (existingGroups.size) {
+        renderGroups(existingGroups);
+      }
+      hydrateFromSitemap();
     }
     megaNav.dataset.built = 'true';
-    hydrateFromSitemap();
   }
 
   function openNav()  { megaNav.style.display = 'flex'; document.body.style.overflow = 'hidden'; }

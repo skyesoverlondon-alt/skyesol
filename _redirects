@@ -40,6 +40,41 @@
 /editorials/little-linguist-jumpstart-kit/     /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/LittleLinguist.html        200
 /editorials/little-linguist-jumpstart-kit/*    /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/LittleLinguist.html        200
 
+# Colorado AI editorial category
+/editorials/colorado-ai                       /Blogs/Editorials/Colorado%20AI/index.html                             200
+/editorials/colorado-ai/                      /Blogs/Editorials/Colorado%20AI/index.html                             200
+/editorials/colorado-ai/*                     /Blogs/Editorials/Colorado%20AI/:splat                                 200
+
+# Devs & AI editorial category
+/editorials/devs-ai                           /Blogs/Editorials/Devs%20%26%20AI/index.html                           200
+/editorials/devs-ai/                          /Blogs/Editorials/Devs%20%26%20AI/index.html                           200
+/editorials/devs-ai/*                         /Blogs/Editorials/Devs%20%26%20AI/:splat                               200
+
+# Apps We've Engineered editorial category
+/editorials/apps-weve-engineered              /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/index.html                  200
+/editorials/apps-weve-engineered/             /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/index.html                  200
+/editorials/apps-weve-engineered/*            /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/:splat                      200
+
+# NorthStar editorial category
+/editorials/northstar                         /Blogs/Editorials/NorthStar/index.html                                 200
+/editorials/northstar/                        /Blogs/Editorials/NorthStar/index.html                                 200
+/editorials/northstar/*                       /Blogs/Editorials/NorthStar/:splat                                     200
+
+# Lowercase /blogs/editorials/ aliases (browser URL bar, shared links)
+/blogs/editorials/colorado%20ai               /Blogs/Editorials/Colorado%20AI/index.html                             200
+/blogs/editorials/colorado%20ai/              /Blogs/Editorials/Colorado%20AI/index.html                             200
+/blogs/editorials/colorado%20ai/*             /Blogs/Editorials/Colorado%20AI/:splat                                 200
+/blogs/editorials/devs%20%26%20ai             /Blogs/Editorials/Devs%20%26%20AI/index.html                           200
+/blogs/editorials/devs%20%26%20ai/            /Blogs/Editorials/Devs%20%26%20AI/index.html                           200
+/blogs/editorials/devs%20%26%20ai/*           /Blogs/Editorials/Devs%20%26%20AI/:splat                               200
+/blogs/editorials/apps%20weve%20engineered    /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/index.html                  200
+/blogs/editorials/apps%20weve%20engineered/   /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/index.html                  200
+/blogs/editorials/apps%20weve%20engineered/*  /Blogs/Editorials/APPS%20WEVE%20ENGINEERED/:splat                      200
+/blogs/editorials/northstar                   /Blogs/Editorials/NorthStar/index.html                                 200
+/blogs/editorials/northstar/                  /Blogs/Editorials/NorthStar/index.html                                 200
+/blogs/editorials/northstar/*                 /Blogs/Editorials/NorthStar/:splat                                     200
+/blogs/editorials/*                           /Blogs/Editorials/:splat                                               200
+
 # Catch-all for Techwear single-page editorials (rewrite)
 /editorials/*                 /Blogs/Editorials/Techwear/:splat  200
 

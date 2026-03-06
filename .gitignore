@@ -16,3 +16,6 @@ secrets/
 
 # Local project archive artifact (never commit)
 /skyesol-project.zip
+
+# Local Netlify folder
+.netlify

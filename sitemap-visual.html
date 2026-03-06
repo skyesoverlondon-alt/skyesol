@@ -1,403 +1,539 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Ecology - Live Folder Map</title>
+  <meta name="description" content="Live ecology map of every public page grouped by folder across the SOLEnterprises website.">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://skyesol.netlify.app/sitemap-visual.html">
-  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
-  <meta name="twitter:description" content="Governed AI platforms, multi-state operations, and execution-first leadership across the SOLEnterprises ecosystem.">
-  <meta name="twitter:title" content="Skyes Over London LC — SOLEnterprises Ecosystem">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="og:url" content="https://skyesol.netlify.app/sitemap-visual.html">
-  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/23/ChatGPTImageFeb23202610_24_00AM.png">
-  <meta property="og:type" content="website">
-  <meta property="og:description" content="Governed AI platforms, multi-state operations, and execution-first leadership across the SOLEnterprises ecosystem.">
-  <meta property="og:title" content="Skyes Over London LC — SOLEnterprises Ecosystem">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site Navigation Map — SOLEnterprises</title>
-<meta name="description" content="Governed AI platforms, multi-state operations, and execution-first leadership across the SOLEnterprises ecosystem.">
-<meta name="robots" content="index, follow">
-<link rel="stylesheet" href="css/style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu" crossorigin="anonymous" defer></script>
-<style>
-  .map-section { margin-bottom: 52px; }
-  .map-section-title {
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 18px; padding-bottom: 10px;
-    border-bottom: 1px solid rgba(212,170,85,0.18);
-  }
-  .map-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
-  }
-  .map-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(212,170,85,0.12);
-    border-radius: 8px;
-    padding: 14px 18px;
-    transition: border-color .25s, background .25s;
-    text-decoration: none;
-    display: block;
-  }
-  .map-card:hover {
-    border-color: rgba(212,170,85,0.45);
-    background: rgba(212,170,85,0.06);
-    text-decoration: none;
-  }
-  .map-card .map-label {
-    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(212,170,85,0.55); margin-bottom: 5px;
-  }
-  .map-card .map-title {
-    font-size: 13px; color: var(--text); font-weight: 400; line-height: 1.4;
-  }
-  .map-card .map-date {
-    font-size: 10px; color: rgba(138,136,128,0.5); margin-top: 6px;
-  }
-  .map-core-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 10px;
-    margin-bottom: 14px;
-  }
-  .map-core-card {
-    background: rgba(212,170,85,0.07);
-    border: 1px solid rgba(212,170,85,0.22);
-    border-radius: 8px;
-    padding: 14px 18px;
-    text-decoration: none;
-    display: block;
-    transition: border-color .25s, background .25s;
-  }
-  .map-core-card:hover {
-    border-color: rgba(212,170,85,0.6);
-    background: rgba(212,170,85,0.13);
-  }
-  .map-core-card .map-title { font-size: 13px; color: var(--gold); font-weight: 500; }
-  .map-core-card .map-sub  { font-size: 10px; color: rgba(138,136,128,0.55); margin-top: 4px; }
-
-  .blog-group { margin-bottom: 36px; }
-  .blog-group-label {
-    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
-    color: rgba(138,99,255,0.7); margin-bottom: 12px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .blog-group-label::after { content:""; flex:1; height:1px; background:rgba(138,99,255,0.15); }
-
-  .stat-bar {
-    display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 48px;
-  }
-  .stat-item { text-align: left; }
-  .stat-num  { font-size: 36px; color: var(--gold); font-weight: 300; letter-spacing: -1px; }
-  .stat-lbl  { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(138,136,128,0.5); }
-</style>
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#05050a">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SOLEnterprises">
-  <link rel="apple-touch-icon" href="/SkyeDocx/assets/icons/apple-touch-icon.png">
+  <style>
+    :root {
+      --ec-bg: #06090f;
+      --ec-surface: rgba(11, 18, 28, 0.88);
+      --ec-border: rgba(104, 228, 255, 0.24);
+      --ec-border-strong: rgba(249, 213, 119, 0.42);
+      --ec-accent: #68e4ff;
+      --ec-accent-alt: #f9d577;
+      --ec-text: #e6eef9;
+      --ec-muted: #8ea2bf;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 8% 0%, rgba(104, 228, 255, 0.16), transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(249, 213, 119, 0.16), transparent 36%),
+        linear-gradient(180deg, #04070c 0%, #06090f 56%, #070a11 100%);
+      color: var(--ec-text);
+    }
+
+    .ecology-wrap {
+      width: min(1400px, 95vw);
+      margin: 118px auto 64px;
+    }
+
+    .ecology-head {
+      border: 1px solid var(--ec-border);
+      background: linear-gradient(120deg, rgba(104, 228, 255, 0.08), rgba(249, 213, 119, 0.06));
+      border-radius: 18px;
+      padding: 22px 24px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+    }
+
+    .ecology-kicker {
+      font-size: 11px;
+      letter-spacing: 2.6px;
+      text-transform: uppercase;
+      color: var(--ec-accent);
+      margin-bottom: 8px;
+    }
+
+    .ecology-head h1 {
+      margin: 0;
+      font-size: clamp(30px, 4.2vw, 52px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .ecology-head p {
+      margin: 12px 0 0;
+      max-width: 900px;
+      color: var(--ec-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .ecology-toolbar {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .ecology-search,
+    .ecology-filter {
+      width: 100%;
+      border: 1px solid var(--ec-border);
+      border-radius: 10px;
+      color: var(--ec-text);
+      background: var(--ec-surface);
+      padding: 12px 14px;
+      font-size: 14px;
+    }
+
+    .ecology-search:focus,
+    .ecology-filter:focus {
+      outline: none;
+      border-color: var(--ec-border-strong);
+      box-shadow: 0 0 0 3px rgba(104, 228, 255, 0.18);
+    }
+
+    .ecology-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(120px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .ecology-stat {
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(11, 18, 28, 0.65);
+      border-radius: 10px;
+      padding: 12px 14px;
+      min-height: 84px;
+    }
+
+    .ecology-stat-number {
+      font-size: clamp(22px, 2.7vw, 34px);
+      color: var(--ec-accent-alt);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 6px;
+      word-break: break-word;
+    }
+
+    .ecology-stat-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--ec-muted);
+    }
+
+    .folder-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .folder-pill {
+      text-decoration: none;
+      color: var(--ec-text);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .folder-pill:hover,
+    .folder-pill.active {
+      border-color: var(--ec-accent-alt);
+      background: rgba(249, 213, 119, 0.12);
+      text-decoration: none;
+    }
+
+    .folder-section {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      background: rgba(8, 13, 22, 0.82);
+    }
+
+    .folder-summary {
+      cursor: pointer;
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      user-select: none;
+    }
+
+    .folder-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .folder-title {
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--ec-accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .folder-count {
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      color: var(--ec-muted);
+      text-transform: uppercase;
+      border: 1px solid rgba(255, 255, 255, 0.17);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .folder-links {
+      padding: 0 14px 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    .ecology-link {
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 11px 12px;
+      min-height: 92px;
+      display: block;
+      transition: transform 0.12s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .ecology-link:hover {
+      text-decoration: none;
+      border-color: var(--ec-accent-alt);
+      background: rgba(249, 213, 119, 0.09);
+      transform: translateY(-1px);
+    }
+
+    .ecology-link-title {
+      display: block;
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--ec-text);
+      margin-bottom: 8px;
+      word-break: break-word;
+      text-transform: capitalize;
+    }
+
+    .ecology-link-path {
+      display: block;
+      font-size: 11px;
+      line-height: 1.35;
+      color: var(--ec-muted);
+      word-break: break-all;
+    }
+
+    .ecology-empty,
+    .ecology-error {
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      border-radius: 12px;
+      padding: 18px;
+      color: var(--ec-muted);
+      background: rgba(6, 10, 16, 0.55);
+    }
+
+    @media (max-width: 880px) {
+      .ecology-wrap {
+        margin-top: 96px;
+      }
+
+      .ecology-toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .ecology-stats {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+      }
+    }
+  </style>
 </head>
 <body>
-<canvas id="three-bg"></canvas>
+  <div id="siteHeaderMount"></div>
 
-<nav class="main-nav" id="mainNav">
-  <a href="/index.html" class="nav-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"><span>SOLEnterprises</span></a>
-  <button class="nav-toggle" id="navToggle">☰</button>
-  <div class="nav-links" id="navLinks">
-    <a href="/index.html">Home</a>
-    <div class="nav-dropdown" data-type="services">
-      <button type="button" class="dropdown-toggle">Services</button>
-      <div class="dropdown-menu">
-        <a href="/Services/WebBuilds/WebBuilds.html">Web Builds</a>
-        <a href="/Services/WebBuilds/Skye%20Ops%20Beacon">Skye Ops Beacon</a>
-        <a href="/Services/ai-data-apps.html">AI &amp; Data Apps</a>
-        <a href="/Services/portals-hubs.html">Portals &amp; Hubs</a>
-        <a href="/Services/ecommerce-payments.html">Ecommerce &amp; Payments</a>
-        <a href="/Services/intake-routing.html">Intake &amp; Routing</a>
-        <a href="/Services/trust-surfaces.html">Trust Surfaces</a>
-        <a href="/Services/api-integration.html">API &amp; Integrations</a>
-        <a href="/Services/brand-identity.html">Brand Identity</a>
-        <a href="/Services/notification-comms.html">Notifications</a>
-        <a href="/Services/docs-knowledge.html">Docs &amp; Knowledge</a>
-        <a href="/Services/platform-migration.html">Migration</a>
-        <a href="/Services/security-audit.html">Security</a>
-        <a href="/Services/analytics-dashboards.html">Analytics</a>
-        <a href="/Services/lifecycle-retention.html">Retention</a>
-        <a href="/Services/mvp-launchpad.html">MVP Builds</a>
-        <a href="/Services/seo-content.html">SEO &amp; Content</a>
-        <a href="/Services/0megaGate/0megagate-product-page.html">0megaGate</a>
-        <a href="/Services/SkyeCorp/0megaPhase/index.html">SkyePack 0megaPhase</a>
-        <a href="/Services/kAIxUGatedPlatform.html">kAIxU Gated Platform</a>
-        <a href="/Services/kAIxU-Powered-Platforms/kAIxURevenueIntelligenceGrid.html">kAIxU Revenue Intelligence Grid</a>
-        <a href="/Services/kAIxU-Powered-Platforms/kAIxUComplianceControlTower.html">kAIxU Compliance Control Tower</a>
-        <a href="/Services/kAIxU-Powered-Platforms/kAIxUGrowthFunnelOrchestrator.html">kAIxU Growth Funnel Orchestrator</a>
-        <a href="/Services/kAIxU-Powered-Platforms/kAIxUClientSuccessPilot.html">kAIxU Client Success Pilot</a>
-        <a href="/Services/kAIxU-Powered-Platforms/kAIxUProposalOpsEngine.html">kAIxU Proposal Ops Engine</a>
-        <a href="/Services/kAIxU-Powered-Platforms/kAIxUIncidentResponseGrid.html">kAIxU Incident Response Grid</a>
-      </div>
-    </div>
-    <a href="/about.html">Founder</a>
-    <div class="nav-dropdown" data-type="suite">
-      <button type="button" class="dropdown-toggle">SkyeSuite</button>
-      <div class="dropdown-menu">
-        <a href="/SkyeDocx/homepage.html">SkyeDocx</a>
-        <a href="/SkyeFlow/index.html">SkyeFlow</a>
-        <a href="/SkyeArchive/index.html">SkyeArchive</a>
-        <a href="/SkyeSlides/index.html">SkyeSlides</a>
-        <a href="/SkyeDrive/index.html">SkyeDrive</a>
-        <a href="/SkyeCollab/index.html">SkyeCollab</a>
-        <a href="/SkyeSheets/index.html">SkyeSheets</a>
-        <a href="/SkyeLedger/index.html">SkyeLedger</a>
-        <a href="/SkyeOps/index.html">SkyeOps</a>
-      </div>
-    </div>
-    <a href="/platforms.html">Platforms</a>
-    <a href="/network.html">Network</a>
-    <a href="/credibility.html">Credibility</a>
-    <a href="/blog.html">Blog</a>
-    <a href="/status.html">Status</a>
-    <a href="/contact.html">Contact</a>
-  </div>
-  <button class="menu-btn" id="menuBtn">☰ MENU</button>
-</nav>
+  <main class="ecology-wrap">
+    <section class="ecology-head">
+      <div class="ecology-kicker">Live Website Ecology</div>
+      <h1>One Surface. Every Public Page.</h1>
+      <p>
+        This page is generated live from <code>/sitemap.xml</code> and sectioned by folder,
+        so you can move through the whole public system as an ecosystem map, not a random list.
+      </p>
+    </section>
 
-<div class="page-header">
-  <div class="section-label">SOLEnterprises · Full Site Index</div>
-  <h1>Site <span>Navigation Map</span></h1>
-  <div class="glow-tile-purple"><p style="color:#000000">Every page, blog series, and piece of content in the SOLEnterprises ecosystem — mapped, linked, and indexed.</p></div>
-</div>
+    <section class="ecology-toolbar" aria-label="Ecology controls">
+      <input id="ecologySearch" class="ecology-search" type="search" placeholder="Search titles, paths, or folder names..." aria-label="Search site ecology">
+      <select id="folderFilter" class="ecology-filter" aria-label="Filter by folder">
+        <option value="">All folders</option>
+      </select>
+    </section>
 
-<div class="divider"></div>
+    <section class="ecology-stats" aria-label="Ecology stats">
+      <article class="ecology-stat">
+        <div id="statTotalLinks" class="ecology-stat-number">0</div>
+        <div class="ecology-stat-label">Total Public URLs</div>
+      </article>
+      <article class="ecology-stat">
+        <div id="statFolders" class="ecology-stat-number">0</div>
+        <div class="ecology-stat-label">Folders Covered</div>
+      </article>
+      <article class="ecology-stat">
+        <div id="statVisible" class="ecology-stat-number">0</div>
+        <div class="ecology-stat-label">Visible Right Now</div>
+      </article>
+      <article class="ecology-stat">
+        <div id="statLargest" class="ecology-stat-number">-</div>
+        <div class="ecology-stat-label">Largest Folder</div>
+      </article>
+    </section>
 
-<section class="content-section">
+    <nav id="folderPills" class="folder-pills" aria-label="Folder quick jump"></nav>
 
-  <!-- STATS -->
-  <div class="stat-bar reveal">
-    <div class="stat-item"><div class="stat-num">118</div><div class="stat-lbl">Total Indexed URLs</div></div>
-    <div class="stat-item"><div class="stat-num">84</div><div class="stat-lbl">Blog Posts</div></div>
-    <div class="stat-item"><div class="stat-num">10</div><div class="stat-lbl">Core Pages</div></div>
-    <div class="stat-item"><div class="stat-num">26</div><div class="stat-lbl">Service Pages</div></div>
-  </div>
+    <section id="ecologySections" aria-live="polite"></section>
+  </main>
 
-  <!-- CORE PAGES -->
-  <div class="map-section reveal">
-    <div class="map-section-title">Core Site Pages</div>
-    <div class="map-core-grid">
-      <a class="map-core-card" href="index.html"><div class="map-title">Home</div><div class="map-sub">SOLEnterprises Hub · /</div></a>
-      <a class="map-core-card" href="about.html"><div class="map-title">Founder Dossier</div><div class="map-sub">About · /about.html</div></a>
-      <a class="map-core-card" href="platforms.html"><div class="map-title">Kaixu Platforms</div><div class="map-sub">AI Division · /platforms.html</div></a>
-      <a class="map-core-card" href="/network.html"><div class="map-title">SOLE Network</div><div class="map-sub">Portal Directory · /network.html</div></a>
-      <a class="map-core-card" href="credibility.html"><div class="map-title">Credibility Archive</div><div class="map-sub">Verified Work · /credibility.html</div></a>
-      <a class="map-core-card" href="blog.html"><div class="map-title">Blog Archive</div><div class="map-sub">All Posts · /blog.html</div></a>
-      <a class="map-core-card" href="status.html"><div class="map-title">Status Board</div><div class="map-sub">Network Health · /status.html</div></a>
-      <a class="map-core-card" href="contact.html"><div class="map-title">Contact</div><div class="map-sub">Work Together · /contact.html</div></a>
-      <a class="map-core-card" href="privacy.html"><div class="map-title">Privacy Policy</div><div class="map-sub">/privacy.html</div></a>
-      <a class="map-core-card" href="terms.html"><div class="map-title">Terms of Service</div><div class="map-sub">/terms.html</div></a>
-    </div>
-  </div>
+  <footer id="siteFooterMount"></footer>
 
-  <!-- SERVICES -->
-  <div class="map-section reveal">
-    <div class="map-section-title">Service Pages</div>
-    <div class="map-grid">
-      <a class="map-card" href="Services/WebBuilds/WebBuilds.html"><div class="map-label">Service</div><div class="map-title">Web Builds — Fast, secure launches</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/WebBuilds/Skye%20Ops%20Beacon"><div class="map-label">Service</div><div class="map-title">Skye Ops Beacon — Automated reputation + local ranking engine</div><div class="map-date">Updated Mar 3, 2026</div></a>
-      <a class="map-card" href="Services/ai-data-apps.html"><div class="map-label">Service</div><div class="map-title">AI &amp; Data Apps — Governed delivery</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/portals-hubs.html"><div class="map-label">Service</div><div class="map-title">Portals &amp; Hubs — Member &amp; partner UX</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/ecommerce-payments.html"><div class="map-label">Service</div><div class="map-title">Ecommerce &amp; Payments — Revenue rails</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/intake-routing.html"><div class="map-label">Service</div><div class="map-title">Intake &amp; Routing — Lead-to-ops flow</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/trust-surfaces.html"><div class="map-label">Service</div><div class="map-title">Trust Surfaces — Proof-first conversions</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/api-integration.html"><div class="map-label">Service</div><div class="map-title">API &amp; Integrations — ConnectBridge layer</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/brand-identity.html"><div class="map-label">Service</div><div class="map-title">Brand Identity — Systems, kits, assets</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/notification-comms.html"><div class="map-label">Service</div><div class="map-title">Notifications — Comms &amp; routing</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/docs-knowledge.html"><div class="map-label">Service</div><div class="map-title">Docs &amp; Knowledge — Knowledge UX</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/platform-migration.html"><div class="map-label">Service</div><div class="map-title">Migration — Platform transitions</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/security-audit.html"><div class="map-label">Service</div><div class="map-title">Security — Posture, audits, guardrails</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/analytics-dashboards.html"><div class="map-label">Service</div><div class="map-title">Analytics — Dashboards &amp; insight loops</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/lifecycle-retention.html"><div class="map-label">Service</div><div class="map-title">Retention — Lifecycle programs</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/mvp-launchpad.html"><div class="map-label">Service</div><div class="map-title">MVP Builds — Launchpad sprints</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/seo-content.html"><div class="map-label">Service</div><div class="map-title">SEO &amp; Content — Authority buildout</div><div class="map-date">Updated Feb 25, 2026</div></a>
-      <a class="map-card" href="Services/0megaGate/0megagate-product-page.html"><div class="map-label">Service</div><div class="map-title">0megaGate — Product and gateway track</div><div class="map-date">Updated Mar 4, 2026</div></a>
-      <a class="map-card" href="Services/SkyeCorp/0megaPhase/index.html"><div class="map-label">Service</div><div class="map-title">SkyePack 0megaPhase — 15 operator packs</div><div class="map-date">Updated Mar 4, 2026</div></a>
-      <a class="map-card" href="Services/kAIxUGatedPlatform.html"><div class="map-label">Service</div><div class="map-title">kAIxU Gated Platform — Member-only AI portal</div><div class="map-date">Updated Mar 3, 2026</div></a>
-      <a class="map-card" href="Services/kAIxU-Powered-Platforms/index.html#revenue"><div class="map-label">Service</div><div class="map-title">kAIxU Revenue Intelligence Grid — Forecast + pipeline control</div><div class="map-date">Updated Mar 3, 2026</div></a>
-      <a class="map-card" href="Services/kAIxU-Powered-Platforms/index.html#compliance"><div class="map-label">Service</div><div class="map-title">kAIxU Compliance Control Tower — Governance + audit readiness</div><div class="map-date">Updated Mar 3, 2026</div></a>
-      <a class="map-card" href="Services/kAIxU-Powered-Platforms/index.html#growth"><div class="map-label">Service</div><div class="map-title">kAIxU Growth Funnel Orchestrator — Demand-to-close lanes</div><div class="map-date">Updated Mar 3, 2026</div></a>
-      <a class="map-card" href="Services/kAIxU-Powered-Platforms/index.html#success"><div class="map-label">Service</div><div class="map-title">kAIxU Client Success Pilot — Onboarding + renewal ops</div><div class="map-date">Updated Mar 3, 2026</div></a>
-      <a class="map-card" href="Services/kAIxU-Powered-Platforms/index.html#proposal"><div class="map-label">Service</div><div class="map-title">kAIxU Proposal Ops Engine — Proposal governance lane</div><div class="map-date">Updated Mar 3, 2026</div></a>
-      <a class="map-card" href="Services/kAIxU-Powered-Platforms/index.html#incident"><div class="map-label">Service</div><div class="map-title">kAIxU Incident Response Grid — Triage + escalation workflows</div><div class="map-date">Updated Mar 3, 2026</div></a>
-    </div>
-    <div style="margin-top:16px" class="reveal">
-      <a href="contact.html" class="btn-outline">Book a build →</a>
-    </div>
-  </div>
-
-  <!-- BLOG SERIES -->
-  <div class="map-section reveal">
-    <div class="map-section-title">Blog Archive · 84 Posts Across 8 Series</div>
-
-    <!-- Editorials -->
-    <div class="blog-group">
-      <div class="blog-group-label">Editorials</div>
-      <div class="map-grid">
-        <a class="map-card" href="Blogs/Editorials/One-Website-Can't-Carry-Your-Authority-Alone.html"><div class="map-label">Editorial</div><div class="map-title">One Website Can't Carry Your Authority Alone</div><div class="map-date">January 8, 2025</div></a>
-        <a class="map-card" href="Blogs/Editorials/billions_stolen_fom_American_workers.html"><div class="map-label">Editorial</div><div class="map-title">Billions Stolen From American Workers</div><div class="map-date">January 26, 2025</div></a>
-        <a class="map-card" href="Blogs/Editorials/WebPile Pro—Monaco Editor.html"><div class="map-label">Editorial</div><div class="map-title">WebPile Pro — Monaco Editor</div><div class="map-date">Updated Mar 3, 2026</div></a>
-      </div>
-    </div>
-
-    <!-- Colorado AI -->
-    <div class="blog-group">
-      <div class="blog-group-label">Colorado AI Landscape</div>
-      <div class="map-grid">
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/adobe-firefly.html"><div class="map-label">Colorado AI</div><div class="map-title">Adobe Firefly</div><div class="map-date">March 21, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/anthropic.html"><div class="map-label">Colorado AI</div><div class="map-title">Anthropic</div><div class="map-date">March 30, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/apple-core-ml.html"><div class="map-label">Colorado AI</div><div class="map-title">Apple Core ML</div><div class="map-date">April 8, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/databricks-mosaic-ai.html"><div class="map-label">Colorado AI</div><div class="map-title">Databricks Mosaic AI</div><div class="map-date">April 17, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/github-copilot.html"><div class="map-label">Colorado AI</div><div class="map-title">GitHub Copilot</div><div class="map-date">April 26, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/google-vertex-ai.html"><div class="map-label">Colorado AI</div><div class="map-title">Google Vertex AI</div><div class="map-date">May 5, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/meta-ai.html"><div class="map-label">Colorado AI</div><div class="map-title">Meta AI</div><div class="map-date">May 14, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/nvidia-cuda.html"><div class="map-label">Colorado AI</div><div class="map-title">NVIDIA CUDA</div><div class="map-date">May 23, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/openai.html"><div class="map-label">Colorado AI</div><div class="map-title">OpenAI</div><div class="map-date">May 31, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/perplexity.html"><div class="map-label">Colorado AI</div><div class="map-title">Perplexity</div><div class="map-date">June 9, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/salesforce-einstein-agentforce.html"><div class="map-label">Colorado AI</div><div class="map-title">Salesforce Einstein Agentforce</div><div class="map-date">June 18, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/scale-ai.html"><div class="map-label">Colorado AI</div><div class="map-title">Scale AI</div><div class="map-date">June 27, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Colorado AI/vercel.html"><div class="map-label">Colorado AI</div><div class="map-title">Vercel</div><div class="map-date">July 6, 2024</div></a>
-      </div>
-    </div>
-
-    <!-- Devs & AI -->
-    <div class="blog-group">
-      <div class="blog-group-label">Devs &amp; AI — Engineering Patterns</div>
-      <div class="map-grid">
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/ai-gateway-one-contract.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">AI Gateway — One Contract</div><div class="map-date">July 15, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/magic-links-done-right.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Magic Links Done Right</div><div class="map-date">July 24, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/minimal-rbac-that-works.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Minimal RBAC That Works</div><div class="map-date">August 1, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/neon-schema-versioning.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Neon Schema Versioning</div><div class="map-date">August 10, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/netlify-functions-practical-patterns.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Netlify Functions — Practical Patterns</div><div class="map-date">August 19, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/observability-for-ai-apps.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Observability for AI Apps</div><div class="map-date">August 28, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/offline-first-ai-patterns.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Offline-First AI Patterns</div><div class="map-date">September 6, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/prompt-hygiene-production.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Prompt Hygiene in Production</div><div class="map-date">September 15, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/rag-retrieval-that-doesnt-lie.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">RAG Retrieval That Doesn't Lie</div><div class="map-date">September 24, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/script-to-system-productizing-dev-work.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Script to System — Productizing Dev Work</div><div class="map-date">October 3, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/shipping-like-a-scientist.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Shipping Like a Scientist</div><div class="map-date">October 11, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/token-economics-indisputable-billing.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Token Economics — Indisputable Billing</div><div class="map-date">October 20, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/Devs &amp; AI/why-blocked-ux.html"><div class="map-label">Devs &amp; AI</div><div class="map-title">Why Blocked UX</div><div class="map-date">October 29, 2024</div></a>
-      </div>
-    </div>
-
-    <!-- NorthStar Financial -->
-    <div class="blog-group">
-      <div class="blog-group-label">NorthStar — Phoenix Financial Operations</div>
-      <div class="map-grid">
-        <a class="map-card" href="Blogs/Editorials/NorthStar/arizona-tpt-record-posture-phoenix-operators.html"><div class="map-label">NorthStar</div><div class="map-title">Arizona TPT Record Posture for Phoenix Operators</div><div class="map-date">November 7, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/NorthStar/bank-ready-financials-phoenix-loans-lines.html"><div class="map-label">NorthStar</div><div class="map-title">Bank-Ready Financials · Phoenix Loans &amp; Lines</div><div class="map-date">November 16, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-1099-contractor-tracking-year-end-ready.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix 1099 Contractor Tracking — Year-End Ready</div><div class="map-date">November 25, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-cash-flow-forecasting-13-week-clarity.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix Cash Flow Forecasting — 13-Week Clarity</div><div class="map-date">December 4, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-payroll-cadence-quarter-close-discipline.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix Payroll Cadence &amp; Quarter-Close Discipline</div><div class="map-date">December 12, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-quickbooks-cleanup-ledger-rescue.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix QuickBooks Cleanup — Ledger Rescue</div><div class="map-date">December 21, 2024</div></a>
-        <a class="map-card" href="Blogs/Editorials/NorthStar/phoenix-year-end-close-30-day-playbook.html"><div class="map-label">NorthStar</div><div class="map-title">Phoenix Year-End Close — 30-Day Playbook</div><div class="map-date">December 30, 2024</div></a>
-      </div>
-    </div>
-
-    <!-- Houston Texas -->
-    <div class="blog-group">
-      <div class="blog-group-label">Houston Texas — Tech &amp; AI Ecosystem</div>
-      <div class="map-grid">
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-bmc-software.html"><div class="map-label">Houston</div><div class="map-title">BMC Software — Houston AI</div><div class="map-date">February 4, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-cemvita.html"><div class="map-label">Houston</div><div class="map-title">Cemvita — Houston AI</div><div class="map-date">February 13, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-chaione.html"><div class="map-label">Houston</div><div class="map-title">ChaiOne — Houston AI</div><div class="map-date">February 21, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-data-gumbo.html"><div class="map-label">Houston</div><div class="map-title">Data Gumbo — Houston AI</div><div class="map-date">March 2, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-halliburton-digital.html"><div class="map-label">Houston</div><div class="map-title">Halliburton Digital — Houston AI</div><div class="map-date">March 11, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-kbr.html"><div class="map-label">Houston</div><div class="map-title">KBR — Houston AI</div><div class="map-date">March 20, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-pros.html"><div class="map-label">Houston</div><div class="map-title">Houston AI Pros</div><div class="map-date">March 29, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-ai-slb-innovation-factori.html"><div class="map-label">Houston</div><div class="map-title">SLB Innovation Factori — Houston AI</div><div class="map-date">April 7, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-dev-hpe-headquarters.html"><div class="map-label">Houston</div><div class="map-title">HPE Headquarters — Houston Dev</div><div class="map-date">April 16, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-dev-softeq.html"><div class="map-label">Houston</div><div class="map-title">Softeq — Houston Dev</div><div class="map-date">April 25, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-enterprise-chevron-hq.html"><div class="map-label">Houston</div><div class="map-title">Chevron HQ — Houston Enterprise</div><div class="map-date">May 3, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-space-axiom-space.html"><div class="map-label">Houston</div><div class="map-title">Axiom Space — Houston Space</div><div class="map-date">May 12, 2025</div></a>
-        <a class="map-card" href="Blogs/Houston Texas Devs &amp; AI/houston-space-intuitive-machines.html"><div class="map-label">Houston</div><div class="map-title">Intuitive Machines — Houston Space</div><div class="map-date">May 21, 2025</div></a>
-      </div>
-    </div>
-
-    <!-- Phoenix Arizona -->
-    <div class="blog-group">
-      <div class="blog-group-label">Phoenix Arizona — Business &amp; Compliance Playbooks</div>
-      <div class="map-grid">
-        <a class="map-card" href="Blogs/Phoenix Arizona/01_phoenix_start_business_playbook.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Phoenix Start Business Playbook</div><div class="map-date">June 17, 2025</div></a>
-        <a class="map-card" href="Blogs/Phoenix Arizona/02_how_to_start_llc_arizona_phoenix.html"><div class="map-label">Phoenix AZ</div><div class="map-title">How to Start an LLC in Arizona / Phoenix</div><div class="map-date">June 26, 2025</div></a>
-        <a class="map-card" href="Blogs/Phoenix Arizona/03_arizona_llc_cost_breakdown.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Arizona LLC Cost Breakdown</div><div class="map-date">July 4, 2025</div></a>
-        <a class="map-card" href="Blogs/Phoenix Arizona/04_phoenix_business_license_requirements.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Phoenix Business License Requirements</div><div class="map-date">July 13, 2025</div></a>
-        <a class="map-card" href="Blogs/Phoenix Arizona/05_arizona_tpt_license_who_needs_it.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Arizona TPT License — Who Needs It</div><div class="map-date">July 22, 2025</div></a>
-        <a class="map-card" href="Blogs/Phoenix Arizona/06_how_to_get_an_ein_arizona.html"><div class="map-label">Phoenix AZ</div><div class="map-title">How to Get an EIN in Arizona</div><div class="map-date">July 31, 2025</div></a>
-        <a class="map-card" href="Blogs/Phoenix Arizona/07_arizona_statutory_agent_registered_agent.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Arizona Statutory vs Registered Agent</div><div class="map-date">August 9, 2025</div></a>
-        <a class="map-card" href="Blogs/Phoenix Arizona/08_phoenix_home_based_business_zoning_rules.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Phoenix Home-Based Business Zoning Rules</div><div class="map-date">August 18, 2025</div></a>
-        <a class="map-card" href="Blogs/Phoenix Arizona/09_phoenix_sales_tax_vs_arizona_tpt.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Phoenix Sales Tax vs Arizona TPT</div><div class="map-date">August 27, 2025</div></a>
-        <a class="map-card" href="Blogs/Phoenix Arizona/10_arizona_contracts_deposits_invoicing_system.html"><div class="map-label">Phoenix AZ</div><div class="map-title">Arizona Contracts, Deposits &amp; Invoicing System</div><div class="map-date">September 5, 2025</div></a>
-      </div>
-    </div>
-
-    <!-- Skaixu -->
-    <div class="blog-group">
-      <div class="blog-group-label">SkAIxu IDE — Engineering Blog Series</div>
-      <div class="map-grid">
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_01_patch-driven-editing-the-anti-drift-contract-for-ai-code-changes.html"><div class="map-label">SkAIxu</div><div class="map-title">Patch-Driven Editing — The Anti-Drift Contract</div><div class="map-date">September 22, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_02_preview-to-patch-targeting-click-to-edit-that-stops-ambiguity.html"><div class="map-label">SkAIxu</div><div class="map-title">Preview-to-Patch Targeting — Click-to-Edit</div><div class="map-date">October 1, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_03_offline-first-ide-local-persistence-that-survives-real-life.html"><div class="map-label">SkAIxu</div><div class="map-title">Offline-First IDE — Local Persistence</div><div class="map-date">October 10, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_04_pwa-install-portable-workspace-your-ide-in-one-tap.html"><div class="map-label">SkAIxu</div><div class="map-title">PWA Install — Portable Workspace in One Tap</div><div class="map-date">October 19, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_05_governance-first-ai-routing-model-access-designed-like-security.html"><div class="map-label">SkAIxu</div><div class="map-title">Governance-First AI Routing</div><div class="map-date">October 28, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_06_undo-redo-as-a-safety-rail-reliability-for-rapid-iteration.html"><div class="map-label">SkAIxu</div><div class="map-title">Undo/Redo as a Safety Rail</div><div class="map-date">November 6, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_07_from-prompt-chaos-to-engineering-discipline-a-practical-loop.html"><div class="map-label">SkAIxu</div><div class="map-title">From Prompt Chaos to Engineering Discipline</div><div class="map-date">November 14, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_08_element-level-refactors-without-breaking-layout.html"><div class="map-label">SkAIxu</div><div class="map-title">Element-Level Refactors Without Breaking Layout</div><div class="map-date">November 23, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_09_agency-workflow-faster-client-builds-without-losing-control.html"><div class="map-label">SkAIxu</div><div class="map-title">Agency Workflow — Faster Client Builds</div><div class="map-date">December 2, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_10_auditability-without-enterprise-overhead.html"><div class="map-label">SkAIxu</div><div class="map-title">Auditability Without Enterprise Overhead</div><div class="map-date">December 11, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_11_why-production-endpoints-must-be-closed-by-default.html"><div class="map-label">SkAIxu</div><div class="map-title">Why Production Endpoints Must Be Closed by Default</div><div class="map-date">December 20, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_12_pattern-libraries-patch-recipes-scale-changes-without-drift.html"><div class="map-label">SkAIxu</div><div class="map-title">Pattern Libraries — Patch Recipes at Scale</div><div class="map-date">December 29, 2025</div></a>
-        <a class="map-card" href="Blogs/Skaixu/skaixu_blog_13_the-operator-s-ide-designing-for-pressure-not-demos.html"><div class="map-label">SkAIxu</div><div class="map-title">The Operator's IDE — Designed for Pressure</div><div class="map-date">January 7, 2026</div></a>
-      </div>
-    </div>
-
-    <!-- 13th Sole + Standalone -->
-    <div class="blog-group">
-      <div class="blog-group-label">13th Sole Promotions &amp; Standalone Posts</div>
-      <div class="map-grid">
-        <a class="map-card" href="Blogs/13th Sole Promotions/Free-events-Phoenix.html"><div class="map-label">13th Sole</div><div class="map-title">Free Events Phoenix</div><div class="map-date">February 24, 2024</div></a>
-        <a class="map-card" href="Blogs/13th Sole Promotions/Establishing-Business-Development-Firm-Phoenix-AZ.html"><div class="map-label">13th Sole</div><div class="map-title">Establishing a Business Development Firm in Phoenix, AZ</div><div class="map-date">2024</div></a>
-        <a class="map-card" href="Blogs/13th Sole Promotions/Mysfit's-Modern-Juke-Joint-Experience.html"><div class="map-label">13th Sole</div><div class="map-title">Mysfit's Modern Juke Joint Experience</div><div class="map-date">2024</div></a>
-        <a class="map-card" href="Blogs/CommonPhoenixLLCProblems.html"><div class="map-label">Standalone</div><div class="map-title">Common Phoenix LLC Problems</div><div class="map-date">March 13, 2024</div></a>
-        <a class="map-card" href="Blogs/PayHawk Is Revolutionizing Pay Plan Design for Small Businesses.html"><div class="map-label">Standalone</div><div class="map-title">PayHawk Is Revolutionizing Pay Plan Design</div><div class="map-date">June 8, 2025</div></a>
-        <a class="map-card" href="Blogs/What-Even-Is-SEO.html"><div class="map-label">Standalone</div><div class="map-title">What Even Is SEO?</div><div class="map-date">2025</div></a>
-        <a class="map-card" href="Blogs/WhenLeadsGoUp,FireDrillsGoUpToo.html"><div class="map-label">Standalone</div><div class="map-title">When Leads Go Up, Fire Drills Go Up Too</div><div class="map-date">2025</div></a>
-        <a class="map-card" href="Blogs/sol-ops-field-brief.html"><div class="map-label">SOL Ops</div><div class="map-title">SOL Ops Field Brief</div><div class="map-date">2025</div></a>
-        <a class="map-card" href="Blogs/Mysfit'sModernJukeJointExperience.html"><div class="map-label">Standalone</div><div class="map-title">Mysfit's Modern Juke Joint Experience</div><div class="map-date">2025</div></a>
-        <a class="map-card" href="Blogs/Web Development in Phoenix, AZ.html"><div class="map-label">Phoenix Web</div><div class="map-title">Web Development in Phoenix, AZ</div><div class="map-date">January 16, 2026</div></a>
-        <a class="map-card" href="Blogs/web-development-phoenix-az-apex-operator-playbook.html"><div class="map-label">Phoenix Web</div><div class="map-title">Web Development Phoenix AZ — Apex Operator Playbook</div><div class="map-date">February 20, 2026</div></a>
-        <a class="map-card" href="Blogs/PhoenixValleyBlogHome.html"><div class="map-label">Hub</div><div class="map-title">Phoenix Valley Blog Home</div><div class="map-date">2025</div></a>
-      </div>
-    </div>
-
-  </div><!-- /map-section blog -->
-
-  <!-- SITEMAP LINK -->
-  <div class="map-section reveal" style="margin-top:48px">
-    <div class="map-section-title">Machine-Readable Sitemap</div>
-    <p class="section-desc" style="margin-bottom:18px">Full XML sitemap for search engines — 117 URLs including all service pages and blog posts with publish dates and priority signals.</p>
-    <a href="/sitemap.xml" class="btn-outline" target="_blank" rel="noopener">View sitemap.xml →</a>
-  </div>
-
-</section>
-
-<footer>
-  <div class="footer-logo"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL"></div>
-  <p><strong style="color:var(--text)">SKYES OVER LONDON LC</strong> · SOLEnterprises Ecosystem<br><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> · 986-210-7040</p>
-  <div class="footer-links"><a href="blog.html">Blog</a><a href="status.html">Status</a><a href="vault.html">Vault</a><a href="admin.html">Admin</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
-  <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35)">© Skyes Over London LC / SOLEnterprises.</p>
-</footer>
-
-<script src="js/three-bg.js" defer></script>
-<script src="js/main.js"></script>
   <script src="/js/partials.js"></script>
+  <script>
+    (function () {
+      const sectionsEl = document.getElementById('ecologySections');
+      const folderPillsEl = document.getElementById('folderPills');
+      const searchEl = document.getElementById('ecologySearch');
+      const folderFilterEl = document.getElementById('folderFilter');
+      const statTotalLinks = document.getElementById('statTotalLinks');
+      const statFolders = document.getElementById('statFolders');
+      const statVisible = document.getElementById('statVisible');
+      const statLargest = document.getElementById('statLargest');
+
+      let folders = [];
+
+      function decodeSafe(value) {
+        try {
+          return decodeURIComponent(value);
+        } catch {
+          return value;
+        }
+      }
+
+      function titleFromPath(pathname) {
+        if (!pathname || pathname === '/') return 'Home';
+        const cleanPath = decodeSafe(pathname).replace(/\/+$/, '');
+        const bits = cleanPath.split('/').filter(Boolean);
+        if (!bits.length) return 'Home';
+        let leaf = bits[bits.length - 1];
+        if (/^index\.html?$/i.test(leaf) && bits.length > 1) {
+          leaf = bits[bits.length - 2];
+        }
+        return leaf
+          .replace(/\.html?$/i, '')
+          .replace(/[\-_]+/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim() || 'Page';
+      }
+
+      function folderNameFromPath(pathname) {
+        const cleanPath = decodeSafe(pathname).replace(/^\/+/, '');
+        const bits = cleanPath.split('/').filter(Boolean);
+        return bits.length ? bits[0] : 'Root';
+      }
+
+      function normalizeHref(urlObj) {
+        return urlObj.pathname + (urlObj.search || '');
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function cardHtml(item) {
+        return [
+          '<a class="ecology-link" href="' + escapeHtml(item.href) + '">',
+          '<span class="ecology-link-title">' + escapeHtml(item.title) + '</span>',
+          '<span class="ecology-link-path">' + escapeHtml(item.path) + '</span>',
+          '</a>'
+        ].join('');
+      }
+
+      function setStats(total, visibleCount, grouped) {
+        statTotalLinks.textContent = String(total);
+        statFolders.textContent = String(grouped.length);
+        statVisible.textContent = String(visibleCount);
+        if (!grouped.length) {
+          statLargest.textContent = '-';
+          return;
+        }
+        const largest = grouped.reduce((acc, cur) => (cur.items.length > acc.items.length ? cur : acc), grouped[0]);
+        statLargest.textContent = largest.name + ' (' + largest.items.length + ')';
+      }
+
+      function renderFolderFilter(grouped) {
+        folderFilterEl.innerHTML = '<option value="">All folders</option>';
+        grouped.forEach(group => {
+          const option = document.createElement('option');
+          option.value = group.name;
+          option.textContent = group.name + ' (' + group.items.length + ')';
+          folderFilterEl.appendChild(option);
+        });
+      }
+
+      function renderFolderPills(grouped) {
+        folderPillsEl.innerHTML = '';
+        grouped.forEach(group => {
+          const anchor = document.createElement('a');
+          anchor.className = 'folder-pill';
+          anchor.href = '#folder-' + group.slug;
+          anchor.textContent = group.name + ' · ' + group.items.length;
+          folderPillsEl.appendChild(anchor);
+        });
+      }
+
+      function buildSections(grouped) {
+        sectionsEl.innerHTML = '';
+        if (!grouped.length) {
+          sectionsEl.innerHTML = '<div class="ecology-empty">No pages matched the current filter.</div>';
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        grouped.forEach((group, idx) => {
+          const details = document.createElement('details');
+          details.className = 'folder-section';
+          details.id = 'folder-' + group.slug;
+          details.open = idx < 6;
+
+          const summary = document.createElement('summary');
+          summary.className = 'folder-summary';
+          summary.innerHTML =
+            '<span class="folder-title">' + escapeHtml(group.name) + '</span>' +
+            '<span class="folder-count">' + group.items.length + ' pages</span>';
+
+          const links = document.createElement('div');
+          links.className = 'folder-links';
+          links.innerHTML = group.items.map(cardHtml).join('');
+
+          details.appendChild(summary);
+          details.appendChild(links);
+          fragment.appendChild(details);
+        });
+
+        sectionsEl.appendChild(fragment);
+      }
+
+      function slugify(value) {
+        return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'root';
+      }
+
+      function applyFilters() {
+        const query = (searchEl.value || '').trim().toLowerCase();
+        const folder = folderFilterEl.value;
+
+        const grouped = folders
+          .map(group => {
+            const items = group.items.filter(item => {
+              const inFolder = !folder || group.name === folder;
+              if (!inFolder) return false;
+              if (!query) return true;
+              return (
+                item.title.toLowerCase().includes(query) ||
+                item.path.toLowerCase().includes(query) ||
+                group.name.toLowerCase().includes(query)
+              );
+            });
+            return Object.assign({}, group, { items });
+          })
+          .filter(group => group.items.length > 0);
+
+        const visibleCount = grouped.reduce((sum, group) => sum + group.items.length, 0);
+        buildSections(grouped);
+        renderFolderPills(grouped);
+        setStats(folders.reduce((sum, g) => sum + g.items.length, 0), visibleCount, grouped);
+      }
+
+      async function loadSitemap() {
+        try {
+          const response = await fetch('/sitemap.xml', { cache: 'no-cache' });
+          if (!response.ok) {
+            throw new Error('Could not load sitemap.xml');
+          }
+          const xmlText = await response.text();
+          const xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+          const nodes = Array.from(xml.querySelectorAll('url > loc'));
+
+          const uniqueByHref = new Map();
+          nodes.forEach(node => {
+            const raw = (node.textContent || '').trim();
+            if (!raw) return;
+            let urlObj;
+            try {
+              urlObj = new URL(raw, window.location.origin);
+            } catch {
+              return;
+            }
+
+            const href = normalizeHref(urlObj);
+            if (uniqueByHref.has(href)) return;
+
+            uniqueByHref.set(href, {
+              href,
+              path: decodeSafe(href),
+              folder: folderNameFromPath(urlObj.pathname),
+              title: titleFromPath(urlObj.pathname)
+            });
+          });
+
+          const groupedMap = new Map();
+          uniqueByHref.forEach(item => {
+            if (!groupedMap.has(item.folder)) {
+              groupedMap.set(item.folder, []);
+            }
+            groupedMap.get(item.folder).push(item);
+          });
+
+          folders = Array.from(groupedMap.entries())
+            .map(([name, items]) => ({
+              name,
+              slug: slugify(name),
+              items: items.sort((a, b) => a.title.localeCompare(b.title))
+            }))
+            .sort((a, b) => {
+              if (a.name === 'Root') return -1;
+              if (b.name === 'Root') return 1;
+              if (b.items.length !== a.items.length) return b.items.length - a.items.length;
+              return a.name.localeCompare(b.name);
+            });
+
+          renderFolderFilter(folders);
+          applyFilters();
+        } catch (error) {
+          sectionsEl.innerHTML =
+            '<div class="ecology-error">Failed to load live ecology map from sitemap.xml. ' +
+            'Run <code>npm run gen-sitemap</code> and refresh.</div>';
+          console.error(error);
+        }
+      }
+
+      searchEl.addEventListener('input', applyFilters);
+      folderFilterEl.addEventListener('change', applyFilters);
+      loadSitemap();
+    })();
+  </script>
 </body>
 </html>

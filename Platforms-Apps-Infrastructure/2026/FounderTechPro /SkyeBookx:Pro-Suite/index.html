@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SkyeBookx Pro Suite Hub</title>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #06080f;
+			--bg-soft: #0d1222;
+			--surface: rgba(16, 22, 40, 0.82);
+			--surface-2: rgba(9, 14, 28, 0.8);
+			--border: rgba(93, 118, 176, 0.42);
+			--text: #e7edff;
+			--muted: #9ba7cc;
+			--accent: #66d9ff;
+			--accent2: #8bffb5;
+			--warn: #ffd56b;
+		}
+
+		* { box-sizing: border-box; }
+		html, body {
+			margin: 0;
+			height: 100%;
+			color: var(--text);
+			font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+			background:
+				radial-gradient(1200px 600px at 0% -10%, rgba(84, 116, 255, 0.25), transparent 60%),
+				radial-gradient(1000px 600px at 100% 0%, rgba(3, 255, 199, 0.12), transparent 60%),
+				linear-gradient(180deg, #050812 0%, #06080f 55%, #05070d 100%);
+		}
+
+		.top-rail {
+			position: fixed;
+			top: 8px;
+			left: 10px;
+			right: 10px;
+			z-index: 3000;
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			align-items: center;
+			padding: 8px;
+			border-radius: 12px;
+			border: 1px solid var(--border);
+			background: linear-gradient(90deg, rgba(8, 13, 28, 0.88), rgba(14, 20, 38, 0.78));
+			backdrop-filter: blur(10px);
+		}
+
+		.brand {
+			font-family: 'JetBrains Mono', monospace;
+			font-size: 12px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: #cbf5ff;
+			padding: 7px 10px;
+			border: 1px solid rgba(102, 217, 255, 0.35);
+			border-radius: 10px;
+			background: rgba(8, 18, 30, 0.65);
+		}
+
+		.top-rail .ctl {
+			color: var(--text);
+			font-size: 12px;
+			padding: 8px 10px;
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			background: rgba(8, 18, 32, 0.86);
+			font-family: 'JetBrains Mono', monospace;
+		}
+
+		.top-rail button.ctl {
+			cursor: pointer;
+		}
+
+		.top-rail select.ctl {
+			min-width: 220px;
+		}
+
+		.top-rail a {
+			color: var(--text);
+			text-decoration: none;
+			font-size: 12px;
+			padding: 8px 12px;
+			border: 1px solid var(--border);
+			border-radius: 999px;
+			background: rgba(8, 18, 32, 0.86);
+			backdrop-filter: blur(8px);
+			font-family: 'JetBrains Mono', monospace;
+		}
+
+		.status-bar {
+			position: fixed;
+			top: 70px;
+			left: 10px;
+			right: 10px;
+			z-index: 2800;
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 8px;
+		}
+
+		.status-lane {
+			padding: 10px;
+			border-radius: 12px;
+			border: 1px solid var(--border);
+			background: var(--surface-2);
+			min-width: 0;
+		}
+
+		.status-lane .lane-tag {
+			font-family: 'JetBrains Mono', monospace;
+			font-size: 10px;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			color: var(--muted);
+		}
+
+		.status-lane .lane-name {
+			font-size: 13px;
+			font-weight: 700;
+			margin-top: 2px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.status-lane.center {
+			border-color: rgba(102, 217, 255, 0.5);
+			box-shadow: inset 0 0 0 1px rgba(102, 217, 255, 0.25), 0 8px 32px rgba(2, 10, 20, 0.45);
+		}
+
+		.workspace-stack {
+			height: 100vh;
+			overflow-y: auto;
+			scroll-snap-type: y mandatory;
+			scroll-behavior: smooth;
+		}
+
+		.workspace {
+			min-height: 100vh;
+			scroll-snap-align: start;
+			display: grid;
+			grid-template-rows: auto 1fr;
+			padding: 132px 18px 76px;
+			gap: 10px;
+		}
+
+		.workspace-head {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+			border: 1px solid var(--border);
+			background: var(--surface);
+			border-radius: 12px;
+			padding: 10px 12px;
+			backdrop-filter: blur(8px);
+			box-shadow: 0 10px 30px rgba(4, 9, 20, 0.38);
+		}
+
+		.workspace-head .tag {
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: var(--muted);
+			font-size: 10px;
+			font-weight: 700;
+		}
+
+		.workspace-head .title {
+			font-size: 15px;
+			font-weight: 700;
+			margin-top: 2px;
+		}
+
+		.workspace-head a {
+			color: #c7d2fe;
+			text-decoration: none;
+			font-size: 12px;
+			border: 1px solid rgba(129, 140, 248, 0.45);
+			border-radius: 10px;
+			padding: 7px 10px;
+			white-space: nowrap;
+		}
+
+		.workspace iframe {
+			width: 100%;
+			height: calc(100vh - 120px);
+			border: 1px solid var(--border);
+			border-radius: 12px;
+			background: var(--bg-soft);
+			box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45);
+			transition: opacity 220ms ease;
+		}
+
+		.workspace iframe.swapping {
+			opacity: 0.55;
+		}
+
+		.workspace-head .meta {
+			font-size: 10px;
+			color: var(--muted);
+			margin-top: 3px;
+		}
+
+		.focus { border-color: rgba(34, 211, 238, 0.55); box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.45), 0 16px 45px rgba(0,0,0,.45); }
+
+		.jump-nav {
+			position: fixed;
+			top: 124px;
+			right: 10px;
+			z-index: 3000;
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			background: rgba(15, 23, 42, 0.85);
+			padding: 6px;
+		}
+
+		.jump-nav button {
+			border: 0;
+			background: transparent;
+			color: var(--text);
+			font-size: 11px;
+			padding: 6px 8px;
+			cursor: pointer;
+			border-radius: 8px;
+		}
+
+		.jump-nav button:hover { background: rgba(129, 140, 248, 0.24); }
+
+		.app-strip {
+			position: fixed;
+			left: 10px;
+			right: 10px;
+			bottom: 10px;
+			z-index: 3000;
+			display: flex;
+			gap: 6px;
+			overflow-x: auto;
+			padding: 8px;
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			background: rgba(8, 15, 30, 0.88);
+			backdrop-filter: blur(8px);
+			box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.32);
+		}
+
+		.app-chip {
+			white-space: nowrap;
+			padding: 6px 10px;
+			border-radius: 999px;
+			border: 1px solid rgba(129, 140, 248, 0.28);
+			background: rgba(2, 6, 23, 0.75);
+			color: #c7d2fe;
+			font-size: 11px;
+			cursor: pointer;
+		}
+
+		.app-chip.active {
+			border-color: rgba(34, 211, 238, 0.6);
+			box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.45) inset;
+			color: #67e8f9;
+		}
+
+		@media (max-width: 900px) {
+			.status-bar {
+				grid-template-columns: 1fr;
+				top: 116px;
+			}
+
+			.workspace {
+				padding-top: 226px;
+			}
+
+			.jump-nav {
+				top: auto;
+				bottom: 66px;
+				right: 10px;
+			}
+
+			.top-rail {
+				padding-right: 64px;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			html, body, .workspace-stack { scroll-behavior: auto; }
+			.workspace iframe { transition: none; }
+		}
+	</style>
+</head>
+<body>
+	<nav class="top-rail">
+		<div class="brand">SkyeBookx House IDE</div>
+		<a href="/index.html">Main Site</a>
+		<a href="/Platforms-Apps-Infrastructure/index.html">Platforms Hub</a>
+		<button id="prevBtn" class="ctl" type="button">Prev Workspace</button>
+		<select id="centerPicker" class="ctl" aria-label="Center workspace app"></select>
+		<button id="nextBtn" class="ctl" type="button">Next Workspace</button>
+	</nav>
+
+	<section class="status-bar" aria-label="Active workspace mapping">
+		<article class="status-lane" id="laneTop">
+			<div class="lane-tag">Top</div>
+			<div class="lane-name" id="laneTopName"></div>
+		</article>
+		<article class="status-lane center" id="laneCenter">
+			<div class="lane-tag">Center</div>
+			<div class="lane-name" id="laneCenterName"></div>
+		</article>
+		<article class="status-lane" id="laneBottom">
+			<div class="lane-tag">Bottom</div>
+			<div class="lane-name" id="laneBottomName"></div>
+		</article>
+	</section>
+
+	<div class="jump-nav">
+		<button data-target="top">Top</button>
+		<button data-target="middle">Middle</button>
+		<button data-target="bottom">Bottom</button>
+	</div>
+
+	<main class="workspace-stack" id="workspaceStack">
+		<section class="workspace" id="top">
+			<header class="workspace-head">
+				<div>
+					<div class="tag">Top Workspace</div>
+					<div class="title" id="topTitle"></div>
+					<div class="meta" id="topMeta"></div>
+				</div>
+				<a id="topOpen" href="#">Open Fullscreen</a>
+			</header>
+			<iframe id="topFrame" src="about:blank" title="Top Workspace" loading="lazy"></iframe>
+		</section>
+
+		<section class="workspace" id="middle">
+			<header class="workspace-head focus">
+				<div>
+					<div class="tag">Primary Workspace</div>
+					<div class="title" id="middleTitle"></div>
+					<div class="meta" id="middleMeta"></div>
+				</div>
+				<a id="middleOpen" href="#">Open Fullscreen</a>
+			</header>
+			<iframe id="middleFrame" src="about:blank" title="Primary Workspace" loading="eager"></iframe>
+		</section>
+
+		<section class="workspace" id="bottom">
+			<header class="workspace-head">
+				<div>
+					<div class="tag">Bottom Workspace</div>
+					<div class="title" id="bottomTitle"></div>
+					<div class="meta" id="bottomMeta"></div>
+				</div>
+				<a id="bottomOpen" href="#">Open Fullscreen</a>
+			</header>
+			<iframe id="bottomFrame" src="about:blank" title="Bottom Workspace" loading="lazy"></iframe>
+		</section>
+	</main>
+
+	<div class="app-strip" id="appStrip" aria-label="All suite apps"></div>
+
+	<script>
+		const APPS = [
+			{ href: './SkyeBookX-Cloud-Edition.html', label: 'SkyeBookX Cloud' },
+			{ href: './kAIxuAtlas.html', label: 'kAIxu Atlas' },
+			{ href: './kAIxuAtmos.html', label: 'kAIxu Atmos' },
+			{ href: './kAIxuBestiary.html', label: 'kAIxu Bestiary' },
+			{ href: './kAIxuBlueprint.html', label: 'kAIxu Blueprint' },
+			{ href: './kAIxuChronos.html', label: 'kAIxu Chronos' },
+			{ href: './kAIxuCodex.html', label: 'kAIxu Codex' },
+			{ href: './kAIxuCodexv2.html', label: 'kAIxu Codex v2' },
+			{ href: './kAIxuFaction.html', label: 'kAIxu Faction' },
+			{ href: './kAIxuForge.html', label: 'kAIxu Forge' },
+			{ href: './kAIxuGig.html', label: 'kAIxu Gig' },
+			{ href: './kAIxuGrimoire.html', label: 'kAIxu Grimoire' },
+			{ href: './kAIxuLexicon.html', label: 'kAIxu Lexicon' },
+			{ href: './kAIxuMatrix.html', label: 'kAIxu Matrix' },
+			{ href: './kAIxuMythos.html', label: 'kAIxu Mythos' },
+			{ href: './kAIxuPersona.html', label: 'kAIxu Persona' },
+			{ href: './kAIxuPress.html', label: 'kAIxu Press' },
+			{ href: './kAIxuPrime.html', label: 'kAIxu Prime' },
+			{ href: './kAIxuQuest.html', label: 'kAIxu Quest' },
+			{ href: './kAIxuRadio.html', label: 'kAIxu Radio' },
+			{ href: './kAIxuScript.html', label: 'kAIxu Script' },
+			{ href: './kAIxuSonic.html', label: 'kAIxu Sonic' },
+			{ href: './kAIxuTerminal.html', label: 'kAIxu Terminal' },
+			{ href: './kAIxuVision.html', label: 'kAIxu Vision' },
+			{ href: './kAIxu\\Catalyst.html', label: 'kAIxu Catalyst' }
+		];
+
+		const stack = document.getElementById('workspaceStack');
+		const centerPicker = document.getElementById('centerPicker');
+		const appStrip = document.getElementById('appStrip');
+
+		const topFrame = document.getElementById('topFrame');
+		const middleFrame = document.getElementById('middleFrame');
+		const bottomFrame = document.getElementById('bottomFrame');
+
+		const topTitle = document.getElementById('topTitle');
+		const middleTitle = document.getElementById('middleTitle');
+		const bottomTitle = document.getElementById('bottomTitle');
+
+		const topMeta = document.getElementById('topMeta');
+		const middleMeta = document.getElementById('middleMeta');
+		const bottomMeta = document.getElementById('bottomMeta');
+
+		const topOpen = document.getElementById('topOpen');
+		const middleOpen = document.getElementById('middleOpen');
+		const bottomOpen = document.getElementById('bottomOpen');
+		const laneTopName = document.getElementById('laneTopName');
+		const laneCenterName = document.getElementById('laneCenterName');
+		const laneBottomName = document.getElementById('laneBottomName');
+
+		let centerIdx = Math.max(0, APPS.findIndex(a => /SkyeBookX-Cloud-Edition\.html$/.test(a.href)));
+		let wheelLock = false;
+
+		function idxWrap(idx) {
+			return (idx + APPS.length) % APPS.length;
+		}
+
+		function appAt(offset) {
+			return APPS[idxWrap(centerIdx + offset)];
+		}
+
+		function bindWorkspace(offset, frame, titleEl, metaEl, openEl, zoneLabel) {
+			const app = appAt(offset);
+			if (frame.dataset.src !== app.href) {
+				frame.classList.add('swapping');
+				frame.src = app.href;
+				frame.dataset.src = app.href;
+				setTimeout(() => frame.classList.remove('swapping'), 170);
+			}
+			titleEl.textContent = app.label;
+			metaEl.textContent = `${zoneLabel} • ${app.href.replace('./', '')}`;
+			openEl.href = app.href;
+			return app;
+		}
+
+		function renderPicker() {
+			centerPicker.innerHTML = '';
+			APPS.forEach((app, idx) => {
+				const opt = document.createElement('option');
+				opt.value = String(idx);
+				opt.textContent = `${idx === centerIdx ? '● ' : ''}${app.label}`;
+				if (idx === centerIdx) opt.selected = true;
+				centerPicker.appendChild(opt);
+			});
+		}
+
+		function renderStrip() {
+			appStrip.innerHTML = '';
+			APPS.forEach((app, idx) => {
+				const btn = document.createElement('button');
+				btn.type = 'button';
+				btn.className = `app-chip${idx === centerIdx ? ' active' : ''}`;
+				btn.textContent = app.label;
+				btn.addEventListener('click', () => {
+					centerIdx = idx;
+					renderAll();
+				});
+				appStrip.appendChild(btn);
+			});
+		}
+
+		function renderAll() {
+			const topApp = bindWorkspace(-1, topFrame, topTitle, topMeta, topOpen, 'Top');
+			const centerApp = bindWorkspace(0, middleFrame, middleTitle, middleMeta, middleOpen, 'Center');
+			const bottomApp = bindWorkspace(1, bottomFrame, bottomTitle, bottomMeta, bottomOpen, 'Bottom');
+
+			laneTopName.textContent = topApp.label;
+			laneCenterName.textContent = centerApp.label;
+			laneBottomName.textContent = bottomApp.label;
+
+			renderPicker();
+			renderStrip();
+			const middle = document.getElementById('middle');
+			middle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+
+		function shift(step) {
+			centerIdx = idxWrap(centerIdx + step);
+			renderAll();
+		}
+
+		document.getElementById('prevBtn').addEventListener('click', () => shift(-1));
+		document.getElementById('nextBtn').addEventListener('click', () => shift(1));
+
+		centerPicker.addEventListener('change', () => {
+			centerIdx = Number(centerPicker.value) || 0;
+			renderAll();
+		});
+
+		stack.addEventListener('wheel', (ev) => {
+			if (wheelLock) return;
+			if (Math.abs(ev.deltaY) < 45) return;
+			ev.preventDefault();
+			wheelLock = true;
+			shift(ev.deltaY > 0 ? 1 : -1);
+			setTimeout(() => { wheelLock = false; }, 380);
+		}, { passive: false });
+
+		document.querySelectorAll('.jump-nav button').forEach(btn => {
+			btn.addEventListener('click', () => {
+				const id = btn.getAttribute('data-target');
+				const target = document.getElementById(id);
+				if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			});
+		});
+
+		window.addEventListener('keydown', (ev) => {
+			if (ev.key === 'ArrowDown') shift(1);
+			if (ev.key === 'ArrowUp') shift(-1);
+		});
+
+		window.addEventListener('load', () => {
+			renderAll();
+		});
+	</script>
+</body>
+</html>

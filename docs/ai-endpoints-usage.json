@@ -1,0 +1,96 @@
+{
+  "summary": {
+    "referencedEndpoints": 90,
+    "missingImplementations": 0,
+    "generatedAt": "2026-03-06T13:43:03.743Z"
+  },
+  "aiEndpoints": [
+    {
+      "endpoint": "/.netlify/functions/gateway-chat",
+      "name": "gateway-chat",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-chat.js",
+      "callers": [
+        "Blogs/Editorials/Devs & AI/ai-gateway-one-contract.html",
+        "Blogs/Editorials/Devs & AI/observability-for-ai-apps.html",
+        "Blogs/Editorials/Devs & AI/prompt-hygiene-production.html",
+        "Blogs/Editorials/Devs & AI/script-to-system-productizing-dev-work.html",
+        "Blogs/Editorials/Devs & AI/shipping-like-a-scientist.html",
+        "Blogs/Editorials/Devs & AI/why-blocked-ux.html",
+        "Platforms-Apps-Infrastructure/NeuralSpacePro/index.html",
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/README.md",
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/kaixuGateway.js",
+        "Platforms-Apps-Infrastructure/kAIxUBrandKit/netlify/functions/kaixu-generate.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_CLIENT_APPS.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/smoketest.html",
+        "gateway/dashboard.html",
+        "kAIxu/RequestKaixuAPIKey.html",
+        "netlify/functions/kaixu-generate.js",
+        "netlify/functions/request-key.mjs"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-embed",
+      "name": "gateway-embed",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-embed.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-embed.js",
+        "netlify/functions/gateway-embed-search.js",
+        "netlify/functions/gateway-embed.js"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-embed-collections",
+      "name": "gateway-embed-collections",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-embed-collections.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-embed-search",
+      "name": "gateway-embed-search",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-embed-search.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/gateway-stream",
+      "name": "gateway-stream",
+      "status": "ok",
+      "functionFile": "netlify/functions/gateway-stream.js",
+      "callers": [
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/README.md",
+        "Platforms-Apps-Infrastructure/kAIxU-PDF-Pro/assets/kaixuGateway.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/kaixu-client.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/docs/RUNBOOK_CLIENT_APPS.md",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/examples/sse-client.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/index.html",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/netlify/functions/gateway-stream.js",
+        "Platforms-Apps-Infrastructure/kAIxUGateway13/readme.md",
+        "gateway/assets/kaixu-client.js",
+        "gateway/dashboard.html",
+        "gateway/examples/sse-client.js",
+        "netlify/functions/gateway-stream.js",
+        "netlify/functions/request-key.mjs"
+      ]
+    },
+    {
+      "endpoint": "/.netlify/functions/v1-proxy",
+      "name": "v1-proxy",
+      "status": "ok",
+      "functionFile": "netlify/functions/v1-proxy.js",
+      "callers": [
+        "Services/0megaGate/0megaGate_Branded_Runbook.html",
+        "netlify/functions/v1-proxy.js"
+      ]
+    }
+  ]
+}
