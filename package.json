@@ -16,8 +16,9 @@
     "meta:check": "node scripts/meta-templater.js --check"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "@netlify/blobs": "^7.0.0",
     "@netlify/neon": "^0.1.2",
-    "@neondatabase/serverless": "^0.10.4"
+    "pg": "^8.20.0"
   }
 }
