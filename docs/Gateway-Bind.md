@@ -342,7 +342,7 @@ Generated reports:
 Every dev (or AI coding agent) must confirm all true:
 
 - No direct provider URL call sites in app code.
-- AI calls target only `/.netlify/functions/gateway-*` lanes.
+- AI calls target only approved gateway lanes: `/.netlify/functions/gateway-chat`, `/.netlify/functions/gateway-stream`, `/.netlify/functions/gateway-embed`, `/.netlify/functions/gateway-embed-search`, `/.netlify/functions/gateway-embed-collections`.
 - Required headers are present.
 - Error mapping implemented for `401/402/403/429/500`.
 - `functions:audit` passes.

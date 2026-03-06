@@ -19,6 +19,10 @@
     "@neondatabase/serverless": "^0.10.4",
     "@netlify/blobs": "^7.0.0",
     "@netlify/neon": "^0.1.2",
-    "pg": "^8.20.0"
+    "bcryptjs": "^3.0.3",
+    "cookie": "^1.1.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.20.0",
+    "yauzl": "^3.2.0"
   }
 }
