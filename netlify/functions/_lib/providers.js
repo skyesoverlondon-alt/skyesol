@@ -8,6 +8,70 @@ function configError(message, hint) {
   return err;
 }
 
+const OPENAI_KEY_ENV_CHAIN = Object.freeze([
+  "OPENAI_API_KEY",
+  "KAIXU_BACKUP_OPENAI_API_KEY",
+  "KAIXU_BACKUP_OPENAI_API_KEY_2",
+  "KAIXU_BACKUP_OPENAI_API_KEY_3",
+  "OPENAI_API_KEY_2",
+  "OPENAI_API_KEY_3"
+]);
+
+function getOpenAIKeyChain() {
+  const seen = new Set();
+  const keys = [];
+  for (const envName of OPENAI_KEY_ENV_CHAIN) {
+    const val = String(process.env[envName] || "").trim();
+    if (!val || seen.has(val)) continue;
+    seen.add(val);
+    keys.push({ envName, value: val });
+  }
+  return keys;
+}
+
+function isRetryableOpenAIStatus(status) {
+  if (status === 401 || status === 403 || status === 429) return true;
+  return status >= 500;
+}
+
+async function fetchOpenAIResponses({ body, stream }) {
+  const keys = getOpenAIKeyChain();
+  if (!keys.length) {
+    throw configError(
+      "OPENAI key chain not configured",
+      "Set one or more of: OPENAI_API_KEY, KAIXU_BACKUP_OPENAI_API_KEY, KAIXU_BACKUP_OPENAI_API_KEY_2, KAIXU_BACKUP_OPENAI_API_KEY_3"
+    );
+  }
+
+  let lastErr = null;
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    const res = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${k.value}`,
+        "content-type": "application/json",
+        ...(stream ? { accept: "text/event-stream" } : {})
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (res.ok) return res;
+
+    const parsed = await res.clone().json().catch(() => ({}));
+    const err = upstreamError("openai", res, parsed);
+    err.openai_key_slot = i + 1;
+    err.openai_key_env = k.envName;
+    lastErr = err;
+
+    if (!isRetryableOpenAIStatus(res.status) || i === keys.length - 1) {
+      throw err;
+    }
+  }
+
+  throw lastErr || new Error("OpenAI upstream failed");
+}
+
 
 function safeJsonString(v, max = 12000) {
   try {
@@ -125,9 +189,6 @@ export function resolveUpstreamModel(provider, requestedModel) {
  * Non-stream calls
  */
 export async function callOpenAI({ model, messages, max_tokens, temperature }) {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) throw configError("OPENAI_API_KEY not configured", "Set OPENAI_API_KEY in Netlify → Site configuration → Environment variables (your OpenAI API key).");
-
   const input = Array.isArray(messages) ? messages.map(m => ({
     role: m.role,
     content: [{ type: "input_text", text: String(m.content ?? "") }]
@@ -141,14 +202,7 @@ export async function callOpenAI({ model, messages, max_tokens, temperature }) {
     store: false
   };
 
-  const res = await fetch("https://api.openai.com/v1/responses", {
-    method: "POST",
-    headers: {
-      "authorization": `Bearer ${apiKey}`,
-      "content-type": "application/json"
-    },
-    body: JSON.stringify(body)
-  });
+  const res = await fetchOpenAIResponses({ body, stream: false });
 
   const data = await res.json().catch(()=> ({}));
   if (!res.ok) throw upstreamError("openai", res, data);
@@ -299,9 +353,6 @@ export async function callGeminiEmbed({ model, input, taskType, title, outputDim
  */
 
 export async function streamOpenAI({ model, messages, max_tokens, temperature }) {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) throw configError("OPENAI_API_KEY not configured", "Set OPENAI_API_KEY in Netlify → Site configuration → Environment variables (your OpenAI API key).");
-
   const input = Array.isArray(messages) ? messages.map(m => ({
     role: m.role,
     content: [{ type: "input_text", text: String(m.content ?? "") }]
@@ -316,20 +367,7 @@ export async function streamOpenAI({ model, messages, max_tokens, temperature })
     stream: true
   };
 
-  const upstream = await fetch("https://api.openai.com/v1/responses", {
-    method: "POST",
-    headers: {
-      "authorization": `Bearer ${apiKey}`,
-      "content-type": "application/json",
-      "accept": "text/event-stream"
-    },
-    body: JSON.stringify(body)
-  });
-
-  if (!upstream.ok) {
-    const data = await upstream.json().catch(()=> ({}));
-    throw new Error(data?.error?.message || `OpenAI error ${upstream.status}`);
-  }
+  const upstream = await fetchOpenAIResponses({ body, stream: true });
 
   // Parse OpenAI SSE lines: data: {json}
   function parseSseLines(chunkText) {
