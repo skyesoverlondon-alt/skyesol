@@ -2,7 +2,7 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-06T19:34:17.276Z",
+  "generatedAt": "2026-03-06T20:00:54.705Z",
   "totalItems": 1180,
   "categories": [
     {
