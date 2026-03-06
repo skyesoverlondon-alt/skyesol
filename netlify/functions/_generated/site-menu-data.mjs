@@ -2,8 +2,8 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-06T18:25:54.283Z",
-  "totalItems": 1179,
+  "generatedAt": "2026-03-06T19:34:17.276Z",
+  "totalItems": 1180,
   "categories": [
     {
       "name": "root",
@@ -7607,7 +7607,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Services",
-      "count": 130,
+      "count": 131,
       "items": [
         {
           "urlPath": "/Services/0megaGate/0megaGate_Branded_Runbook.html",
@@ -8462,6 +8462,14 @@ export const SITE_MENU = {
           "prettyPath": "/Services/WebBuilds/",
           "file": "Services/WebBuilds/index.html",
           "title": "Web Builds Services | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/WebBuilds/Skye%20Ops%20Beacon.html",
+          "prettyPath": null,
+          "file": "Services/WebBuilds/Skye Ops Beacon.html",
+          "title": "Skye Ops Beacon — Automated Reputation + Local Ranking Engine | Skyes Over London LC",
           "ext": ".html",
           "category": "Services"
         },
