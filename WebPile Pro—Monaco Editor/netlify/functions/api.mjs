@@ -1315,7 +1315,7 @@ function parseMemberIds(val) {
 }
 
 function parseMembersValuePath(path) {
-  const m = String(path||'').match(/members\\[value\\s+eq\\s+\\"([0-9a-fA-F-]{36})\\"\\]/i);
+  const m = String(path || '').match(/members\[value\s+eq\s+"([0-9a-fA-F-]{36})"\]/i);
   return m ? m[1] : null;
 }
 
@@ -2609,9 +2609,6 @@ export async function handler(event) {
         const emailsCount = Math.min(50, Math.max(1, Number(q.emailsCount || 10)));
         const sortBy = String(q.sortBy || '').trim();
         const sortOrder = String(q.sortOrder || '').trim();
-        const orderBy = scimOrderBy('groups', sortBy, sortOrder);
-        const sortBy = String(q.sortBy || '').trim();
-        const sortOrder = String(q.sortOrder || '').trim();
         const orderBy = scimOrderBy('users', sortBy, sortOrder);
 
         let ast = null;
@@ -2857,6 +2854,9 @@ const userMatch = path.match(/^\/scim\/v2\/Users\/([0-9a-fA-F-]{36})$/);
         const q = event.queryStringParameters || {};
         const startIndex = Math.max(1, Number(q.startIndex || 1));
         const count = Math.min(200, Math.max(1, Number(q.count || 50)));
+        const sortBy = String(q.sortBy || '').trim();
+        const sortOrder = String(q.sortOrder || '').trim();
+        const orderBy = scimOrderBy('groups', sortBy, sortOrder);
 
         const g = await sql`SELECT id, updated_at FROM scim_groups WHERE org_id = ${orgId} AND id = ${groupId} LIMIT 1`;
         if (!g || g.length === 0) return json(404, { schemas:["urn:ietf:params:scim:api:messages:2.0:Error"], status:"404", detail:"Not found" }, origin, { 'x-request-id': rid });
@@ -2918,6 +2918,12 @@ const groupMatch = path.match(/^\/scim\/v2\/Groups\/([0-9a-fA-F-]{36})$/);
 
         if (method === 'PUT' || method === 'PATCH') {
           const body = parseBody(event) || {};
+          const q2 = event.queryStringParameters || {};
+          const startIndex2 = Math.max(1, Number(q2.startIndex || 1));
+          const count2 = Math.min(500, Math.max(1, Number(q2.count || 200)));
+          const sortBy2 = String(q2.sortBy || '').trim();
+          const sortOrder2 = String(q2.sortOrder || '').trim();
+          const orderBy = scimOrderBy('groups', sortBy2, sortOrder2);
 
           const g = await sql`SELECT id, updated_at FROM scim_groups WHERE org_id = ${orgId} AND id = ${groupId} LIMIT 1`;
           if (!g || g.length === 0) return json(404, { schemas:["urn:ietf:params:scim:api:messages:2.0:Error"], status:"404", detail:"Not found" }, origin, { 'x-request-id': rid });
@@ -2959,9 +2965,6 @@ const groupMatch = path.match(/^\/scim\/v2\/Groups\/([0-9a-fA-F-]{36})$/);
             // PUT-like replace
             const ids = body.members.map(x => String(x?.value || '').trim()).filter(Boolean).slice(0, 5000);
             await bulkReplaceGroupMembers(groupId, ids);
-, ${uid}, now(), now())
-                        ON CONFLICT (group_id, user_id) DO UPDATE SET updated_at = now()`;
-            }
           }
 
           if (displayName) {
@@ -3059,8 +3062,8 @@ return json(404, { schemas:["urn:ietf:params:scim:api:messages:2.0:Error"], stat
               const path = String(opx.path || '').trim();
 
               // remove: emails[value eq "x"]
-              const mVal = path.match(/emails\\[value\\s+eq\\s+\\"([^\\"]+)\\"\\]/i);
-              const mType = path.match(/emails\\[type\\s+eq\\s+\\"([^\\"]+)\\"\\]/i);
+              const mVal = path.match(/emails\[value\s+eq\s+"([^"]+)"\]/i);
+              const mType = path.match(/emails\[type\s+eq\s+"([^"]+)"\]/i);
 
               const val = opx.value;
 
