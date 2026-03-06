@@ -15,6 +15,13 @@
 - Meta template apply/check: `npm run meta:apply` and `npm run meta:check`
 - Local dev with Functions: `netlify dev`
 
+### Mandatory Netlify Function Preflight (Do Not Skip)
+- Before any commit/push that touches functions, gateway docs, or endpoint references, run: `npm run build`.
+- `npm run build` must pass with: `[functions-audit] OK` and no missing endpoints.
+- If any function imports a package (example: `bcryptjs`, `jsonwebtoken`, `cookie`, `pg`, `yauzl`), that package must exist in root `package.json` dependencies and `package-lock.json`.
+- For deploy errors from Netlify, do read-only diagnosis first, identify all blockers, then apply minimal fixes in one batch to avoid repeated failed deploys.
+- Never ship after a partial fix when there are known unresolved blockers.
+
 ## Architecture
 - Root is a multi-page static site with shared assets in `assets/` and `css/`.
 - Serverless backend lives in `netlify/functions/` with shared helpers in `netlify/functions/_lib/` and `_common.mjs`.
