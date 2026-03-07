@@ -407,9 +407,9 @@ const store = {
     if (!k) return showToast("Paste a key first.", false);
     keyInput.value = k;
     store.key = k;
+    const month = $("#monthPicker")?.value?.trim() || "";
 
     async function attemptConnect(){
-      const month = $("#monthPicker")?.value?.trim() || "";
       await loadSummary(month);
       try {
         await loadLogs(month);
