@@ -385,9 +385,12 @@ function mountPricedModelPicker(textareaSel, providersInputSel) {
     const loginView = $("#loginView");
     const appView = $("#appView");
     const logoutBtn = $("#logoutBtn");
+    const gatewayBaseBtn = $("#gatewayBaseBtn");
     if (loginView) loginView.style.display = isAuthed ? "none" : "block";
     if (appView) appView.style.display = isAuthed ? "block" : "none";
     if (logoutBtn) logoutBtn.style.display = isAuthed ? "inline-flex" : "none";
+    if (gatewayBaseBtn) gatewayBaseBtn.style.display = isAuthed ? "inline-flex" : "none";
+    if (!isAuthed) closeBaseModal();
   }
 
   function clearAuth() {
