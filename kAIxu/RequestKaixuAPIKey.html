@@ -222,6 +222,24 @@
       margin-top: 28px; padding-top: 24px;
       border-top: 1px solid var(--stroke2);
     }
+
+    .post-actions {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,.09);
+      color: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    }
     .usage h3 {
       font-family: var(--display); font-size: 1.15rem; margin-bottom: 14px;
       color: var(--mist);
@@ -256,6 +274,7 @@
       .wrap { padding: 40px 16px 60px; }
       .card { padding: 22px 18px; }
       .limits-grid { grid-template-columns: 1fr; }
+      .post-actions { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -295,6 +314,11 @@
           If you lose it, request a new one (the old key will be revoked).
         </div>
 
+        <div class="post-actions">
+          <button class="btn" id="openUserDashboardBtn" type="button">Open User Dashboard</button>
+          <button class="btn secondary" id="requestAnotherBtn" type="button">Request Another Key</button>
+        </div>
+
         <div class="limits-grid" id="limitsGrid"></div>
 
         <div class="usage">
@@ -319,6 +343,8 @@
     const errorMsg = document.getElementById('errorMsg');
     const result = document.getElementById('result');
     const keyDisplay = document.getElementById('keyDisplay');
+    const openUserDashboardBtn = document.getElementById('openUserDashboardBtn');
+    const requestAnotherBtn = document.getElementById('requestAnotherBtn');
     const limitsGrid = document.getElementById('limitsGrid');
     const codeSnippet = document.getElementById('codeSnippet');
 
@@ -418,6 +444,23 @@ console.log(data.output_text);`;
         }, 2000);
       });
     }
+
+    openUserDashboardBtn.addEventListener('click', () => {
+      if (!generatedKey) return;
+      localStorage.setItem('KAIXU_VIRTUAL_KEY', generatedKey);
+      // Ensure user dashboard calls this site by default.
+      localStorage.removeItem('KAIXU_API_BASE');
+      window.location.href = '/gateway/dashboard.html';
+    });
+
+    requestAnotherBtn.addEventListener('click', () => {
+      generatedKey = '';
+      keyDisplay.textContent = '';
+      result.classList.remove('show');
+      form.style.display = '';
+      errorMsg.classList.remove('show');
+      emailInput.focus();
+    });
   </script>
 <div id="siteHeaderMount"></div>
 <script src="/js/partials.js"></script>

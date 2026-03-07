@@ -356,7 +356,7 @@ const store = {
     keyInput.value = k;
     store.key = k;
 
-    try {
+    async function attemptConnect(){
       const month = $("#monthPicker")?.value?.trim() || "";
       await loadSummary(month);
       try {
@@ -364,6 +364,10 @@ const store = {
       } catch (logsErr) {
         showToast(logsErr.message || "Connected, but logs failed to load.", false);
       }
+    }
+
+    try {
+      await attemptConnect();
 
       setConnected(true);
       showToast("Connected.", true);
@@ -375,6 +379,21 @@ const store = {
       if (exp && !exp.value) exp.value = $("#monthPicker")?.value?.trim() || monthKeyUTC();
 
     } catch (e) {
+      const shouldFallbackBase = !!baseStore.apiBase && (e?.status === 404 || /failed to fetch|networkerror|load failed/i.test(String(e?.message || "")));
+      if (shouldFallbackBase) {
+        try {
+          baseStore.apiBase = "";
+          await attemptConnect();
+          setConnected(true);
+          showToast("Connected. Switched dashboard back to this site gateway.", true);
+          switchTab("overview");
+          startLivePolling();
+          return;
+        } catch {
+          // fall through to standard error handling
+        }
+      }
+
       store.key = "";
       setConnected(false);
       const msg = e?.detail?.error || e.message || "Unable to connect";
