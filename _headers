@@ -5,6 +5,15 @@
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Content-Security-Policy: default-src 'self' https: data: blob:; script-src 'self' https://cdnjs.cloudflare.com https://identity.netlify.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https:; frame-ancestors 'none';
 
+# Allow same-origin iframe embeds for SkyeBookx Pro Suite workspace previews
+/platforms-apps-infrastructure/2026/foundertechpro%20/skyebookx:pro-suite/
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: default-src 'self' https: data: blob:; script-src 'self' https://cdnjs.cloudflare.com https://identity.netlify.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https:; frame-ancestors 'self';
+
+/platforms-apps-infrastructure/2026/foundertechpro%20/skyebookx:pro-suite/*
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: default-src 'self' https: data: blob:; script-src 'self' https://cdnjs.cloudflare.com https://identity.netlify.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https:; frame-ancestors 'self';
+
 # Allow PDFs to be embedded in iframes served from the same origin
 /*.pdf
   X-Frame-Options: SAMEORIGIN
