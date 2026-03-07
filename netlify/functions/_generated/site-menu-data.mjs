@@ -2,8 +2,8 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-07T05:44:38.637Z",
-  "totalItems": 1189,
+  "generatedAt": "2026-03-07T05:51:33.569Z",
+  "totalItems": 1193,
   "categories": [
     {
       "name": "root",
@@ -3665,7 +3665,7 @@ export const SITE_MENU = {
     },
     {
       "name": "gateway",
-      "count": 14,
+      "count": 18,
       "items": [
         {
           "urlPath": "/gateway/dashboard.html",
@@ -3696,6 +3696,38 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "gateway/skyedocx-pro-suite.html",
           "title": "SkyeDocx Pro Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/skyedrive-suite.html",
+          "prettyPath": null,
+          "file": "gateway/skyedrive-suite.html",
+          "title": "SkyeDrive Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/skyeledger-suite.html",
+          "prettyPath": null,
+          "file": "gateway/skyeledger-suite.html",
+          "title": "SkyeLedger Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/skyesheets-suite.html",
+          "prettyPath": null,
+          "file": "gateway/skyesheets-suite.html",
+          "title": "SkyeSheets Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/skyeslides-suite.html",
+          "prettyPath": null,
+          "file": "gateway/skyeslides-suite.html",
+          "title": "SkyeSlides Suite | Gateway",
           "ext": ".html",
           "category": "gateway"
         },

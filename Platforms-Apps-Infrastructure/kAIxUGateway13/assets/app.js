@@ -1311,11 +1311,16 @@ async function generatePushInvoice() {
     if (health) health.href = (normalizeBase(saved) || "") + "/.netlify/functions/health";
 
     modal.style.display = "flex";
+    modal.setAttribute("aria-hidden", "false");
+    input?.focus();
   }
 
   function closeBaseModal() {
     const modal = $("#baseModal");
-    if (modal) modal.style.display = "none";
+    if (modal) {
+      modal.style.display = "none";
+      modal.setAttribute("aria-hidden", "true");
+    }
   }
 
   function saveBaseModal() {
@@ -1336,11 +1341,16 @@ async function generatePushInvoice() {
   // Wiring
   // ------------------------------
   $("#gatewayBaseBtn")?.addEventListener("click", openBaseModal);
-  $("#apiBaseClose")?.addEventListener("click", closeBaseModal);
-  $("#apiBaseSave")?.addEventListener("click", saveBaseModal);
-  $("#apiBaseUseThisSite")?.addEventListener("click", useThisSite);
+  $("#apiBaseClose")?.addEventListener("click", (e) => { e.preventDefault(); closeBaseModal(); });
+  $("#apiBaseSave")?.addEventListener("click", (e) => { e.preventDefault(); saveBaseModal(); });
+  $("#apiBaseUseThisSite")?.addEventListener("click", (e) => { e.preventDefault(); useThisSite(); });
   $("#baseModal")?.addEventListener("click", (e) => {
     if (e.target && e.target.id === "baseModal") closeBaseModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    const modal = $("#baseModal");
+    if (modal && modal.style.display !== "none") closeBaseModal();
   });
 
   $("#monCloseBtn")?.addEventListener("click", closeMonitorDetail);
