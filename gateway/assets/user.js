@@ -36,6 +36,13 @@ const store = {
     set key(v){ localStorage.setItem("KAIXU_VIRTUAL_KEY", v || ""); }
   };
 
+  function normalizeKeyInput(raw){
+    return String(raw || "")
+      .replace(/["'`]/g, "")
+      .replace(/\s+/g, "")
+      .trim();
+  }
+
   const toast = $("#toast");
   function showToast(msg, ok=true){
     toast.textContent = msg;
@@ -336,17 +343,28 @@ const store = {
   async function refreshAll(){
     const month = $("#monthPicker").value.trim();
     const m = month || "";
-    try { await loadSummary(m); } catch(e) { showToast(e.message || "Failed to load summary", false); }
-    try { await loadLogs(m);    } catch(e) { showToast(e.message || "Failed to load logs", false); }
+    let firstErr = null;
+    try { await loadSummary(m); } catch(e) { firstErr = firstErr || e; showToast(e.message || "Failed to load summary", false); }
+    try { await loadLogs(m);    } catch(e) { firstErr = firstErr || e; showToast(e.message || "Failed to load logs", false); }
+    if (firstErr) throw firstErr;
   }
 
   async function connect(){
-    const k = keyInput.value.trim();
+    const raw = keyInput.value;
+    const k = normalizeKeyInput(raw);
     if (!k) return showToast("Paste a key first.", false);
+    keyInput.value = k;
     store.key = k;
 
     try {
-      await refreshAll();
+      const month = $("#monthPicker")?.value?.trim() || "";
+      await loadSummary(month);
+      try {
+        await loadLogs(month);
+      } catch (logsErr) {
+        showToast(logsErr.message || "Connected, but logs failed to load.", false);
+      }
+
       setConnected(true);
       showToast("Connected.", true);
       switchTab("overview");
@@ -357,8 +375,11 @@ const store = {
       if (exp && !exp.value) exp.value = $("#monthPicker")?.value?.trim() || monthKeyUTC();
 
     } catch (e) {
+      store.key = "";
       setConnected(false);
-      showToast(e.message || "Unable to connect", false);
+      const msg = e?.detail?.error || e.message || "Unable to connect";
+      const hint = baseStore.apiBase ? ` Check Gateway Base: ${normalizeBase(baseStore.apiBase)}` : "";
+      showToast(msg + hint, false);
     }
   }
 

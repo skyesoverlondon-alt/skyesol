@@ -162,7 +162,7 @@
       cursor: pointer;
       list-style: none;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr auto auto;
       align-items: center;
       gap: 10px;
       padding: 14px 16px;
@@ -191,6 +191,18 @@
       border: 1px solid rgba(255, 255, 255, 0.17);
       border-radius: 999px;
       padding: 4px 10px;
+    }
+
+    .folder-chevron {
+      font-size: 16px;
+      color: var(--ec-accent-alt);
+      transform: rotate(0deg);
+      transition: transform 0.2s ease;
+      line-height: 1;
+    }
+
+    .folder-section[open] .folder-chevron {
+      transform: rotate(90deg);
     }
 
     .folder-links {
@@ -417,13 +429,14 @@
           const details = document.createElement('details');
           details.className = 'folder-section';
           details.id = 'folder-' + group.slug;
-          details.open = idx < 6;
+          details.open = false;
 
           const summary = document.createElement('summary');
           summary.className = 'folder-summary';
           summary.innerHTML =
             '<span class="folder-title">' + escapeHtml(group.name) + '</span>' +
-            '<span class="folder-count">' + group.items.length + ' pages</span>';
+            '<span class="folder-count">' + group.items.length + ' pages</span>' +
+            '<span class="folder-chevron" aria-hidden="true">▸</span>';
 
           const links = document.createElement('div');
           links.className = 'folder-links';
@@ -532,6 +545,28 @@
 
       searchEl.addEventListener('input', applyFilters);
       folderFilterEl.addEventListener('change', applyFilters);
+
+      // Keep this as an accordion: one open folder at a time.
+      sectionsEl.addEventListener('toggle', function (event) {
+        const target = event.target;
+        if (!target || !target.classList || !target.classList.contains('folder-section')) return;
+        if (!target.open) return;
+        Array.from(sectionsEl.querySelectorAll('details.folder-section[open]')).forEach(node => {
+          if (node !== target) node.open = false;
+        });
+      }, true);
+
+      // Pill jump should also open that folder section.
+      folderPillsEl.addEventListener('click', function (event) {
+        const link = event.target.closest('a.folder-pill');
+        if (!link) return;
+        const hash = link.getAttribute('href') || '';
+        if (!hash.startsWith('#folder-')) return;
+        const details = document.querySelector(hash);
+        if (!details) return;
+        details.open = true;
+      });
+
       loadSitemap();
     })();
   </script>

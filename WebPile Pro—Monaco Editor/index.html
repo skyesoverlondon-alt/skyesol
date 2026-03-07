@@ -140,6 +140,15 @@
       overflow:hidden;
       flex: 0 0 auto;
     }
+    .sigil img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:inherit;
+      position:relative;
+      z-index:1;
+      display:block;
+    }
     .sigil:after{
       content:"";
       position:absolute; inset:-60%;
@@ -758,7 +767,7 @@
   <div class="app" id="app">
     <div class="topbar">
       <div class="brand">
-        <div class="sigil" aria-hidden="true"></div>
+        <div class="sigil" aria-hidden="true"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt=""></div>
         <div>
           <h1>
             WebPile Pro Enterprise

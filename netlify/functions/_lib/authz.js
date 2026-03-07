@@ -84,10 +84,9 @@ export async function resolveAuth(token) {
     return row;
   }
 
-  // Reject tokens that are clearly not kAIxu keys.
-  // Prevents provider API keys (OpenAI sk-*, Gemini AI…, Anthropic sk-ant-*) from
-  // being hashed and looked up needlessly.
-  if (!token.startsWith("kx_live_")) return null;
+  // Resolve all non-JWT bearer strings against stored key hashes so future key
+  // formats still authenticate without requiring a frontend redeploy.
+  if (token.length < 12) return null;
 
   return await lookupKey(token);
 }
