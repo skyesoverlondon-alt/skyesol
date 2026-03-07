@@ -2,8 +2,8 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-07T05:21:31.921Z",
-  "totalItems": 1182,
+  "generatedAt": "2026-03-07T05:38:39.786Z",
+  "totalItems": 1189,
   "categories": [
     {
       "name": "root",
@@ -3665,7 +3665,7 @@ export const SITE_MENU = {
     },
     {
       "name": "gateway",
-      "count": 12,
+      "count": 14,
       "items": [
         {
           "urlPath": "/gateway/dashboard.html",
@@ -3688,6 +3688,22 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "gateway/netlify-push.html",
           "title": "Kaixu Netlify Push",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/skyedocx-pro-suite.html",
+          "prettyPath": null,
+          "file": "gateway/skyedocx-pro-suite.html",
+          "title": "SkyeDocx Pro Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/sovereign-variables-suite.html",
+          "prettyPath": null,
+          "file": "gateway/sovereign-variables-suite.html",
+          "title": "Sovereign Variables Suite | Gateway",
           "ext": ".html",
           "category": "gateway"
         },
@@ -9026,6 +9042,52 @@ export const SITE_MENU = {
           "title": "kAIxU Gateway Delta — Security & Data Handling (Gateway13 + Delta)",
           "ext": ".html",
           "category": "SolenteAI"
+        }
+      ]
+    },
+    {
+      "name": "SovereignVariables",
+      "count": 5,
+      "items": [
+        {
+          "urlPath": "/SovereignVariables/index.html",
+          "prettyPath": "/SovereignVariables/",
+          "file": "SovereignVariables/index.html",
+          "title": "Config Packager — Sovereign",
+          "ext": ".html",
+          "category": "SovereignVariables"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SovereignVariables/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "SovereignVariables"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SovereignVariables/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "SovereignVariables"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SovereignVariables/SKYESOVERLONDONDIETYLOGO.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SovereignVariables"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SovereignVariables/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SovereignVariables"
         }
       ]
     },

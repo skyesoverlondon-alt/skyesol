@@ -61,6 +61,14 @@ const store = {
     return new Date().toISOString().slice(0,7);
   }
 
+  function bytesHuman(n){
+    const b = Number(n || 0);
+    if (b < 1024) return `${b} B`;
+    if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`;
+    if (b < 1024 * 1024 * 1024) return `${(b / (1024 * 1024)).toFixed(2)} MB`;
+    return `${(b / (1024 * 1024 * 1024)).toFixed(3)} GB`;
+  }
+
   function escapeHtml(str){
     return String(str || "").replace(/[&<>'"]/g, (c)=> ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c]));
   }
@@ -133,6 +141,7 @@ const store = {
     if (name === "exports") loadInvoicePreview().catch(e=> showToast(e.message || "Failed to load invoice", false));
     if (name === "netlifypush") loadNetlifyPush().catch(e=> showToast(e.message || "Failed to load Netlify Push", false));
     if (name === "ghpush") loadGitHubPush().catch(e=> showToast(e.message || "Failed to load GitHub Push", false));
+    if (name === "appsuite") loadPushCharges().catch(()=>{});
     if (name === "voice") loadVoice().catch(e=> showToast(e.message || "Failed to load Voice", false));
     if (name === "monitor") refreshMonitorTab().catch(() => {});
   }
@@ -140,7 +149,7 @@ const store = {
   $$(".tab").forEach(btn=> btn.addEventListener("click", ()=> switchTab(btn.dataset.tab)));
 
   function requestedTabFromUrl(){
-    const allowed = new Set(["overview", "logs", "devices", "exports", "netlifypush", "ghpush", "monitor", "integrate"]);
+    const allowed = new Set(["overview", "logs", "devices", "exports", "netlifypush", "ghpush", "appsuite", "monitor", "integrate"]);
     const u = new URL(window.location.href);
     const byQuery = (u.searchParams.get("tab") || "").toLowerCase().trim();
     const byHash = (u.hash || "").replace(/^#/, "").toLowerCase().trim();
@@ -227,6 +236,34 @@ const store = {
     return data;
   }
 
+  async function loadPushCharges(month){
+    const m = (month || $("#monthPicker")?.value?.trim() || "").trim();
+    const qs = new URLSearchParams();
+    if (m) qs.set("month", m);
+    const data = await apiJson("/.netlify/functions/user-push-charges" + (qs.toString() ? `?${qs.toString()}` : ""));
+
+    if ($("#pushChargeTransparency") && data?.transparency) {
+      $("#pushChargeTransparency").textContent = data.transparency;
+    }
+
+    if ($("#pcNetlifyTotal")) $("#pcNetlifyTotal").textContent = money(data?.netlify?.total_cents || 0);
+    if ($("#pcGithubTotal")) $("#pcGithubTotal").textContent = money(data?.github?.total_cents || 0);
+    if ($("#pcTotal")) $("#pcTotal").textContent = money(data?.total_push_cents || 0);
+
+    if ($("#pcNetlifyMeta")) {
+      const d = Number(data?.netlify?.deploys_ready || 0).toLocaleString();
+      const b = bytesHuman(data?.netlify?.bytes_uploaded || 0);
+      $("#pcNetlifyMeta").textContent = `${d} deploys • ${b}`;
+    }
+    if ($("#pcGithubMeta")) {
+      const d = Number(data?.github?.pushes_done || 0).toLocaleString();
+      const b = bytesHuman(data?.github?.bytes_uploaded || 0);
+      $("#pcGithubMeta").textContent = `${d} pushes • ${b}`;
+    }
+
+    return data;
+  }
+
   async function loadLogs(month){
     const qs = new URLSearchParams();
     if (month) qs.set("month", month);
@@ -287,6 +324,7 @@ const store = {
       const m = $("#monthPicker")?.value?.trim() || "";
       try { await loadSummary(m); } catch {}
       try { await loadLogs(m);    } catch {}
+      try { await loadPushCharges(m); } catch {}
     }, 30_000);
   }
 
@@ -359,6 +397,7 @@ const store = {
     let firstErr = null;
     try { await loadSummary(m); } catch(e) { firstErr = firstErr || e; showToast(e.message || "Failed to load summary", false); }
     try { await loadLogs(m);    } catch(e) { firstErr = firstErr || e; showToast(e.message || "Failed to load logs", false); }
+    try { await loadPushCharges(m); } catch(e) { showToast(e.message || "Failed to load push charges", false); }
     if (firstErr) throw firstErr;
   }
 
@@ -381,6 +420,7 @@ const store = {
 
     try {
       await attemptConnect();
+      await loadPushCharges(month);
 
       setConnected(true);
       showToast("Connected.", true);

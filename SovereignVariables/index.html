@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Config Packager — Sovereign</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-space: #050508;
+            --electric-violet: #8b5cf6;
+            --mint-aura: #38d39f;
+            --text-silver: #e2e8f0;
+            --glass-bg: rgba(11, 10, 18, 0.9);
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--deep-space);
+            color: var(--text-silver);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        canvas { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            z-index: -1; 
+            pointer-events: none; 
+        }
+        
+        .glass { 
+            background: var(--glass-bg); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+        }
+
+        /* View State Management */
+        #landing-view, #app-view {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            width: 100%;
+        }
+
+        .view-hidden {
+            display: none !important;
+        }
+
+        /* App View Layout - Ensuring no cut-off */
+        #app-view {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 1.5rem;
+            flex: 1;
+            min-height: 0; /* Critical for internal scrolling */
+        }
+
+        /* Responsive grid for smaller screens */
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                overflow-y: auto;
+            }
+            #app-view { height: auto; min-height: 100vh; }
+        }
+
+        /* Scrollable Panels */
+        .scroll-panel {
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--electric-violet) transparent;
+            padding-bottom: 2rem; /* Buffer to prevent bottom cut-off */
+        }
+
+        .scroll-panel::-webkit-scrollbar { width: 4px; }
+        .scroll-panel::-webkit-scrollbar-thumb { background: var(--electric-violet); border-radius: 10px; }
+
+        /* Variable Row Styling */
+        .var-row {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 40px;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* UI elements */
+        .tab-active {
+            border-bottom: 2px solid var(--electric-violet);
+            color: var(--electric-violet);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .btn-primary {
+            background: var(--electric-violet);
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+    </style>
+
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#8b5cf6">
+    <link rel="apple-touch-icon" href="./icon-192.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <!-- LANDING VIEW -->
+    <section id="landing-view" class="relative z-10 flex flex-col items-center pt-32 pb-32 px-6">
+        <div class="max-w-4xl text-center">
+            <h4 class="text-violet-400 uppercase tracking-[0.6em] text-[10px] font-bold mb-8">Secure Configuration</h4>
+            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-tight">
+                Sovereign <br><span class="italic text-violet-500">Variables</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 mb-14 max-w-2xl mx-auto font-light leading-relaxed">
+                A high-fidelity environment manager. Offline, encrypted, and designed for professional workflows.
+            </p>
+            <button onclick="enterApp()" class="px-12 py-5 btn-primary rounded-full font-bold text-sm uppercase tracking-widest">
+                Start Packaging
+            </button>
+        </div>
+    </section>
+
+    <!-- APP VIEW -->
+    <section id="app-view" class="view-hidden">
+        <!-- Header -->
+        <header class="glass rounded-2xl p-4 mb-6 flex justify-between items-center shrink-0">
+            <div class="flex items-center space-x-6">
+                <button onclick="exitApp()" class="text-slate-500 hover:text-white transition text-[10px] mono">← EXIT</button>
+                <div class="h-6 w-px bg-white/10"></div>
+                <div>
+                    <h2 class="mono font-bold text-sm tracking-tighter">CONFIG_PACKAGER_V1</h2>
+                    <p class="text-[9px] text-emerald-400 uppercase tracking-widest">System Operational</p>
+                </div>
+            </div>
+            <div class="flex space-x-3">
+                <button onclick="addVariable()" class="px-5 py-2 btn-primary rounded-xl text-[10px] font-bold uppercase tracking-widest">+ Var</button>
+                <button onclick="exportData()" class="px-5 py-2 glass rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-white/5">Export</button>
+            </div>
+        </header>
+
+        <!-- Layout Grid -->
+        <div class="dashboard-grid">
+            <!-- Project Sidebar -->
+            <aside class="glass rounded-3xl p-6 flex flex-col min-h-0">
+                <h3 class="mono text-[10px] uppercase tracking-widest text-slate-500 mb-6">Vessels</h3>
+                <div id="project-list" class="flex-1 scroll-panel space-y-2">
+                    <!-- Projects -->
+                </div>
+                <button onclick="createNewProject()" class="mt-4 w-full py-4 rounded-xl border border-dashed border-white/10 text-[10px] uppercase font-bold tracking-widest hover:bg-white/5 transition">New Project</button>
+            </aside>
+
+            <!-- Main Panel -->
+            <main class="flex flex-col min-h-0">
+                <!-- Env Tabs -->
+                <div class="glass h-14 rounded-2xl flex items-center px-2 space-x-1 mb-6 shrink-0 overflow-x-auto">
+                    <div id="env-tabs" class="flex h-full">
+                        <!-- Tabs -->
+                    </div>
+                    <button onclick="createNewEnv()" class="px-4 text-slate-500 hover:text-white text-xl">+</button>
+                </div>
+
+                <!-- Editor Workspace -->
+                <div class="grid grid-cols-12 gap-6 flex-1 min-h-0">
+                    <!-- Variable List -->
+                    <div class="col-span-12 lg:col-span-8 glass rounded-3xl p-8 flex flex-col min-h-0">
+                        <div class="flex justify-between items-center mb-6 shrink-0">
+                            <h3 id="env-title" class="text-2xl font-bold italic">Environment</h3>
+                            <div class="flex space-x-4 text-slate-500">
+                                <span class="text-[10px] mono">AUTOSAVED</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col flex-1 min-h-0">
+                            <!-- Headers -->
+                            <div class="grid grid-cols-[1fr_1.5fr_40px] gap-3 px-1 mb-2 text-[10px] mono uppercase tracking-widest text-slate-500">
+                                <div>Key</div>
+                                <div>Value</div>
+                                <div></div>
+                            </div>
+                            <!-- Scrollable Area -->
+                            <div id="variable-list" class="flex-1 scroll-panel pr-2">
+                                <!-- Vars -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side Controls -->
+                    <div class="col-span-12 lg:col-span-4 flex flex-col gap-6 min-h-0">
+                        <!-- Notes -->
+                        <div class="glass flex-1 rounded-3xl p-6 flex flex-col min-h-0">
+                            <h4 class="mono text-[10px] uppercase tracking-widest text-slate-500 mb-4">Meta Notes</h4>
+                            <textarea id="env-notes" class="flex-1 w-full bg-transparent border-none resize-none mono text-xs leading-relaxed focus:outline-none opacity-60 hover:opacity-100 transition" placeholder="Environment descriptions, service links..."></textarea>
+                        </div>
+                        <!-- Output Preview -->
+                        <div class="glass h-56 rounded-3xl p-6 flex flex-col shrink-0">
+                            <h4 class="mono text-[10px] uppercase tracking-widest text-slate-500 mb-4">Quick Copy (.env)</h4>
+                            <div id="raw-output" class="flex-1 bg-black/40 rounded-xl p-4 mono text-[10px] overflow-y-auto text-emerald-400/70 cursor-pointer hover:text-emerald-400 transition">
+                                # No variables defined
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <script>
+        const STORAGE_KEY = 'sovereign-variables-state-v1';
+
+        // State Management
+        let appState = {
+            projects: [
+                {
+                    id: 'p1',
+                    name: 'Project Alpha',
+                    environments: [
+                        { id: 'e1', name: 'Staging', notes: '', variables: [{k: 'DATABASE_URL', v: 'localhost:5432'}] },
+                        { id: 'e2', name: 'Production', notes: '', variables: [{k: 'DATABASE_URL', v: 'db.sovereign.io'}] }
+                    ]
+                }
+            ],
+            activeProjectId: 'p1',
+            activeEnvId: 'e1'
+        };
+
+        function uid(prefix) {
+            return `${prefix}_${Math.random().toString(36).slice(2, 10)}_${Date.now().toString(36)}`;
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return;
+                const parsed = JSON.parse(raw);
+                if (!parsed || !Array.isArray(parsed.projects) || !parsed.projects.length) return;
+                appState = parsed;
+                if (!appState.activeProjectId) appState.activeProjectId = appState.projects[0].id;
+                const ap = appState.projects.find(p => p.id === appState.activeProjectId) || appState.projects[0];
+                if (!appState.activeEnvId || !ap.environments.find(e => e.id === appState.activeEnvId)) {
+                    appState.activeEnvId = ap.environments[0]?.id || null;
+                }
+            } catch (e) {
+                console.warn('Failed to load SovereignVariables state', e);
+            }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            } catch (e) {
+                console.warn('Failed to save SovereignVariables state', e);
+            }
+        }
+
+        // Navigation
+        function enterApp() {
+            loadState();
+            document.getElementById('landing-view').classList.add('view-hidden');
+            document.getElementById('app-view').classList.remove('view-hidden');
+            renderAll();
+        }
+
+        function exitApp() {
+            document.getElementById('app-view').classList.add('view-hidden');
+            document.getElementById('landing-view').classList.remove('view-hidden');
+        }
+
+        // Renderers
+        function renderAll() {
+            renderProjects();
+            renderTabs();
+            renderVariables();
+        }
+
+        function renderProjects() {
+            const list = document.getElementById('project-list');
+            list.innerHTML = appState.projects.map(p => `
+                <div onclick="selectProject('${p.id}')" class="p-4 rounded-xl cursor-pointer transition-all ${appState.activeProjectId === p.id ? 'bg-violet-600/20 border border-violet-500/30' : 'hover:bg-white/5 opacity-50'}">
+                    <span class="mono text-xs font-bold">${p.name}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderTabs() {
+            const container = document.getElementById('env-tabs');
+            const project = appState.projects.find(p => p.id === appState.activeProjectId);
+            if (!project) return;
+
+            container.innerHTML = project.environments.map(e => `
+                <div onclick="selectEnv('${e.id}')" class="h-full flex items-center px-6 text-[10px] font-bold uppercase tracking-widest cursor-pointer transition-all ${appState.activeEnvId === e.id ? 'tab-active' : 'opacity-40 hover:opacity-100'}">
+                    ${e.name}
+                </div>
+            `).join('');
+        }
+
+        function renderVariables() {
+            const list = document.getElementById('variable-list');
+            const project = appState.projects.find(p => p.id === appState.activeProjectId);
+            const env = project?.environments.find(e => e.id === appState.activeEnvId);
+            
+            if (!env) return;
+            document.getElementById('env-title').innerText = env.name;
+            document.getElementById('env-notes').value = env.notes || "";
+
+            list.innerHTML = env.variables.map((v, i) => `
+                <div class="var-row">
+                    <input type="text" value="${v.k}" oninput="updateVar(${i}, 'k', this.value)" placeholder="KEY" class="bg-transparent outline-none mono text-xs text-violet-300">
+                    <input type="text" value="${v.v}" oninput="updateVar(${i}, 'v', this.value)" placeholder="VALUE" class="bg-transparent outline-none mono text-xs opacity-60 focus:opacity-100">
+                    <button onclick="removeVar(${i})" class="text-slate-600 hover:text-red-400 text-lg">×</button>
+                </div>
+            `).join('');
+            
+            updateOutput(env);
+        }
+
+        function updateOutput(env) {
+            const out = env.variables.map(v => `${v.k}=${v.v}`).join('\n');
+            document.getElementById('raw-output').innerText = out || '# No variables defined';
+        }
+
+        // State Actions
+        function selectProject(id) {
+            appState.activeProjectId = id;
+            appState.activeEnvId = appState.projects.find(p => p.id === id).environments[0]?.id;
+            saveState();
+            renderAll();
+        }
+
+        function selectEnv(id) {
+            appState.activeEnvId = id;
+            saveState();
+            renderAll();
+        }
+
+        function addVariable() {
+            const project = appState.projects.find(p => p.id === appState.activeProjectId);
+            const env = project?.environments.find(e => e.id === appState.activeEnvId);
+            if (env) {
+                env.variables.push({k: '', v: ''});
+                saveState();
+                renderVariables();
+            }
+        }
+
+        function updateVar(index, field, value) {
+            const project = appState.projects.find(p => p.id === appState.activeProjectId);
+            const env = project?.environments.find(e => e.id === appState.activeEnvId);
+            env.variables[index][field] = value;
+            saveState();
+            updateOutput(env);
+        }
+
+        function removeVar(index) {
+            const project = appState.projects.find(p => p.id === appState.activeProjectId);
+            const env = project?.environments.find(e => e.id === appState.activeEnvId);
+            env.variables.splice(index, 1);
+            saveState();
+            renderVariables();
+        }
+
+        function createNewProject() {
+            const name = prompt('Project name:', 'New Project');
+            if (!name) return;
+
+            const projectId = uid('p');
+            const envId = uid('e');
+
+            appState.projects.unshift({
+                id: projectId,
+                name: name.trim() || 'New Project',
+                environments: [
+                    { id: envId, name: 'Development', notes: '', variables: [] }
+                ]
+            });
+
+            appState.activeProjectId = projectId;
+            appState.activeEnvId = envId;
+            saveState();
+            renderAll();
+        }
+
+        function createNewEnv() {
+            const project = appState.projects.find(p => p.id === appState.activeProjectId);
+            if (!project) return;
+
+            const name = prompt('Environment name:', 'New Environment');
+            if (!name) return;
+
+            const envId = uid('e');
+            project.environments.push({ id: envId, name: name.trim() || 'New Environment', notes: '', variables: [] });
+            appState.activeEnvId = envId;
+            saveState();
+            renderAll();
+        }
+
+        function exportData() {
+            const blob = new Blob([JSON.stringify(appState, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `sovereign-variables-${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        // BG Animation
+        function initBackground() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+            for (let i = 0; i < 1500; i++) {
+                vertices.push(THREE.MathUtils.randFloatSpread(100), THREE.MathUtils.randFloatSpread(100), THREE.MathUtils.randFloatSpread(100));
+            }
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0x8b5cf6, size: 0.15, transparent: true, opacity: 0.3 }));
+            scene.add(particles);
+
+            camera.position.z = 40;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.y += 0.0005;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        window.onload = () => {
+            initBackground();
+            const notes = document.getElementById('env-notes');
+            if (notes) {
+                notes.addEventListener('input', (e) => {
+                    const project = appState.projects.find(p => p.id === appState.activeProjectId);
+                    const env = project?.environments.find(v => v.id === appState.activeEnvId);
+                    if (!env) return;
+                    env.notes = e.target.value;
+                    saveState();
+                });
+            }
+
+            const output = document.getElementById('raw-output');
+            if (output) {
+                output.addEventListener('click', async () => {
+                    try {
+                        await navigator.clipboard.writeText(output.innerText || '');
+                    } catch (err) {
+                        console.warn('Clipboard copy failed', err);
+                    }
+                });
+            }
+        };
+    </script>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('SW registered'))
+            .catch(err => console.log('SW failure', err));
+        });
+      }
+    </script>
+</body>
+</html>

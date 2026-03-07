@@ -203,6 +203,7 @@
         <button class="tab" data-tab="exports">Exports &amp; Invoices</button>
         <button class="tab" data-tab="netlifypush">Netlify Push</button>
         <button class="tab" data-tab="ghpush">GitHub Push</button>
+        <button class="tab" data-tab="appsuite">App Suites</button>
         <button class="tab" data-tab="monitor">Live Monitor</button>
         <button class="tab" data-tab="integrate">Integration</button>
       </nav>
@@ -263,6 +264,30 @@
                 <thead><tr><th>Provider</th><th>Calls</th><th>Cost</th><th>Input tokens</th><th>Output tokens</th></tr></thead>
                 <tbody id="providerTableBody"></tbody>
               </table>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px;">
+            <div class="cardhead" style="margin-bottom:8px;">
+              <h2>Push Charges This Month</h2>
+            </div>
+            <p class="muted small" id="pushChargeTransparency">Push charges are tracked separately from AI usage and shown below in one glance.</p>
+            <div class="summary" style="display:grid; margin-top:8px;">
+              <div class="stat">
+                <div class="label">Netlify Push Spend</div>
+                <div class="value" id="pcNetlifyTotal">$0.00</div>
+                <div class="muted small" id="pcNetlifyMeta">0 deploys • 0 bytes</div>
+              </div>
+              <div class="stat">
+                <div class="label">GitHub Push Spend</div>
+                <div class="value" id="pcGithubTotal">$0.00</div>
+                <div class="muted small" id="pcGithubMeta">0 pushes • 0 bytes</div>
+              </div>
+              <div class="stat">
+                <div class="label">Total Push Spend</div>
+                <div class="value" id="pcTotal">$0.00</div>
+                <div class="muted small">Non-AI push charges (same key/customer balance by default)</div>
+              </div>
             </div>
           </div>
 
@@ -557,6 +582,39 @@
                 <tr><td colspan="7" class="muted">Loading…</td></tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <div class="card tabpanel" id="tab-appsuite" style="display:none;">
+          <h2>App Suites Behind Gateway</h2>
+          <p class="muted">These are premium-feeling gateway access surfaces. Apps remain directly available on the site too, but users can run them from behind this dashboard wall.</p>
+
+          <div class="cols">
+            <div class="card" style="margin-top:0;">
+              <h3 style="margin-top:0;">Sovereign Variables</h3>
+              <p class="muted small">Secure env var manager for project-level variable packs and exports.</p>
+              <div class="row" style="flex-wrap:wrap;">
+                <a class="btn primary" href="/gateway/sovereign-variables-suite.html">Open Behind Gateway</a>
+                <a class="btn ghost" href="/SovereignVariables/index.html" target="_blank" rel="noreferrer">Open Direct App</a>
+              </div>
+            </div>
+            <div class="card" style="margin-top:0;">
+              <h3 style="margin-top:0;">SkyeDocx Pro</h3>
+              <p class="muted small">Document environment suite available behind gateway while preserving direct site access.</p>
+              <div class="row" style="flex-wrap:wrap;">
+                <a class="btn primary" href="/gateway/skyedocx-pro-suite.html">Open Behind Gateway</a>
+                <a class="btn ghost" href="/SkyeDocx/homepage.html" target="_blank" rel="noreferrer">Open Direct App</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px;">
+            <h3 style="margin-top:0;">What Users See</h3>
+            <ul class="muted small" style="margin:0 0 0 18px; line-height:1.6;">
+              <li>One key, one dashboard, multi-app suite access.</li>
+              <li>Apps open in gateway-native pages to preserve the secure-platform experience.</li>
+              <li>Direct app URLs remain active for normal site traffic and marketing surfaces.</li>
+            </ul>
           </div>
         </div>
 
