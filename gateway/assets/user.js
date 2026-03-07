@@ -131,12 +131,24 @@ const store = {
     // lazy-load extra panels
     if (name === "devices") loadDevices().catch(e=> showToast(e.message || "Failed to load devices", false));
     if (name === "exports") loadInvoicePreview().catch(e=> showToast(e.message || "Failed to load invoice", false));
+    if (name === "netlifypush") loadNetlifyPush().catch(e=> showToast(e.message || "Failed to load Netlify Push", false));
     if (name === "ghpush") loadGitHubPush().catch(e=> showToast(e.message || "Failed to load GitHub Push", false));
     if (name === "voice") loadVoice().catch(e=> showToast(e.message || "Failed to load Voice", false));
     if (name === "monitor") refreshMonitorTab().catch(() => {});
   }
 
   $$(".tab").forEach(btn=> btn.addEventListener("click", ()=> switchTab(btn.dataset.tab)));
+
+  function requestedTabFromUrl(){
+    const allowed = new Set(["overview", "logs", "devices", "exports", "netlifypush", "ghpush", "monitor", "integrate"]);
+    const u = new URL(window.location.href);
+    const byQuery = (u.searchParams.get("tab") || "").toLowerCase().trim();
+    const byHash = (u.hash || "").replace(/^#/, "").toLowerCase().trim();
+    if (allowed.has(byQuery)) return byQuery;
+    if (allowed.has(byHash)) return byHash;
+    return "overview";
+  }
+  const initialTab = requestedTabFromUrl();
 
   const keyInput = $("#kaixuKey");
   const dashView = $("#dashView");
@@ -372,7 +384,7 @@ const store = {
 
       setConnected(true);
       showToast("Connected.", true);
-      switchTab("overview");
+      switchTab(initialTab);
       startLivePolling();
 
       // prefill export month picker
@@ -616,6 +628,277 @@ const store = {
   const monRefreshBtn = document.getElementById("monRefreshBtn");
   if (monRefreshBtn) {
     monRefreshBtn.addEventListener("click", () => refreshMonitorTab().catch(() => {}));
+  }
+
+  // -----------------------------
+  // Netlify Push UI (User Dashboard)
+  // -----------------------------
+  let nfHandlersInstalled = false;
+  let nfLastPushId = null;
+  let nfRole = null;
+
+  function setNfProgress(text){
+    const box = document.getElementById("nfProgressBox");
+    if (box) box.textContent = text || "";
+  }
+
+  function setNfTokenStatus(text){
+    const el = document.getElementById("nfTokenStatus");
+    if (el) el.textContent = text || "";
+  }
+
+  function fillNfProjectSelect(rows){
+    const sel = document.getElementById("nfProjectSelect");
+    if (!sel) return;
+    sel.innerHTML = `<option value="">Select mapped project…</option>` + (rows || []).map(p =>
+      `<option value="${escapeHtml(p.project_id)}" data-site="${escapeHtml(p.netlify_site_id || "")}">${escapeHtml(p.project_id)} · ${escapeHtml(p.name || "")} · ${escapeHtml(p.netlify_site_id || "")}</option>`
+    ).join("");
+  }
+
+  async function refreshNetlifyTokenStatus(){
+    setNfTokenStatus("Netlify token: checking…");
+    try {
+      const st = await apiJson("/.netlify/functions/netlify-token");
+      if (st.connected) {
+        const login = st?.whoami?.email || st?.whoami?.full_name || st?.whoami?.id || "connected";
+        setNfTokenStatus(`Netlify token: connected (${login})`);
+      } else {
+        setNfTokenStatus("Netlify token: not connected");
+      }
+    } catch {
+      setNfTokenStatus("Netlify token: unknown (check key)");
+    }
+  }
+
+  async function loadNetlifyProjects(){
+    const data = await apiJson("/.netlify/functions/push-projects");
+    fillNfProjectSelect(data.projects || []);
+    return data.projects || [];
+  }
+
+  async function sha1HexFromBuffer(buf){
+    const digest = await crypto.subtle.digest("SHA-1", buf);
+    const bytes = new Uint8Array(digest);
+    return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  function normalizeDeployPath(file){
+    return String(file?.webkitRelativePath || file?.name || "")
+      .replace(/^\/+/, "")
+      .replace(/\\/g, "/");
+  }
+
+  async function runNetlifyPush(){
+    const projectId = (document.getElementById("nfProjectId")?.value || document.getElementById("nfProjectSelect")?.value || "").trim();
+    const branch = (document.getElementById("nfBranch")?.value || "main").trim() || "main";
+    const title = (document.getElementById("nfTitle")?.value || "Kaixu Netlify Push").trim() || "Kaixu Netlify Push";
+    const filesInput = document.getElementById("nfFiles");
+    const files = Array.from(filesInput?.files || []);
+
+    if (!projectId) throw new Error("Project ID is required.");
+    if (!files.length) throw new Error("Select at least one file or folder.");
+
+    const manifest = {};
+    const byDigest = new Map();
+
+    setNfProgress("Hashing files…");
+    for (let i = 0; i < files.length; i++) {
+      const f = files[i];
+      const p = normalizeDeployPath(f);
+      if (!p) continue;
+      const buf = await f.arrayBuffer();
+      const sha1 = await sha1HexFromBuffer(buf);
+      manifest[p] = sha1;
+      if (!byDigest.has(sha1)) {
+        byDigest.set(sha1, { path: p, file: f, buf });
+      }
+      setNfProgress(`Hashing files… ${i + 1}/${files.length}`);
+    }
+
+    const init = await apiJson("/.netlify/functions/push-init", {
+      method: "POST",
+      body: {
+        projectId,
+        branch,
+        title,
+        files: manifest
+      }
+    });
+
+    const pushId = init.pushId;
+    nfLastPushId = pushId;
+    const copyBtn = document.getElementById("nfCopyPushIdBtn");
+    if (copyBtn) copyBtn.disabled = false;
+
+    const required = Array.isArray(init.required) ? init.required : [];
+    const uploadList = required.length ? required : Array.from(byDigest.keys());
+    setNfProgress(`Push ${pushId}\nUploading ${uploadList.length} required file digests…`);
+
+    for (let i = 0; i < uploadList.length; i++) {
+      const sha1 = uploadList[i];
+      const item = byDigest.get(sha1);
+      if (!item) throw new Error(`Missing local file for required digest: ${sha1}`);
+
+      await apiBinary(`/.netlify/functions/push-upload?pushId=${encodeURIComponent(pushId)}&path=${encodeURIComponent(item.path)}`, {
+        method: "PUT",
+        body: item.buf,
+        headers: {
+          "content-type": "application/octet-stream",
+          "x-content-sha1": sha1
+        }
+      });
+      setNfProgress(`Push ${pushId}\nUploaded ${i + 1}/${uploadList.length}`);
+    }
+
+    await apiJson("/.netlify/functions/push-complete", { method: "POST", body: { pushId } });
+    setNfProgress(`Push ${pushId}\nFinalizing deploy…`);
+
+    for (let i = 0; i < 75; i++) {
+      const st = await apiJson(`/.netlify/functions/push-status?pushId=${encodeURIComponent(pushId)}`);
+      const p = st.push || {};
+      const state = p.state || "unknown";
+      const url = p.url || "";
+      const err = p.error || "";
+      let line = `Push ${pushId}\nState: ${state}`;
+      if (url) line += `\nURL: ${url}`;
+      if (err) line += `\nError: ${err}`;
+      setNfProgress(line);
+      if (state === "ready") {
+        showToast("Netlify push complete.", true);
+        return;
+      }
+      if (state === "error") {
+        throw new Error(err || "Netlify deploy failed");
+      }
+      await new Promise(r => setTimeout(r, 2000));
+    }
+
+    throw new Error("Timed out waiting for deploy. Use Check Last Push.");
+  }
+
+  async function checkLastNetlifyPush(){
+    if (!nfLastPushId) throw new Error("No push ID yet. Start a push first.");
+    const st = await apiJson(`/.netlify/functions/push-status?pushId=${encodeURIComponent(nfLastPushId)}`);
+    const p = st.push || {};
+    let line = `Push ${nfLastPushId}\nState: ${p.state || "unknown"}`;
+    if (p.url) line += `\nURL: ${p.url}`;
+    if (p.error) line += `\nError: ${p.error}`;
+    setNfProgress(line);
+  }
+
+  async function loadNetlifyPush(){
+    try {
+      const who = await apiJson("/.netlify/functions/push-whoami");
+      nfRole = who.role || "deployer";
+    } catch {
+      nfRole = null;
+    }
+
+    await refreshNetlifyTokenStatus();
+    await loadNetlifyProjects();
+
+    const canAdmin = (nfRole === "admin" || nfRole === "owner");
+    const canDeploy = canAdmin || nfRole === "deployer";
+
+    ["nfSaveTokenBtn", "nfClearTokenBtn", "nfSaveProjectBtn"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.disabled = !canAdmin;
+      el.title = canAdmin ? "" : "Requires admin Kaixu key role";
+    });
+
+    ["nfStartPushBtn"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.disabled = !canDeploy;
+      el.title = canDeploy ? "" : "Requires deployer/admin Kaixu key role";
+    });
+
+    if (!nfHandlersInstalled) {
+      nfHandlersInstalled = true;
+
+      document.getElementById("nfRefreshBtn")?.addEventListener("click", ()=> loadNetlifyPush().catch(()=>{}));
+      document.getElementById("nfLoadProjectsBtn")?.addEventListener("click", async ()=> {
+        try {
+          await loadNetlifyProjects();
+          showToast("Netlify push projects loaded.", true);
+        } catch (e) {
+          showToast(e.detail?.error || e.message || "Failed to load projects", false);
+        }
+      });
+
+      document.getElementById("nfProjectSelect")?.addEventListener("change", (e) => {
+        const val = e.target.value || "";
+        if (!val) return;
+        const opt = e.target.options[e.target.selectedIndex];
+        const site = opt?.getAttribute("data-site") || "";
+        const pid = document.getElementById("nfProjectId");
+        const sid = document.getElementById("nfSiteId");
+        if (pid) pid.value = val;
+        if (sid) sid.value = site;
+      });
+
+      document.getElementById("nfSaveTokenBtn")?.addEventListener("click", async ()=> {
+        const inp = document.getElementById("nfPatInput");
+        const token = (inp?.value || "").trim();
+        if (!token) return showToast("Paste Netlify token first.", false);
+        try {
+          await apiJson("/.netlify/functions/netlify-token", { method: "POST", body: { token } });
+          if (inp) inp.value = "";
+          showToast("Netlify token saved.", true);
+          await refreshNetlifyTokenStatus();
+        } catch (e) {
+          showToast(e.detail?.error || e.message || "Failed to save token", false);
+        }
+      });
+
+      document.getElementById("nfClearTokenBtn")?.addEventListener("click", async ()=> {
+        if (!confirm("Clear Netlify token for this tenant?")) return;
+        try {
+          await apiJson("/.netlify/functions/netlify-token", { method: "DELETE" });
+          showToast("Netlify token cleared.", true);
+          await refreshNetlifyTokenStatus();
+        } catch (e) {
+          showToast(e.detail?.error || e.message || "Failed to clear token", false);
+        }
+      });
+
+      document.getElementById("nfSaveProjectBtn")?.addEventListener("click", async ()=> {
+        const project_id = (document.getElementById("nfProjectId")?.value || "").trim();
+        const name = (document.getElementById("nfProjectName")?.value || "").trim() || project_id;
+        const netlify_site_id = (document.getElementById("nfSiteId")?.value || "").trim();
+        if (!project_id) return showToast("Project ID is required.", false);
+        if (!netlify_site_id) return showToast("Netlify Site ID is required.", false);
+        try {
+          await apiJson("/.netlify/functions/push-projects", {
+            method: "POST",
+            body: { project_id, name, netlify_site_id }
+          });
+          showToast("Project mapping saved.", true);
+          await loadNetlifyProjects();
+        } catch (e) {
+          showToast(e.detail?.error || e.message || "Failed to save project", false);
+        }
+      });
+
+      document.getElementById("nfStartPushBtn")?.addEventListener("click", async ()=> {
+        try { await runNetlifyPush(); } catch (e) { showToast(e.detail?.error || e.message || "Netlify push failed", false); }
+      });
+
+      document.getElementById("nfCheckStatusBtn")?.addEventListener("click", async ()=> {
+        try { await checkLastNetlifyPush(); } catch (e) { showToast(e.detail?.error || e.message || "Status check failed", false); }
+      });
+
+      document.getElementById("nfCopyPushIdBtn")?.addEventListener("click", async ()=> {
+        if (!nfLastPushId) return;
+        try {
+          await navigator.clipboard.writeText(String(nfLastPushId));
+          showToast("Push ID copied.", true);
+        } catch {
+          showToast("Clipboard unavailable.", false);
+        }
+      });
+    }
   }
 
   // -----------------------------

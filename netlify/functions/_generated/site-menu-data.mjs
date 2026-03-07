@@ -2,8 +2,8 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-07T05:02:30.453Z",
-  "totalItems": 1180,
+  "generatedAt": "2026-03-07T05:21:31.921Z",
+  "totalItems": 1182,
   "categories": [
     {
       "name": "root",
@@ -3665,13 +3665,29 @@ export const SITE_MENU = {
     },
     {
       "name": "gateway",
-      "count": 10,
+      "count": 12,
       "items": [
         {
           "urlPath": "/gateway/dashboard.html",
           "prettyPath": null,
           "file": "gateway/dashboard.html",
           "title": "Kaixu Gateway Dashboard",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/github-push.html",
+          "prettyPath": null,
+          "file": "gateway/github-push.html",
+          "title": "Kaixu GitHub Push",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/netlify-push.html",
+          "prettyPath": null,
+          "file": "gateway/netlify-push.html",
+          "title": "Kaixu Netlify Push",
           "ext": ".html",
           "category": "gateway"
         },

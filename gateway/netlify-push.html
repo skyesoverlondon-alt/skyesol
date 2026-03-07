@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kaixu Netlify Push</title>
+  <link rel="canonical" href="https://skyesol.netlify.app/gateway/netlify-push.html" />
+  <meta name="description" content="Dedicated Netlify Push setup and tutorial for Kaixu users. Link token, map site IDs, and deploy from your dashboard with one key." />
+  <link rel="stylesheet" href="/gateway/assets/style.css" />
+</head>
+<body>
+  <main class="shell" style="padding-top:24px;">
+    <section class="card">
+      <h1 style="margin-top:0;">Netlify Push Console</h1>
+      <p class="muted">This page is your dedicated Netlify Push entry point. Your tenant admin can link Netlify credentials, map project IDs to site IDs, and deploy files from the dashboard using one Kaixu key.</p>
+      <div class="row" style="flex-wrap:wrap; margin-top:10px;">
+        <a class="btn primary" href="/gateway/dashboard.html?tab=netlifypush">Open Netlify Push In Dashboard</a>
+        <a class="btn ghost" href="/gateway/dashboard.html">Open Full Dashboard</a>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2 style="margin-top:0;">Setup Tutorial</h2>
+      <ol class="muted" style="margin:0 0 0 18px; line-height:1.7;">
+        <li>Log in with your Kaixu key.</li>
+        <li>If your key role is admin/owner, save your Netlify PAT in the Netlify Push tab.</li>
+        <li>Add a project mapping: internal project ID plus Netlify site ID.</li>
+        <li>Select files/folder and run push. Track status in the progress area and deploy URL output.</li>
+      </ol>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2 style="margin-top:0;">Billing Transparency</h2>
+      <p class="muted">AI usage and Push usage are different charge lanes, but both are tracked under the same Kaixu key/customer balance by default. If you later want split-key billing (AI key vs Push-only key), that can be added as an opt-in policy change.</p>
+      <p class="muted small">Everything is audited and usage-metered through gateway functions so charges remain traceable.</p>
+    </section>
+  </main>
+</body>
+</html>

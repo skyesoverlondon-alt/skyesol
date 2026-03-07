@@ -201,6 +201,7 @@
         <button class="tab" data-tab="logs">Logs</button>
         <button class="tab" data-tab="devices">Devices</button>
         <button class="tab" data-tab="exports">Exports &amp; Invoices</button>
+        <button class="tab" data-tab="netlifypush">Netlify Push</button>
         <button class="tab" data-tab="ghpush">GitHub Push</button>
         <button class="tab" data-tab="monitor">Live Monitor</button>
         <button class="tab" data-tab="integrate">Integration</button>
@@ -380,9 +381,92 @@
             <p class="muted small">After payment, the webhook credits <code>extra_cents</code> for that month and your apps can keep running.</p>
           </div>
         </div>
+        <div class="card tabpanel" id="tab-netlifypush" style="display:none;">
+          <h2>Netlify Push</h2>
+          <p class="muted">Deploy files directly to your mapped Netlify site from this dashboard. One Kaixu key handles both AI usage and Push actions after setup.</p>
+
+          <div class="card" style="margin-top:10px;">
+            <h3 style="margin-top:0;">Setup</h3>
+            <p class="muted small">Tenant admin key required to save/clear Netlify token and project mappings. Deployer key can run pushes once setup is complete.</p>
+            <div class="row" style="flex-wrap:wrap;">
+              <div class="pill" id="nfTokenStatus">Netlify token: checking…</div>
+              <button class="btn ghost" id="nfRefreshBtn">Refresh</button>
+            </div>
+            <label for="nfPatInput">Netlify Personal Access Token</label>
+            <input id="nfPatInput" type="password" placeholder="nfp_..." autocomplete="off" />
+            <div class="row" style="flex-wrap:wrap;">
+              <button class="btn primary" id="nfSaveTokenBtn">Save Netlify Token</button>
+              <button class="btn ghost" id="nfClearTokenBtn">Clear Netlify Token</button>
+            </div>
+
+            <div class="cols" style="margin-top:12px;">
+              <div>
+                <label for="nfProjectId">Project ID (your internal ID)</label>
+                <input id="nfProjectId" type="text" placeholder="client-site-prod" />
+              </div>
+              <div>
+                <label for="nfProjectName">Project Name</label>
+                <input id="nfProjectName" type="text" placeholder="Client Site Production" />
+              </div>
+            </div>
+            <label for="nfSiteId">Netlify Site ID</label>
+            <input id="nfSiteId" type="text" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+            <div class="row" style="flex-wrap:wrap;">
+              <button class="btn primary" id="nfSaveProjectBtn">Save Project Mapping</button>
+              <button class="btn ghost" id="nfLoadProjectsBtn">Load Projects</button>
+            </div>
+            <label for="nfProjectSelect">Mapped Project</label>
+            <select id="nfProjectSelect">
+              <option value="">Select mapped project…</option>
+            </select>
+          </div>
+
+          <div class="card" style="margin-top:12px;">
+            <h3 style="margin-top:0;">Push Files To Netlify</h3>
+            <p class="muted small">Drop build files/folders, then push. We hash files, create deploy manifest, upload required files, and finalize deploy.</p>
+            <div class="cols">
+              <div>
+                <label for="nfBranch">Branch</label>
+                <input id="nfBranch" type="text" value="main" />
+              </div>
+              <div>
+                <label for="nfTitle">Deploy Title</label>
+                <input id="nfTitle" type="text" value="Kaixu Netlify Push" />
+              </div>
+            </div>
+            <label for="nfFiles">Files / Folder</label>
+            <input id="nfFiles" type="file" multiple webkitdirectory directory />
+            <div class="row" style="flex-wrap:wrap;">
+              <button class="btn primary" id="nfStartPushBtn">Start Netlify Push</button>
+              <button class="btn ghost" id="nfCheckStatusBtn">Check Last Push</button>
+              <button class="btn ghost" id="nfCopyPushIdBtn" disabled>Copy Push ID</button>
+            </div>
+            <div class="block" id="nfProgressBox" style="margin-top:10px; white-space:pre-wrap;">Ready.</div>
+          </div>
+
+          <div class="card" style="margin-top:12px;">
+            <h3 style="margin-top:0;">Tutorial + Billing Transparency</h3>
+            <p class="muted small">One key can run AI + GitHub Push + Netlify Push. Push usage is billed separately from AI usage, but both are tracked under the same customer/key balance unless you choose a split-key model later.</p>
+            <ol class="muted small" style="margin:10px 0 0 18px; line-height:1.6;">
+              <li>Connect Netlify token (admin key).</li>
+              <li>Save at least one project mapping (project ID → Netlify site ID).</li>
+              <li>Select mapped project, attach files/folder, click Start Netlify Push.</li>
+              <li>Use push status + invoices/export tabs to verify usage and charges.</li>
+            </ol>
+            <div class="row" style="flex-wrap:wrap; margin-top:10px;">
+              <a class="btn ghost" href="/gateway/netlify-push.html">Open Netlify Push Page</a>
+              <a class="btn ghost" href="/gateway/github-push.html">Open GitHub Push Page</a>
+            </div>
+          </div>
+        </div>
+
         <div class="card tabpanel" id="tab-ghpush" style="display:none;">
           <h2>GitHub Push</h2>
           <p class="muted">Push a ZIP into a GitHub repository as a single commit using your tenant’s connected GitHub token. This runs through the Kaixu GitHub Push Gateway pipeline (chunk upload → background commit).</p>
+          <p class="muted small">Billing transparency: GitHub Push charges are tracked separately from AI usage, but both are deducted under the same Kaixu key/customer balance unless you intentionally move to split-key billing later.</p>
+          <div class="row" style="flex-wrap:wrap; margin-bottom:10px;">
+            <a class="btn ghost" href="/gateway/github-push.html">Open Dedicated GitHub Push Page</a>
+          </div>
 
           <div class="cols">
             <div>

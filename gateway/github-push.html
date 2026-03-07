@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kaixu GitHub Push</title>
+  <link rel="canonical" href="https://skyesol.netlify.app/gateway/github-push.html" />
+  <meta name="description" content="Dedicated GitHub Push setup and tutorial for Kaixu users. Link GitHub token and push ZIP packages from your dashboard." />
+  <link rel="stylesheet" href="/gateway/assets/style.css" />
+</head>
+<body>
+  <main class="shell" style="padding-top:24px;">
+    <section class="card">
+      <h1 style="margin-top:0;">GitHub Push Console</h1>
+      <p class="muted">This page is your dedicated GitHub Push entry point. Your tenant admin can link GitHub OAuth/PAT, and deployer/admin keys can push ZIP packages to connected repositories.</p>
+      <div class="row" style="flex-wrap:wrap; margin-top:10px;">
+        <a class="btn primary" href="/gateway/dashboard.html?tab=ghpush">Open GitHub Push In Dashboard</a>
+        <a class="btn ghost" href="/gateway/dashboard.html">Open Full Dashboard</a>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2 style="margin-top:0;">Setup Tutorial</h2>
+      <ol class="muted" style="margin:0 0 0 18px; line-height:1.7;">
+        <li>Log in with your Kaixu key.</li>
+        <li>If your key role is admin/owner, connect GitHub OAuth or save a PAT.</li>
+        <li>Select owner/repo/branch, upload a ZIP, and start push.</li>
+        <li>Use job status rows to monitor attempts, retries, and commit URLs.</li>
+      </ol>
+    </section>
+
+    <section class="card" style="margin-top:14px;">
+      <h2 style="margin-top:0;">Billing Transparency</h2>
+      <p class="muted">GitHub Push charges are tracked separately from AI usage but deducted under your same Kaixu key/customer balance by default, so one key can run the full platform.</p>
+      <p class="muted small">All push jobs are tracked per customer and key for auditability and enterprise billing controls.</p>
+    </section>
+  </main>
+</body>
+</html>
