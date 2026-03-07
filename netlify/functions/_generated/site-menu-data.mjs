@@ -2,8 +2,8 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-07T05:59:39.675Z",
-  "totalItems": 1193,
+  "generatedAt": "2026-03-07T06:14:01.797Z",
+  "totalItems": 1200,
   "categories": [
     {
       "name": "root",
@@ -3665,7 +3665,7 @@ export const SITE_MENU = {
     },
     {
       "name": "gateway",
-      "count": 18,
+      "count": 25,
       "items": [
         {
           "urlPath": "/gateway/dashboard.html",
@@ -3684,10 +3684,50 @@ export const SITE_MENU = {
           "category": "gateway"
         },
         {
+          "urlPath": "/gateway/jwt-secret-generator-suite.html",
+          "prettyPath": null,
+          "file": "gateway/jwt-secret-generator-suite.html",
+          "title": "JWT Secret Generator Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
           "urlPath": "/gateway/netlify-push.html",
           "prettyPath": null,
           "file": "gateway/netlify-push.html",
           "title": "Kaixu Netlify Push",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/neuralspace-pro-suite.html",
+          "prettyPath": null,
+          "file": "gateway/neuralspace-pro-suite.html",
+          "title": "NeuralSpace Pro Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/qr-code-generator-suite.html",
+          "prettyPath": null,
+          "file": "gateway/qr-code-generator-suite.html",
+          "title": "QR Code Generator Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/repo-live-suite.html",
+          "prettyPath": null,
+          "file": "gateway/repo-live-suite.html",
+          "title": "Repo Live Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/skyecashledger-suite.html",
+          "prettyPath": null,
+          "file": "gateway/skyecashledger-suite.html",
+          "title": "SkyeCashLedger Suite | Gateway",
           "ext": ".html",
           "category": "gateway"
         },
@@ -3708,10 +3748,26 @@ export const SITE_MENU = {
           "category": "gateway"
         },
         {
+          "urlPath": "/gateway/skyefocuslog-suite.html",
+          "prettyPath": null,
+          "file": "gateway/skyefocuslog-suite.html",
+          "title": "SkyeFocusLog Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
           "urlPath": "/gateway/skyeledger-suite.html",
           "prettyPath": null,
           "file": "gateway/skyeledger-suite.html",
           "title": "SkyeLedger Suite | Gateway",
+          "ext": ".html",
+          "category": "gateway"
+        },
+        {
+          "urlPath": "/gateway/skyenotevault-suite.html",
+          "prettyPath": null,
+          "file": "gateway/skyenotevault-suite.html",
+          "title": "SkyeNoteVault Suite | Gateway",
           "ext": ".html",
           "category": "gateway"
         },
