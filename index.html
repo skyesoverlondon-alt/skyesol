@@ -409,7 +409,7 @@
     #sol-fab-toggle:hover{transform:scale(1.05);}
     @keyframes sol-fab-gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
     #sol-fab-items{display:flex;flex-direction:column-reverse;gap:6px;overflow:hidden;max-height:0;opacity:0;transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .25s ease;}
-    #sol-fab-items.open{max-height:400px;opacity:1;}
+    #sol-fab-items.open{max-height:min(calc(100vh - 110px),700px);opacity:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
     .sol-fab-item{display:block;text-decoration:none;padding:6px 11px;border-radius:6px;font-size:0.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;transition:transform .12s,filter .2s;border:1px solid currentColor;}
     .sol-fab-item:hover{transform:translateX(3px);filter:brightness(1.18);}
     .sol-fab-retro{background:rgba(255,204,0,.14);color:#ffcc00;border-color:rgba(255,204,0,.55);box-shadow:0 0 10px rgba(255,204,0,.30);display:flex;align-items:center;gap:8px;}
