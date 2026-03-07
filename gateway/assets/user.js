@@ -3,10 +3,11 @@
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
   
-  // Gateway base override (lets this UI talk to a dedicated gateway without rebuilding)
+  // User dashboard is locked to same-origin gateway routing.
+  // Only admin/deployment config controls upstream base.
   const baseStore = {
-    get apiBase(){ return (localStorage.getItem("KAIXU_API_BASE") || "").trim(); },
-    set apiBase(v){ localStorage.setItem("KAIXU_API_BASE", (v || "").trim()); }
+    get apiBase(){ return ""; },
+    set apiBase(_v){}
   };
 
   // Optional: report user dashboard errors into Monitor (client_error events)
@@ -379,26 +380,10 @@ const store = {
       if (exp && !exp.value) exp.value = $("#monthPicker")?.value?.trim() || monthKeyUTC();
 
     } catch (e) {
-      const shouldFallbackBase = !!baseStore.apiBase && (e?.status === 404 || /failed to fetch|networkerror|load failed/i.test(String(e?.message || "")));
-      if (shouldFallbackBase) {
-        try {
-          baseStore.apiBase = "";
-          await attemptConnect();
-          setConnected(true);
-          showToast("Connected. Switched dashboard back to this site gateway.", true);
-          switchTab("overview");
-          startLivePolling();
-          return;
-        } catch {
-          // fall through to standard error handling
-        }
-      }
-
       store.key = "";
       setConnected(false);
       const msg = e?.detail?.error || e.message || "Unable to connect";
-      const hint = baseStore.apiBase ? ` Check Gateway Base: ${normalizeBase(baseStore.apiBase)}` : "";
-      showToast(msg + hint, false);
+      showToast(msg, false);
     }
   }
 
@@ -541,8 +526,7 @@ const store = {
   async function loadHeartbeat(includeHistory) {
     const qs = includeHistory ? "?history=1" : "";
     try {
-      const base = normalizeBase(baseStore.apiBase);
-      const url = (base || "") + "/.netlify/functions/gateway-heartbeat-read" + qs;
+      const url = "/.netlify/functions/gateway-heartbeat-read" + qs;
       const res = await fetch(url);
       return await res.json();
     } catch { return null; }
@@ -632,75 +616,6 @@ const store = {
   const monRefreshBtn = document.getElementById("monRefreshBtn");
   if (monRefreshBtn) {
     monRefreshBtn.addEventListener("click", () => refreshMonitorTab().catch(() => {}));
-  }
-
-
-  // Base switch UI (optional: only runs if the modal exists on the page)
-  function effectiveBase(){
-    const b = normalizeBase(baseStore.apiBase);
-    return b || window.location.origin;
-  }
-
-  function openBaseModal(){
-    const modal = document.getElementById("baseModal");
-    if (!modal) return;
-    const input = document.getElementById("apiBaseInput");
-    const current = document.getElementById("apiBaseCurrent");
-    const health = document.getElementById("apiBaseHealthLink");
-    const saved = normalizeBase(baseStore.apiBase);
-    if (input) input.value = saved;
-    if (current) current.textContent = effectiveBase();
-    if (health) health.href = effectiveBase() + "/.netlify/functions/health";
-    modal.style.display = "grid";
-  }
-
-  function closeBaseModal(){
-    const modal = document.getElementById("baseModal");
-    if (!modal) return;
-    modal.style.display = "none";
-  }
-
-  function saveBase(){
-    const input = document.getElementById("apiBaseInput");
-    if (!input) return;
-    const raw = (input.value || "").trim();
-    if (raw && !/^https?:\/\//i.test(raw)) {
-      showToast("Gateway Base must start with http:// or https:// (or leave blank for this site).", false);
-      return;
-    }
-    baseStore.apiBase = normalizeBase(raw);
-    const current = document.getElementById("apiBaseCurrent");
-    const health = document.getElementById("apiBaseHealthLink");
-    if (current) current.textContent = effectiveBase();
-    if (health) health.href = effectiveBase() + "/.netlify/functions/health";
-    showToast("Gateway Base saved. This dashboard will now call: " + effectiveBase(), true);
-  }
-
-  const baseBtn = document.getElementById("gatewayBaseBtn");
-  if (baseBtn) baseBtn.addEventListener("click", openBaseModal);
-
-  const baseClose = document.getElementById("apiBaseClose");
-  if (baseClose) baseClose.addEventListener("click", closeBaseModal);
-
-  const baseSave = document.getElementById("apiBaseSave");
-  if (baseSave) baseSave.addEventListener("click", saveBase);
-
-  const baseUseThis = document.getElementById("apiBaseUseThisSite");
-  if (baseUseThis) baseUseThis.addEventListener("click", ()=>{
-    baseStore.apiBase = "";
-    const input = document.getElementById("apiBaseInput");
-    if (input) input.value = "";
-    saveBase();
-  });
-
-  const modal = document.getElementById("baseModal");
-  if (modal) {
-    modal.addEventListener("click", (e)=>{
-      if (e.target === modal) closeBaseModal();
-    });
-    window.addEventListener("keydown", (e)=>{
-      if (e.key === "Escape") closeBaseModal();
-    });
   }
 
   // -----------------------------

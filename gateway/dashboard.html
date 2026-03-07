@@ -34,7 +34,7 @@
     "@type": "FAQPage",
     "mainEntity": [
       {"@type": "Question","name": "How do I view my usage?","acceptedAnswer": {"@type": "Answer","text": "Paste your Kaixu key, then load usage, logs, devices, and exports from the dashboard tabs."}},
-      {"@type": "Question","name": "Can I change the gateway base?","acceptedAnswer": {"@type": "Answer","text": "Yes. Use Gateway Base to point this UI at a dedicated gateway URL."}},
+      {"@type": "Question","name": "Can I change the gateway base?","acceptedAnswer": {"@type": "Answer","text": "No. Gateway routing is admin-controlled so customer dashboards always use the canonical billing path."}},
       {"@type": "Question","name": "How do I export invoices?","acceptedAnswer": {"@type": "Answer","text": "Use the Exports tab to fetch events, summaries, and invoices for your key."}}
     ]
   }
@@ -143,7 +143,6 @@
         </div>
       </div>
       <div class="top-actions">
-                <button id="gatewayBaseBtn" class="btn ghost" type="button" title="Switch which gateway this dashboard calls">Gateway Base</button>
 <a class="btn ghost" href="/gateway/" title="Admin">Admin</a>
         <a class="btn ghost" href="/.netlify/functions/health" target="_blank" rel="noreferrer">Health</a>
         <button id="clearKeyBtn" class="btn danger">Clear Key</button>
@@ -565,33 +564,6 @@
       }, 5300);
     })();
   </script>
-  <!-- Gateway Base modal (lets you point this UI at a dedicated gateway) -->
-  <div id="baseModal" class="modalOverlay" style="display:none;">
-    <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px;">
-        <div>
-          <h3>Gateway Base</h3>
-          <p class="muted">Leave blank to use this site. Set a full URL to point at your dedicated gateway (VPS).</p>
-          <p class="muted">Current effective base: <code id="apiBaseCurrent"></code></p>
-        </div>
-        <button id="apiBaseClose" class="btn ghost" type="button" aria-label="Close">✕</button>
-      </div>
-
-      <div class="row">
-        <input id="apiBaseInput" placeholder="https://gateway.yourdomain.com" />
-      </div>
-
-      <div class="row" style="margin-top:8px;">
-        <a id="apiBaseHealthLink" class="btn ghost" href="/.netlify/functions/health" target="_blank" rel="noreferrer">Open Health for this base</a>
-      </div>
-
-      <div class="actions">
-        <button id="apiBaseUseThisSite" class="btn" type="button">Use This Site</button>
-        <button id="apiBaseSave" class="btn primary" type="button">Save</button>
-      </div>
-    </div>
-  </div>
-
   <script>
     // Lightweight Galaxy background (mirrors Gateway 13 vibe without impacting perf)
     (function() {
