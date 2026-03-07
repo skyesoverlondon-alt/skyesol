@@ -267,8 +267,8 @@
     <div class="badge">kAIxuGateway13</div>
     <h1>Request Your kAIxu API Key</h1>
     <p class="subtitle">
-      Get instant access to OpenAI, Anthropic, and Gemini — all through one key,
-      one gateway, one bill. No provider credentials needed.
+      Get instant access to multiple AI lanes through one key,
+      one gateway, one bill. No external provider credentials needed.
     </p>
 
     <div class="card">
@@ -384,8 +384,8 @@
     <span class="str">"Authorization"</span>: <span class="str">"Bearer ${data.key}"</span>
   },
   <span class="key">body</span>: JSON.stringify({
-    <span class="key">provider</span>: <span class="str">"gemini"</span>,
-    <span class="key">model</span>: <span class="str">"gemini-2.0-flash"</span>,
+    <span class="key">provider</span>: <span class="str">"kaixu"</span>,
+    <span class="key">model</span>: <span class="str">"kaixu-chat"</span>,
     <span class="key">messages</span>: [{ <span class="key">role</span>: <span class="str">"user"</span>, <span class="key">content</span>: <span class="str">"Hello!"</span> }],
     <span class="key">max_tokens</span>: 512
   })

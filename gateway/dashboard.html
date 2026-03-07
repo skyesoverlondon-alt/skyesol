@@ -522,7 +522,7 @@
 
         <div class="card tabpanel" id="tab-integrate" style="display:none;">
           <h2>Use this key in your apps</h2>
-          <p class="muted">Your apps should call the gateway functions, not OpenAI/Anthropic/Gemini directly.</p>
+          <p class="muted">Your apps should call the gateway functions, not external model vendors directly.</p>
           <h3>Non-stream</h3>
           <code class="block">POST /.netlify/functions/gateway-chat</code>
           <h3>Streaming (SSE)</h3>
@@ -530,8 +530,8 @@
           <p class="muted small">Header: <code>Authorization: Bearer &lt;KAIXU_VIRTUAL_KEY&gt;</code></p>
           <h3>Normalized request</h3>
 <pre class="block">{
-  "provider": "openai" | "anthropic" | "gemini",
-  "model": "...",
+  "provider": "kaixu",
+  "model": "kaixu-chat",
   "messages": [{"role":"user","content":"Hello"}],
   "max_tokens": 256,
   "temperature": 0.7

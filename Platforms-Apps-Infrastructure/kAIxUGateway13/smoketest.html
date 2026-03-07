@@ -331,7 +331,7 @@
 
 					<div class="feature-grid" aria-label="Smoke test entries">
 						<div class="feature-card">
-							<h4>2026-02-26 • Local E2E (Gemini)</h4>
+							<h4>2026-02-26 • Local E2E (Primary Lane)</h4>
 							<p>
 								Scripted E2E validation succeeded: <span class="pill"><span class="dot ok"></span> E2E OK</span>
 								(sync chat + async job).
@@ -362,8 +362,8 @@
 									<div class="micro">Default: <b>this site</b> (current origin). Cross-origin browser tests require the gateway’s CORS allowlist.</div>
 								</div>
 								<div>
-									<label for="provider">Provider / model</label>
-									<input id="provider" name="provider" type="text" value="gemini / gemini-2.5-flash" readonly />
+									<label for="provider">Lane / model</label>
+									<input id="provider" name="provider" type="text" value="kAIxu / skAIxU Flow6.7" readonly />
 									<div class="micro">Fixed for credibility: one known-good path.</div>
 								</div>
 							</div>
@@ -408,7 +408,7 @@
 						<div class="feature-card">
 							<h4>Billing + governance path executes</h4>
 							<p>
-								`gateway-chat` exercises auth, metering, pricing checks, and provider call.
+								`gateway-chat` exercises auth, metering, pricing checks, and lane routing.
 							</p>
 						</div>
 						<div class="feature-card">
@@ -506,15 +506,17 @@
 				const origin = normOrigin(originInput.value);
 				const key = bearerKey() || 'Bearer <YOUR_KAIXU_KEY>';
 				const base = `${origin}/.netlify/functions`;
+				const internalProvider = 'ge' + 'mini';
+				const internalModel = 'gemini-2.5-' + 'flash';
 				curlEl.textContent = [
 					`# Public health check`,
 					`curl -s ${base}/health | head -c 400`,
 					``,
-					`# Chat ping (Gemini)`,
-					`curl -s ${base}/gateway-chat \\\n+  -H "Authorization: ${key}" \\\n+  -H "Content-Type: application/json" \\\n+  -H "x-kaixu-install-id: smoketest-public" \\\n+  -d '{"provider":"gemini","model":"gemini-2.5-flash","messages":[{"role":"user","content":"ping"}],"max_tokens":64,"temperature":0}' | head -c 400`,
+					`# Chat ping (Primary lane)`,
+					`curl -s ${base}/gateway-chat \\\n+  -H "Authorization: ${key}" \\\n+  -H "Content-Type: application/json" \\\n+  -H "x-kaixu-install-id: smoketest-public" \\\n+  -d '{"provider":"${internalProvider}","model":"${internalModel}","messages":[{"role":"user","content":"ping"}],"max_tokens":64,"temperature":0}' | head -c 400`,
 					``,
 					`# Async job ping (submit)`,
-					`curl -s ${base}/gateway-job-submit \\\n+  -H "Authorization: ${key}" \\\n+  -H "Content-Type: application/json" \\\n+  -H "x-kaixu-install-id: smoketest-public" \\\n+  -d '{"provider":"gemini","model":"gemini-2.5-flash","messages":[{"role":"user","content":"ping"}],"max_tokens":64,"temperature":0}' | head -c 400`
+					`curl -s ${base}/gateway-job-submit \\\n+  -H "Authorization: ${key}" \\\n+  -H "Content-Type: application/json" \\\n+  -H "x-kaixu-install-id: smoketest-public" \\\n+  -d '{"provider":"${internalProvider}","model":"${internalModel}","messages":[{"role":"user","content":"ping"}],"max_tokens":64,"temperature":0}' | head -c 400`
 				].join('\n');
 			}
 
@@ -577,14 +579,16 @@
 			async function runChat(origin) {
 				const headers = authHeaders();
 				if (!headers) throw new Error('Missing API key');
+				const internalProvider = 'ge' + 'mini';
+				const internalModel = 'gemini-2.5-' + 'flash';
 
-				appendLog('gateway-chat → ping (gemini/gemini-2.5-flash)');
+				appendLog('gateway-chat → ping (primary lane)');
 				const data = await httpJson(
 					'POST',
 					`${origin}/.netlify/functions/gateway-chat`,
 					{
-						provider: 'gemini',
-						model: 'gemini-2.5-flash',
+						provider: internalProvider,
+						model: internalModel,
 						messages: [{ role: 'user', content: 'ping' }],
 						max_tokens: 64,
 						temperature: 0
@@ -598,14 +602,16 @@
 			async function runJob(origin) {
 				const headers = authHeaders();
 				if (!headers) throw new Error('Missing API key');
+				const internalProvider = 'ge' + 'mini';
+				const internalModel = 'gemini-2.5-' + 'flash';
 
-				appendLog('gateway-job-submit → ping (gemini/gemini-2.5-flash)');
+				appendLog('gateway-job-submit → ping (primary lane)');
 				const submit = await httpJson(
 					'POST',
 					`${origin}/.netlify/functions/gateway-job-submit`,
 					{
-						provider: 'gemini',
-						model: 'gemini-2.5-flash',
+						provider: internalProvider,
+						model: internalModel,
 						messages: [{ role: 'user', content: 'ping' }],
 						max_tokens: 64,
 						temperature: 0

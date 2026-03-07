@@ -12,6 +12,7 @@ import { assertAllowed } from "./_lib/allowlist.js";
 import { enforceKaixuMessages } from "./_lib/kaixu.js";
 
 const PUBLIC_PROVIDER_NAME = process.env.KAIXU_PUBLIC_PROVIDER_NAME || "Skyes Over London";
+const PUBLIC_MODEL_NAME = process.env.KAIXU_PUBLIC_MODEL_NAME || "skAIxU Flow6.7";
 
 export default wrap(async (req) => {
   const cors = buildCors(req);
@@ -31,7 +32,7 @@ export default wrap(async (req) => {
   const provider = target.provider;
   const model = target.model;
   const public_provider = PUBLIC_PROVIDER_NAME;
-  const public_model = requested_model || model;
+  const public_model = PUBLIC_MODEL_NAME;
   const messages_in = body.messages;
   const max_tokens = Number.isFinite(body.max_tokens) ? parseInt(body.max_tokens, 10) : 1024;
   const temperature = Number.isFinite(body.temperature) ? body.temperature : 1;
@@ -114,9 +115,7 @@ export default wrap(async (req) => {
     return json(500, {
       error: "Provider error",
       provider: public_provider,
-      model: public_model,
-      requested_provider: requested_provider || public_provider,
-      requested_model: public_model
+      model: public_model
     }, cors);
   }
 
@@ -183,8 +182,6 @@ export default wrap(async (req) => {
   return json(200, {
     provider: public_provider,
     model: public_model,
-    requested_provider: requested_provider || public_provider,
-    requested_model: public_model,
     output_text: result.output_text || "",
     usage: { input_tokens, output_tokens, cost_cents },
     month: {

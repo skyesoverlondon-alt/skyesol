@@ -6,8 +6,8 @@
  *
  * Body:
  * {
- *   "provider": "gemini",
- *   "model":    "gemini-embedding-001",
+ *   "provider": "kaixu",
+ *   "model":    "kaixu-embed-standard",
  *   "input":    "text to embed"  | ["text1","text2"],
  *   "taskType": "RETRIEVAL_QUERY",              // optional
  *   "title":    "doc title",                     // optional  (best with RETRIEVAL_DOCUMENT)
@@ -16,8 +16,8 @@
  *
  * Response:
  * {
- *   "provider": "gemini",
- *   "model":    "gemini-embedding-001",
+ *   "provider": "Skyes Over London",
+ *   "model":    "skAIxU Flow6.7",
  *   "embeddings": [ [0.012, -0.034, …] , … ],
  *   "dimensions": 1536,
  *   "usage": { "input_tokens": 42, "cost_cents": 0 },
@@ -40,6 +40,8 @@ import { assertAllowed } from "./_lib/allowlist.js";
 
 export default wrap(async (req) => {
   const cors = buildCors(req);
+  const PUBLIC_PROVIDER_NAME = process.env.KAIXU_PUBLIC_PROVIDER_NAME || "Skyes Over London";
+  const PUBLIC_MODEL_NAME = process.env.KAIXU_PUBLIC_MODEL_NAME || "skAIxU Flow6.7";
   if (req.method === "OPTIONS") return new Response("", { status: 204, headers: cors });
   if (req.method !== "POST") return json(405, { error: "Method not allowed" }, cors);
 
@@ -59,8 +61,8 @@ export default wrap(async (req) => {
     ? parseInt(body.outputDimensionality, 10)
     : undefined;
 
-  if (!provider) return badRequest("Missing provider (gemini)", cors);
-  if (!model)    return badRequest("Missing model (e.g. gemini-embedding-001)", cors);
+  if (!provider) return badRequest("Missing provider", cors);
+  if (!model)    return badRequest("Missing model", cors);
 
   // Normalize input to array of strings
   const texts = Array.isArray(rawInput)
@@ -132,10 +134,14 @@ export default wrap(async (req) => {
         dimensions = result.dimensions;
       }
     } else {
-      return badRequest("Embedding provider not supported yet. Use gemini.", cors);
+      return badRequest("Embedding provider is not supported for this lane.", cors);
     }
   } catch (e) {
-    return json(e?.status || 500, { error: e?.message || "Provider error", provider }, cors);
+    return json(e?.status || 500, {
+      error: "Embedding request failed",
+      provider: PUBLIC_PROVIDER_NAME,
+      model: PUBLIC_MODEL_NAME
+    }, cors);
   }
 
   // ── Usage tracking ────────────────────────────────────────────────
@@ -201,8 +207,8 @@ export default wrap(async (req) => {
 
   // ── Response ──────────────────────────────────────────────────────
   return json(200, {
-    provider,
-    model,
+    provider: PUBLIC_PROVIDER_NAME,
+    model: PUBLIC_MODEL_NAME,
     embeddings: allEmbeddings,
     dimensions,
     usage: { input_tokens, cost_cents: cost },

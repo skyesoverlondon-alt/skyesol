@@ -11,9 +11,7 @@ Use this as a **keep-only** allowlist for function runtime env vars in Netlify U
 - `NETLIFY_DATABASE_URL` (or `DATABASE_URL`)
 - `ALLOWED_ORIGINS`
 - `KEY_PEPPER`
-- `OPENAI_API_KEY` (if using OpenAI)
-- `ANTHROPIC_API_KEY` (if using Anthropic)
-- `GEMINI_API_KEY` (if using Gemini)
+- internal provider credentials (if using external model lanes)
 
 ## Keep (if using Stripe billing)
 - `STRIPE_SECRET_KEY`

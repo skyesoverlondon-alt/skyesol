@@ -146,8 +146,8 @@ Important:
 
 ```json
 {
-  "provider": "gemini",
-  "model": "gemini-embedding-001",
+  "provider": "kaixu",
+  "model": "kaixu-embed-standard",
   "input": "text to embed or array",
   "taskType": "RETRIEVAL_QUERY|RETRIEVAL_DOCUMENT",
   "title": "optional title",
@@ -165,8 +165,8 @@ Operational recommendation:
 {
   "collection": "my-docs",
   "query": "find references to topic x",
-  "provider": "gemini",
-  "model": "gemini-embedding-001",
+  "provider": "kaixu",
+  "model": "kaixu-embed-standard",
   "top_k": 8
 }
 ```
@@ -200,8 +200,8 @@ Expected event types:
 
 ```json
 {
-  "provider": "gemini",
-  "model": "gemini-embedding-001",
+  "provider": "Skyes Over London",
+  "model": "skAIxU Flow6.7",
   "embeddings": [[0.1, -0.2]],
   "dimensions": 1536,
   "usage": { "input_tokens": 42, "cost_cents": 0 },
@@ -298,7 +298,7 @@ Repeat same forwarding pattern for `gateway-stream` and `gateway-embed`.
 - `NETLIFY_DATABASE_URL`
 - `JWT_SECRET`
 - `ADMIN_PASSWORD`
-- `OPENAI_API_KEY` and/or `ANTHROPIC_API_KEY` and/or `GEMINI_API_KEY`
+- internal lane credentials configured server-side
 
 Strongly recommended:
 
@@ -376,7 +376,7 @@ You must call these endpoints only:
 - `POST /.netlify/functions/gateway-stream`
 - `POST /.netlify/functions/gateway-embed` (only if your feature needs embeddings)
 
-Do not call OpenAI/Anthropic/Gemini URLs directly.
+Do not call direct vendor URLs directly.
 
 ### 15.2 Required Headers
 
@@ -404,8 +404,8 @@ Include when available or required by seat policy:
 ```js
 async function sendChat({ key, messages }) {
   const payload = {
-    provider: "gemini",
-    model: "gemini-2.5-flash",
+    provider: "kaixu",
+    model: "kaixu-chat",
     messages,
     max_tokens: 900,
     temperature: 0.7

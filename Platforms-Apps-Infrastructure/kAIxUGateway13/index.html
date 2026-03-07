@@ -452,12 +452,12 @@
           </div>
           <div class="cols">
             <div>
-              <label>Allowed providers override (comma, optional)</label>
-              <input id="kAllowedProviders" placeholder="openai,anthropic" />
+              <label>Allowed lanes override (comma, optional)</label>
+              <input id="kAllowedProviders" placeholder="lane-a,lane-b" />
             </div>
             <div>
               <label>Allowed models override JSON (optional)</label>
-              <textarea id="kAllowedModels" placeholder="{&quot;openai&quot;:[&quot;gpt-4o-mini&quot;],&quot;anthropic&quot;:[&quot;*&quot;]}" style="min-height:60px;"></textarea>
+              <textarea id="kAllowedModels" placeholder="{&quot;lane-a&quot;:[&quot;model-standard&quot;],&quot;lane-b&quot;:[&quot;*&quot;]}" style="min-height:60px;"></textarea>
             </div>
           </div>
 
@@ -557,8 +557,8 @@
                 <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" id="custRequireInstall" /> Require install_id</label>
               </div>
               <div class="row" style="flex-direction:column; align-items:stretch;">
-                <input id="custAllowedProviders" placeholder="allowed_providers (comma) e.g. openai,anthropic" />
-                <textarea id="custAllowedModels" placeholder="allowed_models JSON (optional) e.g. {\"openai\":[\"gpt-4o-mini\"],\"anthropic\":[\"*\"]}" style="min-height:110px;"></textarea>
+                <input id="custAllowedProviders" placeholder="allowed_providers (comma) e.g. lane-a,lane-b" />
+                <textarea id="custAllowedModels" placeholder="allowed_models JSON (optional) e.g. {\"lane-a\":[\"model-standard\"],\"lane-b\":[\"*\"]}" style="min-height:110px;"></textarea>
               </div>
               <div class="row" style="flex-wrap:wrap;">
                 <button id="saveCustomerConfig" class="btn primary">Save</button>
@@ -845,21 +845,21 @@
       <div>
         <label>Provider</label>
         <select id="embProvider">
-          <option value="openai">OpenAI</option>
-          <option value="gemini">Gemini</option>
-          <option value="voyage">Voyage AI</option>
+          <option value="kaixu-core">kAIxu Core</option>
+          <option value="kaixu-vector">kAIxu Vector</option>
+          <option value="kaixu-fast">kAIxu Fast</option>
         </select>
       </div>
       <div>
         <label>Model</label>
         <select id="embModel">
-          <option value="text-embedding-3-small">text-embedding-3-small (1536d)</option>
-          <option value="text-embedding-3-large">text-embedding-3-large (3072d)</option>
-          <option value="text-embedding-ada-002">text-embedding-ada-002 (1536d)</option>
-          <option value="embedding-001">Gemini embedding-001 (768d)</option>
-          <option value="text-embedding-004">Gemini text-embedding-004 (768d)</option>
-          <option value="voyage-3">voyage-3 (1024d)</option>
-          <option value="voyage-3-lite">voyage-3-lite (512d)</option>
+          <option value="kaixu-embed-standard">kaixu-embed-standard (1536d)</option>
+          <option value="kaixu-embed-large">kaixu-embed-large (3072d)</option>
+          <option value="kaixu-embed-legacy">kaixu-embed-legacy (1536d)</option>
+          <option value="kaixu-embed-compact">kaixu-embed-compact (768d)</option>
+          <option value="kaixu-embed-compact-v2">kaixu-embed-compact-v2 (768d)</option>
+          <option value="kaixu-embed-performance">kaixu-embed-performance (1024d)</option>
+          <option value="kaixu-embed-lite">kaixu-embed-lite (512d)</option>
         </select>
       </div>
     </div>
@@ -873,7 +873,7 @@
       <div>
         <label>Dimensions override (optional)</label>
         <input id="embDimensions" placeholder="auto" />
-        <div class="muted small">Leave blank for model default. OpenAI v3 models support shortening.</div>
+        <div class="muted small">Leave blank for model default. Some lanes support dimension shortening.</div>
       </div>
     </div>
 
@@ -1106,7 +1106,7 @@
   </div>
 
   <div style="margin-top:20px; padding:16px; border:1px solid rgba(255,255,255,0.08); border-radius:8px; background:rgba(138,79,255,0.05);">
-    <p class="muted small" style="margin:0;"><strong>Architecture note:</strong> All embeddings are generated <em>inside</em> the gateway — your clients never call OpenAI/Gemini/Voyage directly for embeddings. The gateway handles model routing, token metering, vector storage (pgvector in Neon), and cosine similarity search. This is <strong>true semantic RAG</strong>: ingest → embed → store → search, all through one authenticated endpoint with the same <code>kx_live_…</code> key.</p>
+    <p class="muted small" style="margin:0;"><strong>Architecture note:</strong> All embeddings are generated <em>inside</em> the gateway - your clients never call external embedding vendors directly. The gateway handles lane routing, token metering, vector storage (pgvector in Neon), and cosine similarity search. This is <strong>true semantic RAG</strong>: ingest -> embed -> store -> search, all through one authenticated endpoint with the same <code>kx_live_…</code> key.</p>
   </div>
 </div>
 <!-- ═══════════════════════════════════════ /EMBEDDINGS ═══════════════════════════════════════ -->
@@ -1123,8 +1123,8 @@
 
           <h3>Normalized chat request</h3>
 <pre class="block">{
-  "provider": "openai" | "anthropic" | "gemini",
-  "model": "...",
+  "provider": "kaixu",
+  "model": "kaixu-chat",
   "messages": [{"role":"user","content":"Hello"}],
   "max_tokens": 256,
   "temperature": 0.7
@@ -1133,8 +1133,8 @@
           <h3>Embeddings — Generate &amp; Store</h3>
           <code class="block">POST /.netlify/functions/gateway-embed</code>
 <pre class="block">{
-  "provider": "openai" | "gemini" | "voyage",
-  "model": "text-embedding-3-small",
+  "provider": "kaixu",
+  "model": "kaixu-embed-standard",
   "input": ["First document", "Second document"],
   "collection": "my-docs",
   "store": true,
@@ -1163,7 +1163,7 @@
 
           <h3>SSE events</h3>
 <pre class="block">event: meta
-data: {"provider":"openai","model":"gpt-4o-mini","month":{"month":"2026-02","cap_cents":2000,"spent_cents":0,"key_cap_cents":500,"key_spent_cents":12}}
+data: {"provider":"kAIxu","model":"kaixu-chat","month":{"month":"2026-02","cap_cents":2000,"spent_cents":0,"key_cap_cents":500,"key_spent_cents":12}}
 
 event: delta
 data: {"text":"Hel"}
@@ -1267,7 +1267,7 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
     <!-- OVERVIEW -->
     <div style="border-left:3px solid #ffd36a; padding-left:16px;">
       <h3 style="color:#ffd36a; margin:0 0 8px;">⚡ How It Works</h3>
-      <p class="muted small">kAIxU Gateway is a <strong>metered AI proxy</strong>. You own the real provider API keys (OpenAI, Anthropic, Gemini). Clients get <strong>kAIxu virtual keys</strong> (<code>kx_live_…</code>) that route through your gateway. You set spend caps, rate limits, and device seats. Clients pay you → you pay providers. The margin is yours.</p>
+      <p class="muted small">kAIxU Gateway is a <strong>metered AI proxy</strong>. You own the private lane credentials. Clients get <strong>kAIxu virtual keys</strong> (<code>kx_live_…</code>) that route through your gateway. You set spend caps, rate limits, and device seats. Clients pay you -> you pay infrastructure costs. The margin is yours.</p>
       <p class="muted small" style="margin-top:6px;">All keys, usage, billing, and audit data live in Neon Postgres (via <code>@netlify/neon</code>). No Redis. No external services unless you add Stripe.</p>
     </div>
 
@@ -1387,19 +1387,19 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
     <div style="border-left:3px solid #a243ff; padding-left:16px;">
       <h3 style="color:#a243ff; margin:0 0 8px;">10. Embeddings Lane (Semantic RAG)</h3>
       <p class="muted small"><strong>What it is:</strong> A complete embeddings pipeline built into the gateway. Generate vector embeddings from any supported provider, store them in pgvector (Neon), and run semantic similarity search — all authenticated through the same <code>kx_live_…</code> key.</p>
-      <p class="muted small" style="margin-top:6px;"><strong>Why it matters:</strong> This is <strong>true semantic RAG</strong>. Your clients don't need their own OpenAI keys, a separate vector database, or a retrieval pipeline. Everything goes through one gateway with metered billing.</p>
+      <p class="muted small" style="margin-top:6px;"><strong>Why it matters:</strong> This is <strong>true semantic RAG</strong>. Your clients do not need separate vendor keys, a separate vector database, or a retrieval pipeline. Everything goes through one gateway with metered billing.</p>
       <p class="muted small" style="margin-top:6px;"><strong>Workflow:</strong></p>
       <ol class="muted small" style="padding-left:18px;">
-        <li>Choose a <strong>provider + model</strong> (OpenAI text-embedding-3-small recommended for cost/performance)</li>
+        <li>Choose a <strong>lane + model</strong> (kaixu-embed-standard recommended for cost/performance)</li>
         <li>Paste or send text(s) → they get embedded and optionally stored in a <strong>collection</strong></li>
         <li>Use <strong>Semantic Search</strong> to query your stored vectors with natural language</li>
         <li>Pipe search results into your chat completions for grounded, RAG-powered responses</li>
       </ol>
-      <p class="muted small" style="margin-top:6px;"><strong>Supported providers:</strong></p>
+      <p class="muted small" style="margin-top:6px;"><strong>Supported lanes:</strong></p>
       <ul class="muted small" style="padding-left:18px; list-style:disc;">
-        <li><strong>OpenAI</strong> — text-embedding-3-small (1536d, cheapest), text-embedding-3-large (3072d, best quality), ada-002 (legacy)</li>
-        <li><strong>Gemini</strong> — embedding-001 (768d), text-embedding-004 (768d)</li>
-        <li><strong>Voyage AI</strong> — voyage-3 (1024d), voyage-3-lite (512d, fastest)</li>
+        <li><strong>kAIxu Standard</strong> - kaixu-embed-standard (1536d), kaixu-embed-large (3072d), kaixu-embed-legacy (1536d)</li>
+        <li><strong>kAIxu Compact</strong> - kaixu-embed-compact (768d), kaixu-embed-compact-v2 (768d)</li>
+        <li><strong>kAIxu Performance</strong> - kaixu-embed-performance (1024d), kaixu-embed-lite (512d)</li>
       </ul>
       <p class="muted small" style="margin-top:6px;"><strong>Collections:</strong> Each collection is a logical namespace. You can have "support-docs", "product-catalog", "knowledge-base", etc. Each tracks its model and dimensions so queries always use the right model.</p>
     </div>
@@ -1450,9 +1450,9 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
           <tr><td>Spend caps</td><td>Customer-level + per-key override (in cents)</td></tr>
           <tr><td>Rate limits</td><td>RPM (per key) + RPD (optional) — DB-backed, no Redis</td></tr>
           <tr><td>Device seats</td><td><code>max_devices_per_key</code> with optional <code>require_install_id</code></td></tr>
-          <tr><td>Chat providers</td><td>OpenAI, Anthropic, Gemini</td></tr>
-          <tr><td>Embed providers</td><td>OpenAI, Gemini, Voyage AI</td></tr>
-          <tr><td>Env vars needed</td><td><code>ADMIN_PASSWORD</code>, <code>JWT_SECRET</code>, <code>OPENAI_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, <code>GEMINI_API_KEY</code>, <code>VOYAGE_API_KEY</code> (optional)</td></tr>
+          <tr><td>Chat lanes</td><td>kAIxu chat lanes (gateway-routed)</td></tr>
+          <tr><td>Embed lanes</td><td>kAIxu embed lanes (gateway-routed)</td></tr>
+          <tr><td>Env vars needed</td><td><code>ADMIN_PASSWORD</code>, <code>JWT_SECRET</code>, and internal lane credentials managed server-side</td></tr>
         </tbody>
       </table>
     </div>

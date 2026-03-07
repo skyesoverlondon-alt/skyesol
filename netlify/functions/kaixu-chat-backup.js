@@ -21,6 +21,12 @@ function parseBody(raw) {
   }
 }
 
+function getBearer(event) {
+  const auth = String(event?.headers?.authorization || event?.headers?.Authorization || "");
+  if (!auth.startsWith("Bearer ")) return null;
+  return auth.slice(7).trim();
+}
+
 function normalizeMessages(body) {
   if (Array.isArray(body.messages) && body.messages.length) {
     return body.messages
@@ -34,6 +40,9 @@ function normalizeMessages(body) {
 }
 
 exports.handler = async (event) => {
+  const PUBLIC_PROVIDER_NAME = process.env.KAIXU_PUBLIC_PROVIDER_NAME || "Skyes Over London";
+  const PUBLIC_MODEL_NAME = process.env.KAIXU_PUBLIC_MODEL_NAME || "skAIxU Flow6.7";
+
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 204, headers: corsHeaders, body: "" };
   }
@@ -42,11 +51,22 @@ exports.handler = async (event) => {
     return json(405, { ok: false, error: "Method not allowed" });
   }
 
+  const backupToken = String(process.env.KAIXU_BACKUP_TOKEN || "").trim();
+  if (backupToken) {
+    const callerToken = getBearer(event);
+    if (!callerToken || callerToken !== backupToken) {
+      return json(401, {
+        ok: false,
+        error: "Unauthorized"
+      }, { "x-kaixu-backup": "locked" });
+    }
+  }
+
   const apiKey = process.env.KAIXU_BACKUP_OPENAI_API_KEY || process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return json(503, {
       ok: false,
-      error: "Backup brain is off (missing KAIXU_BACKUP_OPENAI_API_KEY or OPENAI_API_KEY)."
+      error: "Backup brain is unavailable."
     }, { "x-kaixu-backup": "off" });
   }
 
@@ -86,9 +106,9 @@ exports.handler = async (event) => {
     if (!upstream.ok) {
       return json(upstream.status, {
         ok: false,
-        error: data?.error?.message || "Backup provider request failed",
-        provider: "openai",
-        model
+        error: "Backup brain request failed",
+        provider: PUBLIC_PROVIDER_NAME,
+        model: PUBLIC_MODEL_NAME
       }, { "x-kaixu-backup": "on" });
     }
 
@@ -96,19 +116,18 @@ exports.handler = async (event) => {
 
     return json(200, {
       ok: true,
-      provider: "openai",
+      provider: PUBLIC_PROVIDER_NAME,
       lane: "kaixu-chat-backup",
-      model: data?.model || model,
+      model: PUBLIC_MODEL_NAME,
       text: content,
-      usage: data?.usage || null,
-      raw: data
+      usage: data?.usage || null
     }, { "x-kaixu-backup": "on" });
   } catch (err) {
     return json(502, {
       ok: false,
-      error: String(err?.message || err),
-      provider: "openai",
-      model
+      error: "Backup brain request failed",
+      provider: PUBLIC_PROVIDER_NAME,
+      model: PUBLIC_MODEL_NAME
     }, { "x-kaixu-backup": "on" });
   }
 };

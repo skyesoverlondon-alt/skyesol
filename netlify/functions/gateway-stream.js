@@ -12,6 +12,7 @@ import { assertAllowed } from "./_lib/allowlist.js";
 import { enforceKaixuMessages } from "./_lib/kaixu.js";
 
 const PUBLIC_PROVIDER_NAME = process.env.KAIXU_PUBLIC_PROVIDER_NAME || "Skyes Over London";
+const PUBLIC_MODEL_NAME = process.env.KAIXU_PUBLIC_MODEL_NAME || "skAIxU Flow6.7";
 
 /**
  * SSE endpoint:
@@ -37,7 +38,7 @@ export default wrap(async (req) => {
   const provider = target.provider;
   const model = target.model;
   const public_provider = PUBLIC_PROVIDER_NAME;
-  const public_model = requested_model || model;
+  const public_model = PUBLIC_MODEL_NAME;
   const messages_in = body.messages;
   const max_tokens = Number.isFinite(body.max_tokens) ? parseInt(body.max_tokens, 10) : 1024;
   const temperature = Number.isFinite(body.temperature) ? body.temperature : 1;
@@ -124,8 +125,6 @@ export default wrap(async (req) => {
       send("meta", {
         provider: public_provider,
         model: public_model,
-        requested_provider: requested_provider || public_provider,
-        requested_model: public_model,
         telemetry: { install_id: install_id || null },
         month: {
           month,
@@ -156,9 +155,7 @@ export default wrap(async (req) => {
           send("error", {
             error: "Unknown provider",
             provider: public_provider,
-            model: public_model,
-            requested_provider: requested_provider || public_provider,
-            requested_model: public_model
+            model: public_model
           });
           clearInterval(ping);
 controller.close();
@@ -168,9 +165,7 @@ controller.close();
         send("error", {
           error: "Provider error",
           provider: public_provider,
-          model: public_model,
-          requested_provider: requested_provider || public_provider,
-          requested_model: public_model
+          model: public_model
         });
         clearInterval(ping);
 controller.close();
@@ -267,8 +262,6 @@ controller.close();
         send("done", {
           provider: public_provider,
           model: public_model,
-          requested_provider: requested_provider || public_provider,
-          requested_model: public_model,
           usage: { input_tokens, output_tokens, cost_cents },
           month: {
             month,
@@ -285,7 +278,7 @@ controller.close();
       } catch (err) {
         clearInterval(ping);
         controller.enqueue(encoder.encode(`event: error\n`));
-        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: "Stream error", provider: public_provider, model: public_model, requested_provider: requested_provider || public_provider, requested_model: public_model })}\n\n`));
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: "Stream error", provider: public_provider, model: public_model })}\n\n`));
         clearInterval(ping);
         controller.close();
       }

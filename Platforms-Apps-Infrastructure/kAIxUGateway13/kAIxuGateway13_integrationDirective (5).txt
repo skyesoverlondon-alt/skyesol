@@ -4,9 +4,9 @@ You are modifying or building a web application. This is a hard requirement: the
 
 ABSOLUTE PROHIBITIONS (ZERO TOLERANCE)
 
-Do not call OpenAI, Anthropic, or Gemini endpoints directly.
+Do not call vendor model endpoints directly.
 
-Do not use any OpenAI/Anthropic/Gemini SDKs (client or server).
+Do not use direct vendor SDKs (client or server).
 
 Remove/disable any direct HTTP calls to:
 
@@ -77,7 +77,7 @@ REQUIRED REQUEST PAYLOAD SHAPE (MUST MATCH)
 Every AI chat request sent to the gateway must use this JSON shape:
 
 {
-"provider": "openai" | "anthropic" | "gemini",
+"provider": "kaixu",
 "model": "string",
 "messages": [{"role":"system"|"user"|"assistant","content":"text"}],
 "max_tokens": 123,
@@ -87,8 +87,8 @@ Every AI chat request sent to the gateway must use this JSON shape:
 EMBEDDINGS REQUEST PAYLOAD (gateway-embed):
 
 {
-  "provider": "gemini",
-  "model": "gemini-embedding-001",
+  "provider": "kaixu",
+  "model": "kaixu-embed-standard",
   "input": "text to embed" | ["text1", "text2"],
   "taskType": "RETRIEVAL_QUERY" | "RETRIEVAL_DOCUMENT",
   "title": "optional doc title",
@@ -98,12 +98,12 @@ EMBEDDINGS REQUEST PAYLOAD (gateway-embed):
 taskType values: RETRIEVAL_QUERY (for search queries), RETRIEVAL_DOCUMENT (for
 document ingestion — pair with title for best results).
 outputDimensionality: 1536 recommended (so pgvector column = VECTOR(1536)).
-Gemini default is 3072 dims; 1536 halves storage cost with minimal quality loss.
+Default lane dimensionality may vary; 1536 halves storage cost with minimal quality loss.
 
 EMBEDDINGS RESPONSE:
 {
-  "provider": "gemini",
-  "model": "gemini-embedding-001",
+  "provider": "Skyes Over London",
+  "model": "skAIxU Flow6.7",
   "embeddings": [[0.012, -0.034, …]],
   "dimensions": 1536,
   "usage": { "input_tokens": 42, "cost_cents": 0 },
@@ -366,7 +366,7 @@ NETLIFY FUNCTIONS — netlify/functions/
     http.js            : CORS builder, JSON response utilities (110 lines)
     wrap.js            : Function wrapper with error handling + CORS (105 lines)
     kaixu.js           : Build ID, schema version, system hash constants (25 lines)
-    providers.js       : AI provider routing + streaming + embeddings (callGeminiEmbed) (420 lines)
+    providers.js       : AI lane routing + streaming + embeddings helpers (420 lines)
     pricing.js         : Pricing config loader (40 lines)
     ratelimit.js       : Rate limiting via DB + optional Upstash Redis (103 lines)
     invoices.js        : Invoice generation with monthly range calc (149 lines)
@@ -396,9 +396,7 @@ REQUIRED ENVIRONMENT VARIABLES (Netlify Dashboard → Site → Environment Varia
   JWT_SECRET           : Secret for signing/verifying session JWTs.
   ADMIN_PASSWORD       : Admin panel authentication password.
   DEMONKEY             : Executive Officer Key for admin site menu access.
-  OPENAI_API_KEY       : OpenAI provider key (consumed by gateway functions only).
-  ANTHROPIC_API_KEY    : Anthropic provider key (consumed by gateway functions only).
-  GEMINI_API_KEY       : Gemini provider key (consumed by gateway functions only).
+  INTERNAL_PROVIDER_KEYS : Internal lane credentials (consumed by gateway functions only).
   DB_ENCRYPTION_KEY    : AES encryption key for sensitive DB fields (key vault, Netlify/GitHub tokens).
   KEY_PEPPER           : Pepper for API key hashing (HMAC-SHA256). CRITICAL: Do NOT change
                          after keys are created — existing hashes will be orphaned.

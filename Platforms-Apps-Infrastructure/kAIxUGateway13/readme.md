@@ -34,10 +34,7 @@ This build keeps ops tiny (Netlify DB + Netlify Functions) while adding the miss
 ## Pricing (P0 / production blocker)
 Billing + caps depend on `pricing/pricing.json`.
 
-This build ships with pricing entries for:
-- OpenAI: `gpt-4o`, `gpt-4o-mini`
-- Anthropic: `claude-3-5-sonnet-20241022`, `claude-opus-4-6`
-- Gemini: `gemini-2.5-flash`
+This build ships with pricing entries for internal gateway lanes.
 
 All rates are **provider list price + 31%** (your markup).
 
@@ -109,10 +106,8 @@ Required:
 Optional hardening:
 - `DISABLE_ADMIN_PASSWORD_HEADER=true` to disable legacy `x-admin-password` header auth and require admin JWTs only.
 
-Providers (set any you want to sell):
-- `OPENAI_API_KEY` (optional)
-- `ANTHROPIC_API_KEY` (optional)
-- `GEMINI_API_KEY` (optional)
+Providers (set internal lane credentials server-side as needed):
+- internal provider credentials (optional, gateway-managed)
 
 CORS:
 - `ALLOWED_ORIGINS` = comma-separated list (e.g. https://yourapp.com,https://admin.yourapp.com)
@@ -193,8 +188,8 @@ Headers:
 Body (same as gateway-chat):
 ```json
 {
-  "provider": "openai",
-  "model": "gpt-4o-mini",
+  "provider": "kaixu",
+  "model": "kaixu-chat",
   "messages": [{"role":"user","content":"Write a long response..."}],
   "max_tokens": 8192,
   "temperature": 0.7

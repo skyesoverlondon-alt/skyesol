@@ -50,17 +50,15 @@ async function pingOnce(timeoutMs) {
       db_ok:      dbOk,
       status:     res.status,
       ms,
-      error:      !httpOk ? `HTTP ${res.status}` : (dbOk === false ? "db_down" : parseErr),
+      error:      !httpOk ? "http_unavailable" : (dbOk === false ? "db_degraded" : (parseErr ? "invalid_response" : null)),
       error_type: !httpOk ? "http"               : (dbOk === false ? "db"       : (parseErr ? "parse" : null)),
-      build:      body?.build || null,
     };
   } catch (e) {
     return {
       ok: false, http_ok: false, db_ok: null, status: null,
       ms:         Date.now() - start,
-      error:      e?.name === "AbortError" ? `timeout (>${timeoutMs}ms)` : (e?.message || String(e)),
+      error:      e?.name === "AbortError" ? "timeout" : "network_unavailable",
       error_type: classifyError(e),
-      build:      null,
     };
   } finally {
     clearTimeout(tid);
@@ -88,7 +86,7 @@ export default async () => {
     result = await pingWithRetry();
   } catch (fatal) {
     result = { ok: false, http_ok: false, db_ok: null, status: null, ms: 0,
-               attempt: 0, error: String(fatal?.message || fatal), error_type: "fatal", build: null };
+           attempt: 0, error: "heartbeat_failed", error_type: "fatal" };
   }
 
   const record = { ts, ...result };
