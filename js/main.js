@@ -49,6 +49,7 @@ function attachNav(){
     { name: 'SkyeOps', href: '/SkyeOps/index.html', match: /SkyeOps/i }
   ];
   const servicePages = [
+    { name: 'SkyeFyve', href: '/Services/SkyeFyve/index.html', match: /SkyeFyve/i },
     { name: 'Web Builds', href: '/Services/WebBuilds/WebBuilds.html', match: /WebBuilds/i },
     { name: 'AI & Data Apps', href: '/Services/ai-data-apps.html', match: /ai-data-apps/i },
     { name: 'Portals & Hubs', href: '/Services/portals-hubs.html', match: /portals-hubs/i },
