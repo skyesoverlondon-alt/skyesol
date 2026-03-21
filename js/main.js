@@ -49,13 +49,23 @@ function attachNav(){
     { name: 'SkyeOps', href: '/SkyeOps/index.html', match: /SkyeOps/i }
   ];
   const servicePages = [
-    { name: 'SkyeFyve', href: '/Services/SkyeFyve/index.html', match: /SkyeFyve/i },
-    { name: 'Web Builds', href: '/Services/WebBuilds/WebBuilds.html', match: /WebBuilds/i },
+    { name: 'SkyeLeticX Portal', href: '/skyeleticx-portal.html', match: /skyeleticx-portal/i },
+    { name: 'SkyeFyve', href: '/Services/SkyeFyve/index.html', match: /Services\/SkyeFyve/i },
+    { name: 'Web Builds', href: '/Services/WebBuilds.html', match: /WebBuilds/i },
     { name: 'AI & Data Apps', href: '/Services/ai-data-apps.html', match: /ai-data-apps/i },
     { name: 'Portals & Hubs', href: '/Services/portals-hubs.html', match: /portals-hubs/i },
     { name: 'Ecommerce & Payments', href: '/Services/ecommerce-payments.html', match: /ecommerce-payments/i },
     { name: 'Intake & Routing', href: '/Services/intake-routing.html', match: /intake-routing/i },
     { name: 'Trust Surfaces', href: '/Services/trust-surfaces.html', match: /trust-surfaces/i }
+  ];
+  const explorePages = [
+    { name: 'Founder', href: '/about.html', match: /(^|\/)about(\.html)?$/i },
+    { name: 'Platforms', href: '/platforms.html', match: /(^|\/)platforms(\.html)?$/i },
+    { name: 'Network', href: '/network.html', match: /(^|\/)network(\.html)?$/i },
+    { name: 'Credibility', href: '/credibility.html', match: /(^|\/)credibility(\.html)?$/i },
+    { name: 'Blog', href: '/blog.html', match: /(^|\/)blog(\.html)?$/i },
+    { name: 'Status', href: '/status.html', match: /(^|\/)status(\.html)?$/i },
+    { name: 'Contact', href: '/contact.html', match: /(^|\/)contact(\.html)?$/i }
   ];
 
   // Close all other dropdowns when one opens
@@ -63,6 +73,34 @@ function attachNav(){
     links.querySelectorAll('.nav-dropdown').forEach(dd => {
       if (dd !== except) dd.classList.remove('expanded');
     });
+  }
+
+  function syncOrderedLinks(container, pages) {
+    if (!container) return;
+    const existingLinks = Array.from(container.querySelectorAll(':scope > a'));
+    const linksByName = new Map(existingLinks.map(link => [link.textContent.trim(), link]));
+    const ordered = [];
+
+    pages.forEach(page => {
+      let anchor = linksByName.get(page.name);
+      if (!anchor) {
+        anchor = document.createElement('a');
+        anchor.textContent = page.name;
+      }
+      anchor.href = page.href;
+      ordered.push(anchor);
+      linksByName.delete(page.name);
+    });
+
+    existingLinks.forEach(link => {
+      const label = link.textContent.trim();
+      if (linksByName.has(label)) {
+        ordered.push(link);
+        linksByName.delete(label);
+      }
+    });
+
+    ordered.forEach(link => container.appendChild(link));
   }
 
   function attachServicesDropdown() {
@@ -101,20 +139,13 @@ function attachNav(){
       // Ensure existing dropdown has all service links
       const dropdownMenuEl = dropdown.querySelector('.dropdown-menu');
       if (dropdownMenuEl) {
-        const existing = new Set(Array.from(dropdownMenuEl.querySelectorAll('a')).map(a => a.textContent.trim()));
-        servicePages.forEach(page => {
-          if (!existing.has(page.name)) {
-            const anchor = document.createElement('a');
-            anchor.textContent = page.name;
-            anchor.href = page.href;
-            dropdownMenuEl.appendChild(anchor);
-          }
-        });
+        syncOrderedLinks(dropdownMenuEl, servicePages);
       }
     }
     const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
     const dropdownMenu = dropdown.querySelector('.dropdown-menu');
     if (!dropdownToggle || !dropdownMenu) return;
+    syncOrderedLinks(dropdownMenu, servicePages);
     const markActive = () => {
       const path = location.pathname;
       let active = false;
@@ -230,8 +261,83 @@ function attachNav(){
     toggle.addEventListener('click', () => dropdown.classList.remove('expanded'));
   }
 
+  function attachExploreDropdown() {
+    if (!links) return;
+    let dropdown = links.querySelector('.nav-dropdown[data-type="explore"]');
+    const anchors = [];
+
+    Array.from(links.children).forEach(child => {
+      if (child.tagName !== 'A') return;
+      const label = child.textContent.trim();
+      const matched = explorePages.find(page => page.name === label);
+      if (matched) anchors.push(child);
+    });
+
+    if (!dropdown) {
+      dropdown = document.createElement('div');
+      dropdown.className = 'nav-dropdown';
+      dropdown.dataset.type = 'explore';
+      const dropdownToggle = document.createElement('button');
+      dropdownToggle.type = 'button';
+      dropdownToggle.className = 'dropdown-toggle';
+      dropdownToggle.textContent = 'Explore';
+      const dropdownMenu = document.createElement('div');
+      dropdownMenu.className = 'dropdown-menu';
+      dropdown.appendChild(dropdownToggle);
+      dropdown.appendChild(dropdownMenu);
+
+      const suiteDropdown = links.querySelector('.nav-dropdown[data-type="suite"]');
+      if (suiteDropdown && suiteDropdown.nextSibling) {
+        links.insertBefore(dropdown, suiteDropdown.nextSibling);
+      } else if (suiteDropdown) {
+        links.appendChild(dropdown);
+      } else {
+        links.appendChild(dropdown);
+      }
+    }
+
+    const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+    if (!dropdownMenu || !dropdownToggle) return;
+
+    anchors.forEach(anchor => dropdownMenu.appendChild(anchor));
+    syncOrderedLinks(dropdownMenu, explorePages);
+
+    const markActive = () => {
+      const path = location.pathname;
+      let active = false;
+      dropdownMenu.querySelectorAll('a').forEach(link => {
+        const label = link.textContent.trim();
+        const page = explorePages.find(item => item.name === label);
+        if (page && page.match.test(path)) {
+          link.classList.add('active');
+          active = true;
+        } else {
+          link.classList.remove('active');
+        }
+      });
+      dropdownToggle.classList.toggle('active', active);
+    };
+
+    markActive();
+    if (!dropdownToggle.dataset.exploreBound) {
+      dropdownToggle.dataset.exploreBound = 'true';
+      dropdownToggle.addEventListener('click', event => {
+        event.stopPropagation();
+        closeAllDropdowns(dropdown);
+        dropdown.classList.toggle('expanded');
+      });
+      document.addEventListener('click', () => dropdown.classList.remove('expanded'));
+      dropdownMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => dropdown.classList.remove('expanded'));
+      });
+      toggle.addEventListener('click', () => dropdown.classList.remove('expanded'));
+    }
+  }
+
   attachServicesDropdown();
   attachSuiteDropdown();
+  attachExploreDropdown();
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.pageYOffset > 60);
   }, { passive: true });
@@ -240,7 +346,7 @@ function attachNav(){
   //    casestudies, company, leadership, member — any type not handled above)
   links.querySelectorAll('.nav-dropdown').forEach(dd => {
     const type = dd.dataset.type || '';
-    if (type === 'services' || type === 'suite') return; // already wired above
+    if (type === 'services' || type === 'suite' || type === 'explore') return; // already wired above
     const btn = dd.querySelector('.dropdown-toggle');
     const menu = dd.querySelector('.dropdown-menu');
     if (!btn || !menu || btn.dataset.genericBound) return;
@@ -263,6 +369,7 @@ window.SOL = window.SOL || {};
 window.SOL.attachNav = attachNav;
 window.SOL.attachMegaNav = attachMegaNav;
 attachNav();
+attachMegaNav();
 
 // ── SCROLL REVEAL ──
 (function(){
@@ -314,194 +421,72 @@ attachNav();
 // ── Mega Nav ───────────────────────────────────────
 function attachMegaNav(){
   const menuBtn   = document.getElementById('menuBtn');
-  if (!menuBtn) return;
-
-  let megaNav = document.getElementById('megaNav');
-  if (!megaNav) {
-    megaNav = document.createElement('div');
-    megaNav.id = 'megaNav';
-    megaNav.className = 'mega-nav';
-    megaNav.setAttribute('role', 'dialog');
-    megaNav.setAttribute('aria-label', 'Site navigation');
-    megaNav.innerHTML = '<button class="mega-nav-close" id="megaNavClose">&#x2715; CLOSE</button><div class="mega-nav-grid"></div>';
-    document.body.appendChild(megaNav);
-  }
-
-  let megaClose = megaNav.querySelector('#megaNavClose');
-  if (!megaClose) {
-    megaClose = document.createElement('button');
-    megaClose.className = 'mega-nav-close';
-    megaClose.id = 'megaNavClose';
-    megaClose.innerHTML = '&#x2715; CLOSE';
-    megaNav.prepend(megaClose);
-  }
-
-  let grid = megaNav.querySelector('.mega-nav-grid');
-  if (!grid) {
-    grid = document.createElement('div');
-    grid.className = 'mega-nav-grid';
-    megaNav.appendChild(grid);
-  }
-
-  function normalizeHref(href) {
-    if (!href) return null;
-    try {
-      const parsed = new URL(href, window.location.origin);
-      return parsed.pathname + (parsed.search || '');
-    } catch {
-      return href;
-    }
-  }
-
-  function titleFromPath(pathname) {
-    if (!pathname || pathname === '/') return 'Home';
-    const clean = decodeURIComponent(pathname).replace(/\/+$/, '');
-    const bits = clean.split('/').filter(Boolean);
-    if (!bits.length) return 'Home';
-    let tail = bits[bits.length - 1];
-    if (/^index\.html?$/i.test(tail) && bits.length > 1) {
-      tail = bits[bits.length - 2];
-    }
-    return tail.replace(/\.html?$/i, '').replace(/[-_]+/g, ' ').trim() || 'Page';
-  }
-
-  function pushUnique(map, folder, item) {
-    if (!folder || !item || !item.href) return;
-    const key = folder.trim() || 'Root';
-    const list = map.get(key) || [];
-    if (!list.some(existing => existing.href === item.href)) {
-      list.push(item);
-      map.set(key, list);
-    }
-  }
-
-  function collectExistingGroups() {
-    const groups = new Map();
-    const cols = Array.from(grid.querySelectorAll('.mega-nav-col'));
-    cols.forEach(col => {
-      let folder = null;
-      Array.from(col.children).forEach(node => {
-        if (node.classList && node.classList.contains('mega-nav-label')) {
-          folder = node.textContent.trim() || folder || 'Links';
-          if (!groups.has(folder)) groups.set(folder, []);
-          return;
-        }
-        if (node.tagName === 'A') {
-          const href = normalizeHref(node.getAttribute('href'));
-          const title = node.textContent.trim() || titleFromPath(href || '/');
-          pushUnique(groups, folder || 'Links', { title, href });
-        }
-      });
-    });
-    return groups;
-  }
-
-  function sortGroups(groups) {
-    const entries = Array.from(groups.entries()).map(([folder, links]) => {
-      const sortedLinks = links.slice().sort((left, right) => left.title.localeCompare(right.title));
-      return [folder, sortedLinks];
-    });
-    entries.sort((left, right) => {
-      if (left[0] === 'Root') return -1;
-      if (right[0] === 'Root') return 1;
-      return left[0].localeCompare(right[0]);
-    });
-    return entries;
-  }
-
-  function renderGroups(groups) {
-    const sorted = sortGroups(groups);
-    grid.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    sorted.forEach(([folder, links], index) => {
-      const col = document.createElement('div');
-      col.className = 'mega-nav-col mega-folder';
-      const toggle = document.createElement('button');
-      toggle.type = 'button';
-      toggle.className = 'mega-folder-toggle';
-      toggle.setAttribute('aria-expanded', index === 0 ? 'true' : 'false');
-      toggle.innerHTML = '<span class="mega-folder-name"></span><span class="mega-folder-count"></span>';
-      toggle.querySelector('.mega-folder-name').textContent = folder;
-      toggle.querySelector('.mega-folder-count').textContent = String(links.length);
-
-      const list = document.createElement('div');
-      list.className = 'mega-folder-links';
-      links.forEach(link => {
-        const anchor = document.createElement('a');
-        anchor.href = link.href;
-        anchor.textContent = link.title;
-        list.appendChild(anchor);
-      });
-
-      if (index === 0) col.classList.add('expanded');
-      toggle.addEventListener('click', () => {
-        const expanded = col.classList.toggle('expanded');
-        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      });
-
-      col.appendChild(toggle);
-      col.appendChild(list);
-      fragment.appendChild(col);
-    });
-    grid.appendChild(fragment);
-  }
-
-  async function hydrateFromSitemap() {
-    let xmlText = '';
-    try {
-      const response = await fetch('/sitemap.xml', { cache: 'no-cache' });
-      if (!response.ok) throw new Error('sitemap unavailable');
-      xmlText = await response.text();
-    } catch {
-      return;
-    }
-
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(xmlText, 'application/xml');
-    const locs = Array.from(xml.querySelectorAll('url > loc'));
-    if (!locs.length) return;
-
-    const groups = new Map();
-    locs.forEach(loc => {
-      const raw = (loc.textContent || '').trim();
-      if (!raw) return;
-      let url;
-      try {
-        url = new URL(raw, window.location.origin);
-      } catch {
-        return;
-      }
-      const path = url.pathname || '/';
-      const bits = decodeURIComponent(path).replace(/^\/+/, '').split('/').filter(Boolean);
-      const folder = bits.length ? bits[0] : 'Root';
-      const href = normalizeHref(path + (url.search || ''));
-      const title = titleFromPath(path);
-      pushUnique(groups, folder, { title, href });
-    });
-
-    if (!groups.size) return;
-    renderGroups(groups);
-  }
-
-  if (megaNav.dataset.built !== 'true') {
-    // Use authored menu columns when a page provides them.
-    // Otherwise, build a fallback from known links/sitemap so MENU is never blank.
-    const hasAuthoredColumns = grid.querySelectorAll('.mega-nav-col').length > 0;
-    if (!hasAuthoredColumns) {
-      const existingGroups = collectExistingGroups();
-      if (existingGroups.size) {
-        renderGroups(existingGroups);
-      }
-      hydrateFromSitemap();
-    }
-    megaNav.dataset.built = 'true';
-  }
-
-  function openNav()  { megaNav.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-  function closeNav() { megaNav.style.display = 'none';  document.body.style.overflow = ''; }
-
+  const megaNav   = document.getElementById('megaNav');
+  const megaClose = document.getElementById('megaNavClose');
+  if (!menuBtn || !megaNav) return;
   if (menuBtn.dataset.megaBound === 'true') return; // avoid double-binding
   menuBtn.dataset.megaBound = 'true';
+
+  const servicePages = [
+    { name: 'SkyeLeticX Portal', href: '/skyeleticx-portal.html' },
+    { name: 'SkyeFyve', href: '/Services/SkyeFyve/index.html' },
+    { name: 'Web Builds', href: '/Services/WebBuilds.html' },
+    { name: 'AI & Data Apps', href: '/Services/ai-data-apps.html' },
+    { name: 'Portals & Hubs', href: '/Services/portals-hubs.html' },
+    { name: 'Ecommerce & Payments', href: '/Services/ecommerce-payments.html' },
+    { name: 'Intake & Routing', href: '/Services/intake-routing.html' },
+    { name: 'Trust Surfaces', href: '/Services/trust-surfaces.html' }
+  ];
+  const grid = megaNav.querySelector('.mega-nav-grid');
+  if (grid) {
+    const cols = Array.from(grid.querySelectorAll('.mega-nav-col'));
+    let servicesCol = cols.find(col => {
+      const label = col.querySelector('.mega-nav-label');
+      return label && label.textContent.trim().toLowerCase() === 'services';
+    });
+    const platformCol = cols.find(col => {
+      const label = col.querySelector('.mega-nav-label');
+      return label && label.textContent.trim().toLowerCase() === 'platform';
+    });
+    if (!servicesCol) {
+      servicesCol = document.createElement('div');
+      servicesCol.className = 'mega-nav-col';
+      servicesCol.setAttribute('data-col', 'services');
+      const label = document.createElement('div');
+      label.className = 'mega-nav-label';
+      label.textContent = 'Services';
+      servicesCol.appendChild(label);
+      const insertBeforeNode = platformCol || null;
+      if (insertBeforeNode) {
+        grid.insertBefore(servicesCol, insertBeforeNode);
+      } else {
+        grid.appendChild(servicesCol);
+      }
+    }
+    const existingLinks = Array.from(servicesCol.querySelectorAll(':scope > a'));
+    const linksByName = new Map(existingLinks.map(link => [link.textContent.trim(), link]));
+    const ordered = [];
+    servicePages.forEach(page => {
+      let anchor = linksByName.get(page.name);
+      if (!anchor) {
+        anchor = document.createElement('a');
+        anchor.textContent = page.name;
+      }
+      anchor.href = page.href;
+      ordered.push(anchor);
+      linksByName.delete(page.name);
+    });
+    existingLinks.forEach(link => {
+      const label = link.textContent.trim();
+      if (linksByName.has(label)) {
+        ordered.push(link);
+        linksByName.delete(label);
+      }
+    });
+    ordered.forEach(link => servicesCol.appendChild(link));
+  }
+  function openNav()  { megaNav.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  function closeNav() { megaNav.style.display = 'none';  document.body.style.overflow = ''; }
   menuBtn.addEventListener('click', openNav);
   if (megaClose) megaClose.addEventListener('click', closeNav);
   megaNav.addEventListener('click', function(e){ if (e.target === megaNav) closeNav(); });
