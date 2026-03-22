@@ -14,6 +14,7 @@
 /skyletix-portal                /skyeleticx-portal.html  301
 /skyletix-portal/               /skyeleticx-portal.html  301
 /skyletix-portal.html           /skyeleticx-portal.html  301
+/home.html                      /SkyeLeticXOfficialWebsite/home.html  301
 
 /gateway         /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
 /gateway/        /Platforms-Apps-Infrastructure/kAIxUGateway13/index.html  301
@@ -102,6 +103,10 @@
 /kAIxU                              /kAIxu/index.html   301
 /kAIxU/                             /kAIxu/index.html   301
 /kAIxU/*                            /kAIxu/:splat       200
+/SkyeDocx/index.html               /SkyeDocx/homepage.html   301
+/SkyeDocx/assets/icon/brand/*      /SkyeDocx/assets/icons/brand/:splat   200
+/SkyeDocxPro/index.html            /SkyeDocx/homepage.html   301
+/SkyeDocxPro/assets/icon/brand/*   /SkyeDocx/assets/icons/brand/:splat   200
 /SkyeDocxPro                        /SkyeDocx/index.html   301
 /SkyeDocxPro/                       /SkyeDocx/index.html   301
 /SkyeDocxPro/*                      /SkyeDocx/:splat       200
@@ -153,6 +158,18 @@
 /assets/svs.css               /Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/svs.css                         200
 /assets/zip.js                /Platforms-Apps-Infrastructure/BusinessLaunchGo/assets/zip.js                          200
 /assets/user.js               /gateway/assets/user.js                          200
+/assets/mail-ui.css           /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/mail-ui.css  200
+/assets/mail-ui.js            /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/mail-ui.js  200
+/assets/mailbox-page.js       /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/mailbox-page.js  200
+/assets/contacts-page.js      /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/contacts-page.js  200
+/assets/settings-page.js      /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/settings-page.js  200
+/assets/compose-page.js       /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/compose-page.js  200
+/assets/thread-page.js        /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/thread-page.js  200
+/assets/message-page.js       /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/message-page.js  200
+/assets/drafts-page.js        /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/drafts-page.js  200
+/assets/kaixuGateway.js       /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/kaixuGateway.js  200
+/assets/cryptoVault.js        /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/assets/cryptoVault.js  200
+/assets/media/skyes-primary-logo.png  /Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/skyes-primary-logo.png  200
 
 /assets/dual_lane_funnel_system_brief.pdf            /Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/dual_lane_funnel_system_brief.pdf            200
 /assets/dual_lane_funnel_valuation_certificate.pdf  /Platforms-Apps-Infrastructure/DualLaneFunnel/public/assets/dual_lane_funnel_valuation_certificate.pdf  200
@@ -224,6 +241,48 @@
 
 # Blog canonical alias
 /blog/index.html             /blog.html                                                       301
+
+# Sitewide compatibility routes for nested app surfaces
+/thank-you.html              /thanks.html  301
+/trust                       /kAIxu/trust.html  301
+/trust/                      /kAIxu/trust.html  301
+/kaixu/pricing               /kAIxu/pricing.html  301
+/kaixu/pricing/              /kAIxu/pricing.html  301
+/kaixu/trust                 /kAIxu/trust.html  301
+/kaixu/trust/                /kAIxu/trust.html  301
+/0megagate                   /Services/0megaGate/0megagate-product-page.html  301
+/0megagate/                  /Services/0megaGate/0megagate-product-page.html  301
+/compose.html                /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/compose.html  200
+/dashboard.html              /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/dashboard.html  200
+/sent.html                   /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/sent.html  200
+/drafts.html                 /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/drafts.html  200
+/spam.html                   /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/spam.html  200
+/trash.html                  /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/trash.html  200
+/contacts.html               /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/contacts.html  200
+/settings.html               /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/settings.html  200
+/keys.html                   /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/keys.html  200
+/send.html                   /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/send.html  200
+/message.html                /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/message.html  200
+/thread.html                 /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/thread.html  200
+/login.html                  /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/login.html  200
+/signup.html                 /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/signup.html  200
+/onboarding.html             /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/onboarding.html  200
+/founder.html                /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/founder.html  200
+/ai.html                     /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/ai.html  200
+/icons/icon-192.png          /Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/icons/icon-192.png  200
+/Services/kAIxUGatedPlatform.html  /Services/kAIxU-Powered-Platforms/kAIxUGatedPlatform.html  301
+/Service-Page-Makeover/*     /Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/:splat  200
+/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/*  /Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/products/:splat  200
+/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-FlowPro/index.html  /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-FlowPro/index.html  200
+/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/assets/*  /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/assets/:splat  200
+/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/Branching%20Apps/*  /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/:splat  200
+/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/admin/index.html  /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/index.html  200
+/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx:Pro-Suite/kAIxu/suite-gateway-nav.js  /Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeBookx:Pro-Suite/suite-gateway-nav.js  200
+/assets/media/founder.png    /Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/founder.png  200
+/sitemap/                    /sitemap-visual.html  301
+/accessibility/              /contact.html  301
+/SovereignVariables/icon-192.png  /Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/icons/icon-192.png  200
+/Blogs/Phoenix%20Arizona/index.html  /Blogs/PhoenixValleyBlogHome.html  301
 
 # THE NET WORKS FEATURING dispatch aliases
 /insights/phoenix-dispatch/:slug/   /THE%20NET%20WORKS/FEATURING/:slug.html                  301

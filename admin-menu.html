@@ -94,9 +94,9 @@
           let title = it.title ? escapeHtml(it.title) : file;
           let link = null;
           if (it.urlPath) {
-            link = `<a href="${escapeHtml(it.urlPath)}" target="_blank" rel="noopener">${title}</a>`;
+            link = `<a href="${escapeHtml(it.urlPath)}" target="_blank" rel="noopener noreferrer">${title}</a>`;
           } else if (ext === ".md" || ext === ".txt" || ext === ".js" || ext === ".mjs" || ext === ".json" || ext === ".css") {
-            link = `<a href="/${file}" target="_blank" rel="noopener">${title}</a>`;
+            link = `<a href="/${file}" target="_blank" rel="noopener noreferrer">${title}</a>`;
           } else {
             link = `<span>${title}</span>`;
           }

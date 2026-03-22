@@ -1,11 +1,16 @@
 // SkyeLeticX Global Navigation (static sites, Netlify Drop friendly)
 (function () {
   const NAV_ID = "skyeletix-global-nav";
+  const body = document.body;
+  const explicitOptIn = body && body.getAttribute("data-skx-global-nav") === "1";
+
+  // Do not inject a synthetic nav into the live league pages unless a page explicitly opts in.
+  if (!explicitOptIn) return;
 
   // Avoid double-inject
   if (document.getElementById(NAV_ID)) return;
 
-  const isIntro = document.body && (document.body.getAttribute("data-intro") === "1");
+  const isIntro = body && (body.getAttribute("data-intro") === "1");
   const navHeight = 72;
 
   // Light DOM padding (skip for intro)
@@ -20,11 +25,7 @@
     document.head.appendChild(padStyle);
   }
 
-  // Hide the first primary nav if present (keep sidebar navs)
-  const firstNav = document.querySelector("nav");
-  if (firstNav && !firstNav.classList.contains("sidebar-nav") && firstNav.id !== NAV_ID) {
-    firstNav.style.display = "none";
-  }
+  const siteBase = "/SkyeLeticXOfficialWebsite/";
 
   // Host element
   const host = document.createElement("div");
@@ -40,18 +41,18 @@
   const shadow = host.attachShadow({ mode: "open" });
 
   const items = [
-    { label: "Home", href: "/home.html" },
-    { label: "How It Works", href: "/how-it-works.html" },
-    { label: "About", href: "/about.html" },
-    { label: "Founder", href: "/about-founder.html" },
-    { label: "Arizona HQ", href: "/arizona-hq.html" },
-    { label: "Players", href: "/players.html" },
-    { label: "Owners", href: "/owners-intake.html" },
-    { label: "Championships", href: "/championships.html" },
-    { label: "Editorial", href: "/skyeletes-editorial.html" },
-    { label: "Coach Smith", href: "/coach-smith/index.html" },
-    { label: "League Office", href: "/owner-dashboard.html" },
-    { label: "Sitemap", href: "/sitemap.html" }
+    { label: "Home", href: `${siteBase}home.html` },
+    { label: "How It Works", href: `${siteBase}how-it-works.html` },
+    { label: "About", href: `${siteBase}about.html` },
+    { label: "Founder", href: `${siteBase}about-founder.html` },
+    { label: "Arizona HQ", href: `${siteBase}arizona-hq.html` },
+    { label: "Players", href: `${siteBase}players.html` },
+    { label: "Owners", href: `${siteBase}owners-intake.html` },
+    { label: "Championships", href: `${siteBase}championships.html` },
+    { label: "Editorial", href: `${siteBase}skyeletes-editorial.html` },
+    { label: "Coach Smith", href: `${siteBase}coach-smith/index.html` },
+    { label: "League Office", href: `${siteBase}owner-dashboard.html` },
+    { label: "Sitemap", href: `${siteBase}sitemap.html` }
   ];
 
   const pathname = (location.pathname || "/").toLowerCase();
@@ -158,7 +159,7 @@
   const left = document.createElement("div");
   left.className = "left";
   left.innerHTML = `
-    <a href="/home.html" aria-label="SkyeLeticX Home" style="display:flex;align-items:center;gap:10px;">
+    <a href="${siteBase}home.html" aria-label="SkyeLeticX Home" style="display:flex;align-items:center;gap:10px;">
       <img class="logo" src="${logoUrl}" alt="SkyeLeticX Badge" />
       <div class="brand">
         <div class="name">SkyeLeticX</div>
@@ -190,7 +191,7 @@
 
   const cta = document.createElement("a");
   cta.className = "cta";
-  cta.href = "/players.html";
+  cta.href = `${siteBase}players.html`;
   cta.textContent = "Register / Join";
 
   const burger = document.createElement("button");

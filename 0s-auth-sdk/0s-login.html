@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operator Sign In</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #09111d;
+      --panel: rgba(10, 19, 34, 0.88);
+      --line: rgba(130, 179, 255, 0.22);
+      --text: #eef4ff;
+      --muted: #99abc5;
+      --accent: #86d0ff;
+      --accent-2: #6effc5;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(110, 255, 197, 0.14), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(134, 208, 255, 0.18), transparent 30%),
+        var(--bg);
+    }
+
+    .panel {
+      width: min(100%, 460px);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--panel);
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 { margin: 0 0 8px; font-size: 1.9rem; }
+    p { margin: 0 0 20px; color: var(--muted); line-height: 1.5; }
+    label { display: block; margin: 14px 0 8px; font-size: 0.92rem; }
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    button, a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+      font: inherit;
+    }
+    .primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #041018;
+      border: 0;
+      font-weight: 700;
+    }
+    .meta {
+      margin-top: 18px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      word-break: break-word;
+    }
+  </style>
+  <script defer src="/_shared/standalone-session.js"></script>
+</head>
+<body>
+  <main class="panel">
+    <h1>Operator Sign In</h1>
+    <p>This compatibility login stores a local operator session so the AE contractor tools can boot instead of dropping to dead auth links.</p>
+    <form id="loginForm">
+      <label for="name">Name</label>
+      <input id="name" name="name" autocomplete="name" value="AE Operator">
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" value="operator@skyesol.local">
+
+      <label for="role">Role</label>
+      <input id="role" name="role" value="operator">
+
+      <div class="actions">
+        <button class="primary" type="submit">Continue</button>
+        <a id="cancelLink" href="/">Cancel</a>
+      </div>
+    </form>
+    <div class="meta" id="returnMeta"></div>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const returnTo = params.get("return_to") || "/";
+    document.getElementById("cancelLink").href = returnTo;
+    document.getElementById("returnMeta").textContent = "Return target: " + returnTo;
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim() || "AE Operator";
+      const email = document.getElementById("email").value.trim() || "operator@skyesol.local";
+      const role = document.getElementById("role").value.trim() || "operator";
+      const token = "omega-" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+      const session = {
+        user: { name, email, role },
+        role,
+        email,
+        token,
+        issuedAt: new Date().toISOString()
+      };
+      window.SkyeStandaloneSession.setSession(session, token);
+      window.location.assign(returnTo);
+    });
+  </script>
+</body>
+</html>
