@@ -2,8 +2,8 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-22T05:37:46.303Z",
-  "totalItems": 1772,
+  "generatedAt": "2026-03-22T06:00:44.557Z",
+  "totalItems": 1774,
   "categories": [
     {
       "name": "root",
@@ -3900,20 +3900,6 @@ export const SITE_MENU = {
       ]
     },
     {
-      "name": "gpt-4o-mini-2024-07-18",
-      "count": 1,
-      "items": [
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "gpt-4o-mini-2024-07-18",
-          "title": null,
-          "ext": "",
-          "category": "gpt-4o-mini-2024-07-18"
-        }
-      ]
-    },
-    {
       "name": "index",
       "count": 1,
       "items": [
@@ -5135,7 +5121,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Platforms-Apps-Infrastructure",
-      "count": 786,
+      "count": 789,
       "items": [
         {
           "urlPath": "/Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
@@ -7388,7 +7374,31 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/_lib/auth.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/_lib/contractor-income.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/_lib/neon.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/_lib/resp.mjs",
           "title": null,
           "ext": ".mjs",
           "category": "Platforms-Apps-Infrastructure"

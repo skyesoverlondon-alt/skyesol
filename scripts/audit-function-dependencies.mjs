@@ -88,6 +88,14 @@ function scanFile(filePath, dependencyToFiles, visitedFiles) {
   }
 }
 
+const missingLocalImports = new Map();
+
+function addMissingLocalImport(filePath, specifier) {
+  const imports = missingLocalImports.get(filePath) || new Set();
+  imports.add(specifier);
+  missingLocalImports.set(filePath, imports);
+}
+
 function walk(dir, dependencyToFiles, visitedFiles) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
@@ -120,6 +128,34 @@ walk(functionsDir, dependencyToFiles, visitedFiles);
 
 const referencedDependencies = [...dependencyToFiles.keys()].sort();
 const missingDependencies = referencedDependencies.filter((name) => !declaredDependencies.has(name));
+
+for (const visitedFile of visitedFiles) {
+  const content = fs.readFileSync(visitedFile, "utf8");
+  const relativePath = path.relative(root, visitedFile);
+  for (const pattern of [importPattern, requirePattern]) {
+    pattern.lastIndex = 0;
+    let match;
+    while ((match = pattern.exec(content))) {
+      const specifier = match[1];
+      if (!isLocalSpecifier(specifier)) continue;
+      const resolved = resolveLocalSpecifier(visitedFile, specifier);
+      if (!resolved) addMissingLocalImport(relativePath, specifier);
+    }
+  }
+}
+
+const missingLocalFiles = [...missingLocalImports.keys()].sort();
+
+if (missingLocalFiles.length) {
+  console.error(`[function-deps-audit] FAIL: ${missingLocalFiles.length} file(s) in the Netlify function graph have unresolved local imports:`);
+  for (const filePath of missingLocalFiles) {
+    console.error(` - ${filePath}`);
+    for (const specifier of [...(missingLocalImports.get(filePath) || [])].sort()) {
+      console.error(`   - ${specifier}`);
+    }
+  }
+  process.exit(1);
+}
 
 if (!missingDependencies.length) {
   console.log(`[function-deps-audit] OK: ${referencedDependencies.length} external dependency reference(s), 0 missing from package.json dependencies.`);
