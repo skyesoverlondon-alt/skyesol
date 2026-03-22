@@ -1,0 +1,1 @@
+export { handler } from "../../Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/netlify/functions/mint.js";

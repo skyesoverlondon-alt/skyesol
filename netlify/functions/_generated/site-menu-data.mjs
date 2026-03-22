@@ -2,8 +2,8 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-22T03:35:48.362Z",
-  "totalItems": 1771,
+  "generatedAt": "2026-03-22T05:37:46.303Z",
+  "totalItems": 1772,
   "categories": [
     {
       "name": "root",
@@ -11549,8 +11549,16 @@ export const SITE_MENU = {
     },
     {
       "name": "scripts",
-      "count": 8,
+      "count": 9,
       "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "scripts/audit-function-dependencies.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "scripts"
+        },
         {
           "urlPath": null,
           "prettyPath": null,

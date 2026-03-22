@@ -1,0 +1,1 @@
+exports.handler = require("../../SkyeLeticXOfficialWebsite/netlify/functions/skx-portal.js").handler;
