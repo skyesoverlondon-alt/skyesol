@@ -2,8 +2,8 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-22T06:00:44.557Z",
-  "totalItems": 1774,
+  "generatedAt": "2026-03-22T08:41:26.133Z",
+  "totalItems": 1791,
   "categories": [
     {
       "name": "root",
@@ -29,7 +29,7 @@ export const SITE_MENU = {
           "urlPath": "/about.html",
           "prettyPath": null,
           "file": "about.html",
-          "title": "About Skyes Over London LC | Operator-Grade AI + Web Infrastructure",
+          "title": "About Skyes Over London LC | Phoenix AI, Web, and Operations Infrastructure",
           "ext": ".html",
           "category": "root"
         },
@@ -69,7 +69,7 @@ export const SITE_MENU = {
           "urlPath": "/blog.html",
           "prettyPath": null,
           "file": "blog.html",
-          "title": "Blog · Skyes Over London LC",
+          "title": "Blog — SOLEnterprises Ecosystem",
           "ext": ".html",
           "category": "root"
         },
@@ -77,7 +77,7 @@ export const SITE_MENU = {
           "urlPath": "/contact.html",
           "prettyPath": null,
           "file": "contact.html",
-          "title": "Contact — Skyes Over London LC",
+          "title": "Contact Skyes Over London LC | Phoenix, Houston, Chicago, Denver",
           "ext": ".html",
           "category": "root"
         },
@@ -117,7 +117,7 @@ export const SITE_MENU = {
           "urlPath": "/network.html",
           "prettyPath": null,
           "file": "network.html",
-          "title": "SOLE Network — SOLEnterprises Ecosystem",
+          "title": "Network — SOL Ecosystem",
           "ext": ".html",
           "category": "root"
         },
@@ -125,7 +125,7 @@ export const SITE_MENU = {
           "urlPath": "/platforms.html",
           "prettyPath": null,
           "file": "platforms.html",
-          "title": "Kaixu Platforms — SOLEnterprises AI Division",
+          "title": "Platforms — Kaixu AI Division",
           "ext": ".html",
           "category": "root"
         },
@@ -324,6 +324,98 @@ export const SITE_MENU = {
           "title": null,
           "ext": "",
           "category": "_redirects"
+        }
+      ]
+    },
+    {
+      "name": "_shared",
+      "count": 8,
+      "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "_shared/app-storage-protocol.js",
+          "title": null,
+          "ext": ".js",
+          "category": "_shared"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "_shared/auth-unlock.js",
+          "title": null,
+          "ext": ".js",
+          "category": "_shared"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "_shared/correlation.js",
+          "title": null,
+          "ext": ".js",
+          "category": "_shared"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "_shared/error-fingerprint.js",
+          "title": null,
+          "ext": ".js",
+          "category": "_shared"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "_shared/gateway-retry.js",
+          "title": null,
+          "ext": ".js",
+          "category": "_shared"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "_shared/standalone-session.js",
+          "title": null,
+          "ext": ".js",
+          "category": "_shared"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "_shared/telemetry.js",
+          "title": null,
+          "ext": ".js",
+          "category": "_shared"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "_shared/workspace-record-sync.js",
+          "title": null,
+          "ext": ".js",
+          "category": "_shared"
+        }
+      ]
+    },
+    {
+      "name": "0s-auth-sdk",
+      "count": 2,
+      "items": [
+        {
+          "urlPath": "/0s-auth-sdk/0s-login.html",
+          "prettyPath": null,
+          "file": "0s-auth-sdk/0s-login.html",
+          "title": "Operator Sign In",
+          "ext": ".html",
+          "category": "0s-auth-sdk"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "0s-auth-sdk/index.js",
+          "title": null,
+          "ext": ".js",
+          "category": "0s-auth-sdk"
         }
       ]
     },
@@ -3478,6 +3570,20 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "cdn-cgi",
+      "count": 1,
+      "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js",
+          "title": null,
+          "ext": ".js",
+          "category": "cdn-cgi"
+        }
+      ]
+    },
+    {
       "name": "contact",
       "count": 1,
       "items": [
@@ -3485,7 +3591,7 @@ export const SITE_MENU = {
           "urlPath": "/contact/index.html",
           "prettyPath": "/contact/",
           "file": "contact/index.html",
-          "title": "Contact — Skyes Over London LC",
+          "title": "Contact Skyes Over London LC | Phoenix, Houston, Chicago, Denver",
           "ext": ".html",
           "category": "contact"
         }
@@ -4398,6 +4504,52 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "markets",
+      "count": 5,
+      "items": [
+        {
+          "urlPath": "/markets/chicago-illinois/index.html",
+          "prettyPath": "/markets/chicago-illinois/",
+          "file": "markets/chicago-illinois/index.html",
+          "title": "Chicago, Illinois AI Systems, Web Development, and SEO | Skyes Over London LC",
+          "ext": ".html",
+          "category": "markets"
+        },
+        {
+          "urlPath": "/markets/denver-colorado/index.html",
+          "prettyPath": "/markets/denver-colorado/",
+          "file": "markets/denver-colorado/index.html",
+          "title": "Denver, Colorado AI Systems, Web Development, and SEO | Skyes Over London LC",
+          "ext": ".html",
+          "category": "markets"
+        },
+        {
+          "urlPath": "/markets/houston-texas/index.html",
+          "prettyPath": "/markets/houston-texas/",
+          "file": "markets/houston-texas/index.html",
+          "title": "Houston, Texas AI Systems, Web Development, and SEO | Skyes Over London LC",
+          "ext": ".html",
+          "category": "markets"
+        },
+        {
+          "urlPath": "/markets/index.html",
+          "prettyPath": "/markets/",
+          "file": "markets/index.html",
+          "title": "Service Areas — Phoenix, Houston, Chicago, Denver | Skyes Over London LC",
+          "ext": ".html",
+          "category": "markets"
+        },
+        {
+          "urlPath": "/markets/phoenix-arizona/index.html",
+          "prettyPath": "/markets/phoenix-arizona/",
+          "file": "markets/phoenix-arizona/index.html",
+          "title": "Phoenix, Arizona AI Systems, Web Development, and SEO | Skyes Over London LC",
+          "ext": ".html",
+          "category": "markets"
+        }
+      ]
+    },
+    {
       "name": "members",
       "count": 1,
       "items": [
@@ -5121,7 +5273,7 @@ export const SITE_MENU = {
     },
     {
       "name": "Platforms-Apps-Infrastructure",
-      "count": 789,
+      "count": 790,
       "items": [
         {
           "urlPath": "/Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
@@ -8241,6 +8393,14 @@ export const SITE_MENU = {
           "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/sw.js",
           "title": null,
           "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/CallRunnerPro/deploy-69b846ee068722aab47d87f9.zip",
+          "title": null,
+          "ext": ".zip",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
