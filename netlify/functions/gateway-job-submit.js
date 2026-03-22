@@ -4,10 +4,7 @@ import { q } from "./_lib/db.js";
 import { enforceKaixuMessages, KAIXU_SYSTEM_HASH, SCHEMA_VERSION, BUILD_ID } from "./_lib/kaixu.js";
 import { lookupKey, getMonthRollup, getKeyMonthRollup, customerCapCents, keyCapCents } from "./_lib/authz.js";
 import { enforceRpm } from "./_lib/ratelimit.js";
-import { resolveProvider, resolveUpstreamTarget } from "./_lib/providers.js";
 import { randomUUID } from "crypto";
-
-const PUBLIC_PROVIDER_NAME = process.env.KAIXU_PUBLIC_PROVIDER_NAME || "Skyes Over London";
 
 function siteOrigin(req) {
   const urlEnv = process.env.URL || process.env.DEPLOY_PRIME_URL || process.env.DEPLOY_URL;
@@ -17,7 +14,7 @@ function siteOrigin(req) {
 
 export default wrap(async (req) => {
   const cors = buildCors(req);
-  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
+  if (req.method === "OPTIONS") return new Response("", { status: 204, headers: cors });
   if (req.method !== "POST") return json(405, { error: "Method not allowed" }, cors);
 
   const key = getBearer(req);
@@ -26,20 +23,14 @@ export default wrap(async (req) => {
   let body;
   try { body = await req.json(); } catch { return badRequest("Invalid JSON", cors); }
 
-  const requested_provider = (body.provider || "").toString().trim();
-  const requested_model = (body.model || "").toString().trim();
-  const base_provider = resolveProvider(requested_provider);
-  const target = resolveUpstreamTarget(base_provider, requested_model);
-  const provider = target.provider;
-  const model = target.model;
-  const public_provider = PUBLIC_PROVIDER_NAME;
-  const public_model = requested_model || model;
+  const provider = (body.provider || "").toString().trim().toLowerCase();
+  const model = (body.model || "").toString().trim();
   const messages_in = body.messages;
   const max_tokens = Number.isFinite(body.max_tokens) ? parseInt(body.max_tokens, 10) : 4096;
   const temperature = Number.isFinite(body.temperature) ? body.temperature : 1;
 
-  if (!requested_provider) return badRequest("Missing provider", cors);
-  if (!requested_model) return badRequest("Missing model", cors);
+  if (!provider) return badRequest("Missing provider (openai|anthropic|gemini)", cors);
+  if (!model) return badRequest("Missing model", cors);
   if (!Array.isArray(messages_in) || messages_in.length === 0) return badRequest("Missing messages[]", cors);
 
   const messages = enforceKaixuMessages(messages_in);
@@ -69,7 +60,7 @@ export default wrap(async (req) => {
   }
 
   const job_id = randomUUID();
-  const request = { requested_provider, requested_model, provider, model, messages, max_tokens, temperature };
+  const request = { provider, model, messages, max_tokens, temperature };
 
   await q(
     `insert into async_jobs(id, customer_id, api_key_id, provider, model, request, status, meta)
@@ -102,10 +93,6 @@ export default wrap(async (req) => {
 
   return json(202, {
     job_id,
-    provider: public_provider,
-    model: public_model,
-    requested_provider: requested_provider || public_provider,
-    requested_model: public_model,
     status_url,
     result_url,
     build: { id: BUILD_ID, schema: SCHEMA_VERSION, kaixu_system_hash: KAIXU_SYSTEM_HASH },

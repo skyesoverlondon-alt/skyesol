@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founder Access · 0s Cohort Command</title>
+  <meta name="description" content="0s cohort command surface with founder lane, student lane, student ID generation, welcome letters, instructor content, and workbook notes.">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="/js/kaixu-admin-bridge.js" defer></script>
+</head>
+<body data-route="founder-login" data-kaixu-admin-guard="founder">
+  <div class="site-shell">
+    <header class="topbar print-hide">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html">
+          <img src="assets/media/skyes-primary-logo.png" alt="Skyes Over London logo">
+          <div>
+            <span class="brand-kicker">Skyes Over London × 0s</span>
+            <span class="brand-title">0s Cohort Command Center</span>
+            <span class="brand-sub">Founder-only class control and student-only cohort workspace</span>
+          </div>
+        </a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html">Command</a>
+<a href="founder-login.html" aria-current="page">Founder Access</a>
+<a href="student-login.html">Student Access</a>
+<a href="founder-dashboard.html">Founder Board</a>
+<a href="instructor-book.html">Instructor Book</a>
+<a href="student-portal.html">Student Portal</a>
+          
+        </nav>
+      </div>
+    </header>
+    
+<main class="page">
+  <section class="auth-shell">
+    <div class="dashboard-grid auth-grid">
+      <div class="panel login-copy">
+        <div class="eyebrow">Founder-only access</div>
+        <h1>Founder side stays separate from the student side.</h1>
+        <p class="lead">This lane unlocks the founder board, the teaching book, the student generator, welcome letters, attendance, demo scoring, and wiring settings. Students should never see this surface.</p>
+        <div class="lesson-card">
+          <div class="kicker">What unlocks here</div>
+          <ul class="checklist">
+            <li>Instructor materials and day-by-day teaching content</li>
+            <li>Generated student IDs and activation status</li>
+            <li>Welcome letter creation and printable outputs</li>
+            <li>Attendance, cohort notes, and final scoring</li>
+            <li>Frontend persistence contracts for your future backend</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="section-head">
+          <div class="eyebrow">Founder key</div>
+          <h2>Set or enter the founder unlock code</h2>
+          <p class="muted">If this is the first time on this device, set the local founder code. After that, use that same code to unlock the founder lane on this device.</p>
+        </div>
+        <div class="field-grid">
+          <div class="field field-span-2">
+            <label for="founderCode">Founder code</label>
+            <input id="founderCode" type="password" placeholder="Enter founder code" data-founder-code>
+          </div>
+          <div class="field field-span-2">
+            <label for="founderCodeConfirm">Confirm founder code for first-time setup</label>
+            <input id="founderCodeConfirm" type="password" placeholder="Confirm founder code for setup only" data-founder-code-confirm>
+          </div>
+        </div>
+        <div class="button-row print-hide">
+          <button class="button" type="button" data-founder-setup>Set Founder Code</button>
+          <button class="neon-button" type="button" data-founder-login>Unlock Founder Lane</button>
+          <button class="ghost-button" type="button" data-founder-logout>Lock Founder Lane</button>
+        </div>
+        <div class="status-bar">
+          <span class="status-pill">Founder code status: <strong data-founder-code-status>Not set on this device</strong></span>
+          <span class="status-pill">Session: <strong data-founder-session-status>Locked</strong></span>
+        </div>
+        <div class="callout">
+          <div class="kicker">After unlock</div>
+          <h3>Next move</h3>
+          <p class="muted">Go straight into the founder board to generate student IDs and cohort records, or open the instructor book to run the day-by-day classroom flow.</p>
+          <div class="button-row print-hide">
+            <a class="button" href="founder-dashboard.html">Open Founder Board</a>
+            <a class="ghost-button" href="instructor-book.html">Open Instructor Book</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+    <footer class="footer">
+      <strong>0s Cohort Command Center · Skyes Over London</strong>
+      <p class="muted">Phone: <a href="tel:+14804695416">(480) 469-5416</a> · <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> · <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> · <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></p>
+      <div class="footer-links print-hide">
+        <a class="pill-link" href="https://skyesol.netlify.app/about" target="_blank" rel="noopener noreferrer">Founder Page</a>
+        <a class="pill-link" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener noreferrer">All SkyeSol Case Studies</a>
+      </div>
+    </footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

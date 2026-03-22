@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SkyeLeticX — Offline</title>
+  <meta name="theme-color" content="#2b0b4e" />
+  <style>
+    :root{color-scheme:dark}
+    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+         font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0b0712;color:#f3e7ff}
+    .card{max-width:720px;padding:28px 22px;border:1px solid rgba(255,255,255,.12);
+          border-radius:18px;background:rgba(255,255,255,.04);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+    .row{display:flex;gap:16px;align-items:center}
+    img{width:76px;height:76px}
+    h1{margin:0;font-size:22px;letter-spacing:.2px}
+    p{margin:10px 0 0;line-height:1.5;color:rgba(243,231,255,.85)}
+    a{color:#ffd166;text-decoration:none}
+    a:hover{text-decoration:underline}
+    .btn{display:inline-block;margin-top:14px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14)}
+  </style>
+  <!-- PWA -->
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <meta name="theme-color" content="#2b0b4e" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <script defer src="assets/global-nav.js"></script>
+</head>
+<body>
+  <div class="card">
+    <div class="row">
+      <img src="/SkyeLeticXOfficialWebsite/icon-192.png" alt="SkyeLeticX" />
+      <div>
+        <h1>You’re offline.</h1>
+        <p>SkyeLeticX is installed, but this page needs a connection right now. Some pages may still work from cache.</p>
+      </div>
+    </div>
+    <a class="btn" href="/home.html">Return to Home</a>
+  </div>
+
+  <script>
+    // SkyeLeticX PWA — register service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

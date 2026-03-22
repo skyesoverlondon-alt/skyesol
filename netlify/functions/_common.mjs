@@ -1,5 +1,6 @@
 import "./_lib/defaults.js";  // pre-populate process.env with non-secret defaults
 import { getStore } from "@netlify/blobs";
+import { hasControlPanelAccess } from "./_lib/sol-identity.js";
 
 const STORE_NAME = process.env.BLOBS_STORE || "sol_growth";
 const _textDecoder = typeof TextDecoder !== "undefined" ? new TextDecoder() : null;
@@ -97,8 +98,7 @@ export function userEmail(user) {
 }
 
 export function isAdmin(user) {
-  const roles = user?.app_metadata?.roles;
-  if (Array.isArray(roles) && roles.includes("admin")) return true;
+  if (hasControlPanelAccess(user)) return true;
 
   // Fallback allowlist (useful while roles propagate)
   const allow = (process.env.ADMIN_EMAILS || "")
@@ -166,8 +166,9 @@ export async function ensureSeed() {
         "## Next steps",
         "",
         "1) Enable Netlify Identity",
-        "2) Set `ADMIN_EMAILS`",
-        "3) Deploy Functions via Netlify CLI",
+        "2) Set `NEON_DATABASE_URL`",
+        "3) Optionally set `ADMIN_EMAILS` to auto-grant the president role for internal emails",
+        "4) Deploy Functions via Netlify CLI",
         "",
         "Then open **/admin.html** and start publishing.",
       ].join("\n"),

@@ -47,6 +47,57 @@ function normalizePath(filePath) {
   return path.relative(root, filePath).replace(/\\/g, '/');
 }
 
+function escapeRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function compileRedirectPattern(sourcePattern) {
+  const pattern = sourcePattern.trim();
+  if (!pattern.startsWith('/')) return null;
+
+  const regex = '^' + pattern
+    .split('*')
+    .map((segment) => escapeRegex(segment).replace(/\\:[A-Za-z0-9_-]+/g, '[^/]+'))
+    .join('.*') + '$';
+
+  return new RegExp(regex);
+}
+
+async function loadRedirectMatchers() {
+  const redirectsPath = path.join(root, '_redirects');
+  try {
+    const content = await fs.readFile(redirectsPath, 'utf-8');
+    return content
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter((line) => line && !line.startsWith('#'))
+      .map((line) => line.split(/\s+/)[0])
+      .map(compileRedirectPattern)
+      .filter(Boolean);
+  } catch (error) {
+    return [];
+  }
+}
+
+function matchesRedirectSource(href, redirectMatchers) {
+  const trimmed = String(href || '').trim();
+  if (!trimmed) return false;
+
+  let pathname = trimmed;
+  if (/^https?:\/\//i.test(trimmed)) {
+    try {
+      const url = new URL(trimmed);
+      if (url.hostname !== 'skyesol.netlify.app') return false;
+      pathname = url.pathname;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  if (!pathname.startsWith('/')) return false;
+  return redirectMatchers.some((matcher) => matcher.test(pathname));
+}
+
 function resolveInternalLink(sourceFile, href) {
   const trimmed = href.trim();
   if (!trimmed || trimmed.startsWith('javascript:') || trimmed.startsWith('mailto:') || trimmed.startsWith('tel:')) {
@@ -100,7 +151,7 @@ async function fixRelAttributes(htmlFiles, fixMode) {
   return totalChanges;
 }
 
-async function checkBlogLinks(blogFiles, validPaths) {
+async function checkBlogLinks(blogFiles, validPaths, redirectMatchers) {
   const errors = [];
   for (const file of blogFiles) {
     const content = await fs.readFile(file.fullPath, 'utf-8');
@@ -124,7 +175,7 @@ async function checkBlogLinks(blogFiles, validPaths) {
         normalizedTarget = normalizePath(indexPath);
       }
 
-      if (validPaths.has(normalizedTarget) === false) {
+      if (validPaths.has(normalizedTarget) === false && !matchesRedirectSource(href, redirectMatchers)) {
         errors.push({ source: file.relative, target: normalizedTarget });
       }
     }
@@ -135,6 +186,7 @@ async function checkBlogLinks(blogFiles, validPaths) {
 async function run() {
   const htmlFiles = [];
   await collectHtml(root, htmlFiles);
+  const redirectMatchers = await loadRedirectMatchers();
   const blogFiles = htmlFiles.filter((file) => file.relative.startsWith('Blogs/'));
   const validPaths = new Set(htmlFiles.map((file) => normalizePath(file.fullPath)));
   const fixMode = process.argv.includes('--fix');
@@ -149,7 +201,7 @@ async function run() {
     await fixRelAttributes(htmlFiles, false);
   }
 
-  const linkErrors = await checkBlogLinks(blogFiles, validPaths);
+  const linkErrors = await checkBlogLinks(blogFiles, validPaths, redirectMatchers);
   if (linkErrors.length) {
     console.error('Link checker found missing targets:');
     for (const error of linkErrors) {

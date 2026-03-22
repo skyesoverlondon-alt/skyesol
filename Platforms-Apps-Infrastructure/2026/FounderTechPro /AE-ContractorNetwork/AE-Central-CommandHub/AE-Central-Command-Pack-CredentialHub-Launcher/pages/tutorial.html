@@ -1,0 +1,45 @@
+
+<div class="page-shell page-wrap">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Tutorial</div>
+      <h2>Learn the Credential Vault lane without stuffing everything onto one screen.</h2>
+    </div>
+    <div class="toolbar">
+      <button class="primary-btn" onclick="app.startWalkthrough()">Start Guided Walkthrough</button>
+      <button class="soft-btn" onclick="app.restartTutorial()">Show First-Run Tour Again</button>
+    </div>
+  </div>
+
+  <div class="grid-2 tutorial-grid">
+    <div class="card glass" data-tour="tutorial-overview">
+      <div class="section-head"><div><div class="eyebrow">What this app is</div><h2>Credential Vault - s0l26-0s</h2></div></div>
+      <p class="tutorial-copy">This lane keeps contacts, credentials, projects, notes, and relationship history offline-first. The background stays separate from the glass shell, so the visual identity can change without disturbing the working UI.</p>
+      <div class="tutorial-steps" id="tutorial-checklist"></div>
+    </div>
+    <div class="stack">
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Quick start</div><h2>Best first moves</h2></div></div>
+        <div class="quick-list" style="margin-top:14px">
+          <div class="quick-item"><span>1. Set your preferred backdrop in Settings.</span><button class="soft-btn" onclick="app.goTo('settings')">Open Settings</button></div>
+          <div class="quick-item"><span>2. Import or add your first contacts.</span><button class="soft-btn" onclick="app.goTo('contacts')">Open Contacts</button></div>
+          <div class="quick-item"><span>3. Save the credentials tied to those people or projects.</span><button class="soft-btn" onclick="app.goTo('vault')">Open Vault</button></div>
+          <div class="quick-item"><span>4. Group work into lanes so the records stay organized.</span><button class="soft-btn" onclick="app.goTo('projects')">Open Projects</button></div>
+        </div>
+      </div>
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">What makes it feel paid</div><h2>Feature value, not fluff</h2></div></div>
+        <div class="metric-pills" style="margin-top:14px">
+          <span class="metric">Guided walkthrough</span>
+          <span class="metric">Modular pages</span>
+          <span class="metric">CSV import / export</span>
+          <span class="metric">Relationship timeline</span>
+          <span class="metric">Royal blue + gold glass</span>
+          <span class="metric">Separate background stage</span>
+          <span class="metric">Offline-first</span>
+          <span class="metric">Local lock + backup</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

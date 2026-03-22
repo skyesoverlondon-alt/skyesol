@@ -1,0 +1,15 @@
+{
+  "name": "skymail-mega-build",
+  "private": true,
+  "version": "1.0.0",
+  "description": "SkyMail Host + SkyeDB own-infrastructure monorepo",
+  "workspaces": [
+    "apps/skymail-web",
+    "workers/control-plane",
+    "services/runner"
+  ],
+  "scripts": {
+    "bootstrap:skymail-db": "node apps/skymail-web/tools/bootstrap-skymail-db.js",
+    "show:layout": "find . -maxdepth 3 -type f | sort"
+  }
+}

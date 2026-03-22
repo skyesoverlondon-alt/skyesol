@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walkthrough · Skye Split Engine Ops</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/icon-192.png">
+  <link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="bg-layer"></div>
+    <main class="site">
+      <header class="topbar">
+        <div class="branding">
+          <img src="./assets/media/skydexia-logo.png" alt="Skyes Over London logo">
+          <div class="branding-copy">
+            <h1 data-brand-name>Skye Split Engine Ops</h1>
+            <p data-brand-sub>Skyes Over London · Offline money operations + backup vault</p>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="pill"><span class="dot"></span><span><strong>Tutorial:</strong> Guided setup</span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Currency:</strong> <span data-status-currency>USD</span></span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Sync:</strong> <span data-last-sync>Local only</span></span></div>
+        </div>
+      </header>
+
+      <nav class="navbar">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="engine.html">Split Engine</a>
+        <a class="nav-link" href="ops.html">Money Ops</a>
+        <a class="nav-link" href="receipts.html">Receipts</a>
+        <a class="nav-link" href="contacts.html">Contacts</a>
+        <a class="nav-link" href="vault.html">Backup Vault</a>
+        <a class="nav-link" href="settings.html">Settings</a>
+        <a class="nav-link" href="walkthrough.html">Walkthrough</a>
+        <a class="nav-link" href="help.html">Help</a>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker">Full walkthrough tutorial</div>
+            <h2>Go from blank install to protected money-ops workflow without guessing what page does what.</h2>
+            <p>This tutorial walks through the real order of operations: set the shell, add payout people, build the split math, schedule recurring runs, track deals, issue receipts, and export backups. Mark steps done as you move. The app remembers tutorial progress locally.</p>
+            <div class="hero-actions">
+              <button class="btn" type="button" data-reset-walkthrough>Reset tutorial progress</button>
+              <a class="btn-ghost" href="engine.html">Jump into split engine</a>
+              <a class="btn-soft" href="vault.html">Open backup vault</a>
+            </div>
+          </div>
+          <div>
+            <img class="logo-float" src="./assets/media/skydexia-logo.png" alt="Skyes Over London brand mark">
+          </div>
+        </div>
+      </section>
+
+      <section class="grid-4">
+        <div class="small-card metric">
+          <div class="label">Tutorial progress</div>
+          <div class="value" data-walkthrough-progress>0 / 7</div>
+          <div class="caption">Interactive checklist progress</div>
+        </div>
+        <div class="small-card metric">
+          <div class="label">Recommended next move</div>
+          <div class="value" data-recommended-short>Start</div>
+          <div class="caption" data-recommended-long>Open the first unfinished lane.</div>
+        </div>
+        <div class="small-card metric">
+          <div class="label">Current data readiness</div>
+          <div class="value" data-readiness-score>0%</div>
+          <div class="caption">Based on your saved records</div>
+        </div>
+        <div class="small-card metric">
+          <div class="label">Last backup activity</div>
+          <div class="value" data-last-snapshot-short>Never</div>
+          <div class="caption" data-last-snapshot-long>Create a vault recovery point after setup.</div>
+        </div>
+      </section>
+
+      <section class="grid-2" style="margin-top:18px; align-items:start;">
+        <article class="card">
+          <h3>What each lane is actually for</h3>
+          <div class="list">
+            <div class="list-item"><div><div class="split-label">Settings</div><div class="caption">Brand the shell, choose currency, set glass/background, and decide how often auto snapshots should happen.</div></div><a class="btn-soft" href="settings.html">Open</a></div>
+            <div class="list-item"><div><div class="split-label">Contacts</div><div class="caption">Store recipients, vendors, contractors, founders, or internal payout people so later forms are faster.</div></div><a class="btn-soft" href="contacts.html">Open</a></div>
+            <div class="list-item"><div><div class="split-label">Split Engine</div><div class="caption">Build the payout math itself. Gross in, deductions out, participants defined, and a reusable plan saved.</div></div><a class="btn-soft" href="engine.html">Open</a></div>
+            <div class="list-item"><div><div class="split-label">Money Ops</div><div class="caption">Turn split plans into recurring payout templates and track actual deal ledger rows with status and due dates.</div></div><a class="btn-soft" href="ops.html">Open</a></div>
+            <div class="list-item"><div><div class="split-label">Receipts</div><div class="caption">Issue settlement receipts tied to a deal or split, then print or export the proof file.</div></div><a class="btn-soft" href="receipts.html">Open</a></div>
+            <div class="list-item"><div><div class="split-label">Backup Vault</div><div class="caption">Create local restore points and export plain or encrypted full backups outside the browser.</div></div><a class="btn-soft" href="vault.html">Open</a></div>
+          </div>
+        </article>
+        <article class="panel">
+          <h3>Fastest clean setup order</h3>
+          <div class="note-box">Do not start in Receipts. The clean order is <strong>Settings → Contacts → Split Engine → Money Ops → Receipts → Backup Vault</strong>. That gives you reusable math first, then actual operating records, then proof, then protection.</div>
+          <div class="walkthrough-mini" data-readiness-list style="margin-top:14px;"></div>
+        </article>
+      </section>
+
+      <section class="step-grid" style="margin-top:18px;" data-steps></section>
+
+      <section class="grid-2" style="margin-top:18px; align-items:start;">
+        <article class="card">
+          <h3>15-minute practice run</h3>
+          <div class="list">
+            <div class="list-item"><div><div class="split-label">A. Add one contact</div><div class="caption">Example: Founder payout, Contractor payout, or Vendor reserve recipient.</div></div></div>
+            <div class="list-item"><div><div class="split-label">B. Build one saved split plan</div><div class="caption">Example: gross 10000, fees 300, reserve 500, two people at 60/40.</div></div></div>
+            <div class="list-item"><div><div class="split-label">C. Convert it into a monthly recurring template</div><div class="caption">Set next run date and default gross if you want the template to stamp out similar runs.</div></div></div>
+            <div class="list-item"><div><div class="split-label">D. Create one deal ledger row</div><div class="caption">Use the same numbers and link the template or split so the record chain stays clear.</div></div></div>
+            <div class="list-item"><div><div class="split-label">E. Issue one settlement receipt</div><div class="caption">Tie it back to the deal, then print or export as proof.</div></div></div>
+            <div class="list-item"><div><div class="split-label">F. Export one encrypted backup</div><div class="caption">That turns your local workflow into something recoverable after browser/device issues.</div></div></div>
+          </div>
+        </article>
+        <article class="card">
+          <h3>CSV batch movement, without confusion</h3>
+          <div class="list">
+            <div class="list-item"><div><div class="split-label">Export first</div><div class="caption">Always export a CSV from the live app before editing batches. That gives you the right column layout.</div></div></div>
+            <div class="list-item"><div><div class="split-label">Edit outside the app</div><div class="caption">Use your spreadsheet tool, keep the same headers, then import the cleaned file back in through Money Ops or Receipts.</div></div></div>
+            <div class="list-item"><div><div class="split-label">Import by lane</div><div class="caption">Deals, templates, contacts, and split plans import through Money Ops. Receipts import through the Receipts page.</div></div></div>
+            <div class="list-item"><div><div class="split-label">Snapshot before big imports</div><div class="caption">Make a vault snapshot first so a bad batch can be rolled back fast.</div></div></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid-2" style="margin-top:18px; align-items:start;">
+        <article class="list-card">
+          <h3>Recent local activity</h3>
+          <div data-walkthrough-activity class="list"></div>
+        </article>
+        <article class="card">
+          <h3>What success looks like</h3>
+          <div class="badge-grid">
+            <div class="mini-badge"><strong>Saved contacts</strong><div class="caption">People are ready to be reused in later records.</div></div>
+            <div class="mini-badge"><strong>Saved split plans</strong><div class="caption">Your payout logic is reusable and not trapped in one calculation.</div></div>
+            <div class="mini-badge"><strong>Recurring templates</strong><div class="caption">You can stamp out repeat payout runs instead of rebuilding math every time.</div></div>
+            <div class="mini-badge"><strong>Deal ledger rows</strong><div class="caption">Money movement is tracked as actual operating records.</div></div>
+            <div class="mini-badge"><strong>Settlement receipts</strong><div class="caption">You have printable proof tied to the underlying work.</div></div>
+            <div class="mini-badge"><strong>Vault backup</strong><div class="caption">You can survive browser wipes or device changes.</div></div>
+          </div>
+        </article>
+      </section>
+
+      <footer class="footer-block">
+        <h3>Contact</h3>
+        <div class="footer-contact">
+          <span>Skyes Over London</span>
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+          <a href="tel:+14804695416">(480) 469-5416</a>
+          <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <script type="module" src="./assets/walkthrough.js"></script>
+</body>
+</html>

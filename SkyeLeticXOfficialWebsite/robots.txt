@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://skyesol.netlify.app/SkyeLeticXOfficialWebsite/sitemap.xml

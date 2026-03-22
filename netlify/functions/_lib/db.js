@@ -9,25 +9,38 @@ import { neon } from "@netlify/neon";
  * - For dynamic SQL strings + $1 placeholders, use `sql.query(text, params)`.
  *   (Calling the template function like sql("SELECT ...") can break on newer driver versions.)
  *
- * Netlify DB automatically injects `NETLIFY_DATABASE_URL` when the Neon extension is attached.
+ * Prefer `NEON_DATABASE_URL` for Skyesol's primary database contract.
+ * `DATABASE_URL` and `NETLIFY_DATABASE_URL` remain supported as fallbacks.
  */
 
 let _sql = null;
 let _schemaPromise = null;
 
+export function resolveDbUrl() {
+  return process.env.NEON_DATABASE_URL || process.env.DATABASE_URL || process.env.NETLIFY_DATABASE_URL || "";
+}
+
+export function hasConfiguredDb() {
+  return !!resolveDbUrl();
+}
+
 function getSql() {
   if (_sql) return _sql;
 
-  const hasDbUrl = !!(process.env.NETLIFY_DATABASE_URL || process.env.DATABASE_URL);
-  if (!hasDbUrl) {
-    const err = new Error("Database not configured (missing NETLIFY_DATABASE_URL). Attach Netlify DB (Neon) to this site.");
+  const connectionString = resolveDbUrl();
+  if (!connectionString) {
+    const err = new Error("Database not configured. Set NEON_DATABASE_URL for the shared Skyesol database.");
     err.code = "DB_NOT_CONFIGURED";
     err.status = 500;
-    err.hint = "Netlify UI → Extensions → Neon → Add database (or run: npx netlify db init).";
+    err.hint = "Netlify UI → Environment variables → add NEON_DATABASE_URL. DATABASE_URL and NETLIFY_DATABASE_URL are accepted as fallbacks.";
     throw err;
   }
 
-  _sql = neon(); // auto-uses process.env.NETLIFY_DATABASE_URL on Netlify
+  if (!process.env.NETLIFY_DATABASE_URL) {
+    process.env.NETLIFY_DATABASE_URL = connectionString;
+  }
+
+  _sql = neon();
   return _sql;
 }
 
@@ -467,6 +480,210 @@ async function ensureSchema() {
         unique(customer_id, month)
       );`,
       `create index if not exists voice_usage_monthly_customer_idx on voice_usage_monthly(customer_id, month);`,
+
+      // --- Shared Skyesol Identity source of truth ---
+      `create table if not exists sol_identity_members (
+        id bigserial primary key,
+        email text not null unique,
+        identity_user_id text unique,
+        full_name text,
+        primary_role text not null default 'player',
+        roles text[] not null default array['player']::text[],
+        status text not null default 'active',
+        source text not null default 'netlify_identity',
+        customer_id bigint references customers(id) on delete set null,
+        profile jsonb not null default '{}'::jsonb,
+        last_login_at timestamptz,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `create index if not exists sol_identity_members_role_idx on sol_identity_members(primary_role, updated_at desc);`,
+      `create table if not exists sol_identity_role_grants (
+        id bigserial primary key,
+        member_id bigint not null references sol_identity_members(id) on delete cascade,
+        role text not null,
+        grant_source text not null default 'netlify_identity',
+        granted_by text,
+        meta jsonb not null default '{}'::jsonb,
+        created_at timestamptz not null default now(),
+        revoked_at timestamptz,
+        unique (member_id, role)
+      );`,
+      `create index if not exists sol_identity_role_grants_role_idx on sol_identity_role_grants(role, revoked_at, created_at desc);`,
+      `create table if not exists intake_submissions (
+        id bigserial primary key,
+        created_at timestamptz not null default now(),
+        lane text not null,
+        name text,
+        email text,
+        phone text,
+        company text,
+        role text,
+        ip text,
+        user_agent text,
+        payload jsonb not null
+      );`,
+      `create index if not exists intake_submissions_lane_created_idx on intake_submissions(lane, created_at desc);`,
+
+      `create table if not exists platform_state_docs (
+        app_id text primary key,
+        title text not null default '',
+        state jsonb not null default '{}'::jsonb,
+        summary jsonb not null default '{}'::jsonb,
+        visibility text not null default 'admin',
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `create index if not exists platform_state_docs_updated_idx on platform_state_docs(updated_at desc);`,
+
+      `create table if not exists skymail_shared_desk (
+        item_id text primary key,
+        subject text not null default '',
+        email text not null default '',
+        owner text not null default '',
+        queue text not null default '',
+        priority text not null default '',
+        status text not null default '',
+        waiting text not null default '',
+        last_touch date,
+        payload jsonb not null default '{}'::jsonb,
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `alter table skymail_shared_desk add column if not exists updated_by text;`,
+      `create index if not exists skymail_shared_desk_status_idx on skymail_shared_desk(status, updated_at desc);`,
+      `create index if not exists skymail_shared_desk_queue_idx on skymail_shared_desk(queue, updated_at desc);`,
+      `create table if not exists skymail_follow_ups (
+        item_id text primary key,
+        lead_name text not null default '',
+        email text not null default '',
+        stage text not null default '',
+        health text not null default '',
+        owner text not null default '',
+        next_touch date,
+        payload jsonb not null default '{}'::jsonb,
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `alter table skymail_follow_ups add column if not exists updated_by text;`,
+      `create index if not exists skymail_follow_ups_next_touch_idx on skymail_follow_ups(next_touch, updated_at desc);`,
+      `create index if not exists skymail_follow_ups_stage_idx on skymail_follow_ups(stage, updated_at desc);`,
+      `create table if not exists skymail_intake_records (
+        item_id text primary key,
+        client_name text not null default '',
+        email text not null default '',
+        stage text not null default '',
+        due_on date,
+        estimated_value numeric not null default 0,
+        payload jsonb not null default '{}'::jsonb,
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `alter table skymail_intake_records add column if not exists updated_by text;`,
+      `create index if not exists skymail_intake_records_stage_idx on skymail_intake_records(stage, updated_at desc);`,
+      `create index if not exists skymail_intake_records_due_idx on skymail_intake_records(due_on, updated_at desc);`,
+      `create table if not exists skymail_contacts (
+        item_id text primary key,
+        email text not null default '',
+        company text not null default '',
+        segment text not null default '',
+        owner text not null default '',
+        score integer not null default 0,
+        payload jsonb not null default '{}'::jsonb,
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `alter table skymail_contacts add column if not exists updated_by text;`,
+      `create index if not exists skymail_contacts_segment_idx on skymail_contacts(segment, updated_at desc);`,
+      `create index if not exists skymail_contacts_score_idx on skymail_contacts(score desc, updated_at desc);`,
+      `create table if not exists skymail_reply_templates (
+        item_id text primary key,
+        title text not null default '',
+        category text not null default '',
+        subject text not null default '',
+        payload jsonb not null default '{}'::jsonb,
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `alter table skymail_reply_templates add column if not exists updated_by text;`,
+      `create index if not exists skymail_reply_templates_category_idx on skymail_reply_templates(category, updated_at desc);`,
+      `create table if not exists skymail_recovery_log (
+        item_id text primary key,
+        email text not null default '',
+        severity text not null default '',
+        action text not null default '',
+        est_value numeric not null default 0,
+        payload jsonb not null default '{}'::jsonb,
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `alter table skymail_recovery_log add column if not exists updated_by text;`,
+      `create index if not exists skymail_recovery_log_severity_idx on skymail_recovery_log(severity, updated_at desc);`,
+      `create table if not exists skymail_suite_meta (
+        suite_key text primary key,
+        analytics jsonb not null default '{}'::jsonb,
+        meta jsonb not null default '{}'::jsonb,
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+
+      `create table if not exists platform_ops_status (
+        app_id text primary key,
+        health_status text not null default 'unreviewed',
+        onboarding_stage text not null default 'untracked',
+        lifecycle_status text not null default 'active',
+        owner text,
+        notes text,
+        flags jsonb not null default '{}'::jsonb,
+        updated_by text,
+        last_checked_at timestamptz,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `create index if not exists platform_ops_status_health_idx on platform_ops_status(health_status, updated_at desc);`,
+      `create index if not exists platform_ops_status_onboarding_idx on platform_ops_status(onboarding_stage, updated_at desc);`,
+
+      `create table if not exists cohort_command_configs (
+        config_key text primary key,
+        cohort jsonb not null default '{}'::jsonb,
+        letters jsonb not null default '{}'::jsonb,
+        instructor jsonb not null default '{}'::jsonb,
+        wiring jsonb not null default '{}'::jsonb,
+        generated_preview_id text not null default '',
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `create table if not exists cohort_command_students (
+        student_id text primary key,
+        name text not null default '',
+        email text not null default '',
+        org text not null default '',
+        track text not null default '',
+        seat text not null default '',
+        status text not null default 'pending',
+        notes text not null default '',
+        created_at_label text not null default '',
+        attendance jsonb not null default '{}'::jsonb,
+        profile jsonb not null default '{}'::jsonb,
+        workbook jsonb not null default '{}'::jsonb,
+        demo jsonb not null default '{}'::jsonb,
+        self_score jsonb not null default '{}'::jsonb,
+        founder_score jsonb not null default '{}'::jsonb,
+        updated_by text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `create index if not exists cohort_command_students_status_idx on cohort_command_students(status, updated_at desc);`,
+      `create index if not exists cohort_command_students_email_idx on cohort_command_students(email, updated_at desc);`,
 
 ];
 

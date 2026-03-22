@@ -1,0 +1,23 @@
+
+<div class="page-shell page-wrap">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Vault</div>
+      <h2>Credentials, secrets, URLs, project ties, and notes.</h2>
+    </div>
+    <div class="toolbar" style="margin-top:12px"><button class="soft-btn" type="button" onclick="app.goTo('credential-pack')">Credential Pack</button><button class="soft-btn" type="button" onclick="app.goTo('projects')">Projects</button><button class="soft-btn" type="button" onclick="app.goTo('notes')">Notes</button></div>
+    <div class="toolbar" data-tour="vault-toolbar">
+      <input id="credential-search" type="search" placeholder="Search vault" oninput="app.setFilter('credentialSearch', this.value)">
+      <select id="credential-category-filter" onchange="app.setFilter('credentialCategory', this.value)">
+        <option value="">All categories</option>
+        <option value="login">Login</option>
+        <option value="api">API Key</option>
+        <option value="server">Server</option>
+        <option value="payment">Payment</option>
+        <option value="document">Document</option>
+      </select>
+      <button class="primary-btn" onclick="app.openEntityModal('credential')">Add Credential</button>
+    </div>
+  </div>
+  <div id="credentials-list" class="list-grid" data-tour="vault-list"></div>
+</div>

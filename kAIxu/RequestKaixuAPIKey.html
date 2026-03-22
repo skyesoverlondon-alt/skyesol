@@ -10,11 +10,11 @@
   <meta property="og:title" content="Request a kAIxu API Key" />
   <meta property="og:description" content="Get your free kAIxu API key. Route AI through kAIxuGateway13 — metered, tracked, multi-provider." />
   <meta property="og:url" content="https://skyesol.netlify.app/kAIxu/RequestKaixuAPIKey.html" />
-  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Request a kAIxu API Key" />
   <meta name="twitter:description" content="Instant AI gateway key — metered, tracked, multi-provider." />
-  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" />
+  <meta name="twitter:image" content="https://cdn1.sharemyimage.com/2026/02/17/Logo-2-1.png" />
   <meta name="theme-color" content="#080812" />
   <link rel="canonical" href="https://skyesol.netlify.app/kAIxu/RequestKaixuAPIKey.html" />
 
@@ -222,24 +222,6 @@
       margin-top: 28px; padding-top: 24px;
       border-top: 1px solid var(--stroke2);
     }
-
-    .post-actions {
-      margin-top: 16px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .btn.secondary {
-      background: rgba(255,255,255,.09);
-      color: rgba(255,255,255,.92);
-      border: 1px solid rgba(255,255,255,.16);
-      box-shadow: none;
-    }
-
-    .btn.secondary:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,.25);
-    }
     .usage h3 {
       font-family: var(--display); font-size: 1.15rem; margin-bottom: 14px;
       color: var(--mist);
@@ -274,7 +256,6 @@
       .wrap { padding: 40px 16px 60px; }
       .card { padding: 22px 18px; }
       .limits-grid { grid-template-columns: 1fr; }
-      .post-actions { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -286,8 +267,8 @@
     <div class="badge">kAIxuGateway13</div>
     <h1>Request Your kAIxu API Key</h1>
     <p class="subtitle">
-      Get instant access to multiple AI lanes through one key,
-      one gateway, one bill. No external provider credentials needed.
+      Get instant access to OpenAI, Anthropic, and Gemini — all through one key,
+      one gateway, one bill. No provider credentials needed.
     </p>
 
     <div class="card">
@@ -314,11 +295,6 @@
           If you lose it, request a new one (the old key will be revoked).
         </div>
 
-        <div class="post-actions">
-          <button class="btn" id="openUserDashboardBtn" type="button">Open User Dashboard</button>
-          <button class="btn secondary" id="requestAnotherBtn" type="button">Request Another Key</button>
-        </div>
-
         <div class="limits-grid" id="limitsGrid"></div>
 
         <div class="usage">
@@ -343,8 +319,6 @@
     const errorMsg = document.getElementById('errorMsg');
     const result = document.getElementById('result');
     const keyDisplay = document.getElementById('keyDisplay');
-    const openUserDashboardBtn = document.getElementById('openUserDashboardBtn');
-    const requestAnotherBtn = document.getElementById('requestAnotherBtn');
     const limitsGrid = document.getElementById('limitsGrid');
     const codeSnippet = document.getElementById('codeSnippet');
 
@@ -410,8 +384,8 @@
     <span class="str">"Authorization"</span>: <span class="str">"Bearer ${data.key}"</span>
   },
   <span class="key">body</span>: JSON.stringify({
-    <span class="key">provider</span>: <span class="str">"kaixu"</span>,
-    <span class="key">model</span>: <span class="str">"kaixu-chat"</span>,
+    <span class="key">provider</span>: <span class="str">"gemini"</span>,
+    <span class="key">model</span>: <span class="str">"gemini-2.0-flash"</span>,
     <span class="key">messages</span>: [{ <span class="key">role</span>: <span class="str">"user"</span>, <span class="key">content</span>: <span class="str">"Hello!"</span> }],
     <span class="key">max_tokens</span>: 512
   })
@@ -444,25 +418,7 @@ console.log(data.output_text);`;
         }, 2000);
       });
     }
-
-    openUserDashboardBtn.addEventListener('click', () => {
-      if (!generatedKey) return;
-      localStorage.setItem('KAIXU_VIRTUAL_KEY', generatedKey);
-      // Ensure user dashboard calls this site by default.
-      localStorage.removeItem('KAIXU_API_BASE');
-      window.location.href = '/gateway/dashboard.html';
-    });
-
-    requestAnotherBtn.addEventListener('click', () => {
-      generatedKey = '';
-      keyDisplay.textContent = '';
-      result.classList.remove('show');
-      form.style.display = '';
-      errorMsg.classList.remove('show');
-      emailInput.focus();
-    });
   </script>
-<div id="siteHeaderMount"></div>
-<script src="/js/partials.js"></script>
+  <script src="/js/SkyeSolINTRO.js"></script>
 </body>
 </html>

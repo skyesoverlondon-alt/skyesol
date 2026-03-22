@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://skyesol.netlify.app/skyeleticx-portal.html">
+  <title>SkyeLeticX Portal | Skyes Over London LC</title>
+  <meta name="description" content="Traverse from Skyes Over London LC into the internal SkyeLeticX league site through a dedicated portal handoff.">
+  <meta property="og:title" content="SkyeLeticX Portal">
+  <meta property="og:description" content="A Skyesol gateway into the internal SkyeLeticX league experience.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skyesol.netlify.app/skyeleticx-portal.html">
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SkyeLeticX Portal">
+  <meta name="twitter:description" content="Travel from Skyesol into the internal SkyeLeticX league site through a dedicated portal handoff.">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#05050a">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+    :root {
+      --portal-bg: #05060d;
+      --portal-surface: rgba(9, 16, 30, 0.82);
+      --portal-border: rgba(118, 225, 255, 0.24);
+      --portal-cyan: #76e1ff;
+      --portal-blue: #3f67ff;
+      --portal-gold: #f3c96a;
+      --portal-ice: #eef7ff;
+      --portal-muted: rgba(238, 247, 255, 0.68);
+      --portal-font: 'Space Grotesk', sans-serif;
+      --portal-display: 'Orbitron', sans-serif;
+    }
+
+    body.portal-body {
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(118, 225, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(63, 103, 255, 0.2), transparent 24%),
+        radial-gradient(circle at 50% 75%, rgba(243, 201, 106, 0.14), transparent 26%),
+        linear-gradient(145deg, #03040a 0%, #060814 42%, #05060d 100%);
+      color: var(--portal-ice);
+      font-family: var(--portal-font);
+      position: relative;
+    }
+
+    .portal-body::before,
+    .portal-body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .portal-body::before {
+      background-image:
+        linear-gradient(rgba(118, 225, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(118, 225, 255, 0.07) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1), transparent 78%);
+      opacity: 0.42;
+    }
+
+    .portal-body::after {
+      background:
+        radial-gradient(circle at center, rgba(118, 225, 255, 0.18), transparent 34%),
+        radial-gradient(circle at center, rgba(243, 201, 106, 0.08), transparent 52%);
+      animation: portalPulse 6s ease-in-out infinite;
+    }
+
+    .portal-shell {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 72px;
+    }
+
+    .portal-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .portal-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--portal-ice);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font: 700 0.78rem var(--portal-display);
+    }
+
+    .portal-mark img {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      box-shadow: 0 0 28px rgba(118, 225, 255, 0.18);
+    }
+
+    .portal-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .portal-link,
+    .portal-button,
+    .portal-ghost {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--portal-ice);
+      border-radius: 999px;
+      padding: 14px 22px;
+      text-decoration: none;
+      cursor: pointer;
+      font: 700 0.78rem var(--portal-display);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .portal-link:hover,
+    .portal-button:hover,
+    .portal-ghost:hover {
+      transform: translateY(-2px);
+      border-color: rgba(118, 225, 255, 0.5);
+      box-shadow: 0 18px 40px rgba(63, 103, 255, 0.12);
+    }
+
+    .portal-button {
+      background: linear-gradient(135deg, rgba(118, 225, 255, 0.2), rgba(63, 103, 255, 0.22));
+      border-color: rgba(118, 225, 255, 0.45);
+      color: #07111d;
+      background-blend-mode: screen;
+      color: var(--portal-ice);
+    }
+
+    .portal-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .portal-panel,
+    .portal-ring-panel,
+    .portal-card {
+      background: var(--portal-surface);
+      border: 1px solid var(--portal-border);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 28px 70px rgba(3, 7, 18, 0.42);
+    }
+
+    .portal-panel {
+      border-radius: 34px;
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portal-panel::before {
+      content: "";
+      position: absolute;
+      inset: -20% auto auto -10%;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(118, 225, 255, 0.2), transparent 70%);
+      pointer-events: none;
+    }
+
+    .portal-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(118, 225, 255, 0.28);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font: 700 0.72rem var(--portal-display);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--portal-cyan);
+      margin-bottom: 20px;
+      background: rgba(118, 225, 255, 0.06);
+    }
+
+    .portal-kicker span {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--portal-cyan);
+      box-shadow: 0 0 18px rgba(118, 225, 255, 0.8);
+    }
+
+    .portal-title {
+      margin: 0;
+      font: 800 clamp(2.6rem, 6vw, 5.6rem)/0.94 var(--portal-display);
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .portal-title em {
+      font-style: normal;
+      color: var(--portal-cyan);
+      text-shadow: 0 0 24px rgba(118, 225, 255, 0.26);
+    }
+
+    .portal-copy {
+      max-width: 58ch;
+      margin: 20px 0 0;
+      color: var(--portal-muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .portal-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .portal-status {
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .portal-status div {
+      border-radius: 20px;
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .portal-status strong,
+    .portal-card strong {
+      display: block;
+      font: 700 0.72rem var(--portal-display);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--portal-cyan);
+      margin-bottom: 10px;
+    }
+
+    .portal-status span,
+    .portal-card p,
+    .portal-card li,
+    .portal-hint {
+      color: var(--portal-muted);
+      line-height: 1.6;
+    }
+
+    .portal-ring-panel {
+      border-radius: 34px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portal-ring-panel::before,
+    .portal-ring-panel::after {
+      content: "";
+      position: absolute;
+      inset: 50% auto auto 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .portal-ring-panel::before {
+      width: 280px;
+      height: 280px;
+      border: 1px solid rgba(118, 225, 255, 0.3);
+      box-shadow: 0 0 40px rgba(118, 225, 255, 0.12), inset 0 0 38px rgba(118, 225, 255, 0.06);
+      animation: rotateRing 14s linear infinite;
+    }
+
+    .portal-ring-panel::after {
+      width: 180px;
+      height: 180px;
+      border: 1px dashed rgba(243, 201, 106, 0.34);
+      box-shadow: 0 0 24px rgba(243, 201, 106, 0.12);
+      animation: rotateRingReverse 11s linear infinite;
+    }
+
+    .portal-ring-core {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      min-height: 320px;
+      text-align: center;
+    }
+
+    .portal-ring-core div {
+      width: 122px;
+      height: 122px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      font: 800 1.1rem var(--portal-display);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--portal-ice);
+      background: linear-gradient(135deg, rgba(118, 225, 255, 0.16), rgba(63, 103, 255, 0.28));
+      border: 1px solid rgba(118, 225, 255, 0.34);
+      box-shadow: 0 0 40px rgba(118, 225, 255, 0.18);
+    }
+
+    .portal-ring-copy {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 20px;
+    }
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .portal-card {
+      border-radius: 26px;
+      padding: 24px;
+    }
+
+    .portal-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .portal-card li + li {
+      margin-top: 10px;
+    }
+
+    .portal-return {
+      margin-top: 18px;
+      color: var(--portal-gold);
+      font: 700 0.74rem var(--portal-display);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .portal-transition {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at center, rgba(118, 225, 255, 0.2), rgba(4, 8, 18, 0.98) 56%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+      z-index: 50;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .portal-transition strong {
+      display: block;
+      font: 800 clamp(1.4rem, 4vw, 2.4rem) var(--portal-display);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--portal-cyan);
+      margin-bottom: 12px;
+    }
+
+    .portal-transition p {
+      margin: 0;
+      max-width: 34ch;
+      color: var(--portal-muted);
+      line-height: 1.7;
+    }
+
+    .portal-body.is-jumping .portal-transition {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @keyframes rotateRing {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes rotateRingReverse {
+      from { transform: translate(-50%, -50%) rotate(360deg); }
+      to { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+
+    @keyframes portalPulse {
+      0%, 100% { opacity: 0.82; }
+      50% { opacity: 1; }
+    }
+
+    @media (max-width: 980px) {
+      .portal-hero,
+      .portal-grid,
+      .portal-status {
+        grid-template-columns: 1fr;
+      }
+
+      .portal-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .portal-links {
+        justify-content: flex-start;
+      }
+
+      .portal-shell {
+        padding-top: 24px;
+      }
+    }
+  </style>
+</head>
+<body class="portal-body">
+  <div class="portal-shell">
+    <nav class="portal-nav" aria-label="Portal navigation">
+      <a class="portal-mark" href="/network.html">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC">
+        <span>Skyesol Portal Mesh</span>
+      </a>
+      <div class="portal-links">
+        <a class="portal-link" href="/network.html">Back to Network</a>
+        <a class="portal-link" href="/Case%20Studies/skyeleticx-league-governance-launch.html">League Case Study</a>
+      </div>
+    </nav>
+
+    <section class="portal-hero" aria-labelledby="portal-title">
+      <article class="portal-panel">
+        <div class="portal-kicker" id="portalKicker"><span></span>Separate Site Handoff</div>
+        <h1 class="portal-title" id="portal-title">Traverse Into <em>SkyeLeticX</em></h1>
+        <p class="portal-copy" id="portalCopy">
+          SkyeLeticX remains its own league website, with its own rhythm, navigation, and audience. This Skyesol layer is the threshold: a controlled handoff that signals you are leaving the parent ecosystem shell and entering the internal league site we ship inside this repository.
+        </p>
+        <div class="portal-actions">
+          <button class="portal-button" id="portalEnter" type="button" data-destination="/SkyeLeticXOfficialWebsite/">Initiate Transfer</button>
+          <a class="portal-ghost" href="/SkyeLeticXOfficialWebsite/">Open League Site</a>
+        </div>
+        <div class="portal-status" aria-label="Portal details">
+          <div>
+            <strong>Origin</strong>
+            <span>Skyes Over London LC ecosystem surface</span>
+          </div>
+          <div>
+            <strong>Destination</strong>
+            <span>Internal SkyeLeticX league experience</span>
+          </div>
+          <div>
+            <strong>Return Lane</strong>
+            <span>SkyeLeticX links back here, not into the Skyesol nav shell</span>
+          </div>
+        </div>
+      </article>
+
+      <aside class="portal-ring-panel" aria-label="Portal visualization">
+        <div class="portal-ring-core">
+          <div>Gate X</div>
+        </div>
+        <div class="portal-ring-copy">
+          <strong>Transition Protocol</strong>
+          <p class="portal-hint">Skyesol presents context. SkyeLeticX handles the league. The route is shared, the site identity is not.</p>
+          <div class="portal-return" id="portalReturnNote">Use this page as the entry and re-entry threshold.</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="portal-grid" aria-label="Portal guidance">
+      <article class="portal-card">
+        <strong>Why A Portal</strong>
+        <p>Users understand they are crossing into a separate property instead of stumbling into another internal section.</p>
+      </article>
+      <article class="portal-card">
+        <strong>What Stays Separate</strong>
+        <ul>
+          <li>SkyeLeticX keeps its own navigation and brand language.</li>
+          <li>Skyesol remains the ecosystem frame, not the league shell.</li>
+          <li>Cross-site travel stays intentional instead of casual.</li>
+        </ul>
+      </article>
+      <article class="portal-card">
+        <strong>Recommended Route</strong>
+        <p>Enter through this threshold from Skyesol. Return through this threshold from SkyeLeticX. That keeps the ecosystem relationship clear in both directions.</p>
+      </article>
+    </section>
+  </div>
+
+  <div class="portal-transition" id="portalTransition" aria-live="polite">
+    <div>
+      <strong>Transferring</strong>
+      <p>Leaving the Skyesol shell and docking into the internal SkyeLeticX league environment.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const enterButton = document.getElementById('portalEnter');
+      const searchParams = new URLSearchParams(window.location.search);
+      const isReturnTrip = searchParams.get('return') === '1';
+      const portalTitle = document.getElementById('portal-title');
+      const portalKicker = document.getElementById('portalKicker');
+      const portalCopy = document.getElementById('portalCopy');
+      const returnNote = document.getElementById('portalReturnNote');
+      const destination = enterButton ? enterButton.dataset.destination : '/SkyeLeticXOfficialWebsite/';
+
+      if (isReturnTrip) {
+        portalKicker.innerHTML = '<span></span>Return Threshold';
+        portalTitle.innerHTML = 'Return From <em>SkyeLeticX</em>';
+        portalCopy.textContent = 'You are leaving the standalone league environment and re-entering the Skyes Over London LC ecosystem shell. Use this threshold to make the return leg explicit.';
+        returnNote.textContent = 'This page supports both outward transfer and structured re-entry.';
+      }
+
+      if (!enterButton) return;
+      enterButton.addEventListener('click', () => {
+        document.body.classList.add('is-jumping');
+        window.setTimeout(() => {
+          window.location.href = destination;
+        }, 500);
+      });
+    }());
+  </script>
+</body>
+</html>

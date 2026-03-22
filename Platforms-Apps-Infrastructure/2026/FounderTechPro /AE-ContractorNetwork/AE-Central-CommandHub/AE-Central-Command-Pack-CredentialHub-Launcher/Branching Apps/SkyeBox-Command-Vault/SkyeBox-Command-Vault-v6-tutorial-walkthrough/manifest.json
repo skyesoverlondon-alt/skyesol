@@ -1,0 +1,25 @@
+{
+  "name": "SkyeBox Command Vault · Skyes Over London",
+  "short_name": "SkyeBox Vault",
+  "description": "Offline-first Skyes Over London command vault with authenticator codes, contacts, secure notes, locker storage, encrypted backups, restore points, and a built-in tutorial walkthrough.",
+  "theme_color": "#130f29",
+  "background_color": "#080713",
+  "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay", "minimal-ui"],
+  "start_url": "./index.html",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "utilities", "security"],
+  "lang": "en"
+}

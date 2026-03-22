@@ -8,70 +8,6 @@ function configError(message, hint) {
   return err;
 }
 
-const OPENAI_KEY_ENV_CHAIN = Object.freeze([
-  "OPENAI_API_KEY",
-  "KAIXU_BACKUP_OPENAI_API_KEY",
-  "KAIXU_BACKUP_OPENAI_API_KEY_2",
-  "KAIXU_BACKUP_OPENAI_API_KEY_3",
-  "OPENAI_API_KEY_2",
-  "OPENAI_API_KEY_3"
-]);
-
-function getOpenAIKeyChain() {
-  const seen = new Set();
-  const keys = [];
-  for (const envName of OPENAI_KEY_ENV_CHAIN) {
-    const val = String(process.env[envName] || "").trim();
-    if (!val || seen.has(val)) continue;
-    seen.add(val);
-    keys.push({ envName, value: val });
-  }
-  return keys;
-}
-
-function isRetryableOpenAIStatus(status) {
-  if (status === 401 || status === 403 || status === 429) return true;
-  return status >= 500;
-}
-
-async function fetchOpenAIResponses({ body, stream }) {
-  const keys = getOpenAIKeyChain();
-  if (!keys.length) {
-    throw configError(
-      "OPENAI key chain not configured",
-      "Set one or more of: OPENAI_API_KEY, KAIXU_BACKUP_OPENAI_API_KEY, KAIXU_BACKUP_OPENAI_API_KEY_2, KAIXU_BACKUP_OPENAI_API_KEY_3"
-    );
-  }
-
-  let lastErr = null;
-  for (let i = 0; i < keys.length; i++) {
-    const k = keys[i];
-    const res = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${k.value}`,
-        "content-type": "application/json",
-        ...(stream ? { accept: "text/event-stream" } : {})
-      },
-      body: JSON.stringify(body)
-    });
-
-    if (res.ok) return res;
-
-    const parsed = await res.clone().json().catch(() => ({}));
-    const err = upstreamError("openai", res, parsed);
-    err.openai_key_slot = i + 1;
-    err.openai_key_env = k.envName;
-    lastErr = err;
-
-    if (!isRetryableOpenAIStatus(res.status) || i === keys.length - 1) {
-      throw err;
-    }
-  }
-
-  throw lastErr || new Error("OpenAI upstream failed");
-}
-
 
 function safeJsonString(v, max = 12000) {
   try {
@@ -111,84 +47,13 @@ function upstreamError(provider, res, body) {
   return err;
 }
 
-const BUILTIN_MODEL_ALIASES = Object.freeze({
-  "KAIXU_PRIME6_7": { provider: "openai", model: "gpt-4o-mini" },
-  "KAIXU_PRIME7": { provider: "openai", model: "gpt-4o" }
-});
-
-function aliasToken(value) {
-  return String(value || "")
-    .replace(/[^A-Za-z0-9]+/g, "_")
-    .replace(/^_+|_+$/g, "")
-    .toUpperCase();
-}
-
-function buildEnvAliasMap() {
-  const out = new Map();
-  for (const [k, v] of Object.entries(process.env || {})) {
-    const m = /^KAIXU_ALIAS_(.+)_(PROVIDER|MODEL)$/.exec(k);
-    if (!m) continue;
-    const token = m[1];
-    const field = m[2].toLowerCase();
-    const cur = out.get(token) || {};
-    cur[field] = String(v || "").trim();
-    out.set(token, cur);
-  }
-  return out;
-}
-
-const ENV_MODEL_ALIASES = buildEnvAliasMap();
-
-function lookupModelAlias(requestedModel) {
-  const token = aliasToken(requestedModel);
-  if (!token) return null;
-
-  const envAlias = ENV_MODEL_ALIASES.get(token);
-  if (envAlias && envAlias.model) return envAlias;
-
-  return BUILTIN_MODEL_ALIASES[token] || null;
-}
-
-export function resolveProvider(raw) {
-  const v = String(raw || "").trim().toLowerCase();
-  if (v === "openai" || v === "anthropic" || v === "gemini") return v;
-  if (v === "skyes over london" || v === "skyes over london lc" || v === "skyes" || v === "kaixu") return "openai";
-  return "openai";
-}
-
-// Backward-compatible alias used elsewhere in the codebase.
-export function normalizeProviderName(input) {
-  return resolveProvider(input);
-}
-
-export function resolveUpstreamTarget(provider, requestedModel) {
-  const fallbackProvider = resolveProvider(provider);
-  const fallbackModel = String(requestedModel || "").trim();
-
-  const alias = lookupModelAlias(fallbackModel);
-  if (!alias) {
-    return {
-      provider: fallbackProvider,
-      model: fallbackModel,
-      alias_key: null
-    };
-  }
-
-  return {
-    provider: resolveProvider(alias.provider || fallbackProvider),
-    model: String(alias.model || fallbackModel).trim(),
-    alias_key: fallbackModel
-  };
-}
-
-export function resolveUpstreamModel(provider, requestedModel) {
-  return resolveUpstreamTarget(provider, requestedModel).model;
-}
-
 /**
  * Non-stream calls
  */
 export async function callOpenAI({ model, messages, max_tokens, temperature }) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) throw configError("OPENAI_API_KEY not configured", "Set OPENAI_API_KEY in Netlify → Site configuration → Environment variables (your OpenAI API key).");
+
   const input = Array.isArray(messages) ? messages.map(m => ({
     role: m.role,
     content: [{ type: "input_text", text: String(m.content ?? "") }]
@@ -202,7 +67,14 @@ export async function callOpenAI({ model, messages, max_tokens, temperature }) {
     store: false
   };
 
-  const res = await fetchOpenAIResponses({ body, stream: false });
+  const res = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      "authorization": `Bearer ${apiKey}`,
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
 
   const data = await res.json().catch(()=> ({}));
   if (!res.ok) throw upstreamError("openai", res, data);
@@ -353,6 +225,9 @@ export async function callGeminiEmbed({ model, input, taskType, title, outputDim
  */
 
 export async function streamOpenAI({ model, messages, max_tokens, temperature }) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) throw configError("OPENAI_API_KEY not configured", "Set OPENAI_API_KEY in Netlify → Site configuration → Environment variables (your OpenAI API key).");
+
   const input = Array.isArray(messages) ? messages.map(m => ({
     role: m.role,
     content: [{ type: "input_text", text: String(m.content ?? "") }]
@@ -367,7 +242,20 @@ export async function streamOpenAI({ model, messages, max_tokens, temperature })
     stream: true
   };
 
-  const upstream = await fetchOpenAIResponses({ body, stream: true });
+  const upstream = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      "authorization": `Bearer ${apiKey}`,
+      "content-type": "application/json",
+      "accept": "text/event-stream"
+    },
+    body: JSON.stringify(body)
+  });
+
+  if (!upstream.ok) {
+    const data = await upstream.json().catch(()=> ({}));
+    throw new Error(data?.error?.message || `OpenAI error ${upstream.status}`);
+  }
 
   // Parse OpenAI SSE lines: data: {json}
   function parseSseLines(chunkText) {

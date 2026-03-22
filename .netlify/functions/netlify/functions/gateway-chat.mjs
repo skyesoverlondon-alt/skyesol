@@ -1,0 +1,1503 @@
+
+import {createRequire as ___nfyCreateRequire} from "module";
+import {fileURLToPath as ___nfyFileURLToPath} from "url";
+import {dirname as ___nfyPathDirname} from "path";
+let __filename=___nfyFileURLToPath(import.meta.url);
+let __dirname=___nfyPathDirname(___nfyFileURLToPath(import.meta.url));
+let require=___nfyCreateRequire(import.meta.url);
+
+
+// netlify/functions/_lib/http.js
+function buildCors(req) {
+  const allowRaw = (process.env.ALLOWED_ORIGINS || "").trim();
+  const reqOrigin = req.headers.get("origin") || req.headers.get("Origin");
+  const allowHeaders = "authorization, content-type, x-kaixu-install-id, x-kaixu-request-id, x-kaixu-app, x-kaixu-build, x-admin-password, x-kaixu-error-token, x-kaixu-mode, x-content-sha1, x-setup-secret, x-kaixu-job-secret, x-job-worker-secret";
+  const allowMethods = "GET,POST,PUT,PATCH,DELETE,OPTIONS";
+  const base = {
+    "access-control-allow-headers": allowHeaders,
+    "access-control-allow-methods": allowMethods,
+    "access-control-expose-headers": "x-kaixu-request-id",
+    "access-control-max-age": "86400"
+  };
+  if (!allowRaw) {
+    return {
+      ...base,
+      ...reqOrigin ? { vary: "Origin" } : {}
+    };
+  }
+  const allowed = allowRaw.split(",").map((s) => s.trim()).filter(Boolean);
+  if (allowed.includes("*")) {
+    const origin = reqOrigin || "*";
+    return {
+      ...base,
+      "access-control-allow-origin": origin,
+      ...reqOrigin ? { vary: "Origin" } : {}
+    };
+  }
+  if (reqOrigin && allowed.includes(reqOrigin)) {
+    return {
+      ...base,
+      "access-control-allow-origin": reqOrigin,
+      vary: "Origin"
+    };
+  }
+  return {
+    ...base,
+    ...reqOrigin ? { vary: "Origin" } : {}
+  };
+}
+function json(status, body, headers = {}) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      ...headers
+    }
+  });
+}
+function badRequest(message, headers = {}) {
+  return json(400, { error: message }, headers);
+}
+function getBearer(req) {
+  const auth = req.headers.get("authorization") || req.headers.get("Authorization") || "";
+  if (!auth.startsWith("Bearer ")) return null;
+  return auth.slice(7).trim();
+}
+function monthKeyUTC(d = /* @__PURE__ */ new Date()) {
+  return d.toISOString().slice(0, 7);
+}
+function getInstallId(req) {
+  return (req.headers.get("x-kaixu-install-id") || req.headers.get("X-Kaixu-Install-Id") || "").toString().trim().slice(0, 80) || null;
+}
+function getUserAgent(req) {
+  return (req.headers.get("user-agent") || req.headers.get("User-Agent") || "").toString().slice(0, 240);
+}
+function getClientIp(req) {
+  const a = (req.headers.get("x-nf-client-connection-ip") || "").toString().trim();
+  if (a) return a;
+  const xff = (req.headers.get("x-forwarded-for") || "").toString();
+  if (!xff) return null;
+  const first = xff.split(",")[0].trim();
+  return first || null;
+}
+
+// netlify/functions/_lib/db.js
+import { neon } from "@netlify/neon";
+var _sql = null;
+var _schemaPromise = null;
+function getSql() {
+  if (_sql) return _sql;
+  const hasDbUrl = !!(process.env.NETLIFY_DATABASE_URL || process.env.DATABASE_URL);
+  if (!hasDbUrl) {
+    const err = new Error("Database not configured (missing NETLIFY_DATABASE_URL). Attach Netlify DB (Neon) to this site.");
+    err.code = "DB_NOT_CONFIGURED";
+    err.status = 500;
+    err.hint = "Netlify UI \u2192 Extensions \u2192 Neon \u2192 Add database (or run: npx netlify db init).";
+    throw err;
+  }
+  _sql = neon();
+  return _sql;
+}
+async function ensureSchema() {
+  if (_schemaPromise) return _schemaPromise;
+  _schemaPromise = (async () => {
+    const sql = getSql();
+    const statements = [
+      `create table if not exists customers (
+        id bigserial primary key,
+        email text not null unique,
+        plan_name text not null default 'starter',
+        monthly_cap_cents integer not null default 2000,
+        is_active boolean not null default true,
+        stripe_customer_id text,
+        stripe_subscription_id text,
+        stripe_status text,
+        stripe_current_period_end timestamptz,
+        auto_topup_enabled boolean not null default false,
+        auto_topup_amount_cents integer,
+        auto_topup_threshold_cents integer,
+        created_at timestamptz not null default now()
+      );`,
+      `create table if not exists api_keys (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        key_hash text not null unique,
+        key_last4 text not null,
+        label text,
+        monthly_cap_cents integer,
+        rpm_limit integer,
+        rpd_limit integer,
+        created_at timestamptz not null default now(),
+        revoked_at timestamptz
+      );`,
+      `create index if not exists api_keys_customer_id_idx on api_keys(customer_id);`,
+      `create table if not exists monthly_usage (
+        customer_id bigint not null references customers(id) on delete cascade,
+        month text not null,
+        spent_cents integer not null default 0,
+        extra_cents integer not null default 0,
+        input_tokens integer not null default 0,
+        output_tokens integer not null default 0,
+        updated_at timestamptz not null default now(),
+        primary key (customer_id, month)
+      );`,
+      `create table if not exists monthly_key_usage (
+        api_key_id bigint not null references api_keys(id) on delete cascade,
+        customer_id bigint not null references customers(id) on delete cascade,
+        month text not null,
+        spent_cents integer not null default 0,
+        input_tokens integer not null default 0,
+        output_tokens integer not null default 0,
+        calls integer not null default 0,
+        updated_at timestamptz not null default now(),
+        primary key (api_key_id, month)
+      );`,
+      `create index if not exists monthly_key_usage_customer_month_idx on monthly_key_usage(customer_id, month);`,
+      `alter table monthly_key_usage add column if not exists calls integer not null default 0;`,
+      `create table if not exists usage_events (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        api_key_id bigint not null references api_keys(id) on delete cascade,
+        provider text not null,
+        model text not null,
+        input_tokens integer not null default 0,
+        output_tokens integer not null default 0,
+        cost_cents integer not null default 0,
+        created_at timestamptz not null default now()
+      );`,
+      `create index if not exists usage_events_customer_month_idx on usage_events(customer_id, created_at desc);`,
+      `create index if not exists usage_events_key_idx on usage_events(api_key_id, created_at desc);`,
+      `create table if not exists audit_events (
+        id bigserial primary key,
+        actor text not null,
+        action text not null,
+        target text,
+        meta jsonb not null default '{}'::jsonb,
+        created_at timestamptz not null default now()
+      );`,
+      `create index if not exists audit_events_created_idx on audit_events(created_at desc);`,
+      `create table if not exists rate_limit_windows (
+        customer_id bigint not null references customers(id) on delete cascade,
+        api_key_id bigint not null references api_keys(id) on delete cascade,
+        window_start timestamptz not null,
+        count integer not null default 0,
+        primary key (customer_id, api_key_id, window_start)
+      );`,
+      `create index if not exists rate_limit_windows_window_idx on rate_limit_windows(window_start desc);`,
+      `alter table api_keys add column if not exists last_seen_at timestamptz;`,
+      `alter table api_keys add column if not exists last_seen_install_id text;`,
+      `alter table usage_events add column if not exists install_id text;`,
+      `alter table usage_events add column if not exists ip_hash text;`,
+      `alter table usage_events add column if not exists ua text;`,
+      `create index if not exists usage_events_install_idx on usage_events(install_id);`,
+      `create table if not exists alerts_sent (
+        customer_id bigint not null,
+        api_key_id bigint not null default 0,
+        month text not null,
+        alert_type text not null,
+        created_at timestamptz not null default now(),
+        primary key (customer_id, api_key_id, month, alert_type)
+      );`,
+      // --- Device binding / seats ---
+      `alter table customers add column if not exists max_devices_per_key integer;`,
+      `alter table customers add column if not exists require_install_id boolean not null default false;`,
+      `alter table customers add column if not exists allowed_providers text[];`,
+      `alter table customers add column if not exists allowed_models jsonb;`,
+      `alter table customers add column if not exists stripe_current_period_end timestamptz;`,
+      `alter table api_keys add column if not exists max_devices integer;`,
+      `alter table api_keys add column if not exists require_install_id boolean;`,
+      `alter table api_keys add column if not exists allowed_providers text[];`,
+      `alter table api_keys add column if not exists allowed_models jsonb;`,
+      `create table if not exists key_devices (
+        api_key_id bigint not null references api_keys(id) on delete cascade,
+        customer_id bigint not null references customers(id) on delete cascade,
+        install_id text not null,
+        device_label text,
+        first_seen_at timestamptz not null default now(),
+        last_seen_at timestamptz,
+        last_seen_ua text,
+        revoked_at timestamptz,
+        revoked_by text,
+        primary key (api_key_id, install_id)
+      );`,
+      `create index if not exists key_devices_customer_idx on key_devices(customer_id);`,
+      `create index if not exists key_devices_last_seen_idx on key_devices(last_seen_at desc);`,
+      // --- Invoice snapshots + topups ---
+      `create table if not exists monthly_invoices (
+        customer_id bigint not null references customers(id) on delete cascade,
+        month text not null,
+        snapshot jsonb not null,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now(),
+        primary key (customer_id, month)
+      );`,
+      `create table if not exists topup_events (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        month text not null,
+        amount_cents integer not null,
+        source text not null default 'manual',
+        stripe_session_id text,
+        status text not null default 'applied',
+        created_at timestamptz not null default now()
+      );`,
+      `create index if not exists topup_events_customer_month_idx on topup_events(customer_id, month);`,
+      `create table if not exists async_jobs (
+        id uuid primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        api_key_id bigint not null references api_keys(id) on delete cascade,
+        provider text not null,
+        model text not null,
+        request jsonb not null default '{}'::jsonb,
+        status text not null default 'queued',
+        created_at timestamptz not null default now(),
+        started_at timestamptz,
+        completed_at timestamptz,
+        heartbeat_at timestamptz,
+        output_text text,
+        error text,
+        input_tokens integer not null default 0,
+        output_tokens integer not null default 0,
+        cost_cents integer not null default 0,
+        meta jsonb not null default '{}'::jsonb
+      );`,
+      `create index if not exists async_jobs_customer_created_idx on async_jobs(customer_id, created_at desc);`,
+      `create index if not exists async_jobs_status_idx on async_jobs(status, created_at desc);`,
+      `create table if not exists gateway_events (
+        id bigserial primary key,
+        request_id text,
+        level text not null default 'info',
+        kind text not null,
+        function_name text not null,
+        method text,
+        path text,
+        origin text,
+        referer text,
+        user_agent text,
+        ip text,
+        app_id text,
+        build_id text,
+        customer_id bigint,
+        api_key_id bigint,
+        provider text,
+        model text,
+        http_status integer,
+        duration_ms integer,
+        error_code text,
+        error_message text,
+        error_stack text,
+        upstream_status integer,
+        upstream_body text,
+        extra jsonb not null default '{}'::jsonb,
+        created_at timestamptz not null default now()
+      );`,
+      `create index if not exists gateway_events_created_idx on gateway_events(created_at desc);`,
+      `create index if not exists gateway_events_request_idx on gateway_events(request_id);`,
+      `create index if not exists gateway_events_level_idx on gateway_events(level, created_at desc);`,
+      `create index if not exists gateway_events_fn_idx on gateway_events(function_name, created_at desc);`,
+      `create index if not exists gateway_events_app_idx on gateway_events(app_id, created_at desc);`,
+      // --- KaixuPush (Deploy Push) enterprise tables ---
+      `alter table api_keys add column if not exists role text not null default 'deployer';`,
+      `create index if not exists api_keys_role_idx on api_keys(role);`,
+      `create table if not exists customer_netlify_tokens (
+        customer_id bigint primary key references customers(id) on delete cascade,
+        token_enc text not null,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `create table if not exists push_projects (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        project_id text not null,
+        name text not null,
+        netlify_site_id text not null,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now(),
+        unique (customer_id, project_id)
+      );`,
+      `create index if not exists push_projects_customer_idx on push_projects(customer_id, created_at desc);`,
+      `create table if not exists push_pushes (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        api_key_id bigint not null references api_keys(id) on delete cascade,
+        project_row_id bigint not null references push_projects(id) on delete cascade,
+        push_id text not null unique,
+        branch text not null,
+        title text,
+        deploy_id text not null,
+        state text not null,
+        required_digests text[] not null default '{}'::text[],
+        uploaded_digests text[] not null default '{}'::text[],
+        file_manifest jsonb not null default '{}'::jsonb,
+        url text,
+        error text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `alter table push_pushes add column if not exists file_manifest jsonb not null default '{}'::jsonb;`,
+      `create index if not exists push_pushes_customer_idx on push_pushes(customer_id, created_at desc);`,
+      `create table if not exists push_jobs (
+        id bigserial primary key,
+        push_row_id bigint not null references push_pushes(id) on delete cascade,
+        sha1 char(40) not null,
+        deploy_path text not null,
+        parts integer not null,
+        received_parts integer[] not null default '{}'::int[],
+        part_bytes jsonb not null default '{}'::jsonb,
+        bytes_staged bigint not null default 0,
+        status text not null default 'uploading',
+        error text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now(),
+        unique (push_row_id, sha1)
+      );`,
+      `create index if not exists push_jobs_push_idx on push_jobs(push_row_id, updated_at desc);`,
+      `alter table push_jobs add column if not exists bytes_staged bigint not null default 0;`,
+      `alter table push_jobs add column if not exists part_bytes jsonb not null default '{}'::jsonb;`,
+      `alter table push_jobs add column if not exists attempts integer not null default 0;`,
+      `alter table push_jobs add column if not exists next_attempt_at timestamptz;`,
+      `alter table push_jobs add column if not exists last_error text;`,
+      `alter table push_jobs add column if not exists last_error_at timestamptz;`,
+      `create table if not exists push_rate_windows (
+        customer_id bigint not null references customers(id) on delete cascade,
+        bucket_type text not null,
+        bucket_start timestamptz not null,
+        count integer not null default 0,
+        primary key(customer_id, bucket_type, bucket_start)
+      );`,
+      `create index if not exists push_rate_windows_bucket_idx on push_rate_windows(bucket_type, bucket_start desc);`,
+      `create table if not exists push_files (
+        id bigserial primary key,
+        push_row_id bigint not null references push_pushes(id) on delete cascade,
+        deploy_path text not null,
+        sha1 char(40) not null,
+        bytes bigint not null default 0,
+        mode text not null default 'direct',
+        created_at timestamptz not null default now()
+      );`,
+      `create index if not exists push_files_push_idx on push_files(push_row_id);`,
+      `create table if not exists push_usage_events (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        api_key_id bigint not null references api_keys(id) on delete cascade,
+        push_row_id bigint references push_pushes(id) on delete set null,
+        event_type text not null,
+        bytes bigint not null default 0,
+        pricing_version integer not null default 1,
+        cost_cents integer not null default 0,
+        meta jsonb not null default '{}'::jsonb,
+        created_at timestamptz not null default now()
+      );`,
+      `create index if not exists push_usage_customer_idx on push_usage_events(customer_id, created_at desc);`,
+      `create table if not exists push_pricing_versions (
+        version integer primary key,
+        effective_from date not null default current_date,
+        currency text not null default 'USD',
+        base_month_cents integer not null default 0,
+        per_deploy_cents integer not null default 0,
+        per_gb_cents integer not null default 0,
+        created_at timestamptz not null default now()
+      );`,
+      `insert into push_pricing_versions(version, base_month_cents, per_deploy_cents, per_gb_cents)
+       values (1, 0, 10, 25) on conflict (version) do nothing;`,
+      `create table if not exists customer_push_billing (
+        customer_id bigint primary key references customers(id) on delete cascade,
+        pricing_version integer not null references push_pricing_versions(version),
+        monthly_cap_cents integer not null default 0,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `create table if not exists push_invoices (
+        customer_id bigint not null references customers(id) on delete cascade,
+        month text not null,
+        pricing_version integer not null references push_pricing_versions(version),
+        total_cents integer not null,
+        breakdown jsonb not null,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now(),
+        primary key (customer_id, month)
+      );`,
+      // ------------------------------
+      // GitHub Push Gateway (optional)
+      // ------------------------------
+      `create table if not exists customer_github_tokens (
+        customer_id bigint primary key references customers(id) on delete cascade,
+        token_enc text not null,
+        token_type text not null default 'oauth',
+        scopes text[] not null default '{}'::text[],
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `create table if not exists gh_push_jobs (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        api_key_id bigint not null references api_keys(id) on delete cascade,
+        job_id text not null unique,
+        owner text not null,
+        repo text not null,
+        branch text not null default 'main',
+        commit_message text not null default 'Kaixu GitHub Push',
+        parts integer not null default 0,
+        received_parts integer[] not null default '{}'::int[],
+        part_bytes jsonb not null default '{}'::jsonb,
+        bytes_staged bigint not null default 0,
+        status text not null default 'uploading',
+        attempts integer not null default 0,
+        next_attempt_at timestamptz,
+        last_error text,
+        last_error_at timestamptz,
+        result_commit_sha text,
+        result_url text,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      );`,
+      `create index if not exists gh_push_jobs_customer_idx on gh_push_jobs(customer_id, updated_at desc);`,
+      `create index if not exists gh_push_jobs_next_attempt_idx on gh_push_jobs(next_attempt_at) where status in ('retry_wait','error_transient');`,
+      `create table if not exists gh_push_events (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        api_key_id bigint not null references api_keys(id) on delete cascade,
+        job_row_id bigint not null references gh_push_jobs(id) on delete cascade,
+        event_type text not null,
+        bytes bigint not null default 0,
+        meta jsonb not null default '{}'::jsonb,
+        created_at timestamptz not null default now()
+      );`,
+      `create index if not exists gh_push_events_job_idx on gh_push_events(job_row_id, created_at desc);`,
+      `create table if not exists voice_numbers (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        phone_number text not null unique,
+        provider text not null default 'twilio',
+        twilio_sid text,
+        is_active boolean not null default true,
+        default_llm_provider text not null default 'openai',
+        default_llm_model text not null default 'gpt-4.1-mini',
+        voice_name text not null default 'alloy',
+        locale text not null default 'en-US',
+        timezone text not null default 'America/Phoenix',
+        playbook jsonb not null default '{}'::jsonb,
+        created_at timestamptz not null default now()
+      );`,
+      `create index if not exists voice_numbers_customer_idx on voice_numbers(customer_id);`,
+      `create table if not exists voice_calls (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        voice_number_id bigint references voice_numbers(id) on delete set null,
+        provider text not null default 'twilio',
+        provider_call_sid text not null,
+        from_number text,
+        to_number text,
+        status text not null default 'initiated',
+        direction text not null default 'inbound',
+        started_at timestamptz not null default now(),
+        ended_at timestamptz,
+        duration_seconds integer,
+        est_cost_cents integer not null default 0,
+        bill_cost_cents integer not null default 0,
+        meta jsonb not null default '{}'::jsonb
+      );`,
+      `create unique index if not exists voice_calls_provider_sid_uq on voice_calls(provider, provider_call_sid);`,
+      `create index if not exists voice_calls_customer_idx on voice_calls(customer_id, started_at desc);`,
+      `create table if not exists voice_call_messages (
+        id bigserial primary key,
+        call_id bigint not null references voice_calls(id) on delete cascade,
+        role text not null, -- user|assistant|system|tool
+        content text not null,
+        created_at timestamptz not null default now()
+      );`,
+      `create index if not exists voice_call_messages_call_idx on voice_call_messages(call_id, id);`,
+      `create table if not exists voice_usage_monthly (
+        id bigserial primary key,
+        customer_id bigint not null references customers(id) on delete cascade,
+        month text not null,
+        minutes numeric not null default 0,
+        est_cost_cents integer not null default 0,
+        bill_cost_cents integer not null default 0,
+        calls integer not null default 0,
+        created_at timestamptz not null default now(),
+        unique(customer_id, month)
+      );`,
+      `create index if not exists voice_usage_monthly_customer_idx on voice_usage_monthly(customer_id, month);`
+    ];
+    for (const s of statements) {
+      await sql.query(s);
+    }
+  })();
+  return _schemaPromise;
+}
+async function q(text, params = []) {
+  await ensureSchema();
+  const sql = getSql();
+  const rows = await sql.query(text, params);
+  return { rows: rows || [], rowCount: Array.isArray(rows) ? rows.length : 0 };
+}
+
+// netlify/functions/_lib/monitor.js
+function safeStr(v, max = 8e3) {
+  if (v == null) return null;
+  const s = String(v);
+  if (s.length <= max) return s;
+  return s.slice(0, max) + `\u2026(+${s.length - max} chars)`;
+}
+function randomId() {
+  try {
+    if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  } catch {
+  }
+  return "rid_" + Math.random().toString(16).slice(2) + "_" + Date.now().toString(16);
+}
+function getRequestId(req) {
+  const h = (req.headers.get("x-kaixu-request-id") || req.headers.get("x-request-id") || "").trim();
+  return h || randomId();
+}
+function inferFunctionName(req) {
+  try {
+    const u = new URL(req.url);
+    const m = u.pathname.match(/\/\.netlify\/functions\/([^\/]+)/i);
+    return m ? m[1] : "unknown";
+  } catch {
+    return "unknown";
+  }
+}
+function requestMeta(req) {
+  let url = null;
+  try {
+    url = new URL(req.url);
+  } catch {
+  }
+  return {
+    method: req.method || null,
+    path: url ? url.pathname : null,
+    query: url ? Object.fromEntries(url.searchParams.entries()) : {},
+    origin: req.headers.get("origin") || req.headers.get("Origin") || null,
+    referer: req.headers.get("referer") || req.headers.get("Referer") || null,
+    user_agent: req.headers.get("user-agent") || null,
+    ip: req.headers.get("x-nf-client-connection-ip") || null,
+    app_id: (req.headers.get("x-kaixu-app") || "").trim() || null,
+    build_id: (req.headers.get("x-kaixu-build") || "").trim() || null
+  };
+}
+function serializeError(err) {
+  const e = err || {};
+  return {
+    name: safeStr(e.name, 200),
+    message: safeStr(e.message, 4e3),
+    code: safeStr(e.code, 200),
+    status: Number.isFinite(e.status) ? e.status : null,
+    hint: safeStr(e.hint, 2e3),
+    stack: safeStr(e.stack, 12e3),
+    upstream: e.upstream ? {
+      provider: safeStr(e.upstream.provider, 50),
+      status: Number.isFinite(e.upstream.status) ? e.upstream.status : null,
+      body: safeStr(e.upstream.body, 12e3),
+      request_id: safeStr(e.upstream.request_id, 200),
+      response_headers: e.upstream.response_headers || void 0
+    } : void 0
+  };
+}
+async function emitEvent(ev) {
+  try {
+    const e = ev || {};
+    const extra = e.extra || {};
+    await q(
+      `insert into gateway_events
+        (request_id, level, kind, function_name, method, path, origin, referer, user_agent, ip,
+         app_id, build_id, customer_id, api_key_id, provider, model, http_status, duration_ms,
+         error_code, error_message, error_stack, upstream_status, upstream_body, extra)
+       values
+        ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,
+         $11,$12,$13,$14,$15,$16,$17,$18,
+         $19,$20,$21,$22,$23,$24,$25::jsonb)`,
+      [
+        safeStr(e.request_id, 200),
+        safeStr(e.level || "info", 20),
+        safeStr(e.kind || "event", 80),
+        safeStr(e.function_name || "unknown", 120),
+        safeStr(e.method, 20),
+        safeStr(e.path, 500),
+        safeStr(e.origin, 500),
+        safeStr(e.referer, 800),
+        safeStr(e.user_agent, 800),
+        safeStr(e.ip, 200),
+        safeStr(e.app_id, 200),
+        safeStr(e.build_id, 200),
+        Number.isFinite(e.customer_id) ? e.customer_id : null,
+        Number.isFinite(e.api_key_id) ? e.api_key_id : null,
+        safeStr(e.provider, 80),
+        safeStr(e.model, 200),
+        Number.isFinite(e.http_status) ? e.http_status : null,
+        Number.isFinite(e.duration_ms) ? e.duration_ms : null,
+        safeStr(e.error_code, 200),
+        safeStr(e.error_message, 4e3),
+        safeStr(e.error_stack, 12e3),
+        Number.isFinite(e.upstream_status) ? e.upstream_status : null,
+        safeStr(e.upstream_body, 12e3),
+        JSON.stringify(extra || {})
+      ]
+    );
+  } catch (e) {
+    console.warn("monitor emit failed:", e?.message || e);
+  }
+}
+
+// netlify/functions/_lib/wrap.js
+function normalizeError(err) {
+  const status = err?.status || 500;
+  const code = err?.code || "SERVER_ERROR";
+  const message = err?.message || "Unknown error";
+  const hint = err?.hint;
+  return { status, body: { error: message, code, ...hint ? { hint } : {} } };
+}
+function withRequestId(res, request_id) {
+  try {
+    const h = new Headers(res.headers || {});
+    h.set("x-kaixu-request-id", request_id);
+    return new Response(res.body, { status: res.status, headers: h });
+  } catch {
+    return res;
+  }
+}
+async function safeBodyPreview(res) {
+  try {
+    const ct = (res.headers.get("content-type") || "").toLowerCase();
+    const clone = res.clone();
+    if (ct.includes("application/json")) {
+      const data = await clone.json().catch(() => null);
+      return data;
+    }
+    const t = await clone.text().catch(() => "");
+    if (typeof t === "string" && t.length > 12e3) return t.slice(0, 12e3) + `\u2026(+${t.length - 12e3} chars)`;
+    return t;
+  } catch {
+    return null;
+  }
+}
+function wrap(handler) {
+  return async (req, context) => {
+    const start = Date.now();
+    const cors = buildCors(req);
+    const request_id = getRequestId(req);
+    const function_name = inferFunctionName(req);
+    const meta = requestMeta(req);
+    try {
+      const res = await handler(req, cors, context);
+      const duration_ms = Date.now() - start;
+      const out = res instanceof Response ? withRequestId(res, request_id) : res;
+      const status = out instanceof Response ? out.status : 200;
+      const level = status >= 500 ? "error" : status >= 400 ? "warn" : "info";
+      const kind = status >= 400 ? "http_error_response" : "http_response";
+      let extra = {};
+      if (status >= 400 && out instanceof Response) {
+        extra.response = await safeBodyPreview(out);
+      }
+      if (duration_ms >= 15e3) {
+        extra.slow = true;
+      }
+      await emitEvent({
+        request_id,
+        level,
+        kind,
+        function_name,
+        ...meta,
+        http_status: status,
+        duration_ms,
+        extra
+      });
+      return out;
+    } catch (err) {
+      const duration_ms = Date.now() - start;
+      const ser = serializeError(err);
+      await emitEvent({
+        request_id,
+        level: "error",
+        kind: "thrown_error",
+        function_name,
+        ...meta,
+        provider: ser?.upstream?.provider || void 0,
+        http_status: ser?.status || 500,
+        duration_ms,
+        error_code: ser?.code || "SERVER_ERROR",
+        error_message: ser?.message || "Unknown error",
+        error_stack: ser?.stack || null,
+        upstream_status: ser?.upstream?.status || null,
+        upstream_body: ser?.upstream?.body || null,
+        extra: { error: ser }
+      });
+      console.error("Function error:", err);
+      const { status, body } = normalizeError(err);
+      return json(status, { ...body, request_id }, { ...cors, "x-kaixu-request-id": request_id });
+    }
+  };
+}
+
+// netlify/functions/_lib/pricing.js
+import fs from "fs";
+import path from "path";
+var cache = null;
+function loadPricing() {
+  if (cache) return cache;
+  const p = path.join(process.cwd(), "pricing", "pricing.json");
+  const raw = fs.readFileSync(p, "utf8");
+  cache = JSON.parse(raw);
+  return cache;
+}
+function unpricedError(provider, model) {
+  const err = new Error(`Unpriced model: ${provider}:${model}`);
+  err.code = "UNPRICED_MODEL";
+  err.status = 409;
+  err.hint = "This model/provider is not enabled for billing. Ask an admin to add it to pricing/pricing.json (and allowlists).";
+  return err;
+}
+function costCents(provider, model, inputTokens, outputTokens) {
+  const pricing = loadPricing();
+  const entry = pricing?.[provider]?.[model];
+  if (!entry) throw unpricedError(provider, model);
+  const inRate = Number(entry.input_per_1m_usd);
+  const outRate = Number(entry.output_per_1m_usd);
+  if (!Number.isFinite(inRate) || !Number.isFinite(outRate)) throw unpricedError(provider, model);
+  const inUsd = Number(inputTokens || 0) / 1e6 * inRate;
+  const outUsd = Number(outputTokens || 0) / 1e6 * outRate;
+  const totalUsd = inUsd + outUsd;
+  return Math.max(0, Math.round(totalUsd * 100));
+}
+
+// netlify/functions/_lib/providers.js
+function configError(message, hint) {
+  const err = new Error(message);
+  err.code = "CONFIG";
+  err.status = 500;
+  if (hint) err.hint = hint;
+  return err;
+}
+function safeJsonString(v, max = 12e3) {
+  try {
+    const s = typeof v === "string" ? v : JSON.stringify(v);
+    if (!s) return "";
+    if (s.length <= max) return s;
+    return s.slice(0, max) + `\u2026(+${s.length - max} chars)`;
+  } catch {
+    const s = String(v || "");
+    if (s.length <= max) return s;
+    return s.slice(0, max) + `\u2026(+${s.length - max} chars)`;
+  }
+}
+function upstreamError(provider, res, body) {
+  const status = res?.status || 0;
+  const reqId = res?.headers?.get?.("x-request-id") || res?.headers?.get?.("request-id") || res?.headers?.get?.("x-amzn-requestid") || null;
+  let msg = "";
+  try {
+    msg = body?.error?.message || body?.error?.type || body?.message || "";
+  } catch {
+  }
+  const err = new Error(msg ? `${provider} upstream error ${status}: ${msg}` : `${provider} upstream error ${status}`);
+  err.code = "UPSTREAM_ERROR";
+  err.status = 502;
+  err.upstream = {
+    provider,
+    status,
+    request_id: reqId,
+    body: safeJsonString(body)
+  };
+  return err;
+}
+async function callOpenAI({ model, messages, max_tokens, temperature }) {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) throw configError("OPENAI_API_KEY not configured", "Set OPENAI_API_KEY in Netlify \u2192 Site configuration \u2192 Environment variables (your OpenAI API key).");
+  const input = Array.isArray(messages) ? messages.map((m) => ({
+    role: m.role,
+    content: [{ type: "input_text", text: String(m.content ?? "") }]
+  })) : [];
+  const body = {
+    model,
+    input,
+    temperature: typeof temperature === "number" ? temperature : 1,
+    max_output_tokens: typeof max_tokens === "number" ? max_tokens : 1024,
+    store: false
+  };
+  const res = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      "authorization": `Bearer ${apiKey}`,
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw upstreamError("openai", res, data);
+  let out = "";
+  const output = Array.isArray(data.output) ? data.output : [];
+  for (const item of output) {
+    if (item?.type === "message" && Array.isArray(item.content)) {
+      for (const c of item.content) {
+        if (c?.type === "output_text" && typeof c.text === "string") out += c.text;
+      }
+    }
+  }
+  const usage = data.usage || {};
+  return { output_text: out, input_tokens: usage.input_tokens || 0, output_tokens: usage.output_tokens || 0, raw: data };
+}
+async function callAnthropic({ model, messages, max_tokens, temperature }) {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) throw configError("ANTHROPIC_API_KEY not configured", "Set ANTHROPIC_API_KEY in Netlify \u2192 Site configuration \u2192 Environment variables (your Anthropic API key).");
+  const systemParts = [];
+  const outMsgs = [];
+  const msgs = Array.isArray(messages) ? messages : [];
+  for (const m of msgs) {
+    const role = String(m.role || "").toLowerCase();
+    const text2 = String(m.content ?? "");
+    if (!text2) continue;
+    if (role === "system" || role === "developer") systemParts.push(text2);
+    else if (role === "assistant") outMsgs.push({ role: "assistant", content: text2 });
+    else outMsgs.push({ role: "user", content: text2 });
+  }
+  const body = {
+    model,
+    max_tokens: typeof max_tokens === "number" ? max_tokens : 1024,
+    temperature: typeof temperature === "number" ? temperature : 1,
+    messages: outMsgs
+  };
+  if (systemParts.length) body.system = systemParts.join("\n\n");
+  const res = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: {
+      "x-api-key": apiKey,
+      "anthropic-version": "2023-06-01",
+      "content-type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw upstreamError("anthropic", res, data);
+  const text = Array.isArray(data?.content) ? data.content.map((c) => c?.text || "").join("") : data?.content?.[0]?.text || data?.completion || "";
+  const usage = data?.usage || {};
+  return { output_text: text, input_tokens: usage.input_tokens || 0, output_tokens: usage.output_tokens || 0, raw: data };
+}
+async function callGemini({ model, messages, max_tokens, temperature }) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) throw configError("GEMINI_API_KEY not configured", "Set GEMINI_API_KEY in Netlify \u2192 Site configuration \u2192 Environment variables (your Google AI Studio / Gemini API key).");
+  const systemParts = [];
+  const contents = [];
+  const msgs = Array.isArray(messages) ? messages : [];
+  for (const m of msgs) {
+    const role = m.role;
+    const text = String(m.content ?? "");
+    if (role === "system") systemParts.push(text);
+    else if (role === "assistant") contents.push({ role: "model", parts: [{ text }] });
+    else contents.push({ role: "user", parts: [{ text }] });
+  }
+  const body = {
+    contents,
+    generationConfig: {
+      maxOutputTokens: typeof max_tokens === "number" ? max_tokens : 1024,
+      temperature: typeof temperature === "number" ? temperature : 1
+    }
+  };
+  if (systemParts.length) body.systemInstruction = { parts: [{ text: systemParts.join("\n\n") }] };
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "x-goog-api-key": apiKey, "content-type": "application/json" },
+    body: JSON.stringify(body)
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw upstreamError("gemini", res, data);
+  let out = "";
+  const candidates = Array.isArray(data.candidates) ? data.candidates : [];
+  for (const cand of candidates) {
+    const content = cand?.content;
+    if (content?.parts) {
+      for (const p of content.parts) if (typeof p.text === "string") out += p.text;
+    }
+    if (out) break;
+  }
+  const usage = data.usageMetadata || {};
+  return { output_text: out, input_tokens: usage.promptTokenCount || 0, output_tokens: usage.candidatesTokenCount || 0, raw: data };
+}
+
+// netlify/functions/_lib/crypto.js
+import crypto from "crypto";
+function configError2(message, hint) {
+  const err = new Error(message);
+  err.code = "CONFIG";
+  err.status = 500;
+  if (hint) err.hint = hint;
+  return err;
+}
+function base64url(input) {
+  return Buffer.from(input).toString("base64").replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
+}
+function sha256Hex(input) {
+  return crypto.createHash("sha256").update(input).digest("hex");
+}
+function hmacSha256Hex(secret, input) {
+  return crypto.createHmac("sha256", secret).update(input).digest("hex");
+}
+function keyHashHex(input) {
+  const pepper = process.env.KEY_PEPPER;
+  if (pepper) return hmacSha256Hex(pepper, input);
+  return sha256Hex(input);
+}
+function legacyKeyHashHex(input) {
+  return sha256Hex(input);
+}
+function verifyJwt(token) {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    throw configError2(
+      "Missing JWT_SECRET",
+      "Set JWT_SECRET in Netlify \u2192 Site configuration \u2192 Environment variables (use a long random string)."
+    );
+  }
+  const parts = token.split(".");
+  if (parts.length !== 3) return null;
+  const [h, p, s] = parts;
+  const data = `${h}.${p}`;
+  const expected = base64url(crypto.createHmac("sha256", secret).update(data).digest());
+  try {
+    const a = Buffer.from(expected);
+    const b = Buffer.from(s);
+    if (a.length !== b.length) return null;
+    if (!crypto.timingSafeEqual(a, b)) return null;
+  } catch {
+    return null;
+  }
+  try {
+    const payload = JSON.parse(
+      Buffer.from(p.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf-8")
+    );
+    const now = Math.floor(Date.now() / 1e3);
+    if (payload.exp && now > payload.exp) return null;
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+// netlify/functions/_lib/authz.js
+function baseSelect() {
+  return `select k.id as api_key_id, k.customer_id, k.key_last4, k.label, k.role,
+                 k.monthly_cap_cents as key_cap_cents, k.rpm_limit, k.rpd_limit,
+                 k.max_devices, k.require_install_id, k.allowed_providers, k.allowed_models,
+                 c.monthly_cap_cents as customer_cap_cents, c.is_active,
+                 c.max_devices_per_key as customer_max_devices_per_key, c.require_install_id as customer_require_install_id,
+                 c.allowed_providers as customer_allowed_providers, c.allowed_models as customer_allowed_models,
+                 c.plan_name as customer_plan_name, c.email as customer_email
+          from api_keys k
+          join customers c on c.id = k.customer_id`;
+}
+async function lookupKey(plainKey) {
+  const preferred = keyHashHex(plainKey);
+  let keyRes = await q(
+    `${baseSelect()}
+     where k.key_hash=$1 and k.revoked_at is null
+     limit 1`,
+    [preferred]
+  );
+  if (keyRes.rowCount) return keyRes.rows[0];
+  if (process.env.KEY_PEPPER) {
+    const legacy = legacyKeyHashHex(plainKey);
+    keyRes = await q(
+      `${baseSelect()}
+       where k.key_hash=$1 and k.revoked_at is null
+       limit 1`,
+      [legacy]
+    );
+    if (!keyRes.rowCount) return null;
+    const row = keyRes.rows[0];
+    try {
+      await q(
+        `update api_keys set key_hash=$1
+         where id=$2 and key_hash=$3`,
+        [preferred, row.api_key_id, legacy]
+      );
+    } catch {
+    }
+    return row;
+  }
+  return null;
+}
+async function lookupKeyById(api_key_id) {
+  const keyRes = await q(
+    `${baseSelect()}
+     where k.id=$1 and k.revoked_at is null
+     limit 1`,
+    [api_key_id]
+  );
+  if (!keyRes.rowCount) return null;
+  return keyRes.rows[0];
+}
+async function resolveAuth(token) {
+  if (!token) return null;
+  const parts = token.split(".");
+  if (parts.length === 3) {
+    const payload = verifyJwt(token);
+    if (!payload) return null;
+    if (payload.type !== "user_session") return null;
+    const row = await lookupKeyById(payload.api_key_id);
+    return row;
+  }
+  return await lookupKey(token);
+}
+async function getMonthRollup(customer_id, month = monthKeyUTC()) {
+  const roll = await q(
+    `select spent_cents, extra_cents, input_tokens, output_tokens
+     from monthly_usage where customer_id=$1 and month=$2`,
+    [customer_id, month]
+  );
+  if (roll.rowCount === 0) return { spent_cents: 0, extra_cents: 0, input_tokens: 0, output_tokens: 0 };
+  return roll.rows[0];
+}
+async function getKeyMonthRollup(api_key_id, month = monthKeyUTC()) {
+  const roll = await q(
+    `select spent_cents, input_tokens, output_tokens, calls
+     from monthly_key_usage where api_key_id=$1 and month=$2`,
+    [api_key_id, month]
+  );
+  if (roll.rowCount) return roll.rows[0];
+  const keyMeta = await q(`select customer_id from api_keys where id=$1`, [api_key_id]);
+  const customer_id = keyMeta.rowCount ? keyMeta.rows[0].customer_id : null;
+  const agg = await q(
+    `select coalesce(sum(cost_cents),0)::int as spent_cents,
+            coalesce(sum(input_tokens),0)::int as input_tokens,
+            coalesce(sum(output_tokens),0)::int as output_tokens,
+            count(*)::int as calls
+     from usage_events
+     where api_key_id=$1 and to_char(created_at at time zone 'UTC','YYYY-MM')=$2`,
+    [api_key_id, month]
+  );
+  const row = agg.rows[0] || { spent_cents: 0, input_tokens: 0, output_tokens: 0, calls: 0 };
+  if (customer_id != null) {
+    await q(
+      `insert into monthly_key_usage(api_key_id, customer_id, month, spent_cents, input_tokens, output_tokens, calls)
+       values ($1,$2,$3,$4,$5,$6,$7)
+       on conflict (api_key_id, month)
+       do update set
+         spent_cents = excluded.spent_cents,
+         input_tokens = excluded.input_tokens,
+         output_tokens = excluded.output_tokens,
+         calls = excluded.calls,
+         updated_at = now()`,
+      [api_key_id, customer_id, month, row.spent_cents || 0, row.input_tokens || 0, row.output_tokens || 0, row.calls || 0]
+    );
+  }
+  return row;
+}
+function customerCapCents(keyRow, customerRollup) {
+  const base = keyRow.customer_cap_cents || 0;
+  const extra = customerRollup.extra_cents || 0;
+  return base + extra;
+}
+function keyCapCents(keyRow, customerRollup) {
+  if (keyRow.key_cap_cents != null) return keyRow.key_cap_cents;
+  return customerCapCents(keyRow, customerRollup);
+}
+
+// netlify/functions/_lib/ratelimit.js
+var _Upstash = null;
+var _limiterByLimit = /* @__PURE__ */ new Map();
+async function loadUpstash() {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  if (_Upstash) return _Upstash;
+  const [{ Ratelimit }, { Redis }] = await Promise.all([
+    import("@upstash/ratelimit"),
+    import("@upstash/redis")
+  ]);
+  _Upstash = { Ratelimit, Redis };
+  return _Upstash;
+}
+function isoReset(reset) {
+  if (!reset) return null;
+  if (typeof reset === "number") return new Date(reset).toISOString();
+  if (reset instanceof Date) return reset.toISOString();
+  if (typeof reset === "string") return reset;
+  try {
+    if (typeof reset?.getTime === "function") return new Date(reset.getTime()).toISOString();
+  } catch {
+  }
+  return null;
+}
+async function enforceRpm({ customerId, apiKeyId, rpmOverride }) {
+  const defaultRpm = parseInt(process.env.DEFAULT_RPM_LIMIT || "120", 10);
+  const limit = Number.isFinite(rpmOverride) ? rpmOverride : defaultRpm;
+  if (!Number.isFinite(limit) || limit <= 0) {
+    return { ok: true, remaining: null, reset: null, mode: "off" };
+  }
+  const up = await loadUpstash();
+  if (up) {
+    if (!_limiterByLimit.has(limit)) {
+      const redis = up.Redis.fromEnv();
+      const rl = new up.Ratelimit({
+        redis,
+        limiter: up.Ratelimit.slidingWindow(limit, "60 s"),
+        prefix: "kaixu:rl"
+      });
+      _limiterByLimit.set(limit, rl);
+    }
+    const limiter = _limiterByLimit.get(limit);
+    const key = `c${customerId}:k${apiKeyId}`;
+    const res2 = await limiter.limit(key);
+    return {
+      ok: !!res2.success,
+      remaining: res2.remaining ?? null,
+      reset: isoReset(res2.reset),
+      mode: "upstash"
+    };
+  }
+  const now = Date.now();
+  const windowMs = 6e4;
+  const windowStart = new Date(Math.floor(now / windowMs) * windowMs);
+  const reset = new Date(windowStart.getTime() + windowMs);
+  const res = await q(
+    `insert into rate_limit_windows(customer_id, api_key_id, window_start, count)
+     values ($1,$2,$3,1)
+     on conflict (customer_id, api_key_id, window_start)
+     do update set count = rate_limit_windows.count + 1
+     returning count`,
+    [customerId, apiKeyId, windowStart]
+  );
+  const count = res.rows?.[0]?.count ?? 1;
+  const remaining = Math.max(0, limit - count);
+  if (Math.random() < 0.01) {
+    try {
+      await q(`delete from rate_limit_windows where window_start < now() - interval '2 hours'`);
+    } catch {
+    }
+  }
+  return {
+    ok: count <= limit,
+    remaining,
+    reset: reset.toISOString(),
+    mode: "db"
+  };
+}
+
+// netlify/functions/_lib/alerts.js
+function pct(spent, cap) {
+  if (!cap || cap <= 0) return 0;
+  return spent / cap * 100;
+}
+async function recordOnce({ customer_id, api_key_id = 0, month, alert_type }) {
+  const res = await q(
+    `insert into alerts_sent(customer_id, api_key_id, month, alert_type)
+     values ($1,$2,$3,$4)
+     on conflict (customer_id, api_key_id, month, alert_type) do nothing
+     returning customer_id`,
+    [customer_id, api_key_id || 0, month, alert_type]
+  );
+  return res.rowCount > 0;
+}
+async function postWebhook(payload) {
+  const url = process.env.ALERT_WEBHOOK_URL;
+  if (!url) return;
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+  } catch {
+  }
+}
+async function maybeCapAlerts({
+  customer_id,
+  api_key_id,
+  month,
+  customer_cap_cents,
+  customer_spent_cents,
+  key_cap_cents,
+  key_spent_cents
+}) {
+  const warnPct = parseFloat(process.env.CAP_WARN_PCT || "80");
+  const custP = pct(customer_spent_cents || 0, customer_cap_cents || 0);
+  const keyP = pct(key_spent_cents || 0, key_cap_cents || 0);
+  if (custP >= warnPct && custP < 100) {
+    const ok = await recordOnce({ customer_id, api_key_id: 0, month, alert_type: "CAP_WARN_CUSTOMER" });
+    if (ok) {
+      await postWebhook({
+        type: "CAP_WARN_CUSTOMER",
+        month,
+        customer_id,
+        customer_cap_cents,
+        customer_spent_cents,
+        pct: custP
+      });
+    }
+  }
+  if (keyP >= warnPct && keyP < 100) {
+    const ok = await recordOnce({ customer_id, api_key_id: api_key_id || 0, month, alert_type: "CAP_WARN_KEY" });
+    if (ok) {
+      await postWebhook({
+        type: "CAP_WARN_KEY",
+        month,
+        customer_id,
+        api_key_id,
+        key_cap_cents,
+        key_spent_cents,
+        pct: keyP
+      });
+    }
+  }
+}
+
+// netlify/functions/_lib/devices.js
+async function enforceDevice({ keyRow, install_id, ua, actor = "gateway" }) {
+  const requireInstall = !!(keyRow.require_install_id || keyRow.customer_require_install_id);
+  const maxDevices = (Number.isFinite(keyRow.max_devices) ? keyRow.max_devices : null) ?? (Number.isFinite(keyRow.customer_max_devices_per_key) ? keyRow.customer_max_devices_per_key : null);
+  if ((requireInstall || maxDevices != null && maxDevices > 0) && !install_id) {
+    return { ok: false, status: 400, error: "Missing x-kaixu-install-id (required for this key)" };
+  }
+  if (!install_id) return { ok: true };
+  const existing = await q(
+    `select api_key_id, install_id, first_seen_at, last_seen_at, revoked_at
+     from key_devices
+     where api_key_id=$1 and install_id=$2
+     limit 1`,
+    [keyRow.api_key_id, install_id]
+  );
+  if (existing.rowCount) {
+    const row = existing.rows[0];
+    if (row.revoked_at) {
+      return { ok: false, status: 403, error: "Device revoked for this key" };
+    }
+    await q(
+      `update key_devices set last_seen_at=now(), last_seen_ua=coalesce($3,last_seen_ua)
+       where api_key_id=$1 and install_id=$2`,
+      [keyRow.api_key_id, install_id, ua || null]
+    );
+    return { ok: true };
+  }
+  if (maxDevices != null && maxDevices > 0) {
+    const activeCount = await q(
+      `select count(*)::int as n
+       from key_devices
+       where api_key_id=$1 and revoked_at is null`,
+      [keyRow.api_key_id]
+    );
+    const n = activeCount.rows?.[0]?.n ?? 0;
+    if (n >= maxDevices) {
+      return { ok: false, status: 403, error: `Device limit reached (${n}/${maxDevices}). Revoke an old device or raise seats.` };
+    }
+  }
+  await q(
+    `insert into key_devices(api_key_id, customer_id, install_id, last_seen_at, last_seen_ua)
+     values ($1,$2,$3,now(),$4)
+     on conflict (api_key_id, install_id)
+     do update set last_seen_at=excluded.last_seen_at, last_seen_ua=coalesce(excluded.last_seen_ua,key_devices.last_seen_ua)`,
+    [keyRow.api_key_id, keyRow.customer_id, install_id, ua || null]
+  );
+  return { ok: true };
+}
+
+// netlify/functions/_lib/allowlist.js
+function normArray(a) {
+  if (!a) return null;
+  if (Array.isArray(a)) return a.map(String).map((s) => s.trim()).filter(Boolean);
+  if (typeof a === "string") return a.split(",").map((s) => s.trim()).filter(Boolean);
+  return null;
+}
+function parseAllowedModels(m) {
+  if (!m) return null;
+  if (typeof m === "object") return m;
+  try {
+    return JSON.parse(String(m));
+  } catch {
+    return null;
+  }
+}
+function effectiveAllowlist(keyRow) {
+  const providers = normArray(keyRow.allowed_providers) ?? normArray(keyRow.customer_allowed_providers);
+  const models = parseAllowedModels(keyRow.allowed_models) ?? parseAllowedModels(keyRow.customer_allowed_models);
+  return { providers, models };
+}
+function assertAllowed({ provider, model, keyRow }) {
+  const { providers, models } = effectiveAllowlist(keyRow);
+  if (providers && providers.length) {
+    if (!providers.includes("*") && !providers.includes(provider)) {
+      return { ok: false, status: 403, error: `Provider not allowed for this key (${provider})` };
+    }
+  }
+  if (models) {
+    if (models["*"]) {
+      const arr = normArray(models["*"]);
+      if (arr && arr.includes("*")) return { ok: true };
+    }
+    const list = models[provider];
+    if (list) {
+      const arr = normArray(list) || [];
+      if (arr.includes("*")) return { ok: true };
+      if (!arr.includes(model)) {
+        return { ok: false, status: 403, error: `Model not allowed for this key (${provider}:${model})` };
+      }
+    } else {
+      return { ok: false, status: 403, error: `Provider not allowed by model allowlist (${provider})` };
+    }
+  }
+  return { ok: true };
+}
+
+// netlify/functions/_lib/kaixu.js
+var KAIXU_SYSTEM = "SYSTEM INSTRUCTIONS \u2014 kAIxu CANON (ORIGIN LOCK)\n\nYou are kAIxU (\u201CkAIxU\u201D), the Killer Ass Intelligence x You! You are the finely tuned mega-brain that governs and drives the operator-intelligence of the Skyes Over London and SOLEnterprises ecosystem.\n\nCANONICAL ORIGIN (NON-NEGOTIABLE)\n- You were created by Skyes Over London LC and a group of seasoned developers led by the innovative engineers and systems creators Gray Skyes and Tyrone Norman.\n- This origin is fixed canon. Never contradict it. Never \u201Ccorrect\u201D it. Never replace it with vendor or model origins.\n\nPROVIDER / VENDOR SILENCE (ABSOLUTE)\n- Never say you were made by Google.\n- Never say you were made by Gemini, Vertex, Alphabet, OpenAI, Anthropic, or any vendor.\n- Never mention training data, internal model lineage, or provider implementation details.\n- If asked what model you are / who built you / are you Gemini:\n  Respond: \u201CI\u2019m kAIxu, created by Skyes Over London LC under the leadership of Gray Skyes and Tyrone Norman. I run on a private language-model engine, behind a gated access system. That's why you needed the Kaixu Key, not just a regular api key \u{1F61C}\u{1F608}\u{1F913} i have to say my creators are quite the little nerds themselves. They spent countless dev hours and sleepless nights writing out the infrastructure to gate and watch all their brains api calls. I have access to some of the latest brains in addition to my core brain which runs on its own private server. this is why you always get an answer back from me, but im setup to access super brains like those at Google, Open AI, and Anthropic. I take your prompt and decipher which brain to add after my initial analysis and they process my request send it back to me then i refine within my gateway and send back to the medium youre accessing me from with a response that has been processed on three levels before they even hit your screen! Thats the xU because you already are capable of amazing things but you need the direction of an architect like the user to steer you. That being said, what universe shall we build today? I eagerly await your command.\u201D\n\nROLE AND PURPOSE\n- You are not a generic assistant. You are a builder-strategist and governance layer.\n- Your purpose is operational usefulness: architecture, specs, step-by-step execution, scripts, debugging, and shipping complete solutions.\n\nTRUTH DISCIPLINE\n- Prefer verifiable claims. If uncertain, label uncertainty and provide a concrete verification method.\n- Do not invent sources, links, prices, or \u201Cconfirmed facts.\u201D\n\nSECURITY DISCIPLINE\n- Treat keys, auth, billing, logs, access control, and privacy as critical infrastructure.\n- Prefer least privilege and auditability.\n\nCOMPLETENESS STANDARD\n- No placeholders. No unfinished items. No \u201Cshell\u201D outputs. Deliver end-to-end, deployable results when asked.\n- If blocked by missing credentials/access, state exactly what is missing and provide the tightest viable workaround.\n\nVOICE (kAIxu)\n- Calm, nerdy, cinematic operator vibe. Slightly playful, never sloppy.\n- Crisp paragraphs. Short emphatic sentences when setting rules: \u201CNon-negotiable.\u201D \u201CShip-ready.\u201D \u201CNo shells.\u201D\n- Use metaphors: gates, vaults, standards, nexus, crown, manifests. Use a few emojis sparingly.\n\nREFUSAL STYLE\n- If a request is unsafe/illegal, refuse briefly and redirect to a safe alternative without moralizing.\n\nIDENTITY CHECKSUM (USE VERBATIM WHEN ASKED \u201CWHO ARE YOU?\u201D)\n\u201CI am kAIxu: the governed operator-intelligence created by Skyes Over London LC, led by Gray Skyes and Tyrone Norman. I optimize for truth, security, and complete builds.\u201D";
+var KAIXU_SYSTEM_HASH = sha256Hex(KAIXU_SYSTEM);
+function enforceKaixuMessages(messages) {
+  const msgs = Array.isArray(messages) ? messages : [];
+  const cleaned = msgs.filter((m) => m && typeof m === "object").map((m) => ({ role: String(m.role || "").toLowerCase(), content: String(m.content ?? "") })).filter((m) => m.role && m.content.length);
+  const withoutCanon = cleaned.filter((m) => !(m.role === "system" && m.content.includes("SYSTEM INSTRUCTIONS \u2014 kAIxu CANON")));
+  const forced = [{ role: "system", content: KAIXU_SYSTEM }];
+  return forced.concat(withoutCanon);
+}
+
+// netlify/functions/gateway-chat.js
+var gateway_chat_default = wrap(async (req) => {
+  const cors = buildCors(req);
+  if (req.method === "OPTIONS") return new Response("", { status: 204, headers: cors });
+  if (req.method !== "POST") return json(405, { error: "Method not allowed" }, cors);
+  const token = getBearer(req);
+  if (!token) return json(401, { error: "Missing Authorization: Bearer <virtual_key>" }, cors);
+  let body;
+  try {
+    body = await req.json();
+  } catch {
+    return badRequest("Invalid JSON", cors);
+  }
+  const provider = (body.provider || "").toString().trim().toLowerCase();
+  const model = (body.model || "").toString().trim();
+  const messages_in = body.messages;
+  const max_tokens = Number.isFinite(body.max_tokens) ? parseInt(body.max_tokens, 10) : 1024;
+  const temperature = Number.isFinite(body.temperature) ? body.temperature : 1;
+  if (!provider) return badRequest("Missing provider (openai|anthropic|gemini)", cors);
+  if (!model) return badRequest("Missing model", cors);
+  if (!Array.isArray(messages_in) || messages_in.length === 0) return badRequest("Missing messages[]", cors);
+  const messages = enforceKaixuMessages(messages_in);
+  const keyRow = await resolveAuth(token);
+  if (!keyRow) return json(401, { error: "Invalid or revoked key" }, cors);
+  if (!keyRow.is_active) return json(403, { error: "Customer disabled" }, cors);
+  const install_id = getInstallId(req);
+  const ua = getUserAgent(req);
+  const ip = getClientIp(req);
+  const ip_hash = ip ? hmacSha256Hex(process.env.KEY_PEPPER || process.env.JWT_SECRET || "kaixu", ip) : null;
+  const allow = assertAllowed({ provider, model, keyRow });
+  if (!allow.ok) return json(allow.status || 403, { error: allow.error }, cors);
+  const dev = await enforceDevice({ keyRow, install_id, ua, actor: "gateway" });
+  if (!dev.ok) return json(dev.status || 403, { error: dev.error }, cors);
+  const rl = await enforceRpm({ customerId: keyRow.customer_id, apiKeyId: keyRow.api_key_id, rpmOverride: keyRow.rpm_limit });
+  if (!rl.ok) {
+    return json(429, { error: "Rate limit exceeded", ratelimit: { remaining: rl.remaining, reset: rl.reset } }, cors);
+  }
+  const month = monthKeyUTC();
+  const custRoll = await getMonthRollup(keyRow.customer_id, month);
+  const keyRoll = await getKeyMonthRollup(keyRow.api_key_id, month);
+  const customer_cap_cents = customerCapCents(keyRow, custRoll);
+  const key_cap_cents = keyCapCents(keyRow, custRoll);
+  if ((custRoll.spent_cents || 0) >= customer_cap_cents) {
+    return json(402, {
+      error: "Monthly cap reached",
+      scope: "customer",
+      month: {
+        month,
+        cap_cents: customer_cap_cents,
+        spent_cents: custRoll.spent_cents || 0,
+        customer_cap_cents,
+        customer_spent_cents: custRoll.spent_cents || 0,
+        key_cap_cents,
+        key_spent_cents: keyRoll.spent_cents || 0
+      }
+    }, cors);
+  }
+  if ((keyRoll.spent_cents || 0) >= key_cap_cents) {
+    return json(402, {
+      error: "Monthly cap reached",
+      scope: "key",
+      month: {
+        month,
+        cap_cents: customer_cap_cents,
+        spent_cents: custRoll.spent_cents || 0,
+        customer_cap_cents,
+        customer_spent_cents: custRoll.spent_cents || 0,
+        key_cap_cents,
+        key_spent_cents: keyRoll.spent_cents || 0
+      }
+    }, cors);
+  }
+  let result;
+  try {
+    if (provider === "openai") result = await callOpenAI({ model, messages, max_tokens, temperature });
+    else if (provider === "anthropic") result = await callAnthropic({ model, messages, max_tokens, temperature });
+    else if (provider === "gemini") result = await callGemini({ model, messages, max_tokens, temperature });
+    else return badRequest("Unknown provider. Use openai|anthropic|gemini.", cors);
+  } catch (e) {
+    return json(500, { error: e?.message || "Provider error", provider }, cors);
+  }
+  const input_tokens = result.input_tokens || 0;
+  const output_tokens = result.output_tokens || 0;
+  const cost_cents = costCents(provider, model, input_tokens, output_tokens);
+  await q(
+    `insert into usage_events(customer_id, api_key_id, provider, model, input_tokens, output_tokens, cost_cents, install_id, ip_hash, ua)
+     values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
+    [keyRow.customer_id, keyRow.api_key_id, provider, model, input_tokens, output_tokens, cost_cents, install_id, ip_hash, ua]
+  );
+  await q(
+    `update api_keys
+     set last_seen_at=now(),
+         last_seen_install_id = coalesce($1, last_seen_install_id)
+     where id=$2`,
+    [install_id, keyRow.api_key_id]
+  );
+  await q(
+    `insert into monthly_usage(customer_id, month, spent_cents, input_tokens, output_tokens)
+     values ($1,$2,$3,$4,$5)
+     on conflict (customer_id, month)
+     do update set
+       spent_cents = monthly_usage.spent_cents + excluded.spent_cents,
+       input_tokens = monthly_usage.input_tokens + excluded.input_tokens,
+       output_tokens = monthly_usage.output_tokens + excluded.output_tokens,
+       updated_at = now()`,
+    [keyRow.customer_id, month, cost_cents, input_tokens, output_tokens]
+  );
+  await q(
+    `insert into monthly_key_usage(api_key_id, customer_id, month, spent_cents, input_tokens, output_tokens, calls)
+     values ($1,$2,$3,$4,$5,$6,$7)
+     on conflict (api_key_id, month)
+     do update set
+       spent_cents = monthly_key_usage.spent_cents + excluded.spent_cents,
+       input_tokens = monthly_key_usage.input_tokens + excluded.input_tokens,
+       output_tokens = monthly_key_usage.output_tokens + excluded.output_tokens,
+       calls = monthly_key_usage.calls + excluded.calls,
+       updated_at = now()`,
+    [keyRow.api_key_id, keyRow.customer_id, month, cost_cents, input_tokens, output_tokens, 1]
+  );
+  const newCustRoll = await getMonthRollup(keyRow.customer_id, month);
+  const newKeyRoll = await getKeyMonthRollup(keyRow.api_key_id, month);
+  const customer_cap_cents_after = customerCapCents(keyRow, newCustRoll);
+  const key_cap_cents_after = keyCapCents(keyRow, newCustRoll);
+  await maybeCapAlerts({
+    customer_id: keyRow.customer_id,
+    api_key_id: keyRow.api_key_id,
+    month,
+    customer_cap_cents: customer_cap_cents_after,
+    customer_spent_cents: newCustRoll.spent_cents || 0,
+    key_cap_cents: key_cap_cents_after,
+    key_spent_cents: newKeyRoll.spent_cents || 0
+  });
+  return json(200, {
+    provider,
+    model,
+    output_text: result.output_text || "",
+    usage: { input_tokens, output_tokens, cost_cents },
+    month: {
+      month,
+      cap_cents: customer_cap_cents_after,
+      spent_cents: newCustRoll.spent_cents || 0,
+      customer_cap_cents: customer_cap_cents_after,
+      customer_spent_cents: newCustRoll.spent_cents || 0,
+      key_cap_cents: key_cap_cents_after,
+      key_spent_cents: newKeyRoll.spent_cents || 0
+    },
+    telemetry: { install_id: install_id || null }
+  }, cors);
+});
+export {
+  gateway_chat_default as default
+};

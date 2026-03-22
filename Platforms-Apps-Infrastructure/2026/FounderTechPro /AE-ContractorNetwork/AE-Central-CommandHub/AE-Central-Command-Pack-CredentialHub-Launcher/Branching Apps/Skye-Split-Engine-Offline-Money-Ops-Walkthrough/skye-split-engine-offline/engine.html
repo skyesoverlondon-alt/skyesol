@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Split Engine · Skye Split Engine</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/icon-192.png">
+  <link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="bg-layer"></div>
+    <main class="site">
+      <header class="topbar">
+        <div class="branding">
+          <img src="./assets/media/skydexia-logo.png" alt="Skyes Over London logo">
+          <div class="branding-copy">
+            <h1 data-brand-name>Skye Split Engine</h1>
+            <p data-brand-sub>Skyes Over London · Offline money operations + backup vault</p>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="pill"><span class="dot"></span><span><strong>Mode:</strong> Split math</span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Currency:</strong> <span data-status-currency>USD</span></span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Sync:</strong> <span data-last-sync>Local only</span></span></div>
+        </div>
+      </header>
+
+      
+<nav class="navbar">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="engine.html">Split Engine</a>
+        <a class="nav-link" href="ops.html">Money Ops</a>
+        <a class="nav-link" href="receipts.html">Receipts</a>
+        <a class="nav-link" href="contacts.html">Contacts</a>
+        <a class="nav-link" href="vault.html">Backup Vault</a>
+        <a class="nav-link" href="settings.html">Settings</a>
+        <a class="nav-link" href="walkthrough.html">Walkthrough</a>
+        <a class="nav-link" href="help.html">Help</a>
+      </nav>
+
+      <section class="engine-grid">
+        <article class="card">
+          <div class="toolbar" style="justify-content:space-between; margin-bottom:14px;">
+            <div>
+              <div class="kicker">Core lane</div>
+              <h2 class="page-title" style="font-size:2rem;">Build and save split plans</h2>
+            </div>
+            <div class="inline-actions">
+              <button class="btn-soft" data-quick-6040>60 / 40</button>
+              <button class="btn-soft" data-quick-equal3>Equal 3-way</button>
+              <button class="btn-soft" data-quick-weight>Weighted</button>
+            </div>
+          </div>
+
+          <form id="splitForm" class="form-stack">
+            <div class="form-grid">
+              <div class="field">
+                <label for="title">Plan title</label>
+                <input id="title" name="title" type="text" placeholder="Example: Team revenue split">
+              </div>
+              <div class="field">
+                <label for="currency">Currency</label>
+                <select id="currency" name="currency">
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="CAD">CAD</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="method">Split mode</label>
+                <select id="method" name="method">
+                  <option value="equal">Equal</option>
+                  <option value="percent">Percent</option>
+                  <option value="weight">Weighted</option>
+                  <option value="fixed">Fixed payout</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="gross">Gross amount</label>
+                <input id="gross" name="gross" type="number" step="0.01" placeholder="0.00">
+              </div>
+            </div>
+
+            <div class="form-grid-3">
+              <div class="field">
+                <label for="fees">Fees</label>
+                <input id="fees" name="fees" type="number" step="0.01" placeholder="0.00">
+              </div>
+              <div class="field">
+                <label for="reserve">Reserve / holdback</label>
+                <input id="reserve" name="reserve" type="number" step="0.01" placeholder="0.00">
+              </div>
+              <div class="field">
+                <label for="misc">Misc deduction</label>
+                <input id="misc" name="misc" type="number" step="0.01" placeholder="0.00">
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Participants</label>
+              <div class="participants" data-participants></div>
+              <div class="inline-actions">
+                <button type="button" class="btn-ghost" data-add-participant>Add participant</button>
+                <a class="btn-soft" href="contacts.html">Manage contacts</a>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="notes">Notes</label>
+              <textarea id="notes" name="notes" placeholder="Optional notes, rules, or context for the split."></textarea>
+            </div>
+          </form>
+
+          <div class="actions-row" style="margin-top:16px;">
+            <button class="btn" data-save-plan>Save plan</button>
+            <button class="btn-ghost" data-reset-plan>Reset form</button>
+            <button class="btn-soft" data-export-csv>Export CSV</button>
+            <button class="btn-soft" data-export-json>Export JSON</button>
+          </div>
+          <div data-split-warnings style="margin-top:14px;"></div>
+        </article>
+
+        <aside class="panel">
+          <h3>Live result</h3>
+          <div class="caption">The summary updates as you type.</div>
+          <div class="split-summary" style="margin-top:14px; background:rgba(255,255,255,0.04);">
+            <div class="list-item">
+              <div>
+                <div class="split-label">Method</div>
+                <div class="caption" data-plan-participants>0 participants</div>
+              </div>
+              <div data-plan-method>Equal split</div>
+            </div>
+            <div class="list-item">
+              <div>
+                <div class="split-label">Distributable</div>
+                <div class="caption">Gross minus deductions</div>
+              </div>
+              <div data-distributable>$0.00</div>
+            </div>
+            <div class="list-item">
+              <div>
+                <div class="split-label">Assigned</div>
+                <div class="caption">Total across participants</div>
+              </div>
+              <div data-assigned>$0.00</div>
+            </div>
+            <div class="list-item">
+              <div>
+                <div class="split-label">Remainder</div>
+                <div class="caption">Useful in fixed payout mode</div>
+              </div>
+              <div data-remainder>$0.00</div>
+            </div>
+          </div>
+
+          <div class="table-wrap" style="margin-top:14px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Participant</th>
+                  <th>Input</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody data-results-body>
+                <tr><td colspan="3">No result yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="note-box">Tip: fixed payout mode is excellent when you already know exact amounts. Percent and weighted modes are better when the final amount changes often.</div>
+        </aside>
+      </section>
+
+      <section class="list-card" style="margin-top:18px;">
+        <h3>Saved plans</h3>
+        <div data-plan-list class="list"></div>
+      </section>
+
+      <footer class="footer-block">
+        <h3>Contact</h3>
+        <div class="footer-contact">
+          <span>Skyes Over London</span>
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+          <a href="tel:+14804695416">(480) 469-5416</a>
+          <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <script type="module" src="./assets/engine.js"></script>
+</body>
+</html>

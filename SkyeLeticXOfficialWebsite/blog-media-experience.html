@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Game Deserves to Be Seen: The SkyeLetes Media Experience | SkyeLetes Blog</title>
+    <meta name="description" content="4K game footage. Personal highlight reels. Player portals. Here's how SkyeLetes is changing the content game for under-6'0" basketball.">
+    
+    <meta property="og:title" content="Your Game Deserves to Be Seen | SkyeLetes Blog">
+    <meta property="og:description" content="How SkyeLetes delivers professional-grade media to every player.">
+    <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2026-02-18">
+    <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-ink: #05010a;
+            --color-paper: #faf9f7;
+            --color-gold: #ffd700;
+            --color-purple: #6d28ff;
+            --color-purple-light: rgba(109, 40, 255, 0.15);
+            --color-slate: #8b7db8;
+            --color-mist: #e8e6f1;
+            --color-success: #35ffb6;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Instrument Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-impact: 'Bebas Neue', sans-serif;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--color-ink); color: var(--color-paper); line-height: 1.8; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse { 0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4)); } 50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.7)); } }
+        @keyframes glow-purple { 0%, 100% { filter: drop-shadow(0 0 20px rgba(109, 40, 255, 0.5)); } 50% { filter: drop-shadow(0 0 40px rgba(109, 40, 255, 0.8)); } }
+        .floating-logo { animation: float 6s ease-in-out infinite, pulse 3s ease-in-out infinite; }
+
+        /* Nav */
+        .nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(5, 1, 10, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 215, 0, 0.1); }
+        .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+        .nav-logo { height: 48px; width: auto; }
+        .nav-brand-text { display: flex; flex-direction: column; }
+        .nav-brand-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-paper); }
+        .nav-brand-sub { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-slate); letter-spacing: 0.1em; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-link { font-size: 0.85rem; color: var(--color-slate); text-decoration: none; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-gold); }
+        .nav-btn { background: var(--color-gold); color: var(--color-ink); padding: 0.6rem 1.25rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 6px; transition: all 0.3s; }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,0,0.3); }
+
+        /* Article Header */
+        .article-header { position: relative; z-index: 1; padding: 10rem 2rem 4rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .article-header-content { max-width: 800px; margin: 0 auto; }
+        .article-meta { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .article-category { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-success); letter-spacing: 0.15em; text-transform: uppercase; background: rgba(53, 255, 182, 0.1); border: 1px solid rgba(53, 255, 182, 0.2); padding: 0.4rem 1rem; border-radius: 999px; }
+        .article-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); }
+        .article-read { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); }
+        .article-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 500; line-height: 1.15; margin-bottom: 1.5rem; }
+        .article-title em { font-style: italic; color: var(--color-gold); }
+        .article-excerpt { font-size: 1.25rem; color: var(--color-slate); max-width: 650px; margin: 0 auto; }
+
+        /* Article Body */
+        .article-body { position: relative; z-index: 1; padding: 4rem 2rem; }
+        .article-content { max-width: 720px; margin: 0 auto; }
+        .article-content p { font-size: 1.1rem; color: var(--color-mist); margin-bottom: 1.75rem; }
+        .article-content h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 500; margin: 3rem 0 1.5rem; color: var(--color-paper); }
+        .article-content h2 em { font-style: italic; color: var(--color-gold); }
+        .article-content h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin: 2.5rem 0 1rem; color: var(--color-paper); }
+        .article-content blockquote { border-left: 3px solid var(--color-success); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--color-slate); font-size: 1.15rem; }
+        .article-content ul, .article-content ol { margin: 1.5rem 0; padding-left: 1.5rem; color: var(--color-mist); }
+        .article-content li { margin-bottom: 0.75rem; }
+        .article-content strong { color: var(--color-paper); }
+        .article-content a { color: var(--color-gold); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* Pullquote */
+        .pullquote { background: linear-gradient(135deg, rgba(53, 255, 182, 0.08), rgba(255,215,0,0.05)); border: 1px solid rgba(53, 255, 182, 0.2); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; text-align: center; }
+        .pullquote-text { font-family: var(--font-display); font-size: 1.75rem; font-weight: 500; color: var(--color-paper); line-height: 1.4; margin-bottom: 1rem; }
+        .pullquote-text em { font-style: italic; color: var(--color-gold); }
+
+        /* Media Features Grid */
+        .media-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 2.5rem 0; }
+        .media-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2rem; text-align: center; transition: all 0.4s var(--ease-out-expo); }
+        .media-card:hover { border-color: var(--color-gold); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .media-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .media-card h4 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.5rem; }
+        .media-card p { font-size: 0.9rem; color: var(--color-slate); }
+
+        /* Specs Box */
+        .specs-box { background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(109,40,255,0.05)); border: 1px solid rgba(255,215,0,0.15); border-radius: 20px; padding: 2.5rem; margin: 3rem 0; }
+        .specs-title { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        .specs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .spec-item { text-align: center; }
+        .spec-value { font-family: var(--font-impact); font-size: 2.5rem; color: var(--color-gold); letter-spacing: 0.05em; }
+        .spec-label { font-size: 0.85rem; color: var(--color-slate); margin-top: 0.25rem; }
+
+        /* Timeline */
+        .content-timeline { margin: 2.5rem 0; }
+        .timeline-item { display: flex; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .timeline-step { width: 50px; height: 50px; background: linear-gradient(135deg, var(--color-gold), var(--color-purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-impact); font-size: 1.25rem; color: var(--color-ink); flex-shrink: 0; }
+        .timeline-content h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .timeline-content p { font-size: 0.95rem; color: var(--color-slate); }
+
+        /* CTA Box */
+        .cta-box { background: linear-gradient(135deg, rgba(109,40,255,0.15), rgba(255,215,0,0.08)); border: 1px solid rgba(255,215,0,0.2); border-radius: 20px; padding: 3rem; margin: 3rem 0; text-align: center; }
+        .cta-box h3 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1rem; }
+        .cta-box p { color: var(--color-slate); margin-bottom: 1.5rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 8px; transition: all 0.3s; }
+        .btn-primary { background: var(--color-gold); color: var(--color-ink); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,215,0,0.3); }
+        .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--color-paper); }
+        .btn-secondary:hover { border-color: var(--color-purple); color: var(--color-purple); }
+
+        /* Author Box */
+        .author-box { display: flex; align-items: center; gap: 1.5rem; padding: 2rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; margin-top: 4rem; }
+        .author-avatar { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+        .author-avatar img { width: 100%; height: 100%; object-fit: contain; }
+        .author-info h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .author-info p { font-size: 0.9rem; color: var(--color-slate); }
+
+        /* Related */
+        .related-section { position: relative; z-index: 1; padding: 4rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .related-container { max-width: 1000px; margin: 0 auto; }
+        .related-title { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 2rem; text-align: center; }
+        .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .related-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2rem; transition: all 0.4s var(--ease-out-expo); }
+        .related-card:hover { border-color: var(--color-gold); transform: translateY(-5px); }
+        .related-card h4 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .related-card h4 a { color: var(--color-paper); text-decoration: none; }
+        .related-card h4 a:hover { color: var(--color-gold); }
+        .related-card p { font-size: 0.9rem; color: var(--color-slate); }
+
+        /* Footer */
+        .footer { position: relative; z-index: 1; padding: 4rem 2rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        .footer-brand { display: flex; align-items: center; gap: 1rem; }
+        .footer-brand img { height: 50px; }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { color: var(--color-slate); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--color-gold); }
+        .footer-bottom { max-width: 1000px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.8rem; color: var(--color-slate); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .media-grid { grid-template-columns: 1fr; }
+            .specs-grid { grid-template-columns: 1fr; }
+            .related-grid { grid-template-columns: 1fr; }
+            .author-box { flex-direction: column; text-align: center; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+  <!-- PWA -->
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <meta name="theme-color" content="#2b0b4e" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <script defer src="assets/global-nav.js"></script>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a class="nav-brand" href="skyeletes-editorial.html">
+            <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes" class="nav-logo">
+            <div class="nav-brand-text">
+                <span class="nav-brand-name">SkyeLetes</span>
+                <span class="nav-brand-sub">Blog</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="how-it-works.html" class="nav-link">How It Works</a>
+            <a href="championships.html" class="nav-link">Championships</a>
+        </div>
+        <a href="players.html" class="nav-btn">Register Now</a>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-content">
+            <div class="article-meta">
+                <span class="article-category">Media & Content</span>
+                <span class="article-date">February 18, 2026</span>
+                <span class="article-read">7 min read</span>
+            </div>
+            <h1 class="article-title">Your Game Deserves to Be <em>Seen</em></h1>
+            <p class="article-excerpt">4K game footage. Personal highlight reels. Player portals. Here's how SkyeLetes is changing the content game for under-6'0" basketball.</p>
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <article class="article-body">
+        <div class="article-content">
+            <p>You've hit crossovers that would make crowds gasp. You've drained step-back threes with hands in your face. You've threaded passes through traffic that nobody else even saw. But if nobody's filming, did it even happen?</p>
+
+            <p>In today's world, content is currency. Highlight reels get you followers. Game footage gets you recruited. A strong social presence gets you opportunities. And for most under-6'0" players, this content simply doesn't exist.</p>
+
+            <p>Until now.</p>
+
+            <h2>The <em>Content Gap</em> in Basketball</h2>
+
+            <p>Here's an uncomfortable truth: the basketball content ecosystem is designed for players who fit a certain profile. AAU showcase events have dedicated film crews—for the tallest prospects. College programs create highlight packages—for players they're recruiting. Even social media algorithms tend to favor dunks over dimes.</p>
+
+            <p>If you're a 5'9" guard with elite handles and vision, you're often playing in gyms with nobody watching, no cameras rolling, and no content to show for your work. Your skills exist only in the memories of the people who were there.</p>
+
+            <p>That's a waste. And we're fixing it.</p>
+
+            <div class="pullquote">
+                <p class="pullquote-text">"Every player in SkyeLetes gets treated like a <em>pro</em>. The film, the edits, the portal—it's all designed to showcase your game."</p>
+            </div>
+
+            <h2>What Every SkyeLetes Player <em>Gets</em></h2>
+
+            <p>When you register for SkyeLetes, you're not just joining a league. You're getting access to a full media package:</p>
+
+            <div class="media-grid">
+                <div class="media-card">
+                    <div class="media-icon">🎬</div>
+                    <h4>4K Game Footage</h4>
+                    <p>Every game is filmed in professional 4K quality. Multiple angles. Clean audio. Broadcast-level production.</p>
+                </div>
+                <div class="media-card">
+                    <div class="media-icon">⚡</div>
+                    <h4>Personal Highlights</h4>
+                    <p>Our editors pull your best plays from every game and package them into shareable highlight reels.</p>
+                </div>
+                <div class="media-card">
+                    <div class="media-icon">🌐</div>
+                    <h4>Player Portal</h4>
+                    <p>Your own landing page with stats, highlights, bio, and team affiliation. A permanent home for your basketball identity.</p>
+                </div>
+                <div class="media-card">
+                    <div class="media-icon">📱</div>
+                    <h4>Social-Ready Content</h4>
+                    <p>Vertical clips optimized for Instagram, TikTok, and Twitter. Ready to post, ready to share.</p>
+                </div>
+            </div>
+
+            <h2>The <em>Tech</em> Behind the Production</h2>
+
+            <p>We didn't just hire someone with a camera phone. SkyeLetes media production is built for quality:</p>
+
+            <div class="specs-box">
+                <h4 class="specs-title"><span>📹</span> Production Specs</h4>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-value">4K</div>
+                        <div class="spec-label">Video Resolution</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value">60fps</div>
+                        <div class="spec-label">Frame Rate</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value">48hr</div>
+                        <div class="spec-label">Turnaround</div>
+                    </div>
+                </div>
+            </div>
+
+            <p>Our videographers use professional-grade equipment positioned for optimal court coverage. Games are edited within 48 hours, with highlights and full game footage uploaded to your player portal. You don't have to wait weeks for your content—it's ready while the game is still fresh.</p>
+
+            <h2>Your <em>Player Portal</em>: A Home for Your Game</h2>
+
+            <p>Every SkyeLetes player gets a personalized portal page. Think of it as your basketball landing page—a single URL you can share that tells your whole story.</p>
+
+            <p>Your portal includes:</p>
+
+            <ul>
+                <li><strong>Bio and basics:</strong> Height, position, team, and your personal statement</li>
+                <li><strong>Stats dashboard:</strong> Points, assists, steals, and more—updated after each game</li>
+                <li><strong>Highlight reel:</strong> Your best plays, professionally edited</li>
+                <li><strong>Full game archive:</strong> Complete footage from every game you've played</li>
+                <li><strong>Team connection:</strong> Link to your team's page and roster</li>
+                <li><strong>Social links:</strong> Connect your Instagram, Twitter, and other platforms</li>
+            </ul>
+
+            <p>When someone wants to see what you're about, you send them one link. Everything they need is there.</p>
+
+            <blockquote>
+                "I put my SkyeLetes portal link in my Instagram bio. Now when people ask if I can hoop, I just point them there. The footage speaks for itself."
+            </blockquote>
+
+            <h2>How the <em>Content</em> Gets Made</h2>
+
+            <p>From game day to your phone, here's how the process works:</p>
+
+            <div class="content-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-step">1</div>
+                    <div class="timeline-content">
+                        <h4>Game Day</h4>
+                        <p>Our videographer sets up before tipoff. Multiple camera angles cover the full court. Every play is captured.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-step">2</div>
+                    <div class="timeline-content">
+                        <h4>Post-Production</h4>
+                        <p>Editors review full footage, identify highlights for each player, and create both individual and team packages.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-step">3</div>
+                    <div class="timeline-content">
+                        <h4>Portal Upload</h4>
+                        <p>Within 48 hours, your highlight reel and full game are uploaded to your player portal. Stats are updated.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-step">4</div>
+                    <div class="timeline-content">
+                        <h4>Social Distribution</h4>
+                        <p>Vertical clips are formatted for social media. Download them directly and post to your accounts.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Why This <em>Matters</em></h2>
+
+            <p>Content isn't just about looking good. It's functional:</p>
+
+            <ul>
+                <li><strong>For recruiting:</strong> If you're still looking to play at higher levels, footage is essential. Coaches want to see game situations, not just drills.</li>
+                <li><strong>For personal branding:</strong> Whether you're building a social following, coaching, or training others, professional footage establishes credibility.</li>
+                <li><strong>For memory:</strong> Years from now, you'll have HD documentation of your competitive basketball experience. That's priceless.</li>
+                <li><strong>For proof:</strong> When someone doubts whether you can play, you've got receipts.</li>
+            </ul>
+
+            <p>At SkyeLetes, we believe every player deserves this. Not just the tall ones. Not just the ones with scouts in the stands. Everyone who competes in our league gets professional-grade media.</p>
+
+            <h2>The <em>Long Game</em></h2>
+
+            <p>We're not just making content for individual players. We're building an archive of under-6'0" basketball excellence. Season by season, we're creating a library of footage that showcases what smaller players can do when given a premium stage.</p>
+
+            <p>Your highlights become part of that story. Your crossover, your clutch shot, your defensive play—it all contributes to a growing movement that proves height isn't the only thing that matters in basketball.</p>
+
+            <p>And it all starts with showing up and playing your game.</p>
+
+            <div class="cta-box">
+                <h3>Ready to Get Your Game on Film?</h3>
+                <p>Register for SkyeLetes and get access to professional 4K coverage, highlight reels, and your personal player portal.</p>
+                <div class="cta-buttons">
+                    <a href="players.html" class="btn btn-primary">Register as Player</a>
+                    <a href="how-it-works.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Author Box -->
+            <div class="author-box">
+                <div class="author-avatar">
+                    <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes" class="floating-logo">
+                </div>
+                <div class="author-info">
+                    <h4>SkyeLetes Editorial</h4>
+                    <p>The official voice of SkyeLetes. A Skyes Over London LC venture, part of the SOLEnterprises ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Posts -->
+    <section class="related-section">
+        <div class="related-container">
+            <h3 class="related-title">More from SkyeLetes</h3>
+            <div class="related-grid">
+                <div class="related-card">
+                    <h4><a href="blog-why-under-6ft.html">Why Under 6'0" Changes Everything</a></h4>
+                    <p>The basketball world has always favored height. SkyeLetes flips the script.</p>
+                </div>
+                <div class="related-card">
+                    <h4><a href="blog-first-season.html">From Pickup to Premium: Your First Season</a></h4>
+                    <p>What to expect when you join SkyeLetes—from registration to championship.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Banner_transparent.png" alt="SkyeLetes" class="floating-logo" style="height: 40px;">
+            </div>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="championships.html">Championships</a>
+                <a href="players.html">Register</a>
+                <a href="owners-intake.html">Team Owners</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 SkyeLetes. A Skyes Over London LC Venture. Part of the SOLEnterprises ecosystem.
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        function createStars() {
+            stars = [];
+            const count = Math.floor((canvas.width * canvas.height) / 12000);
+            for (let i = 0; i < count; i++) {
+                stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.2 + 0.3, a: Math.random() * Math.PI * 2, s: Math.random() * 0.01 + 0.003, c: Math.random() > 0.7 ? 'green' : 'gold' });
+            }
+        }
+        function animate() {
+            ctx.fillStyle = '#05010a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.a += star.s;
+                const alpha = Math.abs(Math.sin(star.a)) * 0.5 + 0.2;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+                ctx.fillStyle = star.c === 'green' ? `rgba(53, 255, 182, ${alpha})` : `rgba(255, 215, 0, ${alpha})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        resize(); createStars(); animate();
+        window.addEventListener('resize', () => { resize(); createStars(); });
+    </script>
+
+  <script>
+    // SkyeLeticX PWA — register service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

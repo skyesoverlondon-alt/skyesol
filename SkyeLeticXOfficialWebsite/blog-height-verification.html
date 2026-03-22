@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Height Check: What to Expect | SkyeLetes Blog</title>
+    <meta name="description" content="72 inches. That's the line. Here's exactly how SkyeLetes height verification works and why it protects the integrity of the league.">
+    
+    <meta property="og:title" content="The Height Check: What to Expect | SkyeLetes Blog">
+    <meta property="og:description" content="Everything you need to know about SkyeLetes height verification.">
+    <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2026-02-16">
+    <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-ink: #05010a;
+            --color-paper: #faf9f7;
+            --color-gold: #ffd700;
+            --color-purple: #6d28ff;
+            --color-slate: #8b7db8;
+            --color-mist: #e8e6f1;
+            --color-cyan: #00d4ff;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Instrument Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-impact: 'Bebas Neue', sans-serif;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--color-ink); color: var(--color-paper); line-height: 1.8; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse { 0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4)); } 50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.7)); } }
+        .floating-logo { animation: float 6s ease-in-out infinite, pulse 3s ease-in-out infinite; }
+
+        /* Nav */
+        .nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(5, 1, 10, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 215, 0, 0.1); }
+        .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+        .nav-logo { height: 48px; width: auto; }
+        .nav-brand-text { display: flex; flex-direction: column; }
+        .nav-brand-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-paper); }
+        .nav-brand-sub { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-slate); letter-spacing: 0.1em; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-link { font-size: 0.85rem; color: var(--color-slate); text-decoration: none; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-gold); }
+        .nav-btn { background: var(--color-gold); color: var(--color-ink); padding: 0.6rem 1.25rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 6px; transition: all 0.3s; }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,0,0.3); }
+
+        /* Article Header */
+        .article-header { position: relative; z-index: 1; padding: 10rem 2rem 4rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .article-header-content { max-width: 800px; margin: 0 auto; }
+        .height-visual { margin-bottom: 2rem; }
+        .height-number { font-family: var(--font-impact); font-size: 8rem; color: var(--color-gold); letter-spacing: 0.1em; line-height: 1; text-shadow: 0 0 60px rgba(255,215,0,0.3); }
+        .height-unit { font-family: var(--font-mono); font-size: 1.5rem; color: var(--color-cyan); letter-spacing: 0.2em; }
+        .article-meta { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .article-category { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-cyan); letter-spacing: 0.15em; text-transform: uppercase; background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.2); padding: 0.4rem 1rem; border-radius: 999px; }
+        .article-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); }
+        .article-read { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); }
+        .article-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 500; line-height: 1.15; margin-bottom: 1.5rem; }
+        .article-title em { font-style: italic; color: var(--color-gold); }
+        .article-excerpt { font-size: 1.25rem; color: var(--color-slate); max-width: 650px; margin: 0 auto; }
+
+        /* Article Body */
+        .article-body { position: relative; z-index: 1; padding: 4rem 2rem; }
+        .article-content { max-width: 720px; margin: 0 auto; }
+        .article-content p { font-size: 1.1rem; color: var(--color-mist); margin-bottom: 1.75rem; }
+        .article-content h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 500; margin: 3rem 0 1.5rem; color: var(--color-paper); }
+        .article-content h2 em { font-style: italic; color: var(--color-gold); }
+        .article-content h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin: 2.5rem 0 1rem; color: var(--color-paper); }
+        .article-content blockquote { border-left: 3px solid var(--color-cyan); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--color-slate); font-size: 1.15rem; }
+        .article-content ul, .article-content ol { margin: 1.5rem 0; padding-left: 1.5rem; color: var(--color-mist); }
+        .article-content li { margin-bottom: 0.75rem; }
+        .article-content strong { color: var(--color-paper); }
+        .article-content a { color: var(--color-gold); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* Pullquote */
+        .pullquote { background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255,215,0,0.05)); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; text-align: center; }
+        .pullquote-text { font-family: var(--font-display); font-size: 1.75rem; font-weight: 500; color: var(--color-paper); line-height: 1.4; }
+        .pullquote-text em { font-style: italic; color: var(--color-gold); }
+
+        /* Process Steps */
+        .process-section { margin: 3rem 0; }
+        .process-step { display: flex; gap: 2rem; padding: 2rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; margin-bottom: 1.5rem; transition: all 0.4s var(--ease-out-expo); position: relative; overflow: hidden; }
+        .process-step::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 4px; background: linear-gradient(180deg, var(--color-gold), var(--color-cyan)); }
+        .process-step:hover { border-color: var(--color-cyan); transform: translateX(5px); }
+        .step-number { width: 60px; height: 60px; background: linear-gradient(135deg, var(--color-gold), var(--color-cyan)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-impact); font-size: 1.5rem; color: var(--color-ink); flex-shrink: 0; }
+        .step-content h4 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .step-content p { font-size: 0.95rem; color: var(--color-slate); margin: 0; }
+
+        /* Rule Box */
+        .rule-box { background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(0, 212, 255, 0.08)); border: 2px solid rgba(255,215,0,0.2); border-radius: 20px; padding: 2.5rem; margin: 3rem 0; text-align: center; }
+        .rule-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .rule-title { font-family: var(--font-impact); font-size: 2.5rem; color: var(--color-gold); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+        .rule-text { font-size: 1.1rem; color: var(--color-mist); }
+        .rule-note { font-size: 0.9rem; color: var(--color-slate); margin-top: 1rem; font-style: italic; }
+
+        /* Warning Box */
+        .warning-box { background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.25); border-radius: 16px; padding: 2rem; margin: 2rem 0; }
+        .warning-title { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; color: #ff4757; }
+        .warning-content p { color: var(--color-mist); margin-bottom: 0.75rem; }
+        .warning-content p:last-child { margin-bottom: 0; }
+
+        /* FAQ Section */
+        .faq-section { margin: 3rem 0; }
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 1.5rem 0; }
+        .faq-question { font-size: 1.1rem; font-weight: 600; color: var(--color-paper); margin-bottom: 0.75rem; }
+        .faq-answer { color: var(--color-slate); }
+
+        /* Success Box */
+        .success-box { background: rgba(0, 214, 125, 0.1); border: 1px solid rgba(0, 214, 125, 0.25); border-radius: 16px; padding: 2rem; margin: 2rem 0; }
+        .success-title { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; color: #00d67d; }
+        .success-content p { color: var(--color-mist); margin: 0; }
+
+        /* CTA Box */
+        .cta-box { background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(255,215,0,0.08)); border: 1px solid rgba(0, 212, 255, 0.25); border-radius: 20px; padding: 3rem; margin: 3rem 0; text-align: center; }
+        .cta-box h3 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1rem; }
+        .cta-box p { color: var(--color-slate); margin-bottom: 1.5rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 8px; transition: all 0.3s; }
+        .btn-primary { background: var(--color-gold); color: var(--color-ink); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,215,0,0.3); }
+        .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--color-paper); }
+        .btn-secondary:hover { border-color: var(--color-cyan); color: var(--color-cyan); }
+
+        /* Author Box */
+        .author-box { display: flex; align-items: center; gap: 1.5rem; padding: 2rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; margin-top: 4rem; }
+        .author-avatar { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+        .author-avatar img { width: 100%; height: 100%; object-fit: contain; }
+        .author-info h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .author-info p { font-size: 0.9rem; color: var(--color-slate); }
+
+        /* Footer */
+        .footer { position: relative; z-index: 1; padding: 4rem 2rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        .footer-brand { display: flex; align-items: center; gap: 1rem; }
+        .footer-brand img { height: 50px; }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { color: var(--color-slate); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--color-gold); }
+        .footer-bottom { max-width: 1000px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.8rem; color: var(--color-slate); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .height-number { font-size: 5rem; }
+            .process-step { flex-direction: column; text-align: center; }
+            .author-box { flex-direction: column; text-align: center; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+  <!-- PWA -->
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <meta name="theme-color" content="#2b0b4e" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <script defer src="assets/global-nav.js"></script>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a class="nav-brand" href="skyeletes-editorial.html">
+            <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes" class="nav-logo">
+            <div class="nav-brand-text">
+                <span class="nav-brand-name">SkyeLetes</span>
+                <span class="nav-brand-sub">Blog</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="how-it-works.html" class="nav-link">How It Works</a>
+            <a href="championships.html" class="nav-link">Championships</a>
+        </div>
+        <a href="players.html" class="nav-btn">Register Now</a>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-content">
+            <div class="height-visual">
+                <div class="height-number">72"</div>
+                <div class="height-unit">INCHES BAREFOOT</div>
+            </div>
+            <div class="article-meta">
+                <span class="article-category">Rules & Eligibility</span>
+                <span class="article-date">February 16, 2026</span>
+                <span class="article-read">5 min read</span>
+            </div>
+            <h1 class="article-title">The <em>Height Check</em></h1>
+            <p class="article-excerpt">72 inches. That's the line. Here's exactly how SkyeLetes height verification works and why it protects the integrity of the league.</p>
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <article class="article-body">
+        <div class="article-content">
+            <p>The entire premise of SkyeLetes depends on one rule being enforced: everyone must be under 6'0" tall. That's 72 inches. Barefoot. No exceptions.</p>
+
+            <p>This isn't arbitrary. The height cap is what makes SkyeLetes different from every other basketball league. It's what creates the level playing field. It's what allows skill to matter more than size. And it's why we take verification seriously.</p>
+
+            <p>Here's everything you need to know about the height check process.</p>
+
+            <div class="rule-box">
+                <div class="rule-icon">📏</div>
+                <div class="rule-title">UNDER 72 INCHES</div>
+                <div class="rule-text">Maximum height to compete in SkyeLetes</div>
+                <div class="rule-note">Measured barefoot, standing straight, at official check-in</div>
+            </div>
+
+            <h2>The <em>Verification Process</em></h2>
+
+            <p>Height verification happens at your first official game. Here's the step-by-step:</p>
+
+            <div class="process-section">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Arrive at Check-In</h4>
+                        <p>Get to the venue 30 minutes before your scheduled game time. Check in with staff at the registration table.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Remove Your Shoes</h4>
+                        <p>Verification is done barefoot. No socks, no insoles, no exceptions. This ensures accurate measurement.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Stand Against the Stadiometer</h4>
+                        <p>Stand straight with your back against the measuring device. Heels together. Eyes forward. No slouching, no stretching.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Measurement Recorded</h4>
+                        <p>Staff records your official height. If you're under 72 inches, you're cleared. This measurement stays on file.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Get Your Clearance</h4>
+                        <p>Once verified, you're marked as height-cleared in the system. You won't need to measure again unless there's a dispute.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pullquote">
+                <p class="pullquote-text">"The height check takes 30 seconds. It's quick, it's fair, and it protects <em>everyone</em> in the league."</p>
+            </div>
+
+            <h2>Why We're <em>Strict</em></h2>
+
+            <p>Some people ask: "What's the big deal if someone's 6'0.5"?" Here's why we hold the line:</p>
+
+            <ul>
+                <li><strong>Fairness:</strong> The whole point of SkyeLetes is creating a league where height isn't the determining factor. Every inch matters when skills are supposed to be the differentiator.</li>
+                <li><strong>Trust:</strong> Players register believing they'll compete against others under 6'0". If we let exceptions slide, we break that trust.</li>
+                <li><strong>Integrity:</strong> Championships have cash payouts. The competitive stakes are real. We can't have disputes about whether winners were actually eligible.</li>
+                <li><strong>Precedent:</strong> Allow one exception, and the standard erodes. We maintain the line because it matters.</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4 class="warning-title">⚠️ What Happens If You're Over 72"</h4>
+                <div class="warning-content">
+                    <p><strong>You cannot play.</strong> If measurement shows you're 72 inches or taller, you're not eligible for SkyeLetes. Period.</p>
+                    <p><strong>No refunds.</strong> Registration fees are non-refundable. You attested to your height when you registered. Misrepresentation is on you.</p>
+                    <p><strong>Immediate removal.</strong> If discovered mid-season (through re-measurement due to dispute), you're removed from the roster and all results are reviewed.</p>
+                </div>
+            </div>
+
+            <h2>Common <em>Questions</em></h2>
+
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">What if I'm exactly 72 inches?</div>
+                    <div class="faq-answer">72 inches is the maximum. If you measure at exactly 72.0", you're not eligible. The cutoff is "under" 6'0", not "6'0" or under."</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What if I measured 5'11.5" at the doctor last year?</div>
+                    <div class="faq-answer">Heights vary by time of day, posture, and measurement method. Our official measurement at check-in is what counts. If you're close to the line, get measured accurately before registering.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I dispute the measurement?</div>
+                    <div class="faq-answer">You can request an immediate re-measure by a different staff member. If both measurements show you over 72", the result stands. We use calibrated equipment and trained staff.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What about hair? I have thick hair.</div>
+                    <div class="faq-answer">Measurements are taken with hair compressed. The measuring device presses down to skull level. Hairstyles don't add to your official height.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can opponents challenge my height?</div>
+                    <div class="faq-answer">Yes. If an opposing team formally disputes a player's height, we can re-verify. This rarely happens because we catch issues at initial check-in.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do I get measured at every game?</div>
+                    <div class="faq-answer">No. Once you're verified at your first game, you're cleared for the season unless there's a formal dispute.</div>
+                </div>
+            </div>
+
+            <h2>Be <em>Honest</em> on Registration</h2>
+
+            <p>When you register, you attest that you're under 6'0" tall. This is a legal declaration, not a guess. If you're not sure, get measured before you register. Here's how:</p>
+
+            <ul>
+                <li><strong>Doctor's office:</strong> Most accurate option. Ask for a height measurement at your next appointment.</li>
+                <li><strong>Home measurement:</strong> Stand against a wall, barefoot, with a book flat on your head. Mark the wall. Measure with a tape measure.</li>
+                <li><strong>Gym or fitness center:</strong> Many facilities have stadiometers available.</li>
+            </ul>
+
+            <p>If you're 5'11.75", you might be cutting it close depending on time of day and posture. Know your actual height before you commit.</p>
+
+            <div class="success-box">
+                <h4 class="success-title">✓ If You're Clearly Under 6'0"</h4>
+                <div class="success-content">
+                    <p>Don't stress. If you're 5'10" or under, height check is just a quick formality. Walk in, get measured, get cleared, warm up, and play. The process is smooth for the vast majority of players.</p>
+                </div>
+            </div>
+
+            <h2>The <em>Bigger Picture</em></h2>
+
+            <p>Height verification isn't about gatekeeping—it's about protecting what makes SkyeLetes special. Every player who passes the height check knows they're competing on a level playing field. Every game is decided by skill, effort, and teamwork—not by who got the tallest genes.</p>
+
+            <p>This is what you signed up for. This is what makes the league unique. And this is why we take 30 seconds at your first game to make sure everyone belongs.</p>
+
+            <blockquote>
+                "I've played in leagues where the height rules were 'suggestions.' Here, they mean it. That's why I chose SkyeLetes."
+            </blockquote>
+
+            <div class="cta-box">
+                <h3>Ready to Step Up to the Line?</h3>
+                <p>If you're under 6'0", you belong here. Register and let's see what you've got.</p>
+                <div class="cta-buttons">
+                    <a href="players.html" class="btn btn-primary">Register Now</a>
+                    <a href="how-it-works.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+
+            <!-- Author Box -->
+            <div class="author-box">
+                <div class="author-avatar">
+                    <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes" class="floating-logo">
+                </div>
+                <div class="author-info">
+                    <h4>SkyeLetes Editorial</h4>
+                    <p>The official voice of SkyeLetes. A Skyes Over London LC venture, part of the SOLEnterprises ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Banner_transparent.png" alt="SkyeLetes" class="floating-logo" style="height: 40px;">
+            </div>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="championships.html">Championships</a>
+                <a href="players.html">Register</a>
+                <a href="owners-intake.html">Team Owners</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 SkyeLetes. A Skyes Over London LC Venture. Part of the SOLEnterprises ecosystem.
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        function createStars() {
+            stars = [];
+            const count = Math.floor((canvas.width * canvas.height) / 12000);
+            for (let i = 0; i < count; i++) {
+                stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.2 + 0.3, a: Math.random() * Math.PI * 2, s: Math.random() * 0.01 + 0.003, c: Math.random() > 0.5 ? 'cyan' : 'gold' });
+            }
+        }
+        function animate() {
+            ctx.fillStyle = '#05010a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.a += star.s;
+                const alpha = Math.abs(Math.sin(star.a)) * 0.5 + 0.2;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+                ctx.fillStyle = star.c === 'cyan' ? `rgba(0, 212, 255, ${alpha})` : `rgba(255, 215, 0, ${alpha})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        resize(); createStars(); animate();
+        window.addEventListener('resize', () => { resize(); createStars(); });
+    </script>
+
+  <script>
+    // SkyeLeticX PWA — register service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

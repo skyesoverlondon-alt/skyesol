@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backup Vault · Skye Split Engine</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/icon-192.png">
+  <link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="bg-layer"></div>
+    <main class="site">
+      <header class="topbar">
+        <div class="branding">
+          <img src="./assets/media/skydexia-logo.png" alt="Skyes Over London logo">
+          <div class="branding-copy">
+            <h1 data-brand-name>Skye Split Engine</h1>
+            <p data-brand-sub>Skyes Over London · Offline money operations + backup vault</p>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="pill"><span class="dot"></span><span><strong>Vault:</strong> Recovery lane</span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Currency:</strong> <span data-status-currency>USD</span></span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Sync:</strong> <span data-last-sync>Local only</span></span></div>
+        </div>
+      </header>
+
+      
+<nav class="navbar">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="engine.html">Split Engine</a>
+        <a class="nav-link" href="ops.html">Money Ops</a>
+        <a class="nav-link" href="receipts.html">Receipts</a>
+        <a class="nav-link" href="contacts.html">Contacts</a>
+        <a class="nav-link" href="vault.html">Backup Vault</a>
+        <a class="nav-link" href="settings.html">Settings</a>
+        <a class="nav-link" href="walkthrough.html">Walkthrough</a>
+        <a class="nav-link" href="help.html">Help</a>
+      </nav>
+
+      <section class="vault-grid">
+        <article class="card">
+          <div class="kicker">Actual backup capability</div>
+          <h2 class="page-title" style="font-size:2rem;">Create recovery points and export the full app state.</h2>
+          <p class="page-subtitle">Everything here works in-browser. Backups contain contacts, split plans, snapshots, settings, and activity history.</p>
+
+          <div class="form-grid-2">
+            <div class="field">
+              <label for="snapshotLabel">Snapshot label</label>
+              <input id="snapshotLabel" type="text" placeholder="Example: Before quarterly split cleanup">
+            </div>
+            <div class="field">
+              <label>Vault stats</label>
+              <div class="note-box" data-vault-stats>Loading…</div>
+            </div>
+          </div>
+          <div class="actions-row">
+            <button class="btn" data-create-snapshot>Create local snapshot</button>
+            <button class="btn-soft" data-export-plain>Export plain JSON</button>
+          </div>
+          <div data-create-result></div>
+
+          <hr class="soft">
+
+          <div class="field">
+            <label for="backupPassphrase">Passphrase for encrypted export</label>
+            <input id="backupPassphrase" type="password" placeholder="Use 8+ characters">
+          </div>
+          <div class="actions-row">
+            <button class="btn-ghost" data-export-encrypted>Export encrypted backup</button>
+          </div>
+          <div data-export-result></div>
+
+          <hr class="soft">
+
+          <div class="field">
+            <label for="restorePassphrase">Passphrase for encrypted restore</label>
+            <input id="restorePassphrase" type="password" placeholder="Only needed for encrypted backups">
+          </div>
+          <div class="field">
+            <label for="importFile">Import backup file</label>
+            <input id="importFile" data-import-file type="file" accept=".json,.skyevault,application/json">
+          </div>
+          <div data-restore-result></div>
+        </article>
+
+        <aside class="panel">
+          <h3>Snapshot vault</h3>
+          <div class="caption"><span data-snapshot-count>0 in local vault</span> · last auto snapshot <span data-last-auto-snapshot>Never</span></div>
+          <div data-snapshot-list class="list" style="margin-top:14px;"></div>
+          <div class="note-box">Plain JSON is best for open portability. Encrypted backups are best when the file may travel or sit in cloud storage.</div>
+        </aside>
+      </section>
+
+      <footer class="footer-block">
+        <h3>Contact</h3>
+        <div class="footer-contact">
+          <span>Skyes Over London</span>
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+          <a href="tel:+14804695416">(480) 469-5416</a>
+          <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <script type="module" src="./assets/vault.js"></script>
+</body>
+</html>

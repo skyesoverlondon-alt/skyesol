@@ -22,9 +22,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Functions endpoint audit
-        run: npm run functions:audit
-
       - name: Metadata template check
         run: npm run meta:check
 

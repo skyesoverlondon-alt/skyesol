@@ -1,9 +1,6 @@
 [build]
   publish = "."
 
-# CRITICAL: Do not disable root functions for this site.
-# Gateway 13/admin auth/API depend on live function routes under `/.netlify/functions/*`.
-# If this directory is changed to a disabled/empty path, login and gateway APIs 404 immediately.
 [functions]
   directory = "netlify/functions"
 

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Launcher</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<script src="assets/app.js"></script>
+<script>mountPage('shared-desk','SkyMail Supplemental Suite Launcher','Open every supplemental app from one front-end only suite.', ()=>{document.getElementById('pageContent').innerHTML=`
+<section class="card">
+  <div class="eyebrow">What is in this bundle</div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="notice">You asked for all of them, not three. This launcher now ships every requested supplemental app front end in one cohesive suite.</div>
+    <div class="notice">All pages persist locally, share seeded records, include physical nav menus, and are ready for offline review before deployment.</div>
+  </div>
+</section>
+<section class="card">
+  <div class="toolbar"><div><div class="eyebrow">Suite Apps</div><div class="mini">Open any app surface below.</div></div></div>
+  <div class="link-grid" style="margin-top:14px">
+    <a class="launch-card" href="shared-desk.html"><h3>Shared Desk</h3><p>Claim threads, assign owners, set queues, priorities, and internal handling status.</p></a>
+    <a class="launch-card" href="follow-up-engine.html"><h3>Follow-Up Engine</h3><p>Sequence next touches, track hot leads, and prevent dropped conversations.</p></a>
+    <a class="launch-card" href="intake-vault.html"><h3>Intake Vault</h3><p>Turn conversations into structured client records, stages, and checklists.</p></a>
+    <a class="launch-card" href="recovery-engine.html"><h3>Recovery Engine</h3><p>Find stale deals, unanswered pricing threads, and lost revenue opportunities.</p></a>
+    <a class="launch-card" href="contact-brain.html"><h3>Contact Brain</h3><p>Own the relationship layer with tags, scores, notes, and account memory.</p></a>
+    <a class="launch-card" href="reply-studio.html"><h3>Reply Studio</h3><p>Manage response templates, snippets, and reusable answer blocks.</p></a>
+    <a class="launch-card" href="ops-console.html"><h3>Ops Console</h3><p>See the suite as an owner: compliance, revenue recovered, and response performance.</p></a>
+  </div>
+</section>
+<section class="grid3">
+  <div class="card"><div class="eyebrow">Cross-App Persistence</div><div class="mini" style="margin-top:10px">One shared local data layer means updates in Shared Desk, Follow-Up, Intake, Recovery, Contacts, Reply Studio, and Ops all stay in sync inside the browser.</div></div>
+  <div class="card"><div class="eyebrow">Front-End Only</div><div class="mini" style="margin-top:10px">No backend required for review. Seed data is included so every flow demonstrates immediately.</div></div>
+  <div class="card"><div class="eyebrow">Deployment Ready Shell</div><div class="mini" style="margin-top:10px">Once you are ready, these pages can be wired into your existing mail system and admin APIs without redoing the whole UI layer.</div></div>
+</section>
+`;});</script>
+</body>
+</html>

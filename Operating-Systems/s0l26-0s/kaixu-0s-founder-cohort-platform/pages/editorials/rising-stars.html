@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editorial | Mercy Home, Rising Stars, and the Record of Real Community Work</title>
+  <meta name="description" content="An editorial article framing Mercy Home's Rising Stars Challenge as documented proof of long-standing community work, youth leadership, and credible local presence by Skyes Over London." />
+  <link rel="canonical" href="https://kaixu-0s-founder-cohort-platform.netlify.app/pages/editorials/rising-stars.html" />
+  <meta property="og:url" content="https://kaixu-0s-founder-cohort-platform.netlify.app/pages/editorials/rising-stars.html" />
+  <meta name="theme-color" content="#0b1020" />
+  <style>
+    :root {
+      --bg: #06070d;
+      --bg-2: #0c1020;
+      --panel: rgba(15, 19, 35, 0.76);
+      --panel-strong: rgba(11, 15, 28, 0.9);
+      --line: rgba(161, 125, 255, 0.24);
+      --line-soft: rgba(255, 255, 255, 0.08);
+      --text: #f5f2ff;
+      --muted: #c5bfdc;
+      --soft: #9e96bb;
+      --gold: #f1c96d;
+      --violet: #9f6bff;
+      --violet-2: #7b5cff;
+      --cyan: #75d7ff;
+      --shadow: 0 32px 90px rgba(0, 0, 0, 0.42);
+      --glow: 0 0 0 1px rgba(161, 125, 255, 0.16), 0 0 28px rgba(159, 107, 255, 0.16);
+      --max: 1320px;
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(159,107,255,.22), transparent 28%),
+        radial-gradient(circle at 88% 6%, rgba(117,215,255,.16), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(241,201,109,.10), transparent 28%),
+        linear-gradient(180deg, #06070d 0%, #0a0d18 38%, #06070d 100%);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(circle at center, black 42%, transparent 92%);
+      opacity: .28;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(calc(100% - 28px), var(--max));
+      margin: 0 auto;
+      padding: 18px 0 64px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(8, 10, 18, 0.72);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--glow);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-weight: 800;
+      letter-spacing: .12em;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(241,201,109,.24), transparent 55%),
+        linear-gradient(180deg, rgba(159,107,255,.22), rgba(117,215,255,.12));
+      border: 1px solid rgba(241,201,109,.22);
+      box-shadow: 0 0 24px rgba(159,107,255,.18);
+      flex: 0 0 auto;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: .92rem;
+      line-height: 1.1;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-copy span {
+      display: block;
+      margin-top: 4px;
+      color: var(--soft);
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .top-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .top-links a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255,255,255,.03);
+      color: #ede9ff;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: .22s ease;
+    }
+
+    .top-links a:hover {
+      border-color: rgba(241,201,109,.28);
+      color: var(--gold);
+      box-shadow: 0 0 0 1px rgba(241,201,109,.12), 0 0 26px rgba(241,201,109,.11);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      margin-top: 22px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background:
+        linear-gradient(135deg, rgba(159,107,255,.14), rgba(117,215,255,.06) 42%, rgba(255,255,255,.03) 100%),
+        rgba(10, 13, 24, 0.76);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow), var(--glow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -40% auto;
+      width: 360px;
+      height: 360px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(159,107,255,.18), transparent 66%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, .72fr);
+      gap: 22px;
+      align-items: stretch;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(159,107,255,.09);
+      color: #e8dcff;
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--gold), #fff3cf);
+      box-shadow: 0 0 16px rgba(241,201,109,.42);
+    }
+
+    h1 {
+      margin: 18px 0 16px;
+      max-width: 920px;
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: .96;
+      letter-spacing: -.055em;
+      text-wrap: balance;
+    }
+
+    .dek {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.9vw, 1.2rem);
+      line-height: 1.82;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .hero-meta span {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255,255,255,.035);
+      color: #dfd9f7;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      font-size: .82rem;
+      transition: .22s ease;
+    }
+
+    .btn-primary {
+      color: #080a12;
+      background: linear-gradient(90deg, var(--gold), #f7db97);
+      box-shadow: 0 10px 30px rgba(241,201,109,.22);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: #f2ecff;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .hero-side {
+      display: grid;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(159,107,255,.28)) drop-shadow(0 0 28px rgba(241,201,109,.16));
+      animation: floatPulse 6.2s ease-in-out infinite;
+      flex: 0 0 auto;
+    }
+
+    .portrait-card {
+      position: relative;
+      min-height: 300px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(15,19,35,.82), rgba(11,15,28,.94));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .portrait-glow {
+      position: absolute;
+      inset: auto 50% -22% 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(159,107,255,.24), transparent 68%);
+      pointer-events: none;
+    }
+
+    .portrait-image {
+      position: relative;
+      z-index: 2;
+      width: min(290px, 82%);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,.42));
+      animation: floatPulse 5.8s ease-in-out infinite;
+    }
+
+    .portrait-logo {
+      position: absolute;
+      z-index: 3;
+      width: 92px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(159,107,255,.24));
+      animation: floatPulse 7s ease-in-out infinite;
+    }
+
+    .portrait-logo.logo-main { top: 16px; left: 16px; }
+    .portrait-logo.logo-side { top: 22px; right: 16px; width: 98px; }
+
+    @keyframes floatPulse {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.01); }
+    }
+
+
+    .signal-card,
+    .content-card,
+    .rail-card,
+    .footer-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .signal-card {
+      padding: 22px;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .signal-label,
+    .section-kicker,
+    .rail-card h3,
+    .footer-card h3 {
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .signal-card h2 {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.2vw, 2rem);
+      line-height: 1.02;
+      letter-spacing: -.04em;
+    }
+
+    .signal-card p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: .98rem;
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .signal-stat {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255,255,255,.03);
+    }
+
+    .signal-stat strong {
+      display: block;
+      font-size: 1.32rem;
+      letter-spacing: -.03em;
+      color: #fff7db;
+    }
+
+    .signal-stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--soft);
+      font-size: .77rem;
+      line-height: 1.5;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 24px;
+      margin-top: 24px;
+      align-items: start;
+    }
+
+    .content-card {
+      padding: 28px;
+      background:
+        linear-gradient(180deg, rgba(18,22,38,.86), rgba(10,12,22,.92));
+    }
+
+    .section-kicker {
+      margin-bottom: 16px;
+    }
+
+    .content-card p {
+      margin: 0 0 1.22rem;
+      color: #f2effc;
+      font-size: 1.06rem;
+      line-height: 1.9;
+    }
+
+    .content-card p.lead {
+      font-size: 1.2rem;
+      color: #fff7dc;
+    }
+
+    .content-card h2 {
+      margin: 2rem 0 1rem;
+      font-size: 1.62rem;
+      line-height: 1.12;
+      letter-spacing: -.03em;
+    }
+
+    .dropcap::first-letter {
+      float: left;
+      margin: .14rem .55rem 0 0;
+      font-size: 4.2rem;
+      line-height: .85;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .quote,
+    .callout {
+      margin: 1.8rem 0;
+      padding: 18px 20px;
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote {
+      border: 1px solid rgba(241,201,109,.18);
+      background: linear-gradient(180deg, rgba(241,201,109,.10), rgba(159,107,255,.08));
+      color: #fff6d6;
+      font-size: 1.08rem;
+      line-height: 1.85;
+    }
+
+    .callout {
+      border: 1px solid rgba(117,215,255,.18);
+      background: linear-gradient(180deg, rgba(117,215,255,.08), rgba(159,107,255,.06));
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--cyan);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 1rem;
+      color: #edf9ff;
+      line-height: 1.8;
+    }
+
+    .source {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line-soft);
+      color: var(--soft);
+      font-size: .93rem;
+      line-height: 1.7;
+    }
+
+    .source a { color: var(--gold); }
+
+    .rail {
+      display: grid;
+      gap: 16px;
+      position: sticky;
+      top: 98px;
+    }
+
+    .rail-card {
+      padding: 20px;
+    }
+
+    .fact-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .fact {
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+
+    .fact:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .fact b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: .98rem;
+      color: #ffffff;
+    }
+
+    .fact span,
+    .rail-card p {
+      color: var(--muted);
+      font-size: .98rem;
+      line-height: 1.74;
+      margin: 0;
+    }
+
+    .footer {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 20px;
+    }
+
+    .footer-card {
+      padding: 24px;
+      background: rgba(10, 12, 22, 0.82);
+    }
+
+    .footer-title {
+      margin: 0 0 10px;
+      font-size: clamp(1.55rem, 2vw, 2rem);
+      line-height: 1.02;
+      letter-spacing: -.04em;
+    }
+
+    .footer-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.78;
+    }
+
+    .link-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .link-grid a,
+    .contact-line a {
+      color: #f6f2ff;
+    }
+
+    .link-grid a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-soft);
+      background: rgba(255,255,255,.03);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .contact-stack {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .contact-line {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .contact-line strong {
+      color: var(--text);
+      margin-right: 6px;
+    }
+
+    @media (max-width: 1120px) {
+      .hero-grid,
+      .layout,
+      .footer {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        position: static;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .shell {
+        width: min(calc(100% - 18px), var(--max));
+        padding-top: 10px;
+      }
+
+      .topbar,
+      .hero,
+      .content-card,
+      .rail-card,
+      .footer-card {
+        border-radius: 22px;
+      }
+
+      .topbar {
+        position: static;
+        padding: 14px;
+      }
+
+      .top-links {
+        justify-content: flex-start;
+      }
+
+      .hero,
+      .content-card,
+      .footer-card,
+      .rail-card {
+        padding: 20px;
+      }
+
+      .signal-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .content-card p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+  <meta property="og:title" content="Editorial | Mercy Home, Rising Stars, and the Record of Real Community Work" />
+  <meta property="og:description" content="An editorial article framing Mercy Home&#x27;s Rising Stars Challenge as documented proof of long-standing community work, youth leadership, and credible local presence by Skyes Over London." />
+  <meta name="twitter:description" content="An editorial article framing Mercy Home&#x27;s Rising Stars Challenge as documented proof of long-standing community work, youth leadership, and credible local presence by Skyes Over London." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Editorial | Mercy Home, Rising Stars, and the Record of Real Community Work" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Editorial | Mercy Home, Rising Stars, and the Record of Real Community Work",
+  "url": "https://kaixu-0s-founder-cohort-platform.netlify.app/pages/editorials/rising-stars.html",
+  "description": "An editorial article framing Mercy Home's Rising Stars Challenge as documented proof of long-standing community work, youth leadership, and credible local presence by Skyes Over London.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "0s Founder Cohort",
+    "url": "https://kaixu-0s-founder-cohort-platform.netlify.app/"
+  }
+}
+  </script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand-logo" src="../../assets/media/skyes-primary-logo.png" alt="Skyes Over London logo" />
+        <div class="brand-copy">
+          <strong>Skyes Over London LC</strong>
+          <span>0s Founder Cohort Editorial Surface</span>
+        </div>
+      </div>
+      <nav class="top-links" aria-label="Quick links">
+        <a href="https://skyesol.netlify.app/" target="_blank" rel="noopener">Home</a>
+        <a href="../founder.html">Founder</a>
+        <a href="../trust.html">Trust</a>
+          <a href="index.html">Editorials</a>
+          <a href="../youth-partners.html">Partner Lanes</a>
+        <a href="../apply.html">Apply</a>
+        <a href="https://skyesol.netlify.app/about" target="_blank" rel="noopener">Official About</a>
+        <a href="https://skyesol.netlify.app/credibility" target="_blank" rel="noopener">Credibility</a>
+        <a href="https://solenterprises.org/" target="_blank" rel="noopener">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Featured Editorial</div>
+          <h1>Credibility does not begin when people finally notice you. It begins when institutions can already point to the work.</h1>
+          <p class="dek">Mercy Home’s public record on the Rising Stars Challenge places Tyrone—known today as Skyes Over London—inside a real community institution, inside a youth leadership structure, and inside a documented event where contribution was visible, public, and useful. That is not mythology. That is record.</p>
+          <div class="hero-meta">
+            <span>Community Editorial</span>
+            <span>Chicago</span>
+            <span>Leadership Through Service</span>
+            <span>Documented Public Record</span>
+          </div>
+          <div class="button-row">
+            <a class="btn btn-primary" href="https://skyesol.netlify.app/credibility" target="_blank" rel="noopener">View Credibility Archive</a><a class="btn btn-secondary" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener">All SkyeSol Case Studies</a>
+            <a class="btn btn-secondary" href="https://solenterprises.org/" target="_blank" rel="noopener">Contact SOLEnterprises</a>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <section class="portrait-card" aria-label="Founder portrait and logos">
+            <div class="portrait-glow"></div>
+            <img class="portrait-logo logo-main" src="../../assets/media/skyes-primary-logo.png" alt="Skyes Over London logo" />
+            <img class="portrait-logo logo-side" src="../../assets/media/kaixu-logo.png" alt="kAIxU logo" />
+            <img class="portrait-image" src="../../assets/media/founder.png" alt="Skyes Over London founder portrait" />
+          </section>
+          <section class="signal-card">
+            <div>
+              <p class="signal-label">Signal Metrics</p>
+              <h2>Public proof beats self-description.</h2>
+              <p>This piece is built around institutional evidence: named participation, hosted youth leadership, and visible contribution recorded by a community organization.</p>
+            </div>
+            <div class="signal-grid">
+              <div class="signal-stat">
+                <strong>2019</strong>
+                <span>Record published</span>
+              </div>
+              <div class="signal-stat">
+                <strong>Mercy Home</strong>
+                <span>Institutional context</span>
+              </div>
+              <div class="signal-stat">
+                <strong>Youth Board</strong>
+                <span>Leadership structure</span>
+              </div>
+              <div class="signal-stat">
+                <strong>Named Work</strong>
+                <span>Event shirt design</span>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section class="layout">
+      <article class="content-card">
+        <div class="section-kicker">Editorial Analysis</div>
+        <p class="lead dropcap">There is a lazy way to talk about credibility, and then there is the real thing. The lazy way piles on adjectives: visionary, pillar, leader, transformative. The real thing does not need that kind of padding. The real thing has names, dates, places, organizations, and documented action. That is why the Mercy Home record matters. It gives the public something harder than praise. It gives context.</p>
+
+        <p>On January 22, 2019, Mercy Home published a recap of the Rising Stars Challenge at its West Loop campus. The event was not framed as a vanity moment or a personal tribute. It was framed as community work: youth, staff, organized programming, campus energy, institutional support, and shared participation. The Youth Advisory Board and the Mercy Mustangs hosted the second Rising Stars Challenge in the Noha Gymnasium. That detail matters because it establishes the kind of room this was. It was not outside commentary. It was inside the structure.</p>
+
+        <div class="callout">
+          <strong>What the record shows</strong>
+          <p>Not just attendance. Not just affiliation. It shows participation inside a recognized youth leadership environment, contribution to a public event, and a presence strong enough to be named in Mercy Home’s own account.</p>
+        </div>
+
+        <h2>That is where serious credibility starts.</h2>
+
+        <p>People like to speak as if community standing appears later, after business titles, public branding, or online visibility. In truth, the stronger pattern usually runs the other way. The work comes first. The title comes later. A person learns how to organize, contribute, create, and carry themselves inside real institutions before the wider public ever catches up. Mercy Home’s write-up captures that earlier stage with unusual clarity.</p>
+
+        <p>The article describes a full event atmosphere: organized contests, youth versus staff competition, broad attendance from across the agency, and practical support from coworkers and kitchen staff. It also notes outside backing from adidas, which provided items for winners and participants. But buried inside that broader event account is the line that changes this from a generic feel-good recap into a piece of usable public evidence: one of the young men, Tyrone, designed t-shirts for the event.</p>
+
+        <div class="quote">That single detail does more work than a page of self-promotion ever could. It shows trust. It shows initiative. It shows visible contribution. It shows a young man not standing at the edge of the event, but helping shape what the event looked like.</div>
+
+        <p>That distinction is everything. A community pillar is not somebody who merely passes through respected spaces and later claims them. A community pillar is somebody whose fingerprints can still be found on the work. The shirt design note is small enough to be honest and concrete enough to matter. It tells you this was a person participating with ownership, not drifting as background scenery.</p>
+
+        <h2>The Youth Advisory Board matters here too.</h2>
+
+        <p>That phrase should not be glossed over. Youth Advisory Boards exist because institutions need young people who can do more than receive programming. They need young people who can represent, organize, help shape culture, and hold a visible role in the life of the place. So when Mercy Home says the Rising Stars Challenge was hosted by the Youth Advisory Board and the Mercy Mustangs, it anchors the event in a leadership framework. For someone who was part of that board, the article is not just a memory. It is proof of having operated inside a system of responsibility.</p>
+
+        <p>This is why the Mercy Home connection carries weight beyond sentiment. It is not being invoked here as a soft backstory. It is being used the right way: as a public institutional marker that the person now known as Skyes Over London was already building a record in community-facing environments years before many people knew the name.</p>
+
+        <p>And that is the difference between image and stature. Image can be fabricated on demand. Stature accumulates under observation. It shows up in documented youth boards, community events, contributions that helped define public experiences, and organizations willing to publish your name in connection with real work.</p>
+
+        <h2>No overstatement is required.</h2>
+
+        <p>Nothing about this needs to be inflated. The facts are strong enough on their own. Mercy Home hosted the event at its West Loop campus. The Youth Advisory Board helped host it. The event drew participation from youth and staff across the agency. adidas supported the challenge. And Tyrone was specifically named for designing the event shirts. That is already enough to establish something serious: long before founder language, platform language, or brand language, there was already documented contribution inside an institution known for serving young people.</p>
+
+        <p>So the right way to read this record is not as a sentimental anecdote. The right way to read it is as continuity. The public founder standing people see now did not appear from nowhere. There was already a pattern of contribution, cultural presence, and visible effort. Mercy Home’s archive simply caught it on the record.</p>
+
+        <p>That is what credibility looks like when you do not have to decorate it. It has receipts. It has witnesses. It has institutional memory. It has a date. It has a place. And it has enough substance that years later, the story still does what real stories are supposed to do: not beg for belief, but make belief unnecessary.</p>
+
+        <div class="source">
+          Source basis: Mercy Home for Boys &amp; Girls, <a href="https://www.mercyhome.org/blog/home-updates/rising-stars-challenge/" target="_blank" rel="noopener">“Rising Stars Challenge a Slam Dunk”</a>, published January 22, 2019. This editorial is an opinion piece built from the publicly documented event record.
+        </div>
+      </article>
+
+      <aside class="rail">
+        <section class="rail-card">
+          <h3>Public Record Points</h3>
+          <div class="fact-list">
+            <div class="fact">
+              <b>Institution</b>
+              <span>Mercy Home for Boys &amp; Girls, West Loop campus.</span>
+            </div>
+            <div class="fact">
+              <b>Date on Record</b>
+              <span>January 22, 2019.</span>
+            </div>
+            <div class="fact">
+              <b>Leadership Context</b>
+              <span>The Rising Stars Challenge was hosted by the Youth Advisory Board and the Mercy Mustangs.</span>
+            </div>
+            <div class="fact">
+              <b>Named Contribution</b>
+              <span>Mercy Home states that Tyrone designed t-shirts for the event.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="rail-card">
+          <h3>Editorial Position</h3>
+          <p>This is a credibility piece, not a tribute piece. The point is not to ask readers to feel something soft. The point is to show that the public record already places Skyes Over London inside serious community work.</p>
+        </section>
+
+        <section class="rail-card">
+          <h3>Why It Lands</h3>
+          <div class="fact-list">
+            <div class="fact">
+              <b>Named by the institution</b>
+              <span>That carries more weight than self-description.</span>
+            </div>
+            <div class="fact">
+              <b>Contribution was visible</b>
+              <span>Design work attached to a real event is concrete, not abstract.</span>
+            </div>
+            <div class="fact">
+              <b>Leadership environment</b>
+              <span>Youth Advisory Board affiliation places the work inside structure, not loose association.</span>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      <section class="footer-card">
+        <p class="section-kicker">Skye Editorial Surface</p>
+        <h2 class="footer-title">Built to sit beside the Skyes Over London site family cleanly.</h2>
+        <p>This version uses a darker glass layout, oversized headline treatment, pill navigation, signal cards, and a stronger SOLE-style footer so it visually tracks closer to the main Skyes Over London ecosystem surface.</p>
+        <div class="link-grid">
+          <a href="../../index.html">Offer</a>
+          <a href="../proof.html">Proof</a>
+          <a href="../founder.html">Founder</a>
+          <a href="../youth-partners.html">Partner Lanes</a>
+          <a href="../apply.html">Apply</a>
+        </div>
+      </section>
+
+      <section class="footer-card">
+        <h3>Contact</h3>
+        <div class="contact-stack">
+          <p class="contact-line"><strong>Website:</strong> <a href="https://solenterprises.org/" target="_blank" rel="noopener">SOLEnterprises.org</a></p>
+          <p class="contact-line"><strong>Email:</strong> <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a></p>
+          <p class="contact-line"><strong>Email:</strong> <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a></p>
+          <p class="contact-line"><strong>Email:</strong> <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></p>
+          <p class="contact-line"><strong>Cohort Site:</strong> <a href="https://kaixu-0s-founder-cohort-platform.netlify.app/" target="_blank" rel="noopener">kaixu-0s-founder-cohort-platform.netlify.app</a></p>
+          <p class="contact-line"><strong>Mercy Home:</strong> <a href="https://www.mercyhome.org/" target="_blank" rel="noopener">mercyhome.org</a></p>
+        </div>
+      </section>
+    </footer>
+  
+    <section class="section"><div class="content-card panel"><h2>Trust route</h2><p>This editorial now feeds directly into the dedicated trust page, founder page, Mercy Home lane, and application flow so readers can keep moving through the full Skyes Over London credibility stack.</p><div class="button-row"><a class="btn btn-primary" href="../trust.html">Open Trust Page</a><a class="btn btn-secondary" href="../founder.html">Open Founder Page</a><a class="btn btn-secondary" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener">All SkyeSol Case Studies</a><a class="btn btn-secondary" href="../apply.html">Apply / Request a Seat</a></div></div></section>
+  </main>
+</body>
+</html>

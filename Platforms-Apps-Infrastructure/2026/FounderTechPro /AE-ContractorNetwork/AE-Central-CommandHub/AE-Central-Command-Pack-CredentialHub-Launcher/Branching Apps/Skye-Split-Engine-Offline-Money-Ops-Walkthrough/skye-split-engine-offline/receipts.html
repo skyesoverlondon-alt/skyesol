@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipts · Skye Split Engine Ops</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/icon-192.png">
+  <link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="bg-layer"></div>
+    <main class="site">
+      <header class="topbar">
+        <div class="branding">
+          <img src="./assets/media/skydexia-logo.png" alt="Skyes Over London logo">
+          <div class="branding-copy">
+            <h1 data-brand-name>Skye Split Engine Ops</h1>
+            <p data-brand-sub>Skyes Over London · Offline money operations + backup vault</p>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="pill"><span class="dot"></span><span><strong>Lane:</strong> Receipts</span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Currency:</strong> <span data-status-currency>USD</span></span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Sync:</strong> <span data-last-sync>Local only</span></span></div>
+        </div>
+      </header>
+
+      <nav class="navbar">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="engine.html">Split Engine</a>
+        <a class="nav-link" href="ops.html">Money Ops</a>
+        <a class="nav-link" href="receipts.html">Receipts</a>
+        <a class="nav-link" href="contacts.html">Contacts</a>
+        <a class="nav-link" href="vault.html">Backup Vault</a>
+        <a class="nav-link" href="settings.html">Settings</a>
+        <a class="nav-link" href="walkthrough.html">Walkthrough</a>
+        <a class="nav-link" href="help.html">Help</a>
+      </nav>
+
+      <section class="grid-2" style="align-items:start;">
+        <article class="card">
+          <div class="toolbar" style="justify-content:space-between; margin-bottom:14px;">
+            <div>
+              <div class="kicker">Settlement receipt builder</div>
+              <h2 class="page-title" style="font-size:2rem;">Save printable payout proof</h2>
+            </div>
+            <button class="btn-soft" type="button" data-receipt-reset>Clear form</button>
+          </div>
+          <form id="receiptForm" class="form-stack">
+            <div class="form-grid-2">
+              <div class="field"><label for="receiptNumber">Receipt number</label><input id="receiptNumber" name="receiptNumber" type="text"></div>
+              <div class="field"><label for="settlementDate">Settlement date</label><input id="settlementDate" name="settlementDate" type="date"></div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field"><label for="payer">Payer</label><input id="payer" name="payer" type="text" placeholder="Client, partner, platform, or source"></div>
+              <div class="field"><label for="recipient">Recipient</label><input id="recipient" name="recipient" type="text" placeholder="Who received the settlement"></div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field"><label for="relatedDealId">Related deal</label><select id="relatedDealId" name="relatedDealId"></select></div>
+              <div class="field"><label for="relatedSplitId">Related split plan</label><select id="relatedSplitId" name="relatedSplitId"></select></div>
+            </div>
+            <div class="form-grid-2">
+              <div class="field"><label for="amount">Total amount</label><input id="amount" name="amount" type="number" step="0.01" placeholder="0.00"></div>
+              <div class="field"><label for="receiptStatus">Status</label><select id="receiptStatus" name="status"><option value="issued">Issued</option><option value="paid">Paid</option><option value="void">Void</option></select></div>
+            </div>
+            <div class="field"><label for="lineItems">Line items</label><textarea id="lineItems" name="lineItems" placeholder="One per line: Description | Amount"></textarea></div>
+            <div class="field"><label for="memo">Memo</label><textarea id="memo" name="memo" placeholder="Settlement context, reference notes, or statement text."></textarea></div>
+            <div class="actions-row"><button class="btn" type="submit">Save receipt</button><button class="btn-soft" type="button" data-export-receipts>Export receipts CSV</button></div>
+            <div data-receipt-result></div>
+          </form>
+        </article>
+
+        <aside class="panel">
+          <h3>Live receipt preview</h3>
+          <div class="caption"><span data-receipt-count>0 saved receipts</span> · total <span data-receipt-total-summary>$0.00</span></div>
+          <div class="split-summary" style="margin-top:14px; background:rgba(255,255,255,0.04);">
+            <div class="list-item"><div><div class="split-label">Receipt total</div><div class="caption">Calculated from amount or line items</div></div><div data-receipt-total>$0.00</div></div>
+          </div>
+          <div data-receipt-lines class="list" style="margin-top:14px;"></div>
+          <hr class="soft">
+          <div class="field"><label for="receiptCsv">Import receipt CSV</label><input id="receiptCsv" type="file" accept=".csv,text/csv"></div>
+          <div class="actions-row"><button class="btn-soft" type="button" data-import-receipts>Import receipts CSV</button></div>
+        </aside>
+      </section>
+
+      <section class="list-card" style="margin-top:18px;">
+        <div class="toolbar" style="justify-content:space-between; margin-bottom:14px;">
+          <div><h3>Saved receipts</h3><div class="caption">Print, load, export JSON, or remove</div></div>
+          <input id="receiptSearch" class="search-input" type="search" placeholder="Search receipts">
+        </div>
+        <div data-receipt-list class="list"></div>
+      </section>
+
+      <footer class="footer-block">
+        <h3>Contact</h3>
+        <div class="footer-contact">
+          <span>Skyes Over London</span>
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+          <a href="tel:+14804695416">(480) 469-5416</a>
+          <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <script type="module" src="./assets/receipts.js"></script>
+</body>
+</html>

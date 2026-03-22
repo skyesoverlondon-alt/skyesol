@@ -1,0 +1,10 @@
+{
+  "name": "skyeletix-real-dashboards",
+  "private": true,
+  "version": "1.0.0",
+  "type": "commonjs",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0",
+    "pg": "^8.13.1"
+  }
+}

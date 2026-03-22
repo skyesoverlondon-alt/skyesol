@@ -2,7 +2,7 @@ import { wrap } from "./_lib/wrap.js";
 import { buildCors, json, badRequest, getBearer, monthKeyUTC, getInstallId, getClientIp, getUserAgent } from "./_lib/http.js";
 import { q } from "./_lib/db.js";
 import { costCents } from "./_lib/pricing.js";
-import { callOpenAI, callAnthropic, callGemini, resolveProvider, resolveUpstreamTarget } from "./_lib/providers.js";
+import { callOpenAI, callAnthropic, callGemini } from "./_lib/providers.js";
 import { resolveAuth, getMonthRollup, getKeyMonthRollup, customerCapCents, keyCapCents } from "./_lib/authz.js";
 import { enforceRpm } from "./_lib/ratelimit.js";
 import { hmacSha256Hex } from "./_lib/crypto.js";
@@ -11,12 +11,9 @@ import { enforceDevice } from "./_lib/devices.js";
 import { assertAllowed } from "./_lib/allowlist.js";
 import { enforceKaixuMessages } from "./_lib/kaixu.js";
 
-const PUBLIC_PROVIDER_NAME = process.env.KAIXU_PUBLIC_PROVIDER_NAME || "Skyes Over London";
-const PUBLIC_MODEL_NAME = process.env.KAIXU_PUBLIC_MODEL_NAME || "skAIxU Flow6.7";
-
 export default wrap(async (req) => {
   const cors = buildCors(req);
-  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
+  if (req.method === "OPTIONS") return new Response("", { status: 204, headers: cors });
   if (req.method !== "POST") return json(405, { error: "Method not allowed" }, cors);
 
   const token = getBearer(req);
@@ -25,20 +22,14 @@ export default wrap(async (req) => {
   let body;
   try { body = await req.json(); } catch { return badRequest("Invalid JSON", cors); }
 
-  const requested_provider = (body.provider || "").toString().trim();
-  const requested_model = (body.model || "").toString().trim();
-  const base_provider = resolveProvider(requested_provider);
-  const target = resolveUpstreamTarget(base_provider, requested_model);
-  const provider = target.provider;
-  const model = target.model;
-  const public_provider = PUBLIC_PROVIDER_NAME;
-  const public_model = PUBLIC_MODEL_NAME;
+  const provider = (body.provider || "").toString().trim().toLowerCase();
+  const model = (body.model || "").toString().trim();
   const messages_in = body.messages;
   const max_tokens = Number.isFinite(body.max_tokens) ? parseInt(body.max_tokens, 10) : 1024;
   const temperature = Number.isFinite(body.temperature) ? body.temperature : 1;
 
-  if (!requested_provider) return badRequest("Missing provider", cors);
-  if (!requested_model) return badRequest("Missing model", cors);
+  if (!provider) return badRequest("Missing provider (openai|anthropic|gemini)", cors);
+  if (!model) return badRequest("Missing model", cors);
   if (!Array.isArray(messages_in) || messages_in.length === 0) return badRequest("Missing messages[]", cors);
 
   const messages = enforceKaixuMessages(messages_in);
@@ -110,13 +101,9 @@ export default wrap(async (req) => {
     if (provider === "openai") result = await callOpenAI({ model, messages, max_tokens, temperature });
     else if (provider === "anthropic") result = await callAnthropic({ model, messages, max_tokens, temperature });
     else if (provider === "gemini") result = await callGemini({ model, messages, max_tokens, temperature });
-    else return badRequest("Unknown provider", cors);
+    else return badRequest("Unknown provider. Use openai|anthropic|gemini.", cors);
   } catch (e) {
-    return json(500, {
-      error: "Provider error",
-      provider: public_provider,
-      model: public_model
-    }, cors);
+    return json(500, { error: e?.message || "Provider error", provider }, cors);
   }
 
   const input_tokens = result.input_tokens || 0;
@@ -180,8 +167,8 @@ export default wrap(async (req) => {
   });
 
   return json(200, {
-    provider: public_provider,
-    model: public_model,
+    provider,
+    model,
     output_text: result.output_text || "",
     usage: { input_tokens, output_tokens, cost_cents },
     month: {

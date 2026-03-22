@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0413" />
+  <title>Skye-OfferForge — Offers</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body data-page="offers">
+  <div class="bg-stage">
+    <div class="bg-image-layer"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-dim"></div>
+  </div>
+  <div class="app-shell">
+    <aside class="panel sidebar">
+      <div class="brand-block">
+        <div class="logo-row">
+          <img class="logo" src="assets/media/skydexia-logo.png" alt="SkyDexia logo" />
+          <div>
+            <div class="brand-title">Skye-OfferForge</div>
+            <div class="brand-sub">SkyDexia offline workspace for contacts, offers, docs, and protected backups.</div>
+          </div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a class="nav-link " href="../../../../index.html#launcher">
+            <span class="left"><span class="ico">🚀</span><span><div class="label">Credential Hub Launcher</div><div class="sub">Back to package root</div></span></span>
+            <span class="page-pill">Launcher</span>
+          </a>
+        <a class="nav-link " href="index.html">
+            <span class="left"><span class="ico">✨</span><span><div class="label">Overview</div><div class="sub">Command room</div></span></span>
+            <span class="page-pill">Overview</span>
+          </a>
+<a class="nav-link " href="tutorial.html">
+            <span class="left"><span class="ico">🧭</span><span><div class="label">Walkthrough</div><div class="sub">How to use the app</div></span></span>
+            <span class="page-pill">Tutorial</span>
+          </a>
+<a class="nav-link " href="contacts.html">
+            <span class="left"><span class="ico">👥</span><span><div class="label">Contacts</div><div class="sub">Client vault</div></span></span>
+            <span class="page-pill">Contacts</span>
+          </a>
+<a class="nav-link active" href="offers.html">
+            <span class="left"><span class="ico">🧾</span><span><div class="label">Offers</div><div class="sub">Quote studio</div></span></span>
+            <span class="page-pill">Offers</span>
+          </a>
+<a class="nav-link " href="templates.html">
+            <span class="left"><span class="ico">🧱</span><span><div class="label">Templates</div><div class="sub">Reusable packages</div></span></span>
+            <span class="page-pill">Templates</span>
+          </a>
+<a class="nav-link " href="tasks.html">
+            <span class="left"><span class="ico">📌</span><span><div class="label">Tasks</div><div class="sub">Follow-up desk</div></span></span>
+            <span class="page-pill">Tasks</span>
+          </a>
+<a class="nav-link " href="docs.html">
+            <span class="left"><span class="ico">📄</span><span><div class="label">Docs</div><div class="sub">Output + print</div></span></span>
+            <span class="page-pill">Docs</span>
+          </a>
+<a class="nav-link " href="backup.html">
+            <span class="left"><span class="ico">🛟</span><span><div class="label">Backup</div><div class="sub">Restore center</div></span></span>
+            <span class="page-pill">Backup</span>
+          </a>
+<a class="nav-link " href="settings.html">
+            <span class="left"><span class="ico">🎛️</span><span><div class="label">Settings</div><div class="sub">Background + defaults</div></span></span>
+            <span class="page-pill">Settings</span>
+          </a>
+<a class="nav-link " href="about.html">
+            <span class="left"><span class="ico">👑</span><span><div class="label">About</div><div class="sub">Founder + app notes</div></span></span>
+            <span class="page-pill">About</span>
+          </a>
+      </nav>
+      <div class="side-stats">
+        <div class="mini-card"><div class="k">Contacts</div><div class="v" id="statContacts">0</div></div>
+        <div class="mini-card"><div class="k">Offers</div><div class="v" id="statOffers">0</div></div>
+        <div class="mini-card"><div class="k">Pipeline</div><div class="v" id="statValue">$0</div></div>
+        <div class="mini-card"><div class="k">Open tasks</div><div class="v" id="statTasks">0</div></div>
+      </div>
+      <div class="founder-strip">
+        <img src="assets/media/founder.png" alt="Founder image" />
+        <div class="founder-note">Founder-forward build with the SkyDexia logo and a local-first shell that keeps the visual layer separate from the app UI.</div>
+      </div>
+      <div class="sidebar-footer">
+        <strong>Contact</strong><br/>
+        Skyes Over London LC<br/>
+        SkyesOverLondonLC@SOLEnterprises.org<br/>
+        (480) 469-5416<br/>
+        SOLEnterprises.org
+      </div>
+    </aside>
+
+    <main class="panel main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">SkyDexia Offline Suite</div>
+          <h1 class="page-title" id="pageTitle"></h1>
+          <p class="page-description" id="pageDescription"></p>
+        </div>
+        <div class="top-actions">
+          <a class="btn primary" href="offers.html" id="quickOfferBtn">New offer</a>
+          <a class="btn" href="tutorial.html" id="quickTutorialBtn">Walkthrough</a>
+          <a class="btn" href="backup.html" id="quickBackupBtn">Backup center</a>
+          <button class="btn gold hidden" id="installBtn">Install app</button>
+        </div>
+      </header>
+      <section class="content" id="pageContent"></section>
+      <div class="footer-note">Last saved: <span id="lastSavedStamp">—</span> · Contact block kept in-app: SkyesOverLondonLC@SOLEnterprises.org · (480) 469-5416 · SOLEnterprises.org</div>
+    </main>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -162,8 +162,6 @@
      ────────────────────────────────────────────────────────── */
   global.KAIXU_GATE_BASE  = GATE_BASE;
   global.KAIXU_GATE_MODEL = GATE_MODEL;
-  global.KAIXU_CHAT_ENDPOINT = `${GATE_BASE}/v1/generate`;
-  global.KAIXU_FALLBACK_CHAT = `${GATE_BASE}/v1/generate`;
   global.postToGateway    = postToGateway;    // may be shadowed by app-local — use kaixuGate.generate instead
   global.kaixuStreamChat  = kaixuStreamChat;  // may be shadowed by app-local — use kaixuGate.streamChat instead
   global.kaixuGate = {

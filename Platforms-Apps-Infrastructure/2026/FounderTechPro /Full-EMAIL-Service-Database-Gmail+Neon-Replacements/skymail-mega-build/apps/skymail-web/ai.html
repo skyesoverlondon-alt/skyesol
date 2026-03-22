@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Assistant — SkyMail Host</title>
+
+  <style>
+:root{
+  --bg0:#fffaf0;
+  --bg1:#fff2cc;
+  --glass: rgba(255,255,255,.78);
+  --stroke: rgba(120,90,20,.20);
+  --text: rgba(18,18,18,.94);
+  --muted: rgba(18,18,18,.68);
+  --gold: #d4af37;
+  --gold2:#b8860b;
+  --danger: #b00020;
+  --ok: #0a7a3d;
+  --shadow: 0 18px 55px rgba(0,0,0,.12);
+  --radius: 18px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: var(--sans);
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(212,175,55,.22), transparent 60%),
+    radial-gradient(900px 500px at 90% 30%, rgba(184,134,11,.16), transparent 55%),
+    radial-gradient(1000px 600px at 50% 95%, rgba(212,175,55,.18), transparent 60%),
+    linear-gradient(160deg, var(--bg0), var(--bg1));
+  overflow-x:hidden;
+}
+
+
+a{ color: var(--gold2); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+.wrap{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,.65);
+  border-bottom: 1px solid rgba(120,90,20,.12);
+}
+
+.nav{
+  max-width:1150px;
+  margin:0 auto;
+  padding:14px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:220px;
+}
+.brand img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  filter: drop-shadow(0 0 16px rgba(212,175,55,.28)) drop-shadow(0 0 26px rgba(184,134,11,.18));
+  animation: floatPulse 3.4s ease-in-out infinite;
+}
+@keyframes floatPulse{
+  0%{ transform: translateY(0); filter: drop-shadow(0 0 12px rgba(212,175,55,.22)) drop-shadow(0 0 18px rgba(184,134,11,.16)); }
+  50%{ transform: translateY(-4px); filter: drop-shadow(0 0 18px rgba(212,175,55,.36)) drop-shadow(0 0 30px rgba(184,134,11,.22)); }
+  100%{ transform: translateY(0); filter: drop-shadow(0 0 12px rgba(212,175,55,.22)) drop-shadow(0 0 18px rgba(184,134,11,.16)); }
+}
+
+  50%{ transform: translateY(-4px); filter: drop-shadow(0 0 16px rgba(247,201,75,.30)) drop-shadow(0 0 26px rgba(123,44,255,.35)); }
+  100%{ transform: translateY(0); filter: drop-shadow(0 0 10px rgba(247,201,75,.18)) drop-shadow(0 0 16px rgba(123,44,255,.22)); }
+}
+.brand .name{
+  display:flex; flex-direction:column; line-height:1.1;
+}
+.brand .name b{ letter-spacing:.2px; }
+.brand .name span{ font-size:12px; color:var(--muted); }
+
+.navlinks{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.pill{
+  padding:9px 12px;
+  border:1px solid rgba(120,90,20,.22);
+  background: rgba(255,255,255,.72);
+  border-radius: 999px;
+  color: var(--text);
+  font-size:13px;
+}
+.pill:hover{ background: rgba(212,175,55,.14); }
+
+.container{
+  width:100%;
+  max-width:1150px;
+  margin:0 auto;
+  padding:26px 16px 30px;
+  flex:1;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:18px;
+  align-items:stretch;
+}
+@media (max-width: 940px){
+  .hero{ grid-template-columns:1fr; }
+}
+
+.card{
+  background: var(--glass);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding:18px;
+}
+
+.h1{
+  font-size: 38px;
+  line-height:1.05;
+  margin:0 0 10px;
+  letter-spacing: .2px;
+}
+.sub{
+  margin:0 0 18px;
+  color: var(--muted);
+  font-size:15px;
+  line-height:1.6;
+}
+
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width: 720px){ .grid2{ grid-template-columns:1fr; } }
+
+.kpi{
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.70);
+  padding:12px;
+}
+.kpi b{ color: var(--gold); }
+.kpi div{ font-size:12px; color:var(--muted); margin-top:6px; line-height:1.45; }
+
+.btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+.btn{
+  cursor:pointer;
+  padding:11px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(120,90,20,.24);
+  background: rgba(255,255,255,.78);
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing:.2px;
+}
+.btn:hover{ background: rgba(212,175,55,.12); }
+.btn.gold{
+  border-color: rgba(212,175,55,.55);
+  background: linear-gradient(135deg, rgba(212,175,55,.90), rgba(184,134,11,.78));
+  color: rgba(18,18,18,.94);
+}
+.btn.danger{
+  border-color: rgba(176,0,32,.40);
+  background: rgba(176,0,32,.08);
+}
+.btn.ok{
+  border-color: rgba(10,122,61,.40);
+  background: rgba(10,122,61,.08);
+}
+
+.hr{ height:1px; background: rgba(120,90,20,.12); margin:14px 0; }
+
+label{ font-size:12px; color: var(--muted); display:block; margin:10px 0 6px; }
+input, textarea, select{
+  width:100%;
+  padding:12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.76);
+  color: var(--text);
+  outline:none;
+  font-size:14px;
+}
+textarea{ min-height: 120px; resize: vertical; }
+small{ color: var(--muted); }
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 10px;
+  border-radius: 999px;
+  border:1px solid rgba(120,90,20,.22);
+  background: rgba(255,255,255,.70);
+  font-size:12px;
+  color: var(--muted);
+}
+
+.table{
+  width:100%;
+  border-collapse: collapse;
+  overflow:hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+}
+.table th, .table td{
+  padding:12px 12px;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  text-align:left;
+  font-size:13px;
+}
+.table th{ color: var(--muted); font-weight:600; background: rgba(255,255,255,.72); }
+.table tr:hover td{ background: rgba(212,175,55,.10); }
+.table tr:last-child td{ border-bottom:none; }
+
+.footer{
+  border-top: 1px solid rgba(120,90,20,.12);
+  background: rgba(255,255,255,.70);
+}
+.footer .container{ padding:18px 16px; }
+.footer p{ margin:0; color: var(--muted); font-size:12px; line-height:1.6; }
+
+.split{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 940px){ .split{ grid-template-columns:1fr; } }
+
+.mono{ font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+.notice{
+  border:1px solid rgba(120,90,20,.18);
+  background: rgba(255,255,255,.72);
+  padding:12px;
+  border-radius: 14px;
+  color: var(--muted);
+  line-height:1.55;
+  font-size:13px;
+}
+
+.righthero{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.heroimg{
+  width:100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  overflow:hidden;
+  background: rgba(255,255,255,.70);
+}
+.heroimg img{
+  width:100%;
+  display:block;
+  object-fit:cover;
+}
+.tagline{
+  font-size:13px;
+  line-height:1.55;
+  color: var(--muted);
+}
+.linksbox a{ display:inline-block; margin:6px 10px 0 0; }
+
+.pane{
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.72);
+  padding:12px;
+}
+.pane h3{ margin:0 0 8px; font-size:14px; color: var(--gold2); }
+.pane .row{ display:flex; gap:10px; flex-wrap:wrap; }
+
+.chatlog{
+  max-height: 360px;
+  overflow:auto;
+  padding:10px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.72);
+}
+.msg{
+  padding:10px 10px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.82);
+  margin-bottom:10px;
+}
+.msg .role{ font-size:11px; color: var(--muted); }
+.msg .content{ white-space:pre-wrap; font-size:13px; line-height:1.55; margin-top:4px; }
+  </style>
+<script src="/assets/app.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="nav">
+      <div class="brand">
+        <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC Logo" />
+        <div class="name">
+          <b>SkyMail Host</b>
+          <span>Encrypted business message center • Netlify + SkyeDB</span>
+        </div>
+      </div>
+      <div class="navlinks">
+        <a class="pill" href="/">Home</a>
+        <a class="pill" href="/signup.html">Sign up</a>
+        <a class="pill" href="/login.html">Login</a>
+        <a class="pill" href="/compose.html">Compose</a><a class="pill" href="/onboarding.html">Onboarding</a><a class="pill" href="/founder.html">Founder</a>
+        <a class="pill" href="/ai.html">AI</a>
+        <a class="pill" href="/dashboard.html">Inbox</a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+<div class="card">
+  <h1 class="h1" style="font-size:30px;">AI Assistant (kAIxuGateway13)</h1>
+  <p class="sub">
+    This is a general-purpose assistant panel for message triage and reply drafting.
+    All AI traffic routes through kAIxuGateway13 (no provider SDKs, no direct provider endpoints).
+  </p>
+
+  <div class="split">
+    <div>
+      <label>Kaixu Key</label>
+      <input id="kaixuKey" placeholder="Bearer key stored locally" />
+      <small>Stored in your browser only.</small>
+
+      <div class="grid2" style="margin-top:10px;">
+        <div>
+          <label>Provider</label>
+          <select id="provider">
+            <option value="openai">openai</option>
+            <option value="anthropic">anthropic</option>
+            <option value="gemini">gemini</option>
+          </select>
+        </div>
+        <div>
+          <label>Model (editable)</label>
+          <input id="model" value="gpt-4o-mini" />
+        </div>
+      </div>
+
+      <label>System prompt</label>
+      <textarea id="systemPrompt">You are a precise assistant. Be concise, accurate, and execution-first.</textarea>
+
+      <label>Input</label>
+      <textarea id="userInput" placeholder="Paste a message, request a draft reply, or ask for an action plan..."></textarea>
+
+      <div class="btnrow">
+        <button class="btn gold" id="btnStream">Stream</button>
+        <button class="btn" id="btnNonStream">Non-stream</button>
+        <button class="btn" id="btnStop">Stop</button>
+      </div>
+
+      <div class="hr"></div>
+      <div class="badge" id="budget">Budget: —</div>
+      <div id="status" class="mono" style="margin-top:10px;">Ready.</div>
+    </div>
+
+    <div>
+      <div class="pane">
+        <h3>Conversation</h3>
+        <div class="chatlog" id="chatlog"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/kaixuGateway.js"></script>
+<script>
+(() => {
+  const chatlog = qs("#chatlog");
+  const status = qs("#status");
+  const budget = qs("#budget");
+
+  let history = [];
+  let streamingAbort = null;
+
+  function add(role, content){
+    history.push({ role, content });
+    const div = document.createElement("div");
+    div.className = "msg";
+    div.innerHTML = `<div class="role">${safe(role)}</div><div class="content">${safe(content)}</div>`;
+    chatlog.appendChild(div);
+    chatlog.scrollTop = chatlog.scrollHeight;
+    return div;
+  }
+
+  function setBudgetFromMonth(month){
+    if(!month){ budget.textContent = "Budget: —"; return; }
+    const rem = remainingBudget(month);
+    budget.textContent = `Budget: ${month.spent_cents} / ${month.cap_cents} cents • Remaining: ${rem} cents`;
+  }
+
+  qs("#kaixuKey").value = kaixuKeyGet();
+  qs("#kaixuKey").addEventListener("input", (e) => kaixuKeySet(e.target.value || ""));
+
+  qs("#btnStop").addEventListener("click", () => {
+    if(streamingAbort){ streamingAbort.abort(); streamingAbort = null; }
+  });
+
+  async function run(streaming){
+    const provider = qs("#provider").value;
+    const model = (qs("#model").value || "").trim();
+    const systemPrompt = qs("#systemPrompt").value || "";
+    const input = qs("#userInput").value || "";
+    const key = kaixuKeyGet();
+
+    if(!key){
+      setStatus(status, "Kaixu Key required.", "danger");
+      add("error", "401: Enter your Kaixu Key.");
+      return;
+    }
+    if(!input.trim()){
+      setStatus(status, "Input required.", "danger");
+      return;
+    }
+
+    const messages = [
+      { role:"system", content: systemPrompt },
+      ...history.filter(m => m.role !== "system"),
+      { role:"user", content: input }
+    ];
+
+    add("user", input);
+    qs("#userInput").value = "";
+
+    const outDiv = add("assistant", "");
+    let accum = "";
+
+    try{
+      setStatus(status, streaming ? "Streaming…" : "Requesting…", "");
+
+      if(streaming){
+        streamingAbort = new AbortController();
+        const originalFetch = window.fetch;
+        window.fetch = (input, init={}) => {
+          if(typeof input === "string" && input.includes("/gateway-stream")){
+            init.signal = streamingAbort.signal;
+          }
+          return originalFetch(input, init);
+        };
+
+        await kaixuStreamChat({
+          provider, model, messages,
+          max_tokens: 900,
+          temperature: 0.35,
+          kaixuKey: key,
+          onMeta: (m) => { if(m && m.month) setBudgetFromMonth(m.month); },
+          onDelta: (d) => {
+            if(d && typeof d.text === "string"){
+              accum += d.text;
+              outDiv.querySelector(".content").textContent = accum;
+            }
+          },
+          onDone: (d) => {
+            if(d && d.month) setBudgetFromMonth(d.month);
+            streamingAbort = null;
+            history.push({ role:"assistant", content: accum });
+            setStatus(status, "Done.", "ok");
+          },
+          onError: (e) => {
+            streamingAbort = null;
+            add("error", (e && e.error) ? e.error : "Stream error");
+            setStatus(status, "Stream error.", "danger");
+          }
+        });
+
+        window.fetch = originalFetch;
+
+      }else{
+        const out = await kaixuChat({
+          provider, model, messages,
+          max_tokens: 900,
+          temperature: 0.35,
+          kaixuKey: key
+        });
+        outDiv.querySelector(".content").textContent = out.output_text || "";
+        history.push({ role:"assistant", content: out.output_text || "" });
+        if(out.month) setBudgetFromMonth(out.month);
+        setStatus(status, "Done.", "ok");
+      }
+
+    }catch(err){
+      if(err.status === 401) { add("error", "401: Enter your Kaixu Key."); setStatus(status, "401.", "danger"); }
+      else if(err.status === 402) { add("error", "Monthly cap reached. Further calls blocked until upgraded/top-up."); setStatus(status, "402.", "danger"); }
+      else if(err.status === 429) { add("error", "Rate limited. Retry after a short pause."); setStatus(status, "429.", "danger"); }
+      else { add("error", err.message || "Gateway error."); setStatus(status, "Error.", "danger"); }
+    }
+  }
+
+  qs("#btnStream").addEventListener("click", () => run(true));
+  qs("#btnNonStream").addEventListener("click", () => run(false));
+})();
+</script>
+
+  </div>
+  <div class="footer">
+    <div class="container">
+      <p>
+        Skyes Over London LC • Phoenix, AZ • For contracts, partnerships, operations alignment, and high-integrity execution systems:
+        <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> •
+        <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> •
+        <a href="mailto:B2B@solenterprises.org">B2B@solenterprises.org</a> •
+        <a href="tel:+14804695416">(480) 469-5416</a>
+      </p>
+      <p class="linksbox">
+        <a href="https://solenterprises.org/pages/contact-hub" target="_blank" rel="noopener">Contact Hub</a>
+        <a href="https://solenterprises.org/pages/leadership-hub" target="_blank" rel="noopener">Leadership Hub</a>
+        <a href="https://kaixugateway13ee.netlify.app/" target="_blank" rel="noopener">kAIxuGateway13EE</a>
+        <a href="https://solenterprisesnexusconnect.netlify.app/" target="_blank" rel="noopener">NexusConnect</a>
+        <a href="https://familycommand.netlify.app/" target="_blank" rel="noopener">FamilyCommand</a>
+        <a href="https://skyecode-nexus.netlify.app/" target="_blank" rel="noopener">SkyeCode Nexus</a>
+        <a href="https://skyesoverlondon.netlify.app/" target="_blank" rel="noopener">SkyesOverLondon</a>
+        <a href="https://solenterprises.org/pages/skyeweb" target="_blank" rel="noopener">SkyeWeb</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

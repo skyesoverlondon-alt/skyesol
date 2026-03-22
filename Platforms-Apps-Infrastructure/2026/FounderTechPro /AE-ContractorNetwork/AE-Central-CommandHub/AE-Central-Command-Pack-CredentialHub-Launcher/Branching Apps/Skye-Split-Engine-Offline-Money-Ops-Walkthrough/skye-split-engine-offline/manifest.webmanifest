@@ -1,0 +1,37 @@
+{
+  "name": "Skye Split Engine Ops",
+  "short_name": "SplitOps",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07070d",
+  "theme_color": "#120c1f",
+  "icons": [
+    {
+      "src": "./assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Walkthrough",
+      "short_name": "Tutorial",
+      "url": "./walkthrough.html"
+    },
+    {
+      "name": "Money Ops",
+      "short_name": "Money Ops",
+      "url": "./ops.html"
+    },
+    {
+      "name": "Backup Vault",
+      "short_name": "Vault",
+      "url": "./vault.html"
+    }
+  ]
+}

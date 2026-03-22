@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/app.js"></script>
+  <script defer src="/assets/mail-ui.js"></script>
+  <link rel="stylesheet" href="/assets/mail-ui.css" />
+  <title>Compose — SkyMail Host</title>
+</head>
+<body data-page-id="dashboard" data-page-name="Compose" data-page-hint="Send, draft, alias, and attachment lane">
+<div class="wrap">
+  <div id="pageTopbar"></div>
+  <div class="layout">
+    <aside class="rail" id="leftRail"></aside>
+    <main class="main">
+
+      <section class="hero">
+        <section class="card">
+          <div class="badge" id="mailboxBadge">Checking mailbox connection…</div>
+          <h1 class="h1">Compose</h1>
+          <p class="sub">Send live hosted mail, save real drafts, choose your mailbox identity, and attach files while staying inside the SkyMail command center.</p>
+          <div class="fieldgrid">
+            <div><label for="from_alias">From alias</label><select id="from_alias"></select></div>
+            <div><label for="subject">Subject</label><input id="subject" type="text" placeholder="Subject line" /></div>
+            <div><label for="to">To</label><input id="to" type="text" placeholder="recipient@example.com" /></div>
+            <div><label for="cc">CC</label><input id="cc" type="text" placeholder="optional cc@example.com" /></div>
+            <div class="fieldgrid" style="grid-column:1 / -1"><div><label for="bcc">BCC</label><input id="bcc" type="text" placeholder="optional bcc@example.com" /></div></div>
+          </div>
+          <div class="fieldgrid">
+            <div><label for="text">Plain text body</label><textarea id="text" placeholder="Write your email here."></textarea></div>
+            <div><label for="html">HTML body</label><textarea id="html" placeholder="Optional HTML body for richer formatting."></textarea></div>
+          </div>
+          <div class="hr"></div>
+          <div class="fieldgrid">
+            <div>
+              <label for="attachInput">Attachments</label>
+              <input id="attachInput" type="file" multiple />
+            </div>
+            <div>
+              <label>Queued files</label>
+              <div id="attachmentList" class="attachment-stack"><div class="mini">No attachments queued.</div></div>
+            </div>
+          </div>
+          <input id="draft_id" type="hidden" />
+          <input id="thread_id" type="hidden" />
+          <input id="reply_message_id" type="hidden" />
+          <div class="btnrow"><button class="btn gold" id="sendBtn" type="button">Send Email</button><button class="btn" id="saveDraftBtn" type="button">Save Draft</button><button class="btn ok" id="signatureBtn" type="button">Insert Signature</button></div>
+          <div class="mini" id="statusText" style="margin-top:12px">Waiting for compose state…</div>
+        </section>
+        <aside class="card">
+          <div class="kicker">Quick Contacts</div>
+          <div class="notice">Tap a saved contact or recent correspondent to add them to the recipient line.</div>
+          <div class="btnrow" id="contactsQuick"></div>
+        </aside>
+      </section>
+
+    </main>
+  </div>
+  <div id="appFooter"></div>
+</div>
+<script defer src="/assets/compose-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/app.js"></script>
+  <script defer src="/assets/mail-ui.js"></script>
+  <link rel="stylesheet" href="/assets/mail-ui.css" />
+  <title>Message — SkyMail Host</title>
+</head>
+<body data-page-id="dashboard" data-page-name="Message" data-page-hint="Single message surface">
+<div class="wrap">
+  <div id="pageTopbar"></div>
+  <div class="layout">
+    <aside class="rail" id="leftRail"></aside>
+    <main class="main">
+
+      <section class="card message-card">
+        <div class="message-header">
+          <div>
+            <div class="badge">Message review</div>
+            <h1 class="h1" id="pageTitle">Loading message…</h1>
+            <div class="mail-from" id="metaFrom"></div>
+            <div class="mail-from" id="metaTo"></div>
+            <div class="mail-from" id="metaDate"></div>
+          </div>
+          <div class="btnrow" style="margin-top:0"><a class="btn gold" id="replyBtn" href="#">Reply</a><a class="btn" id="threadBtn" href="#">Open Thread</a></div>
+        </div>
+        <div class="mini" id="statusText">Waiting for message load…</div>
+        <div id="messageContent"><div class="empty">Loading message…</div></div>
+      </section>
+
+    </main>
+  </div>
+  <div id="appFooter"></div>
+</div>
+<script defer src="/assets/message-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+
+<div class="page-shell page-wrap">
+  <div class="hero glass" data-tour="dashboard-hero">
+    <div>
+      <div class="status-pill">Credential Vault • modular pages • injected when needed</div>
+      <h1>Credential Vault stays its own s0l26-0s lane, with offline utility and a cleaner royal-blue-and-gold surface.</h1>
+      <p>The shell stays separate from the backdrop, the feature areas stay split into their own pages, and the paid value comes from useful workflow features instead of enterprise fluff. That means contacts, credentials, notes, and projects feel organized instead of piled into one long screen.</p>
+      <div class="cta-row" data-tour="dashboard-actions">
+        <button class="primary-btn" onclick="app.openEntityModal('contact')">Add Contact</button>
+        <button class="soft-btn" onclick="app.openEntityModal('credential')">Add Credential</button>
+        <button class="soft-btn" onclick="app.goTo('settings')">Tune Background</button>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="card glass founder-spotlight">
+        <div class="founder-spotlight-art">
+          <img src="./assets/founder.webp" alt="Founder">
+        </div>
+        <div class="founder-spotlight-copy">
+          <div class="eyebrow">SkyDexia Identity</div>
+          <h2>Credential Vault, styled like it belongs.</h2>
+          <p>One crest stays in the background. The other visual assets live up front in a cleaner, more intentional layout.</p>
+          <div class="crest-ribbon">
+            <img src="./assets/skydexia-solo.webp" alt="SkyDexia crest">
+          </div>
+        </div>
+      </div>
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Quick Value</div><h2>What people are paying for</h2></div></div>
+        <div class="metric-pills" style="margin-top:14px">
+          <span class="metric">Offline-first</span>
+          <span class="metric">Glass UI</span>
+          <span class="metric">Contacts import</span>
+          <span class="metric">Timeline per contact</span>
+          <span class="metric">Custom backgrounds</span>
+          <span class="metric">Local backup</span>
+          <span class="metric">CSV export</span>
+          <span class="metric">Optional lock</span>
+        </div>
+      </div>
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">At a glance</div><h2>Today’s surface</h2></div></div>
+        <div class="quick-list" id="today-surface" style="margin-top:14px"></div>
+      </div>
+    </div>
+  </div>
+  <div class="stats-grid" id="stats-grid"></div>
+  <div class="grid-2">
+    <div class="card glass">
+      <div class="section-head"><div><div class="eyebrow">Recent linked activity</div><h2>Latest items</h2></div><button class="ghost-btn" onclick="app.refresh()">Refresh</button></div>
+      <div id="recent-items" class="stack" style="margin-top:14px"></div>
+    </div>
+    <div class="stack">
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Favorite contacts</div><h2>Pinned people</h2></div><button class="ghost-btn" onclick="app.goTo('contacts')">Open hub</button></div>
+        <div id="favorite-contacts" class="stack" style="margin-top:14px"></div>
+      </div>
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Important secrets</div><h2>Pinned credentials</h2></div><button class="ghost-btn" onclick="app.goTo('vault')">Open vault</button></div>
+        <div id="favorite-credentials" class="stack" style="margin-top:14px"></div>
+      </div>
+    </div>
+  </div>
+</div>

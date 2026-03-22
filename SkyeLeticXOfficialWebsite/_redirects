@@ -1,0 +1,47 @@
+# Clean URLs (optional niceness)
+
+/home                 /home.html                    301
+/app                  /home.html                    301
+
+/about                 /about.html                    301
+/founder               /about-founder.html            301
+/about-founder         /about-founder.html            301
+/how-it-works          /how-it-works.html             301
+/championships         /championships.html            301
+/players               /players.html                  301
+/owners                /owners-intake.html            301
+/editorial             /skyeletes-editorial.html      301
+/arizona-hq            /arizona-hq.html               301
+
+# Blog clean URLs
+/blog                  /skyeletes-editorial.html      301
+/blog/team-owner-playbook        /blog-team-owner-playbook.html        301
+/blog/first-season               /blog-first-season.html               301
+/blog/why-under-6ft              /blog-why-under-6ft.html              301
+/blog/media-experience           /blog-media-experience.html           301
+/blog/height-verification        /blog-height-verification.html        301
+/blog/building-team-chemistry    /blog-building-team-chemistry.html    301
+/blog/championship-payouts       /blog-championship-payouts.html       301
+/blog/skills-that-win            /blog-skills-that-win.html            301
+
+/sitemap                /sitemap.html                 301
+
+# Coach Smith dossier
+/coach-smith            /coach-smith/index.html       301
+/coach-smith-vp         /coach-smith/index.html       301
+/coach-smith-dossier    /coach-smith/index.html       301
+
+
+# Dashboard clean URLs
+/dashboard               /owner-dashboard.html            301
+/command                 /owner-dashboard.html            301
+/dashboard/league-office /league-office-dashboard.html   301
+/dashboard/vp-ops        /vp-operations-dashboard.html   301
+/dashboard/cfo           /cfo-dashboard.html             301
+/dashboard/team-owner    /team-owner-dashboard.html      301
+/dashboard/player        /player-portal-dashboard.html   301
+/dashboard/draft         /draft-war-room.html            301
+
+# Working intake pages
+/player-intake           /player-combine-intake.html     301
+/expansion-interest      /expansion-interest.html        301

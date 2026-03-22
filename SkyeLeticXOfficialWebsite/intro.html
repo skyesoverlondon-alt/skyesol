@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyeLeticX Animated Intro</title>
+    <meta name="description" content="SkyeLeticX — premium under-6'0\" basketball league. Owners, players, supporters." />
+    <meta name="theme-color" content="#2b0b4e" />
+    <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+    <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #050505;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* 3D Perspective containers */
+        .perspective-container {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+
+        /* --- NEON BASKETBALL AESTHETICS --- */
+        .neon-gold-stroke {
+            stroke: #FFD700;
+            filter: drop-shadow(0 0 10px #FFD700) drop-shadow(0 0 25px #FF8C00);
+        }
+
+        .neon-ball-glow {
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.8), inset 0 0 20px rgba(255, 140, 0, 0.8);
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, rgba(255, 140, 0, 0.2) 100%);
+        }
+
+        /* Shine effect that sweeps across the logo */
+        .shine-container {
+            mask-image: url('https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png');
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            -webkit-mask-image: url('https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png');
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+        }
+
+        .shine-element {
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.8) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg) translateX(-150%);
+        }
+
+        /* Subtle drop shadow for depth */
+        .logo-shadow {
+            filter: drop-shadow(0 20px 30px rgba(0, 162, 255, 0.4));
+        }
+    </style>
+  <script defer src="assets/global-nav.js"></script>
+</head>
+<body class="w-full h-screen text-white flex items-center justify-center relative bg-[#050505]" data-intro="1">
+
+    <!-- PHASE 0: Sponsor Intro -->
+    <div id="sponsor-intro" class="absolute inset-0 z-[60] flex flex-col items-center justify-center bg-[#050505] opacity-0">
+        <p id="sponsor-text-top" class="text-sm md:text-base tracking-[0.3em] text-gray-400 font-medium uppercase mb-6 opacity-0">Sponsored by</p>
+        <img id="sponsor-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London Logo" class="w-48 md:w-64 lg:w-80 opacity-0 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+        <h2 id="sponsor-text-bottom" class="mt-6 text-xl md:text-3xl font-light tracking-[0.2em] text-white opacity-0">Skyes Over London</h2>
+    </div>
+
+    <!-- PHASE 1: Neon Gold Basketball Intro -->
+    <div id="bball-intro" class="absolute inset-0 z-50 flex items-center justify-center overflow-hidden perspective-container">
+        
+        <!-- 3D Court Floor -->
+        <div id="court-floor" class="absolute w-[120vw] max-w-[1200px] h-[80vh] bottom-[-20%] opacity-0" style="transform: rotateX(70deg) translateZ(-100px);">
+            <svg viewBox="0 0 1000 800" class="w-full h-full neon-gold-stroke">
+                <!-- Baseline -->
+                <path d="M 0 780 L 1000 780" fill="none" stroke-width="8" stroke-linecap="round"/>
+                <!-- Paint/Key -->
+                <path d="M 350 780 L 350 300 L 650 300 L 650 780" fill="none" stroke-width="6" stroke-linejoin="round"/>
+                <!-- Free throw circle -->
+                <circle cx="500" cy="300" r="120" fill="none" stroke-width="6" />
+                <!-- 3pt line -->
+                <path d="M 100 780 L 100 550 Q 500 -50 900 550 L 900 780" fill="none" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <!-- Dropping Neon Basketball -->
+        <div id="neon-ball" class="absolute z-20 w-32 h-32 rounded-full neon-ball-glow flex items-center justify-center opacity-0">
+            <svg viewBox="0 0 100 100" class="w-full h-full neon-gold-stroke">
+                <circle cx="50" cy="50" r="48" fill="none" stroke-width="4" />
+                <path d="M 50 2 L 50 98" fill="none" stroke-width="4" />
+                <path d="M 2 50 L 98 50" fill="none" stroke-width="4" />
+                <!-- Curve left -->
+                <path d="M 15 15 Q 65 50 15 85" fill="none" stroke-width="4" />
+                <!-- Curve right -->
+                <path d="M 85 15 Q 35 50 85 85" fill="none" stroke-width="4" />
+            </svg>
+        </div>
+
+        <!-- Impact Shockwave -->
+        <div id="neon-shockwave" class="absolute z-10 w-16 h-16 rounded-full border-[6px] border-[#FFD700] opacity-0 mix-blend-screen" style="box-shadow: 0 0 50px #FFD700, inset 0 0 50px #FF8C00;"></div>
+
+    </div>
+
+
+    <!-- PHASE 2: Main Logo Reveal -->
+    <div id="main-content" class="absolute inset-0 z-10 opacity-0">
+        <!-- Background Particle Canvas -->
+        <canvas id="particle-canvas" class="absolute inset-0 z-0 opacity-60"></canvas>
+
+        <!-- Ambient Glow behind the logo -->
+        <div id="ambient-glow" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-blue-600 rounded-full blur-[100px] opacity-0 z-0 mix-blend-screen pointer-events-none transition-transform"></div>
+
+        <!-- Main Content Container -->
+        <div class="perspective-container relative z-10 flex flex-col items-center justify-center w-full h-full">
+            
+            <!-- Logo Wrapper for 3D transforms -->
+            <div id="logo-wrapper" class="relative w-64 md:w-96 lg:w-[450px] opacity-0 flex justify-center items-center logo-shadow">
+                <!-- The Actual Image -->
+                <img id="main-logo" src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLeticX Badge" class="w-full h-auto relative z-10">
+                <!-- Masked shine overlay -->
+                <div class="shine-container absolute inset-0 z-20 pointer-events-none">
+                    <div id="shine" class="shine-element absolute top-0 -left-[50%] w-[200%] h-full"></div>
+                </div>
+            </div>
+
+            <!-- Cinematic Subtitle Text -->
+            <div id="intro-text" class="mt-12 text-center opacity-0 z-10">
+                <h1 class="text-2xl md:text-4xl font-light tracking-[0.5em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-gray-300 via-white to-gray-300">
+                    SkyeLeticX
+                </h1>
+                <p id="sub-text" class="mt-3 text-sm md:text-base tracking-[0.3em] text-blue-400 font-medium uppercase opacity-0">
+                    Performance Evolution
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHASE 3: Inspiring Quote -->
+    <div id="quote-screen" class="absolute inset-0 z-40 flex items-center justify-center opacity-0 pointer-events-none">
+        <h2 id="inspiring-quote" class="text-3xl md:text-5xl font-light tracking-[0.15em] text-center text-white px-8 opacity-0">
+            "Defy Limits. <span class="text-[#FFD700] font-semibold">Redefine</span> Possible."
+        </h2>
+    </div>
+
+    <!-- PHASE 4: Next Screen (Final Destination) -->
+    <div id="next-screen" class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] opacity-0 pointer-events-none">
+        <h1 class="text-4xl md:text-6xl font-bold tracking-[0.3em] text-white mb-10 text-transparent bg-clip-text bg-gradient-to-r from-gray-300 via-white to-gray-300">SKYELETICX</h1>
+        <button id="enter-site" class="px-10 py-4 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-[#FFD700]/50 text-white rounded-full font-medium tracking-[0.2em] transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,215,0,0.2)]">ENTER SITE</button>
+        <p class="mt-8 text-xl md:text-2xl font-light tracking-[0.15em] text-white">
+            <span class="text-[#FFD700] font-semibold drop-shadow-[0_0_10px_rgba(255,215,0,0.8)]">Skyes</span> the limit
+        </p>
+    </div>
+
+    <!-- Replay Button -->
+    <button id="replay-btn" class="absolute bottom-8 right-8 z-[100] flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full backdrop-blur-md transition-all opacity-0 cursor-pointer pointer-events-none text-sm font-medium tracking-wide">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        Replay Sequence
+    </button>
+
+    <script>
+        // --- 1. Audio System Setup (Web Audio API) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        const SFX = {
+            bounce: (vol = 1, pitch = 150) => {
+                if(audioCtx.state === 'suspended') return;
+                const t = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.setValueAtTime(pitch, t);
+                osc.frequency.exponentialRampToValueAtTime(pitch/4, t + 0.15);
+                gain.gain.setValueAtTime(vol, t);
+                gain.gain.exponentialRampToValueAtTime(0.01, t + 0.15);
+                osc.start(t);
+                osc.stop(t + 0.15);
+            },
+            explosion: () => {
+                if(audioCtx.state === 'suspended') return;
+                const t = audioCtx.currentTime;
+                // Noise burst
+                const bufferSize = audioCtx.sampleRate * 2;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
+                const noiseFilter = audioCtx.createBiquadFilter();
+                noiseFilter.type = 'lowpass';
+                noiseFilter.frequency.setValueAtTime(1000, t);
+                noiseFilter.frequency.exponentialRampToValueAtTime(20, t + 2);
+                const noiseGain = audioCtx.createGain();
+                noiseGain.gain.setValueAtTime(0.05, t); // Waaaaay down
+                noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 2);
+                noise.connect(noiseFilter);
+                noiseFilter.connect(noiseGain);
+                noiseGain.connect(audioCtx.destination);
+                noise.start(t);
+                
+                // Sub Boom
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.setValueAtTime(80, t);
+                osc.frequency.exponentialRampToValueAtTime(10, t + 1.5);
+                gain.gain.setValueAtTime(0.1, t); // Waaaaay down
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 1.5);
+                osc.start(t);
+                osc.stop(t + 1.5);
+            },
+            whoosh: () => {
+                 if(audioCtx.state === 'suspended') return;
+                 const t = audioCtx.currentTime;
+                 // A thick rising cinematic pad/whoosh
+                 const osc1 = audioCtx.createOscillator();
+                 const osc2 = audioCtx.createOscillator();
+                 const gain = audioCtx.createGain();
+                 osc1.type = 'sawtooth';
+                 osc2.type = 'square';
+                 osc1.connect(gain);
+                 osc2.connect(gain);
+                 gain.connect(audioCtx.destination);
+                 osc1.frequency.setValueAtTime(50, t);
+                 osc1.frequency.exponentialRampToValueAtTime(300, t + 2);
+                 osc2.frequency.setValueAtTime(51, t);
+                 osc2.frequency.exponentialRampToValueAtTime(305, t + 2);
+                 gain.gain.setValueAtTime(0.001, t);
+                 gain.gain.exponentialRampToValueAtTime(0.015, t + 1.5); // Waaaaay down (was 0.15)
+                 gain.gain.exponentialRampToValueAtTime(0.001, t + 3);
+                 
+                 // Add wind noise
+                 const bufferSize = audioCtx.sampleRate * 2;
+                 const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                 const data = buffer.getChannelData(0);
+                 for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+                 const noise = audioCtx.createBufferSource();
+                 noise.buffer = buffer;
+                 const noiseFilter = audioCtx.createBiquadFilter();
+                 noiseFilter.type = 'bandpass';
+                 noiseFilter.frequency.setValueAtTime(100, t);
+                 noiseFilter.frequency.exponentialRampToValueAtTime(2000, t + 2);
+                 noise.connect(noiseFilter);
+                 noiseFilter.connect(gain);
+                 noise.start(t);
+                 osc1.start(t);
+                 osc2.start(t);
+                 osc1.stop(t + 3);
+                 osc2.stop(t + 3);
+            },
+            chime: () => {
+                if(audioCtx.state === 'suspended') return;
+                const t = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.setValueAtTime(523.25, t); // C5
+                gain.gain.setValueAtTime(0, t);
+                gain.gain.linearRampToValueAtTime(0.015, t + 0.1); // Waaaaay down (was 0.15)
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 3);
+                osc.start(t);
+                osc.stop(t + 3);
+                
+                // Harmony
+                const osc2 = audioCtx.createOscillator();
+                const gain2 = audioCtx.createGain();
+                osc2.type = 'sine';
+                osc2.connect(gain2);
+                gain2.connect(audioCtx.destination);
+                osc2.frequency.setValueAtTime(659.25, t); // E5
+                gain2.gain.setValueAtTime(0, t);
+                gain2.gain.linearRampToValueAtTime(0.01, t + 0.2); // Waaaaay down (was 0.1)
+                gain2.gain.exponentialRampToValueAtTime(0.001, t + 3);
+                osc2.start(t);
+                osc2.stop(t + 3);
+            }
+        };
+
+        // --- 2. Particle System Setup (Phase 2) ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5 - 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+                if (this.x < 0 || this.x > canvas.width) {
+                    this.speedX *= -1;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(150, 200, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.width * canvas.height) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        
+        initParticles();
+        animateParticles();
+
+        // --- 2. GSAP Master Sequence ---
+        let sponsorTimeline;
+        let bballTimeline;
+        let mainTimeline;
+        let quoteTimeline;
+        let finalTimeline;
+        let floatingAnimation;
+
+        function playFullSequence() {
+            // Kill active animations if replaying
+            if (sponsorTimeline) sponsorTimeline.kill();
+            if (bballTimeline) bballTimeline.kill();
+            if (mainTimeline) mainTimeline.kill();
+            if (quoteTimeline) quoteTimeline.kill();
+            if (finalTimeline) finalTimeline.kill();
+            if (floatingAnimation) floatingAnimation.kill();
+            
+            // --- Reset Phase 0 (Sponsor) ---
+            gsap.set("#sponsor-intro", { display: "flex", opacity: 1 });
+            gsap.set(["#sponsor-text-top", "#sponsor-logo", "#sponsor-text-bottom"], { opacity: 0, y: 15 });
+
+            // --- Reset Phase 1 (Basketball) ---
+            gsap.set("#bball-intro", { display: "none", opacity: 0 }); 
+            gsap.set("#court-floor", { opacity: 0, scaleY: 0, transformOrigin: "bottom center" });
+            gsap.set("#neon-ball", { y: -800, opacity: 0, scale: 1, rotation: -360 });
+            gsap.set("#neon-shockwave", { scale: 0, opacity: 1, y: 150 });
+
+            // --- Reset Phase 2 (Logo) ---
+            gsap.set("#main-content", { opacity: 0, filter: "blur(0px)" });
+            gsap.set("#logo-wrapper", { opacity: 0, scale: 3.5, rotationX: 45, rotationY: -30, z: -500, filter: "blur(30px)" });
+            gsap.set("#main-logo", { filter: "brightness(0)" });
+            gsap.set("#ambient-glow", { opacity: 0, scale: 0.5 });
+            gsap.set("#shine", { xPercent: 0 });
+            gsap.set("#intro-text", { opacity: 0, y: 30 });
+            gsap.set("#intro-text h1", { letterSpacing: "1em" });
+            gsap.set("#sub-text", { opacity: 0, y: 10 });
+            
+            // --- Reset Phase 3 & 4 (Quote & Final Screen) ---
+            gsap.set("#quote-screen", { display: "none", opacity: 0 });
+            gsap.set("#inspiring-quote", { opacity: 0, y: 30, filter: "blur(15px)" });
+            gsap.set("#next-screen", { display: "none", opacity: 0, pointerEvents: "none" });
+
+            // --- Reset Replay Button ---
+            gsap.set("#replay-btn", { opacity: 0, pointerEvents: "none" });
+
+            // Start with Sponsor Intro
+            playSponsorIntro();
+        }
+
+        // --- Phase 0: Sponsor Intro ---
+        function playSponsorIntro() {
+            sponsorTimeline = gsap.timeline();
+
+            sponsorTimeline.to("#sponsor-text-top", { duration: 1, opacity: 1, y: 0, ease: "power2.out" })
+            .to("#sponsor-logo", { duration: 1.5, opacity: 1, y: 0, ease: "power3.out" }, "-=0.5")
+            .to("#sponsor-text-bottom", { duration: 1, opacity: 1, y: 0, ease: "power2.out" }, "-=1")
+            // Hold for 1.5s then fade out
+            .to(["#sponsor-text-top", "#sponsor-logo", "#sponsor-text-bottom"], { 
+                duration: 1, 
+                opacity: 0, 
+                y: -15, 
+                stagger: 0.1, 
+                ease: "power2.in", 
+                delay: 1.5 
+            })
+            // Hide container and start Basketball phase
+            .to("#sponsor-intro", { 
+                duration: 0.5, 
+                opacity: 0, 
+                display: "none",
+                onComplete: playBballIntro
+            });
+        }
+
+        // --- Phase 1: Neon Basketball Slam ---
+        function playBballIntro() {
+            gsap.set("#bball-intro", { display: "flex", opacity: 1 });
+            bballTimeline = gsap.timeline();
+
+            // 1. Court draws in from bottom
+            bballTimeline.to("#court-floor", { duration: 2.5, opacity: 1, scaleY: 1, ease: "power3.inOut" }, 0.2);
+
+            // 2. Ball drops for an initial setup bounce
+            bballTimeline.to("#neon-ball", { duration: 0.1, opacity: 1 }, 1.0)
+            .to("#neon-ball", { duration: 0.8, y: 130, rotation: -180, ease: "power2.in" }, 1.0);
+
+            // 3. First Impact & Sound
+            bballTimeline.to("#neon-ball", { duration: 0.1, scaleY: 0.7, scaleX: 1.2, y: 150, ease: "power1.out" }, 1.8)
+            .call(() => SFX.bounce(0.02, 120), null, 1.8) // Waaaaay down (was 0.2)
+            .to("#neon-ball", { duration: 0.1, scaleY: 1.1, scaleX: 0.9, y: 110, ease: "power1.out" }, 1.9)
+            .call(() => SFX.bounce(0.01, 150), null, 1.9); // Waaaaay down (was 0.1)
+
+            // 4. Ball floats back up for hangtime
+            bballTimeline.to("#neon-ball", { duration: 0.9, y: -250, rotation: 0, scaleY: 1, scaleX: 1, ease: "power2.out" }, 2.0);
+
+            // 5. The Power Slam Drop
+            bballTimeline.to("#neon-ball", { duration: 0.5, y: 130, rotation: 180, ease: "power4.in" }, 3.0);
+
+            // 6. Massive Impact, Squash & Explosion Sound
+            bballTimeline.to("#neon-ball", { duration: 0.1, scaleY: 0.4, scaleX: 1.6, y: 160, ease: "power1.out" }, 3.5)
+            .call(() => SFX.explosion(), null, 3.5)
+            .to("#neon-ball", { duration: 0.1, scaleY: 1.2, scaleX: 0.9, y: 100, ease: "power1.out" }, 3.6)
+            .to("#neon-ball", { duration: 0.4, opacity: 0, scale: 0, ease: "power2.out" }, 3.7);
+
+            // 7. Massive Shockwave Explosion at Impact
+            bballTimeline.to("#neon-shockwave", { duration: 1.8, scale: 50, opacity: 0, ease: "power3.out" }, 3.55);
+
+            // 8. Hide Phase 1, Trigger Phase 2 out of the explosion
+            bballTimeline.to("#court-floor", { duration: 0.5, opacity: 0, ease: "power2.out" }, 3.6)
+                         .to("#bball-intro", { duration: 0.5, opacity: 0, display: "none" }, 4.0)
+                         .call(playMainIntro, null, 3.65);
+        }
+
+        // --- Phase 2: Cinematic Logo Reveal ---
+        function playMainIntro() {
+            mainTimeline = gsap.timeline();
+
+            // Trigger Cinematic Whoosh Sound
+            mainTimeline.call(() => SFX.whoosh(), null, 0);
+
+            // Make the main content visible underneath the explosion
+            mainTimeline.to("#main-content", { duration: 0.1, opacity: 1 }, 0);
+
+            // 1. Dramatic zoom in out of the gold shockwave
+            mainTimeline.to("#logo-wrapper", {
+                duration: 2.5,
+                scale: 1,
+                opacity: 1,
+                rotationX: 0,
+                rotationY: 0,
+                z: 0,
+                filter: "blur(0px)",
+                ease: "power3.out"
+            }, 0);
+
+            // 2. Logo fades from black to full color as it arrives
+            mainTimeline.to("#main-logo", { duration: 2, filter: "brightness(1)", ease: "power2.inOut" }, 0.5);
+
+            // 3. Ambient background glow ignites
+            mainTimeline.to("#ambient-glow", { duration: 2, opacity: 0.4, scale: 1, ease: "power2.out" }, 1.0);
+
+            // 4. Glass shine sweeps across the logo mask
+            mainTimeline.to("#shine", { duration: 1.5, xPercent: 300, ease: "power1.inOut" }, 1.7);
+
+            // 5. Text elements reveal
+            mainTimeline.to("#intro-text", { duration: 1.5, opacity: 1, y: 0, ease: "power3.out" }, 2.3);
+            mainTimeline.to("#intro-text h1", { duration: 2, letterSpacing: "0.5em", ease: "power3.out" }, 2.3);
+            mainTimeline.to("#sub-text", { duration: 1, opacity: 1, y: 0, ease: "power2.out" }, 3.0);
+
+            // 6. Start continuous idle animation
+            mainTimeline.call(startIdleAnimation, null, 4.0);
+
+            // 7. Dissolve Phase 2 after holding for 3.5 seconds
+            mainTimeline.to("#main-content", {
+                duration: 2.5,
+                opacity: 0,
+                filter: "blur(20px)",
+                ease: "power2.inOut",
+                delay: 3.5
+            });
+
+            // Trigger Phase 3
+            mainTimeline.call(playQuoteScreen);
+        }
+
+        // --- Phase 3: Inspiring Quote ---
+        function playQuoteScreen() {
+            gsap.set("#quote-screen", { display: "flex", opacity: 1 });
+            quoteTimeline = gsap.timeline();
+
+            // Ethereal chime sound
+            quoteTimeline.call(() => SFX.chime(), null, 0);
+
+            quoteTimeline.to("#inspiring-quote", {
+                duration: 2.5,
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                ease: "power3.out"
+            })
+            // Hold quote for 2.5 seconds, then fade and blur out
+            .to("#inspiring-quote", {
+                duration: 1.5,
+                opacity: 0,
+                y: -30,
+                filter: "blur(15px)",
+                ease: "power2.in",
+                delay: 2.5
+            })
+            // Hide container and start Phase 4
+            .to("#quote-screen", {
+                duration: 0.1,
+                display: "none",
+                onComplete: playFinalScreen
+            });
+        }
+
+        // --- Phase 4: Final Reveal / App Entry ---
+        function playFinalScreen() {
+            gsap.set("#next-screen", { display: "flex" });
+            finalTimeline = gsap.timeline();
+
+            finalTimeline.to("#next-screen", {
+                duration: 2,
+                opacity: 1,
+                pointerEvents: "auto",
+                ease: "power2.inOut"
+            })
+            // Bring in the replay button at the very end
+            .to("#replay-btn", {
+                duration: 0.5,
+                opacity: 1,
+                pointerEvents: "auto"
+            }, "-=0.5");
+        }
+
+        function startIdleAnimation() {
+            // Continuous subtle floating effect
+            floatingAnimation = gsap.to("#logo-wrapper", {
+                y: "-=15",
+                rotationY: "+=3",
+                rotationX: "-=2",
+                duration: 3,
+                yoyo: true,
+                repeat: -1,
+                ease: "sine.inOut"
+            });
+            
+            gsap.to("#ambient-glow", {
+                opacity: 0.6,
+                scale: 1.05,
+                duration: 4,
+                yoyo: true,
+                repeat: -1,
+                ease: "sine.inOut"
+            });
+        }
+
+        // --- 3. Interactivity ---
+        
+        // Parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            
+            gsap.to(".perspective-container", {
+                rotationY: -xAxis,
+                rotationX: yAxis,
+                duration: 1,
+                ease: "power1.out"
+            });
+            
+            gsap.to("#ambient-glow", {
+                x: xAxis * 10,
+                y: yAxis * 10,
+                duration: 1,
+                ease: "power1.out"
+            });
+        });
+
+        // Setup Replay Button to start the whole sequence over
+        document.getElementById('replay-btn').addEventListener('click', playFullSequence);
+
+        // Start full sequence automatically when page loads
+        window.addEventListener('load', () => {
+            setTimeout(playFullSequence, 300);
+            
+            // Browsers block auto-playing audio. This invisible listener tries to 
+            // resume the audio context if the user clicks anywhere on the screen.
+            document.body.addEventListener('click', () => {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            }, { once: true });
+        });
+
+    </script>
+
+    <script>
+      (function(){
+        const HOME = "/home.html";
+        const KEY = "skyeletix_intro_seen_v1";
+        const params = new URLSearchParams(location.search);
+        const force = (params.get("intro") === "1") || (params.get("forceIntro") === "1");
+
+        try{
+          const seen = localStorage.getItem(KEY);
+          if (seen && !force) {
+            location.replace(HOME);
+            return;
+          }
+        } catch(e){}
+
+        function goHome(){
+          try{ localStorage.setItem(KEY, String(Date.now())); } catch(e){}
+          location.href = HOME;
+        }
+        window.__SKYELETIX_GO_HOME = goHome;
+
+        document.addEventListener("click", (e) => {
+          const btn = e.target && e.target.closest ? e.target.closest("#enter-site") : null;
+          if (btn) { e.preventDefault(); goHome(); }
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            const btn = document.getElementById("enter-site");
+            if (!btn) return;
+            const style = window.getComputedStyle(btn);
+            const visible = style && style.visibility !== "hidden" && style.display !== "none" && style.opacity !== "0";
+            if (visible) goHome();
+          }
+        });
+
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("/sw.js").catch(() => {});
+        }
+      })();
+    </script>
+    <noscript>
+      <div style="position:fixed;inset:0;background:#050505;color:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;">
+        <div style="opacity:.75;letter-spacing:.22em;text-transform:uppercase;">JavaScript required</div>
+        <a href="/home.html" style="padding:12px 22px;border-radius:999px;border:1px solid rgba(255,255,255,.25);color:#fff;text-decoration:none;">Enter Site</a>
+      </div>
+    </noscript>
+
+</body>
+</html>

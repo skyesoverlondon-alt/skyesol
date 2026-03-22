@@ -1,0 +1,13 @@
+{
+  "name": "skye-db-runner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.879.0",
+    "pg": "^8.16.3"
+  }
+}

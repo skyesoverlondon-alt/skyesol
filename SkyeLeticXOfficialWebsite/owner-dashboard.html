@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyeLeticX Dashboard Command</title>
+    <meta name="theme-color" content="#09030f" />
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/skx-dashboard.css" />
+  
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <a href="home.html" style="display:flex;align-items:center;gap:12px">
+        <img src="logo.png" alt="SkyeLeticX logo" />
+      </a>
+      <div>
+        <div class="brand-name">SkyeLeticX</div>
+        <div class="brand-sub">League Command Surfaces • Skyes Over London LC</div>
+      </div>
+    </div>
+    <nav class="nav-links"><a href="home.html" class="">Home</a><a href="how-it-works.html" class="">How It Works</a><a href="about.html" class="">About</a><a href="about-founder.html" class="">Founder</a><a href="players.html" class="">Players</a><a href="owners-intake.html" class="">Founding Owners</a><a href="arizona-hq.html" class="">Arizona HQ</a><a href="skyeletes-editorial.html" class="">Editorial</a><a href="owner-dashboard.html" class="active">Command</a><a href="league-office-dashboard.html" class="">League Office</a><a href="vp-operations-dashboard.html" class="">VP Ops</a><a href="cfo-dashboard.html" class="">CFO</a><a href="team-owner-dashboard.html" class="">Team Owner</a><a href="player-portal-dashboard.html" class="">Player Portal</a><a href="draft-war-room.html" class="">Draft War Room</a></nav>
+    <div class="nav-cta">
+      <div class="pill">Identity • Blobs • Neon</div>
+      <button class="btn btn-secondary" type="button" data-auth="login">Login</button>
+      <button class="btn btn-danger" type="button" data-auth="logout">Logout</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Real dashboards • league control</div>
+      <h1>SkyeLeticX now has the actual command surfaces it needs.</h1>
+      <p>This hub is the live command entry. Netlify Identity handles login and role access. Netlify Blobs holds the running command notes. Neon stores teams, players, combines, finance, picks, and profile links. Use this page to get into the right dashboard fast and to keep a live command memo attached to the league.</p>
+      <div class="metrics">
+        <div class="metric"><b id="metricPlayers">0</b><span>Players in the system</span></div>
+        <div class="metric"><b id="metricTeams">0</b><span>Teams / franchise slots</span></div>
+        <div class="metric"><b id="metricCombines">0</b><span>Combine events</span></div>
+        <div class="metric"><b id="metricOpenFees">$0</b><span>Open finance total</span></div>
+      </div>
+      <div id="authState" class="notice">Checking login state…</div>
+      <div id="authGate" class="auth-gate"></div>
+      <div class="card-actions">
+        <a class="btn btn-primary" href="league-office-dashboard.html">Open League Office</a>
+        <a class="btn btn-secondary" href="player-combine-intake.html">Live Player Intake</a>
+        <a class="btn btn-secondary" href="expansion-interest.html">Expansion Interest Form</a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <img class="hero-logo" src="logo.png" alt="SkyeLeticX logo" />
+      <div class="kicker">Command map</div>
+      <h3>Role lanes that match the league structure</h3>
+      <p>President and VP use the league office and operations lanes. CFO uses the finance dashboard. Team owners use the team owner board and draft war room. Players use the player portal. The command hub sits above all of it so you always have a fast surface.</p>
+      <div class="stack" style="margin-top:14px">
+        <div class="notice">Skyes Over London — President / owner</div>
+        <div class="notice">Namon Smith — Vice President</div>
+        <div class="notice">Dakayla Clark — Chief Financial Officer</div>
+        <div class="notice">26 Season One founding players — team owners</div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2>Dashboard launcher</h2>
+        <p>Every card below routes to a dedicated control surface with live data calls and role-aware actions.</p>
+      </div>
+    </div>
+    <div class="quick-links">
+      <a href="league-office-dashboard.html"><b>League Office</b><span>Seed founding slots, link identities, create teams, create players, and manage the executive layer.</span></a>
+      <a href="vp-operations-dashboard.html"><b>VP Operations</b><span>Run combine events, move players through statuses, rank prospects, and keep the operational board clean.</span></a>
+      <a href="cfo-dashboard.html"><b>CFO Finance</b><span>Track induction fees, payouts, expenses, and mark items paid.</span></a>
+      <a href="team-owner-dashboard.html"><b>Team Owner</b><span>Review linked team data, add prospects, and draft players into the roster.</span></a>
+      <a href="player-portal-dashboard.html"><b>Player Portal</b><span>Let a logged-in player see their profile, team assignment, combine flow, and finance items.</span></a>
+      <a href="draft-war-room.html"><b>Draft War Room</b><span>Run the live board, review available players, teams, and recent picks.</span></a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid">
+      <article class="card span-7">
+        <div class="kicker">Command memo</div>
+        <h3>Persistent blob note for the top-level dashboard</h3>
+        <p>This memo is saved into Netlify Blobs so the latest command note survives across sessions without forcing it into the relational tables.</p>
+        <div class="form-row" style="margin-top:12px">
+          <label for="commandNote">Command note</label>
+          <textarea id="commandNote" class="input" placeholder="Write the running league command note here…"></textarea>
+        </div>
+        <div class="form-foot">
+          <button id="saveCommandNote" class="btn btn-primary" type="button">Save command note</button>
+          <button id="reloadCommandNote" class="btn btn-secondary" type="button">Reload note</button>
+        </div>
+        <div id="commandNoteNotice" class="notice" style="margin-top:12px">No command note loaded yet.</div>
+      </article>
+      <article class="card span-5">
+        <div class="kicker">Working stack</div>
+        <h3>What this build is using</h3>
+        <div class="stack">
+          <div class="notice"><strong>Netlify Identity</strong><br/>Role-aware login for president, VP, CFO, team owner, and player lanes.</div>
+          <div class="notice"><strong>Netlify Blobs</strong><br/>Dashboard notes and cached summary state.</div>
+          <div class="notice"><strong>Neon Database</strong><br/>Teams, players, combines, finance ledger, draft picks, expansion interest, and linked profiles.</div>
+          <div class="notice"><strong>Netlify Forms</strong><br/>Included live intake pages for player combine intake and expansion interest capture.</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">Dashboard command hub • Skyes Over London LC • Contact: <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> • <a href="tel:4804695416">(480) 469-5416</a></footer>
+</main>
+<script>
+(async function(){
+  const boot = await SKX.boot({ roles:['president','vp','cfo','team_owner','player'], authStateId:'authState', gateId:'authGate', summary:true });
+  async function loadNote(){
+    try {
+      const res = await SKX.api('load_note', { query: 'scope=command-hub' });
+      const note = res.note || null;
+      document.getElementById('commandNote').value = note && note.text ? note.text : '';
+      SKX.showNotice('commandNoteNotice', note ? `Loaded note saved by ${SKX.esc(note.author || 'Unknown')} on ${SKX.esc(note.updatedAt || '')}.` : 'No command note saved yet.', note ? 'success' : '');
+    } catch(err) {
+      SKX.showNotice('commandNoteNotice', SKX.esc(err.message), 'error');
+    }
+  }
+  document.getElementById('reloadCommandNote').addEventListener('click', loadNote);
+  document.getElementById('saveCommandNote').addEventListener('click', async function(){
+    try {
+      await SKX.api('save_note', { data: { scope: 'command-hub', text: document.getElementById('commandNote').value } });
+      SKX.showNotice('commandNoteNotice', 'Command note saved.', 'success');
+    } catch(err) {
+      SKX.showNotice('commandNoteNotice', SKX.esc(err.message), 'error');
+    }
+  });
+  if (boot.authorized) loadNote();
+})();
+</script>
+
+<script src="assets/skx-dashboard.js"></script>
+</body>
+</html>

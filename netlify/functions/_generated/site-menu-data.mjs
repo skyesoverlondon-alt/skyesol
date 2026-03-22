@@ -2,12 +2,12 @@
 // Do not hand-edit.
 
 export const SITE_MENU = {
-  "generatedAt": "2026-03-07T06:18:37.482Z",
-  "totalItems": 1200,
+  "generatedAt": "2026-03-22T03:35:48.362Z",
+  "totalItems": 1771,
   "categories": [
     {
       "name": "root",
-      "count": 35,
+      "count": 36,
       "items": [
         {
           "urlPath": null,
@@ -157,7 +157,7 @@ export const SITE_MENU = {
           "urlPath": "/sitemap-visual.html",
           "prettyPath": null,
           "file": "sitemap-visual.html",
-          "title": "Site Ecology - Live Folder Map",
+          "title": "Site Navigation Map — SOLEnterprises",
           "ext": ".html",
           "category": "root"
         },
@@ -174,6 +174,14 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "SKYE INTRO.html",
           "title": "SKYE INTRO",
+          "ext": ".html",
+          "category": "root"
+        },
+        {
+          "urlPath": "/skyeleticx-portal.html",
+          "prettyPath": null,
+          "file": "skyeleticx-portal.html",
+          "title": "SkyeLeticX Portal | Skyes Over London LC",
           "ext": ".html",
           "category": "root"
         },
@@ -276,17 +284,17 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
-          "file": "skyesol-project.zip",
+          "file": "sw.js",
           "title": null,
-          "ext": ".zip",
+          "ext": ".js",
           "category": "root"
         },
         {
           "urlPath": null,
           "prettyPath": null,
-          "file": "sw.js",
+          "file": "what ai bullshit on.md",
           "title": null,
-          "ext": ".js",
+          "ext": ".md",
           "category": "root"
         }
       ]
@@ -1825,7 +1833,7 @@ export const SITE_MENU = {
           "urlPath": "/Blogs/Editorials/WebPile%20Pro%E2%80%94Monaco%20Editor.html",
           "prettyPath": null,
           "file": "Blogs/Editorials/WebPile Pro—Monaco Editor.html",
-          "title": "WebPile Pro — Monaco Editor | Skyes Over London LC",
+          "title": "Redirecting…",
           "ext": ".html",
           "category": "Blogs"
         },
@@ -3499,8 +3507,16 @@ export const SITE_MENU = {
     },
     {
       "name": "css",
-      "count": 2,
+      "count": 3,
       "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "css/FoundersImage.png",
+          "title": null,
+          "ext": ".png",
+          "category": "css"
+        },
         {
           "urlPath": null,
           "prettyPath": null,
@@ -3884,6 +3900,20 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "gpt-4o-mini-2024-07-18",
+      "count": 1,
+      "items": [
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "gpt-4o-mini-2024-07-18",
+          "title": null,
+          "ext": "",
+          "category": "gpt-4o-mini-2024-07-18"
+        }
+      ]
+    },
+    {
       "name": "index",
       "count": 1,
       "items": [
@@ -4009,7 +4039,7 @@ export const SITE_MENU = {
     },
     {
       "name": "js",
-      "count": 12,
+      "count": 14,
       "items": [
         {
           "urlPath": null,
@@ -4046,7 +4076,23 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "js/kaixu-admin-bridge.js",
+          "title": null,
+          "ext": ".js",
+          "category": "js"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "js/kaixu-gate.js",
+          "title": null,
+          "ext": ".js",
+          "category": "js"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "js/kaixu-session.js",
           "title": null,
           "ext": ".js",
           "category": "js"
@@ -4394,6 +4440,628 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "Operating-Systems",
+      "count": 77,
+      "items": [
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/founder-dashboard.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/founder-dashboard.html",
+          "title": "Founder Board · 0s Cohort Command",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/founder-login.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/founder-login.html",
+          "title": "Founder Access · 0s Cohort Command",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/index.html",
+          "prettyPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/",
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/index.html",
+          "title": "0s Cohort Command Center",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/instructor-book.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/instructor-book.html",
+          "title": "Instructor Book · 0s Cohort Command",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/student-login.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/student-login.html",
+          "title": "Student Access · 0s Cohort Command",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/student-portal.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/student-portal.html",
+          "title": "Student Portal · 0s Cohort Command",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/index.html",
+          "prettyPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/",
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/index.html",
+          "title": "0s Founder Cohort | Elite AI Platform Cohort by Skyes Over London",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/apply.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/apply.html",
+          "title": "0s Founder Cohort — Apply / Request a Seat",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/arizona-center-for-youth-resources.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/arizona-center-for-youth-resources.html",
+          "title": "Arizona Center for Youth Resources Partnership Proposal — s0l26-0s Cohort",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/curriculum.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/curriculum.html",
+          "title": "0s Founder Cohort — Curriculum",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/accounting-close-ops-case-study.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/accounting-close-ops-case-study.html",
+          "title": "Accounting Close Operations | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/community-pillar.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/community-pillar.html",
+          "title": "Before the Platform, There Was the Work",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/directory-authority-portal-case-study.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/directory-authority-portal-case-study.html",
+          "title": "Directory Authority Portal | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/governed-ai-support-case-study.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/governed-ai-support-case-study.html",
+          "title": "Governed AI Support Desk | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/index.html",
+          "prettyPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/",
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/index.html",
+          "title": "Client Case Study Editorials | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/logistics-lane-intelligence-case-study.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/logistics-lane-intelligence-case-study.html",
+          "title": "Logistics Lane Intelligence | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/phoenix-service-acquisition-case-study.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/phoenix-service-acquisition-case-study.html",
+          "title": "Phoenix Service Intake Recovery | Skyes Over London LC",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/rising-stars.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/editorials/rising-stars.html",
+          "title": "Editorial | Mercy Home, Rising Stars, and the Record of Real Community Work",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/founder.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/founder.html",
+          "title": "0s Founder Cohort — Founder",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/homebase-youth-services.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/homebase-youth-services.html",
+          "title": "HomeBase Youth Services Partnership Proposal — s0l26-0s Cohort",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/host-a-cohort.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/host-a-cohort.html",
+          "title": "Bring a Cohort to Your Organization — 0s Founder Cohort",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/mercy-home.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/mercy-home.html",
+          "title": "Mercy Home Partnership Proposal — s0l26-0s Cohort",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/new-pathways-for-youth.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/new-pathways-for-youth.html",
+          "title": "New Pathways for Youth Partnership Proposal — s0l26-0s Cohort",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/pricing.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/pricing.html",
+          "title": "0s Founder Cohort — Pricing",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/proof.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/proof.html",
+          "title": "0s Founder Cohort · Proof Points",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/trust.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/trust.html",
+          "title": "Why People Trust Skyes Over London | Elite-Standard AI Company",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": "/Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/youth-partners.html",
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/pages/youth-partners.html",
+          "title": "Phoenix Youth Partner Lanes — 0s Founder Cohort",
+          "ext": ".html",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/background.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/intro.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/bg-ledger.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/founder.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/kaixu-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/chromeboard-pro-max-2.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/execledger-pro.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/family-command.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/kaixu-gate-67.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/kaixu-super-ide.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/northstar-office-accounting.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/sentinel-web-authority.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/skye-family-hub.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/skyecode-nexus.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/skyedoor-portal.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/skyeleticx.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/skyes-over-london.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/skyesol.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/skyeweb.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/sole-ai-division.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/sole-nexus-connect.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/sole-nexus.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/sovereign-variables.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/vaulted-skye-docx.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/launcher-icons/vaulted-skye-drive.svg",
+          "title": null,
+          "ext": ".svg",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/skydexia-dual-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/skydexia-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/media/skyes-primary-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/assets/media/bg-ledger.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/assets/media/founder.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/assets/media/kaixu-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/assets/media/skydexia-dual-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/assets/media/skydexia-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/assets/media/skyes-primary-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/icons/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/icons/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/manifest.webmanifest",
+          "title": null,
+          "ext": ".webmanifest",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/Cohort-App-Gated/0s-cohort-command-app-v2-founder-student-gated-frontend/0s-cohort-command-app/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/icons/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/icons/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/manifest.webmanifest",
+          "title": null,
+          "ext": ".webmanifest",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/readme.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/robots.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/sitemap.xml",
+          "title": null,
+          "ext": ".xml",
+          "category": "Operating-Systems"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Operating-Systems/s0l26-0s/kaixu-0s-founder-cohort-platform/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Operating-Systems"
+        }
+      ]
+    },
+    {
       "name": "Pages",
       "count": 1,
       "items": [
@@ -4467,8 +5135,16 @@ export const SITE_MENU = {
     },
     {
       "name": "Platforms-Apps-Infrastructure",
-      "count": 383,
+      "count": 786,
       "items": [
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/BusinessLaunchKit.html",
+          "title": "BusinessLaunchKit — Everything You Need to Launch a Business Today | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
         {
           "urlPath": "/Platforms-Apps-Infrastructure/2026/ConnectLog.html",
           "prettyPath": null,
@@ -4498,6 +5174,918 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/2026/ExecSignIn.html",
           "title": "ExecSignIn Pro — Secure Authentication for Operator Portals | SOL Platforms",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/404.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/404.html",
+          "title": "404 — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/ae/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/ae/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/ae/index.html",
+          "title": "AE Portal — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/ae/portal/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/ae/portal/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/ae/portal/index.html",
+          "title": "AE Login — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/ae/sop/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/ae/sop/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/ae/sop/index.html",
+          "title": "AE SOP — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/checkout/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/checkout/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/checkout/index.html",
+          "title": "Moved — Access 222 Routing",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/index.html",
+          "title": "Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/offline.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/offline.html",
+          "title": "Offline — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/routing/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/routing/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/routing/index.html",
+          "title": "Account Executive Routing — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/services/access-222/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/services/access-222/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/services/access-222/index.html",
+          "title": "Service — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/thanks/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/Access222/thanks/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/thanks/index.html",
+          "title": "Submitted — Skyesol Access 222™",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/cineframe.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/cineframe.html",
+          "title": "CineFrame · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/combo-scenarios.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/combo-scenarios.html",
+          "title": "Combo Scenarios · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/executive-authority.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/executive-authority.html",
+          "title": "Executive Authority · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/executive-web-builds.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/executive-web-builds.html",
+          "title": "Executive Web Builds · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/index.html",
+          "title": "AE Contractor Scenario Pack · Section 01 Web Builds",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/roadmap.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/roadmap.html",
+          "title": "Roadmap · 23-Page Contractor Project",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/skye-ops-beacon.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/skye-ops-beacon.html",
+          "title": "Skye Ops Beacon · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/accessatlas.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/accessatlas.html",
+          "title": "AccessAtlas · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/checkoutforge.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/checkoutforge.html",
+          "title": "CheckoutForge · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/combo-scenarios.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/combo-scenarios.html",
+          "title": "Combo Scenarios · Section 02",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/datapilot.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/datapilot.html",
+          "title": "DataPilot · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/index.html",
+          "title": "AE Contractor Scenario Pack · Section 02 Core Ops",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/roadmap.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/roadmap.html",
+          "title": "Roadmap · 23-Page Contractor Project",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/signalflow.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/signalflow.html",
+          "title": "SignalFlow · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/trustlayer.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/trustlayer.html",
+          "title": "TrustLayer / Trust Surfaces · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/brandforge.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/brandforge.html",
+          "title": "BrandForge · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/combo-scenarios.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/combo-scenarios.html",
+          "title": "Combo Scenarios · Section 03",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/connectbridge.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/connectbridge.html",
+          "title": "ConnectBridge · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/index.html",
+          "title": "AE Contractor Scenario Pack · Section 03 Infra & Lifecycle",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/migrateops.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/migrateops.html",
+          "title": "MigrateOps · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/pulsewire.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/pulsewire.html",
+          "title": "PulseWire · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/roadmap.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/roadmap.html",
+          "title": "Roadmap · 23-Page Contractor Project",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/vaultops.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/vaultops.html",
+          "title": "VaultOps · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/combo-scenarios.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/combo-scenarios.html",
+          "title": "Combo Scenarios · Section 04",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/contentengine.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/contentengine.html",
+          "title": "ContentEngine · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/index.html",
+          "title": "AE Contractor Scenario Pack · Section 04 Performance & Growth",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/insightforge.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/insightforge.html",
+          "title": "InsightForge · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/launchpad.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/launchpad.html",
+          "title": "LaunchPad · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/retainengine.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/retainengine.html",
+          "title": "RetainEngine · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/roadmap.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/roadmap.html",
+          "title": "Roadmap · 23-Page Contractor Project",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/shieldstack.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/shieldstack.html",
+          "title": "ShieldStack · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/ai-usage-uplift.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/ai-usage-uplift.html",
+          "title": "AI Usage Uplift · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/index.html",
+          "title": "AE Contractor Scenario Pack · Section 05 Contractor Economics",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/payment-methodology.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/payment-methodology.html",
+          "title": "Payment Methodology · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/recruiting-overview.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/recruiting-overview.html",
+          "title": "Recruiting Overview · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/recurring-revenue.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/recurring-revenue.html",
+          "title": "Recurring Revenue · Contractor Sales Page",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/roadmap.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/roadmap.html",
+          "title": "Roadmap · 23-Page Contractor Project",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/all-pages.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/all-pages.html",
+          "title": "AE Contractor Scenario Project · All Pages",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/ae-service-pack-master/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/index.html",
+          "title": "AE Contractor Scenario Project · Master Pack",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/analytics.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/analytics.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/backups.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/backups.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/contacts.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/contacts.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/index.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/leads.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/leads.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/pipeline.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/pipeline.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/playbooks.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/playbooks.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/quick-capture.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/quick-capture.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/routes.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/routes.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/settings.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/settings.html",
+          "title": "Skye Lead Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/WALKTHROUGH.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/WALKTHROUGH.html",
+          "title": "Skye Lead Vault — Walkthrough",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/about.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/about.html",
+          "title": "Skye-OfferForge — About",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/backup.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/backup.html",
+          "title": "Skye-OfferForge — Backup",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/contacts.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/contacts.html",
+          "title": "Skye-OfferForge — Contacts",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/docs.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/docs.html",
+          "title": "Skye-OfferForge — Docs",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/index.html",
+          "title": "Skye-OfferForge — Overview",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/offers.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/offers.html",
+          "title": "Skye-OfferForge — Offers",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/settings.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/settings.html",
+          "title": "Skye-OfferForge — Settings",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/tasks.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/tasks.html",
+          "title": "Skye-OfferForge — Tasks",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/templates.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/templates.html",
+          "title": "Skye-OfferForge — Templates",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/tutorial.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/tutorial.html",
+          "title": "Skye-OfferForge — Walkthrough",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/contacts.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/contacts.html",
+          "title": "Contacts · Skye Split Engine",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/engine.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/engine.html",
+          "title": "Split Engine · Skye Split Engine",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/help.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/help.html",
+          "title": "Help · Skye Split Engine",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/index.html",
+          "title": "Skye Split Engine Ops",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/ops.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/ops.html",
+          "title": "Money Ops · Skye Split Engine Ops",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/receipts.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/receipts.html",
+          "title": "Receipts · Skye Split Engine Ops",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/settings.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/settings.html",
+          "title": "Settings · Skye Split Engine",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/vault.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/vault.html",
+          "title": "Backup Vault · Skye Split Engine",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/walkthrough.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/walkthrough.html",
+          "title": "Walkthrough · Skye Split Engine Ops",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/index.html",
+          "title": "SkyeBox Command Vault · Skyes Over London",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching%20Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/index.html",
+          "title": "SkyePortal Control Plane — Vault Workstation X",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/index.html",
+          "title": "AE Central Command Pack featuring the Credential Hub Launcher",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/ae-command-pack.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/ae-command-pack.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/contact-view.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/contact-view.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/contacts.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/contacts.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/credential-pack.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/credential-pack.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/dashboard.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/dashboard.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/launcher.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/launcher.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/notes.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/notes.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/ops-pack.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/ops-pack.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/projects.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/projects.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/service-pack.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/service-pack.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/settings.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/settings.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/sitemap.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/sitemap.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/tutorial.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/tutorial.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/vault.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/pages/vault.html",
+          "title": null,
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-FlowPro/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE-FlowPro/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/index.html",
+          "title": "AE FLOW by Skyes Over London",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/contractor%20income%20verification%20drop%20in/APP%20SURFACE/public/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/contractor%20income%20verification%20drop%20in/APP%20SURFACE/public/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/APP SURFACE/public/index.html",
+          "title": "Contractor Verification Suite",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/contractor%20income%20verification%20drop%20in/PUBLIC/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/contractor%20income%20verification%20drop%20in/PUBLIC/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/PUBLIC/index.html",
+          "title": "Contractor Income Verification",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/ContractorIncomeVerification/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/ContractorIncomeVerification/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/ContractorIncomeVerification/index.html",
+          "title": "Contractor Income Verification",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/ContractorNetwork/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/ContractorNetwork/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/ContractorNetwork/index.html",
+          "title": "Skyes Over London LC • Contractor Network Console (Neon + Blobs)",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/ContractorWorkflowSuite/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/AE%20Contractor%20Network/ContractorWorkflowSuite/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/ContractorWorkflowSuite/index.html",
+          "title": "Contractor Workflow Suite",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/index.html",
+          "title": "AE Contractor Network",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/SkyePlatinum/SkyePlatinum/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/AE-ContractorNetwork/SkyePlatinum/SkyePlatinum/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/SkyePlatinum/SkyePlatinum/index.html",
+          "title": "SKye Platinum Hub | Quantum Command Protocol",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/contact-brain.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/contact-brain.html",
+          "title": "Contact Brain",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/follow-up-engine.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/follow-up-engine.html",
+          "title": "Follow-Up Engine",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/index.html",
+          "title": "Launcher",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/intake-vault.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/intake-vault.html",
+          "title": "Intake Vault",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/ops-console.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/ops-console.html",
+          "title": "Ops Console",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/recovery-engine.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/recovery-engine.html",
+          "title": "Recovery Engine",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/reply-studio.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/reply-studio.html",
+          "title": "Reply Studio",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/shared-desk.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/shared-desk.html",
+          "title": "Shared Desk",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/skymail-mega-build/apps/platform-admin/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/skymail-mega-build/apps/platform-admin/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/platform-admin/index.html",
+          "title": "Skye Infrastructure Control",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/skymail-mega-build/apps/platform-public/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/Full-EMAIL-Service-Database-Gmail%2BNeon-Replacements/skymail-mega-build/apps/platform-public/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/platform-public/index.html",
+          "title": "Skye Infrastructure Signup",
           "ext": ".html",
           "category": "Platforms-Apps-Infrastructure"
         },
@@ -4706,6 +6294,110 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/SkyeBookX-Cloud-Edition.html",
           "title": "SkyeBookX - kAIxU Edition",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/academy.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/academy.html",
+          "title": "Academy · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/council.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/council.html",
+          "title": "Council · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/districts.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/districts.html",
+          "title": "Districts · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/forge.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/forge.html",
+          "title": "Forge · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/",
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/index.html",
+          "title": "SkyeSpace · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/market.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/market.html",
+          "title": "Market · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/messages.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/messages.html",
+          "title": "Messages · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/muse.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/muse.html",
+          "title": "Muse · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/profile.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/profile.html",
+          "title": "Profile · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/signal.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/signal.html",
+          "title": "Signal · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/stage.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/stage.html",
+          "title": "Stage · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/studio.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/studio.html",
+          "title": "Studio · SkyeSpace",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/2026/FounderTechPro%20/SkyeSpace/SkyeSpace-Infra-Upgrade/vaults.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/vaults.html",
+          "title": "Vaults · SkyeSpace",
           "ext": ".html",
           "category": "Platforms-Apps-Infrastructure"
         },
@@ -4978,86 +6670,6 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/2026/SovereignVariables.html",
           "title": "SovereignVariables — Environment Variable Manager & Audit Tool | SOL Platforms",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/404.html",
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/404.html",
-          "title": "404 — Skyesol Access 222™",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/ae/index.html",
-          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/ae/",
-          "file": "Platforms-Apps-Infrastructure/Access222/ae/index.html",
-          "title": "AE Portal — Skyesol Access 222™",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/ae/portal/index.html",
-          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/ae/portal/",
-          "file": "Platforms-Apps-Infrastructure/Access222/ae/portal/index.html",
-          "title": "AE Login — Skyesol Access 222™",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/ae/sop/index.html",
-          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/ae/sop/",
-          "file": "Platforms-Apps-Infrastructure/Access222/ae/sop/index.html",
-          "title": "AE SOP — Skyesol Access 222™",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/checkout/index.html",
-          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/checkout/",
-          "file": "Platforms-Apps-Infrastructure/Access222/checkout/index.html",
-          "title": "Moved — Access 222 Routing",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/index.html",
-          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/",
-          "file": "Platforms-Apps-Infrastructure/Access222/index.html",
-          "title": "Skyesol Access 222™",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/offline.html",
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/offline.html",
-          "title": "Offline — Skyesol Access 222™",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/routing/index.html",
-          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/routing/",
-          "file": "Platforms-Apps-Infrastructure/Access222/routing/index.html",
-          "title": "Account Executive Routing — Skyesol Access 222™",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/services/access-222/index.html",
-          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/services/access-222/",
-          "file": "Platforms-Apps-Infrastructure/Access222/services/access-222/index.html",
-          "title": "Service — Skyesol Access 222™",
-          "ext": ".html",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": "/Platforms-Apps-Infrastructure/Access222/thanks/index.html",
-          "prettyPath": "/Platforms-Apps-Infrastructure/Access222/thanks/",
-          "file": "Platforms-Apps-Infrastructure/Access222/thanks/index.html",
-          "title": "Submitted — Skyesol Access 222™",
           "ext": ".html",
           "category": "Platforms-Apps-Infrastructure"
         },
@@ -5350,6 +6962,86 @@ export const SITE_MENU = {
           "category": "Platforms-Apps-Infrastructure"
         },
         {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/how-skyeverse-cuts-big-service-prices.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/how-skyeverse-cuts-big-service-prices.html",
+          "title": "How SkyeVerse Can Cut Big Service Prices | Service Power Explained",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/inside-the-skyeverse-gateway.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/inside-the-skyeverse-gateway.html",
+          "title": "Inside the SkyeVerse Gateway | Dedicated Control Plane for Accounts and Rewards",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/phoenix-launch-guide-skyeverse.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/phoenix-launch-guide-skyeverse.html",
+          "title": "Phoenix Launch Guide for SkyeVerse | Platform, Currency, Arcade, and Gateway Story",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/phoenix-skyeverse-loyalty-platform.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/phoenix-skyeverse-loyalty-platform.html",
+          "title": "Phoenix AI Loyalty Platform | Why SkyeVerse Fits the Valley",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/skye-tokens-founder-credit-system.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/skye-tokens-founder-credit-system.html",
+          "title": "SkyeTokens Founder Credit System | Strategic Service Credits for Phoenix Launches",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/skyecoins-for-phoenix-businesses.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/skyecoins-for-phoenix-businesses.html",
+          "title": "SkyeCoins for Phoenix Businesses | A Better Reward Story for Premium Services",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/skyeverse-arcade-luxury-engagement-engine.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/articles/skyeverse-arcade-luxury-engagement-engine.html",
+          "title": "SkyeVerse Arcade | Luxury Engagement Engine with Classics and Progression",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/index.html",
+          "prettyPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/",
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/index.html",
+          "title": "SkyeVerse Launch Hub | Founder Series for Phoenix",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/products/skye-currency.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/products/skye-currency.html",
+          "title": "Skye Currency | SkyeCoins, SkyeTokens, and Service-Power Campaigns",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/products/skyeverse-platform.html",
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/products/skyeverse-platform.html",
+          "title": "SkyeVerse Platform | Luxury Rewards, Arcade Engagement, and Service Buying Power",
+          "ext": ".html",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
           "urlPath": "/Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html",
           "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/gate-proofx.html",
@@ -5496,9 +7188,1697 @@ export const SITE_MENU = {
         {
           "urlPath": null,
           "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/_headers",
+          "title": null,
+          "ext": "",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/_redirects",
+          "title": null,
+          "ext": "",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/ae/portal/portal.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/ae/sop/sop.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/assets/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/assets/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/assets/logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/assets/site.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/assets/site.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/assets/sky3d.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/buildInfo.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/netlify.toml",
+          "title": null,
+          "ext": ".toml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/netlify/functions/ae-auth.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/netlify/functions/ae-logout.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/netlify/functions/ae-verify.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/robots.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/service-worker.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/Access222/sitemap.xml",
+          "title": null,
+          "ext": ".xml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/APP SURFACE/public/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/APP SURFACE/public/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/APP SURFACE/public/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/APP SURFACE/public/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/_lib/contractor-income.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/contractor-income-export.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/contractor-income-record.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/contractor-income-records.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/contractor-income-report.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/netlify/functions/contractor-income-verify.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/contractor income verification drop in/SQL/contractor-income-verification-extension.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/ContractorNetwork/netlify/functions/_lib/auth.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/ContractorNetwork/netlify/functions/_lib/neon.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/ContractorNetwork/netlify/functions/_lib/resp.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/ContractorNetwork/netlify/functions/_lib/validate.mjs",
+          "title": null,
+          "ext": ".mjs",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/ContractorNetwork/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE Contractor Network/ContractorNetwork/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/assets/founder.webp",
+          "title": null,
+          "ext": ".webp",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/assets/skydexia-duo.webp",
+          "title": null,
+          "ext": ".webp",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/assets/skydexia-solo.webp",
+          "title": null,
+          "ext": ".webp",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/assets/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-01-web-builds/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-02-core-ops/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-03-infra-lifecycle/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-04-performance-growth/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/ae-service-pack-section-05-contractor-economics/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/ae-service-pack-master/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/assets/media/skydexia-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Lead-Vault-Offline-Phase2-with-Walkthrough/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/assets/app.js.bak",
+          "title": null,
+          "ext": ".bak",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/assets/media/founder.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/assets/media/skydexia-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/Skye-OfferForge-SkyDexia-Offline-Upgrade-v4-WalkthroughTutorial/oforge/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/app-core.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/app.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/contacts.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/dashboard.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/db.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/engine.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/help.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/icons/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/icons/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/media/skydexia-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/ops.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/receipts.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/settings.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/vault.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/assets/walkthrough.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/manifest.webmanifest",
+          "title": null,
+          "ext": ".webmanifest",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/Skye-Split-Engine-Offline-Money-Ops-Walkthrough/skye-split-engine-offline/service-worker.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/founder.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyeBox-Command-Vault/SkyeBox-Command-Vault-v6-tutorial-walkthrough/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/assets/founder-tyrone.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/assets/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/assets/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/assets/skyes-over-london-logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/manifest.webmanifest",
+          "title": null,
+          "ext": ".webmanifest",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/netlify.toml",
+          "title": null,
+          "ext": ".toml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/netlify/functions/_lib/googleAuth.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/netlify/functions/_lib/jwt.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/netlify/functions/_lib/rulesApi.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/netlify/functions/_lib/utils.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/netlify/functions/config.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/netlify/functions/deployRules.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/netlify/functions/mint.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/Branching Apps/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/SkyePortal-Control-Plane-Vault-Workstation-v5-tutorial/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-Central-CommandHub/AE-Central-Command-Pack-CredentialHub-Launcher/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/_headers",
+          "title": null,
+          "ext": "",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/apple-touch-icon.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/manifest.webmanifest",
+          "title": null,
+          "ext": ".webmanifest",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/maskable-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/readme.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /AE-ContractorNetwork/AE-FlowPro/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/Add-Ons/skymail-supplemental-mvps-all-frontend/assets/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/platform-admin/_redirects",
+          "title": null,
+          "ext": "",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/platform-admin/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/platform-admin/netlify.toml",
+          "title": null,
+          "ext": ".toml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/platform-admin/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/platform-admin/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/platform-public/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/platform-public/styles.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/database/combined-control-and-mail.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/database/control-schema.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/database/mail-platform.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/docs/ARCHITECTURE.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/docs/DB_API.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/docs/DB_ARCHITECTURE.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/docs/DB_DEPLOYMENT.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/docs/DB_HARDENING.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/docs/DEPLOYMENT.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/docs/INTEGRATION.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/infra/hetzner/bootstrap.sh",
+          "title": null,
+          "ext": ".sh",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/infra/hetzner/cloud-init.yaml",
+          "title": null,
+          "ext": ".yaml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/infra/hetzner/docker-compose.yml",
+          "title": null,
+          "ext": ".yml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/infra/hetzner/env/server.env.example",
+          "title": null,
+          "ext": ".example",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/services/runner/Dockerfile",
+          "title": null,
+          "ext": "",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/services/runner/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/services/runner/src/config.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/services/runner/src/crypto.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/services/runner/src/db-admin.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/services/runner/src/index.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/services/runner/src/job-runner.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/services/runner/src/r2.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/workers/control-plane/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/workers/control-plane/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/workers/control-plane/src/auth.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/workers/control-plane/src/crypto.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/workers/control-plane/src/db.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/workers/control-plane/src/http.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/workers/control-plane/src/index.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/workers/control-plane/wrangler.toml.example",
+          "title": null,
+          "ext": ".example",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
           "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeBookx:Pro-Suite/suite-gateway-nav.js",
           "title": null,
           "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/Gateway13-SkyeSpace-Module.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/assets/logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/css/base.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/css/pages.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/db/schema.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/db/seed.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/api.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/background-injector.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/data.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-academy.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-council.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-districts.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-forge.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-home.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-market.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-messages.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-muse.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-profile.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-signal.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-stage.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-studio.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/page-vaults.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/shell.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/js/state.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify.toml",
+          "title": null,
+          "ext": ".toml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/_shared/auth.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/_shared/db.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/_shared/http.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/compose.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/districts.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/feed.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/health.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/market.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/messages.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/metrics.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/profile.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/netlify/functions/signal.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/2026/FounderTechPro /SkyeSpace/SkyeSpace-Infra-Upgrade/README.md",
+          "title": null,
+          "ext": ".md",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
@@ -5595,174 +8975,6 @@ export const SITE_MENU = {
           "file": "Platforms-Apps-Infrastructure/2026/OperationBrowserStrike/sw.js",
           "title": null,
           "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/_headers",
-          "title": null,
-          "ext": "",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/_redirects",
-          "title": null,
-          "ext": "",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/ae/portal/portal.js",
-          "title": null,
-          "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/ae/sop/sop.js",
-          "title": null,
-          "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/assets/app.js",
-          "title": null,
-          "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/assets/icon-192.png",
-          "title": null,
-          "ext": ".png",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/assets/icon-512.png",
-          "title": null,
-          "ext": ".png",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/assets/logo.png",
-          "title": null,
-          "ext": ".png",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/assets/site.css",
-          "title": null,
-          "ext": ".css",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/assets/site.js",
-          "title": null,
-          "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/assets/sky3d.js",
-          "title": null,
-          "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/buildInfo.json",
-          "title": null,
-          "ext": ".json",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/manifest.json",
-          "title": null,
-          "ext": ".json",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/netlify.toml",
-          "title": null,
-          "ext": ".toml",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/netlify/functions/ae-auth.js",
-          "title": null,
-          "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/netlify/functions/ae-logout.js",
-          "title": null,
-          "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/netlify/functions/ae-verify.js",
-          "title": null,
-          "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/README.md",
-          "title": null,
-          "ext": ".md",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/robots.txt",
-          "title": null,
-          "ext": ".txt",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/service-worker.js",
-          "title": null,
-          "ext": ".js",
-          "category": "Platforms-Apps-Infrastructure"
-        },
-        {
-          "urlPath": null,
-          "prettyPath": null,
-          "file": "Platforms-Apps-Infrastructure/Access222/sitemap.xml",
-          "title": null,
-          "ext": ".xml",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
@@ -6307,6 +9519,686 @@ export const SITE_MENU = {
           "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/three-bg-gate.js",
           "title": null,
           "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/_redirects",
+          "title": null,
+          "ext": "",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/assets/css/founder.css",
+          "title": null,
+          "ext": ".css",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/assets/js/site.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/kaixu_multimodal_gateway_patch_build_directive.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/docs/acceptance-checklist.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/docs/api-contract.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/docs/env-example.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/docs/integration-readme.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/docs/routing-rules.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/docs/wallet-model.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/package-lock.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/README.md",
+          "title": null,
+          "ext": ".md",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/adapters/openaiAudioSpeech.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/adapters/openaiAudioTranscriptions.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/adapters/openaiChat.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/adapters/openaiImages.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/adapters/openaiRealtime.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/adapters/openaiStream.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/adapters/openaiVideos.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/auth/policyGuard.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/auth/verifyAdminToken.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/auth/verifyAppToken.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/cloudflare.d.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/db/migrations/0001_init.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/db/migrations/0002_multimodal_hardening.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/db/queries.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/db/schema.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/db/seed.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/env.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/index.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/ledger/creditWallet.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/ledger/debitWallet.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/ledger/finalizeUsage.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/ledger/refundUsage.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/ledger/reserveBudget.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/providers/anthropic.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/providers/gemini.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/providers/normalizeRequest.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/providers/normalizeResponse.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/providers/openai.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/router.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/admin-aliases.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/admin-job-actions.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/admin-jobs.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/admin-providers.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/admin-routing.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/admin-traces.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/admin-upstream.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/admin-wallets.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/audio-speech.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/audio-transcriptions.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/chat.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/embeddings.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/health.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/images.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/jobs.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/models.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/realtime-session.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/stream.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/usage.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/videos.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routes/wallet-balance.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routing/applyFallback.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routing/chooseProvider.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routing/kaixu-engines.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routing/pricing.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/routing/resolveAlias.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/types.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/base64.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/branding.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/clock.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/errors.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/hashing.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/ids.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/json.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/openai-response.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/sse.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/src/utils/trace.ts",
+          "title": null,
+          "ext": ".ts",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/tsconfig.json",
+          "title": null,
+          "ext": ".json",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/Gate-Upgrades/GatewayUpgrades/GatewayUpgrades/sky-currency-additive-pack/wrangler.jsonc",
+          "title": null,
+          "ext": ".jsonc",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/netlify.toml",
+          "title": null,
+          "ext": ".toml",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/README.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/robots.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "Platforms-Apps-Infrastructure"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Platforms-Apps-Infrastructure/kAIxUGateway13/assets/Upgrades/SKyeverse-SkyeTokens-SkyeCOINS/sitemap.xml",
+          "title": null,
+          "ext": ".xml",
           "category": "Platforms-Apps-Infrastructure"
         },
         {
@@ -7726,8 +11618,22 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "Service-Page-Makeover",
+      "count": 1,
+      "items": [
+        {
+          "urlPath": "/Service-Page-Makeover/Service-Page-Standard.html",
+          "prettyPath": null,
+          "file": "Service-Page-Makeover/Service-Page-Standard.html",
+          "title": "Mercy Home Partnership Proposal — s0l26-0s Cohort",
+          "ext": ".html",
+          "category": "Service-Page-Makeover"
+        }
+      ]
+    },
+    {
       "name": "Services",
-      "count": 131,
+      "count": 123,
       "items": [
         {
           "urlPath": "/Services/0megaGate/0megaGate_Branded_Runbook.html",
@@ -7754,14 +11660,6 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/ai-data-apps/index.html",
-          "prettyPath": "/Services/ai-data-apps/",
-          "file": "Services/ai-data-apps/index.html",
-          "title": "DataPilot™ — AI Data App Productization",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
           "urlPath": "/Services/analytics-dashboards.html",
           "prettyPath": null,
           "file": "Services/analytics-dashboards.html",
@@ -7770,25 +11668,9 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/analytics-dashboards/index.html",
-          "prettyPath": "/Services/analytics-dashboards/",
-          "file": "Services/analytics-dashboards/index.html",
-          "title": "Analytics & BI Dashboards — InsightForge™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
           "urlPath": "/Services/api-integration.html",
           "prettyPath": null,
           "file": "Services/api-integration.html",
-          "title": "API & Integration Layer — ConnectBridge™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
-          "urlPath": "/Services/api-integration/index.html",
-          "prettyPath": "/Services/api-integration/",
-          "file": "Services/api-integration/index.html",
           "title": "API & Integration Layer — ConnectBridge™",
           "ext": ".html",
           "category": "Services"
@@ -7810,25 +11692,9 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/brand-identity/index.html",
-          "prettyPath": "/Services/brand-identity/",
-          "file": "Services/brand-identity/index.html",
-          "title": "Brand Identity & Design Systems — BrandForge™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
           "urlPath": "/Services/docs-knowledge.html",
           "prettyPath": null,
           "file": "Services/docs-knowledge.html",
-          "title": "Documentation & Knowledge Base — VaultOps™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
-          "urlPath": "/Services/docs-knowledge/index.html",
-          "prettyPath": "/Services/docs-knowledge/",
-          "file": "Services/docs-knowledge/index.html",
           "title": "Documentation & Knowledge Base — VaultOps™",
           "ext": ".html",
           "category": "Services"
@@ -7842,18 +11708,10 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/ecommerce-payments/index.html",
-          "prettyPath": "/Services/ecommerce-payments/",
-          "file": "Services/ecommerce-payments/index.html",
-          "title": "CheckoutForge™ — Ecommerce & Payments Productization",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
           "urlPath": "/Services/index.html",
           "prettyPath": "/Services/",
           "file": "Services/index.html",
-          "title": "SOLEnterprises Services Hub",
+          "title": "Redirecting…",
           "ext": ".html",
           "category": "Services"
         },
@@ -7861,14 +11719,6 @@ export const SITE_MENU = {
           "urlPath": "/Services/intake-routing.html",
           "prettyPath": null,
           "file": "Services/intake-routing.html",
-          "title": "Intake & Routing — Queues and Handoffs",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
-          "urlPath": "/Services/intake-routing/index.html",
-          "prettyPath": "/Services/intake-routing/",
-          "file": "Services/intake-routing/index.html",
           "title": "Intake & Routing — Queues and Handoffs",
           "ext": ".html",
           "category": "Services"
@@ -8090,25 +11940,9 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/lifecycle-retention/index.html",
-          "prettyPath": "/Services/lifecycle-retention/",
-          "file": "Services/lifecycle-retention/index.html",
-          "title": "Lifecycle & Retention Systems — RetainEngine™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
           "urlPath": "/Services/mvp-launchpad.html",
           "prettyPath": null,
           "file": "Services/mvp-launchpad.html",
-          "title": "MVP & Proof-of-Concept Builds — LaunchPad™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
-          "urlPath": "/Services/mvp-launchpad/index.html",
-          "prettyPath": "/Services/mvp-launchpad/",
-          "file": "Services/mvp-launchpad/index.html",
           "title": "MVP & Proof-of-Concept Builds — LaunchPad™",
           "ext": ".html",
           "category": "Services"
@@ -8122,25 +11956,9 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/notification-comms/index.html",
-          "prettyPath": "/Services/notification-comms/",
-          "file": "Services/notification-comms/index.html",
-          "title": "Notification & Communication Orchestration — PulseWire™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
           "urlPath": "/Services/platform-migration.html",
           "prettyPath": null,
           "file": "Services/platform-migration.html",
-          "title": "Platform Migration & Modernization — MigrateOps™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
-          "urlPath": "/Services/platform-migration/index.html",
-          "prettyPath": "/Services/platform-migration/",
-          "file": "Services/platform-migration/index.html",
           "title": "Platform Migration & Modernization — MigrateOps™",
           "ext": ".html",
           "category": "Services"
@@ -8154,14 +11972,6 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/portals-hubs/index.html",
-          "prettyPath": "/Services/portals-hubs/",
-          "file": "Services/portals-hubs/index.html",
-          "title": "AccessAtlas™ — Portals & Hubs Productization",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
           "urlPath": "/Services/security-audit.html",
           "prettyPath": null,
           "file": "Services/security-audit.html",
@@ -8170,25 +11980,9 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/security-audit/index.html",
-          "prettyPath": "/Services/security-audit/",
-          "file": "Services/security-audit/index.html",
-          "title": "Security Audit & Hardening — ShieldStack™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
           "urlPath": "/Services/seo-content.html",
           "prettyPath": null,
           "file": "Services/seo-content.html",
-          "title": "SEO & Content Infrastructure — ContentEngine™",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
-          "urlPath": "/Services/seo-content/index.html",
-          "prettyPath": "/Services/seo-content/",
-          "file": "Services/seo-content/index.html",
           "title": "SEO & Content Infrastructure — ContentEngine™",
           "ext": ".html",
           "category": "Services"
@@ -8434,6 +12228,54 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
+          "urlPath": "/Services/SkyeFyve/cineframe.html",
+          "prettyPath": null,
+          "file": "Services/SkyeFyve/cineframe.html",
+          "title": "SkyeFyve | CineFrame",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeFyve/contentengine.html",
+          "prettyPath": null,
+          "file": "Services/SkyeFyve/contentengine.html",
+          "title": "SkyeFyve | ContentEngine",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeFyve/execsignin-pro.html",
+          "prettyPath": null,
+          "file": "Services/SkyeFyve/execsignin-pro.html",
+          "title": "SkyeFyve | ExecSignIn Pro",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeFyve/field-service-ops.html",
+          "prettyPath": null,
+          "file": "Services/SkyeFyve/field-service-ops.html",
+          "title": "SkyeFyve | Field Service Ops",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeFyve/index.html",
+          "prettyPath": "/Services/SkyeFyve/",
+          "file": "Services/SkyeFyve/index.html",
+          "title": "SkyeFyve | Five Service Lanes Built to Sell",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
+          "urlPath": "/Services/SkyeFyve/local-seo-snapshot.html",
+          "prettyPath": null,
+          "file": "Services/SkyeFyve/local-seo-snapshot.html",
+          "title": "SkyeFyve | Local SEO Snapshot",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
           "urlPath": "/Services/SkyeMedia-(Photo/brand-photo-day.html",
           "prettyPath": null,
           "file": "Services/SkyeMedia-(Photo/brand-photo-day.html",
@@ -8514,14 +12356,6 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
-          "urlPath": "/Services/trust-surfaces/index.html",
-          "prettyPath": "/Services/trust-surfaces/",
-          "file": "Services/trust-surfaces/index.html",
-          "title": "Trust Surfaces — Status, Privacy, Terms",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
           "urlPath": "/Services/Ultimate%20Business%20Launch%20Stack/core.html",
           "prettyPath": null,
           "file": "Services/Ultimate Business Launch Stack/core.html",
@@ -8562,6 +12396,14 @@ export const SITE_MENU = {
           "category": "Services"
         },
         {
+          "urlPath": "/Services/WebBuilds.html",
+          "prettyPath": null,
+          "file": "Services/WebBuilds.html",
+          "title": "CineFrame™ — Cinematic Web Productization",
+          "ext": ".html",
+          "category": "Services"
+        },
+        {
           "urlPath": "/Services/WebBuilds/ExecutiveAuthority.html",
           "prettyPath": null,
           "file": "Services/WebBuilds/ExecutiveAuthority.html",
@@ -8574,14 +12416,6 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Services/WebBuilds/ExecutiveWebBuilds.html",
           "title": "Website Builds + Executive Authority Tiers | Skyes Over London LC",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
-          "urlPath": "/Services/WebBuilds/index.html",
-          "prettyPath": "/Services/WebBuilds/",
-          "file": "Services/WebBuilds/index.html",
-          "title": "Web Builds Services | Skyes Over London LC",
           "ext": ".html",
           "category": "Services"
         },
@@ -8606,14 +12440,6 @@ export const SITE_MENU = {
           "prettyPath": null,
           "file": "Services/WebBuilds/SkyeSignalVault.html",
           "title": "Skye Signal Vault — Conversion + Trust + Proof System | Skyes Over London LC",
-          "ext": ".html",
-          "category": "Services"
-        },
-        {
-          "urlPath": "/Services/WebBuilds/WebBuilds.html",
-          "prettyPath": null,
-          "file": "Services/WebBuilds/WebBuilds.html",
-          "title": "CineFrame™ — Cinematic Web Productization",
           "ext": ".html",
           "category": "Services"
         },
@@ -8727,6 +12553,22 @@ export const SITE_MENU = {
           "file": "Services/SkyeCorp/Phase1/README.txt",
           "title": null,
           "ext": ".txt",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeFyve/assets/skye-fyve-intake.js",
+          "title": null,
+          "ext": ".js",
+          "category": "Services"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "Services/SkyeFyve/assets/skye-fyve.css",
+          "title": null,
+          "ext": ".css",
           "category": "Services"
         },
         {
@@ -9050,6 +12892,36 @@ export const SITE_MENU = {
       ]
     },
     {
+      "name": "skyefuelstation",
+      "count": 3,
+      "items": [
+        {
+          "urlPath": "/skyefuelstation/index.html",
+          "prettyPath": "/skyefuelstation/",
+          "file": "skyefuelstation/index.html",
+          "title": "SkyeFuelStation",
+          "ext": ".html",
+          "category": "skyefuelstation"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "skyefuelstation/assets/station.css",
+          "title": null,
+          "ext": ".css",
+          "category": "skyefuelstation"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "skyefuelstation/assets/station.js",
+          "title": null,
+          "ext": ".js",
+          "category": "skyefuelstation"
+        }
+      ]
+    },
+    {
       "name": "SkyeLedger",
       "count": 1,
       "items": [
@@ -9060,6 +12932,724 @@ export const SITE_MENU = {
           "title": "SkyeLedger | Executive Intelligence Cockpit",
           "ext": ".html",
           "category": "SkyeLedger"
+        }
+      ]
+    },
+    {
+      "name": "SkyeLeticXOfficialWebsite",
+      "count": 89,
+      "items": [
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/404.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/404.html",
+          "title": "Redirecting… | SkyeLeticX",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/about-founder.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/about-founder.html",
+          "title": "About the Founder | Skyes Over London | SkyeLeticX",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/about.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/about.html",
+          "title": "About SkyeLeticX | Real League Structure for Under-6'0\" Talent",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/arizona-hq.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/arizona-hq.html",
+          "title": "Arizona: Where It All Begins | SkyeLetes Blog",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/blog-building-team-chemistry.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/blog-building-team-chemistry.html",
+          "title": "Building Chemistry: From Strangers to Squad | SkyeLetes Blog",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/blog-championship-payouts.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/blog-championship-payouts.html",
+          "title": "The $350 Question: How Championship Payouts Work | SkyeLetes Blog",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/blog-first-season.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/blog-first-season.html",
+          "title": "From Pickup to Premium: What to Expect Your First Season | SkyeLetes Blog",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/blog-height-verification.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/blog-height-verification.html",
+          "title": "The Height Check: What to Expect | SkyeLetes Blog",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/blog-media-experience.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/blog-media-experience.html",
+          "title": "Your Game Deserves to Be Seen: The SkyeLetes Media Experience | SkyeLetes Blog",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/blog-skills-that-win.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/blog-skills-that-win.html",
+          "title": "Skills That Win When Height Doesn't | SkyeLetes Blog",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/blog-team-owner-playbook.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/blog-team-owner-playbook.html",
+          "title": "The Team Owner Playbook: Building Your Dynasty | SkyeLetes Blog",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/blog-why-under-6ft.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/blog-why-under-6ft.html",
+          "title": "Why Under 6'0\" Changes Everything | SkyeLetes Blog",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/cfo-dashboard.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/cfo-dashboard.html",
+          "title": "CFO Dashboard | SkyeLeticX Dashboards",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/championships.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/championships.html",
+          "title": "Championships | SkyeLetes Premium Under-6'0\" Basketball League",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/coach-smith/dossier/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/coach-smith/dossier/",
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/dossier/index.html",
+          "title": "Namon Smith | SkyeLeticX Operating Dossier",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/coach-smith/ecosystem/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/coach-smith/ecosystem/",
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/ecosystem/index.html",
+          "title": "SkyeLeticX | Connected Ecosystem",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/coach-smith/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/coach-smith/",
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/index.html",
+          "title": "Namon Smith | SkyeLeticX Founder Invitation",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/coach-smith/opportunity/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/coach-smith/opportunity/",
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/opportunity/index.html",
+          "title": "Namon Smith | The VP Seat",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/coach-smith/original-offer/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/coach-smith/original-offer/",
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/original-offer/index.html",
+          "title": "Namon Smith — SkyeLeticX League VP Offer (Flagship July 23–26, 2026)",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/coach-smith/proof/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/coach-smith/proof/",
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/proof/index.html",
+          "title": "SkyeLeticX | Company Proof",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/coach-smith/skyeleticx/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/coach-smith/skyeleticx/",
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/skyeleticx/index.html",
+          "title": "SkyeLeticX | Premium Under-6'0\" League",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/dossier/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/dossier/",
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/dossier/index.html",
+          "title": "Namon Smith | SkyeLeticX Operating Dossier",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/ecosystem/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/ecosystem/",
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/ecosystem/index.html",
+          "title": "SkyeLeticX | Connected Ecosystem",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/",
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/index.html",
+          "title": "Namon Smith | SkyeLeticX Founder Invitation",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/opportunity/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/opportunity/",
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/opportunity/index.html",
+          "title": "Namon Smith | The VP Seat",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/original-offer/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/original-offer/",
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/original-offer/index.html",
+          "title": "Namon Smith — SkyeLeticX League VP Offer (Flagship July 23–26, 2026)",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/proof/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/proof/",
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/proof/index.html",
+          "title": "SkyeLeticX | Company Proof",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/skyeleticx/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/Coach%20Smith/coach-smith-vp-offer/skyeleticx/",
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/skyeleticx/index.html",
+          "title": "SkyeLeticX | Premium Under-6'0\" League",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/draft-war-room.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/draft-war-room.html",
+          "title": "Draft War Room | SkyeLeticX Dashboards",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/expansion-interest.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/expansion-interest.html",
+          "title": "Expansion Interest | SkyeLeticX",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/home.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/home.html",
+          "title": "SkyeLeticX | Real Draft League for Under-6'0\" Talent",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/how-it-works.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/how-it-works.html",
+          "title": "How SkyeLeticX Works | Combine, Draft, and League Structure",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/index.html",
+          "prettyPath": "/SkyeLeticXOfficialWebsite/",
+          "file": "SkyeLeticXOfficialWebsite/index.html",
+          "title": "SkyeLeticX Animated Intro",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/intro.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/intro.html",
+          "title": "SkyeLeticX Animated Intro",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/league-office-dashboard.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/league-office-dashboard.html",
+          "title": "League Office | SkyeLeticX Dashboards",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/offline.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/offline.html",
+          "title": "SkyeLeticX — Offline",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/owner-dashboard.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/owner-dashboard.html",
+          "title": "SkyeLeticX Dashboard Command",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/owners-intake.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/owners-intake.html",
+          "title": "Founding Owners & Expansion | SkyeLeticX",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/player-combine-intake.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/player-combine-intake.html",
+          "title": "Player Combine Intake | SkyeLeticX",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/player-portal-dashboard.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/player-portal-dashboard.html",
+          "title": "Player Portal | SkyeLeticX Dashboards",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/players.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/players.html",
+          "title": "Player Registration | SkyeLeticX Combine & Draft Pool",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/sitemap.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/sitemap.html",
+          "title": "SkyeLeticX | Sitemap",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/skyeletes-editorial.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/skyeletes-editorial.html",
+          "title": "Where Elite Meets Elevation: SkyeLetes Premium Under-6'0\" League | Skyes Over London LC",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/team-owner-dashboard.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/team-owner-dashboard.html",
+          "title": "Team Owner Dashboard | SkyeLeticX Dashboards",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": "/SkyeLeticXOfficialWebsite/vp-operations-dashboard.html",
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/vp-operations-dashboard.html",
+          "title": "VP Operations | SkyeLeticX Dashboards",
+          "ext": ".html",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/_redirects",
+          "title": null,
+          "ext": "",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/apple-touch-icon.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/assets/founder-skyes-over-london.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/assets/global-nav.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/assets/skx-dashboard.css",
+          "title": null,
+          "ext": ".css",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/assets/skx-dashboard.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/deploy-698e38dbbd2a7f5cb4faf25e.zip",
+          "title": null,
+          "ext": ".zip",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/original-offer/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/original-offer/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/original-offer/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/original-offer/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/Coach Smith/coach-smith-vp-offer/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/assets/app.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/assets/style.css",
+          "title": null,
+          "ext": ".css",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/deploy-698e38dbbd2a7f5cb4faf25e.zip",
+          "title": null,
+          "ext": ".zip",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/original-offer/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/original-offer/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/original-offer/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/original-offer/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/coach-smith/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/favicon-16.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/favicon-32.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/icon-192.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/icon-512.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/logo.png",
+          "title": null,
+          "ext": ".png",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/manifest.json",
+          "title": null,
+          "ext": ".json",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/netlify.toml",
+          "title": null,
+          "ext": ".toml",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/netlify/functions/_lib/auth.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/netlify/functions/_lib/db.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/netlify/functions/_lib/response.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/netlify/functions/skx-portal.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/package.json",
+          "title": null,
+          "ext": ".json",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/readme.md",
+          "title": null,
+          "ext": ".md",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/robots.txt",
+          "title": null,
+          "ext": ".txt",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/sitemap.xml",
+          "title": null,
+          "ext": ".xml",
+          "category": "SkyeLeticXOfficialWebsite"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "SkyeLeticXOfficialWebsite/sw.js",
+          "title": null,
+          "ext": ".js",
+          "category": "SkyeLeticXOfficialWebsite"
         }
       ]
     },
@@ -9181,7 +13771,7 @@ export const SITE_MENU = {
     },
     {
       "name": "sql",
-      "count": 3,
+      "count": 4,
       "items": [
         {
           "urlPath": null,
@@ -9195,6 +13785,14 @@ export const SITE_MENU = {
           "urlPath": null,
           "prettyPath": null,
           "file": "sql/migrate_v2_to_v5.sql",
+          "title": null,
+          "ext": ".sql",
+          "category": "sql"
+        },
+        {
+          "urlPath": null,
+          "prettyPath": null,
+          "file": "sql/migrate_v5_to_v6.sql",
           "title": null,
           "ext": ".sql",
           "category": "sql"
@@ -9584,10 +14182,10 @@ export const SITE_MENU = {
           "category": "Valley Verified "
         },
         {
-          "urlPath": "/Valley%20Verified%20/SkyeLetix.html",
+          "urlPath": "/Valley%20Verified%20/SkyeLeticX.html",
           "prettyPath": null,
-          "file": "Valley Verified /SkyeLetix.html",
-          "title": "SkyeLetiX — The Spectacle | Premium Under-6'0\" League",
+          "file": "Valley Verified /SkyeLeticX.html",
+          "title": "SkyeLeticX — The Spectacle | Premium Under-6'0\" League",
           "ext": ".html",
           "category": "Valley Verified "
         },

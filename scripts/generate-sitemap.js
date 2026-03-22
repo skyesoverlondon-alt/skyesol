@@ -28,6 +28,24 @@ const pageMetadata = new Map([
 ]);
 
 const skipDirs = new Set(['node_modules', 'css', 'js', 'netlify', '.git', '.github']);
+const skipFiles = new Set(['Services/WebBuilds/WebBuilds.html']);
+const skipPathPrefixes = [
+  'Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/'
+];
+
+async function shouldSkipFile(relativePath) {
+  if (skipFiles.has(relativePath)) return true;
+  if (skipPathPrefixes.some((prefix) => relativePath.startsWith(prefix))) return true;
+  if (!relativePath.startsWith('Services/') || !relativePath.endsWith('/index.html')) return false;
+
+  const siblingHtml = relativePath.slice(0, -'/index.html'.length) + '.html';
+  try {
+    await fs.access(path.join(root, siblingHtml));
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 async function collectHtml(dir, list) {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -40,7 +58,9 @@ async function collectHtml(dir, list) {
       continue;
     }
     if (entry.isFile() && entry.name.endsWith('.html')) {
-      list.push({ fullPath: entryPath, relative: path.relative(root, entryPath).replace(/\\/g, '/') });
+      const relative = path.relative(root, entryPath).replace(/\\/g, '/');
+      if (await shouldSkipFile(relative)) continue;
+      list.push({ fullPath: entryPath, relative });
     }
   }
 }

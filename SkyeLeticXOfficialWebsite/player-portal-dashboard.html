@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player Portal | SkyeLeticX Dashboards</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#09030f" />
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/skx-dashboard.css" />
+  
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <a href="home.html" style="display:flex;align-items:center;gap:12px">
+        <img src="logo.png" alt="SkyeLeticX logo" />
+      </a>
+      <div>
+        <div class="brand-name">SkyeLeticX</div>
+        <div class="brand-sub">League Command Surfaces • Skyes Over London LC</div>
+      </div>
+    </div>
+    <nav class="nav-links"><a href="home.html" class="">Home</a><a href="how-it-works.html" class="">How It Works</a><a href="about.html" class="">About</a><a href="about-founder.html" class="">Founder</a><a href="players.html" class="">Players</a><a href="owners-intake.html" class="">Founding Owners</a><a href="arizona-hq.html" class="">Arizona HQ</a><a href="skyeletes-editorial.html" class="">Editorial</a><a href="owner-dashboard.html" class="">Command</a><a href="league-office-dashboard.html" class="">League Office</a><a href="vp-operations-dashboard.html" class="">VP Ops</a><a href="cfo-dashboard.html" class="">CFO</a><a href="team-owner-dashboard.html" class="">Team Owner</a><a href="player-portal-dashboard.html" class="active">Player Portal</a><a href="draft-war-room.html" class="">Draft War Room</a></nav>
+    <div class="nav-cta">
+      <div class="pill">Identity • Blobs • Neon</div>
+      <button class="btn btn-secondary" type="button" data-auth="login">Login</button>
+      <button class="btn btn-danger" type="button" data-auth="logout">Logout</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Player lane</div>
+      <h1>Player Portal</h1>
+      <p>This is the live player-facing dashboard. A player logs in through Netlify Identity and this page loads the linked player record from Neon so they can see their status, team, combines, and finance items.</p>
+      <div class="metrics">
+        <div class="metric"><b id="metricPlayers">0</b><span>Total players</span></div>
+        <div class="metric"><b id="metricTeams">0</b><span>Total teams</span></div>
+        <div class="metric"><b id="metricCombines">0</b><span>Combines</span></div>
+        <div class="metric"><b id="metricOpenFees">$0</b><span>Open fees</span></div>
+      </div>
+      <div id="authState" class="notice">Checking login state…</div>
+      <div id="authGate" class="auth-gate"></div>
+    </div>
+    <aside class="hero-card">
+      <img class="hero-logo" src="logo.png" alt="SkyeLeticX" />
+      <div class="kicker">Portal state</div>
+      <div id="playerSummary" class="stack">
+        <div class="notice">Waiting for linked player profile…</div>
+      </div>
+    </aside>
+  </section>
+  <section class="section">
+    <div class="grid">
+      <article class="card span-6">
+        <div class="kicker">My profile</div>
+        <h3>Update my player details</h3>
+        <form id="playerSelfForm">
+          <div class="form-grid">
+            <div class="form-row"><label>Phone</label><input class="input" name="phone" /></div>
+            <div class="form-row"><label>City</label><input class="input" name="city" /></div>
+            <div class="form-row"><label>State</label><input class="input" name="state" /></div>
+            <div class="form-row"><label>School name</label><input class="input" name="school_name" /></div>
+            <div class="form-row"><label>Position</label><input class="input" name="position" /></div>
+            <div class="form-row" style="grid-column:1/-1"><label>Notes</label><textarea class="input" name="notes"></textarea></div>
+          </div>
+          <div class="form-foot"><button class="btn btn-primary" type="submit">Save my profile</button></div>
+        </form>
+        <div id="playerSelfNotice" class="notice" style="margin-top:12px">Ready.</div>
+      </article>
+      <article class="card span-6">
+        <div class="kicker">Team + finance</div>
+        <h3>Current team and ledger</h3>
+        <div id="playerTeamCard" class="stack"></div>
+      </article>
+    </div>
+  </section>
+  <section class="section">
+    <div class="grid">
+      <article class="card span-6"><div class="kicker">Combines</div><h3>Upcoming and recent combine events</h3><div id="playerCombinesTable"></div></article>
+      <article class="card span-6"><div class="kicker">Finance ledger</div><h3>My finance entries</h3><div id="playerFinanceTable"></div></article>
+    </div>
+  </section>
+  <footer class="footer">Player portal • Contact: <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> • <a href="tel:4804695416">(480) 469-5416</a></footer>
+</main>
+<script>
+(async function(){
+  const boot = await SKX.boot({ roles:['player','president','vp','team_owner'], authStateId:'authState', gateId:'authGate', summary:true });
+  if (!boot.authorized) return;
+  async function refresh(){
+    const res = await SKX.api('player_self');
+    const player = res.player;
+    if (!player) {
+      document.getElementById('playerSummary').innerHTML = '<div class="notice error">No player profile is linked to this email yet. Ask league office to link your Netlify Identity email to a player profile.</div>';
+      document.getElementById('playerTeamCard').innerHTML = '<div class="notice">No linked player record yet.</div>';
+      document.getElementById('playerCombinesTable').innerHTML = '';
+      document.getElementById('playerFinanceTable').innerHTML = '';
+      return;
+    }
+    document.getElementById('playerSummary').innerHTML = `
+      <div class="notice"><strong>${SKX.esc(player.full_name)}</strong><br/>${SKX.esc(player.school_level || '')} • ${SKX.esc(player.school_name || '')}</div>
+      <div class="notice"><strong>Status:</strong> ${SKX.esc(player.status || 'registered')}</div>
+      <div class="notice"><strong>Combine score:</strong> ${SKX.esc(player.combine_score || '—')} • <strong>Draft rank:</strong> ${SKX.esc(player.draft_rank || '—')}</div>
+    `;
+    document.getElementById('playerTeamCard').innerHTML = `
+      <div class="notice"><strong>Team:</strong> ${SKX.esc(res.team ? res.team.team_name : 'Not drafted yet')}</div>
+      <div class="notice"><strong>Entry lane:</strong> ${SKX.esc(player.entry_lane || '')}</div>
+      <div class="notice"><strong>Portal email:</strong> ${SKX.esc(player.identity_email || player.email || '')}</div>
+    `;
+    document.querySelector('[name="phone"]').value = player.phone || '';
+    document.querySelector('[name="city"]').value = player.city || '';
+    document.querySelector('[name="state"]').value = player.state || '';
+    document.querySelector('[name="school_name"]').value = player.school_name || '';
+    document.querySelector('[name="position"]').value = player.position || '';
+    document.querySelector('[name="notes"]').value = player.notes || '';
+    document.getElementById('playerCombinesTable').innerHTML = SKX.tableHTML(res.combines || [], [
+      { label:'Event', render:r=>`<strong>${SKX.esc(r.title)}</strong><small>${SKX.esc(r.location || '')}</small>` },
+      { label:'Date', render:r=>SKX.shortDate(r.event_date) },
+      { label:'Check-in', key:'checkin_time' },
+      { label:'Status', render:r=>`<span class="badge violet">${SKX.esc(r.status || '')}</span>` }
+    ]);
+    document.getElementById('playerFinanceTable').innerHTML = SKX.tableHTML(res.finance_entries || [], [
+      { label:'Category', render:r=>`<span class="badge gold">${SKX.esc(r.category || '')}</span>` },
+      { label:'Description', key:'description' },
+      { label:'Amount', render:r=>SKX.money(r.amount) },
+      { label:'Status', render:r=>`<span class="badge ${r.status==='paid'?'green':'violet'}">${SKX.esc(r.status || '')}</span>` },
+      { label:'Due', render:r=>SKX.shortDate(r.due_date) }
+    ]);
+  }
+  document.getElementById('playerSelfForm').addEventListener('submit', async(e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    try { await SKX.api('player_update_self', { data }); SKX.showNotice('playerSelfNotice', 'Player profile updated.', 'success'); refresh(); }
+    catch(err){ SKX.showNotice('playerSelfNotice', SKX.esc(err.message), 'error'); }
+  });
+  await refresh();
+})();
+</script>
+
+<script src="assets/skx-dashboard.js"></script>
+</body>
+</html>

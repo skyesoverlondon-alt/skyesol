@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/app.js"></script>
+  <script defer src="/assets/mail-ui.js"></script>
+  <link rel="stylesheet" href="/assets/mail-ui.css" />
+  <title>Sent — SkyMail Host</title>
+</head>
+<body data-page-id="sent" data-page-name="Sent" data-page-hint="Outbound mailbox lane" data-label="SENT">
+<div class="wrap">
+  <div id="pageTopbar"></div>
+  <div class="layout">
+    <aside class="rail" id="leftRail"></aside>
+    <main class="main">
+
+      <section class="hero">
+        <section class="card">
+          <div class="badge" id="mailboxBadge">Checking mailbox connection…</div>
+          <h1 class="h1">Sent</h1>
+          <p class="sub">Review outbound hosted-mail history in the same SkyMail command surface.</p>
+          <div class="btnrow">
+            <a class="btn gold" href="/compose.html">Compose</a>
+            <button class="btn" id="refreshBtn" type="button">Refresh</button>
+            <button class="btn ok" id="watchBtn" type="button">Enable Push Watch</button>
+            <button class="btn" id="connectBtn" type="button">Provisioning</button>
+            <button class="btn danger" id="disconnectBtn" type="button">Open Settings</button>
+          </div>
+          <div class="hr"></div>
+          <div class="grid3">
+            <div class="stat"><b>Sent</b><span class="mini">Review outbound hosted-mail history in the same SkyMail command surface.</span></div>
+            <div class="stat"><b>Bulk Actions</b><span class="mini">Multi-select messages for real mailbox changes.</span></div>
+            <div class="stat"><b>Thread View</b><span class="mini">Open full threads for stronger conversation review.</span></div>
+          </div>
+        </section>
+        <aside class="card">
+          <div class="kicker">Live Mailbox Status</div>
+          <div class="mini" id="watchText">Checking watch state…</div>
+          <div class="notice" style="margin-top:12px">Search, navigate, and act on the hosted mailbox without leaving the SkyMail shell.</div>
+          <div class="notice" style="margin-top:12px">All visible controls on this page are wired to mailbox or navigation behavior. Nothing here is theater.</div>
+        </aside>
+      </section>
+      <section class="card">
+        <div class="toolbar">
+          <div>
+            <h2 style="margin:0 0 4px">Mailbox list</h2>
+            <div class="mini">Hosted-mail message listing with selection actions and thread open.</div>
+          </div>
+          <div class="mini" id="statusText">Waiting for mailbox load…</div>
+        </div>
+        <div class="searchbar">
+          <div><label for="q">Search query</label><input id="q" type="text" placeholder="from:someone@example.com OR project keyword" /></div>
+          <div><label>&nbsp;</label><button class="btn gold" id="applyBtn" type="button">Apply</button></div>
+          <div><label>&nbsp;</label><button class="btn" id="clearBtn" type="button">Clear</button></div>
+        </div>
+        <div class="hr"></div>
+        <div class="bulkbar" id="bulkBar"></div>
+        <div class="mailtable" id="mailList"><div class="empty">Loading mailbox…</div></div>
+        <div class="pagination"><div class="mini" id="pageTokenText"></div><button class="btn" id="prevBtn" type="button">Previous</button><button class="btn" id="nextBtn" type="button">Next</button></div>
+      </section>
+
+    </main>
+  </div>
+  <div id="appFooter"></div>
+</div>
+<script defer src="/assets/mailbox-page.js"></script>
+</body>
+</html>

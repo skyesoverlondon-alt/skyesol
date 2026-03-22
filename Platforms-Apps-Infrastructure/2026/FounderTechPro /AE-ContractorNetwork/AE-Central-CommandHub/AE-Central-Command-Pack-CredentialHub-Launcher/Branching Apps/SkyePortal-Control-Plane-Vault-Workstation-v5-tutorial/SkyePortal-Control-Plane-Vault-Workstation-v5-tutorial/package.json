@@ -1,0 +1,8 @@
+{
+  "name": "skyeportal-vault-control-plane",
+  "private": true,
+  "version": "3.2.0",
+  "description": "SkyePortal Vault Workstation X \u2014 branded local-first encrypted control plane with docs, files, devices, founder desk, and Netlify broker lane",
+  "type": "module",
+  "dependencies": {}
+}

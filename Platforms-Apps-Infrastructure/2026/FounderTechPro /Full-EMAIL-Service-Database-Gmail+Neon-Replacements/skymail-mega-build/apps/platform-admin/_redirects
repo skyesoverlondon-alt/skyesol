@@ -1,0 +1,2 @@
+# Optional: if you want Netlify to reverse-proxy your worker later, add a real route below.
+# /api/* https://api.example.com/:splat 200

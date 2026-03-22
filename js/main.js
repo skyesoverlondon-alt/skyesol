@@ -49,14 +49,24 @@ function attachNav(){
     { name: 'SkyeOps', href: '/SkyeOps/index.html', match: /SkyeOps/i }
   ];
   const servicePages = [
-    { name: 'SkyeLeticX Portal', href: '/skyeleticx-portal.html', match: /skyeleticx-portal/i },
+    { name: 'SkyeLeticX Portal', href: '/skyeleticx-portal.html', match: /skyeleti(?:cx|x)-portal/i },
     { name: 'SkyeFyve', href: '/Services/SkyeFyve/index.html', match: /Services\/SkyeFyve/i },
     { name: 'Web Builds', href: '/Services/WebBuilds.html', match: /WebBuilds/i },
     { name: 'AI & Data Apps', href: '/Services/ai-data-apps.html', match: /ai-data-apps/i },
     { name: 'Portals & Hubs', href: '/Services/portals-hubs.html', match: /portals-hubs/i },
     { name: 'Ecommerce & Payments', href: '/Services/ecommerce-payments.html', match: /ecommerce-payments/i },
     { name: 'Intake & Routing', href: '/Services/intake-routing.html', match: /intake-routing/i },
-    { name: 'Trust Surfaces', href: '/Services/trust-surfaces.html', match: /trust-surfaces/i }
+    { name: 'Trust Surfaces', href: '/Services/trust-surfaces.html', match: /trust-surfaces/i },
+    { name: 'API & Integrations', href: '/Services/api-integration.html', match: /api-integration/i },
+    { name: 'Brand Identity', href: '/Services/brand-identity.html', match: /brand-identity/i },
+    { name: 'Notifications', href: '/Services/notification-comms.html', match: /notification-comms/i },
+    { name: 'Docs & Knowledge', href: '/Services/docs-knowledge.html', match: /docs-knowledge/i },
+    { name: 'Migration', href: '/Services/platform-migration.html', match: /platform-migration/i },
+    { name: 'Security', href: '/Services/security-audit.html', match: /security-audit/i },
+    { name: 'Analytics', href: '/Services/analytics-dashboards.html', match: /analytics-dashboards/i },
+    { name: 'Retention', href: '/Services/lifecycle-retention.html', match: /lifecycle-retention/i },
+    { name: 'MVP Builds', href: '/Services/mvp-launchpad.html', match: /mvp-launchpad/i },
+    { name: 'SEO & Content', href: '/Services/seo-content.html', match: /seo-content/i }
   ];
   const explorePages = [
     { name: 'Founder', href: '/about.html', match: /(^|\/)about(\.html)?$/i },
@@ -435,7 +445,17 @@ function attachMegaNav(){
     { name: 'Portals & Hubs', href: '/Services/portals-hubs.html' },
     { name: 'Ecommerce & Payments', href: '/Services/ecommerce-payments.html' },
     { name: 'Intake & Routing', href: '/Services/intake-routing.html' },
-    { name: 'Trust Surfaces', href: '/Services/trust-surfaces.html' }
+    { name: 'Trust Surfaces', href: '/Services/trust-surfaces.html' },
+    { name: 'API & Integrations', href: '/Services/api-integration.html' },
+    { name: 'Brand Identity', href: '/Services/brand-identity.html' },
+    { name: 'Notifications', href: '/Services/notification-comms.html' },
+    { name: 'Docs & Knowledge', href: '/Services/docs-knowledge.html' },
+    { name: 'Migration', href: '/Services/platform-migration.html' },
+    { name: 'Security', href: '/Services/security-audit.html' },
+    { name: 'Analytics', href: '/Services/analytics-dashboards.html' },
+    { name: 'Retention', href: '/Services/lifecycle-retention.html' },
+    { name: 'MVP Builds', href: '/Services/mvp-launchpad.html' },
+    { name: 'SEO & Content', href: '/Services/seo-content.html' }
   ];
   const grid = megaNav.querySelector('.mega-nav-grid');
   if (grid) {
@@ -485,12 +505,30 @@ function attachMegaNav(){
     });
     ordered.forEach(link => servicesCol.appendChild(link));
   }
-  function openNav()  { megaNav.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-  function closeNav() { megaNav.style.display = 'none';  document.body.style.overflow = ''; }
-  menuBtn.addEventListener('click', openNav);
+  function setNavState(isOpen) {
+    megaNav.classList.toggle('open', isOpen);
+    megaNav.style.display = isOpen ? 'flex' : 'none';
+    megaNav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  function openNav()  { setNavState(true); }
+  function closeNav() { setNavState(false); }
+
+  menuBtn.setAttribute('aria-expanded', 'false');
+  megaNav.setAttribute('aria-hidden', 'true');
+
+  menuBtn.addEventListener('click', function(){
+    const isOpen = megaNav.classList.contains('open') || megaNav.style.display === 'flex';
+    setNavState(!isOpen);
+  });
   if (megaClose) megaClose.addEventListener('click', closeNav);
   megaNav.addEventListener('click', function(e){ if (e.target === megaNav) closeNav(); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeNav(); });
+  megaNav.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', closeNav);
+  });
 }
 
 document.addEventListener('DOMContentLoaded', attachMegaNav);

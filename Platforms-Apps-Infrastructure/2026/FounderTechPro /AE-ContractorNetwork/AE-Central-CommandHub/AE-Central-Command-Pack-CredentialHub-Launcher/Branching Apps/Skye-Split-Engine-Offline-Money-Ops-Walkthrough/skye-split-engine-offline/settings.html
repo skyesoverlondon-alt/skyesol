@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings · Skye Split Engine</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/icon-192.png">
+  <link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="bg-layer"></div>
+    <main class="site">
+      <header class="topbar">
+        <div class="branding">
+          <img src="./assets/media/skydexia-logo.png" alt="Skyes Over London logo">
+          <div class="branding-copy">
+            <h1 data-brand-name>Skye Split Engine</h1>
+            <p data-brand-sub>Skyes Over London · Offline money operations + backup vault</p>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="pill"><span class="dot"></span><span><strong>Visual:</strong> Glass controls</span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Currency:</strong> <span data-status-currency>USD</span></span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Sync:</strong> <span data-last-sync>Local only</span></span></div>
+        </div>
+      </header>
+
+      
+<nav class="navbar">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="engine.html">Split Engine</a>
+        <a class="nav-link" href="ops.html">Money Ops</a>
+        <a class="nav-link" href="receipts.html">Receipts</a>
+        <a class="nav-link" href="contacts.html">Contacts</a>
+        <a class="nav-link" href="vault.html">Backup Vault</a>
+        <a class="nav-link" href="settings.html">Settings</a>
+        <a class="nav-link" href="walkthrough.html">Walkthrough</a>
+        <a class="nav-link" href="help.html">Help</a>
+      </nav>
+
+      <section class="settings-grid">
+        <article class="card">
+          <div class="kicker">Separate background layer</div>
+          <h2 class="page-title" style="font-size:2rem;">Tune the app shell without breaking the UI.</h2>
+          <form id="settingsForm" class="form-stack">
+            <div class="form-grid-2">
+              <div class="field">
+                <label for="companyName">Company name</label>
+                <input id="companyName" name="companyName" type="text">
+              </div>
+              <div class="field">
+                <label for="appName">App name</label>
+                <input id="appName" name="appName" type="text">
+              </div>
+            </div>
+            <div class="form-grid-3">
+              <div class="field">
+                <label for="currency">Default currency</label>
+                <select id="currency" name="currency">
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="CAD">CAD</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="backgroundMode">Background preset</label>
+                <select id="backgroundMode" name="backgroundMode">
+                  <option value="default">Default cosmic</option>
+                  <option value="nebula">Nebula</option>
+                  <option value="midnight-grid">Midnight grid</option>
+                  <option value="upload">Uploaded image</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="accentMode">Accent mode</label>
+                <select id="accentMode" name="accentMode">
+                  <option value="gold-violet">Gold + violet</option>
+                  <option value="ember">Ember</option>
+                  <option value="ice">Ice</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="backgroundUpload">Upload background image</label>
+              <input id="backgroundUpload" name="backgroundUpload" type="file" accept="image/*">
+              <div class="field-hint">The image is stored locally in this browser. It does not upload anywhere.</div>
+            </div>
+
+            <div class="toggle-row">
+              <div>
+                <div class="split-label">Glass opacity</div>
+                <div class="caption">Higher opacity makes panels more solid.</div>
+              </div>
+              <div class="range-wrap">
+                <input id="glassOpacity" type="range" min="0.18" max="0.82" step="0.01">
+                <strong data-glass-opacity-value>0.52</strong>
+              </div>
+            </div>
+
+            <div class="toggle-row">
+              <div>
+                <div class="split-label">Glass blur</div>
+                <div class="caption">Higher blur deepens the separation between UI and background.</div>
+              </div>
+              <div class="range-wrap">
+                <input id="glassBlur" type="range" min="8" max="36" step="1">
+                <strong data-glass-blur-value>18px</strong>
+              </div>
+            </div>
+
+            <div class="toggle-row">
+              <div>
+                <div class="split-label">Auto snapshots</div>
+                <div class="caption">Create periodic local recovery points while you work.</div>
+              </div>
+              <input id="autoSnapshot" name="autoSnapshot" type="checkbox">
+            </div>
+
+            <div class="field">
+              <label for="snapshotIntervalMinutes">Auto snapshot interval (minutes)</label>
+              <input id="snapshotIntervalMinutes" name="snapshotIntervalMinutes" type="number" min="5" max="180" step="5">
+            </div>
+
+            <div class="actions-row">
+              <button class="btn" type="submit">Save settings</button>
+              <button class="btn-soft" type="button" data-reset-background>Reset background</button>
+            </div>
+          </form>
+          <div data-settings-result></div>
+        </article>
+
+        <aside class="panel">
+          <h3>What this page controls</h3>
+          <div class="list">
+            <div class="list-item">
+              <div>
+                <div class="split-label">Background isolation</div>
+                <div class="caption">Swap or upload visuals without disturbing panel structure.</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div>
+                <div class="split-label">Glass readability</div>
+                <div class="caption">Opacity and blur sliders let users make the UI lighter or stronger.</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div>
+                <div class="split-label">Autosnapshot cadence</div>
+                <div class="caption">A practical value-add for an offline monthly subscription app.</div>
+              </div>
+            </div>
+          </div>
+          <div class="note-box">This is where the app becomes more premium: people can personalize the visual layer while the underlying tool remains stable.</div>
+        </aside>
+      </section>
+
+      <footer class="footer-block">
+        <h3>Contact</h3>
+        <div class="footer-contact">
+          <span>Skyes Over London</span>
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+          <a href="tel:+14804695416">(480) 469-5416</a>
+          <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <script type="module" src="./assets/settings.js"></script>
+</body>
+</html>

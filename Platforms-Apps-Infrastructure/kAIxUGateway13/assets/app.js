@@ -91,8 +91,21 @@
     return "$" + (n / 100).toFixed(2);
   }
 
+  function numberFmt(value) {
+    return new Intl.NumberFormat("en-US").format(Number(value || 0));
+  }
+
   function monthKeyUTC() {
     return new Date().toISOString().slice(0, 7);
+  }
+
+  const PLATFORM_HEALTH_OPTIONS = ["unreviewed", "healthy", "warning", "critical"];
+  const PLATFORM_ONBOARDING_OPTIONS = ["untracked", "queued", "in-progress", "blocked", "complete"];
+  const PLATFORM_LIFECYCLE_OPTIONS = ["active", "maintenance", "paused", "rebuild"];
+
+  function optionTags(options, selected) {
+    const current = String(selected || "").trim();
+    return options.map((value) => `<option value="${escapeAttr(value)}" ${value === current ? "selected" : ""}>${escapeHtml(value)}</option>`).join("");
   }
 
   async function copyText(s) {
@@ -385,12 +398,9 @@ function mountPricedModelPicker(textareaSel, providersInputSel) {
     const loginView = $("#loginView");
     const appView = $("#appView");
     const logoutBtn = $("#logoutBtn");
-    const gatewayBaseBtn = $("#gatewayBaseBtn");
     if (loginView) loginView.style.display = isAuthed ? "none" : "block";
     if (appView) appView.style.display = isAuthed ? "block" : "none";
     if (logoutBtn) logoutBtn.style.display = isAuthed ? "inline-flex" : "none";
-    if (gatewayBaseBtn) gatewayBaseBtn.style.display = isAuthed ? "inline-flex" : "none";
-    if (!isAuthed) closeBaseModal();
   }
 
   function clearAuth() {
@@ -497,6 +507,9 @@ function mountPricedModelPicker(textareaSel, providersInputSel) {
     $$(".tabpanel").forEach((p) => (p.style.display = "none"));
     const panel = $("#tab-" + name);
     if (panel) panel.style.display = "block";
+    if (name === "platforms") {
+      loadPlatformControl().catch((e) => showToast(e.message, false));
+    }
   }
   $$(".tab").forEach((btn) => btn.addEventListener("click", () => switchTab(btn.dataset.tab)));
 
@@ -773,6 +786,198 @@ function mountPricedModelPicker(textareaSel, providersInputSel) {
         tbody.appendChild(tr);
       }
     }
+  }
+
+  async function loadStationOverview() {
+    const month = ($("#sfMonth")?.value || "").trim() || monthKeyUTC();
+    const data = await apiAdmin(`/.netlify/functions/admin-skyefuel-station?month=${encodeURIComponent(month)}`);
+
+    const overview = data?.overview || {};
+    const treasury = overview.treasury || {};
+    const pricing = data?.station?.pricing || {};
+    const preview = data?.preview || {};
+    const brain = data?.brain_gate || {};
+
+    $("#sfMonth") && ($("#sfMonth").value = overview.month || month);
+    $("#sfCustomers") && ($("#sfCustomers").textContent = `${numberFmt(overview?.customers?.active || 0)} / ${numberFmt(overview?.customers?.total || 0)}`);
+    $("#sfKeys") && ($("#sfKeys").textContent = `${numberFmt(overview?.keys?.active || 0)} / ${numberFmt(overview?.keys?.total || 0)}`);
+    $("#sfSpent") && ($("#sfSpent").textContent = money(treasury.spent_cents || 0));
+    $("#sfTopups") && ($("#sfTopups").textContent = money(treasury.topup_cents || 0));
+    $("#sfServiceAsset") && ($("#sfServiceAsset").textContent = pricing.service_asset_name || "SkyeTokens");
+    $("#sfBonusPct") && ($("#sfBonusPct").textContent = `${Number(pricing.bonus_return_pct || 0)}%`);
+    $("#sfDiscountPct") && ($("#sfDiscountPct").textContent = `${Number(pricing.discount_pct || 0)}%`);
+    $("#sfPreview") && ($("#sfPreview").textContent = `${numberFmt(preview.effective_service_units || 0)} units`);
+
+    const brainState = $("#sfBrainState");
+    if (brainState) {
+      brainState.textContent = brain.connected
+        ? `brain gate: live ${brain.endpoint || "connected"}`
+        : brain.configured
+          ? "brain gate: configured but offline"
+          : "brain gate: local bridge only";
+    }
+    $("#sfBrainText") && ($("#sfBrainText").textContent = brain.connected
+      ? `Gateway 13 is reading the separate station brain at ${brain.url}${brain.endpoint || ""}.`
+      : brain.configured
+        ? (brain.error || "Configured station brain did not answer. Local station metrics remain available.")
+        : "Gateway 13 is reading the local station bridge. Set SKYEFUEL_STATION_BRAIN_URL when the separate Cloudflare brain is ready.");
+
+    const products = $("#sfProducts");
+    if (products) {
+      products.innerHTML = (data?.station?.assets || []).map((asset) => `
+        <div style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.08);">
+          <strong>${escapeHtml(asset.name || "")}</strong>
+          <div class="muted small">${escapeHtml(asset.role || "")}</div>
+          <div class="muted small">${escapeHtml(asset.description || "")}</div>
+        </div>
+      `).join("") || '<span class="muted small">No station assets configured.</span>';
+    }
+
+    const leadersBody = $("#sfLeadersTable tbody");
+    if (leadersBody) {
+      leadersBody.innerHTML = "";
+      for (const row of (data?.leaders || [])) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${escapeHtml(row.email || "")}</td>
+          <td>${escapeHtml(row.plan_name || "")}</td>
+          <td>${money(row.spent_cents || 0)}</td>
+          <td>${money(row.extra_cents || 0)}</td>
+          <td>${numberFmt(row.token_volume || 0)}</td>
+        `;
+        leadersBody.appendChild(tr);
+      }
+    }
+
+    const eventsBody = $("#sfEventsTable tbody");
+    if (eventsBody) {
+      eventsBody.innerHTML = "";
+      for (const row of (data?.recent_events || [])) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${row.created_at ? new Date(row.created_at).toLocaleString() : ""}</td>
+          <td>${escapeHtml(row.email || "")}</td>
+          <td>${escapeHtml(row.provider || "")}</td>
+          <td>${escapeHtml(row.model || "")}</td>
+          <td>${money(row.cost_cents || 0)}</td>
+        `;
+        eventsBody.appendChild(tr);
+      }
+    }
+
+    showToast("Loaded SkyeFuelStation overview.", true);
+  }
+
+  async function loadPlatformControl() {
+    const data = await apiAdmin("/.netlify/functions/admin-platform-control");
+    const counts = data?.counts || {};
+    const backupBrain = data?.backup_brain || {};
+
+    $("#pcSurfaceCount") && ($("#pcSurfaceCount").textContent = numberFmt(counts.surfaces || 0));
+    $("#pcRemoteDocs") && ($("#pcRemoteDocs").textContent = numberFmt(counts.connected_remote_docs || 0));
+    $("#pcCohortSeats") && ($("#pcCohortSeats").textContent = numberFmt(counts.cohort_seats || 0));
+    $("#pcMailThreads") && ($("#pcMailThreads").textContent = numberFmt(counts.skymail_threads || 0));
+    $("#pcAttentionCount") && ($("#pcAttentionCount").textContent = numberFmt(counts.attention_needed || 0));
+    $("#pcOnboardingCount") && ($("#pcOnboardingCount").textContent = numberFmt(counts.onboarding_inflight || 0));
+    $("#pcStationCustomers") && ($("#pcStationCustomers").textContent = numberFmt(counts.station_active_customers || 0));
+    $("#pcBackupBrain") && ($("#pcBackupBrain").textContent = backupBrain.configured ? "ready" : "off");
+
+    const storageState = $("#pcStorageState");
+    if (storageState) {
+      storageState.textContent = data?.storage_ready
+        ? `Shared Neon platform-state storage is active. ${numberFmt(counts.reviewed_platforms || 0)} platform lanes have explicit operator review saved in Gateway 13.`
+        : "Shared Neon platform-state storage is not configured yet. Gateway can still see linked surfaces, but server-backed platform state will not persist.";
+    }
+
+    const backupBrainState = $("#pcBackupBrainState");
+    if (backupBrainState) {
+      backupBrainState.textContent = backupBrain.configured
+        ? `Backup brain is configured through ${escapeHtml(backupBrain.provider || "Skyes Over London")} on ${escapeHtml(backupBrain.model || "configured model")}${backupBrain.locked ? " and is token-locked." : "."}`
+        : "Backup brain is not configured yet. Gateway can see the lane, but there is still no live backup signal to surface.";
+    }
+
+    const tbody = $("#platformControlTable tbody");
+    if (tbody) {
+      tbody.innerHTML = "";
+      for (const platform of (data?.platforms || [])) {
+        const ops = platform?.platform_ops || {};
+        const tr = document.createElement("tr");
+        tr.dataset.platformRow = platform.app_id || "";
+        tr.innerHTML = `
+          <td>
+            <strong>${escapeHtml(platform.title || platform.app_id || "")}</strong>
+            <div class="muted small">${escapeHtml(platform.description || "")}</div>
+          </td>
+          <td>${escapeHtml(platform.visibility || "admin")}</td>
+          <td>
+            <div>${escapeHtml(platform.storage_mode || "linked")}</div>
+            <div class="muted small">${escapeHtml(platform.storage_status || "unknown")}</div>
+          </td>
+          <td>${escapeHtml(platform.summary_text || "No shared state yet.")}</td>
+          <td>
+            <select data-platform-health="${escapeAttr(platform.app_id || "")}" style="min-width:130px;">
+              ${optionTags(PLATFORM_HEALTH_OPTIONS, ops.health_status || "unreviewed")}
+            </select>
+          </td>
+          <td>
+            <select data-platform-onboarding="${escapeAttr(platform.app_id || "")}" style="min-width:140px;">
+              ${optionTags(PLATFORM_ONBOARDING_OPTIONS, ops.onboarding_stage || "untracked")}
+            </select>
+          </td>
+          <td>
+            <select data-platform-lifecycle="${escapeAttr(platform.app_id || "")}" style="min-width:130px;">
+              ${optionTags(PLATFORM_LIFECYCLE_OPTIONS, ops.lifecycle_status || "active")}
+            </select>
+          </td>
+          <td>
+            <div style="display:grid; gap:8px; min-width:240px;">
+              <input data-platform-owner="${escapeAttr(platform.app_id || "")}" value="${escapeAttr(ops.owner || "")}" placeholder="Operator / owner" />
+              <textarea data-platform-notes="${escapeAttr(platform.app_id || "")}" rows="3" placeholder="Operational notes">${escapeHtml(ops.notes || "")}</textarea>
+            </div>
+          </td>
+          <td>${platform.updated_at ? new Date(platform.updated_at).toLocaleString() : "Not saved"}</td>
+          <td>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              ${platform.launch_url ? `<a class="btn ghost" href="${escapeAttr(platform.launch_url)}" target="_blank" rel="noreferrer">Open</a>` : '<span class="muted small">n/a</span>'}
+              <button class="btn primary" type="button" data-save-platform-ops="${escapeAttr(platform.app_id || "")}">Save ops</button>
+            </div>
+            <div class="muted small" style="margin-top:8px;">${ops.last_checked_at ? `Checked ${new Date(ops.last_checked_at).toLocaleString()}` : "No operator checkpoint saved yet."}</div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      tbody.querySelectorAll("[data-save-platform-ops]").forEach((button) => {
+        button.addEventListener("click", () => {
+          savePlatformOps(button.getAttribute("data-save-platform-ops") || "").catch((e) => showToast(e.message, false));
+        });
+      });
+    }
+
+    showToast("Loaded platform control.", true);
+  }
+
+  async function savePlatformOps(appId) {
+    if (!appId) throw new Error("Missing platform app_id");
+    const row = document.querySelector(`[data-platform-row="${CSS.escape(appId)}"]`);
+    if (!row) throw new Error("Platform row not found");
+
+    const payload = {
+      app_id: appId,
+      health_status: row.querySelector(`[data-platform-health="${CSS.escape(appId)}"]`)?.value || "unreviewed",
+      onboarding_stage: row.querySelector(`[data-platform-onboarding="${CSS.escape(appId)}"]`)?.value || "untracked",
+      lifecycle_status: row.querySelector(`[data-platform-lifecycle="${CSS.escape(appId)}"]`)?.value || "active",
+      owner: row.querySelector(`[data-platform-owner="${CSS.escape(appId)}"]`)?.value || "",
+      notes: row.querySelector(`[data-platform-notes="${CSS.escape(appId)}"]`)?.value || ""
+    };
+
+    await apiAdmin("/.netlify/functions/admin-platform-ops", {
+      method: "PUT",
+      body: payload
+    });
+
+    showToast(`Saved platform ops for ${appId}.`, true);
+    await loadPlatformControl();
   }
 
   // ------------------------------
@@ -1292,6 +1497,59 @@ async function generatePushInvoice() {
     await monitorSearch(true);
   }
 
+  function platformEventStatus(text) {
+    const el = $("#platformEventStatus");
+    if (el) el.textContent = text;
+  }
+
+  function clearPlatformEventsTable() {
+    const tbody = $("#platformEventsTable tbody");
+    if (tbody) tbody.innerHTML = "";
+  }
+
+  function renderPlatformEventRow(event) {
+    const tbody = $("#platformEventsTable tbody");
+    if (!tbody) return;
+
+    const summary = event?.summary || (event?.source === "audit"
+      ? JSON.stringify(event.meta || {})
+      : (event?.kind || event?.level || JSON.stringify(event.meta || {})));
+    const status = event?.http_status || event?.level || "";
+    const actionLabel = event?.groupLabel || event?.action || "";
+    const targetLabel = event?.targetLabel || event?.target || "";
+
+    const tr = document.createElement("tr");
+    tr.style.cursor = "pointer";
+    tr.innerHTML = `
+      <td>${event.created_at ? new Date(event.created_at).toLocaleString() : ""}</td>
+      <td>${escapeHtml(event.source || "")}</td>
+      <td>${escapeHtml(event.actor || "")}</td>
+      <td>${escapeHtml(actionLabel)}</td>
+      <td>${escapeHtml(targetLabel)}</td>
+      <td>${escapeHtml(String(status))}</td>
+      <td style="max-width:420px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(summary)}</td>
+    `;
+    tr.addEventListener("click", () => openMonitorDetail(event));
+    tbody.appendChild(tr);
+  }
+
+  async function loadPlatformEvents() {
+    platformEventStatus("loading");
+    clearPlatformEventsTable();
+
+    const appId = ($("#platformEventApp")?.value || "").trim();
+    const limitRaw = ($("#platformEventLimit")?.value || "100").trim();
+    const limit = Number.isFinite(Number(limitRaw)) ? Math.max(1, Math.min(500, Number(limitRaw))) : 100;
+    const qs = new URLSearchParams({ limit: String(limit) });
+    if (appId) qs.set("app_id", appId);
+
+    const data = await apiAdmin(`/.netlify/functions/admin-platform-events?${qs.toString()}`);
+    const events = data?.events || [];
+    for (const event of events) renderPlatformEventRow(event);
+    platformEventStatus(events.length ? `${events.length} loaded` : "idle");
+    showToast("Loaded platform history.", true);
+  }
+
   // ------------------------------
   // Gateway Base modal
   // ------------------------------
@@ -1314,16 +1572,11 @@ async function generatePushInvoice() {
     if (health) health.href = (normalizeBase(saved) || "") + "/.netlify/functions/health";
 
     modal.style.display = "flex";
-    modal.setAttribute("aria-hidden", "false");
-    input?.focus();
   }
 
   function closeBaseModal() {
     const modal = $("#baseModal");
-    if (modal) {
-      modal.style.display = "none";
-      modal.setAttribute("aria-hidden", "true");
-    }
+    if (modal) modal.style.display = "none";
   }
 
   function saveBaseModal() {
@@ -1344,16 +1597,11 @@ async function generatePushInvoice() {
   // Wiring
   // ------------------------------
   $("#gatewayBaseBtn")?.addEventListener("click", openBaseModal);
-  $("#apiBaseClose")?.addEventListener("click", (e) => { e.preventDefault(); closeBaseModal(); });
-  $("#apiBaseSave")?.addEventListener("click", (e) => { e.preventDefault(); saveBaseModal(); });
-  $("#apiBaseUseThisSite")?.addEventListener("click", (e) => { e.preventDefault(); useThisSite(); });
+  $("#apiBaseClose")?.addEventListener("click", closeBaseModal);
+  $("#apiBaseSave")?.addEventListener("click", saveBaseModal);
+  $("#apiBaseUseThisSite")?.addEventListener("click", useThisSite);
   $("#baseModal")?.addEventListener("click", (e) => {
     if (e.target && e.target.id === "baseModal") closeBaseModal();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key !== "Escape") return;
-    const modal = $("#baseModal");
-    if (modal && modal.style.display !== "none") closeBaseModal();
   });
 
   $("#monCloseBtn")?.addEventListener("click", closeMonitorDetail);
@@ -1380,6 +1628,8 @@ async function generatePushInvoice() {
   });
 
   $("#loadUsage")?.addEventListener("click", () => loadUsage().catch((e) => showToast(e.message, false)));
+  $("#loadStationOverview")?.addEventListener("click", () => loadStationOverview().catch((e) => showToast(e.message, false)));
+  $("#loadPlatformControl")?.addEventListener("click", () => loadPlatformControl().catch((e) => showToast(e.message, false)));
 
   $("#loadCustomerConfig")?.addEventListener("click", () => loadCustomerConfig().catch((e) => showToast(e.message, false)));
   $("#saveCustomerConfig")?.addEventListener("click", () => saveCustomerConfig().catch((e) => showToast(e.message, false)));
@@ -1407,6 +1657,8 @@ $("#pushGenInvoice")?.addEventListener("click", () => generatePushInvoice().catc
   $("#monRefreshBtn")?.addEventListener("click", () => monitorSearch(true).catch((e) => showToast(e.message, false)));
   $("#monClearBtn")?.addEventListener("click", () => { clearMonitorTable(); monAfterId = 0; showToast("Cleared monitor table.", true); });
   $("#monPruneBtn")?.addEventListener("click", () => monitorPrune().catch((e) => showToast(e.message, false)));
+  $("#loadPlatformEventsBtn")?.addEventListener("click", () => loadPlatformEvents().catch((e) => showToast(e.message, false)));
+  $("#clearPlatformEventsBtn")?.addEventListener("click", () => { clearPlatformEventsTable(); platformEventStatus("idle"); showToast("Cleared platform history table.", true); });
   $("#monLiveBtn")?.addEventListener("click", () => {
     if (!monLive) {
       $("#monLiveBtn").textContent = "Stop Live";
@@ -1440,6 +1692,7 @@ $("#pushGenInvoice")?.addEventListener("click", () => generatePushInvoice().catc
       const m2 = $("#billMonth"); if (m2 && !m2.value) m2.value = monthKeyUTC();
       const m3 = $("#expMonth"); if (m3 && !m3.value) m3.value = monthKeyUTC();
     const m4 = $("#pushMonth"); if (m4 && !m4.value) m4.value = monthKeyUTC();
+    const m5 = $("#sfMonth"); if (m5 && !m5.value) m5.value = monthKeyUTC();
     } catch (e) {
       clearAuth();
       showToast(e.message || "Login failed", false);
@@ -1478,6 +1731,7 @@ mountPricedModelPicker("#custAllowedModels", "#custAllowedProviders");
     const m2 = $("#billMonth"); if (m2 && !m2.value) m2.value = monthKeyUTC();
     const m3 = $("#expMonth"); if (m3 && !m3.value) m3.value = monthKeyUTC();
     const m4 = $("#pushMonth"); if (m4 && !m4.value) m4.value = monthKeyUTC();
+    const m5 = $("#sfMonth"); if (m5 && !m5.value) m5.value = monthKeyUTC();
   })();
 
 

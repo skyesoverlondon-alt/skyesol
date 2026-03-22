@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>League Office | SkyeLeticX Dashboards</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#09030f" />
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/skx-dashboard.css" />
+  
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <a href="home.html" style="display:flex;align-items:center;gap:12px">
+        <img src="logo.png" alt="SkyeLeticX logo" />
+      </a>
+      <div>
+        <div class="brand-name">SkyeLeticX</div>
+        <div class="brand-sub">League Command Surfaces • Skyes Over London LC</div>
+      </div>
+    </div>
+    <nav class="nav-links"><a href="home.html" class="">Home</a><a href="how-it-works.html" class="">How It Works</a><a href="about.html" class="">About</a><a href="about-founder.html" class="">Founder</a><a href="players.html" class="">Players</a><a href="owners-intake.html" class="">Founding Owners</a><a href="arizona-hq.html" class="">Arizona HQ</a><a href="skyeletes-editorial.html" class="">Editorial</a><a href="owner-dashboard.html" class="">Command</a><a href="league-office-dashboard.html" class="active">League Office</a><a href="vp-operations-dashboard.html" class="">VP Ops</a><a href="cfo-dashboard.html" class="">CFO</a><a href="team-owner-dashboard.html" class="">Team Owner</a><a href="player-portal-dashboard.html" class="">Player Portal</a><a href="draft-war-room.html" class="">Draft War Room</a></nav>
+    <div class="nav-cta">
+      <div class="pill">Identity • Blobs • Neon</div>
+      <button class="btn btn-secondary" type="button" data-auth="login">Login</button>
+      <button class="btn btn-danger" type="button" data-auth="logout">Logout</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">President • VP command</div>
+      <h1>League Office</h1>
+      <p>This is the admin surface for the top league layer. Seed the 26 founding slots, create and update teams, create players, and link Netlify Identity emails to role records so the correct people land in the correct dashboards.</p>
+      <div class="metrics">
+        <div class="metric"><b id="metricPlayers">0</b><span>Players</span></div>
+        <div class="metric"><b id="metricTeams">0</b><span>Teams</span></div>
+        <div class="metric"><b id="metricCombines">0</b><span>Combines</span></div>
+        <div class="metric"><b id="metricOpenFees">$0</b><span>Open finance</span></div>
+      </div>
+      <div id="authState" class="notice">Checking login state…</div>
+      <div id="authGate" class="auth-gate"></div>
+      <div class="card-actions">
+        <button id="seedFoundingSlots" class="btn btn-primary" type="button">Seed 26 founding slots</button>
+        <a class="btn btn-secondary" href="draft-war-room.html">Open draft war room</a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <img class="hero-logo" src="logo.png" alt="SkyeLeticX" />
+      <div class="kicker">This page controls</div>
+      <div class="stack">
+        <div class="notice">Founding franchise slot creation</div>
+        <div class="notice">Role / identity email linking</div>
+        <div class="notice">Team setup and owner assignment</div>
+        <div class="notice">Player record creation and assignment</div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="grid">
+      <article class="card span-6">
+        <div class="kicker">Team builder</div>
+        <h3>Create or update a team</h3>
+        <form id="teamForm">
+          <div class="form-grid three">
+            <div class="form-row"><label>Team ID (optional)</label><input class="input" name="id" placeholder="Existing ID for update" /></div>
+            <div class="form-row"><label>Team key</label><input class="input" name="team_key" placeholder="founding-01 or custom" /></div>
+            <div class="form-row"><label>Team name</label><input class="input" name="team_name" placeholder="Team name" required /></div>
+            <div class="form-row"><label>Owner name</label><input class="input" name="owner_name" placeholder="Owner name" /></div>
+            <div class="form-row"><label>Owner email</label><input class="input" name="owner_email" placeholder="owner@email.com" /></div>
+            <div class="form-row"><label>Market</label><input class="input" name="market" placeholder="Phoenix / Chicago / etc" /></div>
+            <div class="form-row"><label>Status</label><select class="input" name="status"><option value="active">Active</option><option value="founding_slot">Founding slot</option><option value="paused">Paused</option></select></div>
+            <div class="form-row"><label>Roster limit</label><input class="input" type="number" name="roster_limit" value="15" /></div>
+          </div>
+          <div class="form-foot"><button class="btn btn-primary" type="submit">Save team</button></div>
+        </form>
+        <div id="teamFormNotice" class="notice" style="margin-top:12px">Ready.</div>
+      </article>
+
+      <article class="card span-6">
+        <div class="kicker">Identity link</div>
+        <h3>Link a Netlify Identity email to a role</h3>
+        <form id="profileForm">
+          <div class="form-grid three">
+            <div class="form-row"><label>Email</label><input class="input" name="email" type="email" placeholder="identity@email.com" required /></div>
+            <div class="form-row"><label>Display name</label><input class="input" name="display_name" placeholder="Display name" /></div>
+            <div class="form-row"><label>Role</label><select class="input" name="role"><option value="president">President</option><option value="vp">VP</option><option value="cfo">CFO</option><option value="team_owner">Team owner</option><option value="player">Player</option></select></div>
+            <div class="form-row"><label>Team ID</label><input class="input" name="team_id" placeholder="Optional team id" /></div>
+            <div class="form-row"><label>Player ID</label><input class="input" name="player_id" placeholder="Optional player id" /></div>
+          </div>
+          <div class="form-foot"><button class="btn btn-primary" type="submit">Link profile</button></div>
+        </form>
+        <div id="profileFormNotice" class="notice" style="margin-top:12px">Ready.</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid">
+      <article class="card span-7">
+        <div class="kicker">Player builder</div>
+        <h3>Create or update a player record</h3>
+        <form id="playerForm">
+          <div class="form-grid three">
+            <div class="form-row"><label>Player ID (optional)</label><input class="input" name="id" placeholder="Existing ID for update" /></div>
+            <div class="form-row"><label>First name</label><input class="input" name="first_name" required /></div>
+            <div class="form-row"><label>Last name</label><input class="input" name="last_name" required /></div>
+            <div class="form-row"><label>Email</label><input class="input" name="email" type="email" /></div>
+            <div class="form-row"><label>Phone</label><input class="input" name="phone" /></div>
+            <div class="form-row"><label>Entry lane</label><select class="input" name="entry_lane"><option value="open_combine">Open combine</option><option value="founding_owner_referral">Founding owner referral</option></select></div>
+            <div class="form-row"><label>School level</label><select class="input" name="school_level"><option value="HS Senior">HS Senior</option><option value="College">College</option><option value="Postgrad">Postgrad</option></select></div>
+            <div class="form-row"><label>School name</label><input class="input" name="school_name" /></div>
+            <div class="form-row"><label>Position</label><input class="input" name="position" placeholder="PG / SG / G / W" /></div>
+            <div class="form-row"><label>Height inches</label><input class="input" name="height_inches" type="number" step="0.01" /></div>
+            <div class="form-row"><label>Status</label><select class="input" name="status"><option value="registered">Registered</option><option value="checked_in">Checked in</option><option value="eligible">Eligible</option><option value="combine_complete">Combine complete</option><option value="draft_pool">Draft pool</option><option value="drafted">Drafted</option></select></div>
+            <div class="form-row"><label>Combine score</label><input class="input" name="combine_score" type="number" step="0.01" /></div>
+            <div class="form-row"><label>Draft rank</label><input class="input" name="draft_rank" type="number" /></div>
+            <div class="form-row"><label>Team ID</label><input class="input" name="team_id" placeholder="Optional" /></div>
+            <div class="form-row"><label>Identity email</label><input class="input" name="identity_email" type="email" placeholder="Link to player portal" /></div>
+            <div class="form-row" style="grid-column:1/-1"><label>Notes</label><textarea class="input" name="notes"></textarea></div>
+          </div>
+          <div class="form-foot"><button class="btn btn-primary" type="submit">Save player</button></div>
+        </form>
+        <div id="playerFormNotice" class="notice" style="margin-top:12px">Ready.</div>
+      </article>
+      <article class="card span-5">
+        <div class="kicker">Blob note</div>
+        <h3>League office memo</h3>
+        <div class="form-row"><label>Office note</label><textarea id="officeNote" class="input" placeholder="Keep the executive operating memo here…"></textarea></div>
+        <div class="form-foot"><button id="saveOfficeNote" class="btn btn-primary" type="button">Save note</button><button id="reloadOfficeNote" class="btn btn-secondary" type="button">Reload</button></div>
+        <div id="officeNoteNotice" class="notice" style="margin-top:12px">Ready.</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="grid">
+      <article class="card span-6"><div class="kicker">Teams</div><h3>Current teams</h3><div id="teamsTable"></div></article>
+      <article class="card span-6"><div class="kicker">Players</div><h3>Recent players</h3><div id="playersTable"></div></article>
+    </div>
+  </section>
+  <footer class="footer">League office • Contact: <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> • <a href="tel:4804695416">(480) 469-5416</a></footer>
+</main>
+<script>
+(async function(){
+  const boot = await SKX.boot({ roles:['president','vp'], authStateId:'authState', gateId:'authGate', summary:true });
+  if (!boot.authorized) return;
+
+  async function refresh(){
+    const [teamsRes, playersRes] = await Promise.all([SKX.api('teams'), SKX.api('players')]);
+    document.getElementById('teamsTable').innerHTML = SKX.tableHTML(teamsRes.teams, [
+      { label:'ID', key:'id' },
+      { label:'Team', render:r=>`<strong>${SKX.esc(r.team_name)}</strong><small>${SKX.esc(r.team_key || '')}</small>` },
+      { label:'Owner', render:r=>`${SKX.esc(r.owner_name || '—')}<small>${SKX.esc(r.owner_email || '')}</small>` },
+      { label:'Market', key:'market' },
+      { label:'Players', render:r=>`<span class="badge gold">${SKX.esc(r.player_count || 0)}</span>` },
+      { label:'Status', render:r=>`<span class="badge violet">${SKX.esc(r.status || 'active')}</span>` }
+    ]);
+    document.getElementById('playersTable').innerHTML = SKX.tableHTML(playersRes.players.slice(0, 20), [
+      { label:'ID', key:'id' },
+      { label:'Player', render:r=>`<strong>${SKX.esc(r.full_name)}</strong><small>${SKX.esc(r.school_level || '')} • ${SKX.esc(r.school_name || '')}</small>` },
+      { label:'Lane', render:r=>`<span class="badge">${SKX.esc(r.entry_lane || '')}</span>` },
+      { label:'Status', render:r=>`<span class="badge green">${SKX.esc(r.status || '')}</span>` },
+      { label:'Rank', render:r=>`${SKX.esc(r.draft_rank || '—')}<small>Score ${SKX.esc(r.combine_score || '—')}</small>` },
+      { label:'Team', key:'team_name' }
+    ]);
+  }
+
+  document.getElementById('seedFoundingSlots').addEventListener('click', async()=>{
+    try {
+      const res = await SKX.api('seed_founding_slots', { data:{} });
+      SKX.showNotice('teamFormNotice', `Created ${SKX.esc(res.created)} founding team slot(s).`, 'success');
+      refresh();
+    } catch(err) { SKX.showNotice('teamFormNotice', SKX.esc(err.message), 'error'); }
+  });
+  document.getElementById('teamForm').addEventListener('submit', async(e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    try { await SKX.api('upsert_team', { data }); SKX.showNotice('teamFormNotice', 'Team saved.', 'success'); e.target.reset(); refresh(); }
+    catch(err){ SKX.showNotice('teamFormNotice', SKX.esc(err.message), 'error'); }
+  });
+  document.getElementById('profileForm').addEventListener('submit', async(e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    try { await SKX.api('link_profile', { data }); SKX.showNotice('profileFormNotice', 'Identity link saved.', 'success'); e.target.reset(); }
+    catch(err){ SKX.showNotice('profileFormNotice', SKX.esc(err.message), 'error'); }
+  });
+  document.getElementById('playerForm').addEventListener('submit', async(e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    try { await SKX.api('upsert_player', { data }); SKX.showNotice('playerFormNotice', 'Player saved.', 'success'); e.target.reset(); refresh(); }
+    catch(err){ SKX.showNotice('playerFormNotice', SKX.esc(err.message), 'error'); }
+  });
+  async function loadNote(){
+    try { const res = await SKX.api('load_note', { query:'scope=league-office' }); const note = res.note || null; document.getElementById('officeNote').value = note && note.text ? note.text : ''; SKX.showNotice('officeNoteNotice', note ? `Loaded note by ${SKX.esc(note.author || 'Unknown')}.` : 'No office note saved yet.', note ? 'success' : ''); }
+    catch(err){ SKX.showNotice('officeNoteNotice', SKX.esc(err.message), 'error'); }
+  }
+  document.getElementById('reloadOfficeNote').addEventListener('click', loadNote);
+  document.getElementById('saveOfficeNote').addEventListener('click', async()=>{
+    try { await SKX.api('save_note', { data:{ scope:'league-office', text: document.getElementById('officeNote').value } }); SKX.showNotice('officeNoteNotice', 'Office note saved.', 'success'); }
+    catch(err){ SKX.showNotice('officeNoteNotice', SKX.esc(err.message), 'error'); }
+  });
+  await refresh();
+  await loadNote();
+})();
+</script>
+
+<script src="assets/skx-dashboard.js"></script>
+</body>
+</html>

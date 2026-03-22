@@ -42,16 +42,31 @@ Use Netlify CLI so Functions ship correctly.
 #### 2) Configure Netlify (site settings)
 1) Enable **Netlify Identity** for your site.
 2) In Identity → Registration, decide if you want invite-only or open signup.
-3) Set environment variables:
+3) In Identity roles, use this Skyesol role set:
+   - `president`
+   - `vp`
+   - `cfo`
+   - `team_owner`
+   - `player`
+4) Set environment variables.
 
-ENV TEMPLATE:
-```
-ADMIN_EMAILS=you@domain.com,another@domain.com
-BLOBS_STORE=sol_growth
-MONITOR_HISTORY_CAP=120
+Minimum required database env:
+
+```env
+NEON_DATABASE_URL=postgres://...
 ```
 
-`ADMIN_EMAILS` assigns the `admin` role automatically on login.
+Notes:
+- `NEON_DATABASE_URL` is the only database env var you need for this build.
+- `DATABASE_URL` and `NETLIFY_DATABASE_URL` are still accepted as fallbacks, but they are not the clean primary setup.
+- Netlify Blobs does not require a manual env var in this build.
+- Netlify Identity does not require an env var, but it must be enabled in Netlify site settings.
+- `ADMIN_EMAILS` is optional. If you set it, matching emails are auto-granted the `president` role on Identity login.
+
+Skyesol remains the single source of truth:
+- shared Postgres tables live under the main Skyesol database
+- Identity members and role grants sync into the same database
+- intake submissions, vault data, and gateway/customer records stay in one backend instead of separate per-subsite stores
 
 #### 3) Deploy
 From this project folder:
@@ -66,6 +81,7 @@ From this project folder:
 - Three.js is loaded from a CDN for the animated background.
 - `404.html` redirects unknown routes to `/`.
 - Blog/Vault content and monitoring results are stored in Netlify Blobs.
+- Netlify Blobs is runtime-managed here; the default stores work without adding a manual blobs env var.
 
 
 

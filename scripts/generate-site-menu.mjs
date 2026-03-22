@@ -19,10 +19,29 @@ const SKIP_FILE_BASENAMES = new Set([
 const SKIP_FILES_RELATIVE = new Set([
   "Platforms-Apps-Infrastructure/kAIxUGateway13/.env",
   "Platforms-Apps-Infrastructure/kAIxUGateway13/env.template",
+  "Services/WebBuilds/WebBuilds.html",
 ]);
+const SKIP_PATH_PREFIXES = [
+  "Platforms-Apps-Infrastructure/2026/FounderTechPro /Full-EMAIL-Service-Database-Gmail+Neon-Replacements/skymail-mega-build/apps/skymail-web/",
+];
 
 function slash(p) {
   return p.replace(/\\/g, "/");
+}
+
+async function shouldSkipRelativeFile(relativePath) {
+  const rel = slash(relativePath);
+  if (SKIP_FILES_RELATIVE.has(rel)) return true;
+  if (SKIP_PATH_PREFIXES.some((prefix) => rel.startsWith(prefix))) return true;
+  if (!rel.startsWith("Services/") || !rel.endsWith("/index.html")) return false;
+
+  const siblingHtml = rel.slice(0, -"/index.html".length) + ".html";
+  try {
+    await fs.access(path.join(ROOT, siblingHtml));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function decodeHtmlEntitiesBasic(value) {
@@ -54,7 +73,7 @@ async function collectAllFiles(dir, out) {
     if (entry.isFile()) {
       // Skip template files, env files, and other dev-only artifacts
       if (SKIP_FILE_BASENAMES.has(entry.name)) continue;
-      if (SKIP_FILES_RELATIVE.has(rel)) continue;
+      if (await shouldSkipRelativeFile(rel)) continue;
       out.push({ fullPath: full, relative: rel, ext: path.extname(entry.name).toLowerCase() });
     }
   }

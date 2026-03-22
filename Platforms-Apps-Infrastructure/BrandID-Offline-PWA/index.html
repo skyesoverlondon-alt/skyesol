@@ -9,9 +9,9 @@
   <meta name="theme-color" content="#070A12" />
 
   <!-- PWA -->
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="icons/icon.svg" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./assets/logo.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
@@ -19,7 +19,7 @@
   <meta property="og:title" content="Skyes Over London | Brand Identity Kit" />
   <meta property="og:description" content="Primary lockup + icon mark. Live preview. One-click SVG export. True offline-first PWA." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="icons/icon.svg" />
+  <meta property="og:image" content="./icon-512.png" />
 
   <style>
     :root{
@@ -534,14 +534,14 @@
   <div class="bg-glow"></div>
   <div class="noise"></div>
   <div class="watermark" aria-hidden="true">
-    <img id="wmLogo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="" />
+    <img id="wmLogo" src="assets/logo.svg" alt="" />
   </div>
 
   <header>
     <div class="glass">
       <div class="container header-row">
         <a href="#top" class="brand">
-          <img id="headerLogo" class="float-glow" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL Logo" />
+          <img id="headerLogo" class="float-glow" src="assets/logo.svg" alt="SOL Logo" />
           <div style="min-width:0;">
             <div class="brand-title">SKYES OVER LONDON</div>
             <div class="brand-sub">Brand Identity Kit • True Offline PWA</div>
@@ -614,7 +614,7 @@
         <div>
           <div class="glass panel" style="border-radius: var(--radius);">
             <div style="display:flex; align-items:center; gap:12px;">
-              <img class="float-glow" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="SOL Logo" style="width:48px; height:48px;" />
+              <img class="float-glow" src="assets/logo.svg" alt="SOL Logo" style="width:48px; height:48px;" />
               <div>
                 <div style="font-weight:900; font-size:18px;">Skyes Over London</div>
                 <div class="muted2" style="font-size:14px;">SOLEnterprises International Nexus &amp; Holdings</div>
@@ -1260,5 +1260,7 @@
       status.textContent = "Diagnostics: ready. Offline-first shell is active. Default logo is local.";
       updateSvgs();
     })();
-  </script></body>
+  </script>
+  <script src="/js/SkyeSolINTRO.js"></script>
+</body>
 </html>

@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#150c23" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>SkyePortal Control Plane — Vault Workstation X</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="noise-layer" aria-hidden="true"></div>
+
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <div class="brand-wrap">
+        <img class="brand__icon" src="assets/skyes-over-london-logo.png" alt="Skyes Over London logo" />
+        <div>
+          <div class="brand__title">SkyePortal Control Plane — Vault Workstation</div>
+          <div class="brand__subtitle">Offline-first encrypted workstation • documents • attachments • devices • recovery bundle • glass UI</div>
+        </div>
+      </div>
+
+      <div class="topbar__center">
+        <div class="searchbar">
+          <input id="globalSearch" type="search" placeholder="Search docs, files, devices, contacts, tasks, notes, env…" />
+          <button id="btnRunSearch" class="btn btn--ghost">Search</button>
+        </div>
+      </div>
+
+      <div class="topbar__right">
+        <span id="connectivityPill" class="pill">Offline ready</span>
+        <button id="btnInstall" class="btn btn--ghost hidden" title="Install app">Install</button>
+        <button id="btnTutorial" class="btn btn--ghost" title="Open walkthrough">Tutorial</button>
+        <button id="btnQuickBackup" class="btn btn--ghost" title="Create encrypted snapshot">Backup</button>
+        <button id="btnExportBundle" class="btn btn--ghost" title="Export encrypted recovery bundle">Export</button>
+        <button id="btnImportTrigger" class="btn btn--ghost" title="Import encrypted recovery bundle">Import</button>
+        <button id="btnLock" class="btn btn--ghost" title="Lock vault">Lock</button>
+        <input id="fileImport" type="file" accept="application/json" hidden />
+        <input id="bgUpload" type="file" accept="image/*" hidden />
+      </div>
+    </header>
+
+    <main class="main">
+      <section id="unlockView" class="unlock-view">
+        <div class="unlock-hero card">
+          <div class="unlock-copy">
+            <div class="eyebrow">s0l26-0s • offline utility</div>
+            <h1>A real local vault workstation, not browser theater.</h1>
+            <p class="muted">This pass upgrades the control plane into an encrypted offline workstation with a document lane, encrypted local attachments, device inventory, restore points, and a practical recovery bundle that carries the vault plus the file store.</p>
+            <div class="feature-pills">
+              <a class="btn btn--ghost" href="../../../index.html#launcher">Credential Hub Launcher</a>
+              <span class="tag tag--gold">Encrypted vault</span>
+              <span class="tag">Offline documents</span>
+              <span class="tag">Local attachments</span>
+              <span class="tag">Device inventory</span>
+              <span class="tag">Recovery bundle</span>
+              <span class="tag">Custom backgrounds</span>
+            </div>
+            <div class="brand-showcase">
+              <img class="brand-showcase__logo" src="assets/skyes-over-london-logo.png" alt="Skyes Over London logo" />
+              <img class="brand-showcase__founder" src="assets/founder-tyrone.png" alt="Founder portrait" />
+            </div>
+          </div>
+
+          <div class="unlock-panel glass-panel">
+            <div class="grid2 compact-gap">
+              <div class="field">
+                <label for="passphrase">Passphrase</label>
+                <input id="passphrase" type="password" autocomplete="current-password" placeholder="Enter passphrase" />
+              </div>
+              <div class="field">
+                <label for="unlockMode">Mode</label>
+                <select id="unlockMode">
+                  <option value="unlock" selected>Unlock existing vault</option>
+                  <option value="init">Initialize new vault</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <button id="btnUnlock" class="btn btn--primary">Continue</button>
+              <span id="unlockStatus" class="status"></span>
+            </div>
+            <details class="details">
+              <summary>What is actually inside this upgrade?</summary>
+              <div class="details__body muted">
+                <p>Encrypted documents with tags and folders, a local attachment locker with preview/download/edit metadata flows, a device inventory lane, search across workstation content, snapshot retention, and a recovery bundle that includes the encrypted vault, snapshot history, and encrypted file store.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="unlock-grid">
+          <article class="card compact-card">
+            <h3>Documents that remain usable offline</h3>
+            <p class="muted">Write procedures, runbooks, checklists, references, and internal docs in one local lane and export them when needed.</p>
+          </article>
+          <article class="card compact-card">
+            <h3>Actual file locker capability</h3>
+            <p class="muted">Bring in local files, keep them encrypted in IndexedDB, preview supported formats, link them to docs or devices, and pull them back out later.</p>
+          </article>
+          <article class="card compact-card">
+            <h3>Inventory that belongs in a workstation</h3>
+            <p class="muted">Track devices, owners, serials, locations, operating systems, warranty dates, and linked files without needing a network.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="workspace" class="workspace hidden">
+        <aside class="nav card">
+          <button class="nav__item active" data-tab="dashboard">Dashboard</button>
+          <button class="nav__item" data-tab="search">Search</button>
+          <button class="nav__item" data-tab="documents">Documents</button>
+          <button class="nav__item" data-tab="files">Files</button>
+          <button class="nav__item" data-tab="devices">Devices</button>
+          <button class="nav__item" data-tab="projects">Projects</button>
+          <button class="nav__item" data-tab="rules">Rules Packs</button>
+          <button class="nav__item" data-tab="apps">Apps</button>
+          <button class="nav__item" data-tab="env">Env Profiles</button>
+          <button class="nav__item" data-tab="contacts">Contacts</button>
+          <button class="nav__item" data-tab="notes">Notes</button>
+          <button class="nav__item" data-tab="tasks">Tasks</button>
+          <button class="nav__item" data-tab="backups">Backups</button>
+          <button class="nav__item" data-tab="broker">Broker</button>
+          <button class="nav__item" data-tab="audit">Audit</button>
+          <button class="nav__item" data-tab="settings">Settings</button>
+        </aside>
+
+        <section class="content">
+          <section id="tab_dashboard" class="tab">
+            <div class="hero card hero-card">
+              <div>
+                <div class="eyebrow">Vault command center</div>
+                <h2>One local command surface for the moving parts.</h2>
+                <p class="muted">Projects, apps, env profiles, documents, encrypted attachments, device inventory, contacts, notes, tasks, recovery history, and broker controls all sit in one encrypted local workspace.</p>
+              </div>
+              <div class="hero-brand">
+                <img class="hero-brand__logo" src="assets/skyes-over-london-logo.png" alt="Skyes Over London logo" />
+                <img class="hero-brand__founder" src="assets/founder-tyrone.png" alt="Founder portrait" />
+              </div>
+              <div class="hero-actions">
+                <button class="btn btn--primary" data-goto="documents">Add document</button>
+                <button class="btn" data-goto="files">Open files</button>
+                <button class="btn" data-goto="devices">Add device</button>
+                <button id="btnTutorialHero" class="btn btn--ghost" type="button">Walkthrough</button>
+                <button id="btnSeedFounderKit" class="btn btn--ghost" type="button">Load founder kit</button>
+              </div>
+            </div>
+
+            <div class="stats-grid">
+              <article class="stat-card card"><div class="stat-card__num" id="statProjects">0</div><div class="stat-card__label">Projects</div></article>
+              <article class="stat-card card"><div class="stat-card__num" id="statApps">0</div><div class="stat-card__label">Apps</div></article>
+              <article class="stat-card card"><div class="stat-card__num" id="statDocuments">0</div><div class="stat-card__label">Documents</div></article>
+              <article class="stat-card card"><div class="stat-card__num" id="statFiles">0</div><div class="stat-card__label">Files</div></article>
+              <article class="stat-card card"><div class="stat-card__num" id="statDevices">0</div><div class="stat-card__label">Devices</div></article>
+              <article class="stat-card card"><div class="stat-card__num" id="statContacts">0</div><div class="stat-card__label">Contacts</div></article>
+              <article class="stat-card card"><div class="stat-card__num" id="statTasks">0</div><div class="stat-card__label">Tasks</div></article>
+              <article class="stat-card card"><div class="stat-card__num" id="statBackups">0</div><div class="stat-card__label">Snapshots</div></article>
+            </div>
+
+            <div class="dashboard-grid dashboard-grid--3">
+              <article class="card">
+                <div class="section-head">
+                  <h3>Vault health</h3>
+                  <button class="btn btn--ghost" id="btnRefreshHealth">Refresh</button>
+                </div>
+                <div id="dashboardHealth" class="stack-list"></div>
+              </article>
+
+              <article class="card">
+                <div class="section-head">
+                  <h3>Quick launcher</h3>
+                  <button class="btn btn--ghost" data-goto="apps">Manage</button>
+                </div>
+                <div id="quickLauncher" class="stack-list"></div>
+              </article>
+
+              <article class="card">
+                <div class="section-head">
+                  <h3>Recent documents</h3>
+                  <button class="btn btn--ghost" data-goto="documents">Open docs</button>
+                </div>
+                <div id="recentDocuments" class="stack-list"></div>
+              </article>
+
+              <article class="card">
+                <div class="section-head">
+                  <h3>Upcoming tasks</h3>
+                  <button class="btn btn--ghost" data-goto="tasks">Open tasks</button>
+                </div>
+                <div id="upcomingTasks" class="stack-list"></div>
+              </article>
+
+              <article class="card">
+                <div class="section-head">
+                  <h3>Device watchlist</h3>
+                  <button class="btn btn--ghost" data-goto="devices">Open devices</button>
+                </div>
+                <div id="deviceWatchlist" class="stack-list"></div>
+              </article>
+
+              <article class="card founder-command-card">
+                <div class="section-head">
+                  <h3>Founder command desk</h3>
+                  <button class="btn btn--ghost" data-goto="settings">Brand desk</button>
+                </div>
+                <div class="founder-command-card__visual">
+                  <img class="founder-command-card__logo" src="assets/skyes-over-london-logo.png" alt="Skyes Over London logo" />
+                  <img class="founder-command-card__founder" src="assets/founder-tyrone.png" alt="Founder portrait" />
+                </div>
+                <div id="founderDesk" class="stack-list"></div>
+                <div id="founderDeskStatus" class="status"></div>
+              </article>
+
+              <article class="card tutorial-card">
+                <div class="section-head">
+                  <h3>Walkthrough</h3>
+                  <button id="btnTutorialStart" class="btn btn--ghost" type="button">Start walkthrough</button>
+                </div>
+                <div class="tutorial-card__visual">
+                  <img class="tutorial-card__logo" src="assets/skyes-over-london-logo.png" alt="Skyes Over London logo" />
+                  <img class="tutorial-card__founder" src="assets/founder-tyrone.png" alt="Founder portrait" />
+                </div>
+                <div id="tutorialLane" class="stack-list"></div>
+                <div id="tutorialStatus" class="status"></div>
+              </article>
+
+              <article class="card">
+                <div class="section-head">
+                  <h3>Recent activity</h3>
+                  <button class="btn btn--ghost" data-goto="audit">Audit lane</button>
+                </div>
+                <div id="recentActivity" class="stack-list"></div>
+              </article>
+            </div>
+          </section>
+
+          <section id="tab_search" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Search</h2>
+                <p class="muted">Query everything stored in the workstation.</p>
+              </div>
+            </div>
+            <article class="card search-surface">
+              <div class="searchbar searchbar--large">
+                <input id="searchTabInput" type="search" placeholder="Search docs, files, devices, contacts, tags, note text, env keys…" />
+                <button id="btnSearchTab" class="btn btn--primary">Run search</button>
+              </div>
+              <div id="searchResultsMeta" class="muted small-gap">Type a query to search the workstation.</div>
+              <div id="searchResultsList" class="list"></div>
+            </article>
+          </section>
+
+          <section id="tab_documents" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Documents</h2>
+                <p class="muted">Offline procedures, specs, manuals, checklists, references, and internal docs with linked file support.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnSeedDocuments" class="btn btn--ghost">Load starter docs</button>
+                <button id="btnExportDocumentsJson" class="btn btn--ghost">Export JSON</button>
+                <button id="btnAddDocument" class="btn btn--primary">New document</button>
+              </div>
+            </div>
+            <div id="documentsList" class="list"></div>
+          </section>
+
+          <section id="tab_files" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Files & Attachments</h2>
+                <p class="muted">Encrypted local attachment locker with preview, download, metadata editing, and link targets for docs, devices, contacts, and notes.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnExportFilesManifest" class="btn btn--ghost">Export manifest CSV</button>
+                <button id="btnAddFile" class="btn btn--primary">Add file</button>
+              </div>
+            </div>
+            <div id="filesList" class="list"></div>
+          </section>
+
+          <section id="tab_devices" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Device Inventory</h2>
+                <p class="muted">Track operators, hardware, serials, status, warranty windows, locations, IPs, and linked files without leaving the vault.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnExportDevicesCsv" class="btn btn--ghost">Export CSV</button>
+                <button id="btnAddDevice" class="btn btn--primary">New device</button>
+              </div>
+            </div>
+            <div id="devicesList" class="list"></div>
+          </section>
+
+          <section id="tab_projects" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Projects</h2>
+                <p class="muted">Registry for project IDs, public configs, origins, and notes.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnAddProject" class="btn btn--primary">New project</button>
+              </div>
+            </div>
+            <div id="projectsList" class="list"></div>
+          </section>
+
+          <section id="tab_rules" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Rules Packs</h2>
+                <p class="muted">Keep reusable Firestore and Storage rules together.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnAddRule" class="btn btn--primary">New rules pack</button>
+              </div>
+            </div>
+            <div id="rulesList" class="list"></div>
+          </section>
+
+          <section id="tab_apps" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Apps</h2>
+                <p class="muted">Launcher links, app IDs, default projects, and origin control.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnAddApp" class="btn btn--primary">New app</button>
+              </div>
+            </div>
+            <div id="appsList" class="list"></div>
+          </section>
+
+          <section id="tab_env" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Env Profiles</h2>
+                <p class="muted">Public env blocks plus encrypted private values in the same local vault.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnAddEnv" class="btn btn--primary">New env profile</button>
+              </div>
+            </div>
+            <div id="envList" class="list"></div>
+          </section>
+
+          <section id="tab_contacts" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Contacts</h2>
+                <p class="muted">A usable local contact desk for operators, vendors, clients, and support points.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnAddContact" class="btn btn--primary">New contact</button>
+                <button id="btnExportContactsCsv" class="btn btn--ghost">Export CSV</button>
+              </div>
+            </div>
+            <div id="contactsList" class="list"></div>
+          </section>
+
+          <section id="tab_notes" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Notes & Runbooks</h2>
+                <p class="muted">Pinned operating notes, recovery steps, snippets, and instructions.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnAddNote" class="btn btn--primary">New note</button>
+              </div>
+            </div>
+            <div id="notesList" class="list"></div>
+          </section>
+
+          <section id="tab_tasks" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Tasks</h2>
+                <p class="muted">Keep the local ops queue visible even when the network is gone.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnAddTask" class="btn btn--primary">New task</button>
+                <button id="btnExportTasksCsv" class="btn btn--ghost">Export CSV</button>
+              </div>
+            </div>
+            <div id="tasksList" class="list"></div>
+          </section>
+
+          <section id="tab_backups" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Backups & Recovery</h2>
+                <p class="muted">Snapshots handle the structured vault. The recovery bundle carries the encrypted vault, snapshot history, and encrypted file locker.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnCreateBackup" class="btn btn--primary">Create snapshot</button>
+                <button id="btnVerifyAllBackups" class="btn btn--ghost">Verify latest</button>
+              </div>
+            </div>
+
+            <div class="dashboard-grid">
+              <article class="card">
+                <div class="section-head"><h3>Recovery bundle</h3></div>
+                <p class="muted">Exports the current encrypted vault, local snapshot history, and the encrypted local file store. Import restores the whole workstation without exposing the payload.</p>
+                <div class="field">
+                  <label for="manualBackupLabel">Manual snapshot label</label>
+                  <input id="manualBackupLabel" placeholder="e.g., before branch rewrite" />
+                </div>
+                <div class="row">
+                  <button id="btnBundleExport" class="btn btn--primary">Export recovery bundle</button>
+                  <button id="btnBundleImport" class="btn btn--ghost">Import bundle</button>
+                </div>
+                <div id="backupStatus" class="status"></div>
+              </article>
+
+              <article class="card">
+                <div class="section-head"><h3>Backup policy</h3></div>
+                <div id="backupPolicySummary" class="stack-list"></div>
+              </article>
+            </div>
+
+            <div id="backupsList" class="list"></div>
+          </section>
+
+          <section id="tab_broker" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Broker</h2>
+                <p class="muted">The vault core is offline. This lane becomes useful when you are online and the Netlify functions are deployed.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnBrokerTest" class="btn">Test broker</button>
+              </div>
+            </div>
+
+            <article class="card">
+              <h3>Connection</h3>
+              <div class="grid2 compact-gap">
+                <div class="field">
+                  <label for="brokerUrl">Broker Base URL</label>
+                  <input id="brokerUrl" placeholder="https://your-site.netlify.app" />
+                </div>
+                <div class="field">
+                  <label for="brokerAppId">Vault App ID</label>
+                  <input id="brokerAppId" value="vault-ui" placeholder="vault-ui" />
+                </div>
+              </div>
+              <div class="grid2 compact-gap">
+                <div class="field">
+                  <label for="brokerSecret">Vault App Secret</label>
+                  <input id="brokerSecret" type="password" placeholder="VAULT_APP_SECRETS entry" />
+                </div>
+                <div class="field">
+                  <label for="brokerScopes">Scopes</label>
+                  <input id="brokerScopes" value="config:read,rules:deploy" />
+                </div>
+              </div>
+              <div class="row">
+                <button id="btnMintToken" class="btn btn--primary">Mint token</button>
+                <span id="brokerStatus" class="status"></span>
+              </div>
+              <div class="field">
+                <label for="brokerJwt">JWT</label>
+                <textarea id="brokerJwt" rows="4" readonly></textarea>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3>Deploy rules pack</h3>
+              <div class="grid2 compact-gap">
+                <div class="field">
+                  <label for="deployProject">Target Project</label>
+                  <select id="deployProject"></select>
+                </div>
+                <div class="field">
+                  <label for="deployPack">Rules Pack</label>
+                  <select id="deployPack"></select>
+                </div>
+              </div>
+              <div class="grid2 compact-gap">
+                <div class="field">
+                  <label for="deployFirestore">Deploy Firestore</label>
+                  <select id="deployFirestore"><option value="yes" selected>yes</option><option value="no">no</option></select>
+                </div>
+                <div class="field">
+                  <label for="deployStorage">Deploy Storage</label>
+                  <select id="deployStorage"><option value="yes" selected>yes</option><option value="no">no</option></select>
+                </div>
+              </div>
+              <div class="row">
+                <button id="btnDeployRules" class="btn btn--primary">Deploy</button>
+                <span id="deployStatus" class="status"></span>
+              </div>
+              <div class="field">
+                <label for="deployResult">Result</label>
+                <textarea id="deployResult" rows="10" readonly></textarea>
+              </div>
+            </article>
+          </section>
+
+          <section id="tab_audit" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Audit</h2>
+                <p class="muted">Local event trail for workstation actions.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnClearAudit" class="btn btn--ghost">Clear audit</button>
+              </div>
+            </div>
+            <div id="auditList" class="list"></div>
+          </section>
+
+          <section id="tab_settings" class="tab hidden">
+            <div class="tab__head">
+              <div>
+                <h2>Settings</h2>
+                <p class="muted">Appearance, snapshot policy, and broker defaults.</p>
+              </div>
+              <div class="row slim-row">
+                <button id="btnTutorialReplay" class="btn btn--ghost" type="button">Walkthrough</button>
+                <button id="btnSaveSettings" class="btn btn--primary">Save settings</button>
+              </div>
+            </div>
+
+            <div class="dashboard-grid">
+              <article class="card">
+                <h3>Appearance</h3>
+                <div class="grid2 compact-gap">
+                  <div class="field">
+                    <label for="settingPreset">Preset</label>
+                    <select id="settingPreset">
+                      <option value="nebula">Nebula</option>
+                      <option value="royal">Royal</option>
+                      <option value="midnight">Midnight</option>
+                      <option value="sunrise">Sunrise</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="settingRetention">Snapshot retention</label>
+                    <input id="settingRetention" type="number" min="6" max="50" />
+                  </div>
+                </div>
+                <div class="grid2 compact-gap">
+                  <div class="field">
+                    <label for="settingGlass">Glass density</label>
+                    <input id="settingGlass" type="range" min="42" max="92" />
+                  </div>
+                  <div class="field">
+                    <label for="settingBlur">Blur</label>
+                    <input id="settingBlur" type="range" min="8" max="28" />
+                  </div>
+                </div>
+                <div class="grid2 compact-gap">
+                  <div class="field">
+                    <label for="settingTint">Tint</label>
+                    <input id="settingTint" type="range" min="18" max="72" />
+                  </div>
+                  <div class="field checkbox-field">
+                    <label class="checkbox-wrap"><input id="settingAutoSnapshots" type="checkbox" /> <span>Auto snapshots</span></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <button id="btnUploadBg" class="btn btn--ghost" type="button">Upload background</button>
+                  <button id="btnResetBg" class="btn btn--ghost" type="button">Reset background</button>
+                </div>
+                <div id="settingsStatus" class="status"></div>
+              </article>
+
+              <article class="card">
+                <h3>Support</h3>
+                <div class="support-block">
+                  <div class="item"><div class="item__title">Workstation mode</div><div class="item__subtitle">Core documents, files, devices, contacts, notes, tasks, search, and recovery stay local.</div></div>
+                  <div class="item"><div class="item__title">Recovery reminder</div><div class="item__subtitle">Use snapshots before risky edits and export a recovery bundle after meaningful milestones.</div></div>
+                  <div class="item"><div class="item__title">Broker reality</div><div class="item__subtitle">Server-side broker actions still depend on deployed Netlify functions.</div></div>
+                </div>
+              </article>
+
+              <article class="card founder-panel">
+                <h3>Founder & Brand Desk</h3>
+                <div class="founder-panel__visual">
+                  <img class="founder-panel__logo" src="assets/skyes-over-london-logo.png" alt="Skyes Over London logo" />
+                  <img class="founder-panel__founder" src="assets/founder-tyrone.png" alt="Founder portrait" />
+                </div>
+                <p class="muted">The workstation now ships branded offline with your logo, founder image, direct contact blocks, and a one-click founder starter kit for operations, documents, contacts, and devices.</p>
+                <div class="support-block">
+                  <div class="item"><div class="item__title">Created by Skyes Over London</div><div class="item__subtitle">Offline vault workstation for the s0l26-0s stack and related operating surfaces.</div></div>
+                  <div class="item"><div class="item__title">Primary contact</div><div class="item__subtitle"><a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> • <a href="tel:+14804695416">(480) 469-5416</a></div></div>
+                  <div class="item"><div class="item__title">Secondary contact</div><div class="item__subtitle"><a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> • <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a></div></div>
+                </div>
+                <div class="row">
+                  <button id="btnSeedFounderKitSettings" class="btn btn--ghost" type="button">Load founder kit</button>
+                  <button id="btnFounderEmergencyBackup" class="btn btn--primary" type="button">Export recovery bundle</button>
+                </div>
+              </article>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer glass-panel">
+      <div class="footer__copy">Skyes Over London offline-first encrypted workstation for s0l26-0s. Core vault, docs, files, inventory, and founder ops surfaces remain local. Broker tools require connectivity.</div>
+      <div class="footer__contact">
+        <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a>
+        <span>•</span>
+        <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a>
+        <span>•</span>
+        <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+        <span>•</span>
+        <a href="tel:+14804695416">(480) 469-5416</a>
+      </div>
+    </footer>
+  </div>
+
+  <dialog id="documentDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="documentForm">
+      <h3 id="documentDialogTitle">New document</h3>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Title</label><input id="docTitle" required placeholder="e.g., Incident Recovery Runbook" /></div>
+        <div class="field"><label>Folder</label><input id="docFolder" placeholder="e.g., Operations / Recovery" /></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Type</label><select id="docType"><option>procedure</option><option>manual</option><option>reference</option><option>checklist</option><option>spec</option><option>template</option><option>contract</option><option>other</option></select></div>
+        <div class="field"><label>Status</label><select id="docStatus"><option value="draft">draft</option><option value="active" selected>active</option><option value="archived">archived</option></select></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Tags (comma)</label><input id="docTags" placeholder="ops, restore, network" /></div>
+        <div class="field checkbox-field"><label class="checkbox-wrap"><input id="docPinned" type="checkbox" /> <span>Pin document</span></label></div>
+      </div>
+      <div class="field"><label>Body</label><textarea id="docBody" rows="16" placeholder="Write the document…"></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveDocumentDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="fileDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="fileForm">
+      <h3 id="fileDialogTitle">Add file</h3>
+      <div class="field"><label>Select local file</label><input id="fileBinary" type="file" /></div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Display name</label><input id="fileName" placeholder="Leave blank to use file name" /></div>
+        <div class="field"><label>Link type</label><select id="fileLinkedType"><option value="general">general</option><option value="document">document</option><option value="device">device</option><option value="contact">contact</option><option value="note">note</option></select></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Link target</label><select id="fileLinkedId"></select></div>
+        <div class="field"><label>Tags (comma)</label><input id="fileTags" placeholder="invoice, warranty, screenshot" /></div>
+      </div>
+      <div class="field"><label>Notes</label><textarea id="fileNote" rows="5" placeholder="What this file is and why it matters…"></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveFileDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="deviceDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="deviceForm">
+      <h3 id="deviceDialogTitle">New device</h3>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Name</label><input id="deviceName" required placeholder="e.g., Founder MacBook Pro" /></div>
+        <div class="field"><label>Category</label><select id="deviceCategory"><option>laptop</option><option>desktop</option><option>phone</option><option>tablet</option><option>server</option><option>network</option><option>drive</option><option>other</option></select></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Status</label><select id="deviceStatus"><option value="active" selected>active</option><option value="standby">standby</option><option value="repair">repair</option><option value="retired">retired</option></select></div>
+        <div class="field"><label>Owner</label><input id="deviceOwner" placeholder="e.g., Skyes Over London" /></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Serial</label><input id="deviceSerial" placeholder="Serial number" /></div>
+        <div class="field"><label>Asset tag</label><input id="deviceAssetTag" placeholder="Asset / internal ID" /></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Operating system</label><input id="deviceOs" placeholder="e.g., ChromeOS / macOS / Windows" /></div>
+        <div class="field"><label>IP / network</label><input id="deviceIp" placeholder="e.g., 192.168.1.20" /></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Location</label><input id="deviceLocation" placeholder="e.g., home office / locker A" /></div>
+        <div class="field"><label>Last seen / checked</label><input id="deviceLastSeen" type="date" /></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Purchase date</label><input id="devicePurchaseDate" type="date" /></div>
+        <div class="field"><label>Warranty date</label><input id="deviceWarrantyDate" type="date" /></div>
+      </div>
+      <div class="field"><label>Tags (comma)</label><input id="deviceTags" placeholder="primary, founder, backup" /></div>
+      <div class="field"><label>Notes</label><textarea id="deviceNotes" rows="5" placeholder="Condition, accessories, issues, recovery notes…"></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveDeviceDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="projectDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="projectForm">
+      <h3 id="projectDialogTitle">New project</h3>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Name</label><input id="projName" required placeholder="e.g., SkyePortal Vault" /></div>
+        <div class="field"><label>Environment</label><select id="projEnv"><option>dev</option><option>stage</option><option selected>prod</option></select></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Project ID</label><input id="projProjectId" required placeholder="e.g., my-firebase-project" /></div>
+        <div class="field"><label>Allowed Origins (comma)</label><input id="projOrigins" placeholder="https://app.netlify.app, http://localhost:8888" /></div>
+      </div>
+      <div class="field"><label>Public config JSON</label><textarea id="projPublicConfig" rows="6" placeholder='{"apiKey":"...","projectId":"..."}'></textarea></div>
+      <div class="field"><label>Notes</label><textarea id="projNotes" rows="4" placeholder="Auth providers, console links, redirect notes…"></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveProjectDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="ruleDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="ruleForm">
+      <h3 id="ruleDialogTitle">New rules pack</h3>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Name</label><input id="ruleName" required placeholder="e.g., Baseline multi-tenant" /></div>
+        <div class="field"><label>Tags (comma)</label><input id="ruleTags" placeholder="baseline, firestore, storage" /></div>
+      </div>
+      <div class="field"><label>Summary</label><input id="ruleSummary" placeholder="What this pack is for" /></div>
+      <div class="field"><label>Firestore rules</label><textarea id="ruleFirestore" rows="10"></textarea></div>
+      <div class="field"><label>Storage rules</label><textarea id="ruleStorage" rows="10"></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveRuleDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="appDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="appForm">
+      <h3 id="appDialogTitle">New app</h3>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>App name</label><input id="appName" required placeholder="e.g., SkyeEmail" /></div>
+        <div class="field"><label>App ID</label><input id="appAppId" required placeholder="e.g., skyeemail" /></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Allowed origins (comma)</label><input id="appOrigins" placeholder="https://your-app.netlify.app" /></div>
+        <div class="field"><label>Default project</label><select id="appDefaultProject"></select></div>
+      </div>
+      <div class="field"><label>Launch URL</label><input id="appUrl" placeholder="https://your-app.netlify.app/" /></div>
+      <div class="field"><label>Notes</label><textarea id="appNotes" rows="4" placeholder="Flags, lane notes, deployment reminders…"></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveAppDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="envDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="envForm">
+      <h3 id="envDialogTitle">New env profile</h3>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>App</label><select id="envApp"></select></div>
+        <div class="field"><label>Project</label><select id="envProject"></select></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Profile name</label><input id="envName" required placeholder="e.g., Production Netlify" /></div>
+        <div class="field"><label>Environment</label><select id="envStage"><option>dev</option><option>stage</option><option selected>prod</option></select></div>
+      </div>
+      <div class="field"><label>Public env JSON</label><textarea id="envPublic" rows="6" placeholder='{"VITE_PUBLIC_FLAG":"1"}'></textarea></div>
+      <div class="field"><label>Private env JSON (encrypted in vault)</label><textarea id="envPrivate" rows="6" placeholder='{"SECRET_KEY":"..."}'></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveEnvDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="envExportDialog" class="dlg">
+    <form method="dialog" class="dlg__form">
+      <h3>Env export blocks</h3>
+      <p class="muted">Only public env values are exported here. Private values stay encrypted in the vault.</p>
+      <div class="field"><label>Netlify block</label><textarea id="envExportNetlify" rows="8" readonly></textarea></div>
+      <div class="field"><label>.env block</label><textarea id="envExportDotenv" rows="8" readonly></textarea></div>
+      <div class="row">
+        <button type="button" id="btnCopyNetlify" class="btn btn--ghost">Copy Netlify block</button>
+        <button type="button" id="btnCopyDotenv" class="btn btn--ghost">Copy .env block</button>
+      </div>
+      <div class="row row--end"><button value="cancel" class="btn btn--primary">Close</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="contactDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="contactForm">
+      <h3 id="contactDialogTitle">New contact</h3>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Name</label><input id="contactName" required placeholder="e.g., Jane Doe" /></div>
+        <div class="field"><label>Company</label><input id="contactCompany" placeholder="e.g., SOLEnterprises" /></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Role</label><input id="contactRole" placeholder="e.g., Ops lead" /></div>
+        <div class="field"><label>Tags (comma)</label><input id="contactTags" placeholder="client, vendor, internal" /></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Email</label><input id="contactEmail" type="email" placeholder="name@example.com" /></div>
+        <div class="field"><label>Phone</label><input id="contactPhone" placeholder="(480) 555-5555" /></div>
+      </div>
+      <div class="field"><label>Website / URL</label><input id="contactUrl" placeholder="https://..." /></div>
+      <div class="field"><label>Notes</label><textarea id="contactNotes" rows="4" placeholder="Meeting notes, availability, next step…"></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveContactDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="noteDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="noteForm">
+      <h3 id="noteDialogTitle">New note</h3>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Title</label><input id="noteTitle" required placeholder="e.g., Recovery runbook" /></div>
+        <div class="field checkbox-field"><label class="checkbox-wrap"><input id="notePinned" type="checkbox" /> <span>Pin this note</span></label></div>
+      </div>
+      <div class="field"><label>Tags (comma)</label><input id="noteTags" placeholder="ops, recovery, broker" /></div>
+      <div class="field"><label>Body</label><textarea id="noteBody" rows="12" placeholder="Write the note…"></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveNoteDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="taskDialog" class="dlg">
+    <form method="dialog" class="dlg__form" id="taskForm">
+      <h3 id="taskDialogTitle">New task</h3>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Title</label><input id="taskTitle" required placeholder="e.g., Rotate broker secret" /></div>
+        <div class="field"><label>Status</label><select id="taskStatus"><option value="todo" selected>todo</option><option value="doing">doing</option><option value="done">done</option></select></div>
+      </div>
+      <div class="grid2 compact-gap">
+        <div class="field"><label>Priority</label><select id="taskPriority"><option>low</option><option selected>medium</option><option>high</option><option>critical</option></select></div>
+        <div class="field"><label>Due date</label><input id="taskDue" type="date" /></div>
+      </div>
+      <div class="field"><label>Tags (comma)</label><input id="taskTags" placeholder="ops, deploy, customer" /></div>
+      <div class="field"><label>Notes</label><textarea id="taskNotes" rows="5" placeholder="Context, next step, blocker…"></textarea></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--ghost">Cancel</button><button id="btnSaveTaskDialog" value="default" class="btn btn--primary">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="filePreviewDialog" class="dlg">
+    <form method="dialog" class="dlg__form">
+      <h3 id="filePreviewTitle">File preview</h3>
+      <div id="filePreviewMeta" class="muted small-gap"></div>
+      <div id="filePreviewBody" class="preview-area"></div>
+      <div class="row row--end"><button value="cancel" class="btn btn--primary">Close</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="tutorialDialog" class="dlg tutorial-dlg">
+    <form method="dialog" class="dlg__form tutorial-shell">
+      <div class="tutorial-shell__visual">
+        <img class="tutorial-shell__logo" src="assets/skyes-over-london-logo.png" alt="Skyes Over London logo" />
+        <img class="tutorial-shell__founder" src="assets/founder-tyrone.png" alt="Founder portrait" />
+      </div>
+      <div class="tutorial-shell__body">
+        <div class="eyebrow">Vault workstation walkthrough</div>
+        <div class="tutorial-shell__head">
+          <div>
+            <h3 id="tutorialTitle">Walkthrough</h3>
+            <div id="tutorialProgressText" class="muted"></div>
+          </div>
+        </div>
+        <p id="tutorialBody" class="tutorial-copy"></p>
+        <div id="tutorialBullets" class="tutorial-bullets"></div>
+        <div class="item tutorial-target-card">
+          <div class="item__title" id="tutorialTarget"></div>
+          <div class="item__subtitle" id="tutorialHint"></div>
+        </div>
+        <label class="checkbox-wrap tutorial-checkbox"><input id="tutorialAutostart" type="checkbox" /> <span>Auto-open this walkthrough on unlock until I finish it</span></label>
+        <div class="row row--end">
+          <button id="btnTutorialClose" class="btn btn--ghost" type="button">Close</button>
+          <button id="btnTutorialPrev" class="btn btn--ghost" type="button">Previous</button>
+          <button id="btnTutorialNext" class="btn btn--primary" type="button">Next</button>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

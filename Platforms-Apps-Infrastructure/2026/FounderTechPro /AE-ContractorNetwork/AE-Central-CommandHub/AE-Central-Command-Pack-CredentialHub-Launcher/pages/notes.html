@@ -1,0 +1,15 @@
+
+<div class="page-shell page-wrap">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Notes</div>
+      <h2>Quick references, snippets, and internal context.</h2>
+    </div>
+    <div class="toolbar" style="margin-top:12px"><button class="soft-btn" type="button" onclick="app.goTo('credential-pack')">Credential Pack</button><button class="soft-btn" type="button" onclick="app.goTo('contacts')">Contacts</button><button class="soft-btn" type="button" onclick="app.goTo('vault')">Vault</button></div>
+    <div class="toolbar" data-tour="notes-toolbar">
+      <input id="note-search" type="search" placeholder="Search notes" oninput="app.setFilter('noteSearch', this.value)">
+      <button class="primary-btn" onclick="app.openEntityModal('note')">Add Note</button>
+    </div>
+  </div>
+  <div id="notes-list" class="list-grid" data-tour="notes-list"></div>
+</div>

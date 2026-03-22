@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arizona: Where It All Begins | SkyeLetes Blog</title>
+    <meta name="description" content="Phoenix is SkyeLetes HQ. Here's why Arizona is the heart of under-6'0" basketball and what makes the desert the perfect proving ground.">
+    
+    <meta property="og:title" content="Arizona: Where It All Begins | SkyeLetes Blog">
+    <meta property="og:description" content="Phoenix is SkyeLetes HQ. The story of our home state.">
+    <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2026-02-17">
+    <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-ink: #05010a;
+            --color-paper: #faf9f7;
+            --color-gold: #ffd700;
+            --color-purple: #6d28ff;
+            --color-slate: #8b7db8;
+            --color-mist: #e8e6f1;
+            --color-copper: #c77b48;
+            --color-sunset: #ff6b35;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Instrument Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-impact: 'Bebas Neue', sans-serif;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--color-ink); color: var(--color-paper); line-height: 1.8; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse { 0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4)); } 50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.7)); } }
+        @keyframes sun-glow { 0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 107, 53, 0.5)); } 50% { filter: drop-shadow(0 0 60px rgba(255, 107, 53, 0.8)); } }
+        .floating-logo { animation: float 6s ease-in-out infinite, pulse 3s ease-in-out infinite; }
+        .sun-float { animation: float 8s ease-in-out infinite, sun-glow 4s ease-in-out infinite; }
+
+        /* Nav */
+        .nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(5, 1, 10, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 215, 0, 0.1); }
+        .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+        .nav-logo { height: 48px; width: auto; }
+        .nav-brand-text { display: flex; flex-direction: column; }
+        .nav-brand-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-paper); }
+        .nav-brand-sub { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-slate); letter-spacing: 0.1em; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-link { font-size: 0.85rem; color: var(--color-slate); text-decoration: none; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-gold); }
+        .nav-btn { background: var(--color-gold); color: var(--color-ink); padding: 0.6rem 1.25rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 6px; transition: all 0.3s; }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,0,0.3); }
+
+        /* Article Header */
+        .article-header { position: relative; z-index: 1; padding: 10rem 2rem 4rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .article-header-content { max-width: 800px; margin: 0 auto; }
+        .state-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(199, 123, 72, 0.15)); border: 1px solid rgba(255, 107, 53, 0.3); padding: 0.75rem 1.5rem; border-radius: 999px; margin-bottom: 2rem; }
+        .state-badge span { font-size: 1.5rem; }
+        .state-badge-text { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-sunset); letter-spacing: 0.1em; font-weight: 600; }
+        .article-meta { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .article-category { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-copper); letter-spacing: 0.15em; text-transform: uppercase; background: rgba(199, 123, 72, 0.15); border: 1px solid rgba(199, 123, 72, 0.25); padding: 0.4rem 1rem; border-radius: 999px; }
+        .article-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); }
+        .article-read { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); }
+        .article-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 500; line-height: 1.15; margin-bottom: 1.5rem; }
+        .article-title em { font-style: italic; color: var(--color-gold); }
+        .article-excerpt { font-size: 1.25rem; color: var(--color-slate); max-width: 650px; margin: 0 auto; }
+
+        /* Article Body */
+        .article-body { position: relative; z-index: 1; padding: 4rem 2rem; }
+        .article-content { max-width: 720px; margin: 0 auto; }
+        .article-content p { font-size: 1.1rem; color: var(--color-mist); margin-bottom: 1.75rem; }
+        .article-content h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 500; margin: 3rem 0 1.5rem; color: var(--color-paper); }
+        .article-content h2 em { font-style: italic; color: var(--color-gold); }
+        .article-content h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin: 2.5rem 0 1rem; color: var(--color-paper); }
+        .article-content blockquote { border-left: 3px solid var(--color-sunset); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--color-slate); font-size: 1.15rem; }
+        .article-content ul, .article-content ol { margin: 1.5rem 0; padding-left: 1.5rem; color: var(--color-mist); }
+        .article-content li { margin-bottom: 0.75rem; }
+        .article-content strong { color: var(--color-paper); }
+        .article-content a { color: var(--color-gold); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* Pullquote */
+        .pullquote { background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(199, 123, 72, 0.08)); border: 1px solid rgba(255, 107, 53, 0.2); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; text-align: center; }
+        .pullquote-text { font-family: var(--font-display); font-size: 1.75rem; font-weight: 500; color: var(--color-paper); line-height: 1.4; }
+        .pullquote-text em { font-style: italic; color: var(--color-gold); }
+
+        /* HQ Card */
+        .hq-card { background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 215, 0, 0.08)); border: 2px solid rgba(255, 107, 53, 0.3); border-radius: 24px; padding: 3rem; margin: 3rem 0; text-align: center; position: relative; overflow: hidden; }
+        .hq-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 50%); pointer-events: none; }
+        .hq-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .hq-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-sunset); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .hq-title { font-family: var(--font-impact); font-size: 3rem; color: var(--color-gold); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+        .hq-subtitle { font-size: 1.1rem; color: var(--color-slate); }
+
+        /* Stats Grid */
+        .az-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 3rem 0; }
+        .az-stat { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; text-align: center; transition: all 0.4s var(--ease-out-expo); }
+        .az-stat:hover { border-color: var(--color-sunset); transform: translateY(-3px); }
+        .az-stat-value { font-family: var(--font-impact); font-size: 2.5rem; color: var(--color-gold); letter-spacing: 0.05em; }
+        .az-stat-label { font-size: 0.85rem; color: var(--color-slate); margin-top: 0.25rem; }
+
+        /* Location Cards */
+        .location-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 2rem 0; }
+        .location-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: all 0.4s var(--ease-out-expo); }
+        .location-card:hover { border-color: var(--color-copper); transform: translateX(5px); }
+        .location-icon { font-size: 2rem; flex-shrink: 0; }
+        .location-content h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .location-content p { font-size: 0.9rem; color: var(--color-slate); margin: 0; }
+
+        /* Timeline */
+        .founding-timeline { margin: 3rem 0; position: relative; }
+        .founding-timeline::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--color-sunset), var(--color-gold)); }
+        .timeline-event { display: flex; gap: 2rem; margin-bottom: 2rem; position: relative; }
+        .timeline-dot { width: 50px; height: 50px; background: var(--color-ink); border: 3px solid var(--color-sunset); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; z-index: 2; }
+        .timeline-content { padding-top: 0.5rem; }
+        .timeline-year { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-sunset); letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+        .timeline-content h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .timeline-content p { font-size: 0.95rem; color: var(--color-slate); margin: 0; }
+
+        /* CTA Box */
+        .cta-box { background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(199, 123, 72, 0.1)); border: 1px solid rgba(255, 107, 53, 0.25); border-radius: 20px; padding: 3rem; margin: 3rem 0; text-align: center; }
+        .cta-box h3 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1rem; }
+        .cta-box p { color: var(--color-slate); margin-bottom: 1.5rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 8px; transition: all 0.3s; }
+        .btn-primary { background: var(--color-gold); color: var(--color-ink); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,215,0,0.3); }
+        .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--color-paper); }
+        .btn-secondary:hover { border-color: var(--color-sunset); color: var(--color-sunset); }
+
+        /* Author Box */
+        .author-box { display: flex; align-items: center; gap: 1.5rem; padding: 2rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; margin-top: 4rem; }
+        .author-avatar { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+        .author-avatar img { width: 100%; height: 100%; object-fit: contain; }
+        .author-info h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .author-info p { font-size: 0.9rem; color: var(--color-slate); }
+
+        /* Footer */
+        .footer { position: relative; z-index: 1; padding: 4rem 2rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        .footer-brand { display: flex; align-items: center; gap: 1rem; }
+        .footer-brand img { height: 50px; }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { color: var(--color-slate); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--color-gold); }
+        .footer-bottom { max-width: 1000px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.8rem; color: var(--color-slate); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .az-stats { grid-template-columns: repeat(2, 1fr); }
+            .location-grid { grid-template-columns: 1fr; }
+            .author-box { flex-direction: column; text-align: center; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+  <!-- PWA -->
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <meta name="theme-color" content="#2b0b4e" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <script defer src="assets/global-nav.js"></script>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a class="nav-brand" href="skyeletes-editorial.html">
+            <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes" class="nav-logo">
+            <div class="nav-brand-text">
+                <span class="nav-brand-name">SkyeLetes</span>
+                <span class="nav-brand-sub">Blog</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="how-it-works.html" class="nav-link">How It Works</a>
+            <a href="championships.html" class="nav-link">Championships</a>
+        </div>
+        <a href="players.html" class="nav-btn">Register Now</a>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-content">
+            <div class="state-badge">
+                <span>🌵</span>
+                <span class="state-badge-text">State Spotlight</span>
+            </div>
+            <div class="article-meta">
+                <span class="article-category">Arizona</span>
+                <span class="article-date">February 17, 2026</span>
+                <span class="article-read">7 min read</span>
+            </div>
+            <h1 class="article-title">Arizona: Where It All <em>Begins</em></h1>
+            <p class="article-excerpt">Phoenix is SkyeLetes HQ. Here's why Arizona is the heart of under-6'0" basketball and what makes the desert the perfect proving ground.</p>
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <article class="article-body">
+        <div class="article-content">
+            <p>Every movement has a birthplace. For SkyeLetes, that place is Phoenix, Arizona—a city built on grit, heat, and the kind of relentless energy that forges champions.</p>
+
+            <p>When Skyes Over London LC set out to build a basketball league for players under 6'0", Arizona wasn't just a convenient choice. It was the only choice. The desert demands excellence. The basketball culture runs deep. And the infrastructure was ready.</p>
+
+            <p>This is the story of our home state—and why it matters that this is where SkyeLetes was born.</p>
+
+            <div class="hq-card">
+                <div class="hq-icon sun-float">☀️</div>
+                <div class="hq-label">League Headquarters</div>
+                <div class="hq-title">PHOENIX, AZ</div>
+                <div class="hq-subtitle">The Valley of the Sun • Where Champions Rise</div>
+            </div>
+
+            <h2>Why <em>Arizona</em>?</h2>
+
+            <p>Arizona might seem like an unlikely basketball hub. No NBA championships (yet). No dominant college program. But look closer, and you'll see why it's perfect for what we're building:</p>
+
+            <h3>Year-Round Basketball Weather</h3>
+            <p>While the rest of the country deals with snow and indoor-only seasons, Arizona plays ball 365 days a year. The gyms are always running. The parks are always active. Players here develop faster because they never stop playing.</p>
+
+            <h3>Hungry Player Base</h3>
+            <p>Arizona players have always been overlooked. Not a traditional recruiting hotbed. Not where scouts come first. But that chip on the shoulder? It produces players who work harder, compete fiercer, and appreciate opportunities when they come.</p>
+
+            <h3>Growing Population</h3>
+            <p>Phoenix is one of the fastest-growing cities in America. More people means more players. More competition. More talent rising through the ranks. The player pool here is expanding every year.</p>
+
+            <h3>Strategic Location</h3>
+            <p>As the league expands, Phoenix sits perfectly positioned. Close enough to California, Texas, and Colorado for national events. Major airport. Easy logistics. When state champions converge for nationals, they're coming here.</p>
+
+            <div class="az-stats">
+                <div class="az-stat">
+                    <div class="az-stat-value">5M+</div>
+                    <div class="az-stat-label">Metro Population</div>
+                </div>
+                <div class="az-stat">
+                    <div class="az-stat-value">300+</div>
+                    <div class="az-stat-label">Sunny Days/Year</div>
+                </div>
+                <div class="az-stat">
+                    <div class="az-stat-value">HQ</div>
+                    <div class="az-stat-label">League Home</div>
+                </div>
+                <div class="az-stat">
+                    <div class="az-stat-value">#1</div>
+                    <div class="az-stat-label">National Finals Host</div>
+                </div>
+            </div>
+
+            <div class="pullquote">
+                <p class="pullquote-text">"The desert heat forges different players. When it's 110° outside and you're still in the gym, you're <em>built different</em>."</p>
+            </div>
+
+            <h2>The Arizona <em>Basketball Scene</em></h2>
+
+            <p>Arizona's basketball culture might not get national attention, but it's real and it's deep:</p>
+
+            <div class="location-grid">
+                <div class="location-card">
+                    <div class="location-icon">🏀</div>
+                    <div class="location-content">
+                        <h4>Phoenix Parks</h4>
+                        <p>From Encanto to Cesar Chavez, the outdoor runs are legendary. Year-round competition at every level.</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">🏟️</div>
+                    <div class="location-content">
+                        <h4>ASU & U of A</h4>
+                        <p>The college rivalry fuels passion statewide. Everyone picks a side and plays like it matters.</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">🌴</div>
+                    <div class="location-content">
+                        <h4>Scottsdale Gyms</h4>
+                        <p>High-end training facilities where serious players work on their games year-round.</p>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <div class="location-icon">🔥</div>
+                    <div class="location-content">
+                        <h4>Mesa-Gilbert Corridor</h4>
+                        <p>The East Valley produces talent constantly. Youth programs feeding serious competitors.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>The <em>Founding Story</em></h2>
+
+            <p>SkyeLetes didn't appear out of nowhere. It was built, step by step, from Phoenix:</p>
+
+            <div class="founding-timeline">
+                <div class="timeline-event">
+                    <div class="timeline-dot">💡</div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2024</div>
+                        <h4>The Concept</h4>
+                        <p>Tyrone Norman III, working from Phoenix, identifies the gap: no premium league exists for under-6'0" players. The vision takes shape.</p>
+                    </div>
+                </div>
+                <div class="timeline-event">
+                    <div class="timeline-dot">🔧</div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <h4>Infrastructure Build</h4>
+                        <p>Skyes Over London LC begins constructing the systems: registration, media production, uniform design, payout processing.</p>
+                    </div>
+                </div>
+                <div class="timeline-event">
+                    <div class="timeline-dot">🚀</div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2026</div>
+                        <h4>Launch Season</h4>
+                        <p>SkyeLetes goes live across four states: Arizona, Texas, Colorado, Illinois. Phoenix serves as HQ and national finals host.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>National Championship <em>Destination</em></h2>
+
+            <p>When state champions from Arizona, Texas, Colorado, and Illinois converge for the national title, they're coming to Phoenix. Here's why that matters:</p>
+
+            <ul>
+                <li><strong>Neutral-ish ground:</strong> Arizona champions have slight home advantage, but the venue is designed for all competitors</li>
+                <li><strong>Premium facilities:</strong> We're not playing in a community center gym. National finals deserve a national stage</li>
+                <li><strong>Full production:</strong> Multiple camera angles. Professional lighting. Broadcast-quality output</li>
+                <li><strong>Event atmosphere:</strong> This isn't just a game—it's a destination. Players and families make it a weekend</li>
+            </ul>
+
+            <p>The Arizona state champion gets to compete in front of home-state fans. The other champions get to prove themselves on the road. Either way, Phoenix delivers the stage these players deserve.</p>
+
+            <blockquote>
+                "Coming to Phoenix for nationals felt like a real event. The facilities, the production, the energy—it felt like we'd made it to the biggest stage."
+            </blockquote>
+
+            <h2>Join the <em>Arizona Movement</em></h2>
+
+            <p>If you're an Arizona player under 6'0", you're in the right place at the right time. The league was built here. The infrastructure is here. The community is growing here.</p>
+
+            <p>State championships happen here. National championships happen here. Your opportunity to compete at the highest level for under-6'0" basketball? It's right here.</p>
+
+            <p>The desert has always been a place where people come to build something new. SkyeLetes is no different. We started in Phoenix because this is where dreams get forged—one rep at a time, one game at a time, one championship at a time.</p>
+
+            <p><strong>Welcome to Arizona. Welcome to SkyeLetes HQ.</strong></p>
+
+            <div class="cta-box">
+                <h3>Ready to Represent Arizona?</h3>
+                <p>Register for SkyeLetes and compete for the Arizona state championship—right here at home.</p>
+                <div class="cta-buttons">
+                    <a href="players.html" class="btn btn-primary">Register Now</a>
+                    <a href="championships.html" class="btn btn-secondary">View Championships</a>
+                </div>
+            </div>
+
+            <!-- Author Box -->
+            <div class="author-box">
+                <div class="author-avatar">
+                    <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes" class="floating-logo">
+                </div>
+                <div class="author-info">
+                    <h4>SkyeLetes Editorial</h4>
+                    <p>The official voice of SkyeLetes. A Skyes Over London LC venture, part of the SOLEnterprises ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Banner_transparent.png" alt="SkyeLetes" class="floating-logo" style="height: 40px;">
+            </div>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="championships.html">Championships</a>
+                <a href="players.html">Register</a>
+                <a href="owners-intake.html">Team Owners</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 SkyeLetes. A Skyes Over London LC Venture. Part of the SOLEnterprises ecosystem.
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        function createStars() {
+            stars = [];
+            const count = Math.floor((canvas.width * canvas.height) / 12000);
+            for (let i = 0; i < count; i++) {
+                stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.2 + 0.3, a: Math.random() * Math.PI * 2, s: Math.random() * 0.01 + 0.003, c: Math.random() > 0.6 ? 'copper' : 'gold' });
+            }
+        }
+        function animate() {
+            ctx.fillStyle = '#05010a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.a += star.s;
+                const alpha = Math.abs(Math.sin(star.a)) * 0.5 + 0.2;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+                ctx.fillStyle = star.c === 'copper' ? `rgba(199, 123, 72, ${alpha})` : `rgba(255, 215, 0, ${alpha})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        resize(); createStars(); animate();
+        window.addEventListener('resize', () => { resize(); createStars(); });
+    </script>
+
+  <script>
+    // SkyeLeticX PWA — register service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

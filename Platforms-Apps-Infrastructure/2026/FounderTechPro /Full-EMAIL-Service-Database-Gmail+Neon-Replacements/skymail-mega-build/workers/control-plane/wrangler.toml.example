@@ -1,0 +1,15 @@
+name = "skye-db-control-plane"
+main = "src/index.js"
+compatibility_date = "2026-03-17"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+CORS_ORIGIN = "https://dbadmin.example.com"
+PUBLIC_DB_HOST = "db.example.com"
+PUBLIC_DB_PORT = "5432"
+PUBLIC_DB_SSLMODE = "require"
+SUPERADMIN_EMAILS = "owner@example.com,ops@example.com"
+
+[[hyperdrive]]
+binding = "HYPERDRIVE"
+id = "REPLACE_WITH_HYPERDRIVE_ID"

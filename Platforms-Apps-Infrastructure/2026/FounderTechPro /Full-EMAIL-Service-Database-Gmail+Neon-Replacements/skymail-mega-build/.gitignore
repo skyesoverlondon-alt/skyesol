@@ -1,0 +1,9 @@
+node_modules
+.env
+.env.*
+!.env.template
+dist
+.netlify
+.wrangler
+.DS_Store
+*.log

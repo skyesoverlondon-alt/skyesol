@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Before the Platform, There Was the Work</title>
+  <meta name="description" content="An editorial article highlighting Tyrone, known as Skyes Over London, through his documented community leadership at Mercy Home for Boys &amp; Girls." />
+  <link rel="canonical" href="https://kaixu-0s-founder-cohort-platform.netlify.app/pages/editorials/community-pillar.html" />
+  <meta property="og:url" content="https://kaixu-0s-founder-cohort-platform.netlify.app/pages/editorials/community-pillar.html" />
+  <meta name="theme-color" content="#0b1020" />
+  <style>
+    :root{
+      --bg:#06070d;
+      --bg-2:#0b1020;
+      --panel:rgba(14,18,34,.78);
+      --panel-strong:rgba(10,13,24,.9);
+      --text:#f5f2ff;
+      --muted:#c6bfdc;
+      --soft:#9f97bb;
+      --line:rgba(161,125,255,.24);
+      --line-soft:rgba(255,255,255,.08);
+      --accent:#9f6bff;
+      --accent-2:#f1c96d;
+      --cyan:#75d7ff;
+      --shadow:0 32px 90px rgba(0,0,0,.42);
+      --glow:0 0 0 1px rgba(161,125,255,.15), 0 0 26px rgba(159,107,255,.15);
+      --max:1260px;
+      --radius:28px;
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      min-height:100%;
+      color:var(--text);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 8% 10%, rgba(159,107,255,.22), transparent 28%),
+        radial-gradient(circle at 92% 2%, rgba(117,215,255,.14), transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(241,201,109,.08), transparent 32%),
+        linear-gradient(180deg,#06070d 0%, #0a0d18 42%, #06070d 100%);
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size:32px 32px;
+      mask-image:radial-gradient(circle at center, black 40%, transparent 92%);
+      opacity:.28;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .shell{
+      width:min(calc(100% - 28px), var(--max));
+      margin:0 auto;
+      padding:18px 0 64px;
+      position:relative;
+      z-index:1;
+    }
+
+    .topbar{
+      position:sticky;
+      top:12px;
+      z-index:20;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 18px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(8,10,18,.72);
+      backdrop-filter:blur(18px);
+      box-shadow:var(--glow);
+    }
+
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+
+    .brand-badge{
+      width:44px;
+      height:44px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      color:var(--accent-2);
+      font-weight:800;
+      letter-spacing:.12em;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(241,201,109,.24), transparent 55%),
+        linear-gradient(180deg, rgba(159,107,255,.22), rgba(117,215,255,.12));
+      border:1px solid rgba(241,201,109,.22);
+      box-shadow:0 0 24px rgba(159,107,255,.18);
+      flex:0 0 auto;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:.92rem;
+      line-height:1.1;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-copy span{
+      display:block;
+      margin-top:4px;
+      color:var(--soft);
+      font-size:.78rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .top-links{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px}
+
+    .top-links a{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line-soft);
+      background:rgba(255,255,255,.03);
+      color:#ede9ff;
+      font-size:.8rem;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      transition:.22s ease;
+    }
+
+    .top-links a:hover{
+      border-color:rgba(241,201,109,.28);
+      color:var(--accent-2);
+      box-shadow:0 0 0 1px rgba(241,201,109,.12), 0 0 26px rgba(241,201,109,.11);
+      transform:translateY(-1px);
+    }
+
+    .hero{
+      margin-top:22px;
+      padding:28px;
+      border:1px solid var(--line);
+      border-radius:32px;
+      background:
+        linear-gradient(135deg, rgba(159,107,255,.14), rgba(117,215,255,.06) 42%, rgba(255,255,255,.03) 100%),
+        rgba(10,13,24,.76);
+      backdrop-filter:blur(18px);
+      box-shadow:var(--shadow), var(--glow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto -10% -46% auto;
+      width:360px;
+      height:360px;
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(159,107,255,.18), transparent 66%);
+      pointer-events:none;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0, 1.55fr) minmax(300px, .8fr);
+      gap:22px;
+      position:relative;
+      z-index:1;
+      align-items:stretch;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(159,107,255,.09);
+      color:#e8dcff;
+      font-size:.74rem;
+      font-weight:800;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:linear-gradient(180deg, var(--accent-2), #fff3cf);
+      box-shadow:0 0 16px rgba(241,201,109,.42);
+    }
+
+    h1{
+      margin:18px 0 14px;
+      font-size:clamp(2.45rem, 5vw, 4.85rem);
+      line-height:.96;
+      letter-spacing:-.055em;
+      text-wrap:balance;
+    }
+
+    .dek{
+      max-width:820px;
+      margin:0;
+      color:var(--muted);
+      font-size:clamp(1.04rem, 1.85vw, 1.18rem);
+      line-height:1.82;
+    }
+
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:22px;
+    }
+
+    .hero-meta span{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line-soft);
+      background:rgba(255,255,255,.035);
+      color:#dfd9f7;
+      font-size:.75rem;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .button-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 18px;
+      border-radius:999px;
+      font-weight:800;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      font-size:.82rem;
+      transition:.22s ease;
+    }
+
+    .btn-primary{
+      color:#080a12;
+      background:linear-gradient(90deg, var(--accent-2), #f7db97);
+      box-shadow:0 10px 30px rgba(241,201,109,.22);
+    }
+
+    .btn-secondary{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:#f2ecff;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+
+    .signal-card,
+    article,
+    .card,
+    .footer-card{
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:var(--panel);
+      backdrop-filter:blur(18px);
+      box-shadow:var(--shadow);
+    }
+
+    .signal-card{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:100%;
+    }
+
+    .signal-label,
+    .section-kicker,
+    .card h2,
+    .footer-card h3{
+      margin:0 0 12px;
+      color:var(--accent-2);
+      font-size:.76rem;
+      font-weight:800;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+    }
+
+    .signal-card h2{
+      margin:0;
+      font-size:clamp(1.4rem, 2.2vw, 2rem);
+      line-height:1.02;
+      letter-spacing:-.04em;
+    }
+
+    .signal-card p{
+      margin:14px 0 0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:.98rem;
+    }
+
+    .signal-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+      margin-top:20px;
+    }
+
+    .signal-stat{
+      padding:14px;
+      border-radius:18px;
+      border:1px solid var(--line-soft);
+      background:rgba(255,255,255,.03);
+    }
+
+    .signal-stat strong{
+      display:block;
+      font-size:1.3rem;
+      letter-spacing:-.03em;
+      color:#fff7db;
+    }
+
+    .signal-stat span{
+      display:block;
+      margin-top:4px;
+      color:var(--soft);
+      font-size:.77rem;
+      line-height:1.5;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    article{
+      margin-top:24px;
+      padding:28px;
+      background:linear-gradient(180deg, rgba(18,22,38,.86), rgba(10,12,22,.92));
+    }
+
+    .section-kicker{margin-bottom:16px}
+
+    p{margin:0 0 1.2rem;font-size:1.05rem;line-height:1.9;color:#f2effc}
+
+    .lead{font-size:1.18rem;color:#fff7dc}
+
+    .quote{
+      margin:1.8rem 0;
+      padding:18px 20px;
+      border-radius:22px;
+      border:1px solid rgba(241,201,109,.18);
+      background:linear-gradient(180deg, rgba(241,201,109,.10), rgba(159,107,255,.08));
+      color:#fff6d6;
+      line-height:1.85;
+    }
+
+    .source{
+      margin-top:28px;
+      padding-top:18px;
+      border-top:1px solid var(--line-soft);
+      font-size:.93rem;
+      color:var(--soft);
+      line-height:1.7;
+    }
+
+    .source strong{color:var(--text)}
+
+    .contacts{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+      margin-top:28px;
+    }
+
+    .card{
+      padding:22px;
+      background:rgba(10,12,22,.74);
+    }
+
+    .card h2{margin-bottom:12px}
+
+    .contact-line{margin:0 0 .65rem;color:var(--muted);line-height:1.7}
+
+    .contact-line strong{color:var(--text);margin-right:6px}
+
+    .footer-note{margin-top:18px;color:var(--muted);font-size:.93rem;line-height:1.7}
+
+    .footer{
+      margin-top:24px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:20px;
+    }
+
+    .footer-card{
+      padding:24px;
+      background:rgba(10,12,22,.82);
+    }
+
+    .footer-title{
+      margin:0 0 10px;
+      font-size:clamp(1.55rem, 2vw, 2rem);
+      line-height:1.02;
+      letter-spacing:-.04em;
+    }
+
+    .footer-card p{margin:0;color:var(--muted);line-height:1.78}
+
+    .link-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+    .link-grid a{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line-soft);
+      background:rgba(255,255,255,.03);
+      font-size:.8rem;
+      font-weight:700;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+      color:#f6f2ff;
+    }
+
+
+
+    .brand-logo{
+      width:52px;
+      height:52px;
+      object-fit:contain;
+      filter:drop-shadow(0 0 18px rgba(159,107,255,.28)) drop-shadow(0 0 28px rgba(241,201,109,.16));
+      animation:floatPulse 6.2s ease-in-out infinite;
+      flex:0 0 auto;
+    }
+
+    .hero-visual{
+      position:relative;
+      min-height:270px;
+      border:1px solid var(--line-soft);
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(13,18,34,.78), rgba(9,12,22,.92));
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      margin-bottom:18px;
+    }
+
+    .hero-visual-glow{
+      position:absolute;
+      inset:auto 50% -18% 50%;
+      width:280px;
+      height:280px;
+      transform:translateX(-50%);
+      border-radius:999px;
+      background:radial-gradient(circle, rgba(159,107,255,.26), transparent 68%);
+      pointer-events:none;
+    }
+
+    .hero-portrait{
+      position:relative;
+      z-index:2;
+      width:min(280px, 78%);
+      height:auto;
+      object-fit:contain;
+      filter:drop-shadow(0 16px 40px rgba(0,0,0,.42));
+      animation:floatPulse 5.8s ease-in-out infinite;
+    }
+
+    .hero-orbit{
+      position:absolute;
+      z-index:3;
+      width:88px;
+      height:auto;
+      object-fit:contain;
+      filter:drop-shadow(0 0 18px rgba(159,107,255,.24));
+      animation:floatPulse 7s ease-in-out infinite;
+    }
+
+    .logo-main{top:18px;left:18px;}
+    .logo-side{top:24px;right:16px;width:96px;}
+
+    @keyframes floatPulse{
+      0%,100%{transform:translateY(0) scale(1)}
+      50%{transform:translateY(-8px) scale(1.01)}
+    }
+
+    @media (max-width:1080px){
+      .hero-grid,
+      .footer{grid-template-columns:1fr}
+    }
+
+    @media (max-width:760px){
+      .shell{width:min(calc(100% - 18px), var(--max));padding-top:10px}
+      .topbar,
+      .hero,
+      article,
+      .card,
+      .footer-card{border-radius:22px}
+      .topbar{position:static;padding:14px}
+      .top-links{justify-content:flex-start}
+      .hero,
+      article,
+      .card,
+      .footer-card,
+      .signal-card{padding:20px}
+      .contacts{grid-template-columns:1fr}
+      p{font-size:1rem}
+      .lead{font-size:1.08rem}
+    }
+  </style>
+  <meta property="og:title" content="Before the Platform, There Was the Work" />
+  <meta property="og:description" content="An editorial article highlighting Tyrone, known as Skyes Over London, through his documented community leadership at Mercy Home for Boys &amp;amp; Girls." />
+  <meta name="twitter:description" content="An editorial article highlighting Tyrone, known as Skyes Over London, through his documented community leadership at Mercy Home for Boys &amp;amp; Girls." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Before the Platform, There Was the Work" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Before the Platform, There Was the Work",
+  "url": "https://kaixu-0s-founder-cohort-platform.netlify.app/pages/editorials/community-pillar.html",
+  "description": "An editorial article highlighting Tyrone, known as Skyes Over London, through his documented community leadership at Mercy Home for Boys &amp; Girls.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "0s Founder Cohort",
+    "url": "https://kaixu-0s-founder-cohort-platform.netlify.app/"
+  }
+}
+  </script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brand-logo" src="../../assets/media/skyes-primary-logo.png" alt="Skyes Over London logo" />
+        <div class="brand-copy">
+          <strong>Skyes Over London LC</strong>
+          <span>0s Founder Cohort Editorial Surface</span>
+        </div>
+      </div>
+      <nav class="top-links" aria-label="Quick links">
+        <a href="../../index.html">Offer</a>
+        <a href="../proof.html">Proof</a>
+        <a href="../founder.html">Founder</a>
+        <a href="../trust.html">Trust</a>
+          <a href="index.html">Editorials</a>
+          <a href="../youth-partners.html">Partner Lanes</a>
+        <a href="../apply.html">Apply</a>
+        <a href="https://skyesol.netlify.app/about" target="_blank" rel="noopener">Official About</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Editorial Feature</div>
+          <h1>Before the Platform, There Was the Work</h1>
+          <p class="dek">Long before the brand scale, the platform infrastructure, and the growing digital footprint, Tyrone—better known as Skyes Over London—was already showing up in the places where real community credibility is earned: in youth spaces, in hard conversations, and in rooms where the subject was not image, but people.</p>
+          <div class="hero-meta">
+            <span>Community Editorial</span>
+            <span>Chicago</span>
+            <span>Leadership Record</span>
+            <span>Documented Reflection</span>
+          </div>
+          <div class="button-row">
+            <a class="btn btn-primary" href="../founder.html">Meet the Founder</a><a class="btn btn-secondary" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener">All SkyeSol Case Studies</a>
+            <a class="btn btn-secondary" href="../mercy-home.html">Mercy Home Partnership</a>
+            <a class="btn btn-secondary" href="../apply.html">Apply / Request a Seat</a>
+            <a class="btn btn-secondary" href="https://skyesol.netlify.app/about" target="_blank" rel="noopener">Official About</a>
+          </div>
+        </div>
+
+        <aside class="signal-card">
+          <div class="hero-visual" aria-label="Founder portrait and logos">
+            <div class="hero-visual-glow"></div>
+            <img class="hero-orbit logo-main" src="../../assets/media/skyes-primary-logo.png" alt="Skyes Over London logo" />
+            <img class="hero-orbit logo-side" src="../../assets/media/kaixu-logo.png" alt="kAIxU logo" />
+            <img class="hero-portrait" src="../../assets/media/founder.png" alt="Skyes Over London founder portrait" />
+          </div>
+          <div>
+            <p class="signal-label">Signal Metrics</p>
+            <h2>Visible contribution in a serious room.</h2>
+            <p>This page now presents the piece like a Skye editorial surface: oversized headline, darker glass panels, stronger signal modules, and a cleaner ecosystem-style footer.</p>
+          </div>
+          <div class="signal-grid">
+            <div class="signal-stat">
+              <strong>April 2019</strong>
+              <span>Published context</span>
+            </div>
+            <div class="signal-stat">
+              <strong>Mercy Home</strong>
+              <span>Institutional setting</span>
+            </div>
+            <div class="signal-stat">
+              <strong>Public Remarks</strong>
+              <span>Recorded substance</span>
+            </div>
+            <div class="signal-stat">
+              <strong>Throughline</strong>
+              <span>Credibility continuity</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <article>
+      <div class="section-kicker">Editorial Analysis</div>
+      <p class="lead">A public record from Mercy Home captures a moment that says plenty on its own. In April 2019, during a gathering at Mercy Home for Boys &amp; Girls in Chicago, Tyrone was not presented as a spectator, a guest, or a symbolic attendee. He was one of the young people entrusted to help lead a reflection and discussion in front of the room.</p>
+
+      <p>That distinction matters. In community spaces, the difference between being present and being relied upon is everything. Mercy Home’s account shows Tyrone helping carry a conversation about injustice—not in abstract terms, but through the lived realities that shape neighborhoods every day. He spoke about the way poverty traps people, the way mental-health needs go untreated, and the way incarceration can become part of a cycle that keeps communities pinned under pressure.</p>
+
+      <p>That is the kind of leadership that rarely arrives with fanfare. It appears in moments where somebody is willing to say the difficult part out loud, connect the systems, and speak with enough clarity that other people in the room can locate themselves inside the truth of it. That is what made this Mercy Home moment worth revisiting. It preserves a version of Tyrone that predates a lot of what people may know him for now, but it already contains the same core pattern: service, analysis, courage, and reach.</p>
+
+      <div class="quote">He was not there to decorate the story. He was there helping shape the conversation.</div>
+
+      <p>There is also something important about the setting itself. Mercy Home is not a stage people manufacture for themselves. It is an institution with a long record of serving young people in Chicago, and the fact that Tyrone appears there in a leadership capacity carries weight. Community reputation becomes real when it can be traced through independent places, witnessed by others, and anchored to actual participation. This is one of those moments.</p>
+
+      <p>For anyone trying to understand why Skyes Over London carries credibility now, the answer is not limited to titles, websites, products, or platforms. The answer is in the continuity. The same voice that would later build, lead, teach, and create was already present in community work years earlier—articulate, grounded, and unafraid to name the structural problems affecting real people.</p>
+
+      <p>That is what gives the record its force. The article does not need to overstate who he is. It shows him in action. It shows him trusted with substance. It shows him speaking on conditions that too many people are forced to survive. And it shows that the foundation under the public name Skyes Over London was built in places where leadership had to mean something before it could ever become branding.</p>
+
+      <p>Seen that way, this Mercy Home feature is more than a snapshot from 2019. It is evidence of a longer throughline. It marks a point on the timeline where Tyrone was already doing the work that community pillars do: stepping into meaningful spaces, carrying serious conversations, and leaving behind something more durable than presence—a documented contribution.</p>
+
+      <div class="source"><strong>Source context:</strong> Mercy Home for Boys &amp; Girls, “Celebrating Easter and Seder at Mercy Home,” published April 23, 2019. The article states that Tyrone and another youth led a reflection and discussion on past and present injustices, and it records Tyrone’s remarks on poverty, mental-health barriers, incarceration, and structural inequality.</div>
+
+      <section class="contacts">
+        <div class="card">
+          <h2>Skyes Over London Contact</h2>
+          <p class="contact-line"><strong>Website:</strong> <a href="https://solenterprises.org/" target="_blank" rel="noopener">SOLEnterprises.org</a></p>
+          <p class="contact-line"><strong>Email:</strong> <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a></p>
+          <p class="contact-line"><strong>Email:</strong> <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a></p>
+          <p class="contact-line"><strong>Email:</strong> <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></p>
+          <p class="contact-line"><strong>Phone:</strong> <a href="tel:+14804695416">(480) 469-5416</a></p>
+        </div>
+        <div class="card">
+          <h2>Mercy Home for Boys &amp; Girls</h2>
+          <p class="contact-line"><strong>Website:</strong> <a href="https://www.mercyhome.org/" target="_blank" rel="noopener">mercyhome.org</a></p>
+          <p class="contact-line"><strong>Address:</strong> 1140 W. Jackson Blvd., Chicago, IL 60607</p>
+          <p class="contact-line"><strong>General Information:</strong> <a href="tel:+13127387560">(312) 738-7560</a></p>
+          <p class="contact-line"><strong>Email:</strong> <a href="mailto:info@mercyhome.org">info@mercyhome.org</a></p>
+        </div>
+      </section>
+
+      <div class="footer-note">For features, speaking, partnerships, and direct outreach, use the Skyes Over London contact block above. For organization information and Mercy Home programming, use the Mercy Home contact block above.</div>
+    </article>
+
+    <footer class="footer">
+      <section class="footer-card">
+        <p class="section-kicker">Skye Editorial Surface</p>
+        <h2 class="footer-title">A darker, ecosystem-style presentation that tracks closer to the main Skyes Over London site family.</h2>
+        <p>This version keeps the article intact while shifting the page toward the core Skyes Over London visual language: glass panels, large editorial hero treatment, compact link pills, and a stronger footer structure.</p>
+        <div class="link-grid">
+          <a href="../../index.html">Offer</a>
+          <a href="../proof.html">Proof</a>
+          <a href="../founder.html">Founder</a>
+          <a href="../youth-partners.html">Partner Lanes</a>
+          <a href="../apply.html">Apply</a>
+        </div>
+      </section>
+
+      <section class="footer-card">
+        <h3>Contact</h3>
+        <p class="contact-line"><strong>Website:</strong> <a href="https://solenterprises.org/" target="_blank" rel="noopener">SOLEnterprises.org</a></p>
+        <p class="contact-line"><strong>Email:</strong> <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a></p>
+        <p class="contact-line"><strong>Email:</strong> <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a></p>
+        <p class="contact-line"><strong>Email:</strong> <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></p>
+        <p class="contact-line"><strong>Cohort Site:</strong> <a href="https://kaixu-0s-founder-cohort-platform.netlify.app/" target="_blank" rel="noopener">kaixu-0s-founder-cohort-platform.netlify.app</a></p>
+      </section>
+    </footer>
+  
+    <section class="section"><div class="content-card panel"><h2>Trust route</h2><p>This editorial now feeds directly into the dedicated trust page, founder page, Mercy Home lane, and application flow so readers can keep moving through the full Skyes Over London credibility stack.</p><div class="button-row"><a class="btn btn-primary" href="../trust.html">Open Trust Page</a><a class="btn btn-secondary" href="../founder.html">Open Founder Page</a><a class="btn btn-secondary" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener">All SkyeSol Case Studies</a><a class="btn btn-secondary" href="../apply.html">Apply / Request a Seat</a></div></div></section>
+  </main>
+</body>
+</html>

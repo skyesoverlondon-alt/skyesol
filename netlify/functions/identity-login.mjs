@@ -1,5 +1,7 @@
 // Netlify Identity event: login
-// Assigns admin role automatically when the user's email is in ADMIN_EMAILS.
+// Keeps Skyesol Identity roles normalized and synced to the shared database.
+
+import { normalizeIdentityRoles, upsertIdentityMember } from "./_lib/sol-identity.js";
 
 function parseAllowlist() {
   return (process.env.ADMIN_EMAILS || "")
@@ -22,12 +24,26 @@ export const handler = async (event) => {
 
   const allow = parseAllowlist();
   const email = String(user.email || "").toLowerCase().trim();
-  const shouldAdmin = allow.includes(email);
+  const shouldGrantPresident = allow.includes(email);
 
   const roles = Array.isArray(user.app_metadata?.roles) ? user.app_metadata.roles : [];
-  const nextRoles = shouldAdmin
-    ? Array.from(new Set([...roles, "admin"]))
-    : roles.filter((r) => r !== "admin");
+  const nextRoles = normalizeIdentityRoles([
+    ...roles,
+    shouldGrantPresident ? "president" : null,
+  ]);
+
+  await upsertIdentityMember({
+    email,
+    identityUserId: user.id || null,
+    fullName: user.user_metadata?.full_name || user.user_metadata?.name || null,
+    roles: nextRoles,
+    status: "active",
+    source: "identity-login",
+    metadata: {
+      last_login_event: "identity-login",
+    },
+    lastLoginAt: new Date().toISOString(),
+  });
 
   return {
     statusCode: 200,

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founder Board · 0s Cohort Command</title>
+  <meta name="description" content="0s cohort command surface with founder lane, student lane, student ID generation, welcome letters, instructor content, and workbook notes.">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="/js/kaixu-admin-bridge.js" defer></script>
+</head>
+<body data-route="founder-dashboard" data-kaixu-admin-guard="founder">
+  <div class="site-shell">
+    <header class="topbar print-hide">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html">
+          <img src="assets/media/skyes-primary-logo.png" alt="Skyes Over London logo">
+          <div>
+            <span class="brand-kicker">Skyes Over London × 0s</span>
+            <span class="brand-title">0s Cohort Command Center</span>
+            <span class="brand-sub">Founder-only class control and student-only cohort workspace</span>
+          </div>
+        </a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html">Command</a>
+<a href="founder-login.html">Founder Access</a>
+<a href="student-login.html">Student Access</a>
+<a href="founder-dashboard.html" aria-current="page">Founder Board</a>
+<a href="instructor-book.html">Instructor Book</a>
+<a href="student-portal.html">Student Portal</a>
+          
+        </nav>
+      </div>
+    </header>
+    
+<main class="page route-guard" data-guard="founder">
+  <section class="split-panel">
+    <aside class="sidebar print-hide">
+      <div class="eyebrow">Founder board</div>
+      <nav>
+        <a href="#overview" class="active">Overview</a>
+        <a href="#generator">Student Generator</a>
+        <a href="#letters">Welcome Letters</a>
+        <a href="#roster">Roster & Attendance</a>
+        <a href="#scoring">Demo Scoring</a>
+        <a href="#wiring">Wiring Map</a>
+      </nav>
+      <div class="lesson-card" style="margin-top:14px;">
+        <div class="kicker">Fast launch</div>
+        <div class="button-row">
+          <a class="button" href="instructor-book.html">Instructor Book</a>
+          <a class="ghost-button" href="student-portal.html">Student Preview</a>
+        </div>
+      </div>
+    </aside>
+    <div class="content-pane">
+      <section id="overview" class="panel">
+        <div class="section-head">
+          <div class="eyebrow">Class command</div>
+          <h1>Founder control board</h1>
+          <p class="lead">Everything here is founder-only: class identity, student generation, welcome letter output, attendance, scoring, and the frontend data map you will wire into your own backend later.</p>
+        </div>
+        <div class="stats-grid">
+          <article class="card"><div class="kicker">Generated seats</div><div class="metric-value" data-student-count>0</div><p>Students created from this board.</p></article>
+          <article class="card"><div class="kicker">Active seats</div><div class="metric-value" data-active-student-count>0</div><p>Students currently marked active.</p></article>
+          <article class="card"><div class="kicker">Founder session</div><div class="metric-value" data-founder-session-label>Locked</div><p>Separate from the student lane.</p></article>
+          <article class="card"><div class="kicker">Data state</div><div class="metric-value" data-last-saved>Not saved</div><p>Local app save stamp for this device.</p></article>
+        </div>
+        <div class="field-grid" style="margin-top:12px;">
+          <div class="field">
+            <label for="cohortName">Cohort name</label>
+            <input id="cohortName" type="text" data-bind="cohort.name" placeholder="0s Founder Cohort — November 2026">
+          </div>
+          <div class="field">
+            <label for="cohortTerm">Term / lane</label>
+            <input id="cohortTerm" type="text" data-bind="cohort.term" placeholder="Founder cohort · Elite open invitation lane">
+          </div>
+          <div class="field">
+            <label for="cohortLocation">Location</label>
+            <input id="cohortLocation" type="text" data-bind="cohort.location" placeholder="Phoenix, Chicago, Houston, Denver">
+          </div>
+          <div class="field">
+            <label for="cohortStartDate">Start date</label>
+            <input id="cohortStartDate" type="date" data-bind="cohort.startDate">
+          </div>
+          <div class="field field-span-2">
+            <label for="cohortPromise">Cohort promise / opening frame</label>
+            <textarea id="cohortPromise" data-bind="cohort.promise" placeholder="What students are building, what your teaching posture is, and what standard the room will hold."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section id="generator" class="grid-2">
+        <article class="panel">
+          <div class="section-head">
+            <div class="eyebrow">Student generator</div>
+            <h2>Create a live student seat</h2>
+            <p class="muted">Generate the student ID here. As soon as the seat is created and active, the student can use that ID on the student login lane.</p>
+          </div>
+          <div class="field-grid">
+            <div class="field"><label for="studentName">Student name</label><input id="studentName" type="text" data-generator="name" placeholder="Student full name"></div>
+            <div class="field"><label for="studentEmail">Student email</label><input id="studentEmail" type="email" data-generator="email" placeholder="student@example.com"></div>
+            <div class="field"><label for="studentOrg">Organization / school</label><input id="studentOrg" type="text" data-generator="org" placeholder="Mercy Home, HomeBase, independent, etc."></div>
+            <div class="field"><label for="studentTrack">Track</label><select id="studentTrack" data-generator="track"><option value="Founder Cohort">Founder Cohort</option><option value="Youth Access Cohort">Youth Access Cohort</option><option value="Partner Cohort">Partner Cohort</option></select></div>
+            <div class="field"><label for="studentSeat">Seat label</label><input id="studentSeat" type="text" data-generator="seat" placeholder="Seat A-01"></div>
+            <div class="field"><label for="studentStatus">Seat status</label><select id="studentStatus" data-generator="status"><option value="active">Active</option><option value="pending">Pending</option><option value="hold">On Hold</option></select></div>
+            <div class="field field-span-2"><label for="studentNotes">Founder notes</label><textarea id="studentNotes" data-generator="notes" placeholder="Placement notes, support posture, or anything you want attached to this student record."></textarea></div>
+          </div>
+          <div class="button-row print-hide">
+            <button class="button" type="button" data-generate-student>Create Student ID</button>
+            <button class="ghost-button" type="button" data-clear-generator>Clear Generator</button>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="section-head">
+            <div class="eyebrow">Live output</div>
+            <h2>Generated seat preview</h2>
+          </div>
+          <div class="student-id-card" data-current-student-card>
+            <div class="kicker">Current generated ID</div>
+            <div class="id-output" data-generated-id>0S-2026-LOCKED</div>
+            <div class="chip-row">
+              <span class="chip" data-generated-name>Student name will appear here</span>
+              <span class="chip" data-generated-track>Track will appear here</span>
+              <span class="chip" data-generated-status>Status will appear here</span>
+            </div>
+            <p class="muted" data-generated-summary>Create a seat to make the student lane go live for that ID on this device data set.</p>
+            <div class="button-row print-hide">
+              <button class="neon-button" type="button" data-open-letter>Open Welcome Letter</button>
+              <button class="ghost-button" type="button" data-print-id-card>Print ID Card</button>
+              <button class="button" type="button" data-copy-id>Copy ID</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section id="letters" class="grid-2">
+        <article class="panel">
+          <div class="section-head">
+            <div class="eyebrow">Welcome letter builder</div>
+            <h2>Founder welcome letter template</h2>
+            <p class="muted">Choose a student from the live roster and generate their letter instantly. This letter can be printed, copied, or exported as HTML.</p>
+          </div>
+          <div class="field-grid">
+            <div class="field field-span-2"><label for="letterStudent">Student record</label><select id="letterStudent" data-letter-student></select></div>
+            <div class="field"><label for="letterSubject">Letter title</label><input id="letterSubject" type="text" data-bind="letters.subject" placeholder="Welcome to the 0s Founder Cohort"></div>
+            <div class="field"><label for="letterSignature">Signature line</label><input id="letterSignature" type="text" data-bind="letters.signature" placeholder="Skyes Over London"></div>
+            <div class="field field-span-2"><label for="letterIntro">Opening paragraph</label><textarea id="letterIntro" data-bind="letters.intro" placeholder="Welcome them to the cohort, the standard, and the room."></textarea></div>
+            <div class="field field-span-2"><label for="letterBody">Core letter body</label><textarea id="letterBody" data-bind="letters.body" placeholder="Explain the outcome, what they should expect, and what standard the class holds."></textarea></div>
+          </div>
+          <div class="button-row print-hide">
+            <button class="button" type="button" data-render-letter>Render Letter</button>
+            <button class="neon-button" type="button" data-print-letter>Print Letter</button>
+            <button class="ghost-button" type="button" data-export-letter>Export Letter HTML</button>
+          </div>
+        </article>
+        <article class="panel">
+          <div class="section-head">
+            <div class="eyebrow">Letter preview</div>
+            <h2>Printable welcome letter</h2>
+          </div>
+          <div class="letter-preview" data-letter-preview></div>
+        </article>
+      </section>
+
+      <section id="roster" class="panel">
+        <div class="section-head">
+          <div class="eyebrow">Roster and attendance</div>
+          <h2>Live generated roster</h2>
+          <p class="muted">Every generated student seat appears here. Attendance, notes, and seat status can be changed and saved from this surface.</p>
+        </div>
+        <div class="button-row print-hide">
+          <button class="button" type="button" data-export-roster-csv>Export Roster CSV</button>
+          <button class="ghost-button" type="button" data-export-app>Export Full App Data</button>
+          <button class="danger-button" type="button" data-clear-students>Clear All Students</button>
+        </div>
+        <div class="table-shell">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th><th>Name</th><th>Email</th><th>Track</th><th>Status</th><th>D1</th><th>D2</th><th>D3</th><th>D4</th><th>D5</th><th>D6</th><th>D7</th><th>Notes</th>
+              </tr>
+            </thead>
+            <tbody data-student-table></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="scoring" class="panel">
+        <div class="section-head">
+          <div class="eyebrow">Final demo scoring</div>
+          <h2>Score student outcomes</h2>
+          <p class="muted">Keep this inside the founder lane only. Students should never see the score controls in this package.</p>
+        </div>
+        <div class="field-grid">
+          <div class="field field-span-2"><label for="scoreStudent">Student to score</label><select id="scoreStudent" data-score-student></select></div>
+        </div>
+        <div class="score-grid">
+          <div class="score-card"><label>Clarity</label><input type="number" min="1" max="5" data-score-field="clarity"></div>
+          <div class="score-card"><label>Coherence</label><input type="number" min="1" max="5" data-score-field="coherence"></div>
+          <div class="score-card"><label>Feature honesty</label><input type="number" min="1" max="5" data-score-field="feature"></div>
+          <div class="score-card"><label>AI lane</label><input type="number" min="1" max="5" data-score-field="ai"></div>
+          <div class="score-card"><label>Monetization</label><input type="number" min="1" max="5" data-score-field="money"></div>
+          <div class="score-card"><label>Trust</label><input type="number" min="1" max="5" data-score-field="trust"></div>
+          <div class="score-card"><label>Presentation</label><input type="number" min="1" max="5" data-score-field="presentation"></div>
+          <div class="score-card"><label>Overall</label><input type="number" min="1" max="5" data-score-field="overall"></div>
+        </div>
+        <div class="field-grid" style="margin-top:12px;">
+          <div class="field field-span-2"><label for="scoreNotes">Founder scoring notes</label><textarea id="scoreNotes" data-score-notes placeholder="What was strongest, what needs work, and what the next move should be."></textarea></div>
+        </div>
+        <div class="button-row print-hide">
+          <button class="button" type="button" data-save-score>Save Score</button>
+          <button class="ghost-button" type="button" data-print-score>Print Score Sheet</button>
+        </div>
+      </section>
+
+      <section id="wiring" class="panel">
+        <div class="section-head">
+          <div class="eyebrow">Frontend wiring map</div>
+          <h2>Handoff lanes for your backend build</h2>
+          <p class="muted">This section exists so your later Neon / Netlify / Identity wiring has a dedicated front-end contract surface instead of being mixed into student or teacher content.</p>
+        </div>
+        <div class="grid-2">
+          <article class="integration-card">
+            <div class="kicker">Identity lane</div>
+            <label for="identityAudience">Netlify Identity / founder auth endpoint</label>
+            <input id="identityAudience" type="text" data-bind="wiring.identity" placeholder="/.netlify/identity or custom auth handler">
+            <label for="founderRoleName" style="margin-top:10px;">Founder role / claim</label>
+            <input id="founderRoleName" type="text" data-bind="wiring.founderRole" placeholder="founder_admin">
+          </article>
+          <article class="integration-card">
+            <div class="kicker">Forms lane</div>
+            <label for="formsEndpoint">Netlify Forms / intake endpoint</label>
+            <input id="formsEndpoint" type="text" data-bind="wiring.forms" placeholder="/api/cohort-intake">
+            <label for="welcomeWebhook" style="margin-top:10px;">Welcome letter webhook</label>
+            <input id="welcomeWebhook" type="text" data-bind="wiring.welcomeWebhook" placeholder="/api/welcome-letter">
+          </article>
+          <article class="integration-card">
+            <div class="kicker">Blob lane</div>
+            <label for="blobBucket">Blobs / asset bucket route</label>
+            <input id="blobBucket" type="text" data-bind="wiring.blobs" placeholder="/api/blobs/cohort-assets">
+            <label for="exportBucket" style="margin-top:10px;">Export archive route</label>
+            <input id="exportBucket" type="text" data-bind="wiring.exports" placeholder="/api/export-cohort-state">
+          </article>
+          <article class="integration-card">
+            <div class="kicker">Neon lane</div>
+            <label for="neonRoute">Neon persistence route</label>
+            <input id="neonRoute" type="text" data-bind="wiring.neon" placeholder="/api/neon/cohort-state">
+            <label for="studentTableName" style="margin-top:10px;">Student table / schema hint</label>
+            <input id="studentTableName" type="text" data-bind="wiring.neonTable" placeholder="cohort_students">
+          </article>
+        </div>
+        <div class="button-row print-hide">
+          <button class="button" type="button" data-export-wiring>Export Wiring Map</button>
+          <button class="ghost-button" type="button" data-action="print">Print Wiring Map</button>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+<section class="empty-state route-guard" data-guard-fail="founder">
+  Founder session is locked on this device. Use Founder Access first.
+</section>
+
+    <footer class="footer">
+      <strong>0s Cohort Command Center · Skyes Over London</strong>
+      <p class="muted">Phone: <a href="tel:+14804695416">(480) 469-5416</a> · <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> · <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> · <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></p>
+      <div class="footer-links print-hide">
+        <a class="pill-link" href="https://skyesol.netlify.app/about" target="_blank" rel="noopener noreferrer">Founder Page</a>
+        <a class="pill-link" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener noreferrer">All SkyeSol Case Studies</a>
+      </div>
+    </footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

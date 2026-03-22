@@ -249,7 +249,7 @@
       <a href="/" style="color:#ffd36a; text-decoration:none; font-weight:600;">← SOLEnterprises</a>
       <span style="color:rgba(255,255,255,0.20);">|</span>
       <a href="/platforms.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Platforms</a>
-      <a href="/Services/WebBuilds/WebBuilds.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Services</a>
+      <a href="/Services/WebBuilds.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Services</a>
       <a href="/about.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Founder</a>
       <a href="/contact.html" style="color:rgba(255,255,255,0.65); text-decoration:none;">Contact</a>
       <span style="color:rgba(255,255,255,0.20);">|</span>
@@ -296,6 +296,7 @@
       <div style="margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.10);">
         <p class="muted small">Looking for an API key? <a href="/kAIxu/RequestKaixuAPIKey.html" style="color:#ffd36a;">Request a kAIxu API key →</a></p>
         <p class="muted small">Already have a key? <a href="/gateway/dashboard.html" style="color:#27f2ff;">Open User Dashboard →</a></p>
+        <p class="muted small">Need the public fuel-and-asset hub? <a href="/skyefuelstation/" style="color:#8fffd1;">Open SkyeFuelStation →</a></p>
       </div>
     </section>
 
@@ -305,6 +306,8 @@
         <button class="tab" data-tab="create">Create Customer + Master Key</button>
         <button class="tab" data-tab="keys">Keys (Sub-keys / Rotate / Revoke)</button>
         <button class="tab" data-tab="usage">Usage</button>
+        <button class="tab" data-tab="station">Fuel Station</button>
+        <button class="tab" data-tab="platforms">Platform Control</button>
         <button class="tab" data-tab="billing">Billing &amp; Controls</button>
         <button class="tab" data-tab="devices">Devices</button>
         <button class="tab" data-tab="exports">Exports &amp; Invoices</button>
@@ -527,6 +530,177 @@
           </div>
 
           <p class="muted small">SSE endpoint: <code>POST /.netlify/functions/gateway-stream</code></p>
+        </div>
+
+        <div class="card tabpanel" id="tab-station" style="display:none;">
+          <div class="cardhead">
+            <h2>SkyeFuelStation</h2>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn ghost" href="/skyefuelstation/" target="_blank" rel="noreferrer">Open public station</a>
+              <button id="loadStationOverview" class="btn primary" type="button">Load station overview</button>
+            </div>
+          </div>
+
+          <div class="row" style="flex-wrap:wrap; margin-top:8px;">
+            <label class="muted small">Month</label>
+            <input id="sfMonth" placeholder="YYYY-MM" style="max-width:160px;" />
+            <span id="sfBrainState" class="pill">brain gate: pending</span>
+          </div>
+
+          <div class="summary" style="margin-top:14px;">
+            <div class="stat">
+              <div class="label">Active customers</div>
+              <div class="value" id="sfCustomers">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Active keys</div>
+              <div class="value" id="sfKeys">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Month spent</div>
+              <div class="value" id="sfSpent">$0.00</div>
+            </div>
+            <div class="stat">
+              <div class="label">Top-ups</div>
+              <div class="value" id="sfTopups">$0.00</div>
+            </div>
+          </div>
+
+          <div class="grid2" style="margin-top:14px;">
+            <div class="card">
+              <h3 style="margin-top:0;">Station pricing policy</h3>
+              <div class="summary">
+                <div class="stat">
+                  <div class="label">Service asset</div>
+                  <div class="value" id="sfServiceAsset">SkyeTokens</div>
+                </div>
+                <div class="stat">
+                  <div class="label">Bonus return</div>
+                  <div class="value" id="sfBonusPct">23%</div>
+                </div>
+                <div class="stat">
+                  <div class="label">Usual discount</div>
+                  <div class="value" id="sfDiscountPct">0%</div>
+                </div>
+                <div class="stat">
+                  <div class="label">$100 preview</div>
+                  <div class="value" id="sfPreview">0 units</div>
+                </div>
+              </div>
+              <p class="muted small" id="sfBrainText" style="margin-top:10px;">Gateway 13 reads the station from here without becoming the public front door.</p>
+            </div>
+
+            <div class="card">
+              <h3 style="margin-top:0;">Station products</h3>
+              <div id="sfProducts" class="muted small">Load the station overview to view the current public asset lineup.</div>
+            </div>
+          </div>
+
+          <div class="grid2" style="margin-top:14px;">
+            <div class="card">
+              <h3 style="margin-top:0;">Top customer usage</h3>
+              <div class="tablewrap">
+                <table class="table" id="sfLeadersTable">
+                  <thead>
+                    <tr>
+                      <th>Customer</th>
+                      <th>Plan</th>
+                      <th>Spent</th>
+                      <th>Extra</th>
+                      <th>Tokens</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 style="margin-top:0;">Recent station activity</h3>
+              <div class="tablewrap">
+                <table class="table" id="sfEventsTable">
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Customer</th>
+                      <th>Provider</th>
+                      <th>Model</th>
+                      <th>Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card tabpanel" id="tab-platforms" style="display:none;">
+          <div class="cardhead">
+            <h2>Platform Control</h2>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button id="loadPlatformControl" class="btn primary" type="button">Load platform control</button>
+              <a class="btn ghost" href="/Platforms-Apps-Infrastructure/" target="_blank" rel="noreferrer">Open all platforms</a>
+            </div>
+          </div>
+
+          <div class="summary" style="margin-top:14px;">
+            <div class="stat">
+              <div class="label">Connected surfaces</div>
+              <div class="value" id="pcSurfaceCount">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Remote state docs</div>
+              <div class="value" id="pcRemoteDocs">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Cohort seats</div>
+              <div class="value" id="pcCohortSeats">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Mail desk threads</div>
+              <div class="value" id="pcMailThreads">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Attention lanes</div>
+              <div class="value" id="pcAttentionCount">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Onboarding inflight</div>
+              <div class="value" id="pcOnboardingCount">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Station customers</div>
+              <div class="value" id="pcStationCustomers">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Backup brain</div>
+              <div class="value" id="pcBackupBrain">off</div>
+            </div>
+          </div>
+
+          <p class="muted small" id="pcStorageState" style="margin-top:10px;">Load platform control to inspect which separate surfaces are connected to Gateway 13 and which ones are only linked by route.</p>
+          <p class="muted small" id="pcBackupBrainState" style="margin-top:6px;">Backup-brain status will appear here after loading platform control.</p>
+
+          <div class="tablewrap" style="margin-top:12px;">
+            <table class="table" id="platformControlTable" style="min-width:1320px;">
+              <thead>
+                <tr>
+                  <th>Platform</th>
+                  <th>Visibility</th>
+                  <th>Storage</th>
+                  <th>Summary</th>
+                  <th>Health</th>
+                  <th>Onboarding</th>
+                  <th>Lifecycle</th>
+                  <th>Owner / Notes</th>
+                  <th>Updated</th>
+                  <th>Launch / Save</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
 
         
@@ -1250,6 +1424,47 @@ data: {"usage":{"input_tokens":12,"output_tokens":18,"cost_cents":1},"month":{"m
               </thead>
               <tbody></tbody>
             </table>
+          </div>
+
+          <div class="card" style="margin-top:16px;">
+            <div class="cardhead">
+              <h3 style="margin:0;">Platform Timeline</h3>
+              <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                <span id="platformEventStatus" class="pill">idle</span>
+                <button id="loadPlatformEventsBtn" class="btn primary" type="button">Load platform history</button>
+                <button id="clearPlatformEventsBtn" class="btn ghost" type="button">Clear</button>
+              </div>
+            </div>
+
+            <div class="form" style="margin-top:10px;">
+              <div class="cols">
+                <div>
+                  <label>Platform app_id</label>
+                  <input id="platformEventApp" placeholder="cohort-command" />
+                </div>
+                <div>
+                  <label>Limit</label>
+                  <input id="platformEventLimit" value="100" placeholder="100" />
+                </div>
+              </div>
+            </div>
+
+            <div class="tablewrap" style="margin-top:10px;">
+              <table class="table" id="platformEventsTable">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Source</th>
+                    <th>Actor</th>
+                    <th>Action</th>
+                    <th>Target</th>
+                    <th>Status</th>
+                    <th>Summary</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
           </div>
 
           <p class="muted small" style="margin-top:10px;">

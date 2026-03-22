@@ -10,10 +10,9 @@ const CORE_ASSETS = [
   "./index.html",
   "./manifest.webmanifest",
   "./sw.js",
-  "./favicon.svg",
   "./assets/logo.svg",
-  "./icons/icon.svg",
-  "./icons/icon-maskable.svg"
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {

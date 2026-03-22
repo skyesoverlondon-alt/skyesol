@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Governed AI Support Desk | Skyes Over London LC</title>
+  <meta name="description" content="Client-style AI systems case study in the live SOL voice, focusing on governed support workflows, response consistency, and platform discipline.">
+    <link rel="canonical" href="https://kaixu-0s-founder-cohort-platform.netlify.app/pages/editorials/governed-ai-support-case-study.html" />
+  <meta property="og:url" content="https://kaixu-0s-founder-cohort-platform.netlify.app/pages/editorials/governed-ai-support-case-study.html" />
+  <meta name="theme-color" content="#0b1020" />
+<style>
+:root{
+  --bg:#060810;
+  --bg-soft:#0a0f1f;
+  --panel:rgba(11,17,34,.84);
+  --panel-2:rgba(14,23,44,.88);
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(250,204,21,.22);
+  --text:#f4f7ff;
+  --muted:#aab6d4;
+  --purple:#7c4dff;
+  --purple-2:#4f2ce0;
+  --blue:#59a7ff;
+  --gold:#f5cf5a;
+  --gold-2:#ffc83d;
+  --shadow:0 30px 80px rgba(0,0,0,.42);
+  --glow:0 0 0 1px rgba(245,207,90,.08),0 0 40px rgba(124,77,255,.14);
+  --max:1220px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(42rem 42rem at 10% -10%, rgba(124,77,255,.22), transparent 55%),
+    radial-gradient(34rem 34rem at 90% 0%, rgba(89,167,255,.14), transparent 50%),
+    radial-gradient(36rem 36rem at 50% 110%, rgba(245,207,90,.09), transparent 50%),
+    linear-gradient(180deg, #05070e 0%, #070b14 25%, #090f1d 58%, #05070d 100%);
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; opacity:.25;
+  background-image:radial-gradient(rgba(255,255,255,.25) .7px, transparent .7px);
+  background-size:26px 26px;
+  mask-image:linear-gradient(180deg, rgba(255,255,255,.18), transparent 85%);
+}
+.site-shell{position:relative;z-index:1}
+.container{width:min(calc(100% - 28px), var(--max)); margin:0 auto}
+.topbar{
+  position:sticky; top:0; z-index:60;
+  background:rgba(4,8,18,.72);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:74px}
+.brand{display:flex; align-items:center; gap:14px; min-width:0}
+.brand img{width:56px; height:56px; object-fit:contain; filter:drop-shadow(0 0 18px rgba(245,207,90,.18)); animation:floatGlow 6s ease-in-out infinite}
+.brand-copy{min-width:0}
+.brand-kicker{font-size:.70rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold)}
+.brand-title{font-size:1rem; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.nav{display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+.nav a,.ghost-btn,.cta-btn,.chip{
+  border:1px solid var(--line);
+  padding:.8rem 1rem;
+  border-radius:999px;
+  background:rgba(255,255,255,.025);
+  font-weight:700;
+  transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.nav a:hover,.ghost-btn:hover,.cta-btn:hover,.chip:hover{transform:translateY(-1px); border-color:rgba(245,207,90,.32); box-shadow:0 0 0 1px rgba(245,207,90,.10), 0 0 26px rgba(124,77,255,.16)}
+.cta-btn{background:linear-gradient(135deg, rgba(124,77,255,.22), rgba(245,207,90,.12)); border-color:rgba(245,207,90,.28)}
+.hero{padding:54px 0 20px}
+.hero-grid{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(300px,.8fr); gap:18px; align-items:stretch}
+.panel{
+  background:linear-gradient(180deg, rgba(13,20,40,.84), rgba(8,13,26,.92));
+  border:1px solid var(--line);
+  border-radius:30px;
+  box-shadow:var(--shadow), var(--glow);
+}
+.hero-copy{padding:34px 34px 30px}
+.kicker{display:inline-flex; gap:10px; align-items:center; font-size:.76rem; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); font-weight:800}
+.kicker .dot{width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 20px rgba(245,207,90,.85)}
+.hero h1{margin:14px 0 14px; font-size:clamp(2.7rem, 7vw, 5.15rem); line-height:.92; letter-spacing:-.05em; max-width:11ch}
+.hero p{margin:0; color:var(--muted); font-size:1.03rem; line-height:1.78; max-width:68ch}
+.hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px}
+.hero-side{padding:18px; display:grid; gap:14px}
+.stat-card,.micro-card,.quote-card,.content-card,.section-card,.footer-card{
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+  border:1px solid var(--line);
+  border-radius:24px;
+}
+.stat-card{padding:18px 18px 16px}
+.stat-label{font-size:.74rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:9px; font-weight:800}
+.stat-value{font-size:2rem; font-weight:900; line-height:1}
+.stat-note{margin-top:8px; color:var(--muted); line-height:1.6; font-size:.95rem}
+.micro-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.micro-card{padding:16px}
+.micro-card h3{margin:0 0 8px; font-size:.85rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold)}
+.micro-card p{margin:0; color:var(--muted); line-height:1.6; font-size:.94rem}
+.section{padding:16px 0}
+.section-grid{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(280px,.65fr); gap:18px}
+.content-card{padding:26px 26px 18px}
+.content-card h2{margin:0 0 14px; font-size:1.8rem; letter-spacing:-.03em}
+.content-card h3{margin:22px 0 8px; font-size:1rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold)}
+.content-card p, .content-card li{color:var(--muted); line-height:1.78; font-size:1rem}
+.content-card ul{margin:12px 0 0; padding-left:20px}
+.callout{padding:18px 20px; border-left:3px solid var(--gold); background:rgba(245,207,90,.05); border-radius:18px; margin:18px 0 0}
+.callout strong{display:block; margin-bottom:6px; color:var(--text)}
+.quote-card{padding:22px; display:grid; gap:12px}
+.quote-card .eyebrow{font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:800}
+.quote-card blockquote{margin:0; font-size:1.14rem; line-height:1.6; color:var(--text)}
+.quote-card p{margin:0; color:var(--muted); line-height:1.7}
+.side-stack{display:grid; gap:18px}
+.metric-list{display:grid; gap:10px}
+.metric{display:flex; gap:12px; align-items:flex-start; padding:14px 0; border-top:1px solid var(--line)}
+.metric:first-child{border-top:0; padding-top:0}
+.metric .metric-num{min-width:48px; font-size:1.4rem; font-weight:900; color:var(--gold)}
+.metric .metric-copy strong{display:block; margin-bottom:4px}
+.metric .metric-copy span{display:block; color:var(--muted); line-height:1.6}
+.process{display:grid; gap:12px; margin-top:10px}
+.process-step{padding:16px 18px; border:1px solid var(--line); border-radius:20px; background:rgba(255,255,255,.025)}
+.process-step strong{display:block; margin-bottom:7px}
+.process-step p{margin:0; color:var(--muted); line-height:1.65}
+.editorial-band{padding:14px 0 10px}
+.editorial-band .band-card{padding:26px}
+.band-title{font-size:.76rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:800}
+.band-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:16px}
+.band-grid .mini{padding:18px; border-radius:20px; border:1px solid var(--line); background:rgba(255,255,255,.03)}
+.band-grid .mini strong{display:block; margin-bottom:6px}
+.band-grid .mini span{color:var(--muted); line-height:1.6; font-size:.95rem}
+.footer{padding:18px 0 48px}
+.footer-card{padding:26px 26px 22px}
+.footer-top{display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; align-items:flex-start}
+.footer-title{font-size:1.2rem; font-weight:900}
+.footer-copy{color:var(--muted); line-height:1.7; max-width:62ch}
+.footer-links{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+.contact-line{margin-top:16px; color:var(--muted); line-height:1.8}
+.grid-links{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:18px}
+.grid-links a{display:block; padding:16px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.03)}
+.grid-links strong{display:block; margin-bottom:4px}
+.grid-links span{display:block; color:var(--muted); line-height:1.55; font-size:.95rem}
+.index-wrap{padding:40px 0 56px}
+.index-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px}
+.case-card{padding:24px; border:1px solid var(--line); border-radius:26px; background:linear-gradient(180deg, rgba(14,23,44,.82), rgba(8,12,24,.9)); box-shadow:var(--shadow), var(--glow)}
+.case-card h2{margin:10px 0 10px; font-size:1.6rem; letter-spacing:-.03em}
+.case-card p{margin:0; color:var(--muted); line-height:1.72}
+.case-card .case-actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+.note-strip{margin-top:14px; font-size:.88rem; color:var(--muted)}
+@keyframes floatGlow{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+@media (max-width:1000px){
+  .hero-grid,.section-grid,.index-grid,.band-grid,.grid-links{grid-template-columns:1fr}
+  .hero h1{max-width:none}
+}
+@media (max-width:720px){
+  .nav{display:none}
+  .hero-copy,.content-card,.footer-card{padding:22px}
+  .micro-grid{grid-template-columns:1fr}
+  .topbar-inner{min-height:70px}
+  .brand img{width:48px; height:48px}
+}
+
+.founder-visual-card{padding:18px; display:grid; gap:14px; overflow:hidden}
+.founder-visual{
+  position:relative;
+  min-height:330px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at 50% 15%, rgba(245,207,90,.10), transparent 24%),
+    radial-gradient(circle at 12% 12%, rgba(124,77,255,.22), transparent 30%),
+    radial-gradient(circle at 86% 18%, rgba(89,167,255,.16), transparent 26%),
+    linear-gradient(180deg, rgba(12,18,34,.95), rgba(6,10,20,.98));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 24px 60px rgba(0,0,0,.28);
+}
+.founder-visual::before{
+  content:"";
+  position:absolute; inset:8% 14% auto 14%; height:42%;
+  border-radius:999px;
+  background:radial-gradient(circle, rgba(245,207,90,.18), rgba(124,77,255,.12) 45%, transparent 72%);
+  filter:blur(16px);
+  pointer-events:none;
+}
+.founder-portrait{
+  position:absolute; left:50%; bottom:0; transform:translateX(-50%);
+  height:min(88%, 420px); width:auto; object-fit:contain;
+  filter:drop-shadow(0 18px 34px rgba(0,0,0,.46));
+}
+.founder-logo{
+  position:absolute; width:76px; height:76px; object-fit:contain;
+  filter:drop-shadow(0 0 18px rgba(245,207,90,.18));
+  animation:floatGlow 6s ease-in-out infinite;
+}
+.founder-logo.logo-main{top:18px; left:18px}
+.founder-logo.logo-side{top:28px; right:18px; width:68px; height:68px; animation-delay:.8s}
+.founder-chip-row{display:flex; flex-wrap:wrap; gap:10px}
+.founder-chip{display:inline-flex; align-items:center; gap:8px; padding:.68rem .9rem; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03); font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; font-weight:800; color:var(--gold)}
+.case-grid-links{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:18px}
+.case-grid-links a{display:block; padding:16px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.03)}
+.case-grid-links strong{display:block; margin-bottom:4px}
+.case-grid-links span{display:block; color:var(--muted); line-height:1.55; font-size:.95rem}
+@media (max-width:720px){
+  .founder-visual{min-height:280px}
+  .case-grid-links{grid-template-columns:1fr}
+}
+
+</style>
+  <meta property="og:title" content="Governed AI Support Desk | Skyes Over London LC" />
+  <meta property="og:description" content="Client-style AI systems case study in the live SOL voice, focusing on governed support workflows, response consistency, and platform discipline." />
+  <meta name="twitter:description" content="Client-style AI systems case study in the live SOL voice, focusing on governed support workflows, response consistency, and platform discipline." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Governed AI Support Desk | Skyes Over London LC" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Governed AI Support Desk | Skyes Over London LC",
+  "url": "https://kaixu-0s-founder-cohort-platform.netlify.app/pages/editorials/governed-ai-support-case-study.html",
+  "description": "Client-style AI systems case study in the live SOL voice, focusing on governed support workflows, response consistency, and platform discipline.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "0s Founder Cohort",
+    "url": "https://kaixu-0s-founder-cohort-platform.netlify.app/"
+  }
+}
+  </script>
+</head>
+<body>
+<div class="site-shell">
+
+<header class="topbar">
+  <div class="container topbar-inner">
+    <a class="brand" href="../../index.html">
+      <img src="../../assets/media/skyes-primary-logo.png" alt="Skyes Over London LC logo">
+      <div class="brand-copy">
+        <div class="brand-kicker">SKYES OVER LONDON LC</div>
+        <div class="brand-title">0s Founder Cohort Editorial Surface</div>
+      </div>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="../../index.html">Offer</a>
+      <a href="../proof.html">Proof</a>
+      <a href="../founder.html">Founder</a>
+      <a href="../trust.html">Trust</a>
+          <a href="index.html">Editorials</a>
+          <a href="../youth-partners.html">Partner Lanes</a>
+      <a href="index.html">All Editorials</a>
+      <a href="https://skyesol.netlify.app/about">Official About</a>
+      <a class="cta-btn" href="../apply.html">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <article class="panel hero-copy">
+      <div class="kicker"><span class="dot"></span>Case Study · AI Systems · Governed Support</div>
+      <h1>Governed AI Support Desk</h1>
+      <p>The live Skyesol site talks about gateways, brains, policies, streaming, and proof because the point is control, not spectacle. This client case study uses the same posture. The business wanted AI assistance in the support lane, but it could not afford loose outputs, missing context, or zero audit trail. The solution was a governed AI support desk surface: one that helped operators move faster while still keeping routing, approvals, and visible boundaries intact.</p>
+      <div class="hero-actions">
+        <a class="cta-btn" href="index.html">All Editorials</a>
+        <a class="ghost-btn" href="../apply.html">Apply / Request a Seat</a>
+        <a class="ghost-btn" href="../founder.html">Meet the Founder</a>
+      </div>
+    </article>
+    <aside class="panel hero-side">
+      <div class="founder-visual-card stat-card">
+        <div class="stat-label">Founder Surface</div>
+        <div class="founder-visual" aria-label="Founder portrait and logos">
+          <img class="founder-logo logo-main" src="../../assets/media/skyes-primary-logo.png" alt="Skyes Over London logo">
+          <img class="founder-logo logo-side" src="../../assets/media/kaixu-logo.png" alt="kAIxU logo">
+          <img class="founder-portrait" src="../../assets/media/founder.png" alt="Skyes Over London founder portrait">
+        </div>
+        <div class="founder-chip-row">
+          <span class="founder-chip">Founder-Led</span>
+          <span class="founder-chip">Proof-First</span>
+          <span class="founder-chip">Client-Ready</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Signal Snapshot</div>
+        <div class="stat-value">0 to 1</div>
+        <div class="stat-note">The most important shift was from ungoverned experimentation to a controlled production lane with clear usage purpose, review points, and operator ownership.</div>
+      </div>
+      <div class="micro-grid">
+        <div class="micro-card">
+          <h3>Why governance mattered</h3>
+          <p>The client did not fear AI. The client feared a support surface that created more risk than speed.</p>
+        </div>
+        <div class="micro-card">
+          <h3>Outcome</h3>
+          <p>The desk became usable because guardrails were designed into the workflow instead of bolted on later.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+<section class="section">
+  <div class="container section-grid">
+    <div class="content-stack">
+      <article class="content-card panel"><h2>The problem with “just add AI”</h2><p>Most AI support ideas collapse because they start with generation and ignore responsibility.</p><h3>The client tension</h3><p>They wanted faster handling of routine support actions, but they also needed confidence that the system would stay inside policy and not improvise where it should not.</p><h3>The risk posture</h3><p>Without routing logic, escalation rules, and a clear human review model, the support lane could become noisier instead of faster.</p><h3>The design requirement</h3><ul><li>AI should accelerate repetitive handling, not replace accountability.</li><li>Operators should always know what the system did and why.</li><li>Escalations should be obvious, not hidden.</li></ul></article><article class="content-card panel"><h2>What the governed desk looked like</h2><p>This build followed the same “stable contract + controlled surface” thinking that appears throughout the kAIxU parts of the live site.</p><h3>Operator interface</h3><p>A clean workspace for structured prompts, response drafting, and issue-category handling instead of freeform chaos.</p><h3>Workflow controls</h3><p>Policy-aware routes, escalation states, and human checkpoints so support actions stayed bounded.</p><h3>Proof posture</h3><p>Usage visibility, response history, and clearer ownership so the client could defend the system operationally.</p><div class="callout"><strong>kAIxU-style framing</strong>Capability is only useful when it can be governed. That is the same philosophy the live site applies to gateways and control planes.</div></article><article class="content-card panel"><h2>Why this is a strong client-facing case study</h2><p>A lot of companies want AI, but many prospects are still skeptical. This editorial answers that skepticism directly by making governance part of the sales story.</p><h3>For cautious buyers</h3><p>It shows that speed and control do not have to be opposites.</p><h3>For operations teams</h3><p>It demonstrates that human review and structured automation can coexist in one lane.</p><h3>For executive stakeholders</h3><p>It makes the purchase legible as an operational control upgrade, not just a technology experiment.</p></article>
+    </div>
+    <aside class="side-stack">
+      <div class="quote-card panel"><div class="eyebrow">AI Division Tone</div><blockquote>Governed AI that ships, bills, and holds up. That is the live site posture, and it is exactly the right posture for a support desk case study.</blockquote><p>This language deliberately echoes the live home page theme.</p></div><div class="content-card panel"><h2>Client-side value</h2><div class="metric-list"><div class="metric"><div class="metric-num">01</div><div class="metric-copy"><strong>More consistent drafts</strong><span>Routine support handling became more uniform and easier to review.</span></div></div><div class="metric"><div class="metric-num">02</div><div class="metric-copy"><strong>Less operator drift</strong><span>People had a clearer lane for when to use AI and when to escalate.</span></div></div><div class="metric"><div class="metric-num">03</div><div class="metric-copy"><strong>Better buyer confidence</strong><span>Prospects could see that the intelligence layer was controlled, not improvised.</span></div></div></div></div><div class="content-card panel"><h2>Rollout sequence</h2><div class="process"><div class="process-step"><strong>Define the boundary</strong><p>Set the categories where AI can assist and where it must defer.</p></div><div class="process-step"><strong>Structure the desk</strong><p>Create predictable support flows instead of one big text box.</p></div><div class="process-step"><strong>Make proof portable</strong><p>Keep visible history and accountability so the system can be trusted under review.</p></div></div></div>
+    </aside>
+  </div>
+</section>
+<section class="editorial-band">
+  <div class="container">
+    <div class="panel band-card">
+      <div class="band-title">Why this reads like the live SOL surface</div>
+      <div class="band-grid">
+        <div class="mini"><strong>kAIxU adjacency</strong><span>The live site describes AI infrastructure as governed, metered, and audit-aware; this page keeps that exact logic.</span></div><div class="mini"><strong>Client credibility</strong><span>The editorial sells seriousness, which is what higher-value AI buyers need to feel before they engage.</span></div><div class="mini"><strong>Website fit</strong><span>The styling and tone sit close to the live home, about, and network surfaces rather than drifting into a generic SaaS theme.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-card panel">
+      <div class="footer-top">
+        <div>
+          <div class="brand-kicker">SKYES OVER LONDON LC · SOLEnterprises Ecosystem</div>
+          <div class="footer-title">Editorial surfaces aligned to the cohort site and live Skyes Over London posture.</div>
+        </div>
+        <div class="footer-copy">
+          These case-study editorials now sit inside the cohort site with the same founder-linked polish: local navigation, direct cohort access, founder adjacency, contact-forward structure, and a cleaner published editorial lane.
+        </div>
+      </div>
+      <div class="footer-links">
+        <a class="ghost-btn" href="../../index.html">Cohort Offer</a>
+        <a class="ghost-btn" href="../proof.html">Proof Page</a>
+        <a class="ghost-btn" href="../founder.html">Founder Page</a>
+        <a class="ghost-btn" href="../mercy-home.html">Mercy Home Page</a>
+        <a class="ghost-btn" href="index.html">All Editorials</a>
+        <a class="cta-btn" href="../apply.html">Apply / Request a Seat</a>
+      </div>
+      <div class="contact-line">
+        Email: <strong>SkyesOverLondonLC@SOLEnterprises.org</strong><br>
+        Email: <strong>SkyesOverLondon@gmail.com</strong><br>
+        Email: <strong>B2B@SOLEnterprises.org</strong><br>
+        Phone: <strong>(480) 469-5416</strong><br>
+        Web: <strong>kaixu-0s-founder-cohort-platform.netlify.app</strong> · <strong>skyesol.netlify.app</strong> · <strong>solenterprises.org</strong>
+      </div>
+      <div class="grid-links">
+        <a href="../../index.html"><strong>0s Founder Cohort</strong><span>Main offer surface for pricing, curriculum, founder context, and seat application.</span></a>
+        <a href="../founder.html"><strong>Founder Page</strong><span>Dedicated founder lane with profile, company context, and direct path into the official About surface.</span></a>
+        <a href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener noreferrer"><strong>All SkyeSol Case Studies</strong><span>Open the broader public case-study archive connected to the founder credibility surface.</span></a>
+        <a href="https://skyesol.netlify.app/about"><strong>Official About</strong><span>Live public founder/company page on the Skyes Over London site.</span></a>
+      </div>
+      <div class="case-grid-links">
+        <a href="community-pillar.html"><strong>Community Pillar</strong><span>Mercy Home editorial on long-running community leadership and documented public record.</span></a>
+        <a href="rising-stars.html"><strong>Rising Stars</strong><span>Mercy Home editorial on named contribution, youth leadership, and institutional continuity.</span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -16,7 +16,7 @@ All client calls use:
 
 - `Authorization: Bearer <virtual_key>`
 
-A "virtual key" is a Kaixu key issued by the gateway (not a direct vendor key).
+A "virtual key" is a Kaixu key issued by the gateway (not an OpenAI/Anthropic key).
 
 Some endpoints also accept short-lived **user session JWTs** minted by the gateway UI (internally these resolve to an `api_key_id`).
 
@@ -55,8 +55,8 @@ CORS is **strict-by-default**.
 Body:
 ```json
 {
-  "provider": "kaixu",
-  "model": "kaixu-chat",
+  "provider": "openai|anthropic|gemini",
+  "model": "...",
   "messages": [{"role":"user","content":"..."}],
   "max_tokens": 1024,
   "temperature": 1
@@ -66,8 +66,8 @@ Body:
 Response `200`:
 ```json
 {
-  "provider": "Skyes Over London",
-  "model": "skAIxU Flow6.7",
+  "provider": "openai",
+  "model": "...",
   "output_text": "...",
   "usage": {"input_tokens": 0, "output_tokens": 0, "cost_cents": 0},
   "month": {"month":"YYYY-MM", "customer_cap_cents": 0, "customer_spent_cents": 0, "key_cap_cents": 0, "key_spent_cents": 0},
@@ -146,7 +146,7 @@ It automatically chooses:
 
 - `GET /.netlify/functions/health`
 
-Includes branded runtime status and a DB connectivity check.
+Includes build/schema identifiers, provider-key presence flags, and a DB connectivity check.
 
 ## Env vars that must exist for a working gateway
 
@@ -155,7 +155,7 @@ Minimum for core AI proxying:
 - `JWT_SECRET`
 - `ADMIN_PASSWORD`
 - `ALLOWED_ORIGINS` (for browser apps; can be `*` for allow-all)
-- At least one internal lane credential configured server-side
+- At least one provider key: `OPENAI_API_KEY` or `ANTHROPIC_API_KEY` or `GEMINI_API_KEY`
 
 Strongly recommended:
 - `KEY_PEPPER` (improves key hash security)

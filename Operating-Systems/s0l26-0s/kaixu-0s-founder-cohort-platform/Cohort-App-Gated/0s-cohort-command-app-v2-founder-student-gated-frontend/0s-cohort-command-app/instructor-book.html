@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructor Book · 0s Cohort Command</title>
+  <meta name="description" content="0s cohort command surface with founder lane, student lane, student ID generation, welcome letters, instructor content, and workbook notes.">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="/js/kaixu-admin-bridge.js" defer></script>
+</head>
+<body data-route="instructor-book" data-kaixu-admin-guard="founder">
+  <div class="site-shell">
+    <header class="topbar print-hide">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html">
+          <img src="assets/media/skyes-primary-logo.png" alt="Skyes Over London logo">
+          <div>
+            <span class="brand-kicker">Skyes Over London × 0s</span>
+            <span class="brand-title">0s Cohort Command Center</span>
+            <span class="brand-sub">Founder-only class control and student-only cohort workspace</span>
+          </div>
+        </a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html">Command</a>
+<a href="founder-login.html">Founder Access</a>
+<a href="student-login.html">Student Access</a>
+<a href="founder-dashboard.html">Founder Board</a>
+<a href="instructor-book.html" aria-current="page">Instructor Book</a>
+<a href="student-portal.html">Student Portal</a>
+          
+        </nav>
+      </div>
+    </header>
+    
+<main class="page route-guard" data-guard="founder">
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Founder teaching lane</div>
+        <h1>Instructor Book with deeper day-by-day content you can actually teach from.</h1>
+        <p class="lead">This is the founder-only teaching surface: opening frames, what to teach, live demos, rescue lines, build drills, and what must be locked before each class ends. Students should never see this side.</p>
+        <div class="button-row print-hide">
+          <a class="button" href="founder-dashboard.html">Open Founder Board</a>
+          <button class="neon-button" type="button" data-action="print">Print Instructor Page</button>
+        </div>
+      </div>
+      <div class="visual-panel">
+        <img class="constellation-logo logo-1" src="assets/media/skydexia-dual-logo.png" alt="SkyDexia dual logo">
+        <img class="constellation-logo logo-2" src="assets/media/kaixu-logo.png" alt="kAIxU logo">
+        <img class="constellation-logo logo-3" src="assets/media/skydexia-logo.png" alt="SkyDexia logo">
+        <img class="constellation-logo logo-4" src="assets/media/skyes-primary-logo.png" alt="Skyes Over London logo">
+        <img class="founder" src="assets/media/founder.png" alt="Founder portrait">
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="section-head">
+      <div class="eyebrow">Day tabs</div>
+      <h2>7-day lesson command</h2>
+      <p class="muted">Every tab below includes the content you actually need in the room: opening language, lessons, demos, drills, rescue lines, and dismissal locks.</p>
+    </div>
+    <div class="tabs print-hide"><button class="tab active" type="button" data-tab-target="day-1">Day 1</button><button class="tab" type="button" data-tab-target="day-2">Day 2</button><button class="tab" type="button" data-tab-target="day-3">Day 3</button><button class="tab" type="button" data-tab-target="day-4">Day 4</button><button class="tab" type="button" data-tab-target="day-5">Day 5</button><button class="tab" type="button" data-tab-target="day-6">Day 6</button><button class="tab" type="button" data-tab-target="day-7">Day 7</button></div>
+    
+      <div class="tab-panel" id="day-1">
+        <div class="lesson-stack">
+          <div class="lesson-card">
+            <div class="kicker">Day 1</div>
+            <h2>Product Lock, Standards, and Platform Identity</h2>
+            <p>Kill vagueness. Lock the product, target user, pain, transformation, recurring value, and first-version scope.</p>
+            <div class="subpanel"><strong>Opening frame</strong><p>“Today is not about being vaguely creative. Today is about getting specific. A vague product is not a product. A vague audience is not an audience. A vague promise is not a business.”</p></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>What to teach</h4><ul class="checklist"><li>Explain the difference between an app idea and a platform concept.</li><li>Force one user, one repeated pain, one transformation, and one recurring reason to return.</li><li>Teach the five locks: product name, target user, problem, transformation, recurring value.</li></ul></div>
+            <div class="lesson-card"><h4>What to demo live</h4><ul class="checklist"><li>Take a weak idea and sharpen it live into a product statement.</li><li>Model a clean one-page product blueprint with 3 features max.</li></ul></div>
+            <div class="lesson-card"><h4>Build drills</h4><ul class="checklist"><li>Have every student write a 60-second product lock statement.</li><li>Run “too broad / too vague / too many features” corrections publicly.</li></ul></div>
+            <div class="lesson-card"><h4>Rescue lines</h4><ul class="checklist"><li>“That is not a buyer. That is a population.”</li><li>“What repeats here monthly?”</li><li>“What changes after they use your app?”</li></ul></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>Must lock before dismissal</h4><ul class="checklist"><li>Product name</li><li>Target user</li><li>Problem and transformation</li><li>Primary feature</li><li>Version-one scope</li></ul></div>
+            <div class="lesson-card">
+              <h4>Homework / next step</h4>
+              <p>Tighten the one-sentence positioning line and cut anything that does not belong in version one.</p>
+              <label>Founder teaching notes</label>
+              <textarea class="note-block" data-bind="instructor.notes.day-1" placeholder="Add your live notes, examples, questions, and what you want to sharpen for this day."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tab-panel" id="day-2">
+        <div class="lesson-stack">
+          <div class="lesson-card">
+            <div class="kicker">Day 2</div>
+            <h2>Brand System, User Journey, and App Structure</h2>
+            <p>Make the product visible. Build the first branded shell and map the user journey.</p>
+            <div class="subpanel"><strong>Opening frame</strong><p>“A real product tells the user where they are, what it does, and what to do next. If the first screen confuses them, the app is already losing.”</p></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>What to teach</h4><ul class="checklist"><li>Teach headline, subheadline, CTA, navigation, workspace, and trust path.</li><li>Split the app into public surface, work surface, and result surface.</li><li>Teach “land → understand → click → use → receive result → return.”</li></ul></div>
+            <div class="lesson-card"><h4>What to demo live</h4><ul class="checklist"><li>Build a homepage shell and a dashboard shell.</li><li>Rewrite weak homepage copy into direct product language.</li></ul></div>
+            <div class="lesson-card"><h4>Build drills</h4><ul class="checklist"><li>Students sketch or build their shell.</li><li>Each student explains the first action a user takes in five seconds.</li></ul></div>
+            <div class="lesson-card"><h4>Rescue lines</h4><ul class="checklist"><li>“Tell the truth faster.”</li><li>“What is the main action?”</li><li>“What belongs on page one and what does not?”</li></ul></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>Must lock before dismissal</h4><ul class="checklist"><li>Homepage copy</li><li>CTA path</li><li>Page map</li><li>Main workspace frame</li><li>User journey</li></ul></div>
+            <div class="lesson-card">
+              <h4>Homework / next step</h4>
+              <p>Finish headline, subheadline, CTA, and the main first-screen structure.</p>
+              <label>Founder teaching notes</label>
+              <textarea class="note-block" data-bind="instructor.notes.day-2" placeholder="Add your live notes, examples, questions, and what you want to sharpen for this day."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tab-panel" id="day-3">
+        <div class="lesson-stack">
+          <div class="lesson-card">
+            <div class="kicker">Day 3</div>
+            <h2>Build the First Real Lane</h2>
+            <p>Make the app honest. One lane must actually work from input to result.</p>
+            <div class="subpanel"><strong>Opening frame</strong><p>“Today fake apps die. If it only looks like it works, today is the day that stops.”</p></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>What to teach</h4><ul class="checklist"><li>Break one feature into input, action, process, output, saved state, and next step.</li><li>Teach that one strong lane beats six fake features.</li><li>Keep them from feature sprawl.</li></ul></div>
+            <div class="lesson-card"><h4>What to demo live</h4><ul class="checklist"><li>Build one real flow all the way through: intake → action → result.</li><li>Show success, empty, and correction states.</li></ul></div>
+            <div class="lesson-card"><h4>Build drills</h4><ul class="checklist"><li>Students choose one lane only.</li><li>Each student must demo their lane in under two minutes before class ends.</li></ul></div>
+            <div class="lesson-card"><h4>Rescue lines</h4><ul class="checklist"><li>“No second feature.”</li><li>“What does the user get back?”</li><li>“Would you let a stranger use this?”</li></ul></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>Must lock before dismissal</h4><ul class="checklist"><li>One real working lane</li><li>Honest button labels</li><li>Output formatting</li><li>Empty and success states</li></ul></div>
+            <div class="lesson-card">
+              <h4>Homework / next step</h4>
+              <p>Remove dead controls and clean the flow until it can be shown without explanation.</p>
+              <label>Founder teaching notes</label>
+              <textarea class="note-block" data-bind="instructor.notes.day-3" placeholder="Add your live notes, examples, questions, and what you want to sharpen for this day."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tab-panel" id="day-4">
+        <div class="lesson-stack">
+          <div class="lesson-card">
+            <div class="kicker">Day 4</div>
+            <h2>AI Lane, Automation Logic, and Infrastructure Thinking</h2>
+            <p>Treat AI like a governed service lane inside the product, not magic dust.</p>
+            <div class="subpanel"><strong>Opening frame</strong><p>“AI is not the product. It is a capability inside the product. Today we make the intelligence serve the workflow instead of distracting from it.”</p></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>What to teach</h4><ul class="checklist"><li>Use the simple logic model: screen → brain → save → result.</li><li>Translate that into frontend, processing layer, state, and output.</li><li>Teach useful AI jobs: transform, summarize, classify, generate, support.</li></ul></div>
+            <div class="lesson-card"><h4>What to demo live</h4><ul class="checklist"><li>Build one structured AI lane with a clear result surface.</li><li>Show how to make the output usable instead of generic.</li></ul></div>
+            <div class="lesson-card"><h4>Build drills</h4><ul class="checklist"><li>Students add one AI or automation lane only.</li><li>Run output quality reviews: what makes this actually useful?</li></ul></div>
+            <div class="lesson-card"><h4>Rescue lines</h4><ul class="checklist"><li>“Why is AI the right tool here?”</li><li>“What should the result look like?”</li><li>“Does this make the workflow clearer or messier?”</li></ul></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>Must lock before dismissal</h4><ul class="checklist"><li>One AI or automation lane</li><li>Structured input/output</li><li>Review step</li><li>Usable result formatting</li></ul></div>
+            <div class="lesson-card">
+              <h4>Homework / next step</h4>
+              <p>Tighten the prompt or logic and improve the result surface.</p>
+              <label>Founder teaching notes</label>
+              <textarea class="note-block" data-bind="instructor.notes.day-4" placeholder="Add your live notes, examples, questions, and what you want to sharpen for this day."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tab-panel" id="day-5">
+        <div class="lesson-stack">
+          <div class="lesson-card">
+            <div class="kicker">Day 5</div>
+            <h2>Monetization, Offer Design, and Commercial Structure</h2>
+            <p>Wrap a clean offer around the product so it can actually be sold.</p>
+            <div class="subpanel"><strong>Opening frame</strong><p>“If your product cannot be explained commercially, you do not have a business yet. Today we turn the product into an offer.”</p></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>What to teach</h4><ul class="checklist"><li>Teach the difference between product, offer, buyer, and user.</li><li>Show monthly subscription, setup plus monthly, and support-based options.</li><li>Force recurring value logic.</li></ul></div>
+            <div class="lesson-card"><h4>What to demo live</h4><ul class="checklist"><li>Build a pricing / offer section live.</li><li>Write offer copy around outcome, not around feature clutter.</li></ul></div>
+            <div class="lesson-card"><h4>Build drills</h4><ul class="checklist"><li>Students state buyer, user, offer, and recurring reason.</li><li>Rewrite weak pricing language into clear value language.</li></ul></div>
+            <div class="lesson-card"><h4>Rescue lines</h4><ul class="checklist"><li>“What exactly is being sold?”</li><li>“Who signs off on buying this?”</li><li>“Why would they keep paying next month?”</li></ul></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>Must lock before dismissal</h4><ul class="checklist"><li>Offer structure</li><li>Pricing direction</li><li>Buyer logic</li><li>CTA and follow-up path</li></ul></div>
+            <div class="lesson-card">
+              <h4>Homework / next step</h4>
+              <p>Tighten the pricing copy and the reason the buyer cares.</p>
+              <label>Founder teaching notes</label>
+              <textarea class="note-block" data-bind="instructor.notes.day-5" placeholder="Add your live notes, examples, questions, and what you want to sharpen for this day."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tab-panel" id="day-6">
+        <div class="lesson-stack">
+          <div class="lesson-card">
+            <div class="kicker">Day 6</div>
+            <h2>Trust, Proof, Authority, and Launch Readiness</h2>
+            <p>Make the app believable enough to show without standing next to it.</p>
+            <div class="subpanel"><strong>Opening frame</strong><p>“Trust is not decoration. Trust is product language, proof, contact, and completeness.”</p></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>What to teach</h4><ul class="checklist"><li>Teach about sections, proof sections, contact blocks, FAQ, and trust surfaces.</li><li>Use honest proof instead of hype.</li><li>Run the polish pass on readability, spacing, labels, and links.</li></ul></div>
+            <div class="lesson-card"><h4>What to demo live</h4><ul class="checklist"><li>Add trust modules to a sample product and show how it changes credibility.</li><li>Show proof blocks, founder/about logic, and clean CTA flow.</li></ul></div>
+            <div class="lesson-card"><h4>Build drills</h4><ul class="checklist"><li>Students add about, proof, FAQ, and contact.</li><li>Run a trust audit: would a stranger believe this?</li></ul></div>
+            <div class="lesson-card"><h4>Rescue lines</h4><ul class="checklist"><li>“Why should a stranger trust this?”</li><li>“What proof can you actually show?”</li><li>“Can someone contact you right now?”</li></ul></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>Must lock before dismissal</h4><ul class="checklist"><li>Trust surface</li><li>Proof block</li><li>Contact block</li><li>Polished CTA path</li></ul></div>
+            <div class="lesson-card">
+              <h4>Homework / next step</h4>
+              <p>Fix broken links, remove fake elements, and polish visible pages.</p>
+              <label>Founder teaching notes</label>
+              <textarea class="note-block" data-bind="instructor.notes.day-6" placeholder="Add your live notes, examples, questions, and what you want to sharpen for this day."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="tab-panel" id="day-7">
+        <div class="lesson-stack">
+          <div class="lesson-card">
+            <div class="kicker">Day 7</div>
+            <h2>Final Demo, Operator Handoff, and Next-Step Path</h2>
+            <p>Present a coherent product story with a real next-step path.</p>
+            <div class="subpanel"><strong>Opening frame</strong><p>“Today is not a celebration of effort. It is a presentation of outcome.”</p></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>What to teach</h4><ul class="checklist"><li>Teach the five-minute demo structure: name, user, problem, main lane, AI lane, offer, next step.</li><li>Coach them to start with the result and end with the business path.</li></ul></div>
+            <div class="lesson-card"><h4>What to demo live</h4><ul class="checklist"><li>Run a model final demo.</li><li>Show how to avoid rambling and stay outcome-first.</li></ul></div>
+            <div class="lesson-card"><h4>Build drills</h4><ul class="checklist"><li>Students rehearse in pairs before final demos.</li><li>Run scoring against clarity, coherence, feature honesty, AI lane, trust, and presentation.</li></ul></div>
+            <div class="lesson-card"><h4>Rescue lines</h4><ul class="checklist"><li>“Start with the result.”</li><li>“Show the strongest lane first.”</li><li>“Do not narrate your struggle. Show the product.”</li></ul></div>
+          </div>
+          <div class="grid-2">
+            <div class="lesson-card"><h4>Must lock before dismissal</h4><ul class="checklist"><li>Five-minute final demo</li><li>Operator handoff packet</li><li>Next-step roadmap</li></ul></div>
+            <div class="lesson-card">
+              <h4>Homework / next step</h4>
+              <p>None. Ship the presentation cleanly.</p>
+              <label>Founder teaching notes</label>
+              <textarea class="note-block" data-bind="instructor.notes.day-7" placeholder="Add your live notes, examples, questions, and what you want to sharpen for this day."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </section>
+
+  
+  <section class="grid-2">
+    <article class="panel teacher-deep">
+      <div class="kicker">4-hour rhythm</div>
+      <h3>Use the same class spine every day</h3>
+      <div class="timeline">
+        <div class="timeline-item"><h4>Hour 1 · Frame + teach</h4><p>State the outcome for the day, teach the concept, and show exactly what strong output looks like.</p></div>
+        <div class="timeline-item"><h4>Hour 2 · Build-along</h4><p>Model the build yourself. Keep it clean, explain the logic, and stop before overbuilding.</p></div>
+        <div class="timeline-item"><h4>Hour 3 · Student sprint</h4><p>Students build their own version while you correct scope, copy, clarity, and fake lanes fast.</p></div>
+        <div class="timeline-item"><h4>Hour 4 · Review + lock</h4><p>Students demo what exists now. No vague promises. Lock the day before anyone leaves.</p></div>
+      </div>
+    </article>
+    <article class="panel teacher-deep">
+      <div class="kicker">Example live product lanes</div>
+      <h3>Fast examples to teach from</h3>
+      <ul class="checklist">
+        <li>Service intake and proposal generator for local businesses</li>
+        <li>Internal operations board for tasks, approvals, and notes</li>
+        <li>AI content engine for niche authority publishing</li>
+        <li>Directory or resource search app with filters and output cards</li>
+        <li>Client request portal with structured summaries and status tracking</li>
+        <li>Community or youth support portal with role-based resources</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="grid-2">
+    <article class="panel teacher-deep">
+      <div class="kicker">Fast interventions</div>
+      <h3>Lines to use when the room drifts</h3>
+      <ul class="checklist">
+        <li>What is this actually for?</li>
+        <li>Who pays for this?</li>
+        <li>What happens right after the click?</li>
+        <li>What does the user get back?</li>
+        <li>Why would they return?</li>
+        <li>What can we cut?</li>
+        <li>What is still fake?</li>
+      </ul>
+    </article>
+    <article class="panel teacher-deep">
+      <div class="kicker">Founder reset</div>
+      <h3>Two-minute room reset prompt</h3>
+      <p class="muted">Use this if the room starts drifting into chaos:</p>
+      <div class="subpanel">
+        <p>Stop building for two minutes. Answer these now:</p>
+        <ul class="checklist">
+          <li>What is your product?</li>
+          <li>Who is it for?</li>
+          <li>What is the main working lane?</li>
+          <li>What is still fake?</li>
+          <li>What are you locking before class ends?</li>
+        </ul>
+      </div>
+      <label>Additional founder notes</label>
+      <textarea class="note-block" data-bind="instructor.resetNotes" placeholder="Add your own favorite rescue prompts or reminders."></textarea>
+    </article>
+  </section>
+</main>
+<section class="empty-state route-guard" data-guard-fail="founder">Founder session is locked on this device. Use Founder Access first.</section>
+
+    <footer class="footer">
+      <strong>0s Cohort Command Center · Skyes Over London</strong>
+      <p class="muted">Phone: <a href="tel:+14804695416">(480) 469-5416</a> · <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> · <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> · <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></p>
+      <div class="footer-links print-hide">
+        <a class="pill-link" href="https://skyesol.netlify.app/about" target="_blank" rel="noopener noreferrer">Founder Page</a>
+        <a class="pill-link" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener noreferrer">All SkyeSol Case Studies</a>
+      </div>
+    </footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

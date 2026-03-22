@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/app.js"></script>
+  <script defer src="/assets/mail-ui.js"></script>
+  <link rel="stylesheet" href="/assets/mail-ui.css" />
+  <title>Provisioning — SkyMail Host</title>
+</head>
+<body data-page-id="dashboard" data-page-name="Provisioning" data-page-hint="Mailbox setup and launchpad">
+<div class="wrap">
+  <div id="pageTopbar"></div>
+  <div class="layout">
+    <aside class="rail" id="leftRail"></aside>
+    <main class="main">
+      <section class="hero">
+        <section class="card">
+          <div class="badge" id="stateBadge">Checking mailbox status…</div>
+          <h1 class="h1">Your hosted mailbox is the product core.</h1>
+          <p class="sub">This account owns a real mailbox address and uses the SkyMail command center for inbox, sent, drafts, spam, trash, threads, contacts, and signatures.</p>
+          <div class="grid3">
+            <div class="stat"><b>Create</b><span class="mini">Claim a mailbox address on one of the hosted domains.</span><div class="btnrow"><a class="btn gold" href="/signup.html">Create mailbox</a></div></div>
+            <div class="stat"><b>Login</b><span class="mini">Return to your command center with your handle or mailbox address.</span><div class="btnrow"><a class="btn" href="/login.html">Login</a></div></div>
+            <div class="stat"><b>Launch</b><span class="mini">Open the live command center once your account is active.</span><div class="btnrow"><a class="btn" href="/dashboard.html">Open inbox</a></div></div>
+          </div>
+          <div class="btnrow"><a class="btn" href="/drafts.html">Open Drafts</a><a class="btn" href="/settings.html">Open Settings</a><button class="btn" id="refreshBtn" type="button">Refresh Status</button></div>
+        </section>
+        <aside class="card">
+          <div class="kicker">Status</div>
+          <div class="notice" id="statusBox">Waiting for mailbox status…</div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <div id="appFooter"></div>
+</div>
+<script>
+(async function(){
+  const boot = await SMV.withBoot('dashboard', 'Provisioning', 'Mailbox setup and launchpad');
+  if(!boot) return;
+  const stateBadge = qs('#stateBadge');
+  const statusBox = qs('#statusBox');
+  function setBox(msg, kind=''){ setStatus(statusBox, msg, kind); }
+  function refresh(){
+    if(boot.status && boot.status.connected && boot.status.mailbox){
+      stateBadge.textContent = `Mailbox live • ${boot.status.mailbox.email}`;
+      setBox('Your mailbox is provisioned and ready for the command center.', 'ok');
+    } else {
+      stateBadge.textContent = 'No mailbox provisioned';
+      setBox('Create a mailbox first, then return here to launch the command center.', '');
+    }
+  }
+  qs('#refreshBtn').onclick = ()=> location.reload();
+  refresh();
+})();
+</script>
+</body>
+</html>

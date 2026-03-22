@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyeLeticX — The Spectacle | Premium Under-6'0" League</title>
+  <meta name="description" content="SkyeLeticX: The premier under-6'0" basketball league. Cinematic Three.js experience showcasing elite talent, championship stakes, and premium media production. Sponsored by Skyes Over London.">
+  <meta property="og:title" content="SkyeLeticX — The Spectacle">
+  <meta property="og:description" content="Defy Limits. Redefine Possible. The premier under-6'0" basketball league.">
+  <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+  <meta property="og:url" content="https://skyesol.netlify.app/SkyeLeticXOfficialWebsite/">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e8d48b;
+      --gold-dim: rgba(201,168,76,0.15);
+      --dark: #0e0e1a;
+      --darker: #07070f;
+      --surface: #0c0c14;
+      --surface-2: #111119;
+      --surface-3: #181822;
+      --text: #e8e6e1;
+      --text-dim: #8a8880;
+      --accent-fire: #e84c30;
+      --accent-blue: #3a6fd8;
+      --purple: #8a63ff;
+      --purple-dim: rgba(138,99,255,0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--darker);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Noise overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 99998;
+    }
+
+    /* Three.js Canvas */
+    #three-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ═══ LOADER ═══ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--darker);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999999;
+      font-family: 'Fira Code', monospace;
+      letter-spacing: 1px;
+      color: var(--gold);
+      text-align: center;
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+    #loader.fade-out {
+      opacity: 0;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+    .spinner {
+      width: 56px; height: 56px;
+      border: 2px solid transparent;
+      border-top-color: var(--gold);
+      border-right-color: var(--accent-blue);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 18px;
+      box-shadow: 0 0 20px rgba(201,168,76,0.35);
+    }
+    #loader .loader-badge {
+      width: 120px; height: auto;
+      margin-bottom: 24px;
+      animation: floatGlow 3s ease-in-out infinite;
+    }
+    #loading-text {
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    #loading-sub {
+      text-transform: uppercase;
+      font-size: 10px;
+      color: rgba(232,232,232,0.45);
+      letter-spacing: 2px;
+    }
+    .load-bar-outer {
+      width: 200px; height: 2px;
+      background: rgba(201,168,76,0.1);
+      margin-top: 20px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .load-bar-inner {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--accent-blue));
+      transition: width 0.3s ease;
+    }
+
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes floatGlow {
+      0%,100% { transform: translateY(0); filter: drop-shadow(0 0 18px rgba(201,168,76,0.5)) drop-shadow(0 0 40px rgba(201,168,76,0.15)); }
+      50% { transform: translateY(-10px); filter: drop-shadow(0 0 28px rgba(201,168,76,0.7)) drop-shadow(0 0 60px rgba(201,168,76,0.25)); }
+    }
+    @keyframes floatGlowBlue {
+      0%,100% { transform: translateY(0); filter: drop-shadow(0 0 18px rgba(58,111,216,0.5)); }
+      50% { transform: translateY(-10px); filter: drop-shadow(0 0 28px rgba(58,111,216,0.7)); }
+    }
+    @keyframes floatGlowPurple {
+      0%,100% { transform: translateY(0); filter: drop-shadow(0 0 18px rgba(138,99,255,0.5)); }
+      50% { transform: translateY(-8px); filter: drop-shadow(0 0 28px rgba(138,99,255,0.7)); }
+    }
+    @keyframes subtlePulse { 0%,100% { opacity: 1; } 50% { opacity: .6; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(80px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-80px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInScale { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+    @keyframes lineExpand { from { width: 0; } to { width: 100%; } }
+    @keyframes borderGlow {
+      0%,100% { border-color: rgba(201,168,76,0.08); }
+      50% { border-color: rgba(201,168,76,0.35); }
+    }
+    @keyframes glowPulseRing {
+      0%,100% { box-shadow: 0 0 20px rgba(201,168,76,0.1), inset 0 0 20px rgba(201,168,76,0.05); }
+      50% { box-shadow: 0 0 40px rgba(201,168,76,0.25), inset 0 0 40px rgba(201,168,76,0.1); }
+    }
+    @keyframes textReveal {
+      from { clip-path: inset(0 100% 0 0); }
+      to { clip-path: inset(0 0% 0 0); }
+    }
+    @keyframes rotateGlow {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes pulseScale {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* ═══ SCROLL REVEAL ═══ */
+    .reveal { opacity: 0; transform: translateY(50px); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-60px); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(60px); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.8); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    .stagger-children .reveal:nth-child(1) { transition-delay: 0s; }
+    .stagger-children .reveal:nth-child(2) { transition-delay: .1s; }
+    .stagger-children .reveal:nth-child(3) { transition-delay: .18s; }
+    .stagger-children .reveal:nth-child(4) { transition-delay: .26s; }
+    .stagger-children .reveal:nth-child(5) { transition-delay: .34s; }
+    .stagger-children .reveal:nth-child(6) { transition-delay: .42s; }
+
+    /* ═══ CONTENT ═══ */
+    .content-wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ═══ NAV ═══ */
+    .spec-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9000;
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(5,5,8,0.6);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(201,168,76,0.06);
+      transition: background .4s, border-color .4s;
+    }
+    .spec-nav.scrolled {
+      background: rgba(5,5,8,0.92);
+      border-bottom-color: rgba(201,168,76,0.12);
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-brand img { height: 32px; width: auto; }
+    .nav-brand span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 5px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color .3s;
+      position: relative;
+      padding: 6px 0;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all .3s;
+    }
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--darker);
+    }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent 10%, var(--gold) 50%, transparent 90%);
+      animation: subtlePulse 3s ease-in-out infinite;
+      z-index: 10;
+    }
+    .hero-sponsor {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 6px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+    .hero-sponsor-logo {
+      height: 60px;
+      width: auto;
+      margin-bottom: 30px;
+      animation: floatGlow 4s ease-in-out infinite;
+      animation-delay: 0.6s;
+      opacity: 0;
+      animation: fadeInScale 1s ease-out 0.7s both, floatGlow 4s ease-in-out 1.7s infinite;
+    }
+    .hero-badge {
+      width: 220px;
+      height: auto;
+      margin-bottom: 20px;
+      animation: fadeInScale 1.2s ease-out 1s both;
+      filter: drop-shadow(0 0 40px rgba(201,168,76,0.4)) drop-shadow(0 0 80px rgba(201,168,76,0.15));
+    }
+    .hero-badge-ring {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .hero-badge-ring::before {
+      content: '';
+      position: absolute;
+      width: 280px; height: 280px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.08);
+      animation: glowPulseRing 5s ease-in-out infinite;
+    }
+    .hero-badge-ring::after {
+      content: '';
+      position: absolute;
+      width: 340px; height: 340px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid rgba(138,99,255,0.05);
+      animation: glowPulseRing 7s ease-in-out 1s infinite;
+    }
+    .hero-tagline {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(11px, 1.4vw, 15px);
+      letter-spacing: 8px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      animation: fadeInUp 1s ease-out 1.3s both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 8vw, 120px);
+      font-weight: 700;
+      line-height: 1.0;
+      margin-bottom: 10px;
+      animation: fadeInUp 1s ease-out 1.5s both;
+    }
+    .hero h1 span {
+      display: block;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2vw, 24px);
+      font-style: italic;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      animation: fadeInUp 1s ease-out 1.8s both;
+    }
+    .hero-stat-row {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 2s both;
+      margin-bottom: 40px;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat .num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .hero-stat .lbl {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 2.2s both;
+    }
+    .btn-gold {
+      display: inline-block;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--darker);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all .3s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+    }
+    .btn-gold:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(201,168,76,0.5);
+    }
+    .btn-outline {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all .3s;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+      transform: translateY(-3px);
+    }
+    .btn-purple {
+      display: inline-block;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, var(--purple), #6b4fff);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all .3s;
+      box-shadow: 0 4px 20px rgba(138,99,255,0.3);
+    }
+    .btn-purple:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(138,99,255,0.5);
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      animation: fadeInUp 1s ease-out 2.5s both;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: subtlePulse 2s ease-in-out infinite;
+    }
+
+    /* ═══ DIVIDER ═══ */
+    .divider {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ═══ SECTION ═══ */
+    .section {
+      padding: 120px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .section-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 12px;
+      letter-spacing: 6px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 5vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .section-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      max-width: 700px;
+      margin-bottom: 50px;
+      line-height: 1.85;
+    }
+
+    /* ═══ METRIC CARDS ═══ */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .metric-card {
+      text-align: center;
+      padding: 40px 18px;
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.04);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .4s, transform .4s;
+    }
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .metric-card:hover::before { opacity: 1; }
+    .metric-card:hover { border-color: rgba(201,168,76,0.2); transform: translateY(-6px); }
+    .metric-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .metric-label {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ═══ FEATURE CARDS ═══ */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .feature-card {
+      padding: 36px 28px;
+      background: var(--surface);
+      border: 1px solid rgba(201,168,76,0.04);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      transition: all .4s;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .5s;
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-card:hover { border-color: rgba(201,168,76,0.15); transform: translateY(-6px); }
+    .feature-card .icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+    .feature-card .tag {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .feature-card p {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    /* ═══ TIMELINE ═══ */
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+      max-width: 700px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), var(--purple), rgba(201,168,76,0.05));
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 50px;
+      padding-left: 30px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -54px; top: 8px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 20px rgba(201,168,76,0.5);
+    }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -58px; top: 4px;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.2);
+      animation: glowPulseRing 4s ease-in-out infinite;
+    }
+    .timeline-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 14px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .timeline-item h4 {
+      font-weight: 600;
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+    .timeline-item p {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    /* ═══ SPLIT SECTION ═══ */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .split-img {
+      position: relative;
+    }
+    .split-img img {
+      width: 100%;
+      border-radius: 6px;
+      animation: floatGlow 5s ease-in-out infinite;
+    }
+    .split-img::after {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border: 1px solid rgba(201,168,76,0.06);
+      border-radius: 8px;
+      pointer-events: none;
+      animation: borderGlow 5s ease-in-out infinite;
+    }
+
+    /* ═══ VALUES GRID ═══ */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .value-card {
+      padding: 30px;
+      background: var(--surface);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 4px 4px 0;
+      position: relative;
+      overflow: hidden;
+      transition: all .4s;
+    }
+    .value-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 100%;
+      background: rgba(201,168,76,0.03);
+      transition: width .5s;
+    }
+    .value-card:hover::after { width: 100%; }
+    .value-card:hover { transform: translateX(8px); border-left-color: var(--gold-light); }
+    .value-card .v-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .value-card h4 {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .value-card p {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══ SPONSOR BANNER ═══ */
+    .sponsor-banner {
+      background: linear-gradient(135deg, var(--surface), var(--surface-2));
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 6px;
+      padding: 60px 50px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .sponsor-banner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--purple), var(--gold), transparent);
+    }
+    .sponsor-banner img {
+      height: 80px;
+      width: auto;
+      margin-bottom: 20px;
+    }
+    .sponsor-banner h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .sponsor-banner p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto 24px;
+    }
+
+    /* ═══ GLOW TILES ═══ */
+    .glow-tile {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(138,99,255,0.08) 100%);
+      border-radius: 12px;
+      box-shadow: 0 0 18px 6px rgba(201,168,76,0.15), 0 0 32px 12px rgba(201,168,76,0.06);
+      padding: 18px 32px;
+      color: var(--text);
+      font-size: 1.05rem;
+      font-weight: 500;
+      text-align: center;
+      letter-spacing: 0.01em;
+      border: 1px solid rgba(201,168,76,0.12);
+      animation: floatGlow 4.5s ease-in-out infinite;
+    }
+    .glow-tile-purple {
+      background: linear-gradient(135deg, rgba(138,99,255,0.15) 0%, rgba(58,111,216,0.1) 100%);
+      box-shadow: 0 0 18px 6px rgba(138,99,255,0.18), 0 0 32px 12px rgba(138,99,255,0.08);
+      border: 1px solid rgba(138,99,255,0.15);
+      animation: floatGlowPurple 4.5s ease-in-out infinite;
+    }
+
+    /* ═══ CTA SECTION ═══ */
+    .cta-section {
+      text-align: center;
+      padding: 140px 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .cta-section .hero-badge-ring {
+      margin-bottom: 30px;
+    }
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .cta-section h2 span {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-section p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--text-dim);
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+
+    /* ═══ FOOTER ═══ */
+    footer {
+      text-align: center;
+      padding: 60px 24px 40px;
+      border-top: 1px solid rgba(201,168,76,0.06);
+      position: relative;
+      z-index: 2;
+    }
+    footer img { height: 50px; width: auto; margin-bottom: 16px; }
+    footer p {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+    footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      transition: color .3s;
+    }
+    footer a:hover { color: var(--gold); }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 900px) {
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .spec-nav { padding: 14px 20px; }
+      .hero h1 { font-size: clamp(36px, 12vw, 80px); }
+      .hero-stat-row { gap: 24px; }
+      .sponsor-banner { padding: 40px 24px; }
+    }
+    @media (max-width: 600px) {
+      .metric-grid { grid-template-columns: 1fr 1fr; }
+      .hero-badge { width: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <img class="loader-badge" src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLeticX">
+  <div class="spinner"></div>
+  <div id="loading-text">Initializing Spectacle</div>
+  <div id="loading-sub">SkyeLeticX · Three.js Engine</div>
+  <div class="load-bar-outer"><div class="load-bar-inner" id="loadBar"></div></div>
+</div>
+
+<!-- THREE.JS CANVAS -->
+<canvas id="three-bg"></canvas>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <!-- NAV -->
+  <nav class="spec-nav" id="mainNav">
+    <a href="/SkyeLeticXOfficialWebsite/" class="nav-brand">
+      <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLeticX">
+      <span>SkyeLeticX</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#how">How It Works</a>
+      <a href="#values">Values</a>
+      <a href="#journey">Journey</a>
+      <a href="#sponsor">Sponsor</a>
+    </div>
+    <a href="/SkyeLeticXOfficialWebsite/players.html" class="nav-cta">Register / Join</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-sponsor">Sponsored by</div>
+    <img class="hero-sponsor-logo" src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London">
+    <div class="hero-badge-ring">
+      <img class="hero-badge" src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLeticX Badge">
+    </div>
+    <div class="hero-tagline">Performance Evolution · Under 6'0"</div>
+    <h1>SKYE<span>LETICX</span></h1>
+    <p class="hero-sub">"Defy Limits. Redefine Possible." — The premier under-6'0" basketball league with championship stakes, 4K media production, and real payouts.</p>
+    <div class="hero-stat-row">
+      <div class="hero-stat"><div class="num" data-count="6" data-suffix="'0&quot;">0</div><div class="lbl">Max Height</div></div>
+      <div class="hero-stat"><div class="num" data-count="4">0</div><div class="lbl">States Active</div></div>
+      <div class="hero-stat"><div class="num" data-count="350" data-suffix="">0</div><div class="lbl">Champion Payout</div></div>
+      <div class="hero-stat"><div class="num">4K</div><div class="lbl">Highlight Reels</div></div>
+    </div>
+    <div class="hero-cta-row">
+      <a href="/SkyeLeticXOfficialWebsite/" class="btn-gold">Enter SkyeLeticX</a>
+      <a href="/SkyeLeticXOfficialWebsite/players.html" class="btn-outline">Register as Player</a>
+      <a href="/SkyeLeticXOfficialWebsite/owners-intake.html" class="btn-purple">Become an Owner</a>
+    </div>
+    <div class="hero-scroll-hint">Scroll<div class="scroll-line"></div></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-label reveal">🏀 Our Story</div>
+    <div class="section-title reveal">Where <em>Elite</em> Meets Elevation</div>
+    <div class="section-desc reveal">SkyeLetes was built on a simple belief: talent shouldn't be measured by height. We created the premier league for players under 6'0" who deserve a professional stage, pro-grade media, and real championship stakes.</div>
+    <div class="split">
+      <div class="split-img reveal-left">
+        <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLeticX Badge">
+      </div>
+      <div class="reveal-right">
+        <div class="metric-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="metric-card"><div class="metric-number" data-count="4">0</div><div class="metric-label">States Active</div></div>
+          <div class="metric-card"><div class="metric-number">72"</div><div class="metric-label">Max Height</div></div>
+          <div class="metric-card"><div class="metric-number">$<span data-count="350">0</span></div><div class="metric-label">Champion Payout</div></div>
+          <div class="metric-card"><div class="metric-number">4K</div><div class="metric-label">Highlight Reels</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="section-label reveal">🎯 The Blueprint</div>
+    <div class="section-title reveal">How <em>SkyeLeticX</em> Works</div>
+    <div class="section-desc reveal">Rules of engagement, the premium standard, and how the ecosystem fits together to create the ultimate under-6'0" stage.</div>
+    <div class="feature-grid stagger-children">
+      <div class="feature-card reveal">
+        <div class="icon">📏</div>
+        <h3>Strict Height Cap</h3>
+        <div class="tag">Under 6'0" Only</div>
+        <p>Every player must be under 6'0". No exceptions. Verified at registration. This is the great equalizer — talent wins here, not wingspan.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon">🏆</div>
+        <h3>Championship Stakes</h3>
+        <div class="tag">Real Cash Payouts</div>
+        <p>State champions earn $350 per player and advance to the national title. This isn't a rec league — it's a real competitive ecosystem with real rewards.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon">📱</div>
+        <h3>Media-First Approach</h3>
+        <div class="tag">4K · Highlights · Content</div>
+        <p>Every game filmed in 4K. Every player gets highlight reels. Every team gets content for social media, recruiting, or personal branding. Your game deserves to be seen.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon">👔</div>
+        <h3>Team Owners</h3>
+        <div class="tag">Founding Dynasties</div>
+        <p>Founding owner applications are open. Secure your franchise, build a roster, design custom uniforms via Brand-Lock, and build a lasting dynasty.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon">🏟️</div>
+        <h3>Arizona HQ</h3>
+        <div class="tag">Phoenix · Houston · Denver · Chicago</div>
+        <p>Headquartered in Phoenix, AZ with expansion into Houston, Denver, and Chicago. Multi-state championship structure activated.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon">⚡</div>
+        <h3>Player Portals</h3>
+        <div class="tag">Personal Landing Pages</div>
+        <p>Custom uniforms, personal landing pages, stats tracking, and professional player profiles. Every Skelete gets the premium treatment.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VALUES -->
+  <section class="section" id="values">
+    <div class="section-label reveal">💎 Core Values</div>
+    <div class="section-title reveal">What We <em>Stand For</em></div>
+    <div class="section-desc reveal">The principles driving every decision, every game, every championship moment.</div>
+    <div class="values-grid stagger-children">
+      <div class="value-card reveal">
+        <div class="v-icon">⚡</div>
+        <h4>Execution Over Excuses</h4>
+        <p>We ship. We deliver. We make things happen. No empty promises — just results you can see and feel.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="v-icon">🎖️</div>
+        <h4>Premium Everything</h4>
+        <p>From uniforms to media to player experience — we don't cut corners. If it has our name on it, it's done right.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="v-icon">🤝</div>
+        <h4>Ownership Mentality</h4>
+        <p>Team Owners aren't just recruiters — they're partners. Players aren't just participants — they're building their brand.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="v-icon">🏀</div>
+        <h4>Pure Basketball</h4>
+        <p>No gimmicks, no distractions. Skill, speed, IQ, and heart. That's what wins championships in this league.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="v-icon">📹</div>
+        <h4>Visibility for All</h4>
+        <p>Every player gets 4K footage, highlight reels, and content. Your talent deserves an audience.</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="v-icon">🌍</div>
+        <h4>National Ambition</h4>
+        <p>Starting in 4 states, expanding everywhere. We're building infrastructure that scales — city by city, state by state.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- JOURNEY / TIMELINE -->
+  <section class="section" id="journey">
+    <div class="section-label reveal">📅 The Journey</div>
+    <div class="section-title reveal">How <em>SkyeLetes</em> Came to Be</div>
+    <div class="section-desc reveal">From concept to multi-state championship structure — the evolution of a movement.</div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2024</div>
+        <h4>The Concept</h4>
+        <p>Recognized the gap: talented players under 6'0" had nowhere to compete at a premium level. Started designing a league that would flip the script on traditional basketball hierarchies.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2025</div>
+        <h4>Building Infrastructure</h4>
+        <p>Developed the Team Owner model, created the Brand-Lock system for uniform customization, and built the player portal infrastructure. Secured partnerships with videographers across target markets.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">2026</div>
+        <h4>Launch & Expansion</h4>
+        <p>Launched in Phoenix (HQ), Houston, Denver, and Chicago. First season rosters filling. Multi-state championship structure activated. The movement begins.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-year">Beyond</div>
+        <h4>National Domination</h4>
+        <p>Expansion to 10+ states. National championship tournament. Media partnerships. The under-6'0" league that changed basketball forever.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SPONSOR -->
+  <section class="section" id="sponsor">
+    <div class="section-label reveal" style="text-align:center;">🤝 Backed By</div>
+    <div class="section-title reveal" style="text-align:center;">Powered by <em>SOLEnterprises</em></div>
+    <div class="section-desc reveal" style="text-align:center; margin: 0 auto 50px;">SkyeLetes is a Skyes Over London LC venture, part of the SOLEnterprises International Nexus & Holdings ecosystem.</div>
+    <div class="sponsor-banner reveal-scale">
+      <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London" style="animation: floatGlow 4s ease-in-out infinite;">
+      <h3>Skyes Over London</h3>
+      <p>We bring the same systems-first approach, execution focus, and commitment to quality that defines all SOLEnterprises operations. From healthcare logistics to web authority platforms to premium basketball leagues — we build infrastructure that performs under pressure.</p>
+      <div class="glow-tile-purple" style="margin-bottom: 24px;">Cinematic • Secure • Operator-Grade</div>
+      <br>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top: 16px;">
+        <a href="https://solenterprises.org/" class="btn-outline" target="_blank">SOLEnterprises.org</a>
+        <a href="https://skyesoverlondon.netlify.app/" class="btn-outline" target="_blank">Skyes Over London</a>
+        <a href="https://skyesol.netlify.app/" class="btn-outline" target="_blank">SkyeSol Services</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section">
+    <div class="hero-badge-ring reveal-scale">
+      <img class="hero-badge" src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Banner_transparent.png" alt="SkyeLetes" style="width: 300px; max-width: 80vw;">
+    </div>
+    <h2 class="reveal">Ready to <span>Elevate?</span></h2>
+    <p class="reveal">Join the league that was built for players like you. Register as a player or apply to become a Team Owner.</p>
+    <div class="hero-cta-row reveal">
+      <a href="/SkyeLeticXOfficialWebsite/players.html" class="btn-gold">Register Now</a>
+      <a href="/SkyeLeticXOfficialWebsite/owners-intake.html" class="btn-purple">Own a Team</a>
+      <a href="/SkyeLeticXOfficialWebsite/" class="btn-outline">Explore SkyeLeticX</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLeticX">
+    <p><strong style="color:var(--text)">SkyeLeticX</strong> · Premium Under-6'0" League<br>A Skyes Over London LC Venture · <a href="https://solenterprises.org/" target="_blank">SOLEnterprises Ecosystem</a></p>
+    <div class="footer-links">
+      <a href="/SkyeLeticXOfficialWebsite/home.html">Home</a>
+      <a href="/SkyeLeticXOfficialWebsite/about.html">About</a>
+      <a href="/SkyeLeticXOfficialWebsite/how-it-works.html">How It Works</a>
+      <a href="/SkyeLeticXOfficialWebsite/players.html">Players</a>
+      <a href="/SkyeLeticXOfficialWebsite/owners-intake.html">Owners</a>
+      <a href="/SkyeLeticXOfficialWebsite/championships.html">Championships</a>
+      <a href="/SkyeLeticXOfficialWebsite/arizona-hq.html">Arizona HQ</a>
+    </div>
+    <p style="margin-top:20px;font-size:10px;color:rgba(138,136,128,0.35);">Sponsored by Skyes Over London LC / SOLEnterprises. © 2026 SkyeLeticX. All rights reserved.</p>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     THREE.JS — CINEMATIC PARTICLE + AURORA ENGINE
+     Gold · Purple · 4000+ particles · Aurora bands
+     Basketball court grid · Floating geometry
+     ═══════════════════════════════════════════════ -->
+<script>
+(function(){
+  const canvas = document.getElementById('three-bg');
+  if (!canvas) return;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x07070f, 1);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.3;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 300);
+  camera.position.set(0, 0, 14);
+
+  const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+  let scrollY = 0;
+
+  // ── PARTICLES ─────────────────────────────────────
+  const COUNT = 4000;
+  const pPos = new Float32Array(COUNT * 3);
+  const pColor = new Float32Array(COUNT * 3);
+  const pSize = new Float32Array(COUNT);
+  const pSpeed = new Float32Array(COUNT);
+  const pOffset = new Float32Array(COUNT);
+
+  const goldPal = [[0.85,0.68,0.22],[0.95,0.85,0.42],[1.0,0.93,0.58]];
+  const purplePal = [[0.55,0.40,1.0],[0.62,0.48,0.94],[0.74,0.60,1.0]];
+  const firePal = [[0.91,0.30,0.19],[1.0,0.5,0.2]];
+
+  for (let i = 0; i < COUNT; i++) {
+    pPos[i*3]   = (Math.random() - 0.5) * 40;
+    pPos[i*3+1] = (Math.random() - 0.5) * 28;
+    pPos[i*3+2] = (Math.random() - 0.5) * 18 - 5;
+    pSize[i]   = Math.random() * 3.2 + 0.3;
+    pSpeed[i]  = Math.random() * 0.4 + 0.06;
+    pOffset[i] = Math.random() * Math.PI * 2;
+    const r = Math.random();
+    const pal = r < 0.52 ? goldPal : r < 0.88 ? purplePal : firePal;
+    const c = pal[Math.floor(Math.random() * pal.length)];
+    pColor[i*3] = c[0]; pColor[i*3+1] = c[1]; pColor[i*3+2] = c[2];
+  }
+
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  pGeo.setAttribute('color', new THREE.BufferAttribute(pColor, 3));
+  pGeo.setAttribute('size', new THREE.BufferAttribute(pSize, 1));
+  pGeo.setAttribute('aSpeed', new THREE.BufferAttribute(pSpeed, 1));
+  pGeo.setAttribute('aOffset', new THREE.BufferAttribute(pOffset, 1));
+
+  const pMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPixelRatio: { value: renderer.getPixelRatio() } },
+    vertexShader: `
+      attribute float size; attribute float aSpeed; attribute float aOffset; attribute vec3 color;
+      uniform float uTime; uniform float uPixelRatio;
+      varying vec3 vColor; varying float vAlpha;
+      void main() {
+        vColor = color;
+        vec3 pos = position;
+        pos.y += sin(uTime * aSpeed + aOffset + pos.x * 0.25) * 1.1;
+        pos.x += cos(uTime * aSpeed * 0.6 + aOffset * 1.4 + pos.y * 0.15) * 0.5;
+        pos.z += sin(uTime * aSpeed * 0.4 + aOffset * 0.9) * 0.35;
+        vec4 mv = modelViewMatrix * vec4(pos, 1.0);
+        float dist = -mv.z;
+        vAlpha = smoothstep(26.0, 3.0, dist) * (0.3 + sin(uTime * aSpeed + aOffset) * 0.2 + 0.45);
+        gl_PointSize = size * uPixelRatio * (60.0 / dist);
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      varying vec3 vColor; varying float vAlpha;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        if (d > 0.5) discard;
+        float s = smoothstep(0.5, 0.0, d);
+        float core = smoothstep(0.2, 0.0, d) * 0.6;
+        gl_FragColor = vec4(vColor * (1.0 + core), s * vAlpha);
+      }`,
+    transparent: true, depthWrite: false,
+    blending: THREE.AdditiveBlending, vertexColors: true
+  });
+  scene.add(new THREE.Points(pGeo, pMat));
+
+  // ── AURORA BANDS ──────────────────────────────────
+  function makeAurora(w, h, segs, colA, colB, z, y, spd, phase, tiltX) {
+    const geo = new THREE.PlaneGeometry(w, h, segs, Math.max(1, Math.floor(segs / 4)));
+    const mat = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uColorA: { value: new THREE.Color(...colA) },
+        uColorB: { value: new THREE.Color(...colB) },
+        uSpeed: { value: spd },
+        uPhase: { value: phase }
+      },
+      vertexShader: `
+        uniform float uTime; uniform float uSpeed; uniform float uPhase;
+        varying vec2 vUv; varying float vWave;
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
+          float w1 = sin(pos.x * 0.35 + uTime * uSpeed + uPhase) * 1.6;
+          float w2 = sin(pos.x * 0.7 + uTime * uSpeed * 1.3 + uPhase * 1.8) * 0.65;
+          float w3 = cos(pos.x * 0.16 + uTime * uSpeed * 0.5 + uPhase * 0.6) * 0.9;
+          pos.y += (w1 + w2 + w3) * uv.y;
+          vWave = (w1 + w2) * 0.5;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }`,
+      fragmentShader: `
+        uniform vec3 uColorA; uniform vec3 uColorB;
+        uniform float uTime; uniform float uPhase;
+        varying vec2 vUv; varying float vWave;
+        void main() {
+          float ef = smoothstep(0.0, 0.2, vUv.y) * smoothstep(1.0, 0.8, vUv.y);
+          float sf = smoothstep(0.0, 0.1, vUv.x) * smoothstep(1.0, 0.9, vUv.x);
+          float t = clamp(vUv.x + vWave * 0.18 + sin(uTime * 0.25 + uPhase) * 0.1, 0.0, 1.0);
+          vec3 col = mix(uColorA, uColorB, t);
+          float shim = sin(vUv.x * 20.0 + uTime * 2.0 + uPhase) * 0.08 + 0.92;
+          col *= shim;
+          gl_FragColor = vec4(col, ef * sf * 0.2);
+        }`,
+      transparent: true, depthWrite: false,
+      blending: THREE.AdditiveBlending, side: THREE.DoubleSide
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(0, y, z);
+    mesh.rotation.x = tiltX;
+    return mesh;
+  }
+
+  const auroras = [
+    makeAurora(48, 8, 140, [0.55,0.40,1.0], [0.85,0.68,0.22], -3, 2.0, 0.35, 0.0, -0.08),
+    makeAurora(42, 6, 120, [0.85,0.68,0.22], [0.55,0.40,1.0], -5, -1.0, 0.25, 2.2, 0.05),
+    makeAurora(52, 7, 160, [0.74,0.60,1.0], [1.0,0.93,0.58], -7, 3.5, 0.2, 4.5, -0.12),
+    makeAurora(44, 5, 110, [0.85,0.68,0.22], [0.74,0.60,1.0], -4, -3.2, 0.3, 1.5, 0.06),
+    makeAurora(38, 4, 100, [0.91,0.30,0.19], [0.85,0.68,0.22], -6, 0.5, 0.18, 3.8, -0.04),
+  ];
+  auroras.forEach(a => scene.add(a));
+
+  // ── FLOATING BASKETBALL WIREFRAME ──────────────────
+  const ballGeo = new THREE.IcosahedronGeometry(1.5, 1);
+  const ballMat = new THREE.MeshBasicMaterial({
+    color: 0xc9a84c,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.08
+  });
+  const ball = new THREE.Mesh(ballGeo, ballMat);
+  ball.position.set(8, 2, -8);
+  scene.add(ball);
+
+  // ── FLOATING RING (hoop) ──────────────────────────
+  const ringGeo = new THREE.TorusGeometry(2, 0.08, 16, 60);
+  const ringMat = new THREE.MeshBasicMaterial({
+    color: 0xe84c30,
+    transparent: true,
+    opacity: 0.12
+  });
+  const ring = new THREE.Mesh(ringGeo, ringMat);
+  ring.position.set(-7, -1, -10);
+  ring.rotation.x = Math.PI / 2.5;
+  scene.add(ring);
+
+  // ── SECOND BALL ─────────────────────────────────────
+  const ball2Geo = new THREE.IcosahedronGeometry(0.8, 2);
+  const ball2Mat = new THREE.MeshBasicMaterial({
+    color: 0x8a63ff,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.06
+  });
+  const ball2 = new THREE.Mesh(ball2Geo, ball2Mat);
+  ball2.position.set(-5, 4, -6);
+  scene.add(ball2);
+
+  // ── COURT LINES (geometric) ───────────────────────
+  const courtMat = new THREE.LineBasicMaterial({ color: 0xc9a84c, transparent: true, opacity: 0.04 });
+
+  // Center circle
+  const circleGeo = new THREE.BufferGeometry();
+  const circlePoints = [];
+  for (let i = 0; i <= 64; i++) {
+    const angle = (i / 64) * Math.PI * 2;
+    circlePoints.push(Math.cos(angle) * 3, Math.sin(angle) * 3, -12);
+  }
+  circleGeo.setAttribute('position', new THREE.Float32BufferAttribute(circlePoints, 3));
+  scene.add(new THREE.Line(circleGeo, courtMat));
+
+  // Half court line
+  const halfGeo = new THREE.BufferGeometry();
+  halfGeo.setAttribute('position', new THREE.Float32BufferAttribute([-8, 0, -12, 8, 0, -12], 3));
+  scene.add(new THREE.Line(halfGeo, courtMat));
+
+  // ── FLOATING OCTAHEDRON ────────────────────────────
+  const octGeo = new THREE.OctahedronGeometry(1.2, 0);
+  const octMat = new THREE.MeshBasicMaterial({
+    color: 0xc9a84c,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.05
+  });
+  const oct = new THREE.Mesh(octGeo, octMat);
+  oct.position.set(6, -3, -9);
+  scene.add(oct);
+
+  // ── EVENTS ────────────────────────────────────────
+  window.addEventListener('mousemove', e => {
+    mouse.tx =  (e.clientX / window.innerWidth - 0.5) * 2;
+    mouse.ty = -(e.clientY / window.innerHeight - 0.5) * 2;
+  });
+  window.addEventListener('scroll', () => { scrollY = window.pageYOffset; }, { passive: true });
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // ── ANIMATE ───────────────────────────────────────
+  const clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    mouse.x += (mouse.tx - mouse.x) * 0.025;
+    mouse.y += (mouse.ty - mouse.y) * 0.025;
+
+    camera.position.x = mouse.x * 1.0;
+    camera.position.y = mouse.y * 0.6 - scrollY * 0.0015;
+    camera.lookAt(0, -scrollY * 0.0008, 0);
+
+    pMat.uniforms.uTime.value = t;
+    auroras.forEach((a, i) => {
+      a.material.uniforms.uTime.value = t;
+      a.position.x = mouse.x * (i % 2 === 0 ? -0.5 : 0.4) * (0.5 + i * 0.15);
+    });
+
+    // Floating geometry
+    ball.rotation.x = t * 0.15;
+    ball.rotation.y = t * 0.2;
+    ball.position.y = 2 + Math.sin(t * 0.5) * 1.2;
+
+    ring.rotation.z = t * 0.1;
+    ring.position.y = -1 + Math.sin(t * 0.35 + 1) * 0.8;
+
+    ball2.rotation.x = t * 0.25;
+    ball2.rotation.z = t * 0.15;
+    ball2.position.y = 4 + Math.sin(t * 0.4 + 2) * 1.0;
+
+    oct.rotation.x = t * 0.12;
+    oct.rotation.y = t * 0.18;
+    oct.position.y = -3 + Math.sin(t * 0.3 + 3) * 0.9;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+</script>
+
+<!-- ═══ MAIN JS ═══ -->
+<script>
+// ── LOADER ──
+(function(){
+  const loader = document.getElementById('loader');
+  const bar = document.getElementById('loadBar');
+  const text = document.getElementById('loading-text');
+  const phases = [
+    'Loading Three.js Engine',
+    'Rendering Particles',
+    'Building Aurora Bands',
+    'Generating Court Grid',
+    'Compositing Spectacle',
+    'Ready'
+  ];
+  let progress = 0;
+  let phase = 0;
+  const interval = setInterval(() => {
+    progress += Math.random() * 18 + 5;
+    if (progress > 100) progress = 100;
+    bar.style.width = progress + '%';
+    if (progress > (phase + 1) * (100 / phases.length) && phase < phases.length - 1) {
+      phase++;
+      text.textContent = phases[phase];
+    }
+    if (progress >= 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        loader.classList.add('fade-out');
+        setTimeout(() => loader.style.display = 'none', 1200);
+      }, 400);
+    }
+  }, 180);
+})();
+
+// ── NAV SCROLL ──
+(function(){
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.pageYOffset > 60);
+  }, { passive: true });
+})();
+
+// ── SCROLL REVEAL ──
+(function(){
+  const els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  if (!els.length) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => obs.observe(el));
+})();
+
+// ── ANIMATED COUNTERS ──
+(function(){
+  const counters = document.querySelectorAll('[data-count]');
+  if (!counters.length) return;
+  const triggered = new Set();
+
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-count'));
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 2500;
+    const start = performance.now();
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(eased * target);
+      el.textContent = current.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  counters.forEach(c => {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !triggered.has(e.target)) {
+          triggered.add(e.target);
+          animateCounter(e.target);
+        }
+      });
+    }, { threshold: 0.5 }).observe(c);
+  });
+})();
+
+// ── SMOOTH SCROLL for nav links ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
+  <script src="/js/partials.js"></script>
+  <script src="/js/SkyeSolINTRO.js"></script>
+</body>
+</html>

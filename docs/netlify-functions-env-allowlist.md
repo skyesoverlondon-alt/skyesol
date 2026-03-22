@@ -8,10 +8,17 @@ Use this as a **keep-only** allowlist for function runtime env vars in Netlify U
 - `ADMIN_PASSWORD`
 - `JWT_SECRET`
 - `DB_ENCRYPTION_KEY` (or rely on `JWT_SECRET` fallback)
-- `NETLIFY_DATABASE_URL` (or `DATABASE_URL`)
+- `NEON_DATABASE_URL`
+- `DATABASE_URL` (optional fallback)
+- `NETLIFY_DATABASE_URL` (optional fallback)
 - `ALLOWED_ORIGINS`
 - `KEY_PEPPER`
 - internal provider credentials (if using external model lanes)
+
+Netlify-specific notes:
+- Netlify Blobs does not need a manual env var in this build.
+- Netlify Identity does not need an env var, but it must be enabled in site settings.
+- Identity roles for this site are `president`, `vp`, `cfo`, `team_owner`, `player`.
 
 ## Keep (if using Stripe billing)
 - `STRIPE_SECRET_KEY`

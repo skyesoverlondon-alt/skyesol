@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VP Operations | SkyeLeticX Dashboards</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#09030f" />
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/skx-dashboard.css" />
+  
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <a href="home.html" style="display:flex;align-items:center;gap:12px">
+        <img src="logo.png" alt="SkyeLeticX logo" />
+      </a>
+      <div>
+        <div class="brand-name">SkyeLeticX</div>
+        <div class="brand-sub">League Command Surfaces • Skyes Over London LC</div>
+      </div>
+    </div>
+    <nav class="nav-links"><a href="home.html" class="">Home</a><a href="how-it-works.html" class="">How It Works</a><a href="about.html" class="">About</a><a href="about-founder.html" class="">Founder</a><a href="players.html" class="">Players</a><a href="owners-intake.html" class="">Founding Owners</a><a href="arizona-hq.html" class="">Arizona HQ</a><a href="skyeletes-editorial.html" class="">Editorial</a><a href="owner-dashboard.html" class="">Command</a><a href="league-office-dashboard.html" class="">League Office</a><a href="vp-operations-dashboard.html" class="active">VP Ops</a><a href="cfo-dashboard.html" class="">CFO</a><a href="team-owner-dashboard.html" class="">Team Owner</a><a href="player-portal-dashboard.html" class="">Player Portal</a><a href="draft-war-room.html" class="">Draft War Room</a></nav>
+    <div class="nav-cta">
+      <div class="pill">Identity • Blobs • Neon</div>
+      <button class="btn btn-secondary" type="button" data-auth="login">Login</button>
+      <button class="btn btn-danger" type="button" data-auth="logout">Logout</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Operations</div>
+      <h1>VP Operations Dashboard</h1>
+      <p>Use this surface to create combine events, rank players, and move entrants through the real league pipeline. This is the working surface for check-in, eligibility, combine completion, and draft-pool readiness.</p>
+      <div class="metrics">
+        <div class="metric"><b id="metricPlayers">0</b><span>Total players</span></div>
+        <div class="metric"><b id="metricTeams">0</b><span>Teams</span></div>
+        <div class="metric"><b id="metricCombines">0</b><span>Combines</span></div>
+        <div class="metric"><b id="metricOpenFees">$0</b><span>Open fees</span></div>
+      </div>
+      <div id="authState" class="notice">Checking login state…</div>
+      <div id="authGate" class="auth-gate"></div>
+    </div>
+    <aside class="hero-card">
+      <img class="hero-logo" src="logo.png" alt="SkyeLeticX" />
+      <div class="kicker">Use this page for</div>
+      <div class="stack">
+        <div class="notice">Combine creation</div>
+        <div class="notice">Player status transitions</div>
+        <div class="notice">Ranking and score updates</div>
+        <div class="notice">Operations memo saved to blobs</div>
+      </div>
+    </aside>
+  </section>
+  <section class="section">
+    <div class="grid">
+      <article class="card span-5">
+        <div class="kicker">Create combine</div>
+        <h3>Add a combine event</h3>
+        <form id="combineForm">
+          <div class="form-grid">
+            <div class="form-row"><label>Title</label><input class="input" name="title" placeholder="Chicago Under-6 Combine" required /></div>
+            <div class="form-row"><label>Location</label><input class="input" name="location" placeholder="Gym / city" /></div>
+            <div class="form-row"><label>Date</label><input class="input" type="date" name="event_date" /></div>
+            <div class="form-row"><label>Check-in time</label><input class="input" name="checkin_time" placeholder="8:00 AM" /></div>
+            <div class="form-row"><label>Status</label><select class="input" name="status"><option value="scheduled">Scheduled</option><option value="live">Live</option><option value="complete">Complete</option></select></div>
+            <div class="form-row" style="grid-column:1/-1"><label>Notes</label><textarea class="input" name="notes"></textarea></div>
+          </div>
+          <div class="form-foot"><button class="btn btn-primary" type="submit">Create combine</button></div>
+        </form>
+        <div id="combineFormNotice" class="notice" style="margin-top:12px">Ready.</div>
+      </article>
+      <article class="card span-7">
+        <div class="kicker">Operations memo</div>
+        <h3>Running combine / ops note</h3>
+        <div class="form-row"><label>Memo</label><textarea id="opsNote" class="input" placeholder="Write the current operations memo here…"></textarea></div>
+        <div class="form-foot"><button id="saveOpsNote" class="btn btn-primary" type="button">Save note</button><button id="reloadOpsNote" class="btn btn-secondary" type="button">Reload</button></div>
+        <div id="opsNoteNotice" class="notice" style="margin-top:12px">Ready.</div>
+      </article>
+    </div>
+  </section>
+  <section class="section">
+    <div class="grid">
+      <article class="card span-12"><div class="kicker">Player board</div><h3>Update player statuses and rankings</h3><div id="opsPlayersTable"></div></article>
+      <article class="card span-12"><div class="kicker">Combine events</div><h3>Current combine calendar</h3><div id="combinesTable"></div></article>
+    </div>
+  </section>
+  <footer class="footer">VP Operations • Contact: <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> • <a href="tel:4804695416">(480) 469-5416</a></footer>
+</main>
+<script>
+(async function(){
+  const boot = await SKX.boot({ roles:['president','vp'], authStateId:'authState', gateId:'authGate', summary:true });
+  if (!boot.authorized) return;
+  let players = [];
+  async function refresh(){
+    const [playersRes, combinesRes] = await Promise.all([SKX.api('players'), SKX.api('combines')]);
+    players = playersRes.players || [];
+    document.getElementById('opsPlayersTable').innerHTML = SKX.tableHTML(players.slice(0,120), [
+      { label:'Player', render:r=>`<strong>${SKX.esc(r.full_name)}</strong><small>${SKX.esc(r.school_level || '')} • ${SKX.esc(r.school_name || '')}</small>` },
+      { label:'Status', render:r=>`<select class="input status-select" data-player-id="${r.id}" style="min-width:150px"><option ${r.status==='registered'?'selected':''} value="registered">Registered</option><option ${r.status==='checked_in'?'selected':''} value="checked_in">Checked in</option><option ${r.status==='eligible'?'selected':''} value="eligible">Eligible</option><option ${r.status==='combine_complete'?'selected':''} value="combine_complete">Combine complete</option><option ${r.status==='draft_pool'?'selected':''} value="draft_pool">Draft pool</option><option ${r.status==='drafted'?'selected':''} value="drafted">Drafted</option></select>` },
+      { label:'Score', render:r=>`<input class="input score-input" data-player-id="${r.id}" value="${SKX.esc(r.combine_score || '')}" style="min-width:90px" />` },
+      { label:'Rank', render:r=>`<input class="input rank-input" data-player-id="${r.id}" value="${SKX.esc(r.draft_rank || '')}" style="min-width:90px" />` },
+      { label:'Team', key:'team_name' },
+      { label:'Action', render:r=>`<button class="btn btn-primary save-player-status" data-player-id="${r.id}" type="button">Save</button>` }
+    ]);
+    const combines = combinesRes.combines || [];
+    document.getElementById('combinesTable').innerHTML = SKX.tableHTML(combines, [
+      { label:'Title', render:r=>`<strong>${SKX.esc(r.title)}</strong><small>${SKX.esc(r.notes || '')}</small>` },
+      { label:'Location', key:'location' },
+      { label:'Date', render:r=>SKX.shortDate(r.event_date) },
+      { label:'Check-in', key:'checkin_time' },
+      { label:'Status', render:r=>`<span class="badge violet">${SKX.esc(r.status || '')}</span>` }
+    ]);
+  }
+  document.getElementById('combineForm').addEventListener('submit', async(e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    try { await SKX.api('create_combine', { data }); SKX.showNotice('combineFormNotice', 'Combine created.', 'success'); e.target.reset(); refresh(); }
+    catch(err){ SKX.showNotice('combineFormNotice', SKX.esc(err.message), 'error'); }
+  });
+  document.addEventListener('click', async(e)=>{
+    const btn = e.target.closest('.save-player-status');
+    if (!btn) return;
+    const id = btn.getAttribute('data-player-id');
+    const status = document.querySelector(`.status-select[data-player-id="${id}"]`).value;
+    const combine_score = document.querySelector(`.score-input[data-player-id="${id}"]`).value;
+    const draft_rank = document.querySelector(`.rank-input[data-player-id="${id}"]`).value;
+    try { await SKX.api('update_player_status', { data:{ player_id:id, status, combine_score, draft_rank } }); refresh(); }
+    catch(err){ alert(err.message); }
+  });
+  async function loadNote(){
+    try { const res = await SKX.api('load_note', { query:'scope=vp-operations' }); const note = res.note || null; document.getElementById('opsNote').value = note && note.text ? note.text : ''; SKX.showNotice('opsNoteNotice', note ? `Loaded memo by ${SKX.esc(note.author || 'Unknown')}.` : 'No ops note saved yet.', note ? 'success' : ''); }
+    catch(err){ SKX.showNotice('opsNoteNotice', SKX.esc(err.message), 'error'); }
+  }
+  document.getElementById('saveOpsNote').addEventListener('click', async()=>{
+    try { await SKX.api('save_note', { data:{ scope:'vp-operations', text: document.getElementById('opsNote').value } }); SKX.showNotice('opsNoteNotice', 'Ops memo saved.', 'success'); }
+    catch(err){ SKX.showNotice('opsNoteNotice', SKX.esc(err.message), 'error'); }
+  });
+  document.getElementById('reloadOpsNote').addEventListener('click', loadNote);
+  await refresh();
+  await loadNote();
+})();
+</script>
+
+<script src="assets/skx-dashboard.js"></script>
+</body>
+</html>

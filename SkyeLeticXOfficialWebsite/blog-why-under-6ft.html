@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Under 6'0" Changes Everything | SkyeLetes Blog</title>
+    <meta name="description" content="The basketball world has always favored height. SkyeLetes flips the script. Here's why capping height at 6'0" creates a fundamentally different—and better—game.">
+    
+    <meta property="og:title" content="Why Under 6'0" Changes Everything | SkyeLetes Blog">
+    <meta property="og:description" content="The basketball world has always favored height. SkyeLetes flips the script.">
+    <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2026-02-20">
+    <meta property="article:author" content="SkyeLetes Editorial">
+    <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-ink: #05010a;
+            --color-paper: #faf9f7;
+            --color-gold: #ffd700;
+            --color-purple: #6d28ff;
+            --color-purple-light: rgba(109, 40, 255, 0.15);
+            --color-slate: #8b7db8;
+            --color-mist: #e8e6f1;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Instrument Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-impact: 'Bebas Neue', sans-serif;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--color-ink); color: var(--color-paper); line-height: 1.8; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse { 0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4)); } 50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.7)); } }
+        .floating-logo { animation: float 6s ease-in-out infinite, pulse 3s ease-in-out infinite; }
+
+        /* Nav */
+        .nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(5, 1, 10, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 215, 0, 0.1); }
+        .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+        .nav-logo { height: 48px; width: auto; }
+        .nav-brand-text { display: flex; flex-direction: column; }
+        .nav-brand-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-paper); }
+        .nav-brand-sub { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-slate); letter-spacing: 0.1em; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-link { font-size: 0.85rem; color: var(--color-slate); text-decoration: none; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-gold); }
+        .nav-btn { background: var(--color-gold); color: var(--color-ink); padding: 0.6rem 1.25rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 6px; transition: all 0.3s; }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,0,0.3); }
+
+        /* Article Header */
+        .article-header { position: relative; z-index: 1; padding: 10rem 2rem 4rem; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .article-header-content { max-width: 800px; margin: 0 auto; }
+        .article-meta { display: flex; justify-content: center; align-items: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .article-category { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gold); letter-spacing: 0.15em; text-transform: uppercase; background: rgba(255,215,0,0.1); padding: 0.4rem 1rem; border-radius: 999px; }
+        .article-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); }
+        .article-read { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); }
+        .article-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 500; line-height: 1.15; margin-bottom: 1.5rem; }
+        .article-title em { font-style: italic; color: var(--color-gold); }
+        .article-excerpt { font-size: 1.25rem; color: var(--color-slate); max-width: 650px; margin: 0 auto; }
+
+        /* Article Body */
+        .article-body { position: relative; z-index: 1; padding: 4rem 2rem; }
+        .article-content { max-width: 720px; margin: 0 auto; }
+        .article-content p { font-size: 1.1rem; color: var(--color-mist); margin-bottom: 1.75rem; }
+        .article-content h2 { font-family: var(--font-display); font-size: 2rem; font-weight: 500; margin: 3rem 0 1.5rem; color: var(--color-paper); }
+        .article-content h2 em { font-style: italic; color: var(--color-gold); }
+        .article-content h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin: 2.5rem 0 1rem; color: var(--color-paper); }
+        .article-content blockquote { border-left: 3px solid var(--color-gold); padding-left: 1.5rem; margin: 2rem 0; font-style: italic; color: var(--color-slate); font-size: 1.15rem; }
+        .article-content ul, .article-content ol { margin: 1.5rem 0; padding-left: 1.5rem; color: var(--color-mist); }
+        .article-content li { margin-bottom: 0.75rem; }
+        .article-content strong { color: var(--color-paper); }
+        .article-content a { color: var(--color-gold); text-decoration: underline; text-underline-offset: 3px; }
+        .article-content a:hover { color: var(--color-paper); }
+
+        /* Pullquote */
+        .pullquote { background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(109,40,255,0.05)); border: 1px solid rgba(255,215,0,0.15); border-radius: 16px; padding: 2.5rem; margin: 3rem 0; text-align: center; }
+        .pullquote-text { font-family: var(--font-display); font-size: 1.75rem; font-weight: 500; color: var(--color-paper); line-height: 1.4; margin-bottom: 1rem; }
+        .pullquote-text em { font-style: italic; color: var(--color-gold); }
+        .pullquote-author { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-slate); letter-spacing: 0.05em; }
+
+        /* Stats Grid */
+        .stats-inline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 3rem 0; }
+        .stat-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem; text-align: center; }
+        .stat-value { font-family: var(--font-impact); font-size: 2.5rem; color: var(--color-gold); letter-spacing: 0.05em; }
+        .stat-label { font-size: 0.85rem; color: var(--color-slate); margin-top: 0.25rem; }
+
+        /* CTA Box */
+        .cta-box { background: linear-gradient(135deg, rgba(109,40,255,0.15), rgba(255,215,0,0.08)); border: 1px solid rgba(255,215,0,0.2); border-radius: 20px; padding: 3rem; margin: 3rem 0; text-align: center; }
+        .cta-box h3 { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1rem; }
+        .cta-box p { color: var(--color-slate); margin-bottom: 1.5rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 8px; transition: all 0.3s; }
+        .btn-primary { background: var(--color-gold); color: var(--color-ink); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,215,0,0.3); }
+        .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--color-paper); }
+        .btn-secondary:hover { border-color: var(--color-purple); color: var(--color-purple); }
+
+        /* Author Box */
+        .author-box { display: flex; align-items: center; gap: 1.5rem; padding: 2rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; margin-top: 4rem; }
+        .author-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--color-gold), var(--color-purple)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .author-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .author-info h4 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+        .author-info p { font-size: 0.9rem; color: var(--color-slate); }
+
+        /* Related Posts */
+        .related-section { position: relative; z-index: 1; padding: 4rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .related-container { max-width: 1000px; margin: 0 auto; }
+        .related-title { font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 2rem; text-align: center; }
+        .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .related-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2rem; transition: all 0.4s var(--ease-out-expo); }
+        .related-card:hover { border-color: var(--color-gold); transform: translateY(-5px); }
+        .related-card h4 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .related-card h4 a { color: var(--color-paper); text-decoration: none; }
+        .related-card h4 a:hover { color: var(--color-gold); }
+        .related-card p { font-size: 0.9rem; color: var(--color-slate); }
+
+        /* Footer */
+        .footer { position: relative; z-index: 1; padding: 4rem 2rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-content { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+        .footer-brand { display: flex; align-items: center; gap: 1rem; }
+        .footer-brand img { height: 50px; }
+        .footer-brand span { font-family: var(--font-display); font-size: 1.1rem; color: var(--color-paper); }
+        .footer-links { display: flex; gap: 2rem; }
+        .footer-links a { color: var(--color-slate); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--color-gold); }
+        .footer-bottom { max-width: 1000px; margin: 2rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 0.8rem; color: var(--color-slate); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .stats-inline { grid-template-columns: 1fr; }
+            .related-grid { grid-template-columns: 1fr; }
+            .author-box { flex-direction: column; text-align: center; }
+            .footer-content { flex-direction: column; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+  <!-- PWA -->
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <meta name="theme-color" content="#2b0b4e" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <script defer src="assets/global-nav.js"></script>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a class="nav-brand" href="skyeletes-editorial.html">
+            <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes" class="nav-logo">
+            <div class="nav-brand-text">
+                <span class="nav-brand-name">SkyeLetes</span>
+                <span class="nav-brand-sub">Blog</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="how-it-works.html" class="nav-link">How It Works</a>
+            <a href="championships.html" class="nav-link">Championships</a>
+        </div>
+        <a href="players.html" class="nav-btn">Register Now</a>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-content">
+            <div class="article-meta">
+                <span class="article-category">League Philosophy</span>
+                <span class="article-date">February 20, 2026</span>
+                <span class="article-read">8 min read</span>
+            </div>
+            <h1 class="article-title">Why Under 6'0" Changes <em>Everything</em></h1>
+            <p class="article-excerpt">The basketball world has always favored height. SkyeLetes flips the script. Here's why capping height at 6'0" creates a fundamentally different—and better—game.</p>
+        </div>
+    </header>
+
+    <!-- Article Body -->
+    <article class="article-body">
+        <div class="article-content">
+            <p>Walk into any gym during pickup games, and you'll see it immediately. The tallest players get picked first. They get the ball in the post. They alter shots just by existing near the rim. Height isn't just an advantage in basketball—it's often the <em>primary</em> advantage.</p>
+
+            <p>But here's what you'll also see: a 5'9" guard running circles around everyone, creating opportunities out of nothing, making plays that bigger players simply can't make. That player exists in every gym, in every city, in every state. And too often, that player never gets the stage they deserve.</p>
+
+            <p>That's why we built SkyeLetes.</p>
+
+            <h2>The <em>Height Tax</em> in Traditional Basketball</h2>
+
+            <p>Let's be honest about what height does in basketball. A 6'5" player with average skills will often beat out a 5'10" player with exceptional skills when it comes to:</p>
+
+            <ul>
+                <li><strong>Team selection:</strong> Coaches at every level prioritize height for "upside"</li>
+                <li><strong>Position flexibility:</strong> Taller players get more opportunities to develop</li>
+                <li><strong>Showcase events:</strong> Scouts look for height before they look for handles</li>
+                <li><strong>Content opportunities:</strong> Highlights favor dunks over dimes</li>
+            </ul>
+
+            <p>This isn't speculation. It's observable reality. The average height in the NBA is 6'6". College rosters skew tall. Even serious recreational leagues tend to favor bigger bodies.</p>
+
+            <p>The result? Millions of skilled players under 6'0" who never get the competitive, professional-grade experience they deserve.</p>
+
+            <div class="pullquote">
+                <p class="pullquote-text">"When everyone's under 6'0", the game becomes about <em>skill</em>, not size. That's basketball in its purest form."</p>
+                <span class="pullquote-author">— SkyeLetes Editorial</span>
+            </div>
+
+            <h2>What Changes When Height is <em>Capped</em></h2>
+
+            <p>Remove the height variable, and basketball transforms. Here's what we see in SkyeLetes games that you won't see in traditional leagues:</p>
+
+            <h3>1. Guard Play Becomes Elite</h3>
+
+            <p>When everyone's between 5'4" and 5'11", guard skills matter exponentially more. Ball handling, court vision, shooting accuracy—these become the differentiators. You can't just dump it to the big man and let physics take over. Every possession requires craft.</p>
+
+            <h3>2. Team Basketball Flourishes</h3>
+
+            <p>Without dominant post players, teams have to move the ball. They have to find the open shooter. They have to execute screens and cuts with precision. The five players on the court have to play as a unit, not as four guys getting rebounds for the tall one.</p>
+
+            <h3>3. Speed and IQ Win Games</h3>
+
+            <p>In SkyeLetes, the fastest player has a real advantage—not just a marginal one that gets negated by someone standing in the paint. Quick decisions matter. Court awareness matters. Reading the defense matters. These are the skills that separate good players from great ones, and they finally get their due.</p>
+
+            <div class="stats-inline">
+                <div class="stat-box">
+                    <div class="stat-value">72"</div>
+                    <div class="stat-label">Maximum Height</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Skill-Based</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">States Active</div>
+                </div>
+            </div>
+
+            <h2>The Players Who <em>Thrive</em> Here</h2>
+
+            <p>SkyeLetes attracts a specific kind of player. They're the ones who've been told they're "too short" their whole lives. They're the ones who had to develop elite handles because they couldn't rely on reaching over defenders. They're the gym rats who outwork everyone because they know they have to.</p>
+
+            <p>These players have been building their games for years. They've been practicing crossovers and step-backs because that's how they score. They've been studying the game because they can't just rely on physical gifts. They are, frankly, some of the most skilled players you'll find anywhere.</p>
+
+            <p>And for the first time, they have a league built specifically for them.</p>
+
+            <blockquote>
+                "I've been the shortest guy on the court my whole life. In SkyeLetes, I'm not overcoming a disadvantage—I'm just playing basketball."
+            </blockquote>
+
+            <h2>More Than Just <em>Games</em></h2>
+
+            <p>We're not just running a league. We're building a platform. Every SkyeLetes player gets:</p>
+
+            <ul>
+                <li><strong>4K game footage</strong> that captures their skills in professional quality</li>
+                <li><strong>Personal highlight reels</strong> they can use for social media, recruiting, or just showing off</li>
+                <li><strong>Custom team uniforms</strong> that look as good as any professional league</li>
+                <li><strong>Player portal profiles</strong> that establish their presence in the basketball world</li>
+                <li><strong>Championship stakes</strong> with real cash payouts</li>
+            </ul>
+
+            <p>This is the infrastructure that taller players get access to through AAU, college, and beyond. We're bringing that same infrastructure to the players who've been overlooked.</p>
+
+            <h2>The <em>Movement</em> Starts Now</h2>
+
+            <p>SkyeLetes is currently operating in four states: Arizona, Texas, Colorado, and Illinois. We're building the model, proving the concept, and creating a community of players who understand what this league means.</p>
+
+            <p>State champions earn $350 per player. They compete in Phoenix for the national title. They get content that follows them long after the season ends.</p>
+
+            <p>But more than the prizes, they get something that's been missing: a stage that's actually built for them.</p>
+
+            <div class="cta-box">
+                <h3>Ready to Play Where Skill Wins?</h3>
+                <p>Join the league that was built for players who've been proving doubters wrong their whole lives.</p>
+                <div class="cta-buttons">
+                    <a href="players.html" class="btn btn-primary">Register as Player</a>
+                    <a href="owners-intake.html" class="btn btn-secondary">Build a Team</a>
+                </div>
+            </div>
+
+            <h2>The <em>Future</em> We're Building</h2>
+
+            <p>SkyeLetes isn't just a basketball league. It's a statement about what the game can be when we remove artificial barriers and let skill determine outcomes.</p>
+
+            <p>We're starting with four states. We're building the infrastructure, the content pipeline, the championship structure. We're proving that there's massive demand for a premium basketball experience among players under 6'0".</p>
+
+            <p>And we're just getting started.</p>
+
+            <p>The basketball world has always had room for players who don't fit the mold. They've just never had a league of their own. Now they do.</p>
+
+            <p><strong>Welcome to SkyeLetes. Where elite meets elevation.</strong></p>
+
+            <!-- Author Box -->
+            <div class="author-box">
+                <div class="author-avatar">
+                    <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes">
+                </div>
+                <div class="author-info">
+                    <h4>SkyeLetes Editorial</h4>
+                    <p>The official voice of SkyeLetes. Covering league news, player stories, and the movement to elevate under-6'0" basketball.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Posts -->
+    <section class="related-section">
+        <div class="related-container">
+            <h3 class="related-title">More from SkyeLetes</h3>
+            <div class="related-grid">
+                <div class="related-card">
+                    <h4><a href="blog-team-owner-playbook.html">The Team Owner Playbook: Building Your Dynasty</a></h4>
+                    <p>Everything you need to know about becoming a SkyeLetes Team Owner—from recruitment to championship glory.</p>
+                </div>
+                <div class="related-card">
+                    <h4><a href="how-it-works.html">How SkyeLetes Works</a></h4>
+                    <p>Registration, Brand-Lock, season play, and championships. The complete guide to the SkyeLetes experience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes" class="floating-logo" style="height: 50px;">
+                <span>SkyeLetes</span>
+            </div>
+            <div class="footer-links">
+                <a href="about.html">About</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="championships.html">Championships</a>
+                <a href="players.html">Register</a>
+                <a href="owners-intake.html">Team Owners</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 SkyeLetes. A Skyes Over London LC Venture. Part of the SOLEnterprises ecosystem.
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        function createStars() {
+            stars = [];
+            const count = Math.floor((canvas.width * canvas.height) / 12000);
+            for (let i = 0; i < count; i++) {
+                stars.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.2 + 0.3, a: Math.random() * Math.PI * 2, s: Math.random() * 0.01 + 0.003 });
+            }
+        }
+        function animate() {
+            ctx.fillStyle = '#05010a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.a += star.s;
+                const alpha = Math.abs(Math.sin(star.a)) * 0.5 + 0.2;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 215, 0, ${alpha})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        resize(); createStars(); animate();
+        window.addEventListener('resize', () => { resize(); createStars(); });
+    </script>
+
+  <script>
+    // SkyeLeticX PWA — register service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

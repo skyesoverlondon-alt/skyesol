@@ -1,0 +1,37 @@
+<div class="page-shell page-wrap">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Sitemap</div>
+      <h2>AE Central Command Pack route map, Credential Pack route map, Connected Ops Pack route map, Service Master Pack route map, Credential Hub route map, and bundled app map.</h2>
+    </div>
+    <div class="toolbar">
+      <button class="primary-btn" type="button" onclick="app.goTo('launcher')">Back to Launcher</button>
+      <button class="soft-btn" type="button" onclick="app.goTo('ae-command-pack')">Open AE Command Pack</button>
+      <button class="soft-btn" type="button" onclick="app.goTo('credential-pack')">Open Credential Pack</button>
+      <button class="soft-btn" type="button" onclick="app.goTo('ops-pack')">Open Ops Pack</button>
+      <button class="soft-btn" type="button" onclick="app.goTo('service-pack')">Open Service Pack</button>
+    </div>
+  </div>
+
+  <div class="grid-2 launcher-layout">
+    <div class="card glass">
+      <div class="section-head"><div><div class="eyebrow">Route tree</div><h2>Every current command-pack entry point</h2></div></div>
+      <div id="sitemap-tree" class="stack" style="margin-top:14px"></div>
+    </div>
+    <div class="stack">
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Connected apps</div><h2>Linked command-pack surfaces</h2></div></div>
+        <div id="sitemap-apps" class="linked-grid" style="margin-top:14px"></div>
+      </div>
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Contact block</div><h2>Owner details</h2></div></div>
+        <div class="stack" style="margin-top:14px">
+          <div class="quick-item"><span>Skyes Over London LC</span><span class="status-pill">Owner</span></div>
+          <div class="quick-item"><span>SkyesOverLondonLC@SOLEnterprises.org</span><span class="status-pill">Email</span></div>
+          <div class="quick-item"><span>(480) 469-5416</span><span class="status-pill">Phone</span></div>
+          <div class="quick-item"><span>SOLEnterprises.org</span><span class="status-pill">Web</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

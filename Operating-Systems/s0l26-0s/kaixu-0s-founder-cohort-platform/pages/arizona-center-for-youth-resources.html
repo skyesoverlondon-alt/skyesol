@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arizona Center for Youth Resources Partnership Proposal — s0l26-0s Cohort</title>
+  <meta name="description" content="Arizona Center for Youth Resources specific partnership page for a later-launch 0s cohort proposal from Skyes Over London and SOLEnterprises." />
+  <link rel="canonical" href="https://kaixu-0s-founder-cohort-platform.netlify.app/pages/arizona-center-for-youth-resources.html" />
+  <meta property="og:url" content="https://kaixu-0s-founder-cohort-platform.netlify.app/pages/arizona-center-for-youth-resources.html" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <link rel="icon" href="../icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="../icons/icon-192.png" />
+  <style>
+    :root {
+      --bg:#04050a;
+      --bg2:#090d19;
+      --glass:rgba(255,255,255,.08);
+      --glass-2:rgba(255,255,255,.05);
+      --line:rgba(255,255,255,.14);
+      --text:#f6f7ff;
+      --muted:#c2c7e1;
+      --gold:#ffd76a;
+      --purple:#9a62ff;
+      --cyan:#63e8ff;
+      --green:#7ef2bc;
+      --danger:#ff958e;
+      --shadow:0 22px 70px rgba(0,0,0,.36);
+      --radius:26px;
+    }
+    * { box-sizing:border-box; }
+    html, body {
+      margin:0; padding:0; color:var(--text);
+      font:16px/1.55 Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(900px 600px at 12% 10%, rgba(154,98,255,.18), transparent 55%),
+        radial-gradient(800px 500px at 88% 8%, rgba(99,232,255,.14), transparent 55%),
+        radial-gradient(900px 700px at 50% 100%, rgba(255,215,106,.08), transparent 60%),
+        linear-gradient(180deg, rgba(4,5,10,.96), rgba(9,13,25,.98));
+      min-height:100vh;
+    }
+    a { color:inherit; text-decoration:none; }
+    .wrap { width:min(1280px, calc(100% - 26px)); margin:0 auto; padding:18px 0 32px; }
+    .glass {
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(18px) saturate(130%);
+      -webkit-backdrop-filter: blur(18px) saturate(130%);
+      border-radius:var(--radius);
+    }
+    .hero {
+      padding:24px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before {
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:inherit;
+      padding:1px;
+      background:linear-gradient(135deg, rgba(255,215,106,.25), rgba(154,98,255,.18), rgba(99,232,255,.22));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      pointer-events:none;
+    }
+    .hero-grid {
+      display:grid;
+      grid-template-columns: 1.35fr .95fr;
+      gap:20px;
+      align-items:start;
+    }
+    .badge {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:var(--gold); font-size:.8rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .logo {
+      width:128px; display:block; max-width:34vw; margin-bottom:16px;
+      filter:drop-shadow(0 0 16px rgba(255,215,106,.24)) drop-shadow(0 0 28px rgba(154,98,255,.24));
+      animation: floaty 4.8s ease-in-out infinite, pulse 2.2s ease-in-out infinite;
+    }
+    @keyframes floaty { 0%,100% { transform:translateY(0px); } 50% { transform:translateY(-10px); } }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.92; } }
+    h1 {
+      margin:16px 0 12px; line-height:.96; letter-spacing:-.03em;
+      font-size:clamp(2.2rem, 5vw, 4.7rem);
+    }
+    .lead { color:var(--muted); font-size:1.05rem; max-width:880px; }
+    .hero-note {
+      margin-top:18px; display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;
+    }
+    .mini {
+      padding:14px 15px; border-radius:18px;
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+    }
+    .mini strong { display:block; margin-bottom:5px; font-size:.98rem; }
+    .mini span { color:var(--muted); font-size:.92rem; }
+    .aside-block {
+      padding:18px; border-radius:22px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+    }
+    .aside-block h3 { margin:0 0 12px; font-size:1rem; color:var(--gold); }
+    .stack { display:grid; gap:12px; }
+    .stat {
+      padding:14px 14px; border-radius:16px; background:rgba(7,10,18,.52); border:1px solid rgba(255,255,255,.08);
+    }
+    .stat strong { display:block; }
+    .stat small { color:var(--muted); display:block; margin-top:4px; }
+    .layout {
+      margin-top:20px;
+      display:grid;
+      grid-template-columns: 290px 1fr;
+      gap:18px;
+    }
+    .sidebar {
+      position:sticky; top:16px; align-self:start; padding:18px;
+    }
+    .nav-title { font-size:.82rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; font-weight:800; }
+    .nav-list { display:grid; gap:10px; }
+    .nav-link {
+      display:block; padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.04); color:var(--muted);
+    }
+    .nav-link:hover { color:var(--text); border-color:rgba(255,255,255,.18); }
+    .page {
+      display:grid; gap:18px;
+    }
+    .section { padding:22px; }
+    .section h2 {
+      margin:0 0 8px; font-size:clamp(1.5rem, 2.6vw, 2.25rem); letter-spacing:-.02em; line-height:1.06;
+    }
+    .intro { color:var(--muted); margin:0 0 16px; max-width:920px; }
+    .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+    .card {
+      padding:18px; border-radius:20px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.095);
+      min-height:100%;
+    }
+    .card strong { display:block; font-size:1rem; margin-bottom:6px; }
+    .card p, .card div { color:var(--muted); }
+    .eyebrow {
+      display:inline-block; margin-bottom:10px; font-size:.76rem; text-transform:uppercase; letter-spacing:.08em;
+      color:var(--cyan); font-weight:800;
+    }
+    .money {
+      font-size:2rem; line-height:1; font-weight:900; color:var(--gold); margin:8px 0 10px;
+    }
+    .pill {
+      display:inline-flex; padding:6px 10px; border-radius:999px; background:rgba(126,242,188,.12);
+      border:1px solid rgba(126,242,188,.24); color:var(--green); font-size:.82rem; font-weight:700;
+    }
+    .muted { color:var(--muted); }
+    .list { display:grid; gap:12px; }
+    .item {
+      padding:16px 16px 16px 18px; border-radius:18px; border:1px solid rgba(255,255,255,.09); background:rgba(255,255,255,.04);
+    }
+    .item strong { display:block; margin-bottom:6px; }
+    .proof-link {
+      display:flex; justify-content:space-between; gap:10px; align-items:center;
+      padding:14px 16px; border-radius:16px; border:1px solid rgba(255,255,255,.11); background:rgba(255,255,255,.04);
+    }
+    .proof-link span { color:var(--muted); }
+    .surface-card { display:flex; flex-direction:column; }
+    .surface-card .surface-cta {
+      margin-top:12px; display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06); color:var(--text); font-weight:800; font-size:.9rem;
+    }
+    .surface-card .surface-cta:hover { border-color:rgba(255,255,255,.28); background:rgba(255,255,255,.1); }
+    table {
+      width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:18px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.04);
+    }
+    th, td {
+      padding:12px 10px; text-align:left; vertical-align:top; border-bottom:1px solid rgba(255,255,255,.08);
+      font-size:.95rem;
+    }
+    th { background:rgba(255,255,255,.055); color:var(--gold); }
+    tr:last-child td { border-bottom:none; }
+    .table-wrap { overflow:auto; }
+    .formula {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      padding:12px 14px; border-radius:16px; border:1px solid rgba(255,255,255,.1); background:rgba(0,0,0,.22);
+      color:#e8ebff;
+    }
+    .field-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+    label { display:block; font-size:.92rem; margin-bottom:8px; color:#eef1ff; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea, select {
+      width:100%; color:var(--text); border-radius:14px; padding:13px 14px; outline:none;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+    }
+    textarea { min-height:112px; resize:vertical; }
+    .checkrow {
+      display:flex; gap:12px; align-items:flex-start;
+      padding:13px 14px; border-radius:16px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09);
+    }
+    input[type="checkbox"] {
+      margin-top:4px; transform:scale(1.15);
+      accent-color:#9a62ff;
+    }
+    .savebar {
+      margin-top:14px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+    }
+    .btn {
+      border:none; cursor:pointer; color:#fff; padding:12px 15px; border-radius:14px; font-weight:800;
+      background:linear-gradient(135deg, rgba(154,98,255,.95), rgba(99,232,255,.82));
+      box-shadow:0 14px 32px rgba(88,65,255,.24);
+    }
+    .btn.secondary {
+      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); box-shadow:none;
+    }
+    .btn.warn {
+      background:linear-gradient(135deg, rgba(255,149,142,.9), rgba(255,215,106,.88));
+      color:#241d08;
+    }
+    .saved-pill {
+      font-size:.84rem; color:var(--green);
+      padding:8px 10px; border:1px solid rgba(126,242,188,.2); background:rgba(126,242,188,.08); border-radius:999px;
+    }
+    .final-callout {
+      padding:18px; border-radius:20px; border:1px solid rgba(255,215,106,.22);
+      background:linear-gradient(180deg, rgba(255,215,106,.1), rgba(255,255,255,.04));
+    }
+    .contact-block {
+      display:grid; grid-template-columns:repeat(2,1fr); gap:16px;
+    }
+    .contact-card {
+      padding:18px; border-radius:18px; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04);
+    }
+    .small { font-size:.92rem; color:var(--muted); }
+    .footer-note {
+      margin-top:18px; text-align:center; color:#b7bdd7; font-size:.9rem;
+    }
+    .hidden { display:none !important; }
+
+    .site-cohort-bar {
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding:14px 16px; margin-bottom:18px;
+      position:sticky; top:12px; z-index:30;
+    }
+    .site-brand {
+      display:flex; align-items:center; gap:12px; min-width:0;
+    }
+    .site-brand img {
+      width:58px; height:58px; object-fit:contain;
+      filter:drop-shadow(0 0 16px rgba(255,215,106,.22)) drop-shadow(0 0 28px rgba(154,98,255,.22));
+      animation: floaty 4.8s ease-in-out infinite, pulse 2.2s ease-in-out infinite;
+    }
+    .site-brand-copy { display:grid; gap:2px; }
+    .site-brand-copy strong { letter-spacing:.1em; text-transform:uppercase; font-size:.74rem; color:var(--gold); }
+    .site-brand-copy span { color:var(--muted); font-size:.92rem; }
+    .site-links { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+    .site-links a {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 13px; border-radius:999px; border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05); color:var(--text); font-weight:800; font-size:.86rem;
+      box-shadow:0 0 0 1px rgba(255,255,255,.03), 0 12px 28px rgba(0,0,0,.16);
+    }
+    .site-links a.primary-link {
+      border-color:rgba(255,215,106,.28);
+      box-shadow:0 0 0 1px rgba(255,215,106,.10), 0 0 24px rgba(154,98,255,.16), 0 14px 32px rgba(0,0,0,.20);
+    }
+    .founder-route-card {
+      display:flex; gap:14px; align-items:center; padding:14px; border-radius:18px;
+      background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.1);
+      margin-top:4px;
+    }
+    .founder-thumb {
+      width:88px; height:116px; object-fit:contain; object-position:bottom center; flex:0 0 auto;
+      filter:drop-shadow(0 12px 24px rgba(0,0,0,.34));
+    }
+    .link-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+    @media (max-width:1080px) {
+      .site-cohort-bar { position:static; }
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid, .layout, .grid-2, .grid-3, .grid-4, .field-grid, .contact-block { grid-template-columns:1fr; }
+      .site-cohort-bar, .site-links, .founder-route-card { flex-direction:column; align-items:flex-start; }
+      .hero-note { grid-template-columns:1fr; }
+      .sidebar { position:static; }
+    }
+  </style>
+  <meta property="og:title" content="Arizona Center for Youth Resources Partnership Proposal — s0l26-0s Cohort" />
+  <meta property="og:description" content="Arizona Center for Youth Resources specific partnership page for a later-launch 0s cohort proposal from Skyes Over London and SOLEnterprises." />
+  <meta name="twitter:description" content="Arizona Center for Youth Resources specific partnership page for a later-launch 0s cohort proposal from Skyes Over London and SOLEnterprises." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Arizona Center for Youth Resources Partnership Proposal — s0l26-0s Cohort" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Arizona Center for Youth Resources Partnership Proposal — s0l26-0s Cohort",
+  "url": "https://kaixu-0s-founder-cohort-platform.netlify.app/pages/arizona-center-for-youth-resources.html",
+  "description": "Arizona Center for Youth Resources specific partnership page for a later-launch 0s cohort proposal from Skyes Over London and SOLEnterprises.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "0s Founder Cohort",
+    "url": "https://kaixu-0s-founder-cohort-platform.netlify.app/"
+  }
+}
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="glass site-cohort-bar" aria-label="Cohort site navigation">
+      <a class="site-brand" href="../index.html">
+        <img src="../assets/media/skyes-primary-logo.png" alt="Skyes Over London" />
+        <div class="site-brand-copy">
+          <strong>Skyes Over London × 0s</strong>
+          <span>ACYR partnership lane inside the live founder cohort site.</span>
+        </div>
+      </a>
+      <div class="site-links">
+        <a href="../index.html">Offer</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="proof.html">Proof</a>
+        <a class="primary-link" href="founder.html">Founder</a>
+        <a href="trust.html">Trust</a>
+        <a href="editorials/index.html">Editorials</a>
+        <a href="youth-partners.html">Partner Lanes</a>
+        <a href="arizona-center-for-youth-resources.html" aria-current="page">ACYR</a>
+        <a href="apply.html">Apply</a>
+      </div>
+    </nav>
+    <section class="glass hero">
+      <div class="hero-grid" id="proposalView">
+        <div>
+          <img class="logo" src="../assets/media/skyes-primary-logo.png" alt="Skyes Over London logo" />
+          <div class="badge">ACYR Partnership Proposal · Later launch lane</div>
+          <h1>Arizona Center for Youth Resources can host an education-to-technology cohort lane.</h1>
+          <p class="lead">
+            This page is built specifically for Arizona Center for Youth Resources. It frames a later-launch education-to-technology cohort path, routes readers through the founder review step, and stages the approval, scheduling, and contact flow for a November 2026 or 2027 launch window.
+          </p>
+          <div class="hero-note"><div class="mini"><strong>Later launch window</strong><span>The first cohort lane has already been claimed. This ACYR lane is staged for a later rollout beginning around November 2026 or in 2027.</span></div><div class="mini"><strong>Education to build skills</strong><span>The partnership framing fits an education and career-readiness environment where re-engagement and technical growth already matter.</span></div><div class="mini"><strong>Same enterprise-level outcome</strong><span>Approved youth would still receive the same serious platform exposure and product outcome level as the paid cohort.</span></div></div>
+        </div>
+        <aside class="aside-block">
+          <h3>At-a-glance</h3>
+          <div class="stack"><div class="stat"><strong>Requested Phoenix launchpad</strong><small>The proposal is to stage a later ACYR-specific founder cohort lane connected to the existing 0s program and trust stack.</small></div><div class="stat"><strong>Current planning window</strong><small>The first cohort is already claimed, so this page is built for a target window beginning around November 1, 2026 or during 2027 scheduling.</small></div><div class="stat"><strong>Public paid cohort seat price</strong><small>$4,444.00 per seat with a $1,111.00 deposit and the remaining $3,333.00 parsed across 6–13 months.</small></div><div class="stat"><strong>Sponsored youth lane</strong><small>SOLEnterprises would cover approved youth enrollment and in-class AI usage cost during the sponsored lane.</small></div></div>
+          <div class="founder-route-card">
+            <img class="founder-thumb" src="../assets/media/founder.png" alt="Founder portrait" />
+            <div>
+              <strong>Dedicated founder page is live</strong>
+              <small>The founder-review step now clicks directly into the actual cohort founder page instead of a placeholder route.</small>
+              <div class="link-row">
+                <a class="btn secondary" href="founder.html">Open founder page</a>
+                <a class="btn secondary" href="proof.html">Open proof page</a>
+                <a class="btn secondary" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener noreferrer">All SkyeSol Case Studies</a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero-grid hidden" id="founderView">
+        <div>
+          <img class="logo" src="../assets/media/skyes-primary-logo.png" alt="Skyes Over London logo" />
+          <div class="badge">Founder route</div>
+          <h1>Founder page is live.</h1>
+          <p class="lead">
+            ACYR can now move directly from this partnership page into the dedicated founder page already living inside the cohort site.
+          </p>
+          <div class="mini"><strong>Founder route updated</strong><span>The dedicated founder page is already part of the live cohort site, so this ACYR workflow can point directly to it now.</span></div>
+          <div class="savebar" style="margin-top:18px;">
+            <a class="btn" href="founder.html">Open live founder page</a>
+            <a class="btn secondary" href="arizona-center-for-youth-resources.html">Back to ACYR proposal</a>
+          </div>
+        </div>
+        <aside class="aside-block">
+          <h3>Current state</h3>
+          <div class="stack">
+            <div class="stat"><strong>Founder page is linked directly</strong><small>This now routes ACYR into the real founder page instead of a placeholder-only lane.</small></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="layout" id="proposalLayout">
+      <aside class="glass sidebar">
+        <div class="nav-title">ACYR walkthrough</div>
+        <div class="nav-list">
+          <a class="nav-link" href="#intent">1. Intent + relationship</a>
+          <a class="nav-link" href="#paid-cohort">2. Paid cohort economics</a>
+          <a class="nav-link" href="#free-cohort">3. Sponsored ACYR youth cohort</a>
+          <a class="nav-link" href="#founder">4. Founder review</a>
+          <a class="nav-link" href="#approval">5. Approval request</a>
+          <a class="nav-link" href="#availability">6. Scheduling windows</a>
+          <a class="nav-link" href="#contact">7. Contact + submit</a>
+          <a class="nav-link" href="./proof.html">Existing proof page</a>
+        </div>
+      </aside>
+
+      <main class="page">
+        <section class="glass section" id="intent">
+          <h2>1) Program intent, partnership purpose, and fit context</h2>
+          <p class="intro">
+            This page is designed for a Phoenix education and career-readiness setting where re-engagement, supportive learning, and employment pathways already matter. The cohort offer is framed as a structured route from academic or workforce readiness into real technical product-building.
+          </p>
+          <div class="grid-2">
+            <div class="card">
+              <span class="eyebrow">Why this matters</span>
+              <strong>Youth-first before company cashflow</strong>
+              <div>
+                The first cohort proposed here is the free ACYR youth cohort. That means SOLEnterprises and Skyes Over London are volunteering the enterprise-level curriculum, access, and AI usage cost before taking in proceeds from the public paid cohort.
+              </div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Program fit</span>
+              <strong>ACYR is a strong fit for an education-to-technology lane</strong>
+              <div>
+                The offer is presented as a later-stage youth-opportunity lane that can sit alongside education, GED, diploma, and career support work while opening a high-value technology pathway for interested participants.
+              </div>
+            </div>
+          </div>
+          <div class="list" style="margin-top:16px;">
+            <a class="proof-link" href="founder.html">
+              <div><strong>Founder review route</strong><span>Open the live founder page inside the cohort site.</span></div>
+              <div>Open →</div>
+            </a>
+            <a class="proof-link" href="trust.html">
+              <div><strong>Trust route</strong><span>Open the founder trust page inside the cohort site.</span></div>
+              <div>Open →</div>
+            </a>
+            <a class="proof-link" href="youth-partners.html">
+              <div><strong>Partner lane hub</strong><span>Open the shared youth partnership hub for all partner pages.</span></div>
+              <div>Open →</div>
+            </a>
+          </div>
+          <div class="checkrow" style="margin-top:16px;">
+            <input type="checkbox" id="understandIntent" />
+            <div>
+              <strong>ACYR confirmation — program intent understood</strong>
+              <div class="small">We understand that the proposal is youth-first, that the learning resource room is being requested as the launchpad, and that the paid public cohort would follow with the ACYR donation structure.</div>
+            </div>
+          </div>
+          <div class="savebar">
+            <button class="btn secondary" data-save="intent">Save this response</button>
+            <span class="saved-pill" id="saved-intent">Not saved yet</span>
+          </div>
+        </section>
+
+        <section class="glass section" id="paid-cohort">
+          <h2>2) Paid public cohort economics — transparent breakdown</h2>
+          <p class="intro">
+            The paid cohort is proposed with a maximum class size between 16 and 31 seats. Each seat is priced at $4,444.00. The deposit is $1,111.00 before class. The remaining $3,333.00 is parsed over 6 to 13 months. On received funds, Skyes Over London is paid first for instruction at 11%, ACYR receives 70% of the remaining amount, and SOLEnterprises (International Nexus &amp; Holdings) receives the rest.
+          </p>
+
+          <div class="grid-4">
+            <div class="card">
+              <span class="eyebrow">Per seat</span>
+              <strong>Seat price</strong>
+              <div class="money">$4,444.00</div>
+              <div class="small">Full paid cohort tuition per seat.</div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Per seat</span>
+              <strong>Deposit</strong>
+              <div class="money">$1,111.00</div>
+              <div class="small">Collected before class start.</div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Per seat</span>
+              <strong>Remaining balance</strong>
+              <div class="money">$3,333.00</div>
+              <div class="small">Spread across 6–13 months after deposit.</div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Installment range</span>
+              <strong>Monthly estimate</strong>
+              <div class="money">$256.38–555.50</div>
+              <div class="small">$3,333.00 over 13 months at the low end or 6 months at the fast end.</div>
+            </div>
+          </div>
+
+          <div class="formula" style="margin-top:16px;">
+            Instructor share = 11% of received funds → ACYR share = 70% of the remaining 89% → SOLEnterprises share = the remaining 30% of that 89%.
+          </div>
+
+          <div class="grid-2" style="margin-top:16px;">
+            <div class="card">
+              <span class="eyebrow">Per-seat deposit breakdown</span>
+              <strong>What one $1,111.00 deposit means</strong>
+              <div class="list">
+                <div class="item"><strong>Skyes Over London instruction share</strong>$122.21</div>
+                <div class="item"><strong>ACYR share after instruction payout</strong>$692.15</div>
+                <div class="item"><strong>SOLEnterprises share after instruction + ACYR allocation</strong>$296.64</div>
+              </div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Per-seat full tuition breakdown</span>
+              <strong>What one full $4,444.00 seat means</strong>
+              <div class="list">
+                <div class="item"><strong>Skyes Over London instruction share</strong>$488.84</div>
+                <div class="item"><strong>ACYR share after instruction payout</strong>$2,768.61</div>
+                <div class="item"><strong>SOLEnterprises share after instruction + ACYR allocation</strong>$1,186.55</div>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="margin:20px 0 10px; color:var(--gold);">Scenario illustrations ACYR can review</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Seat count</th>
+                  <th>Deposit stage gross</th>
+                  <th>Deposit stage — Skyes Over London</th>
+                  <th>Deposit stage — ACYR</th>
+                  <th>Deposit stage — SOLEnterprises</th>
+                  <th>Full cohort gross</th>
+                  <th>Full cohort — Skyes Over London</th>
+                  <th>Full cohort — ACYR</th>
+                  <th>Full cohort — SOLEnterprises</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>16 seats</td><td>$17,776.00</td><td>$1,955.36</td><td>$11,074.45</td><td>$4,746.19</td><td>$71,104.00</td><td>$7,821.44</td><td>$44,297.79</td><td>$18,984.77</td></tr><tr><td>24 seats</td><td>$26,664.00</td><td>$2,933.04</td><td>$16,611.67</td><td>$7,119.29</td><td>$106,656.00</td><td>$11,732.16</td><td>$66,446.69</td><td>$28,477.15</td></tr><tr><td>31 seats</td><td>$34,441.00</td><td>$3,788.51</td><td>$21,456.74</td><td>$9,195.75</td><td>$137,764.00</td><td>$15,154.04</td><td>$85,826.97</td><td>$36,782.99</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="item" style="margin-top:16px;">
+            <strong>Why the numbers are shown this openly</strong>
+            ACYR should know roughly what the organization stands to receive across realistic seat-count outcomes. This proposal is intentionally transparent because clarity is key to getting the deal done and to showing this is a serious fundraising structure rather than vague language.
+          </div>
+
+          <div class="checkrow" style="margin-top:16px;">
+            <input type="checkbox" id="understandPaid" />
+            <div>
+              <strong>ACYR confirmation — paid cohort economics understood</strong>
+              <div class="small">We understand the $4,444.00 seat price, $1,111.00 deposit, 6–13 month balance structure, 11% instruction payout first, 70% ACYR share of the remainder, and the scenario examples above.</div>
+            </div>
+          </div>
+          <div class="savebar">
+            <button class="btn secondary" data-save="paid">Save this response</button>
+            <span class="saved-pill" id="saved-paid">Not saved yet</span>
+          </div>
+        </section>
+
+        <section class="glass section" id="free-cohort">
+          <h2>3) Sponsored ACYR youth cohort — reserved later launch lane</h2>
+          <p class="intro">
+            The first cohort lane is already claimed, so this page stages a later sponsored cohort specifically for ACYR-approved youth who may be interested in the program. SOLEnterprises would cover the cost of their enrollment and the cost of their AI usage while in class. The youth would receive the same enterprise-level outcome and product exposure as the paying cohort, just broken down in a simpler and easier-to-understand methodology.
+          </p>
+
+          <div class="grid-2">
+            <div class="card">
+              <span class="eyebrow">Offered at no youth charge</span>
+              <strong>What ACYR youth receive</strong>
+              <div class="list">
+                <div class="item"><strong>Enrollment cost covered</strong>No youth enrollment fee is being requested for the ACYR approved youth cohort.</div>
+                <div class="item"><strong>AI usage cost covered</strong>SOLEnterprises covers the in-class AI runtime cost for the youth cohort.</div>
+                <div class="item"><strong>Enterprise-level education</strong>The content is not watered down in value; it is made easier to understand in methodology.</div>
+                <div class="item"><strong>Monetization path preserved</strong>Youth can be set up to direct clients and traffic to their created tech while retaining management of their own underlying ecosystem.</div>
+              </div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Revenue ethics for youth</span>
+              <strong>What SOLEnterprises will not take</strong>
+              <div class="list">
+                <div class="item"><strong>No company take from youth money</strong>SOLEnterprises and Skyes Over London will not take revenue from the youth participants' monetized tech.</div>
+                <div class="item"><strong>Approved account routing</strong>The proposal is that any youth revenue should go into an approved ACYR or ACYR-approved youth account structure.</div>
+                <div class="item"><strong>Better savings logic respected</strong>If ACYR's account structure yields stronger savings outcomes, the proposal supports routing the youths' proceeds there rather than through company-owned channels.</div>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="margin:20px 0 10px; color:var(--gold);">Examples of the level of deployed value being brought to the table</h3>
+          <p class="intro" style="margin-top:0;">
+            These are examples of currently valued deployed or canonically valued ecosystem surfaces demonstrating that the program is coming from a serious operating environment, not a casual hobby stack. Each card below links directly to a live deployed surface and opens in a new tab.
+          </p>
+          <div class="grid-3">
+            <div class="card surface-card"><span class="eyebrow">Deployed surface</span><strong>kAIxU Gate Xinth</strong><div class="money">$1,350,000.00</div><div class="small">Unified gateway surface with health, models, generate, stream, smoke UI, and multi-app ecosystem entry.</div><a class="surface-cta" href="https://kaixu0s.netlify.app/" target="_blank" rel="noreferrer">Open live surface ↗</a></div>
+            <div class="card surface-card"><span class="eyebrow">Deployed surface</span><strong>kAIxU Super IDE</strong><div class="money">$865,000.00</div><div class="small">Browser IDE with multi-tenant orgs, billing, SSO, semantic search, and gateway-connected AI operations.</div><a class="surface-cta" href="https://kaixusuperide.netlify.app/ide" target="_blank" rel="noreferrer">Open live surface ↗</a></div>
+            <div class="card surface-card"><span class="eyebrow">Deployed surface</span><strong>Sovereign Variables</strong><div class="money">$205,000.00</div><div class="small">Offline-first secure environment vessel and encrypted configuration packager.</div><a class="surface-cta" href="https://sovereignvariables-s0l26.netlify.app/" target="_blank" rel="noreferrer">Open live surface ↗</a></div>
+            <div class="card surface-card"><span class="eyebrow">Deployed surface</span><strong>ChromeBoard Pro Max2</strong><div class="money">$215,000.00</div><div class="small">Live Chromebook-focused product surface and command workspace layer.</div><a class="surface-cta" href="https://chromeboardpromax2.netlify.app/" target="_blank" rel="noreferrer">Open live surface ↗</a></div>
+            <div class="card surface-card"><span class="eyebrow">Deployed surface</span><strong>SkyeDocx Pro</strong><div class="money">$205,000.00</div><div class="small">Live document utility surface inside the SkyeVault ecosystem.</div><a class="surface-cta" href="https://vaultedskye.netlify.app/apps/docx/index.html" target="_blank" rel="noreferrer">Open live surface ↗</a></div>
+            <div class="card surface-card"><span class="eyebrow">Deployed surface</span><strong>SkyeVault</strong><div class="money">$185,000.00</div><div class="small">Live drive and workspace utility surface inside the SkyeVault ecosystem.</div><a class="surface-cta" href="https://vaultedskye.netlify.app/drive/index.html" target="_blank" rel="noreferrer">Open live surface ↗</a></div>
+          </div>
+          <div class="final-callout" style="margin-top:16px;">
+            <strong>Total value represented by the example surfaces shown above: $3,025,000.00</strong>
+            <div class="small" style="margin-top:6px;">
+              This does not claim the youth cohort is priced at that total. It shows the caliber of the infrastructure, product thinking, and deployed ecosystem level being brought into the ACYR lane on the sponsored youth side of the partnership.
+            </div>
+          </div>
+
+          <div class="checkrow" style="margin-top:16px;">
+            <input type="checkbox" id="understandFree" />
+            <div>
+              <strong>ACYR confirmation — free youth cohort value understood</strong>
+              <div class="small">We understand that the ACYR youth cohort is proposed first, that SOLEnterprises covers enrollment and class-time AI usage, that the youths keep their monetization routed to approved ACYR/youth accounts, and that the program is being delivered from a serious deployed ecosystem level.</div>
+            </div>
+          </div>
+          <div class="savebar">
+            <button class="btn secondary" data-save="free">Save this response</button>
+            <span class="saved-pill" id="saved-free">Not saved yet</span>
+          </div>
+        </section>
+
+        <section class="glass section" id="founder">
+          <h2>4) Learn more about the founder</h2>
+          <p class="intro">
+            ACYR may reasonably need a dedicated founder review step. This workflow now links directly into the live founder page already included in the cohort site.
+          </p>
+          <div class="grid-2">
+            <div class="card">
+              <span class="eyebrow">Founder review route</span>
+              <strong>Open the live founder page</strong>
+              <div class="small">Click the button below to open the live founder page inside the cohort site.</div>
+              <div class="savebar" style="margin-top:14px;">
+                <a class="btn" href="founder.html">Open founder page</a>
+              </div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Workflow proof</span>
+              <strong>Why this step is included</strong>
+              <div class="small">This gives ACYR a dedicated founder-review step that now lands on the actual founder page instead of a temporary placeholder.</div>
+            </div>
+          </div>
+          <div class="checkrow" style="margin-top:16px;">
+            <input type="checkbox" id="understandFounder" />
+            <div>
+              <strong>ACYR confirmation — founder review acknowledged</strong>
+              <div class="small">We understand that a dedicated founder page route exists and now points directly to the live founder page within the cohort site.</div>
+            </div>
+          </div>
+          <div class="savebar">
+            <button class="btn secondary" data-save="founder">Save this response</button>
+            <span class="saved-pill" id="saved-founder">Not saved yet</span>
+          </div>
+        </section>
+
+        <section class="glass section" id="approval">
+          <h2>5) Requested approval to begin the partnership process</h2>
+          <p class="intro">
+            The request is straightforward: please give the green light to begin the ACYR approval process so the sponsored youth cohort and the later public paid cohort donation structure can be planned. The first cohort lane is already claimed, so the planning target on this page begins around November 1, 2026 or later into 2027.
+          </p>
+          <div class="item">
+            <strong>Approval requested</strong>
+            ACYR is being asked to allow Skyes Over London and SOLEnterprises to partner with ACYR on this cohort-style initiative, to allow the youth-first sponsored cohort to be planned, and to allow the public paid cohort to operate with 70% of post-instructor proceeds being donated to Arizona Center for Youth Resources.
+          </div>
+          <div class="grid-2" style="margin-top:16px;">
+            <div class="checkrow">
+              <input type="checkbox" id="approveYouthFirst" />
+              <div>
+                <strong>We approve the youth-first planning path</strong>
+                <div class="small">This acknowledges permission to begin coordinating the ACYR approved youth cohort first.</div>
+              </div>
+            </div>
+            <div class="checkrow">
+              <input type="checkbox" id="approveDonation" />
+              <div>
+                <strong>We approve the donation structure concept</strong>
+                <div class="small">This acknowledges understanding and preliminary acceptance of the 70% ACYR share after the instructor payout on paid cohort proceeds.</div>
+              </div>
+            </div>
+          </div>
+          <div class="checkrow" style="margin-top:12px;">
+            <input type="checkbox" id="understandApproval" />
+            <div>
+              <strong>ACYR confirmation — approval request understood</strong>
+              <div class="small">We understand that approval here is meant to get the ball rolling on planning, scheduling, and partner coordination for both the youth-first cohort and the later public fundraising cohort.</div>
+            </div>
+          </div>
+          <div class="savebar">
+            <button class="btn secondary" data-save="approval">Save this response</button>
+            <span class="saved-pill" id="saved-approval">Not saved yet</span>
+          </div>
+        </section>
+
+        <section class="glass section" id="availability">
+          <h2>6) Scheduling windows — please provide two options for each cohort</h2>
+          <p class="intro">
+            Because the first cohort lane is already claimed, this page stages date ranges beginning around November 1, 2026 or later. ACYR is asked to propose two range options for the sponsored youth cohort and two range options for the paid public cohort, for a total of four ranges.
+          </p>
+
+          <div class="grid-2">
+            <div class="card">
+              <span class="eyebrow">Free youth cohort</span>
+              <strong>Option A</strong>
+              <div class="field-grid" style="margin-top:12px;">
+                <div><label for="freeAStart">Start date</label><input type="date" id="freeAStart" min="2026-11-01" /></div>
+                <div><label for="freeAEnd">End date</label><input type="date" id="freeAEnd" min="2026-11-01" /></div>
+              </div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Free youth cohort</span>
+              <strong>Option B</strong>
+              <div class="field-grid" style="margin-top:12px;">
+                <div><label for="freeBStart">Start date</label><input type="date" id="freeBStart" min="2026-11-01" /></div>
+                <div><label for="freeBEnd">End date</label><input type="date" id="freeBEnd" min="2026-11-01" /></div>
+              </div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Paid public cohort</span>
+              <strong>Option A</strong>
+              <div class="field-grid" style="margin-top:12px;">
+                <div><label for="paidAStart">Start date</label><input type="date" id="paidAStart" min="2026-11-01" /></div>
+                <div><label for="paidAEnd">End date</label><input type="date" id="paidAEnd" min="2026-11-01" /></div>
+              </div>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Paid public cohort</span>
+              <strong>Option B</strong>
+              <div class="field-grid" style="margin-top:12px;">
+                <div><label for="paidBStart">Start date</label><input type="date" id="paidBStart" min="2026-11-01" /></div>
+                <div><label for="paidBEnd">End date</label><input type="date" id="paidBEnd" min="2026-11-01" /></div>
+              </div>
+            </div>
+          </div>
+
+          <label for="availabilityNotes" style="margin-top:16px;">Optional scheduling notes</label>
+          <textarea id="availabilityNotes" placeholder="Add notes about room availability, staffing preferences, youth selection considerations, blackout periods, or ideal weekday patterns."></textarea>
+
+          <div class="checkrow" style="margin-top:16px;">
+            <input type="checkbox" id="understandAvailability" />
+            <div>
+              <strong>ACYR confirmation — scheduling step understood</strong>
+              <div class="small">We understand that this step is collecting two scheduling windows for the free youth cohort and two windows for the paid public cohort, all beginning around November 1, 2026 or in 2027.</div>
+            </div>
+          </div>
+          <div class="savebar">
+            <button class="btn secondary" data-save="availability">Save this response</button>
+            <span class="saved-pill" id="saved-availability">Not saved yet</span>
+          </div>
+        </section>
+
+        <section class="glass section" id="contact">
+          <h2>7) Contact details and final approval submission</h2>
+          <p class="intro">
+            The final step captures the ACYR contact information, saves the responses, and generates the approval email. The generated email draft opens in the user's email app or browser compose flow depending on device settings. They must still press <strong>Send</strong> after it opens.
+          </p>
+
+          <div class="contact-block">
+            <div class="contact-card">
+              <strong>ACYR contact</strong>
+              <div class="field-grid" style="margin-top:14px;">
+                <div><label for="contactName">Full name</label><input type="text" id="contactName" placeholder="Name" /></div>
+                <div><label for="contactTitle">Title / position</label><input type="text" id="contactTitle" placeholder="Title / position" /></div>
+                <div><label for="contactDept">Department</label><input type="text" id="contactDept" placeholder="Department or program area" /></div>
+                <div><label for="contactEmail">Email</label><input type="email" id="contactEmail" placeholder="Email" /></div>
+                <div><label for="contactPhone">Phone</label><input type="tel" id="contactPhone" placeholder="Phone" /></div>
+                <div><label for="contactOrg">Organization</label><input type="text" id="contactOrg" value="Arizona Center for Youth Resources" /></div>
+              </div>
+            </div>
+            <div class="contact-card">
+              <strong>Prepared by</strong>
+              <div class="small" style="margin-top:10px;">
+                <strong>Skyes Over London</strong><br/>
+                SOLEnterprises / Skyes Over London LC<br/>
+                Email: SkyesOverLondonLC@SOLEnterprises.org<br/>
+                Email: SkyesOverLondon@gmail.com<br/>
+                Email: B2B@SOLEnterprises.org<br/>
+                Phone: (480) 469-5416<br/>
+                Website: SOLEnterprises.org
+              </div>
+              <div class="small" style="margin-top:16px;">
+                <strong>ACYR reference</strong><br/>
+                Arizona Center for Youth Resources<br/>649 N 6th Ave, Phoenix, AZ 85003<br/>Phone: (602) 252-6721<br/>Email: ask@acyraz.org
+              </div>
+            </div>
+          </div>
+
+          <label for="finalNotes" style="margin-top:16px;">Optional final notes from ACYR</label>
+          <textarea id="finalNotes" placeholder="Add any final conditions, questions, internal review notes, or follow-up needs here."></textarea>
+
+          <div class="final-callout" style="margin-top:16px;">
+            <strong>Final acknowledgment</strong>
+            <div class="small" style="margin-top:8px;">
+              By checking the box below and then clicking the final submit button, ACYR is acknowledging that the generated email will serve as the formal written signal that the organization understands the proposal and is willing to allow Skyes Over London and SOLEnterprises to begin the partnership and scheduling process for this cohort-style fundraising and youth opportunity initiative.
+            </div>
+          </div>
+
+          <div class="checkrow" style="margin-top:16px;">
+            <input type="checkbox" id="submitAcknowledge" />
+            <div>
+              <strong>I understand that clicking the final submit button will open an approval email draft that still needs to be sent manually</strong>
+              <div class="small">Depending on the device, the draft may open in a new browser tab, a mail app, or the default email composer. The user still needs to press <strong>Send</strong>.</div>
+            </div>
+          </div>
+
+          <div class="checkrow" style="margin-top:12px;">
+            <input type="checkbox" id="submitApproval" />
+            <div>
+              <strong>I approve allowing Skyes Over London and SOLEnterprises to begin the ACYR cohort partnership process described on this page</strong>
+              <div class="small">This covers the youth-first cohort planning path and the later public paid cohort donation structure, subject to ACYR's internal process and scheduling coordination.</div>
+            </div>
+          </div>
+
+          <div class="savebar">
+            <button class="btn secondary" id="saveAll">Save all responses now</button>
+            <button class="btn" id="openEmail">Submit approval — open email draft</button>
+            <button class="btn warn" id="downloadJson">Download saved responses</button>
+            <span class="saved-pill" id="saved-contact">Not saved yet</span>
+          </div>
+
+          <div class="footer-note">
+            This page stores confirmation responses locally in the browser so ACYR can review, save, come back, and then generate the approval email once ready.
+          </div>
+        </section>
+      
+      <section>
+        <div class="callout">
+          <div class="eyebrow">Organization lane</div>
+          <h2>Want this brought to your organization?</h2>
+          <p class="page-intro">There is now a dedicated organization-request page for institutions that want Skyes Over London to bring a cohort directly to their people. The invitation is open, but vetting and approval remain required.</p>
+          <div class="inline-actions">
+            <a class="button" href="host-a-cohort.html">Open Host-a-Cohort Page</a>
+            <a class="button secondary" href="founder.html">Founder</a>
+            <a class="button ghost" href="trust.html">Trust</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "acyr_partnership_proposal_v1";
+
+    const fields = [
+      "understandIntent","understandPaid","understandFree","understandFounder","approveYouthFirst","approveDonation","understandApproval",
+      "freeAStart","freeAEnd","freeBStart","freeBEnd","paidAStart","paidAEnd","paidBStart","paidBEnd","availabilityNotes",
+      "contactName","contactTitle","contactDept","contactEmail","contactPhone","contactOrg","finalNotes",
+      "understandAvailability","submitAcknowledge","submitApproval"
+    ];
+
+    const saveLabels = {
+      intent: "saved-intent",
+      paid: "saved-paid",
+      free: "saved-free",
+      founder: "saved-founder",
+      approval: "saved-approval",
+      availability: "saved-availability"
+    };
+
+    function nowStamp() {
+      return new Date().toLocaleString();
+    }
+
+    function getData() {
+      const data = {};
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        data[id] = el.type === "checkbox" ? el.checked : el.value;
+      });
+      data.savedAt = nowStamp();
+      return data;
+    }
+
+    function persist(sectionName) {
+      const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      const merged = Object.assign(existing, getData());
+      if (sectionName) {
+        merged["saved_" + sectionName] = nowStamp();
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+      refreshSavedBadges();
+    }
+
+    function restore() {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el || data[id] === undefined) return;
+        if (el.type === "checkbox") {
+          el.checked = !!data[id];
+        } else {
+          el.value = data[id];
+        }
+      });
+      refreshSavedBadges();
+    }
+
+    function refreshSavedBadges() {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      Object.entries(saveLabels).forEach(([section, badgeId]) => {
+        const badge = document.getElementById(badgeId);
+        if (!badge) return;
+        badge.textContent = data["saved_" + section] ? "Saved " + data["saved_" + section] : "Not saved yet";
+      });
+      const contactBadge = document.getElementById("saved-contact");
+      if (contactBadge) {
+        contactBadge.textContent = data.savedAt ? "Saved " + data.savedAt : "Not saved yet";
+      }
+    }
+
+    function attachAutosave() {
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("change", () => persist());
+        if (el.tagName === "TEXTAREA" || el.type === "text" || el.type === "email" || el.type === "tel" || el.type === "date") {
+          el.addEventListener("blur", () => persist());
+        }
+      });
+    }
+
+    function sectionSaver() {
+      document.querySelectorAll("[data-save]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          persist(btn.getAttribute("data-save"));
+        });
+      });
+      document.getElementById("saveAll")?.addEventListener("click", () => persist());
+    }
+
+    function currency(n) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+    }
+
+    function requireFields() {
+      const requiredChecks = [
+        "understandIntent","understandPaid","understandFree","understandFounder",
+        "approveYouthFirst","approveDonation","understandApproval","understandAvailability",
+        "submitAcknowledge","submitApproval"
+      ];
+      for (const id of requiredChecks) {
+        const el = document.getElementById(id);
+        if (!el.checked) {
+          alert("Please complete all required confirmation steps before generating the approval email.");
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          return false;
+        }
+      }
+      const requiredText = ["contactName","contactTitle","contactEmail","contactOrg"];
+      for (const id of requiredText) {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+          alert("Please complete the required ACYR contact details before generating the approval email.");
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function getSummaryBody() {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      const yesNo = v => v ? "Yes" : "No";
+
+      return [
+        "ACYR Cohort Partnership Approval Summary",
+        "",
+        "ACYR contact",
+        "Name: " + (data.contactName || ""),
+        "Title / Position: " + (data.contactTitle || ""),
+        "Department: " + (data.contactDept || ""),
+        "Email: " + (data.contactEmail || ""),
+        "Phone: " + (data.contactPhone || ""),
+        "Organization: " + (data.contactOrg || ""),
+        "",
+        "Confirmation checkpoints",
+        "1. Program intent understood: " + yesNo(data.understandIntent),
+        "2. Paid cohort economics understood: " + yesNo(data.understandPaid),
+        "3. Sponsored ACYR youth cohort value understood: " + yesNo(data.understandFree),
+        "4. Founder review acknowledged: " + yesNo(data.understandFounder),
+        "5. Youth-first planning approved: " + yesNo(data.approveYouthFirst),
+        "6. Donation structure concept approved: " + yesNo(data.approveDonation),
+        "7. Approval request understood: " + yesNo(data.understandApproval),
+        "8. Scheduling step understood: " + yesNo(data.understandAvailability),
+        "9. Email draft manual-send step understood: " + yesNo(data.submitAcknowledge),
+        "10. Final partnership approval given: " + yesNo(data.submitApproval),
+        "",
+        "Scheduling windows proposed",
+        "Free youth cohort option A: " + (data.freeAStart || "") + " to " + (data.freeAEnd || ""),
+        "Free youth cohort option B: " + (data.freeBStart || "") + " to " + (data.freeBEnd || ""),
+        "Paid public cohort option A: " + (data.paidAStart || "") + " to " + (data.paidAEnd || ""),
+        "Paid public cohort option B: " + (data.paidBStart || "") + " to " + (data.paidBEnd || ""),
+        "Availability notes: " + (data.availabilityNotes || ""),
+        "",
+        "Key economics acknowledged",
+        "Seat price: $4,444.00",
+        "Deposit: $1,111.00",
+        "Remaining balance per seat: $3,333.00",
+        "Monthly range after deposit: $256.38 to $555.50",
+        "",
+        "Final notes from ACYR",
+        (data.finalNotes || ""),
+        "",
+        "This email serves as ACYR's current written confirmation that the organization understands the proposal and allows Skyes Over London and SOLEnterprises to begin planning and coordination for the sponsored youth cohort and the later public paid cohort donation structure, subject to the organization's internal process."
+      ].join("\n");
+    }
+
+    function openEmail() {
+      if (!requireFields()) return;
+      persist();
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      const subject = encodeURIComponent("ACYR Cohort Partnership Approval — " + (data.contactName || "ACYR"));
+      const body = encodeURIComponent(getSummaryBody());
+      const to = encodeURIComponent("SkyesOverLondonLC@SOLEnterprises.org");
+      const mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+      window.location.href = mailto;
+      setTimeout(() => {
+        alert("Your email draft has been opened in your default email flow if your device allows it. Please review it and press Send.");
+      }, 250);
+    }
+
+    function downloadJson() {
+      persist();
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "mercy-home-cohort-partnership-responses.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    function initViews() {
+      const params = new URLSearchParams(window.location.search);
+      const isFounder = params.get("view") === "founder";
+      document.getElementById("proposalView").classList.toggle("hidden", isFounder);
+      document.getElementById("founderView").classList.toggle("hidden", !isFounder);
+      document.getElementById("proposalLayout").classList.toggle("hidden", isFounder);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initViews();
+      restore();
+      attachAutosave();
+      sectionSaver();
+      document.getElementById("openEmail")?.addEventListener("click", openEmail);
+      document.getElementById("downloadJson")?.addEventListener("click", downloadJson);
+    });
+  </script>
+</body>
+</html>

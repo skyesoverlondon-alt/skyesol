@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Championships | SkyeLetes Premium Under-6'0" Basketball League</title>
+    <meta name="description" content="SkyeLetes multi-state championship system. State champions from Arizona, Texas, Colorado, and Illinois compete for the national title in Phoenix.">
+    
+    <meta property="og:title" content="Championships | SkyeLetes">
+    <meta property="og:image" content="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    <link rel="icon" href="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-ink: #05010a;
+            --color-paper: #faf9f7;
+            --color-gold: #ffd700;
+            --color-purple: #6d28ff;
+            --color-purple-light: rgba(109, 40, 255, 0.15);
+            --color-slate: #8b7db8;
+            --color-success: #35ffb6;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Instrument Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-impact: 'Bebas Neue', sans-serif;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: var(--color-ink); color: var(--color-paper); line-height: 1.7; min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(3deg); } }
+        @keyframes pulse { 0%, 100% { filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5)); } 50% { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.8)); } }
+        @keyframes trophy-glow { 0%, 100% { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6)) brightness(1); } 50% { filter: drop-shadow(0 0 60px rgba(255, 215, 0, 0.9)) brightness(1.1); } }
+        .floating-logo { animation: float 6s ease-in-out infinite, pulse 3s ease-in-out infinite; }
+        .trophy-float { animation: float 5s ease-in-out infinite, trophy-glow 2.5s ease-in-out infinite; }
+
+        /* Nav */
+        .nav { position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: rgba(5, 1, 10, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 215, 0, 0.1); }
+        .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+        .nav-logo { height: 48px; width: auto; }
+        .nav-brand-text { display: flex; flex-direction: column; }
+        .nav-brand-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-paper); }
+        .nav-brand-sub { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-slate); letter-spacing: 0.1em; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+        .nav-link { font-size: 0.85rem; color: var(--color-slate); text-decoration: none; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-gold); }
+        .nav-btn { background: var(--color-gold); color: var(--color-ink); padding: 0.6rem 1.25rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 6px; transition: all 0.3s; }
+        .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(255,215,0,0.3); }
+
+        /* Hero */
+        .hero { position: relative; z-index: 1; min-height: 80vh; display: flex; align-items: center; padding: 8rem 2rem 4rem; }
+        .hero-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(109,40,255,0.1)); border: 1px solid rgba(255, 215, 0, 0.3); padding: 0.5rem 1rem; border-radius: 999px; margin-bottom: 1.5rem; }
+        .hero-badge-text { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gold); letter-spacing: 0.1em; text-transform: uppercase; }
+        .hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 500; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero-title em { font-style: italic; color: var(--color-gold); }
+        .hero-desc { font-size: 1.15rem; color: var(--color-slate); margin-bottom: 2rem; max-width: 500px; }
+        .hero-visual { display: flex; justify-content: center; align-items: center; }
+        .trophy-container { position: relative; }
+        .trophy-icon { font-size: 12rem; display: block; }
+
+        /* Prize Banner */
+        .prize-banner { position: relative; z-index: 1; background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(109,40,255,0.1)); border-top: 1px solid rgba(255,215,0,0.2); border-bottom: 1px solid rgba(255,215,0,0.2); padding: 3rem 2rem; }
+        .prize-content { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center; }
+        .prize-item { }
+        .prize-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-slate); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .prize-value { font-family: var(--font-impact); font-size: 3.5rem; color: var(--color-gold); letter-spacing: 0.05em; }
+        .prize-sub { font-size: 0.9rem; color: var(--color-slate); }
+
+        /* States Section */
+        .states-section { position: relative; z-index: 1; padding: 6rem 2rem; }
+        .states-container { max-width: 1200px; margin: 0 auto; }
+        .section-label { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; text-align: center; }
+        .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; margin-bottom: 1rem; text-align: center; }
+        .section-title em { font-style: italic; color: var(--color-gold); }
+        .section-desc { font-size: 1.1rem; color: var(--color-slate); max-width: 700px; margin: 0 auto 3rem; text-align: center; }
+
+        .states-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .state-card { background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 2rem; text-align: center; transition: all 0.4s var(--ease-out-expo); position: relative; overflow: hidden; }
+        .state-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--color-gold), var(--color-purple)); transform: scaleX(0); transition: transform 0.4s; }
+        .state-card:hover { border-color: var(--color-gold); transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .state-card:hover::before { transform: scaleX(1); }
+        .state-flag { font-size: 3rem; margin-bottom: 1rem; }
+        .state-abbr { font-family: var(--font-impact); font-size: 2.5rem; color: var(--color-gold); letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+        .state-name { font-size: 1rem; color: var(--color-paper); margin-bottom: 0.5rem; }
+        .state-city { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); letter-spacing: 0.05em; }
+        .state-hq { position: absolute; top: 1rem; right: 1rem; background: var(--color-gold); color: var(--color-ink); padding: 3px 8px; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.05em; border-radius: 4px; }
+
+        /* Bracket Section */
+        .bracket-section { position: relative; z-index: 1; padding: 6rem 2rem; background: linear-gradient(135deg, rgba(109,40,255,0.1), rgba(5,1,10,0.95)); border-top: 1px solid rgba(109,40,255,0.2); }
+        .bracket-container { max-width: 1000px; margin: 0 auto; }
+        .bracket-visual { margin-top: 3rem; }
+        .bracket-flow { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .bracket-round { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+        .bracket-title { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .bracket-slot { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1rem 1.5rem; min-width: 140px; text-align: center; transition: all 0.3s; }
+        .bracket-slot:hover { border-color: var(--color-gold); background: rgba(255,215,0,0.05); }
+        .bracket-slot.final { border-color: var(--color-gold); background: rgba(255,215,0,0.1); }
+        .bracket-slot span { display: block; font-size: 0.85rem; color: var(--color-slate); }
+        .bracket-slot strong { display: block; font-size: 1rem; color: var(--color-paper); margin-top: 0.25rem; }
+        .bracket-arrow { color: var(--color-gold); font-size: 1.5rem; }
+        .bracket-vs { font-family: var(--font-impact); font-size: 1.5rem; color: var(--color-purple); letter-spacing: 0.1em; }
+
+        /* Schedule Section */
+        .schedule-section { position: relative; z-index: 1; padding: 6rem 2rem; }
+        .schedule-container { max-width: 900px; margin: 0 auto; }
+        .schedule-timeline { margin-top: 3rem; }
+        .schedule-item { display: grid; grid-template-columns: 150px 1fr; gap: 2rem; padding: 2rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .schedule-date { text-align: right; }
+        .schedule-month { font-family: var(--font-impact); font-size: 1.5rem; color: var(--color-gold); letter-spacing: 0.1em; }
+        .schedule-year { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-slate); }
+        .schedule-content h4 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .schedule-content p { color: var(--color-slate); }
+        .schedule-badge { display: inline-block; background: var(--color-purple-light); border: 1px solid rgba(109,40,255,0.3); color: var(--color-purple); padding: 2px 8px; font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.05em; border-radius: 4px; margin-top: 0.5rem; text-transform: uppercase; }
+
+        /* CTA */
+        .cta-section { position: relative; z-index: 1; text-align: center; padding: 6rem 2rem; background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(109,40,255,0.05)); border-top: 1px solid rgba(255,215,0,0.15); }
+        .cta-logo { width: 300px; margin: 0 auto 2rem; }
+        .cta-title { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-title em { font-style: italic; color: var(--color-gold); }
+        .cta-desc { color: var(--color-slate); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border-radius: 8px; transition: all 0.3s; }
+        .btn-primary { background: var(--color-gold); color: var(--color-ink); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(255,215,0,0.3); }
+        .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--color-paper); }
+        .btn-secondary:hover { border-color: var(--color-purple); color: var(--color-purple); }
+
+        /* Footer */
+        .footer { position: relative; z-index: 1; padding: 4rem 2rem 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+        .footer-brand img { height: 60px; margin-bottom: 1rem; }
+        .footer-brand p { font-size: 0.9rem; color: var(--color-slate); max-width: 280px; }
+        .footer-col h5 { font-size: 0.8rem; color: var(--color-gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+        .footer-col a { display: block; color: var(--color-slate); text-decoration: none; font-size: 0.9rem; padding: 0.3rem 0; transition: color 0.3s; }
+        .footer-col a:hover { color: var(--color-paper); }
+        .footer-bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--color-slate); }
+
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-desc { margin-left: auto; margin-right: auto; }
+            .hero-visual { margin-top: 2rem; }
+            .trophy-icon { font-size: 8rem; }
+            .prize-content { grid-template-columns: 1fr; gap: 1.5rem; }
+            .states-grid { grid-template-columns: repeat(2, 1fr); }
+            .bracket-flow { flex-direction: column; }
+            .bracket-arrow { transform: rotate(90deg); }
+            .schedule-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            .schedule-date { text-align: left; }
+            .footer-content { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .states-grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+  <!-- PWA -->
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <meta name="theme-color" content="#2b0b4e" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <script defer src="assets/global-nav.js"></script>
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a class="nav-brand" href="home.html">
+            <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes" class="nav-logo">
+            <div class="nav-brand-text">
+                <span class="nav-brand-name">SkyeLetes</span>
+                <span class="nav-brand-sub">Championships</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="home.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="how-it-works.html" class="nav-link">How It Works</a>
+            <a href="players.html" class="nav-link">Players</a>
+            <a href="owners-intake.html" class="nav-link">Team Owners</a>
+        </div>
+        <a href="players.html" class="nav-btn">Register Now</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span>🏆</span>
+                    <span class="hero-badge-text">Championship Series</span>
+                </div>
+                <h1 class="hero-title">Compete for <em>Glory</em></h1>
+                <p class="hero-desc">Four states. Four champions. One national title. Win your state championship, earn real cash, and advance to compete for the crown in Phoenix.</p>
+            </div>
+            <div class="hero-visual">
+                <div class="trophy-container">
+                    <span class="trophy-icon trophy-float">🏆</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prize Banner -->
+    <div class="prize-banner">
+        <div class="prize-content">
+            <div class="prize-item">
+                <div class="prize-label">State Champion Payout</div>
+                <div class="prize-value">$350</div>
+                <div class="prize-sub">per player</div>
+            </div>
+            <div class="prize-item">
+                <div class="prize-label">Team Owner Bonus</div>
+                <div class="prize-value">$500</div>
+                <div class="prize-sub">for champion team</div>
+            </div>
+            <div class="prize-item">
+                <div class="prize-label">National Champion</div>
+                <div class="prize-value">TBD</div>
+                <div class="prize-sub">2026 inaugural</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- States Section -->
+    <section class="states-section">
+        <div class="states-container">
+            <span class="section-label">Active Markets</span>
+            <h2 class="section-title">Four States. <em>Four Champions.</em></h2>
+            <p class="section-desc">Each state runs its own regular season and playoffs. State champions earn their payout and advance to the national championship in Phoenix.</p>
+
+            <div class="states-grid">
+                <div class="state-card">
+                    <span class="state-hq">HQ</span>
+                    <div class="state-flag">🌵</div>
+                    <div class="state-abbr">AZ</div>
+                    <div class="state-name">Arizona</div>
+                    <div class="state-city">Phoenix</div>
+                </div>
+                <div class="state-card">
+                    <div class="state-flag">🤠</div>
+                    <div class="state-abbr">TX</div>
+                    <div class="state-name">Texas</div>
+                    <div class="state-city">Houston</div>
+                </div>
+                <div class="state-card">
+                    <div class="state-flag">🏔️</div>
+                    <div class="state-abbr">CO</div>
+                    <div class="state-name">Colorado</div>
+                    <div class="state-city">Denver</div>
+                </div>
+                <div class="state-card">
+                    <div class="state-flag">🌆</div>
+                    <div class="state-abbr">IL</div>
+                    <div class="state-name">Illinois</div>
+                    <div class="state-city">Chicago</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bracket Section -->
+    <section class="bracket-section">
+        <div class="bracket-container">
+            <span class="section-label">Tournament Structure</span>
+            <h2 class="section-title">Path to the <em>Crown</em></h2>
+            <p class="section-desc">State champions converge in Phoenix for the national championship. Single elimination. Winner takes all.</p>
+
+            <div class="bracket-visual">
+                <div class="bracket-flow">
+                    <div class="bracket-round">
+                        <div class="bracket-title">Semifinals</div>
+                        <div class="bracket-slot">
+                            <span>Match 1</span>
+                            <strong>AZ Champion</strong>
+                        </div>
+                        <div class="bracket-vs">VS</div>
+                        <div class="bracket-slot">
+                            <span>Match 1</span>
+                            <strong>TX Champion</strong>
+                        </div>
+                    </div>
+
+                    <div class="bracket-arrow">→</div>
+
+                    <div class="bracket-round">
+                        <div class="bracket-title">National Final</div>
+                        <div class="bracket-slot final">
+                            <span>Championship</span>
+                            <strong>🏆 Winner</strong>
+                        </div>
+                    </div>
+
+                    <div class="bracket-arrow">←</div>
+
+                    <div class="bracket-round">
+                        <div class="bracket-title">Semifinals</div>
+                        <div class="bracket-slot">
+                            <span>Match 2</span>
+                            <strong>CO Champion</strong>
+                        </div>
+                        <div class="bracket-vs">VS</div>
+                        <div class="bracket-slot">
+                            <span>Match 2</span>
+                            <strong>IL Champion</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule-section">
+        <div class="schedule-container">
+            <span class="section-label">2026 Season</span>
+            <h2 class="section-title">Championship <em>Timeline</em></h2>
+
+            <div class="schedule-timeline">
+                <div class="schedule-item">
+                    <div class="schedule-date">
+                        <div class="schedule-month">MAR</div>
+                        <div class="schedule-year">2026</div>
+                    </div>
+                    <div class="schedule-content">
+                        <h4>Registration Opens</h4>
+                        <p>Player and Team Owner registration begins. Early bird rosters get priority scheduling.</p>
+                        <span class="schedule-badge">Now Open</span>
+                    </div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">
+                        <div class="schedule-month">APR</div>
+                        <div class="schedule-year">2026</div>
+                    </div>
+                    <div class="schedule-content">
+                        <h4>Brand-Lock Sessions</h4>
+                        <p>Teams finalize uniforms and branding. Custom gear production begins.</p>
+                    </div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">
+                        <div class="schedule-month">MAY</div>
+                        <div class="schedule-year">2026</div>
+                    </div>
+                    <div class="schedule-content">
+                        <h4>Regular Season Begins</h4>
+                        <p>State leagues kick off. All games filmed in 4K. Standings updated weekly.</p>
+                    </div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">
+                        <div class="schedule-month">AUG</div>
+                        <div class="schedule-year">2026</div>
+                    </div>
+                    <div class="schedule-content">
+                        <h4>State Playoffs</h4>
+                        <p>Top teams in each state compete for the state championship title and $350/player payout.</p>
+                    </div>
+                </div>
+
+                <div class="schedule-item">
+                    <div class="schedule-date">
+                        <div class="schedule-month">SEP</div>
+                        <div class="schedule-year">2026</div>
+                    </div>
+                    <div class="schedule-content">
+                        <h4>National Championship</h4>
+                        <p>State champions converge in Phoenix for the inaugural SkyeLetes National Championship.</p>
+                        <span class="schedule-badge">Phoenix, AZ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Banner_transparent.png" alt="SkyeLetes" class="cta-logo floating-logo">
+        <h2 class="cta-title">Write Your <em>Legacy</em></h2>
+        <p class="cta-desc">The first generation of SkyeLetes champions will be crowned in 2026. Make sure you're part of history.</p>
+        <div class="cta-buttons">
+            <a href="players.html" class="btn btn-primary">Register as Player</a>
+            <a href="owners-intake.html" class="btn btn-secondary">Build Your Team</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLetes">
+                <p>The premier basketball league for elite players under 6'0". A Skyes Over London LC venture.</p>
+            </div>
+            <div class="footer-col">
+                <h5>League</h5>
+                <a href="about.html">About Us</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="championships.html">Championships</a>
+            </div>
+            <div class="footer-col">
+                <h5>Join</h5>
+                <a href="players.html">Player Registration</a>
+                <a href="owners-intake.html">Founding Owners &amp; Expansion</a>
+            </div>
+            <div class="footer-col">
+                <h5>Connect</h5>
+                <a href="tel:4804695416">(480) 469-5416</a>
+                <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a>
+                <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a>
+                <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+                <a href="https://sole-nexus.netlify.app/" target="_blank">SOLEnterprises</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 SkyeLetes. A Skyes Over London LC Venture.</span>
+            <span>Phoenix, AZ • Houston, TX • Denver, CO • Chicago, IL</span>
+        </div>
+    </footer>
+
+    <script>
+        // Starfield
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        function createStars() {
+            stars = [];
+            const count = Math.floor((canvas.width * canvas.height) / 8000);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    r: Math.random() * 1.5 + 0.5,
+                    a: Math.random() * Math.PI * 2,
+                    s: Math.random() * 0.015 + 0.005,
+                    c: Math.random() > 0.6 ? 'gold' : 'purple'
+                });
+            }
+        }
+        function animate() {
+            ctx.fillStyle = '#05010a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.a += star.s;
+                const alpha = Math.abs(Math.sin(star.a)) * 0.6 + 0.2;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+                ctx.fillStyle = star.c === 'gold' ? `rgba(255, 215, 0, ${alpha})` : `rgba(109, 40, 255, ${alpha})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        resize(); createStars(); animate();
+        window.addEventListener('resize', () => { resize(); createStars(); });
+    </script>
+
+  <script>
+    // SkyeLeticX PWA — register service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

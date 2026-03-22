@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkyeLeticX | Real Draft League for Under-6'0" Talent</title>
+  <meta name="description" content="SkyeLeticX is a real draft-based league for overlooked high school seniors and college players under 6'0&quot;. Explore the combine, founding owners, league office, and player pathway." />
+  <meta name="theme-color" content="#030008" />
+  
+  <!-- PWA -->
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
+
+    :root {
+      --bg: #030008;
+      --surface: #0a0412;
+      --surface-hover: #130822;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.55);
+      --gold: #f6d36a;
+      --gold-glow: rgba(246, 211, 106, 0.4);
+      --violet: #a78bfa;
+      --violet-glow: rgba(167, 139, 250, 0.4);
+      --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* 3D Canvas */
+    #webgl-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Content Wrapper */
+    .wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4vw;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .brand-text h1 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(167, 139, 250, 0.1);
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--violet);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+      width: fit-content;
+    }
+
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--violet);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--violet);
+    }
+
+    .hero h2 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+      max-width: 20ch;
+      background: linear-gradient(to right, #fff, rgba(255,255,255,0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1.25rem 2.5rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--gold-glow);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Stats Section */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      padding: 4rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 6rem;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      color: var(--gold);
+    }
+
+    .stat-item p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    /* Bento Grid System */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(300px, auto);
+      gap: 1.5rem;
+      margin-bottom: 6rem;
+    }
+
+    .bento-card {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      transition: transform 0.4s ease, border-color 0.4s ease;
+      group: bento;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .bento-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.03), transparent 50%);
+      pointer-events: none;
+    }
+
+    .bento-card h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .bento-card p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .bento-card .arrow {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .bento-card:hover .arrow {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* Grid Spans */
+    .span-8 { grid-column: span 8; }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+
+    /* Special Cards Styling */
+    .card-gold:hover { border-color: var(--gold); }
+    .card-gold:hover .arrow { background: var(--gold); border-color: var(--gold); }
+    
+    .card-violet:hover { border-color: var(--violet); }
+    .card-violet:hover .arrow { background: var(--violet); border-color: var(--violet); }
+
+    /* Lists inside mini bento cards */
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: auto;
+    }
+
+    .link-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .link-list a:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateX(5px);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand h4 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .span-8, .span-4, .span-6 { grid-column: span 12; }
+      .nav-links { display: none; /* Add a mobile menu trigger here in production */ }
+      .bento-card { padding: 2rem; }
+    }
+  </style>
+
+  <!-- Import Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="assets/global-nav.js"></script>
+</head>
+<body>
+
+  <!-- 3D Background -->
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+  <div class="wrapper">
+    <!-- Navigation -->
+    <nav>
+      <div class="brand">
+        <img src="https://cdn1.sharemyimage.com/2026/02/09/SkyeLeticX_Badge_transparent_2048_png8.png" alt="SkyeLeticX Badge" />
+        <div class="brand-text">
+          <h1>SkyeLeticX</h1>
+          <span>The Under-6'0" League</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="championships.html">Championships</a>
+        <a href="players.html">Players</a>
+        <a href="owners-intake.html">Owners</a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-badge">
+        <div class="dot"></div>
+        Premium Athletic Entertainment
+      </div>
+      <h2>DEFY<br>MEASUREMENT.</h2>
+      <p>
+        Built for overlooked high school seniors and college players under 6'0&quot; with real upside. The combine feeds the draft. The draft feeds the league. The league now turns overlooked talent into real franchises, real rosters, and a real stage.
+      </p>
+      <div class="cta-group">
+        <a href="owners-intake.html" class="btn btn-primary">Build a Dynasty</a>
+        <a href="players.html" class="btn btn-secondary">Player Intake</a>
+        <a href="coach-smith/index.html" class="btn btn-secondary">Coach Smith Dossier</a>
+        <a href="about-founder.html" class="btn btn-secondary">About the Founder</a>
+        <a href="https://skyesol.netlify.app/skyeleticx-portal.html?return=1" class="btn btn-secondary">Return to Skyesol Portal</a>
+      </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <section class="stats">
+      <div class="stat-item">
+        <h3>&lt; 6'0"</h3>
+        <p>Strict Height Cap</p>
+      </div>
+      <div class="stat-item">
+        <h3>Tier 1</h3>
+        <p>Media & Production</p>
+      </div>
+      <div class="stat-item">
+        <h3>AZ</h3>
+        <p>League Headquarters</p>
+      </div>
+      <div class="stat-item">
+        <h3>100%</h3>
+        <p>Pure Basketball</p>
+      </div>
+    </section>
+
+    <!-- Bento Grid Navigation -->
+    <main class="bento-grid">
+      
+      <!-- Card 1 -->
+      <a href="how-it-works.html" class="bento-card span-8 card-violet">
+        <div class="arrow">↗</div>
+        <h3>The Blueprint</h3>
+        <p>Combine standards, induction flow, and the real-league operating model that now powers SkyeLeticX from player intake through draft night.</p>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="championships.html" class="bento-card span-4 card-gold">
+        <div class="arrow">↗</div>
+        <h3>Championships</h3>
+        <p>Season structure, championship energy, and the prestige mechanics driving the league.</p>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="players.html" class="bento-card span-6">
+        <div class="arrow">↗</div>
+        <h3>The Players</h3>
+        <p>High school seniors and college players under 6'0&quot; enter through the combine, get evaluated, and land in the live draft pool.</p>
+      </a>
+
+      <!-- Card 4 -->
+      <a href="owners-intake.html" class="bento-card span-6">
+        <div class="arrow">↗</div>
+        <h3>Founding Owners</h3>
+        <p>The 26 Season One players now own the first 26 teams. See how player-owners, combine intake, and expansion now work.</p>
+      </a>
+
+      <!-- Card 5 (Editorial Links) -->
+      <div class="bento-card span-4">
+        <h3>Editorial Picks</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Latest from the league office.</p>
+        <div class="link-list">
+          <a href="owner-dashboard.html">League Office &amp; Draft Structure <span>→</span></a>
+          <a href="blog-first-season.html">Season One Legacy <span>→</span></a>
+          <a href="skyeletes-editorial.html" style="color: var(--violet); border-color: rgba(167,139,250,0.3);">View All Editorials <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- Card 6 (HQ & About) -->
+      <div class="bento-card span-4">
+        <h3>League Office</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 1rem;">League command, executive structure, combine logic, and the path from founding season to expansion draft.</p>
+        <div class="link-list">
+          <a href="arizona-hq.html">Arizona HQ <span>→</span></a>
+          <a href="about.html">About SkyeLeticX <span>→</span></a>
+          <a href="about-founder.html">About the Founder <span>→</span></a>
+          <a href="coach-smith/index.html">Coach Smith Dossier <span>→</span></a>
+          <a href="owner-dashboard.html">League Office &amp; Draft <span>→</span></a>
+        </div>
+      </div>
+
+      <!-- Card 7 (Network) -->
+      <div class="bento-card span-4">
+        <h3>The Network</h3>
+        <p style="font-size: 0.9rem; margin-bottom: 1rem;">Connected platforms.</p>
+        <div class="link-list">
+          <a href="https://skyesol.netlify.app/skyeleticx-portal.html?return=1">Skyesol Portal <span>↗</span></a>
+          <a href="https://solenterprises.org/" target="_blank">SOLEnterprises <span>↗</span></a>
+          <a href="https://skyesoverlondon.netlify.app/" target="_blank">Skyes Over London <span>↗</span></a>
+          <a href="https://sole-nexus.netlify.app/" target="_blank">SOLE Nexus <span>↗</span></a>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-brand">
+        <h4>SkyeLeticX</h4>
+        <p>Static Netlify Drop Bundle • © 2026</p>
+      </div>
+      <div class="footer-links">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="championships.html">Championships</a>
+        <a href="players.html">Players</a>
+        <a href="owners-intake.html">Owners</a>
+        <a href="about.html">About</a>
+        <a href="about-founder.html">Founder</a>
+        <a href="coach-smith/index.html">Coach Smith</a>
+        <a href="https://skyesol.netlify.app/skyeleticx-portal.html?return=1">Skyesol Portal</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // PWA Registration
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+
+    // --- THREE.JS CINEMATIC BACKGROUND ---
+    window.onload = () => {
+      const canvas = document.getElementById('webgl-canvas');
+      if (!canvas) return;
+
+      // Scene setup
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x030008, 0.015);
+
+      // Camera
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 45;
+      camera.position.x = 10; // Offset to right side so it balances with text on left
+      
+      // Handle mobile camera framing
+      if(window.innerWidth < 1024) {
+        camera.position.x = 0;
+        camera.position.z = 60;
+      }
+
+      // Renderer
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Championship Armillary Sphere (The core visual)
+      const armillaryGroup = new THREE.Group();
+      scene.add(armillaryGroup);
+
+      // Materials
+      const goldMat = new THREE.MeshStandardMaterial({
+        color: 0xf6d36a,
+        metalness: 1,
+        roughness: 0.2,
+        emissive: 0x332200
+      });
+      
+      const violetMat = new THREE.MeshStandardMaterial({
+        color: 0xa78bfa,
+        metalness: 0.8,
+        roughness: 0.4,
+        emissive: 0x220044
+      });
+
+      const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        metalness: 0.1,
+        roughness: 0.1,
+        transmission: 0.9,
+        transparent: true,
+        opacity: 0.5
+      });
+
+      // Constructing the Armillary (Rings)
+      const rings = [];
+      const ringGeometries = [
+        new THREE.TorusGeometry(15, 0.15, 16, 100),
+        new THREE.TorusGeometry(18, 0.08, 16, 100),
+        new THREE.TorusGeometry(21, 0.2, 16, 100),
+        new THREE.TorusGeometry(24, 0.05, 16, 100)
+      ];
+
+      ringGeometries.forEach((geo, i) => {
+        const mesh = new THREE.Mesh(geo, i % 2 === 0 ? goldMat : violetMat);
+        mesh.rotation.x = Math.random() * Math.PI;
+        mesh.rotation.y = Math.random() * Math.PI;
+        armillaryGroup.add(mesh);
+        rings.push({
+          mesh: mesh,
+          speedX: (Math.random() - 0.5) * 0.005,
+          speedY: (Math.random() - 0.5) * 0.005,
+          speedZ: (Math.random() - 0.5) * 0.005
+        });
+      });
+
+      // Inner Core (Glass Sphere)
+      const coreGeo = new THREE.SphereGeometry(8, 32, 32);
+      const core = new THREE.Mesh(coreGeo, glassMat);
+      armillaryGroup.add(core);
+
+      // Inner Glowing Core
+      const glowGeo = new THREE.SphereGeometry(4, 32, 32);
+      const glowMat = new THREE.MeshBasicMaterial({ color: 0xa78bfa });
+      const glowCore = new THREE.Mesh(glowGeo, glowMat);
+      armillaryGroup.add(glowCore);
+
+      // Lighting
+      const ambient = new THREE.AmbientLight(0xffffff, 0.2);
+      scene.add(ambient);
+
+      const spotLight = new THREE.SpotLight(0xf6d36a, 5);
+      spotLight.position.set(20, 30, 20);
+      spotLight.angle = Math.PI / 4;
+      spotLight.penumbra = 0.5;
+      scene.add(spotLight);
+
+      const spotLight2 = new THREE.SpotLight(0xa78bfa, 5);
+      spotLight2.position.set(-20, -30, 20);
+      scene.add(spotLight2);
+
+      // Floating Dust Particles
+      const particlesGeo = new THREE.BufferGeometry();
+      const particleCount = 1000;
+      const posArray = new Float32Array(particleCount * 3);
+      for(let i=0; i<particleCount*3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 100;
+      }
+      particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+      const particleMat = new THREE.PointsMaterial({
+        size: 0.1,
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.4,
+        blending: THREE.AdditiveBlending
+      });
+      const particles = new THREE.Points(particlesGeo, particleMat);
+      scene.add(particles);
+
+      // Mouse Parallax Effect
+      let mouseX = 0;
+      let mouseY = 0;
+      let targetX = 0;
+      let targetY = 0;
+      
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2);
+        mouseY = (e.clientY - window.innerHeight / 2);
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        if(window.innerWidth < 1024) {
+          camera.position.x = 0;
+          camera.position.z = 60;
+        } else {
+          camera.position.x = 10;
+          camera.position.z = 45;
+        }
+      });
+
+      // Animation Loop
+      const clock = new THREE.Clock();
+
+      function animate() {
+        requestAnimationFrame(animate);
+        const elapsedTime = clock.getElapsedTime();
+
+        // Parallax easing
+        targetX = mouseX * 0.01;
+        targetY = mouseY * 0.01;
+        
+        armillaryGroup.rotation.y += 0.002;
+        armillaryGroup.rotation.x += 0.001;
+
+        // Position offset based on mouse
+        armillaryGroup.position.x += (targetX - armillaryGroup.position.x) * 0.05;
+        armillaryGroup.position.y += (-targetY - armillaryGroup.position.y) * 0.05;
+
+        // Animate rings
+        rings.forEach(ring => {
+          ring.mesh.rotation.x += ring.speedX;
+          ring.mesh.rotation.y += ring.speedY;
+          ring.mesh.rotation.z += ring.speedZ;
+        });
+
+        // Animate particles
+        particles.rotation.y = elapsedTime * 0.02;
+        particles.position.y = Math.sin(elapsedTime * 0.2) * 2;
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    };
+  </script>
+</body>
+</html>

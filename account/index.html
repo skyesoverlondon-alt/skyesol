@@ -252,6 +252,14 @@
             <span class="ql-label">Keys</span>
             <span class="ql-title">Request API Key</span>
           </a>
+          <a href="/skyefuelstation/" class="quick-link">
+            <span class="ql-label">Fuel</span>
+            <span class="ql-title">SkyeFuelStation</span>
+          </a>
+          <a href="/skyespace/" class="quick-link">
+            <span class="ql-label">Platform</span>
+            <span class="ql-title">SkyeSpace</span>
+          </a>
         </div>
         <div class="notice" id="verifyNotice">
           <strong>Didn't get the verification email?</strong><br>
@@ -290,6 +298,7 @@
   </div>
 
   <script src="/assets/app.js" defer></script>
+  <script src="/js/kaixu-session.js"></script>
   <script>
     // ── Tab switching ────────────────────────────────────────────────────────
     document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -372,9 +381,13 @@
           return;
         }
         const data = await res.json();
-        // Store session in sessionStorage and redirect to dashboard
-        sessionStorage.setItem('kaixu_session', data.token);
-        sessionStorage.setItem('kaixu_key_last4', data.key_last4 || '');
+        if (window.KaixuSession) {
+          window.KaixuSession.setSession(data.token, data.key_last4 || '');
+        } else {
+          localStorage.setItem('KAIXU_VIRTUAL_KEY', data.token);
+          localStorage.setItem('kaixu_session', data.token);
+          localStorage.setItem('kaixu_key_last4', data.key_last4 || '');
+        }
         keyOk.style.display = 'block';
         setTimeout(() => { window.location.href = '/gateway/dashboard.html'; }, 800);
       } catch (err) {
@@ -394,5 +407,6 @@
 
   <script src="/js/main.js"></script>
   <script src="/js/partials.js"></script>
+  <script src="/js/SkyeSolINTRO.js"></script>
 </body>
 </html>

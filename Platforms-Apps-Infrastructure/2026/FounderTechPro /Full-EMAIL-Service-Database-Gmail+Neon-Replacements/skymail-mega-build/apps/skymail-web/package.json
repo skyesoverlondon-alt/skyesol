@@ -1,0 +1,21 @@
+{
+  "name": "skymail-web",
+  "private": true,
+  "version": "4.0.0",
+  "description": "SkyMail Host \u2014 own-mail + own-database command center on Stalwart + SkyeDB",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "imapflow": "^1.0.181",
+    "jsonwebtoken": "^9.0.2",
+    "mailparser": "^3.7.2",
+    "nodemailer": "^6.9.16",
+    "pg": "^8.13.0"
+  },
+  "scripts": {
+    "bootstrap:db": "node tools/bootstrap-skymail-db.js"
+  }
+}

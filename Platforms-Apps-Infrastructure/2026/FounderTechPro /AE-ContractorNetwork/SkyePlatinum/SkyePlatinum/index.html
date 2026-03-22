@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKye Platinum Hub | Quantum Command Protocol</title>
+    <!-- React & Babel for browser-side JSX -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/_shared/auth-unlock.js"></script>
+    <script src="/_shared/standalone-session.js"></script>
+    <script src="/_shared/workspace-record-sync.js"></script>
+    <script src="/_shared/gateway-retry.js"></script>
+    <script src="/_shared/telemetry.js"></script>
+    <script src="/_shared/error-fingerprint.js"></script>
+    <script src="/_shared/correlation.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020205;
+            margin: 0;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        @keyframes introFade { 0% { opacity: 0; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes lineReveal { 0% { width: 0; } 100% { width: 300px; } }
+        @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes floatUp { 0% { transform: translateY(110vh); opacity: 0; } 50% { opacity: 0.15; } 100% { transform: translateY(-10vh); opacity: 0; } }
+        @keyframes ringSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulseBorder { 0% { border-color: rgba(255, 215, 0, 0.1); } 50% { border-color: rgba(255, 215, 0, 0.4); } 100% { border-color: rgba(255, 215, 0, 0.1); } }
+
+        .intro-animate { animation: introFade 2s ease-out forwards; }
+        .line-reveal { animation: lineReveal 1.5s ease-in-out forwards; animation-delay: 1s; }
+        .logo-pulse { animation: pulseScale 4s ease-in-out infinite; }
+        .golden-glow { border: 1px solid rgba(255, 215, 0, 0.1); animation: pulseBorder 4s infinite; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 215, 0, 0.1); border-radius: 10px; }
+
+        .backdrop-blur-luxury {
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    </style>
+  <script src="/0s-auth-sdk/index.js"></script>
+  <script>OmegaAuth.requireSession();</script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo, useRef } = React;
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'skye-platinum-hub-v1';
+        const pageParams = new URLSearchParams(window.location.search);
+        const wsId = pageParams.get('ws_id') || 'primary-workspace';
+        const workspaceRecordApp = 'SkyePlatinum';
+        const logoSrc = "https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png";
+
+        const createRecordId = (prefix) => {
+            if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+                return `${prefix}-${window.crypto.randomUUID()}`;
+            }
+            return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+        };
+
+        const getTimestampValue = (value) => {
+            if (!value) return 0;
+            if (typeof value === 'number' && Number.isFinite(value)) return value;
+            if (typeof value === 'string') {
+                const parsed = Date.parse(value);
+                return Number.isNaN(parsed) ? 0 : parsed;
+            }
+            if (typeof value === 'object' && typeof value.seconds === 'number') {
+                return (value.seconds * 1000) + Math.round(Number(value.nanoseconds || 0) / 1000000);
+            }
+            return 0;
+        };
+
+        const normalizeClient = (client) => {
+            const record = client && typeof client === 'object' ? client : {};
+            return {
+                id: record.id || createRecordId('client'),
+                name: String(record.name || ''),
+                entityType: String(record.entityType || 'Corporation'),
+                status: String(record.status || 'Active'),
+                totalValue: Number(record.totalValue || 0),
+                createdAt: record.createdAt || null,
+            };
+        };
+
+        const normalizeLedgerEntry = (entry) => {
+            const record = entry && typeof entry === 'object' ? entry : {};
+            return {
+                id: record.id || createRecordId('ledger'),
+                clientId: String(record.clientId || ''),
+                clientName: String(record.clientName || ''),
+                amount: Number(record.amount || 0),
+                type: record.type === 'Debit' ? 'Debit' : 'Credit',
+                description: String(record.description || ''),
+                timestamp: record.timestamp || new Date().toISOString(),
+            };
+        };
+
+        const sortLedgerEntries = (entries) => {
+            return (Array.isArray(entries) ? entries : [])
+                .map(normalizeLedgerEntry)
+                .sort((a, b) => getTimestampValue(b.timestamp) - getTimestampValue(a.timestamp));
+        };
+
+        const ecosystemNodes = [
+            { name: "SKye Sol", url: "https://skyesoverlondon.com/" },
+            { name: "Skyeletix", url: "https://skyeletix.netlify.app" },
+            { name: "Northstar Accounting", url: "https://northstarofficexaccounting.netlify.app" },
+            { name: "Sole Nexus", url: "https://sole-nexus.netlify.app" },
+            { name: "Nexus Connect", url: "https://solenterprisesnexusconnect.netlify.app/" },
+            { name: "SKye Family Hub", url: "https://skyefamilyhub.netlify.app/" },
+            { name: "Sentinel Web Authority", url: "https://sentinelwebauthority.netlify.app/" },
+            { name: "Solenteai Skyes", url: "https://solenteaiskyes.netlify.app/" },
+            { name: "Family Command", url: "https://familycommand.netlify.app/" },
+            { name: "SKyeCode Nexus", url: "https://skyecode-nexus.netlify.app/" },
+            { name: "Skyes Over London", url: "https://skyesoverlondon.netlify.app/" },
+            { name: "SOLE Web", url: "https://solenterprises.org/pages/skyeweb" }
+        ];
+
+        const Icon = ({ name, size = 20, className = "" }) => {
+            const icons = {
+                dashboard: (
+                    <React.Fragment>
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </React.Fragment>
+                ),
+                analytics: (
+                    <React.Fragment>
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </React.Fragment>
+                ),
+                users: (
+                    <React.Fragment>
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </React.Fragment>
+                ),
+                ledger: (
+                    <React.Fragment>
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                    </React.Fragment>
+                ),
+                settings: (
+                    <React.Fragment>
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </React.Fragment>
+                ),
+                shield: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,
+                zap: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>,
+                plus: (
+                    <React.Fragment>
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </React.Fragment>
+                ),
+                refresh: (
+                    <React.Fragment>
+                        <polyline points="23 4 23 10 17 10"/>
+                        <polyline points="1 20 1 14 7 14"/>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                    </React.Fragment>
+                ),
+                cpu: (
+                    <React.Fragment>
+                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+                        <rect x="9" y="9" width="6" height="6"/>
+                        <line x1="9" y1="1" x2="9" y2="4"/>
+                        <line x1="15" y1="1" x2="15" y2="4"/>
+                        <line x1="9" y1="20" x2="9" y2="23"/>
+                        <line x1="15" y1="20" x2="15" y2="23"/>
+                        <line x1="20" y1="9" x2="23" y2="9"/>
+                        <line x1="20" y1="15" x2="23" y2="15"/>
+                        <line x1="1" y1="9" x2="4" y2="9"/>
+                        <line x1="1" y1="15" x2="4" y2="15"/>
+                    </React.Fragment>
+                ),
+                trash: (
+                    <React.Fragment>
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        <line x1="10" y1="11" x2="10" y2="17"/>
+                        <line x1="14" y1="11" x2="14" y2="17"/>
+                    </React.Fragment>
+                ),
+                external: (
+                    <React.Fragment>
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                        <polyline points="15 3 21 3 21 9"/>
+                        <line x1="10" y1="14" x2="21" y2="3"/>
+                    </React.Fragment>
+                ),
+                search: (
+                    <React.Fragment>
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </React.Fragment>
+                ),
+                arrowRight: (
+                    <React.Fragment>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </React.Fragment>
+                ),
+                upRight: (
+                    <React.Fragment>
+                        <line x1="7" y1="17" x2="17" y2="7"/>
+                        <polyline points="7 7 17 7 17 17"/>
+                    </React.Fragment>
+                ),
+                downRight: (
+                    <React.Fragment>
+                        <line x1="7" y1="7" x2="17" y2="17"/>
+                        <polyline points="17 7 17 17 7 17"/>
+                    </React.Fragment>
+                )
+            };
+            return (
+                <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                    {icons[name] || <circle cx="12" cy="12" r="10" />}
+                </svg>
+            );
+        };
+
+        const App = () => {
+            const [sessionReady, setSessionReady] = useState(false);
+            const [showIntro, setShowIntro] = useState(true);
+            const [activeTab, setActiveTab] = useState('dashboard');
+            const [notifications, setNotifications] = useState([]);
+            
+            const [clients, setClients] = useState([]);
+            const [ledger, setLedger] = useState([]);
+            const [kaixuAccessKey, setKaixuAccessKey] = useState("");
+            const [aiInsight, setAiInsight] = useState("");
+            const [aiDirectives, setAiDirectives] = useState([]);
+            const [directiveWorkflow, setDirectiveWorkflow] = useState([]);
+            const [isGeneratingAi, setIsGeneratingAi] = useState(false);
+
+            const [searchTerm, setSearchTerm] = useState("");
+            const [ledgerFilter, setLedgerFilter] = useState("All");
+            const [selectedClientDetail, setSelectedClientDetail] = useState(null);
+            const [showAddClient, setShowAddClient] = useState(false);
+            const [showAddTransaction, setShowAddTransaction] = useState(false);
+            const [showSettings, setShowSettings] = useState(false);
+            const [isImporting, setIsImporting] = useState(false);
+            const [operatorRole, setOperatorRole] = useState(() => localStorage.getItem('skye.platinum.role') || 'member');
+            
+            const [clientForm, setClientForm] = useState({ name: '', entityType: 'Corporation', status: 'Active' });
+            const [txForm, setTxForm] = useState({ clientId: '', amount: '', type: 'Credit', description: '' });
+            const [tempKey, setTempKey] = useState('');
+
+            const particlesRef = useRef(null);
+            const workspaceStateRef = useRef({ clients: [], ledger: [], kaixuAccessKey: '' });
+            const workspaceSyncRef = useRef(null);
+            const hasHydratedRef = useRef(false);
+            const isApplyingRemoteRef = useRef(false);
+            const autosaveTimerRef = useRef(null);
+
+            useEffect(() => {
+                const timer = setTimeout(() => setShowIntro(false), 4500);
+                return () => clearTimeout(timer);
+            }, []);
+
+            const analytics = useMemo(() => {
+                const totalRevenue = ledger.reduce((acc, tx) => tx.type === 'Credit' ? acc + Number(tx.amount) : acc - Number(tx.amount), 0);
+                const sortedLedger = [...ledger].sort((a, b) => getTimestampValue(a.timestamp) - getTimestampValue(b.timestamp));
+                let runningTotal = 0;
+                const history = sortedLedger.map(tx => {
+                    runningTotal += (tx.type === 'Credit' ? Number(tx.amount) : -Number(tx.amount));
+                    return { val: runningTotal, date: getTimestampValue(tx.timestamp) };
+                });
+                const composition = clients.reduce((acc, c) => {
+                    acc[c.entityType] = (acc[c.entityType] || 0) + 1;
+                    return acc;
+                }, {});
+                return { totalRevenue, history, composition };
+            }, [ledger, clients]);
+
+            const anomalyTrend = useMemo(() => {
+                const sorted = [...ledger].sort((a, b) => getTimestampValue(a.timestamp) - getTimestampValue(b.timestamp));
+                const movements = sorted.map((tx) => ({
+                    ...tx,
+                    movement: tx.type === 'Credit' ? Number(tx.amount || 0) : -Number(tx.amount || 0),
+                }));
+                if (!movements.length) return [];
+
+                return movements.map((row, idx) => {
+                    const windowRows = movements.slice(Math.max(0, idx - 8), idx + 1);
+                    const mean = windowRows.reduce((sum, item) => sum + item.movement, 0) / Math.max(1, windowRows.length);
+                    const variance = windowRows.reduce((sum, item) => sum + Math.pow(item.movement - mean, 2), 0) / Math.max(1, windowRows.length);
+                    const std = Math.sqrt(variance) || 1;
+                    const z = Math.abs((row.movement - mean) / std);
+                    const isAnomaly = z >= 2.1 || Math.abs(row.movement) >= 25000;
+                    const confidence = Math.min(99, Math.max(51, Math.round(50 + z * 14)));
+                    return {
+                        id: row.id,
+                        movement: row.movement,
+                        clientName: row.clientName,
+                        description: row.description,
+                        timestamp: row.timestamp,
+                        isAnomaly,
+                        confidence,
+                    };
+                });
+            }, [ledger]);
+
+            const topAnomalies = useMemo(
+                () => anomalyTrend.filter((a) => a.isAnomaly).sort((a, b) => b.confidence - a.confidence).slice(0, 6),
+                [anomalyTrend]
+            );
+
+            const isHighRiskLedgerAction = useMemo(() => {
+                const amt = Number(txForm.amount || 0);
+                const highRiskText = /wire|override|sweep|manual|urgent|external/i.test(String(txForm.description || ''));
+                return txForm.type === 'Debit' && (amt >= 10000 || highRiskText);
+            }, [txForm]);
+
+            const canExecuteHighRisk = operatorRole === 'owner' || operatorRole === 'admin';
+
+            useEffect(() => {
+                localStorage.setItem('skye.platinum.role', operatorRole);
+            }, [operatorRole]);
+
+            const notify = (msg) => {
+                const id = Date.now();
+                setNotifications(prev => [...prev, { id, msg }]);
+                setTimeout(() => setNotifications(prev => prev.filter(n => n.id !== id)), 4000);
+            };
+
+            const updateDirectiveState = (id, patch) => {
+                setDirectiveWorkflow((old) => old.map((item) => (item.id === id ? { ...item, ...patch } : item)));
+            };
+
+            workspaceStateRef.current = { clients, ledger, kaixuAccessKey };
+
+            if (!workspaceSyncRef.current && window.SkyeWorkspaceRecordSync && typeof window.SkyeWorkspaceRecordSync.create === 'function') {
+                workspaceSyncRef.current = window.SkyeWorkspaceRecordSync.create({
+                    appId,
+                    recordApp: workspaceRecordApp,
+                    wsId,
+                    getState: () => workspaceStateRef.current,
+                    applyState: (payload) => {
+                        const model = payload && typeof payload === 'object' ? payload : {};
+                        isApplyingRemoteRef.current = true;
+                        setClients(Array.isArray(model.clients) ? model.clients.map(normalizeClient) : []);
+                        setLedger(Array.isArray(model.ledger) ? sortLedgerEntries(model.ledger) : []);
+                        const nextKey = typeof model.kaixuAccessKey === 'string' ? model.kaixuAccessKey : '';
+                        setKaixuAccessKey(nextKey);
+                        setTempKey(nextKey);
+                        setSessionReady(true);
+                        window.setTimeout(() => {
+                            isApplyingRemoteRef.current = false;
+                        }, 0);
+                    },
+                    serialize: (model) => ({
+                        clients: (Array.isArray(model.clients) ? model.clients : []).map(normalizeClient),
+                        ledger: sortLedgerEntries(model.ledger),
+                        kaixuAccessKey: String(model.kaixuAccessKey || ''),
+                    }),
+                    deserialize: (payload) => (payload && typeof payload === 'object' ? payload : {}),
+                    getTitle: () => 'Skye Platinum Workspace',
+                    onLoadError: (error) => {
+                        console.error('Workspace load failed', error);
+                        setSessionReady(false);
+                    },
+                    onSaveError: (error) => {
+                        console.error('Workspace save failed', error);
+                        setSessionReady(false);
+                    },
+                });
+            }
+
+            const loadWorkspace = async (prompt = false) => {
+                const sync = workspaceSyncRef.current;
+                if (!sync) return null;
+                const payload = await sync.load(prompt);
+                setSessionReady(true);
+                return payload;
+            };
+
+            const saveWorkspace = async (options = {}) => {
+                const sync = workspaceSyncRef.current;
+                if (!sync) return null;
+                const result = await sync.save(options);
+                if (result) setSessionReady(true);
+                return result;
+            };
+
+            useEffect(() => {
+                let isMounted = true;
+
+                const hydrateWorkspace = async () => {
+                    try {
+                        await loadWorkspace(false);
+                    } catch (error) {
+                        console.error('Workspace hydration failed', error);
+                    } finally {
+                        if (isMounted) {
+                            hasHydratedRef.current = true;
+                            isApplyingRemoteRef.current = false;
+                        }
+                    }
+                };
+
+                hydrateWorkspace();
+
+                return () => {
+                    isMounted = false;
+                    window.clearTimeout(autosaveTimerRef.current);
+                };
+            }, []);
+
+            useEffect(() => {
+                if (!hasHydratedRef.current || isApplyingRemoteRef.current) return;
+                window.clearTimeout(autosaveTimerRef.current);
+                autosaveTimerRef.current = window.setTimeout(() => {
+                    saveWorkspace({ prompt: false, silent: true, successText: 'Synced' }).catch((error) => {
+                        console.error('Autosave failed', error);
+                    });
+                }, 1500);
+
+                return () => window.clearTimeout(autosaveTimerRef.current);
+            }, [clients, ledger, kaixuAccessKey]);
+
+            const handleSyncUnlock = async () => {
+                try {
+                    await loadWorkspace(true);
+                    notify('Workspace sync unlocked');
+                } catch (error) {
+                    notify(error?.message || 'Workspace sync unavailable');
+                }
+            };
+
+            const exportExecutiveReport = () => {
+                const payload = {
+                    generated_at: new Date().toISOString(),
+                    app: 'SkyePlatinum',
+                    executive_role: operatorRole,
+                    summary: {
+                        aggregate_protocol_value: analytics.totalRevenue,
+                        entity_count: clients.length,
+                        ledger_rows: ledger.length,
+                        anomaly_count: topAnomalies.length,
+                    },
+                    insight: aiInsight,
+                    directives: directiveWorkflow.map((d) => ({
+                        id: d.id,
+                        text: d.text,
+                        status: d.status,
+                        assignee: d.assignee,
+                        source_reference: 'kAIxU Neural Link',
+                    })),
+                    anomaly_trend: topAnomalies.map((a) => ({
+                        transaction_id: a.id,
+                        confidence: a.confidence,
+                        movement: a.movement,
+                        client: a.clientName,
+                        description: a.description,
+                        source_reference: `ledger/${a.id}`,
+                    })),
+                    source_references: [
+                        ...ledger.slice(0, 20).map((tx) => ({
+                            kind: 'ledger',
+                            id: tx.id,
+                            amount: tx.amount,
+                            type: tx.type,
+                            client: tx.clientName,
+                        })),
+                        ...clients.slice(0, 20).map((c) => ({
+                            kind: 'client',
+                            id: c.id,
+                            name: c.name,
+                            entity_type: c.entityType,
+                        })),
+                    ],
+                };
+
+                const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+                const href = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = href;
+                a.download = `skye-platinum-executive-report-${Date.now()}.json`;
+                a.click();
+                URL.revokeObjectURL(href);
+                notify('Executive report exported with source references');
+            };
+
+            const gatewayFetch = (window.SkyeGateway && window.SkyeGateway.fetchWithRetry) || fetch;
+            const telemetryEmit = (window.SkyeTelemetry && window.SkyeTelemetry.emit) || (async () => {});
+            const errorFingerprint = (window.SkyeError && window.SkyeError.fingerprint) || (() => 'E-UNKNOWN');
+
+            const getGatewayHeaders = () => {
+                const headers = { "Content-Type": "application/json" };
+                const corr = window.SkyeCorrelation && window.SkyeCorrelation.next ? window.SkyeCorrelation.next('skyeplatinum') : '';
+                if (kaixuAccessKey && kaixuAccessKey.trim()) {
+                    headers["Authorization"] = `Bearer ${kaixuAccessKey.trim()}`;
+                }
+                if (corr) headers["X-Correlation-Id"] = corr;
+                return headers;
+            };
+
+            const generatekAIxUInsight = async () => {
+                if (!kaixuAccessKey) return notify("kAIxU Key Required");
+                const startedAt = Date.now();
+                setIsGeneratingAi(true);
+                try {
+                    const response = await gatewayFetch("/api/kaixu-generate", {
+                        method: "POST",
+                        headers: getGatewayHeaders(),
+                        body: JSON.stringify({
+                            app: "SkyePlatinum",
+                            format: "text",
+                            system: "You are the kAIxU intelligence node. Provide a sharp 2-sentence fiscal summary and 3 actionable 'Directives' for the CEO.",
+                            prompt: `Revenue: $${analytics.totalRevenue}. Entities: ${clients.length}.`
+                        })
+                    });
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data?.error || data?.message || "kAIxU gateway failed");
+                    const content = data.output || data.text || data.result || data.response || "";
+                    const parts = content.split('\n').filter(p => p.trim());
+                    setAiInsight(parts.slice(0, 2).join(' '));
+                    const nextDirectives = parts.slice(2, 5).map(d => d.replace(/^\d\.?\s?/, '').trim()).filter(Boolean);
+                    setAiDirectives(nextDirectives);
+                    setDirectiveWorkflow(nextDirectives.map((text, idx) => ({
+                        id: `dir-${Date.now()}-${idx}`,
+                        text,
+                        status: 'new',
+                        assignee: '',
+                    })));
+                    await telemetryEmit({
+                        app: 'SkyePlatinum',
+                        action: 'generate_kaixu_insight',
+                        outcome: 'success',
+                        duration_ms: Date.now() - startedAt,
+                        ws_id: wsId,
+                        context: { entities: clients.length }
+                    });
+                    notify("kAIxU Neural Link Synchronized");
+                } catch (err) {
+                    const errorId = errorFingerprint(err, { app: 'SkyePlatinum', action: 'generate_kaixu_insight' });
+                    setAiInsight("kAIxU node offline.");
+                    await telemetryEmit({
+                        app: 'SkyePlatinum',
+                        action: 'generate_kaixu_insight',
+                        outcome: 'error',
+                        error_code: String(err?.message || 'unknown').slice(0, 64),
+                        duration_ms: Date.now() - startedAt,
+                        ws_id: wsId,
+                        context: { error_id: errorId },
+                    });
+                    notify(`${err?.message || "kAIxU gateway error"} [${errorId}]`);
+                }
+                finally { setIsGeneratingAi(false); }
+            };
+
+            useEffect(() => {
+                if (!particlesRef.current) return;
+                particlesRef.current.innerHTML = '';
+                for (let i = 0; i < 40; i++) {
+                    const p = document.createElement('div');
+                    p.style.cssText = `position:absolute; background:#ffd700; border-radius:50%; width:${Math.random()*2+1}px; height:${Math.random()*2+1}px; left:${Math.random()*100}vw; opacity:0.1; animation:floatUp ${Math.random()*20+15}s linear infinite;`;
+                    particlesRef.current.appendChild(p);
+                }
+            }, [showIntro]);
+
+            const handleAddClient = async (e) => {
+                e.preventDefault();
+                try {
+                    const newClient = normalizeClient({
+                        id: createRecordId('client'),
+                        ...clientForm,
+                        createdAt: new Date().toISOString(),
+                        totalValue: 0,
+                    });
+                    setClients((prev) => [...prev, newClient]);
+                    setClientForm({ name: '', entityType: 'Corporation', status: 'Active' });
+                    setShowAddClient(false);
+                    notify("Client Registered");
+                } catch (err) { notify("Registry Write Failed"); }
+            };
+
+            const handleAddTransaction = async (e) => {
+                e.preventDefault();
+                const client = clients.find(c => c.id === txForm.clientId);
+                if (!client) return;
+
+                if (isHighRiskLedgerAction && !canExecuteHighRisk) {
+                    notify(`High-risk ledger action locked for role=${operatorRole.toUpperCase()}`);
+                    return;
+                }
+
+                try {
+                    const nextAmount = Number(txForm.amount);
+                    const newEntry = normalizeLedgerEntry({
+                        id: createRecordId('ledger'),
+                        ...txForm,
+                        amount: nextAmount,
+                        clientName: client.name,
+                        timestamp: new Date().toISOString(),
+                    });
+                    const newVal = txForm.type === 'Credit' 
+                        ? (Number(client.totalValue || 0) + nextAmount)
+                        : (Number(client.totalValue || 0) - nextAmount);
+
+                    setLedger((prev) => sortLedgerEntries([newEntry, ...prev]));
+                    setClients((prev) => prev.map((row) => (
+                        row.id === client.id ? { ...row, totalValue: newVal } : row
+                    )));
+                    setShowAddTransaction(false);
+                    setTxForm({ clientId: '', amount: '', type: 'Credit', description: '' });
+                    notify("Ledger Verified");
+                } catch (err) { notify("Verification Failed"); }
+            };
+
+            if (showIntro) {
+                return (
+                    <div className="fixed inset-0 z-[1000] bg-[#020205] flex flex-col items-center justify-center overflow-hidden">
+                        <div className="relative flex flex-col items-center intro-animate opacity-0">
+                            <div className="relative mb-8">
+                                <div className="absolute inset-0 bg-yellow-500/20 blur-3xl rounded-full scale-150 animate-pulse" />
+                                <img src={logoSrc} alt="SKye Logo" className="w-48 h-48 relative z-10 drop-shadow-[0_0_30px_rgba(255,215,0,0.4)] logo-pulse" />
+                            </div>
+                            <h1 className="text-5xl font-black tracking-[0.3em] text-white uppercase mb-2">SKye <span className="text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 to-yellow-600">Platinum Hub</span></h1>
+                            <div className="h-[1px] bg-yellow-500/40 line-reveal w-0" />
+                            <p className="mt-4 text-[10px] font-mono tracking-[0.6em] text-yellow-500/60 uppercase">The Quantum Command Protocol</p>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="relative min-h-screen w-full text-white bg-[#020205] flex flex-col">
+                    <div className="absolute inset-0 pointer-events-none z-0">
+                        <div className="absolute top-1/2 left-1/2 w-[200vw] h-[200vw] -translate-x-1/2 -translate-y-1/2 opacity-5 animate-[ringSpin_400s_linear_infinite]" style={{ background: 'repeating-conic-gradient(from 0deg, transparent 0deg 10deg, rgba(255, 215, 0, 0.05) 15deg 20deg, transparent 25deg)' }} />
+                        <div ref={particlesRef} className="absolute inset-0" />
+                    </div>
+
+                    <div className="fixed top-6 right-6 z-[200] space-y-3">
+                        {notifications.map(n => (
+                            <div key={n.id} className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-black/90 border border-yellow-500/30 text-yellow-500 text-[10px] font-black uppercase tracking-widest backdrop-blur-3xl shadow-2xl">
+                                <Icon name="zap" size={14} className="fill-current" /> {n.msg}
+                            </div>
+                        ))}
+                    </div>
+
+                    <nav className="relative z-50 flex items-center justify-between px-10 py-8 backdrop-blur-3xl border-b border-white/5 bg-black/40">
+                        <div className="flex items-center gap-6 cursor-pointer" onClick={() => setActiveTab('dashboard')}>
+                            <img src={logoSrc} className="w-10 h-10 drop-shadow-[0_0_15px_rgba(255,215,0,0.6)]" alt="logo" />
+                            <div>
+                                <span className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 to-yellow-600 block leading-none uppercase">SKye Platinum Hub</span>
+                                <span className="text-[9px] text-yellow-500/30 font-mono tracking-[0.4em] uppercase mt-1 block font-bold">Quantum Command Protocol</span>
+                            </div>
+                        </div>
+                        <div className="hidden lg:flex gap-10 items-center text-[10px] font-black uppercase tracking-[0.2em]">
+                            {['dashboard', 'analytics', 'crm', 'ledger'].map(tab => (
+                                <button key={tab} onClick={() => setActiveTab(tab)} className={`transition-all hover:text-yellow-400 relative py-1 ${activeTab === tab ? 'text-yellow-500' : 'text-gray-500'}`}>
+                                    {tab}
+                                    {activeTab === tab && <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-yellow-500 shadow-[0_0_15px_gold]" />}
+                                </button>
+                            ))}
+                            <button onClick={handleSyncUnlock} className={`px-4 py-2 rounded-full border transition-colors ${sessionReady ? 'border-yellow-500/40 bg-yellow-500/10 text-yellow-300' : 'border-white/10 bg-white/5 text-gray-300 hover:border-yellow-500/30 hover:text-yellow-300'}`}>
+                                {sessionReady ? 'Workspace Synced' : 'Unlock Sync'}
+                            </button>
+                            <button onClick={() => setShowSettings(true)} className="p-2 bg-white/5 rounded-xl hover:bg-yellow-500/10 transition-colors">
+                                <Icon name="settings" size={18} />
+                            </button>
+                        </div>
+                    </nav>
+
+                    <main className="relative z-40 flex-1 overflow-y-auto px-10 py-12 custom-scrollbar">
+                        {activeTab === 'dashboard' && (
+                            <div className="max-w-7xl mx-auto space-y-12">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                    {[
+                                        { label: "Aggregate Protocol Value", val: `$${analytics.totalRevenue.toLocaleString()}`, icon: "dashboard" },
+                                        { label: "Neural Entity Registry", val: clients.length, icon: "users" },
+                                        { label: "Shard Sync Status", val: sessionReady ? "Optimal" : "Standby", icon: "shield" }
+                                    ].map((m, i) => (
+                                        <div key={i} className="p-10 rounded-[45px] bg-black/60 backdrop-blur-3xl border border-white/5 shadow-2xl relative overflow-hidden group hover:border-yellow-500/20 transition-all">
+                                            <div className="absolute top-0 right-0 p-8 opacity-10 text-yellow-500 transition-transform group-hover:scale-125"><Icon name={m.icon} size={48} /></div>
+                                            <h3 className="text-gray-500 text-[10px] font-black uppercase tracking-[0.4em] mb-4">{m.label}</h3>
+                                            <p className="text-5xl font-bold tracking-tighter">{m.val}</p>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="p-12 rounded-[50px] bg-black/80 border border-yellow-500/10 flex flex-col lg:flex-row items-center justify-between gap-12 relative overflow-hidden">
+                                    <div className="flex-1 space-y-6">
+                                        <h4 className="flex items-center gap-3 text-yellow-500 font-black text-[10px] uppercase tracking-[0.5em]">
+                                            <Icon name="cpu" size={18} /> Neural kAIxU Synthesis
+                                        </h4>
+                                        <div className="space-y-4">
+                                            <p className="text-gray-300 italic text-2xl font-serif leading-relaxed">
+                                                {aiInsight || "Deploy kAIxU key to activate deep fiscal analysis."}
+                                            </p>
+                                            {aiDirectives.length > 0 && (
+                                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 border-t border-white/5">
+                                                    {directiveWorkflow.map((d, i) => (
+                                                        <div key={d.id} className="p-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/10 text-[10px] uppercase font-bold tracking-wider text-yellow-200/60 leading-tight space-y-3">
+                                                            <div className="flex gap-3 items-start">
+                                                                <span className="text-yellow-500">D0{i+1}</span> {d.text}
+                                                            </div>
+                                                            <div className="grid grid-cols-2 gap-2">
+                                                                <select value={d.status} onChange={(event) => updateDirectiveState(d.id, { status: event.target.value })} className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-[9px] uppercase">
+                                                                    <option value="new">new</option>
+                                                                    <option value="accepted">accepted</option>
+                                                                    <option value="delegated">delegated</option>
+                                                                    <option value="completed">completed</option>
+                                                                </select>
+                                                                <input value={d.assignee} onChange={(event) => updateDirectiveState(d.id, { assignee: event.target.value })} placeholder="assignee" className="bg-black/40 border border-white/10 rounded-lg px-2 py-1 text-[9px] uppercase" />
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col gap-3 shrink-0">
+                                        <button onClick={generatekAIxUInsight} disabled={isGeneratingAi || !kaixuAccessKey} className="px-12 py-6 rounded-full bg-yellow-500 text-black font-black uppercase text-xs hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(255,215,0,0.3)] disabled:opacity-20 flex items-center gap-3">
+                                            {isGeneratingAi ? <Icon name="refresh" className="animate-spin" size={14} /> : <Icon name="zap" size={14} />} Initiate Pulse
+                                        </button>
+                                        <button onClick={exportExecutiveReport} className="px-8 py-4 rounded-full bg-white/5 border border-yellow-500/30 text-yellow-400 font-black uppercase text-[10px] tracking-widest hover:bg-yellow-500/10 transition-all">
+                                            Export Executive Report
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'analytics' && (
+                            <div className="max-w-7xl mx-auto space-y-8">
+                                <h2 className="text-4xl font-black uppercase tracking-tighter">Anomaly Trend Intelligence</h2>
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                    <div className="p-10 rounded-[45px] bg-black/60 border border-white/5 space-y-5">
+                                        <h3 className="text-yellow-500 text-[10px] uppercase tracking-[0.4em] font-black">Financial Anomaly Trend</h3>
+                                        <div className="space-y-3">
+                                            {anomalyTrend.slice(-10).map((row, idx) => (
+                                                <div key={`${row.id}-${idx}`} className={`p-4 rounded-2xl border ${row.isAnomaly ? 'border-red-500/40 bg-red-500/10' : 'border-white/10 bg-white/[0.02]'} flex justify-between items-center`}>
+                                                    <div>
+                                                        <p className="text-sm font-bold">{row.clientName || 'Unknown Client'}</p>
+                                                        <p className="text-[10px] uppercase text-gray-500">{row.description || 'No description'}</p>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <p className={`font-mono text-lg font-bold ${row.movement >= 0 ? 'text-yellow-500' : 'text-red-400'}`}>{row.movement >= 0 ? '+' : ''}{row.movement.toLocaleString()}</p>
+                                                        <p className="text-[9px] uppercase text-white/60">confidence {row.confidence}%</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="p-10 rounded-[45px] bg-black/60 border border-white/5 space-y-5">
+                                        <h3 className="text-yellow-500 text-[10px] uppercase tracking-[0.4em] font-black">High Confidence Flags</h3>
+                                        <div className="space-y-3">
+                                            {topAnomalies.length === 0 && <p className="text-gray-500 text-sm">No anomaly spikes detected in current ledger window.</p>}
+                                            {topAnomalies.map((flag) => (
+                                                <div key={flag.id} className="p-4 rounded-2xl border border-yellow-500/20 bg-yellow-500/5">
+                                                    <p className="text-sm font-bold">{flag.clientName || 'Unknown Client'} <span className="text-yellow-400">({flag.confidence}%)</span></p>
+                                                    <p className="text-[10px] uppercase text-gray-500">Source: ledger/{flag.id}</p>
+                                                    <p className="text-xs text-white/80 mt-2">{flag.description || 'No detail provided'}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'crm' && (
+                            <div className="max-w-7xl mx-auto space-y-8">
+                                <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                                    <h2 className="text-4xl font-black uppercase tracking-tighter">Client Registry</h2>
+                                    <button onClick={() => setShowAddClient(true)} className="px-8 py-4 bg-yellow-500 text-black font-black uppercase text-[10px] rounded-full hover:brightness-110 flex items-center gap-2">
+                                        <Icon name="plus" size={16} /> Register Mandate
+                                    </button>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    {clients.map(client => (
+                                        <div key={client.id} onClick={() => setSelectedClientDetail(client)} className="p-10 rounded-[45px] bg-black/60 border border-white/5 hover:border-yellow-500/40 transition-all group cursor-pointer shadow-2xl">
+                                            <h3 className="text-2xl font-bold mb-1">{client.name}</h3>
+                                            <p className="text-[10px] uppercase text-yellow-500/40 font-bold mb-6">{client.entityType}</p>
+                                            <p className="text-2xl font-mono text-yellow-500 font-bold">${(client.totalValue || 0).toLocaleString()}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {activeTab === 'ledger' && (
+                            <div className="max-w-5xl mx-auto space-y-8">
+                                <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                                    <h2 className="text-4xl font-black uppercase tracking-tighter">Command Ledger</h2>
+                                    <button onClick={() => setShowAddTransaction(true)} className="px-8 py-4 bg-yellow-500 text-black font-black uppercase text-[10px] rounded-full hover:brightness-110 flex items-center gap-2">
+                                        <Icon name="plus" size={16} /> Add Ledger Update
+                                    </button>
+                                </div>
+                                <div className="p-4 rounded-2xl border border-yellow-500/20 bg-yellow-500/5 text-[10px] font-black uppercase tracking-widest text-yellow-200/80">
+                                    Role lock profile: {operatorRole.toUpperCase()} • High-risk debit updates require OWNER or ADMIN.
+                                </div>
+                                <div className="space-y-4">
+                                    {ledger.map(tx => (
+                                        <div key={tx.id} className="p-8 rounded-[40px] bg-black/60 border border-white/5 flex justify-between items-center backdrop-blur-xl group hover:border-yellow-500/20 transition-all">
+                                            <div>
+                                                <p className="text-2xl font-bold">{tx.clientName}</p>
+                                                <p className="text-[10px] uppercase text-gray-500">{tx.description}</p>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className={`text-3xl font-mono font-bold ${tx.type === 'Credit' ? 'text-yellow-500' : 'text-red-400'}`}>
+                                                    {tx.type === 'Credit' ? '+' : '-'}${Number(tx.amount).toLocaleString()}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </main>
+
+                    {showAddClient && (
+                        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-6">
+                            <form onSubmit={handleAddClient} className="max-w-2xl w-full p-10 bg-[#08080c] border border-yellow-500/20 rounded-[40px] space-y-8 shadow-2xl">
+                                <div className="flex justify-between items-center">
+                                    <h3 className="text-2xl font-black uppercase tracking-tighter text-yellow-500">Register Client</h3>
+                                    <button type="button" onClick={() => setShowAddClient(false)} className="p-3 bg-white/5 rounded-full"><Icon name="plus" className="rotate-45" size={18} /></button>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <input required value={clientForm.name} onChange={(event) => setClientForm((old) => ({ ...old, name: event.target.value }))} placeholder="Client name" className="md:col-span-2 bg-white/5 border border-white/10 p-4 rounded-2xl text-sm" />
+                                    <select value={clientForm.entityType} onChange={(event) => setClientForm((old) => ({ ...old, entityType: event.target.value }))} className="bg-white/5 border border-white/10 p-4 rounded-2xl text-sm">
+                                        <option value="Corporation">Corporation</option>
+                                        <option value="LLC">LLC</option>
+                                        <option value="Nonprofit">Nonprofit</option>
+                                        <option value="Trust">Trust</option>
+                                        <option value="Private">Private</option>
+                                    </select>
+                                    <select value={clientForm.status} onChange={(event) => setClientForm((old) => ({ ...old, status: event.target.value }))} className="bg-white/5 border border-white/10 p-4 rounded-2xl text-sm">
+                                        <option value="Active">Active</option>
+                                        <option value="Prospect">Prospect</option>
+                                        <option value="Watch">Watch</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+
+                                <div className="flex justify-end gap-3">
+                                    <button type="button" onClick={() => setShowAddClient(false)} className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest">Cancel</button>
+                                    <button type="submit" className="px-8 py-3 rounded-2xl bg-yellow-500 text-black text-[10px] font-black uppercase tracking-widest">Register Client</button>
+                                </div>
+                            </form>
+                        </div>
+                    )}
+
+                    {showSettings && (
+                        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-6">
+                            <div className="max-w-3xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar p-12 bg-[#08080c] border border-yellow-500/20 rounded-[60px] space-y-12 shadow-2xl relative">
+                                <div className="flex justify-between items-center">
+                                    <h3 className="text-3xl font-black uppercase italic tracking-tighter text-yellow-500">Infrastructure Config</h3>
+                                    <button onClick={() => setShowSettings(false)} className="p-3 bg-white/5 rounded-full"><Icon name="plus" className="rotate-45" size={18} /></button>
+                                </div>
+                                
+                                <div className="space-y-10">
+                                    <div className="space-y-4">
+                                        <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest flex items-center gap-2">
+                                            <Icon name="shield" size={14} /> Operator Role Lock Profile
+                                        </label>
+                                        <select value={operatorRole} onChange={(event) => setOperatorRole(event.target.value)} className="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-yellow-500 font-mono text-sm">
+                                            <option value="owner">owner</option>
+                                            <option value="admin">admin</option>
+                                            <option value="member">member</option>
+                                            <option value="viewer">viewer</option>
+                                        </select>
+                                        <p className="text-[10px] uppercase text-yellow-500/70 font-black tracking-wider">High-risk ledger debits are locked unless role is owner/admin.</p>
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest flex items-center gap-2">
+                                            <Icon name="settings" size={14} /> kAIxU Gateway Key
+                                        </label>
+                                        <div className="flex gap-4">
+                                            <input type="password" value={tempKey} onChange={e => setTempKey(e.target.value)} className="flex-1 bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-yellow-500 font-mono text-sm" placeholder="kx-..." />
+                                            <button type="button" onClick={() => {
+                                                const nextKey = tempKey.trim();
+                                                setTempKey(nextKey);
+                                                setKaixuAccessKey(nextKey);
+                                                notify("kAIxU gateway secured");
+                                                if (!hasHydratedRef.current) return;
+                                                window.clearTimeout(autosaveTimerRef.current);
+                                                saveWorkspace({ prompt: false, silent: true, successText: 'Key Synced' }).catch((error) => {
+                                                    console.error('Manual key sync failed', error);
+                                                    notify(error?.message || 'Workspace sync failed');
+                                                });
+                                            }} className="px-8 bg-yellow-500 text-black font-black uppercase text-[10px] rounded-2xl">Deploy</button>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-6">
+                                        <label className="text-[10px] uppercase font-black text-gray-500 tracking-widest">Ecosystem Shards</label>
+                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                            {ecosystemNodes.map((node, i) => (
+                                                <a key={i} href={node.url} target="_blank" className="p-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-yellow-500/40 hover:bg-yellow-500/5 transition-all group flex flex-col">
+                                                    <span className="text-[9px] font-black uppercase tracking-widest text-gray-400 group-hover:text-yellow-500">{node.name}</span>
+                                                    <Icon name="external" size={12} className="text-gray-600 mt-2 self-end" />
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="pt-8 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="p-6 rounded-[30px] bg-white/[0.03] border border-white/5">
+                                            <p className="text-[8px] uppercase font-black text-gray-500 mb-1">Voice Protocol</p>
+                                            <p className="text-sm font-bold">(480) 469-5416</p>
+                                        </div>
+                                        <div className="p-6 rounded-[30px] bg-white/[0.03] border border-white/5">
+                                            <p className="text-[8px] uppercase font-black text-gray-500 mb-1">Main Signal</p>
+                                            <p className="text-[10px] font-bold truncate text-yellow-500/80">SkyesOverLondonLC@SOLEnterprises.org</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {showAddTransaction && (
+                        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-3xl flex items-center justify-center p-6">
+                            <form onSubmit={handleAddTransaction} className="max-w-2xl w-full p-10 bg-[#08080c] border border-yellow-500/20 rounded-[40px] space-y-8 shadow-2xl">
+                                <div className="flex justify-between items-center">
+                                    <h3 className="text-2xl font-black uppercase tracking-tighter text-yellow-500">Ledger Update</h3>
+                                    <button type="button" onClick={() => setShowAddTransaction(false)} className="p-3 bg-white/5 rounded-full"><Icon name="plus" className="rotate-45" size={18} /></button>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <select required value={txForm.clientId} onChange={(event) => setTxForm((old) => ({ ...old, clientId: event.target.value }))} className="bg-white/5 border border-white/10 p-4 rounded-2xl text-sm">
+                                        <option value="">Select client</option>
+                                        {clients.map((client) => <option key={client.id} value={client.id}>{client.name}</option>)}
+                                    </select>
+                                    <select required value={txForm.type} onChange={(event) => setTxForm((old) => ({ ...old, type: event.target.value }))} className="bg-white/5 border border-white/10 p-4 rounded-2xl text-sm">
+                                        <option value="Credit">Credit</option>
+                                        <option value="Debit">Debit</option>
+                                    </select>
+                                    <input required value={txForm.amount} onChange={(event) => setTxForm((old) => ({ ...old, amount: event.target.value }))} type="number" min="0" step="0.01" placeholder="Amount" className="bg-white/5 border border-white/10 p-4 rounded-2xl text-sm" />
+                                    <input required value={txForm.description} onChange={(event) => setTxForm((old) => ({ ...old, description: event.target.value }))} placeholder="Description" className="bg-white/5 border border-white/10 p-4 rounded-2xl text-sm" />
+                                </div>
+
+                                {isHighRiskLedgerAction && !canExecuteHighRisk && (
+                                    <div className="p-4 rounded-2xl border border-red-500/40 bg-red-500/10 text-red-300 text-[10px] font-black uppercase tracking-widest">
+                                        Blocked: role={operatorRole.toUpperCase()} cannot submit high-risk ledger updates.
+                                    </div>
+                                )}
+
+                                <div className="flex justify-end gap-3">
+                                    <button type="button" onClick={() => setShowAddTransaction(false)} className="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest">Cancel</button>
+                                    <button type="submit" className="px-8 py-3 rounded-2xl bg-yellow-500 text-black text-[10px] font-black uppercase tracking-widest">Commit Ledger Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    )}
+
+                    <footer className="relative z-50 py-10 text-center opacity-20 text-[8px] font-black tracking-[0.8em] uppercase border-t border-white/5">
+                        SKye Platinum Hub • Quantum Command Protocol v7.5.0
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

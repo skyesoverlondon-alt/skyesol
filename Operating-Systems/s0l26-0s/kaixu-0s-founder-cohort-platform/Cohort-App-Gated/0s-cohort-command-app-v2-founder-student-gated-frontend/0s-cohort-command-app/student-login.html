@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Access · 0s Cohort Command</title>
+  <meta name="description" content="0s cohort command surface with founder lane, student lane, student ID generation, welcome letters, instructor content, and workbook notes.">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-route="student-login">
+  <div class="site-shell">
+    <header class="topbar print-hide">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html">
+          <img src="assets/media/skyes-primary-logo.png" alt="Skyes Over London logo">
+          <div>
+            <span class="brand-kicker">Skyes Over London × 0s</span>
+            <span class="brand-title">0s Cohort Command Center</span>
+            <span class="brand-sub">Founder-only class control and student-only cohort workspace</span>
+          </div>
+        </a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html">Command</a>
+<a href="founder-login.html">Founder Access</a>
+<a href="student-login.html" aria-current="page">Student Access</a>
+<a href="founder-dashboard.html">Founder Board</a>
+<a href="instructor-book.html">Instructor Book</a>
+<a href="student-portal.html">Student Portal</a>
+          
+        </nav>
+      </div>
+    </header>
+    
+<main class="page">
+  <section class="auth-shell">
+    <div class="dashboard-grid auth-grid">
+      <div class="panel login-copy">
+        <div class="eyebrow">Student-only access</div>
+        <h1>Students only enter through the generated cohort ID.</h1>
+        <p class="lead">The student side is not the founder side. Students enter the ID you generated for them from the founder board. Once active, they only see their welcome lane, workbook, notes, and final demo prep.</p>
+        <div class="lesson-card">
+          <div class="kicker">What students get</div>
+          <ul class="checklist">
+            <li>Welcome letter and cohort badge</li>
+            <li>Day-by-day workbook and personal notes</li>
+            <li>Daily deliverable checklists</li>
+            <li>Final demo prep surface</li>
+            <li>Student-only saved progress tied to their ID</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="section-head">
+          <div class="eyebrow">Enter generated ID</div>
+          <h2>Student sign in</h2>
+          <p class="muted">Use the exact student ID issued by the founder lane. Optionally confirm the email that was placed on the roster for this seat.</p>
+        </div>
+        <div class="field-grid">
+          <div class="field field-span-2">
+            <label for="studentIdInput">Student ID</label>
+            <input id="studentIdInput" type="text" placeholder="0S-2026-AB12C7" data-student-login-id>
+          </div>
+          <div class="field field-span-2">
+            <label for="studentEmailInput">Student email</label>
+            <input id="studentEmailInput" type="email" placeholder="student@example.com" data-student-login-email>
+          </div>
+        </div>
+        <div class="button-row print-hide">
+          <button class="neon-button" type="button" data-student-login>Enter Student Lane</button>
+          <button class="ghost-button" type="button" data-student-logout>Lock Student Lane</button>
+        </div>
+        <div class="status-bar">
+          <span class="status-pill">Student session: <strong data-student-session-status>Locked</strong></span>
+          <span class="status-pill">Live generated seats: <strong data-student-count>0</strong></span>
+        </div>
+        <div class="callout">
+          <div class="kicker">Need your ID?</div>
+          <p class="muted">The student ID is issued from the founder side. Once your founder generates and activates your seat, this page becomes live for you immediately on the same data set.</p>
+          <div class="button-row print-hide">
+            <a class="button" href="student-portal.html">Open Student Portal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+    <footer class="footer">
+      <strong>0s Cohort Command Center · Skyes Over London</strong>
+      <p class="muted">Phone: <a href="tel:+14804695416">(480) 469-5416</a> · <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> · <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> · <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></p>
+      <div class="footer-links print-hide">
+        <a class="pill-link" href="https://skyesol.netlify.app/about" target="_blank" rel="noopener noreferrer">Founder Page</a>
+        <a class="pill-link" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener noreferrer">All SkyeSol Case Studies</a>
+      </div>
+    </footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

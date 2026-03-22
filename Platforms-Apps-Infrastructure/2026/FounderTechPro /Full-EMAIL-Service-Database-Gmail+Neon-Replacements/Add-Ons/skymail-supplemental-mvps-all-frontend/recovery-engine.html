@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Recovery Engine</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<script src="assets/app.js"></script>
+<script>mountPage('recovery-engine','Recovery Engine','Revenue leak detection, stale thread surfacing, and revival queue control.', (state)=>{document.getElementById('pageContent').innerHTML=`
+<section class="grid2"><section class="card"><div class="toolbar"><div><div class="eyebrow">Recovery Signals</div><div class="mini">Surface stale or underworked opportunities.</div></div><div class="btnrow" style="margin-top:0"><button class="btn gold" id="runRecoveryBtn" type="button">Recalculate Recovery Queue</button></div></div><div class="table-list" id="recoveryList" style="margin-top:14px"></div></section><section class="card"><div class="eyebrow">Recovery Summary</div><div class="kpi-grid" style="margin-top:14px" id="recoveryKpis"></div><div class="notice" style="margin-top:14px">This engine reads shared desk, follow-up, and intake records to infer where money or response energy is leaking.</div></section></section>
+`;
+async function recalc(){
+  const leaks=[];
+  state.followUps.forEach(f=>{if(f.health==='Cooling' || f.stage==='No reply') leaks.push({id:uid(),name:f.lead,email:f.email,reason:`${f.stage} • next touch ${formatDate(f.nextTouch)}`,estValue:1600+(Number(f.sequenceStep||1)*250),action:`Use template: ${f.template||'Follow up'}`,severity:f.health==='Cooling'?'High':'Medium'})});
+  state.intake.forEach(i=>{if(i.stage==='Proposal' || i.stage==='Discovery') leaks.push({id:uid(),name:i.client,email:i.email,reason:`${i.stage} record still open`,estValue:Number(i.value||0)||1200,action:`${i.nextAction||'Advance next action'}`,severity:Number(i.value||0)>2000?'High':'Medium'})});
+  state.sharedDesk.forEach(d=>{if(d.priority==='Urgent' || d.waiting==='Client') leaks.push({id:uid(),name:d.contact,email:d.email,reason:`Desk item ${d.status} / waiting ${d.waiting}`,estValue:d.priority==='Urgent'?900:500,action:'Return thread to active handling',severity:d.priority==='Urgent'?'High':'Low'})});
+  state.recoveryLog = leaks.slice(0,12);
+  await replaceLaneCollection(state,'recoveryLog',state.recoveryLog); render();
+}
+function render(){
+  const total=state.recoveryLog.reduce((n,x)=>n+Number(x.estValue||0),0);
+  recoveryKpis.innerHTML=`<div class="stat"><b>${state.recoveryLog.length}</b><span class="mini">Recovery candidates</span></div><div class="stat"><b>${formatMoney(total)}</b><span class="mini">Estimated revenue at risk</span></div><div class="stat"><b>${state.recoveryLog.filter(x=>x.severity==='High').length}</b><span class="mini">High severity leaks</span></div><div class="stat"><b>${state.followUps.filter(x=>x.health==='Cooling').length}</b><span class="mini">Cooling follow-ups</span></div>`;
+  recoveryList.innerHTML=state.recoveryLog.length?state.recoveryLog.map(item=>`<div class="row-card"><div class="row-head"><div><div class="row-title">${safe(item.name)}</div><div class="row-sub">${safe(item.email)}</div></div><div class="actions"><span class="chip ${item.severity==='High'?'metric-danger':'metric-warn'}">${safe(item.severity)}</span></div></div><div class="chips"><span class="chip">${safe(item.reason)}</span><span class="chip">${safe(formatMoney(item.estValue))}</span></div>${laneAuditMarkup(item)}<div class="mini" style="margin-top:10px">Recommended action: ${safe(item.action)}</div></div>`).join(''):'<div class="empty">No recovery signals detected.</div>';
+}
+runRecoveryBtn.onclick=()=>recalc().catch((err)=>console.warn('recovery recalc failed:', err?.message||err)); hydrateLaneCollection(state,'recoveryLog').finally(render);});</script>
+</body>
+</html>

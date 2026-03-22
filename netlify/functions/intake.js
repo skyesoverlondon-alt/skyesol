@@ -23,7 +23,7 @@ function validateEmail(email) {
 }
 
 async function db() {
-  const url = process.env.NEON_DATABASE_URL || process.env.DATABASE_URL;
+  const url = process.env.NEON_DATABASE_URL || process.env.DATABASE_URL || process.env.NETLIFY_DATABASE_URL;
   if (!url) return null;
 
   // Keep pg optional so this function still deploys without pg installed.

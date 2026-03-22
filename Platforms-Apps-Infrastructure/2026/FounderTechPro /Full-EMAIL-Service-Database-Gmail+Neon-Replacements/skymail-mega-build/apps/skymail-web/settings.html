@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/app.js"></script>
+  <script defer src="/assets/mail-ui.js"></script>
+  <link rel="stylesheet" href="/assets/mail-ui.css" />
+  <title>Settings — SkyMail Host</title>
+</head>
+<body data-page-id="settings" data-page-name="Settings" data-page-hint="Mailbox identity, signatures, profile, and security">
+<div class="wrap">
+  <div id="pageTopbar"></div>
+  <div class="layout">
+    <aside class="rail" id="leftRail"></aside>
+    <main class="main">
+
+      <section class="hero">
+        <section class="card">
+          <div class="badge" id="mailboxStatus">Checking mailbox status…</div>
+          <h1 class="h1">Mailbox identity, signature, and security.</h1>
+          <p class="sub">Control how your hosted mailbox presents itself, save your signature profile, tune auto-reply content, and rotate the password that unlocks both the app and the mailbox.</p>
+          <div class="btnrow">
+            <button class="btn gold" id="saveBtn" type="button">Save Mailbox Settings</button>
+            <button class="btn ok" id="syncBtn" type="button">Save + Refresh Status</button>
+            <button class="btn" id="watchBtn" type="button">Refresh Live Status</button>
+            <button class="btn" id="connectBtn" type="button">Provisioning</button>
+            <button class="btn" id="disconnectBtn" type="button">Open Inbox</button>
+          </div>
+          <div class="mini" id="statusText" style="margin-top:12px">Waiting for settings load…</div>
+        </section>
+        <aside class="card">
+          <div class="kicker">Mailbox Health</div>
+          <div class="notice" id="scopeStatus">Checking mailbox identity state…</div>
+          <div class="notice" id="contactsScope" style="margin-top:12px">Checking address book state…</div>
+        </aside>
+      </section>
+      <section class="settings-grid">
+        <section class="card">
+          <div class="fieldgrid">
+            <div><label for="display_name">Display name</label><input id="display_name" type="text" placeholder="Skyes Over London" /></div>
+            <div><label for="profile_title">Title</label><input id="profile_title" type="text" placeholder="Founder & Operator" /></div>
+            <div><label for="profile_company">Company</label><input id="profile_company" type="text" placeholder="Skyes Over London LC" /></div>
+            <div><label for="profile_phone">Phone</label><input id="profile_phone" type="text" placeholder="(480) 469-5416" /></div>
+            <div class="fieldgrid" style="grid-column:1 / -1"><div><label for="profile_website">Website</label><input id="profile_website" type="text" placeholder="https://SOLEnterprises.org" /></div></div>
+            <div class="fieldgrid" style="grid-column:1 / -1"><div><label for="preferred_from_alias">Primary sending identity</label><select id="preferred_from_alias"></select></div></div>
+          </div>
+          <div class="hr"></div>
+          <div class="fieldgrid">
+            <div><label for="signature_text">Signature text</label><textarea id="signature_text" placeholder="Plain text signature for fast replies."></textarea></div>
+            <div><label for="signature_html">Signature HTML</label><textarea id="signature_html" placeholder="Optional HTML signature for richer outgoing mail."></textarea></div>
+          </div>
+        </section>
+        <section class="card">
+          <div class="kicker">Mailbox identities</div>
+          <div class="alias-grid" id="aliasList"><div class="empty">Loading mailbox identities…</div></div>
+          <div class="hr"></div>
+          <div class="kicker">Password rotation</div>
+          <div class="fieldgrid" style="margin-top:12px">
+            <div><label for="new_password">New password</label><input id="new_password" type="password" placeholder="At least 10 characters" /></div>
+            <div><label>&nbsp;</label><button class="btn gold" id="passwordBtn" type="button">Update Mailbox Password</button></div>
+          </div>
+          <div class="mini" style="margin-top:10px">This rotates the password for both your SkyMail app account and the hosted mailbox itself.</div>
+        </section>
+      </section>
+      <section class="card">
+        <div class="kicker">Auto reply profile</div>
+        <div class="fieldgrid" style="margin-top:12px">
+          <div><label for="vacation_enabled">Enable auto reply</label><div class="toggleline"><input id="vacation_enabled" type="checkbox" />Turn on automated replies for this mailbox profile</div></div>
+          <div><label for="vacation_restrict_contacts">Restrict responses</label><div class="toggleline"><input id="vacation_restrict_contacts" type="checkbox" />Reply only to saved contacts</div></div>
+          <div><label for="vacation_restrict_domain">Domain-only responses</label><div class="toggleline"><input id="vacation_restrict_domain" type="checkbox" />Reply only inside this hosted domain</div></div>
+          <div></div>
+          <div><label for="vacation_start">Start</label><input id="vacation_start" type="datetime-local" /></div>
+          <div><label for="vacation_end">End</label><input id="vacation_end" type="datetime-local" /></div>
+          <div class="fieldgrid" style="grid-column:1 / -1"><div><label for="vacation_subject">Subject</label><input id="vacation_subject" type="text" placeholder="Away from mailbox" /></div></div>
+        </div>
+        <div class="fieldgrid" style="margin-top:12px">
+          <div><label for="vacation_response_text">Plain text response</label><textarea id="vacation_response_text" placeholder="Thanks for your message. This mailbox is currently away."></textarea></div>
+          <div><label for="vacation_response_html">HTML response</label><textarea id="vacation_response_html" placeholder="<p>Thanks for your message. This mailbox is currently away.</p>"></textarea></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <div id="appFooter"></div>
+</div>
+<script defer src="/assets/settings-page.js"></script>
+</body>
+</html>

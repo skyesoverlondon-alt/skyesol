@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kaixu-0s-founder-cohort-platform.netlify.app/sitemap.xml

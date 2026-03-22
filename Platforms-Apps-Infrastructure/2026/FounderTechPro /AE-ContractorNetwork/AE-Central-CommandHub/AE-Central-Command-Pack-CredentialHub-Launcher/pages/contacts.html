@@ -1,0 +1,25 @@
+
+<div class="page-shell page-wrap">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Contacts Hub</div>
+      <h2>People, companies, follow-up notes, links, quick copy, and relationship history.</h2>
+    </div>
+    <div class="toolbar" style="margin-top:12px"><button class="soft-btn" type="button" onclick="app.goTo('credential-pack')">Credential Pack</button><button class="soft-btn" type="button" onclick="app.goTo('projects')">Projects</button><button class="soft-btn" type="button" onclick="app.goTo('notes')">Notes</button></div>
+    <div class="toolbar" data-tour="contacts-toolbar">
+      <input id="contact-search" type="search" placeholder="Search contacts" oninput="app.setFilter('contactSearch', this.value)">
+      <select id="contact-status-filter" onchange="app.setFilter('contactStatus', this.value)">
+        <option value="">All statuses</option>
+        <option value="lead">Lead</option>
+        <option value="warm">Warm</option>
+        <option value="client">Client</option>
+        <option value="vendor">Vendor</option>
+        <option value="personal">Personal</option>
+      </select>
+      <label class="soft-btn" for="contacts-import-file">Import CSV<input id="contacts-import-file" type="file" accept=".csv,text/csv" class="hidden" onchange="app.importContactsFromCSV(event)"></label>
+      <button class="soft-btn" onclick="app.exportContactsCSV()">Export CSV</button>
+      <button class="primary-btn" onclick="app.openEntityModal('contact')">Add Contact</button>
+    </div>
+  </div>
+  <div id="contacts-list" class="list-grid" data-tour="contacts-list"></div>
+</div>

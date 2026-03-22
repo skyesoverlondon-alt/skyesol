@@ -3,11 +3,10 @@
   const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
   
-  // User dashboard is locked to same-origin gateway routing.
-  // Only admin/deployment config controls upstream base.
+  // Gateway base override (lets this UI talk to a dedicated gateway without rebuilding)
   const baseStore = {
-    get apiBase(){ return ""; },
-    set apiBase(_v){}
+    get apiBase(){ return (localStorage.getItem("KAIXU_API_BASE") || "").trim(); },
+    set apiBase(v){ localStorage.setItem("KAIXU_API_BASE", (v || "").trim()); }
   };
 
   // Optional: report user dashboard errors into Monitor (client_error events)
@@ -37,13 +36,6 @@ const store = {
     set key(v){ localStorage.setItem("KAIXU_VIRTUAL_KEY", v || ""); }
   };
 
-  function normalizeKeyInput(raw){
-    return String(raw || "")
-      .replace(/["'`]/g, "")
-      .replace(/\s+/g, "")
-      .trim();
-  }
-
   const toast = $("#toast");
   function showToast(msg, ok=true){
     toast.textContent = msg;
@@ -59,14 +51,6 @@ const store = {
 
   function monthKeyUTC(){
     return new Date().toISOString().slice(0,7);
-  }
-
-  function bytesHuman(n){
-    const b = Number(n || 0);
-    if (b < 1024) return `${b} B`;
-    if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`;
-    if (b < 1024 * 1024 * 1024) return `${(b / (1024 * 1024)).toFixed(2)} MB`;
-    return `${(b / (1024 * 1024 * 1024)).toFixed(3)} GB`;
   }
 
   function escapeHtml(str){
@@ -139,25 +123,12 @@ const store = {
     // lazy-load extra panels
     if (name === "devices") loadDevices().catch(e=> showToast(e.message || "Failed to load devices", false));
     if (name === "exports") loadInvoicePreview().catch(e=> showToast(e.message || "Failed to load invoice", false));
-    if (name === "netlifypush") loadNetlifyPush().catch(e=> showToast(e.message || "Failed to load Netlify Push", false));
     if (name === "ghpush") loadGitHubPush().catch(e=> showToast(e.message || "Failed to load GitHub Push", false));
-    if (name === "appsuite") loadPushCharges().catch(()=>{});
     if (name === "voice") loadVoice().catch(e=> showToast(e.message || "Failed to load Voice", false));
     if (name === "monitor") refreshMonitorTab().catch(() => {});
   }
 
   $$(".tab").forEach(btn=> btn.addEventListener("click", ()=> switchTab(btn.dataset.tab)));
-
-  function requestedTabFromUrl(){
-    const allowed = new Set(["overview", "logs", "devices", "exports", "netlifypush", "ghpush", "appsuite", "monitor", "integrate"]);
-    const u = new URL(window.location.href);
-    const byQuery = (u.searchParams.get("tab") || "").toLowerCase().trim();
-    const byHash = (u.hash || "").replace(/^#/, "").toLowerCase().trim();
-    if (allowed.has(byQuery)) return byQuery;
-    if (allowed.has(byHash)) return byHash;
-    return "overview";
-  }
-  const initialTab = requestedTabFromUrl();
 
   const keyInput = $("#kaixuKey");
   const dashView = $("#dashView");
@@ -236,34 +207,6 @@ const store = {
     return data;
   }
 
-  async function loadPushCharges(month){
-    const m = (month || $("#monthPicker")?.value?.trim() || "").trim();
-    const qs = new URLSearchParams();
-    if (m) qs.set("month", m);
-    const data = await apiJson("/.netlify/functions/user-push-charges" + (qs.toString() ? `?${qs.toString()}` : ""));
-
-    if ($("#pushChargeTransparency") && data?.transparency) {
-      $("#pushChargeTransparency").textContent = data.transparency;
-    }
-
-    if ($("#pcNetlifyTotal")) $("#pcNetlifyTotal").textContent = money(data?.netlify?.total_cents || 0);
-    if ($("#pcGithubTotal")) $("#pcGithubTotal").textContent = money(data?.github?.total_cents || 0);
-    if ($("#pcTotal")) $("#pcTotal").textContent = money(data?.total_push_cents || 0);
-
-    if ($("#pcNetlifyMeta")) {
-      const d = Number(data?.netlify?.deploys_ready || 0).toLocaleString();
-      const b = bytesHuman(data?.netlify?.bytes_uploaded || 0);
-      $("#pcNetlifyMeta").textContent = `${d} deploys • ${b}`;
-    }
-    if ($("#pcGithubMeta")) {
-      const d = Number(data?.github?.pushes_done || 0).toLocaleString();
-      const b = bytesHuman(data?.github?.bytes_uploaded || 0);
-      $("#pcGithubMeta").textContent = `${d} pushes • ${b}`;
-    }
-
-    return data;
-  }
-
   async function loadLogs(month){
     const qs = new URLSearchParams();
     if (month) qs.set("month", month);
@@ -324,7 +267,6 @@ const store = {
       const m = $("#monthPicker")?.value?.trim() || "";
       try { await loadSummary(m); } catch {}
       try { await loadLogs(m);    } catch {}
-      try { await loadPushCharges(m); } catch {}
     }, 30_000);
   }
 
@@ -394,37 +336,20 @@ const store = {
   async function refreshAll(){
     const month = $("#monthPicker").value.trim();
     const m = month || "";
-    let firstErr = null;
-    try { await loadSummary(m); } catch(e) { firstErr = firstErr || e; showToast(e.message || "Failed to load summary", false); }
-    try { await loadLogs(m);    } catch(e) { firstErr = firstErr || e; showToast(e.message || "Failed to load logs", false); }
-    try { await loadPushCharges(m); } catch(e) { showToast(e.message || "Failed to load push charges", false); }
-    if (firstErr) throw firstErr;
+    try { await loadSummary(m); } catch(e) { showToast(e.message || "Failed to load summary", false); }
+    try { await loadLogs(m);    } catch(e) { showToast(e.message || "Failed to load logs", false); }
   }
 
   async function connect(){
-    const raw = keyInput.value;
-    const k = normalizeKeyInput(raw);
+    const k = keyInput.value.trim();
     if (!k) return showToast("Paste a key first.", false);
-    keyInput.value = k;
     store.key = k;
-    const month = $("#monthPicker")?.value?.trim() || "";
-
-    async function attemptConnect(){
-      await loadSummary(month);
-      try {
-        await loadLogs(month);
-      } catch (logsErr) {
-        showToast(logsErr.message || "Connected, but logs failed to load.", false);
-      }
-    }
 
     try {
-      await attemptConnect();
-      await loadPushCharges(month);
-
+      await refreshAll();
       setConnected(true);
       showToast("Connected.", true);
-      switchTab(initialTab);
+      switchTab("overview");
       startLivePolling();
 
       // prefill export month picker
@@ -432,11 +357,27 @@ const store = {
       if (exp && !exp.value) exp.value = $("#monthPicker")?.value?.trim() || monthKeyUTC();
 
     } catch (e) {
-      store.key = "";
       setConnected(false);
-      const msg = e?.detail?.error || e.message || "Unable to connect";
-      showToast(msg, false);
+      showToast(e.message || "Unable to connect", false);
     }
+  }
+
+  function disconnect(){
+    store.key = "";
+    keyInput.value = "";
+    setConnected(false);
+    stopLivePolling();
+    showToast("Disconnected.", true);
+  }
+
+  function bindFirstClick(selectors, handler){
+    for (const selector of selectors) {
+      const el = $(selector);
+      if (!el) continue;
+      el.addEventListener("click", handler);
+      return el;
+    }
+    return null;
   }
 
   // --- Show/hide key input toggle ---
@@ -452,18 +393,15 @@ const store = {
   })();
 
   // --- UI wiring ---
-  // Support both legacy and current button IDs so auth wiring does not break.
-  const connectBtn = $("#connectBtn") || $("#saveKeyBtn");
-  const monthBtn = $("#monthBtn") || $("#loadMonthBtn") || $("#refreshBtn");
+  bindFirstClick(["#saveKeyBtn", "#connectBtn"], connect);
+  bindFirstClick(["#refreshBtn", "#loadMonthBtn", "#monthBtn"], refreshAll);
+  bindFirstClick(["#clearKeyBtn", "#disconnectBtn"], disconnect);
 
-  connectBtn?.addEventListener("click", connect);
-  monthBtn?.addEventListener("click", refreshAll);
-  $("#disconnectBtn")?.addEventListener("click", ()=>{
-    store.key = "";
-    keyInput.value = "";
-    setConnected(false);
-    stopLivePolling();
-    showToast("Disconnected.", true);
+  keyInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      connect();
+    }
   });
 
   $("#refreshDevicesBtn")?.addEventListener("click", ()=> loadDevices().catch(e=> showToast(e.message || "Failed", false)));
@@ -578,7 +516,8 @@ const store = {
   async function loadHeartbeat(includeHistory) {
     const qs = includeHistory ? "?history=1" : "";
     try {
-      const url = "/.netlify/functions/gateway-heartbeat-read" + qs;
+      const base = normalizeBase(baseStore.apiBase);
+      const url = (base || "") + "/.netlify/functions/gateway-heartbeat-read" + qs;
       const res = await fetch(url);
       return await res.json();
     } catch { return null; }
@@ -670,275 +609,73 @@ const store = {
     monRefreshBtn.addEventListener("click", () => refreshMonitorTab().catch(() => {}));
   }
 
-  // -----------------------------
-  // Netlify Push UI (User Dashboard)
-  // -----------------------------
-  let nfHandlersInstalled = false;
-  let nfLastPushId = null;
-  let nfRole = null;
 
-  function setNfProgress(text){
-    const box = document.getElementById("nfProgressBox");
-    if (box) box.textContent = text || "";
+  // Base switch UI (optional: only runs if the modal exists on the page)
+  function effectiveBase(){
+    const b = normalizeBase(baseStore.apiBase);
+    return b || window.location.origin;
   }
 
-  function setNfTokenStatus(text){
-    const el = document.getElementById("nfTokenStatus");
-    if (el) el.textContent = text || "";
+  function openBaseModal(){
+    const modal = document.getElementById("baseModal");
+    if (!modal) return;
+    const input = document.getElementById("apiBaseInput");
+    const current = document.getElementById("apiBaseCurrent");
+    const health = document.getElementById("apiBaseHealthLink");
+    const saved = normalizeBase(baseStore.apiBase);
+    if (input) input.value = saved;
+    if (current) current.textContent = effectiveBase();
+    if (health) health.href = effectiveBase() + "/.netlify/functions/health";
+    modal.style.display = "grid";
   }
 
-  function fillNfProjectSelect(rows){
-    const sel = document.getElementById("nfProjectSelect");
-    if (!sel) return;
-    sel.innerHTML = `<option value="">Select mapped project…</option>` + (rows || []).map(p =>
-      `<option value="${escapeHtml(p.project_id)}" data-site="${escapeHtml(p.netlify_site_id || "")}">${escapeHtml(p.project_id)} · ${escapeHtml(p.name || "")} · ${escapeHtml(p.netlify_site_id || "")}</option>`
-    ).join("");
+  function closeBaseModal(){
+    const modal = document.getElementById("baseModal");
+    if (!modal) return;
+    modal.style.display = "none";
   }
 
-  async function refreshNetlifyTokenStatus(){
-    setNfTokenStatus("Netlify token: checking…");
-    try {
-      const st = await apiJson("/.netlify/functions/netlify-token");
-      if (st.connected) {
-        const login = st?.whoami?.email || st?.whoami?.full_name || st?.whoami?.id || "connected";
-        setNfTokenStatus(`Netlify token: connected (${login})`);
-      } else {
-        setNfTokenStatus("Netlify token: not connected");
-      }
-    } catch {
-      setNfTokenStatus("Netlify token: unknown (check key)");
+  function saveBase(){
+    const input = document.getElementById("apiBaseInput");
+    if (!input) return;
+    const raw = (input.value || "").trim();
+    if (raw && !/^https?:\/\//i.test(raw)) {
+      showToast("Gateway Base must start with http:// or https:// (or leave blank for this site).", false);
+      return;
     }
+    baseStore.apiBase = normalizeBase(raw);
+    const current = document.getElementById("apiBaseCurrent");
+    const health = document.getElementById("apiBaseHealthLink");
+    if (current) current.textContent = effectiveBase();
+    if (health) health.href = effectiveBase() + "/.netlify/functions/health";
+    showToast("Gateway Base saved. This dashboard will now call: " + effectiveBase(), true);
   }
 
-  async function loadNetlifyProjects(){
-    const data = await apiJson("/.netlify/functions/push-projects");
-    fillNfProjectSelect(data.projects || []);
-    return data.projects || [];
-  }
+  const baseBtn = document.getElementById("gatewayBaseBtn");
+  if (baseBtn) baseBtn.addEventListener("click", openBaseModal);
 
-  async function sha1HexFromBuffer(buf){
-    const digest = await crypto.subtle.digest("SHA-1", buf);
-    const bytes = new Uint8Array(digest);
-    return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
-  }
+  const baseClose = document.getElementById("apiBaseClose");
+  if (baseClose) baseClose.addEventListener("click", closeBaseModal);
 
-  function normalizeDeployPath(file){
-    return String(file?.webkitRelativePath || file?.name || "")
-      .replace(/^\/+/, "")
-      .replace(/\\/g, "/");
-  }
+  const baseSave = document.getElementById("apiBaseSave");
+  if (baseSave) baseSave.addEventListener("click", saveBase);
 
-  async function runNetlifyPush(){
-    const projectId = (document.getElementById("nfProjectId")?.value || document.getElementById("nfProjectSelect")?.value || "").trim();
-    const branch = (document.getElementById("nfBranch")?.value || "main").trim() || "main";
-    const title = (document.getElementById("nfTitle")?.value || "Kaixu Netlify Push").trim() || "Kaixu Netlify Push";
-    const filesInput = document.getElementById("nfFiles");
-    const files = Array.from(filesInput?.files || []);
+  const baseUseThis = document.getElementById("apiBaseUseThisSite");
+  if (baseUseThis) baseUseThis.addEventListener("click", ()=>{
+    baseStore.apiBase = "";
+    const input = document.getElementById("apiBaseInput");
+    if (input) input.value = "";
+    saveBase();
+  });
 
-    if (!projectId) throw new Error("Project ID is required.");
-    if (!files.length) throw new Error("Select at least one file or folder.");
-
-    const manifest = {};
-    const byDigest = new Map();
-
-    setNfProgress("Hashing files…");
-    for (let i = 0; i < files.length; i++) {
-      const f = files[i];
-      const p = normalizeDeployPath(f);
-      if (!p) continue;
-      const buf = await f.arrayBuffer();
-      const sha1 = await sha1HexFromBuffer(buf);
-      manifest[p] = sha1;
-      if (!byDigest.has(sha1)) {
-        byDigest.set(sha1, { path: p, file: f, buf });
-      }
-      setNfProgress(`Hashing files… ${i + 1}/${files.length}`);
-    }
-
-    const init = await apiJson("/.netlify/functions/push-init", {
-      method: "POST",
-      body: {
-        projectId,
-        branch,
-        title,
-        files: manifest
-      }
+  const modal = document.getElementById("baseModal");
+  if (modal) {
+    modal.addEventListener("click", (e)=>{
+      if (e.target === modal) closeBaseModal();
     });
-
-    const pushId = init.pushId;
-    nfLastPushId = pushId;
-    const copyBtn = document.getElementById("nfCopyPushIdBtn");
-    if (copyBtn) copyBtn.disabled = false;
-
-    const required = Array.isArray(init.required) ? init.required : [];
-    const uploadList = required.length ? required : Array.from(byDigest.keys());
-    setNfProgress(`Push ${pushId}\nUploading ${uploadList.length} required file digests…`);
-
-    for (let i = 0; i < uploadList.length; i++) {
-      const sha1 = uploadList[i];
-      const item = byDigest.get(sha1);
-      if (!item) throw new Error(`Missing local file for required digest: ${sha1}`);
-
-      await apiBinary(`/.netlify/functions/push-upload?pushId=${encodeURIComponent(pushId)}&path=${encodeURIComponent(item.path)}`, {
-        method: "PUT",
-        body: item.buf,
-        headers: {
-          "content-type": "application/octet-stream",
-          "x-content-sha1": sha1
-        }
-      });
-      setNfProgress(`Push ${pushId}\nUploaded ${i + 1}/${uploadList.length}`);
-    }
-
-    await apiJson("/.netlify/functions/push-complete", { method: "POST", body: { pushId } });
-    setNfProgress(`Push ${pushId}\nFinalizing deploy…`);
-
-    for (let i = 0; i < 75; i++) {
-      const st = await apiJson(`/.netlify/functions/push-status?pushId=${encodeURIComponent(pushId)}`);
-      const p = st.push || {};
-      const state = p.state || "unknown";
-      const url = p.url || "";
-      const err = p.error || "";
-      let line = `Push ${pushId}\nState: ${state}`;
-      if (url) line += `\nURL: ${url}`;
-      if (err) line += `\nError: ${err}`;
-      setNfProgress(line);
-      if (state === "ready") {
-        showToast("Netlify push complete.", true);
-        return;
-      }
-      if (state === "error") {
-        throw new Error(err || "Netlify deploy failed");
-      }
-      await new Promise(r => setTimeout(r, 2000));
-    }
-
-    throw new Error("Timed out waiting for deploy. Use Check Last Push.");
-  }
-
-  async function checkLastNetlifyPush(){
-    if (!nfLastPushId) throw new Error("No push ID yet. Start a push first.");
-    const st = await apiJson(`/.netlify/functions/push-status?pushId=${encodeURIComponent(nfLastPushId)}`);
-    const p = st.push || {};
-    let line = `Push ${nfLastPushId}\nState: ${p.state || "unknown"}`;
-    if (p.url) line += `\nURL: ${p.url}`;
-    if (p.error) line += `\nError: ${p.error}`;
-    setNfProgress(line);
-  }
-
-  async function loadNetlifyPush(){
-    try {
-      const who = await apiJson("/.netlify/functions/push-whoami");
-      nfRole = who.role || "deployer";
-    } catch {
-      nfRole = null;
-    }
-
-    await refreshNetlifyTokenStatus();
-    await loadNetlifyProjects();
-
-    const canAdmin = (nfRole === "admin" || nfRole === "owner");
-    const canDeploy = canAdmin || nfRole === "deployer";
-
-    ["nfSaveTokenBtn", "nfClearTokenBtn", "nfSaveProjectBtn"].forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.disabled = !canAdmin;
-      el.title = canAdmin ? "" : "Requires admin Kaixu key role";
+    window.addEventListener("keydown", (e)=>{
+      if (e.key === "Escape") closeBaseModal();
     });
-
-    ["nfStartPushBtn"].forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.disabled = !canDeploy;
-      el.title = canDeploy ? "" : "Requires deployer/admin Kaixu key role";
-    });
-
-    if (!nfHandlersInstalled) {
-      nfHandlersInstalled = true;
-
-      document.getElementById("nfRefreshBtn")?.addEventListener("click", ()=> loadNetlifyPush().catch(()=>{}));
-      document.getElementById("nfLoadProjectsBtn")?.addEventListener("click", async ()=> {
-        try {
-          await loadNetlifyProjects();
-          showToast("Netlify push projects loaded.", true);
-        } catch (e) {
-          showToast(e.detail?.error || e.message || "Failed to load projects", false);
-        }
-      });
-
-      document.getElementById("nfProjectSelect")?.addEventListener("change", (e) => {
-        const val = e.target.value || "";
-        if (!val) return;
-        const opt = e.target.options[e.target.selectedIndex];
-        const site = opt?.getAttribute("data-site") || "";
-        const pid = document.getElementById("nfProjectId");
-        const sid = document.getElementById("nfSiteId");
-        if (pid) pid.value = val;
-        if (sid) sid.value = site;
-      });
-
-      document.getElementById("nfSaveTokenBtn")?.addEventListener("click", async ()=> {
-        const inp = document.getElementById("nfPatInput");
-        const token = (inp?.value || "").trim();
-        if (!token) return showToast("Paste Netlify token first.", false);
-        try {
-          await apiJson("/.netlify/functions/netlify-token", { method: "POST", body: { token } });
-          if (inp) inp.value = "";
-          showToast("Netlify token saved.", true);
-          await refreshNetlifyTokenStatus();
-        } catch (e) {
-          showToast(e.detail?.error || e.message || "Failed to save token", false);
-        }
-      });
-
-      document.getElementById("nfClearTokenBtn")?.addEventListener("click", async ()=> {
-        if (!confirm("Clear Netlify token for this tenant?")) return;
-        try {
-          await apiJson("/.netlify/functions/netlify-token", { method: "DELETE" });
-          showToast("Netlify token cleared.", true);
-          await refreshNetlifyTokenStatus();
-        } catch (e) {
-          showToast(e.detail?.error || e.message || "Failed to clear token", false);
-        }
-      });
-
-      document.getElementById("nfSaveProjectBtn")?.addEventListener("click", async ()=> {
-        const project_id = (document.getElementById("nfProjectId")?.value || "").trim();
-        const name = (document.getElementById("nfProjectName")?.value || "").trim() || project_id;
-        const netlify_site_id = (document.getElementById("nfSiteId")?.value || "").trim();
-        if (!project_id) return showToast("Project ID is required.", false);
-        if (!netlify_site_id) return showToast("Netlify Site ID is required.", false);
-        try {
-          await apiJson("/.netlify/functions/push-projects", {
-            method: "POST",
-            body: { project_id, name, netlify_site_id }
-          });
-          showToast("Project mapping saved.", true);
-          await loadNetlifyProjects();
-        } catch (e) {
-          showToast(e.detail?.error || e.message || "Failed to save project", false);
-        }
-      });
-
-      document.getElementById("nfStartPushBtn")?.addEventListener("click", async ()=> {
-        try { await runNetlifyPush(); } catch (e) { showToast(e.detail?.error || e.message || "Netlify push failed", false); }
-      });
-
-      document.getElementById("nfCheckStatusBtn")?.addEventListener("click", async ()=> {
-        try { await checkLastNetlifyPush(); } catch (e) { showToast(e.detail?.error || e.message || "Status check failed", false); }
-      });
-
-      document.getElementById("nfCopyPushIdBtn")?.addEventListener("click", async ()=> {
-        if (!nfLastPushId) return;
-        try {
-          await navigator.clipboard.writeText(String(nfLastPushId));
-          showToast("Push ID copied.", true);
-        } catch {
-          showToast("Clipboard unavailable.", false);
-        }
-      });
-    }
   }
 
   // -----------------------------

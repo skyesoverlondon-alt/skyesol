@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skye Split Engine Ops</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/icon-192.png">
+  <link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="bg-layer"></div>
+    <main class="site">
+      <header class="topbar">
+        <div class="branding">
+          <img src="./assets/media/skydexia-logo.png" alt="Skyes Over London logo">
+          <div class="branding-copy">
+            <h1 data-brand-name>Skye Split Engine Ops</h1>
+            <p data-brand-sub>Skyes Over London · Offline money operations + backup vault</p>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="pill"><span class="dot"></span><span><strong>Mode:</strong> Offline-first</span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Currency:</strong> <span data-status-currency>USD</span></span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Sync:</strong> <span data-last-sync>Local only</span></span></div>
+        </div>
+      </header>
+
+      <nav class="navbar">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="engine.html">Split Engine</a>
+        <a class="nav-link" href="ops.html">Money Ops</a>
+        <a class="nav-link" href="receipts.html">Receipts</a>
+        <a class="nav-link" href="contacts.html">Contacts</a>
+        <a class="nav-link" href="vault.html">Backup Vault</a>
+        <a class="nav-link" href="settings.html">Settings</a>
+        <a class="nav-link" href="walkthrough.html">Walkthrough</a>
+        <a class="nav-link" href="help.html">Help</a>
+      </nav>
+
+      <section class="hero">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker">s0l26-0s · aggressive money ops lane</div>
+            <h2>Run recurring payouts, track deals, issue settlement receipts, and move CSV batches without touching the internet.</h2>
+            <p>This pass pushes Skye Split Engine into a harder money-operations build. You now have the original split calculator plus recurring payout templates, a deal ledger, settlement receipts, CSV batch import and export lanes, and the same local backup vault sitting underneath everything.</p>
+            <div class="hero-actions">
+              <a class="btn" href="ops.html">Open money ops</a>
+              <a class="btn-ghost" href="receipts.html">Issue receipts</a>
+              <a class="btn-ghost" href="vault.html">Protect with backups</a>
+              <a class="btn-soft" href="walkthrough.html">Walkthrough tutorial</a>
+            </div>
+          </div>
+          <div>
+            <img class="logo-float" src="./assets/media/skydexia-logo.png" alt="Skyes Over London brand mark">
+          </div>
+        </div>
+      </section>
+
+      <section class="grid-4">
+        <div class="small-card metric">
+          <div class="label">Saved contacts</div>
+          <div class="value" data-metric-contacts>0</div>
+          <div class="caption">People, vendors, payout recipients</div>
+        </div>
+        <div class="small-card metric">
+          <div class="label">Saved split plans</div>
+          <div class="value" data-metric-splits>0</div>
+          <div class="caption">Reusable payout math</div>
+        </div>
+        <div class="small-card metric">
+          <div class="label">Local snapshots</div>
+          <div class="value" data-metric-snapshots>0</div>
+          <div class="caption">Recovery points inside the vault</div>
+        </div>
+        <div class="small-card metric">
+          <div class="label">Planned payouts</div>
+          <div class="value" data-metric-total>$0.00</div>
+          <div class="caption">Across saved split plans</div>
+        </div>
+      </section>
+
+      <section class="grid-4" style="margin-top:18px;">
+        <div class="small-card metric">
+          <div class="label">Recurring templates</div>
+          <div class="value" data-metric-templates>0</div>
+          <div class="caption">Scheduled payout patterns</div>
+        </div>
+        <div class="small-card metric">
+          <div class="label">Deal ledger rows</div>
+          <div class="value" data-metric-deals>0</div>
+          <div class="caption">Pipeline and settlement tracking</div>
+        </div>
+        <div class="small-card metric">
+          <div class="label">Settlement receipts</div>
+          <div class="value" data-metric-receipts>0</div>
+          <div class="caption">Issued and saved locally</div>
+        </div>
+        <div class="small-card metric">
+          <div class="label">Ledger net</div>
+          <div class="value" data-metric-pipeline>$0.00</div>
+          <div class="caption">Across deal ledger entries</div>
+        </div>
+      </section>
+
+      <section class="grid-2" style="margin-top:18px;">
+        <article class="card">
+          <h3>What changed in the money operations build</h3>
+          <div class="badge-grid">
+            <div class="mini-badge"><strong>Recurring payout templates</strong><div class="caption">Run due payouts from saved split plans and roll forward the next date.</div></div>
+            <div class="mini-badge"><strong>Deal ledger</strong><div class="caption">Track gross, fees, holdbacks, reserves, status, due dates, and notes.</div></div>
+            <div class="mini-badge"><strong>Settlement receipts</strong><div class="caption">Save, print, export JSON, and import or export receipt CSV batches.</div></div>
+            <div class="mini-badge"><strong>CSV movement</strong><div class="caption">Batch import or export deals, templates, contacts, receipts, and split plans.</div></div>
+          </div>
+          <div class="note-box">Last local recovery point: <strong data-metric-last-snapshot>Not yet</strong>. The vault now protects the money-ops stores too.</div>
+        </article>
+        <article class="card">
+          <h3>Fast launch lanes</h3>
+          <div class="list">
+            <div class="list-item"><div><div class="split-label">1. Build split logic</div><div class="caption">Use Split Engine for the payout math and save the pattern.</div></div><a class="btn-soft" href="engine.html">Open</a></div>
+            <div class="list-item"><div><div class="split-label">2. Turn it recurring</div><div class="caption">Convert saved split plans into due-date driven payout templates.</div></div><a class="btn-soft" href="ops.html">Open</a></div>
+            <div class="list-item"><div><div class="split-label">3. Run the ledger</div><div class="caption">Track deals, notes, due dates, and status in one offline lane.</div></div><a class="btn-soft" href="ops.html">Open</a></div>
+            <div class="list-item"><div><div class="split-label">4. Issue settlement proof</div><div class="caption">Create printable receipts tied back to deals or split plans.</div></div><a class="btn-soft" href="receipts.html">Open</a></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid-2" style="margin-top:18px;">
+        <article class="list-card">
+          <h3>Recent recurring templates</h3>
+          <div data-recent-templates class="list"></div>
+        </article>
+        <article class="list-card">
+          <h3>Recent split plans</h3>
+          <div data-recent-splits class="list"></div>
+        </article>
+      </section>
+
+      <section class="grid-2" style="margin-top:18px;">
+        <article class="list-card">
+          <h3>Recent deal ledger rows</h3>
+          <div data-recent-deals class="list"></div>
+        </article>
+        <article class="list-card">
+          <h3>Recent settlement receipts</h3>
+          <div data-recent-receipts class="list"></div>
+        </article>
+      </section>
+
+      <section class="grid-2" style="margin-top:18px;">
+        <article class="list-card">
+          <h3>Recent snapshots</h3>
+          <div data-recent-snapshots class="list"></div>
+        </article>
+        <article class="card">
+          <h3>Recent local activity</h3>
+          <div data-activity class="list"></div>
+        </article>
+      </section>
+
+      <footer class="footer-block">
+        <h3>Contact</h3>
+        <div class="footer-contact">
+          <span>Skyes Over London</span>
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+          <a href="tel:+14804695416">(480) 469-5416</a>
+          <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <script type="module" src="./assets/dashboard.js"></script>
+</body>
+</html>

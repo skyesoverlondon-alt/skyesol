@@ -4,11 +4,8 @@
   "type": "module",
   "description": "Skyes Over London LC — full growth platform (static + Netlify Functions + Netlify Blobs)",
   "scripts": {
-    "build": "node scripts/audit-functions-deploy.js && node scripts/generate-site-menu.mjs",
+    "build": "node scripts/generate-site-menu.mjs",
     "gen-sitemap": "node scripts/generate-sitemap.js",
-    "functions:audit": "node scripts/audit-functions-deploy.js",
-    "functions:map": "node scripts/audit-functions-deploy.js --map",
-    "functions:map:json": "node scripts/audit-functions-deploy.js --json",
     "link-check": "node scripts/link-guardian.js",
     "link-check:fix": "node scripts/link-guardian.js --fix",
     "audit:internal-links": "node scripts/audit-internal-links.mjs",
@@ -16,13 +13,7 @@
     "meta:check": "node scripts/meta-templater.js --check"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.10.4",
     "@netlify/blobs": "^7.0.0",
-    "@netlify/neon": "^0.1.2",
-    "bcryptjs": "^3.0.3",
-    "cookie": "^1.1.1",
-    "jsonwebtoken": "^9.0.3",
-    "pg": "^8.20.0",
-    "yauzl": "^3.2.0"
+    "@netlify/neon": "^0.1.2"
   }
 }

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help · Skye Split Engine</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icons/icon-192.png">
+  <link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="bg-layer"></div>
+    <main class="site">
+      <header class="topbar">
+        <div class="branding">
+          <img src="./assets/media/skydexia-logo.png" alt="Skyes Over London logo">
+          <div class="branding-copy">
+            <h1 data-brand-name>Skye Split Engine</h1>
+            <p data-brand-sub>Skyes Over London · Offline money operations + backup vault</p>
+          </div>
+        </div>
+        <div class="status-row">
+          <div class="pill"><span class="dot"></span><span><strong>Help:</strong> Local guide</span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Currency:</strong> <span data-status-currency>USD</span></span></div>
+          <div class="pill"><span class="dot"></span><span><strong>Sync:</strong> <span data-last-sync>Local only</span></span></div>
+        </div>
+      </header>
+
+      
+<nav class="navbar">
+        <a class="nav-link" href="index.html">Dashboard</a>
+        <a class="nav-link" href="engine.html">Split Engine</a>
+        <a class="nav-link" href="ops.html">Money Ops</a>
+        <a class="nav-link" href="receipts.html">Receipts</a>
+        <a class="nav-link" href="contacts.html">Contacts</a>
+        <a class="nav-link" href="vault.html">Backup Vault</a>
+        <a class="nav-link" href="settings.html">Settings</a>
+        <a class="nav-link" href="walkthrough.html">Walkthrough</a>
+        <a class="nav-link" href="help.html">Help</a>
+      </nav>
+
+      <section class="grid-2">
+        <article class="card">
+          <div class="kicker">Quick use</div>
+          <div class="actions-row" style="margin:0 0 14px;"><a class="btn" href="walkthrough.html">Open walkthrough tutorial</a><a class="btn-soft" href="index.html">Back to dashboard</a></div>
+          <h2 class="page-title" style="font-size:2rem;">How to run the app well offline</h2>
+          <div class="list">
+            <div class="list-item">
+              <div>
+                <div class="split-label">1. Add contacts first</div>
+                <div class="caption">Save your common payout recipients or team members in Contacts so the split lane becomes faster.</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div>
+                <div class="split-label">2. Build payout math in Split Engine</div>
+                <div class="caption">Enter gross amount, deductions, choose a method, and save the scenario once the math looks correct.</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div>
+                <div class="split-label">3. Schedule recurring runs in Money Ops</div>
+                <div class="caption">Convert saved split plans into recurring payout templates, then push those runs into the deal ledger.</div>
+              </div>
+            </div>
+            <div class="list-item">
+              <div>
+                <div class="split-label">4. Issue receipts and protect the vault</div>
+                <div class="caption">Create settlement receipts after payouts, then keep JSON or encrypted backups outside the browser.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h3>Local activity lane</h3>
+          <div data-help-activity class="list"></div>
+        </article>
+      </section>
+
+      <section class="grid-2" style="margin-top:18px;">
+        <article class="card">
+          <h3>Important note</h3>
+          <div class="note-box">The app is fully static and has no external dependencies. It works by storing data in the browser. That means exported backups matter. For best resilience, keep both a local snapshot and an exported encrypted vault file.</div>
+        </article>
+        <article class="card">
+          <h3>Company contact</h3>
+          <div class="footer-contact" style="display:grid; gap:10px;">
+            <span>Skyes Over London</span>
+            <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+            <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+            <a href="tel:+14804695416">(480) 469-5416</a>
+            <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a>
+          </div>
+        </article>
+      </section>
+
+      <footer class="footer-block">
+        <h3>Contact</h3>
+        <div class="footer-contact">
+          <span>Skyes Over London</span>
+          <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a>
+          <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a>
+          <a href="tel:+14804695416">(480) 469-5416</a>
+          <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+  <script type="module" src="./assets/help.js"></script>
+</body>
+</html>

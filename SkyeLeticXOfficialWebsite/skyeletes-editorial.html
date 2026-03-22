@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Where Elite Meets Elevation: SkyeLetes Premium Under-6'0" League | Skyes Over London LC</title>
+    <meta name="title" content="Where Elite Meets Elevation: SkyeLetes Premium Under-6'0 League | Skyes Over London LC">
+    <meta name="description" content="The premier basketball league for elite players under 6'0. Pro-grade media, custom uniforms, portal profiles, and championship payouts across Arizona, Texas, Colorado, and Illinois.">
+    <meta name="keywords" content="basketball league, under 6 foot basketball, elite basketball, pro-am basketball, basketball tournament, Phoenix basketball, multi-state league, basketball media, player profiles, championship basketball">
+    <meta name="author" content="Skyes Over London LC">
+    <meta name="publisher" content="Solenterprises International Nexus & Holdings LLC">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://skyeletes.netlify.app/">
+    <meta property="og:title" content="Where Elite Meets Elevation: SkyeLetes Premium Under-6'0 League">
+    <meta property="og:description" content="The premier basketball league for elite players under 6'0. Pro-grade media, custom uniforms, portal profiles, and championship payouts.">
+    <meta property="og:site_name" content="Skyes Over London LC">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Where Elite Meets Elevation: SkyeLetes Premium Under-6'0 League">
+    <meta name="twitter:description" content="The premier basketball league for elite players under 6'0. Pro-grade media, custom uniforms, and championship payouts.">
+    <meta name="twitter:site" content="@SkyesOverLondon">
+    
+    <link rel="canonical" href="https://skyeletes.netlify.app/">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SportsOrganization",
+        "name": "SkyeLetes",
+        "alternateName": "SkyeLetes Premium League",
+        "url": "https://skyeletes.netlify.app/",
+        "sport": "Basketball",
+        "description": "Premium basketball league for elite players under 6'0 with pro-grade media, custom uniforms, and multi-state championships",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "3838 N Central Ave",
+            "addressLocality": "Phoenix",
+            "addressRegion": "AZ",
+            "postalCode": "85012",
+            "addressCountry": "US"
+        },
+        "telephone": "+1-(480) 469-5416",
+        "email": ["B2B@SOLEnterprises.org", "SkyesOverLondonLC@SOLEnterprises.org", "SkyesOverLondon@gmail.com"],
+        "areaServed": ["Arizona", "Texas", "Colorado", "Illinois"],
+        "parentOrganization": {
+            "@type": "Organization",
+            "name": "Skyes Over London LC"
+        }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-ink: #05010a;
+            --color-paper: #faf9f7;
+            --color-cream: #f5f3ef;
+            --color-gold: #ffd700;
+            --color-gold-dark: #f5c542;
+            --color-purple: #6d28ff;
+            --color-purple-dark: #5620cc;
+            --color-navy: #0b0214;
+            --color-slate: #8b7db8;
+            --color-mist: #e8e6f1;
+            --color-shadow: rgba(109, 40, 255, 0.15);
+            --color-danger: #ff3b6b;
+            --color-ok: #35ffb6;
+            
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Instrument Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-body);
+            background: var(--color-ink);
+            color: var(--color-paper);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Cinematic Opener */
+        .cinematic-opener {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--color-ink); z-index: 10000;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            animation: openerFadeOut 1s var(--ease-out-expo) 4.5s forwards;
+            pointer-events: none;
+        }
+        .cinematic-opener::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 20% 50%, rgba(109, 40, 255, 0.25) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 50%, rgba(255, 215, 0, 0.15) 0%, transparent 50%);
+            animation: gradientPulse 4s ease-in-out infinite;
+        }
+        @keyframes gradientPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        .opener-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+        .opener-text {
+            font-family: var(--font-display); color: var(--color-paper);
+            font-size: clamp(1rem, 3vw, 1.5rem); letter-spacing: 0.3em; text-transform: uppercase;
+            opacity: 0; transform: translateY(100%);
+            animation: slideUp 1s var(--ease-out-expo) 0.5s forwards;
+        }
+        .opener-title {
+            font-family: var(--font-display); color: var(--color-gold);
+            font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 600; line-height: 1.1;
+            margin: 1.5rem 0; opacity: 0; transform: translateY(100%);
+            animation: slideUp 1.2s var(--ease-out-expo) 1s forwards;
+        }
+        .opener-subtitle {
+            font-family: var(--font-body); color: var(--color-mist);
+            font-size: clamp(0.9rem, 2vw, 1.1rem); letter-spacing: 0.05em;
+            opacity: 0; animation: fadeIn 1.5s var(--ease-out-expo) 2s forwards;
+        }
+        .opener-divider {
+            width: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), var(--color-purple), transparent);
+            margin: 2rem auto; animation: expandLine 1.5s var(--ease-out-expo) 1.5s forwards;
+        }
+        .opener-company {
+            font-family: var(--font-mono); color: var(--color-slate);
+            font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+            margin-top: 2rem; opacity: 0; animation: fadeIn 1s var(--ease-out-expo) 3s forwards;
+        }
+        .progress-bar {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
+            width: 200px; height: 2px; background: rgba(255,255,255,0.1);
+            border-radius: 2px; overflow: hidden; z-index: 10001;
+            animation: fadeOut 0.5s var(--ease-out-expo) 4s forwards;
+        }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--color-purple), var(--color-gold));
+            width: 0; animation: progressFill 4s var(--ease-out-quart) forwards;
+        }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes expandLine { to { width: 200px; } }
+        @keyframes openerFadeOut { to { opacity: 0; visibility: hidden; } }
+        @keyframes progressFill { to { width: 100%; } }
+        @keyframes fadeOut { to { opacity: 0; } }
+
+        /* Navigation */
+        .nav {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 3rem;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: transparent;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+        .nav.scrolled {
+            background: rgba(5, 1, 10, 0.95); backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(255, 215, 0, 0.18); padding: 1rem 3rem;
+        }
+        .nav-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .nav-badge {
+            width: 42px; height: 42px; border-radius: 12px;
+            background: radial-gradient(circle at 30% 30%, rgba(255,215,0,.9), rgba(109,40,255,.85));
+            box-shadow: 0 10px 30px rgba(109,40,255,.25);
+            border: 1px solid rgba(255,215,0,.45);
+        }
+        .nav-brand-text { display: flex; flex-direction: column; gap: 0.1rem; }
+        .nav-brand-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--color-paper); }
+        .nav-brand-sub { font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-slate); letter-spacing: 0.1em; text-transform: uppercase; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--color-slate); text-decoration: none; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--color-gold); }
+        .nav-cta {
+            background: linear-gradient(135deg, rgba(255,215,0,.22), rgba(109,40,255,.18));
+            border: 1px solid rgba(255,215,0,.45); color: var(--color-paper);
+            padding: 0.75rem 1.5rem; font-size: 0.8rem; font-weight: 600;
+            letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none;
+            border-radius: 14px; transition: all 0.3s ease;
+        }
+        .nav-cta:hover { background: var(--color-gold); color: var(--color-ink); transform: translateY(-2px); }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; overflow: hidden; background: var(--color-ink);
+        }
+        .hero-video-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+        .hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(5, 1, 10, 0.3) 0%, rgba(5, 1, 10, 0.7) 100%),
+                        linear-gradient(90deg, rgba(5, 1, 10, 0.8) 0%, transparent 50%);
+        }
+        .hero-content { position: relative; z-index: 10; max-width: 900px; padding: 0 5rem; padding-top: 8rem; }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 1rem;
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gold);
+            letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2rem;
+            opacity: 0; animation: heroFadeUp 1s var(--ease-out-expo) 4.8s forwards;
+        }
+        .hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--color-gold); }
+        .hero-title {
+            font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 500; color: var(--color-paper); line-height: 1.05; margin-bottom: 2rem;
+            opacity: 0; animation: heroFadeUp 1.2s var(--ease-out-expo) 5s forwards;
+        }
+        .hero-title em { font-style: italic; color: var(--color-gold); }
+        .hero-title .purple { color: var(--color-purple); }
+        .hero-description {
+            font-size: 1.15rem; color: var(--color-mist); line-height: 1.8;
+            max-width: 600px; margin-bottom: 3rem;
+            opacity: 0; animation: heroFadeUp 1.2s var(--ease-out-expo) 5.2s forwards;
+        }
+        .hero-actions {
+            display: flex; gap: 1.5rem; flex-wrap: wrap;
+            opacity: 0; animation: heroFadeUp 1.2s var(--ease-out-expo) 5.4s forwards;
+        }
+        .hero-btn {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            padding: 1.25rem 2.5rem; font-size: 0.85rem; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+            transition: all 0.4s var(--ease-out-expo); border-radius: 14px;
+        }
+        .hero-btn-primary {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+            color: var(--color-ink); border: 1px solid var(--color-gold);
+        }
+        .hero-btn-primary:hover { background: var(--color-paper); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3); }
+        .hero-btn-secondary { background: transparent; color: var(--color-paper); border: 1px solid rgba(255,255,255,0.3); }
+        .hero-btn-secondary:hover { border-color: var(--color-purple); color: var(--color-purple); background: rgba(109, 40, 255, 0.1); }
+        .hero-btn svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+        .hero-btn:hover svg { transform: translateX(4px); }
+        @keyframes heroFadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-scroll-indicator {
+            position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+            color: var(--color-mist); opacity: 0;
+            animation: heroFadeUp 1s var(--ease-out-expo) 5.6s forwards;
+        }
+        .hero-scroll-indicator span { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+        .scroll-line {
+            width: 1px; height: 60px;
+            background: linear-gradient(180deg, var(--color-gold), var(--color-purple), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+        @keyframes scrollPulse { 0%, 100% { opacity: 0.3; transform: scaleY(0.5); } 50% { opacity: 1; transform: scaleY(1); } }
+
+        /* Animation Section */
+        .hero-animation-section {
+            background: var(--color-ink); padding: 8rem 5rem;
+            position: relative; overflow: hidden; min-height: 80vh;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .animation-container { position: relative; width: 100%; max-width: 1200px; margin: 0 auto; }
+        .network-canvas {
+            position: absolute; top: -100px; left: -100px;
+            width: calc(100% + 200px); height: calc(100% + 200px); pointer-events: none;
+        }
+        .animation-content { position: relative; z-index: 10; text-align: center; }
+        .animated-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 80px; height: 80px; position: relative; margin-bottom: 2rem;
+        }
+        .badge-pulse {
+            position: absolute; width: 100%; height: 100%;
+            border: 2px solid var(--color-gold); border-radius: 50%;
+            animation: badgePulse 2s ease-out infinite;
+        }
+        .badge-pulse::before {
+            content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 1px solid var(--color-purple); border-radius: 50%; opacity: 0.5;
+            animation: badgePulse 2s ease-out infinite 0.5s;
+        }
+        @keyframes badgePulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.8); opacity: 0; } }
+        .badge-icon { font-size: 2rem; position: relative; z-index: 2; animation: iconFloat 3s ease-in-out infinite; }
+        @keyframes iconFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .animation-title { margin-bottom: 3rem; }
+        .title-line {
+            display: block; font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 500;
+            color: var(--color-paper); line-height: 1.1;
+            opacity: 0; transform: translateY(30px);
+            animation: titleReveal 0.8s var(--ease-out-expo) forwards;
+        }
+        .title-line:nth-child(1) { animation-delay: 0.2s; }
+        .title-line:nth-child(2) { animation-delay: 0.4s; }
+        .title-line:nth-child(3) { animation-delay: 0.6s; }
+        .title-line.highlight { color: var(--color-gold); font-style: italic; }
+        .title-line.purple-highlight { color: var(--color-purple); }
+        @keyframes titleReveal { to { opacity: 1; transform: translateY(0); } }
+        .animated-stats-ring { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin: 4rem 0; }
+        .ring-stat {
+            position: relative; opacity: 0; transform: scale(0.8);
+            animation: ringStatReveal 0.6s var(--ease-out-expo) forwards;
+            animation-delay: var(--delay);
+        }
+        @keyframes ringStatReveal { to { opacity: 1; transform: scale(1); } }
+        .ring-stat-inner {
+            width: 120px; height: 120px; border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; position: relative;
+            background: rgba(5, 1, 10, 0.5); backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+        .ring-stat:hover .ring-stat-inner {
+            border-color: var(--color-gold); transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+        }
+        .ring-stat-inner::before {
+            content: ''; position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
+            border-radius: 50%; border: 1px solid transparent; border-top-color: var(--color-purple);
+            animation: ringRotate 3s linear infinite;
+        }
+        @keyframes ringRotate { to { transform: rotate(360deg); } }
+        .ring-number, .ring-number-text { font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--color-gold); }
+        .ring-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-mist); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
+        .animation-tagline { font-size: 1.1rem; color: var(--color-mist); max-width: 500px; margin: 0 auto; opacity: 0; animation: fadeIn 1s ease 1s forwards; }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: linear-gradient(135deg, rgba(109, 40, 255, 0.15), rgba(255, 215, 0, 0.08));
+            border-top: 1px solid rgba(255, 215, 0, 0.18);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.18);
+            padding: 4rem 5rem; display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 2rem; position: relative; overflow: hidden;
+        }
+        .stat-item {
+            position: relative; z-index: 2; text-align: center;
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.8s var(--ease-out-expo);
+        }
+        .stat-item.visible { opacity: 1; transform: translateY(0); }
+        .stat-number { font-family: var(--font-display); font-size: 3.5rem; font-weight: 600; color: var(--color-gold); line-height: 1; margin-bottom: 0.5rem; }
+        .stat-label { font-size: 0.85rem; color: var(--color-mist); letter-spacing: 0.05em; }
+
+        /* Article */
+        .article { max-width: 1400px; margin: 0 auto; padding: 8rem 5rem; background: var(--color-paper); color: var(--color-ink); }
+        .article-header { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-bottom: 6rem; padding-bottom: 6rem; border-bottom: 1px solid var(--color-mist); }
+        .article-meta { display: flex; flex-direction: column; gap: 2rem; }
+        .article-category { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-purple); letter-spacing: 0.15em; text-transform: uppercase; }
+        .article-date { font-size: 0.9rem; color: var(--color-slate); }
+        .article-author { display: flex; align-items: center; gap: 1rem; margin-top: auto; }
+        .author-avatar {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-display); font-size: 1.2rem; color: var(--color-paper); font-weight: 600;
+        }
+        .author-info { display: flex; flex-direction: column; gap: 0.2rem; }
+        .author-name { font-weight: 600; font-size: 0.95rem; color: var(--color-ink); }
+        .author-role { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-slate); }
+        .article-intro { font-family: var(--font-display); font-size: 1.75rem; font-weight: 400; line-height: 1.5; color: var(--color-ink); }
+        .article-intro em { font-style: italic; color: var(--color-purple); }
+        .article-body { display: grid; grid-template-columns: 280px 1fr; gap: 6rem; }
+        .article-sidebar { position: sticky; top: 120px; height: fit-content; }
+        .sidebar-nav { display: flex; flex-direction: column; gap: 0.75rem; }
+        .sidebar-nav-title { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-slate); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-mist); }
+        .sidebar-nav a { font-size: 0.9rem; color: var(--color-slate); text-decoration: none; padding: 0.5rem 0; padding-left: 1rem; border-left: 2px solid transparent; transition: all 0.3s ease; }
+        .sidebar-nav a:hover, .sidebar-nav a.active { color: var(--color-ink); border-left-color: var(--color-purple); }
+        .article-content h2 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 500; color: var(--color-ink); margin-top: 4rem; margin-bottom: 1.5rem; line-height: 1.2; }
+        .article-content h2:first-child { margin-top: 0; }
+        .article-content h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--color-ink); margin-top: 3rem; margin-bottom: 1rem; }
+        .article-content p { font-size: 1.1rem; color: var(--color-ink); line-height: 1.85; margin-bottom: 1.5rem; }
+        .article-content p.lead { font-size: 1.3rem; color: var(--color-slate); line-height: 1.7; }
+
+        /* Feature Cards */
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin: 3rem 0; }
+        .feature-card {
+            background: var(--color-cream); padding: 2.5rem; position: relative;
+            overflow: hidden; transition: all 0.4s var(--ease-out-expo); border-radius: 18px;
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(180deg, var(--color-gold), var(--color-purple));
+            transform: scaleY(0); transform-origin: top;
+            transition: transform 0.4s var(--ease-out-expo); border-radius: 4px 0 0 4px;
+        }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(109, 40, 255, 0.1); }
+        .feature-card:hover::before { transform: scaleY(1); }
+        .feature-icon {
+            width: 48px; height: 48px; background: var(--color-ink);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem; border-radius: 12px;
+        }
+        .feature-icon svg { width: 24px; height: 24px; color: var(--color-gold); }
+        .feature-card h4 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-ink); margin-bottom: 0.75rem; }
+        .feature-card p { font-size: 0.95rem; color: var(--color-slate); line-height: 1.7; margin-bottom: 0; }
+
+        /* Pull Quote */
+        .pull-quote { margin: 4rem 0; padding: 3rem 4rem; background: var(--color-ink); position: relative; border-radius: 18px; }
+        .pull-quote::before {
+            content: '"'; position: absolute; top: -20px; left: 2rem;
+            font-family: var(--font-display); font-size: 8rem; color: var(--color-gold); opacity: 0.3; line-height: 1;
+        }
+        .pull-quote blockquote {
+            font-family: var(--font-display); font-size: 1.75rem; font-weight: 400;
+            font-style: italic; color: var(--color-paper); line-height: 1.5; position: relative; z-index: 2;
+        }
+        .pull-quote cite { display: block; font-family: var(--font-body); font-size: 0.9rem; font-style: normal; color: var(--color-gold); margin-top: 1.5rem; }
+
+        /* Animated List */
+        .animated-list { list-style: none; margin: 2rem 0; }
+        .animated-list li {
+            display: flex; align-items: flex-start; gap: 1rem;
+            padding: 1.25rem 0; border-bottom: 1px solid var(--color-mist);
+            opacity: 0; transform: translateX(-20px);
+            transition: all 0.6s var(--ease-out-expo);
+        }
+        .animated-list li.visible { opacity: 1; transform: translateX(0); }
+        .list-icon {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-purple));
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; border-radius: 8px;
+        }
+        .list-icon svg { width: 16px; height: 16px; color: var(--color-ink); }
+        .list-content h5 { font-weight: 600; font-size: 1rem; color: var(--color-ink); margin-bottom: 0.25rem; }
+        .list-content p { font-size: 0.95rem; color: var(--color-slate); margin-bottom: 0; }
+
+        /* Journey Showcase */
+        .animated-showcase {
+            margin: 4rem 0; background: var(--color-ink); padding: 4rem;
+            position: relative; overflow: hidden; border-radius: 18px;
+        }
+        .animated-showcase::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at 0% 0%, rgba(109, 40, 255, 0.12) 0%, transparent 40%),
+                        radial-gradient(ellipse at 100% 100%, rgba(255, 215, 0, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .showcase-header { text-align: center; margin-bottom: 4rem; position: relative; z-index: 2; }
+        .showcase-eyebrow {
+            display: inline-flex; align-items: center; gap: 1rem;
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gold);
+            letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;
+        }
+        .showcase-eyebrow::before, .showcase-eyebrow::after { content: ''; width: 30px; height: 1px; background: var(--color-gold); }
+        .showcase-title { font-family: var(--font-display); font-size: 2.5rem; font-weight: 500; color: var(--color-paper); margin: 0; }
+        .journey-animation { position: relative; z-index: 2; }
+        .journey-track { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255, 215, 0, 0.2); transform: translateX(-50%); }
+        .journey-progress { position: absolute; top: 0; left: 0; width: 100%; height: 0; background: linear-gradient(180deg, var(--color-gold), var(--color-purple)); animation: progressGrow 3s ease-out forwards; animation-delay: 0.5s; }
+        @keyframes progressGrow { to { height: 100%; } }
+        .journey-steps { display: flex; flex-direction: column; gap: 3rem; }
+        .journey-step {
+            display: grid; grid-template-columns: 1fr auto 1fr; gap: 3rem; align-items: center;
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.6s var(--ease-out-expo);
+        }
+        .journey-step.visible { opacity: 1; transform: translateY(0); }
+        .journey-step:nth-child(odd) .step-content { grid-column: 1; text-align: right; }
+        .journey-step:nth-child(odd) .step-node { grid-column: 2; }
+        .journey-step:nth-child(odd)::after { content: ''; grid-column: 3; }
+        .journey-step:nth-child(even) .step-content { grid-column: 3; text-align: left; }
+        .journey-step:nth-child(even) .step-node { grid-column: 2; }
+        .journey-step:nth-child(even)::before { content: ''; grid-column: 1; }
+        .step-node { position: relative; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
+        .node-pulse { position: absolute; width: 100%; height: 100%; border: 2px solid var(--color-gold); border-radius: 50%; opacity: 0; animation: nodePulse 2s ease-out infinite; }
+        .journey-step.active .node-pulse { opacity: 1; }
+        @keyframes nodePulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.5); opacity: 0; } }
+        .node-icon {
+            width: 60px; height: 60px; background: var(--color-ink);
+            border: 2px solid rgba(255, 215, 0, 0.3); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 2; transition: all 0.4s ease;
+        }
+        .journey-step:hover .node-icon, .journey-step.active .node-icon {
+            border-color: var(--color-gold); background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+        .node-icon svg { width: 24px; height: 24px; color: var(--color-gold); }
+        .step-content { max-width: 350px; }
+        .step-number { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-purple); letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem; }
+        .step-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--color-paper); margin: 0 0 0.5rem; }
+        .step-desc { font-size: 0.9rem; color: var(--color-mist); line-height: 1.6; margin: 0; }
+        .showcase-cta { text-align: center; margin-top: 4rem; position: relative; z-index: 2; }
+        .showcase-btn {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            padding: 1.25rem 2.5rem;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+            color: var(--color-ink); font-size: 0.85rem; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+            transition: all 0.4s var(--ease-out-expo); border-radius: 14px;
+        }
+        .showcase-btn:hover { background: var(--color-paper); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3); }
+        .showcase-btn svg { width: 18px; height: 18px; transition: transform 0.3s ease; }
+        .showcase-btn:hover svg { transform: translateX(5px); }
+
+        /* CTA Section */
+        .cta-section { background: var(--color-ink); margin: 6rem -5rem; padding: 6rem 5rem; position: relative; overflow: hidden; }
+        .cta-section::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: radial-gradient(ellipse at 100% 50%, rgba(109, 40, 255, 0.2) 0%, transparent 60%); }
+        .cta-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; }
+        .cta-text h3 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 500; color: var(--color-paper); margin-bottom: 1rem; }
+        .cta-text p { font-size: 1.1rem; color: var(--color-mist); margin-bottom: 0; }
+        .cta-button {
+            display: inline-flex; align-items: center; gap: 1rem;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+            color: var(--color-ink); font-size: 0.9rem; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+            transition: all 0.4s var(--ease-out-expo); border-radius: 14px;
+        }
+        .cta-button:hover { background: var(--color-paper); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3); }
+        .cta-button svg { width: 18px; height: 18px; transition: transform 0.3s ease; }
+        .cta-button:hover svg { transform: translateX(4px); }
+
+        /* Pricing Grid */
+        .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin: 3rem 0; }
+        .pricing-card { background: var(--color-cream); padding: 3rem; position: relative; transition: all 0.4s var(--ease-out-expo); border-radius: 18px; border: 2px solid transparent; }
+        .pricing-card.featured { border-color: var(--color-gold); background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(109, 40, 255, 0.05)); }
+        .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(109, 40, 255, 0.1); }
+        .pricing-badge { position: absolute; top: -12px; right: 24px; background: linear-gradient(135deg, var(--color-gold), var(--color-purple)); color: var(--color-ink); padding: 6px 16px; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 999px; }
+        .pricing-price { font-family: var(--font-display); font-size: 3.5rem; font-weight: 600; color: var(--color-ink); line-height: 1; margin-bottom: 0.5rem; }
+        .pricing-price span { font-size: 1rem; color: var(--color-slate); }
+        .pricing-title { font-weight: 600; font-size: 1.1rem; color: var(--color-ink); margin-bottom: 1.5rem; }
+        .pricing-features { list-style: none; margin: 0; padding: 0; }
+        .pricing-features li { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0; font-size: 0.95rem; color: var(--color-slate); }
+        .pricing-features svg { width: 16px; height: 16px; color: var(--color-ok); flex-shrink: 0; }
+
+        /* Issues/States Grid */
+        .issues-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--color-mist); margin: 3rem 0; border-radius: 18px; overflow: hidden; }
+        .issue-card { background: var(--color-paper); padding: 3rem; position: relative; transition: all 0.4s var(--ease-out-expo); }
+        .issue-card::after { content: ''; position: absolute; bottom: 0; left: 3rem; right: 3rem; height: 3px; background: linear-gradient(90deg, var(--color-gold), var(--color-purple)); transform: scaleX(0); transition: transform 0.4s var(--ease-out-expo); border-radius: 3px; }
+        .issue-card:hover { background: var(--color-cream); }
+        .issue-card:hover::after { transform: scaleX(1); }
+        .issue-number { font-family: var(--font-display); font-size: 3rem; font-weight: 600; color: var(--color-mist); line-height: 1; margin-bottom: 1rem; transition: color 0.4s ease; }
+        .issue-card:hover .issue-number { color: var(--color-purple); }
+        .issue-card h4 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--color-ink); margin-bottom: 1rem; }
+        .issue-card p { font-size: 0.95rem; color: var(--color-slate); line-height: 1.7; margin-bottom: 0; }
+
+        /* Founder Section */
+        .founder-section { background: var(--color-ink); margin: 6rem -5rem; padding: 8rem 5rem; position: relative; overflow: hidden; }
+        .founder-backdrop { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 0% 0%, rgba(255, 215, 0, 0.12) 0%, transparent 50%), radial-gradient(ellipse at 100% 100%, rgba(109, 40, 255, 0.15) 0%, transparent 50%); }
+        .founder-content { position: relative; z-index: 2; display: grid; grid-template-columns: 400px 1fr; gap: 6rem; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .founder-image-container { position: relative; }
+        .founder-image-frame { position: relative; width: 100%; aspect-ratio: 3/4; overflow: hidden; border-radius: 18px; }
+        .founder-image { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%); transition: all 0.6s var(--ease-out-expo); }
+        .founder-image-frame:hover .founder-image { filter: grayscale(0%); transform: scale(1.03); }
+        .founder-image-accent { position: absolute; top: -20px; left: -20px; width: calc(100% + 40px); height: calc(100% + 40px); border: 1px solid var(--color-gold); opacity: 0.3; pointer-events: none; border-radius: 24px; }
+        .founder-badge { position: absolute; bottom: -20px; right: -20px; background: linear-gradient(135deg, var(--color-gold), var(--color-purple)); padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; border-radius: 14px; }
+        .founder-badge .badge-icon { font-size: 1.5rem; }
+        .founder-badge .badge-text { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink); }
+        .founder-info { color: var(--color-paper); }
+        .founder-eyebrow { display: inline-flex; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .founder-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--color-gold); }
+        .founder-name { font-family: var(--font-display); font-size: 3.5rem; font-weight: 500; color: var(--color-paper); line-height: 1.1; margin-bottom: 1rem; }
+        .founder-title { font-size: 1.1rem; color: var(--color-mist); line-height: 1.6; margin-bottom: 0; }
+        .founder-subtitle { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-gold); letter-spacing: 0.05em; }
+        .founder-divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--color-gold), var(--color-purple)); margin: 2rem 0; }
+        .founder-bio { font-size: 1rem; color: var(--color-mist); line-height: 1.8; margin-bottom: 1rem; }
+        .founder-stats { display: flex; gap: 3rem; margin: 2.5rem 0; padding: 2rem 0; border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .founder-stat { display: flex; flex-direction: column; gap: 0.25rem; }
+        .founder-stat-number { font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--color-gold); }
+        .founder-stat-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-slate); letter-spacing: 0.1em; text-transform: uppercase; }
+        .founder-strengths { display: flex; flex-direction: column; gap: 0.75rem; margin: 2rem 0; }
+        .strength-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; color: var(--color-mist); }
+        .strength-item svg { width: 18px; height: 18px; color: var(--color-gold); flex-shrink: 0; }
+        .founder-location { display: flex; align-items: center; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-slate); letter-spacing: 0.05em; margin: 2rem 0; }
+        .founder-location svg { width: 16px; height: 16px; color: var(--color-purple); }
+        .founder-link { display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2rem; background: transparent; border: 1px solid var(--color-gold); color: var(--color-gold); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; transition: all 0.4s var(--ease-out-expo); border-radius: 14px; }
+        .founder-link:hover { background: var(--color-gold); color: var(--color-ink); }
+        .founder-link svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+        .founder-link:hover svg { transform: translateX(4px); }
+
+        /* Testimonials */
+        .testimonials { background: var(--color-cream); margin: 6rem -5rem; padding: 6rem 5rem; }
+        .testimonials-header { text-align: center; margin-bottom: 4rem; }
+        .testimonials-header h3 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 500; color: var(--color-ink); }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .testimonial-card { background: var(--color-paper); padding: 2.5rem; position: relative; transition: all 0.4s var(--ease-out-expo); border-radius: 18px; }
+        .testimonial-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(109, 40, 255, 0.1); }
+        .testimonial-stars { display: flex; gap: 0.25rem; margin-bottom: 1.5rem; }
+        .testimonial-stars svg { width: 16px; height: 16px; color: var(--color-gold); fill: var(--color-gold); }
+        .testimonial-text { font-size: 1rem; color: var(--color-ink); line-height: 1.7; margin-bottom: 1.5rem; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--color-mist); }
+        .testimonial-avatar { width: 40px; height: 40px; background: linear-gradient(135deg, var(--color-purple), var(--color-gold)); border-radius: 50%; }
+        .testimonial-info { display: flex; flex-direction: column; }
+        .testimonial-name { font-weight: 600; font-size: 0.9rem; color: var(--color-ink); }
+        .testimonial-role { font-size: 0.8rem; color: var(--color-slate); }
+
+        /* Footer */
+        .footer { background: var(--color-ink); padding: 6rem 5rem 3rem; color: var(--color-paper); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-brand h4 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .footer-brand .subsidiary { font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-slate); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+        .footer-brand p { font-size: 0.95rem; color: var(--color-mist); line-height: 1.7; max-width: 300px; }
+        .footer-links h5 { font-weight: 600; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-links a { font-size: 0.9rem; color: var(--color-mist); text-decoration: none; transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--color-gold); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+        .footer-copyright { font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-slate); letter-spacing: 0.05em; }
+        .footer-legal { display: flex; gap: 2rem; }
+        .footer-legal a { font-size: 0.8rem; color: var(--color-mist); text-decoration: none; transition: color 0.3s ease; }
+        .footer-legal a:hover { color: var(--color-gold); }
+
+        /* Animations */
+        .fade-up { opacity: 0; transform: translateY(40px); transition: all 0.8s var(--ease-out-expo); }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+
+        /* Responsive */
+        @media (max-width: 1200px) { .article-body { grid-template-columns: 1fr; } .article-sidebar { display: none; } }
+        @media (max-width: 1024px) {
+            .nav { padding: 1rem 2rem; } .nav-links { display: none; }
+            .hero-content { padding: 0 3rem; }
+            .hero-animation-section { padding: 5rem 3rem; min-height: 70vh; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 3rem; }
+            .article { padding: 5rem 3rem; }
+            .article-header { grid-template-columns: 1fr; gap: 3rem; }
+            .feature-grid, .pricing-grid, .issues-grid, .testimonial-grid { grid-template-columns: 1fr; }
+            .cta-section, .testimonials, .founder-section { margin: 4rem -3rem; padding: 4rem 3rem; }
+            .cta-content { grid-template-columns: 1fr; text-align: center; }
+            .founder-content { grid-template-columns: 1fr; gap: 4rem; text-align: center; }
+            .founder-image-container { max-width: 350px; margin: 0 auto; }
+            .founder-eyebrow::before { display: none; }
+            .founder-stats { justify-content: center; }
+            .founder-strengths { align-items: center; }
+            .founder-location { justify-content: center; }
+            .animated-showcase { padding: 3rem 2rem; }
+            .journey-step { grid-template-columns: auto 1fr; gap: 1.5rem; }
+            .journey-track { left: 35px; }
+            .journey-step:nth-child(odd) .step-content, .journey-step:nth-child(even) .step-content { grid-column: 2; text-align: left; }
+            .journey-step:nth-child(odd) .step-node, .journey-step:nth-child(even) .step-node { grid-column: 1; }
+            .journey-step:nth-child(odd)::after, .journey-step:nth-child(even)::before { display: none; }
+            .step-content { max-width: none; }
+            .animated-stats-ring { gap: 1.5rem; }
+            .ring-stat-inner { width: 100px; height: 100px; }
+            .ring-number, .ring-number-text { font-size: 1.5rem; }
+            .footer { padding: 4rem 3rem 2rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+        }
+        @media (max-width: 768px) {
+            .hero-content { padding: 0 1.5rem; padding-top: 6rem; }
+            .hero-animation-section { padding: 4rem 1.5rem; }
+            .stats-bar { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+            .stat-number { font-size: 2.5rem; }
+            .article { padding: 3rem 1.5rem; }
+            .pull-quote { padding: 2rem; }
+            .pull-quote blockquote { font-size: 1.25rem; }
+            .cta-section, .testimonials, .founder-section { margin: 3rem -1.5rem; padding: 3rem 1.5rem; }
+            .cta-text h3 { font-size: 1.75rem; }
+            .founder-name { font-size: 2.5rem; }
+            .founder-stats { flex-direction: column; gap: 1.5rem; align-items: center; }
+            .founder-image-container { max-width: 280px; }
+            .animated-showcase { padding: 2rem 1.5rem; margin: 3rem 0; }
+            .showcase-title { font-size: 1.75rem; }
+            .step-node { width: 50px; height: 50px; }
+            .node-icon { width: 45px; height: 45px; }
+            .node-icon svg { width: 20px; height: 20px; }
+            .journey-track { left: 25px; }
+            .animated-stats-ring { gap: 1rem; }
+            .ring-stat-inner { width: 80px; height: 80px; }
+            .ring-number, .ring-number-text { font-size: 1.25rem; }
+            .ring-label { font-size: 0.55rem; }
+            .footer { padding: 3rem 1.5rem 2rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+    </style>
+  <!-- PWA -->
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <meta name="theme-color" content="#2b0b4e" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <script defer src="assets/global-nav.js"></script>
+</head>
+<body>
+    <!-- Cinematic Opening Sequence -->
+    <div class="cinematic-opener">
+        <div class="opener-content">
+            <div class="opener-line"><p class="opener-text">A Skyes Over London LC Production</p></div>
+            <div class="opener-line"><h1 class="opener-title">SkyeLetes</h1></div>
+            <div class="opener-divider"></div>
+            <p class="opener-subtitle">Premium Under-6'0" League • Multi-State Championships</p>
+            <p class="opener-company">A Subsidiary of Solenterprises International Nexus & Holdings LLC</p>
+        </div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a class="nav-brand" href="home.html">
+            <img src="https://cdn1.sharemyimage.com/2026/02/09/SOL_Tiger_Logo_transparent_cropped.png" alt="SkyeLetes Logo" class="nav-logo" style="height: 48px; width: auto;">
+            <div class="nav-brand-text">
+                <span class="nav-brand-name">SkyeLetes</span>
+                <span class="nav-brand-sub">Premium League • Under 6'0"</span>
+            </div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#vision">The Vision</a></li>
+            <li><a href="#features">What You Get</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#states">States</a></li>
+            <li><a href="#founder">Founder</a></li>
+        </ul>
+        <a href="players.html" class="nav-cta">Join as Player</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-video-container">
+            <canvas id="heroCanvas" class="hero-canvas"></canvas>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <span class="hero-eyebrow">Premium Basketball League • 4K Media • Portal Profiles</span>
+            <h1 class="hero-title">Where <em>Elite</em> Meets <span class="purple">Elevation</span></h1>
+            <p class="hero-description">SkyeLetes is the premier basketball league for elite players under 6'0"—built to scale state-by-state with pro-grade media, custom uniforms, personal landing pages, and championship payouts that turn park hoopers into portfolio-ready athletes.</p>
+            <div class="hero-actions">
+                <a href="players.html" class="hero-btn hero-btn-primary">
+                    Player Registration
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </a>
+                <a href="owners-intake.html" class="hero-btn hero-btn-secondary">
+                    View Team Ownership
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Animation Section -->
+    <section id="hero-animation" class="hero-animation-section">
+        <div class="animation-container">
+            <canvas id="networkCanvas" class="network-canvas"></canvas>
+            <div class="animation-content">
+                <div class="animated-badge">
+                    <div class="badge-pulse"></div>
+                    <span class="badge-icon">🏀</span>
+                </div>
+                <h2 class="animation-title">
+                    <span class="title-line">Built for</span>
+                    <span class="title-line highlight">Under 6'0"</span>
+                    <span class="title-line purple-highlight">Athletes</span>
+                </h2>
+                <div class="animated-stats-ring">
+                    <div class="ring-stat" style="--delay: 0s;"><div class="ring-stat-inner"><span class="ring-number" data-target="4">0</span><span class="ring-label">States</span></div></div>
+                    <div class="ring-stat" style="--delay: 0.2s;"><div class="ring-stat-inner"><span class="ring-number" data-target="15">0</span><span class="ring-label">Max Roster</span></div></div>
+                    <div class="ring-stat" style="--delay: 0.4s;"><div class="ring-stat-inner"><span class="ring-number-text">$350</span><span class="ring-label">Champ Payout</span></div></div>
+                    <div class="ring-stat" style="--delay: 0.6s;"><div class="ring-stat-inner"><span class="ring-number-text">4K</span><span class="ring-label">Media Quality</span></div></div>
+                </div>
+                <p class="animation-tagline">Premium league. Pro-grade media. State-by-state championships.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stat-item"><div class="stat-number">$800</div><div class="stat-label">Rostered Player Fee</div></div>
+        <div class="stat-item"><div class="stat-number">$967</div><div class="stat-label">Individual Entry Fee</div></div>
+        <div class="stat-item"><div class="stat-number">$350</div><div class="stat-label">Champion Payout/Player</div></div>
+        <div class="stat-item"><div class="stat-number" data-count="15">0</div><div class="stat-label">Max Roster Size</div></div>
+    </section>
+
+    <!-- Main Article -->
+    <article class="article">
+        <header class="article-header">
+            <div class="article-meta">
+                <span class="article-category">Premium Athletics & Media</span>
+                <span class="article-date">January 27, 2026</span>
+                <div class="article-author">
+                    <div class="author-avatar">SL</div>
+                    <div class="author-info">
+                        <span class="author-name">Skyes Over London Editorial</span>
+                        <span class="author-role">Sports & Entertainment Division</span>
+                    </div>
+                </div>
+            </div>
+            <div class="article-intro">
+                <p>In a basketball world that celebrates height above all else, millions of elite players under 6'0" are left without a stage that matches their skill. SkyeLetes changes that—a premium league where every rostered player buys into more than games: <em>pro-grade media, a personal landing page, and a season portal</em> that turns "random park footage" into a real portfolio.</p>
+            </div>
+        </header>
+
+        <div class="article-body">
+            <aside class="article-sidebar">
+                <nav class="sidebar-nav">
+                    <span class="sidebar-nav-title">In This Article</span>
+                    <a href="#vision">The Vision</a>
+                    <a href="#features">What You Get</a>
+                    <a href="#pricing">Pricing Structure</a>
+                    <a href="#eligibility">Eligibility</a>
+                    <a href="#states">State Championships</a>
+                    <a href="#owners">Team Owners</a>
+                    <a href="#founder">Meet the Founder</a>
+                </nav>
+            </aside>
+
+            <div class="article-content">
+                <section id="vision" class="fade-up">
+                    <h2>The Vision: A Premium Stage for Elite Under-6'0" Talent</h2>
+                    <p class="lead">Height shouldn't be the only metric that matters. Skill, IQ, heart, and hustle define a player just as much—if not more—than inches. SkyeLetes was built for ballers who've been told they're "too short" but know they belong on a bigger stage.</p>
+                    <p>Every year, countless talented hoopers get overlooked because the basketball world fixates on height. College scouts, pro leagues, and even local tournaments favor the tall—leaving skilled guards and forwards under 6'0" without the exposure they deserve. The pickup games are legendary, the mixtapes are fire, but there's no organized platform that takes these athletes seriously.</p>
+                    <p>That's the gap SkyeLetes fills. This isn't a consolation league. This is a premium experience: custom uniforms, 4K highlight reels, personal player portals, championship brackets, and real payouts. When you join SkyeLetes, you're not just playing basketball—you're building a professional sports portfolio.</p>
+                </section>
+
+                <!-- Journey Showcase -->
+                <div class="animated-showcase fade-up">
+                    <div class="showcase-header">
+                        <span class="showcase-eyebrow">Your Journey</span>
+                        <h3 class="showcase-title">From Registration to Championship</h3>
+                    </div>
+                    <div class="journey-animation">
+                        <div class="journey-track"><div class="journey-progress"></div></div>
+                        <div class="journey-steps">
+                            <div class="journey-step active" data-step="1">
+                                <div class="step-node"><div class="node-pulse"></div><div class="node-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></div></div>
+                                <div class="step-content"><span class="step-number">01</span><h4 class="step-title">Register & Pay</h4><p class="step-desc">Join as rostered player ($800) or individual ($967). Complete waiver and submit height verification.</p></div>
+                            </div>
+                            <div class="journey-step" data-step="2">
+                                <div class="step-node"><div class="node-pulse"></div><div class="node-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg></div></div>
+                                <div class="step-content"><span class="step-number">02</span><h4 class="step-title">Brand-Lock Session</h4><p class="step-desc">Custom jersey, shorts, and socks designed for your team. Professional branding locked in before the season.</p></div>
+                            </div>
+                            <div class="journey-step" data-step="3">
+                                <div class="step-node"><div class="node-pulse"></div><div class="node-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></div></div>
+                                <div class="step-content"><span class="step-number">03</span><h4 class="step-title">Compete & Create Content</h4><p class="step-desc">4K highlight reels captured every game. Your portal profile gets updated throughout the season.</p></div>
+                            </div>
+                            <div class="journey-step" data-step="4">
+                                <div class="step-node"><div class="node-pulse"></div><div class="node-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg></div></div>
+                                <div class="step-content"><span class="step-number">04</span><h4 class="step-title">Win & Get Paid</h4><p class="step-desc">$350 per player for champions, plus free entry next season and sponsorship consideration.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="showcase-cta">
+                        <a href="players.html" class="showcase-btn">Start Your Journey <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg></a>
+                    </div>
+                </div>
+
+                <section id="features" class="fade-up">
+                    <h2>What You Get: Premium from Jump</h2>
+                    <p>Every dollar you invest in SkyeLetes comes back to you in value. This isn't a gym rental with a ref—it's a complete athlete development and media package designed to elevate your game and your brand.</p>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg></div>
+                            <h4>Custom Team Uniforms</h4>
+                            <p>Full kit—jersey, shorts, and socks—professionally designed in a Brand-Lock session before the season. Your team looks pro because you are pro.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg></div>
+                            <h4>4K Highlight Reels</h4>
+                            <p>Every game is filmed in 4K. Your best plays get cut into shareable highlight packages that update your player portal throughout the season.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></div>
+                            <h4>Personal Landing Page</h4>
+                            <p>Your own player portal profile—a dedicated page showcasing your stats, highlights, bio, and season journey. Share it anywhere.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
+                            <h4>Championship Payouts</h4>
+                            <p>Winners walk away with $350 per player, free entry to next season, and first consideration for brand sponsorships.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="pull-quote fade-up">
+                    <blockquote>This isn't a consolation league for short guys. This is a premium stage for elite hoopers who happen to be under 6'0". The media alone is worth the entry.</blockquote>
+                    <cite>— SkyeLetes Founding Vision</cite>
+                </div>
+
+                <section id="pricing" class="fade-up">
+                    <h2>Pricing Structure: Transparent Value</h2>
+                    <p>We believe in clear, upfront pricing with no hidden fees. Every player on the roster pays—no free spots, no exceptions. This ensures commitment, quality, and a premium experience for everyone.</p>
+                    <div class="pricing-grid">
+                        <div class="pricing-card featured">
+                            <span class="pricing-badge">Best Value</span>
+                            <div class="pricing-price">$800 <span>/ player</span></div>
+                            <div class="pricing-title">Rostered Player (Team Entry)</div>
+                            <ul class="pricing-features">
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Full custom uniform kit</li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>4K highlight reels all season</li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Personal player portal profile</li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Championship eligibility</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-card">
+                            <div class="pricing-price">$967 <span>/ player</span></div>
+                            <div class="pricing-title">Individual Entry (Free Agent)</div>
+                            <ul class="pricing-features">
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>All rostered player benefits</li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>League-assisted team placement</li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Premium matching service</li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>Priority draft pool status</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="eligibility" class="fade-up">
+                    <h2>Eligibility: Hard Gates, No Exceptions</h2>
+                    <p>SkyeLetes maintains strict eligibility standards to ensure competitive integrity and a premium experience for all participants.</p>
+                    <ul class="animated-list">
+                        <li><div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg></div><div class="list-content"><h5>Height Requirement: Under 6'0" (72 inches)</h5><p>Verified barefoot at check-in using league protocol. No exceptions—this is what makes SkyeLetes unique.</p></div></li>
+                        <li><div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div><div class="list-content"><h5>Roster-Active Status Requirements</h5><p>Must have: paid entry fee + signed waiver + eligibility verified. All three required to play.</p></div></li>
+                        <li><div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div><div class="list-content"><h5>No Free Roster Spots</h5><p>Every player on the roster pays. This ensures commitment and maintains the premium standard.</p></div></li>
+                        <li><div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div><div class="list-content"><h5>Maximum Roster Size: 15 Players</h5><p>Teams cap at 15 to ensure playing time and maintain competitive balance throughout the season.</p></div></li>
+                    </ul>
+                </section>
+
+                <div class="cta-section">
+                    <div class="cta-content">
+                        <div class="cta-text">
+                            <h3>Ready to Elevate Your Game?</h3>
+                            <p>Join SkyeLetes and get the premium basketball experience you deserve. Pro-grade media. Championship payouts. Your stage.</p>
+                        </div>
+                        <a href="players.html" class="cta-button">Register Now <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></a>
+                    </div>
+                </div>
+
+                <section id="states" class="fade-up">
+                    <h2>Multi-State Championships: Built to Scale</h2>
+                    <p>SkyeLetes isn't just a local league—it's a multi-state championship system designed to crown the best under-6'0" talent in the country.</p>
+                    <div class="issues-grid">
+                        <div class="issue-card"><div class="issue-number">AZ</div><h4>Phoenix, Arizona</h4><p>League headquarters and home of Championship Weekend. State champions from across the country converge here to compete for the Country Champion title.</p></div>
+                        <div class="issue-card"><div class="issue-number">TX</div><h4>Houston, Texas</h4><p>The Lone Star State brings deep basketball tradition and fierce competition. Texas State Champions earn their shot at the national title in Arizona.</p></div>
+                        <div class="issue-card"><div class="issue-number">CO</div><h4>Denver, Colorado</h4><p>Mile High hoops. Colorado's State Champion proves that altitude doesn't affect skill when you're built different. Championship Weekend awaits.</p></div>
+                        <div class="issue-card"><div class="issue-number">IL</div><h4>Chicago, Illinois</h4><p>The birthplace of legendary hoopers. Chicago's State Champion carries the weight of basketball history into the national championship stage.</p></div>
+                    </div>
+                </section>
+
+                <section id="owners" class="fade-up">
+                    <h2>Founding Owners: Season One Now Runs the First 26 Teams</h2>
+                    <p>The league's first 26 team owners now come directly from the 26 players in Season One. They carry franchise identity, select players from the live draft, and form the first true ownership layer of SkyeLeticX.</p>
+                    <ul class="animated-list">
+                        <li><div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div><div class="list-content"><h5>Recruitment Bounties</h5><p>Earn bounties for every player you bring to your roster. Build your team, build your earnings.</p></div></li>
+                        <li><div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg></div><div class="list-content"><h5>Ticket Commissions</h5><p>Promote games, sell tickets, earn commission. Your hustle directly impacts your income.</p></div></li>
+                        <li><div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg></div><div class="list-content"><h5>Tracking Codes & Scripts</h5><p>Get professional sales materials, tracking codes, and scripts to recruit players and sell tickets effectively.</p></div></li>
+                        <li><div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg></div><div class="list-content"><h5>Owner Dashboard</h5><p>Full analytics on your roster, player status, earnings, and team performance—all in one place.</p></div></li>
+                    </ul>
+                </section>
+
+                <div class="pull-quote fade-up">
+                    <blockquote>We're not just running a league—we're building a platform that turns talented hoopers into portfolio-ready athletes. The media, the profiles, the payouts—it all adds up to something real.</blockquote>
+                    <cite>— Tyrone Norman III, Founder & CEO</cite>
+                </div>
+            </div>
+        </div>
+
+        <!-- Founder Section -->
+        <section id="founder" class="founder-section">
+            <div class="founder-backdrop"></div>
+            <div class="founder-content">
+                <div class="founder-image-container fade-up">
+                    <div class="founder-image-frame">
+                        <img src="https://cdn1.sharemyimage.com/2026/01/09/Partner-pitches.pdf-11.png" alt="Tyrone Norman III - Founder & CEO" class="founder-image">
+                        <div class="founder-image-accent"></div>
+                    </div>
+                    <div class="founder-badge"><span class="badge-icon">🏀</span><span class="badge-text">Founder & CEO</span></div>
+                </div>
+                <div class="founder-info fade-up stagger-2">
+                    <span class="founder-eyebrow">Meet the Visionary</span>
+                    <h2 class="founder-name">Tyrone Norman III</h2>
+                    <p class="founder-title">Founder & CEO, Skyes Over London LC<br><span class="founder-subtitle">Executive Operator • Systems Builder • AI Product Engineer</span></p>
+                    <div class="founder-divider"></div>
+                    <p class="founder-bio">A holding-company operator building real-world systems where execution, accountability, and scale actually matter. Tyrone has proven his expertise across regulated transportation, healthcare logistics, residential care expansion, business operations, and AI-enabled systems.</p>
+                    <p class="founder-bio">SkyeLetes represents his vision for premium athletics: combining pro-grade media production with systematic league operations to create an athlete development platform that scales state-by-state.</p>
+                    <div class="founder-stats">
+                        <div class="founder-stat"><span class="founder-stat-number">4</span><span class="founder-stat-label">States Operating</span></div>
+                        <div class="founder-stat"><span class="founder-stat-number">4K</span><span class="founder-stat-label">Media Standard</span></div>
+                        <div class="founder-stat"><span class="founder-stat-number">24/7</span><span class="founder-stat-label">Execution Systems</span></div>
+                    </div>
+                    <div class="founder-strengths">
+                        <div class="strength-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg><span>Execution-First Leadership</span></div>
+                        <div class="strength-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg><span>Multi-State Operations</span></div>
+                        <div class="strength-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg><span>Systems That Enforce Integrity</span></div>
+                    </div>
+                    <div class="founder-location"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg><span>Phoenix, AZ • Multi-State Ops: AZ • TX • CO • IL</span></div>
+                    <a href="https://solenterprises.org/pages/leadership-hub" class="founder-link" target="_blank">View Full Executive Profile <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="testimonials">
+            <div class="testimonials-header"><h3>What Players Are Saying</h3></div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-up stagger-1">
+                    <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <p class="testimonial-text">"Finally a league that takes under-6'0" hoopers seriously. The media quality alone is worth the entry. My highlight reel looks like I'm in the G-League."</p>
+                    <div class="testimonial-author"><div class="testimonial-avatar"></div><div class="testimonial-info"><span class="testimonial-name">Darius M.</span><span class="testimonial-role">Point Guard, Phoenix</span></div></div>
+                </div>
+                <div class="testimonial-card fade-up stagger-2">
+                    <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <p class="testimonial-text">"As a Team Owner, the bounty system and dashboard make running my squad easy. I recruited 12 players and earned back more than my entry fee."</p>
+                    <div class="testimonial-author"><div class="testimonial-avatar"></div><div class="testimonial-info"><span class="testimonial-name">Marcus T.</span><span class="testimonial-role">Team Owner, Houston</span></div></div>
+                </div>
+                <div class="testimonial-card fade-up stagger-3">
+                    <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+                    <p class="testimonial-text">"The custom uniforms hit different. Walking into the gym with matching gear that looks professional—it changes your whole mentality. This is real hoops."</p>
+                    <div class="testimonial-author"><div class="testimonial-avatar"></div><div class="testimonial-info"><span class="testimonial-name">Jerome K.</span><span class="testimonial-role">Shooting Guard, Denver</span></div></div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>SkyeLetes</h4>
+                <p class="subsidiary">A Skyes Over London LC Production • Solenterprises International</p>
+                <p>The premier basketball league for elite players under 6'0". Pro-grade media, custom uniforms, championship payouts, and a platform that turns talented hoopers into portfolio-ready athletes.</p>
+            </div>
+            <div class="footer-links">
+                <h5>League</h5>
+                <ul><li><a href="players.html">Player Registration</a></li><li><a href="owners-intake.html">Founding Owners</a></li><li><a href="owner-dashboard.html">League Office</a></li><li><a href="#">Schedule</a></li></ul>
+            </div>
+            <div class="footer-links">
+                <h5>States</h5>
+                <ul><li><a href="#">Phoenix, AZ</a></li><li><a href="#">Houston, TX</a></li><li><a href="#">Denver, CO</a></li><li><a href="#">Chicago, IL</a></li></ul>
+            </div>
+            <div class="footer-links">
+                <h5>Contact</h5>
+                <ul><li><a href="tel:4804695416">(480) 469-5416</a></li><li><a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></li><li><a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a></li><li><a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a></li></ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2026 Skyes Over London LC. All rights reserved. A subsidiary of Solenterprises International Nexus & Holdings LLC.</p>
+            <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Waiver</a></div>
+        </div>
+    </footer>
+
+    <script>
+        // Hero Canvas Animation
+        const canvas = document.getElementById('heroCanvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let animationId;
+
+            function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.1;
+                    const colorRoll = Math.random();
+                    this.color = colorRoll > 0.7 ? '#ffd700' : colorRoll > 0.5 ? '#6d28ff' : '#ffffff';
+                }
+                update() {
+                    this.x += this.speedX; this.y += this.speedY;
+                    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+                }
+                draw() {
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color; ctx.globalAlpha = this.opacity; ctx.fill(); ctx.globalAlpha = 1;
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                const count = Math.floor((canvas.width * canvas.height) / 15000);
+                for (let i = 0; i < count; i++) particles.push(new Particle());
+            }
+
+            function drawConnections() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 120) {
+                            ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = '#6d28ff'; ctx.globalAlpha = 0.05 * (1 - distance / 120);
+                            ctx.lineWidth = 0.5; ctx.stroke(); ctx.globalAlpha = 1;
+                        }
+                    }
+                }
+            }
+
+            let time = 0;
+            function animate() {
+                time += 0.016;
+                const gradient = ctx.createRadialGradient(canvas.width * 0.3, canvas.height * 0.3, 0, canvas.width * 0.5, canvas.height * 0.5, canvas.width * 0.8);
+                gradient.addColorStop(0, '#0b0214'); gradient.addColorStop(0.5, '#05010a'); gradient.addColorStop(1, '#05010a');
+                ctx.fillStyle = gradient; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                drawConnections();
+                animationId = requestAnimationFrame(animate);
+            }
+
+            resizeCanvas(); initParticles(); animate();
+            window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+        }
+
+        // Network Canvas Animation
+        const networkCanvas = document.getElementById('networkCanvas');
+        if (networkCanvas) {
+            const netCtx = networkCanvas.getContext('2d');
+            let networkParticles = [];
+
+            function resizeNetworkCanvas() {
+                const container = networkCanvas.parentElement;
+                networkCanvas.width = container.offsetWidth + 200;
+                networkCanvas.height = container.offsetHeight + 200;
+            }
+
+            class NetworkNode {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * networkCanvas.width;
+                    this.y = Math.random() * networkCanvas.height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.8;
+                    this.speedY = (Math.random() - 0.5) * 0.8;
+                    this.opacity = Math.random() * 0.6 + 0.2;
+                }
+                update() {
+                    this.x += this.speedX; this.y += this.speedY;
+                    if (this.x < 0) this.x = networkCanvas.width;
+                    if (this.x > networkCanvas.width) this.x = 0;
+                    if (this.y < 0) this.y = networkCanvas.height;
+                    if (this.y > networkCanvas.height) this.y = 0;
+                }
+                draw() {
+                    netCtx.beginPath(); netCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    netCtx.fillStyle = Math.random() > 0.5 ? '#ffd700' : '#6d28ff';
+                    netCtx.globalAlpha = this.opacity; netCtx.fill(); netCtx.globalAlpha = 1;
+                }
+            }
+
+            function initNetworkParticles() {
+                networkParticles = [];
+                const count = Math.floor((networkCanvas.width * networkCanvas.height) / 8000);
+                for (let i = 0; i < Math.min(count, 100); i++) networkParticles.push(new NetworkNode());
+            }
+
+            function drawNetworkConnections() {
+                for (let i = 0; i < networkParticles.length; i++) {
+                    for (let j = i + 1; j < networkParticles.length; j++) {
+                        const dx = networkParticles[i].x - networkParticles[j].x;
+                        const dy = networkParticles[i].y - networkParticles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < 150) {
+                            netCtx.beginPath(); netCtx.moveTo(networkParticles[i].x, networkParticles[i].y);
+                            netCtx.lineTo(networkParticles[j].x, networkParticles[j].y);
+                            netCtx.strokeStyle = '#ffd700'; netCtx.globalAlpha = 0.1 * (1 - distance / 150);
+                            netCtx.lineWidth = 1; netCtx.stroke(); netCtx.globalAlpha = 1;
+                        }
+                    }
+                }
+            }
+
+            function animateNetwork() {
+                netCtx.clearRect(0, 0, networkCanvas.width, networkCanvas.height);
+                networkParticles.forEach(p => { p.update(); p.draw(); });
+                drawNetworkConnections();
+                requestAnimationFrame(animateNetwork);
+            }
+
+            resizeNetworkCanvas(); initNetworkParticles(); animateNetwork();
+            window.addEventListener('resize', () => { resizeNetworkCanvas(); initNetworkParticles(); });
+        }
+
+        // Navigation scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up, .stat-item, .animated-list li, .journey-step').forEach(el => observer.observe(el));
+
+        // Counter animation
+        const animateCounter = (element, target) => {
+            const duration = 2000;
+            const increment = target / (duration / 16);
+            let current = 0;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) { element.textContent = target; clearInterval(timer); }
+                else element.textContent = Math.floor(current);
+            }, 16);
+        };
+
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const count = entry.target.dataset.count || entry.target.dataset.target;
+                    if (count) animateCounter(entry.target, parseInt(count));
+                    statObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number[data-count], .ring-number[data-target]').forEach(el => statObserver.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Sidebar active state
+        const sections = document.querySelectorAll('section[id]');
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 200) current = section.getAttribute('id');
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+    </script>
+
+  <script>
+    // SkyeLeticX PWA — register service worker
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>

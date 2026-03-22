@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/app.js"></script>
+  <script defer src="/assets/mail-ui.js"></script>
+  <link rel="stylesheet" href="/assets/mail-ui.css" />
+  <title>Contacts — SkyMail Host</title>
+</head>
+<body data-page-id="contacts" data-page-name="Contacts" data-page-hint="Address book and recent correspondents">
+<div class="wrap">
+  <div id="pageTopbar"></div>
+  <div class="layout">
+    <aside class="rail" id="leftRail"></aside>
+    <main class="main">
+
+      <section class="hero">
+        <section class="card">
+          <h1 class="h1">Contacts</h1>
+          <p class="sub">Build a real reusable address book inside SkyMail Host and promote recent correspondents into saved client records for faster sending.</p>
+          <div class="btnrow">
+            <button class="btn gold" id="applySearchBtn" type="button">Search</button>
+            <button class="btn" id="clearSearchBtn" type="button">Clear</button>
+            <a class="btn" href="/compose.html">Open Compose</a>
+          </div>
+          <div class="fieldgrid" style="margin-top:14px">
+            <div><label for="contactSearch">Search contacts</label><input id="contactSearch" type="text" placeholder="name, email, phone, company" /></div>
+            <div><label>Address book state</label><div class="notice" id="syncMeta">Checking address book state…</div></div>
+          </div>
+          <div class="mini" id="statusText" style="margin-top:12px">Waiting for contacts load…</div>
+        </section>
+        <aside class="card">
+          <div class="kicker">Contact Editor</div>
+          <form onsubmit="return false;">
+            <input id="contact_id" type="hidden" />
+            <div class="fieldgrid">
+              <div><label for="email">Email</label><input id="email" type="text" placeholder="contact@example.com" /></div>
+              <div><label for="full_name">Full name</label><input id="full_name" type="text" placeholder="Contact name" /></div>
+              <div><label for="company">Company</label><input id="company" type="text" placeholder="Company" /></div>
+              <div><label for="phone">Phone</label><input id="phone" type="text" placeholder="(480) 469-5416" /></div>
+            </div>
+            <div class="fieldgrid" style="margin-top:12px">
+              <div><label for="favorite">Favorite</label><div class="toggleline"><input id="favorite" type="checkbox" />Mark as favorite</div></div>
+              <div><label>&nbsp;</label><div class="mini">Saved contacts live inside your SkyMail account and are available in Compose.</div></div>
+            </div>
+            <label for="notes">Notes</label><textarea id="notes" placeholder="Notes for this contact."></textarea>
+            <div class="btnrow"><button class="btn gold" id="saveBtn" type="button">Save Contact</button><button class="btn" id="newBtn" type="button">New Contact</button></div>
+          </form>
+        </aside>
+      </section>
+      <section class="grid2">
+        <section class="card"><div class="toolbar"><div><h2 style="margin:0">Saved contacts</h2><div class="mini">Local address book records for this mailbox owner</div></div></div><div class="contact-list" id="savedContacts"><div class="empty">Loading contacts…</div></div></section>
+        <section class="card"><div class="toolbar"><div><h2 style="margin:0">Recent correspondents</h2><div class="mini">Discovered from mailbox traffic and ready for fast compose</div></div></div><div class="contact-list" id="recentContacts"><div class="empty">Loading recent correspondents…</div></div></section>
+      </section>
+
+    </main>
+  </div>
+  <div id="appFooter"></div>
+</div>
+<script defer src="/assets/contacts-page.js"></script>
+</body>
+</html>

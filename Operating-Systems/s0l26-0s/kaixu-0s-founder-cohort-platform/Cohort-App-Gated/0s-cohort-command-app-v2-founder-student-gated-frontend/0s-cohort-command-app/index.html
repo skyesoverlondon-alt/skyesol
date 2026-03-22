@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0s Cohort Command Center</title>
+  <meta name="description" content="0s cohort command surface with founder lane, student lane, student ID generation, welcome letters, instructor content, and workbook notes.">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="/js/kaixu-admin-bridge.js" defer></script>
+</head>
+<body data-route="landing">
+  <div class="site-shell">
+    <header class="topbar print-hide">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html">
+          <img src="assets/media/skyes-primary-logo.png" alt="Skyes Over London logo">
+          <div>
+            <span class="brand-kicker">Skyes Over London × 0s</span>
+            <span class="brand-title">0s Cohort Command Center</span>
+            <span class="brand-sub">Founder-only class control and student-only cohort workspace</span>
+          </div>
+        </a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html" aria-current="page">Command</a>
+<a href="founder-login.html">Founder Access</a>
+<a href="student-login.html">Student Access</a>
+<a href="founder-dashboard.html">Founder Board</a>
+<a href="instructor-book.html">Instructor Book</a>
+<a href="student-portal.html">Student Portal</a>
+          
+        </nav>
+      </div>
+    </header>
+    
+<main class="page">
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Founder lane and student lane separated cleanly</div>
+        <h1>Run the cohort from one gated app without mixing teacher materials and student materials. ⚡</h1>
+        <p class="lead">This front end is built around two completely separate class lanes: founder-only control surfaces and student-only class access. Founder tools generate live student IDs, welcome letters, roster records, attendance, final scoring, and cohort content. Students only see their own class lane after their generated ID is activated.</p>
+        <div class="hero-actions print-hide">
+          <a class="button" href="founder-login.html">Enter Founder Lane</a>
+          <a class="neon-button" href="student-login.html">Enter Student Lane</a>
+          <a class="ghost-button" href="instructor-book.html">Preview Teaching Book</a>
+          <a class="ghost-button" href="/gateway/" data-founder-admin-link hidden>Validate Admin In Gateway</a>
+        </div>
+        <div class="status-bar">
+          <span class="status-pill">Founder session: <strong data-founder-session-label>Locked</strong></span>
+          <span class="status-pill">Student session: <strong data-student-session-label>Locked</strong></span>
+          <span class="status-pill">Generated students: <strong data-student-count>0</strong></span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Founder visual">
+        <img class="constellation-logo logo-1" src="assets/media/skydexia-dual-logo.png" alt="SkyDexia dual logo">
+        <img class="constellation-logo logo-2" src="assets/media/kaixu-logo.png" alt="kAIxU logo">
+        <img class="constellation-logo logo-3" src="assets/media/skydexia-logo.png" alt="SkyDexia logo">
+        <img class="constellation-logo logo-4" src="assets/media/skyes-primary-logo.png" alt="Skyes Over London logo">
+        <img class="founder" src="assets/media/founder.png" alt="Founder portrait">
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-grid">
+    <article class="card"><div class="kicker">Founder side</div><div class="metric-value">7-Day Book</div><p>Deep daily teaching content, scripts, drills, rescue lines, and delivery structure.</p></article>
+    <article class="card"><div class="kicker">Student side</div><div class="metric-value">Workbook</div><p>Day-by-day prompts, note-taking, deliverable locks, and final demo prep.</p></article>
+    <article class="card"><div class="kicker">Admin side</div><div class="metric-value">ID Generator</div><p>Create live student IDs, activate seats, issue welcome letters, and manage cohort access.</p></article>
+    <article class="card"><div class="kicker">Data side</div><div class="metric-value">Wiring Map</div><p>Dedicated frontend-ready lanes for Neon, Netlify Identity, Forms, and Blobs handoff later.</p></article>
+  </section>
+
+  <section class="quick-grid">
+    <a class="card" href="founder-login.html">
+      <div class="kicker">Founder-only lane</div>
+      <h3>Founder Access</h3>
+      <p>Use a separate founder unlock code, keep class control private, and route into the board and instructor book.</p>
+    </a>
+    <a class="card" href="founder-dashboard.html">
+      <div class="kicker">Command center</div>
+      <h3>Founder Board</h3>
+      <p>Generate IDs, issue welcome letters, manage attendance, score demos, and configure the cohort.</p>
+    </a>
+    <a class="card" href="student-login.html">
+      <div class="kicker">Student-only lane</div>
+      <h3>Student Access</h3>
+      <p>Students enter their generated ID and only land inside their own workbook and welcome materials.</p>
+    </a>
+    <a class="card" href="instructor-book.html">
+      <div class="kicker">Teaching depth</div>
+      <h3>Instructor Book</h3>
+      <p>Much more actual content to teach: lesson spine, examples, rescue prompts, checkpoints, and assignments.</p>
+    </a>
+  </section>
+
+  <section class="grid-2">
+    <article class="panel hero-locks">
+      <div class="section-head">
+        <div class="eyebrow">Founder lane</div>
+        <h2>What is behind the founder side</h2>
+      </div>
+      <ul class="checklist">
+        <li>Founder-only login and session lane</li>
+        <li>Instructor book with deep day-by-day teaching content</li>
+        <li>Student ID generator and live activation</li>
+        <li>Welcome letter composer and print/export</li>
+        <li>Roster, attendance, cohort notes, and final scoring</li>
+        <li>Frontend wiring map for Identity, Forms, Blobs, and Neon handoff</li>
+      </ul>
+    </article>
+    <article class="panel hero-locks">
+      <div class="section-head">
+        <div class="eyebrow">Student lane</div>
+        <h2>What is behind the student side</h2>
+      </div>
+      <ul class="checklist">
+        <li>Student ID entry gate separate from the founder lane</li>
+        <li>Personal welcome letter and cohort access badge</li>
+        <li>Student workbook with day-by-day notes and prompts</li>
+        <li>Deliverable checklists, scorecard, and final demo prep</li>
+        <li>Student-only saved notes scoped to their ID</li>
+        <li>Print and export support for in-class use</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="callout">
+    <div class="kicker">Current package truth</div>
+    <h2>This package is the full front end. Your backend handoff slots are already separated and ready for your own wiring.</h2>
+    <p class="muted">Every control in this build works inside the front end right now: ID generation, welcome letter creation, session gating, local persistence, attendance, scoring, student notes, workbook content, and export/import. Where you plan to wire backend later, this package gives you a dedicated settings and data map surface instead of fake hidden theater.</p>
+    <div class="button-row print-hide">
+      <button class="button" type="button" data-action="export-app">Export Full App Data</button>
+      <button class="ghost-button" type="button" data-action="import-app">Import Full App Data</button>
+      <input type="file" accept="application/json" hidden data-action="import-input">
+      <button class="neon-button" type="button" data-action="print">Print This Page</button>
+    </div>
+  </section>
+</main>
+
+    <footer class="footer">
+      <strong>0s Cohort Command Center · Skyes Over London</strong>
+      <p class="muted">Phone: <a href="tel:+14804695416">(480) 469-5416</a> · <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> · <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> · <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></p>
+      <div class="footer-links print-hide">
+        <a class="pill-link" href="https://skyesol.netlify.app/about" target="_blank" rel="noopener noreferrer">Founder Page</a>
+        <a class="pill-link" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener noreferrer">All SkyeSol Case Studies</a>
+      </div>
+    </footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

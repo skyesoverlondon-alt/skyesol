@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skye Lead Vault — Walkthrough</title>
+  <style>
+    :root{
+      --bg:#07030f;
+      --bg2:#150c24;
+      --glass:rgba(28,18,50,.68);
+      --stroke:rgba(255,255,255,.12);
+      --text:#f7f0ff;
+      --muted:#c9bbdf;
+      --gold:#f2c96d;
+      --violet:#9d6cff;
+      --good:#62d49a;
+      --warn:#ffb454;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+      background:radial-gradient(circle at top, #2c1747 0%, var(--bg2) 30%, var(--bg) 100%);
+      min-height:100vh;
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
+    .hero,.card{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--stroke);border-radius:24px;box-shadow:0 20px 70px rgba(0,0,0,.35)}
+    .hero{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:24px;margin-bottom:22px}
+    .hero img{width:100%;height:auto;display:block;filter:drop-shadow(0 0 20px rgba(242,201,109,.35))}
+    .kicker{color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:700;margin-bottom:10px}
+    h1,h2,h3{margin:0 0 10px}
+    h1{font-size:34px;line-height:1.05}
+    h2{font-size:22px}
+    h3{font-size:17px}
+    p{margin:0 0 12px;color:var(--muted);line-height:1.65}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .card{padding:22px}
+    .steps{display:grid;gap:12px;margin-top:12px}
+    .step{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:14px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+    .num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),#915fff);color:#120b1f;font-weight:900}
+    .pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .pill{display:inline-flex;align-items:center;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:12px;color:#f6e8ff}
+    .good{color:var(--good)} .warn{color:var(--warn)}
+    .footer{margin-top:18px;font-size:14px;color:var(--muted)}
+    a{color:#f9d884}
+    ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.65}
+    code{background:rgba(255,255,255,.06);padding:2px 6px;border-radius:8px}
+    @media (max-width:820px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <img src="assets/media/skydexia-logo.png" alt="SkyDexia logo">
+      <div>
+        <div class="kicker">Offline operator guide</div>
+        <h1>Skye Lead Vault Walkthrough</h1>
+        <p>This is the fast working flow for the offline build. It is written so you can open the vault, get productive fast, and know exactly where the serious features live.</p>
+        <div class="pillrow">
+          <span class="pill">Fully offline</span>
+          <span class="pill">Encrypted backup</span>
+          <span class="pill">Quick capture</span>
+          <span class="pill">Scripts + quotes</span>
+          <span class="pill">Daily command center</span>
+          <span class="pill">App lock</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <div class="kicker">1. First launch</div>
+        <h2>How to open it properly</h2>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><div><h3>Open <code>index.html</code></h3><p>That lands you on the Daily Command Center. If your browser supports installation, install it as an app for the cleanest offline use.</p></div></div>
+          <div class="step"><div class="num">2</div><div><h3>Go to Settings</h3><p>Pick your background, glass feel, reminder preferences, and PIN. The vault lock is local to this device only.</p></div></div>
+          <div class="step"><div class="num">3</div><div><h3>Run your first backup</h3><p>Before adding real data, go to Backup Vault and export one plain backup and one encrypted backup. That gives you a known-good restore point.</p></div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="kicker">2. Daily use</div>
+        <h2>The normal operating rhythm</h2>
+        <div class="steps">
+          <div class="step"><div class="num">A</div><div><h3>Start on Dashboard</h3><p>The dashboard is the working desk. It surfaces today’s follow-ups, hot leads, neglected records, overdue items, and local storage status.</p></div></div>
+          <div class="step"><div class="num">B</div><div><h3>Add new leads fast</h3><p>Use <strong>+ New lead</strong> for full entry or <strong>Quick capture</strong> when you are in the field and need speed.</p></div></div>
+          <div class="step"><div class="num">C</div><div><h3>Work stages from Pipeline</h3><p>Move records through Prospect, Contacted, Warm, Proposal, Won, and Lost. Follow-up status keeps pressure visible.</p></div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="kicker">3. Lead ledger</div>
+        <h2>Where the real record lives</h2>
+        <p>Lead Ledger is the master record area. Switch between table, cards, and dossier depending on how you want to work.</p>
+        <ul>
+          <li><strong>Smart dedupe:</strong> the vault checks business name, phone, email, and location similarity to flag duplicate risk.</li>
+          <li><strong>Lead scoring:</strong> records get a local score from stage, priority, value, recency, due state, and manual boost.</li>
+          <li><strong>Timeline:</strong> calls, notes, status changes, quote saves, and field captures stack into the activity history.</li>
+          <li><strong>Document vault:</strong> keep lightweight files, photos, receipts, voice notes, and quote outputs attached to the lead.</li>
+          <li><strong>Saved quotes:</strong> quote files saved from Playbook Studio can be stored back on the lead record.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="kicker">4. Contact hub</div>
+        <h2>Relationship mapping</h2>
+        <p>Each business can hold multiple contacts, not just one. Use this to separate the owner, gatekeeper, manager, buyer, front desk, or referral source.</p>
+        <ul>
+          <li>Mark decision-maker strength.</li>
+          <li>Store notes about best contact times and blockers.</li>
+          <li>Keep the business record clean while still knowing who matters.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="kicker">5. Quick capture</div>
+        <h2>Field mode</h2>
+        <p>This is the speed lane. Use it when you are walking in, doing events, or moving too fast for full data entry.</p>
+        <ul>
+          <li>Add a business with basic details and a quick note type.</li>
+          <li>Attach a photo when supported.</li>
+          <li>Record a voice note when supported by the browser/device.</li>
+          <li>It automatically creates a timeline event so the lead has context later.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="kicker">6. Routes + territory</div>
+        <h2>Offline planning without live maps</h2>
+        <p>This lane is for route buckets and territory organization. You are not depending on map APIs here. You are grouping and sequencing work logically.</p>
+        <ul>
+          <li>Create territory names like Central Phoenix, East Valley, West Run, Friday Route.</li>
+          <li>Sort leads by city, ZIP, area, or custom route tags.</li>
+          <li>Export printable run sheets for a day in the field.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="kicker">7. Playbook studio</div>
+        <h2>Scripts, offers, and quotes</h2>
+        <p>This is where the vault turns records into action.</p>
+        <ul>
+          <li><strong>Script pack generator:</strong> creates reusable outreach language for a selected lead.</li>
+          <li><strong>Copy or export:</strong> each block can be copied individually, or the full pack can be exported.</li>
+          <li><strong>Quote builder:</strong> select a lead, choose a quote template, edit line items, and download an HTML quote.</li>
+          <li><strong>Save to lead:</strong> store the quote back onto the lead so the dossier keeps history.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="kicker">8. Analytics</div>
+        <h2>What the numbers are telling you</h2>
+        <p>Analytics is the local visibility layer. Use it to see whether you are actually moving work.</p>
+        <ul>
+          <li>Stage distribution</li>
+          <li>Source mix</li>
+          <li>Recovery candidates</li>
+          <li>Open value estimates</li>
+          <li>Activity velocity</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="kicker">9. Backup vault</div>
+        <h2>The safety flow</h2>
+        <div class="steps">
+          <div class="step"><div class="num">1</div><div><h3>Export plain backup</h3><p>Good for quick local copies and visible JSON inspection.</p></div></div>
+          <div class="step"><div class="num">2</div><div><h3>Export encrypted backup</h3><p>Use a passphrase. This gives you AES-GCM encrypted backup JSON for safer storage outside the device.</p></div></div>
+          <div class="step"><div class="num">3</div><div><h3>Restore preview</h3><p>Load a backup file first. The app previews what is inside before it changes anything.</p></div></div>
+          <div class="step"><div class="num">4</div><div><h3>Choose merge or replace</h3><p><span class="good">Merge</span> combines current and incoming records by ID. <span class="warn">Replace</span> wipes the current vault and restores only the loaded file.</p></div></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="kicker">10. Privacy mode</div>
+        <h2>How the lock works</h2>
+        <p>The PIN lock is a local privacy barrier for this device and browser profile. It is useful protection for an offline field app, but it is not pretending to be enterprise identity.</p>
+        <ul>
+          <li>Set or update the PIN in Settings.</li>
+          <li>Use <strong>Privacy mode</strong> or <strong>Lock now</strong> to hide the vault.</li>
+          <li>Unlock requires the correct local PIN.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:18px">
+      <div class="kicker">Recommended workflow</div>
+      <h2>Best way to use it day to day</h2>
+      <p>Open Dashboard first. Knock out due follow-ups. Add any new field records through Quick Capture. Clean and enrich them in Lead Ledger. Use Contact Hub to map who matters. Build scripts and quotes in Playbook Studio. Review Analytics once a day. Export an encrypted backup before closing out real work.</p>
+      <p class="footer">Contact: <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> • <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> • <a href="tel:4804695416">(480) 469-5416</a> • <a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a></p>
+    </section>
+  </div>
+</body>
+</html>

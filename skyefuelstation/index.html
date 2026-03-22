@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SkyeFuelStation</title>
+  <meta name="description" content="Public SkyeFuelStation for fuel, tokens, coins, Kaixu key access, and live usage visibility." />
+  <link rel="stylesheet" href="/skyefuelstation/assets/station.css" />
+</head>
+<body>
+  <div class="station-shell">
+    <header class="topbar">
+      <a class="brand" href="/">
+        <span class="brand-mark"></span>
+        <span>
+          <strong>SkyeFuelStation</strong>
+          <small>Public access layer for fuel, assets, and Kaixu usage</small>
+        </span>
+      </a>
+      <nav class="topnav">
+        <a href="/gateway/dashboard.html">Client Dashboard</a>
+        <a href="/gateway">Gateway 13 Admin</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero panel">
+        <div class="hero-copy">
+          <p class="eyebrow">Separate public station</p>
+          <h1>Fuel usage, service assets, and key visibility without making Gateway 13 the front door.</h1>
+          <p class="lede">This station keeps client-facing balance checks and asset discovery in one place while Gateway 13 stays in the admin lane.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#console">Open live balance console</a>
+            <a class="btn ghost" id="brainGateLink" href="#brain-gate">Brain gate status</a>
+          </div>
+        </div>
+        <div class="hero-meter">
+          <div class="meter-card">
+            <span class="meter-label">Service bonus return</span>
+            <strong id="bonusReturnPct">23%</strong>
+          </div>
+          <div class="meter-card accent">
+            <span class="meter-label">Usual discount</span>
+            <strong id="discountPct">0%</strong>
+          </div>
+          <div class="meter-card">
+            <span class="meter-label">Service asset</span>
+            <strong id="serviceAssetName">SkyeTokens</strong>
+          </div>
+          <div class="meter-card accent">
+            <span class="meter-label">Live station signal</span>
+            <strong id="stationLiveSignal">Booting</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel preview-grid">
+        <article>
+          <p class="section-kicker">Station preview</p>
+          <div class="panel-row">
+            <h2><span id="previewSpendLabel">$100</span> service preview</h2>
+            <label class="inline-field compact">
+              <span>Spend</span>
+              <input id="previewSpendInput" type="number" min="25" step="25" value="100" />
+            </label>
+          </div>
+          <div class="preview-figures">
+            <div>
+              <span>Base units</span>
+              <strong id="previewBaseUnits">0</strong>
+            </div>
+            <div>
+              <span>Bonus units</span>
+              <strong id="previewBonusUnits">0</strong>
+            </div>
+            <div>
+              <span>Discount value</span>
+              <strong id="previewDiscountUsd">$0.00</strong>
+            </div>
+          </div>
+        </article>
+        <article>
+          <p class="section-kicker">Brain gate</p>
+          <h2 id="brainGateHeading">Awaiting dedicated Cloudflare brain</h2>
+          <p id="brainGateText">Set the station brain env vars to surface the separate Cloudflare worker here.</p>
+          <div class="brain-pill-row">
+            <span class="brain-pill" id="brainGateStatusPill">Config only</span>
+            <span class="brain-pill" id="brainGateRemotePill">Local station bridge</span>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel live-grid">
+        <div class="panel-heading">
+          <div>
+            <p class="section-kicker">Live public telemetry</p>
+            <h2>Station intelligence board</h2>
+            <p class="muted" id="stationStorageState">Public station is loading its aggregate telemetry.</p>
+          </div>
+          <div class="panel-tools">
+            <label class="inline-field compact">
+              <span>Telemetry month</span>
+              <input id="stationOverviewMonth" placeholder="YYYY-MM" />
+            </label>
+            <button id="stationRefreshBtn" class="btn primary" type="button">Refresh station board</button>
+          </div>
+        </div>
+        <div class="digest-grid" id="stationDigestGrid">
+          <article class="digest-card">
+            <span>Active customers</span>
+            <strong id="digestCustomers">0</strong>
+          </article>
+          <article class="digest-card">
+            <span>Active keys</span>
+            <strong id="digestKeys">0</strong>
+          </article>
+          <article class="digest-card">
+            <span>Monthly top-ups</span>
+            <strong id="digestTopups">$0.00</strong>
+          </article>
+          <article class="digest-card">
+            <span>Token volume</span>
+            <strong id="digestTokens">0</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="asset-strip" id="assetStrip"></section>
+
+      <section class="insight-grid">
+        <article class="panel insight-panel">
+          <div class="panel-row">
+            <div>
+              <p class="section-kicker">Plan mix</p>
+              <h2>Who is fueling the station</h2>
+            </div>
+            <span class="muted small">Live monthly plan aggregation</span>
+          </div>
+          <div id="planMixList" class="stack-list empty-state">No plan telemetry loaded yet.</div>
+        </article>
+
+        <article class="panel insight-panel">
+          <div class="panel-row">
+            <div>
+              <p class="section-kicker">Provider mix</p>
+              <h2>Usage lanes</h2>
+            </div>
+            <span class="muted small">Current month by provider</span>
+          </div>
+          <div id="providerMixList" class="stack-list empty-state">No provider telemetry loaded yet.</div>
+        </article>
+
+        <article class="panel insight-panel">
+          <div class="panel-row">
+            <div>
+              <p class="section-kicker">Top-up sources</p>
+              <h2>Where treasury growth came from</h2>
+            </div>
+            <span class="muted small">Applied top-ups only</span>
+          </div>
+          <div id="topupSourcesList" class="stack-list empty-state">No top-up telemetry loaded yet.</div>
+        </article>
+      </section>
+
+      <section class="activity-grid">
+        <article class="panel activity-panel">
+          <div class="panel-row">
+            <div>
+              <p class="section-kicker">Leaders</p>
+              <h2>High-usage client lane</h2>
+            </div>
+            <span class="muted small">Redacted public ranking</span>
+          </div>
+          <div id="stationLeaders" class="stack-list empty-state">No leader data loaded yet.</div>
+        </article>
+
+        <article class="panel activity-panel">
+          <div class="panel-row">
+            <div>
+              <p class="section-kicker">Recent top-ups</p>
+              <h2>Treasury activity</h2>
+            </div>
+            <span class="muted small">Latest station credits</span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Source</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody id="stationTopupsBody">
+                <tr><td colspan="4" class="muted">No top-up events loaded yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel activity-panel wide">
+          <div class="panel-row">
+            <div>
+              <p class="section-kicker">Recent usage</p>
+              <h2>Latest live station activity</h2>
+            </div>
+            <span class="muted small">Redacted event stream</span>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Client</th>
+                  <th>Provider</th>
+                  <th>Model</th>
+                  <th>Cost</th>
+                </tr>
+              </thead>
+              <tbody id="stationEventsBody">
+                <tr><td colspan="5" class="muted">No live events loaded yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel console-panel" id="console">
+        <div>
+          <p class="section-kicker">Live balance console</p>
+          <h2>Check a Kaixu key from the station</h2>
+          <p class="muted">This uses the existing live user summary endpoint, but the experience lives here instead of inside Gateway 13 admin.</p>
+        </div>
+
+        <div class="console-form">
+          <label>
+            <span>Kaixu key</span>
+            <input id="stationKey" type="password" placeholder="kx_live_..." autocomplete="off" />
+          </label>
+          <label>
+            <span>Month</span>
+            <input id="stationMonth" placeholder="YYYY-MM" />
+          </label>
+          <div class="console-actions">
+            <button id="stationLookupBtn" class="btn primary" type="button">Load live balance</button>
+            <button id="stationClearBtn" class="btn ghost" type="button">Clear key</button>
+          </div>
+          <p id="stationStatus" class="muted">Enter a live key to inspect remaining customer and key budget.</p>
+        </div>
+
+        <div id="stationSummary" class="summary-grid hidden">
+          <div class="summary-card">
+            <span>Customer plan</span>
+            <strong id="sumPlan">-</strong>
+          </div>
+          <div class="summary-card">
+            <span>Customer remaining</span>
+            <strong id="sumCustomerRemaining">$0.00</strong>
+          </div>
+          <div class="summary-card">
+            <span>Key remaining</span>
+            <strong id="sumKeyRemaining">$0.00</strong>
+          </div>
+          <div class="summary-card">
+            <span>Monthly tokens</span>
+            <strong id="sumTokens">0</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/skyefuelstation/assets/station.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skye Infrastructure Signup</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">Skye Infrastructure</p>
+        <h1>Start your infrastructure workspace</h1>
+        <p class="lede">Create a signup application, reserve your plan, then continue into the admin app to activate your org on first login.</p>
+      </section>
+      <section class="panel two-col">
+        <div>
+          <h2>Connection</h2>
+          <label>Worker API base URL</label>
+          <input id="api-base" placeholder="https://api.example.com" />
+          <button id="save-api">Save API base</button>
+          <p class="muted">This page talks to <code>/v1/public/plans</code> and <code>/v1/public/signup</code>.</p>
+        </div>
+        <div>
+          <h2>How it works</h2>
+          <ol>
+            <li>Choose a plan and submit your workspace details.</li>
+            <li>Receive a signup token and reserved onboarding record.</li>
+            <li>Open the admin app, create/log into your Netlify Identity account, and sync auth.</li>
+            <li>Your workspace activates and billing records are created automatically.</li>
+          </ol>
+        </div>
+      </section>
+      <section class="panel">
+        <div class="section-head"><h2>Plans</h2><button id="load-plans">Refresh plans</button></div>
+        <div id="plans" class="cards"></div>
+      </section>
+      <section class="panel two-col">
+        <div>
+          <h2>Create signup application</h2>
+          <label>Full name</label>
+          <input id="full-name" placeholder="Jane Doe" />
+          <label>Email</label>
+          <input id="email" placeholder="jane@example.com" />
+          <label>Workspace / org name</label>
+          <input id="org-name" placeholder="Jane Labs" />
+          <label>First project name</label>
+          <input id="project-name" placeholder="Main App" />
+          <label>Plan</label>
+          <select id="plan-code"></select>
+          <button id="submit-signup">Create signup application</button>
+        </div>
+        <div>
+          <h2>Result</h2>
+          <pre id="result" class="code"></pre>
+          <div class="actions">
+            <a id="continue-link" href="../admin/index.html">Continue to admin</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

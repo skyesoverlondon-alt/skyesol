@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kaixu-super-gate",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-03-13",
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sky_currency",
+      "database_id": "REPLACE_WITH_REAL_D1_DATABASE_ID"
+    }
+  ],
+  "vars": {
+    "APP_NAME": "Skyes Over London • Kaixu Super Gate",
+    "APP_ENV": "dev",
+    "DEFAULT_CURRENCY": "SKYFUEL",
+    "ENABLE_FALLBACKS": "true",
+    "DEFAULT_MAX_SKYFUEL_PER_CALL": "60"
+  }
+}

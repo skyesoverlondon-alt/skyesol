@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login — SkyMail Host</title>
+  <script defer src="/assets/app.js"></script>
+  <style>
+    :root{--bg0:#fffaf0;--bg1:#fff2cc;--glass:rgba(255,255,255,.82);--stroke:rgba(120,90,20,.2);--text:rgba(18,18,18,.94);--muted:rgba(18,18,18,.68);--gold:#d4af37;--danger:#b00020;--ok:#0a7a3d;--shadow:0 18px 55px rgba(0,0,0,.12);--radius:20px;--sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}*{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:var(--sans);color:var(--text);background:radial-gradient(1200px 600px at 20% 10%, rgba(212,175,55,.22), transparent 60%),radial-gradient(900px 500px at 90% 30%, rgba(184,134,11,.16), transparent 55%),radial-gradient(1000px 600px at 50% 95%, rgba(212,175,55,.18), transparent 60%),linear-gradient(160deg,var(--bg0),var(--bg1))}.wrap{min-height:100%;display:flex;flex-direction:column}.topbar{backdrop-filter:blur(14px);background:rgba(255,255,255,.65);border-bottom:1px solid rgba(120,90,20,.12)}.nav{max-width:980px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px}.brand img{width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 0 16px rgba(212,175,55,.28))}.pill,.btn{padding:10px 13px;border:1px solid rgba(120,90,20,.22);background:rgba(255,255,255,.74);border-radius:999px;color:var(--text);font-size:13px;text-decoration:none;cursor:pointer}.btn{border-radius:14px;font-weight:700}.btn.gold{border-color:rgba(212,175,55,.55);background:linear-gradient(135deg, rgba(212,175,55,.90), rgba(184,134,11,.78));color:#1c1605}.container{width:100%;max-width:980px;margin:0 auto;padding:34px 16px;flex:1;display:grid;place-items:center}.card{width:min(100%,520px);background:var(--glass);border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}.h1{font-size:34px;line-height:1.04;margin:0 0 10px}.sub{margin:0;color:var(--muted);font-size:15px;line-height:1.65}label{font-size:12px;color:var(--muted);display:block;margin:12px 0 6px}input{width:100%;padding:12px;border-radius:14px;border:1px solid rgba(120,90,20,.14);background:rgba(255,255,255,.84);color:var(--text);outline:none;font-size:14px}.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.mini{font-size:12px;color:var(--muted);line-height:1.55}.footer{border-top:1px solid rgba(120,90,20,.12);background:rgba(255,255,255,.72)}.footer .inner{max-width:980px;margin:0 auto;padding:18px 16px}.footer p{margin:0;color:var(--muted);font-size:12px;line-height:1.65}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><div class="nav"><div class="brand"><img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Logo" /><div><b>SkyMail Host</b><div style="font-size:12px;color:var(--muted)">Mailbox login</div></div></div><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="pill" href="/signup.html">Create Mailbox</a></div></div></div>
+  <div class="container">
+    <section class="card">
+      <h1 class="h1">Sign in.</h1>
+      <p class="sub">Use your handle or full mailbox address and the password tied to your hosted mailbox.</p>
+      <label for="ident">Handle or mailbox address</label>
+      <input id="ident" type="text" placeholder="yourhandle or you@mail.yourdomain.com" />
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="Your password" />
+      <div class="btnrow"><button class="btn gold" type="button" id="loginBtn">Login</button><a class="btn" href="/signup.html">Create mailbox</a></div>
+      <div class="mini" id="statusText" style="margin-top:12px">Waiting for login.</div>
+    </section>
+  </div>
+  <div class="footer"><div class="inner"><p>Skyes Over London LC • SkyesOverLondonLC@SOLEnterprises.org • SkyesOverLondon@gmail.com • B2B@solenterprises.org • (480) 469-5416</p></div></div>
+</div>
+<script>
+qs('#loginBtn').onclick = async ()=> {
+  const ident = qs('#ident').value.trim();
+  const password = qs('#password').value;
+  if(!ident || !password){ setStatus(qs('#statusText'), 'Enter your login and password.', 'danger'); return; }
+  try{
+    const data = await apiFetch('/auth-login', { method:'POST', body: JSON.stringify({ ident, password }) });
+    setToken(data.token); setHandle(data.handle || ident);
+    setStatus(qs('#statusText'), `Welcome back ${data.handle || ''}.`, 'ok');
+    setTimeout(()=>{ location.href='/dashboard.html'; }, 350);
+  }catch(err){ setStatus(qs('#statusText'), err.message || 'Login failed.', 'danger'); }
+};
+</script>
+</body>
+</html>

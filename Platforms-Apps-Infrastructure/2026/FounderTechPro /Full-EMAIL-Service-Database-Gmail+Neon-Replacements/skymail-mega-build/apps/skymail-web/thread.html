@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script defer src="/assets/app.js"></script>
+  <script defer src="/assets/mail-ui.js"></script>
+  <link rel="stylesheet" href="/assets/mail-ui.css" />
+  <title>Thread — SkyMail Host</title>
+</head>
+<body data-page-id="dashboard" data-page-name="Thread View" data-page-hint="Conversation stack">
+<div class="wrap">
+  <div id="pageTopbar"></div>
+  <div class="layout">
+    <aside class="rail" id="leftRail"></aside>
+    <main class="main">
+
+      <section class="hero">
+        <section class="card">
+          <div class="badge">Conversation stack</div>
+          <h1 class="h1" id="threadTitle">Loading thread…</h1>
+          <p class="sub" id="threadMeta">Loading conversation metadata…</p>
+          <div class="mini" id="statusText">Waiting for thread load…</div>
+        </section>
+        <aside class="card">
+          <div class="kicker">Quick Reply</div>
+          <div class="notice" id="replySummary">Reply in thread</div>
+          <label for="replyText">Reply body</label>
+          <textarea id="replyText" placeholder="Write a thread reply here."></textarea>
+          <div class="btnrow"><button class="btn gold" id="replySendBtn" type="button">Send Reply</button><button class="btn" id="replyComposeBtn" type="button">Open in Compose</button></div>
+        </aside>
+      </section>
+      <section class="card"><div class="thread-stack" id="threadStack"><div class="empty">Loading thread…</div></div></section>
+
+    </main>
+  </div>
+  <div id="appFooter"></div>
+</div>
+<script defer src="/assets/thread-page.js"></script>
+</body>
+</html>

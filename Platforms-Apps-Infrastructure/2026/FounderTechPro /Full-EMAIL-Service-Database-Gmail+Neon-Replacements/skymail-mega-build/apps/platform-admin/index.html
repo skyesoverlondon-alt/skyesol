@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skye Infrastructure Control</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">SK</div>
+          <div>
+            <strong>Skye Infrastructure Control</strong>
+            <p>Billing + onboarding lane</p>
+          </div>
+        </div>
+        <nav class="menu">
+          <a href="./index.html#settings">Settings</a>
+          <a href="./index.html#access">Access</a>
+          <a href="./index.html#organizations">Organizations</a>
+          <a href="./index.html#billing">Billing</a>
+          <a href="./index.html#projects">Projects</a>
+          <a href="./index.html#databases">Databases</a>
+          <a href="./index.html#usage">Usage</a>
+          <a href="./index.html#jobs">Jobs</a>
+          <a href="./index.html#audit">Audit</a>
+        </nav>
+      </aside>
+      <main class="content">
+        <header class="hero">
+          <div>
+            <h1>Skye Infrastructure Billing + Public Onboarding</h1>
+            <p>One operator plane for your own projects, plus client self-serve signup, plan assignment, invoices, and onboarding activation.</p>
+          </div>
+          <div class="status-card triple">
+            <div><span>API</span><strong id="health-status">Unknown</strong></div>
+            <div><span>Auth</span><strong id="auth-status">Not connected</strong></div>
+            <div><span>Mode</span><strong id="mode-status">Customer</strong></div>
+          </div>
+        </header>
+
+        <section id="settings" class="panel two-col">
+          <div>
+            <h2>Connection</h2>
+            <label>Worker API base URL</label>
+            <input id="api-base" placeholder="https://api.example.com" />
+            <label>Bootstrap admin token</label>
+            <input id="manual-token" placeholder="Paste bootstrap token for initial operator access" />
+            <label>Pending signup token</label>
+            <input id="pending-signup-token" placeholder="Auto-filled from public onboarding link" />
+            <div class="row gap wrap">
+              <button id="save-settings">Save settings</button>
+              <button id="check-health" class="secondary">Check health</button>
+              <button id="clear-signup-token" class="secondary">Clear signup token</button>
+            </div>
+          </div>
+          <div>
+            <h2>Netlify Identity</h2>
+            <p class="muted">Public onboarding hands users a signup token. First successful auth sync will activate that workspace automatically.</p>
+            <div class="row gap wrap">
+              <button id="identity-login" class="secondary">Open login</button>
+              <button id="identity-logout" class="secondary">Log out</button>
+              <button id="sync-auth" class="secondary">Sync account</button>
+            </div>
+            <pre id="identity-output" class="code small"></pre>
+          </div>
+        </section>
+
+        <section id="access" class="panel grid-panel">
+          <div class="form-card stacked-forms">
+            <div>
+              <h2>My workspace</h2>
+              <label>Default org</label>
+              <select id="active-org"></select>
+              <label>Quick bootstrap org name</label>
+              <input id="personal-org-name" placeholder="Skyes Over London" />
+              <button id="sync-auth-create">Sync + create personal workspace</button>
+            </div>
+            <hr />
+            <div>
+              <h2>Invite member</h2>
+              <label>Organization</label>
+              <select id="member-org"></select>
+              <label>Email</label>
+              <input id="member-email" placeholder="client@example.com" />
+              <label>Role</label>
+              <select id="member-role">
+                <option value="member">member</option>
+                <option value="admin">admin</option>
+                <option value="owner">owner</option>
+              </select>
+              <button id="add-member" class="secondary">Add / update member</button>
+            </div>
+          </div>
+          <div class="list-card">
+            <div class="card-head"><h2>Org detail</h2><button id="refresh-org-detail" class="secondary">Refresh active org</button></div>
+            <div id="org-detail" class="list"></div>
+          </div>
+        </section>
+
+        <section id="organizations" class="panel grid-panel">
+          <div class="form-card">
+            <h2>Create organization</h2>
+            <label>Name</label>
+            <input id="org-name" placeholder="Client Workspace" />
+            <label>Plan</label>
+            <select id="org-plan"></select>
+            <button id="create-org">Create organization</button>
+          </div>
+          <div class="list-card">
+            <div class="card-head"><h2>Organizations</h2><button id="refresh-orgs" class="secondary">Refresh</button></div>
+            <div id="org-list" class="list"></div>
+          </div>
+        </section>
+
+        <section id="billing" class="panel grid-panel">
+          <div class="form-card stacked-forms">
+            <div>
+              <h2>Subscription</h2>
+              <label>Plan</label>
+              <select id="billing-plan"></select>
+              <label>Billing email</label>
+              <input id="billing-email" placeholder="billing@client.com" />
+              <label>Legal name</label>
+              <input id="billing-legal-name" placeholder="Client Legal Name" />
+              <label><input type="checkbox" id="billing-cancel-at-period-end" /> Cancel at period end</label>
+              <div class="row gap wrap">
+                <button id="update-subscription">Update subscription</button>
+                <button id="create-checkout-session" class="secondary">Create checkout session</button>
+              </div>
+            </div>
+            <hr />
+            <div>
+              <h2>Invoice actions</h2>
+              <label>Invoice</label>
+              <select id="billing-invoice-select"></select>
+              <div class="row gap wrap">
+                <button id="mark-invoice-paid" class="secondary">Mark paid</button>
+                <button id="refresh-billing" class="secondary">Refresh billing</button>
+              </div>
+            </div>
+          </div>
+          <div class="list-card stacked-lists">
+            <div>
+              <div class="card-head"><h2>Billing summary</h2><button id="refresh-signups" class="secondary">Refresh signups</button></div>
+              <div id="billing-summary" class="list"></div>
+            </div>
+            <div>
+              <div class="card-head"><h2>Signup applications</h2><span class="muted">Owner view</span></div>
+              <div id="signup-list" class="list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" class="panel grid-panel">
+          <div class="form-card stacked-forms">
+            <div>
+              <h2>Create project</h2>
+              <label>Organization</label>
+              <select id="project-org"></select>
+              <label>Name</label>
+              <input id="project-name" placeholder="Platform Factory" />
+              <button id="create-project">Create project</button>
+            </div>
+            <hr />
+            <div>
+              <h2>Create environment</h2>
+              <label>Project</label>
+              <select id="environment-project"></select>
+              <label>Name</label>
+              <input id="environment-name" placeholder="Production" />
+              <label>Kind</label>
+              <select id="environment-kind">
+                <option value="production">production</option>
+                <option value="preview">preview</option>
+                <option value="dev">dev</option>
+              </select>
+              <button id="create-environment" class="secondary">Create environment</button>
+            </div>
+            <hr />
+            <div>
+              <h2>Create project API key</h2>
+              <label>Project</label>
+              <select id="api-key-project"></select>
+              <label>Name</label>
+              <input id="api-key-name" placeholder="Primary integration" />
+              <button id="create-api-key" class="secondary">Create API key</button>
+            </div>
+          </div>
+          <div class="list-card stacked-lists">
+            <div>
+              <div class="card-head"><h2>Projects</h2><button id="refresh-projects" class="secondary">Refresh</button></div>
+              <div id="project-list" class="list"></div>
+            </div>
+            <div>
+              <div class="card-head"><h2>Environments</h2><button id="refresh-environments" class="secondary">Refresh</button></div>
+              <div id="environment-list" class="list"></div>
+            </div>
+            <div>
+              <div class="card-head"><h2>Latest API key result</h2><button id="refresh-api-keys" class="secondary">Load active project keys</button></div>
+              <pre id="api-key-output" class="code small"></pre>
+            </div>
+          </div>
+        </section>
+
+        <section id="databases" class="panel grid-panel">
+          <div class="form-card stacked-forms">
+            <div>
+              <h2>Create database</h2>
+              <label>Project</label>
+              <select id="db-project"></select>
+              <label>Environment</label>
+              <select id="db-environment"></select>
+              <label>Name</label>
+              <input id="db-name" placeholder="customer-main" />
+              <label>Plan</label>
+              <select id="db-plan"></select>
+              <button id="create-db">Queue create</button>
+            </div>
+            <hr />
+            <div>
+              <h2>Branch database</h2>
+              <label>Source database</label>
+              <select id="branch-source"></select>
+              <label>New branch name</label>
+              <input id="branch-name" placeholder="feature-branch" />
+              <button id="branch-db" class="secondary">Queue branch</button>
+            </div>
+            <hr />
+            <div>
+              <h2>Ops</h2>
+              <label>Database</label>
+              <select id="backup-instance"></select>
+              <div class="row gap wrap">
+                <button id="run-backup">Queue backup</button>
+                <button id="run-rotate" class="secondary">Queue rotate</button>
+              </div>
+              <label>Restore backup</label>
+              <select id="restore-backup"></select>
+              <button id="run-restore" class="secondary danger">Queue restore</button>
+            </div>
+          </div>
+          <div class="list-card">
+            <div class="card-head"><h2>Databases</h2><button id="refresh-databases" class="secondary">Refresh</button></div>
+            <div id="database-list" class="list database-list"></div>
+          </div>
+        </section>
+
+        <section id="usage" class="panel grid-panel">
+          <div class="list-card">
+            <div class="card-head"><h2>Usage summary</h2><button id="refresh-usage" class="secondary">Refresh</button></div>
+            <div id="usage-summary" class="list"></div>
+          </div>
+          <div class="list-card">
+            <div class="card-head"><h2>Plan catalog</h2><button id="refresh-plans" class="secondary">Refresh</button></div>
+            <div id="plan-list" class="list"></div>
+          </div>
+        </section>
+
+        <section id="jobs" class="panel grid-panel">
+          <div class="list-card">
+            <div class="card-head"><h2>Jobs</h2><button id="refresh-jobs" class="secondary">Refresh</button></div>
+            <div id="job-list" class="list"></div>
+          </div>
+          <div class="list-card">
+            <div class="card-head"><h2>Backups</h2><button id="refresh-backups" class="secondary">Refresh</button></div>
+            <div id="backup-list" class="list"></div>
+          </div>
+        </section>
+
+        <section id="audit" class="panel grid-panel">
+          <div class="list-card">
+            <div class="card-head"><h2>Audit</h2><button id="refresh-audit" class="secondary">Refresh</button></div>
+            <div id="audit-list" class="list"></div>
+          </div>
+          <div class="list-card">
+            <div class="card-head"><h2>Recent usage events</h2><span class="muted">Metering trail</span></div>
+            <div id="usage-recent" class="list"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="card-head"><h2>Activity log</h2></div>
+          <pre id="activity-log" class="code log"></pre>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

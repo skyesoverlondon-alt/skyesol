@@ -6,7 +6,7 @@ function json(obj, status = 200) {
 }
 
 function dbUrl() {
-  return process.env.DATABASE_URL || process.env.NEON_DATABASE_URL || process.env.KAIXU_DATABASE_URL || "";
+  return process.env.NEON_DATABASE_URL || process.env.DATABASE_URL || process.env.NETLIFY_DATABASE_URL || process.env.KAIXU_DATABASE_URL || "";
 }
 
 async function ensureSchema(sql) {
@@ -37,7 +37,7 @@ export default async function handler(req) {
   if (req.method === "OPTIONS") return new Response("", { status: 204 });
   if (req.method !== "POST") return json({ error: "Method not allowed" }, 405);
   const u = dbUrl();
-  if (!u) return json({ error: "Vault disabled. Set DATABASE_URL." }, 501);
+  if (!u) return json({ error: "Vault disabled. Set NEON_DATABASE_URL for the shared Skyesol database." }, 501);
 
   const payload = await req.json().catch(() => null);
   if (!payload) return json({ error: "Invalid JSON" }, 400);

@@ -1,0 +1,15 @@
+
+<div class="page-shell page-wrap">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Projects</div>
+      <h2>Group contacts, credentials, and notes into actual working lanes.</h2>
+    </div>
+    <div class="toolbar" style="margin-top:12px"><button class="soft-btn" type="button" onclick="app.goTo('credential-pack')">Credential Pack</button><button class="soft-btn" type="button" onclick="app.goTo('contacts')">Contacts</button><button class="soft-btn" type="button" onclick="app.goTo('vault')">Vault</button></div>
+    <div class="toolbar" data-tour="projects-toolbar">
+      <input id="project-search" type="search" placeholder="Search projects" oninput="app.setFilter('projectSearch', this.value)">
+      <button class="primary-btn" onclick="app.openEntityModal('project')">Add Project</button>
+    </div>
+  </div>
+  <div id="projects-list" class="list-grid" data-tour="projects-list"></div>
+</div>

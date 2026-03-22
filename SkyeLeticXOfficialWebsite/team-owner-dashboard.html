@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Owner Dashboard | SkyeLeticX Dashboards</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#09030f" />
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/skx-dashboard.css" />
+  
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <a href="home.html" style="display:flex;align-items:center;gap:12px">
+        <img src="logo.png" alt="SkyeLeticX logo" />
+      </a>
+      <div>
+        <div class="brand-name">SkyeLeticX</div>
+        <div class="brand-sub">League Command Surfaces • Skyes Over London LC</div>
+      </div>
+    </div>
+    <nav class="nav-links"><a href="home.html" class="">Home</a><a href="how-it-works.html" class="">How It Works</a><a href="about.html" class="">About</a><a href="about-founder.html" class="">Founder</a><a href="players.html" class="">Players</a><a href="owners-intake.html" class="">Founding Owners</a><a href="arizona-hq.html" class="">Arizona HQ</a><a href="skyeletes-editorial.html" class="">Editorial</a><a href="owner-dashboard.html" class="">Command</a><a href="league-office-dashboard.html" class="">League Office</a><a href="vp-operations-dashboard.html" class="">VP Ops</a><a href="cfo-dashboard.html" class="">CFO</a><a href="team-owner-dashboard.html" class="active">Team Owner</a><a href="player-portal-dashboard.html" class="">Player Portal</a><a href="draft-war-room.html" class="">Draft War Room</a></nav>
+    <div class="nav-cta">
+      <div class="pill">Identity • Blobs • Neon</div>
+      <button class="btn btn-secondary" type="button" data-auth="login">Login</button>
+      <button class="btn btn-danger" type="button" data-auth="logout">Logout</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Team owner lane</div>
+      <h1>Team Owner Dashboard</h1>
+      <p>This page is for the linked Season One player-owner tier. When your Netlify Identity email is linked to a team in the league office, this dashboard shows your team, your roster, and the live board you can draft from.</p>
+      <div class="metrics">
+        <div class="metric"><b id="metricPlayers">0</b><span>Players in system</span></div>
+        <div class="metric"><b id="metricTeams">0</b><span>Teams</span></div>
+        <div class="metric"><b id="metricCombines">0</b><span>Combines</span></div>
+        <div class="metric"><b id="metricOpenFees">$0</b><span>Open fees</span></div>
+      </div>
+      <div id="authState" class="notice">Checking login state…</div>
+      <div id="authGate" class="auth-gate"></div>
+    </div>
+    <aside class="hero-card">
+      <img class="hero-logo" src="logo.png" alt="SkyeLeticX" />
+      <div class="kicker">Team owner tools</div>
+      <div id="teamOwnerSummary" class="stack">
+        <div class="notice">Waiting for linked team context…</div>
+      </div>
+    </aside>
+  </section>
+  <section class="section">
+    <div class="grid">
+      <article class="card span-5">
+        <div class="kicker">Prospect add</div>
+        <h3>Add a prospect into the pool</h3>
+        <form id="prospectForm">
+          <div class="form-grid">
+            <div class="form-row"><label>First name</label><input class="input" name="first_name" required /></div>
+            <div class="form-row"><label>Last name</label><input class="input" name="last_name" required /></div>
+            <div class="form-row"><label>Email</label><input class="input" name="email" type="email" /></div>
+            <div class="form-row"><label>Phone</label><input class="input" name="phone" /></div>
+            <div class="form-row"><label>School level</label><select class="input" name="school_level"><option value="HS Senior">HS Senior</option><option value="College">College</option></select></div>
+            <div class="form-row"><label>School</label><input class="input" name="school_name" /></div>
+            <div class="form-row"><label>Position</label><input class="input" name="position" /></div>
+            <div class="form-row"><label>City</label><input class="input" name="city" /></div>
+            <div class="form-row"><label>State</label><input class="input" name="state" /></div>
+            <div class="form-row"><label>Entry lane</label><select class="input" name="entry_lane"><option value="founding_owner_referral">Founding owner referral</option><option value="open_combine">Open combine</option></select></div>
+            <div class="form-row" style="grid-column:1/-1"><label>Notes</label><textarea class="input" name="notes"></textarea></div>
+          </div>
+          <div class="form-foot"><button class="btn btn-primary" type="submit">Add prospect</button></div>
+        </form>
+        <div id="prospectFormNotice" class="notice" style="margin-top:12px">Ready.</div>
+      </article>
+      <article class="card span-7">
+        <div class="kicker">Team memo</div>
+        <h3>Blob-backed owner note</h3>
+        <div class="form-row"><label>Team owner memo</label><textarea id="teamOwnerNote" class="input"></textarea></div>
+        <div class="form-foot"><button id="saveTeamOwnerNote" class="btn btn-primary" type="button">Save note</button><button id="reloadTeamOwnerNote" class="btn btn-secondary" type="button">Reload</button></div>
+        <div id="teamOwnerNoteNotice" class="notice" style="margin-top:12px">Ready.</div>
+      </article>
+    </div>
+  </section>
+  <section class="section">
+    <div class="grid">
+      <article class="card span-6"><div class="kicker">Roster</div><h3>Current team roster</h3><div id="myRosterTable"></div></article>
+      <article class="card span-6"><div class="kicker">Available board</div><h3>Players available to draft</h3><div id="availablePlayersTable"></div></article>
+      <article class="card span-12"><div class="kicker">Recent picks</div><h3>Your draft activity</h3><div id="myPicksTable"></div></article>
+    </div>
+  </section>
+  <footer class="footer">Team owner dashboard • Contact: <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> • <a href="tel:4804695416">(480) 469-5416</a></footer>
+</main>
+<script>
+(async function(){
+  const boot = await SKX.boot({ roles:['president','vp','team_owner'], authStateId:'authState', gateId:'authGate', summary:true });
+  if (!boot.authorized) return;
+  let linkedTeamId = boot.profile && boot.profile.team_id ? Number(boot.profile.team_id) : null;
+  let linkedTeamName = 'Unlinked team';
+  function noteScope(){ return linkedTeamId ? `team-owner-${linkedTeamId}` : 'team-owner-unlinked'; }
+  async function refresh(){
+    const [boardRes, playersRes, teamsRes] = await Promise.all([SKX.api('draft_board'), SKX.api('players'), SKX.api('teams')]);
+    linkedTeamId = boardRes.linked_team_id || linkedTeamId || null;
+    const team = (teamsRes.teams || []).find(t => Number(t.id) === Number(linkedTeamId));
+    linkedTeamName = team ? team.team_name : 'No linked team yet';
+    document.getElementById('teamOwnerSummary').innerHTML = linkedTeamId
+      ? `<div class="notice"><strong>Linked team:</strong> ${SKX.esc(linkedTeamName)}</div><div class="notice"><strong>Owner email:</strong> ${SKX.esc(team && team.owner_email || boot.user && boot.user.email || '')}</div><div class="notice"><strong>Roster count:</strong> ${SKX.esc(team && team.player_count || 0)}</div>`
+      : `<div class="notice error">Your Netlify Identity email is not linked to a team yet. Use the League Office dashboard to map your email to a team profile.</div>`;
+    const players = playersRes.players || [];
+    const myRoster = linkedTeamId ? players.filter(p => Number(p.team_id) === Number(linkedTeamId)) : [];
+    document.getElementById('myRosterTable').innerHTML = SKX.tableHTML(myRoster, [
+      { label:'Player', render:r=>`<strong>${SKX.esc(r.full_name)}</strong><small>${SKX.esc(r.position || '')} • ${SKX.esc(r.school_name || '')}</small>` },
+      { label:'Status', render:r=>`<span class="badge green">${SKX.esc(r.status || '')}</span>` },
+      { label:'Score', render:r=>`${SKX.esc(r.combine_score || '—')}` },
+      { label:'Rank', render:r=>`${SKX.esc(r.draft_rank || '—')}` }
+    ]);
+    const available = boardRes.available_players || [];
+    document.getElementById('availablePlayersTable').innerHTML = SKX.tableHTML(available.slice(0,100), [
+      { label:'Player', render:r=>`<strong>${SKX.esc(r.full_name)}</strong><small>${SKX.esc(r.school_level || '')} • ${SKX.esc(r.school_name || '')}</small>` },
+      { label:'Position', key:'position' },
+      { label:'Rank', render:r=>`${SKX.esc(r.draft_rank || '—')}<small>Score ${SKX.esc(r.combine_score || '—')}</small>` },
+      { label:'Lane', render:r=>`<span class="badge">${SKX.esc(r.entry_lane || '')}</span>` },
+      { label:'Action', render:r=> linkedTeamId ? `<button class="btn btn-primary draft-from-owner" data-player-id="${r.id}" type="button">Draft</button>` : 'Link team first' }
+    ]);
+    const myPicks = (boardRes.picks || []).filter(p => Number(p.team_id) === Number(linkedTeamId));
+    document.getElementById('myPicksTable').innerHTML = SKX.tableHTML(myPicks, [
+      { label:'Pick', render:r=>`Round ${SKX.esc(r.round_no)} • Pick ${SKX.esc(r.pick_no)}` },
+      { label:'Player', key:'player_name' },
+      { label:'Selected by', key:'selected_by_name' },
+      { label:'When', render:r=>SKX.shortDate(r.created_at) }
+    ]);
+  }
+  document.getElementById('prospectForm').addEventListener('submit', async(e)=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    try { await SKX.api('upsert_player', { data }); SKX.showNotice('prospectFormNotice', 'Prospect added.', 'success'); e.target.reset(); refresh(); }
+    catch(err){ SKX.showNotice('prospectFormNotice', SKX.esc(err.message), 'error'); }
+  });
+  document.addEventListener('click', async(e)=>{
+    const btn = e.target.closest('.draft-from-owner');
+    if (!btn) return;
+    if (!linkedTeamId) return alert('Link your identity to a team first in League Office.');
+    const pickNo = window.prompt('Enter the pick number for this selection:');
+    if (!pickNo) return;
+    try { await SKX.api('make_draft_pick', { data:{ team_id: linkedTeamId, player_id: btn.getAttribute('data-player-id'), pick_no: pickNo, round_no: 1 } }); refresh(); }
+    catch(err){ alert(err.message); }
+  });
+  async function loadNote(){
+    try { const res = await SKX.api('load_note', { query:`scope=${encodeURIComponent(noteScope())}` }); const note = res.note || null; document.getElementById('teamOwnerNote').value = note && note.text ? note.text : ''; SKX.showNotice('teamOwnerNoteNotice', note ? `Loaded note by ${SKX.esc(note.author || 'Unknown')}.` : 'No team owner note saved yet.', note ? 'success' : ''); }
+    catch(err){ SKX.showNotice('teamOwnerNoteNotice', SKX.esc(err.message), 'error'); }
+  }
+  document.getElementById('saveTeamOwnerNote').addEventListener('click', async()=>{
+    try { await SKX.api('save_note', { data:{ scope: noteScope(), text: document.getElementById('teamOwnerNote').value } }); SKX.showNotice('teamOwnerNoteNotice', 'Team owner note saved.', 'success'); }
+    catch(err){ SKX.showNotice('teamOwnerNoteNotice', SKX.esc(err.message), 'error'); }
+  });
+  document.getElementById('reloadTeamOwnerNote').addEventListener('click', loadNote);
+  await refresh();
+  await loadNote();
+})();
+</script>
+
+<script src="assets/skx-dashboard.js"></script>
+</body>
+</html>

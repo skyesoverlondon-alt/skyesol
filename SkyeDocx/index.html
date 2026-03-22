@@ -1053,15 +1053,6 @@
 
             async boot() {
                 // Intro Sequence Management
-                let introHidden = false;
-                const hideIntro = () => {
-                    if (introHidden) return;
-                    const intro = document.getElementById('skyes-intro');
-                    introHidden = true;
-                    if (intro) intro.remove();
-                    document.body.classList.add('app-ready');
-                };
-
                 const terminal = document.getElementById('intro-terminal-text');
                 let terminalInterval;
                 if(terminal) {
@@ -1072,10 +1063,10 @@
 
                 setTimeout(() => {
                     clearInterval(terminalInterval);
-                    hideIntro();
+                    const intro = document.getElementById('skyes-intro');
+                    if (intro) intro.remove();
+                    document.body.classList.add('app-ready');
                 }, 5300);
-
-                setTimeout(hideIntro, 9000);
 
                 this.initQuill();
                 await this.loadDocList();
@@ -2008,14 +1999,15 @@
         // Initialize!
         App.boot();
     </script>
-        <script>
-        (() => {
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).catch(() => {});
-                });
-            }
-        })();
-        </script>
+<script>
+(() => {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js', { updateViaCache: 'none' }).catch(() => {});
+    });
+  }
+})();
+</script>
+  <script src="/js/SkyeSolINTRO.js"></script>
 </body>
 </html>

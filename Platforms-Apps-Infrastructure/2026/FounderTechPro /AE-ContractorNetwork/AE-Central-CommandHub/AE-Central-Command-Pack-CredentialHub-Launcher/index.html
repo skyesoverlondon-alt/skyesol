@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>AE Central Command Pack featuring the Credential Hub Launcher</title>
+  <meta name="theme-color" content="#0f2f78">
+  <meta name="description" content="AE Central Command Pack featuring the Credential Hub Launcher brings AE FLOW, ConnectLog, Skye Intake Vault, Exec Sign In Pro, the Service Master Pack, the Credential Pack, the Connected Ops Pack, and the credential command shell together in one offline-first royal-blue-and-gold package.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <div class="app">
+    <div class="background-stage" aria-hidden="true">
+      <div id="background-secondary" class="background-secondary"></div>
+      <div id="background-custom" class="background-custom"></div>
+      <div class="bg-noise"></div>
+            <img id="bg-founder" class="founder-figure" src="./assets/founder.webp" alt="">
+      <div class="background-tint"></div>
+      <div class="background-dim"></div>
+    </div>
+
+    <div class="shell">
+      <aside class="sidebar glass">
+        <div class="brand">
+          <div class="brand-media">
+            <img class="brand-emblem" src="./assets/skydexia-solo.webp" alt="SkyDexia crest">
+          </div>
+          <div>
+            <div class="brand-eyebrow">s0l26-0s • AE Central Command Pack</div>
+            <div class="name">AE Central Command Pack</div>
+            <div class="sub">Credential Hub Launcher sits at the center of the AE Central Command Pack. Use it to move through the built-in vault lanes, the free AE stack guidance, and the linked package surfaces without guessing where anything lives.</div>
+          </div>
+        </div>
+
+        <nav class="nav" id="nav" data-tour="sidebar-nav">
+          <button class="active" data-page="launcher"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 7l9 5 9-5-9-5Z"/><path d="m3 17 9 5 9-5"/><path d="m3 12 9 5 9-5"/></svg><span>Launcher</span></button>
+          <button data-page="ae-command-pack"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18"/><path d="M12 3v18"/><circle cx="12" cy="12" r="9"/></svg><span>AE Pack</span></button>
+          <button data-page="credential-pack"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8"/><path d="M8 13h8"/><path d="M8 17h5"/></svg><span>Credential Pack</span></button>
+          <button data-page="ops-pack"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h7"/><path d="M18 5v14"/></svg><span>Ops Pack</span></button>
+          <button data-page="service-pack"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M8 9h8"/><path d="M8 13h8"/><path d="M8 17h5"/></svg><span>Service Pack</span></button>
+          <button data-page="dashboard"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h8V3H3z"/><path d="M13 21h8v-6h-8z"/><path d="M13 3h8v8h-8z"/><path d="M3 21h8v-4H3z"/></svg><span>Dashboard</span></button>
+          <button data-page="sitemap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3H4v6h6V3Z"/><path d="M20 15h-6v6h6v-6Z"/><path d="M10 15H4v6h6v-6Z"/><path d="M7 9v3h10v3"/></svg><span>Sitemap</span></button>
+          <button data-page="tutorial"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 2-3 4"/><path d="M12 17h.01"/></svg><span>Tutorial</span></button>
+          <button data-page="contacts"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg><span>Contacts Hub</span></button>
+          <button data-page="vault"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg><span>Vault</span></button>
+          <button data-page="projects"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18"/><path d="M7 3v4"/><path d="M17 3v4"/><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 12h8"/><path d="M8 16h5"/></svg><span>Projects</span></button>
+          <button data-page="notes"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V4a2 2 0 0 1 2-2h9l5 5v12.5a2.5 2.5 0 0 1-2.5 2.5H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/></svg><span>Notes</span></button>
+          <button data-page="settings"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .33 1.82l.05.05a2 2 0 0 1-2.83 2.83l-.05-.05a1.7 1.7 0 0 0-1.82-.33 1.7 1.7 0 0 0-1 1.54V21a2 2 0 0 1-4 0v-.08a1.7 1.7 0 0 0-1-1.54 1.7 1.7 0 0 0-1.82.33l-.05.05a2 2 0 0 1-2.83-2.83l.05-.05A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.54-1H3a2 2 0 0 1 0-4h.08A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.33-1.82l-.05-.05a2 2 0 0 1 2.83-2.83l.05.05A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.52V3a2 2 0 0 1 4 0v.08A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.82-.33l.05-.05a2 2 0 1 1 2.83 2.83l-.05.05A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.52 1H21a2 2 0 0 1 0 4h-.08a1.7 1.7 0 0 0-1.52 1z"/></svg><span>Settings</span></button>
+        </nav>
+
+        <div class="sidebar-foot">
+          <div class="tiny-card">
+            <h4>AE Command Pack</h4>
+            <p>The package now includes dedicated AE, Credential, Ops, and Service Pack pages so the team can move from capture to offer selection, payment clarity, and post-close operations without guessing.</p>
+          </div>
+          <div class="tiny-card">
+            <h4>Credential Hub Launcher</h4>
+            <p>Launcher, sitemap, connected branch-app links, glass shell, local backup, optional lock, direct route access, the lead-to-ledger ops editorial, and the new service-selection master pack all stay intact underneath the command-pack framing.</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar glass" data-tour="global-toolbar">
+          <div class="topbar-left">
+            <div class="search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+              <input id="global-search" type="search" placeholder="Search contacts, credentials, projects, and notes…">
+              <div id="results-panel" class="results-panel">
+                <div class="results-shell glass" id="results-shell"></div>
+              </div>
+            </div>
+            <span id="offline-pill" class="status-pill offline">Checking sync state…</span>
+          </div>
+          <div class="topbar-right"><button id="tour-btn" class="chip-btn" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 2-3 4"/><path d="M12 17h.01"/></svg>Walkthrough</button>
+            <button id="install-btn" class="chip-btn hidden"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Install</button>
+            <button class="soft-btn" onclick="app.exportBackup()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Backup</button>
+            <label class="soft-btn" for="restore-file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V9"/><path d="m17 14-5-5-5 5"/><path d="M5 3h14"/></svg>Restore<input id="restore-file" type="file" accept=".json" class="hidden"></label>
+            <button class="primary-btn" onclick="app.openQuickAdd()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>Add</button>
+          </div>
+        </div>
+
+        <section id="page-host" class="page-host">
+          <div class="page-loader glass">Loading page…</div>
+        </section>
+      </main>
+    </div>
+
+    <div id="modal-backdrop" class="modal-backdrop">
+      <div class="modal glass">
+        <div class="modal-head">
+          <h3 id="modal-title">Add Item</h3>
+          <button class="icon-btn" type="button" onclick="app.closeModal()">Close</button>
+        </div>
+        <div class="modal-body" id="modal-body"></div>
+      </div>
+    </div>
+
+    <div id="lock-screen" class="lock-screen">
+      <div class="lock-card glass">
+        <img class="lock-logo" src="./icon-512.png" alt="">
+        <h2>Unlock Credential Vault</h2>
+        <p>This Credential Vault lane is stored locally with an access code. Enter the code to load your contacts, credentials, projects, notes, and relationship timeline on this device.</p>
+        <input id="lock-input" class="field" type="password" inputmode="text" autocomplete="current-password" placeholder="Access code">
+        <div class="row">
+          <button class="primary-btn" onclick="app.unlockVault()">Unlock</button>
+          <button class="soft-btn" onclick="app.cancelUnlock()">Stay Locked</button>
+        </div>
+        <div id="lock-error" class="small-note" style="margin-top:12px;color:#ffc3d0"></div>
+      </div>
+    </div>
+
+    
+
+    <div id="tour-backdrop" class="tour-backdrop hidden" aria-hidden="true">
+      <div id="tour-highlight" class="tour-highlight"></div>
+      <div id="tour-card" class="tour-card glass" role="dialog" aria-modal="true" aria-labelledby="tour-title">
+        <div class="tour-step">Step <span id="tour-step-count">1 / 1</span></div>
+        <h3 id="tour-title">Walkthrough</h3>
+        <p id="tour-body">Learn the app.</p>
+        <div class="tour-actions">
+          <button id="tour-skip" class="ghost-btn" type="button">Skip</button>
+          <div class="tour-nav-actions">
+            <button id="tour-prev" class="soft-btn" type="button">Back</button>
+            <button id="tour-next" class="primary-btn" type="button">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-wrap" class="toast-wrap"></div>
+
+  </div>
+
+  <script src="./assets/app.js"></script>
+</body>
+</html>

@@ -356,6 +356,114 @@ a {
   margin-bottom: 6px;
 }
 
+.sf-intake-shell {
+  scroll-margin-top: 118px;
+}
+
+.sf-intake-note {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+}
+
+.sf-intake-note strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.sf-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sf-field,
+.sf-field-full {
+  display: grid;
+  gap: 8px;
+}
+
+.sf-field-full {
+  grid-column: 1 / -1;
+}
+
+.sf-form-label {
+  color: var(--sf-text);
+  font-size: 0.92rem;
+}
+
+.sf-form-label span {
+  color: var(--sf-gold);
+}
+
+.sf-field input,
+.sf-field select,
+.sf-field-full textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--sf-text);
+  outline: none;
+}
+
+.sf-field-full textarea {
+  min-height: 116px;
+  resize: vertical;
+}
+
+.sf-checklist-stack {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.sf-checkrow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sf-checkrow input[type="checkbox"] {
+  margin-top: 4px;
+  transform: scale(1.12);
+  accent-color: var(--sf-purple);
+}
+
+.sf-checkrow strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.sf-savebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.sf-saved-pill {
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 242, 188, 0.24);
+  background: rgba(126, 242, 188, 0.1);
+  color: var(--sf-green);
+  font-size: 0.84rem;
+}
+
+.sf-small {
+  color: var(--sf-muted);
+  font-size: 0.92rem;
+}
+
 .sf-footer-note {
   margin-top: 18px;
   text-align: center;
@@ -369,6 +477,7 @@ a {
   .sf-mini-grid,
   .sf-card-grid,
   .sf-card-grid.sf-card-grid-3,
+  .sf-form-grid,
   .sf-loop-grid,
   .sf-proof-grid {
     grid-template-columns: 1fr;

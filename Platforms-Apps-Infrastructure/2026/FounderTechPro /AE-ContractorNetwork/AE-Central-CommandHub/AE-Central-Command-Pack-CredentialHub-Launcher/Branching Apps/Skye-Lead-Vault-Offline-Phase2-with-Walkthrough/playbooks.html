@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#120b1f">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" href="icon-192.png">
+  <title>Skye Lead Vault</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="playbooks">
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="app-shell glass">
+    <aside class="sidebar glass">
+      <div class="sidebar-inner">
+        <div class="brand-wrap">
+          <div class="brand-logo"><img src="assets/media/skydexia-logo.png" alt="SkyDexia logo"></div>
+          <div>
+            <div class="brand-kicker">s0l26-0s module</div>
+            <div class="brand-title">Skye Lead Vault</div>
+            <div class="brand-copy">Offline lead intelligence, contact rollups, pipeline movement, quick capture, routes, analytics, script packs, and real backup handling.</div>
+          </div>
+        </div>
+
+        <div class="side-block">
+          <div class="side-label">Navigation</div>
+          <nav class="nav-links">
+            <a class="nav-link " href="index.html"><span>Dashboard</span><span class="nav-badge" data-count="today">0</span></a>
+<a class="nav-link " href="leads.html"><span>Lead ledger</span><span class="nav-badge" data-count="leads">0</span></a>
+<a class="nav-link " href="pipeline.html"><span>Pipeline board</span><span class="nav-badge" data-count="pipeline">0</span></a>
+<a class="nav-link " href="contacts.html"><span>Contact hub</span><span class="nav-badge" data-count="contacts">0</span></a>
+<a class="nav-link active" href="playbooks.html"><span>Playbook studio</span><span class="nav-badge" data-count="playbooks">0</span></a>
+<a class="nav-link " href="quick-capture.html"><span>Quick capture</span><span class="nav-badge" data-count="capture">0</span></a>
+<a class="nav-link " href="routes.html"><span>Routes + territory</span><span class="nav-badge" data-count="routes">0</span></a>
+<a class="nav-link " href="analytics.html"><span>Analytics</span><span class="nav-badge" data-count="analytics">0</span></a>
+<a class="nav-link " href="backups.html"><span>Backup vault</span><span class="nav-badge" data-count="backups">0</span></a>
+<a class="nav-link " href="settings.html"><span>Settings</span><span class="nav-badge" data-count="settings">0</span></a>
+          </nav>
+        </div>
+
+        <div class="side-block">
+          <div class="side-label">Quick actions</div>
+          <div class="row">
+            <button class="btn btn-primary" id="quickAddBtn">+ New lead</button>
+            <button class="btn" id="quickBackupBtn">Backup</button>
+            <button class="btn btn-gold" id="quickTodayBtn">Today</button>
+          </div>
+        </div>
+
+        <div class="side-block">
+          <div class="side-label">Support contact</div>
+          <div class="contact-card">
+            <div class="rowline"><strong>Skyes Over London</strong></div>
+            <div class="rowline"><a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a></div>
+            <div class="rowline"><a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a></div>
+            <div class="rowline"><a href="tel:4804695416">(480) 469-5416</a></div>
+            <div class="rowline"><a href="https://SOLEnterprises.org" target="_blank" rel="noreferrer">SOLEnterprises.org</a></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-shell glass">
+      <div class="topbar">
+        <div class="topbar-left">
+          <div class="page-kicker" id="pageKicker"></div>
+          <div class="page-title" id="pageTitle"></div>
+          <div class="page-sub" id="pageSub"></div>
+        </div>
+        <div class="topbar-right">
+          <button class="toggle" id="privacyToggle" data-action="toggle-privacy">Privacy mode</button>
+          <button class="btn" onclick="window.location.href='backups.html'">Backup vault</button>
+          <button class="btn btn-primary" onclick="window.location.href='settings.html'">Background studio</button>
+        </div>
+      </div>
+      <div class="page-content">
+        <div id="pageRoot"></div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="modal-panel glass" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title" id="modalTitle">Edit</div>
+          <div class="modal-sub" id="modalSub">Manage the selected record.</div>
+        </div>
+        <div class="inline-actions">
+          <button class="btn" id="modalCloseBtn">Close</button>
+          <button class="btn btn-danger" id="modalDeleteBtn">Delete</button>
+          <button class="btn btn-primary" id="modalSaveBtn">Save</button>
+        </div>
+      </div>
+      <div id="modalBody" style="padding-top:14px"></div>
+    </div>
+  </div>
+
+  <div class="lock-overlay" id="lockOverlay">
+    <div class="lock-card glass">
+      <div class="brand-wrap">
+        <div class="brand-logo"><img src="assets/media/skydexia-logo.png" alt="SkyDexia logo"></div>
+        <div>
+          <div class="brand-kicker">Privacy mode</div>
+          <div class="brand-title">Unlock Skye Lead Vault</div>
+          <div class="brand-copy">This local vault is protected by a PIN on this device.</div>
+        </div>
+      </div>
+      <input class="input" id="unlockPin" type="password" placeholder="Enter PIN">
+      <div class="inline-actions">
+        <button class="btn btn-primary" id="unlockBtn">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

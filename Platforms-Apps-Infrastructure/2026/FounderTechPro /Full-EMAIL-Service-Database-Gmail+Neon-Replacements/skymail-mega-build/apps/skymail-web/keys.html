@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Vault Keys — SkyMail Host</title>
+<style>
+:root{
+  --bg0:#fffaf0;
+  --bg1:#fff2cc;
+  --glass: rgba(255,255,255,.78);
+  --stroke: rgba(120,90,20,.20);
+  --text: rgba(18,18,18,.94);
+  --muted: rgba(18,18,18,.68);
+  --gold: #d4af37;
+  --gold2:#b8860b;
+  --danger: #b00020;
+  --ok: #0a7a3d;
+  --shadow: 0 18px 55px rgba(0,0,0,.12);
+  --radius: 18px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: var(--sans);
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(212,175,55,.22), transparent 60%),
+    radial-gradient(900px 500px at 90% 30%, rgba(184,134,11,.16), transparent 55%),
+    radial-gradient(1000px 600px at 50% 95%, rgba(212,175,55,.18), transparent 60%),
+    linear-gradient(160deg, var(--bg0), var(--bg1));
+  overflow-x:hidden;
+}
+
+
+a{ color: var(--gold2); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+.wrap{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  backdrop-filter: blur(14px);
+  background: rgba(255,255,255,.65);
+  border-bottom: 1px solid rgba(120,90,20,.12);
+}
+
+.nav{
+  max-width:1150px;
+  margin:0 auto;
+  padding:14px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:220px;
+}
+.brand img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  filter: drop-shadow(0 0 16px rgba(212,175,55,.28)) drop-shadow(0 0 26px rgba(184,134,11,.18));
+  animation: floatPulse 3.4s ease-in-out infinite;
+}
+@keyframes floatPulse{
+  0%{ transform: translateY(0); filter: drop-shadow(0 0 12px rgba(212,175,55,.22)) drop-shadow(0 0 18px rgba(184,134,11,.16)); }
+  50%{ transform: translateY(-4px); filter: drop-shadow(0 0 18px rgba(212,175,55,.36)) drop-shadow(0 0 30px rgba(184,134,11,.22)); }
+  100%{ transform: translateY(0); filter: drop-shadow(0 0 12px rgba(212,175,55,.22)) drop-shadow(0 0 18px rgba(184,134,11,.16)); }
+}
+
+  50%{ transform: translateY(-4px); filter: drop-shadow(0 0 16px rgba(247,201,75,.30)) drop-shadow(0 0 26px rgba(123,44,255,.35)); }
+  100%{ transform: translateY(0); filter: drop-shadow(0 0 10px rgba(247,201,75,.18)) drop-shadow(0 0 16px rgba(123,44,255,.22)); }
+}
+.brand .name{
+  display:flex; flex-direction:column; line-height:1.1;
+}
+.brand .name b{ letter-spacing:.2px; }
+.brand .name span{ font-size:12px; color:var(--muted); }
+
+.navlinks{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.pill{
+  padding:9px 12px;
+  border:1px solid rgba(120,90,20,.22);
+  background: rgba(255,255,255,.72);
+  border-radius: 999px;
+  color: var(--text);
+  font-size:13px;
+}
+.pill:hover{ background: rgba(212,175,55,.14); }
+
+.container{
+  width:100%;
+  max-width:1150px;
+  margin:0 auto;
+  padding:26px 16px 30px;
+  flex:1;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:18px;
+  align-items:stretch;
+}
+@media (max-width: 940px){
+  .hero{ grid-template-columns:1fr; }
+}
+
+.card{
+  background: var(--glass);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding:18px;
+}
+
+.h1{
+  font-size: 38px;
+  line-height:1.05;
+  margin:0 0 10px;
+  letter-spacing: .2px;
+}
+.sub{
+  margin:0 0 18px;
+  color: var(--muted);
+  font-size:15px;
+  line-height:1.6;
+}
+
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width: 720px){ .grid2{ grid-template-columns:1fr; } }
+
+.kpi{
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.70);
+  padding:12px;
+}
+.kpi b{ color: var(--gold); }
+.kpi div{ font-size:12px; color:var(--muted); margin-top:6px; line-height:1.45; }
+
+.btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+.btn{
+  cursor:pointer;
+  padding:11px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(120,90,20,.24);
+  background: rgba(255,255,255,.78);
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing:.2px;
+}
+.btn:hover{ background: rgba(212,175,55,.12); }
+.btn.gold{
+  border-color: rgba(212,175,55,.55);
+  background: linear-gradient(135deg, rgba(212,175,55,.90), rgba(184,134,11,.78));
+  color: rgba(18,18,18,.94);
+}
+.btn.danger{
+  border-color: rgba(176,0,32,.40);
+  background: rgba(176,0,32,.08);
+}
+.btn.ok{
+  border-color: rgba(10,122,61,.40);
+  background: rgba(10,122,61,.08);
+}
+
+.hr{ height:1px; background: rgba(120,90,20,.12); margin:14px 0; }
+
+label{ font-size:12px; color: var(--muted); display:block; margin:10px 0 6px; }
+input, textarea, select{
+  width:100%;
+  padding:12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.76);
+  color: var(--text);
+  outline:none;
+  font-size:14px;
+}
+textarea{ min-height: 120px; resize: vertical; }
+small{ color: var(--muted); }
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 10px;
+  border-radius: 999px;
+  border:1px solid rgba(120,90,20,.22);
+  background: rgba(255,255,255,.70);
+  font-size:12px;
+  color: var(--muted);
+}
+
+.table{
+  width:100%;
+  border-collapse: collapse;
+  overflow:hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+}
+.table th, .table td{
+  padding:12px 12px;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  text-align:left;
+  font-size:13px;
+}
+.table th{ color: var(--muted); font-weight:600; background: rgba(255,255,255,.72); }
+.table tr:hover td{ background: rgba(212,175,55,.10); }
+.table tr:last-child td{ border-bottom:none; }
+
+.footer{
+  border-top: 1px solid rgba(120,90,20,.12);
+  background: rgba(255,255,255,.70);
+}
+.footer .container{ padding:18px 16px; }
+.footer p{ margin:0; color: var(--muted); font-size:12px; line-height:1.6; }
+
+.split{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 940px){ .split{ grid-template-columns:1fr; } }
+
+.mono{ font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+.notice{
+  border:1px solid rgba(120,90,20,.18);
+  background: rgba(255,255,255,.72);
+  padding:12px;
+  border-radius: 14px;
+  color: var(--muted);
+  line-height:1.55;
+  font-size:13px;
+}
+
+.righthero{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.heroimg{
+  width:100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  overflow:hidden;
+  background: rgba(255,255,255,.70);
+}
+.heroimg img{
+  width:100%;
+  display:block;
+  object-fit:cover;
+}
+.tagline{
+  font-size:13px;
+  line-height:1.55;
+  color: var(--muted);
+}
+.linksbox a{ display:inline-block; margin:6px 10px 0 0; }
+
+.pane{
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.72);
+  padding:12px;
+}
+.pane h3{ margin:0 0 8px; font-size:14px; color: var(--gold2); }
+.pane .row{ display:flex; gap:10px; flex-wrap:wrap; }
+
+.chatlog{
+  max-height: 360px;
+  overflow:auto;
+  padding:10px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.72);
+}
+.msg{
+  padding:10px 10px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.82);
+  margin-bottom:10px;
+}
+.msg .role{ font-size:11px; color: var(--muted); }
+.msg .content{ white-space:pre-wrap; font-size:13px; line-height:1.55; margin-top:4px; }
+  </style>
+</head><body>
+<div class="wrap">
+  <div class="topbar"><div class="nav">
+    <div class="brand">
+      <img src="https://cdn1.sharemyimage.com/2026/02/16/logo1_transparent.png" alt="Skyes Over London LC Logo" />
+      <div class="name"><b>SkyMail Host</b><span>Keys • Export/Import • Rotation</span></div>
+    </div>
+    <div class="navlinks">
+      <a class="pill" href="/">Home</a>
+      <a class="pill" href="/dashboard.html">Inbox</a>
+      <a class="pill" href="/ai.html">AI</a>
+      <a class="pill" href="/compose.html">Compose</a><a class="pill" href="/onboarding.html">Onboarding</a><a class="pill" href="/founder.html">Founder</a>
+      <button class="pill" id="btnLogout" style="cursor:pointer;">Logout</button>
+    </div>
+  </div></div>
+
+  <div class="container"><div class="card">
+    <h1 class="h1" style="font-size:30px;">Vault Keys</h1>
+    <p class="sub">Export a Vault Pack for backup/migration, restore keys from a Vault Pack, and rotate keys. Old messages remain decryptable via key versions.</p>
+
+    <div class="badge" id="who">Loading…</div>
+    <div class="hr"></div>
+
+    <div class="split">
+      <div>
+        <div class="pane">
+          <h3>Export Vault Pack</h3>
+          <div class="notice">Downloads an encrypted key pack (wrapped private keys). Keep it safe.</div>
+          <div class="btnrow" style="margin-top:10px;">
+            <button class="btn gold" id="btnExport">Download Vault Pack</button>
+          </div>
+        </div>
+
+        <div class="pane" style="margin-top:12px;">
+          <h3>Restore Keys from Vault Pack</h3>
+          <div class="notice">Paste a previously exported Vault Pack. This replaces keys on the server for your account (auth required).</div>
+          <label>Vault Pack JSON</label>
+          <textarea id="packJson" placeholder='{"schema":"SMV_VAULT_PACK_V1", ...}'></textarea>
+          <div class="btnrow" style="margin-top:10px;">
+            <button class="btn" id="btnRestore">Restore Keys</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="pane">
+          <h3>Key Rotation</h3>
+          <div class="notice">Generates a new key pair locally and makes it active. Old key versions remain on your account for decrypting older messages.</div>
+          <label>Vault Passphrase (wrap the new private key)</label>
+          <input id="vaultPass" type="password" placeholder="Enter your vault passphrase" autocomplete="current-password" />
+          <div class="btnrow" style="margin-top:10px;">
+            <button class="btn gold" id="btnRotate">Rotate Keys</button>
+          </div>
+          <div class="hr"></div>
+          <div id="kstatus" class="mono">Ready.</div>
+        </div>
+
+        <div class="pane" style="margin-top:12px;">
+          <h3>Key Versions</h3>
+          <div class="notice" id="keysList">Loading…</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+    <div id="status" class="mono">Ready.</div>
+  </div></div>
+
+  <div class="footer"><div class="container">
+    <p>Skyes Over London LC • Phoenix, AZ •
+      <a href="mailto:SkyesOverLondonLC@solenterprises.org">SkyesOverLondonLC@solenterprises.org</a> •
+      <a href="tel:+14804695416">(480) 469-5416</a>
+    </p>
+  </div></div>
+</div>
+
+<script src="/assets/app.js"></script>
+<script src="/assets/cryptoVault.js"></script>
+<script>
+(async () => {
+  if(!requireAuthOrRedirect()) return;
+  qs("#btnLogout").addEventListener("click", logout);
+
+  const who = qs("#who");
+  const status = qs("#status");
+  const kstatus = qs("#kstatus");
+  const keysList = qs("#keysList");
+
+  function download(filename, text){
+    const blob = new Blob([text], { type:"application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=> URL.revokeObjectURL(url), 500);
+  }
+
+  async function refreshMe(){
+    const me = await apiFetch("/auth-me");
+    who.textContent = `${me.handle} • ${me.email} • Active key v${me.active_version}`;
+    keysList.innerHTML = (me.keys || []).map(k => {
+      const tag = k.is_active ? "<b style='color:var(--ok)'>ACTIVE</b>" : "<span style='color:var(--muted)'>inactive</span>";
+      return `<div class="mono">v${k.version} — ${tag} — created ${safe(fmtDate(k.created_at))}</div>`;
+    }).join("");
+    return me;
+  }
+
+  qs("#btnExport").addEventListener("click", async () => {
+    try{
+      setStatus(status, "Exporting…", "");
+      const pack = await apiFetch("/vault-export");
+      const name = `vault-pack-${pack.user.handle}-${new Date().toISOString().slice(0,10)}.json`;
+      download(name, JSON.stringify(pack, null, 2));
+      setStatus(status, "Vault Pack downloaded.", "ok");
+    }catch(err){
+      setStatus(status, err.message || "Export failed.", "danger");
+    }
+  });
+
+  qs("#btnRestore").addEventListener("click", async () => {
+    try{
+      setStatus(status, "Restoring…", "");
+      const raw = qs("#packJson").value || "";
+      const pack = JSON.parse(raw);
+      await apiFetch("/vault-restore-keys", { method:"POST", body: JSON.stringify(pack) });
+      qs("#packJson").value = "";
+      await refreshMe();
+      setStatus(status, "Keys restored.", "ok");
+    }catch(err){
+      setStatus(status, err.message || "Restore failed.", "danger");
+    }
+  });
+
+  qs("#btnRotate").addEventListener("click", async () => {
+    try{
+      const pass = qs("#vaultPass").value || "";
+      if(pass.length < 10) { setStatus(kstatus, "Vault Passphrase required (10+ chars).", "danger"); return; }
+      setStatus(kstatus, "Generating new keypair…", "");
+      const kp = await CryptoVault.generateRecipientRsaKeypair();
+      const wrap = await CryptoVault.wrapPrivateKeyWithPassphrase(kp.privateKeyPem, pass);
+      setStatus(kstatus, "Sending rotation…", "");
+      const out = await apiFetch("/keys-rotate", { method:"POST", body: JSON.stringify({ rsa_public_key_pem: kp.publicKeyPem, vault_wrap_json: wrap }) });
+      setStatus(kstatus, "Rotated. Active key v" + out.active_version, "ok");
+      await refreshMe();
+    }catch(err){
+      setStatus(kstatus, err.message || "Rotation failed.", "danger");
+    }
+  });
+
+  try{
+    await refreshMe();
+  }catch(err){
+    if(err.status === 401){ clearToken(); location.href="/login.html"; return; }
+    setStatus(status, err.message || "Failed.", "danger");
+  }
+})();
+</script>
+</body></html>

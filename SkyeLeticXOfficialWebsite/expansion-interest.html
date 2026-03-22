@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expansion Interest | SkyeLeticX</title>
+    <meta name="theme-color" content="#09030f" />
+  <link rel="manifest" href="/SkyeLeticXOfficialWebsite/manifest.json" />
+  <link rel="apple-touch-icon" href="/SkyeLeticXOfficialWebsite/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/SkyeLeticXOfficialWebsite/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/SkyeLeticXOfficialWebsite/favicon-16.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/skx-dashboard.css" />
+  
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <div class="brand">
+      <a href="home.html" style="display:flex;align-items:center;gap:12px">
+        <img src="logo.png" alt="SkyeLeticX logo" />
+      </a>
+      <div>
+        <div class="brand-name">SkyeLeticX</div>
+        <div class="brand-sub">League Command Surfaces • Skyes Over London LC</div>
+      </div>
+    </div>
+    <nav class="nav-links"><a href="home.html" class="">Home</a><a href="how-it-works.html" class="">How It Works</a><a href="about.html" class="">About</a><a href="about-founder.html" class="">Founder</a><a href="players.html" class="">Players</a><a href="owners-intake.html" class="">Founding Owners</a><a href="arizona-hq.html" class="">Arizona HQ</a><a href="skyeletes-editorial.html" class="">Editorial</a><a href="owner-dashboard.html" class="">Command</a><a href="league-office-dashboard.html" class="">League Office</a><a href="vp-operations-dashboard.html" class="">VP Ops</a><a href="cfo-dashboard.html" class="">CFO</a><a href="team-owner-dashboard.html" class="">Team Owner</a><a href="player-portal-dashboard.html" class="">Player Portal</a><a href="draft-war-room.html" class="">Draft War Room</a></nav>
+    <div class="nav-cta">
+      <div class="pill">Identity • Blobs • Neon</div>
+      <button class="btn btn-secondary" type="button" data-auth="login">Login</button>
+      <button class="btn btn-danger" type="button" data-auth="logout">Logout</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="shell">
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Live Netlify form</div>
+      <h1>Expansion Interest</h1>
+      <p>This page captures franchise, sponsor, partner-gym, and expansion conversations through a real Netlify Form and immediately syncs the interest record into Neon for the league office.</p>
+      <div class="card-actions"><a class="btn btn-primary" href="owners-intake.html">Back to founding owners page</a><a class="btn btn-secondary" href="owner-dashboard.html">Dashboard hub</a></div>
+    </div>
+    <aside class="hero-card">
+      <img class="hero-logo" src="logo.png" alt="SkyeLeticX" />
+      <div class="notice">Use this for future expansion, sponsorship, coach/staff, partner-gym, and market interest capture.</div>
+    </aside>
+  </section>
+  <section class="section">
+    <article class="card span-12">
+      <div class="kicker">Form + database</div>
+      <h3>Submit an interest record</h3>
+      <form id="interestForm" name="skx-expansion-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="skx-expansion-interest" />
+        <p hidden><label>Don’t fill this out: <input name="bot-field" /></label></p>
+        <div class="form-grid three">
+          <div class="form-row"><label>Name</label><input class="input" name="name" required /></div>
+          <div class="form-row"><label>Email</label><input class="input" name="email" type="email" required /></div>
+          <div class="form-row"><label>Phone</label><input class="input" name="phone" /></div>
+          <div class="form-row"><label>Organization</label><input class="input" name="org_name" /></div>
+          <div class="form-row"><label>Lane</label><select class="input" name="lane"><option value="expansion">Expansion</option><option value="sponsor">Sponsor</option><option value="coach_staff">Coach / staff</option><option value="partner_gym">Partner gym</option><option value="media">Media</option></select></div>
+          <div class="form-row"><label>City</label><input class="input" name="city" /></div>
+          <div class="form-row"><label>State</label><input class="input" name="state" /></div>
+          <div class="form-row" style="grid-column:1/-1"><label>Message</label><textarea class="input" name="message"></textarea></div>
+        </div>
+        <div class="form-foot"><button class="btn btn-primary" type="submit">Submit interest</button></div>
+      </form>
+      <div id="interestNotice" class="notice" style="margin-top:12px">Ready.</div>
+    </article>
+  </section>
+  <footer class="footer">Expansion interest • Contact: <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> • <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> • <a href="tel:4804695416">(480) 469-5416</a></footer>
+</main>
+<script>
+(function(){
+  function encode(data){ return Object.keys(data).map(k=>encodeURIComponent(k)+'='+encodeURIComponent(data[k] || '')).join('&'); }
+  document.getElementById('interestForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form).entries());
+    try {
+      await fetch('/', { method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded' }, body: encode(data) });
+      await SKX.publicSubmit('public_interest', data);
+      SKX.showNotice('interestNotice', 'Expansion interest submitted to Netlify Forms and Neon.', 'success');
+      form.reset();
+    } catch(err) {
+      SKX.showNotice('interestNotice', SKX.esc(err.message), 'error');
+    }
+  });
+})();
+</script>
+
+<script src="assets/skx-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "AE Central Command Pack featuring the Credential Hub Launcher",
+  "short_name": "AE Command Pack",
+  "description": "AE Central Command Pack brings AE FLOW, ConnectLog, Skye Intake Vault, Exec Sign In Pro, the Credential Pack, the Connected Ops Pack, and the Credential Hub Launcher together inside one offline-first royal-blue-and-gold shell.",
+  "theme_color": "#0f2f78",
+  "background_color": "#07142f",
+  "display": "standalone",
+  "start_url": "./index.html",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

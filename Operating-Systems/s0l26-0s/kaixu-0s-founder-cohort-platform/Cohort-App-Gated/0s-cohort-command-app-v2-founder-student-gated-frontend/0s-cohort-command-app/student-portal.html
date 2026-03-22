@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal · 0s Cohort Command</title>
+  <meta name="description" content="0s cohort command surface with founder lane, student lane, student ID generation, welcome letters, instructor content, and workbook notes.">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-route="student-portal">
+  <div class="site-shell">
+    <header class="topbar print-hide">
+      <div class="topbar-inner">
+        <a class="brand" href="index.html">
+          <img src="assets/media/skyes-primary-logo.png" alt="Skyes Over London logo">
+          <div>
+            <span class="brand-kicker">Skyes Over London × 0s</span>
+            <span class="brand-title">0s Cohort Command Center</span>
+            <span class="brand-sub">Founder-only class control and student-only cohort workspace</span>
+          </div>
+        </a>
+        <nav class="main-nav" aria-label="Primary">
+          <a href="index.html">Command</a>
+<a href="founder-login.html">Founder Access</a>
+<a href="student-login.html">Student Access</a>
+<a href="founder-dashboard.html">Founder Board</a>
+<a href="instructor-book.html">Instructor Book</a>
+<a href="student-portal.html" aria-current="page">Student Portal</a>
+          
+        </nav>
+      </div>
+    </header>
+    
+<main class="page route-guard" data-guard="student">
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Student-only cohort lane</div>
+        <h1>Student workbook, personal notes, welcome letter, and final demo prep.</h1>
+        <p class="lead">This lane belongs to the student. It pulls the generated student record, shows the welcome letter, and gives a private workbook and notes surface tied to the student ID.</p>
+        <div class="status-bar">
+          <span class="status-pill">Student: <strong data-student-name>Unknown</strong></span>
+          <span class="status-pill">ID: <strong data-student-id-label>Locked</strong></span>
+          <span class="status-pill">Track: <strong data-student-track>Unknown</strong></span>
+        </div>
+        <div class="button-row print-hide">
+          <button class="button" type="button" data-action="print">Print Student View</button>
+          <button class="ghost-button" type="button" data-student-export>Export My Notes</button>
+          <a class="neon-button" href="student-login.html">Lock / Return to Student Access</a>
+        </div>
+      </div>
+      <div class="visual-panel">
+        <div class="student-id-card">
+          <div class="kicker">Student cohort badge</div>
+          <div class="id-output" data-student-id-card>0S-LOCKED</div>
+          <div class="chip-row">
+            <span class="chip" data-student-seat>Seat</span>
+            <span class="chip" data-student-org>Organization</span>
+            <span class="chip" data-student-status>Status</span>
+          </div>
+          <p class="muted">Your founder generated this seat from the founder board. Your notes save to this student lane on this device.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid-2">
+    <article class="panel">
+      <div class="section-head"><div class="eyebrow">Welcome</div><h2>Your welcome letter</h2></div>
+      <div class="letter-preview" data-student-letter></div>
+    </article>
+    <article class="panel">
+      <div class="section-head"><div class="eyebrow">Quick identity</div><h2>Your cohort profile</h2></div>
+      <div class="field-grid">
+        <div class="field"><label>Name</label><input type="text" data-student-profile="name"></div>
+        <div class="field"><label>Email</label><input type="email" data-student-profile="email"></div>
+        <div class="field"><label>Product name</label><input type="text" data-student-profile="productName" placeholder="What is your product called?"></div>
+        <div class="field"><label>Industry / lane</label><input type="text" data-student-profile="industry" placeholder="What space are you building in?"></div>
+        <div class="field field-span-2"><label>12-month vision</label><textarea data-student-profile="vision" placeholder="What do you want this product to become over the next year?"></textarea></div>
+      </div>
+    </article>
+  </section>
+
+  <section class="panel">
+    <div class="section-head"><div class="eyebrow">Workbook</div><h2>Day-by-day note book</h2><p class="muted">Each day below has its own note areas, deliverable lock, and help flag.</p></div>
+    
+    <details class="shell" open>
+      <summary><strong>Day 1</strong> · Product Lock</summary>
+      <div class="lesson-stack" style="margin-top:14px;">
+        <div class="lesson-card"><div class="kicker">Day promise</div><p>Lock your product, target user, pain, transformation, recurring value, and first-version scope.</p></div>
+        <div class="grid-2">
+          <div class="lesson-card"><label>Main output for Day 1</label><textarea class="note-block" data-student-bind="day-1.output" placeholder="What are you locking today?"></textarea></div>
+          <div class="lesson-card"><label>Questions / friction for Day 1</label><textarea class="note-block" data-student-bind="day-1.questions" placeholder="What feels fuzzy or blocked?"></textarea></div>
+          <div class="lesson-card"><label>Build notes for Day 1</label><textarea class="note-block" data-student-bind="day-1.notes" placeholder="Write notes from class, live examples, corrections, and your own ideas."></textarea></div>
+          <div class="lesson-card"><label>Homework for Day 1</label><textarea class="note-block" data-student-bind="day-1.homework" placeholder="What do you need to tighten before the next session?"></textarea></div>
+        </div>
+        <div class="lesson-card">
+          <label>Deliverable check for Day 1</label>
+          <div class="chip-row">
+            <label class="chip"><input type="checkbox" data-student-check="day-1.done"> Locked for the day</label>
+            <label class="chip"><input type="checkbox" data-student-check="day-1.needsHelp"> Need founder help</label>
+          </div>
+        </div>
+      </div>
+    </details>
+    
+    <details class="shell" >
+      <summary><strong>Day 2</strong> · Brand + Journey</summary>
+      <div class="lesson-stack" style="margin-top:14px;">
+        <div class="lesson-card"><div class="kicker">Day promise</div><p>Write the headline, subheadline, CTA, structure, and first user journey.</p></div>
+        <div class="grid-2">
+          <div class="lesson-card"><label>Main output for Day 2</label><textarea class="note-block" data-student-bind="day-2.output" placeholder="What are you locking today?"></textarea></div>
+          <div class="lesson-card"><label>Questions / friction for Day 2</label><textarea class="note-block" data-student-bind="day-2.questions" placeholder="What feels fuzzy or blocked?"></textarea></div>
+          <div class="lesson-card"><label>Build notes for Day 2</label><textarea class="note-block" data-student-bind="day-2.notes" placeholder="Write notes from class, live examples, corrections, and your own ideas."></textarea></div>
+          <div class="lesson-card"><label>Homework for Day 2</label><textarea class="note-block" data-student-bind="day-2.homework" placeholder="What do you need to tighten before the next session?"></textarea></div>
+        </div>
+        <div class="lesson-card">
+          <label>Deliverable check for Day 2</label>
+          <div class="chip-row">
+            <label class="chip"><input type="checkbox" data-student-check="day-2.done"> Locked for the day</label>
+            <label class="chip"><input type="checkbox" data-student-check="day-2.needsHelp"> Need founder help</label>
+          </div>
+        </div>
+      </div>
+    </details>
+    
+    <details class="shell" >
+      <summary><strong>Day 3</strong> · First Real Lane</summary>
+      <div class="lesson-stack" style="margin-top:14px;">
+        <div class="lesson-card"><div class="kicker">Day promise</div><p>Build one honest feature all the way through with real inputs and results.</p></div>
+        <div class="grid-2">
+          <div class="lesson-card"><label>Main output for Day 3</label><textarea class="note-block" data-student-bind="day-3.output" placeholder="What are you locking today?"></textarea></div>
+          <div class="lesson-card"><label>Questions / friction for Day 3</label><textarea class="note-block" data-student-bind="day-3.questions" placeholder="What feels fuzzy or blocked?"></textarea></div>
+          <div class="lesson-card"><label>Build notes for Day 3</label><textarea class="note-block" data-student-bind="day-3.notes" placeholder="Write notes from class, live examples, corrections, and your own ideas."></textarea></div>
+          <div class="lesson-card"><label>Homework for Day 3</label><textarea class="note-block" data-student-bind="day-3.homework" placeholder="What do you need to tighten before the next session?"></textarea></div>
+        </div>
+        <div class="lesson-card">
+          <label>Deliverable check for Day 3</label>
+          <div class="chip-row">
+            <label class="chip"><input type="checkbox" data-student-check="day-3.done"> Locked for the day</label>
+            <label class="chip"><input type="checkbox" data-student-check="day-3.needsHelp"> Need founder help</label>
+          </div>
+        </div>
+      </div>
+    </details>
+    
+    <details class="shell" >
+      <summary><strong>Day 4</strong> · AI + Automation</summary>
+      <div class="lesson-stack" style="margin-top:14px;">
+        <div class="lesson-card"><div class="kicker">Day promise</div><p>Add one AI or automation lane that actually serves the product.</p></div>
+        <div class="grid-2">
+          <div class="lesson-card"><label>Main output for Day 4</label><textarea class="note-block" data-student-bind="day-4.output" placeholder="What are you locking today?"></textarea></div>
+          <div class="lesson-card"><label>Questions / friction for Day 4</label><textarea class="note-block" data-student-bind="day-4.questions" placeholder="What feels fuzzy or blocked?"></textarea></div>
+          <div class="lesson-card"><label>Build notes for Day 4</label><textarea class="note-block" data-student-bind="day-4.notes" placeholder="Write notes from class, live examples, corrections, and your own ideas."></textarea></div>
+          <div class="lesson-card"><label>Homework for Day 4</label><textarea class="note-block" data-student-bind="day-4.homework" placeholder="What do you need to tighten before the next session?"></textarea></div>
+        </div>
+        <div class="lesson-card">
+          <label>Deliverable check for Day 4</label>
+          <div class="chip-row">
+            <label class="chip"><input type="checkbox" data-student-check="day-4.done"> Locked for the day</label>
+            <label class="chip"><input type="checkbox" data-student-check="day-4.needsHelp"> Need founder help</label>
+          </div>
+        </div>
+      </div>
+    </details>
+    
+    <details class="shell" >
+      <summary><strong>Day 5</strong> · Monetization</summary>
+      <div class="lesson-stack" style="margin-top:14px;">
+        <div class="lesson-card"><div class="kicker">Day promise</div><p>Turn the build into an offer with a buyer, value, and recurring reason.</p></div>
+        <div class="grid-2">
+          <div class="lesson-card"><label>Main output for Day 5</label><textarea class="note-block" data-student-bind="day-5.output" placeholder="What are you locking today?"></textarea></div>
+          <div class="lesson-card"><label>Questions / friction for Day 5</label><textarea class="note-block" data-student-bind="day-5.questions" placeholder="What feels fuzzy or blocked?"></textarea></div>
+          <div class="lesson-card"><label>Build notes for Day 5</label><textarea class="note-block" data-student-bind="day-5.notes" placeholder="Write notes from class, live examples, corrections, and your own ideas."></textarea></div>
+          <div class="lesson-card"><label>Homework for Day 5</label><textarea class="note-block" data-student-bind="day-5.homework" placeholder="What do you need to tighten before the next session?"></textarea></div>
+        </div>
+        <div class="lesson-card">
+          <label>Deliverable check for Day 5</label>
+          <div class="chip-row">
+            <label class="chip"><input type="checkbox" data-student-check="day-5.done"> Locked for the day</label>
+            <label class="chip"><input type="checkbox" data-student-check="day-5.needsHelp"> Need founder help</label>
+          </div>
+        </div>
+      </div>
+    </details>
+    
+    <details class="shell" >
+      <summary><strong>Day 6</strong> · Trust + Polish</summary>
+      <div class="lesson-stack" style="margin-top:14px;">
+        <div class="lesson-card"><div class="kicker">Day promise</div><p>Add trust, proof, contact, and clean polish that makes the app believable.</p></div>
+        <div class="grid-2">
+          <div class="lesson-card"><label>Main output for Day 6</label><textarea class="note-block" data-student-bind="day-6.output" placeholder="What are you locking today?"></textarea></div>
+          <div class="lesson-card"><label>Questions / friction for Day 6</label><textarea class="note-block" data-student-bind="day-6.questions" placeholder="What feels fuzzy or blocked?"></textarea></div>
+          <div class="lesson-card"><label>Build notes for Day 6</label><textarea class="note-block" data-student-bind="day-6.notes" placeholder="Write notes from class, live examples, corrections, and your own ideas."></textarea></div>
+          <div class="lesson-card"><label>Homework for Day 6</label><textarea class="note-block" data-student-bind="day-6.homework" placeholder="What do you need to tighten before the next session?"></textarea></div>
+        </div>
+        <div class="lesson-card">
+          <label>Deliverable check for Day 6</label>
+          <div class="chip-row">
+            <label class="chip"><input type="checkbox" data-student-check="day-6.done"> Locked for the day</label>
+            <label class="chip"><input type="checkbox" data-student-check="day-6.needsHelp"> Need founder help</label>
+          </div>
+        </div>
+      </div>
+    </details>
+    
+    <details class="shell" >
+      <summary><strong>Day 7</strong> · Final Demo</summary>
+      <div class="lesson-stack" style="margin-top:14px;">
+        <div class="lesson-card"><div class="kicker">Day promise</div><p>Prepare the final story, demo the strongest lane, and define the next step.</p></div>
+        <div class="grid-2">
+          <div class="lesson-card"><label>Main output for Day 7</label><textarea class="note-block" data-student-bind="day-7.output" placeholder="What are you locking today?"></textarea></div>
+          <div class="lesson-card"><label>Questions / friction for Day 7</label><textarea class="note-block" data-student-bind="day-7.questions" placeholder="What feels fuzzy or blocked?"></textarea></div>
+          <div class="lesson-card"><label>Build notes for Day 7</label><textarea class="note-block" data-student-bind="day-7.notes" placeholder="Write notes from class, live examples, corrections, and your own ideas."></textarea></div>
+          <div class="lesson-card"><label>Homework for Day 7</label><textarea class="note-block" data-student-bind="day-7.homework" placeholder="What do you need to tighten before the next session?"></textarea></div>
+        </div>
+        <div class="lesson-card">
+          <label>Deliverable check for Day 7</label>
+          <div class="chip-row">
+            <label class="chip"><input type="checkbox" data-student-check="day-7.done"> Locked for the day</label>
+            <label class="chip"><input type="checkbox" data-student-check="day-7.needsHelp"> Need founder help</label>
+          </div>
+        </div>
+      </div>
+    </details>
+    
+  </section>
+
+  <section class="grid-2">
+    <article class="panel">
+      <div class="section-head"><div class="eyebrow">Final demo prep</div><h2>5-minute demo outline</h2></div>
+      <div class="field-grid">
+        <div class="field field-span-2"><label>Product name</label><input type="text" data-student-demo="name" placeholder="Product name"></div>
+        <div class="field field-span-2"><label>Who it helps</label><textarea data-student-demo="user" placeholder="Who is this for?"></textarea></div>
+        <div class="field field-span-2"><label>Main working feature</label><textarea data-student-demo="feature" placeholder="What is the strongest real lane?"></textarea></div>
+        <div class="field field-span-2"><label>AI or automation lane</label><textarea data-student-demo="ai" placeholder="What does the intelligence lane do?"></textarea></div>
+        <div class="field"><label>Offer / price direction</label><input type="text" data-student-demo="offer" placeholder="How do you sell this?"></div>
+        <div class="field"><label>Next step</label><input type="text" data-student-demo="next" placeholder="What happens after the cohort?"></div>
+      </div>
+    </article>
+    <article class="panel">
+      <div class="section-head"><div class="eyebrow">Cohort scorecard</div><h2>Self-check</h2></div>
+      <div class="score-grid">
+        <div class="score-card"><label>Clarity</label><input type="number" min="1" max="5" data-student-score="clarity"></div>
+        <div class="score-card"><label>Coherence</label><input type="number" min="1" max="5" data-student-score="coherence"></div>
+        <div class="score-card"><label>Feature honesty</label><input type="number" min="1" max="5" data-student-score="feature"></div>
+        <div class="score-card"><label>AI lane</label><input type="number" min="1" max="5" data-student-score="ai"></div>
+        <div class="score-card"><label>Monetization</label><input type="number" min="1" max="5" data-student-score="money"></div>
+        <div class="score-card"><label>Trust</label><input type="number" min="1" max="5" data-student-score="trust"></div>
+        <div class="score-card"><label>Presentation</label><input type="number" min="1" max="5" data-student-score="presentation"></div>
+        <div class="score-card"><label>Overall readiness</label><input type="number" min="1" max="5" data-student-score="overall"></div>
+      </div>
+      <label style="margin-top:12px;">Personal reflection</label>
+      <textarea class="note-block" data-student-demo="reflection" placeholder="What became real this week and what do you do next?"></textarea>
+    </article>
+  </section>
+</main>
+<section class="empty-state route-guard" data-guard-fail="student">Student session is locked on this device. Use Student Access first.</section>
+
+    <footer class="footer">
+      <strong>0s Cohort Command Center · Skyes Over London</strong>
+      <p class="muted">Phone: <a href="tel:+14804695416">(480) 469-5416</a> · <a href="mailto:SkyesOverLondonLC@SOLEnterprises.org">SkyesOverLondonLC@SOLEnterprises.org</a> · <a href="mailto:SkyesOverLondon@gmail.com">SkyesOverLondon@gmail.com</a> · <a href="mailto:B2B@SOLEnterprises.org">B2B@SOLEnterprises.org</a></p>
+      <div class="footer-links print-hide">
+        <a class="pill-link" href="https://skyesol.netlify.app/about" target="_blank" rel="noopener noreferrer">Founder Page</a>
+        <a class="pill-link" href="https://skyesol.netlify.app/Case%20Studies/index.html" target="_blank" rel="noopener noreferrer">All SkyeSol Case Studies</a>
+      </div>
+    </footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

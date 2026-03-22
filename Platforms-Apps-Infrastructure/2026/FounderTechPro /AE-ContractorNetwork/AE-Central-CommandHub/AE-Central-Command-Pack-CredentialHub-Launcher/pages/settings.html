@@ -1,0 +1,70 @@
+
+<div class="page-shell page-wrap">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">Settings</div>
+      <h2>Theme the background stage, keep the UI glassy, and manage local security.</h2>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="stack">
+      <div class="card glass" data-tour="settings-background">
+        <div class="section-head"><div><div class="eyebrow">Background Presets</div><h2>Choose the stage</h2></div></div>
+        <div id="preset-grid" class="preset-grid" style="margin-top:14px"></div>
+      </div>
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Glass Tuning</div><h2>Personalize the surface</h2></div></div>
+        <div class="stack" style="margin-top:14px">
+          <div class="slider-row"><label class="small">UI Opacity</label><input id="ui-opacity" type="range" min="10" max="55" value="28" oninput="app.updateUISetting('opacity', this.value)"><div class="small-note">Lower values make the UI more transparent. Higher values make it denser.</div></div>
+          <div class="slider-row"><label class="small">Glass Blur</label><input id="ui-blur" type="range" min="8" max="34" value="20" oninput="app.updateUISetting('blur', this.value)"></div>
+          <div class="slider-row"><label class="small">Background Dim</label><input id="bg-dim" type="range" min="0" max="80" value="34" oninput="app.updateUISetting('dim', this.value)"></div>
+          <div class="slider-row"><label class="small">Tint Color</label><input id="tint-color" type="color" value="#5f33d3" style="height:52px;border-radius:16px;border:1px solid var(--field-border);background:var(--field-bg);padding:8px" oninput="app.updateUISetting('tint', this.value)"></div>
+          <div class="split">
+            <div class="toggle-row"><div><strong>Founder Overlay</strong><div class="small-note">Keep the transparent founder figure in the stage.</div></div><button id="toggle-founder" class="switch" type="button" aria-label="Toggle founder overlay" onclick="app.toggleUIOption('showFounder')"></button></div>
+            <div class="toggle-row"><div><strong>Background Crest</strong><div class="small-note">Keep one SkyDexia crest drifting behind the shell.</div></div><button id="toggle-logos" class="switch" type="button" aria-label="Toggle logos" onclick="app.toggleUIOption('showLogos')"></button></div>
+          </div>
+          <div class="toggle-row"><div><strong>Use Uploaded Background</strong><div class="small-note">When enabled, your uploaded file becomes the main backdrop layer.</div></div><button id="toggle-upload-bg" class="switch" type="button" aria-label="Toggle uploaded background" onclick="app.toggleUIOption('useUploadedBackground')"></button></div>
+          <div class="toolbar"><label class="soft-btn" for="bg-upload">Upload Background<input id="bg-upload" type="file" accept="image/*" class="hidden" onchange="app.handleBackgroundUpload(event)"></label><button class="danger-btn" onclick="app.clearCustomBackground()">Remove Upload</button></div>
+        </div>
+      </div>
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Install & Offline</div><h2>Offline-first behavior</h2></div></div>
+        <div class="stack" style="margin-top:14px">
+          <div class="toggle-row"><div><strong>Installable PWA</strong><div class="small-note">Install button appears when the browser offers it.</div></div><span id="install-status" class="status-pill">Waiting for browser</span></div>
+          <div class="toggle-row"><div><strong>Service Worker</strong><div class="small-note">This caches the modular app shell for offline usage.</div></div><span id="sw-status" class="status-pill">Checking</span></div>
+          <div class="small-note">For the best offline behavior, load the app once from a real local server or HTTPS host. Plain file:// opening does not allow service workers in normal browsers.</div>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="card glass" data-tour="settings-security">
+        <div class="section-head"><div><div class="eyebrow">Security</div><h2>Optional local lock</h2></div></div>
+        <div class="stack" style="margin-top:14px">
+          <div class="field-wrap"><label class="small">Current Status</label><div id="security-summary" class="small-note">No vault lock is active right now.</div></div>
+          <div class="field-wrap"><label class="small">New Access Code</label><input id="security-passcode" class="field" type="password" placeholder="Set or change the local access code"></div>
+          <div class="field-wrap"><label class="small">Confirm Access Code</label><input id="security-passcode-confirm" class="field" type="password" placeholder="Confirm the access code"></div>
+          <div class="inline-actions"><button class="soft-btn" onclick="app.applyPasscode()">Save Lock</button><button class="danger-btn" onclick="app.removePasscode()">Remove Lock</button></div>
+          <div class="small-note">This uses browser-side crypto while the data is stored locally. It is useful protection for an offline vault, but it is not a substitute for full device security.</div>
+        </div>
+      </div>
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Backup and Reset</div><h2>Move or wipe your local vault</h2></div></div>
+        <div class="stack" style="margin-top:14px">
+          <div class="toggle-row"><div><strong>Download Backup</strong><div class="small-note">Exports data, appearance settings, and timestamps to a JSON file.</div></div><button class="soft-btn" onclick="app.exportBackup()">Export</button></div>
+          <div class="toggle-row"><div><strong>Import Backup</strong><div class="small-note">Use the Restore control in the top bar.</div></div><span class="status-pill">JSON only</span></div>
+          <div class="toggle-row"><div><strong>Factory Wipe</strong><div class="small-note">Deletes everything stored in this browser for this app.</div></div><button class="danger-btn" onclick="app.factoryReset()">Wipe</button></div>
+        </div>
+      </div>
+      <div class="card glass">
+        <div class="section-head"><div><div class="eyebrow">Why this has paid value</div><h2>Feature-driven, not fluff-driven</h2></div></div>
+        <div class="stack" style="margin-top:14px">
+          <div class="quick-item"><span>Background customization</span><span class="status-pill">Feels personal</span></div>
+          <div class="quick-item"><span>Glass shell stays separate</span><span class="status-pill">Easy to theme</span></div>
+          <div class="quick-item"><span>Contacts import + timeline</span><span class="status-pill">Actual utility</span></div>
+          <div class="quick-item"><span>Project linking and favorites</span><span class="status-pill">Faster workflow</span></div>
+          <div class="quick-item"><span>Offline, installable, local backup</span><span class="status-pill">Low friction</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

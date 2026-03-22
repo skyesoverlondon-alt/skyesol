@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2b0b4d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>AE FLOW by Skyes Over London</title>
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg: #07040d;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(0,0,0,.35);
+      --border: rgba(255,255,255,.12);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.55);
+      --text: rgba(255,255,255,.92);
+      --purple: #7c3aed;
+      --purple2: #a855f7;
+      --gold: #f5c542;
+      --good: #22c55e;
+      --bad: #ef4444;
+      --warn: #f59e0b;
+      --shadow: 0 20px 80px rgba(0,0,0,.45);
+      --radius: 18px;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1100px 700px at 20% 10%, rgba(124,58,237,.30), transparent 60%),
+        radial-gradient(900px 600px at 80% 20%, rgba(245,197,66,.12), transparent 55%),
+        radial-gradient(900px 800px at 50% 90%, rgba(168,85,247,.16), transparent 60%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    /* --- 3D Cosmos Background (Three.js) --- */
+    #cosmosCanvas{
+      position:fixed;
+      inset:0;
+      width:100vw;
+      height:100vh;
+      pointer-events:none;
+      z-index:0;
+    }
+    #cosmosVignette{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
+      background:
+        radial-gradient(1200px 900px at 50% 40%, rgba(0,0,0,.15), rgba(0,0,0,.72)),
+        radial-gradient(900px 700px at 20% 10%, rgba(0,0,0,.38), rgba(0,0,0,0));
+      mix-blend-mode: multiply;
+    }
+    /* Keep main content readable above the cosmos */
+    .wrap{ position:relative; z-index:10; }
+
+    a{ color:inherit; }
+    .wrap{ max-width:1180px; margin:0 auto; padding:18px 14px 110px; }
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(to bottom, rgba(7,4,13,.88), rgba(7,4,13,.62), rgba(7,4,13,0));
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 14px 14px 10px;
+      margin: 0 -14px 14px;
+    }
+    .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900; letter-spacing:.3px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,.30);
+      border-radius: 999px;
+      font-size:12px;
+      color: var(--muted);
+    }
+    .pill strong{ color: var(--text); }
+    .spacer{ flex:1; }
+    .btn{
+      border:1px solid var(--border);
+      background: rgba(124,58,237,.20);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 900;
+      cursor:pointer;
+      transition: transform .06s ease, background .2s ease;
+      user-select:none;
+      white-space: nowrap;
+    }
+    .btn:active{ transform: translateY(1px) scale(.99); }
+    .btn.secondary{ background: rgba(0,0,0,.28); }
+    .btn.danger{ background: rgba(239,68,68,.16); border-color: rgba(239,68,68,.35); }
+    .btn.good{ background: rgba(34,197,94,.16); border-color: rgba(34,197,94,.35); }
+    .btn.gold{ background: rgba(245,197,66,.12); border-color: rgba(245,197,66,.28); }
+    .btn.small{ padding:8px 10px; border-radius:10px; font-size:12px; }
+
+    .tabs{
+      display:flex; gap:8px; flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .tab{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      padding: 9px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight: 900;
+      font-size: 12px;
+      color: rgba(255,255,255,.86);
+    }
+    .tab.active{
+      background: rgba(124,58,237,.28);
+      border-color: rgba(124,58,237,.45);
+    }
+
+    .grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap: 14px; }
+    @media (max-width: 980px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      border:1px solid var(--border);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+    .card h2{ margin:0 0 8px; font-size:16px; }
+    .card h3{ margin:14px 0 8px; font-size:14px; color: var(--muted); }
+    .muted{ color: var(--muted); }
+    .muted2{ color: var(--muted2); }
+    .tiny{ font-size: 11px; color: var(--muted2); }
+    .sep{ height:1px; background: rgba(255,255,255,.08); margin: 10px 0; }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+
+    .kpi{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width: 720px){ .kpi{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    .kpi .box{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      border-radius: 14px;
+      padding: 10px;
+    }
+    .kpi .num{ font-size:18px; font-weight: 950; }
+    .kpi .lbl{ font-size:12px; color: var(--muted2); margin-top:2px; }
+
+    details{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.23);
+      border-radius: 14px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 950;
+      list-style:none;
+      outline: none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .scriptbox{
+      background: rgba(0,0,0,.32);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      padding: 10px;
+      white-space: pre-wrap;
+      line-height: 1.35;
+      color: rgba(255,255,255,.90);
+    }
+    .script-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .tagrow{ display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+    .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(124,58,237,.14);
+      color: rgba(255,255,255,.85);
+    }
+
+    .form{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 720px){ .form{ grid-template-columns: 1fr; } }
+    label{ display:block; font-size: 12px; color: var(--muted2); margin: 6px 0 6px; }
+    input, select, textarea{
+      width:100%;
+      padding: 10px 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.33);
+      color: var(--text);
+      outline: none;
+    }
+    textarea{ min-height: 92px; resize: vertical; }
+    .full{ grid-column: 1 / -1; }
+
+    .list{ display:flex; flex-direction: column; gap: 10px; }
+    .item{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.24);
+      border-radius: 14px;
+      padding: 12px;
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+    }
+    .item .left{ flex: 1; min-width: 0; }
+    .item .title{
+      font-weight: 950;
+      display:flex;
+      gap: 8px;
+      flex-wrap:wrap;
+      align-items: center;
+    }
+    .badge{
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.86);
+    }
+    .badge.good{ border-color: rgba(34,197,94,.35); background: rgba(34,197,94,.12); }
+    .badge.warn{ border-color: rgba(245,158,11,.35); background: rgba(245,158,11,.12); }
+    .badge.bad{ border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.12); }
+    .meta{ margin-top:6px; font-size:12px; color: var(--muted2); }
+    .actions{
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+      min-width: 190px;
+    }
+    @media (max-width: 520px){
+      .item{ flex-direction: column; }
+      .actions{ flex-direction: row; min-width: 0; flex-wrap: wrap; }
+    }
+
+    .bottomdock{
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 30;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: linear-gradient(to top, rgba(7,4,13,.92), rgba(7,4,13,.72), rgba(7,4,13,0));
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .dockrow{ max-width:1180px; margin: 0 auto; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .search{ flex: 1; min-width: 210px; }
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: calc(78px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.78);
+      border:1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.92);
+      padding: 10px 12px;
+      border-radius: 14px;
+      z-index: 60;
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      max-width: min(820px, 92vw);
+      box-shadow: var(--shadow);
+    }
+    .toast.show{ opacity: 1; transform: translateX(-50%) translateY(-2px); }
+
+    .hidden{ display:none !important; }
+
+    .miniGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 820px){ .miniGrid{ grid-template-columns: 1fr; } }
+
+    .calc{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      border-radius: 14px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .calc .line{ display:flex; justify-content:space-between; gap:10px; margin:6px 0; }
+    .calc .line strong{ font-weight: 950; }
+
+    .tablelike{ display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+    .li{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      border-radius: 14px;
+      padding: 10px;
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items:flex-start;
+      flex-wrap: wrap;
+    }
+    .li .name{ font-weight: 950; }
+    .li .right{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+
+    .callout{
+      border:1px solid rgba(245,197,66,.24);
+      background: rgba(245,197,66,.10);
+      border-radius: 14px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .chartGrid{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; }
+    @media (max-width: 860px){ .chartGrid{ grid-template-columns: 1fr; } }
+    .chartCard{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.24);
+      border-radius: 16px;
+      padding: 12px;
+      min-height: 290px;
+    }
+    .chartTitle{ font-weight:950; margin-bottom:6px; }
+    .chartSub{ font-size:12px; color: var(--muted2); margin-bottom:8px; }
+    .chartCanvas{ width:100%; height:220px; display:block; border-radius: 12px; background: rgba(255,255,255,.02); }
+    .miniStats{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    @media (max-width: 820px){ .miniStats{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    .miniStat{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .miniStat .big{ font-size: 18px; font-weight:950; }
+    .miniStat .small{ font-size: 12px; color: var(--muted2); margin-top: 3px; }
+    .insightList{ display:flex; flex-direction:column; gap:8px; }
+    .insightItem{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,.88);
+    }
+    .queueList{ display:flex; flex-direction:column; gap:10px; }
+    .queueItem{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .metricLine{ display:flex; justify-content:space-between; gap:12px; font-size:13px; color:var(--muted2); margin-top:6px; }
+    .tableList{ display:flex; flex-direction:column; gap:10px; }
+    .tableRow{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.24);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .tableTitle{ font-weight:950; }
+    .tableValue{ font-weight:950; font-size:16px; }
+    .tableMeta{ font-size:12px; color: var(--muted2); margin-top:4px; }
+
+  </style>
+</head>
+
+<body>
+  <canvas id="cosmosCanvas" aria-hidden="true"></canvas>
+  <div id="cosmosVignette" aria-hidden="true"></div>
+<div class="topbar">
+    <div class="row">
+      <div class="brand">
+        <img src="icon-192.png" alt="" width="28" height="28" style="border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.3);padding:4px">
+        <div>AE FLOW</div>
+        <span class="pill">Network: <strong id="offlineFlag">Online</strong></span>
+      </div>
+      <div class="spacer"></div>
+      <div class="row">
+        <button class="btn small gold" id="installBtn" style="display:none;">Install App</button>
+        <button class="btn small secondary" id="backupBtn">Backup JSON</button>
+        <button class="btn small secondary" id="exportCsvBtn">Export CSV</button>
+        <button class="btn small secondary" id="exportOpsReportBtn">Ops Report</button>
+        <button class="btn small good" id="shareBtn">Share</button>
+      </div>
+    </div>
+
+    <div class="kpi" id="kpiRow">
+      <div class="box">
+        <div class="num" id="kpiToday">0</div>
+        <div class="lbl">Visits today</div>
+      </div>
+      <div class="box">
+        <div class="num" id="kpiEmails">0</div>
+        <div class="lbl">Emails captured</div>
+      </div>
+      <div class="box">
+        <div class="num" id="kpiOwned">0</div>
+        <div class="lbl">Accounts owned</div>
+      </div>
+      <div class="box">
+        <div class="num" id="kpiDeals">0</div>
+        <div class="lbl">Open deals</div>
+      </div>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-tab="intake">Intake</div>
+      <div class="tab" data-tab="accounts">Accounts</div>
+      <div class="tab" data-tab="deals">Deals</div>
+      <div class="tab" data-tab="analytics">Analytics</div>
+      <div class="tab" data-tab="settings">Settings</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="grid">
+      <!-- LEFT -->
+      <div class="card">
+
+        <!-- INTAKE TAB -->
+        <div id="tab-intake">
+          <h2>Walk-In Script (Cold → Email Capture → Permission)</h2>
+          <div class="muted">Goal: owned accounts + approval. Not “selling.”</div>
+
+          <details open>
+            <summary>1) Cold Open + Frame (non-sales)</summary>
+            <div class="sep"></div>
+            <div class="scriptbox" id="scriptOpen"></div>
+            <div class="script-actions">
+              <button class="btn small" data-copy="scriptOpen">Copy</button>
+              <button class="btn small secondary" data-addtag="cold-open">Tag: Cold Open</button>
+            </div>
+          </details>
+
+          <details>
+            <summary>2) Yes-Yes Train</summary>
+            <div class="sep"></div>
+            <div class="scriptbox" id="scriptYesYes"></div>
+            <div class="script-actions">
+              <button class="btn small" data-copy="scriptYesYes">Copy</button>
+              <button class="btn small secondary" data-addtag="yes-yes">Tag: Yes-Yes</button>
+            </div>
+          </details>
+
+          <details>
+            <summary>3) Free One-Page Conversion System</summary>
+            <div class="sep"></div>
+            <div class="scriptbox" id="scriptFree"></div>
+            <div class="script-actions">
+              <button class="btn small" data-copy="scriptFree">Copy</button>
+              <button class="btn small secondary" data-addtag="free-offer">Tag: Free Offer</button>
+            </div>
+          </details>
+
+          <details>
+            <summary>4) Close: Email Capture + Permission</summary>
+            <div class="sep"></div>
+            <div class="scriptbox" id="scriptClose"></div>
+            <div class="script-actions">
+              <button class="btn small" data-copy="scriptClose">Copy</button>
+              <button class="btn small secondary" data-addtag="email-captured">Tag: Email Captured</button>
+            </div>
+          </details>
+
+          <details>
+            <summary>Objections (quick replies)</summary>
+            <div class="sep"></div>
+            <div class="scriptbox" id="scriptObj"></div>
+            <div class="script-actions">
+              <button class="btn small" data-copy="scriptObj">Copy</button>
+              <button class="btn small secondary" data-addtag="objections">Tag: Objections</button>
+            </div>
+          </details>
+
+          <div class="sep"></div>
+
+          <h2>Field Intake (Save to Phone)</h2>
+          <div class="muted">Save a Visit, then Convert → Account. Accounts can generate a Handoff Pack + Email scripts.</div>
+
+          <div class="tagrow" id="activeTags"></div>
+
+          <form id="intakeForm" autocomplete="off">
+            <div class="form">
+              <div>
+                <label>AE Name (Account Executive of Record) *</label>
+                <input id="aeName" required placeholder="AE full name" />
+              </div>
+              <div>
+                <label>Territory / Route (optional)</label>
+                <input id="route" placeholder="Downtown PHX, Tempe loop, etc." />
+              </div>
+
+              <div>
+                <label>Business Name *</label>
+                <input id="bizName" required placeholder="ABC Plumbing, Desert Med Spa, etc." />
+              </div>
+              <div>
+                <label>Contact Name / Role</label>
+                <input id="contactName" placeholder="Jordan (Owner), Maria (Manager)..." />
+              </div>
+
+              <div>
+                <label>Business Email *</label>
+                <input id="bizEmail" required type="email" placeholder="owner@business.com" />
+              </div>
+              <div>
+                <label>Phone (optional)</label>
+                <input id="bizPhone" placeholder="(###) ###-####" />
+              </div>
+
+              <div>
+                <label>Service #1 they want more of</label>
+                <input id="service1" placeholder="Teeth whitening, Move-outs, Brake jobs..." />
+              </div>
+              <div>
+                <label>Service Area</label>
+                <input id="serviceArea" placeholder="Phoenix / Tempe / Scottsdale..." />
+              </div>
+
+              <div>
+                <label>Preferred lead action</label>
+                <select id="leadAction">
+                  <option>Phone calls</option>
+                  <option>Text messages</option>
+                  <option>Form submissions</option>
+                  <option>Calendar bookings</option>
+                </select>
+              </div>
+              <div>
+                <label>Response speed</label>
+                <select id="responseSpeed">
+                  <option>Instant / under 5 minutes</option>
+                  <option>Within 15–60 minutes</option>
+                  <option>Same day</option>
+                  <option>Next day or later</option>
+                </select>
+              </div>
+
+              <div>
+                <label>Lead source</label>
+                <select id="leadSource">
+                  <option>Google</option>
+                  <option>Referrals</option>
+                  <option>Walk-ins</option>
+                  <option>Social</option>
+                  <option>Mixed / not sure</option>
+                </select>
+              </div>
+              <div>
+                <label>Website / Booking link</label>
+                <input id="bookingLink" placeholder="https://site.com / https://calendly.com/..." />
+              </div>
+
+              <details class="full">
+                <summary>Advanced qualifiers (offline intelligence)</summary>
+                <div class="sep"></div>
+                <div class="form">
+                  <div>
+                    <label>Industry / Vertical</label>
+                    <input id="industry" placeholder="HVAC, Legal, Med Spa, Roofing..." />
+                  </div>
+                  <div>
+                    <label>Source Directory / Campaign</label>
+                    <input id="sourceDirectory" placeholder="PhxSoul, Black Chamber AZ, walk-in route..." />
+                  </div>
+                  <div>
+                    <label>Lead Temperature</label>
+                    <select id="leadTemperature">
+                      <option>Cold</option>
+                      <option>Warm</option>
+                      <option>Hot</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label>Priority</label>
+                    <select id="priority">
+                      <option>Normal</option>
+                      <option>High</option>
+                      <option>Critical</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label>Estimated Setup Value</label>
+                    <input id="estimatedSetupValue" type="number" step="0.01" min="0" placeholder="1500" />
+                  </div>
+                  <div>
+                    <label>Estimated Monthly Value</label>
+                    <input id="estimatedMonthlyValue" type="number" step="0.01" min="0" placeholder="750" />
+                  </div>
+                  <div>
+                    <label>Next Action</label>
+                    <input id="nextAction" placeholder="Send proof page, call owner, email handoff..." />
+                  </div>
+                  <div>
+                    <label>Last Contacted</label>
+                    <input id="lastContactedAt" type="date" />
+                  </div>
+                </div>
+              </details>
+
+              <div class="full">
+                <label>Permission to refer them as a vetted operator?</label>
+                <select id="permission">
+                  <option value="yes">Yes — approved to refer</option>
+                  <option value="maybe">Maybe — needs review</option>
+                  <option value="no">No — do not refer</option>
+                </select>
+              </div>
+
+              <div class="full">
+                <label>Notes</label>
+                <textarea id="notes" placeholder="Objections, vibe, what they cared about, follow-up angle..."></textarea>
+              </div>
+
+              <div>
+                <label>Follow-up date (optional)</label>
+                <input id="followUpDate" type="date" />
+              </div>
+              <div>
+                <label>Visit Status</label>
+                <select id="status">
+                  <option>New</option>
+                  <option>Sent system for approval</option>
+                  <option>Approved</option>
+                  <option>At capacity</option>
+                  <option>Do not contact</option>
+                </select>
+              </div>
+
+              <div class="full row" style="margin-top:8px;">
+                <button class="btn good" type="submit">Save Visit</button>
+                <button class="btn secondary" type="button" id="clearFormBtn">Clear</button>
+                <button class="btn gold" type="button" id="convertToAccountBtn">Convert → Account</button>
+                <button class="btn secondary" type="button" id="copyFollowUpTextBtn">Copy follow-up text</button>
+              </div>
+
+              <div class="full tiny">
+                Tip: after converting to Account, go to Accounts → Generate Handoff Pack (downloads a 1-page HTML).
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- ACCOUNTS TAB -->
+        <div id="tab-accounts" class="hidden">
+          <h2>Accounts (Owned by AEs)</h2>
+          <div class="muted">Accounts generate a Handoff Pack + Email scripts. This is how you operationalize the network.</div>
+
+          <div class="sep"></div>
+
+          <div class="row">
+            <button class="btn small secondary" id="accountsMineBtn">Mine (AE)</button>
+            <button class="btn small secondary" id="accountsAllBtn">All</button>
+            <button class="btn small secondary" id="createAccountBlankBtn">New Account</button>
+          </div>
+
+          <div class="callout">
+            <div style="font-weight:950;">Handoff Pack Generator</div>
+            <div class="tiny">
+              Each Account can produce a one-page HTML pack you can forward to you / back office.
+              It includes account details + linked deals + key intake notes.
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="list" id="accountsList"></div>
+        </div>
+
+        <!-- DEALS TAB -->
+        <div id="tab-deals" class="hidden">
+          <h2>Deals (Packages + Deposit + Retainer)</h2>
+          <div class="muted">Build packages in the field. Then generate a Handoff Pack from the Account.</div>
+
+          <div class="sep"></div>
+
+          <div class="form">
+            <div class="full">
+              <label>Select Account *</label>
+              <select id="dealAccountSelect"></select>
+              <div class="tiny">If empty, create an Account first.</div>
+            </div>
+
+            <div>
+              <label>Deal Name</label>
+              <input id="dealName" placeholder="Lead Sprint + Content Retainer, SVS Build, etc." />
+            </div>
+            <div>
+              <label>Stage</label>
+              <select id="dealStage">
+                <option>Discovery</option>
+                <option>Proposal Sent</option>
+                <option>Negotiation</option>
+                <option>Closed Won</option>
+                <option>Closed Lost</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Deposit % (decimal)</label>
+              <input id="dealDepositPct" type="number" step="0.01" min="0" max="1" />
+              <div class="tiny">Example: 0.40 = 40%</div>
+            </div>
+            <div>
+              <label>Commission Preset</label>
+              <select id="dealPreset"></select>
+            </div>
+
+            <div class="full">
+              <label>Notes</label>
+              <textarea id="dealNotes" placeholder="What they want, timeline, objections, who approves, etc."></textarea>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <h3>Package Builder</h3>
+          <div class="muted2">Add line items. Each item can have a one-time setup and/or monthly retainer.</div>
+
+          <div class="miniGrid">
+            <div>
+              <label>Service / Item</label>
+              <input id="itemName" placeholder="Landing page build, Media Day, Ads mgmt..." />
+            </div>
+            <div>
+              <label>Setup (one-time)</label>
+              <input id="itemSetup" type="number" step="0.01" min="0" placeholder="1500" />
+            </div>
+            <div>
+              <label>Monthly Retainer</label>
+              <input id="itemMonthly" type="number" step="0.01" min="0" placeholder="750" />
+            </div>
+          </div>
+          <div class="row" style="margin-top:10px;">
+            <button class="btn small" id="addItemBtn">Add Item</button>
+            <button class="btn small secondary" id="clearItemsBtn">Clear Items</button>
+          </div>
+
+          <div class="tablelike" id="itemsList"></div>
+
+          <div class="calc" id="dealCalcBox"></div>
+
+          <div class="row" style="margin-top:10px;">
+            <button class="btn good" id="saveDealBtn">Save Deal</button>
+            <button class="btn secondary" id="resetDealBtn">Reset Deal</button>
+            <button class="btn gold" id="copyDealSummaryBtn">Copy Deal Summary</button>
+          </div>
+
+          <div class="sep"></div>
+
+          <h3>Open Deals</h3>
+          <div class="list" id="dealsList"></div>
+        </div>
+
+        <!-- ANALYTICS TAB -->
+        <div id="tab-analytics" class="hidden">
+          <h2>Field Analytics Command Deck</h2>
+          <div class="muted">Offline graphs, conversion intelligence, follow-up pressure, AE leaderboard, and exportable ops snapshots.</div>
+
+          <div class="miniStats" style="margin-top:12px;">
+            <div class="miniStat"><div class="big" id="anaTotalVisits">0</div><div class="small">Total visits</div></div>
+            <div class="miniStat"><div class="big" id="anaConversion">0%</div><div class="small">Visit → account conversion</div></div>
+            <div class="miniStat"><div class="big" id="anaPermissionYes">0%</div><div class="small">Permission yes rate</div></div>
+            <div class="miniStat"><div class="big" id="anaFollowupsDue">0</div><div class="small">Follow-ups due / overdue</div></div>
+            <div class="miniStat"><div class="big" id="anaEstSetup">$0</div><div class="small">Estimated setup value from visits</div></div>
+            <div class="miniStat"><div class="big" id="anaEstMonthly">$0</div><div class="small">Estimated monthly value from visits</div></div>
+            <div class="miniStat"><div class="big" id="anaOpenPipeline">$0</div><div class="small">Open pipeline value</div></div>
+            <div class="miniStat"><div class="big" id="anaActiveAEs">0</div><div class="small">Active AEs in dataset</div></div>
+            <div class="miniStat"><div class="big" id="anaWeighted12m">$0</div><div class="small">Weighted 12-month visit forecast</div></div>
+            <div class="miniStat"><div class="big" id="anaRouteSignal">0</div><div class="small">Top route command score</div></div>
+          </div>
+
+          <div class="row" style="margin-top:12px;">
+            <button class="btn small secondary" id="exportAnalyticsJsonBtn">Export Analytics JSON</button>
+            <button class="btn small secondary" id="exportForecastCsvBtn">Forecast CSV</button>
+            <button class="btn small gold" id="exportOpsHtmlBtn">Ops HTML</button>
+            <button class="btn small gold" id="exportExecutiveSnapshotBtn">Executive Snapshot</button>
+            <button class="btn small good" id="copyInsightsBtn">Copy Insights</button>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="chartGrid">
+            <div class="chartCard">
+              <div class="chartTitle">Lead Sources</div>
+              <div class="chartSub">Which lanes are feeding the machine.</div>
+              <canvas class="chartCanvas" id="chartLeadSources" width="520" height="220"></canvas>
+            </div>
+            <div class="chartCard">
+              <div class="chartTitle">Visit Statuses</div>
+              <div class="chartSub">Where the field log is getting stuck.</div>
+              <canvas class="chartCanvas" id="chartStatuses" width="520" height="220"></canvas>
+            </div>
+            <div class="chartCard">
+              <div class="chartTitle">AE Leaderboard</div>
+              <div class="chartSub">Visits logged by AE.</div>
+              <canvas class="chartCanvas" id="chartAEs" width="520" height="220"></canvas>
+            </div>
+            <div class="chartCard">
+              <div class="chartTitle">Route Pressure</div>
+              <div class="chartSub">Which routes are actually producing signal.</div>
+              <canvas class="chartCanvas" id="chartRoutes" width="520" height="220"></canvas>
+            </div>
+            <div class="chartCard">
+              <div class="chartTitle">Visits Timeline</div>
+              <div class="chartSub">Last 14 days of field activity.</div>
+              <canvas class="chartCanvas" id="chartTimeline" width="520" height="220"></canvas>
+            </div>
+            <div class="chartCard">
+              <div class="chartTitle">Industry Mix</div>
+              <div class="chartSub">Which verticals are filling the board.</div>
+              <canvas class="chartCanvas" id="chartIndustries" width="520" height="220"></canvas>
+            </div>
+            <div class="chartCard">
+              <div class="chartTitle">Priority Heat</div>
+              <div class="chartSub">Which urgency lanes are dominating field work.</div>
+              <canvas class="chartCanvas" id="chartPriorities" width="520" height="220"></canvas>
+            </div>
+            <div class="chartCard">
+              <div class="chartTitle">Deal Stages</div>
+              <div class="chartSub">How the pipeline is distributed right now.</div>
+              <canvas class="chartCanvas" id="chartDealStages" width="520" height="220"></canvas>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="chartGrid">
+            <div class="chartCard" style="min-height:unset;">
+              <div class="chartTitle">Follow-Up Queue</div>
+              <div class="chartSub">Due within 7 days or already overdue.</div>
+              <div class="queueList" id="followupQueue"></div>
+            </div>
+            <div class="chartCard" style="min-height:unset;">
+              <div class="chartTitle">Machine Insights</div>
+              <div class="chartSub">Offline intelligence synthesized from your local dataset.</div>
+              <div class="insightList" id="insightsList"></div>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="chartGrid">
+            <div class="chartCard" style="min-height:unset;">
+              <div class="chartTitle">Route Command Scores</div>
+              <div class="chartSub">Weighted routes ranked by field signal, conversions, and forecast value.</div>
+              <div class="tableList" id="routeScoreList"></div>
+            </div>
+            <div class="chartCard" style="min-height:unset;">
+              <div class="chartTitle">Account Forecast Board</div>
+              <div class="chartSub">Top account lanes by forecasted 12-month value.</div>
+              <div class="tableList" id="accountForecastList"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SETTINGS TAB -->
+        <div id="tab-settings" class="hidden">
+          <h2>Settings (Deposit + Commission Splits)</h2>
+          <div class="muted">
+            Set your deposit % and commission presets so the deal projections match your existing structure.
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="form">
+            <div class="full">
+              <label>Default Deposit % (decimal)</label>
+              <input id="setDepositPct" type="number" step="0.01" min="0" max="1" />
+              <div class="tiny">Example: 0.40 = 40% deposit</div>
+            </div>
+
+            <div class="full">
+              <label>Commission Presets (Deposit + Monthly)</label>
+              <textarea id="setPresets" class="mono" placeholder='One preset per line. Format:
+Preset Name | AE_DepositPct | AE_MonthlyPct
+
+Example:
+Standard | 0.40 | 0.20
+Aggressive | 0.50 | 0.25'></textarea>
+              <div class="tiny">
+                Projections only (field guidance). Your real commissions follow your official structure.
+              </div>
+            </div>
+
+            <div>
+              <label>Weighted Win Rate (decimal)</label>
+              <input id="setForecastWinRate" type="number" step="0.01" min="0" max="1" />
+              <div class="tiny">Used for route scoring and 12-month forecast math.</div>
+            </div>
+
+            <div>
+              <label>Retention Months</label>
+              <input id="setForecastRetentionMonths" type="number" step="1" min="1" max="60" />
+              <div class="tiny">How many monthly cycles the forecast assumes.</div>
+            </div>
+
+            <div class="full">
+              <label>Close Window Days</label>
+              <input id="setForecastCloseWindowDays" type="number" step="1" min="1" max="365" />
+              <div class="tiny">Local planning number for route/account forecast lanes.</div>
+            </div>
+
+            <div class="full row">
+              <button class="btn good" id="saveSettingsBtn">Save Settings</button>
+              <button class="btn secondary" id="resetSettingsBtn">Reset to Defaults</button>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <h3>Secure Vault (Client-Side Encryption)</h3>
+          <div class="muted2">Client-side AES encryption for offline mirror/backup workflows. Works in Netlify because the magic stays in the browser.</div>
+          <div class="form" style="margin-top:10px;">
+            <div class="full">
+              <label>Vault Passphrase</label>
+              <input id="vaultPassphrase" type="password" autocomplete="new-password" placeholder="Enter a long passphrase for encrypted mirror / backup" />
+            </div>
+            <div class="full row">
+              <button class="btn small secondary" id="saveSecureMirrorBtn">Save Secure Mirror</button>
+              <button class="btn small secondary" id="restoreSecureMirrorBtn">Restore Secure Mirror</button>
+              <button class="btn small gold" id="exportEncryptedBackupBtn">Export Encrypted Backup</button>
+              <button class="btn small danger" id="clearSecureMirrorBtn">Clear Secure Mirror</button>
+            </div>
+            <div class="full">
+              <input type="file" id="vaultImportFile" accept="application/json,.json,.aeflowvault" />
+              <div class="row" style="margin-top:10px;">
+                <button class="btn small secondary" id="vaultImportBtn">Import Encrypted Backup</button>
+              </div>
+              <div class="tiny" id="vaultStatus" style="margin-top:10px;"></div>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+
+          <h3>Data Tools</h3>
+          <div class="row">
+            <button class="btn small secondary" id="exportTodayCsvBtn">Export Today CSV</button>
+            <button class="btn small secondary" id="exportTodayJsonBtn">Backup Today JSON</button>
+            <button class="btn small gold" id="bundleTodayBtn">Export Daily Bundle (JSON)</button>
+            <button class="btn small secondary" id="exportOpsHtmlBtn2">Export Ops HTML</button>
+            <button class="btn small good" id="sendBundleTodayBtn">Send Daily Bundle (Share)</button>
+            <button class="btn small danger" id="wipeBtn">Wipe Device Data</button>
+          </div>
+
+          <div class="sep"></div>
+
+          <h3>Import Backup</h3>
+          <div class="muted2">Import a JSON backup file (merges into current device).</div>
+          <input type="file" id="importFile" accept="application/json" />
+          <div class="row" style="margin-top:10px;">
+            <button class="btn small secondary" id="importBtn">Import JSON</button>
+          </div>
+
+          <div class="sep"></div>
+
+          <h3>Handoff Log</h3>
+          <div class="muted2">This device logs each generated handoff (so bundling is accurate).</div>
+          <div class="row" style="margin-top:10px;">
+            <button class="btn small secondary" id="clearHandoffLogTodayBtn">Clear Today Handoff Log</button>
+            <button class="btn small secondary" id="clearHandoffLogAllBtn">Clear ALL Handoff Log</button>
+          </div>
+          <div class="tiny" id="handoffLogStats" style="margin-top:10px;"></div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div class="card">
+        <h2>Field Log + Summary</h2>
+        <div class="muted">End-of-day: share summary + export full CSV/JSON.</div>
+
+        <div class="sep"></div>
+
+        <div class="row">
+          <button class="btn small secondary" id="todayOnlyBtn">Today</button>
+          <button class="btn small secondary" id="allBtn">All</button>
+          <button class="btn small secondary" id="filterOwnedBtn">Accounts</button>
+          <button class="btn small secondary" id="filterPermissionYesBtn">Permission: Yes</button>
+        </div>
+
+        <div class="sep"></div>
+
+        <input class="search" id="search" placeholder="Search visits/accounts/deals..." />
+
+        <div class="sep"></div>
+
+        <h3>Visits</h3>
+        <div class="list" id="visitsList"></div>
+
+        <div class="sep"></div>
+
+        <h3>Quick Share Summary</h3>
+        <div class="row" style="margin-top:10px;">
+          <button class="btn small good" id="shareBtn2">Share Summary</button>
+          <button class="btn small secondary" id="copySummaryBtn">Copy Summary</button>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="tiny">
+          Handoff Packs: go to Accounts → Generate Handoff Pack.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottomdock">
+    <div class="dockrow">
+      <button class="btn small secondary" id="newVisitBtn">New Visit</button>
+      <button class="btn small secondary" id="jumpAccountsBtn">Accounts</button>
+      <button class="btn small secondary" id="jumpDealsBtn">Deals</button>
+      <button class="btn small secondary" id="exportCsvBtn2">Export CSV</button>
+      <button class="btn small secondary" id="backupBtn2">Backup JSON</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+
+</body>
+</html>
